@@ -4435,6 +4435,12 @@
 				player.removePerk(PerkLib.Incorporeality);
 				changes++;
 			}
+			//Remove Dragonfire Perk
+			if (player.findPerk(PerkLib.Dragonfire) >= 0 && changes < changeLimit && rand(10) == 0) {
+				outputText("\n\nYou have the strange feeling, that you've been missing something in your chest. The burning sensation you've always felt seems to be cooling off until it completely disappears. \n<b>(Perk Lost: Dragonfire!)</b>", false);
+				player.removePerk(PerkLib.Dragonfire);
+				changes++;
+			}
 			//-Skin color change – tan, olive, dark, light
 			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && changes < changeLimit && rand(5) == 0) {
 				changes++;
@@ -5338,7 +5344,7 @@
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
 				outputText("  <b>You have reptilian legs and claws!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_LIZARD;
-				player.legCount = 2;
+				player.legCount = player.isTaur() ? 4 : 2;
 				changes++;
 			}
 			//-Tail – sinuous lizard tail

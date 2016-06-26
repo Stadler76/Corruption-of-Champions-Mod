@@ -200,6 +200,19 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
+		// modded (neckLength)
+		private var _neckLength:int = 2;
+		public function get neckLength():int { return _neckLength; }
+		public function restoreNeck():void { _neckLength = 2; }
+		public function modifyNeck(len:int):void {
+			_neckLength += len;
+			if (_neckLength > 24) _neckLength = 24;
+			if (_neckLength < 2)  _neckLength = 2;
+		}
+		public function hasDragonNeck():Boolean { return _neckLength >= 24; }
+		public function hasNormalNeck():Boolean { return _neckLength <= 2; }
+		// \modded (neckLength)
+
 		/*EarType
 		-1 - none!
 		0 - human

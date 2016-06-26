@@ -884,6 +884,13 @@ private function buyOils():void {
 	addButton(4, "Mahogany", buyOil, consumables.MAHOGOL);
 	addButton(5, "Olive", buyOil, consumables.OLIVEOL);
 	addButton(6, "Russet", buyOil, consumables.RUSS_OL);
+	addButton(7, "Red", buyOil, consumables.RED__OL);
+	addButton(8, "Green", buyOil, consumables.GREENOL);
+	addButton(9, "White", buyOil, consumables.WHITEOL);
+	addButton(10, "Blue", buyOil, consumables.BLUE_OL);
+	addButton(11, "Black", buyOil, consumables.BLACKOL);
+	addButton(12, "Purple", buyOil, consumables.PURPLOL);
+	addButton(13, "Silver", buyOil, consumables.SILVROL);
 	addButton(14, "Nevermind", buyOilNevermind);
 }
 

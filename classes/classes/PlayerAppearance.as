@@ -13,6 +13,7 @@ package classes
 			//Temp vars
 			var temp:Number = 0;
 			var rando:Number = 0;
+			var calcedTallness:Number = player.tallness + player.neckLength - 2;
 			//Determine race type:
 			var race:String = "human";
 			race = player.race();
@@ -21,8 +22,8 @@ package classes
 			displayHeader("Appearance");
 			if (race != player.startingRace)	outputText("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ", false);
 			//Height and race.
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
-			else outputText("You are a " + Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(calcedTallness * 2.54) / 100 + " metres tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+			else outputText("You are a " + Math.floor(calcedTallness / 12) + " foot " + calcedTallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 			
 			outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
 			if (player.jewelryName != "nothing") 
@@ -410,6 +411,32 @@ package classes
 				}
 
 			}
+			// Modded (neckLength)
+			if (!player.hasNormalNeck())
+			{
+				// length description
+				if (player.hasDragonNeck())
+					outputText("  Your neck is about two feet long, roughly matching your arm length.");
+				else {
+					var lengthText:String = "";
+					if (player.neckLength < 8) lengthText = "a few inches longer";
+					else if (player.neckLength < 13) lengthText = "somewhat longer";
+					else if (player.neckLength < 18) lengthText = "very long";
+					else lengthText = "extremely long";
+					outputText("  Where normal humans have a short neck, yours is " + lengthText + ", measuring " + player.neckLength + " inches.");
+				}
+
+				// bending your neck
+				if (player.hasDragonNeck())
+					outputText("  You manage to bend it in every direction you want and can easily take a look at your back.");
+				else {
+					if (player.neckLength < 10) outputText("  You can bend it a bit more than others with some effort.");
+					else if (player.neckLength < 16) outputText("  You can bend it more than others with low effort.");
+					else outputText("  You are able to bend it in almost every direction and with some effort you even manage to take a glimpse at your back.");
+				}
+			}
+			player.modifyNeck(2 + rand(4));
+			// \Modded (neckLength)
 			//BODY PG HERE
 			outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
 			//WINGS!
@@ -439,6 +466,8 @@ package classes
 				outputText("  Shining black exoskeleton  covers your arms from the biceps down, resembling a pair of long black gloves from a distance.", false);	
 			else if(player.armType == ARM_TYPE_SALAMANDER)
 				outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
+			else if(player.armType == ARM_TYPE_DRACONIC)
+				outputText("  Shield-shaped " + player.skinTone + " scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
 			//Done with head bits. Move on to body stuff
 			//Horse lowerbody, other lowerbody texts appear lower
 			if (player.isTaur()) 

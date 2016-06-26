@@ -16,6 +16,7 @@ public static const SKIN_TYPE_FUR:int                                           
 public static const SKIN_TYPE_SCALES:int                                            =    2;
 public static const SKIN_TYPE_GOO:int                                               =    3;
 public static const SKIN_TYPE_UNDEFINED:int                                         =    4;
+public static const SKIN_TYPE_DRACONIC:int                                          =    5; // maybe later :)
 
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;
@@ -108,6 +109,7 @@ public static const ANTENNAE_BEE:int                                            
 public static const ARM_TYPE_HUMAN:int                                              =   0;
 public static const ARM_TYPE_HARPY:int                                              =   1;
 public static const ARM_TYPE_SPIDER:int                                             =   2;
+public static const ARM_TYPE_DRACONIC:int                                           =   4;
 public static const ARM_TYPE_SALAMANDER:int									           		=   5;
 
 // tailType
@@ -179,6 +181,12 @@ public static const LOWER_BODY_TYPE_CLOVEN_HOOFED:int                           
 public static const LOWER_BODY_TYPE_ECHIDNA:int                                     =  23;
 public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24; // DEPRECATED, use LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4
 public static const LOWER_BODY_TYPE_SALAMANDER:int						       			=  25;
+
+// rearBodyType
+public static const REAR_BODY_TYPE_NONE:int                                         =   0;
+public static const REAR_BODY_TYPE_DRACONIC_MANE:int                                =   1;
+public static const REAR_BODY_TYPE_DRACONIC_SPIKES:int                              =   2; // Maybe later and if Ember has no mane.
+public static const REAR_BODY_TYPE_BEHEMOTH:int                                     =   3; // NYI, Its just there as an example.
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
