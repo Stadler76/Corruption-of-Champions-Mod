@@ -1791,6 +1791,22 @@ use namespace kGAMECLASS;
 				return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
 		}
 
+		public function hasReptileArms():Boolean
+		{
+				return [ARM_TYPE_DRACONIC, ARM_TYPE_SALAMANDER].indexOf(armType) != -1;
+		}
+
+		public function hasReptileFeet():Boolean
+		{
+				return [LOWER_BODY_TYPE_LIZARD, LOWER_BODY_TYPE_DRAGON, LOWER_BODY_TYPE_SALAMANDER].indexOf(lowerBody) != -1;
+		}
+
+		public function hasDragonRear():Boolean
+		{
+			return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet();
+		}
+
+
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
 			if (vaginas.length==0) return false;
 			var wasVirgin:Boolean = vaginas[0].virgin;

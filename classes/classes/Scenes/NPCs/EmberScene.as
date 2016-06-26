@@ -1760,6 +1760,24 @@ package classes.Scenes.NPCs
 				}
 				changes++;
 			}
+			//Gain Dragon Neck (modded)
+			//public function hasDragonRear():Boolean { return player.hasDragonWings(true) && player.hasScales() && player.hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
+			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
+			outputText("\n\nNeck Debug:");
+			outputText("\nplayer.isDraconic() = " + player.isDraconic());
+			outputText("\nplayer.hasDragonRear() = " + player.hasDragonRear());
+			outputText("\nplayer.hasDragonWings(true) = " + player.hasDragonWings(true));
+			outputText("\nplayer.hasScales() = " + player.hasScales());
+			outputText("\nplayer.hasReptileTail() = " + player.hasReptileTail());
+			outputText("\nplayer.hasReptileArms() = " + player.hasReptileArms());
+			outputText("\nplayer.hasReptileFeet() = " + player.hasReptileFeet());
+			outputText("\nplayer.hasDragonNeck() = " + player.hasDragonNeck());
+			if (player.isDraconic() && player.hasDragonRear() && changes < changeLimit && !player.hasDragonNeck()) {
+				outputText("\n\nOld neck length: " + player.neckLength + "in.");
+				player.modifyNeck(2 + rand(4));
+				outputText("  New neck length: " + player.neckLength + "in.");
+			}
+			//\Gain Dragon Neck (modded)
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
