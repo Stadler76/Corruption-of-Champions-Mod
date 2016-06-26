@@ -4436,7 +4436,7 @@
 				changes++;
 			}
 			//Remove Dragonfire Perk
-			if (player.findPerk(PerkLib.Dragonfire) >= 0 && changes < changeLimit && rand(10) == 0) {
+			if (player.findPerk(PerkLib.Dragonfire) >= 0 && player.perkv4(PerkLib.Dragonfire) == 0 && changes < changeLimit && rand(10) == 0) {
 				outputText("\n\nYou have the strange feeling, that you've been missing something in your chest. The burning sensation you've always felt seems to be cooling off until it completely disappears. \n<b>(Perk Lost: Dragonfire!)</b>", false);
 				player.removePerk(PerkLib.Dragonfire);
 				changes++;

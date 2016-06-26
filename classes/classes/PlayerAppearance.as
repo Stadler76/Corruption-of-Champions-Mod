@@ -435,7 +435,6 @@ package classes
 					else outputText("  You are able to bend it in almost every direction and with some effort you even manage to take a glimpse at your back.");
 				}
 			}
-			//player.modifyNeck(2 + rand(4));
 			// \Modded (neckLength)
 			//BODY PG HERE
 			outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);

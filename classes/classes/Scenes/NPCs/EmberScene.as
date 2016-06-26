@@ -1679,12 +1679,6 @@ package classes.Scenes.NPCs
 				player.skinDesc = "scales";
 				//def bonus of scales
 			}
-			//Gain Dragon Arms (Modded. Derived from ARM_TYPE_SALAMANDER)
-			if (player.armType != ARM_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and short claws replacing your fingernails.  <b>You now have dragon arms.</b>", false);
-				player.armType = ARM_TYPE_DRACONIC;
-				changes++
-			}
 			//Gain Dragon Legs
 			if (player.lowerBody != LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				//(if drider)
@@ -1761,23 +1755,32 @@ package classes.Scenes.NPCs
 				changes++;
 			}
 			//Gain Dragon Neck (modded)
-			//public function hasDragonRear():Boolean { return player.hasDragonWings(true) && player.hasScales() && player.hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
+			//public function hasDragonRear():Boolean { return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
-			outputText("\n\nNeck Debug:");
-			outputText("\nplayer.isDraconic() = " + player.isDraconic());
-			outputText("\nplayer.hasDragonRear() = " + player.hasDragonRear());
-			outputText("\nplayer.hasDragonWings(true) = " + player.hasDragonWings(true));
-			outputText("\nplayer.hasScales() = " + player.hasScales());
-			outputText("\nplayer.hasReptileTail() = " + player.hasReptileTail());
-			outputText("\nplayer.hasReptileArms() = " + player.hasReptileArms());
-			outputText("\nplayer.hasReptileFeet() = " + player.hasReptileFeet());
-			outputText("\nplayer.hasDragonNeck() = " + player.hasDragonNeck());
 			if (player.isDraconic() && player.hasDragonRear() && changes < changeLimit && !player.hasDragonNeck()) {
-				outputText("\n\nOld neck length: " + player.neckLength + "in.");
-				player.modifyNeck(2 + rand(4));
-				outputText("  New neck length: " + player.neckLength + "in.");
+				var nlChange:int = 2 + rand(4);
+				if (!player.hasNormalNeck()) {
+					player.modifyNeck(nlChange);
+					outputText("\n\nWith less pain than the last time your neck grows a few more inches reaching " + player.neckLength + " inches.");
+				} else {
+					player.modifyNeck(nlChange);
+					// Growing a dragon neck may be limited to Ember's blood only in the future.
+					outputText("\n\nAfter you have finished " + (drakesHeart ? "eating the flower" : "drinking Ember's dragon blood") + " you start feeling a sudden pain in your neck. Your skin stretches and your spine grows a bit. Your neck has grown a few inches longer than that of a normal human reaching " + player.neckLength + " inches.");
+				}
+				if (player.hasDragonNeck()) {
+					outputText("\n\nAfter the enlongation has finally ceased, your spine begins to readjust its position on your head. After that has settled you want to try out your new draconic neck and begin to bend your neck finding that you can bend it at ease like a snake can bend its tail. Eager to see, how you look from behind you quickly turn your head around. Staring at your magnificent draconic rear your mouth and eyes open wide in astonishment. You muster your tail, your backside fully covered in scales and finally, you unfold your wings. This is the first time, you can see every single scale of them. You look at them from all sides, flapping them slowly, just to watch them moving. Then you lift off ...");
+					outputText("\n\nWhile you fly and soar through the mountain-range you watch yourself flying and gliding through the air elegantly, not forgetting to take a glimpse to that, what lies before you from time to time, so you don't crash into anything. " + (drakesHeart ? "The flower" : "Ember") + " gifted you with a view you'll never forget in a lifetime, no matter what will happen to you in the future.");
+					outputText("\n\n<b>You now have a fully grown dragon neck.</b>");
+				}
 			}
 			//\Gain Dragon Neck (modded)
+			//Gain Dragon Arms (Modded. Derived from ARM_TYPE_SALAMANDER)
+			if (player.armType != ARM_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and short claws replacing your fingernails.");
+				outputText("\n<b>You now have dragon arms.</b>", false);
+				player.armType = ARM_TYPE_DRACONIC;
+				changes++
+			}
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
