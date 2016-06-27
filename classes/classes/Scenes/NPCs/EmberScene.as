@@ -1769,7 +1769,7 @@ package classes.Scenes.NPCs
 				}
 				if (player.hasDragonNeck()) {
 					outputText("\n\nAfter the enlongation has finally ceased, your spine begins to readjust its position on your head. After that has settled you want to try out your new draconic neck and begin to bend your neck finding that you can bend it at ease like a snake can bend its tail. Eager to see, how you look from behind you quickly turn your head around. Staring at your magnificent draconic rear your mouth and eyes open wide in astonishment. You muster your tail, your backside fully covered in scales and finally, you unfold your wings. This is the first time, you can see every single scale of them. You look at them from all sides, flapping them slowly, just to watch them moving. Then you lift off ...");
-					outputText("\n\nWhile you fly and soar through the mountain-range you watch yourself flying and gliding through the air elegantly, not forgetting to take a glimpse to that, what lies before you from time to time, so you don't crash into anything. " + (drakesHeart ? "The flower" : "Ember") + " gifted you with a view you'll never forget in a lifetime, no matter what will happen to you in the future.");
+					outputText("\n\nWhile you fly and soar through the mountain-range you watch yourself flying and gliding through the air elegantly, not forgetting to take a glimpse to that, what lies before you from time to time, so you don't crash into anything. " + (drakesHeart ? "The flower" : "Ember") + " gifted you with a view you'll never forget in a lifetime, no matter what will happen to you in the future. The view of a draconic body. And its your draconic body!");
 					outputText("\n\n<b>You now have a fully grown dragon neck.</b>");
 				}
 			}
