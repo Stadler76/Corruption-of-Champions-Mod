@@ -772,7 +772,7 @@ use namespace kGAMECLASS;
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_LIZARD)
 					race += "-taur";
 			}
-			if (isDraconic() > 6)
+			if (isDraconic())
 			{
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DRAGON)
 					race = "dragon-taur";

@@ -200,14 +200,31 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
+		// modded (neckType)
+		private var _neckType:Number = NECK_TYPE_NORMAL;
+		public function get neckType():Number { return _neckType; }
+		public function set neckType(value:Number):void { _neckType = value; }
+		// \modded (neckType)
+
 		// modded (neckLength)
 		private var _neckLength:int = 2;
 		public function get neckLength():int { return _neckLength; }
-		public function restoreNeck():void { _neckLength = 2; }
-		public function modifyNeck(len:int):void {
+		public function restoreNeck():void {
+			_neckLength = 2;
+			_neckType = NECK_TYPE_NORMAL;
+		}
+		public function modifyNeck(len:int, newType:Number = -1):void {
+			var nlMax:Array = [];
+			nlMax[NECK_TYPE_NORMAL]   =  2;
+			nlMax[NECK_TYPE_DRACONIC] = 24;
+			nlMax[NECK_TYPE_EASTERN]  = 48; // NYI, for later use
+			nlMax[NECK_TYPE_HYDRA]    = 72; // NYI, for later use
+
+			if (newType != -1) _neckType = newType;
+
 			_neckLength += len;
-			if (_neckLength > 24) _neckLength = 24;
 			if (_neckLength < 2)  _neckLength = 2;
+			if (_neckLength > nlMax[_neckType]) _neckLength = nlMax[_neckType];
 		}
 		public function hasDragonNeck():Boolean { return _neckLength >= 24; }
 		public function hasNormalNeck():Boolean { return _neckLength <= 2; }

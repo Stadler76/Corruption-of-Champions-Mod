@@ -418,6 +418,12 @@ package classes {
 					}
 				}
 			}
+			if (player.hasDragonNeck() && player.neckType == NECK_TYPE_DRACONIC && !player.hasDragonRear()) {
+				outputText("\n<b>Your draconic neck and its position on your head reverts. Well, your rear isn't worthy to gaze at it anymore.</b>\n");
+				player.restoreNeck();
+				needNext = true;
+			}
+
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
 					getGame().dynStats("lib", -player.statusEffect(player.findStatusEffect(StatusEffects.Heat)).value2, "resisted", false, "noBimbo", true);

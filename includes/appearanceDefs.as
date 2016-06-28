@@ -188,6 +188,12 @@ public static const REAR_BODY_TYPE_DRACONIC_MANE:int                            
 public static const REAR_BODY_TYPE_DRACONIC_SPIKES:int                              =   2; // Maybe later and if Ember has no mane.
 public static const REAR_BODY_TYPE_BEHEMOTH:int                                     =   3; // NYI, Its just there as an example.
 
+// neckType
+public static const NECK_TYPE_NORMAL:int                                            =   0; // normal human neck. neckLength = 2 inches
+public static const NECK_TYPE_DRACONIC:int                                          =   1; // (western) dragon neck. neckLength = 2-24 inches
+public static const NECK_TYPE_EASTERN:int                                           =   2; // (eastern) dragon neck. neckLength = 2-36 (or 48?) inches. NYI, example
+public static const NECK_TYPE_HYDRA:int                                             =   3; // neckLength = 2-24 (48? 72?) inches. NYI, example
+
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
 public static const PIERCING_TYPE_STUD:int                                          =   1;
