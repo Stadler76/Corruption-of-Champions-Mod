@@ -772,7 +772,7 @@ use namespace kGAMECLASS;
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_LIZARD)
 					race += "-taur";
 			}
-			if (isDraconic())
+			if (isDragon())
 			{
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DRAGON)
 					race = "dragon-taur";
@@ -1751,7 +1751,7 @@ use namespace kGAMECLASS;
 			return false;
 		}
 		
-		public function isDraconic(softCap:Boolean = false):Boolean
+		public function isDragon(softCap:Boolean = false):Boolean
 		{
 			if (softCap)
 			{
@@ -1801,7 +1801,7 @@ use namespace kGAMECLASS;
 				return [LOWER_BODY_TYPE_LIZARD, LOWER_BODY_TYPE_DRAGON, LOWER_BODY_TYPE_SALAMANDER].indexOf(lowerBody) != -1;
 		}
 
-		public function hasDragonRear():Boolean
+		public function hasDraconicBackSide():Boolean
 		{
 			return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet();
 		}
@@ -2493,7 +2493,7 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4) {
 				maxInt += 10;
 			}
-			if (isDraconic(true)) {
+			if (isDragon(true)) {
 				maxStr += 5;
 				maxTou += 10;
 				maxInt += 10;

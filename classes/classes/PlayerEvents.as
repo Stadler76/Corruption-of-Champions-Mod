@@ -418,7 +418,7 @@ package classes {
 					}
 				}
 			}
-			if (player.hasDragonNeck() && player.neckType == NECK_TYPE_DRACONIC && !player.hasDragonRear()) {
+			if (player.hasDragonNeck() && player.neckType == NECK_TYPE_DRACONIC && !player.hasDraconicBackSide()) {
 				outputText("\n<b>Your draconic neck and its position on your head reverts. Well, your rear isn't worthy to gaze at it anymore.</b>\n");
 				player.restoreNeck();
 				needNext = true;

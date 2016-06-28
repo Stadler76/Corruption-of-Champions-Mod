@@ -1755,9 +1755,9 @@ package classes.Scenes.NPCs
 				changes++;
 			}
 			//Gain Dragon Neck (modded)
-			//public function hasDragonRear():Boolean { return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
+			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
-			if (player.isDraconic() && player.hasDragonRear() && changes < changeLimit && !player.hasDragonNeck()) {
+			if (player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && !player.hasDragonNeck()) {
 				var nlChange:int = 2 + rand(4);
 				if (!player.hasNormalNeck()) { // Note: hasNormalNeck checks the length, not the type!
 					player.modifyNeck(nlChange);
@@ -1785,14 +1785,14 @@ package classes.Scenes.NPCs
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
-			if (player.isDraconic() && changes < changeLimit && player.findPerk(PerkLib.Dragonfire) < 0) {
+			if (player.isDragon() && changes < changeLimit && player.findPerk(PerkLib.Dragonfire) < 0) {
 				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragonfire!</b>)");
 				player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0);
 				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
 				changes++;
 			}
-			if (player.isDraconic() && rand(3) == 0 && player.gender > 0) {
+			if (player.isDragon() && rand(3) == 0 && player.gender > 0) {
 				outputText("\n\nA sudden swell of lust races through your ");
 				if (player.hasCock()) {
 					outputText(player.cockDescript(0));
@@ -2052,7 +2052,7 @@ package classes.Scenes.NPCs
 				}
 				player.refillHunger(25);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.isDraconic() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.isDragon() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(player.cockDescript(0));
@@ -2115,7 +2115,7 @@ package classes.Scenes.NPCs
 				}
 				player.refillHunger(50);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.isDraconic() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.isDragon() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(player.cockDescript(0));
@@ -2212,7 +2212,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber gets so flustered that " + emberMF("he", "she") + " just stares at you in stunned silence, wearing a goofy smile.  \"<i>Wha... you know, there's no point in saying anything.  I know you'll just sneak another opportunity like this in the future... doesn't mean I won't make you pay for this when I catch you later.</i>\"");
 				outputText("\n\nYou whisper into her ear that you're looking forward to it, and gently raise yourself from " + emberMF("his", "her") + " lap to leave.");
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.isDraconic() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.isDragon() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(player.cockDescript(0));
