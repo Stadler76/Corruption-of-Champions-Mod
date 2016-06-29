@@ -419,7 +419,14 @@ package classes {
 				}
 			}
 			if (player.hasDragonNeck() && player.neckType == NECK_TYPE_DRACONIC && !player.hasDraconicBackSide()) {
-				outputText("\n<b>Your draconic neck and its position on your head reverts. Well, your rear isn't worthy to gaze at it anymore.</b>\n");
+				outputText("\n<b>Your draconic neck and its position on your head reverts to its normal position and length. ");
+				if (player.hasDragonRearBody()) {
+					outputText("  After that you feel a tingling on your backside, telling you that your");
+					outputText((player.rearBodyType == REAR_BODY_TYPE_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText("draconic mane is disappearing, too.");
+				}
+				outputText("  Well, your rear isn't worthy to gaze at it anymore.</b>\n");
+				player.rearBodyType = REAR_BODY_TYPE_NONE;
 				player.restoreNeck();
 				needNext = true;
 			}

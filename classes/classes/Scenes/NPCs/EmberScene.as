@@ -954,6 +954,13 @@ package classes.Scenes.NPCs
 				else if (flags[kFLAGS.EMBER_HAIR] == 2) {
 					outputText("  Tracing " + emberMF("his", "her") + " spine, a mane of hair grows; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail in a small tuft.  It is the same color as the hair on " + emberMF("his", "her") + " head, but shorter and denser; it grows in a thick vertical strip, maybe two inches wide.  It reminds you vaguely of a horse's mane.");
 				}
+				// modded (rearBodyType)
+				if (flags[kFLAGS.EMBER_HAIR] != 2) {
+					// Teh spiky mane, similar to the hairy one.
+					outputText("  Tracing " + emberMF("his", "her") + " spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail.");
+					outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
+				}
+				// \modded (rearBodyType)
 				outputText("\n\n" + emberMF("His", "Her") + " back supports a pair of strong, scaly dragon wings, covered in membranous leathery scales.  The muscles are held taut, as though ready to extend and take to the skies at any notice.");
 
 				//(Male)
@@ -1754,10 +1761,44 @@ package classes.Scenes.NPCs
 				}
 				changes++;
 			}
+			//Gain Dragon Rear Body (modded)
+			if (!player.hasDragonRearBody() && player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
+				var emberRear:Number = player.fetchEmberRearBodyType();
+				switch (emberRear) {
+					case REAR_BODY_TYPE_DRACONIC_MANE:
+						// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
+						outputText("\n\nYou feel a sudden tingle just above your spine. Eager to see, what is the cause of it you bend your draconic neck to take a closer look at it.");
+						outputText(" Looking at your back you see tiny splotches of hair beginning to grow out of your scaly skin. The hair grows longer and the splotches grow until");
+						outputText(" they slowly merge to a vertical strip right above your spine.");
+						outputText("\n\nTracing your spine, a mane of hair has grown; starting at the base of your neck and continuing down your tail, ending on the tip of your tail in a small tuft.");
+						outputText("  It is the same color as the hair on your head, but shorter and denser; it has grown in a thick vertical strip, maybe two inches wide.");
+						outputText("  It reminds you vaguely of a horse's mane.");
+						outputText("  <b>You now have a hairy mane on your rear.</b>");
+						player.rearBodyType = REAR_BODY_TYPE_DRACONIC_MANE;
+						break;
+
+					case REAR_BODY_TYPE_DRACONIC_SPIKES:
+						// Teh spiky mane, similar to the hairy one.
+						outputText("\n\nYou feel a sudden pain coming from your spine. Eager to see, what is the cause of it you bend your draconic neck to take a closer look at it.");
+						outputText(" You watch your back in growing pain as small bulges start emerging from your spine, growing bigger and bigger, until you feel a sudden burst of pain, when small spikes");
+						outputText(" begin to break through your skin. Hardly bearing the growing pain you continue watching them slowly growing longer curving backwards until finally the pain has ceased.");
+						outputText("\n\nTracing your spine, a row of short steel-gray and curved backwards spikes protrude;");
+						outputText("  starting at the base of your neck and continuing down your tail, ending on the tip of your tail.");
+						outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
+						outputText("  <b>Your rear is now decorated with a row of curved spikes.</b>");
+						player.rearBodyType = REAR_BODY_TYPE_DRACONIC_SPIKES;
+						break;
+
+					default:
+						// this should hopefully never happen
+						trace("Invalid Ember rearBodyType: " + emberRear);
+				}
+			}
+			//\Gain Dragon Rear Body (modded)
 			//Gain Dragon Neck (modded)
 			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
-			if (player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && !player.hasDragonNeck()) {
+			if (!player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit) {
 				var nlChange:int = 2 + rand(4);
 				if (!player.hasNormalNeck()) { // Note: hasNormalNeck checks the length, not the type!
 					player.modifyNeck(nlChange);

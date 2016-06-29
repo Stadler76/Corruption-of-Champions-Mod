@@ -200,6 +200,12 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
+		// modded (rearBodyType)
+		private var _rearBodyType:Number = REAR_BODY_TYPE_NONE;
+		public function get rearBodyType():Number { return _rearBodyType; }
+		public function set rearBodyType(value:Number):void { _rearBodyType = value; }
+		// \modded (rearBodyType)
+
 		// modded (neckType)
 		private var _neckType:Number = NECK_TYPE_NORMAL;
 		public function get neckType():Number { return _neckType; }

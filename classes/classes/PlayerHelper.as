@@ -1,5 +1,7 @@
-package classes 
+package classes
 {
+	import classes.GlobalFlags.kFLAGS;
+
 	/**
 	 * This contains some of the helper methods for the player-object I've written
 	 * @author Stadler76
@@ -24,32 +26,42 @@ package classes
 
 		public function hasLeatherWings(large:Boolean = false):Boolean
 		{
-				return hasDragonWings(large) || hasBatWings(large);
+			return hasDragonWings(large) || hasBatWings(large);
 		}
 
 		public function hasScales():Boolean
 		{
-				return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
+			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
 		}
 
 		public function hasReptileTail():Boolean
 		{
-				return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
+			return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
 		}
 
 		public function hasReptileArms():Boolean
 		{
-				return [ARM_TYPE_DRACONIC, ARM_TYPE_SALAMANDER].indexOf(armType) != -1;
+			return [ARM_TYPE_DRACONIC, ARM_TYPE_SALAMANDER].indexOf(armType) != -1;
 		}
 
 		public function hasReptileFeet():Boolean
 		{
-				return [LOWER_BODY_TYPE_LIZARD, LOWER_BODY_TYPE_DRAGON, LOWER_BODY_TYPE_SALAMANDER].indexOf(lowerBody) != -1;
+			return [LOWER_BODY_TYPE_LIZARD, LOWER_BODY_TYPE_DRAGON, LOWER_BODY_TYPE_SALAMANDER].indexOf(lowerBody) != -1;
 		}
 
 		public function hasDraconicBackSide():Boolean
 		{
 			return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet();
+		}
+
+		public function hasDragonRearBody():Boolean
+		{
+			return [REAR_BODY_TYPE_DRACONIC_MANE, REAR_BODY_TYPE_DRACONIC_SPIKES].indexOf(rearBodyType) != -1;
+		}
+
+		public function fetchEmberRearBodyType():Number
+		{
+			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_TYPE_DRACONIC_MANE : REAR_BODY_TYPE_DRACONIC_SPIKES;
 		}
 	}
 }
