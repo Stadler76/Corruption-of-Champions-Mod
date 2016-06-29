@@ -185,7 +185,7 @@ public static const LOWER_BODY_TYPE_SALAMANDER:int						       			=  25;
 // rearBodyType
 public static const REAR_BODY_TYPE_NONE:int                                         =   0;
 public static const REAR_BODY_TYPE_DRACONIC_MANE:int                                =   1;
-public static const REAR_BODY_TYPE_DRACONIC_SPIKES:int                              =   2; // Maybe later and if Ember has no mane.
+public static const REAR_BODY_TYPE_DRACONIC_SPIKES:int                              =   2;
 public static const REAR_BODY_TYPE_BEHEMOTH:int                                     =   3; // NYI, Its just there as an example.
 
 // neckType

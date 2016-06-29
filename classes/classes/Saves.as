@@ -848,6 +848,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
+		saveFile.data.neckLength = player.neckLength;
+		saveFile.data.neckType = player.neckType;
+		saveFile.data.rearBodyType = player.rearBodyType;
 		saveFile.data.wingDesc = player.wingDesc;
 		saveFile.data.wingType = player.wingType;
 		saveFile.data.lowerBody = player.lowerBody;
@@ -1730,7 +1733,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.hornType = HORNS_NONE;
 		else
 			player.hornType = saveFile.data.hornType;
-			
+
+		// <modded name="Dragon patch"> 
+		player.neckLength = (saveFile.data.neckLength == undefined) ? 2 : saveFile.data.neckLength;
+		player.neckType = (saveFile.data.neckType == undefined) ? NECK_TYPE_NORMAL : saveFile.data.neckType;
+		player.rearBodyType = (saveFile.data.rearBodyType == undefined) ? REAR_BODY_TYPE_NONE : saveFile.data.rearBodyType;
+		// </modded> 
+
 		player.wingDesc = saveFile.data.wingDesc;
 		player.wingType = saveFile.data.wingType;
 		player.lowerBody = saveFile.data.lowerBody;

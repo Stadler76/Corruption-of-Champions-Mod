@@ -213,13 +213,14 @@ package classes
 		// \modded (neckType)
 
 		// modded (neckLength)
-		private var _neckLength:int = 2;
-		public function get neckLength():int { return _neckLength; }
+		private var _neckLength:Number = 2;
+		public function get neckLength():Number { return _neckLength; }
+		public function set neckLength(value:Number):void { _neckLength = value; }
 		public function restoreNeck():void {
 			_neckLength = 2;
 			_neckType = NECK_TYPE_NORMAL;
 		}
-		public function modifyNeck(len:int, newType:Number = -1):void {
+		public function modifyNeck(len:Number, newType:Number = -1):void {
 			var nlMax:Array = [];
 			nlMax[NECK_TYPE_NORMAL]   =  2;
 			nlMax[NECK_TYPE_DRACONIC] = 24;
