@@ -5344,8 +5344,15 @@
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
 				outputText("  <b>You have reptilian legs and claws!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_LIZARD;
-				player.legCount = player.isTaur() ? 4 : 2;
+				if (!player.isTaur()) player.legCount = 2; // I'll revert this after some more debugging, since you can always use Taurinum from Rathazul
 				changes++;
+			}
+			//Gain predator arms (Modded)
+			if (player.armType != ARM_TYPE_PREDATOR && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short claws replacing your fingernails.");
+				outputText("\n<b>You now have reptilian arms.</b>", false);
+				player.armType = ARM_TYPE_PREDATOR;
+				changes++
 			}
 			//-Tail – sinuous lizard tail
 			if (player.tailType != TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
@@ -5379,42 +5386,22 @@
 			if (player.skinType != SKIN_TYPE_SCALES && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				//(fur)
 				if (player.skinType == SKIN_TYPE_FUR) {
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
-					}
+					player.skinTone = player.newLizanSkinTone();
 					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
+				}
+				else if (player.skinType == SKIN_TYPE_DRACONIC) {
+					outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New scales have grown to replace your peeled off " + player.skinFurScales() + ".  <b>You're covered from head to toe in shiny ");
+					player.skinTone = player.newLizanSkinTone();
+					outputText(player.skinTone + " scales.</b>", false);
 				}
 				//(no fur)
 				else {
 					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny ", false);
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
-					}
+					player.skinTone = player.newLizanSkinTone();
 					outputText(player.skinTone + " scales.</b>", false);
 				}
 				player.skinType = SKIN_TYPE_SCALES;
+				player.skinAdj = "";
 				player.skinDesc = "scales";
 				changes++;
 			}

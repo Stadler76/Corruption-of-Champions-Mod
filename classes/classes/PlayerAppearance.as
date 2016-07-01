@@ -480,10 +480,10 @@ package classes
 				outputText("  Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.", false);
 			else if (player.armType == ARM_TYPE_SPIDER) 
 				outputText("  Shining black exoskeleton  covers your arms from the biceps down, resembling a pair of long black gloves from a distance.", false);	
-			else if(player.armType == ARM_TYPE_SALAMANDER)
+			else if (player.armType == ARM_TYPE_SALAMANDER)
 				outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
-			else if(player.armType == ARM_TYPE_DRACONIC)
-				outputText("  Shield-shaped " + player.skinTone + " scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
+			else if (player.armType == ARM_TYPE_PREDATOR)
+				outputText("  Your arms are covered by " + player.skinFurScales() + " from the biceps down and your fingernails are now short curved claws.", false);
 			//Done with head bits. Move on to body stuff
 			//Horse lowerbody, other lowerbody texts appear lower
 			if (player.isTaur()) 

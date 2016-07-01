@@ -1251,7 +1251,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (horns > 0 && (hornType == 3 || hornType == 4))
 				lizardCounter++;
-			if (skinType == 2)
+			if (hasScales() == 2)
 				lizardCounter++;
 			return lizardCounter;
 		}
@@ -1367,7 +1367,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (horns > 0 && (hornType == 3 || hornType == 4))
 				dragonCounter++;
-			if (skinType == 2 && dragonCounter > 0)
+			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
 				dragonCounter++;
 			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
 				dragonCounter++;

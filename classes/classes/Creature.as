@@ -2547,6 +2547,8 @@ package classes
 			//haircolor
 			if (_skinType == 1)
 				skinzilla += furColor + " ";
+			else if (_skinType == SKIN_TYPE_DRACONIC)
+				skinzilla += _skinTone + " shield-shaped ";
 			else
 				skinzilla += _skinTone + " ";
 			skinzilla += skinDesc;

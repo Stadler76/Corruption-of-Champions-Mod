@@ -1679,10 +1679,10 @@ package classes.Scenes.NPCs
 			}
 			//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 			//Gain Dragon Scales
-			if (player.skinType != SKIN_TYPE_SCALES && changes < changeLimit && rand(3) == 0) {
+			if (player.skinType != SKIN_TYPE_DRACONIC && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. <b>Your body is now covered in shield-shaped dragon scales.</b>");
-				player.skinType = SKIN_TYPE_SCALES;
-				player.skinAdj = "";
+				player.skinType = SKIN_TYPE_DRACONIC;
+				player.skinAdj = "tough, iron-like";
 				player.skinDesc = "scales";
 				//def bonus of scales
 			}
@@ -1712,7 +1712,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nYou scream in agony as you feel the bones in your feet suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
 				}
 				player.lowerBody = LOWER_BODY_TYPE_DRAGON;
-				player.legCount = player.isTaur() ? 4 : 2;
+				if (!player.isTaur()) player.legCount = 2; // I'll revert this after some more debugging, since you can always use Taurinum from Rathazul
 				changes++;
 			}
 			//Gain Dragon Tail
@@ -1817,10 +1817,10 @@ package classes.Scenes.NPCs
 			}
 			//\Gain Dragon Neck (modded)
 			//Gain Dragon Arms (Modded. Derived from ARM_TYPE_SALAMANDER)
-			if (player.armType != ARM_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+			if (player.armType != ARM_TYPE_PREDATOR && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and short claws replacing your fingernails.");
 				outputText("\n<b>You now have dragon arms.</b>", false);
-				player.armType = ARM_TYPE_DRACONIC;
+				player.armType = ARM_TYPE_PREDATOR;
 				changes++
 			}
 			//Get Dragon Breath (Tainted version)
