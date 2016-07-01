@@ -416,7 +416,7 @@ package classes
 			{
 				// length description
 				if (player.hasDragonNeck())
-					outputText("  Your neck is about two feet long, roughly matching your arm length.");
+					outputText("  Your neck starts at the backside of your head and is about two and a half feet long, roughly six inches longer, than your arm length.");
 				else {
 					var lengthText:String = "";
 					if (player.neckLength < 8) lengthText = "a few inches longer";

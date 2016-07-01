@@ -223,7 +223,7 @@ package classes
 		public function modifyNeck(len:Number, newType:Number = -1):void {
 			var nlMax:Array = [];
 			nlMax[NECK_TYPE_NORMAL]   =  2;
-			nlMax[NECK_TYPE_DRACONIC] = 24;
+			nlMax[NECK_TYPE_DRACONIC] = 30;
 			nlMax[NECK_TYPE_EASTERN]  = 48; // NYI, for later use
 			nlMax[NECK_TYPE_HYDRA]    = 72; // NYI, for later use
 
@@ -233,8 +233,6 @@ package classes
 			if (_neckLength < 2)  _neckLength = 2;
 			if (_neckLength > nlMax[_neckType]) _neckLength = nlMax[_neckType];
 		}
-		public function hasDragonNeck():Boolean { return _neckLength >= 24; }
-		public function hasNormalNeck():Boolean { return _neckLength <= 2; }
 		// \modded (neckLength)
 
 		/*EarType

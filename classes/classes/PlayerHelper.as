@@ -61,6 +61,16 @@ package classes
 			return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet();
 		}
 
+		public function hasDragonNeck():Boolean
+		{
+			return neckLength >= 30;
+		}
+
+		public function hasNormalNeck():Boolean
+		{
+			return neckLength <= 2;
+		}
+
 		public function hasDragonRearBody():Boolean
 		{
 			return [REAR_BODY_TYPE_DRACONIC_MANE, REAR_BODY_TYPE_DRACONIC_SPIKES].indexOf(rearBodyType) != -1;
