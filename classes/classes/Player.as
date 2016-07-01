@@ -1251,7 +1251,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (horns > 0 && (hornType == 3 || hornType == 4))
 				lizardCounter++;
-			if (hasScales() == 2)
+			if (hasScales())
 				lizardCounter++;
 			return lizardCounter;
 		}
