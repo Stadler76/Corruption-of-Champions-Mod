@@ -34,6 +34,18 @@ package classes
 			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
 		}
 
+		// ugly name, but should do for now
+		public function hasGooOrUndefSkin():Boolean
+		{
+			return [SKIN_TYPE_GOO, SKIN_TYPE_UNDEFINED].indexOf(skinType) != -1;
+		}
+
+		// used more than once, so I wrote a helper method for it
+		public function hasFurOrScales():Boolean
+		{
+			return skinType == SKIN_TYPE_FUR || hasScales();
+		}
+
 		public function hasReptileTail():Boolean
 		{
 			return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;

@@ -1658,7 +1658,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "skin";
 			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == SKIN_TYPE_SCALES)
+			if (player.hasScales())
 				player.skinDesc = "scales";
 			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
@@ -1670,7 +1670,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "skin";
 			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == SKIN_TYPE_SCALES)
+			if (player.hasScales())
 				player.skinDesc = "scales";
 			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
@@ -1682,7 +1682,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "skin";
 			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == SKIN_TYPE_SCALES)
+			if (player.hasScales())
 				player.skinDesc = "scales";
 			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
@@ -1694,7 +1694,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "skin";
 			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == SKIN_TYPE_SCALES)
+			if (player.hasScales())
 				player.skinDesc = "scales";
 			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
@@ -1706,7 +1706,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "skin";
 			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == SKIN_TYPE_SCALES)
+			if (player.hasScales())
 				player.skinDesc = "scales";
 			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";

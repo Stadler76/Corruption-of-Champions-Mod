@@ -272,7 +272,8 @@ use namespace kGAMECLASS;
 			}
 			//Stacks on top of Thick Skin perk.
 			if (skinType == SKIN_TYPE_FUR) armorDef += 1;
-			if (skinType == SKIN_TYPE_SCALES) armorDef += 3;
+			if (hasScales()) armorDef += 3;
+			//if (skinType == SKIN_TYPE_DRACONIC) armorDef += 3; // maybe later
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
@@ -1271,7 +1272,7 @@ use namespace kGAMECLASS;
 				score--;
 			if (tailType == 5)
 				score += 2;
-			if (skinType > 0 && score > 0)
+			if (skinType != SKIN_TYPE_PLAIN && score > 0)
 				score--;
 			return score;
 		}
@@ -1328,8 +1329,10 @@ use namespace kGAMECLASS;
 			//If the character has fur, scales, or gooey skin, -1
 			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
-			if (skinType > SKIN_TYPE_FUR)
-				kitsuneCounter -= skinType; // -2 sor scales, -3 for goo
+			if (hasScales())
+				kitsuneCounter -= 2;
+			if (hasGooOrUndefSkin())
+				kitsuneCounter -= 3;
 			//If the character has abnormal legs, -1
 			if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
 				kitsuneCounter--;
@@ -1518,7 +1521,7 @@ use namespace kGAMECLASS;
 			var mutantCounter:Number = 0;
 			if (faceType > 0)
 				mutantCounter++;
-			if (skinType > 0)
+			if (skinType != 0)
 				mutantCounter++;
 			if (tailType > 0)
 				mutantCounter++;
