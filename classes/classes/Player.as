@@ -773,21 +773,22 @@ use namespace kGAMECLASS;
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_LIZARD)
 					race += "-taur";
 			}
+
 			if (isDragon())
 			{
-				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DRAGON)
+				race = "dragon-morph";
+				if (faceType == 0)
+					race = "dragon-" + mf("man", "girl");
+				if (isTaur())
 					race = "dragon-taur";
-				else {
-					race = "dragon-morph";
-					if (faceType == 0)
-						race = "dragon-" + mf("man", "girl");
-				}
 			}
 			if (raccoonScore() >= 4)
 			{
 				race = "raccoon-morph";
 				if (balls > 0 && ballSize > 5)
 					race = "tanuki-morph";
+				if (isTaur())
+					race = "raccoon-taur";
 			}
 			if (dogScore() >= 4)
 			{
@@ -833,6 +834,8 @@ use namespace kGAMECLASS;
 				race = "corrupted mutant";
 			if (minoScore() >= 4)
 				race = "minotaur-morph";
+				if (isTaur())
+					race = "minotaur-taur";
 			if (cowScore() > 5)
 			{
 				race = "cow-";
