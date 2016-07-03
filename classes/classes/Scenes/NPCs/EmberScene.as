@@ -963,13 +963,14 @@ package classes.Scenes.NPCs
 				else if (flags[kFLAGS.EMBER_HAIR] == 2) {
 					outputText("  Tracing " + emberMF("his", "her") + " spine, a mane of hair grows; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail in a small tuft.  It is the same color as the hair on " + emberMF("his", "her") + " head, but shorter and denser; it grows in a thick vertical strip, maybe two inches wide.  It reminds you vaguely of a horse's mane.");
 				}
-				// modded (rearBodyType)
+				// <mod name="Dragon patch" author="Stadler76">
+				// rearBodyType
 				if (flags[kFLAGS.EMBER_HAIR] != 2) {
 					// Teh spiky mane, similar to the hairy one.
 					outputText("  Tracing " + emberMF("his", "her") + " spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail.");
 					outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
 				}
-				// \modded (rearBodyType)
+				// </mod>
 				outputText("\n\n" + emberMF("His", "Her") + " back supports a pair of strong, scaly dragon wings, covered in membranous leathery scales.  The muscles are held taut, as though ready to extend and take to the skies at any notice.");
 
 				//(Male)
@@ -1770,7 +1771,8 @@ package classes.Scenes.NPCs
 				}
 				changes++;
 			}
-			//Gain Dragon Rear Body (modded)
+			// <mod name="Dragon patch" author="Stadler76">
+			//Gain Dragon Rear Body
 			if (!player.hasDragonRearBody() && player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
 				var emberRear:Number = player.fetchEmberRearBodyType();
 				switch (emberRear) {
@@ -1803,8 +1805,7 @@ package classes.Scenes.NPCs
 						trace("Invalid Ember rearBodyType: " + emberRear);
 				}
 			}
-			//\Gain Dragon Rear Body (modded)
-			//Gain Dragon Neck (modded)
+			//Gain Dragon Neck
 			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
 			if (!player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit) {
@@ -1824,8 +1825,7 @@ package classes.Scenes.NPCs
 					outputText("  <b>You now have a fully grown dragon neck.</b>");
 				}
 			}
-			//\Gain Dragon Neck (modded)
-			//Gain Dragon Arms (Modded. Derived from ARM_TYPE_SALAMANDER)
+			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
 			if (player.armType != ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick curved claws replacing your fingernails.");
 				outputText("\n<b>You now have dragon arms.</b>", false);
@@ -1842,6 +1842,7 @@ package classes.Scenes.NPCs
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}
+			// </mod>
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 

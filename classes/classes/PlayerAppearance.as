@@ -411,7 +411,8 @@ package classes
 				}
 
 			}
-			// Modded (neckLength)
+			// <mod name="Dragon patch" author="Stadler76">
+			// neckLength
 			if (!player.hasNormalNeck())
 			{
 				// length description
@@ -435,7 +436,7 @@ package classes
 					else outputText("  You are able to bend it in almost every direction and with some effort you even manage to take a glimpse at your back.");
 				}
 			}
-			// \Modded (neckLength)
+			// </mod>
 			//BODY PG HERE
 			outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
 			//WINGS!
@@ -458,7 +459,8 @@ package classes
 			else if (player.wingType == WING_TYPE_GIANT_DRAGONFLY) 
 				outputText("  Giant dragonfly wings hang from your shoulders.  At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
 
-			// modded (rearBodyType)
+			// <mod name="Dragon patch" author="Stadler76">
+			// rearBodyType
 			switch (player.rearBodyType) {
 				case REAR_BODY_TYPE_DRACONIC_MANE:
 					// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
@@ -473,7 +475,7 @@ package classes
 					outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
 					break;
 			}
-			// \modded (rearBodyType)
+			// </mod>
 
 			//Wing arms
 			if (player.armType == ARM_TYPE_HARPY) 

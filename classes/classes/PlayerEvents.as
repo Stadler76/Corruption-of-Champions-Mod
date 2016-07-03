@@ -418,6 +418,7 @@ package classes {
 					}
 				}
 			}
+			// <mod name="Dragon patch" author="Stadler76">
 			if (player.hasDragonNeck() && player.neckType == NECK_TYPE_DRACONIC && (!player.isDragon() || !player.hasDraconicBackSide())) {
 				outputText("\n<b>Your draconic neck and its position on your head reverts to its normal position and length. ");
 				if (player.hasDragonRearBody()) {
@@ -430,6 +431,7 @@ package classes {
 				player.restoreNeck();
 				needNext = true;
 			}
+			// </mod>
 
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
