@@ -200,25 +200,19 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
-		// modded (rearBodyType)
-		private var _rearBodyType:Number = REAR_BODY_TYPE_NONE;
-		public function get rearBodyType():Number { return _rearBodyType; }
-		public function set rearBodyType(value:Number):void { _rearBodyType = value; }
-		// \modded (rearBodyType)
+		// <mod name="Dragon patch" author="Stadler76">
+		public var clawDesc:String = "claws";
+		public var clawAdj:String = "";
+		public var rearBodyType:Number = REAR_BODY_TYPE_NONE;
+		public var neckType:Number = NECK_TYPE_NORMAL;
 
-		// modded (neckType)
-		private var _neckType:Number = NECK_TYPE_NORMAL;
-		public function get neckType():Number { return _neckType; }
-		public function set neckType(value:Number):void { _neckType = value; }
-		// \modded (neckType)
-
-		// modded (neckLength)
+		// neckLength
 		private var _neckLength:Number = 2;
 		public function get neckLength():Number { return _neckLength; }
 		public function set neckLength(value:Number):void { _neckLength = value; }
 		public function restoreNeck():void {
 			_neckLength = 2;
-			_neckType = NECK_TYPE_NORMAL;
+			neckType = NECK_TYPE_NORMAL;
 		}
 		public function modifyNeck(len:Number, newType:Number = -1):void {
 			var nlMax:Array = [];
@@ -227,13 +221,13 @@ package classes
 			nlMax[NECK_TYPE_EASTERN]  = 48; // NYI, for later use
 			nlMax[NECK_TYPE_HYDRA]    = 72; // NYI, for later use
 
-			if (newType != -1) _neckType = newType;
+			if (newType != -1) neckType = newType;
 
 			_neckLength += len;
 			if (_neckLength < 2)  _neckLength = 2;
-			if (_neckLength > nlMax[_neckType]) _neckLength = nlMax[_neckType];
+			if (_neckLength > nlMax[neckType]) _neckLength = nlMax[neckType];
 		}
-		// \modded (neckLength)
+		// </mod>
 
 		/*EarType
 		-1 - none!
@@ -2552,6 +2546,18 @@ package classes
 			skinzilla += skinDesc;
 			return skinzilla;
 		}
+
+		// <mod name="Dragon patch" author="Stadler76">
+		public function claws():String
+		{
+			var clawText:String = "";
+			//Adjectives first!
+			if (clawAdj != "")
+				clawText += clawAdj + " ";
+			clawText += clawDesc != "" ? clawDesc : "claws";
+			return clawText;
+		}
+		// </mod>
 
 		public function leg():String
 		{

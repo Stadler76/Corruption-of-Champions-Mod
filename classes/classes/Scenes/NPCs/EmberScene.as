@@ -1826,10 +1826,20 @@ package classes.Scenes.NPCs
 			}
 			//\Gain Dragon Neck (modded)
 			//Gain Dragon Arms (Modded. Derived from ARM_TYPE_SALAMANDER)
-			if (player.armType != ARM_TYPE_PREDATOR && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and short claws replacing your fingernails.");
+			if (player.armType != ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick curved claws replacing your fingernails.");
 				outputText("\n<b>You now have dragon arms.</b>", false);
 				player.armType = ARM_TYPE_PREDATOR;
+				player.clawAdj = "powerful, thick curved";
+				player.clawDesc = "claws";
+				changes++
+			}
+			//Claw transition
+			if (player.hasDragonArms() && !player.hasDragonClaws() && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
+				player.clawAdj = "powerful, thick curved";
+				player.clawDesc = "claws";
+				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}
 			//Get Dragon Breath (Tainted version)

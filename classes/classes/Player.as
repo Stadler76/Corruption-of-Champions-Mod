@@ -832,10 +832,11 @@ use namespace kGAMECLASS;
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
-			if (minoScore() >= 4)
+			if (minoScore() >= 4) {
 				race = "minotaur-morph";
 				if (isTaur())
 					race = "minotaur-taur";
+			}
 			if (cowScore() > 5)
 			{
 				race = "cow-";
@@ -1257,6 +1258,8 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (hasScales())
 				lizardCounter++;
+			if (hasLizanArms() && hasLizanClaws())
+				lizardCounter++;
 			return lizardCounter;
 		}
 
@@ -1378,6 +1381,12 @@ use namespace kGAMECLASS;
 			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
 				dragonCounter++;
 			if (findPerk(PerkLib.Dragonfire) >= 0)
+				dragonCounter++;
+			if (hasDragonArms() && hasDragonClaws())
+				dragonCounter++;
+			if (hasDragonNeck())
+				dragonCounter++;
+			if (hasDragonRearBody())
 				dragonCounter++;
 			return dragonCounter;
 		}

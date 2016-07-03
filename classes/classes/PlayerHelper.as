@@ -51,13 +51,32 @@ package classes
 			return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
 		}
 
-		public function hasReptileArms():Boolean
+		public function hasLizanArms():Boolean
 		{
-			return [ARM_TYPE_PREDATOR, ARM_TYPE_SALAMANDER].indexOf(armType) != -1;
+			return armType == ARM_TYPE_PREDATOR && skinType == SKIN_TYPE_SCALES;
 		}
 
-		// As of now its just an alias for hasReptileArms()
-		// Maybe in the future you want to have different predator arms. e. g. ARM_TYPE_FELINE for cats with retractable claws or whatever :)
+		public function hasLizanClaws():Boolean
+		{
+			return clawAdj == "short curved" && clawDesc == "claws";
+		}
+
+		public function hasDragonArms():Boolean
+		{
+			return armType == ARM_TYPE_PREDATOR && skinType == SKIN_TYPE_DRACONIC;
+		}
+
+		public function hasDragonClaws():Boolean
+		{
+			return clawAdj == "powerful, thick curved" && clawDesc == "claws";
+		}
+
+		// For reptiles with predator arms I recommend to require hasScales() before doing the armType TF to ARM_TYPE_PREDATOR
+		public function hasReptileArms():Boolean
+		{
+			return armType == ARM_TYPE_SALAMANDER || (armType == ARM_TYPE_PREDATOR && hasScales());
+		}
+
 		public function hasPredatorArms():Boolean
 		{
 			return [ARM_TYPE_PREDATOR, ARM_TYPE_SALAMANDER].indexOf(armType) != -1;
@@ -70,7 +89,7 @@ package classes
 
 		public function hasDraconicBackSide():Boolean
 		{
-			return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet();
+			return hasDragonWings(true) && skinType == SKIN_TYPE_DRACONIC && hasReptileTail() && hasReptileArms() && hasReptileFeet();
 		}
 
 		public function hasDragonNeck():Boolean
