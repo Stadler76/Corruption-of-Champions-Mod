@@ -29,37 +29,37 @@ package classes.Items.Consumables
 				case "smooth":
 					switch(Utils.rand(2)) { //Nested switch-and-case FTW!
 						case 0:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 							break;
 						case 1:
-							outputText("thick cream");
+							liquidDesc = "thick cream";
 							break;
 						default:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 					}
 					break;
 				case "rough":
 					switch(Utils.rand(2)) { 
 						case 0:
-							outputText("abrasive goop");
+							liquidDesc = "abrasive goop";
 							break;
 						case 1:
-							outputText("rough textured goop");
+							liquidDesc = "rough textured goop";
 							break;
 						default:
-							outputText("abrasive goop");
+							liquidDesc = "abrasive goop";
 					}
 					break;
 				case "sexy":
 					switch(Utils.rand(3)) {
 						case 0:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 							break;
 						case 1:
-							outputText("attractive cream");
+							liquidDesc = "attractive cream";
 							break;
 						case 2:
-							outputText("beautiful cream");
+							liquidDesc = "beautiful cream";
 							break;
 						default:
 							outputText("smooth liquid");
@@ -68,17 +68,17 @@ package classes.Items.Consumables
 				case "clear":
 					switch(Utils.rand(2)) {
 						case 0:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 							break;
 						case 1:
-							outputText("thick cream");
+							liquidDesc = "thick cream";
 							break;
 						default:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 					}
 					break;
 				default: //Failsafe
-					outputText("cream");
+					liquidDesc = "cream";
 			}
 			return liquidDesc;
 		}
@@ -89,7 +89,7 @@ package classes.Items.Consumables
 				game.HPChange(10, true);
 			}
 			else {
-				if (game.player.skinType != 3) { //If skin is goo, don't change.
+				if ([3, 5].indexOf(game.player.skinType) < 0) { //If skin is goo or dragon scales, don't change.
 					if (_adj != "clear") game.player.skinAdj = _adj;
 					else game.player.skinAdj = "";
 				}
@@ -153,6 +153,10 @@ package classes.Items.Consumables
 						break;
 					case 3: //Goo
 						outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
+						//No changes due to gooey skin.
+						break;
+					case 5: //Dragon scales
+						outputText("You take the lotion and pour the " + liquidDesc() + " on your scales. The concoction dissolves, leaving your dragon scales unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to gooey skin.
 						break;
 					default:
