@@ -2180,7 +2180,8 @@
 					[SKIN_TYPE_FUR, "fur"],
 					[SKIN_TYPE_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "goo"],
-					[SKIN_TYPE_UNDEFINED, "undefined flesh"]
+					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
+					[SKIN_TYPE_DRACONIC, "scales"]
 				]
 		);
 		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
@@ -2189,7 +2190,8 @@
 					[SKIN_TYPE_FUR, "fur"],
 					[SKIN_TYPE_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "skin"],
-					[SKIN_TYPE_UNDEFINED, "skin"]
+					[SKIN_TYPE_UNDEFINED, "skin"],
+					[SKIN_TYPE_DRACONIC, "scales"]
 				]
 		);
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
@@ -2299,7 +2301,8 @@
 					[ARM_TYPE_HUMAN, "human"],
 					[ARM_TYPE_HARPY, "harpy"],
 					[ARM_TYPE_SPIDER, "spider"],
-					[ARM_TYPE_SALAMANDER, "salamander"]
+					[ARM_TYPE_SALAMANDER, "salamander"],
+					[ARM_TYPE_PREDATOR, "predator"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2392,6 +2395,24 @@
 					[LOWER_BODY_TYPE_SALAMANDER, "salamander"]
 				]
 		);
+		// <mod name="Dragon patch" author="Stadler76">
+		public static const DEFAULT_REAR_BODY_NAMES:Object = createMapFromPairs(
+			[
+				[REAR_BODY_TYPE_NONE, "none"],
+				[REAR_BODY_TYPE_DRACONIC_MANE, "draconic hairy mane"],
+				[REAR_BODY_TYPE_DRACONIC_SPIKES, "draconic spiky mane"],
+				[REAR_BODY_TYPE_BEHEMOTH, "behemoth spikes"]
+			]
+		);
+		public static const DEFAULT_NECK_NAMES:Object = createMapFromPairs(
+			[
+				[NECK_TYPE_NORMAL, "normal"],
+				[NECK_TYPE_DRACONIC, "dragon"],
+				[NECK_TYPE_EASTERN, "eastern dragon"],
+				[NECK_TYPE_HYDRA, "hydra"]
+			]
+		);
+		// </mod>
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
 				[
 					[PIERCING_TYPE_NONE, "none"],
