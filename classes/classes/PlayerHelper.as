@@ -34,12 +34,6 @@ package classes
 			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
 		}
 
-		// ugly name, but should do for now
-		public function hasGooOrUndefSkin():Boolean
-		{
-			return [SKIN_TYPE_GOO, SKIN_TYPE_UNDEFINED].indexOf(skinType) != -1;
-		}
-
 		// used more than once, so I wrote a helper method for it
 		public function hasFurOrScales():Boolean
 		{
