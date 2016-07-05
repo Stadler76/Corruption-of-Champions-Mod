@@ -65,6 +65,11 @@ package classes
 			return clawAdj == "powerful, thick curved" && clawDesc == "claws";
 		}
 
+		public function hasDragonHorns():Boolean
+		{
+			return [HORNS_DRACONIC_X2, HORNS_DRACONIC_X4_12_INCH_LONG].indexOf(hornType) != -1;
+		}
+
 		// For reptiles with predator arms I recommend to require hasScales() before doing the armType TF to ARM_TYPE_PREDATOR
 		public function hasReptileArms():Boolean
 		{
@@ -79,6 +84,11 @@ package classes
 		public function hasReptileFeet():Boolean
 		{
 			return [LOWER_BODY_TYPE_LIZARD, LOWER_BODY_TYPE_DRAGON, LOWER_BODY_TYPE_SALAMANDER].indexOf(lowerBody) != -1;
+		}
+
+		public function hasReptileEyes():Boolean
+		{
+			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
 		}
 
 		public function hasDraconicBackSide():Boolean

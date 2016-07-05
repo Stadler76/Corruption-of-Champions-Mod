@@ -770,6 +770,8 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4)
 			{
 				race = "lizan";
+				if (findPerk(PerkLib.BasiliskWomb) >= 0 /*&& eyeType == EYES_BASILISK*/)
+					race = (hasDragonWings() && tongueType == TONGUE_DRACONIC) ? "dracolisk" : "basilisk";
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_LIZARD)
 					race += "-taur";
 			}
@@ -1259,6 +1261,8 @@ use namespace kGAMECLASS;
 			if (hasScales())
 				lizardCounter++;
 			if (hasLizanArms() && hasLizanClaws())
+				lizardCounter++;
+			if (hasReptileEyes())
 				lizardCounter++;
 			return lizardCounter;
 		}
