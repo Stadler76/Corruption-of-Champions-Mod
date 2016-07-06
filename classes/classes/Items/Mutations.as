@@ -5672,7 +5672,7 @@
 				changes++;
 			}
 			//-Skin color change
-			var humanSkinColors:Array = ["light", "fair", "tan", "dark", "ebony", "mahogany", "russet"];
+			var humanSkinColors:Array = ["light", "fair", "tan", "dark"];
 			if (humanSkinColors.indexOf(player.skinTone) < 0 && changes < changeLimit && rand(4) == 0) {
 				changes++;
 				outputText("\n\nIt takes a while for you to notice, but <b>");
