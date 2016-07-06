@@ -62,7 +62,7 @@ package classes.Items.Consumables
 							liquidDesc = "beautiful cream";
 							break;
 						default:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 					}
 					break;
 				case "clear":

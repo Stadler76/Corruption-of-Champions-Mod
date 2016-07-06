@@ -1539,7 +1539,7 @@ use namespace kGAMECLASS;
 			var mutantCounter:Number = 0;
 			if (faceType > 0)
 				mutantCounter++;
-			if (skinType != 0)
+			if (skinType != SKIN_TYPE_PLAIN)
 				mutantCounter++;
 			if (tailType > 0)
 				mutantCounter++;
