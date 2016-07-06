@@ -1798,7 +1798,7 @@ use namespace kGAMECLASS;
 			{
 				return dragonScore() >= 4;
 			}
-			return dragonScore() > 6;
+			return dragonScore() >= 6;
 		}
 
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
