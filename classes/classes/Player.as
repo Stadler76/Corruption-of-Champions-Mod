@@ -769,6 +769,8 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4)
 			{
 				race = "lizan";
+				if (isTaur())
+					race += "-taur";
 			}
 			if (dragonScore() > 6)
 			{
@@ -1372,7 +1374,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (skinType == 2 && dragonCounter > 0)
 				dragonCounter++;
-			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
+			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
 				dragonCounter++;
 			if (findPerk(PerkLib.Dragonfire) >= 0)
 				dragonCounter++;
