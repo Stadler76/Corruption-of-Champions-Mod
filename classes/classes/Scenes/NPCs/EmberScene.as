@@ -1790,7 +1790,7 @@ package classes.Scenes.NPCs
 			}
 			// <mod name="Dragon patch" author="Stadler76">
 			//Gain Dragon Rear Body
-			if (!player.hasDragonRearBody() && player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
+			if (!drakesHeart && !player.hasDragonRearBody() && player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
 				var emberRear:Number = player.fetchEmberRearBodyType();
 				switch (emberRear) {
 					case REAR_BODY_TYPE_DRACONIC_MANE:
@@ -1825,7 +1825,7 @@ package classes.Scenes.NPCs
 			//Gain Dragon Neck
 			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
-			if (!player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit) {
+			if (!drakesHeart && !player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit) {
 				var nlChange:int = 4 + rand(5);
 				if (!player.hasNormalNeck()) { // Note: hasNormalNeck checks the length, not the type!
 					player.modifyNeck(nlChange);
