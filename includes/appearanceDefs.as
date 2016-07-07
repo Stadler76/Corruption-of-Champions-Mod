@@ -113,7 +113,7 @@ public static const ARM_TYPE_HUMAN:int                                          
 public static const ARM_TYPE_HARPY:int                                              =   1;
 public static const ARM_TYPE_SPIDER:int                                             =   2;
 public static const ARM_TYPE_PREDATOR:int                                           =   4;
-public static const ARM_TYPE_SALAMANDER:int	                                        =   5;
+public static const ARM_TYPE_SALAMANDER:int                                         =   5;
 
 // clawType
 public static const CLAW_TYPE_NORMAL:int                                            =   0;
