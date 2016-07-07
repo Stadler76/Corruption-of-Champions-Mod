@@ -5339,7 +5339,7 @@
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
 				outputText("  <b>You have reptilian legs and claws!</b>", false);
 				player.lowerBody = LOWER_BODY_TYPE_LIZARD;
-				if (!player.isTaur()) player.legCount = 2; // I'll revert this after some more debugging, since you can always use Taurinum from Rathazul
+				player.legCount = 2;
 				changes++;
 			}
 			// <mod name="Dragon patch" author="Stadler76">
