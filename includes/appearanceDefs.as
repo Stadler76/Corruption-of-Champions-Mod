@@ -113,7 +113,15 @@ public static const ARM_TYPE_HUMAN:int                                          
 public static const ARM_TYPE_HARPY:int                                              =   1;
 public static const ARM_TYPE_SPIDER:int                                             =   2;
 public static const ARM_TYPE_PREDATOR:int                                           =   4;
-public static const ARM_TYPE_SALAMANDER:int									           		=   5;
+public static const ARM_TYPE_SALAMANDER:int	                                        =   5;
+
+// clawType
+public static const CLAW_TYPE_NORMAL:int                                            =   0;
+public static const CLAW_TYPE_LIZARD:int                                            =   1;
+public static const CLAW_TYPE_DRAGON:int                                            =   2;
+public static const CLAW_TYPE_FELINE:int                                            =   4; // NYI! Example!!
+public static const CLAW_TYPE_DOG:int                                               =   5; // NYI! Example!! Doggies and Wolfies can't really scratch their foes, but their claws could possibly aid them in combat
+public static const CLAW_TYPE_RAPTOR:int                                            =   6; // NYI! Example!! Giev teh Rapturs :-)
 
 // tailType
 public static const TAIL_TYPE_NONE:int                                              =   0;

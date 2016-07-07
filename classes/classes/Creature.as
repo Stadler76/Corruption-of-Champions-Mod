@@ -203,6 +203,7 @@ package classes
 		// <mod name="Dragon patch" author="Stadler76">
 		public var clawDesc:String = "claws";
 		public var clawAdj:String = "";
+		public var clawType:Number = CLAW_TYPE_NORMAL;
 		public var rearBodyType:Number = REAR_BODY_TYPE_NONE;
 		public var neckType:Number = NECK_TYPE_NORMAL;
 

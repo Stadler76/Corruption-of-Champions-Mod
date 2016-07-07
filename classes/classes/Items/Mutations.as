@@ -5350,13 +5350,15 @@
 				player.armType = ARM_TYPE_PREDATOR;
 				player.clawAdj = "short curved";
 				player.clawDesc = "claws";
+				player.clawType = CLAW_TYPE_LIZARD;
 				changes++
 			}
 			//Claw transition
-			if (player.hasLizanArms() && !player.hasLizanClaws() && changes < changeLimit && rand(3) == 0) {
+			if (player.hasLizanArms() && player.clawType != CLAW_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change a little to become reptilian.");
 				player.clawAdj = "short curved";
 				player.clawDesc = "claws";
+				player.clawType = CLAW_TYPE_LIZARD;
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}

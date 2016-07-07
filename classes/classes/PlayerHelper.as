@@ -50,19 +50,9 @@ package classes
 			return armType == ARM_TYPE_PREDATOR && skinType == SKIN_TYPE_SCALES;
 		}
 
-		public function hasLizanClaws():Boolean
-		{
-			return clawAdj == "short curved" && clawDesc == "claws";
-		}
-
 		public function hasDragonArms():Boolean
 		{
 			return armType == ARM_TYPE_PREDATOR && skinType == SKIN_TYPE_DRACONIC;
-		}
-
-		public function hasDragonClaws():Boolean
-		{
-			return clawAdj == "powerful, thick curved" && clawDesc == "claws";
 		}
 
 		public function hasDragonHorns():Boolean

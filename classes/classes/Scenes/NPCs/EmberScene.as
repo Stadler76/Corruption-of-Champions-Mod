@@ -1849,13 +1849,15 @@ package classes.Scenes.NPCs
 				player.armType = ARM_TYPE_PREDATOR;
 				player.clawAdj = "powerful, thick curved";
 				player.clawDesc = "claws";
+				player.clawType = CLAW_TYPE_DRAGON;
 				changes++
 			}
 			//Claw transition
-			if (player.hasDragonArms() && !player.hasDragonClaws() && changes < changeLimit && rand(3) == 0) {
+			if (player.hasDragonArms() && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
 				player.clawAdj = "powerful, thick curved";
 				player.clawDesc = "claws";
+				player.clawType = CLAW_TYPE_DRAGON;
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}

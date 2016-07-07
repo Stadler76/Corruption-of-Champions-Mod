@@ -1280,7 +1280,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (hasScales())
 				lizardCounter++;
-			if (hasLizanArms() && hasLizanClaws())
+			if (hasLizanArms() && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
 			if (hasReptileEyes())
 				lizardCounter++;
@@ -1406,7 +1406,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (findPerk(PerkLib.Dragonfire) >= 0)
 				dragonCounter++;
-			if (hasDragonArms() && hasDragonClaws())
+			if (hasDragonArms() && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
 			if (hasDragonNeck())
 				dragonCounter++;
