@@ -2557,7 +2557,7 @@ package classes
 			if (clawAdj != "")
 				clawText += clawAdj;
 			clawText += clawTone == "" ? "" : (", " + clawTone);
-			clawText += clawDesc != "" ? clawDesc : "claws";
+			clawText += clawDesc != "" ? clawDesc : "fingernails";
 			return clawText;
 		}
 		// </mod>
