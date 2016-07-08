@@ -105,23 +105,5 @@ package classes
 		{
 			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_TYPE_DRACONIC_MANE : REAR_BODY_TYPE_DRACONIC_SPIKES;
 		}
-
-		public function newLizanSkinTone():String
-		{
-			if (rand(10) == 0) {
-				//rare skinTone
-				return rand(2) == 0 ? "purple" : "silver";
-			} else {
-				//non rare skinTone
-				switch (rand(5)) {
-					case 0: return "red";
-					case 1: return "green";
-					case 2: return "white";
-					case 3: return "blue";
-					case 4: return "black";
-				}
-			}
-			return "invalid"; // Will never happen. Suppresses 'Error: Function does not return a value.'
-		}
 	}
 }
