@@ -16,7 +16,7 @@ package classes
 				return [WING_TYPE_DRACONIC_SMALL, WING_TYPE_DRACONIC_LARGE].indexOf(wingType) != -1;
 		}
 
-		public function hasBatWings(large:Boolean = false):Boolean
+		public function hasBatLikeWings(large:Boolean = false):Boolean
 		{
 			if (large)
 				return wingType == WING_TYPE_BAT_LIKE_LARGE;
@@ -26,7 +26,7 @@ package classes
 
 		public function hasLeatherWings(large:Boolean = false):Boolean
 		{
-			return hasDragonWings(large) || hasBatWings(large);
+			return hasDragonWings(large) || hasBatLikeWings(large);
 		}
 
 		public function hasScales():Boolean
