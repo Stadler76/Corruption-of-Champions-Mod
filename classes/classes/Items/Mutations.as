@@ -5594,6 +5594,7 @@
 			if (player.armType != ARM_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>", false);
 				player.armType = ARM_TYPE_SALAMANDER;
+				player.clawType = CLAW_TYPE_SALAMANDER;
 				changes++;
 			}
 			//Remove odd eyes

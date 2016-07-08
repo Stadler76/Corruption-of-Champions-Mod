@@ -854,6 +854,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.rearBodyType = player.rearBodyType;
 		saveFile.data.clawAdj = player.clawAdj;
 		saveFile.data.clawDesc = player.clawDesc;
+		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
 		saveFile.data.wingDesc = player.wingDesc;
@@ -1751,7 +1752,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.neckType     = (saveFile.data.neckType     == undefined) ? NECK_TYPE_NORMAL    : saveFile.data.neckType;
 		player.rearBodyType = (saveFile.data.rearBodyType == undefined) ? REAR_BODY_TYPE_NONE : saveFile.data.rearBodyType;
 		player.clawAdj      = (saveFile.data.clawAdj      == undefined) ? ""                  : saveFile.data.clawAdj;
-		player.clawDesc     = (saveFile.data.clawDesc     == undefined) ? "claws"             : saveFile.data.clawDesc;
+		player.clawDesc     = (saveFile.data.clawDesc     == undefined) ? "fingers"           : saveFile.data.clawDesc;
+		player.clawTone     = (saveFile.data.clawTone     == undefined) ? ""                  : saveFile.data.clawTone;
 		player.clawType     = (saveFile.data.clawType     == undefined) ? CLAW_TYPE_NORMAL    : saveFile.data.clawType;
 		if (player.clawType == CLAW_TYPE_NORMAL && player.clawAdj != "")
 		{
@@ -1762,6 +1764,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				{
 					case "powerful, thick curved": player.clawType = CLAW_TYPE_DRAGON; break;
 					case "short curved":           player.clawType = CLAW_TYPE_LIZARD; break;
+					case "":                       player.clawType = CLAW_TYPE_NORMAL; player.clawDesc = "fingers";  break;
 				}
 			}
 		}

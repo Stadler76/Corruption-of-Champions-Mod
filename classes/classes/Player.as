@@ -771,7 +771,7 @@ use namespace kGAMECLASS;
 			{
 				race = "lizan";
 				if (findPerk(PerkLib.BasiliskWomb) >= 0 /*&& eyeType == EYES_BASILISK*/)
-					race = (hasDragonWings() && tongueType == TONGUE_DRACONIC) ? "dracolisk" : "basilisk";
+					race = (hasDragonWings(true) && findPerk(PerkLib.Dragonfire) >= 0) ? "dracolisk" : "basilisk";
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_LIZARD)
 					race += "-taur";
 			}

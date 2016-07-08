@@ -119,9 +119,11 @@ public static const ARM_TYPE_SALAMANDER:int                                     
 public static const CLAW_TYPE_NORMAL:int                                            =   0;
 public static const CLAW_TYPE_LIZARD:int                                            =   1;
 public static const CLAW_TYPE_DRAGON:int                                            =   2;
-public static const CLAW_TYPE_FELINE:int                                            =   4; // NYI! Example!!
-public static const CLAW_TYPE_DOG:int                                               =   5; // NYI! Example!! Doggies and Wolfies can't really scratch their foes, but their claws could possibly aid them in combat
-public static const CLAW_TYPE_RAPTOR:int                                            =   6; // NYI! Example!! Giev teh Rapturs :-)
+public static const CLAW_TYPE_SALAMANDER:int                                        =   3;
+public static const CLAW_TYPE_CAT:int                                               =   4; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
+public static const CLAW_TYPE_DOG:int                                               =   5; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
+public static const CLAW_TYPE_RAPTOR:int                                            =   6; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws) Giev teh Rapturs :-)
+public static const CLAW_TYPE_MANTIS:int                                            =   7; // NYI! Placeholder for Xianxia mod (See http://tiny.cc/coc-xianxia-mod)
 
 // tailType
 public static const TAIL_TYPE_NONE:int                                              =   0;
