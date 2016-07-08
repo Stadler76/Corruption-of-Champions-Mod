@@ -1823,7 +1823,7 @@ package classes.Scenes.NPCs
 				}
 			}
 			//Gain Dragon Neck
-			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && hasScales() && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
+			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && skinType == SKIN_TYPE_DRACONIC && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
 			if (!drakesHeart && !player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit) {
 				var nlChange:int = 4 + rand(5);
