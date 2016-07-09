@@ -200,9 +200,7 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
-		// <mod name="Dragon patch" author="Stadler76">
-		public var clawDesc:String = "claws";
-		public var clawAdj:String = "";
+		// <mod name="Dragon patch" author="Stadler">
 		public var clawTone:String = "";
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		public var rearBodyType:Number = REAR_BODY_TYPE_NONE;
@@ -2549,16 +2547,18 @@ package classes
 			return skinzilla;
 		}
 
-		// <mod name="Dragon patch" author="Stadler76">
+		// <mod name="Predator arms" author="Stadler">
 		public function claws():String
 		{
-			var clawText:String = "";
-			//Adjectives first!
-			if (clawAdj != "")
-				clawText += clawAdj;
-			clawText += clawTone == "" ? "" : (", " + clawTone);
-			clawText += clawDesc != "" ? clawDesc : "fingernails";
-			return clawText;
+			var toneText:String = clawTone == "" ? " " : (", " + clawTone + " ");
+
+			switch (clawType) {
+				case CLAW_TYPE_NORMAL: return "fingernails";
+				case CLAW_TYPE_LIZARD: return "short curved" + toneText + "claws";
+				case CLAW_TYPE_DRAGON: return "powerful, thick curved" + toneText + "claws";
+				// Since mander arms are hardcoded and the others are NYI, we're done here for now
+			}
+			return "fingernails";
 		}
 		// </mod>
 

@@ -22,7 +22,7 @@ package classes
 			displayHeader("Appearance");
 			if (race != player.startingRace)	outputText("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ", false);
 			//Height and race.
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(calcedTallness * 2.54) / 100 + " metres tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + (Math.round(calcedTallness * 2.54) / 100).toFixed(2) + " metres tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 			else outputText("You are a " + Math.floor(calcedTallness / 12) + " foot " + calcedTallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 			
 			outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
