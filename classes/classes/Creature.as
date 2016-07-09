@@ -200,18 +200,16 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
-		// <mod name="Dragon patch" author="Stadler">
+		//<mod name="Dragon patch" author="Stadler">
 		public var clawTone:String = "";
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		public var rearBodyType:Number = REAR_BODY_TYPE_NONE;
 		public var neckType:Number = NECK_TYPE_NORMAL;
 
 		// neckLength
-		private var _neckLength:Number = 2;
-		public function get neckLength():Number { return _neckLength; }
-		public function set neckLength(value:Number):void { _neckLength = value; }
+		public var neckLength:Number = 2;
 		public function restoreNeck():void {
-			_neckLength = 2;
+			neckLength = 2;
 			neckType = NECK_TYPE_NORMAL;
 		}
 		public function modifyNeck(len:Number, newType:Number = -1):void {
@@ -223,11 +221,11 @@ package classes
 
 			if (newType != -1) neckType = newType;
 
-			_neckLength += len;
-			if (_neckLength < 2)  _neckLength = 2;
-			if (_neckLength > nlMax[neckType]) _neckLength = nlMax[neckType];
+			neckLength += len;
+			if (neckLength < 2)  neckLength = 2;
+			if (neckLength > nlMax[neckType]) neckLength = nlMax[neckType];
 		}
-		// </mod>
+		//</mod>
 
 		/*EarType
 		-1 - none!
