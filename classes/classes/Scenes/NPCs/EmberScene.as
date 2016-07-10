@@ -1693,7 +1693,7 @@ package classes.Scenes.NPCs
 			if (player.skinType != SKIN_TYPE_DRACONIC && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. <b>Your body is now covered in shield-shaped dragon scales.</b>");
 				player.skinType = SKIN_TYPE_DRACONIC;
-				player.skinAdj = "tough, iron-like";
+				player.skinAdj = "tough";
 				player.skinDesc = "scales";
 				//def bonus of scales
 			}
