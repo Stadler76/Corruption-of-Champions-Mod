@@ -1408,11 +1408,11 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (hasDragonArms() && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
+			if (eyeType == EYES_DRAGON)
+				dragonCounter++;
 			if (hasDragonNeck())
 				dragonCounter++;
 			if (hasDragonRearBody())
-				dragonCounter++;
-			if (eyeType == EYES_DRAGON)
 				dragonCounter++;
 			return dragonCounter;
 		}
@@ -1798,7 +1798,7 @@ use namespace kGAMECLASS;
 			{
 				return dragonScore() >= 4;
 			}
-			return dragonScore() >= 6;
+			return dragonScore() >= 5;
 		}
 
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
