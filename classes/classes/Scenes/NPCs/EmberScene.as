@@ -1704,8 +1704,8 @@ package classes.Scenes.NPCs
 					outputText("\n\nYour eyes change slightly in their appearance.");
 				else
 				{
-					outputText("\n\nYou feel a sudden surge of pain in your eyes as they begin to reshape. Your pupils begin to elongate becoming vertically slitted and your irises change their form and color, too.");
-					outputText("\n\nAs the pain passes, you examine your eyes in a nearby puddle. You look into your new prideful, fierce dragon eyes with vertically slitted pupils and burning orange irises.");
+					outputText("\n\nYou feel a sudden surge of pain in your eyes as they begin to reshape. Your pupils begin to elongate becoming vertically slitted and your irises change their color, too.");
+					outputText("\nAs the pain passes, you examine your eyes in a nearby puddle. You look into your new prideful, fierce dragon eyes with vertically slitted pupils and burning orange irises.");
 					outputText("  They glitter even in the darkness. With a few tears remaining, the look is a bit blurry. Wanting to get a clearer look at them, you blink your remaining tears away and suddenly you realize, that you just did that with your second set of eyelids.");
 				}
 				outputText("  <b>You now have fierce dragon eyes.</b>");
