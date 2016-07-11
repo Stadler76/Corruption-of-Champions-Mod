@@ -125,7 +125,7 @@ package classes.Items
 
 			return "invalid"; // Will never happen. Suppresses 'Error: Function does not return a value.'
 		}
-		
+
 		public function gainSnakeTongue(changes:Number, changeLimit:Number):Number
 		{
 			var localChanges:Number = 0;
