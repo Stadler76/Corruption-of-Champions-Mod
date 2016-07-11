@@ -4127,7 +4127,7 @@
 				changes++;
 			}
 			//9c) II The tongue (sensitivity bonus, stored as a perk?)
-			if (changes == 0) changes += gainSnakeTongue(changes, changeLimit);
+			if (changes == 0 && rand(3) == 0) changes += gainSnakeTongue(changes, changeLimit);
 			//9c) III The fangs
 			if (changes == 0 && player.tongueType == TONGUE_SNAKE && player.faceType != FACE_SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nWithout warning, you feel your canine teeth jump almost an inch in size, clashing on your gums, cutting yourself quite badly. As you attempt to find a new way to close your mouth without dislocating your jaw, you notice that they are dripping with a bitter, khaki liquid.  Watch out, and <b>try not to bite your tongue with your poisonous fangs!</b>", false);
@@ -5331,7 +5331,7 @@
 				player.faceType = FACE_LIZARD;
 			}
 			//-Snake tongue
-			if (player.faceType == FACE_LIZARD) changes += gainSnakeTongue(changes, changeLimit);
+			if (player.faceType == FACE_LIZARD && rand(3) == 0) changes += gainSnakeTongue(changes, changeLimit);
 			//-Remove Gills
 			if (rand(4) == 0 && player.gills && changes < changeLimit) {
 				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
