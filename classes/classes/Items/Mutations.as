@@ -5264,12 +5264,14 @@
 				outputText("\n<b>You now have reptilian arms.</b>", false);
 				player.armType = ARM_TYPE_PREDATOR;
 				player.clawType = CLAW_TYPE_LIZARD;
+				player.clawTone = "";
 				changes++
 			}
 			//Claw transition
-			if (player.hasLizanArms() && player.clawType != CLAW_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
+			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_SCALES && player.clawType != CLAW_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change a little to become reptilian.");
 				player.clawType = CLAW_TYPE_LIZARD;
+				player.clawTone = "";
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}
@@ -5558,9 +5560,10 @@
 			}
 			//Arms
 			if (player.armType != ARM_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>", false);
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of a salamander with leathery, red scales and short, fiery-red claws replacing your fingernails.  <b>You now have salamander arms.</b>");
 				player.armType = ARM_TYPE_SALAMANDER;
 				player.clawType = CLAW_TYPE_SALAMANDER;
+				player.clawTone = "fiery-red";
 				changes++;
 			}
 			//Remove odd eyes
@@ -6267,6 +6270,7 @@
 				changes++;
 				player.armType = ARM_TYPE_HARPY;
 				player.clawType = CLAW_TYPE_NORMAL;
+				player.clawTone = "";
 			}
 			//-Feathery Hair
 			if (player.hairType != 1 && changes < changeLimit && (type == 1 || player.faceType == FACE_HUMAN) && rand(4) == 0) {

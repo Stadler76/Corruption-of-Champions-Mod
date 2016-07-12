@@ -45,16 +45,6 @@ package classes
 			return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
 		}
 
-		public function hasLizanArms():Boolean
-		{
-			return armType == ARM_TYPE_PREDATOR && skinType == SKIN_TYPE_SCALES;
-		}
-
-		public function hasDragonArms():Boolean
-		{
-			return armType == ARM_TYPE_PREDATOR && skinType == SKIN_TYPE_DRACONIC;
-		}
-
 		public function hasDragonHorns():Boolean
 		{
 			return [HORNS_DRACONIC_X2, HORNS_DRACONIC_X4_12_INCH_LONG].indexOf(hornType) != -1;

@@ -3,7 +3,7 @@ package classes.Items
 	import classes.*;
 	
 	/**
-	 * Helper class to get rid of the copy&paste-mess from classes.Items.Mutations
+	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
 	 * @author Stadler76
 	 */
 	public class MutationsHelper extends BaseContent 
@@ -41,6 +41,7 @@ package classes.Items
 				if (hasClaws || player.armType == ARM_TYPE_HARPY) outputText("  <b>You have normal human arms again.</b>");
 
 				player.clawType = CLAW_TYPE_NORMAL;
+				player.clawTone = "";
 				player.armType = ARM_TYPE_HUMAN;
 				return 0;
 			}
@@ -84,6 +85,7 @@ package classes.Items
 				}
 				outputText("  <b>You have normal human arms again.</b>");
 				player.clawType = CLAW_TYPE_NORMAL;
+				player.clawTone = "";
 				player.armType = ARM_TYPE_HUMAN;
 				localChanges++;
 			}

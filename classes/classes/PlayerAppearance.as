@@ -389,7 +389,7 @@ package classes
 					outputText("  Two huge horns erupt from your forehead, curving outward at first, then forwards.  The weight of them is heavy, and they end in dangerous looking points.", false);
 			}
 			//Lizard horns
-			if (player.hornType == HORNS_DRACONIC_X2) 
+			if (player.horns > 0 && player.hornType == HORNS_DRACONIC_X2) 
 			{
 				if (flags[kFLAGS.USE_METRICS] > 0) outputText("  A pair of " + num2Text(int(player.horns*2.54)) + " centimetre horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
 				else outputText("  A pair of " + num2Text(int(player.horns)) + " inch horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
@@ -503,7 +503,7 @@ package classes
 			else if (player.armType == ARM_TYPE_SPIDER) 
 				outputText("  Shining black exoskeleton  covers your arms from the biceps down, resembling a pair of long black gloves from a distance.", false);	
 			else if (player.armType == ARM_TYPE_SALAMANDER)
-				outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
+				outputText("  Shining thick, leathery red scales cover your arms from the biceps down and your fingernails are now short, fiery-red curved claws.", false);
 			else if (player.armType == ARM_TYPE_PREDATOR)
 				outputText("  Your arms are covered by " + player.skinFurScales() + " and your fingernails are now " + player.claws() + ".", false);
 			//Done with head bits. Move on to body stuff

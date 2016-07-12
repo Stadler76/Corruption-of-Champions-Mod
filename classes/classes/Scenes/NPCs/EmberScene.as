@@ -1668,7 +1668,7 @@ package classes.Scenes.NPCs
 						//maxxed out, new row
 						else {
 							//--Next horn growth adds second row and brings length up to 12\"
-							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>", false);
+							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a dragon can grow.</b>", false);
 							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 							changes++;
 						}
@@ -1848,12 +1848,14 @@ package classes.Scenes.NPCs
 				outputText("\n<b>You now have dragon arms.</b>", false);
 				player.armType = ARM_TYPE_PREDATOR;
 				player.clawType = CLAW_TYPE_DRAGON;
+				player.clawTone = "steel-gray";
 				changes++
 			}
 			//Claw transition
-			if (player.hasDragonArms() && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
 				player.clawType = CLAW_TYPE_DRAGON;
+				player.clawTone = "steel-gray";
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}

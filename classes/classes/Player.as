@@ -776,7 +776,7 @@ use namespace kGAMECLASS;
 					race += "-taur";
 			}
 
-			if (isDragon())
+			if (isDragon(true))
 			{
 				race = "dragon-morph";
 				if (faceType == 0)
@@ -841,11 +841,8 @@ use namespace kGAMECLASS;
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
-			if (minoScore() >= 4) {
+			if (minoScore() >= 4)
 				race = "minotaur-morph";
-				if (isTaur())
-					race = "minotaur-taur";
-			}
 			if (cowScore() > 5)
 			{
 				race = "cow-";
@@ -959,6 +956,8 @@ use namespace kGAMECLASS;
 					else {
 						if (horseScore() >= 5)
 							race = "equitaur";
+						else if (minoScore() >= 4)
+							race = "mino-centaur";
 						else
 							race = "centaur";
 					}
@@ -1276,11 +1275,11 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
 				lizardCounter++;
-			if (horns > 0 && (hornType == 3 || hornType == 4))
+			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
 				lizardCounter++;
 			if (hasScales())
 				lizardCounter++;
-			if (hasLizanArms() && clawType == CLAW_TYPE_LIZARD)
+			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
 			if (hasReptileEyes())
 				lizardCounter++;
@@ -1398,15 +1397,13 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (lowerBody == 18)
 				dragonCounter++;
-			if (horns > 0 && (hornType == 3 || hornType == 4))
-				dragonCounter++;
 			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
 				dragonCounter++;
-			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
-				dragonCounter++;
+			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+				dragonCounter += 2;
 			if (findPerk(PerkLib.Dragonfire) >= 0)
 				dragonCounter++;
-			if (hasDragonArms() && clawType == CLAW_TYPE_DRAGON)
+			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
 			if (eyeType == EYES_DRAGON)
 				dragonCounter++;
@@ -1792,13 +1789,10 @@ use namespace kGAMECLASS;
 			return false;
 		}
 		
-		public function isDragon(softCap:Boolean = false):Boolean
+		public function isDragon(hardCap:Boolean = false):Boolean
 		{
-			if (softCap)
-			{
-				return dragonScore() >= 4;
-			}
-			return dragonScore() >= 5;
+			if (hardCap) return dragonScore() >= 6;
+			return dragonScore() >= 4;
 		}
 
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
@@ -2487,7 +2481,7 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4) {
 				maxInt += 10;
 			}
-			if (isDragon(true)) {
+			if (isDragon()) {
 				maxStr += 5;
 				maxTou += 10;
 				maxInt += 10;
