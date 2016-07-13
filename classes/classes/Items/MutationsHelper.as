@@ -4,7 +4,8 @@ package classes.Items
 	
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
-	 * @author Stadler76
+	 * @since July 8, 2016
+	 * @author Stadler
 	 */
 	public class MutationsHelper extends BaseContent 
 	{
