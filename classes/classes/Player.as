@@ -1403,13 +1403,13 @@ use namespace kGAMECLASS;
 				dragonCounter += 2;
 			if (findPerk(PerkLib.Dragonfire) >= 0)
 				dragonCounter++;
-			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
-				dragonCounter++;
 			if (eyeType == EYES_DRAGON)
 				dragonCounter++;
 			if (hasDragonNeck())
 				dragonCounter++;
 			if (hasDragonRearBody())
+				dragonCounter++;
+			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
 			return dragonCounter;
 		}
