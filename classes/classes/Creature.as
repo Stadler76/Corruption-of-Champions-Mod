@@ -200,9 +200,11 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
-		//<mod name="Dragon patch" author="Stadler">
+		// <mod name="Predator arms" author="Stadler">
 		public var clawTone:String = "";
 		public var clawType:Number = CLAW_TYPE_NORMAL;
+		// </mod>
+		//<mod name="Dragon patch" author="Stadler">
 		public var rearBodyType:Number = REAR_BODY_TYPE_NONE;
 		public var neckType:Number = NECK_TYPE_NORMAL;
 
