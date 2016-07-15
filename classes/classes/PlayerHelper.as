@@ -9,6 +9,19 @@ package classes
 	 */
 	public class PlayerHelper extends Character 
 	{
+		public function PlayerHelper() {}
+		
+		public function hasScales():Boolean
+		{
+			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
+		}
+
+		// used more than once, so I wrote a helper method for it
+		public function hasFurOrScales():Boolean
+		{
+			return skinType == SKIN_TYPE_FUR || hasScales();
+		}
+
 		public function hasDragonWings(large:Boolean = false):Boolean
 		{
 			if (large)
@@ -30,25 +43,14 @@ package classes
 			return hasDragonWings(large) || hasBatLikeWings(large);
 		}
 
-		public function hasScales():Boolean
+		public function hasDragonHorns():Boolean
 		{
-			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
-		}
-
-		// used more than once, so I wrote a helper method for it
-		public function hasFurOrScales():Boolean
-		{
-			return skinType == SKIN_TYPE_FUR || hasScales();
+			return [HORNS_DRACONIC_X2, HORNS_DRACONIC_X4_12_INCH_LONG].indexOf(hornType) != -1;
 		}
 
 		public function hasReptileTail():Boolean
 		{
 			return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
-		}
-
-		public function hasDragonHorns():Boolean
-		{
-			return [HORNS_DRACONIC_X2, HORNS_DRACONIC_X4_12_INCH_LONG].indexOf(hornType) != -1;
 		}
 
 		// For reptiles with predator arms I recommend to require hasScales() before doing the armType TF to ARM_TYPE_PREDATOR
@@ -57,10 +59,12 @@ package classes
 			return armType == ARM_TYPE_SALAMANDER || (armType == ARM_TYPE_PREDATOR && hasScales());
 		}
 
+		/*
 		public function hasPredatorArms():Boolean
 		{
 			return [ARM_TYPE_PREDATOR, ARM_TYPE_SALAMANDER].indexOf(armType) != -1;
 		}
+		*/
 
 		public function hasReptileFeet():Boolean
 		{

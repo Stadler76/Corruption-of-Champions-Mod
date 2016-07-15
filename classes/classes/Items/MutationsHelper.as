@@ -18,9 +18,7 @@ package classes.Items
 		// restoreArms options
 		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
 
-		public function MutationsHelper() 
-		{
-		}
+		public function MutationsHelper() {}
 
 		public function restoreArms(changes:Number, changeLimit:Number, keepArms:Array = null, options:int = 0):Number
 		{
