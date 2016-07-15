@@ -1277,9 +1277,9 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
 				lizardCounter++;
-			if (hasScales())
-				lizardCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
+				lizardCounter++;
+			if (hasScales())
 				lizardCounter++;
 			if (hasReptileEyes())
 				lizardCounter++;
