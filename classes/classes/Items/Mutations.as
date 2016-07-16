@@ -4345,6 +4345,26 @@
 				player.removePerk(PerkLib.Dragonfire);
 				changes++;
 			}
+			//<mod name="Dragon mod" author="Stadler">
+			var meetsLongNeckReq:Boolean = player.isDragon() && player.hasDraconicBackSide();
+			if (!player.hasNormalNeck() && rand(meetsLongNeckReq ? 10 : 4) == 0) {
+				outputText("\n\n<b>Your draconic neck and its position on your head revert to its normal position and length.</b> ");
+				if (player.hasDragonRearBody()) {
+					outputText("  After that you feel a tingling on your backside, telling you that <b>your");
+					outputText((player.rearBodyType == REAR_BODY_TYPE_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText("draconic mane is disappearing, too.</b>");
+				}
+				outputText("  Well, your rear isn't worthy to gaze at it anymore.\n");
+				player.rearBodyType = REAR_BODY_TYPE_NONE;
+				player.restoreNeck();
+			}
+			if (!player.hasNormalNeck() && player.hasDragonRearBody() && rand(6) == 0) {
+					outputText("\n\nYou feel a tingling on your backside, telling you that <b>your");
+					outputText((player.rearBodyType == REAR_BODY_TYPE_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText("draconic mane is disappearing.</b>");
+					player.rearBodyType = REAR_BODY_TYPE_NONE;
+			}
+			//</mod>
 			//-Skin color change – tan, olive, dark, light
 			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && changes < changeLimit && rand(5) == 0) {
 				changes++;
