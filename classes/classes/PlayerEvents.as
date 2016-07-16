@@ -418,7 +418,7 @@ package classes {
 					}
 				}
 			}
-			// <mod name="Dragon patch" author="Stadler76">
+			// <mod name="Dragon mod" author="Stadler">
 			if (!player.hasNormalNeck() && player.neckType == NECK_TYPE_DRACONIC && (!player.isDragon() || !player.hasDraconicBackSide())) {
 				outputText("\n<b>Your draconic neck and its position on your head reverts to its normal position and length. ");
 				if (player.hasDragonRearBody()) {

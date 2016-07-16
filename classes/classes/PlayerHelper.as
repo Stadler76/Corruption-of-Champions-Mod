@@ -43,9 +43,20 @@ package classes
 			return hasDragonWings(large) || hasBatLikeWings(large);
 		}
 
+		// To be honest: I seriously considered naming it hasDrDragonCox() :D
+		public function hasDragonCocks():Boolean
+		{
+			return countCocksOfType(CockTypesEnum.DRAGON) > 0;
+		}
+
 		public function hasDragonHorns():Boolean
 		{
-			return [HORNS_DRACONIC_X2, HORNS_DRACONIC_X4_12_INCH_LONG].indexOf(hornType) != -1;
+			return (horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
+		}
+
+		public function hasLizardCocks():Boolean
+		{
+			return countCocksOfType(CockTypesEnum.LIZARD) > 0;
 		}
 
 		public function hasReptileTail():Boolean
@@ -74,6 +85,21 @@ package classes
 		public function hasReptileEyes():Boolean
 		{
 			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
+		}
+
+		public function hasDragonfire():Boolean
+		{
+			return findPerk(PerkLib.Dragonfire) >= 0;
+		}
+
+		public function hasDragonWingsAndFire():Boolean
+		{
+			return hasDragonWings(true) && findPerk(PerkLib.Dragonfire) >= 0
+		}
+
+		public function isBasilisk():Boolean
+		{
+			return findPerk(PerkLib.BasiliskWomb) >= 0 /*&& eyeType == EYES_BASILISK*/;
 		}
 
 		public function hasDraconicBackSide():Boolean
