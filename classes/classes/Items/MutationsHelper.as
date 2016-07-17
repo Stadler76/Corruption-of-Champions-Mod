@@ -13,7 +13,6 @@ package classes.Items
 
 		// I tend to use bitfields rather than lots of optional boolean params.
 		// If I consider a method to be finalized and has only one option I'll refactor this to use a boolean value.
-		// I'll add more consts later if needed. This one is just here for the sake of being an example for starters (Stadler76)
 
 		// restoreArms options
 		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
