@@ -1283,7 +1283,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (hasScales())
 				lizardCounter++;
-			if (hasReptileEyes())
+			if (hasReptileEyes() && eyeType != EYES_DRAGON) // Maybe I'll write a different function for that later. e. g. hasLizardEyes() (Stadler76)
 				lizardCounter++;
 			return lizardCounter;
 		}
@@ -1405,10 +1405,10 @@ use namespace kGAMECLASS;
 				dragonCounter += 2;
 			if (hasDragonfire())
 				dragonCounter++;
-			if (eyeType == EYES_DRAGON)
-				dragonCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
+			if (eyeType == EYES_DRAGON)
+				dragonCounter++;				
 			if (hasDragonNeck())
 				dragonCounter++;
 			if (hasDragonRearBody())

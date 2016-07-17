@@ -1697,7 +1697,7 @@ package classes.Scenes.NPCs
 				player.skinDesc = "scales";
 				//def bonus of scales
 			}
-			//<mod name="Dragon patch" author="Stadler76">
+			//<mod name="Reptile eyes" author="Stadler76">
 			//Gain Dragon Eyes
 			if (player.eyeType != EYES_DRAGON && player.skinType == SKIN_TYPE_DRACONIC && player.earType == EARS_DRAGON && player.hasDragonHorns() && changes < changeLimit && rand(4) == 0) {
 				if (player.hasReptileEyes())

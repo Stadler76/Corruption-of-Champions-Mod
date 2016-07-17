@@ -148,7 +148,7 @@ package classes
 				if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP)
 				{
 					outputText("  Of course, no feline face would be complete without vertically slit eyes");
-					outputText(player.hasReptileEyes() ? ", although they come with a second set of eyelids, which is somewhat unusual for a cats face." : ".");
+					outputText(!player.hasReptileEyes() ? "." : ", although they come with a second set of eyelids, which is somewhat unusual for a cats face.");
 				}
 			}
 			//Minotaaaauuuur-face
@@ -237,7 +237,7 @@ package classes
 				switch (player.eyeType)
 				{
 					case EYES_DRAGON: outputText(" prideful, fierce dragon eyes with vertically slitted pupils and burning orange irises. They glitter even in the darkness and they"); break;
-					case EYES_LIZARD: outputText(" are those of a lizard with vertically slitted pupils and green-yellowish irises. They"); break;
+					case EYES_LIZARD: outputText(" those of a lizard with vertically slitted pupils and green-yellowish irises. They"); break;
 				}
 				outputText(" come with the typical second set of eyelids, allowing you to blink twice as much as others.");
 			}

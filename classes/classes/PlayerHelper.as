@@ -16,7 +16,6 @@ package classes
 			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
 		}
 
-		// used more than once, so I wrote a helper method for it
 		public function hasFurOrScales():Boolean
 		{
 			return skinType == SKIN_TYPE_FUR || hasScales();
@@ -94,7 +93,7 @@ package classes
 
 		public function hasDragonWingsAndFire():Boolean
 		{
-			return hasDragonWings(true) && findPerk(PerkLib.Dragonfire) >= 0
+			return hasDragonWings(true) && hasDragonfire();
 		}
 
 		public function isBasilisk():Boolean
