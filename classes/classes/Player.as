@@ -769,12 +769,9 @@ use namespace kGAMECLASS;
 			}
 			if (lizardScore() >= 4)
 			{
-				race = "lizan";
-				if (findPerk(PerkLib.BasiliskWomb) >= 0 /*&& eyeType == EYES_BASILISK*/)
-					if (hasDragonWings(true) && findPerk(PerkLib.Dragonfire) >= 0)
-						race = "dracolisk";
-					else
-						race = "basilisk";
+				race = isBasilisk() ? "basilisk" : "lizan";
+				if (hasDragonWingsAndFire())
+					race = isBasilisk() ? "dracolisk" : "dracolizan";
 				if (isTaur())
 					race += "-taur";
 			}
@@ -1268,17 +1265,19 @@ use namespace kGAMECLASS;
 		public function lizardScore():Number
 		{
 			var lizardCounter:Number = 0;
-			if (faceType == 7)
+			if (faceType == FACE_LIZARD)
 				lizardCounter++;
-			if (earType == 6)
+			if (earType == EARS_LIZARD)
 				lizardCounter++;
-			if (tailType == 9)
+			if (tailType == TAIL_TYPE_LIZARD)
 				lizardCounter++;
-			if (lowerBody == 10)
+			if (tongueType == TONGUE_SNAKE)
 				lizardCounter++;
-			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
+			if (lowerBody == LOWER_BODY_TYPE_LIZARD)
 				lizardCounter++;
-			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+			if (hasLizardCocks())
+				lizardCounter++;
+			if (hasDragonHorns())
 				lizardCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
@@ -1386,33 +1385,33 @@ use namespace kGAMECLASS;
 		public function dragonScore():Number
 		{
 			var dragonCounter:Number = 0;
-			if (faceType == 12)
+			if (faceType == FACE_DRAGON)
 				dragonCounter++;
-			if (earType == 10)
+			if (earType == EARS_DRAGON)
 				dragonCounter++;
-			if (tailType == 14)
+			if (tailType == TAIL_TYPE_DRACONIC)
 				dragonCounter++;
-			if (tongueType == 3)
+			if (tongueType == TONGUE_DRACONIC)
 				dragonCounter++;
-			if (countCocksOfType(CockTypesEnum.DRAGON) > 0)
+			if (hasDragonCocks())
 				dragonCounter++;
-			if (wingType == 10 || wingType == 11)
+			if (hasDragonWings())
 				dragonCounter++;
-			if (lowerBody == 18)
+			if (lowerBody == LOWER_BODY_TYPE_DRAGON)
 				dragonCounter++;
 			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
 				dragonCounter++;
-			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+			if (hasDragonHorns())
 				dragonCounter += 2;
-			if (findPerk(PerkLib.Dragonfire) >= 0)
+			if (hasDragonfire())
 				dragonCounter++;
 			if (eyeType == EYES_DRAGON)
+				dragonCounter++;
+			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
 			if (hasDragonNeck())
 				dragonCounter++;
 			if (hasDragonRearBody())
-				dragonCounter++;
-			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
 			return dragonCounter;
 		}
@@ -2454,7 +2453,7 @@ use namespace kGAMECLASS;
 				if (maxSpe < 50) maxSpe = 50;
 			}
 			//Perks ahoy
-			if (findPerk(PerkLib.BasiliskResistance) >= 0)
+			if (findPerk(PerkLib.BasiliskResistance) >= 0/* && !isBasilisk()*/)
 			{
 				maxSpe -= 5;
 			}
@@ -2483,6 +2482,10 @@ use namespace kGAMECLASS;
 			}
 			if (lizardScore() >= 4) {
 				maxInt += 10;
+				/*if (isBasilisk()) {
+					maxTou += 5;
+					maxInt += 10;
+				}*/
 			}
 			if (isDragon()) {
 				maxStr += 5;

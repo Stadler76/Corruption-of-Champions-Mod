@@ -5,7 +5,7 @@ package classes
 	/**
 	 * This contains some of the helper methods for the player-object I've written
 	 * @since June 29, 2016
-	 * @author Stadler
+	 * @author Stadler76
 	 */
 	public class PlayerHelper extends Character 
 	{
@@ -43,9 +43,20 @@ package classes
 			return hasDragonWings(large) || hasBatLikeWings(large);
 		}
 
+		// To be honest: I seriously considered naming it hasDrDragonCox() :D
+		public function hasDragonCocks():Boolean
+		{
+			return countCocksOfType(CockTypesEnum.DRAGON) > 0;
+		}
+
 		public function hasDragonHorns():Boolean
 		{
-			return [HORNS_DRACONIC_X2, HORNS_DRACONIC_X4_12_INCH_LONG].indexOf(hornType) != -1;
+			return (horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
+		}
+
+		public function hasLizardCocks():Boolean
+		{
+			return countCocksOfType(CockTypesEnum.LIZARD) > 0;
 		}
 
 		public function hasReptileTail():Boolean
@@ -76,6 +87,21 @@ package classes
 			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
 		}
 
+		public function hasDragonfire():Boolean
+		{
+			return findPerk(PerkLib.Dragonfire) >= 0;
+		}
+
+		public function hasDragonWingsAndFire():Boolean
+		{
+			return hasDragonWings(true) && findPerk(PerkLib.Dragonfire) >= 0
+		}
+
+		public function isBasilisk():Boolean
+		{
+			return findPerk(PerkLib.BasiliskWomb) >= 0 /*&& eyeType == EYES_BASILISK*/;
+		}
+
 		public function hasDraconicBackSide():Boolean
 		{
 			return hasDragonWings(true) && skinType == SKIN_TYPE_DRACONIC && hasReptileTail() && hasReptileArms() && hasReptileFeet();
@@ -83,20 +109,20 @@ package classes
 
 		public function hasDragonNeck():Boolean
 		{
-			return neckLength >= 30;
+			return neckLen >= 30;
 		}
 
 		public function hasNormalNeck():Boolean
 		{
-			return neckLength <= 2;
+			return neckLen <= 2;
 		}
 
 		public function hasDragonRearBody():Boolean
 		{
-			return [REAR_BODY_TYPE_DRACONIC_MANE, REAR_BODY_TYPE_DRACONIC_SPIKES].indexOf(rearBodyType) != -1;
+			return [REAR_BODY_TYPE_DRACONIC_MANE, REAR_BODY_TYPE_DRACONIC_SPIKES].indexOf(rearBody) != -1;
 		}
 
-		public function fetchEmberRearBodyType():Number
+		public function fetchEmberRearBody():Number
 		{
 			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_TYPE_DRACONIC_MANE : REAR_BODY_TYPE_DRACONIC_SPIKES;
 		}

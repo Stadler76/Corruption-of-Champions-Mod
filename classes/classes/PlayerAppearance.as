@@ -13,7 +13,6 @@ package classes
 			//Temp vars
 			var temp:Number = 0;
 			var rando:Number = 0;
-			var calcedTallness:Number = player.tallness + player.neckLength - 2;
 			//Determine race type:
 			var race:String = "human";
 			race = player.race();
@@ -22,8 +21,8 @@ package classes
 			displayHeader("Appearance");
 			if (race != player.startingRace)	outputText("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ", false);
 			//Height and race.
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + (Math.round(calcedTallness * 2.54) / 100).toFixed(2) + " metres tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
-			else outputText("You are a " + Math.floor(calcedTallness / 12) + " foot " + calcedTallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + (Math.round(player.tallness * 2.54) / 100).toFixed(2) + " metres tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+			else outputText("You are a " + Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 			
 			outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
 			if (player.jewelryName != "nothing") 
@@ -432,7 +431,7 @@ package classes
 					outputText("  It has developed its own cute little spiral. You estimate it to be about a foot long, two inches thick and very sturdy. A very useful natural weapon.");
 			}
 			// <mod name="Dragon patch" author="Stadler76">
-			// neckLength
+			// neckLen
 			if (!player.hasNormalNeck())
 			{
 				// length description
@@ -440,19 +439,19 @@ package classes
 					outputText("  Your neck starts at the backside of your head and is about two and a half feet long, roughly six inches longer, than your arm length.");
 				else {
 					var lengthText:String = "";
-					if (player.neckLength < 8) lengthText = "a few inches longer";
-					else if (player.neckLength < 13) lengthText = "somewhat longer";
-					else if (player.neckLength < 18) lengthText = "very long";
+					if (player.neckLen < 8) lengthText = "a few inches longer";
+					else if (player.neckLen < 13) lengthText = "somewhat longer";
+					else if (player.neckLen < 18) lengthText = "very long";
 					else lengthText = "extremely long";
-					outputText("  Where normal humans have a short neck, yours is " + lengthText + ", measuring " + player.neckLength + " inches.");
+					outputText("  Where normal humans have a short neck, yours is " + lengthText + ", measuring " + player.neckLen + " inches.");
 				}
 
 				// bending your neck
 				if (player.hasDragonNeck())
 					outputText("  You manage to bend it in every direction you want and can easily take a look at your back.");
 				else {
-					if (player.neckLength < 10) outputText("  You can bend it a bit more than others with some effort.");
-					else if (player.neckLength < 16) outputText("  You can bend it more than others with low effort.");
+					if (player.neckLen < 10) outputText("  You can bend it a bit more than others with some effort.");
+					else if (player.neckLen < 16) outputText("  You can bend it more than others with low effort.");
 					else outputText("  You are able to bend it in almost every direction and with some effort you even manage to take a glimpse at your back.");
 				}
 			}
@@ -480,8 +479,8 @@ package classes
 				outputText("  Giant dragonfly wings hang from your shoulders.  At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
 
 			// <mod name="Dragon patch" author="Stadler76">
-			// rearBodyType
-			switch (player.rearBodyType) {
+			// rearBody
+			switch (player.rearBody) {
 				case REAR_BODY_TYPE_DRACONIC_MANE:
 					// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
 					outputText("  Tracing your spine, a mane of hair grows; starting at the base of your neck and continuing down your tail, ending on the tip of your tail in a small tuft.");

@@ -397,7 +397,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_1.4_dev";
-			ver += "_dragonmod_0.9.5RC5";
+			ver += "_dragonmod_0.9.6RC6";
 			version = ver + " (<b>Ember Spar Intensifies</b>)";
 
 			//Indicates if building for mobile?

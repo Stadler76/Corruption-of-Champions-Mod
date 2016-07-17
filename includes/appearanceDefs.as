@@ -195,17 +195,17 @@ public static const LOWER_BODY_TYPE_ECHIDNA:int                                 
 public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24; // DEPRECATED, use LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4
 public static const LOWER_BODY_TYPE_SALAMANDER:int						       			=  25;
 
-// rearBodyType
+// rearBody
 public static const REAR_BODY_TYPE_NONE:int                                         =   0;
 public static const REAR_BODY_TYPE_DRACONIC_MANE:int                                =   1;
 public static const REAR_BODY_TYPE_DRACONIC_SPIKES:int                              =   2;
 public static const REAR_BODY_TYPE_BEHEMOTH:int                                     =   3; // NYI, Its just there as an example.
 
 // neckType
-public static const NECK_TYPE_NORMAL:int                                            =   0; // normal human neck. neckLength = 2 inches
-public static const NECK_TYPE_DRACONIC:int                                          =   1; // (western) dragon neck. neckLength = 2-30 inches
-public static const NECK_TYPE_EASTERN:int                                           =   2; // (eastern) dragon neck. neckLength = 2-36 (or 48?) inches. NYI, example
-public static const NECK_TYPE_HYDRA:int                                             =   3; // neckLength = 2-24 (48? 72?) inches. NYI, example. Maybe never implemented.
+public static const NECK_TYPE_NORMAL:int                                            =   0; // normal human neck. neckLen = 2 inches
+public static const NECK_TYPE_DRACONIC:int                                          =   1; // (western) dragon neck. neckLen = 2-30 inches
+public static const NECK_TYPE_EASTERN:int                                           =   2; // (eastern) dragon neck. neckLen = 2-36 (or 48?) inches. NYI, example
+public static const NECK_TYPE_HYDRA:int                                             =   3; // neckLen = 2-24 (48? 72?) inches. NYI, example. Maybe never implemented.
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
