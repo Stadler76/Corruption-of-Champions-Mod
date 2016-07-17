@@ -965,7 +965,7 @@ package classes.Scenes.NPCs
 					outputText("  Tracing " + emberMF("his", "her") + " spine, a mane of hair grows; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail in a small tuft.  It is the same color as the hair on " + emberMF("his", "her") + " head, but shorter and denser; it grows in a thick vertical strip, maybe two inches wide.  It reminds you vaguely of a horse's mane.");
 				}
 				// <mod name="Dragon patch" author="Stadler76">
-				// rearBodyType
+				// rearBody
 				if (flags[kFLAGS.EMBER_HAIR] != 2) {
 					// Teh spiky mane, similar to the hairy one.
 					outputText("  Tracing " + emberMF("his", "her") + " spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail.");
@@ -1788,10 +1788,10 @@ package classes.Scenes.NPCs
 				}
 				changes++;
 			}
-			// <mod name="Dragon patch" author="Stadler">
+			// <mod name="Dragon patch" author="Stadler76">
 			//Gain Dragon Rear Body
 			if (!drakesHeart && !player.hasDragonRearBody() && player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
-				var emberRear:Number = player.fetchEmberRearBodyType();
+				var emberRear:Number = player.fetchEmberRearBody();
 				switch (emberRear) {
 					case REAR_BODY_TYPE_DRACONIC_MANE:
 						// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
@@ -1802,7 +1802,7 @@ package classes.Scenes.NPCs
 						outputText("  It is the same color as the hair on your head, but shorter and denser; it has grown in a thick vertical strip, maybe two inches wide.");
 						outputText("  It reminds you vaguely of a horse's mane.");
 						outputText("  <b>You now have a hairy mane on your rear.</b>");
-						player.rearBodyType = REAR_BODY_TYPE_DRACONIC_MANE;
+						player.rearBody = REAR_BODY_TYPE_DRACONIC_MANE;
 						break;
 
 					case REAR_BODY_TYPE_DRACONIC_SPIKES:
@@ -1814,12 +1814,12 @@ package classes.Scenes.NPCs
 						outputText("  starting at the base of your neck and continuing down your tail, ending on the tip of your tail.");
 						outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
 						outputText("  <b>Your rear is now decorated with a row of curved spikes.</b>");
-						player.rearBodyType = REAR_BODY_TYPE_DRACONIC_SPIKES;
+						player.rearBody = REAR_BODY_TYPE_DRACONIC_SPIKES;
 						break;
 
 					default:
 						// this should hopefully never happen
-						trace("Invalid Ember rearBodyType: " + emberRear);
+						trace("Invalid Ember rearBody: " + emberRear);
 				}
 			}
 			//Gain Dragon Neck
@@ -1829,11 +1829,11 @@ package classes.Scenes.NPCs
 				var nlChange:int = 4 + rand(5);
 				if (!player.hasNormalNeck()) { // Note: hasNormalNeck checks the length, not the type!
 					player.modifyNeck(nlChange);
-					outputText("\n\nWith less pain than the last time your neck grows a few more inches reaching " + player.neckLength + " inches.");
+					outputText("\n\nWith less pain than the last time your neck grows a few more inches reaching " + player.neckLen + " inches.");
 				} else {
 					player.modifyNeck(nlChange, NECK_TYPE_DRACONIC);
 					// Growing a dragon neck may be limited to Ember's blood only in the future.
-					outputText("\n\nAfter you have finished " + (drakesHeart ? "eating the flower" : "drinking Ember's dragon blood") + " you start feeling a sudden pain in your neck. Your skin stretches and your spine grows a bit. Your neck has grown a few inches longer than that of a normal human reaching " + player.neckLength + " inches.");
+					outputText("\n\nAfter you have finished " + (drakesHeart ? "eating the flower" : "drinking Ember's dragon blood") + " you start feeling a sudden pain in your neck. Your skin stretches and your spine grows a bit. Your neck has grown a few inches longer than that of a normal human reaching " + player.neckLen + " inches.");
 				}
 				if (player.hasDragonNeck()) {
 					outputText("\n\nAfter the enlongation has finally ceased, your spine begins to readjust its position on your head until its settled at the backside of your head. After that you want to try out your new draconic neck and begin to bend your neck finding that you can bend it at ease like a snake can bend its tail. Eager to see, how you look from behind you quickly turn your head around. Staring at your magnificent draconic rear your mouth and eyes open wide in astonishment. You muster your tail, your backside fully covered in scales and finally, you unfold your wings. This is the first time, you can see every single scale of them. You look at them from all sides, flapping them slowly, just to watch them moving.");

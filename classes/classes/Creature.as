@@ -200,18 +200,18 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
-		// <mod name="Predator arms" author="Stadler">
+		// <mod name="Predator arms" author="Stadler76">
 		public var clawTone:String = "";
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
-		//<mod name="Dragon patch" author="Stadler">
-		public var rearBodyType:Number = REAR_BODY_TYPE_NONE;
+		//<mod name="Dragon patch" author="Stadler76">
+		public var rearBody:Number = REAR_BODY_TYPE_NONE;
 		public var neckType:Number = NECK_TYPE_NORMAL;
 
-		// neckLength
-		public var neckLength:Number = 2;
+		// neckLen
+		public var neckLen:Number = 2;
 		public function restoreNeck():void {
-			neckLength = 2;
+			neckLen = 2;
 			neckType = NECK_TYPE_NORMAL;
 		}
 		public function modifyNeck(len:Number, newType:Number = -1):void {
@@ -223,9 +223,9 @@ package classes
 
 			if (newType != -1) neckType = newType;
 
-			neckLength += len;
-			if (neckLength < 2)  neckLength = 2;
-			if (neckLength > nlMax[neckType]) neckLength = nlMax[neckType];
+			neckLen += len;
+			if (neckLen < 2)  neckLen = 2;
+			if (neckLen > nlMax[neckType]) neckLen = nlMax[neckType];
 		}
 		//</mod>
 
@@ -2547,7 +2547,7 @@ package classes
 			return skinzilla;
 		}
 
-		// <mod name="Predator arms" author="Stadler">
+		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String
 		{
 			var toneText:String = clawTone == "" ? " " : (", " + clawTone + " ");

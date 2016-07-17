@@ -4345,24 +4345,24 @@
 				player.removePerk(PerkLib.Dragonfire);
 				changes++;
 			}
-			//<mod name="Dragon mod" author="Stadler">
+			//<mod name="Dragon mod" author="Stadler76">
 			var meetsLongNeckReq:Boolean = player.isDragon() && player.hasDraconicBackSide();
 			if (!player.hasNormalNeck() && rand(meetsLongNeckReq ? 10 : 4) == 0) {
 				outputText("\n\n<b>Your draconic neck and its position on your head revert to its normal position and length.</b> ");
 				if (player.hasDragonRearBody()) {
 					outputText("  After that you feel a tingling on your backside, telling you that <b>your");
-					outputText((player.rearBodyType == REAR_BODY_TYPE_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText((player.rearBody == REAR_BODY_TYPE_DRACONIC_MANE) ? " hairy " : " spiky ");
 					outputText("draconic mane is disappearing, too.</b>");
 				}
 				outputText("  Well, your rear isn't worthy to gaze at it anymore.\n");
-				player.rearBodyType = REAR_BODY_TYPE_NONE;
+				player.rearBody = REAR_BODY_TYPE_NONE;
 				player.restoreNeck();
 			}
-			if (!player.hasNormalNeck() && player.hasDragonRearBody() && rand(6) == 0) {
+			if (!player.hasNormalNeck() && player.hasDragonRearBody() && rand(meetsLongNeckReq ? 6 : 4) == 0) {
 					outputText("\n\nYou feel a tingling on your backside, telling you that <b>your");
-					outputText((player.rearBodyType == REAR_BODY_TYPE_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText((player.rearBody == REAR_BODY_TYPE_DRACONIC_MANE) ? " hairy " : " spiky ");
 					outputText("draconic mane is disappearing.</b>");
-					player.rearBodyType = REAR_BODY_TYPE_NONE;
+					player.rearBody = REAR_BODY_TYPE_NONE;
 			}
 			//</mod>
 			//-Skin color change – tan, olive, dark, light
@@ -5250,7 +5250,7 @@
 				player.legCount = 2;
 				changes++;
 			}
-			// <mod name="Predator arms" author="Stadler">
+			// <mod name="Predator arms" author="Stadler76">
 			//Gain predator arms
 			if (player.armType != ARM_TYPE_PREDATOR && player.hasScales() && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short claws replacing your fingernails.");

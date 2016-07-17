@@ -5,7 +5,7 @@ package classes
 	/**
 	 * This contains some of the helper methods for the player-object I've written
 	 * @since June 29, 2016
-	 * @author Stadler
+	 * @author Stadler76
 	 */
 	public class PlayerHelper extends Character 
 	{
@@ -109,20 +109,20 @@ package classes
 
 		public function hasDragonNeck():Boolean
 		{
-			return neckLength >= 30;
+			return neckLen >= 30;
 		}
 
 		public function hasNormalNeck():Boolean
 		{
-			return neckLength <= 2;
+			return neckLen <= 2;
 		}
 
 		public function hasDragonRearBody():Boolean
 		{
-			return [REAR_BODY_TYPE_DRACONIC_MANE, REAR_BODY_TYPE_DRACONIC_SPIKES].indexOf(rearBodyType) != -1;
+			return [REAR_BODY_TYPE_DRACONIC_MANE, REAR_BODY_TYPE_DRACONIC_SPIKES].indexOf(rearBody) != -1;
 		}
 
-		public function fetchEmberRearBodyType():Number
+		public function fetchEmberRearBody():Number
 		{
 			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_TYPE_DRACONIC_MANE : REAR_BODY_TYPE_DRACONIC_SPIKES;
 		}

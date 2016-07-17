@@ -848,10 +848,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
-		// <mod name="Dragon patch" author="Stadler">
-		saveFile.data.neckLength = player.neckLength;
+		// <mod name="Dragon patch" author="Stadler76">
+		saveFile.data.neckLen = player.neckLen;
 		saveFile.data.neckType = player.neckType;
-		saveFile.data.rearBodyType = player.rearBodyType;
+		saveFile.data.rearBody = player.rearBody;
 		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
@@ -1745,12 +1745,20 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.hornType = saveFile.data.hornType;
 
-		// <mod name="Dragon patch" author="Stadler">
-		player.neckLength   = (saveFile.data.neckLength   == undefined) ? 2                   : saveFile.data.neckLength;
-		player.neckType     = (saveFile.data.neckType     == undefined) ? NECK_TYPE_NORMAL    : saveFile.data.neckType;
-		player.rearBodyType = (saveFile.data.rearBodyType == undefined) ? REAR_BODY_TYPE_NONE : saveFile.data.rearBodyType;
-		player.clawTone     = (saveFile.data.clawTone     == undefined) ? ""                  : saveFile.data.clawTone;
-		player.clawType     = (saveFile.data.clawType     == undefined) ? CLAW_TYPE_NORMAL    : saveFile.data.clawType;
+		// <mod name="Dragon patch" author="Stadler76">
+		if (saveFile.data.rearBodyType != undefined)
+			saveFile.data.rearBody = saveFile.data.rearBodyType;
+		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_TYPE_NONE : saveFile.data.rearBody;
+
+		if (saveFile.data.neckLength != undefined)
+			saveFile.data.neckLen = saveFile.data.neckLength;
+		player.neckLen  = (saveFile.data.neckLen  == undefined) ? 2                   : saveFile.data.neckLen;
+		player.neckType = (saveFile.data.neckType == undefined) ? NECK_TYPE_NORMAL    : saveFile.data.neckType;
+		// </mod>
+
+		// <mod name="Predator arms" author="Stadler76">
+		player.clawTone = (saveFile.data.clawTone == undefined) ? ""                  : saveFile.data.clawTone;
+		player.clawType = (saveFile.data.clawType == undefined) ? CLAW_TYPE_NORMAL    : saveFile.data.clawType;
 		// </mod>
 
 		player.wingDesc = saveFile.data.wingDesc;
