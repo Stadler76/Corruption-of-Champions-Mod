@@ -21,6 +21,16 @@ package classes
 			return skinType == SKIN_TYPE_FUR || hasScales();
 		}
 
+		public function hasDragonHorns():Boolean
+		{
+			return (horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
+		}
+
+		public function hasReptileEyes():Boolean
+		{
+			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
+		}
+
 		public function hasDragonWings(large:Boolean = false):Boolean
 		{
 			if (large)
@@ -46,11 +56,6 @@ package classes
 		public function hasDragonCocks():Boolean
 		{
 			return countCocksOfType(CockTypesEnum.DRAGON) > 0;
-		}
-
-		public function hasDragonHorns():Boolean
-		{
-			return (horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
 		}
 
 		public function hasLizardCocks():Boolean
@@ -79,11 +84,6 @@ package classes
 		public function hasReptileFeet():Boolean
 		{
 			return [LOWER_BODY_TYPE_LIZARD, LOWER_BODY_TYPE_DRAGON, LOWER_BODY_TYPE_SALAMANDER].indexOf(lowerBody) != -1;
-		}
-
-		public function hasReptileEyes():Boolean
-		{
-			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
 		}
 
 		public function hasDragonfire():Boolean

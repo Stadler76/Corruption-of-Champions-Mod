@@ -1408,7 +1408,7 @@ use namespace kGAMECLASS;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
 			if (eyeType == EYES_DRAGON)
-				dragonCounter++;				
+				dragonCounter++;
 			if (hasDragonNeck())
 				dragonCounter++;
 			if (hasDragonRearBody())
