@@ -771,7 +771,7 @@ use namespace kGAMECLASS;
 			{
 				race = isBasilisk() ? "basilisk" : "lizan";
 				if (hasDragonWingsAndFire())
-					race = isBasilisk() ? "dracolisk" : "dracolizan";
+					race = isBasilisk() ? "dracolisk" : "dragonewt";
 				if (isTaur())
 					race += "-taur";
 			}
