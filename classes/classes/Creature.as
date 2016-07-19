@@ -636,6 +636,11 @@ package classes
 			{
 				return false;
 			}
+			if (perkv4(ptype) > 0)
+			{
+				// trace('ERROR! Attempted to remove permanent "' + ptype.name + '" perk.');
+				return false;
+			}
 			while (counter > 0)
 			{
 				counter--;
@@ -765,7 +770,7 @@ package classes
 		var counter:Number = findPerk(ptype);
 		if (counter < 0)
 		{
-			trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
+			// trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
 			return 0;
 		}
 		return perk(counter).value4;

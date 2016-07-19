@@ -4335,9 +4335,10 @@
 			if (rand(4) == 0) restoreLegs(null, RESTORELEGS_FIX_BIPED);
 			//Remove Incorporeality Perk
 			if (player.findPerk(PerkLib.Incorporeality) >= 0 && changes < changeLimit && rand(10) == 0) {
-				outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>", false);
-				player.removePerk(PerkLib.Incorporeality);
-				changes++;
+				if (player.removePerk(PerkLib.Incorporeality)) {
+					outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>");
+					changes++;
+				}
 			}
 			//Remove Dragonfire Perk
 			if (player.findPerk(PerkLib.Dragonfire) >= 0 && player.perkv4(PerkLib.Dragonfire) == 0 && changes < changeLimit && rand(10) == 0) {
