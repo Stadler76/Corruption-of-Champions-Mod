@@ -52,15 +52,15 @@ package classes
 			return hasDragonWings(large) || hasBatLikeWings(large);
 		}
 
-		// To be honest: I seriously considered naming it hasDrDragonCox() :D
-		public function hasDragonCocks():Boolean
+		// To be honest: I seriously considered naming it drDragonCox() :D
+		public function dragonCocks():int
 		{
-			return countCocksOfType(CockTypesEnum.DRAGON) > 0;
+			return countCocksOfType(CockTypesEnum.DRAGON);
 		}
 
-		public function hasLizardCocks():Boolean
+		public function lizardCocks():int
 		{
-			return countCocksOfType(CockTypesEnum.LIZARD) > 0;
+			return countCocksOfType(CockTypesEnum.LIZARD);
 		}
 
 		public function hasReptileTail():Boolean
