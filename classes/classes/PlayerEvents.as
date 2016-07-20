@@ -419,7 +419,7 @@ package classes {
 				}
 			}
 			// <mod name="Dragon mod" author="Stadler76">
-			if (!player.hasNormalNeck() && player.neckType == NECK_TYPE_DRACONIC && (!player.isDragon() || !player.hasDraconicBackSide())) {
+			if (!player.hasNormalNeck() && player.neckType == NECK_TYPE_DRACONIC && (player.dragonScore() < 6 || !player.hasDraconicBackSide())) {
 				outputText("\n<b>Your draconic neck and its position on your head reverts to its normal position and length. ");
 				if (player.hasDragonRearBody()) {
 					outputText("  After that you feel a tingling on your backside, telling you that your");

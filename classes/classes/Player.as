@@ -769,14 +769,15 @@ use namespace kGAMECLASS;
 			}
 			if (lizardScore() >= 4)
 			{
-				race = isBasilisk() ? "basilisk" : "lizan";
 				if (hasDragonWingsAndFire())
 					race = isBasilisk() ? "dracolisk" : "dragonewt";
+				else
+					race = isBasilisk() ? "basilisk"  : "lizan";
 				if (isTaur())
 					race += "-taur";
 			}
 
-			if (isDragon(true))
+			if (dragonScore() >= 6)
 			{
 				race = "dragon-morph";
 				if (faceType == 0)
@@ -1790,12 +1791,6 @@ use namespace kGAMECLASS;
 			if (lactationQ() > 0) return true;
 			return false;
 		}
-		
-		public function isDragon(hardCap:Boolean = false):Boolean
-		{
-			if (hardCap) return dragonScore() >= 6;
-			return dragonScore() >= 4;
-		}
 
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
 			if (vaginas.length==0) return false;
@@ -2487,7 +2482,7 @@ use namespace kGAMECLASS;
 					maxInt += 10;
 				}*/
 			}
-			if (isDragon()) {
+			if (dragonScore() >= 4) {
 				maxStr += 5;
 				maxTou += 10;
 				maxInt += 10;
