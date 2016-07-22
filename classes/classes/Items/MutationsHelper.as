@@ -47,8 +47,7 @@ package classes.Items
 				if (hasClaws) outputText("now gooey claws melt back into your fingers. Well, who cares, gooey claws aren't very useful in combat to begin with.");
 				if (hasClaws || player.armType == ARM_TYPE_HARPY) outputText("  <b>You have normal human arms again.</b>");
 
-				player.clawType = CLAW_TYPE_NORMAL;
-				player.clawTone = "";
+				updateClaws();
 				player.armType = ARM_TYPE_HUMAN;
 				return true;
 			}
@@ -91,8 +90,7 @@ package classes.Items
 						outputText(" your unusual arms change more and more until they are normal human arms, leaving " + player.skinFurScales() + " behind.");
 				}
 				outputText("  <b>You have normal human arms again.</b>");
-				player.clawType = CLAW_TYPE_NORMAL;
-				player.clawTone = "";
+				updateClaws();
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
 				return true;
@@ -188,6 +186,95 @@ package classes.Items
 			}
 
 			return "invalid"; // Will never happen. Suppresses 'Error: Function does not return a value.'
+		}
+
+		public function updateClaws(clawType:int = CLAW_TYPE_NORMAL):String
+		{
+			var clawTone:String = "";
+			var oldClawTone:String = player.clawTone;
+
+			switch (clawType) {
+				case CLAW_TYPE_DRAGON:       clawTone = "steel-gray";   break;
+				case CLAW_TYPE_SALAMANDER:   clawTone = "fiery-red";    break;
+				case CLAW_TYPE_LIZARD:
+					// See http://www.bergenbattingcenter.com/lizard-skins-bat-grip/ for all those NYI! lizard skin colors
+					// I'm still not that happy with these claw tones. Any suggestion would be nice.
+					switch (player.skinTone) {
+						case "red":          clawTone = "reddish";      break;
+						case "green":        clawTone = "greenish";     break;
+						case "white":        clawTone = "light-gray";   break;
+						case "blue":         clawTone = "bluish";       break;
+						case "black":        clawTone = "dark-gray";    break;
+						case "purple":       clawTone = "purplish";     break;
+						case "silver":       clawTone = "silvery";      break;
+						case "pink":         clawTone = "pink";         break; // NYI! Maybe only with a new Skin Oil?
+						case "orange":       clawTone = "orangey";      break; // NYI!
+						case "yellow":       clawTone = "yellowish";    break; // NYI!
+						case "desert-camo":  clawTone = "pale-yellow";  break; // NYI!
+						case "gray-camo":    clawTone = "gray";         break; // NYI!
+						default:             clawTone = "gray";         break;
+					}
+					break;
+				default:
+					clawTone = "";
+			}
+
+			player.clawType = clawType;
+			player.clawTone = clawTone;
+
+			return oldClawTone;
+		}
+
+		public function updateOvipositionPerk(tfSource:String):*
+		{
+			trace('called updateOvipositionPerk("' + tfSource + '")');
+			// First things first :)
+			if (player.findPerk(PerkLib.BasiliskWomb) >= 0) {
+				if (player.findPerk(PerkLib.Oviposition) >= 0)
+					return null; // we already have it => return null; // no change
+
+				// Basilisk Womb but no Oviposition? Fix, whats broken
+				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
+				          +"  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your basilisk womb.\n");
+				outputText("(<b>Perk Gained: Oviposition</b>)");
+
+				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
+				return true; // true => gained Oviposition Perk
+			}
+
+			if (changes >= changeLimit) return null;
+
+			// Note, that we don't do the score checks anymore. That was just an unly workaround and we don't want to do that again!
+			switch(tfSource) {
+				case "emberTFs":
+				case "snakeOil":
+				//case "catTransformation-dragonne": // Keep it? Maybe later.
+				// TFs with minor changes. Just in case, we change our mind or if we intend to upgrade them.
+				case "winterPudding":
+				case "rizzaRootEffect":
+					return null; // Don't change it. So we're done, yay!
+
+				case "reptilum":
+					if (player.findPerk(PerkLib.Oviposition) >= 0) return null;
+					outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
+					          +"  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
+					outputText("(<b>Perk Gained: Oviposition</b>)");
+
+					player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
+					changes++;
+					return true; // Gained it
+					break;
+
+				default:
+					if (player.findPerk(PerkLib.Oviposition) < 0) return null;
+					if (tfSource != "superHummus") {
+						outputText("\n\nAnother change in your uterus ripples through your reproductive systems."
+						          +"  Somehow you know you've lost a little bit of reptilian reproductive ability.\n");
+						outputText("(<b>Perk Lost: Oviposition</b>)\n");
+					}
+					player.removePerk(PerkLib.Oviposition);
+					return false; // Lost it
+			}
 		}
 
 		public function gainSnakeTongue():Boolean

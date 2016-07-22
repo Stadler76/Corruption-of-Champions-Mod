@@ -5,6 +5,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
+	import classes.Items.Mutations;
 
 	public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -57,6 +58,12 @@ package classes.Scenes.NPCs
 // TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
 		public var pregnancy:PregnancyStore;
+		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
+		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
+		protected function get changes():int { return mutations.changes; }
+		protected function set changes(val:int):void { mutations.changes = val; }
+		protected function get changeLimit():int { return mutations.changeLimit; }
+		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
 		public function EmberScene()
 		{
@@ -1583,10 +1590,11 @@ package classes.Scenes.NPCs
 //TF messages (Z)
 		public function emberTFs(drakesHeart:Boolean = false):void
 		{
-			var changes:int = 0;
-			var changeLimit:int = 2;
+			changes = 0;
+			changeLimit = 2;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			var tfSource:String = "emberTFs";
 			//Gain Dragon Dick
 			if (changes < changeLimit && player.countCocksOfType(CockTypesEnum.DRAGON) < player.totalCocks() && rand(3) == 0) {
 				temp = 0;
@@ -1611,6 +1619,7 @@ package classes.Scenes.NPCs
 				player.cocks[select].cockType = CockTypesEnum.DRAGON;
 				player.cocks[select].knotMultiplier = 1.3;
 			}
+			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain Dragon Head
 			if (changes < changeLimit && rand(3) == 0 && player.faceType != FACE_DRAGON && flags[kFLAGS.EMBER_ROUNDFACE] == 0) {
 				outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
@@ -1790,7 +1799,7 @@ package classes.Scenes.NPCs
 			}
 			// <mod name="Dragon patch" author="Stadler76">
 			//Gain Dragon Rear Body
-			if (!drakesHeart && !player.hasDragonRearBody() && player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
+			if (!drakesHeart && !player.hasDragonRearBody() && player.hasDragonNeck() && player.dragonScore() >= 4 && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
 				var emberRear:Number = player.fetchEmberRearBody();
 				switch (emberRear) {
 					case REAR_BODY_TYPE_DRACONIC_MANE:
@@ -1823,9 +1832,9 @@ package classes.Scenes.NPCs
 				}
 			}
 			//Gain Dragon Neck
-			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && skinType == SKIN_TYPE_DRACONIC && hasReptileTail() && hasReptileArms() && hasReptileFeet(); }
+			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && skinType == SKIN_TYPE_DRACONIC && hasReptileTail() && hasReptileArms() && hasReptileLegs(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
-			if (!drakesHeart && !player.hasDragonNeck() && player.isDragon() && player.hasDraconicBackSide() && changes < changeLimit) {
+			if (!drakesHeart && !player.hasDragonNeck() && player.dragonScore() >= 6 && player.hasDraconicBackSide() && changes < changeLimit) {
 				var nlChange:int = 4 + rand(5);
 				if (!player.hasNormalNeck()) { // Note: hasNormalNeck checks the length, not the type!
 					player.modifyNeck(nlChange);
@@ -1845,18 +1854,16 @@ package classes.Scenes.NPCs
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
 			if (player.armType != ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick curved claws replacing your fingernails.");
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick, curved steel-gray claws replacing your fingernails.");
 				outputText("\n<b>You now have dragon arms.</b>", false);
 				player.armType = ARM_TYPE_PREDATOR;
-				player.clawType = CLAW_TYPE_DRAGON;
-				player.clawTone = "steel-gray";
+				mutations.updateClaws(CLAW_TYPE_DRAGON);
 				changes++
 			}
 			//Claw transition
 			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
-				player.clawType = CLAW_TYPE_DRAGON;
-				player.clawTone = "steel-gray";
+				mutations.updateClaws(CLAW_TYPE_DRAGON);
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}
@@ -1864,14 +1871,14 @@ package classes.Scenes.NPCs
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
-			if (player.isDragon() && changes < changeLimit && player.findPerk(PerkLib.Dragonfire) < 0) {
+			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.Dragonfire) < 0) {
 				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragonfire!</b>)");
 				player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0);
 				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
 				changes++;
 			}
-			if (player.isDragon() && rand(3) == 0 && player.gender > 0) {
+			if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0) {
 				outputText("\n\nA sudden swell of lust races through your ");
 				if (player.hasCock()) {
 					outputText(player.cockDescript(0));
@@ -1896,13 +1903,13 @@ package classes.Scenes.NPCs
 					outputText("rut");
 					
 					player.goIntoRut(false);
-					changes++;
+					changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
 				}
 				else {
 					outputText("heat");
 					
 					player.goIntoHeat(false);
-					changes++;
+					changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
 				}
 				outputText("</b>.");
 			}
@@ -2131,7 +2138,7 @@ package classes.Scenes.NPCs
 				}
 				player.refillHunger(25);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.isDragon() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(player.cockDescript(0));
@@ -2194,7 +2201,7 @@ package classes.Scenes.NPCs
 				}
 				player.refillHunger(50);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.isDragon() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(player.cockDescript(0));
@@ -2291,7 +2298,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber gets so flustered that " + emberMF("he", "she") + " just stares at you in stunned silence, wearing a goofy smile.  \"<i>Wha... you know, there's no point in saying anything.  I know you'll just sneak another opportunity like this in the future... doesn't mean I won't make you pay for this when I catch you later.</i>\"");
 				outputText("\n\nYou whisper into her ear that you're looking forward to it, and gently raise yourself from " + emberMF("his", "her") + " lap to leave.");
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.isDragon() && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(player.cockDescript(0));
