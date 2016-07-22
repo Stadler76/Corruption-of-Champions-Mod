@@ -60,10 +60,10 @@ package classes.Scenes.NPCs
 		public var pregnancy:PregnancyStore;
 		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
 		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
-		protected function get changes():int { return kGAMECLASS.mutations.changes; }
-		protected function set changes(val:int):void { kGAMECLASS.mutations.changes = val; }
-		protected function get changeLimit():int { return kGAMECLASS.mutations.changeLimit; }
-		protected function set changeLimit(val:int):void { kGAMECLASS.mutations.changeLimit = val; }
+		protected function get changes():int { return mutations.changes; }
+		protected function set changes(val:int):void { mutations.changes = val; }
+		protected function get changeLimit():int { return mutations.changeLimit; }
+		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
 		public function EmberScene()
 		{
@@ -1594,6 +1594,7 @@ package classes.Scenes.NPCs
 			changeLimit = 2;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			var tfSource:String = "emberTFs";
 			//Gain Dragon Dick
 			if (changes < changeLimit && player.countCocksOfType(CockTypesEnum.DRAGON) < player.totalCocks() && rand(3) == 0) {
 				temp = 0;
@@ -1618,6 +1619,7 @@ package classes.Scenes.NPCs
 				player.cocks[select].cockType = CockTypesEnum.DRAGON;
 				player.cocks[select].knotMultiplier = 1.3;
 			}
+			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain Dragon Head
 			if (changes < changeLimit && rand(3) == 0 && player.faceType != FACE_DRAGON && flags[kFLAGS.EMBER_ROUNDFACE] == 0) {
 				outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
@@ -1866,7 +1868,6 @@ package classes.Scenes.NPCs
 				changes++
 			}
 			// </mod>
-			trace("emberTFs changeLimit: ", changeLimit);
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
