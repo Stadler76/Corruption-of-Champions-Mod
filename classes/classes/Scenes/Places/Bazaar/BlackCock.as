@@ -1627,6 +1627,7 @@ package classes.Scenes.Places.Bazaar
 				player.skinAdj = "tough";
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinDesc = "skin";
+				mutations.updateClaws(player.clawType);
 				changes++;
 			}
 			//Arms change to regular
@@ -1641,6 +1642,7 @@ package classes.Scenes.Places.Bazaar
 					default:
 				}
 				player.armType = ARM_TYPE_HUMAN;
+				mutations.updateClaws();
 				changes++;
 			}
 			//Change legs to normal
