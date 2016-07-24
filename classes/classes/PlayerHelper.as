@@ -57,7 +57,6 @@ package classes
 			return hasDragonWings(large) || hasBatLikeWings(large);
 		}
 
-		// To be honest: I seriously considered naming it drDragonCox() :D
 		public function dragonCocks():int
 		{
 			return countCocksOfType(CockTypesEnum.DRAGON);
@@ -93,13 +92,6 @@ package classes
 		{
 			return armType == ARM_TYPE_SALAMANDER || (armType == ARM_TYPE_PREDATOR && hasScales());
 		}
-
-		/*
-		public function hasPredatorArms():Boolean
-		{
-			return [ARM_TYPE_PREDATOR, ARM_TYPE_SALAMANDER].indexOf(armType) != -1;
-		}
-		*/
 
 		public function hasReptileLegs():Boolean
 		{

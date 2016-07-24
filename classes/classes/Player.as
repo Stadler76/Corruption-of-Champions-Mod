@@ -775,7 +775,7 @@ use namespace kGAMECLASS;
 					race = isBasilisk() ? "basilisk"  : "lizan";
 				if (isTaur())
 					race += "-taur";
-				if (lizardScore() >= 8)
+				if (lizardScore() >= 9)
 					return race; // High lizardScore? always return lizan-race
 			}
 
