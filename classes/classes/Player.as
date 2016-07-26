@@ -778,7 +778,6 @@ use namespace kGAMECLASS;
 				if (lizardScore() >= 9)
 					return race; // High lizardScore? always return lizan-race
 			}
-
 			if (dragonScore() >= 6)
 			{
 				race = "dragon-morph";
