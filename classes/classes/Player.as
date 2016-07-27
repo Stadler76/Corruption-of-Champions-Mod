@@ -1018,7 +1018,7 @@ use namespace kGAMECLASS;
 				humanCounter++;
 			if (lowerBody == 0)
 				humanCounter++;
-			if (countCocksOfType(CockTypesEnum.HUMAN) == 1 && totalCocks() == 1)
+			if (countCocksOfType(CockTypesEnum.HUMAN) == 1 && cocks.length == 1)
 				humanCounter++;
 			if (breastRows.length == 1 && skinType == 0)
 				humanCounter++;
@@ -1568,7 +1568,7 @@ use namespace kGAMECLASS;
 				mutantCounter++;
 			if (tailType > 0)
 				mutantCounter++;
-			if (cockTotal() > 1)
+			if (cocks.length > 1)
 				mutantCounter++;
 			if (hasCock() && hasVagina())
 				mutantCounter++;
@@ -1597,20 +1597,22 @@ use namespace kGAMECLASS;
 		public function salamanderScore():Number
 		{
 			var salamanderCounter:Number = 0;
-			if (faceType == 0)
+			if (armType == ARM_TYPE_SALAMANDER)
 				salamanderCounter++;
-			if (earType == 0)
-				salamanderCounter++;
-			if (armType == 5)
-				salamanderCounter++;
-			if (lowerBody == 25)
+			if (lowerBody == LOWER_BODY_TYPE_SALAMANDER)
 				salamanderCounter++;
 			if (tailType == TAIL_TYPE_SALAMANDER)
 				salamanderCounter++;
-			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
-				salamanderCounter++;
 			if (findPerk(PerkLib.Lustzerker) >= 0)
 				salamanderCounter++;
+			if (salamanderCounter >= 2) {
+				if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
+					salamanderCounter++;
+				if (faceType == 0)
+					salamanderCounter++;
+				if (earType == 0)
+					salamanderCounter++;
+			}
 			return salamanderCounter;
 		}
 		
@@ -3195,10 +3197,9 @@ use namespace kGAMECLASS;
 			return true;
 		}
 		
-		public function setFurColor(colorArray:Array):void {
-			if (skinType == SKIN_TYPE_FUR) {
-				furColor = colorArray[rand(colorArray.length)];
-			}
+		public function setFurColor(colorArray:Array, ignoreSkinType:Boolean = false):void {
+			if (!ignoreSkinType && skinType != SKIN_TYPE_FUR) return;
+			furColor = colorArray[rand(colorArray.length)];
 		}
 	}
 }
