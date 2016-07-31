@@ -1287,7 +1287,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (hasScales())
 				lizardCounter++;
-			if (hasReptileEyes() && eyeType != EYES_DRAGON) // Maybe I'll write a different function for that later. e. g. hasLizardEyes() (Stadler76)
+			if (hasLizardEyes())
 				lizardCounter++;
 			return lizardCounter;
 		}

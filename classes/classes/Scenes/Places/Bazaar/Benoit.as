@@ -165,6 +165,16 @@ public function clearBenoitPreggers():void
 	}
 }
 
+public function benoitOffspring():int
+{
+	return flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.FEMOIT_EGGS_LAID];
+}
+
+public function benoitBigFamily():Boolean
+{
+	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
+}
+
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
 	if (model.time.hours >= 9 && model.time.hours <= 17) {
 		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && this.getGame().model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
@@ -297,13 +307,20 @@ public function benoitIntro():void {
 	addButton(2, "Talk", talkToBenoit);
 	addButton(14, "Leave", bazaar.enterTheBazaarAndMenu);
 	//Feminize & Herminize
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
-	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0)
+		addButton(3, "Feminize", benoitFeminise);
+	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3)
+		addButton(3, "Herminize", benoitHerminise);
 	//Basilisk Womb
-	if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && [0, 3].indexOf(flags[kFLAGS.BENOIT_STATUS]) >= 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && [0, 3].indexOf(flags[kFLAGS.BENOIT_STATUS]) >= 0)
+		addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
 	//Suggest & sex
-	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
-	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
+	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3))
+		addButton(5, "Suggest", eggySuggest);
+	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
+		addButton(6, "Sex", femoitSexIntro);
+	if (flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 1 && player.eyeType != EYES_BASILISK)
+		addButton(7, "Basil. Eyes", convertToBassyEyes);
 }
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
 private function buyOrSellExplanationFirstTime():void {
@@ -637,11 +654,35 @@ private function talkToBenoit():void {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
+	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
+		// Talk scene written by MissBlackthorne
+		outputText("You ask " + benoitMF("Benoit", "Benoite") + " how the petrifying effect of " + benoitMF("his", "her") + " brethrens gaze works,"
+		          +" is it something their eyes naturally do or type of sight? " + benoitMF("He","She") + " stiffens for a moment before letting out a frustrated sigh.");
+
+		outputText("\n\n\"<i>[name], you do know i am blind yes? Zis is not somesing to joke about.</i>\"");
+
+		outputText("\n\nYou hurriedly tell your scaled lover that you didn't mean it in a cruel way, you were merely curious."
+		          +" After all, you've transformed yourself to become more basilisk like for " + benoitMF("him", "her")
+		          +" already, so you're curious if you could get even closer to being a true basilisk.");
+
+		outputText("\n\nAfter a few moments " + benoitMF("Benoit", "Benoite") + " nods slightly.");
+		outputText("\n\"<i>I see...are you sure about zis [name]? It is so reckless to experiment on your body like zis....But I suppose you have done so much for my folk,"
+		          +" zat if you wish to be one of us, i could look into it. Beware though, zey are dangerous, so while i shall do zis to thank you,"
+		          +" I do not wish to risk you becoming like ze others...Ze demons no doubt affected our gaze too, ze perverts...</i>\"");
+
+		outputText("\n\nYou smile at the lizard's concern for you before leaving " + benoitMF("Benoit", "Benoite") + " to find a recipe in peace.");
+
+		//toggle on "Basil. Eyes" from benoit's main menu.
+		flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] = 1;
+		outputText("\n\n(<b>Basilisk Eyes option enabled in " + benoitMF("Benoit", "Benoite") + "'s menu!</b>)");
+		doNext(camp.returnToCampUseOneHour);
+		return;
+	}
 	//Basilisk Womb
 	//Requires: Had sex with Benoit at least twice, have vagina, select talk
 	if (((flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
 		outputText("You ask " + benoitMF("Benoit","Benoite") + " if " + benoitMF("he","she") + " has ever thought about trying to do something to help his people's plight.");
-		
+
 		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" " + benoitMF("he","she") + " says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" " + benoitMF("he","she") + " trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
 		
 		if (player.inte >= 60) {
@@ -1170,6 +1211,41 @@ private function repeatBenoitFuckTakeCharge():void {
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	player.orgasm();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+//Basilisk Eyes
+private function convertToBassyEyes():void {
+	var eyesGranted:int = flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED];
+	clearOutput();
+	trace("eyesGranted:", eyesGranted);
+	outputText("Stubby text summaries for starters:\n");
+	if (eyesGranted == 0) { // First time
+		outputText("You tell " + benoitMF("Benoit", "Benoite") + ", that you've decided, that you want the basilisk eyes and ask "
+		           + benoitMF("him", "her") + ", if " + benoitMF("he", "she") + " could grant them to you.");
+		outputText("\n\n" + benoitMF("Benoit", "Benoite") + " begins to fetch some ingredients, mixes a solution, adds " + benoitMF("his", "her") + " blood"
+		          +" and a freshly shedded tear to it (can reptiles actually shed tears? Naah, whatever, I don't really care about biology, when it adds more fluff to a fantasy game."
+		          +" Whoever writes this: just decide for yourself :) (Stadler76)) and gives the potion/tinture/whatever to you.");
+		outputText("\n\nYou drink it/pour it on your eyes and they become basilisk eyes.");
+	} else {
+		outputText("You tell " + benoitMF("Benoit", "Benoite") + ", that you've lost the basilisk eyes and ask " + benoitMF("him", "her") + ", if "
+		           + benoitMF("he", "she") + " could grant them to you again.");
+		if (eyesGranted == 1) { // Second time
+			outputText("\n\n" + benoitMF("Benoit", "Benoite") + " says: \"<i>Oh, you've lost zem? No problem,");
+		} else if (eyesGranted >= 2 && eyesGranted < 5) { // Third time and later
+			outputText("\n\n" + benoitMF("Benoit", "Benoite") + " says: \"<i>Oh, you've lost zem again? 'mm ok...");
+		} else /*if (eyesGranted >= 5)*/ { // Sixth time and later
+			outputText("\n\n" + benoitMF("Benoit", "Benoite") + " sighs: \"<i>You should be more careful not to lose zem so often!</i>\" "
+			          + benoitMF("he", "she") + " grumbles... \"<I>'mm well...");
+		}
+		outputText(" just give me a moment, zo I can fetch ze ingredienns for you again...</i>\"");
+		outputText("\n\"<i>For ze " + num2Text2(eyesGranted + 1) + " time</i>\", " + benoitMF("he", "she") + " mumbles...");
+		outputText("\n\n" + benoitMF("Benoit", "Benoite") + " fetches the ingedients again and gives the potion/tinture/whatever again to you. You drink it/pour it on your eyes"
+		          +" and they again become basilisk eyes.");
+	}
+	outputText("\n\n(<b>You now have basilisk eyes</b>)");
+	player.eyeType = EYES_BASILISK;
+	flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED]++
 	doNext(camp.returnToCampUseOneHour);
 }
 
