@@ -386,7 +386,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_1.4_dev";
-			ver += "_dragonmod_1.0";
+			ver += "_dragonmod_1.0.1";
 			version = ver + " (<b>Anzu's Palace Test</b>)";
 
 			//Indicates if building for mobile?
