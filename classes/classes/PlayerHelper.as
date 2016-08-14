@@ -127,5 +127,25 @@ package classes
 		{
 			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_TYPE_DRACONIC_MANE : REAR_BODY_TYPE_DRACONIC_SPIKES;
 		}
+
+		public function hasLizardScales():Boolean
+		{
+			return skinType == SKIN_TYPE_SCALES;
+		}
+
+		public function featheryHairPinEquipped():Boolean
+		{
+			return hasKeyItem("Feathery hair-pin") >= 0 && keyItemv1("Feathery hair-pin") == 1;
+		}
+
+		public function isMaleOrHerm():Boolean
+		{
+			return (gender & GENDER_MALE) != 0;
+		}
+
+		public function isFemaleOrHerm():Boolean
+		{
+			return (gender & GENDER_FEMALE) != 0;
+		}
 	}
 }
