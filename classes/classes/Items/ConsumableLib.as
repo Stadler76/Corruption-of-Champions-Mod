@@ -49,7 +49,9 @@ package classes.Items
 		public const MAHOGOL:SkinOil = new SkinOil("MahogOl", "Mahogany");
 		public const OLIVEOL:SkinOil = new SkinOil("OliveOl", "Olive");
 		public const RUSS_OL:SkinOil = new SkinOil("RussOil", "Russet");
-		public const RED__OL:SkinOil = new SkinOil("Red_Oil", "Red");
+		public const RED__OL:SkinOil = new SkinOil("Red Oil", "Red");
+		public const ORANGOL:SkinOil = new SkinOil("OranOil", "Orange");
+		public const YELLOOL:SkinOil = new SkinOil("YeloOil", "Yellow");
 		public const GREENOL:SkinOil = new SkinOil("GrenOil", "Green");
 		public const WHITEOL:SkinOil = new SkinOil("WhitOil", "White");
 		public const BLUE_OL:SkinOil = new SkinOil("BlueOil", "Blue");
