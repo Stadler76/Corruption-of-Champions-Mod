@@ -26,6 +26,7 @@ package classes.Scenes
 		public var transformativeArray:Array = [];
 		public var consumableArray:Array = [];
 		public var dyeArray:Array = [];
+		public var skinOilArray:Array = [];
 		public var materialArray:Array = [];
 		public var rareArray:Array = [];
 		
@@ -78,6 +79,7 @@ package classes.Scenes
 			addButton(7, "Armours", displayItemPage, armourArray, 1);
 			addButton(8, "Undergarments", displayItemPage, undergarmentArray, 1);
 			addButton(9, "Accessories", displayItemPage, accessoryArray, 1);
+			addButton(10, "Skin Oils", displayItemPage, skinOilArray, 1);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -286,7 +288,29 @@ package classes.Scenes
 			dyeArray.push(consumables.RED_DYE);
 			//Page 2
 			dyeArray.push(consumables.WHITEDY);
-			
+
+			//------------
+			// Skin Oils
+			//------------
+			//Page 1
+			skinOilArray.push(consumables.DARK_OL);
+			skinOilArray.push(consumables.EBONYOL);
+			skinOilArray.push(consumables.FAIR_OL);
+			skinOilArray.push(consumables.LIGHTOL);
+			skinOilArray.push(consumables.MAHOGOL);
+			skinOilArray.push(consumables.OLIVEOL);
+			skinOilArray.push(consumables.RUSS_OL);
+			skinOilArray.push(consumables.RED__OL);
+			skinOilArray.push(consumables.ORANGOL);
+			skinOilArray.push(consumables.YELLOOL);
+			skinOilArray.push(consumables.GREENOL);
+			skinOilArray.push(consumables.WHITEOL);
+			//Page 2
+			skinOilArray.push(consumables.BLUE_OL);
+			skinOilArray.push(consumables.BLACKOL);
+			skinOilArray.push(consumables.PURPLOL);
+			skinOilArray.push(consumables.SILVROL);
+
 			//------------
 			// Materials
 			//------------
