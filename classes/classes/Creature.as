@@ -206,7 +206,7 @@ package classes
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
 		//<mod name="Dragon patch" author="Stadler76">
-		public var rearBody:Number = REAR_BODY_TYPE_NONE;
+		public var rearBody:Number = REAR_BODY_NONE;
 		public var neckType:Number = NECK_TYPE_NORMAL;
 
 		// neckLen

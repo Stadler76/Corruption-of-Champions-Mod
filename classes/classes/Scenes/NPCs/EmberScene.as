@@ -1740,7 +1740,7 @@ package classes.Scenes.NPCs
 			if (!drakesHeart && !player.hasDragonRearBody() && player.hasDragonNeck() && player.dragonScore() >= 4 && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
 				var emberRear:Number = player.fetchEmberRearBody();
 				switch (emberRear) {
-					case REAR_BODY_TYPE_DRACONIC_MANE:
+					case REAR_BODY_DRACONIC_MANE:
 						// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
 						outputText("\n\nYou feel a sudden tingle just above your spine. Eager to see, what is the cause of it you bend your draconic neck to take a closer look at it.");
 						outputText(" Looking at your back you see tiny splotches of hair beginning to grow out of your scaly skin. The hair grows longer and the splotches grow until");
@@ -1749,10 +1749,10 @@ package classes.Scenes.NPCs
 						outputText("  It is the same color as the hair on your head, but shorter and denser; it has grown in a thick vertical strip, maybe two inches wide.");
 						outputText("  It reminds you vaguely of a horse's mane.");
 						outputText("  <b>You now have a hairy mane on your rear.</b>");
-						player.rearBody = REAR_BODY_TYPE_DRACONIC_MANE;
+						player.rearBody = REAR_BODY_DRACONIC_MANE;
 						break;
 
-					case REAR_BODY_TYPE_DRACONIC_SPIKES:
+					case REAR_BODY_DRACONIC_SPIKES:
 						// Teh spiky mane, similar to the hairy one.
 						outputText("\n\nYou feel a sudden pain coming from your spine. Eager to see, what is the cause of it you bend your draconic neck to take a closer look at it.");
 						outputText(" You watch your back in growing pain as small bulges start emerging from your spine, growing bigger and bigger, until you feel a sudden burst of pain, when small spikes");
@@ -1761,7 +1761,7 @@ package classes.Scenes.NPCs
 						outputText("  starting at the base of your neck and continuing down your tail, ending on the tip of your tail.");
 						outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
 						outputText("  <b>Your rear is now decorated with a row of curved spikes.</b>");
-						player.rearBody = REAR_BODY_TYPE_DRACONIC_SPIKES;
+						player.rearBody = REAR_BODY_DRACONIC_SPIKES;
 						break;
 
 					default:

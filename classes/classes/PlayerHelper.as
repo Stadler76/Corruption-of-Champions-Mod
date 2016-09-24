@@ -120,12 +120,12 @@ package classes
 
 		public function hasDragonRearBody():Boolean
 		{
-			return [REAR_BODY_TYPE_DRACONIC_MANE, REAR_BODY_TYPE_DRACONIC_SPIKES].indexOf(rearBody) != -1;
+			return [REAR_BODY_DRACONIC_MANE, REAR_BODY_DRACONIC_SPIKES].indexOf(rearBody) != -1;
 		}
 
 		public function fetchEmberRearBody():Number
 		{
-			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_TYPE_DRACONIC_MANE : REAR_BODY_TYPE_DRACONIC_SPIKES;
+			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_DRACONIC_MANE : REAR_BODY_DRACONIC_SPIKES;
 		}
 
 		public function hasLizardScales():Boolean

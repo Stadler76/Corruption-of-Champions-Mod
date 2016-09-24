@@ -1765,13 +1765,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			saveFile.data.neckLen = saveFile.data.neckLength;
 		if (saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		player.neckLen  = (saveFile.data.neckLen  == undefined) ? 2                   : saveFile.data.neckLen;
-		player.neckType = (saveFile.data.neckType == undefined) ? NECK_TYPE_NORMAL    : saveFile.data.neckType;
-		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_TYPE_NONE : saveFile.data.rearBody;
+		player.neckLen  = (saveFile.data.neckLen  == undefined) ? 2                : saveFile.data.neckLen;
+		player.neckType = (saveFile.data.neckType == undefined) ? NECK_TYPE_NORMAL : saveFile.data.neckType;
+		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_NONE   : saveFile.data.rearBody;
 		// </mod>
 		// <mod name="Predator arms" author="Stadler76">
-		player.clawTone = (saveFile.data.clawTone == undefined) ? ""                  : saveFile.data.clawTone;
-		player.clawType = (saveFile.data.clawType == undefined) ? CLAW_TYPE_NORMAL    : saveFile.data.clawType;
+		player.clawTone = (saveFile.data.clawTone == undefined) ? ""               : saveFile.data.clawTone;
+		player.clawType = (saveFile.data.clawType == undefined) ? CLAW_TYPE_NORMAL : saveFile.data.clawType;
 		// </mod>
 
 		player.wingDesc = saveFile.data.wingDesc;

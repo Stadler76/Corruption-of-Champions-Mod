@@ -165,7 +165,7 @@
 			player.tongueType = TONGUE_HUMAN;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player.femininity = 50;
 			//<mod name="Dragon patch" author="Stadler76">
-			player.rearBody = REAR_BODY_TYPE_NONE;
+			player.rearBody = REAR_BODY_NONE;
 			player.neckType = NECK_TYPE_NORMAL;
 			player.neckLen = 2;
 			//</mod>

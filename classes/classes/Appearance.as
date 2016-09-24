@@ -2426,12 +2426,12 @@
 		);
 		// <mod name="Dragon patch" author="Stadler76">
 		public static const DEFAULT_REAR_BODY_NAMES:Object = createMapFromPairs(
-			[
-				[REAR_BODY_TYPE_NONE, "none"],
-				[REAR_BODY_TYPE_DRACONIC_MANE, "draconic hairy mane"],
-				[REAR_BODY_TYPE_DRACONIC_SPIKES, "draconic spiky mane"],
-				[REAR_BODY_TYPE_BEHEMOTH, "behemoth spikes"]
-			]
+				[
+					[REAR_BODY_NONE, "none"],
+					[REAR_BODY_DRACONIC_MANE, "draconic hairy mane"],
+					[REAR_BODY_DRACONIC_SPIKES, "draconic spiky mane"],
+					[REAR_BODY_BEHEMOTH, "behemoth spikes"]
+				]
 		);
 		public static const DEFAULT_NECK_NAMES:Object = createMapFromPairs(
 			[

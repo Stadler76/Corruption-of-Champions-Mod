@@ -503,14 +503,14 @@ package classes
 			// <mod name="Dragon patch" author="Stadler76">
 			// rearBody
 			switch (player.rearBody) {
-				case REAR_BODY_TYPE_DRACONIC_MANE:
+				case REAR_BODY_DRACONIC_MANE:
 					// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
 					outputText("  Tracing your spine, a mane of hair grows; starting at the base of your neck and continuing down your tail, ending on the tip of your tail in a small tuft.");
 					outputText("  It is the same color as the hair on your head, but shorter and denser; it grows in a thick vertical strip, maybe two inches wide.");
 					outputText("  It reminds you vaguely of a horse's mane.");
 					break;
 
-				case REAR_BODY_TYPE_DRACONIC_SPIKES:
+				case REAR_BODY_DRACONIC_SPIKES:
 					// Teh spiky mane, similar to the hairy one.
 					outputText("  Tracing your spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of your neck and continuing down your tail, ending on the tip of your tail.");
 					outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");

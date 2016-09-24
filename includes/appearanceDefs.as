@@ -203,10 +203,11 @@ public static const LOWER_BODY_TYPE_DEERTAUR:int                                
 public static const LOWER_BODY_TYPE_SALAMANDER:int                                  =  25;
 
 // rearBody
-public static const REAR_BODY_TYPE_NONE:int                                         =   0;
-public static const REAR_BODY_TYPE_DRACONIC_MANE:int                                =   1;
-public static const REAR_BODY_TYPE_DRACONIC_SPIKES:int                              =   2;
-public static const REAR_BODY_TYPE_BEHEMOTH:int                                     =   3; // NYI, Its just there as an example.
+public static const REAR_BODY_NONE:int                                              =   0;
+public static const REAR_BODY_DRACONIC_MANE:int                                     =   1;
+public static const REAR_BODY_DRACONIC_SPIKES:int                                   =   2;
+public static const REAR_BODY_FENRIR_ICE_SPIKES:int                                 =   3; // NYI, placeholder for Xianxia
+public static const REAR_BODY_BEHEMOTH:int                                          =   4; // NYI, Its just there as an example.
 
 // neckType
 public static const NECK_TYPE_NORMAL:int                                            =   0; // normal human neck. neckLen = 2 inches
