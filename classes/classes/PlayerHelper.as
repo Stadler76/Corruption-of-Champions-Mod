@@ -10,16 +10,6 @@ package classes
 	public class PlayerHelper extends Character 
 	{
 		public function PlayerHelper() {}
-		
-		public function hasScales():Boolean
-		{
-			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
-		}
-
-		public function hasFurOrScales():Boolean
-		{
-			return skinType == SKIN_TYPE_FUR || hasScales();
-		}
 
 		public function hasDragonHorns(fourHorns:Boolean = false):Boolean
 		{
@@ -92,10 +82,10 @@ package classes
 			return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
 		}
 
-		// For reptiles with predator arms I recommend to require hasScales() before doing the armType TF to ARM_TYPE_PREDATOR
+		// For reptiles with predator arms I recommend to require hasReptileScales() before doing the armType TF to ARM_TYPE_PREDATOR
 		public function hasReptileArms():Boolean
 		{
-			return armType == ARM_TYPE_SALAMANDER || (armType == ARM_TYPE_PREDATOR && hasScales());
+			return armType == ARM_TYPE_SALAMANDER || (armType == ARM_TYPE_PREDATOR && hasReptileScales());
 		}
 
 		public function hasReptileLegs():Boolean
@@ -105,7 +95,7 @@ package classes
 
 		public function hasDraconicBackSide():Boolean
 		{
-			return hasDragonWings(true) && skinType == SKIN_TYPE_DRACONIC && hasReptileTail() && hasReptileArms() && hasReptileLegs();
+			return hasDragonWings(true) && hasDragonScales() && hasReptileTail() && hasReptileArms() && hasReptileLegs();
 		}
 
 		public function hasDragonNeck():Boolean
@@ -126,11 +116,6 @@ package classes
 		public function fetchEmberRearBody():Number
 		{
 			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_DRACONIC_MANE : REAR_BODY_DRACONIC_SPIKES;
-		}
-
-		public function hasLizardScales():Boolean
-		{
-			return skinType == SKIN_TYPE_SCALES;
 		}
 
 		public function featheryHairPinEquipped():Boolean
