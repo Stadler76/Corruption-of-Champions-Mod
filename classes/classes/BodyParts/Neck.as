@@ -1,8 +1,9 @@
 package classes.BodyParts 
 {
 	/**
-	 * ...
-	 * @author ...
+	 * Container class for the players neck
+	 * @since December 19, 2016
+	 * @author Stadler76
 	 */
 	public class Neck 
 	{
