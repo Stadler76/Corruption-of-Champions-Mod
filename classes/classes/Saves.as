@@ -882,6 +882,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.neckLen = player.neckLen;
 		saveFile.data.neckType = player.neckType;
 		saveFile.data.rearBody = player.rearBody;
+		saveFile.data.rearBodyType = undefined;
 		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
@@ -1770,7 +1771,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.neckLength != undefined)
 			saveFile.data.neckLen = saveFile.data.neckLength;
-		if (saveFile.data.rearBodyType != undefined)
+		if (saveFile.data.rearBody == undefined && saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
 		player.neckLen  = (saveFile.data.neckLen  == undefined) ? 2                : saveFile.data.neckLen;
 		player.neckType = (saveFile.data.neckType == undefined) ? NECK_TYPE_NORMAL : saveFile.data.neckType;
