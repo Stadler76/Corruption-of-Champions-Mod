@@ -4405,7 +4405,7 @@
 				}
 				outputText("  Well, your rear isn't worthy to gaze at it anymore.\n");
 				player.rearBody = REAR_BODY_NONE;
-				player.restoreNeck();
+				player.neck.restore();
 			}
 			if (!player.hasNormalNeck() && player.hasDragonRearBody() && rand(meetsLongNeckReq ? 6 : 4) == 0) {
 					outputText("\n\nYou feel a tingling on your backside, telling you that <b>your");

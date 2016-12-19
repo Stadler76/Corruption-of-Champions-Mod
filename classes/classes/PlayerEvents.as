@@ -422,7 +422,7 @@ package classes {
 				}
 			}
 			// <mod name="Dragon mod" author="Stadler76">
-			if (!player.hasNormalNeck() && player.neckType == NECK_TYPE_DRACONIC && (player.dragonScore() < 6 || !player.hasDraconicBackSide())) {
+			if (!player.hasNormalNeck() && player.neck.type == NECK_TYPE_DRACONIC && (player.dragonScore() < 6 || !player.hasDraconicBackSide())) {
 				outputText("\n<b>Your draconic neck and its position on your head reverts to its normal position and length. ");
 				if (player.hasDragonRearBody()) {
 					outputText("  After that you feel a tingling on your backside, telling you that your");
@@ -431,7 +431,7 @@ package classes {
 				}
 				outputText("  Well, your rear isn't worthy to gaze at it anymore.</b>\n");
 				player.rearBody = REAR_BODY_NONE;
-				player.restoreNeck();
+				player.neck.restore();
 				needNext = true;
 			}
 			// </mod>

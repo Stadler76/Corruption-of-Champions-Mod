@@ -5,6 +5,7 @@ package classes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;
 	import classes.StatusEffectType;
+	import classes.BodyParts.Neck;
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
 	import classes.Scenes.Places.TelAdre.UmasShop;
@@ -207,27 +208,7 @@ package classes
 		// </mod>
 		//<mod name="Dragon patch" author="Stadler76">
 		public var rearBody:Number = REAR_BODY_NONE;
-		public var neckType:Number = NECK_TYPE_NORMAL;
-
-		// neckLen
-		public var neckLen:Number = 2;
-		public function restoreNeck():void {
-			neckLen = 2;
-			neckType = NECK_TYPE_NORMAL;
-		}
-		public function modifyNeck(len:Number, newType:Number = -1):void {
-			var nlMax:Array = [];
-			nlMax[NECK_TYPE_NORMAL]   =  2;
-			nlMax[NECK_TYPE_DRACONIC] = 30;
-			nlMax[NECK_TYPE_EASTERN]  = 48; // NYI, for later use
-			nlMax[NECK_TYPE_HYDRA]    = 72; // NYI, for later use
-
-			if (newType != -1) neckType = newType;
-
-			neckLen += len;
-			if (neckLen < 2)  neckLen = 2;
-			if (neckLen > nlMax[neckType]) neckLen = nlMax[neckType];
-		}
+		public var neck:Neck = new Neck();
 		//</mod>
 
 		/*EarType

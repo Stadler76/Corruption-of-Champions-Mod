@@ -243,19 +243,21 @@ package classes.Items.Consumables
 			if (!drakesHeart && !player.hasDragonNeck() && player.dragonScore() >= 6 && player.hasDraconicBackSide() && changes < changeLimit) {
 				var nlChange:int = 4 + rand(5);
 				if (!player.hasNormalNeck()) { // Note: hasNormalNeck checks the length, not the type!
-					player.modifyNeck(nlChange);
-					outputText("\n\nWith less pain than the last time your neck grows a few more inches reaching " + player.neckLen + " inches.");
+					player.neck.modify(nlChange);
+					outputText("\n\nWith less pain than the last time your neck grows a few more inches reaching " + player.neck.len + " inches.");
 				} else {
-					player.modifyNeck(nlChange, NECK_TYPE_DRACONIC);
+					player.neck.modify(nlChange, NECK_TYPE_DRACONIC);
 					// Growing a dragon neck may be limited to Ember's blood only in the future.
-					outputText("\n\nAfter you have finished " + (drakesHeart ? "eating the flower" : "drinking Ember's dragon blood") + " you start feeling a sudden pain in your neck. Your skin stretches and your spine grows a bit. Your neck has grown a few inches longer than that of a normal human reaching " + player.neckLen + " inches.");
+					outputText("\n\nAfter you have finished " + (drakesHeart ? "eating the flower" : "drinking Ember's dragon blood") + " you start feeling a sudden pain in your neck. Your skin stretches and your spine grows a bit. Your neck has grown a few inches longer than that of a normal human reaching " + player.neck.len + " inches.");
 				}
-				if (player.hasDragonNeck()) {
+				if (player.hasDragonNeck() && !player.neck.pos) {
 					outputText("\n\nAfter the enlongation has finally ceased, your spine begins to readjust its position on your head until its settled at the backside of your head. After that you want to try out your new draconic neck and begin to bend your neck finding that you can bend it at ease like a snake can bend its tail. Eager to see, how you look from behind you quickly turn your head around. Staring at your magnificent draconic rear your mouth and eyes open wide in astonishment. You muster your tail, your backside fully covered in scales and finally, you unfold your wings. This is the first time, you can see every single scale of them. You look at them from all sides, flapping them slowly, just to watch them moving.");
 					//outputText("  Then you lift off ...\n\nWhile you fly and soar through the mountain-range you watch yourself flying and gliding through the air elegantly, not forgetting to take a glimpse to that, what lies before you from time to time, so you don't crash into anything. " + (drakesHeart ? "The flower" : "Ember") + " gifted you with a view you'll never forget in a lifetime, no matter what will happen to you in the future. The view of a draconic body. And its your draconic body!");
 					//outputText("\n\n<b>You now have a fully grown dragon neck.</b>");
 					outputText("  <b>You now have a fully grown dragon neck.</b>");
+					player.neck.pos = true;
 				}
+				changes++;
 			}
 			// </mod>
 			// <mod name="Predator arms" author="Stadler76">
