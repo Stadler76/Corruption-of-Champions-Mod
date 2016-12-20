@@ -11,18 +11,16 @@ package classes.BodyParts
 
 		public var type:Number = NECK_TYPE_NORMAL;
 		public var len:Number = 2;
-		public function get length():Number { return len; }
-		public function set length(value:Number):void { len = value; }
 		public var pos:Boolean = false;
 
-		public var nlMax:Array = [];
+		private var _nlMax:Array = [];
 
 		public function Neck()
 		{
-			nlMax[NECK_TYPE_NORMAL]   =  2;
-			nlMax[NECK_TYPE_DRACONIC] = 30;
-			nlMax[NECK_TYPE_EASTERN]  = 48; // NYI, for later use
-			nlMax[NECK_TYPE_HYDRA]    = 72; // NYI, example
+			_nlMax[NECK_TYPE_NORMAL]   =  2;
+			_nlMax[NECK_TYPE_DRACONIC] = 30;
+			_nlMax[NECK_TYPE_EASTERN]  = 48; // NYI, for later use
+			_nlMax[NECK_TYPE_HYDRA]    = 72; // NYI, example
 		}
 
 		public function restore():Neck
@@ -61,14 +59,14 @@ package classes.BodyParts
 
 			len += l;
 			if (len < 2)  len = 2;
-			if (len > nlMax[type]) len = nlMax[type];
+			if (len > _nlMax[type]) len = _nlMax[type];
 
 			return this;
 		}
 
 		public function isFullyGrown():Boolean
 		{
-			return len >= nlMax[type];
+			return len >= _nlMax[type];
 		}
 	}
 }
