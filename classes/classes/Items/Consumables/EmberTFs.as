@@ -217,7 +217,7 @@ package classes.Items.Consumables
 						outputText("  It is the same color as the hair on your head, but shorter and denser; it has grown in a thick vertical strip, maybe two inches wide.");
 						outputText("  It reminds you vaguely of a horse's mane.");
 						outputText("  <b>You now have a hairy mane on your rear.</b>");
-						player.rearBody = REAR_BODY_DRACONIC_MANE;
+						player.rearBody.type = REAR_BODY_DRACONIC_MANE;
 						break;
 
 					case REAR_BODY_DRACONIC_SPIKES:
@@ -229,7 +229,7 @@ package classes.Items.Consumables
 						outputText("  starting at the base of your neck and continuing down your tail, ending on the tip of your tail.");
 						outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
 						outputText("  <b>Your rear is now decorated with a row of curved spikes.</b>");
-						player.rearBody = REAR_BODY_DRACONIC_SPIKES;
+						player.rearBody.type = REAR_BODY_DRACONIC_SPIKES;
 						break;
 
 					default:

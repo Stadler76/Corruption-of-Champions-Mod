@@ -502,7 +502,7 @@ package classes
 
 			// <mod name="Dragon patch" author="Stadler76">
 			// rearBody
-			switch (player.rearBody) {
+			switch (player.rearBody.type) {
 				case REAR_BODY_DRACONIC_MANE:
 					// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
 					outputText("  Tracing your spine, a mane of hair grows; starting at the base of your neck and continuing down your tail, ending on the tip of your tail in a small tuft.");

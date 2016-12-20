@@ -6,6 +6,7 @@ package classes
 	import classes.PerkType;
 	import classes.StatusEffectType;
 	import classes.BodyParts.Neck;
+	import classes.BodyParts.RearBody;
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
 	import classes.Scenes.Places.TelAdre.UmasShop;
@@ -207,7 +208,7 @@ package classes
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
 		//<mod name="Dragon patch" author="Stadler76">
-		public var rearBody:Number = REAR_BODY_NONE;
+		public var rearBody:RearBody = new RearBody();
 		public var neck:Neck = new Neck();
 		//</mod>
 
