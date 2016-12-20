@@ -461,19 +461,19 @@ package classes
 					outputText("  Your neck starts at the backside of your head and is about two and a half feet long, roughly six inches longer, than your arm length.");
 				else {
 					var lengthText:String = "";
-					if (player.neckLen < 8) lengthText = "a few inches longer";
-					else if (player.neckLen < 13) lengthText = "somewhat longer";
-					else if (player.neckLen < 18) lengthText = "very long";
+					if (player.neck.len < 8) lengthText = "a few inches longer";
+					else if (player.neck.len < 13) lengthText = "somewhat longer";
+					else if (player.neck.len < 18) lengthText = "very long";
 					else lengthText = "extremely long";
-					outputText("  Where normal humans have a short neck, yours is " + lengthText + ", measuring " + player.neckLen + " inches.");
+					outputText("  Where normal humans have a short neck, yours is " + lengthText + ", measuring " + player.neck.len + " inches.");
 				}
 
 				// bending your neck
 				if (player.hasDragonNeck())
 					outputText("  You manage to bend it in every direction you want and can easily take a look at your back.");
 				else {
-					if (player.neckLen < 10) outputText("  You can bend it a bit more than others with some effort.");
-					else if (player.neckLen < 16) outputText("  You can bend it more than others with low effort.");
+					if (player.neck.len < 10) outputText("  You can bend it a bit more than others with some effort.");
+					else if (player.neck.len < 16) outputText("  You can bend it more than others with low effort.");
 					else outputText("  You are able to bend it in almost every direction and with some effort you even manage to take a glimpse at your back.");
 				}
 			}

@@ -100,12 +100,12 @@ package classes
 
 		public function hasDragonNeck():Boolean
 		{
-			return neckLen >= 30;
+			return neck.type == NECK_TYPE_DRACONIC && neck.isFullyGrown();
 		}
 
 		public function hasNormalNeck():Boolean
 		{
-			return neckLen <= 2;
+			return neck.len <= 2;
 		}
 
 		public function hasDragonRearBody():Boolean
