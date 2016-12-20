@@ -1769,7 +1769,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.rearBody == undefined && saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_NONE : saveFile.data.rearBody;
+		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_NONE   : saveFile.data.rearBody;
 		if (saveFile.data.neck != undefined)
 			player.neck = saveFile.data.neck;
 		// </mod>
