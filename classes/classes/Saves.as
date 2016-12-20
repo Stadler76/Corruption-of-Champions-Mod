@@ -1767,11 +1767,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.hornType = saveFile.data.hornType;
 
 		// <mod name="Dragon patch" author="Stadler76">
+		if (saveFile.data.neck != undefined)
+			player.neck = saveFile.data.neck;
 		if (saveFile.data.rearBody == undefined && saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
 		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_NONE   : saveFile.data.rearBody;
-		if (saveFile.data.neck != undefined)
-			player.neck = saveFile.data.neck;
 		// </mod>
 		// <mod name="Predator arms" author="Stadler76">
 		player.clawTone = (saveFile.data.clawTone == undefined) ? ""               : saveFile.data.clawTone;
