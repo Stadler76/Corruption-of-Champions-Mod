@@ -4400,18 +4400,18 @@
 				outputText("\n\n<b>Your draconic neck and its position on your head revert to its normal position and length.</b> ");
 				if (player.hasDragonRearBody()) {
 					outputText("  After that you feel a tingling on your backside, telling you that <b>your");
-					outputText((player.rearBody == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
 					outputText("draconic mane is disappearing, too.</b>");
 				}
 				outputText("  Well, your rear isn't worthy to gaze at it anymore.\n");
-				player.rearBody = REAR_BODY_NONE;
+				player.rearBody.restore();
 				player.neck.restore();
 			}
 			if (!player.hasNormalNeck() && player.hasDragonRearBody() && rand(meetsLongNeckReq ? 6 : 4) == 0) {
 					outputText("\n\nYou feel a tingling on your backside, telling you that <b>your");
-					outputText((player.rearBody == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
 					outputText("draconic mane is disappearing.</b>");
-					player.rearBody = REAR_BODY_NONE;
+					player.rearBody.restore();
 			}
 			//</mod>
 			//-Skin color change – tan, olive, dark, light

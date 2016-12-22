@@ -43,6 +43,7 @@ the text from being too boring.
 	import classes.AssClass; // Creates the class that holds ass-related variables as described above. 
 	import classes.BreastRowClass; // Creates the class that holds breast-related variables.
 	import classes.BodyParts.Neck;
+	import classes.BodyParts.RearBody;
 	import classes.Items.*; // This pulls in all the files in the Items folder. Basically any inventory item in the game
 	import classes.PerkLib; // This instantiates the IDs, names, and descriptions of perks. Does NOT have any code related to the actual perk! Use the ID field to search the code base for that. 
 
@@ -510,6 +511,7 @@ the text from being too boring.
 			registerClassAlias("StatusEffectClass", StatusEffectClass);
 			registerClassAlias("VaginaClass", VaginaClass);
 			registerClassAlias("Neck", Neck);
+			registerClassAlias("RearBody", RearBody);
 
 			//Hide sprites
 			mainView.hideSprite();

@@ -1,6 +1,7 @@
 ﻿package classes
 {
 
+	import classes.BodyParts.RearBody;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Inventory;
@@ -881,7 +882,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		// <mod name="Dragon patch" author="Stadler76">
 		saveFile.data.neck = player.neck;
 		saveFile.data.rearBody = player.rearBody;
-		saveFile.data.rearBodyType = undefined;
+		delete saveFile.data.rearBodyType;
 		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
@@ -1772,7 +1773,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.neck = saveFile.data.neck;
 		if (saveFile.data.rearBody == undefined && saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		player.rearBody = (saveFile.data.rearBody == undefined) ? REAR_BODY_NONE   : saveFile.data.rearBody;
+		if (saveFile.data.rearBody != undefined) {
+			if (saveFile.data.rearBody is RearBody)
+				player.rearBody = saveFile.data.rearBody;
+			else
+				player.rearBody.type = saveFile.data.rearBody;
+		}
 		// </mod>
 		// <mod name="Predator arms" author="Stadler76">
 		player.clawTone = (saveFile.data.clawTone == undefined) ? ""               : saveFile.data.clawTone;

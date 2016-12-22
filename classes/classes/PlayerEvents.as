@@ -426,11 +426,11 @@ package classes {
 				outputText("\n<b>Your draconic neck and its position on your head reverts to its normal position and length. ");
 				if (player.hasDragonRearBody()) {
 					outputText("  After that you feel a tingling on your backside, telling you that your");
-					outputText((player.rearBody == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
 					outputText("draconic mane is disappearing, too.");
 				}
 				outputText("  Well, your rear isn't worthy to gaze at it anymore.</b>\n");
-				player.rearBody = REAR_BODY_NONE;
+				player.rearBody.restore();
 				player.neck.restore();
 				needNext = true;
 			}
