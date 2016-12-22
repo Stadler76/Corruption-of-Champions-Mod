@@ -882,7 +882,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		// <mod name="Dragon patch" author="Stadler76">
 		saveFile.data.neck = player.neck;
 		saveFile.data.rearBody = player.rearBody;
-		saveFile.data.rearBodyType = undefined;
+		delete saveFile.data.rearBodyType;
 		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
