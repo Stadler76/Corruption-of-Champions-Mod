@@ -881,6 +881,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.hornType = player.hornType;
 		// <mod name="Dragon patch" author="Stadler76">
 		saveFile.data.neck = player.neck;
+		delete saveFile.data.neckType;
+		delete saveFile.data.neckLength;
+		delete saveFile.data.neckLen;
 		saveFile.data.rearBody = player.rearBody;
 		delete saveFile.data.rearBodyType;
 		saveFile.data.clawTone = player.clawTone;
