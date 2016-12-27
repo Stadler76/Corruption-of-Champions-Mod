@@ -28,7 +28,7 @@ package classes.BodyParts
 		{
 			if (p.hasOwnProperty('type'))  type  = p.type;
 			if (p.hasOwnProperty('color')) color = p.color;
-			if (p.hasOwnProperty('skin') && p.skin is Object) skin.setProps(p.skin);
+			if (p.hasOwnProperty('skin'))  skin.setProps(p.skin);
 
 			return this;
 		}
