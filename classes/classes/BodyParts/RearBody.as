@@ -24,8 +24,8 @@ package classes.BodyParts
 
 		public function setProps(p:Object):RearBody
 		{
-			if (p.type   != undefined) type  = p.type;
-			if (p.color  != undefined) color = p.color;
+			if (p.hasOwnProperty('type'))  type  = p.type;
+			if (p.hasOwnProperty('color')) color = p.color;
 
 			return this;
 		}
@@ -34,7 +34,6 @@ package classes.BodyParts
 		{
 			restore();
 			setProps(p);
-
 			return this;
 		}
 	}

@@ -34,9 +34,9 @@ package classes.BodyParts
 
 		public function setProps(p:Object):Neck
 		{
-			if (p.type   != undefined) type = p.type;
-			if (p.len    != undefined) len  = p.len;
-			if (p.pos    != undefined) pos  = p.pos;
+			if (p.hasOwnProperty('type')) type = p.type;
+			if (p.hasOwnProperty('len'))  len  = p.len;
+			if (p.hasOwnProperty('pos'))  pos  = p.pos;
 
 			return this;
 		}
@@ -45,10 +45,6 @@ package classes.BodyParts
 		{
 			restore();
 			setProps(p);
-			/*type = p.type != undefined ? p.type : NECK_TYPE_NORMAL;
-			len  = p.len  != undefined ? p.len  : 2;
-			pos  = p.pos  != undefined ? p.pos  : false;*/
-
 			return this;
 		}
 
