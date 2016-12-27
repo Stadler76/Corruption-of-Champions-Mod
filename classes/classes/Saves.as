@@ -1,6 +1,7 @@
 ﻿package classes
 {
 
+	import classes.BodyParts.Neck;
 	import classes.BodyParts.RearBody;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
@@ -1772,13 +1773,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.hornType = saveFile.data.hornType;
 
 		// <mod name="Dragon patch" author="Stadler76">
-		if (saveFile.data.neck != undefined)
-			player.neck = saveFile.data.neck;
+		if (saveFile.data.neck is Neck)
+			player.neck.setAllProps(saveFile.data.neck);
 		if (saveFile.data.rearBody == undefined && saveFile.data.rearBodyType != undefined)
 			saveFile.data.rearBody = saveFile.data.rearBodyType;
 		if (saveFile.data.rearBody != undefined) {
 			if (saveFile.data.rearBody is RearBody)
-				player.rearBody = saveFile.data.rearBody;
+				player.rearBody.setAllProps(saveFile.data.rearBody);
 			else
 				player.rearBody.type = saveFile.data.rearBody;
 		}

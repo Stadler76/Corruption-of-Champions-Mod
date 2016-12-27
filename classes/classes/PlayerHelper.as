@@ -110,7 +110,7 @@ package classes
 
 		public function hasDragonRearBody():Boolean
 		{
-			return [REAR_BODY_DRACONIC_MANE, REAR_BODY_DRACONIC_SPIKES].indexOf(rearBody) != -1;
+			return [REAR_BODY_DRACONIC_MANE, REAR_BODY_DRACONIC_SPIKES].indexOf(rearBody.type) != -1;
 		}
 
 		public function fetchEmberRearBody():Number

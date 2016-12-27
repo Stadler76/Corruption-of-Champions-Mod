@@ -36,7 +36,6 @@ package classes.BodyParts
 		{
 			if (p.type   != undefined) type = p.type;
 			if (p.len    != undefined) len  = p.len;
-			if (p.length != undefined) len  = p.length;
 			if (p.pos    != undefined) pos  = p.pos;
 
 			return this;
