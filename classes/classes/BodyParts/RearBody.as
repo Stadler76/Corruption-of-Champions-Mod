@@ -11,6 +11,7 @@ package classes.BodyParts
 
 		public var type:Number = REAR_BODY_NONE;
 		public var color:String = "";
+		public var skin:Skin = new Skin();
 
 		public function RearBody() {}
 
@@ -18,6 +19,7 @@ package classes.BodyParts
 		{
 			type  = REAR_BODY_NONE;
 			color = "";
+			skin.restore();
 
 			return this;
 		}
@@ -26,6 +28,7 @@ package classes.BodyParts
 		{
 			if (p.hasOwnProperty('type'))  type  = p.type;
 			if (p.hasOwnProperty('color')) color = p.color;
+			if (p.hasOwnProperty('skin'))  skin.setProps(p.skin);
 
 			return this;
 		}
