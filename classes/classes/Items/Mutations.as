@@ -4436,9 +4436,7 @@
 				else outputText("is", false);
 				outputText(" falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>", false);
 
-				player.skinType = SKIN_TYPE_PLAIN;
-				player.skinAdj = "";
-				player.skinDesc = "skin";
+				player.skinData.restore();
 				changes++;
 			}
 			//Restore arms to become human arms again
