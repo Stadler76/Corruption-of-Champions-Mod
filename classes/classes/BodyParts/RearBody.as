@@ -1,5 +1,7 @@
 package classes.BodyParts 
 {
+	import classes.Creature;
+
 	/**
 	 * Container class for the players rear body
 	 * @since December 20, 2016
@@ -11,9 +13,15 @@ package classes.BodyParts
 
 		public var type:Number = REAR_BODY_NONE;
 		public var color:String = "";
-		public var skin:Skin = new Skin();
+		public var skin:Skin;
 
-		public function RearBody() {}
+		private var _creature:Creature;
+
+		public function RearBody(i_creature:Creature)
+		{
+			skin = new Skin(i_creature);
+			_creature = i_creature;
+		}
 
 		public function restore():RearBody
 		{
