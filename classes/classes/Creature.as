@@ -206,7 +206,7 @@ package classes
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
 		//<mod name="Dragon patch" author="Stadler76">
-		public var rearBody:RearBody = new RearBody();
+		public var rearBody:RearBody;
 		public var neck:Neck = new Neck();
 		//</mod>
 
@@ -499,6 +499,7 @@ package classes
 		public function Creature()
 		{
 			skinData = new Skin(this);
+			rearBody = new RearBody(this);
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks = [];
