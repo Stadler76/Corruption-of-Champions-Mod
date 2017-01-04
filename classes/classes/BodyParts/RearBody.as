@@ -15,13 +15,7 @@ package classes.BodyParts
 		public var color:String = "";
 		public var skin:Skin;
 
-		private var _creature:Creature;
-
-		public function RearBody(i_creature:Creature)
-		{
-			skin = new Skin(i_creature);
-			_creature = i_creature;
-		}
+		public function RearBody() {}
 
 		public function restore():RearBody
 		{
