@@ -2,6 +2,7 @@
 package classes
 {
 	import classes.BodyParts.Skin;
+	import classes.BodyParts.UnderBody;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;
@@ -156,7 +157,6 @@ package classes
 		public var hairLength:Number = 0;
 		
 		public function get furColor():String { return skinData.furColor; }
-		public function get newFurColor():String { return skinData.newFurColor; }
 		public function set furColor(value:String):void { skinData.furColor = value; }
 		/*Beardstyle
 		0- normal
@@ -171,7 +171,7 @@ package classes
 		1 - furry
 		2 - scaley
 		3 - goopey*/
-		public var skinData:Skin;
+		public var skinData:Skin = new Skin();
 		public function get skinType():Number { return skinData.type; }
 		public function set skinType(value:Number):void { skinData.type = value; }
 		public function get skinTone():String { return skinData.tone; }
@@ -206,9 +206,10 @@ package classes
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
 		//<mod name="Dragon patch" author="Stadler76">
-		public var rearBody:RearBody;
+		public var rearBody:RearBody = new RearBody();
 		public var neck:Neck = new Neck();
 		//</mod>
+		public var underBody:UnderBody = new UnderBody();
 
 		/*EarType
 		-1 - none!
@@ -498,8 +499,6 @@ package classes
 		//Constructor
 		public function Creature()
 		{
-			skinData = new Skin(this);
-			rearBody = new RearBody(this);
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks = [];
@@ -2451,7 +2450,7 @@ package classes
 
 		public function hasFur():Boolean
 		{
-			return skinType == SKIN_TYPE_FUR;
+			return skinData.hasFur();
 		}
 
 		public function hasFurOrScales():Boolean
