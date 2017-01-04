@@ -13,7 +13,7 @@ package classes.BodyParts
 
 		public var type:Number = REAR_BODY_NONE;
 		public var color:String = "";
-		public var skin:Skin;
+		public var skin:Skin = new Skin();
 
 		public function RearBody() {}
 
