@@ -517,7 +517,6 @@ the text from being too boring.
 			registerClassAlias("RearBody", RearBody);
 			registerClassAlias("Skin", Skin);
 			registerClassAlias("UnderBody", UnderBody);
-			//registerClassAlias("Enum", Enum);
 
 			//Hide sprites
 			mainView.hideSprite();
