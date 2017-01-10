@@ -23,40 +23,33 @@ package classes.BodyParts
 			_nlMax[NECK_TYPE_HYDRA]    = 72; // NYI, example
 		}
 
-		public function restore():Neck
+		public function restore():void
 		{
 			type = NECK_TYPE_NORMAL;
 			len  = 2;
 			pos  = false;
-
-			return this;
 		}
 
-		public function setProps(p:Object):Neck
+		public function setProps(p:Object):void
 		{
 			if (p.hasOwnProperty('type')) type = p.type;
 			if (p.hasOwnProperty('len'))  len  = p.len;
 			if (p.hasOwnProperty('pos'))  pos  = p.pos;
-
-			return this;
 		}
 
-		public function setAllProps(p:Object):Neck
+		public function setAllProps(p:Object):void
 		{
 			restore();
 			setProps(p);
-			return this;
 		}
 
-		public function modify(l:Number, newType:Number = -1):Neck
+		public function modify(diff:Number, newType:Number = -1):void
 		{
 			if (newType != -1) type = newType;
 
-			len += l;
+			len += diff;
 			if (len < 2)  len = 2;
 			if (len > _nlMax[type]) len = _nlMax[type];
-
-			return this;
 		}
 
 		public function isFullyGrown():Boolean

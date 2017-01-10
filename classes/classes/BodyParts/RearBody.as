@@ -17,29 +17,24 @@ package classes.BodyParts
 
 		public function RearBody() {}
 
-		public function restore():RearBody
+		public function restore(keepTone:Boolean = true):void
 		{
 			type  = REAR_BODY_NONE;
 			color = "";
-			skin.restore();
-
-			return this;
+			skin.restore(keepTone);
 		}
 
-		public function setProps(p:Object):RearBody
+		public function setProps(p:Object):void
 		{
 			if (p.hasOwnProperty('type'))  type  = p.type;
 			if (p.hasOwnProperty('color')) color = p.color;
 			if (p.hasOwnProperty('skin'))  skin.setProps(p.skin);
-
-			return this;
 		}
 
-		public function setAllProps(p:Object):RearBody
+		public function setAllProps(p:Object, keepTone:Boolean = true):void
 		{
-			restore();
+			restore(keepTone);
 			setProps(p);
-			return this;
 		}
 	}
 }
