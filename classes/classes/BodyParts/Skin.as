@@ -51,7 +51,7 @@ package classes.BodyParts
 			return type == SKIN_TYPE_FUR;
 		}
 
-		public function restore(keepTone:Boolean = true)
+		public function restore(keepTone:Boolean = true):void
 		{
 			type = SKIN_TYPE_PLAIN;
 			if (!keepTone) tone = "albino";
@@ -60,7 +60,7 @@ package classes.BodyParts
 			furColor = "no";
 		}
 
-		public function setProps(p:Object)
+		public function setProps(p:Object):void
 		{
 			if (p.hasOwnProperty('type')) type = p.type;
 			if (p.hasOwnProperty('tone')) tone = p.tone;
@@ -69,7 +69,7 @@ package classes.BodyParts
 			if (p.hasOwnProperty('furColor')) furColor = p.furColor;
 		}
 
-		public function setAllProps(p:Object, keepTone:Boolean = true)
+		public function setAllProps(p:Object, keepTone:Boolean = true):void
 		{
 			restore(keepTone);
 			setProps(p);
