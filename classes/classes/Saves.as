@@ -3,6 +3,7 @@
 
 	import classes.BodyParts.Neck;
 	import classes.BodyParts.RearBody;
+	import classes.BodyParts.UnderBody;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Inventory;
@@ -882,6 +883,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
+		// <mod name="BodyParts.Skin and UnderBody" author="Stadler76">
+		saveFile.data.underBody = player.underBody;
+		// </mod>
 		// <mod name="Dragon patch" author="Stadler76">
 		saveFile.data.neck = player.neck;
 		delete saveFile.data.neckType;
@@ -1774,6 +1778,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.hornType = saveFile.data.hornType;
 
+		// <mod name="BodyParts.Skin and UnderBody" author="Stadler76">
+		if (saveFile.data.underBody is UnderBody)
+			player.underBody.setAllProps(saveFile.data.underBody);
+		// </mod>
 		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.neck is Neck)
 			player.neck.setAllProps(saveFile.data.neck);
