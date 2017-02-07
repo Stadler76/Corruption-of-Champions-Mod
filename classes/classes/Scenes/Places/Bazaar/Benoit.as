@@ -172,7 +172,16 @@ public function benoitOffspring():int
 
 public function benoitBigFamily():Boolean
 {
-	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
+	// You need a bassy womb, ...
+	if (player.findPerk(PerkLib.BasiliskWomb) < 0)
+		return false;
+
+	// ... have laid at least 8 eggs by yourself ...
+	if (flags[kFLAGS.BENOIT_EGGS] < 8)
+		return false;
+
+	// ... and at least 15 eggs produced in total (You and/or Benoite)
+	return benoitOffspring() >= 15;
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
@@ -300,6 +309,11 @@ public function benoitIntro():void {
 
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
 
+	if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_BASILISKS] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Basilisks!</b>")
+	}
+
 	menu();
 	//Core buttons
 	addButton(0, "Buy", benoitsBuyMenu);
@@ -347,10 +361,10 @@ public function benoitsBuyMenu():void {
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
-	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
-			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
-			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			"", null, "", null);
+	menu();
+	addButton(0, flags[kFLAGS.BENOIT_1], benoitTransactBuy, 1);
+	addButton(1, flags[kFLAGS.BENOIT_2], benoitTransactBuy, 2);
+	addButton(2, flags[kFLAGS.BENOIT_3], benoitTransactBuy, 3);
 	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack, null, null, null, "This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] <= 0) addButton(6, "Flintlock", buyFlintlock);
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(7, "Alarm Clock", buyAlarmClock, null, null, null, "This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
@@ -461,6 +475,7 @@ public function updateBenoitInventory():void
 		consumables.SMART_T.id,
 		consumables.VITAL_T.id,
 		consumables.DBLPEPP.id,
+		consumables.REPTLUM.id,
 	];
 	benoitSlot1Items.push(rand(3) == 0 ? consumables.PURHONY.id : consumables.BEEHONY.id);
 	flags[kFLAGS.BENOIT_1] = randomChoice(benoitSlot1Items);
