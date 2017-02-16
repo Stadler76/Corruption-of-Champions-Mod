@@ -881,7 +881,7 @@ use namespace kGAMECLASS;
 			if (salamanderScore() >= 4)
 			{
 				if (isTaur()) race = "salamander-taur";
-				else race = "salamander-morph";
+				else race = "salamander-" + mf("boy", "girl");
 			}
 			//<mod>
 			if (pigScore() >= 4) 
@@ -1584,7 +1584,7 @@ use namespace kGAMECLASS;
 				if (tailType == 2)
 					mutantCounter--;
 			}
-			return mutantCounter--;
+			return mutantCounter;
 		}
 		
 		//Salamander score
@@ -1622,7 +1622,7 @@ use namespace kGAMECLASS;
 				sirenCounter++;
 			//if (hasCock() && findFirstCockType(CockTypesEnum.ANEMONE) >= 0)
 			//	sirenCounter++;
-			return sirenCounter++;
+			return sirenCounter;
 		}
 		
 		public function pigScore():Number
