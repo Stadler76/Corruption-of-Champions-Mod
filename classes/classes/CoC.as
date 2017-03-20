@@ -183,6 +183,8 @@ the text from being too boring.
 		public var inventory:Inventory = new Inventory(saves);
 		public var masturbation:Masturbation = new Masturbation();
 		public var pregnancyProgress:PregnancyProgression = new PregnancyProgression();
+		public var bimboProgress:BimboProgression = new BimboProgression();
+		
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
@@ -412,7 +414,7 @@ the text from being too boring.
 			debug = false; //DEBUG, used all over the place
 			ver = "1.0.2_mod_1.4_dev"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
-			version = ver + " (<b>I give up</b>)"; //Version TEXT
+			version = ver + " (<b>The Fabulous Update</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;
