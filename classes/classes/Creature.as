@@ -209,7 +209,7 @@ package classes
 		public var rearBody:RearBody = new RearBody();
 		public var neck:Neck = new Neck();
 		//</mod>
-		public var underBody:UnderBody = new UnderBody();
+		public var underBody:UnderBody;
 
 		/*EarType
 		-1 - none!
@@ -508,6 +508,7 @@ package classes
 			_perks = [];
 			statusEffects = [];
 			//keyItems = new Array();
+			underBody = new UnderBody(this);
 		}
 
 		//Functions			
