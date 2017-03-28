@@ -16,32 +16,36 @@ package classes.BodyParts
 
 		private var _creature:Creature;
 
-		public function UnderBody() {}
+		public function UnderBody(creature:Creature = null)
+		{
+			_creature = creature;
+		}
 
 		public function skinDescription(...args):String { return skin.description.apply(null, args); }
 		public function skinFurScales(...args):String { return skin.skinFurScales.apply(null, args); }
 
-		public function restore(keepTone:Boolean = true):UnderBody
+		public function copySkin(p:Object = null):void
+		{
+			skin.setProps(_creature.skin);
+			if (p != null) skin.setProps(p);
+		}
+
+		public function restore(keepTone:Boolean = true):void
 		{
 			type  = UNDER_BODY_TYPE_NONE;
 			skin.restore(keepTone);
-
-			return this;
 		}
 
-		public function setProps(p:Object):UnderBody
+		public function setProps(p:Object):void
 		{
 			if (p.hasOwnProperty('type')) type = p.type;
 			if (p.hasOwnProperty('skin')) skin.setProps(p.skin);
-
-			return this;
 		}
 
-		public function setAllProps(p:Object, keepTone:Boolean = true):UnderBody
+		public function setAllProps(p:Object, keepTone:Boolean = true):void
 		{
 			restore(keepTone);
 			setProps(p);
-			return this;
 		}
 	}
 }
