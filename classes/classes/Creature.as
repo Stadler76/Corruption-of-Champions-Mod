@@ -2400,8 +2400,7 @@ package classes
 			var stretched:Boolean = false;
 			//cArea > capacity = autostreeeeetch half the time.
 			if (cArea >= analCapacity() && rand(2) == 0) {
-				if (ass.analLooseness >= 5) {}
-				else ass.analLooseness++;
+				ass.analLooseness++;
 				stretched = true;
 				//Reset butt stretchin recovery time
 				if (findStatusEffect(StatusEffects.ButtStretched) >= 0) changeStatusValue(StatusEffects.ButtStretched,1,0);
@@ -2421,6 +2420,7 @@ package classes
 				ass.analLooseness++;
 				stretched = true;
 			}
+			if (ass.analLooseness > 5) ass.analLooseness = 5;
 			//Delay un-stretching
 			if (cArea >= .5 * analCapacity()) {
 				//Butt Stretched used to determine how long since last enlargement
