@@ -5,7 +5,7 @@
  order of these imports until more is known about what needs to load and when.
 */
 
-﻿package classes
+package classes
 {
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
@@ -186,6 +186,8 @@ the text from being too boring.
 		public var bimboProgress:BimboProgression = new BimboProgression();
 		
 		// Scenes/Areas/
+		public var commonEncounters:CommonEncounters = new CommonEncounters(); // Common dependencies go first
+
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
 		public var forest:Forest = new Forest();
@@ -412,7 +414,7 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4_pre2"; //Version NUMBER
+			ver = "1.0.2_mod_1.4"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
 			version = ver + " (<b>The Fabulous Update</b>)"; //Version TEXT
 
