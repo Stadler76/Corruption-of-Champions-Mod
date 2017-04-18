@@ -346,7 +346,7 @@ package classes.Scenes.Monsters
 					//<<GoTo I2>>
 					centaurOnImpResults(2);
 					//<<End>>
-					player.orgasmDick();
+					player.orgasm('Dick');
 					combat.cleanupAfterCombat();
 					return;
 				}
@@ -360,7 +360,7 @@ package classes.Scenes.Monsters
 						outputText("Feeling merciful you extract yourself from the creature, flipping it unto a nearby rock as it begins to regain consciousness.  Before it realizes what you are doing your " + player.cockDescript(player.biggestCockIndex()) + " is prodding at its " + monster.assholeDescript() + ", then sliding quickly between its cheeks.  The amount of slobber over you is more than enough lubricant.  You groan in pleasure as it gives a slight squeal, then proceed to finish yourself off in the once-tight orifice.\n\n", false);
 						//<<Goto I1>> 
 						centaurOnImpResults(1);
-						player.orgasmDick();
+						player.orgasm('Dick');
 						combat.cleanupAfterCombat();
 						return;
 					}
@@ -379,7 +379,7 @@ package classes.Scenes.Monsters
 						//<<cum multiplier: lots>>
 						if (player.cumQ() > 250) outputText("Beneath you the creature's belly is distending more and more, and you can feel some of the overflowing cum filling back out until it is pouring out of the creature's unconscious mouth and overstretched ass, forming a spermy pool beneath it.", false);
 						outputText("With on last grunt you begin extracting the tentacles back out, almost cumming again from the tightness around them.  You give your " + player.cockDescript(player.smallestCockIndex()) + " one last shake over the creature's face before trotting away satisfied and already thinking about the next creature you might abuse.", false);
-						player.orgasmDick();
+						player.orgasm('Dick');
 						combat.cleanupAfterCombat();
 						return;
 					}
@@ -400,12 +400,12 @@ package classes.Scenes.Monsters
 					//<<GoTo I1>>
 					centaurOnImpResults(1);
 					//<<End>>
-					player.orgasmDick();
+					player.orgasm('Dick');
 					combat.cleanupAfterCombat();
 					return;
 				}
 			}
-			player.orgasmDick();
+			player.orgasm('Dick');
 			combat.cleanupAfterCombat();
 		}
 		//CUNTS
@@ -1207,7 +1207,7 @@ package classes.Scenes.Monsters
 						outputText("Imps lick milk from your bloated " + player.biggestBreastSizeDescript() + " as your rider milks you.  As one imp drinks his fill, staggering away with a sloshing belly, another steps up to guzzle from your milk-spewing udders.\n\n", false);
 						//Additional nipplefucking scene by Xodin
 						if (player.hasFuckableNipples()) {
-							outputText("The imp rider grabs the fat folds of one of your nipplecunt's 'labia' and grins mischeviously. He rubs his obscene erection all over the milk stained surface of your nipple-cunt's clit and begins to press the head of his bulbous imp cock into the swollen orifice against the flow of milk. You know no woman in your village could have handled an aroused cock this big, and yet now this imp on your " + player.allBreastsDescript() + " is about to ram just such an erection into one of your " + player.nippleDescript(0) + "s. He tugs and pulls and pulls again on your nipple-cunt's sensitive labia, forcing his cock to push into the flesh of your " + player.biggestBreastSizeDescript() + ". Your taut flesh burns with his venom already, and is now violated by the presence of his demonic flesh rod.  ", false);
+							outputText("The imp rider grabs the fat folds of one of your nipplecunt's 'labia' and grins mischievously. He rubs his obscene erection all over the milk stained surface of your nipple-cunt's clit and begins to press the head of his bulbous imp cock into the swollen orifice against the flow of milk. You know no woman in your village could have handled an aroused cock this big, and yet now this imp on your " + player.allBreastsDescript() + " is about to ram just such an erection into one of your " + player.nippleDescript(0) + "s. He tugs and pulls and pulls again on your nipple-cunt's sensitive labia, forcing his cock to push into the flesh of your " + player.biggestBreastSizeDescript() + ". Your taut flesh burns with his venom already, and is now violated by the presence of his demonic flesh rod.  ", false);
 							//[START BREAST SIZE SPECIFIC TEXT] 
 							//[IF breastSize <= DD]
 							if (player.biggestTitSize() <= 5) outputText("You feel the bulbous head of his cock squeeze further and deeper until it pushes up against your ribs.", false);

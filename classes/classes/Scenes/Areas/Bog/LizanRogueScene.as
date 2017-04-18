@@ -175,7 +175,7 @@ package classes.Scenes.Areas.Bog
 			else outputText("Your [face] twists into a titanic roar as [eachCock] explodes with enough force to blast out of the lizan's rectal embrace. Torrents of creamy white fluid blast from [eachCock]. Soon the lizan's upturned ass and the base of his tail is covered but you're still going. By the time you're finished the lizan is grinning from ear to ear amidst a small lake of cum.");
 			outputText("\n\nSpent and breathing hard you collapse. For a second you just lie there [fullChest] against his abs and his legs wrapped around your [hips] while lying in the hot glorious mess of his lizan spunk. Both of you are panting, both of you have been satisfied. Then you push yourself off of him and go to collect your [armor]. He takes it upon himself to clean your [fullChest] with his tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave, you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
+			player.orgasm('Dick');
 			doNext(camp.returnToCampUseOneHour);
 			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
@@ -229,7 +229,7 @@ package classes.Scenes.Areas.Bog
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
+			player.orgasm('Vaginal');
 			doNext(camp.returnToCampUseOneHour);
 			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
@@ -279,7 +279,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nYour orgasm seems to spur the lizan on. His thrusts become irregular before he tightens his grip on your waist. He shoves in to the hilt and, yelling like a madman, explodes. You feel his cum surging into your [asshole] as a hot warmth swells " + (player.hasVagina() ? "and dribbles out of your [vagina] and " : "") + "down your [legs] in a sticky stream of lizan dick juice.");
 			outputText("\n\nYou spend some time cuddling, the lizan's still on your back with his warm cock in your [asshole]. Eventually, you get up and give him a deep kiss before you return to your camp.");
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
+			player.orgasm('Anal');
 			doNext(camp.returnToCampUseOneHour);
 			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
@@ -287,7 +287,7 @@ package classes.Scenes.Areas.Bog
 		public function consensualDoublePenetration():void {
 			clearOutput();
 			outputText("The lizan watches you with obvious interest and asks \"<i>How do you want to do this?</i>\" you tell him you're going to ride him until the wheels come off, which causes a surprised grin to stretch across his face. He confidently peels off his loin cloth, exposing two bumpy purple lizan dicks not lacking in length or girth.");
-			outputText("\n\nHe steps into you, leaning in for a kiss. As you kiss him you wrap your arms around his shoulders and he reaches down to cup your [ass], massaging your rear end with deligted fingers. Then he breaks the kiss and begins painting kisses down your neck.");
+			outputText("\n\nHe steps into you, leaning in for a kiss. As you kiss him you wrap your arms around his shoulders and he reaches down to cup your [ass], massaging your rear end with delighted fingers. Then he breaks the kiss and begins painting kisses down your neck.");
 			if (player.isLactating()) outputText("\n\nWhen he reaches your [fullChest] he takes one look at your [nipples] and cocks his head to the side. He takes a tentative slurp and looks up into your [face] as if to ask if milk coming out of your tits is normal. You just nod and he shrugs and begins playing with your [fullChest] like a happy kid at the park. At one point his tongue slithers across each nipple at once as if to see if the milk coming from each tastes the same. He quite happily slurps milk from your [nipples] and massages the soft flesh in a way that is both firm and erotic.");
 			else if (player.hasFuckableNipples()) outputText("\n\nWhen he reaches your [fullChest] he takes one look at your [nipples] and does a double take. For a moment he is at a loss for words but when you clear your throat he quickly collects his wits and sticks his tongue into your fuckable nipples. The sensation is similar to getting your pussy licked but much higher up. You groan as he suckles each nipple in turn while massaging your [chest].");
 			else outputText("\n\nWhen he reaches your [fullChest he takes one look at your [nipples] and dives right in. He makes a show of pulling one into his mouth. All you can see his his " + monster.skinTone + " lips but inside you can feel his tongue swirling around your sensitive nipples. He sucks off with a pop that sends a tingle down to your groin before he latches on to the next one and repeats this torturous practice.");
@@ -302,7 +302,7 @@ package classes.Scenes.Areas.Bog
 			}
 			else if (player.looseness(false) < 4) {
 				outputText("\n\nThe lizan spreads your [ass], obviously set on entering you from the rear first. You feel a glob of spit land on your upturned [asshole]. The sudden coolness of the saliva dripping down your hole is quickly followed by the large head of the lizan's cock.");
-				outputText("\n\nYour voice vibrating your chest and stretching out into infinity is all the incentive the lizan needs. He slides his big bumpy dick into your [asshole], his hands pulling your [ass] back into him. Once he's burried the full length of his big purple dick in your backdoor he begins swirling his dick around in your guts, causing you to groan loudly as you push back against his large dick.");
+				outputText("\n\nYour voice vibrating your chest and stretching out into infinity is all the incentive the lizan needs. He slides his big bumpy dick into your [asshole], his hands pulling your [ass] back into him. Once he's buried the full length of his big purple dick in your backdoor he begins swirling his dick around in your guts, causing you to groan loudly as you push back against his large dick.");
 			}
 			else {
 				outputText("\n\nThe lizan spreads your [ass], obviously set on entering you from the rear first. When he gets a good look at your [asshole] he shoves his fist into the air. He happily enters you after taking a moment to spit shine his bumpy purple dick. As his cock tunnels through you you make sure to squeeze it, massaging the lizan as he begins t swirl his cock around inside of you as if trying to stir your guts.");
@@ -340,7 +340,8 @@ package classes.Scenes.Areas.Bog
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-			player.orgasm();
+			player.orgasm('Vaginal');
+			player.orgasm('Anal', false);
 			doNext(camp.returnToCampUseOneHour);
 			if (getGame().inCombat) combat.cleanupAfterCombat();
 		}
@@ -403,7 +404,7 @@ package classes.Scenes.Areas.Bog
 				}
 				else {
 					outputText("\n\nThe lizan releases a loud yelp as your [cockHead] splits him open. Once you have breached his anal walls it is tough work to bury the rest of your [cock] into his tight little body. He flinches every time you rock your hips, forcing more of your [cock] into him. Thanks to the beating you gave him he can barely run from your forceful entry.");
-					outputText("\n\nDespite this he arches his back perfectly in an attempt to give you deeper access. Once you've managed to force your entire length into his backdoor the lizan's body spasms and you can feel his rectal passage quiver against your embedded [cock]. With a grin you realize he is in the throes of an annaly induced orgasm.");
+					outputText("\n\nDespite this he arches his back perfectly in an attempt to give you deeper access. Once you've managed to force your entire length into his backdoor the lizan's body spasms and you can feel his rectal passage quiver against your embedded [cock]. With a grin you realize he is in the throes of an anally induced orgasm.");
 					outputText("\n\nYou grab him by his slender hips and begin pounding the lizan's tight little tail hole into a new shape. He allows your brutal thrusts to penetrate him without resisting, even squeezing as your truck slams into his upturned ass. The little self righteous butt slut seems to be enjoying himself. Yet he is still unwilling to admit this obvious fact as he continues to unsuccessfully suppress the ecstasy apparent in his deep voice even though he just came a few moments ago. So you fuck him into the bog floor. You listen to every quivering note he fails to suppress and really give it to him, reveling in your ability to make his entire body quake with desire.");
 				}
 				outputText("\n\nThe lizan's hole begins to quiver around your quickly thrusting [cock]. Your brutal thrusts into his sensitive tail hole are sending him over the edge. As he reaches his climax and begins spraying the bog floor with lizan seed his tight little tail hole begins to milk your embedded [cock].");
@@ -412,7 +413,7 @@ package classes.Scenes.Areas.Bog
 				else if (player.cumQ() >= 2500) outputText("\n\nYou listen to the lizan squeal as your spasming dick pumps him full and overflowing. By the time you’re done cumming he is not only lying in a small lake of hot cum but looking pregnant from the seed sloshing around in his stomach.");
 			}
 			outputText("\n\nYou leave the passed out lizan where he lies, his newly abused little hole dripping your cream. You raid his pack and leave.");
-			player.orgasm();
+			player.orgasm('Dick');
 			combat.cleanupAfterCombat();
 		}
 		
@@ -440,7 +441,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nYou leave the passed out lizan where he lies, covered in your combined sexual fluids. You raid his pack and leave.");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
-			player.orgasm();
+			player.orgasm('Vaginal');
 			combat.cleanupAfterCombat();
 		}
 	}

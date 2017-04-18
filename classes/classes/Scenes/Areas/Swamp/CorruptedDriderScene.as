@@ -228,7 +228,7 @@ package classes.Scenes.Areas.Swamp
 			else outputText("You mumble out a denial.  You're not a beast... you just like to take charge and fuck.  It's just so hard to resist jumping on a nice wet pussy and making it squirt while you pack it full... no!  That's not what...\n\n", false);
 
 			outputText("\"<i>Oooh, are you leaking out more pre-cum already?  You're insatiable!  I bet you start thinking about your next fuck before you even finish getting off, don't you?  You can deny it all you want, but I felt your dick puff up a little bit more as soon as I said it.  No matter what you think, your cock is a dumb, happy little tattle-tale that always tells the girls exactly what you're thinking.</i>\"", false);
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("  Exgartuan mumbles telepathicaly, \"<i>Fuck yes I do, but I wanna see how this plays out.</i>\"", false);
+			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("  Exgartuan mumbles telepathically, \"<i>Fuck yes I do, but I wanna see how this plays out.</i>\"", false);
 			outputText("  She adds, \"<i>Face the music - there's nothing you love more than defeating someone and letting your dick tell you what to do.  You dumb... domineering... beast...</i>\"\n\n", false);
 
 			outputText("Gods!  It's getting so hard to think with that tight cunt clutching at your cock and the soft, feminine enunciations constantly interrupting your thoughts.  How can she concentrate with the stink of sex hanging so thick in the air?  Your " + player.cockDescript(x) + " is so horny, why aren't you fucking her yet?  You shudder weakly and remember ", false);
@@ -280,7 +280,7 @@ package classes.Scenes.Areas.Swamp
 			outputText(".  Even unconscious, her vagina continues its rhythmic contractions around your cock, working you towards another burst of orgasmic pleasure while you wait for your strength to come back...\n\n", false);
 			//[NEXT]
 			doNext(winDriderPCDickInSpiderCunt2);
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", 1, "sen", 1);
 		}
 
@@ -308,7 +308,7 @@ package classes.Scenes.Areas.Swamp
 			player.lust = player.maxLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", 1, "sen", 1);
 		}
 
@@ -344,7 +344,7 @@ package classes.Scenes.Areas.Swamp
 			//Pregnancy Goes Here
 			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("cor", .5);
 			combat.cleanupAfterCombat();
 		}
@@ -415,7 +415,7 @@ package classes.Scenes.Areas.Swamp
 			//Pregnancy Goes Here
 			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("cor", .5);
 			combat.cleanupAfterCombat();
 		}
@@ -468,7 +468,7 @@ package classes.Scenes.Areas.Swamp
 				if (player.wetness() >= 3) outputText(" and drips", false);
 				outputText(" sympathetically with the sensation, and your " + player.clitDescript() + " peeks from the wet lips.", false);
 			}
-			outputText("  Yet you are not denied the anal pleasure you crave, as the widening bands now filling you are each pushing out harder than the one before.  At the stimulation, her own demonic clit swells as if posessed, nodulates, and hardens into dick form, poking up from her pussy and drooling a slime of pre-cum onto her abdomen.  The second ring rolls over your anal g-spot and you gasp, nearly losing your grip.  The third knocks your " + player.legs() + " out from under you, and you collapse atop your partner, squeezing oozing dick", false);
+			outputText("  Yet you are not denied the anal pleasure you crave, as the widening bands now filling you are each pushing out harder than the one before.  At the stimulation, her own demonic clit swells as if possessed, nodulates, and hardens into dick form, poking up from her pussy and drooling a slime of pre-cum onto her abdomen.  The second ring rolls over your anal g-spot and you gasp, nearly losing your grip.  The third knocks your " + player.legs() + " out from under you, and you collapse atop your partner, squeezing oozing dick", false);
 			if (player.hasCock()) outputText("s", false);
 			outputText(" between you", false);
 			if (player.clitLength >= 4 && player.hasVagina()) outputText(", and pressing your monster chick-stick into it; the gooey heat sends a tingle of shock up your spine and your pussy convulses", false);
@@ -518,7 +518,7 @@ package classes.Scenes.Areas.Swamp
 			//GET KNOCKED UP
 			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasm('Anal');
 			dynStats("cor", .5);
 			combat.cleanupAfterCombat();
 		}
@@ -571,7 +571,7 @@ package classes.Scenes.Areas.Swamp
 			}
 			outputText("\n\n", false);
 			outputText("Your lust sated, you disengage from her with a little pop, leaving her to lick her lips happily and groan unintelligible babble.  You wipe your " + player.cockDescript(x) + " off on her hair to clean it off a bit, then redress and head out.  With a glance at the snoozing drider over your shoulder, you head out of the smelly swamp and start back towards camp.", false);
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("cor", .5);
 			combat.cleanupAfterCombat();
 		}
@@ -776,7 +776,7 @@ package classes.Scenes.Areas.Swamp
 			player.slimeFeed();
 			//GET KNOCKED UP
 			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
-			player.orgasm();
+			player.orgasm('Anal');
 			dynStats("lib", 1, "sen", 1, "cor", .5);
 			combat.cleanupAfterCombat();
 		}
@@ -806,7 +806,7 @@ package classes.Scenes.Areas.Swamp
 			}
 			outputText("Once you come down from your high, you roll to the side and watch the tiny driders clambering out of their egg shells.\n\n", false);
 			outputText("Your newborn children glance at you, chittering happily before they scurry off in the direction of the swamp.\n", false);
-			player.orgasm();
+			player.orgasm('Anal');
 		}
 
 
@@ -846,7 +846,7 @@ package classes.Scenes.Areas.Swamp
 			outputText(".  After remembering where you are, the next thing you notice is the absence of your drider children.  Only a pile of empty, broken egg shells and some messy webbing in the trees remain.  As you stand up and prepare to move on, the sun reflecting off something in the corner of your eye catches your attention.\n\n", false);
 
 			outputText("Between two nearby trees is a large spider web.  While not out of the ordinary, when the sunlight hits it at a certain angle the gossamer strands spell out a simple message:  \"<i>THANK YOU MOMMY.</i>\"", false);
-			player.orgasm();
+			player.orgasm('Vaginal');
 		}
 
 //Win Drider Male Anal (OH BABY)
@@ -880,7 +880,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("Finally done, you pull out of the drider, collapsing on her spider-back with a contented sigh.  Completely insensate after the anal ravaging you just gave her, the drider poses no threat as you leisurely gather " + player.sMultiCockDesc() + " back into your " + player.armorName + " and lower yourself off her cum-soaked abdomen.  You give her a final, playful ass slap as you dismount before heading back to camp.", false);
 			if (silly()) outputText("\n\n(Driders butt-sex is awesome.)", false);
-			player.orgasm();
+			player.orgasm('Dick');
 			combat.cleanupAfterCombat();
 		}
 
@@ -1003,14 +1003,14 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("\n\nYou moan as she writhes beneath you, her passage gripping and touching you in ways you never thought possible whilst she breathlessly whines at your aggressive over-stimulation, each brush against her clit quickening your thrusts as her insides grow ever wetter.  Her voice fails her long before she stops convulsing, body still wracked with bolts of pleasure as you hump into her unceasingly, drawing out pleasure-filled grunts as you push into her pleasure-wracked walls again and again, her tired body twitching as it lies in the mire beneath you, unable to do much more than pant and groan after her impossibly long orgasm.");
 
-			outputText("\n\nDriven on by the sight of the thoroughly defeated girl, you move your hands to grip her sides and start pistoning your bodies together.  She can only moan pathetically while you use her, the way your length presses against her sensitive insides all too much for her exhausted frame.  Hammering into her, you dart a thumb across to sweep over her throbbing clit, bringing about a particularly loud cry of pleasure that makes your [cock " + y + "] jump delightfully even as she clenches especially tightly around you.  You feel yourself getting close, the mixture of such a tight, wet cunt and your unbelieveable arousal leaving you smacking into her pelvis with a single goal in mind: filling her with your potent seed.");
+			outputText("\n\nDriven on by the sight of the thoroughly defeated girl, you move your hands to grip her sides and start pistoning your bodies together.  She can only moan pathetically while you use her, the way your length presses against her sensitive insides all too much for her exhausted frame.  Hammering into her, you dart a thumb across to sweep over her throbbing clit, bringing about a particularly loud cry of pleasure that makes your [cock " + y + "] jump delightfully even as she clenches especially tightly around you.  You feel yourself getting close, the mixture of such a tight, wet cunt and your unbelievable arousal leaving you smacking into her pelvis with a single goal in mind: filling her with your potent seed.");
 
 			outputText("\n\nYou pant in time with her, watching as her throat reflexively swallows the spunk filling her mouth from the gag, too tired to put up any fight anymore.  Seeing her similarly cum-coated throat bulge as she takes your sperm is the last push you need, the sight of her finally accepting her part in this relationship bringing you right to the edge, leaving you teetering on the point of letting yourself go.  As you feel your body starting to shiver you speed up, roughly ramming the insensate girl, trying to get as deep as possible before you release into her.  Her raspy moans get louder with every thrust, pausing every so often to allow another glob of spunk to slide down her throat while you lean yourself further down, pressing against her body.");
 
 			outputText("\n\nYou feel your cock starting to contract and pull the drider tight against you, fingers digging into the soft flesh of her hips as you press her as closely to you as you can manage.  Fully hilted within her, the entire length of your [cock " + y + "] is squeezed and teased by her still-spasming cunt all at once.  The heat is incredible, enhanced by the sheer amount of wet, warm fluid gushing down both of your hips, leaving you crying out as you finally start to cum.  Your body is wracked with unbelievable pleasure whilst your member explodes inside her, painting her insides white with fertile cream.  She barely realizes what's going on at this point, completely zoned out after her own mind-numbing orgasm, only able to softly grunt at each steaming load that you fire into her.  You take the opportunity to sink your teeth into her collar, marking her as [if (corruption < 40) yours][if (corruption >= 40) your slut] at the same time as your seed marks her pussy as your property, moaning deeply the entire time.");
 
 			outputText("\n\nFinally finished, you collapse on top of the similarly exhausted woman, barely capable of moving after such a breathtaking end.  Your shaft still twinges after such a powerful climax, not helped by the way her pussy continually shudders around you.  The drider, smothered underneath you, begins to sink slowly into the soft ground of the swamp, still completely oblivious to anything going on around her.  Deciding it would be a terrible shame if your new cumdump were to be lost so soon after acquiring it, you heave yourself onto unsteady legs, cock drizzling as you withdraw yourself from the abused, sperm-stuffed cunt that surrounded it.");
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("sen", -1);
 			doNext(driderTiedUpPartFour);
 		}
