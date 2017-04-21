@@ -2858,7 +2858,7 @@ use namespace kGAMECLASS;
 				removeStatusEffect(StatusEffects.GardenerSapSpeed);
 			}
 			if (hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
-				str += statusEffectv1(StatusEffects.DriderIncubusVenom);
+				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
 				kGAMECLASS.mainView.statsView.showStatUp('str');
 				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 			}
