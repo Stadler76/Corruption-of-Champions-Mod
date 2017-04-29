@@ -181,7 +181,9 @@ internal function loseKihaPreSpiderFight():void {
 
 	outputText("You could warn Kiha of the approaching mob - or you could let them jump her and scamper away in the confusion, leaving Kiha to whatever horrible fate awaits her.  What do you do?", false);
 	//(Display Options: [Warn Kiha] [Let Them])
-	simpleChoices("Warn Kiha", warnKihaOfHerImpendingDemise, "Let Them", letTheSpidersHaveTheirWayWithKiha, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Warn Kiha", warnKihaOfHerImpendingDemise);
+	addButton(1, "Let Them", letTheSpidersHaveTheirWayWithKiha);
 }
 
 //Player Wins Against Kiha (Z)
@@ -200,7 +202,9 @@ internal function playerBeatsUpKihaPreSpiderFight():void {
 
 	outputText("You could make like a baker and move your buns, but Gods knows what will happen to Kiha if you do.", false);
 	//(Display Options: [Help Kiha] [Leave Her]
-	simpleChoices("Help Kiha", helpKihaAgainstSpoidahs, "Leave Her", leaveKihaToSpoidahHorde, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Help Kiha", helpKihaAgainstSpoidahs);
+	addButton(1, "Leave Her", leaveKihaToSpoidahHorde);
 }
 
 //Warn Kiha (Z)
@@ -511,7 +515,10 @@ public function kihaXSalamander():void {
 	outputText("[pg]You consider warning the dragoness, but too late!  The mysterious figure leaps from the brush and shoulder-slams into Kiha, throwing her right off you and into the mud.  Before you can even say a word to your new friend, she grabs you by the scruff of your neck and throws you to the ground behind her, putting herself between you and Kiha.", false);
 	outputText("[pg]You could just lie there, but you're not sure how well you'd fare against two powerful warriors at once - you could end up dominated, at the very least.  You could instead try and get the jump on the fighters before they jump you... Or, you suppose you could get the fuck out while you have the chance.", false);
 	//(Display Options: [Lie There] [Jump Them] [GTFO])
-	simpleChoices("Lie There", lieThere, "Jump Them", jumpDaBitches, "GTFO", GTFO, "", null, "", null);
+	menu();
+	addButton(0, "Lie There", lieThere);
+	addButton(1, "Jump Them", jumpDaBitches);
+	addButton(2, "GTFO", GTFO);
 }
 
 //GTFO (Z)
@@ -579,7 +586,7 @@ private function lieThere():void {
 	outputText("[pg]\"<i>FUCK YOU ANYWAY!</i>\"  Hel yells after her, fist clenched.", false);
 	outputText("[pg]And here we almost had a beautiful moment going.  You sigh, wipe the mud off Hel's face enough to give her a little kiss, and head on back to camp.", false);
 	outputText("[pg]Your [armorName] squelches wetly all the way, full of your cum as it is.", false);
-	player.orgasm();
+	player.orgasm('Generic');
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -639,7 +646,7 @@ private function jumpDaBitches():void {
 	if (player.cumQ() >= 1000) outputText(" filling her so utterly that your cum squirts back out her asshole around your cock", false);
 	outputText(".  You make a few final, weak thrusts, riding out your orgasm until Kiha and Hel have finally calmed down, and your own [cock] is only dribbling a weak trickle of seed up Kiha's ass.", false);
 	outputText("[pg]Laughing weakly, exhausted by your efforts at dominating the two fiery redheads, you pull out of Kiha's rectum, watching as cum gushers out of her stretched bum.  You give her a little pat on the thigh before untangling yourself from the dragoness.  You stop by to give Hel and Kiha both a quick kiss on the lips before grabbing your gear and staggering off to camp, leaving the girls to sort themselves out in the murky swamp.", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -766,7 +773,7 @@ private function lovingHugDickings():void {
 	outputText("[pg]It figures.  You sigh and catch a quick nap next to her.");
 	outputText("[pg]<b>A little later...</b>");
 	outputText("\nKiha flies you back to get your " + player.armorDescript() + ".  The search takes a little while, but you eventually recover it.  She looks at you hesitantly before giving you a goodbye kiss.  \"<i>Don't get yourself killed out there.  I'd get bored without you messing everything up all the time.</i>\"", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -787,7 +794,7 @@ private function lovingHugsGirlFuckSex():void {
 	outputText("[pg]Kiha slowly drags herself off of you to lie beside you, smooth-yet-scaly body dragging up beside you until she's looking you eye to eye, her hot breath smelling strongly of your juices.  You kiss her, sucking her bottom lip into your mouth for a moment before she pulls back, looking at you with open eyes filled with love.  She pulls you tight and whispers, \"<i>That was a... acceptable...</i>\"  Kiha smirks and closes her eyes.  You sigh and catch a quick nap next to her.");
 	outputText("[pg]<b>A little later...</b>");
 	outputText("\nKiha flies you back to get your armor.  The search takes a little while, but you eventually recover it.  She looks at you hesitantly before giving you a goodbye kiss.  \"<i>Don't get yourself killed out there.  I'd get bored without you messing everything up all the time.</i>\"", false);
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -811,7 +818,7 @@ private function lovingHugsForRetards():void {
 	outputText("[pg]As the passion subsides, your scaled companion slowly extricates herself from your [asshole], your heavily violated passage tingling as it gapes wide for a moment.  She rolls to the side with you still in her arms and gives you a quick peck on the lips before admitting, \"<i>That wasn't so bad...</i>\"  Not so bad?  Not so bad!?  That was great!  Her eyelids drift closed as she falls fast asleep, robbing you of a chance to reply.  Oh, Kiha.  You sigh and catch a quick nap next to her.");
 	outputText("[pg]<b>A little later...</b>");
 	outputText("\nKiha flies you back to get your [armor].  The search takes a little while, but you eventually recover it.  She looks at you hesitantly before giving you a goodbye kiss.  \"<i>Don't get yourself killed out there.  I'd get bored without you messing everything up all the time.</i>\"", false);
-	player.orgasm();
+	player.orgasm('Anal');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -990,67 +997,72 @@ private function blechKihaYourCooking():void {
 
 private function kihaSexMenu(display:Boolean = true, allowBack:Boolean = true):void {
 	spriteSelect(72);
-	var gro:Function = null;
-	var incu:Function = null;
-	var tent:Function = null;
-	var horse:Function = null;
-	var anal:Function = null;
-	var sixtyNine:Function = null;
-	var dickWorship:Function = null;
-	var fuckVag:Function = null;
-	var dom:Function = null;
-	var backFunc:Function = (allowBack ? kihaScene.encounterKiha : camp.returnToCampUseOneHour);
 	if (display) outputText("\n");
-	//REQUIRES CAMP FOLLOWER:
-	if (followerKiha()) {
-		if (player.gender > 0) dom = dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThis;
-		//Req: Gro+ (also soft ghost req!)
-		if (player.hasItem(consumables.GROPLUS)) {
-			if (display) {
-				if (player.findPerk(PerkLib.Incorporeality) >= 0) outputText("\nYou could try and pump her boobs a bit with gro+, and if she decides against it, possess her and do it anyway!");
-				else outputText("\nYou could see if she'd let you pump her boobs with gro+.");
-			}
-			gro = ghostboobiesKiha;
-		}
-		else if (display) outputText("\nIf you had some gro+, you could ask her about making her breasts bigger.");
-		if (player.hasItem(consumables.INCUBID) || player.hasItem(consumables.P_DRAFT)) {
-			if (display) outputText("\nYou could slip her an incubi draft and let her fuck your ass with it.");
-			incu = giveKihaIncubusDraft;
-		}
-		else if (display) outputText("\nIf you had an incubi draft, you could have her grow a dick for you to take in the ass, at least for a while.");
-		if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1)
-			tent = fuckKihaWithATentacle;
-		//Req: Cock
-		if (player.hasCock()) {
-			if (player.cockThatFits(67) >= 0) fuckVag = fuckKihasVagInCamp;
-			else if (display) outputText("\nKiha's vagina is too small and tight for you to take.");
-			//(requires 50+ minimum lust, or 80+ libido, or a lust/fuck draft)
-			if (player.cockThatFits(200) >= 0 && (player.minLust() > 50 || player.lib > 80 || player.hasItem(consumables.L_DRAFT))) {
-				//Dick also can't be that small.
-				if (player.cockArea(player.cockThatFits(200)) >= 40) {
-					horse = boneTheShitOutofKihaHolesWithHorsecock;
-				}
-				else if (display) {
-					if (player.minLust() > 50 || player.lib > 80) outputText("\nYou have a hunch that if your dick were bigger you'd be able to really go town on her with your incredible libido.");
-					else outputText("\nIf you had a bigger dick and a lust draft you could really go to town on her.");
-				}
-			}
+
+	menu();
+	if (player.cockThatFits(94) >= 0) {
+		addButton(0, "Anal", savinTheAnalForKiha);
+	} else {
+		addDisabledButton(0, "Anal", "This scene requires you to have fitting cock.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(1, "Dominate", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (!player.isGenderless()) {
+		addButton(1, "Dominate", dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThis);
+	} else {
+		addDisabledButton(1, "Dominate", "This scene requires you to have genitals.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(2, "FuckVag", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.cockThatFits(67) >= 0) {
+		addButton(2, "FuckVag", fuckKihasVagInCamp);
+	} else {
+		addDisabledButton(2, "FuckVag", "This scene requires you to have fitting cock.");
+	}
+	if (player.biggestCockArea() >= 150) {
+		addButton(3, "Get HJ", kihaPlaysWithBigassCocksFemDomAhoy);
+	} else {
+		addDisabledButton(3, "Get HJ", "This scene requires you to have overly large cock.");
+	}
+	if (player.hasVagina()) {
+		addButton(4, "Girl69", kihaGirlGirlSex);
+	} else {
+		addDisabledButton(4, "Girl69", "This scene requires you to have vagina.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(5, "GroPlusTits", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.hasItem(consumables.GROPLUS)) {
+		addButton(5, "GroPlusTits", ghostboobiesKiha, undefined, undefined, undefined, "You could try and pump her boobs a bit with gro+" + ((player.findPerk(PerkLib.Incorporeality) >= 0) ? ", and if she decides against it, possess her and do it anyway!" : "."));
+	} else {
+		addDisabledButton(5, "GroPlusTits", "This scene requires you to have a dose of Gro+.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(6, "Give I.Drft", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.hasItem(consumables.INCUBID) || player.hasItem(consumables.P_DRAFT)) {
+		addButton(6, "Give I.Drft", giveKihaIncubusDraft, undefined, undefined, undefined, "You could slip her an incubi draft and let her fuck your ass with it.");
+	} else {
+		addDisabledButton(6, "Give I.Drft", "This scene requires you to have a dose of Incubi Draft.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(7, "LustyDicking", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else {
+		if (player.cockThatFits(200) < 0 || player.cockArea(player.cockThatFits(200)) < 40) {
+			addDisabledButton(7, "LustyDicking", "This scene requires you to have large yet fitting cock.");
+		} else if (player.minLust() < 50 && player.lib < 80 && !player.hasItem(consumables.L_DRAFT)) {
+			addDisabledButton(7, "LustyDicking", "This scene requires you to have insatiable libido or a bottle of Lust Draft.");
+		} else {
+			addButton(7, "LustyDicking", boneTheShitOutofKihaHolesWithHorsecock);
 		}
 	}
-	else if (display && player.hasCock()) outputText("\nKiha doesn't seem to keen on the idea of vaginal sex right now.");
-	//WARM SEX:
-	//Req Dick That Fits Butt
-	if (player.hasCock()) {
-		//savinTheAnalForKiha()
-		if (player.cockThatFits(94) >= 0) anal = savinTheAnalForKiha;
-		else if (display) outputText("\nYou're too big to fuck her ass.");
-		//Req Bigass Dick
-		if (player.biggestCockArea() >= 150) dickWorship = kihaPlaysWithBigassCocksFemDomAhoy;
-		else if (display) outputText("\nYour penis isn't ridiculously large enough for her to take care of it with her hands and feet.");
+	if (!followerKiha()) {
+		addDisabledButton(8, "TentacleFuck", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) {
+		addButton(8, "TentacleFuck", fuckKihaWithATentacle);
+	} else {
+		addDisabledButton(8, "TentacleFuck", "This scene requires you to have at least two tentacle cocks.");
 	}
-	//Req Vag
-	if (player.hasVagina()) sixtyNine = kihaGirlGirlSex;
-	choices("Anal", anal, "Dominate", dom, "FuckVag", fuckVag, "Get HJ", dickWorship, "Girl69", sixtyNine, "GroPlusTits", gro, "Give I.Drft", incu, "LustyDicking", horse, "TentacleFuck", tent, (allowBack ? "Back" : "Leave"), (allowBack ? kihaScene.encounterKiha : camp.returnToCampUseOneHour));
+	
+	addButton(14, (allowBack ? "Back" : "Leave"), (allowBack ? kihaScene.encounterKiha : camp.returnToCampUseOneHour));
 }
 
 //Savage Every Hole With A Bigass Horsecock 
@@ -1329,7 +1341,7 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 		outputText("[pg]<b>(You used up one lust draft!)</b>");
 	}
 	flags[kFLAGS.KIHA_HORSECOCK_FUCKED]++;
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", -1, "sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1416,7 +1428,7 @@ private function kihaPlaysWithBigassCocksFemDomAhoy():void {
 	outputText(".");
 	if (sophieBimbo.bimboSophie()) outputText("  Sophie greets you when you return, though she seems crestfallen once she smells the sex on you and realizes how thoroughly you've been sated.");
 	if (amilyScene.amilyCorrupt()) outputText("  Amily begs, \"<i>May I help to service you next time, " + player.mf("master","mistress") + "?</i>\"");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1444,7 +1456,7 @@ private function kihaGirlGirlSex():void {
 	else outputText("explosion");
 	outputText(" of lady-spooge to mess her face.");
 	outputText("[pg]Mouths stuffed in each others' twats, you lie with your lover, lazily lapping at fragrant girl-honey while your bodies shiver from aftershocks of bliss.  Kiha admits, \"<i>Okay, you're - lick - not too bad - lick - at this.</i>\"  You swat her rump and stroke her happily swaying tail before thanking her.");
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1510,7 +1522,7 @@ private function savinTheAnalForKiha():void {
 	outputText("[pg]By the time you recover, Kiha's turned around, now sitting in your lap, your cum-soaked cock stuffed up her ass and your hands wrapped around her waist.  She nestles against your chest, reaching back to run her fingers through your hair.  \"<i>N-not bad, for a pervert,</i>\" Kiha chuckles, rubbing the small part of your prick not tucked inside her.  \"<i>If you're lucky... I might just let you do this again.</i>\"");
 	outputText("[pg]Grinning, you give your dragoness a long, loving kiss on the lips.  You sit entwined for a long while, kissing and cuddling, until Kiha eventually draws herself off of you.  \"<i>Don't just sit there all day, doofus,</i>\" she teases, \"<i>Don't you have demons to defeat?</i>\"");
 	outputText("[pg]You give Kiha a playful swat on the butt as you depart, laughing as the impact causes a trickle of your cum to leak out and down her thigh.  \"<i>Oh, you idiot!</i>\"  she growls as you run off back to your duties.");
-	player.orgasm();
+	player.orgasm('Dick');
 	flags[kFLAGS.TIMES_KIHA_ANALED]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1544,7 +1556,7 @@ private function fuckKihasVagInCamp():void {
 	outputText("[pg]After some languid snuggling, Kiha beams up at you radiantly.  \"<i>That was... okay,</i>\" she declares, a quaver of uncertainty in her voice as her emotional defenses come back up.  You stand and slowly stretch the kinks from your muscles.  Teasingly, you remind her that it seemed a little better than 'okay'.  A tail sweeps your [legs] out from under you, a moment before Kiha pounces you with cat-like agility.  She hisses, \"<i>It was better than okay, alright?  It was great.  You've made me happy, [name]!</i>\"");
 	outputText("[pg]Kiha punches you in the chest before climbing off you.  \"<i>I don't have time for those emotions, doofus... not while Lethice lives.</i>\"  Well, it was a nice moment.");
 	kihaKnockUpAttempt();
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", -1, "sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1575,7 +1587,7 @@ private function giveKihaIncubusDraft():void {
 	outputText("[pg]Roaring, Kiha thrusts her cock up into your ass as you slam down upon her, meeting half-way as the first great, hot load of dragon-spunk shoots into your ass.  You grind your [asshole] around your lover's reptilian prick, milking out squirt after squirt of dragon-spooge until white streamers leak freely out of your asshole and coat the ground beneath you.");
 	outputText("[pg]By the time Kiha's orgasm subsides, you're both covered in her hot white spunk, reeking of sex, sweat, and semen.  Shuddering from the sticky, slimy sensation up your ass, you crawl off your lover, her prick popping out of you with a wet POP.  Looking down at her, you see Kiha's eyes are crossed, her chest heaving; she's mumbling something about some pink eggs in her stash, but seems otherwise insensate.  You give her soon-to-be-gone cock a last loving little pat before gathering your [armorName] and heading out.");
 	dynStats("sen", 4, "lus", 30, "cor", .5);
-	player.orgasm();
+	player.orgasm('Anal');
 	if (player.hasItem(consumables.P_DRAFT)) player.consumeItem(consumables.P_DRAFT);
 	else {
 		player.consumeItem(consumables.INCUBID);
@@ -1651,7 +1663,7 @@ private function fuckKihaWithATentacle():void {
 	if (player.balls > 0) outputText("churn and quiver");
 	else outputText("churns and quivers");
 	outputText(", and you can feel semen gathering at the base of your crotch for an ultimate burst of love.  Kiha and you have been hugging and fucking for what seems like hours, and your hot sweating bodies are literally emitting an aura of pure animal lust as they grind against each other.  You pump harder and faster, eager to bring your draconic lover closer to climax before your own orgasm kicks in.  Suddenly, there it comes: you blast Kiha's insides with your spooge, spraying her innermost depths with your hot, sticky goo.  [EachCock] release an enormous fountain of sap, drenching the dragoness' body and splattering every square inch of her skin with your seed.  You pound away as you keep cumming, [eachCock] squelching noisily as it thrusts in and out of her interior; likewise, the girl's orifices undulate and contract irregularily, doing their best to milk you of everything you have.  In no time, the dragoness becomes a spunk-sopping mess; some of the scales sprinkled over her body actually shine from all the cum-polishing.  Kiha's holes are completely filled and your baby-batter dribbles out of her in thick greenish-white ropes.  Your fluids mix with the fiery girl's own vagina juices and sweat and soon a puddle of sexual filth appears below the exotic couple you both form.  Semen keeps flowing out of the tip of [eachCock] and soaking your lover until you feel completely drained.  When the last glob of goo comes out, you release your embrace somewhat and you both fall over to rest, [eachCock] still buried deep inside her.  There's a loud splash as Kiha's robust body hits the fluid-polluted floor.  You keep caressing and cuddling your lover, enjoying her warm and moist contact as she still hugs you tightly.  Then, at last, she awkwardly removes [eachCock] from her orifices. Her holes are gaping and packed with an absurd amount of jism, but this doesn't seem to reduce her pride in the least.  She quickly swallows the remainder of cum on her lips and grumbles dizzily: \"<i>You idiot, look at what you did!  Now I'm completely coated with your filth, I'll have to get cleaned up!  Don't think I'm a slave to your disgusting dicks... I only accepted because you were so pathetically in need... D-don't you do this again!  Well, unless, you know, you really want to.  Not that I liked it, but since you love doing this that much... I-I guess you... could... well- I must go.</i>\" Kiha then clumsily turns around and flies off, flapping her wings erratically; she's still giddy from the hard tentacle fuck you both just had and is probably going to wash herself in some river.");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", 1, "sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1711,7 +1723,7 @@ private function ghostboobiesKiha():void {
 	outputText("[pg]At some point Kiha seems to have rolled onto her belly, ass stuck up into the sex-heavy air and knees drawn up to her torso.  The way her squeezable hips jerk around violently would be a clear invitation to any man, woman, or beast who happened to glance her way.  Arms still flitting around her entire self in an attempt to pleasure every part of her simultaneously, the poor oversensitized dragon girl seems to have infected you with her lust.  You happily smash her tits harder into the ground, entirely caught up in the lusty typhoon.");
 	outputText("[pg]Her entire body tenses as an orgasmic tremor rocks your system, both of you bellowing your pleasure.  Gushes of her translucent fluids surge past her fingers are you continue to stroke the inflamed labia.  Flopping to her side, Kiha trembles as the orgasm runs its course and eventually fades.  She lies there for a few minutes more, enjoying the near-electric aftershocks running through her body.  Before she can even rise, however, she's snoozing, curled up and pressing her knees into her too-big chest.  Taking that as your cue to depart, you wriggle your ghostly essence back out of her back, reforming and recorporealizing behind her.");
 	outputText("[pg]Your lust spent and curiosity sated, you step over and past Kiha.  Glancing back over your shoulder, you notice her bosom has shrunken just a little already.  You realize, with a sigh, that you'd probably need to take more drastic measures to make more of a permanent effect on her cup size.  Oh well, you figure.  There's always next time.");
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("cor", 2);
 	player.consumeItem(consumables.GROPLUS);
 	doNext(camp.returnToCampUseOneHour);
@@ -1735,7 +1747,9 @@ internal function kihaBitchesOutCorruptPCs():void {
 		outputText("[pg]\"<i>[name].</i>\"  She says flatly, planting the haft of her axe in the ground, leaning heavily upon it.");
 		outputText("[pg]You say hello, looking nervously around.  Something isn't right here, and your hand drifts toward your [weaponName].");
 		outputText("[pg]\"<i>Listen, [name],</i>\" Kiha says, eyeing you from behind her axe.  \"<i>Maybe we've gotten to be friends lately, but... something's changed about you.  I can SMELL the corruption on you, the lust... I-I can't do it, [name].  I can't be around someone that could turn into someTHING at any moment, someone who's just letting themselves go like... like you are. Please j-just go, [name].</i>\"  You try to protest, to reason with the fiery warrior, but she only lifts up her axe and levels it at you...  \"<i>J-JUST GO!</i>\"");
-		simpleChoices("Fight", kihaScene.meetKihaAndFight, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		menu();
+		addButton(0, "Fight", kihaScene.meetKihaAndFight);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("Kiha approaches you, her belongings gathered in her hands.  The sexy dragoness seems visibly upset, and before you can say a word, she interrupts, \"<i>Don't say a word, [name].  You're corrupt.  I can smell the corruption rolling off you from over here.  I won't be here when you turn into a demon, and I don't want to fight you... but if you come after me, I won't hesitate to defend myself!</i>\"");
@@ -1813,7 +1827,9 @@ private function dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWr
 	outputText("[pg]\"<i>If you want have your way with me, you'll need to earn it, just like anyone else,</i>\" Kiha explains.  She narrows her eyes at you and questions, \"<i>The question is, are you " + player.mf("man","woman") + " enough to take what you want?  I wouldn't want you to get hurt.</i>\"");
 	outputText("[pg]That seems like a challenge.  Will you rise to it, or will you back down?");
 	//[Back down]    [Fight for position]
-	simpleChoices("Back Down", beABitchDumbass, "FightForDom", fightForDominanceWithDragonCunnies, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Back Down", beABitchDumbass);
+	addButton(1, "FightForDom", fightForDominanceWithDragonCunnies);
 }
 
 //[Back down]
@@ -1999,7 +2015,7 @@ internal function pcWinsDomFight():void {
 	outputText("[pg]The act concluded, you turn to seeing how to ensure Kiha's future cooperation in deciding who gets to be the bottom or the top during sex, and your respective roles in more mundane interaction as well.  Your gesture to gain her attention needs to be forceful, but not too violent.  Grabbing her by the throat, you press the back of her head against the tree, and gaze into her (cum-obstructed) eyes.  You inform her in no uncertain terms that you've proven your dominance- repeatedly, now- and from this point forward, you EXPECT that she will submit to your will, in light of your multiple victories over her, and your obviously greater prowess in battle.  Whoever loses is the sub for the winner's pleasures, right?");
 	//outputText("[pg]Kiha nods, as best she can with her head pinned against the tree trunk, and then grins.  \"<i>Just the way I like it, [name]. Let's get back to camp; no doubt there are demons that need our feet up their asses.</i>\"  That sounds like a good idea.  (And maybe she can clean herself up when she gets back).");
 	outputText("[pg]Kiha nods, as best she can with her head pinned, and then she grins.  \"<i>Dominance isn't something you do once and get forever, [name].  If you want to stay on top with me, you'd better back it up with your actions.  It takes more than a few losses to make me ANYONE's bitch.</i>\"  Well, that's probably as good as you'll get out of her for now.  You suggest heading back to camp; no doubt there's some demons needing feet up their asses.  Kiha replies, \"<i>Sounds like a good idea, [master].</i>\"  There's an undercurrent of humor in her words, but she's the one who couldn't handle you in a fight.");
-	player.orgasm();
+	player.orgasm('Generic');
 	combat.cleanupAfterCombat();
 }
 
