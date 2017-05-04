@@ -13,7 +13,7 @@ language: java
 before_install:
   - sudo apt-get update
   # install VNC and xfce4 so we have a desktop, as the flash player requires one
-  - sudo apt-get install vnc4server xfce4 -y
+  - sudo apt-get install vnc4server xfce4 ant ant-optional -y
 
 install:
   # download and install the flex SDK and the flash player
