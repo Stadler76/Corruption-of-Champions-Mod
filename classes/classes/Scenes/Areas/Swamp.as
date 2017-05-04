@@ -5,8 +5,12 @@ package classes.Scenes.Areas
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Areas.Swamp.*;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.FnHelpers;
+import classes.Scenes.Areas.Swamp.*;
 
 	use namespace kGAMECLASS;
 
@@ -29,70 +33,70 @@ package classes.Scenes.Areas
 			outputText("<b>You've discovered the Swamp!</b>");
 			doNext(camp.returnToCampUseTwoHours);
 		}
+
+		private var _explorationEncounter:Encounter = null;
+		public function get explorationEncounter():Encounter {
+			const game:CoC     = kGAMECLASS;
+			const fn:FnHelpers = Encounters.fn;
+			if (_explorationEncounter == null) _explorationEncounter =
+					Encounters.group(game.commonEncounters, {
+						name: "bog",
+						when: function ():Boolean {
+							return (flags[kFLAGS.TIMES_EXPLORED_SWAMP] >= 25)
+								   && !game.bog.isDiscovered();
+						},
+						call: game.bog.discover
+					}, {
+						name: "kihaxhel",
+						when: function ():Boolean {
+							return !kGAMECLASS.kihaFollower.followerKiha()
+									/* && flags[kFLAGS.KIHA_KILLED] == 0 */ // [INTERMOD:8chan]
+									&& player.cor < 60
+									&& flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1
+									&& flags[kFLAGS.HEL_FUCKBUDDY] > 0
+									&& player.hasCock()
+									&& flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0;
+						},
+						call: game.kihaFollower.kihaXSalamander
+					}, {
+						name  : "ember",
+						when  : function ():Boolean {
+							return flags[kFLAGS.TOOK_EMBER_EGG] == 0
+								   && flags[kFLAGS.EGG_BROKEN] == 0
+								   && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0;
+						},
+						chance: 0.1,
+						call  : game.emberScene.findEmbersEgg
+					}, {
+						name: "rogar",
+						when: function ():Boolean {
+							return flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_PHASE] < 3;
+						},
+						call: rogar.encounterRogarSwamp
+					}, {
+						name: "mspider",
+						call: maleSpiderMorphScene.greetMaleSpiderMorph
+					}, {
+						name: "fspider",
+						call: femaleSpiderMorphScene.fSpiderMorphGreeting
+					}, {
+						name: "drider",
+						call: corruptedDriderScene.driderEncounter
+					}, {
+						name: "kiha",
+						call: function ():void {
+							if (game.kihaFollower.followerKiha()
+								/*|| flags[kFLAGS.KIHA_KILLED]*/ // [INTERMOD:8chan]
+								|| flags[kFLAGS.KIHA_TOLL_DURATION] > 1) game.kihaScene.kihaExplore();
+							else game.kihaScene.encounterKiha();
+						}
+					});
+			return _explorationEncounter;
+		}
 		public function exploreSwamp():void
 		{
-			//Discover 'Bog' at after 25 explores of swamp
-			if ((flags[kFLAGS.TIMES_EXPLORED_SWAMP] >= 25) && flags[kFLAGS.BOG_EXPLORED] == 0) {
-				outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)", true);
-				flags[kFLAGS.BOG_EXPLORED]++;
-				doNext(camp.returnToCampUseOneHour);
-				return;
-			}
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
-			/*  SPECIAL SCENE OVERWRITES */
-			//KIHA X HEL THREESOME!
-			if (!kGAMECLASS.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
-				kGAMECLASS.kihaFollower.kihaXSalamander();
-				return;
-			}
-			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
-				return;
-			}
-			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (flags[kFLAGS.TIMES_EXPLORED_SWAMP] % 40 == 0)) {
-				kGAMECLASS.emberScene.findEmbersEgg();
-				return;
-			}
-			/*  STANDARD SCENE SELECTION  */
-			var choices:Array = [];
-			//Build the choice array
-			//M & F spidermorphs
-			choices[choices.length] = 0;
-			choices[choices.length] = 1;
-			//Drider
-			choices[choices.length] = 2;
-			//ROGAR
-			if (flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_PHASE] < 3)
-				choices[choices.length] = 3;
-			//Kiha
-			choices[choices.length] = 4;
-
-			//Pick from the choices and pull the encounter.
-			var choice:Number = choices[rand(choices.length)];
-			switch (choice) {
-				case 0:
-					femaleSpiderMorphScene.fSpiderMorphGreeting();
-					break;
-				case 1:
-					maleSpiderMorphScene.greetMaleSpiderMorph();
-					break;
-				case 2:
-					corruptedDriderScene.driderEncounter();
-					break;
-				case 3:
-					rogar.encounterRogarSwamp();
-					break;
-				case 4:
-					//Kiha follower gets to explore her territory!
-					if (kGAMECLASS.kihaFollower.followerKiha()) kGAMECLASS.kihaScene.kihaExplore();
-					else kGAMECLASS.kihaScene.encounterKiha();
-					break;
-				default:
-					outputText("New explore code fucked up.  YOU BONED (TELL FEN)");
-					doNext(playerMenu);
-					break;
-			}
+			return explorationEncounter.execEncounter();
 		}
 	}
 }

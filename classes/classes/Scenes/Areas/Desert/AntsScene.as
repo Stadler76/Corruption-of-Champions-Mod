@@ -126,7 +126,9 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYou could watch from where you're hiding, or you could play the hero and step in.");
 			//[Keep Hidden]
 			//[Play Hero]
-			simpleChoices("Play Hero", playHero, "Keep Hidden", keepHidden, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Play Hero", playHero);
+			addButton(1, "Keep Hidden", keepHidden);
 		}
 
 //►[Keep Hidden]
@@ -304,7 +306,9 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\n\"<i>Oh good, you're here.  I was beginning to think you were a coward.</i>\"  Before you can respond to his insult, he cuts you off.  \"<i>We're ready to start when you are.  Let's hope you survive longer than the last guy.</i>\"");
 			}
 			//[Fight] [Leave]
-			simpleChoices("Fight", antColiseumFight, "", null, "", null, "", null, "Leave", leaveAntColony);
+			menu();
+			addButton(0, "Fight", antColiseumFight);
+			addButton(14, "Leave", leaveAntColony);
 		}
 
 //►[Leave]
@@ -493,7 +497,6 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nAs you look into her eyes and your lips lock together, you feel as if you're a single mind. It's one of the strangest feelings; you can feel... what she's feeling.  As you run your hands over her body you feel your own motions as if you were the recipient.  It's almost thrilling in a way, knowing exactly how your touch feels on another.  You smile wickedly as you lay her down on the cushioned pillows.");
 			//Use Penis - Male Continuation
 			//Use Vagina - Female Continuation
-			//simpleChoices("UseYourPenis",0,"UseYourVagina",0,"",0,"",0,"",0);
 			menu();
 			if (player.hasCock()) addButton(0, "Use Penis", gigititigitigitigitigityAntGirl);
 			if (player.hasVagina()) addButton(1, "Use Vagina", femalePhyllaFirstFuckGooooo);

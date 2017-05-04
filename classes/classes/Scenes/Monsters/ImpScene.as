@@ -139,7 +139,6 @@ package classes.Scenes.Monsters
 				dynStats("cor", 1);
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
-				player.cuntChange(monster.cockArea(0), true, true, false);
 			}
 			player.orgasm('Vaginal');
 			dynStats("cor", 1);
@@ -1285,7 +1284,7 @@ package classes.Scenes.Monsters
 				outputText("Your " + player.vaginaDescript(0) + " drips in anticipation, and you find yourself involuntarily moving your knees farther apart to prepare yourself to be filled. He smiles and presses his cock against your " + player.vaginaDescript(0) + ", pushing you back to get a better angle. You try to make words, but your brain can only think of so much at once! Right now, it's thinking of cock, which, naturally, makes you open your mouth and let out a slutty moan.\n\n", false);
 		
 				outputText("The imp pushes into you violently, ramming his cock in to the hilt, leaving you gasping in pain and surprise. He leaves it in your slutty pussy, giving you a second to... oh who is he kidding... he can tell by your air-headed look that you've done nothing but take cocks your whole life. He fucks you hard, slapping your " + player.buttDescript() + " to remind you who is in charge. You can't help but think about, like, how you just love it when a man takes charge. Less thinking!", false);
-				player.cuntChange(12,true,true,false);
+				player.cuntChange(monster.cockArea(0),true,true,false);
 				outputText("\n\n", false);
 		
 				outputText("The rough fucking becomes more and more pleasurable as time goes on. You moan air-headedly with each thrust, hips squeezing around the demon-cock- loving the feeling of his fullness. Before long you can't help but cum all over him, your vagina locking around his cock like a vice, muscles rippling, milking him for his cum. The imp's prick explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption. You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with insane amounts of cum.\n\n", false);
@@ -1327,7 +1326,7 @@ package classes.Scenes.Monsters
 					}
 					else {
 						outputText("  He plunges in violently, ramming his " + monster.cockDescriptShort(0) + " in to the hilt, leaving you gasping in pain and surprise.  He leaves it there, giving you a second to get used to him, and then begins fucking you hard, slapping your ass every few thrusts to remind you who is in charge.", false);
-						player.cuntChange(12,true,true,false);
+						player.cuntChange(monster.cockArea(0),true,true,false);
 					}
 					if (player.gender == 3) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes, until you cannot help but stroke your " + player.cockDescript(0) + " along with each plunge he takes in your " + player.vaginaDescript(0) + ".  You feel yourself clench around him as your sexual organs release, erupting spurts of cum and milking the demon's cock like your life depended on it.", false);
 					if (player.gender == 2) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes.  You moan loudly and lewdly with each thrust, hips squeezing around the demon-cock, relishing the feeling of fullness.  Before long you cannot help but cum all over him, " + player.vaginaDescript(0) + " locking around his cock like a vice, muscles rippling, milking him for his cum.", false);

@@ -76,7 +76,7 @@ package classes
 			addButton(1, "Settings", kGAMECLASS.gameSettings.settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
 			addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 			addButton(3, "Achievements", kGAMECLASS.achievementList.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
-			addButton(4, "Mod Thread", openURL, "https://forum.fenoxo.com/threads/coc-revamp-mod-v1-3-25-for-coc-1-0-2.3/", null, null, "Check the official mod thread on Fenoxo's forum.");
+			addButton(4, "Mod Thread", openURL, "https://forum.fenoxo.com/threads/coc-revamp-mod.3/", null, null, "Check the official mod thread on Fenoxo's forum.");
 				
 			addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
 			addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
@@ -123,6 +123,8 @@ package classes
 				outputText("\n\n<b>Easy Mode On: Bad-ends can be ignored.</b>");
 			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 				outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
+			if (flags[kFLAGS.PRISON_ENABLED])
+				outputText("\n\n<b>PRISON ENABLED: The prison can be accessed. WARNING: The prison is very buggy and may break your game. Enter it at your own risk!</b>");
 			if (flags[kFLAGS.ITS_EVERY_DAY])
 				outputText("\n\n<b>Eternal holiday enabled.</b>");
 			if (kGAMECLASS.plains.bunnyGirl.isItEaster())

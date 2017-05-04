@@ -128,7 +128,6 @@ public function encounterKiha():void {
 			addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
 			addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
 			addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
-			//simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 		}
 		else {
 			outputText("It's a fight!", false);
@@ -144,7 +143,9 @@ private function offerToBuyPassageFromKiha():void {
 	//(Unlocks toll option next encounter)
 	flags[kFLAGS.KIHA_TOLL] = 1;
 	//[Fight] [Leave] - Same results as main fight/leave.
-	simpleChoices("Fight", meetKihaAndFight, "", null, "", null, "", null, "Leave", leaveWhenMeetingAgressiveKiha);
+	menu();
+	addButton(0, "Fight", meetKihaAndFight);
+	addButton(14, "Leave", leaveWhenMeetingAgressiveKiha);
 }
 //[Leave] 
 private function leaveWhenMeetingAgressiveKiha():void {
@@ -860,7 +861,10 @@ private function analRapuzulaKiha():void {
 
 			//if implying that Rathazul used to be an advisor to the queen before the fall, start by spelling his name correctly; else, proceed as normal
 			//[Retribution] [Carnality] [No]
-			simpleChoices("Retribution", retributionArmorIsCoolShit, "Carnality", carnalityArmorIsCoolShitToo, "", null, "", null, "NOPE!", noThankYouSirIDontWantAwesomeArmors);
+			menu();
+			addButton(0, "Retribution", retributionArmorIsCoolShit);
+			addButton(1, "Carnality", carnalityArmorIsCoolShitToo);
+			addButton(4, "NOPE!", noThankYouSirIDontWantAwesomeArmors);
 		}
 
 		//[No]

@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.GlobalFlags.*;
 	import classes.*;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
 
 	public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -12,6 +14,44 @@
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 96, 72, 48);
 			CoC.timeAwareClassAdd(this);
 		}
+
+		public function jojoEncounterFn():void {
+			clearOutput();
+			if (flags[kFLAGS.JOJO_STATUS] == 0) {
+				if (player.cor < 25) {
+					lowCorruptionJojoEncounter();
+				} else {
+					highCorruptionJojoEncounter();
+				}
+			} else if (flags[kFLAGS.JOJO_STATUS] >= 2) { //Angry/Horny Jojo
+				corruptJojoEncounter();
+			} else { // JOJO_STATUS is 1 or Negative (indicates rape is disabled.)
+				repeatJojoEncounter();
+			}
+		}
+
+	private var _jojoForest:Encounter = null;
+	public function get jojoForest():Encounter {
+		const game:CoC = kGAMECLASS;
+		if (_jojoForest == null) _jojoForest = Encounters.build({
+			name  : "jojo",
+			call  : jojoEncounterFn,
+			when  : function ():Boolean {
+				return !(player.hasStatusEffect(StatusEffects.PureCampJojo) ||
+						 camp.campCorruptJojo() ||
+						 flags[kFLAGS.JOJO_DEAD_OR_GONE] > 0 ||
+						 (player.level < 4
+						  && player.cor < 25
+						  && time.days < 28)
+				);
+			},
+			chance: function ():Number {
+				if (flags[kFLAGS.JOJO_STATUS] >= 2) return game.commonEncounters.furriteMod();
+				return 1;
+			}
+		});
+		return _jojoForest;
+	}
 
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
@@ -175,25 +215,39 @@ public function corruptCampJojo():void {
 		}
 	}
 	
-	var tent:Function = null;
-	if (tentacleJojo() && player.lust >= 33) tent = useTentacleJojo;
-	var milkHim:Function = null;
-	var tentaMilk:Function = null;
-	var eggs:Function = null;
-	if (player.canOvipositBee()) eggs = beeEggsInCorruptJojo;
+	menu();
+	addDisabledButton(0, "Sex");
+	addDisabledButton(1, "TentacleSex");
+	addDisabledButton(2, "Milk Him");
+	addDisabledButton(3, "TentacleMilk");
+	addDisabledButton(4, "HairCare");
+	addDisabledButton(5, "Lay Eggs");
+
+	if (!player.isGenderless() && player.lust >= 33) {
+		addButton(0, "Sex", corruptJojoSexMenu);
+	}
+	if (tentacleJojo() && player.lust >= 33) {
+		addButton(1, "TentacleSex", useTentacleJojo);
+	}
 	if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0) {
 		if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>", false);
 		//First time:
 		else if (flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] != 0) {
-			milkHim = repeatMilkJojo;
-			if (tentacleJojo()) tentaMilk = createCallBackFunction(repeatMilkJojo, true);
-		} else milkHim = milkJojoFirst;
+			addButton(2, "Milk Him", repeatMilkJojo);
+			if (tentacleJojo()) {
+				addButton(3, "TentacleMilk", repeatMilkJojo, tentacleJojo());
+			}
+		} else {
+			addButton(2, "Milk Him", milkJojoFirst);
+		}
 	}
-	var hairCare:Function = null;
-	var sex:Function = null;
-	if (player.gender > 0 && player.lust >= 33) sex = corruptJojoSexMenu;
-	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) hairCare = jojoPaysForPerms;
-	choices("Sex", sex, "TentacleSex", tent, "Milk Him", milkHim, "TentacleMilk", tentaMilk, "HairCare", hairCare, "Lay Eggs", eggs, "", null, "", null, "", null, "Back", camp.campSlavesMenu);
+	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) {
+		addButton(4, "HairCare", jojoPaysForPerms);
+	}
+	if (player.canOvipositBee()) {
+		addButton(5, "Lay Eggs", beeEggsInCorruptJojo);
+	}
+	addButton(14, "Back", camp.campSlavesMenu);
 	
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) addButton(6, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(6, "Go Camp", backToCamp);
@@ -948,13 +1002,14 @@ private function BJRidesGETYOUONE():void {
 	//[Cum in Amily Mouth] [Cum in Amily Pussy] [Cum in Jojo Mouth]
 	outputText("\n\nWhere do you cum?");
 	//Pussy requires a minimum tallness?
-	var puss:Function = null;
-	if (player.tallness > 55) puss = stuffAmilysMouthWithPostBJCUM;
-	simpleChoices("Amily's Mouth", fillAmilysMouth,
-					"Amily's Pussy", puss,
-					"Jojo's Mouth", fillJojosMouthWithHotStickyCum,
-					"", null,
-					"", null);
+	menu();
+	addButton(0, "Amily's Mouth", fillAmilysMouth);
+	if (player.tallness > 55) {
+		addButton(1, "Amily's Pussy", stuffAmilysMouthWithPostBJCUM);
+	} else {
+		addDisabledButton(1, "Amily's Pussy", "This scene requires you to be tall enough.")
+	}
+	addButton(2, "Jojo's Mouth", fillJojosMouthWithHotStickyCum);
 }
 //Fill Amily's Mouth (Z)
 private function fillAmilysMouth():void {
@@ -2459,7 +2514,14 @@ public function jojoCamp():void {
 			outputText("You walk up to the boulder where Jojo usually sits, and see him sitting cross legged with his eyes closed.  He seems to be deep in meditation, but when you approach his eyes open suddenly and he gets up appearing slightly distressed, “<i>Uh... [name], I can feel a bit of corruption within you.  It is not much, but I think you should be concerned about it before it gets out of hand and you do something you might regret.  If you want to I'd be happy to meditate with you as you rid yourself of it.</i>” he offers with a concerned look on his face.\n\n");
 		}
 		outputText("Do you accept Jojo's help?\n\n");
-		simpleChoices("Yes", acceptOfferOfHelp, "No", refuseOfferOfHelp, "", null, "", null, "Rape", (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.JOJO_STATUS] >= 0 ? jojoAtCampRape : null));
+		menu();
+		addButton(0, "Yes", acceptOfferOfHelp);
+		addButton(1, "No", refuseOfferOfHelp);
+		if (player.lust >= 33 && !player.isGenderless() && flags[kFLAGS.JOJO_STATUS] >= 0) {
+			addButton(4, "Rape", jojoAtCampRape);
+		} else {
+			addDisabledButton(4, "Rape");
+		}
 	}
 	else { //Normal shit
 		if (player.cor > 10)
@@ -2516,17 +2578,25 @@ public function jojoAppearance():void
 	doNext(jojoCamp);
 }
 
-public function talkMenu():void
+public function talkMenu(from:Function = null):void
 {
 	jojoSprite();
 	menu();
-	addButton(0, "Village", jojoTalkVillage, null, null, null, "Ask him about the village he was raised in.");
-	addButton(1, "Monks", jojoTalkJoiningTheMonks, null, null, null, "Ask him about how and why he became a monk.");
-	addButton(2, "MonksFall", jojoTalkFallOfTheMonks, null, null, null, "Ask him about the demise of the monks.");
-	addButton(3, "Forest", jojoTalkForestConvo, null, null, null, "Ask him about how he ended up in the forest.");
-	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(4, "You", jojoTalkYourOrigin, null, null, null, "Tell him about Ingnam and your history.");
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory, null, null, null, "Tell him about how you've shut down the factory.");
-	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave, null, null, null, "Tell him about your encounter in the Sand Cave in the desert.");
+	// Copypaste this shit to use it for other talk menu.
+	var talkButton:Function = function(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):* {
+		if(from != func1) addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+		else addDisabledButton(pos, text, toolTipText, toolTipHeader);	
+	}
+	
+	talkButton(0, "Village", jojoTalkVillage, null, null, null, "Ask him about the village he was raised in.");
+	talkButton(1, "Monks", jojoTalkJoiningTheMonks, null, null, null, "Ask him about how and why he became a monk.");
+	talkButton(2, "MonksFall", jojoTalkFallOfTheMonks, null, null, null, "Ask him about the demise of the monks.");
+	talkButton(3, "Forest", jojoTalkForestConvo, null, null, null, "Ask him about how he ended up in the forest.");
+	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) talkButton(4, "You", jojoTalkYourOrigin, null, null, null, "Tell him about Ingnam and your history.");
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 1) addButton(4, "Thief", jojoCatchesThief, null, null, null, "Ask Jojo to catch the thief instead of guard the stash.");
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 2) addButton(4, "Thief", jojoGuardsStash, null, null, null, "Ask Jojo to guard the stash instead of catch the thief.");
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) talkButton(5, "Factory", jojoTalkFactory, null, null, null, "Tell him about how you've shut down the factory.");
+	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) talkButton(6, "SandCave", jojoTalkSandCave, null, null, null, "Tell him about your encounter in the Sand Cave in the desert.");
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift, null, null, null, "Ask him if he's willing to train you.");
 	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1, null, null, null, "Ask him if he can exorcise the demonic parasite infesting Minerva.");
 	//Sex button
@@ -2568,8 +2638,7 @@ public function jojoTalkVillage():void
 		outputText("Looks like Jojo’s childhood wasn’t so bad. A little sickly sweet and void of wet pussies and drooling dicks but not bad. You tell him you’re happy to have him near you and he smiles for ear to ear, ignorant of your thoughts.\n\n");
 	}
 
-	menu();
-	doNext(camp.returnToCampUseOneHour); // Dunno where exactly to kick back to, fuck it, back to camp yo!
+	talkMenu(jojoTalkVillage);
 }
 
 //Joining the Monks convo
@@ -2586,8 +2655,7 @@ public function jojoTalkJoiningTheMonks():void
 	outputText("“<i>The temple became very important to me.  I read about the world, I spoke to the clergy and I sat and thought.  I was enraptured with learning but I didn’t want to be a priest, I don’t know why... I guess it just didn’t appeal to me.  When I first saw the monks visiting the temple, it was like dawn breaking.  After that I waited until I was old enough to join and made the short pilgrimage to the Monastery of the Celestial Lotus.</i>”\n\n");
 	outputText("Jojo wears this quiet little smile as he finishes.  Then he chuckles and says, “<i>Thank you for the memories, [name].  I enjoy our talks.</i>”\n\n");
 
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	talkMenu(jojoTalkJoiningTheMonks);
 }
 
 //Fall of the Monks convo
@@ -2603,10 +2671,9 @@ public function jojoTalkFallOfTheMonks():void
 	outputText("You watch as Jojo bows his head in shame for a moment. Yet when he looks back up there’s fire in his eyes.\n\n");
 	outputText("“<i>Never again....</i>”\n\n");
 	outputText("You try to comfort Jojo, telling him he couldn’t have made a difference being but a single mouse, but he waves you off.  He tells you he is fine and thanks you for your concern.\n\n");
-	outputText("You can tell the story has affected him, but you’re surprised to hear the resolve in his voice and see the defiant strength in his eyes. Excusing yourself, you rise and leave him to do as he will.\n\n");
+	outputText("You can tell the story has affected him, but you’re surprised to hear the resolve in his voice and see the defiant strength in his eyes.\n\n");
 
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	talkMenu(jojoTalkFallOfTheMonks);
 }
 
 //Forest Convo
@@ -2656,10 +2723,9 @@ public function jojoTalkForestConvo():void
 	outputText("You see anger in the monk’s eyes as he clenches his fists, “<i>They had utterly defiled the monastery and there was nothing I could do about it but honor its memory.  I labored for what felt like days; burying the fallen; seeking out survivors; gathering what few items of my faith had escaped demonic desecration.</i>”  He touches the large beads around his neck meaningfully.\n\n");
 	outputText("“<i>Then, I burned the monastery to the ground and set fire to all the fields...  Since that day, I have eked out a meager existence in the wilderness; I study the texts I can, train my body as best I can, and seek to fortify my soul against demonic blandishments.  Though I have technically progressed far along my path, with no master and only a pale echo of a fraction of my order’s texts at my disposal, I may never be a true master in my own right.</i>”\n\n");
 	outputText("He gives you an appraising look before looking away, “<i>Until I met you, [name], my only purpose had been to find the demons who destroyed my order and make them pay for the lives they took.  That is why I was in the forest, I was in the middle of a harsh training regimen to increase my power and skill so that I may seek out those evil brutes who took everything I loved away from me... but vengeance is not the way of the Celestial Lotus.  The Celestial doesn’t train bullies or assassins.  Finding you and aiding in your quest to protect your village from these demonic creatures of perversion gave me new purpose and would make my departed brothers and sisters proud.  I can’t honestly say I’ve given up on having my vengeance but... I will aid you in your quest first if for nothing more than to honor our friendship and honor the memory of the order and its teachings.</i>\n\n");
-	outputText("Looking renewed and at peace despite the emotional storm you know must be raging within his tiny frame Jojo returns to what he was doing after thanking you for giving him new purpose.\n\n");
+	outputText("Looking renewed and at peace despite the emotional storm you know must be raging within his tiny frame Jojo thanks you for giving him new purpose.\n\n");
 
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	talkMenu(jojoTalkForestConvo);
 }
 
 //Yourself
@@ -2723,10 +2789,74 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 		outputText("Somehow, you don’t seem to have a defined history perk... <b>Please report a bug!</b>\n\n");
 	}
 
-	outputText("Jojo smiles now that he has gotten to know you a little better. After a little bit more small talk, the two of you decide the conversation is over and part ways.\n\n");
+	outputText("Jojo smiles now that he has gotten to know you a little better.\n\n");
 
+	talkMenu(jojoTalkYourOrigin);
+}
+
+//Change Jojo Bimbo State from no bimbo to go bimbo
+//Requirements: Tell Jojo to guard the stash over catch the thief
+public function jojoCatchesThief():void {
+	clearOutput();
+	jojoSprite();
+	outputText("You tell Jojo that you've changed your mind on what you want him to do about the thief. You want him to try and catch the thief, though you want him to be careful.");
+	outputText("\n\n\"<i>I will be careful, don't worry, my friend. I assure you that everything will be fine,</i>\" Jojo insists. With that, he takes the bottle and leaves, clearly getting ready to lay a trap for the mysterious would-be thief.");
+	inventory.removeItemFromStorage(inventory.itemStorageDirectGet(), consumables.BIMBOLQ);
+	flags[kFLAGS.JOJO_BIMBO_STATE] = 2;
+	flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] = 0; //Reset timer to 0.
+	doNext(playerMenu);
+}
+
+//Change Jojo Bimbo State from go bimbo to no bimbo
+//Requirements: Tell Jojo to catch the thief over guard the stash
+public function jojoGuardsStash():void {
+	clearOutput();
+	jojoSprite();
+		outputText("You tell Jojo that you've changed your mind-- you'd rather have him just keep a close eye on your stash. It sounds less risky than having him catch the thief.");
+		outputText("\n\n\"<i>I’m not afraid of danger; don’t forget that the forest where we met is full of monsters, especially imps and tentacle beasts.  I can defend myself.</i>\" Jojo points out, sounding a little annoyed at being dismissed like this.");
+		outputText("\n\nEven so, you’d still rather he didn’t risk himself.  There’s no telling what this thief would do if they got your hands on your Bimbo Liqueur.");
+		outputText("\n\n\"<i>What does it even do, anyway?  Why would anyone want it?</i>\" The baffled murine monk asks.");
+		outputText("\n\nKnowing the monk, he would surely oppose to you keeping it around... and you really don’t feel like throwing it away... so you tell him it’s just a very rare liquor you happened to find in a stash hidden somewhere.  You’re just saving it for a special occasion, that’s all.");
+		outputText("\n\n\"<i>Well, I guess even in these times, rare alcohol is still valuable... very well; if you’re sure it’s best that I leave it to you, I’ll focus on just guarding the camp.</i>\"");
+		outputText("\n\nYou thank Jojo for understanding... and for keeping your camp safe.\n\n");
+	flags[kFLAGS.JOJO_BIMBO_STATE] = 1;
+	flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] = 0; //Reset timer to 0, not like it'll hurt.
+	if (player.hasItem(consumables.BIMBOLQ) || inventory.hasItemInStorage(consumables.BIMBOLQ)) { //Avoids infinite Bimbo Liqueur spawn
+		doNext(getBackYouMenu);
+	} else {
+		inventory.takeItem(consumables.BIMBOLQ, getBackYouMenu);
+	}
+}
+
+// A menu to let you decide you never want to change Jojo's no-bimbo state and get back the "You" button
+// It sets the Bimbo State at 0, so you can always go back and change your mind by re-adding Bimbo Liqueur to the stash
+public function getBackYouMenu():void {
+	clearOutput();
+	jojoSprite();
+	if (player.hasItem(consumables.BIMBOLQ)) {
+		outputText("You look at the Bimbo Liqueur in your hand.", false);
+	} else {
+		outputText("You hesitate for a moment, contemplating your choices.", false);
+	}
+	outputText(" You could always ask Jojo to catch the thief if you change your mind, but do you really think you ever will?", false);
 	menu();
-	doNext(camp.returnToCampUseOneHour);
+	addButton(0, "Yes", keepChanging, null, null, null, null);
+	addButton(1, "No", stopChanging, null, null, null, null);
+}
+
+public function keepChanging():void {
+	clearOutput();
+	jojoSprite();
+		outputText("Of course you might. It's impossible to tell what the future holds, and you might need him to if the thief becomes too much of a problem. You decide to keep your options open.", false);
+	doNext(playerMenu);
+}
+
+public function stopChanging():void {
+	clearOutput();
+	jojoSprite();
+		outputText("Of course you won't. You're sure Jojo could handle the thief, but you don't want to put him in that kind of dangerous position in the first place. You decide that you won't change your mind.", false);
+	flags[kFLAGS.JOJO_BIMBO_STATE] = 0;
+	doNext(playerMenu);
 }
 
 //Dungeon Convo: Factory
@@ -2753,10 +2883,7 @@ public function jojoTalkFactory():void
 		outputText("Jojo’s chest swells with pride as he looks at you with new eyes before saying, “<i>Wow [name], I don’t know what to say.  I know it uprooted your life and took you away from the ones you love but I sincerely believe that the day you came through that portal was a good day for all of Mareth.  I am proud of you and humbled by the fact that I can call you my friend.</i>”  He rises and gives you a hug of fierce devotion and friendly affection before pulling away and saying, “<i>We’ll have to watch the factory though... the demons can’t be allowed to reopen that evil place.</i>”\n\n");
 	}
 
-	outputText("Once the two of you are done discussing the demonic factory Jojo excuses himself to think on what you’ve told him.\n\n");
-
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	talkMenu(jojoTalkFactory);
 }
 
 //Dungeon Convo: Sand Cave
@@ -2851,10 +2978,7 @@ public function jojoTalkSandCave():void
 		}
 	}
 
-	outputText("Having concluded the conversation the two of you stand and Jojo gives you an appreciative pat on the shoulder, seeming more fond of you.\n\n");
-
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	talkMenu(jojoTalkSandCave);
 }
 
 //Training

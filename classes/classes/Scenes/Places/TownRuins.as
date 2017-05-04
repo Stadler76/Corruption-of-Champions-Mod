@@ -28,6 +28,10 @@ package classes.Scenes.Places
 		
 		private var furnitureFoundToday:String = "";
 		
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0;
+		}
+
 		//Encounters
 		//[Ruined Village]
 		//[Exploring the Lake]

@@ -7,12 +7,22 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.API.Encounter;
 
-	public class AkbalScene extends BaseContent
+public class AkbalScene extends BaseContent implements Encounter
 	{
+
+	public function encounterChance():Number {
+		return 1;
+	}
+
 		public function AkbalScene()
 		{
 		}
+
+	public function encounterName():String {
+		return "akbal";
+	}
 
 		public function akbalDefeated(hpVictory:Boolean):void{
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 1;
@@ -679,8 +689,7 @@ package classes.Scenes.Areas.Forest
 		//2. AKBAL'S MY BITCH
 
 		//[First Encounter]
-		public function supahAkabalEdition():void
-		{
+		public function execEncounter():void {
 			spriteSelect(2);
 			//Make sure that the buttchange is set correctly
 			//when submitting.  Gotta stretch em all!

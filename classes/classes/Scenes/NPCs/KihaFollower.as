@@ -382,7 +382,6 @@ internal function kihaFriendlyGreeting(output:Boolean = true):void {
 	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
 	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
-	//simpleChoices("Talk", talk, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 //Spar with Friendly Kiha - Intro (Z)
 private function sparWithKiha():void {
@@ -670,7 +669,6 @@ private function kihaAdmitsSheLikesYourWang():void {
 	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 	addButton(3, "LovinHug", lovinHugKiha, null, null, null, "Give the dragoness a hug and take things to a whole new level!");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
-	//simpleChoices("Talk", null, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "LovinHug", lovinHugKiha, "Leave", camp.returnToCampUseOneHour);
 }
 //Loving Hug
 private function lovinHugKiha():void {
@@ -843,7 +841,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			outputText("When you approach your dragoness lover, a warm smile spreads across her dark features.  She gives you a playful punch on the shoulder and laughs, \"<i>Hey, doofus. You need something -- maybe a little dragon loving?</i>\" she adds with a wink.");
 			if (canKihaGetPregnant()) outputText("\n\n<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilize her and become a father.</b>");
 			leave = camp.campLoversMenu;
-			//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 			menu();
 			addButton(0, "Appearance", kihaCampAppearance, null, null, null, "Examine Kiha's appearance.");
 			addButton(1, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");

@@ -497,15 +497,23 @@ package classes.Scenes.NPCs
 		//------------
 		// TALK
 		//------------
-		private function joyTalkMenu():void {
-			clearOutput();
-			outputText("You tell Joy you'd like to talk to her for a moment.");
-			outputText("\n\nThe bimbo mouse gives you a brainlessly happy grin. \"<i>Like, sure, [name]! So, what do you, like, wanna talk about?</i>\" She asks.");
+		private function joyTalkMenu(from:Function = null):void {
+			if (from == null) {
+				clearOutput();
+				outputText("You tell Joy you'd like to talk to her for a moment.");
+				outputText("\n\nThe bimbo mouse gives you a brainlessly happy grin. \"<i>Like, sure, [name]! So, what do you, like, wanna talk about?</i>\" She asks.");
+			}
 			menu();
-			addButton(0, "Yourself", askJoyAboutYourself);
-			if (joyTalkCounter() > 0) addButton(1, "Old Life", askJoyAboutOldLife);
-			addButton(2, "Demons", askJoyAboutDemons);
-			if (flags[kFLAGS.JOY_TWINS_BIRTHED] > 0 || player.isPregnant() || jojoScene.pregnancy.isPregnant) addButton(3, "Babies", askJoyAboutBabies);
+			// Copypaste this shit to use it for other talk menu.
+			var talkButton:Function = function(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):* {
+				if(from != func1) addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+				else addDisabledButton(pos, text, toolTipText, toolTipHeader);	
+			}
+			talkButton(0, "Yourself", askJoyAboutYourself);
+			if (joyTalkCounter() > 0) talkButton(1, "Old Life", askJoyAboutOldLife);
+			else addDisabledButton(1, "Old Life", "You should talk a little more before you can ask about it.");
+			talkButton(2, "Demons", askJoyAboutDemons);
+			if (flags[kFLAGS.JOY_TWINS_BIRTHED] > 0 || player.isPregnant() || jojoScene.pregnancy.isPregnant) talkButton(3, "Babies", askJoyAboutBabies);
 			addButton(14, "Back", genericMenu);
 		}
 		
@@ -650,7 +658,8 @@ package classes.Scenes.NPCs
 			outputText("\n\nShe smiles and flops down on the ground. \"<i>I'm tired now. I wanna take a nap.</i>\" She announces, then curls up and closes her eyes, oblivious to the world.");
 			outputText("\n\nTo be honest this whole situation is a bit awkward... so you take your leave...");
 			flags[kFLAGS.JOY_TALKED_ABOUT_YOURSELF]++;
-			doNext(playerMenu);
+			
+			joyTalkMenu(askJoyAboutYourself);
 		}
 		
 		private function askJoyAboutHerself():void { //For some reason, this talk topic is missing.
@@ -689,7 +698,8 @@ package classes.Scenes.NPCs
 			outputText("\n\nMaybe you should approach and talk to Joy about changing her back once you have a clear way of doing so...");
 			if (flags[kFLAGS.JOY_INTELLIGENCE] < 40) flags[kFLAGS.JOY_INTELLIGENCE]++;
 			flags[kFLAGS.JOY_TALKED_ABOUT_OLD_LIFE]++;
-			doNext(playerMenu);
+			
+			joyTalkMenu(askJoyAboutOldLife);
 		}
 		
 		private function askJoyAboutDemons():void {
@@ -700,7 +710,8 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Uh...</i>\" She mumbles, clearly trying to think of something helpful to say. \"<i>Like, meditating to bring your libido under control is really the only thing I can think of. If, like, you aren't naturally super-horny, then the demons will, y'know, have a harder time getting you so turned on you stop fighting, y'see?</i>\"");
 			outputText("\n\nSeems like this is the only way... You thank Joy for the insight and leave her for the moment.");
 			flags[kFLAGS.JOY_TALKED_ABOUT_DEMONS]++;
-			doNext(playerMenu);
+			
+			joyTalkMenu(askJoyAboutDemons);
 		}
 		
 		private function askJoyAboutBabies():void {
@@ -719,7 +730,8 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou smile and tell Joy that's all you were really worried about. You promise to come see her later and turn to leave her.");
 			outputText("\n\n\"<i>Like, thanks for dropping by, [name].</i>\" The bimbofied mouse says as you leave.");
 			flags[kFLAGS.JOY_TALKED_ABOUT_BABIES]++;
-			doNext(playerMenu);
+			
+			joyTalkMenu(askJoyAboutBabies);
 		}
 		//------------
 		// MEDITATION

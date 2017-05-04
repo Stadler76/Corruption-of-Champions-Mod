@@ -2,14 +2,25 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	
-	public class SwordInStone extends AbstractLakeContent
-	{
+import classes.Scenes.API.Encounter;
+
+public class SwordInStone extends AbstractLakeContent implements Encounter {
 		public function SwordInStone()
 		{
 		}
 
-		public function findSwordInStone():void 
+
+	public function encounterName():String {
+		return "sword";
+	}
+
+	public function encounterChance():Number {
+		return !player.hasStatusEffect(StatusEffects.TookBlessedSword)
+			   && !player.hasStatusEffect(StatusEffects.BSwordBroken)
+				? 1 : 0;
+	}
+
+	public function execEncounter():void
 		{
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] < 2)
 			{

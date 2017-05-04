@@ -2,6 +2,8 @@
 	
 	import classes.*;
 	import classes.GlobalFlags.*;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
 
 	public class AprilFools extends BaseContent
 	{
@@ -10,17 +12,25 @@
 			return (date.date == 1 && date.month == 3);
 		}
 
-		// Encounter Chance 1 out of 40 and only if you're a centaur
-		public function poniesYN():Boolean {
-			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.isTaur() && date.date == 1 && date.month == 3 && flags[kFLAGS.SILLY_MODE_PONIES] == 0) {
+	public const poniesEncounter:Encounter = Encounters.build({
+		name  : "ponies",
+		call  : poniesFn,
+		when  : function ():Boolean {
+			return player.lowerBody == LOWER_BODY_TYPE_HOOFED
+				   && player.isTaur()
+				   && date.date == 1 && date.month == 3
+				   && flags[kFLAGS.SILLY_MODE_PONIES] == 0
+		},
+		chance: 0.25
+	});
+		private function poniesFn():void {
 				clearOutput();
 				outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n", false);
 				//(option: Approach? Leave them Be?)
-				simpleChoices("Approach",approachPonies,"",null,"",null,"",null,"Leave",leavePonies);
+				menu();
+				addButton(0, "Approach", approachPonies);
+				addButton(14, "Leave", leavePonies);
 				flags[kFLAGS.SILLY_MODE_PONIES]++;
-				return true;
-			}
-			return false;
 		}
 
 		//----------Next Page-----------
@@ -53,7 +63,10 @@
 			//Option one: Leave Politely
 			//Option Two: Too creepy...
 			//Option three: Yay, party?
-			simpleChoices("Too creepy",derpCreepy,"Yay Party!",derpyParty,"",null,"",null,"Leave",derpPolitely);
+			menu();
+			addButton(0, "Too creepy", derpCreepy);
+			addButton(1, "Yay Party!", derpyParty);
+			addButton(14, "Leave", derpPolitely);
 		}
 
 		public function derpPolitely():void {

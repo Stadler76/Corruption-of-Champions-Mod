@@ -51,6 +51,11 @@ package classes.BodyParts
 			return type == SKIN_TYPE_FUR;
 		}
 
+		public function hasWool():Boolean
+		{
+			return type == SKIN_TYPE_WOOL;
+		}
+
 		public function restore(keepTone:Boolean = true):void
 		{
 			type = SKIN_TYPE_PLAIN;

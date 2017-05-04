@@ -435,7 +435,7 @@ private function fuckEdrynTaur():void {
 	else outputText("\n\nShe sighs contentedly and says, \"<i>Mmm, never stop visiting, okay?</i>\"", false);
 	outputText("\n\nThe two of you wipe up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly your groin reeks of centaur-slut.  Your body, happy with the scent and scrutiny of the bar's patrons, refuses to go soft, providing a wonderful view of your cum-slicked member.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
 	if (player.statusEffectv1(StatusEffects.Edryn) >= 4) edrynPregChance();
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -3);
 	if (player.lust < 30) player.lust = 30;
 	doNext(camp.returnToCampUseOneHour);
@@ -492,7 +492,7 @@ private function fuckEdrynNonTaur():void {
 	else outputText("She sighs contentedly and says, \"<i>Mmm, never stop visiting ok?</i>\"\n\n", false);
 	outputText("The two of you clean up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly you reek of centaur-slut.  Your body, happy with the scent and the scrutiny of the bar's patrons, refuses to go soft, providing a more-than-ample tent.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
 	if (player.statusEffectv1(StatusEffects.Edryn) >= 4) edrynPregChance();
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -3);
 	if (player.lust < 30) player.lust = 30;
 	doNext(camp.returnToCampUseOneHour);
@@ -540,11 +540,10 @@ public function helAppearance():void {
 public function approachHelAtZeBitch():void {
 	clearOutput();
 	outputText(images.showImage("hel-chat-at-bar"));
-	var edryn:Function = null;
-	if (edrynBar() && player.cockThatFits(300) >= 0 && player.statusEffectv1(StatusEffects.Edryn) >= 4)
-		edryn = helEdrynThreeSomeStartYerEngines;
 
-	if (edryn != null && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
+	menu();
+	addDisabledButton(0, "Edryn3Some");
+	if ((edrynBar() && player.cockThatFits(300) >= 0 && player.statusEffectv1(StatusEffects.Edryn) >= 4) && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way.  \"<i>Well, fancy meeting you here, ", false);
 		if (player.femininity < 49) outputText("handsome", false);
 		else outputText("beautiful", false);
@@ -558,6 +557,7 @@ public function approachHelAtZeBitch():void {
 
 		outputText("Sitting with the salamander, you notice across the crowded bar that Edryn is sitting at her table, sipping a little glass of wine.  Catching your eye, the centauress gives you a sultry wink.  An idea forms in your mind: you could easily introduce the two girls.  Do you?", false);
 		flags[kFLAGS.HEL_EDRYN_OFFER]++;
+		addButton(0, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
 	}
 	else {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way before swinging over and taking her place on your lap.  \"<i>Well, fancy meeting you here, ", false);
@@ -570,7 +570,9 @@ public function approachHelAtZeBitch():void {
 		outputText("  Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n", false);
 	}
 	//(Display Options: [Threesome] [Leave]
-	simpleChoices("Edryn3Some", edryn, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs, "", null, "", null, "Leave", leaveHelInZeBitch);
+	
+	addButton(1, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs);
+	addButton(14, "Leave", leaveHelInZeBitch);
 }
 
 //First Time - Leave
@@ -645,7 +647,7 @@ private function threesomeEdrynAndHel():void {
 	outputText("When you're satisfied, you stumble and collapse against her horsebody, barely fighting off an intense urge to sleep.  The centauress moans contentedly, \"<i>Mmm, we should do this again sometime. You two were amazing.</i>\"\n\n", false);
 
 	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your " + player.armorName + " and walking off back to camp.\n\n", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	kGAMECLASS.helFollower.helAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -661,10 +663,15 @@ public function findOutEdrynIsPregnant():void {
 	outputText("The centaur blushes fiercely, blurting everything out in a rush now that she's started to talk, \"<i>I don't know how it happened!  I've been taking herbs to prevent this kind of thing, and I've NEVER heard of someone getting pregnant while they're on these.</i>\"  She gives her flank a gentle pat as she keeps speaking, \"<i>There's just something about your cum I guess!  Our child will be a centaur, just like her mom, and I intend to keep her.</i>\"\n\n", false);
 
 	outputText("<b>How do you react?</b>", false);
-
-	var aroused:Function = (player.totalCocks() > 0 ? arousedByPregdryn : null);
 	//[Shocked] [Pleased] [Aroused (Requires Wang)]
-	simpleChoices("Shocked", shockedByEdrynsPregnancy, "Pleased", pleasedbyPregdryn, "Aroused", aroused, "", null, "", null);
+	menu();
+	addButton(0, "Shocked", shockedByEdrynsPregnancy);
+	addButton(1, "Pleased", pleasedbyPregdryn);
+	if (player.hasCock()) {
+		addButton(2, "Aroused", arousedByPregdryn);
+	} else {
+		addDisabledButton(2, "Aroused", "This scene requires you to have cock.");
+	}
 }
 
 //Shocked
@@ -675,7 +682,9 @@ private function shockedByEdrynsPregnancy():void {
 
 	outputText("\n\n<b>What do you do?</b>", false);
 	//[Accept it] [Reject it]
-	simpleChoices("Accept It", shockedByPregdrynThenAccept, "Reject It", beAnAssholeToPregdryn, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Accept It", shockedByPregdrynThenAccept);
+	addButton(1, "Reject It", beAnAssholeToPregdryn);
 }
 //Accept it
 private function shockedByPregdrynThenAccept():void {
@@ -926,7 +935,7 @@ public function fuckPregEdryn():void {
 
 		outputText("After you both get a chance to stagger up to your feet and get dressed, Edryn thanks you, \"<i>That was wonderful dear.  I'll probably be horny and dripping again in a few minutes, so please come back soon.  I think I'm going to be a sopping wet mess until our child is born.</i>\"\n\n", false);
 	}
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -.5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -991,7 +1000,7 @@ private function jizzFromEatingPregdrynOut():void {
 	outputText("You nod and give her milk-dripping teat a squeeze.  A squirt of the white stuff escapes before Edryn pushes you away.  You chuckle and get dressed while she does the same, but before you can escape her room, she lifts her shirt, squeezes a teat, and catches you in the face with her milk.\n\n", false);
 
 	outputText("\"<i>Turn-about is fair play!</i>\" she exclaims. You leave, unable to dispute the logic.", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", 1, "sen", 2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1163,7 +1172,7 @@ public function eatEdrynPussyLikeABawss():void {
 	//[Next]
 	menu();
 	addButton(0,"Next",postEdrynEatOutRut);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", .25, "sen", -3);
 }
 

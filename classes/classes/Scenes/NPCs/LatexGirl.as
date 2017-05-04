@@ -2,9 +2,10 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
 
-	public class LatexGirl extends NPCAwareContent
-	{
+public class LatexGirl extends NPCAwareContent  {
 
 		public function LatexGirl()
 		{
@@ -270,6 +271,16 @@ private function nameZeLatexGoo():void
 	flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
 	doNext(camp.returnToCampUseOneHour);
 }
+
+	public const lakeDiscovery:Encounter = Encounters.build({
+		name:"latexGirl",
+		call:encounterLeftBehindGooSlave,
+		chance:0.3,
+		when:function():Boolean {
+			return (flags[kFLAGS.GOO_TFED_MEAN] + flags[kFLAGS.GOO_TFED_NICE] > 0)
+				   && flags[kFLAGS.GOO_SLAVE_RECRUITED] == 0;
+		}
+	});
 //PC Couldn't Bring Her Back
 public function encounterLeftBehindGooSlave():void {
 	clearOutput();

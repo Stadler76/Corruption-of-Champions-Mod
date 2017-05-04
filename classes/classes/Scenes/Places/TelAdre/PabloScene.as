@@ -87,13 +87,14 @@ package classes.Scenes.Places.TelAdre
 				if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("\n\nThe centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.");
 				outputText("\n\n\"<i>Great,</i>\" Pablo responds with a grin. \"<i>There’s another bar next to mine. Maybe you could try doing some chin-ups?</i>\"");
 				outputText("\n\nWith that, Pablo flutters his wings, lifting himself to his bar.");
+				outputText("\n\n");
 			}
 			if (flags[kFLAGS.PABLO_AFFECTION] < 80) {
-				outputText("\n\nYou work out for about an hour or so, exchanging a few stories of your own travels in Mareth as you do so. He pays close attention to his stories, adding commentary whenever appropriate.");
+				outputText("You work out for about an hour or so, exchanging a few stories of your own travels in Mareth as you do so. He pays close attention to his stories, adding commentary whenever appropriate.");
 				outputText("\n\nYou depart to take a quick shower before returning to camp, Pablo waving goodbye at you as you go.");
 			}
 			else {
-				outputText("\n\nYou accept the imp-morph’s invitation eagerly.");
+				outputText("You accept the imp-morph’s invitation eagerly.");
 				outputText("\n\n\"<i>Great! You know how much I enjoy our workouts. There’s a bar you can use right next to mine, as per the usual.</i>\"");
 				outputText("\n\nNodding, you hop up, grasping the bar. You work out for an hour, exchanging various stories of your adventures in Mareth. He adds in commentary whenever appropriate, as well as the occasional witty banter.");
 				outputText("\n\nWhen your hour is up, you hop down from your bar and make your way to the showers, Pablo waving goodbye to you as you do so. Once you finish with your shower, you return to camp.");

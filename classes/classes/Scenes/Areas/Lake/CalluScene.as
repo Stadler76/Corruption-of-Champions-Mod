@@ -2,22 +2,30 @@ package classes.Scenes.Areas.Lake
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	
+import classes.Scenes.API.Encounter;
+
 	/**
 	 * ...
 	 * @author ...
 	 */
-	public class CalluScene extends AbstractLakeContent
-	{
+	public class CalluScene extends AbstractLakeContent implements Encounter {
 		
 		public function CalluScene() 
 		{
 			
 		}
 		
+	public function encounterName():String {
+		return "callu";
+	}
+
+// Base chance x0.5 or x2.5 if hungry
+	public function encounterChance():Number {
+		return 0.5 + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 10 ? 2 : 0)
+	}
+
 		//Just want to do a quick Ottergirl event submission after you mentioned it!
-		public function ottahGirl():void
-		{
+	public function execEncounter():void {
 			clearOutput();
 			outputText(images.showImage("callu-intro"));
 			flags[kFLAGS.MET_OTTERGIRL]++;

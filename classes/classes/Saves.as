@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 
 	import classes.BodyParts.Neck;
@@ -9,6 +9,8 @@
 	import classes.Scenes.Inventory;
 	import classes.Scenes.Places.TelAdre.Katherine;
 	import classes.internals.LoggerFactory;
+	import classes.internals.Serializable;
+	import classes.internals.SerializationUtils;
 	import mx.logging.ILogger;
 
 	CONFIG::AIR 
@@ -458,23 +460,14 @@ public function deleteScreen():void
 		s++;
 	}
 	addButton(14, "Back", returnToSaveMenu);
-	/*
-	choices("Slot 1", delFuncs[0], 
-			"Slot 2", delFuncs[1], 
-			"Slot 3", delFuncs[2], 
-			"Slot 4", delFuncs[3], 
-			"Slot 5", delFuncs[4], 
-			"Slot 6", delFuncs[5], 
-			"Slot 7", delFuncs[6], 
-			"Slot 8", delFuncs[7], 
-			"Slot 9", delFuncs[8], 
-			"Back", returnToSaveMenu);*/
 }
 
 public function confirmDelete():void
 {
 	outputText("You are about to delete the following save: <b>" + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
-	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", null, "", null, "", null);
+	menu();
+	addButton(0, "No", deleteScreen);
+	addButton(1, "Yes", purgeTheMutant);
 }
 
 public function purgeTheMutant():void
@@ -619,6 +612,7 @@ public function savePermObject(isFile:Boolean):void {
 		
 		saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] = flags[kFLAGS.SHOW_SPRITES_FLAG];
 		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
+		saveFile.data.flags[kFLAGS.PRISON_ENABLED] = flags[kFLAGS.PRISON_ENABLED];
 		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 		
 		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
@@ -671,6 +665,7 @@ public function loadPermObject():void {
 			
 			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
+			if (saveFile.data.flags[kFLAGS.PRISON_ENABLED] != undefined) flags[kFLAGS.PRISON_ENABLED] = saveFile.data.flags[kFLAGS.PRISON_ENABLED];
 			
 			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_FONT] != undefined) flags[kFLAGS.USE_OLD_FONT] = saveFile.data.flags[kFLAGS.USE_OLD_FONT];
@@ -900,7 +895,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
-		saveFile.data.wingDesc = player.wingDesc;
 		saveFile.data.wingType = player.wingType;
 		saveFile.data.lowerBody = player.lowerBody;
 		saveFile.data.legCount = player.legCount;
@@ -929,8 +923,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		   myLocalData.data.girlEffectArray.push(new Array());
 		 }*/
 
+		
 		saveFile.data.cocks = [];
-		saveFile.data.vaginas = [];
 		saveFile.data.breastRows = [];
 		saveFile.data.perks = [];
 		saveFile.data.statusAffects = [];
@@ -955,28 +949,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.cocks[i].pLongDesc = player.cocks[i].pLongDesc;
 			saveFile.data.cocks[i].sock = player.cocks[i].sock;
 		}
-		//Set Vaginal Array
-		for (i = 0; i < player.vaginas.length; i++)
-		{
-			saveFile.data.vaginas.push([]);
-		}
-		//Populate Vaginal Array
-		for (i = 0; i < player.vaginas.length; i++)
-		{
-			saveFile.data.vaginas[i].type = player.vaginas[i].type;
-			saveFile.data.vaginas[i].vaginalWetness = player.vaginas[i].vaginalWetness;
-			saveFile.data.vaginas[i].vaginalLooseness = player.vaginas[i].vaginalLooseness;
-			saveFile.data.vaginas[i].fullness = player.vaginas[i].fullness;
-			saveFile.data.vaginas[i].virgin = player.vaginas[i].virgin;
-			saveFile.data.vaginas[i].labiaPierced = player.vaginas[i].labiaPierced;
-			saveFile.data.vaginas[i].labiaPShort = player.vaginas[i].labiaPShort;
-			saveFile.data.vaginas[i].labiaPLong = player.vaginas[i].labiaPLong;
-			saveFile.data.vaginas[i].clitPierced = player.vaginas[i].clitPierced;
-			saveFile.data.vaginas[i].clitPShort = player.vaginas[i].clitPShort;
-			saveFile.data.vaginas[i].clitPLong = player.vaginas[i].clitPLong;
-			saveFile.data.vaginas[i].clitLength = player.vaginas[i].clitLength;
-			saveFile.data.vaginas[i].recoveryProgress = player.vaginas[i].recoveryProgress;
-		}
+		
+		saveFile.data.vaginas = SerializationUtils.serializeVector(player.vaginas as Vector.<*>);
+		
 		//NIPPLES
 		saveFile.data.nippleLength = player.nippleLength;
 		//Set Breast Array
@@ -1803,7 +1778,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.clawType = (saveFile.data.clawType == undefined) ? CLAW_TYPE_NORMAL : saveFile.data.clawType;
 		// </mod>
 
-		player.wingDesc = saveFile.data.wingDesc;
 		player.wingType = saveFile.data.wingType;
 		player.lowerBody = saveFile.data.lowerBody;
 		player.tailType = saveFile.data.tailType;
@@ -1892,56 +1866,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 				//trace("LoadOne Cock i(" + i + ")");
 		}
-		//Set Vaginal Array
-		for (i = 0; i < saveFile.data.vaginas.length; i++)
-		{
-			player.createVagina();
-		}
-		//Populate Vaginal Array
-		for (i = 0; i < saveFile.data.vaginas.length; i++)
-		{
-			player.vaginas[i].vaginalWetness = saveFile.data.vaginas[i].vaginalWetness;
-			player.vaginas[i].vaginalLooseness = saveFile.data.vaginas[i].vaginalLooseness;
-			player.vaginas[i].fullness = saveFile.data.vaginas[i].fullness;
-			player.vaginas[i].virgin = saveFile.data.vaginas[i].virgin;
-			if (saveFile.data.vaginas[i].type == undefined) player.vaginas[i].type = 0;
-			else player.vaginas[i].type = saveFile.data.vaginas[i].type;
-			if (saveFile.data.vaginas[i].labiaPierced == undefined) {
-				player.vaginas[i].labiaPierced = 0;
-				player.vaginas[i].labiaPShort = "";
-				player.vaginas[i].labiaPLong = "";
-				player.vaginas[i].clitPierced = 0;
-				player.vaginas[i].clitPShort = "";
-				player.vaginas[i].clitPLong = "";
-				player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
-				player.vaginas[i].recoveryProgress = 0;
-			}
-			else
-			{
-				player.vaginas[i].labiaPierced = saveFile.data.vaginas[i].labiaPierced;
-				player.vaginas[i].labiaPShort = saveFile.data.vaginas[i].labiaPShort;
-				player.vaginas[i].labiaPLong = saveFile.data.vaginas[i].labiaPLong;
-				player.vaginas[i].clitPierced = saveFile.data.vaginas[i].clitPierced;
-				player.vaginas[i].clitPShort = saveFile.data.vaginas[i].clitPShort;
-				player.vaginas[i].clitPLong = saveFile.data.vaginas[i].clitPLong;
-				player.vaginas[i].clitLength = saveFile.data.vaginas[i].clitLength;
-				player.vaginas[i].recoveryProgress = saveFile.data.vaginas[i].recoveryProgress;
-				
-				
-				// backwards compatibility
-				//TODO is there a better way to do this?
-				if(saveFile.data.vaginas[i].clitLength == undefined) {
-					player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
-					trace("Clit length was not loaded, setting to default.");
-				}
-				
-				if(saveFile.data.vaginas[i].recoveryProgress == undefined) {
-					player.vaginas[i].recoveryProgress = 0;
-					trace("Stretch counter was not loaded, setting to 0.");
-				}
-			}
-				//trace("LoadOne Vagina i(" + i + ")");
-		}
+		player.vaginas = new Vector.<VaginaClass>();
+		SerializationUtils.deserializeVector(player.vaginas as Vector.<*>, saveFile.data.vaginas, VaginaClass);
+		
 		//NIPPLES
 		if (saveFile.data.nippleLength == undefined)
 			player.nippleLength = .25;

@@ -56,9 +56,16 @@ package classes.Scenes.Areas.Swamp
 			player.refillHunger(20, false);
 			outputText("He starts talking first, telling of how his people were a young race of transformed off-worlders.  The demons put a quick end to that, and recruited a large amount of the more aggressive driders and arachnes from his tribe.  He quickly explains that arachne are like him, but with chitinous exoskeletons covering their whole body, except for the face.  Driders on the other hand, have the body of a human from the hips up but a giant spider body below.\n\n", false);
 			outputText("You talk of your own people, and the good times you had in Ingnam growing up, but you keep coming back to the sadness of losing so many young adults to becoming champions.  Eventually you go over your own selection, training, and eventual journey.  The spider-morph listens with rapt attention the whole way through.\n\n", false);
-			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n", false);
-			outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ", false);
-			inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  ");
+			if (rand(6) != 0) {
+				outputText("If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n", false);
+				outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ", false);
+				inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+			} else {
+				outputText("Spider webs are tougher than steel.  A skilled artisan can make an excellent fabric using it.  Or you can just twist it into a rope.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n", false);
+				outputText("He stands and gives you a bundle of white fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ", false);
+				inventory.takeItem(useables.T_SSILK, camp.returnToCampUseOneHour);
+			}
 		}
 
 //*Victory Pretext:rr
@@ -87,7 +94,7 @@ package classes.Scenes.Areas.Swamp
 				if (player.hasVagina()) {
 					addButton(0, "Mount", victoryCowgirlRidingOnSpiderBoi);
 					if (player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
-						addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+						addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster);
 					}
 				}
 				if (player.hasCock()) {

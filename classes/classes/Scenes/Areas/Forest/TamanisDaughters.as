@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Forest
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.forest.tamaniDaughtersScene.combatWinAgainstDaughters();
+			game.forest.tamaniScene.tamaniDaughtersScene.combatWinAgainstDaughters();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -89,7 +89,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
 				game.combat.cleanupAfterCombat();
 			} else {
-				game.forest.tamaniDaughtersScene.loseToDaughters();
+				game.forest.tamaniScene.tamaniDaughtersScene.loseToDaughters();
 			}
 		}
 

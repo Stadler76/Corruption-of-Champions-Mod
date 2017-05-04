@@ -58,7 +58,9 @@ public function encounterMarae():void {
 				outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 				if (player.lib + player.cor > 80) {
 					outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-					simpleChoices("Boob",grabHerBoob,"", null,"", null,"", null,"Leave",camp.returnToCampUseOneHour);
+					menu();
+					addButton(0, "Boob", grabHerBoob);
+					addButton(14, "Leave", camp.returnToCampUseOneHour);
 				}
 				else doNext(camp.returnToCampUseOneHour);
 				return;
@@ -96,7 +98,9 @@ public function encounterMarae():void {
 					outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n", false);
 					if (player.lib + player.cor > 80) {
 						outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?", false);
-						simpleChoices("Boob",grabHerBoob,"", null,"", null,"", null,"Leave",camp.returnToCampUseOneHour);
+						menu();
+						addButton(0, "Boob", grabHerBoob);
+						addButton(14, "Leave", camp.returnToCampUseOneHour);
 					}
 					else doNext(camp.returnToCampUseOneHour);
 				}
@@ -127,7 +131,10 @@ public function encounterMarae():void {
 				outputText("Spellbound, you watch as she forces more and more fingers into her hungry flower-hole, \"<i>Ever since then, I've just been drinking in more and corruption, and waiting for someone to come here and help fill my hole.  I've played with my flower for what has felt like days on end.  Every time I come harder and harder.  The more I let go the better it is.  Do you know what I did this morning?  I let my branches grow tentacles to fuck my mouth and pussy at the same time.  I came over and over and over, and then I had my roots pull in all the cum they could find to fill my womb with.</i>\"\n\n", false);
 				outputText("You gasp at the change she has gone through, getting more than a little turned on yourself.  Thinking that a once chaste goddess has been reduced to a horny slut makes you wonder how you stand any chance of victory.  Marae keeps up her show, \"<i>It's so good.  Come join me in it.  I gave in to the pleasure already.  If you look behind me, you can see what's left of my soul.  I could feel it dripping out through my cunny a little bit each time I came.  After a while it flowed together and started to crystalize.  I think the demons call it lethicite, but I just wish I still had a soul so I could do it all over again.  Come fuck me, I want to watch you go mad while you cum out your soul.</i>\"\n\n", false);
 				outputText("It sounds like a very pleasant offer, but it would mean the total abandonment of your reasons for coming here.   You could probably get away if you were to run, she doesn't seem to be nearly as powerful.  Or you could risk trying to steal the lethicite before making your getaway, but it wouldn't be hard for her to catch you that close.", false);
-				simpleChoices("Run", runFromPervertedGoddess, "Lethicite", maraeStealLethicite, "Accept", maraeBadEnd, "", null, "", null);
+				menu();
+				addButton(0, "Run", runFromPervertedGoddess);
+				addButton(1, "Lethicite", maraeStealLethicite);
+				addButton(2, "Accept", maraeBadEnd);
 				addButton(3, "Prank", maraeStealLethicite, true, null, null, "Play a practical joke on the corrupted goddess and pretend to steal her Lethicite. Why would you do this?","Practical Joke");
 				addButton(4, "FIGHT!", promptFightMarae, encounterMarae);
 
@@ -296,7 +303,7 @@ private function maraeStealLethicite( deliberate:Boolean = false ):void {
 	//(FAIL)
 	else {
 		player.slimeFeed();
-		player.orgasm();
+		player.orgasm('Generic');
 		if(!deliberate)outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n", false);
 		else outputText("A mischievous idea reaches you, and you decide to play a prank on the corrupted goddess. You dart to the side, diving into a roll that bring you up behind the tree, aiming for her lethicite. You try to make your robbery attempt look real, and succeed; perhaps too well. Caught by surprise by her honest hostile reaction, you're ensnared by several tentacles like a fly in a spider's web. You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree. This was most definitely a bad idea.\n\n", false);
 		outputText("\"<i>Awwww, what a nasty deceitful little " + player.mf("boy", "girl"), false);
@@ -665,7 +672,7 @@ private function MaraePt2RoundIIIPrizes():void {
 			}
 		}
 	}
-	player.orgasm();
+	player.orgasm('Generic');
 	doNext(camp.returnToCampUseTwoHours);
 }
 

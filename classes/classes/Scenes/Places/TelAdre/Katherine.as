@@ -929,19 +929,30 @@ private function katherineMenu():void {
 }
 
 //Talk
-private function talkToKatherine():void {
-	clearOutput();
-	outputText("You tell Katherine that you'd like to talk.  ");
+private function talkToKatherine(from:Function = null):void {
+	// Copypaste this shit to use it for other talk menu.
+	var talkButton:Function = function(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):* {
+		if(from != func1) addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+		else addDisabledButton(pos, text, toolTipText, toolTipHeader);	
+	}
+	
+	if (from == null) {
+		clearOutput();
+		outputText("You tell Katherine that you'd like to talk.  ");
+	}
 	if (isAt(KLOC_STREETS)) {
-		outputText("The pink-haired black cat looks shy, but excited at that.  “<i>Okay... what do you want to talk about?</i>” she asks, nervously looking at her feet.");
+		if (from == null) {
+			outputText("The pink-haired black cat looks shy, but excited at that.  “<i>Okay... what do you want to talk about?</i>” she asks, nervously looking at her feet.");
+		}
 		//[Racial Tension] [Her History] [Gang] [Dog Cock] [Vagrancy] [Love & Lust]
 		menu();
-		addButton(0, "RacialTension", katherineDefur);
-		addButton(1, "Her History", katherinesHistory);
-		addButton(2, "Gang", askKatherineAboutGang);
-		addButton(3, "Dog Cock", askKatherineAboutDogCock);
-		addButton(4, "Vagrancy", askKatherineAboutVagrancy);
-		addButton(5, "LoveAndLust", askKatherineAboutLoveAndLust);
+		talkButton(0, "RacialTension", katherineRacialTension);
+		talkButton(1, "Her History", katherinesHistory);
+		talkButton(2, "Gang", askKatherineAboutGang);
+		talkButton(3, "Dog Cock", askKatherineAboutDogCock);
+		talkButton(4, "Vagrancy", askKatherineAboutVagrancy);
+		talkButton(5, "LoveAndLust", askKatherineAboutLoveAndLust);
+		
 		if (flags[kFLAGS.KATHERINE_UNLOCKED] == 1 && flags[kFLAGS.KATHERINE_TRAINING] == 1) {
 			addButton(6, "Employment", telAdre.katherineEmployment.employmentTalk);
 		} else {
@@ -950,28 +961,34 @@ private function talkToKatherine():void {
 		addButton(14, "Back", katherineMenu);
 		return;
 	}
-	outputText((isAt(KLOC_KATHS_APT) ? "She sits on the edge of the bed" : "She leans back in her chair") + " and says “<i>I’d love to talk.  What’s on your mind?</i>”");
+	if (from == null) {
+		outputText((isAt(KLOC_KATHS_APT) ? "She sits on the edge of the bed" : "She leans back in her chair") + " and says “<i>I’d love to talk.  What’s on your mind?</i>”");
+	}
 	menu();
-	addButton(0, "Gangs", talkGangs);
-	addButton(1, "The Watch", talkWatch);
-	addButton(2, "Her Home", talkHome);
-	addButton(3, "The Bar", talkWetBitch);
+	talkButton(0, "Gangs", talkGangs);
+	talkButton(1, "The Watch", talkWatch);
+	talkButton(2, "Her Home", talkHome);
+	talkButton(3, "The Bar", talkWetBitch);
+	
 	if (doneSubmissive(KBIT_SUB_CAT_GIRL)) {
-		addButton(4, "Cat Girl", talkCatGirl);
+		talkButton(4, "Cat Girl", talkCatGirl);
 	} else {
 		addDisabledButton(4, "Cat Girl");
 	}
 	if (isAt(KLOC_KATHS_APT) && flags[kFLAGS.KATHERINE_CLOTHES] >= 4) {
+		// has submenu - don't disable it
 		addButton(5, "Clothes", talkClothes); //All the special clothes have a value of 4 or more
 	} else {
 		addDisabledButton(5, "Clothes");
 	}
 	if (playerLovers() > 0) {
+		// has submenu - don't disable it
 		addButton(6, "Lovers", talkLovers);
 	} else {
 		addDisabledButton(6, "Lovers");
 	}
 	if (submissiveness() >= 4) {
+		// is toggle - don't disable it
 		addButton(7, "Master", talkMaster);
 	} else {
 		addDisabledButton(7, "Master");
@@ -979,6 +996,7 @@ private function talkToKatherine():void {
 	if (breasts.lactating()) {
 		addButton(8, "Her Milk", talkMilk);
 	} else {
+		// has submenu - don't disable it
 		addDisabledButton(8, "Her Milk");
 	}
 	addButton(14, "Back", katherineMenu);
@@ -986,7 +1004,7 @@ private function talkToKatherine():void {
 
 //Talk Scenes
 //Racial Tension
-private function katherineDefur():void {
+private function katherineRacialTension():void {
 	clearOutput();
 	outputText("You comment to Katherine that you can't help but notice that she and all of her... ah, 'friends' are cats, and the city seems to be mainly populated by dogs.  Does that have anything to do with her basically being a vagrant?\n\n");
 
@@ -996,9 +1014,9 @@ private function katherineDefur():void {
 
 	outputText("“<i>We're a lot more united now than we were before, but, honestly, old beliefs die hard, you know?  Horses are dumb, sex-crazed brutes, centaurs are horses with big egos and bad attitudes, dogs are dull-witted, wolves are savage, cats are lazy, mice are cowardly, foxes are shiftless... Well, you can see how it goes.</i>”  The herm cat-morph delivers this proclamation while airly waving one furry hand.  “<i>Besides, it's not as if there are demons beating on the walls day in and day out to remind us all of the greater threat every morning, you know?</i>”\n\n");
 
-	outputText("You click your tongue reflexively.  Politely thanking Katherine for the talk, you turn and walk away.");
-	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdre.telAdreMenu);
+	outputText("You click your tongue reflexively.");
+	
+	talkToKatherine(katherineRacialTension);
 }
 
 //Her History
@@ -1016,9 +1034,9 @@ private function katherinesHistory():void {
 
 	outputText("She sees the look you're giving her and hastily anticipates your reaction.  “<i>But don't worry, I actually like my life!  Nobody telling me what to do, I make my own hours... really, it's not so bad.</i>”\n\n");
 
-	outputText("You're skeptical, but reason there's nothing you can do about it right now.  Politely thanking Katherine for the talk, you turn and walk away.");
-	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdre.telAdreMenu);
+	outputText("You're skeptical, but reason there's nothing you can do about it right now.");
+	
+	talkToKatherine(katherinesHistory);
 }
 
 //Gang
@@ -1062,11 +1080,9 @@ private function askKatherineAboutGang():void {
 
 	outputText("Mulling that over, you remember what you were originally talking about and ask her what the gang does aside from milk-muggings.\n\n");
 
-	outputText("She shrugs.  “<i>Panhandling, a little pickpocketing, some stall-robbing...  Mostly we're urban scavengers - you know, sneaking into abandoned homes and things to pick up stuff we can pawn for money.  It's not as easy as it sounds, and the law really cracks down on it, so if they catch us... it won't go easy.  We do that only when we're sure we can get away with it.</i>”\n\n");
-
-	outputText("Politely thanking Katherine for the talk, you turn and walk away.\n\n");
-	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdre.telAdreMenu);
+	outputText("She shrugs.  “<i>Panhandling, a little pickpocketing, some stall-robbing...  Mostly we're urban scavengers - you know, sneaking into abandoned homes and things to pick up stuff we can pawn for money.  It's not as easy as it sounds, and the law really cracks down on it, so if they catch us... it won't go easy.  We do that only when we're sure we can get away with it.</i>”");
+	
+	talkToKatherine(askKatherineAboutGang);
 }
 
 //Dog Cock
@@ -1085,10 +1101,8 @@ private function askKatherineAboutDogCock():void {
 	outputText("Curious, you prod her with another question; would she ever change her dog-dick for something else, given the opportunity?\n\n");
 
 	outputText("She shakes her head.  “<i>No... like I said, I'm accustomed to the dog-dick now, I even rather like it.  I just want to change the knot.  I'm not saying I want to get my hands on bulbous peppers or double peppers or anything like that.  Actually, I don't think I'd mind the bulbous peppers, and a double pepper might be interesting.  I definitely would like to get my hands on an overly large pepper or two...</i>”  She trails off murmuring, half to you, half to herself.\n\n");
-
-	outputText("Politely thanking Katherine for the chat, you turn and walk away.");
-	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdre.telAdreMenu);
+	
+	talkToKatherine(askKatherineAboutDogCock);
 }
 
 //Vagrancy
@@ -1098,10 +1112,11 @@ private function askKatherineAboutVagrancy():void {
 
 	outputText("Katherine scowls.  “<i>It's the government's idea.  Basically, they've repossessed all of the houses that are empty, and you can't get into them until and unless you prove you can make enough money to pay taxes and buy a lease.  No money, no house - that's why we, and many others like us, live on the street.  The Watch spends more time cracking vagrants over the head and expelling us from perfectly good empty houses than doing anything useful.</i>”\n\n");
 
-	outputText("You can't help wondering how much of that is true and how much of that is prejudice.  Politely thanking Katherine for the talk, you turn and walk away.");
+	outputText("You can't help wondering how much of that is true and how much of that is prejudice.");
 	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	flags[kFLAGS.KATHERINE_TRAINING] = 1; //Now you can talk about Kath getting a job
-	doNext(telAdre.telAdreMenu);
+	
+	talkToKatherine(askKatherineAboutVagrancy);
 }
 
 //Love & Lust
@@ -1113,11 +1128,9 @@ private function askKatherineAboutLoveAndLust():void {
 
 	outputText("Automatically, your eyes are drawn to her crotch and you can't help asking if her canine member is really that off-putting to others.\n\n");
 
-	outputText("“<i>It is, yeah.  Most cats can't get over it, most dogs can't get over the fact the rest of me is still a cat, and even centauresses are wary of letting me shove what is basically a melon in their cunts.</i>”  Katherine nods, sadly.  “<i>But then, you came along... I don't know why you did what you did, but I'm too happy to care.</i>”  A beatific expression covers her face.\n\n");
-
-	outputText("Politely thanking Katherine for the talk, you turn and walk away.");
-	//Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	doNext(telAdre.telAdreMenu);
+	outputText("“<i>It is, yeah.  Most cats can't get over it, most dogs can't get over the fact the rest of me is still a cat, and even centauresses are wary of letting me shove what is basically a melon in their cunts.</i>”  Katherine nods, sadly.  “<i>But then, you came along... I don't know why you did what you did, but I'm too happy to care.</i>”  A beatific expression covers her face.");
+	
+	talkToKatherine(askKatherineAboutLoveAndLust);
 }
 
 private function talkGangs():void {
@@ -1534,7 +1547,7 @@ private function talkLoversAmily():void {
 	else {
 		outputText("You bring Kath up to date about things that have been happening at your camp.  You talk some more about Amily and Kath once again mentions she’d like to meet Amily in person.  You get the feeling Kath wants to see how she measures up.  Getting the two of them together might cause sparks or they might rub each other the right way.");
 	}
-	katherineMenu();
+	talkToKatherine(talkLoversAmily);
 }
 
 private function talkLoversCotton():void {
@@ -1557,7 +1570,7 @@ private function talkLoversCotton():void {
 	else {
 		outputText("You talk about your recent gym visits and Kath suggests that she might be willing to try out a little yoga.  You get the feeling Kath wants to see how she measures up to Cotton.  That could certainly make for a fun evening.");
 	}
-	katherineMenu();
+	talkToKatherine(talkLoversCotton);
 }
 
 private function talkLoversEdryn():void {
@@ -1579,7 +1592,7 @@ private function talkLoversEdryn():void {
 	else {
 		outputText("You talk to Kath about her work, steering the conversation toward her coworkers.  Kath is happy to spill the beans and tells you how she’s been noticing things about Edryn since you mentioned her, like how some mornings she comes in to work looking very pleased with herself, a certain looseness in her step.  Kath grins and says, “<i>I bet I know who’s responsible for that.</i>”");
 	}
-	katherineMenu();
+	talkToKatherine(talkLoversEdryn);
 }
 
 private function talkLoversHelia():void {
@@ -1603,7 +1616,7 @@ private function talkLoversHelia():void {
 	else {
 		outputText("You bring Kath up to date about things that have been happening at your camp.  You talk some more about Helia and Kath once again mentions she’d like to meet your salamander lover" + (flags[kFLAGS.HELSPAWN_AGE] > 0 ? " and her daughter" : "") + ".  It might be your imagination but you think Katherine wants to prove something to you.");
 	}
-	katherineMenu();
+	talkToKatherine(talkLoversHelia);
 }
 
 private function talkLoversUrta():void {
@@ -1633,21 +1646,21 @@ private function talkLoversUrta():void {
 	else { //Kath has decided she loves Urta too
 		outputText("When you mention Urta Kath gets up and gives you a hug.  “<i>I was a girl who never thought anyone was going to love her cause of a big doggie dick.  Now I’ve got you and you got me together with Urta too.  I’m so happy, everyday I get a workout - who needs a gym?  And I’ve always got someone I can go home with, someone I can talk to, someone I can just hug and hold on to.  Thank you so much " + playerText() + ".</i>”");
 	}
-	katherineMenu();
+	talkToKatherine(talkLoversUrta);
 }
 
 private function talkLoversUrtaDont():void {
 	outputText("\n\nYou scratch Kath behind the ears and tell her that while you’re happy for her you’d really prefer if she waited for you to be around before banging Urta.  You feel a little left out.\n\n");
 	outputText("Kath gives you a hug and tells you, “<i>I’ll be good, I promise.  But we do see each other all the time, so I hope you’re planning a lot of threesomes to release all our pent up energy.</i>”");
 	flags[kFLAGS.KATHERINE_URTA_DATE] = KDATE_LITTLE;
-	katherineMenu();
+	talkToKatherine(talkLoversUrtaDont);
 }
 
 private function talkLoversUrtaWhenever():void {
 	outputText("\n\nYou stroke Kath’s tail and tell her that you don’t mind if your favorite herms need to blow off a little steam together.  As long as they don’t wear each other out that is.\n\n");
 	outputText("Kath giggles and says, “<i>That’s good - oh and you don’t have anything to worry about " + playerText() + ", we’re both so horny that we’re almost always up for some fun.</i>”");
 	flags[kFLAGS.KATHERINE_URTA_DATE] = KDATE_WHENEVER;
-	katherineMenu();
+	talkToKatherine(talkLoversUrtaWhenever);
 }
 
 private function talkLoversUrtaEncourage():void {
@@ -1660,7 +1673,7 @@ private function talkLoversUrtaEncourage():void {
 	outputText("“<i>I want you to fuck so much you forget how to masturbate,</i>” you tell her.\n\n");
 	outputText("“<i>Oh yeah!  I think we can manage that,</i>” she replies in a dreamy tone.");
 	flags[kFLAGS.KATHERINE_URTA_DATE] = KDATE_LOTS;
-	katherineMenu();
+	talkToKatherine(talkLoversUrtaEncourage);
 }
 
 private function talkLoversVala():void {
@@ -1691,21 +1704,21 @@ private function talkLoversVala():void {
 			return;
 		}
 	}
-	katherineMenu();
+	talkToKatherine(talkLoversVala);
 }
 
 private function talkLoversValaDont():void {
 	outputText("\n\nYou give Kath a kiss and tell her that while you’re happy that she and Vala get along so well you’d really prefer if she waited for you to be around before doing anything with the faerie waitress.  You feel a little left out.\n\n");
 	outputText("Kath gives you a hug and tells you, “<i>I’ll be good, I promise.  But we do see each other almost every day at the bar, so I hope you’re planning a lot of threesomes to release all our pent up energy.</i>”");
 	flags[kFLAGS.KATHERINE_VALA_DATE] = KDATE_LITTLE;
-	katherineMenu();
+	talkToKatherine(talkLoversValaDont);
 }
 
 private function talkLoversValaWhenever():void {
 	outputText("\n\nYou stroke Kath’s tail and tell her that you don’t mind if she wants to blow off a little steam with Vala.  They’re both horny and they both need it.  As long as they don’t wear each other out that is.  You want to be sure they’ve got enough energy for threesomes with you.\n\n");
 	outputText("Kath giggles and says, “<i>I’m glad you feel that way " + playerText() + ".  Some people get really possessive, but you know both of us are hooked on you.</i>”");
 	flags[kFLAGS.KATHERINE_VALA_DATE] = KDATE_WHENEVER;
-	katherineMenu();
+	talkToKatherine(talkLoversValaWhenever);
 }
 
 private function talkLoversValaEncourage():void {
@@ -1714,7 +1727,7 @@ private function talkLoversValaEncourage():void {
 	outputText("You tell her the two of them need to be there, each for the other.  It's so much healthier for them to release all that tension that builds up.\n\n");
 	outputText("Kath moans and you feel her tail twitching in your grasp.  You know she’ll follow your instructions - deep down it’s what she wants.");
 	flags[kFLAGS.KATHERINE_VALA_DATE] = KDATE_LOTS;
-	katherineMenu();
+	talkToKatherine(talkLoversValaEncourage);
 }
 
 private function talkWetBitch():void {
@@ -1722,7 +1735,8 @@ private function talkWetBitch():void {
 	outputText("You ask Katherine why she hangs out at the Wet Bitch after work.\n\n");
 	outputText("She smiles and replies that they make a mean plate of fries.  Then more seriously she says, “<i>There are a few other bars in Tel’Adre, but since Urta " + (isAt(KLOC_KATHS_APT) ? "goes there it's" : "comes here this is") + " sort of the unofficial watch bar.  For average people it means starting fights or robbing drunks is a bad idea but for Watch officers it means " + (isAt(KLOC_KATHS_APT) ? "it's" : "this is") + " a good place for gossip and stories or for just hanging out after work.</i>”\n\n");
 	outputText((isAt(KLOC_KATHS_APT) ? "She scoots closer to you and says" : "She takes a sip from her mug and adds") + ", “<i>when I joined up I thought I would just head home and sleep after shifts but sometimes it helps, talking to people who have the same job as you.  Besides, it turns out it’s hard to get drinks at home in Tel’Adre.  The city worries so much about demonic liquors that only a few merchants can sell the stuff legally and they charge nearly as much as the bars.</i>”");
-	katherineMenu();
+	
+	talkToKatherine(talkWetBitch);
 }
 
 private function talkCatGirl():void {
@@ -1819,7 +1833,7 @@ private function talkMilkMenu():void {
 	addButton(4, "Limit", talkMilkLimitation);
 	if (!sharingWithFriends) addButton(5, "Old Gang", talkMilkShareWithOldGang);
 	if (submissiveness() >= 2) addButton(6, "Friends", talkMilkShareWithFriends);
-	addButton(9, "Back", katherineMenu);
+	addButton(9, "Back", talkToKatherine);
 }
 
 private function talkMilkShareWithHelena():void {
@@ -2132,50 +2146,120 @@ private function katherinesAppearance(clear:Boolean = true):void {
 }
 	
 //Give Item:
-private function giveKatherineAnItem():void {
+private function giveKatherineAnItem(page:int = 0):void {
 	clearOutput();
 	outputText("You tell Katherine that you have a present for her.\n\n");
 	outputText("The cat-morph's face lights up, but then she guiltily lowers her eyes.  “<i>I can't - you're too good to me already...</i>”  You cut her off, insisting that you want to give it to her.  “<i>Okay, if you're sure... what is it?</i>”\n\n");
 	var hasJob:Boolean = flags[kFLAGS.KATHERINE_UNLOCKED] >= 4;
-	var blackEgg:Boolean = player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG);
-	var honey:Boolean = player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY);
-	var pinkEgg:Boolean = player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG);
 	var button:int = 0;
 	menu();
-	//Clothes
-	if (hasJob && !hasClothing(KBIT_CLOTHES_BODYSUIT) && player.hasItem(armors.T_BSUIT)) addButton(button++, "Bodysuit", giveKatClothesBodysuit);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_B_DRESS) && player.hasItem(armors.B_DRESS)) addButton(button++, "Long Dress", giveKatClothesLongDress);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_NURSECL) && player.hasItem(armors.NURSECL)) addButton(button++, "NurseClothes", giveKatClothesNurseOutfit);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_SS_ROBE) && player.hasItem(armors.SS_ROBE)) addButton(button++, "Silk Robe", giveKatClothesSilkRobe);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_TUBETOP) && player.hasItem(armors.TUBETOP)) addButton(button++, "Tube Top", giveKatClothesTubeTop);
+	addButton(14, "Back", giveKatherineAnItem);
+	// list pages
+	if (page == 0) {
+		addButton(button++, "Transformatives", giveKatherineAnItem, 1);
+		
+		if (hasJob) addButton(button++, "Clothes", giveKatherineAnItem, 2);
+		else addDisabledButton(button++, "Clothes", "She has no place to store her clothes.");
+		
+		if (hasJob) addButton(button++, "Dyes", giveKatherineAnItem, 3);
+		else addDisabledButton(button++, "Dyes", "She likes her current hair color.");
+		addButton(14, "Back", katherineMenu);
+	}
 	//Transformatives
-	if (player.hasItem(consumables.BULBYPP)) addButton(button++, "BulbPepper", giveKatABulbousPepper);
-	if (player.hasItem(consumables.CANINEP)) addButton(button++, "Canine Pep", giveKatACaninePepper);
-	if (hasJob && furry && blackEgg && player.hasItem(consumables.P_S_MLK) && player.hasItem(consumables.GLDSEED)) addButton(button++, "Defur", giveKatDefurFormula);
-	if (player.hasItem(consumables.DBLPEPP)) addButton(button++, "DblPeppr", giveKatADoublePepper);
-	if (hasJob && player.hasItem(consumables.KNOTTYP)) addButton(button++, "KnotPepp", giveKatAKnottyPepper);
-	if (hasJob && player.hasItem(consumables.LACTAID)) addButton(button++, "Lactaid", giveKatTheGiftOFMilk);
-	if (player.hasItem(consumables.LARGEPP)) addButton(button++, "LrgPepp", giveKatAOverlyLargePepper);
-	if (hasJob && hasCock() && pinkEgg) addButton(button++, "Pink Egg", usePinkEggOnKath);
-	if (hasJob && player.hasItem(consumables.P_DRAFT)) addButton(button++, (hasCock() ? consumables.P_DRAFT.shortName : "Grow Cock"), useIncubiDraftOnKath);
-	if (hasJob && hasCock() && player.hasItem(consumables.PSDELIT)) addButton(button++, "P. Suc Delight", giveKatPureSuccubusDelight);
-	if (hasJob && player.hasItem(consumables.P_S_MLK)) addButton(button++, "P. Suc Milk", giveKatPureSuccubusMilk);
-	if (player.hasItem(consumables.REDUCTO)) addButton(button++, "Reducto", useReductoOnKat);
-	if (hasJob && !furry && honey && player.hasItem(consumables.W_FRUIT) && player.hasItem(consumables.EXTSERM)) addButton(button++, "Refuzz", giveKatRefuzzFormula);
-	if (hasJob && hasCock() && ballSize == 1 && pinkEgg && player.hasItem(consumables.REDUCTO)) addButton(button++, "Rem Balls", useReductoAndPinkEgg);
-	if (hasJob && player.hasItem(consumables.W_FRUIT)) addButton(button++, "W. Fruit", giveKatWhiskerFruit);
+	if (page == 1) {
+		var blackEgg:Boolean = player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG);
+		var honey:Boolean = player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY);
+		var pinkEgg:Boolean = player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG);
+		
+		if (player.hasItem(consumables.CANINEP)) addButton(button++, consumables.CANINEP.shortName, giveKatACaninePepper, undefined, undefined, undefined, "Offer her " + consumables.CANINEP.longName + ".");
+		else addDisabledButton(button++, consumables.CANINEP.shortName, "Offer her " + consumables.CANINEP.longName + ".", consumables.CANINEP.longName);
+		
+		if (player.hasItem(consumables.LARGEPP)) addButton(button++, consumables.LARGEPP.shortName, giveKatAOverlyLargePepper, undefined, undefined, undefined, "Offer her " + consumables.LARGEPP.longName + ".");
+		else addDisabledButton(button++, consumables.LARGEPP.shortName, "Offer her " + consumables.LARGEPP.longName + ".", consumables.LARGEPP.longName);
+		
+		if (player.hasItem(consumables.DBLPEPP)) addButton(button++, consumables.DBLPEPP.shortName, giveKatADoublePepper, undefined, undefined, undefined, "Offer her " + consumables.DBLPEPP.longName + ".");
+		else addDisabledButton(button++, consumables.DBLPEPP.shortName, "Offer her " + consumables.DBLPEPP.longName + ".", consumables.DBLPEPP.longName);
+		
+		if (player.hasItem(consumables.BULBYPP)) addButton(button++, consumables.BULBYPP.shortName, giveKatABulbousPepper, undefined, undefined, undefined, "Offer her " + consumables.BULBYPP.longName + ".");
+		else addDisabledButton(button++, consumables.BULBYPP.shortName, "Offer her " + consumables.BULBYPP.longName + ".", consumables.BULBYPP.longName);
+		
+		if (hasJob && player.hasItem(consumables.KNOTTYP)) addButton(button++, consumables.KNOTTYP.shortName, giveKatAKnottyPepper, undefined, undefined, undefined, "Offer her " + consumables.KNOTTYP.longName + ". She won't accept such a thing if she is not sure about her future");
+		else addDisabledButton(button++, consumables.KNOTTYP.shortName, "Offer her " + consumables.KNOTTYP.longName + ". She won't accept such a thing if she is not sure about her future.", consumables.KNOTTYP.longName);
+		
+		if (hasJob && player.hasItem(consumables.W_FRUIT)) addButton(button++, consumables.W_FRUIT.shortName, giveKatWhiskerFruit, undefined, undefined, undefined, "Offer her " + consumables.W_FRUIT.longName + (hasCock() && flags[kFLAGS.KATHERINE_DICK_FORM] == 0 ? " to make her cock feline again." : "."));
+		else addDisabledButton(button++, consumables.W_FRUIT.shortName, "Offer her " + consumables.W_FRUIT.longName + ". She won't accept such a thing if she is not sure about her future.", consumables.W_FRUIT.longName);
+		
+		if (player.hasItem(consumables.REDUCTO)) addButton(button++, consumables.REDUCTO.shortName, useReductoOnKat, undefined, undefined, undefined, "Offer her " + consumables.REDUCTO.longName + " to make her assets smaller.");
+		else addDisabledButton(button++, consumables.REDUCTO.shortName, "Offer her " + consumables.REDUCTO.longName + ".", consumables.REDUCTO.longName);
+		
+		if (hasJob && player.hasItem(consumables.LACTAID)) addButton(button++, consumables.LACTAID.shortName, giveKatTheGiftOFMilk, undefined, undefined, undefined, "Offer her " + consumables.LACTAID.longName + ".");
+		else addDisabledButton(button++, consumables.LACTAID.shortName, "Offer her " + consumables.LACTAID.longName + ". She won't accept such a thing if she is not sure about her future.", consumables.LACTAID.longName);
+		
+		if (hasJob && hasCock() && pinkEgg) addButton(button++, "Pink Egg", usePinkEggOnKath, undefined, undefined, undefined, "Offer her a pink egg to remove her cock.");
+		else addDisabledButton(button++, "Pink Egg", "Offer her a pink egg to remove her cock. She won't accept such a thing if she is not sure about her future.", "Pink Egg");
+		
+		if (hasJob && player.hasItem(consumables.P_DRAFT)) addButton(button++, consumables.P_DRAFT.shortName, useIncubiDraftOnKath, undefined, undefined, undefined, "Offer her " + consumables.P_DRAFT.longName + (hasCock() ? " to make her cock bigger." : " to regrow her cock."));
+		else addDisabledButton(button++, consumables.P_DRAFT.shortName, "Offer her " + consumables.P_DRAFT.longName + (hasCock() ? " to make her cock bigger" : " to regrow her cock") + ". She won't accept such a thing if she is not sure about her future.", consumables.P_DRAFT.longName);
+		
+		if (hasJob && player.hasItem(consumables.P_S_MLK)) addButton(button++, consumables.P_S_MLK.shortName, giveKatPureSuccubusMilk, undefined, undefined, undefined, "Offer her " + consumables.P_S_MLK.longName + " to make her breasts bigger.");
+		else addDisabledButton(button++, consumables.P_S_MLK.shortName, "Offer her " + consumables.P_S_MLK.longName + " to make her breasts bigger. She won't accept such a thing if she is not sure about her future.", consumables.P_S_MLK.longName);
+		
+		if (hasJob && hasCock() && player.hasItem(consumables.PSDELIT)) addButton(button++, consumables.PSDELIT.shortName, giveKatPureSuccubusDelight, undefined, undefined, undefined, "Offer her " + consumables.PSDELIT.longName + " to make her balls bigger.");
+		else addDisabledButton(button++, consumables.PSDELIT.shortName, "Offer her " + consumables.PSDELIT.longName + " to make her balls bigger. She won't accept such a thing if she is not sure about her future.", consumables.PSDELIT.longName);
+		
+		if (hasJob && hasCock() && ballSize == 1 && pinkEgg && player.hasItem(consumables.REDUCTO)) addButton(button++, "Rem Balls", useReductoAndPinkEgg, undefined, undefined, undefined, "You’ve met herms that have no balls. You’re pretty sure that together the pink egg and the Reducto salve can make her like that.", "Remove Balls");
+		else addDisabledButton(button++, "Rem Balls", "You’ve met herms that have no balls. You’re pretty sure that together the pink egg and the Reducto salve can make her like that. She won't accept such a thing if she is not sure about her future.", "Remove Balls");
+		
+		if (furry) {
+			if (hasJob && blackEgg && player.hasItem(consumables.P_S_MLK) && player.hasItem(consumables.GLDSEED)) addButton(button++, "Defur", giveKatDefurFormula, undefined, undefined, undefined, "Offer her to become a cat-girl. It takes a black egg, an untainted bottle of Succubi milk and a golden seed.");
+			else addDisabledButton(button++, "Defur", "You can offer her to become a cat-girl. It takes a black egg, an untainted bottle of Succubi milk and a golden seed. She won't accept such a thing if she is not sure about her future.");
+		} else {
+			if (hasJob && honey && player.hasItem(consumables.W_FRUIT) && player.hasItem(consumables.EXTSERM)) addButton(button++, "Refuzz", giveKatRefuzzFormula, undefined, undefined, undefined, "Offer her to become a cat-morph again. It takes a bottle of special bee honey, a piece of whisker-fruit and a bottle of hair extension serum.");
+			else addDisabledButton(button++, "Refuzz", "You can offer her to become a cat-morph again. It takes a bottle of special bee honey, a piece of whisker-fruit and a bottle of hair extension serum.");
+		}
+		// Warning: This page already has 14 options. If you want to add more, you'll have to break it down to subpages.
+	}
+	//Clothes
+	if (page == 2) {
+		if (!hasClothing(KBIT_CLOTHES_BODYSUIT) && player.hasItem(armors.T_BSUIT)) addButton(button++, "Bodysuit", giveKatClothesBodysuit);
+		else if (hasClothing(KBIT_CLOTHES_BODYSUIT)) addDisabledButton(button++, "Bodysuit", "She already owns a bodysuit.");
+		else addDisabledButton(button++, "Bodysuit", "You think she can use a bodysuit.");
+		
+		if (!hasClothing(KBIT_CLOTHES_B_DRESS) && player.hasItem(armors.B_DRESS)) addButton(button++, "Long Dress", giveKatClothesLongDress);
+		else if (hasClothing(KBIT_CLOTHES_B_DRESS)) addDisabledButton(button++, "Long Dress", "She already owns a long dress.");
+		else addDisabledButton(button++, "Long Dress", "You think she can use a long dress.");
+		
+		if (!hasClothing(KBIT_CLOTHES_NURSECL) && player.hasItem(armors.NURSECL)) addButton(button++, "NurseClothes", giveKatClothesNurseOutfit);
+		else if (hasClothing(KBIT_CLOTHES_NURSECL)) addDisabledButton(button++, "NurseClothes", "She already owns a nurse clothes.");
+		else addDisabledButton(button++, "NurseClothes", "You think she can use a nurse clothes.");
+		
+		if (!hasClothing(KBIT_CLOTHES_SS_ROBE) && player.hasItem(armors.SS_ROBE)) addButton(button++, "Silk Robe", giveKatClothesSilkRobe);
+		else if (hasClothing(KBIT_CLOTHES_SS_ROBE)) addDisabledButton(button++, "Silk Robe", "She already owns a silk robe.");
+		else addDisabledButton(button++, "Silk Robe", "You think she can use a silk robe.");
+		
+		if (!hasClothing(KBIT_CLOTHES_TUBETOP) && player.hasItem(armors.TUBETOP)) addButton(button++, "Tube Top", giveKatClothesTubeTop);
+		else if (hasClothing(KBIT_CLOTHES_TUBETOP)) addDisabledButton(button++, "Tube Top", "She already owns a tube top.");
+		else addDisabledButton(button++, "Tube Top", "You think she can use a tube top.");
+	}
 	//Dyes
-	if (hasJob && hairColor != "rich auburn" && player.hasItem(consumables.AUBURND)) addButton(button++, "Auburn Dye", giveKatDyeAuburn);
-	if (hasJob && hairColor != "jet black" && player.hasItem(consumables.BLACK_D)) addButton(button++, "Black Dye", giveKatDyeBlack);
-	if (hasJob && hairColor != "light blonde" && player.hasItem(consumables.BLOND_D)) addButton(button++, "Blonde Dye", giveKatDyeBlonde);
-	if (hasJob && hairColor != "bright blue" && player.hasItem(consumables.BLUEDYE)) addButton(button++, "Blue Dye", giveKatDyeBlue);
-	if (hasJob && hairColor != "lime green" && player.hasItem(consumables.GREEN_D)) addButton(button++, "Green Dye", giveKatDyeGreen);
-	if (hasJob && hairColor != "vibrant orange" && player.hasItem(consumables.ORANGDY)) addButton(button++, "Orange Dye", giveKatDyeOrange);
-	if (hasJob && hairColor != "neon pink" && player.hasItem(consumables.PINKDYE)) addButton(button++, "Pink Dye", giveKatDyePink);
-	if (hasJob && hairColor != "deep purple" && player.hasItem(consumables.PURPDYE)) addButton(button++, "Purple Dye", giveKatDyePurple);
-	if (hasJob && hairColor != "flaming red" && player.hasItem(consumables.RED_DYE)) addButton(button++, "Red Dye", giveKatDyeRed);
-	if (hasJob && hairColor != "snow white" && player.hasItem(consumables.WHITEDY)) addButton(button++, "White Dye", giveKatDyeWhite);
-	addButton(14, "Back", katherineMenu);
+	if (page == 3) {
+		var dyeButton:Function = function(color:String, item:ItemType, func:Function):void {
+			if (hairColor == color) addDisabledButton(button++,  item.shortName, "Her hair is already " + color + ".");
+			else if (!player.hasItem(item)) addDisabledButton(button++,  item.shortName, "You think she would look good with " + color + " hair if you could find a dye.");
+			else addButton(button++, item.shortName, func, undefined, undefined, undefined, "Offer her " + item.longName + ".");
+		};
+		
+		dyeButton("rich auburn", consumables.AUBURND, giveKatDyeAuburn);
+		dyeButton("jet black", consumables.BLACK_D, giveKatDyeBlack);
+		dyeButton("light blonde", consumables.BLOND_D, giveKatDyeBlonde);
+		dyeButton("bright blue", consumables.BLUEDYE, giveKatDyeBlue);
+		dyeButton("lime green", consumables.GREEN_D, giveKatDyeGreen);
+		dyeButton("vibrant orange", consumables.ORANGDY, giveKatDyeOrange);
+		dyeButton("neon pink", consumables.PINKDYE, giveKatDyePink);
+		dyeButton("deep purple", consumables.PURPDYE, giveKatDyePurple);
+		dyeButton("flaming red", consumables.RED_DYE, giveKatDyeRed);
+		dyeButton("snow white", consumables.WHITEDY, giveKatDyeWhite);
+	}
 }
 
 //Reducto
@@ -3727,7 +3811,7 @@ public function penetrateKatsVag():void {
 		if (player.cumQ() >= 1500) outputText("\n\nOn the journey back to the city both you and Kath rub her cum bloated belly, leaving a trail of juices that stretch from the shores of the lake to the edge of the desert.");
 	}
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	player.orgasm();
+	player.orgasm('Dick');
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -3805,7 +3889,7 @@ public function pcPenetratesKatAnally():void {
 		outputText(".");
 	}
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	player.orgasm();
+	player.orgasm('Dick');
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -3967,7 +4051,7 @@ private function pcPenetratesKatDoublyNormalEnd():void {
 		outputText("Completely spent, Kath collapses back onto the bed with a massive wet splat.  You give her a little pat on the head and promise you’ll see her soon.  All you get in reply is a contented murmur followed by some snoring.");
 	else //At the lake
 		outputText("When she recovers Kath washes herself off in a nearby stream and then the two of you begin the long march back to Tel’Adre.  When you reach the gates you put your arms around Kath, give her a long kiss and promise you’ll see her soon.");
-	player.orgasm();
+	player.orgasm('Dick');
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -4028,7 +4112,7 @@ private function pcPenetratesKatDoublyHighCumCorrupt():void {
 	outputText("you put your arms around her.  Katherine gives you a delighted smile and you tell her " + (firstTime ? "that it will be much easier and much sexier for her" : "you’re already looking forward to") + " next time.\n\n");
 	
 	outputText("She blushes and gives you a kiss.  On the way back to camp you wonder what other tricks you can teach your submissive " + catGirl("cat girl.", "kitty."));
-	player.orgasm();
+	player.orgasm('Dick');
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -4109,7 +4193,7 @@ public function suckNFuck():void {
 
 	outputText("You promise her you'll remember that.  Redressed, you bid her farewell and head back out into the streets of Tel'Adre.\n\n");
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	player.orgasm();
+	player.orgasm('Dick');
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -4262,7 +4346,7 @@ public function letKatKnotYourCuntPussyFuck():void {
 	else outputText("Y");
 	outputText("ou get dressed, thank her, and head back to your camp.");
 	//minus lust, slimefeed, Player returns to camp
-	player.orgasm();
+	player.orgasm('Vaginal');
 	orgasm(); 
 	dynStats("sen", -1);
 	player.slimeFeed();
@@ -4348,7 +4432,7 @@ public function getPenetrated():void {
 
 	outputText("About an hour later, she's deflated and you are able to get dressed, thank her, and head back to your camp.");
 	//minus lust, slimefeed, Player returns to camp
-	player.orgasm();
+	player.orgasm('Dick');
 	orgasm();
 	dynStats("sen", -1);
 	player.slimeFeed();
@@ -4421,7 +4505,7 @@ public function getDoublePennedByKat():void {
 	outputText("About an hour later, she's deflated and you are finally able to rise off of her, get dressed, and head back to your camp.\n\n");
 	//minus lust, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('VaginalAnal');
 	orgasm();
 	dynStats("sen", -2);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -4505,7 +4589,7 @@ public function suckedNFuckedByKat():void {
 	outputText(" deflate and you detach, you clean yourself off, get dressed, and head back out" + (isAt(KLOC_KATHS_APT) ? ", leaving Kath passed out on her bed." : " into the street."));
 	//lust -100, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('VaginalAnal');
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -4819,7 +4903,7 @@ private function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	outputText("You simply groan at the absolutely terrible pun and get back up, redressing yourself and heading back into the streets after a quick peck to thank her for the time.");
 	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	player.orgasm();
+	player.orgasm('Vaginal');
 }
 
 //[Male/Herm]
@@ -4856,7 +4940,7 @@ private function katherineLicksAllTheBoyPenises():void {
 
 	outputText("Weakly, she collapses onto her " + catGirl("smooth", "furry") + "  behind on the ground, smiling up at you.  “<i>I take it you enjoyed that?</i>” she teases.  You admit she did very well, " + (isAt(KLOC_KATHS_APT) ? "gently stroking her hair in thanks" : "helping her up and to her own 'bed'") + ", then get dressed and head back out into Tel'Adre's streets.");
 	//lust -100 regardless of sex, return to wherever
-	player.orgasm();
+	player.orgasm('Dick');
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -4989,7 +5073,7 @@ private function katDoubleHelixCraziness():void {
 	outputText("Righting and redressing yourself, you say goodbye to the charming kitty, then head back to camp, still feeling rather drained.\n\n");
 	//Player returns to camp without his lust, slimefeed
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('Generic');
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_DOUBLE_HELIX);
@@ -5742,7 +5826,7 @@ private function bathTimeCentaurRide():void {
 
 	outputText("When you recover from your ‘bath’ you wake Katherine up.  It’s probably not safe to stick around, so the two of you collect your things and start the long walk back to Tel’Adre.  Katherine is smiling and giggling through most of the trip back.");
 	if (!hasAlready(KBIT_TRIED_BATH)) outputText("  In fact she enjoyed this trip so much that you have a feeling these ‘baths’ will become quite popular.");
-	player.orgasm();
+	player.orgasm('Generic');
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
@@ -5808,7 +5892,7 @@ private function bathTimeCentaurPenetrated():void {
 	}
 	if (!hasAlready(KBIT_TRIED_BATH)) outputText("  In fact she enjoyed this trip so much that you have a feeling these ‘baths’ will become quite popular.");
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('Generic');
 	orgasm();
 	player.changeFatigue(15); //Some extra fatigue for dragging your girlfriend's ass halfway home
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -5892,7 +5976,7 @@ private function bathTimeFuckKath():void {
 	outputText(" belly and enjoying the sensation of her pussy wrapped around your slowly deflating cock.  Once it’s over you haul Katherine to the shore and she smiles at you contentedly.\n\n");
 
 	outputText("On the long walk back to Tel’Adre she playfully asks when you’re going to take her for another swim.\n\n");
-	player.orgasm();
+	player.orgasm('Dick');
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
@@ -5984,7 +6068,7 @@ private function bathTimePenetrated():void {
 		else
 			outputText(", so you suspect these ‘baths’ will always be popular.");
 		player.slimeFeed();
-		player.orgasm();
+		player.orgasm('Dick');
 		orgasm();
 		flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 		experience(KBIT_TRIED_BATH);
@@ -6262,7 +6346,7 @@ private function bedroomBondage():void {
 		outputText("Katherine giggles and pulls you into a hug.  She’s so tired that within a minute or two she starts to snore.  She looks so content that you leave her soaking in a puddle of her own cum and let yourself out.");
 		player.slimeFeed();
 	}
-	player.orgasm();
+	player.orgasm('Generic');
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	addSubmissive(KBIT_SUB_BED_BOND);
@@ -6380,7 +6464,7 @@ private function drunkFuck():void {
 		}
 	}
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('Generic');
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseOneHour);

@@ -133,12 +133,15 @@
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 5;
 			this.gems = 10 + rand(10);
-            this.drop = new WeightedDrop().add(consumables.CANINEP, 3)
-            					.addMany(1, consumables.BULBYPP,
-            							consumables.KNOTTYP,
-            							consumables.BLACKPP,
-            							consumables.DBLPEPP,
-            							consumables.LARGEPP);
+			this.drop = new WeightedDrop()
+ 					.add(consumables.CANINEP, 6)
+ 					.add(consumables.WOLF_PP, 1)
+ 					.addMany(2,
+ 						consumables.BULBYPP,
+ 						consumables.KNOTTYP,
+ 						consumables.BLACKPP,
+ 						consumables.DBLPEPP,
+ 						consumables.LARGEPP);
 			this.special1 = hellhoundFire;
 			this.special2 = hellhoundScent;
 			this.special3 = hellHoundWormCannon;

@@ -5,7 +5,9 @@ package classes.Scenes.Camp
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.BaseContent;
-	
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
+
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Camp;
 	
@@ -52,6 +54,17 @@ package classes.Scenes.Camp
 		//------------
 		// HARVESTING
 		//------------
+		private var _forestEncounter:Encounter=null;
+		public function get forestEncounter():Encounter {
+			return _forestEncounter ||= Encounters.build({
+				name: "lumber",
+				call: gatherWoods,
+				when: function ():Boolean {
+					return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4
+						   && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply();
+				}
+			});
+		}
 		public function gatherWoods():void {
 			combat.cleanupAfterCombat();
 			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees. \n\n");

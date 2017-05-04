@@ -6,16 +6,91 @@ package classes.Scenes.Areas.Lake
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
 
-	public class GooGirlScene extends AbstractLakeContent
-	{
+public class GooGirlScene extends AbstractLakeContent implements Encounter {
 		public function GooGirlScene()
 		{
 		}
 
+	public function encounterName():String {
+		return "gooGirl";
+	}
+
+	private const _encounter:Encounter = Encounters.complex(Encounters.fn.ifLevelMin(2), {
+		name  : "spyOnGooAndOozeSex",
+		call  : spyOnGooAndOozeSex,
+		chance: function ():Number {
+			//Chance of seeing ooze convert goo! More common if factory blew up
+			//Else pretty rare.
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) return 0.2;
+			return 0.05;
+		}
+	}, {
+		name  : "googirl",
+		call  : encounterGooGirl,
+		chance: gooGirlChance
+	}, {
+		name  : "slime",
+		call  : encounterSlime,
+		chance: slimeChance
+	});
+
+	public function gooGirlChance():Number {
+		//50% odds of slime-girl, 75% if shutdown factory, 25% if overload
+		switch (flags[kFLAGS.FACTORY_SHUTDOWN]) {
+			case 1: return 0.75;
+			case 2: return 0.25;
+			default: return 0.5;
+		}
+	}
+	public function slimeChance():Number {
+		return 1.0 - gooGirlChance();
+	}
+	public function encounterChance():Number {
+		return _encounter.encounterChance();
+	}
+	public function execEncounter():void {
+		_encounter.execEncounter();
+	}
+
 //VARS
 //const GOOGIRL_BIRTHS:int = 384;
 //const GOOGIRL_CONSECUTIVE_LOSSES:int = 385;
+
+	public function encounterSlime():void {
+		flags[kFLAGS.TIMES_MET_OOZE]++;
+		spriteSelect(25);
+		//High int starts on even footing.
+		if (player.inte >= 25) {
+			outputText("A soft shuffling sound catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!", true);
+			startCombat(new GreenSlime());
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
+			return;
+		}
+		//High speed starts on even footing.
+		if (player.spe >= 30) {
+			outputText("You feel something moist brush the back of your ankle and instinctively jump forward and roll, coming up to face whatever it is behind you.  The nearly silent, amorphous green slime that was at your feet surges vertically, its upper body taking the form of a humanoid with thick arms and wide shoulders, which attacks!", true);
+			startCombat(new GreenSlime());
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
+			return;
+		}
+		//High strength gets stunned first round.
+		if (player.str >= 40) {
+			outputText("Without warning, you feel something moist and spongy wrap around your ankle, nearly pulling you off balance.  With a ferocious tug, you pull yourself free and turn to face your assailant.  It is a large green ooze that surges upwards to take the form of humanoid with wide shoulders and massive arms.  It shudders for a moment, and its featureless face shifts into a green version of your own! The sight gives you pause for a moment, and the creature strikes!", true);
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
+			startCombat(new GreenSlime());
+			outputText("\n\n", false);
+			monster.eAttack();
+			return;
+		}
+		//Player's stats suck and you should feel bad.
+		outputText("Without warning, you feel something moist and spongy wrap around your ankle, pulling you off balance!  You turn and try to pull your leg away, struggling against a large green ooze for a moment before your foot comes away with a *schlorp* and a thin coating of green fluid.  The rest of the ooze rises to tower over you, forming a massive green humanoid torso with hugely muscled arms and wide shoulders.  Adrenaline rushes into your body as you prepare for combat, and you feel your heart skip a beat as your libido begins to kick up as well!", true);
+		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
+		dynStats("lib", 1, "lus", 10);
+		startCombat(new GreenSlime());
+	}
 
 		private function gooGirl():GooGirl
 		{

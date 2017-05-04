@@ -6,6 +6,9 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounters;
+	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
@@ -31,98 +34,154 @@ package classes.Scenes.Areas
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Explore Mountain
+		private var _explorationEncounter:Encounter = null;
+		public function get explorationEncounter():Encounter {
+			const game:CoC     = kGAMECLASS;
+			const fn:FnHelpers = Encounters.fn;
+			if (_explorationEncounter == null) _explorationEncounter =
+					Encounters.group(game.commonEncounters.withImpGob,{
+								name: "salon",
+								when: fn.not(salon.isDiscovered),
+								call: salon.hairDresser
+							},{
+								name: "mimic",
+								when: fn.ifLevelMin(3),
+								call: curry(game.mimicScene.mimicTentacleStart,2)
+							},{
+								name: "highmountains",
+								when: function ():Boolean {
+									return !game.highMountains.isDiscovered()
+										   && (player.level >= 5 || flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 40)
+								},
+								call: game.highMountains.discover
+							},{
+								name: "snowangel",
+								when: function():Boolean {
+									return isHolidays()
+										   && player.gender > 0
+										   && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
+										   && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
+										   && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0
+										   && player.hasKeyItem("North Star Key") < 0)
+								},
+								call: game.xmas.snowAngel.gatsSpectacularRouter
+							},{
+								name:"jackfrost",
+								when: function ():Boolean {
+									return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly();
+								},
+								call: game.xmas.jackFrost.meetJackFrostInTheMountains
+							},{
+								name:"hellhound",
+								call:hellHoundScene.hellhoundEncounter,
+								mods:[game.commonEncounters.furriteMod]
+							},{
+								name:"infhhound",
+								when: function():Boolean {
+									return player.hasStatusEffect(StatusEffects.WormsOn);
+								},
+								chance:function ():Number {
+									return player.hasStatusEffect(StatusEffects.WormsHalf) ? 0.25 : 0.5;
+								},
+								call:infestedHellhoundScene.infestedHellhoundEncounter,
+								mods:[game.commonEncounters.furriteMod]
+							},{
+								name:"worms1",
+								when: function():Boolean {
+									return !player.hasStatusEffect(StatusEffects.WormsOn)
+										   && !player.hasStatusEffect(StatusEffects.WormsOff);
+								},
+								call: wormsScene.wormToggle
+							},{
+								name:"worms2",
+								chance: function ():Number {
+									return player.hasStatusEffect(StatusEffects.WormsHalf) ? 0.5 : 1;
+								},
+								when: function ():Boolean {
+									return player.hasStatusEffect(StatusEffects.WormsOn)
+										   && (!player.hasStatusEffect(StatusEffects.Infested) ||
+											   !player.hasStatusEffect(StatusEffects.MetWorms))
+								},
+								call: wormsScene.wormEncounter
+							},{
+								name:"minotaur",
+								chance:minotaurChance,
+								call:minotaurRouter,
+								mods:[game.commonEncounters.furriteMod]
+							},{
+								name:"factory",
+								when:function():Boolean { return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0; },
+								call: game.dungeons.enterFactory
+							},{
+								name:"ceraph",
+								chance:0.3,
+								when:function ():Boolean {
+									return !game.ceraphFollowerScene.ceraphIsFollower()
+											/* [INTERMOD:8chan]
+											&& flags[kFLAGS.CERAPH_KILLED] == 0
+											 */
+										   /*&& game.fetishManager.compare(FetishManager.FETISH_EXHIBITION)*/;
+								},
+								call:ceraphFn,
+								mods:[fn.ifLevelMin(2)]
+							},{
+								name:"hhound_master",
+								chance:2,
+								when:function():Boolean {
+									//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
+									var check1:Boolean = player.faceType == FACE_DOG && player.cor >= 60;
+									var check2:Boolean = player.dogCocks() >= 2
+													|| (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND);
+									var check3:int = (player.tailType == TAIL_TYPE_DOG ? 1 : 0) +
+													 (player.lowerBody == LOWER_BODY_TYPE_DOG ? 1 : 0) +
+													 (player.hairColor == "midnight black" ? 1 : 0);
+									var check4a:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0;
+									var check4b:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1
+														  && player.hasKeyItem("Marae's Lethicite") >= 0
+														  && player.keyItemv2("Marae's Lethicite") < 3;
+									return flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] < 3
+										   && check1 && check2 && check3 && (check4a || check4b);
+								},
+								call:hellHoundScene.HellHoundMasterEncounter
+							},{
+								name:"hike",
+								chance:0.2,
+								call:hike
+							})
+			;
+			return _explorationEncounter
+		}
 		public function exploreMountain():void
 		{
 			flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]++;
-			var chooser:Number = rand(5);
-			if (chooser == 5 && player.level < 3 && model.time.days < 20) //Disable mimic if requirements not met (Can still be encountered in level 1 run)
-				chooser = rand(4);
-			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
-				return;
-			}
-			//Discover 'high mountain' at level 5 or 40 explores of mountain
-			if ((player.level >= 5 || flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 40) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] == 0) {
-				outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)", true);
-				flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-				doNext(camp.returnToCampUseOneHour);
-				return;
-			}
-			if (isHolidays()) {
-				//Gats xmas adventure!
-				if (rand(5) == 0 && player.gender > 0 && isHolidays() && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0 && player.hasKeyItem("North Star Key") < 0)) {
-					kGAMECLASS.xmas.snowAngel.gatsSpectacularRouter();
-					return;
-				}
-				if (rand(6) == 0 && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly()) {
-					kGAMECLASS.xmas.jackFrost.meetJackFrostInTheMountains();
-					return;
-				}
-			}
-			//8% chance of hellhoundsplosions if appropriate
-			if (rand(100) <= 77) {
-				if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] < 3) {
-					trace("CHANCE AT HELLHOUND GAO");
-					//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
-					if (player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
-						trace("PASS BODYCHECK");
-						if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0) {
-							hellHoundScene.HellHoundMasterEncounter();
-							return;
-						}
-						//Level 2 requires lethecite
-						else if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) {
-							hellHoundScene.HellHoundMasterEncounter();
-							return;
-						}
-					}
-				}
-			}
+			var chooser:Number;
+			explorationEncounter.execEncounter();
+		}
+
+		public function ceraphFn():void {
 			//Rarer 'nice' Ceraph encounter
 			//Overlaps half the old encounters once pierced.
-			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
-				kGAMECLASS.ceraphScene.friendlyNeighborhoodSpiderManCeraph();
-				return;
-			}
-			//15% chance of Ceraph
-			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
-				kGAMECLASS.ceraphScene.encounterCeraph();
-				return;
-			}
-			//10% chance of hairdresser encounter if not found yet
-			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.HairdresserMeeting)) chooser = 5;
-			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
-				trace("Dungeon start!");
-				kGAMECLASS.dungeons.enterFactory();
-				return;
-			}
-			//Boosts mino and hellhound rates!
-			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
-				if (rand(2) == 0) chooser = 1;
-				else chooser = 3;
-			}
-			//10% chance to mino encounter rate if addicted
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
-				chooser = 1;
-			}
-			//10% MORE chance for minos if uber-addicted
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(10) == 0) {
-				chooser = 1;
-			}
+			if (rand(3) == 0
+				/* [INTERMOD:8chan]
+				&& kGAMECLASS.fetishManager.compare(FetishManager.FETISH_EXHIBITION)
+				else */
+				&& flags[kFLAGS.PC_FETISH] > 0 /**/
+			) getGame().ceraphScene.friendlyNeighborhoodSpiderManCeraph();
+			else getGame().ceraphScene.encounterCeraph();
+		}
+
+		public function minotaurChance():Number {
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) return 3;
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0) return 2;
+			return 1;
+		}
+
+		private function minotaurRouter():void {
+			spriteSelect(44);
 			//Every 16 explorations chance at mino bad-end!
 			if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(3) == 0) {
-				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
-				return;
-			}
-			//Generic Goblin/Imp encounter
-			if (chooser == 0) {
-				kGAMECLASS.exploration.genericGobImpEncounters();
-			}
-			//Minotauuuuur
-			if (chooser == 1) {
-				spriteSelect(44);
+			} else {
 				if (!player.hasStatusEffect(StatusEffects.TF2) && player.level <= 1 && player.str <= 40) {
 					if (silly()) {
 						//(Ideally, this should occur the first time the player would normally get an auto-rape encounter with the minotaur. The idea is to give a breather encounter to serve as a warning of how dangerous the mountain is)
@@ -143,10 +202,8 @@ package classes.Scenes.Areas
 					}
 					player.createStatusEffect(StatusEffects.TF2, 0, 0, 0, 0);
 					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				//Mino gangbang
-				if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl) || rand(10) == 0) {
+				} else if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl) || rand(10) == 0) {
+					//Mino gangbang
 					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && player.minotaurAddicted()) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
@@ -174,107 +231,52 @@ package classes.Scenes.Areas
 						//[Join] [Watch]
 						addButton(0, "Join", minotaurScene.joinBeingAMinoCumSlut);
 						addButton(1, "Watch", minotaurScene.watchAMinoCumSlut);
-						return;
+					} else {
+						flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] = 1;
+						if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl)) player.createStatusEffect(StatusEffects.MinoPlusCowgirl, 0, 0, 0, 0);
+						else player.addStatusValue(StatusEffects.MinoPlusCowgirl, 1, 1);
+						outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n", true);
+						outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n", false);
+						if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
+							outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
+						}
+						if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
+							outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
+						}
+						outputText("A part of your mind registers bits of clothing tossed aside and the heady scent of impending sex in the air, but your attention is riveted on the actions of the pair. The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur. The minotaur closes the distance between them in a single step.\n\n", false);
+						outputText("She bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands. Her tail raises to expose a glistening wet snatch, its lips already parted with desire. She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.\n\n", false);
+						outputText("With a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings. She screams in half pain, half ecstasy and pushes back, hungry for his full length. After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.\n\n", false);
+						outputText("The pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess. To you it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise. She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits. He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.", false);
+						doNext(minotaurScene.continueMinoVoyeurism);
 					}
-					flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] = 1;
-					if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl)) player.createStatusEffect(StatusEffects.MinoPlusCowgirl, 0, 0, 0, 0);
-					else player.addStatusValue(StatusEffects.MinoPlusCowgirl, 1, 1);
-					outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n", true);
-					outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n", false);
-					if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
-						outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
-					}
-					if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-						outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
-					}
-					outputText("A part of your mind registers bits of clothing tossed aside and the heady scent of impending sex in the air, but your attention is riveted on the actions of the pair. The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur. The minotaur closes the distance between them in a single step.\n\n", false);
-					outputText("She bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands. Her tail raises to expose a glistening wet snatch, its lips already parted with desire. She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.\n\n", false);
-					outputText("With a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings. She screams in half pain, half ecstasy and pushes back, hungry for his full length. After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.\n\n", false);
-					outputText("The pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess. To you it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise. She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits. He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.", false);
-					doNext(minotaurScene.continueMinoVoyeurism);
-					return;
-				}
-				//Cum addictus interruptus!  LOL HARRY POTTERFAG
-				//Withdrawl auto-fuck!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && rand(2) == 0 && player.inte/10 + rand(20) < 15) {
+				} else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && rand(2) == 0 && player.inte / 10 + rand(20) < 15) {
+					//Cum addictus interruptus!  LOL HARRY POTTERFAG
+					//Withdrawl auto-fuck!
 					minotaurScene.minoAddictionFuck();
-					return;
-				}
-				//Rare Minotaur Lord
-				if (rand(5) == 0 && player.level >= 10) {
+				} else if (rand(5) == 0 && player.level >= 10) {
+					//Rare Minotaur Lord
 					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!", true);
 					startCombat(new MinotaurLord());
-					return;
+				} else {
+					minotaurScene.getRapedByMinotaur(true);
 				}
-				minotaurScene.getRapedByMinotaur(true);
-				spriteSelect(44);
-			}
-			//Worms
-			if (chooser == 2) {
-				//If worms are on and not infested.
-				if (player.hasStatusEffect(StatusEffects.WormsOn) && !player.hasStatusEffect(StatusEffects.Infested)) {
-					if (player.hasStatusEffect(StatusEffects.WormsHalf) && rand(2) == 0) {
-						if (player.cor < 90) {
-							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
-							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
-						}
-						else {
-							outputText("During your hike into the mountains, your depraved mind keeps replaying your most obscenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.", true);
-							dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
-						}
-						doNext(camp.returnToCampUseOneHour);
-						return;
-					}
-					wormsScene.wormEncounter();
-				}
-				else {
-					//If worms are off or the PC is infested, no worms.
-					if (player.hasStatusEffect(StatusEffects.WormsOff) || player.hasStatusEffect(StatusEffects.Infested) || (rand(2) == 0 && player.hasStatusEffect(StatusEffects.WormsHalf))) {
-						if (player.hasStatusEffect(StatusEffects.WormsOff) && !player.hasStatusEffect(StatusEffects.MetWorms)) {
-							wormsScene.wormEncounter(); //You can only encounter the worms once.
-							return;
-						}
-						if (player.cor < 90) {
-							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
-							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
-						}
-						else {
-							outputText("During your hike into the mountains, your depraved mind keeps replaying your most obscenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.", true);
-							dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
-						}
-						doNext(camp.returnToCampUseOneHour);
-					}
-					else {
-						wormsScene.wormToggle();
-					}
-				}
-			}
-			//Hellhound
-			if (chooser == 3) {
-				spriteSelect(27);
-				if (player.hasStatusEffect(StatusEffects.WormsOn) && rand(2) == 0) {
-					//If lowered encounter rate, 25% chance, otherwise 50%.
-					if (player.hasStatusEffect(StatusEffects.WormsHalf) && rand(2) == 0) {
-						hellHoundScene.hellhoundEncounter();
-						return;
-					}
-					infestedHellhoundScene.infestedHellhoundEncounter();
-					return;
-				}
-				hellHoundScene.hellhoundEncounter();
-			}
-			//Mimic
-			if (chooser == 4) {
-				getGame().mimicScene.mimicTentacleStart(2);
-			}
-			//Hairdresser
-			if (chooser == 5) {
-				salon.hairDresser();
 			}
 		}
-		
+
+		private function hike():void {
+			if (player.cor < 90) {
+				outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
+				dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
+			}
+			else {
+				outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.", true);
+				dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
+			}
+			doNext(camp.returnToCampUseOneHour);
+		}
+
 		private function findOre():void { //Not used. Doubt if it will ever be added.
 			var ore:int = rand(3); //0 = copper, 1 = tin, 2 = iron
 		}

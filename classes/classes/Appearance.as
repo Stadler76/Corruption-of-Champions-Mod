@@ -84,6 +84,14 @@
 						"shock of feathers",
 					];
 					return description + randomChoice(options);
+				case HAIR_WOOL:
+					options = [
+						"woolen hair",
+						"poofy hair",
+						"soft wool",
+						"untameable woolen hair",
+					];
+					return description + randomChoice(options);
 			}
 			// TODO: Fix the spaghetti-code below to use a switch-case-return and it'll be
 			// case HAIR_GOO: return description + "goo-mane";
@@ -95,6 +103,7 @@
 				else if (i_creature.hairType == HAIR_GOO) description += "goo-";
 				else if (i_creature.hairType == HAIR_ANEMONE) description += "tentacle-";
 				else if (i_creature.hairType == HAIR_QUILL) description += "quill-";
+				else if (i_creature.hairType == HAIR_WOOL) description += "wool-";
 				description += "mane";
 				return description;
 			}
@@ -110,6 +119,7 @@
 			else if (i_creature.hairType == HAIR_GOO) description += "goo-";
 			else if (i_creature.hairType == HAIR_ANEMONE) description += "tentacle-";
 			else if (i_creature.hairType == HAIR_QUILL) description += "quill-";
+			else if (i_creature.hairType == HAIR_WOOL) description += "woolen ";
 			description += "hair";
 
 			return description;
@@ -2148,6 +2158,7 @@
 					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"],
 					[SKIN_TYPE_FISH_SCALES, "scales"],
+					[SKIN_TYPE_WOOL, "wool"],
 				]
 		);
 		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
@@ -2159,6 +2170,7 @@
 					[SKIN_TYPE_UNDEFINED, "skin"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"],
 					[SKIN_TYPE_FISH_SCALES, "scales"],
+					[SKIN_TYPE_WOOL, "wool-covered skin"],
 				]
 		);
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
@@ -2171,6 +2183,7 @@
 					[HAIR_QUILL, "quill"],
 					[HAIR_BASILISK_SPINES, "spiny basilisk"],
 					[HAIR_BASILISK_PLUME, "feathery plume"],
+					[HAIR_WOOL, "woolen"],
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2252,6 +2265,7 @@
 					[EARS_WOLF, "wolf"],
 					[EARS_ECHIDNA, "echidna"],
 					[EARS_DEER, "deer"],
+					[EARS_SHEEP, "sheep"],
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2264,6 +2278,8 @@
 					[HORNS_ANTLERS, "deer"],
 					[HORNS_GOAT, "goat"],
 					[HORNS_RHINO, "rhino"],
+					[HORNS_SHEEP, "sheep"],
+					[HORNS_RAM, "ram"],
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
@@ -2310,6 +2326,7 @@
 					[TAIL_TYPE_ECHIDNA, "echidna"],
 					[TAIL_TYPE_DEER, "deer"],
 					[TAIL_TYPE_SALAMANDER, "salamander"],
+					[TAIL_TYPE_SHEEP, "sheep"],
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(

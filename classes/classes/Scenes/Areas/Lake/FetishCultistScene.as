@@ -5,12 +5,21 @@ package classes.Scenes.Areas.Lake
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounter;
 
-	public class FetishCultistScene extends AbstractLakeContent
-	{
+public class FetishCultistScene extends AbstractLakeContent implements Encounter {
 		public function FetishCultistScene()
 		{
 		}
+
+
+	public function encounterName():String {
+		return "fetishCultist";
+	}
+
+	public function encounterChance():Number {
+		return player.level >= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? 1 : 0;
+	}
 
 		/*
 		 (first draft)
@@ -22,8 +31,16 @@ package classes.Scenes.Areas.Lake
 		 Loot: Could drop a random set of clothing or a costume on death.
 		 */
 
-		public function fetishCultistEncounter():void
-		{
+		public function execEncounter():void {
+			if (!player.hasStatusEffect(StatusEffects.FetishOn)) {
+				player.createStatusEffect(StatusEffects.FetishOn, 0, 0, 0, 0);
+				outputText("While exploring, you notice something unusual on the lake.  This something is quickly moving towards you at a surprising rate, much faster than anything you've ever seen before.  Wary of meeting new things in this world after your previous experiences, you decide to slip behind a nearby hill and watch it while hidden.  Soon the object comes into view and you can see that it is a boat of some kind.  It looks almost like a large open box on the water with some kind of gazebo on it.  Despite how fast it is moving, you can't see any oars or means of moving the boat.  It slows somewhat when it gets close to the shore, but is still going about as fast as you can run when it hits the shore and extends some kind of gangplank onto the lake shore.  With a close up view, you estimate that it is six feet across, ten feet long, and doesn't actually seem to have very much of it underwater.  You guess that it must be magic in some way.  There are several robe-clad figures on board.\n\n", true);
+				outputText("After a moment, a number of the figures disembark down the gangplank and immediately go off in different directions.  You count half a dozen of them, and guess that they are female when one of them passes by close to you and you see the hole in her outfit over her naughty bits.  You look back at the boat to see it close the gangplank, and move back onto the lake, with only one of the figures still on board.  Surprised to hear a sudden yell, you look to the side and see the clothing of the one who passed you earlier shift and twist before becoming some pink outfit that clings to her backside.  You are stunned for a moment as she disappears from sight before you shake your head and move on.  It seems there are new residents to the lake.\n\n<b>(Fetish Cultists can now be encountered!)</b>", false);
+				//(increase player lust from the sights they saw)
+				dynStats("lus", 5);
+				doNext(camp.returnToCampUseOneHour);
+
+			} else {
 			outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.", true);
 			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] = 1;
@@ -32,6 +49,7 @@ package classes.Scenes.Areas.Lake
 			startCombat(new FetishCultist());
 			spriteSelect(19);
 			doNext(playerMenu);
+		}
 		}
 
 		public function cultistRapesYou():void
@@ -466,11 +484,18 @@ package classes.Scenes.Areas.Lake
 				//increase PC's lust thanks to foreplay
 				dynStats("lus", 30);
 				//player chooses between; penetrate vagina, vibrator vagina, nevermind.  Options as appropriate.
-				var vibe:Function =null;
-				var fuckVag:Function =null;
-				if (player.hasVagina()) vibe = swimsuitVibrators;
-				if (player.hasCock()) fuckVag = plugSwimsuitVag;
-				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", null, "", null, "Leave", combat.cleanupAfterCombat);
+				menu();
+				if (player.hasCock()) {
+					addButton(0, "FuckHerVag", plugSwimsuitVag);
+				} else {
+					addDisabledButton(0, "FuckHerVag", "This scene requires you to have cock.");
+				}
+				if (player.hasVagina()) {
+					addButton(1, "Vibrator", swimsuitVibrators);
+				} else {
+					addDisabledButton(1, "Vibrator", "This scene requires you to have vagina.");
+				}
+				addButton(14, "Leave", combat.cleanupAfterCombat);
 				return;
 			}
 			else {

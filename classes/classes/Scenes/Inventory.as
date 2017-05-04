@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by aimozg on 12.01.14.
  */
 package classes.Scenes
@@ -91,6 +91,16 @@ package classes.Scenes
 			if (!getGame().inCombat) {
 				addButton(10, "Unequip", manageEquipment);
 			}
+			
+			if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 1) {
+				addButton(11, "Trash All", deleteItems, null, null, null, "Trash your items, one by one.\n\nClick to trash all in a stack.\nClick twice to stop.", "Trash Items");
+			} else if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 2) {
+				addButton(11, "Trash Stop", deleteItems, null, null, null, "Trash all of your items in a stack.\n\nClick to stop.\nClick twice to trash your items one by one.", "Trash Items");
+			} else if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 0) {
+				addButton(11, "Trash One", deleteItems, null, null, null, "Start throwing away your items.\n\nClick to trash your items one by one.\nClick twice to trash all in a stack.", "Trash Items");
+			}
+			
+			
 			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0 && checkKeyItems(true)) {
 				addButton(12, "Key Items", checkKeyItems);
 				foundItem = true;
@@ -341,8 +351,11 @@ package classes.Scenes
 			clearOutput();
 			if (player.itemSlots[slotNum].itype is Useable) {
 				var item:Useable = player.itemSlots[slotNum].itype as Useable;
-				if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+				if (flags[kFLAGS.DELETE_ITEMS] == 1) {
 					deleteItemPrompt(item, slotNum);
+					return;
+				} else if (flags[kFLAGS.DELETE_ITEMS] == 2) {
+					deleteItemsPrompt(item, slotNum);
 					return;
 				}
 				if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
@@ -354,31 +367,71 @@ package classes.Scenes
 			else {
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
 			}
-			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
-/* menuLoc is no longer needed, after monster.doAI game will always move to the next round			
-			else if (menuLoc == 1) {
-				menuLoc = 0;
-				if (!combatRoundOver()) {
-					outputText("\n\n");
-					monster.doAI();
-				}
-			}
-*/
+			itemGoNext();
 		}
 		
 		private function inventoryCombatHandler():void {
-			if (!combat.combatRoundOver()) { //Check if the battle is over. If not then go to the enemy's action.
+			if (!combat.combatRoundOver()) { //Check if the battle is over.
 				outputText("\n\n");
 				monster.doAI();
 			}
 		}
+		
+		private function deleteItems():void {
+			if (flags[kFLAGS.DELETE_ITEMS] == 0) {
+				flags[kFLAGS.DELETE_ITEMS]++;
+				deleteYes();
+			} else if (flags[kFLAGS.DELETE_ITEMS] == 1) {
+				flags[kFLAGS.DELETE_ITEMS]++;
+				deleteYesMany();
+			} else if (flags[kFLAGS.DELETE_ITEMS] == 2) {
+				flags[kFLAGS.DELETE_ITEMS] = 0;
+				deleteNo();
+			}
+		}
+		
+		private function deleteYes():void {
+			clearOutput();
+			outputText("You are now deleting items one at a time.", false);
+			menu();
+			addButton(0, "Next", inventoryMenu);
+		}
+		
+		private function deleteYesMany():void {
+			clearOutput();
+			outputText("You are now deleting all the items within a stack at once.", false);
+			menu();
+			addButton(0, "Next", inventoryMenu);
+		}
+		
+		private function deleteNo():void {
+			clearOutput();
+			outputText("You are no longer deleting items.", false);
+			menu();
+			addButton(0, "Next", inventoryMenu);
+		}
+		
 		private function deleteItemPrompt(item:Useable, slotNum:int):void {
+			clearOutput();
+			outputText("Are you sure you want to destroy 1 " + item.shortName + "?  You won't be able to retrieve it!");
+			menu();
+			addButton(0, "Yes", delete1Item, item, slotNum);
+			addButton(1, "No", inventoryMenu);
+		}
+		
+		private function deleteItemsPrompt(item:Useable, slotNum:int):void {
 			clearOutput();
 			outputText("Are you sure you want to destroy " + player.itemSlots[slotNum].quantity + "x " + item.shortName + "?  You won't be able to retrieve " + (player.itemSlots[slotNum].quantity == 1 ? "it": "them") + "!");
 			menu();
 			addButton(0, "Yes", deleteItem, item, slotNum);
 			addButton(1, "No", inventoryMenu);
-			//doYesNo(deleteItem, inventoryMenu);
+		}
+		
+		public function delete1Item(item:Useable, slotNum:int):void {
+			clearOutput();
+			outputText("1 " + item.shortName + " has been destroyed.");
+			player.destroyItems(item, 1);
+			doNext(inventoryMenu);
 		}
 		
 		private function deleteItem(item:Useable, slotNum:int):void {
@@ -440,17 +493,17 @@ package classes.Scenes
 			menu();
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked)
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), replaceItem, itype, x);
 			}
 			if (source != null) {
 				currentItemSlot = source;
-				addButton(12, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
+				addButton(12, "Put Back", returnItemToInventory, itype, false);
 			}
-			if (showUseNow && itype is Useable) addButton(13, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));
+			if (showUseNow && itype is Useable) addButton(13, "Use Now", useItemNow, itype as Useable, source);
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
 		
-		private function useItemNow(item:Useable, source:ItemSlotClass):void {
+		private function useItemNow(item:Useable, source:ItemSlotClass = null):void {
 			clearOutput();
 			if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
 				useItem(item, source);
@@ -714,7 +767,7 @@ package classes.Scenes
 			var button:int = 0;
 			menu();
 			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), pickFrom, storage, x);
 			}
 			addButton(14, "Back", stash);
 		}

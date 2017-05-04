@@ -59,6 +59,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new FetishCultist();},
 			function ():Monster {return new FetishZealot();},
 			function ():Monster {return new FrostGiant();},
+			function ():Monster {return new Ghoul();},
 			function ():Monster {return new Gnoll();},
 			function ():Monster {return new GnollSpearThrower();},
 			function ():Monster {return new Goblin();},

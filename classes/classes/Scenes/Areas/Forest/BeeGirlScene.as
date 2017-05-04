@@ -745,7 +745,7 @@ package classes.Scenes.Areas.Forest
 					outputText("Your wings tingle before suddenly growing much larger.  You test them for a moment finding that they are now big enough to allow you to fly!");
 				}
 				else {
-					outputText("Your " + player.wingDesc + " feel itchy for a moment before falling off entirely.  You don’t have much time to worry about that though, as almost immediately afterwards you sprout a large pair of bee wings that you use to lift yourself into the air.\n\n");
+					outputText("Your [wings] feel itchy for a moment before falling off entirely.  You don’t have much time to worry about that though, as almost immediately afterwards you sprout a large pair of bee wings that you use to lift yourself into the air.\n\n");
 				}
 				outputText("  Nodding in approval, the bee girl takes your hand and the two of you fly into the sky, the handmaiden leading you to your new home.\n\n");
 			}
@@ -836,7 +836,11 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nThe handmaiden stands up on the flower, and puts her hands on her hips.  <i>“Why not?  Thizzz will be abzzzolutly wonderful for you, I promizzze.  Why won’t you aczzzept me?”</i> she pouts through her glossy lips.\n\n");
 					outputText("You stop for a moment and wonder exactly why you’ve refused her up until now.  Is it because you are afraid of her and the effect she has on your mind?  Is it because the idea of her eggs inside you is disgusting?  Is it because of your duty as a champion?  Or are you just going to leave her there wondering?");
 					dynStats("lus", 5 + player.lib / 25);
-					simpleChoices("Afraid", beeEncounterRefusedHerEggsAfraid, "Disgusted", beeEncounterRefusedHerEggsDisgusted, "Duty", beeEncounterRefusedHerEggsDuty, "", null, "Leave", beeEncounterRefusedHerEggsLeave);
+					menu();
+					addButton(0, "Afraid", beeEncounterRefusedHerEggsAfraid);
+					addButton(1, "Disgusted", beeEncounterRefusedHerEggsDisgusted);
+					addButton(2, "Duty", beeEncounterRefusedHerEggsDuty);
+					addButton(14, "Leave", beeEncounterRefusedHerEggsLeave);
 					return;
 				case BEE_GIRL_TALKED_AND_LEFT:
 					attitude = BEE_GIRL_TALKED_AND_LEFT_TWICE; //Same text as for first time you talked and left, just update attitude

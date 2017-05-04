@@ -175,7 +175,9 @@ private function meetJasun2():void {
 	outputText("\"<i>My name is Jasun, " + player.short + ". My people love the water, but most of them are ferocious and have lost their way. Seeing as I could no longer stay with them without risking my own life constantly, I came to Tel'Adre and set about working with the gym here to set up this wondrous pool. I spend most of my time here. Not many people get to use it, but I think you are ready.</i>\" He smiles at you without baring his teeth and you're flattered, knowing how difficult that must be for something with his jaw structure. \"<i>Come, let's swim.</i>\" He puts out his hand, palm up, literally asking for your hand for him to take you into the water.\n\n", false);
 	flags[kFLAGS.JASUN_NAME_LEARNED] = 1;
 	//[Accept] [Turn Away]
-	simpleChoices("Accept", acceptJasunsAdvances, "Turn Away", turnAwayFromAdj, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Accept", acceptJasunsAdvances);
+	addButton(1, "Turn Away", turnAwayFromAdj);
 }
 
 //IF YOU TURN AWAY
@@ -232,7 +234,7 @@ private function jasunSecks():void {
 		outputText("When you wake back up, you find that your bikini is next to you and that everything else seems to be fine. You put your bikini back on and look around, unable to see Jasun anywhere. You walk toward the gym's exit and reminisce of your experience today, ready for whatever your next escapade will bring.", false);
 	}
 	flags[kFLAGS.JASUN_FUCKED_COUNTER]++;
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }

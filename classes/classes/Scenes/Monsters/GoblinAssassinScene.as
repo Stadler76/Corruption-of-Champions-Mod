@@ -216,7 +216,7 @@ package classes.Scenes.Monsters
 			if (player.hasCock() && player.lust >= 33) {
 				//Corrupt too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.cor > 80 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1))
-					addButton(2, "CorruptDick", manRapesGoblinTooBig);
+					addButton(2, "CorruptDick", rapeAGoblinCorruptTooBig);
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
 					addButton(1, "DickTooBig", manRapesGoblinTooBig);

@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places{
+package classes.Scenes.Places{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Plains.BazaarGatekeeper;
@@ -48,11 +48,17 @@ public function findBazaar():void {
 private function approachBazaarGuard():void {
 	clearOutput();
 	outputText("You step from concealment and walk up to the strange man, calling out in greeting.  He folds his arms across his chest and looks you up and down, peering at you with intense, black eyes.  They aren't solid onyx, but his irises are just as dark as the seemingly bottomless depths of his pupils.  His appraising gaze watches you, unblinking as second after second ticks by.  Just when you start to wonder if he speaks your language, he interrupts you by saying, \"<i>", false);
-	if (player.cor < 33 - player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
+	if (player.cor < (33 - player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
 	outputText("</i>\"", false);
-	if (player.cor < 33 - player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
-	else simpleChoices("Enter",enterTheBazaar, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
+	menu();
+	if (player.cor < (33 - player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+		addButton(0, "FIGHT!",initiateFightGuard);
+	} else {
+		addButton(0, "Enter",enterTheBazaar);
+	}
+	
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 public function enterTheBazaar():void {
@@ -96,7 +102,11 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	addButton(0, "Shops", shopMenu);
 	addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
 	addButton(2, "Food Tent", blackCock.enterTheBlackCock, null, null, null, "The incredible smell seems to come from that tent.", "The Black Cock");
-	addButton(4, "Back Alley", investigateBackAlley, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
+	if (flags[kFLAGS.PRISON_ENABLED] == true) {
+		addButton(4, "Back Alley", investigateBackAlley, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
+	} else {
+		addButton(4, "Back Alley", investigateBackAlleyNoPrison, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
+	}
 	//Cinnabar
 	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
 	//Griping Demons
@@ -186,7 +196,6 @@ private function theSlipperySqueeze():void {
 		milker = askJoeyAboutOffer;
 	//	[Joey] [Sara] [][] [Leave]
 	
-	//simpleChoices("JoeyMassage",joeyMassage,"Androgyny",androgyny,"Joey'sOffer",milker,"",0,"Leave",2855);
 	menu();
 	addButton(0,"JoeyMassage",joeyMassage);
 	addButton(1,"Adrogyny",androgyny);
@@ -230,8 +239,10 @@ private function buyCockMilker():void {
 	outputText("\n\n(<b>Key Item Acquired: Cock Milker</b>)");
 	player.gems -= 200;
 	statScreenRefresh();
-	player.createKeyItem("Cock Milker",0,0,0,0);
-	simpleChoices("JoeyMassage", joeyMassage, "Androgyny", null, "Joey'sOffer", null, "", null, "Leave", enterTheBazaar);
+	player.createKeyItem("Cock Milker", 0, 0, 0, 0);
+	menu();
+	addButton(0, "JoeyMassage", joeyMassage);
+	addButton(14, "Leave", enterTheBazaar);
 }
 
 private function joeyAndrogyny():void {
@@ -349,7 +360,7 @@ private function joeysMassageWifNoExtraJizz():void {
 		outputText("  Joey turns and prances away, saying, \"<i>There's a shower if you need to clean up, and be sure and visit me the next time you need help to squeeze out all that tension!</i>\"  You barely hear his words, so focused are you on his cum-darkened, distended thong.  You can see it bulging between his legs, and while his pert butt sways out the door, you can see that his cum-filled thong is designed to redirect all that fluid over his taint and into his backdoor. Kinky.", false);
 	}
 	//(reduces libido significantly if very high, reduces lust, and reduces sensitivity to 40)
-	player.orgasm();
+	player.orgasm('Generic');
 	if (player.lib > 20) dynStats("lib", -.5);
 	if (player.lib > 80) dynStats("lib", -1);
 	if (player.lib > 60) dynStats("lib", -1);
@@ -401,7 +412,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	
 	outputText("Joey leaves, his poofy tail bobbing back and forth.  You can see his thong is distended, virtually packed with his own still-pumping spooge, and you marvel at his perverse ingenuity when you realize his thong is waterproofed and shaped to guide all the jizz between his thighs and into his back-door.  Kinky.", false);
 	player.cumMultiplier += 2;
-	player.orgasm();
+	player.orgasm('Dick');
 	if (player.lib > 20) dynStats("lib", -.5);
 	if (player.lib > 80) dynStats("lib", -1);
 	if (player.lib > 60) dynStats("lib", -1);
@@ -421,13 +432,17 @@ private function joeyBigBalls():void {
 		if (player.cor > 70) outputText("; you won't get to watch him fountaining all that pearly spunk like a perverted statue", false);
 		outputText(".  What do you decide?", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
+		menu();
+		addButton(0, "SuckCumOut", suckOffJoeysGardenHose);
+		addButton(1, "MasturbateOut", joeyWanksItOut);
 	}
 	//(Sucked Joey once) 
 	else {
 		outputText("As soon as you enter The Slippery Squeeze, you know somehow that something is amiss.  Joey staggers out from a back-room, his balls once again swollen huge and round.  He looks at you and admits, \"<i>Someone's <b>got</b> to be sabotaging me... gods, this hurts!  Could you help me, or should I go in the back and jerk it out myself?</i>\"\n\n", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
+		menu();
+		addButton(0, "SuckCumOut", suckOffJoeysGardenHose);
+		addButton(1, "MasturbateOut", joeyWanksItOut);
 	}
 	flags[kFLAGS.JOEY_BIG_BALLS_COUNTER]++;	
 }
@@ -986,7 +1001,7 @@ private function eggsInButt(eggButt:Boolean = false):void {
 	outputText("\n\nJoey sets the headrest back up, pats you on the head and says, \"<i>Take as long as you want to recover, you sweet thing, you.  There's a towel on the table, and a shower in the back!  Come back ANY time, [name].  I'd love to give you another 'dessert.'</i>\"");
 	
 	outputText("\n\nJoey leaves, his rabbit tail bobbing to and fro.  You see his thong is distended, practically packed to the brim with more of his still-drooling chocolatey cum.  As usual, the waterproof thong seems to be pumping it all between his soft thighs and right into his already egg-filled asshole.  He really does like feeling full back there.  Kinky.");
-	player.orgasm();
+	player.orgasm('Lips');
 	dynStats("lib", -2, "sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1044,7 +1059,7 @@ private function assaultYoRapistYo():void {
 		//open options [Leave][Abuse ass(70 or more corruption)]
 		menu();
 		addButton(4,"Leave", assaultWinAndLeave);
-		if (player.cor >= 66 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) addButton(0,"Abuse Ass",abuseHisAss);
+		if (player.cor >= (66 - player.corruptionTolerance()) || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) addButton(0,"Abuse Ass",abuseHisAss);
 	}
 }
 
@@ -1241,7 +1256,7 @@ private function finalGayFinallee(road:int = 0):void {
 			if (player.gems < 0) player.gems = 0;
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: a lust draft potion with an orange ribbon tied to it.  A note at the end reads: \"<i>Thanks for bailing me out of buying booze.  Your ass was amazing even after that orc had it.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn tiger paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
-		player.orgasm();
+		player.orgasm('Anal');
 		dynStats("sen", 5);
 		model.time.days++;
 		model.time.hours = 6;
@@ -1273,7 +1288,7 @@ private function finalGayFinallee(road:int = 0):void {
 			if (player.gems < 0) player.gems = 0;
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: A lust draft potion with an brown ribbon tied to it.  A note at the end reads: \"<i>I'll always remember the face you made trying to wrap your cute lips around my giant dick.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn bear paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
-		player.orgasm();
+		player.orgasm('Anal');
 		dynStats("sen", 5);
 		model.time.days++;
 		model.time.hours = 6;
@@ -1304,7 +1319,7 @@ private function finalGayFinallee(road:int = 0):void {
 		//Lust sated
 		//Gained 1 Bimbo brew, lost a few gems(9 or so?)
 		//Time set to morning
-		player.orgasm();
+		player.orgasm('Generic');
 		dynStats("sen", 5);
 		model.time.days++;
 		
@@ -1322,6 +1337,13 @@ private function finalGayFinallee(road:int = 0):void {
 		clearOutput();
 		outputText("Your curiosity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 		doYesNo(getGame().prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
+	}
+	//Nope no prison for me thank you very much
+	private function investigateBackAlleyNoPrison():void {
+		clearOutput();
+		outputText("Your curiosity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply. You take the wise decision of walking away.");
+		menu();
+		addButton(0, "Next", enterTheBazaarAndMenu);
 	}
 
 }

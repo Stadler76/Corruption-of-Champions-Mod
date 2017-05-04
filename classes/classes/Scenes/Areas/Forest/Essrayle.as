@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.Areas.Forest{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
 
 	public class Essrayle extends BaseContent{
 
@@ -17,6 +19,14 @@
 //const ESSY_MET_IN_DUNGEON:int = 866;
 
 //Restriction on meeting Essy I'd figure is you can't be genderless, Essy is a very sexual being and if she doesn't detect a sex in someone, she's bluntly not interested. I'd imagine she'd be more receptive to nagas, those rather cowish in species, and characters with very, very large breasts.
+	public function forestEncounterCondition():Boolean {
+		return player.gender > 0 && (flags[kFLAGS.ESSY_MET_IN_DUNGEON] == 0 || flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 1);
+	}
+	public var forestEncounter:Encounter = Encounters.build({
+		name:"essrayle",
+		call:essrayleMeetingI,
+		when:forestEncounterCondition
+	});
 
 public function essrayleMeetingI():void {
 	clearOutput();

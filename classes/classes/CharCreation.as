@@ -1,4 +1,4 @@
-﻿package classes 
+package classes 
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -98,6 +98,7 @@
 			var silly:Boolean = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 			var easy:Boolean = flags[kFLAGS.EASY_MODE_ENABLE_FLAG];
 			var sprite:Boolean = flags[kFLAGS.SHOW_SPRITES_FLAG];
+			var prison:Boolean = flags[kFLAGS.PRISON_ENABLED];
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 			
@@ -121,7 +122,6 @@
 			//mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
 			menu();
 			addButton(0, "OK", chooseName);
-		//	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		
@@ -229,7 +229,6 @@
 				}
 			}
 			player.wingType = WING_TYPE_NONE;
-			player.wingDesc = "non-existant";
 			if (player.eyeType == EYES_BASILISK) player.eyeType = EYES_LIZARD; // Silently change them to be lizard eyes again. Simple and stupid ;)
 			//Default
 			player.skinTone = "light";

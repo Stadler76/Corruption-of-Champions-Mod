@@ -4,8 +4,9 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Mutations;
+import classes.Scenes.API.Encounter;
 
-	public class ErlKingScene extends BaseContent
+public class ErlKingScene extends BaseContent implements Encounter
 	{
 		public function ErlKingScene()
 		{
@@ -17,7 +18,15 @@ package classes.Scenes.Areas.Forest
 		protected function get changeLimit():int { return mutations.changeLimit; }
 		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
-		public function encounterWildHunt():void
+	public function encounterName():String {
+		return "erlking";
+	}
+
+	public function encounterChance():Number {
+		return flags[kFLAGS.ERLKING_DISABLED] == 0 ? 2 : 0;
+	}
+
+	public function execEncounter():void
 		{
 			if (flags[kFLAGS.WILD_HUNT_ENCOUNTERS] == 0)
 			{

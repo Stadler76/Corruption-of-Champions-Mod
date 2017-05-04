@@ -2110,8 +2110,6 @@ package classes.Scenes.Dungeons
 		//*Encounter:
 
 		public function sandWitchMotherFriendlyMenu():void {
-			startCombat(new SandMother(),true);
-			getGame().inCombat = false;
 			menu();
 			if (flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",leaveAloneSendLackeysToggle, null, null, null, "You've had enough with the Sand Witches. They should leave you alone.", "Talk: Stop Attacking");
 			else addButton(0,"StartAttacking",leaveAloneSendLackeysToggle, null, null, null, "Tell the Sand Mother that you want to encounter the Sand Witches again.", "Talk: Start Attacking");
@@ -2119,16 +2117,56 @@ package classes.Scenes.Dungeons
 			addButton(2,"Cum Witches",discussCumWitches, null, null, null, "Ask the Sand Mother about the Cum Witches.", "Talk: Cum Witches");
 			addButton(3,"CovenStatus",currentStateOfInterwebs, null, null, null, "Ask the Sand Mother about the status of the coven.", "Talk: Coven Status");
 			addButton(4,"History",sandWitchHistory, null, null, null, "Ask the Sand Mother about the history of the Sand Witches.", "Talk: History");
-			if (flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {
-				addButton(5,"Get LaBova",getLaBova, null, null, null, consumables.LABOVA_.description);
-				addButton(6,"Get Lactaid",getLactaidFromWitches, null, null, null, consumables.LACTAID.description);
-			}
+			addButton(5,"Buy LaBova",buyPotion, consumables.LABOVA_, 25, null, consumables.LABOVA_.description);
+			addButton(6,"Buy Lactaid",buyPotion, consumables.LACTAID, 50, null, consumables.LACTAID.description);
 			if ((flags[kFLAGS.ESSY_MET_IN_DUNGEON] > 0 && flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 0) || (flags[kFLAGS.MET_MILK_SLAVE] > 0 && flags[kFLAGS.MILK_NAME] is Number))
 				addButton(7,"Free Slaves",slavesDiscussion, null, null, null, "Request the Sand Mother to release a slave.");
 			if (player.lust >= 33) addButton(8, "Sex", sexWithFriendlySandMother, null, null, null, "Have some sexy time with the Sand Mother.");
 			else addDisabledButton(8, "Sex", "You are not aroused enough.");
 			
 			addButton(14,"Leave",playerMenu);
+		}
+		
+		private function buyPotion(iType:ItemType, price:int):void {
+			clearOutput();
+			outputText("You ask if you can get a dose of " + iType.shortName + " from her coven.");
+			
+			if (iType == consumables.LACTAID) {
+				outputText("You ");
+				if (player.cor < 33) outputText("politely request");
+				else if (player.cor < 66) outputText("request");
+				else outputText("none-too-politely request");
+				outputText(" a dose of Lactaid from her coven.");
+				
+				outputText("\n\n\"<i>Are you thinking of joining us?  We could do the deed much more directly with our magics,</i>\" the Sand Mother offers.  \"<i>These dunes are as comfortable to us as a mother's bosom, and your place among us could be most pleasant.</i>\"");
+				
+				outputText("\n\nYou decline the offer and repeat your request for Lactaid, which sours the woman's expression slightly.  \"<i>Fine, it would be " + price + " gems per bottle.</i>\"\n\n");
+			} else {
+				outputText("You ask for some La Bova");
+				if (player.cor < 33) outputText(" with a blush");
+				else if (player.cor < 66) outputText(" a little uncertainly");
+				else outputText(" with a knowing smile");
+				outputText(".");
+				outputText("\n\n\"<i>Oh?  You're not going to move into the mountains and try to woo the minotaurs into submission with milk are you?</i>\" the Sand Mother questions.  \"<i>That would be a sure descent into corruption.</i>\"");
+				outputText("\n\nYou shake your head");
+				if (player.cor > 66) outputText(", though the idea does seem to nestle into your imagination quite alluringly");
+				outputText(".");
+				outputText("\n\n\"<i>That is good.  The ways of beasts offer many boons.  This one is quite useful for enhancing lactation, for instance.  However, there is great risk in reveling in such transformation.  Be sure that you don't lose yourself to it,</i>\" the statuesque sorceress warns. \"<i>It would be " + price + " gems per bottle.</i>\"\n\n");
+			}
+			
+			menu();
+			if (player.gems >= price) {
+				addButton(0, "Yes", buyPotionConfirm, iType, price);
+			} else {
+				addDisabledButton(0, "Yes", "You can't afford this!");
+			}
+			addButton(1, "No", sandWitchMotherFriendlyMenu);
+		}
+		
+		private function buyPotionConfirm(iType:ItemType, price:int):void {
+			player.gems -= price;
+			inventory.takeItem(iType, sandWitchMotherFriendlyMenu);
+			statScreenRefresh();
 		}
 
 		public function slavesDiscussion():void {
@@ -2237,6 +2275,10 @@ package classes.Scenes.Dungeons
 		}
 
 		public function sexWithFriendlySandMother():void {
+			if (monster == null || monster.short != "Sand Mother") {
+				monster = new SandMother();
+				monster.HP = 0;
+			}
 			menu();
 			//friendly cunt fuck:
 			if (player.hasVagina()) addButton(0, "GetMilkFill", lesboMilkFilling, null, null, null, "Get into female sex with the Sand Mother and get your vagina stuffed with milk!", "Get Milk Fill");
@@ -2249,8 +2291,8 @@ package classes.Scenes.Dungeons
 
 
 		public function sandMotherPOMenu():void {
-			if (monster.short != "Sand Mother") {
-				startCombat(new SandMother(),true);
+			if (monster == null || monster.short != "Sand Mother") {
+				monster = new SandMother();
 				monster.HP = 0;
 			}
 			menu();
@@ -2464,9 +2506,11 @@ package classes.Scenes.Dungeons
 		//*Fuck Her Cunt
 		//>Sets to resisting with options for repeat rapes.
 		public function fuckTheSandMothersCunt():void {
+			if (monster == null || monster.short != "Sand Mother") {
+				monster = new SandMother();
+				monster.HP = 0;
+			}
 			clearOutput();
-			startCombat(new SandMother(), true);
-			getGame().inCombat = false;
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			outputText("You admire your prize for a moment, reveling triumphantly in your victory as you hastily disrobe.  The Sand Mother, defeated and weak, declares, \"<i>Fine then, do as you will.  You won't break me.</i>\"  The venom in her voice takes you off-guard - she still thinks you're a demonic agent!  You shrug and roll her over, pulling her up onto her hands and knees.  She can think what she wants, but you're going to tap her super-curvy body regardless.  You smack the weakened Queen through her sheer robes and admire the ripple that moves from one side of her well-endowed tush to the other.");
@@ -2802,9 +2846,11 @@ package classes.Scenes.Dungeons
 		//*Friendly Fuck (Optional?)
 		//>Fuck her friendly style.
 		public function friendlySandMotherFuck():void {
+			if (monster == null || monster.short != "Sand Mother") {
+				monster = new SandMother();
+				monster.HP = 0;
+			}
 			clearOutput();
-			startCombat(new SandMother(), true);
-			getGame().inCombat = false;
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			//First Time:
@@ -3336,10 +3382,10 @@ package classes.Scenes.Dungeons
 			else outputText("\n\nThe cum witch says, \"<i>Oh, you lack a gender.  Why don't you pick up some sexual equipment and come back for some real fun.</i>\"");
 			//[Virility] [Fertility] [Nevermind]
 			menu();
-			if (player.findPerk(PerkLib.MagicalVirility)) addButtonDisabled(1, "Virility", "You already posess this blessing.");
+			if (player.findPerk(PerkLib.MagicalVirility) >= 0) addButtonDisabled(0, "Virility", "You already posess this blessing.");
 			else if (player.hasCock()) addButton(0,"Virility",cumWitchBlessed, true, null, null, "Receive the blessing of virility. This will increase your cum production and virility rating.");
 			else addButtonDisabled(0, "Virility", "This scene requires you to have cock.");
-			if (player.findPerk(PerkLib.MagicalFertility)) addButtonDisabled(1, "Fertility", "You already posess this blessing.");
+			if (player.findPerk(PerkLib.MagicalFertility) >= 0) addButtonDisabled(1, "Fertility", "You already posess this blessing.");
 			else if (player.hasVagina()) addButton(1, "Fertility", cumWitchBlessed, false, null, null, "Receive the blessing of fertility. This will increase your pregnancy speed and fertility rating.");
 			else addButtonDisabled(1, "Fertility", "This scene requires you to have vagina.");
 			addButton(4,"Nevermind",changeMindAboutBlessings, null, null, null, "Nevermind that! Drop the subject. You'll be able to come back if you want.");

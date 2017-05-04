@@ -276,37 +276,8 @@ package classes.Scenes.NPCs
 				//(High Affection)
 				else outputText("\n\n\"<i>Depends... what do you have in mind?</i>\"");
 			}
-
-			/*var catchAnal_:Function = null;
-			var pitchAnal:Function = null;
-			var blowEmber:Function =null;
-			var getBlown:Function =null;
-			var eatOut:Function =null;
-			var getEatenOut:Function =null;
-			var penetrateHer:Function =null;
-			var getPenetrated:Function =null;*/
-			//Display Options:[Catch Anal][Pitch Anal][Blow Ember][Get Blown][Eat Ember Out][Get Eaten Out][Penetrate Her][Get Penetrated][Leave]
-			//Scenes that require Ember to have a dick
-			/*if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) {
-				blowEmber = suckEmberCock;
-				catchAnal_ = catchAnal;
-				if (player.lust >= 33 && player.hasVagina()) {
-					getPenetrated = getPenetratedByEmberLastSexSceneWoooo;
-				}
-			}
-			//scenes that require Ember to have a cunt
-			if (flags[kFLAGS.EMBER_GENDER] >= 2) {
-				eatOut = slurpDraggieCunnies;
-				if (player.hasCock() && player.lust >= 33) penetrateHer = penetrateEmbrah;
-			}
-			if (player.hasVagina() && player.lust >= 33) getEatenOut = getEatenOutByEmbra;
-			if (player.hasCock() && player.lust >= 33) {
-				getBlown = stickDickInKnifeDrawer;
-				pitchAnal = stickItInEmbersButt;
-			}*/
-			//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
+			//Display sex menu choices
 			menu();
-			
 			addDisabledButton(0, "Catch Anal", "This scene requires Ember to have cock.");
 			addDisabledButton(1, "Pitch Anal", "This scene requires you to have cock and sufficient arousal.");
 			addDisabledButton(2, "Blow Ember", "This scene requires Ember to have cock.");
@@ -323,7 +294,7 @@ package classes.Scenes.NPCs
 			if (player.hasCock() && player.lust >= 33) addButton(3, "Get Blown", stickDickInKnifeDrawer, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to suck you off.");
 			if (flags[kFLAGS.EMBER_GENDER] >= 2) addButton(4, "Eat Her Out", slurpDraggieCunnies, null, null, null, "Get a taste of Ember vagina!");
 			if (player.hasVagina() && player.lust >= 33) addButton(5, "Get Eaten Out", getEatenOutByEmbra, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to get a taste of your vagina.");
-			if (flags[kFLAGS.EMBER_GENDER] >= 2 && player.hasCock() && player.lust >= 33) addButton(6, "Penetrate Her", penetrateEmbrah, null, null, null, "Penetrate Ember vaginally!");
+			if (flags[kFLAGS.EMBER_GENDER] >= 2 && player.hasCock() && player.lust >= 33) addButton(6, "Penetrate " + emberMF("Him", "Her"), penetrateEmbrah, null, null, null, "Penetrate Ember vaginally!");
 			if ((flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) && player.lust >= 33 && player.hasVagina()) addButton(7, "Get Penetrated", getPenetratedByEmberLastSexSceneWoooo, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate you vaginally with that cock of " + emberMF("his", "hers") + ".");
 			if (emberAffection() >= 95 && player.hasCock() && player.cockThatFits(emberVaginalCapacity()) >= 0 && (player.hasItem(consumables.L_DRAFT) || player.lib >= 50 || player.minLust() >= 40))
 				addButton(8, "LustyFuck", highAffectionEmberLustFuck);
@@ -378,7 +349,9 @@ package classes.Scenes.NPCs
 			outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
 			flags[kFLAGS.EGG_BROKEN] = 1;
 			//[Eat][Leave]
-			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Eat It", eatEmbersYolkLikeAnEvenBiggerDick);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[=Eat=]
@@ -572,30 +545,55 @@ package classes.Scenes.NPCs
 			else {
 				outputText("\n\nYou stare at the egg's pulsations as the rhythm shifts slightly.  You feel a tinge of excitement, a distant expectation not your own.  Though curious about what could be inside, you decide nothing more can be done for now.");
 			}
-			var fap:Function =null;
-			if (player.lust >= 33) fap = masturbateOntoAnEgg;
-			var draft:Function =null;
-			if (player.hasItem(consumables.INCUBID)) draft = createCallBackFunction(useIncubusDraftOnEmber,false);
-			var pDraft:Function =null;
-			if (player.hasItem(consumables.P_DRAFT)) pDraft = createCallBackFunction(useIncubusDraftOnEmber,true);
-			var milk:Function =null;
-			if (player.hasItem(consumables.SUCMILK)) milk = createCallBackFunction(useSuccubiMilkOnEmber,false);
-			var pMilk:Function =null;
-			if (player.hasItem(consumables.P_S_MLK)) pMilk = createCallBackFunction(useSuccubiMilkOnEmber,true);
-			var hair:Function =null;
-			if (player.hasItem(consumables.EXTSERM)) hair = hairExtensionSerum;
-			var ovi:Function =null;
-			if (player.hasItem(consumables.OVIELIX)) ovi = useOviElixerOnEmber;
-			var lactaid:Function =null;
-			if (player.hasItem(consumables.LACTAID)) lactaid = useLactaidOnEmber;
-			var hatch:Function =null;
+			
+			menu();
 			if (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] >= 5 && flags[kFLAGS.EMBER_JACKED_ON] > 0 && flags[kFLAGS.EMBER_GENDER] > 0) {
-				hatch = hatchZeMuzzles;
 				outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
+				addButton(0, "Hatch", hatchZeMuzzles);
+			} else if (player.lust >= 33 && !player.isGenderless()) {
+				addButton(0, "Masturbate", masturbateOntoAnEgg);
+			} else {
+				addDisabledButton(0, "Masturbate", "This scene requires you to have genitals and sufficient arousal.");
 			}
-			if (hatch!=null) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else if (fap!=null) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			
+			addButton(1, "Blood", giveEmberBludSausages);
+			
+			if (player.hasItem(consumables.INCUBID)) {
+				addButton(2, "IncubiDraft", createCallBackFunction(useIncubusDraftOnEmber, false));
+			} else {
+				addDisabledButton(2, "IncubiDraft");
+			}
+			if (player.hasItem(consumables.P_DRAFT)) {
+				addButton(3, "Pure Draft", createCallBackFunction(useIncubusDraftOnEmber,true));
+			} else {
+				addDisabledButton(3, "Pure Draft");
+			}
+			if (player.hasItem(consumables.SUCMILK)) {
+				addButton(4, "Succubi Milk", createCallBackFunction(useSuccubiMilkOnEmber, false));
+			} else {
+				addDisabledButton(4, "Succubi Milk");
+			}
+			if (player.hasItem(consumables.P_S_MLK)) {
+				addButton(5, "Pure Milk", createCallBackFunction(useSuccubiMilkOnEmber, true));
+			} else {
+				addDisabledButton(5, "Pure Milk");
+			}
+			if (player.hasItem(consumables.EXTSERM)) {
+				addButton(6, "Hair Serum", hairExtensionSerum);
+			} else {
+				addDisabledButton(6, "Hair Serum");
+			}
+			if (player.hasItem(consumables.OVIELIX)) {
+				addButton(7, "Ovi Elixir", useOviElixerOnEmber);
+			} else {
+				addDisabledButton(7, "Ovi Elixir");
+			}
+			if (player.hasItem(consumables.LACTAID)) {
+				addButton(8, "Lactaid", useLactaidOnEmber);
+			} else {
+				addDisabledButton(8, "Lactaid");
+			}
+			addButton(14, "Back", leaveWithoutUsingAnEmberItem);
 		}
 
 //[= No =]
@@ -1130,8 +1128,12 @@ package classes.Scenes.NPCs
 			//Talk about Dragons
 			//Talk about Exploring
 			//Talk about Yourself
-			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", null, "Back", emberCampMenu);
+			menu();
+			addButton(0, "Dragons", talkToEmberAboutDragonzzz);
+			addButton(1, "Exploring", discussExplorationWithEmber);
+			addButton(2, "Yourself", talkToEmberAboutYourself);
 			if (flags[kFLAGS.EMBER_AFFECTION] >= 100 && flags[kFLAGS.EGG_BROKEN] < 1) addButton(3, "Eggshell", askEmberForEggshell, null, null, null, "Ask Ember for the eggshell. After all, you should have deserved the eggshell by now.");
+			addButton(14, "Back", emberCampMenu);
 		}
 
 //Talk about Dragons (Z)
@@ -1562,7 +1564,9 @@ package classes.Scenes.NPCs
 
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking...");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Continue", drinkDeeplyOfDagronBlud);
+				addButton(1, "Stop", noMoDagronBlud);
 			}
 			//(High Affection)
 			else {
@@ -1572,7 +1576,9 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber kisses you back; " + emberMF("his", "her") + " bleeding tongue stroking yours lovingly.");
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking?");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Continue", drinkDeeplyOfDagronBlud);
+				addButton(1, "Stop", noMoDagronBlud);
 			}
 			//Flag as drinking her blood today!
 			flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] = 1;
@@ -1671,7 +1677,9 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber bites her lips and says once more, a bit louder this time, \"<i>Would you like to watch?</i>\"");
 				outputText("\n\nYou blink at the offer, then give her your most winning smile.  You could agree, or just smooth-talk your way out of it.");
 				//[Watch][Fob Off]
-				simpleChoices("Watch", watchMediumAffectionEmberEggLay, "Don't Watch", dontWatchEmberLayEgg, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Watch", watchMediumAffectionEmberEggLay);
+				addButton(1, "Don't Watch", dontWatchEmberLayEgg);
 			}
 			//(High Affection)
 			else {
@@ -3203,7 +3211,9 @@ package classes.Scenes.NPCs
 			dynStats("lus", 10 + player.lib / 10);
 			outputText("\n\nWhat do you say?");
 			//[Accept] [Deny]
-			simpleChoices("Accept", timeToPuffTheMagicDragon, "Deny", fuckOffEmberIWantANap, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Accept", timeToPuffTheMagicDragon);
+			addButton(1, "Deny", fuckOffEmberIWantANap);
 		}
 
 //[=Deny=]
@@ -3247,7 +3257,9 @@ package classes.Scenes.NPCs
 			if (player.pregnancyIncubation == 0 && !pregnancy.isPregnant && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
 				outputText("\n\n(Who should bear the kids?)");
 				//[Ember] [You]
-				simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding);
+				addButton(1, "You", getKnockedUpByEmbrahBroBaby);
 			}
 			//[Play appropriate breeding scene.]
 			//Female Breeding Scene:
@@ -4314,7 +4326,7 @@ package classes.Scenes.NPCs
 			if (player.tailType > TAIL_TYPE_NONE) outputText("the base of your tail, tugging lightly on it and stroking it for a moment, then her hands move on to ");
 			outputText("your [butt], grabbing the ");
 			outputText("cheeks.  You wriggle appreciatively under her grip, making it clear she's not half bad at this herself.  The she-dragon giggles at your compliment, coiling her tail around your [legs].  \"<i>I haven't even started playing with you properly yet, my mate, and you're already excited...</i>\"  She clicks her tongue in mock reproval.  \"<i>You're such a pervert aren't you, [name]?  Lucky for us, you are <b>my</b> pervert, and I enjoy being played with a lot... so go ahead and toy with my body as much as you want.  I'll make sure to return the favor,</i>\" she purrs lovingly, sliding her hands back up your back, ");
-			if (player.wingType > WING_TYPE_NONE) outputText("stopping momentarily to stroke along your " + player.wingDesc + " wings before continuing up and ");
+			if (player.wingType > WING_TYPE_NONE) outputText("stopping momentarily to stroke along your [wings] before continuing up and ");
 			outputText("stopping at the back of your head.");
 
 			outputText("\n\nSlowly she guides you towards one of her erect nipples.  \"<i>");

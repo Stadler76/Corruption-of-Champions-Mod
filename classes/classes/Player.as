@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -257,18 +257,18 @@ use namespace kGAMECLASS;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
 			//Blacksmith history!
-			if (armorDef > 0 && findPerk(PerkLib.HistorySmith) >= 0) {
+			if (armorDef > 0 && hasPerk(PerkLib.HistorySmith)) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
 			//Skin armor perk
-			if (findPerk(PerkLib.ThickSkin) >= 0) {
+			if (hasPerk(PerkLib.ThickSkin)) {
 				armorDef += 2;
 			}
 			//Stacks on top of Thick Skin perk.
 			if (hasFur()) armorDef += 1;
 			if (hasReptileScales()) armorDef += 3;
-			if (hasDragonScales()) armorDef += 2;
+			if (hasDragonScales()) armorDef += 3;
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
@@ -280,18 +280,18 @@ use namespace kGAMECLASS;
 			}
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
-			if (findPerk(PerkLib.Agility) >= 0) {
+			if (hasPerk(PerkLib.Agility)) {
 				if (armorPerk == "Light" || _armor.name == "nothing") speedBonus += Math.round(spe/8);
 				else if (armorPerk == "Medium") speedBonus += Math.round(spe/13);
 				if (speedBonus > 15) speedBonus = 15;
 			}
 			armorDef += speedBonus
 			//Acupuncture effect
-			if (findPerk(PerkLib.ChiReflowDefense) >= 0) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
-			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
+			if (hasPerk(PerkLib.ChiReflowDefense)) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
+			if (hasPerk(PerkLib.ChiReflowAttack)) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
 			//Berzerking removes armor
 			if (hasStatusEffect(StatusEffects.Berzerking)) {
-				if (findPerk(PerkLib.ColdFury) < 0)
+				if (!hasPerk(PerkLib.ColdFury))
 					armorDef = 0;
 				else
 					armorDef /= 2;
@@ -321,17 +321,17 @@ use namespace kGAMECLASS;
 		}
 		override public function get weaponAttack():Number {
 			var attack:Number = _weapon.attack;
-			if (findPerk(PerkLib.WeaponMastery) >= 0 && weaponPerk == "Large" && str > 60)
+			if (hasPerk(PerkLib.WeaponMastery) && weaponPerk == "Large" && str > 60)
 				attack *= 2;
-			if (findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && weaponPerk != "Large") {
+			if (hasPerk(PerkLib.LightningStrikes) && spe >= 60 && weaponPerk != "Large") {
 				attack += Math.round((spe - 50) / 3);
 			}
 			//Iron fists bonus!
-			if (findPerk(PerkLib.IronFists) >= 0 && str >= 50 && weaponName == "fists")
+			if (hasPerk(PerkLib.IronFists) && str >= 50 && weaponName == "fists")
 				attack += 5;
-			if (findPerk(PerkLib.IronFists2) >= 0 && str >= 65 && weaponName == "fists")
+			if (hasPerk(PerkLib.IronFists2) && str >= 65 && weaponName == "fists")
 				attack += 3;
-			if (findPerk(PerkLib.IronFists3) >= 0 && str >= 80 && weaponName == "fists")
+			if (hasPerk(PerkLib.IronFists3) && str >= 80 && weaponName == "fists")
 				attack += 3;
 			//Bonus for being samurai!
 			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA)
@@ -568,7 +568,7 @@ use namespace kGAMECLASS;
 			
 			//Opponents can critical too!
 			var crit:Boolean = false
-			if (rand(100) <= 4 || (kGAMECLASS.monster.findPerk(PerkLib.Tactician) >= 0 && kGAMECLASS.monster.inte >= 50 && (kGAMECLASS.monster.inte - 50)/5 > rand(100))) {
+			if (rand(100) <= 4 || (kGAMECLASS.monster.hasPerk(PerkLib.Tactician) && kGAMECLASS.monster.inte >= 50 && (kGAMECLASS.monster.inte - 50)/5 > rand(100))) {
 				crit = true;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
@@ -786,8 +786,22 @@ use namespace kGAMECLASS;
 				if (isTaur())
 					race = "raccoon-taur";
 			}
+			if (sheepScore() >= 4) {
+				if (legCount == 4 && lowerBody == 21) {
+					race = "sheep-taur";
+				}
+				else if (gender == 0 || gender == 3) {
+					race = "sheep-morph";
+				}
+				else if (gender == 1 && hornType == 10) {
+					race = "ram-morph";
+				}
+				else {
+					race = "sheep-" +mf("boy","girl");
+				}
+			}
 			if (wolfScore() >= 4) {
-				if (hasFur()) {
+				if (hasFur() || gender == 0 || gender == 3) {
 					race = "wolf-morph";
 				}
 				else {
@@ -871,9 +885,11 @@ use namespace kGAMECLASS;
 			}
 			if (spiderScore() >= 4)
 			{
-				race = "spider-morph";
-				if (mf("no", "yes") == "yes")
-					race = "spider-girl";
+				if (gender == 0 || gender == 3) {
+					race = "spider-morph";
+				} else {
+					race = "spider-" + mf("boy", "girl");
+				}
 				if (isDrider())
 					race = "drider";
 			}
@@ -907,7 +923,7 @@ use namespace kGAMECLASS;
 			if (rhinoScore() >= 4)
 			{
 				race = "rhino-morph";
-				if (faceType == 0) race = "rhino-" + mf("man", "girl");
+				if (faceType == 0) race = "rhino-" + mf("boy", "girl");
 			}
 			if (echidnaScore() >= 4)
 			{
@@ -919,7 +935,7 @@ use namespace kGAMECLASS;
 				if (isTaur()) race = "deer-taur";
 				else {
 					race = "deer-morph";
-					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+					if (faceType == 0) race = "deer-" + mf("boy", "girl");
 				}
 			}
 			//Special, bizarre races
@@ -929,14 +945,14 @@ use namespace kGAMECLASS;
 				else {
 					race  = "dragonne-morph";
 					if (faceType == 0)
-						race = "dragonne-" + mf("man", "girl");
+						race = "dragonne-" + mf("boy", "girl");
 				}
 			}
 			if (manticoreScore() >= 6)
 			{
 				race = "manticore-morph"
 				if (faceType == 0)
-					race = "manticore-" + mf("man", "girl");
+					race = "manticore-" + mf("boy", "girl");
 			}
 			if (sirenScore() >= 4)
 			{
@@ -972,7 +988,7 @@ use namespace kGAMECLASS;
 			if (gooScore() >= 3)
 			{
 				race = "goo-";
-				race += mf("boi", "girl");
+				race += mf("boy", "girl");
 			}
 			
 			
@@ -1571,6 +1587,27 @@ use namespace kGAMECLASS;
 			return kanga;
 		}
 
+		//Sheep score
+		public function sheepScore():Number
+		{
+			var sheepCounter:Number = 0;
+			if (earType == 19)
+				sheepCounter++;
+			if (hornType == 9)
+				sheepCounter++;
+			if (hornType == 10)
+				sheepCounter++;
+			if (tailType == 27)
+				sheepCounter++;
+			if (lowerBody == 21 && legCount == 2)
+				sheepCounter++;
+			if (hairType == 8)
+				sheepCounter++;
+			if (hasWool())
+				sheepCounter++;
+			return sheepCounter;
+		}
+
 		//sharkscore
 		public function sharkScore():Number
 		{
@@ -1632,7 +1669,7 @@ use namespace kGAMECLASS;
 				salamanderCounter++;
 			if (tailType == TAIL_TYPE_SALAMANDER)
 				salamanderCounter++;
-			if (findPerk(PerkLib.Lustzerker) >= 0)
+			if (hasPerk(PerkLib.Lustzerker))
 				salamanderCounter++;
 			if (salamanderCounter >= 2) {
 				if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
@@ -1813,9 +1850,9 @@ use namespace kGAMECLASS;
 				bimboCounter -= 2;
 			if (armorName == "bimbo skirt") 
 				bimboCounter += 1;
-			if (findPerk(PerkLib.BimboBrains) >= 0) 
+			if (hasPerk(PerkLib.BimboBrains)) 
 				bimboCounter += 2;
-			if (findPerk(PerkLib.BimboBody) >= 0) 
+			if (hasPerk(PerkLib.BimboBody)) 
 				bimboCounter += 2;
 			if (flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST] > 25) 
 				bimboCounter++;
@@ -1899,7 +1936,7 @@ use namespace kGAMECLASS;
 				total += 10 * breastRows[counter].breastRating * breastRows[counter].lactationMultiplier * breastRows[counter].breasts * statusEffectv1(StatusEffects.LactationEndurance);
 				
 			}
-			if (findPerk(PerkLib.MilkMaid) >= 0)
+			if (hasPerk(PerkLib.MilkMaid))
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
@@ -2034,7 +2071,7 @@ use namespace kGAMECLASS;
 					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
 			}
-			if (findPerk(PerkLib.Diapause) >= 0) {
+			if (hasPerk(PerkLib.Diapause)) {
 				flags[kFLAGS.DIAPAUSE_FLUID_AMOUNT] += 3 + rand(3);
 				flags[kFLAGS.DIAPAUSE_NEEDS_DISPLAYING] = 1;
 			}
@@ -2057,7 +2094,7 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 60) raw /= 2;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 80) raw /= 2;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 90) raw /= 2;
-			if (findPerk(PerkLib.MinotaurCumResistance) >= 0) raw *= 0;
+			if (hasPerk(PerkLib.MinotaurCumResistance)) raw *= 0;
 			//If in withdrawl, readdiction is potent!
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;
@@ -2067,7 +2104,7 @@ use namespace kGAMECLASS;
 			if (raw < -50) raw = -50;
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
 			//Recheck to make sure shit didn't break
-			if (findPerk(PerkLib.MinotaurCumResistance) >= 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0; //Never get addicted!
+			if (hasPerk(PerkLib.MinotaurCumResistance)) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0; //Never get addicted!
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 
@@ -2075,17 +2112,17 @@ use namespace kGAMECLASS;
 
 		public function spellMod():Number {
 			var mod:Number = 1;
-			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) mod += .5;
-			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) mod += .5;
-			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) mod += .5;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) mod += .5;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) {
+			if (hasPerk(PerkLib.Archmage) && inte >= 75) mod += .5;
+			if (hasPerk(PerkLib.Channeling) && inte >= 60) mod += .5;
+			if (hasPerk(PerkLib.Mage) && inte >= 50) mod += .5;
+			if (hasPerk(PerkLib.Spellpower) && inte >= 50) mod += .5;
+			if (hasPerk(PerkLib.WizardsFocus)) {
 				mod += perkv1(PerkLib.WizardsFocus);
 			}
-			if (findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+			if (hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 			if (jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (jewelryEffectMagnitude / 100);
 			if (countCockSocks("blue") > 0) mod += (countCockSocks("blue") * .05);
-			if (findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (perkv1(PerkLib.AscensionMysticality) * 0.05);
+			if (hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (perkv1(PerkLib.AscensionMysticality) * 0.05);
 			return mod;
 		}
 		
@@ -2103,18 +2140,18 @@ use namespace kGAMECLASS;
 		public function spellCost(mod:Number):Number {
 			//Addiditive mods
 			var costPercent:Number = 100;
-			if (findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= perkv1(PerkLib.SpellcastingAffinity);
-			if (findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= perkv1(PerkLib.WizardsEndurance);
+			if (hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= perkv1(PerkLib.SpellcastingAffinity);
+			if (hasPerk(PerkLib.WizardsEndurance)) costPercent -= perkv1(PerkLib.WizardsEndurance);
 			
 			//Limiting it and multiplicative mods
-			if (findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
+			if (hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 			
 			mod *= costPercent/100;
 			
-			if (findPerk(PerkLib.HistoryScholar) >= 0) {
+			if (hasPerk(PerkLib.HistoryScholar)) {
 				if (mod > 2) mod *= .8;
 			}
-			if (findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
+			if (hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 			else if (mod < 2) mod = 2;
 			
 			mod = Math.round(mod * 100)/100;
@@ -2123,7 +2160,7 @@ use namespace kGAMECLASS;
 		
 		public function physicalCost(mod:Number):Number {
 			var costPercent:Number = 100;
-			if (findPerk(PerkLib.IronMan) >= 0) costPercent -= 50;
+			if (hasPerk(PerkLib.IronMan)) costPercent -= 50;
 			mod *= costPercent/100;
 			return mod;
 		}
@@ -2140,7 +2177,7 @@ use namespace kGAMECLASS;
 				mod = spellCost(mod);
 				
 				//Blood mages use HP for spells
-				if (findPerk(PerkLib.BloodMage) >= 0) {
+				if (hasPerk(PerkLib.BloodMage)) {
 					takeDamage(mod);
 					return;
 				}                
@@ -2158,9 +2195,9 @@ use namespace kGAMECLASS;
 			if (mod < 0) {
 				var multi:Number = 1;
 				
-				if (findPerk(PerkLib.HistorySlacker) >= 0) multi *= 1.2;
-				if (findPerk(PerkLib.ControlledBreath) >= 0 && cor < (30 + corruptionTolerance())) multi *= 1.1;
-				if (findPerk(PerkLib.SpeedyRecovery) >= 0) multi *= 1.5;
+				if (hasPerk(PerkLib.HistorySlacker)) multi *= 1.2;
+				if (hasPerk(PerkLib.ControlledBreath) && cor < (30 + corruptionTolerance())) multi *= 1.1;
+				if (hasPerk(PerkLib.SpeedyRecovery)) multi *= 1.5;
 				
 				mod *= multi;
 			}
@@ -2226,7 +2263,7 @@ use namespace kGAMECLASS;
 					temp = 1;
 					breastRows[0].breastRating--;
 					//Shrink again 50% chance
-					if (breastRows[0].breastRating >= 1 && rand(2) == 0 && findPerk(PerkLib.BigTits) < 0) {
+					if (breastRows[0].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
 						temp++;
 						breastRows[0].breastRating--;
 					}
@@ -2271,7 +2308,7 @@ use namespace kGAMECLASS;
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			//Chance for "big tits" perked characters to grow larger!
-			if (findPerk(PerkLib.BigTits) >= 0 && rand(3) == 0 && amount < 1) amount=1;
+			if (hasPerk(PerkLib.BigTits) && rand(3) == 0 && amount < 1) amount=1;
 
 			// Needs to be a number, since uint will round down to 0 prevent growth beyond a certain point
 			var temp:Number = breastRows.length;
@@ -2297,7 +2334,7 @@ use namespace kGAMECLASS;
 						//Diminishing returns!
 						if (breastRows[temp2].breastRating > 3)
 						{
-							if (findPerk(PerkLib.BigTits) < 0)
+							if (!hasPerk(PerkLib.BigTits))
 								temp /=1.5;
 							else
 								temp /=1.3;
@@ -2306,21 +2343,21 @@ use namespace kGAMECLASS;
 						// WHy are there three options here. They all have the same result.
 						if (breastRows[temp2].breastRating > 7)
 						{
-							if (findPerk(PerkLib.BigTits) < 0)
+							if (!hasPerk(PerkLib.BigTits))
 								temp /=2;
 							else
 								temp /=1.5;
 						}
 						if (breastRows[temp2].breastRating > 9)
 						{
-							if (findPerk(PerkLib.BigTits) < 0)
+							if (!hasPerk(PerkLib.BigTits))
 								temp /=2;
 							else
 								temp /=1.5;
 						}
 						if (breastRows[temp2].breastRating > 12)
 						{
-							if (findPerk(PerkLib.BigTits) < 0)
+							if (!hasPerk(PerkLib.BigTits))
 								temp /=2;
 							else
 								temp  /=1.5;
@@ -2338,15 +2375,15 @@ use namespace kGAMECLASS;
 			{
 				//Diminishing returns!
 				if (breastRows[0].breastRating > 3) {
-					if (findPerk(PerkLib.BigTits) < 0) amount/=1.5;
+					if (!hasPerk(PerkLib.BigTits)) amount/=1.5;
 					else amount/=1.3;
 				}
 				if (breastRows[0].breastRating > 7) {
-					if (findPerk(PerkLib.BigTits) < 0) amount/=2;
+					if (!hasPerk(PerkLib.BigTits)) amount/=2;
 					else amount /= 1.5;
 				}
 				if (breastRows[0].breastRating > 12) {
-					if (findPerk(PerkLib.BigTits) < 0) amount/=2;
+					if (!hasPerk(PerkLib.BigTits)) amount/=2;
 					else amount /= 1.5;
 				}
 			}
@@ -2451,13 +2488,13 @@ use namespace kGAMECLASS;
 				else min += flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST];
 			}
 			//Omnibus' Gift
-			if (findPerk(PerkLib.OmnibusGift) >= 0) {
+			if (hasPerk(PerkLib.OmnibusGift)) {
 				if (min > 40) min += 10;
 				else if (min >= 20) min += 20;
 				else min += 35;
 			}
 			//Nymph perk raises to 30
-			if (findPerk(PerkLib.Nymphomania) >= 0) {
+			if (hasPerk(PerkLib.Nymphomania)) {
 				if (min >= 40) min += 10;
 				else if (min >= 20) min += 15;
 				else min += 30;
@@ -2469,11 +2506,11 @@ use namespace kGAMECLASS;
 				else min += 30;
 			}
 			//Hot blooded perk raises min lust!
-			if (findPerk(PerkLib.HotBlooded) >= 0) {
+			if (hasPerk(PerkLib.HotBlooded)) {
 				if (min > 0) min += perk(findPerk(PerkLib.HotBlooded)).value1 / 2;
 				else min += perk(findPerk(PerkLib.HotBlooded)).value1;
 			}
-			if (findPerk(PerkLib.LuststickAdapted) > 0) {
+			if (hasPerk(PerkLib.LuststickAdapted)) {
 				if (min < 50) min += 10;
 				else min += 5;
 			}
@@ -2486,7 +2523,7 @@ use namespace kGAMECLASS;
 			min -= perkv1(PerkLib.PiercedIcestone);
 			min += perkv1(PerkLib.PentUp);
 			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings. This effectively caps minimum lust at 80.
-			if (findPerk(PerkLib.ColdBlooded) >= 0) {
+			if (hasPerk(PerkLib.ColdBlooded)) {
 				if (min >= 20) {
 					if (min <= 40) min -= (min - 20);
 					else min -= 20;
@@ -2554,13 +2591,13 @@ use namespace kGAMECLASS;
 				if (maxSpe < 50) maxSpe = 50;
 			}
 			//Perks ahoy
-			if (findPerk(PerkLib.BasiliskResistance) >= 0 && !canUseStare())
+			if (hasPerk(PerkLib.BasiliskResistance) && !canUseStare())
 			{
 				maxSpe -= 5;
 			}
 			//Uma's Needlework affects max stats. Takes effect BEFORE racial modifiers and AFTER modifiers from body size.
 			//Caps strength from Uma's needlework. 
-			if (findPerk(PerkLib.ChiReflowSpeed) >= 0)
+			if (hasPerk(PerkLib.ChiReflowSpeed))
 			{
 				if (maxStr > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
 				{
@@ -2568,7 +2605,7 @@ use namespace kGAMECLASS;
 				}
 			}
 			//Caps speed from Uma's needlework.
-			if (findPerk(PerkLib.ChiReflowDefense) >= 0)
+			if (hasPerk(PerkLib.ChiReflowDefense))
 			{
 				if (maxSpe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
 				{
@@ -2576,6 +2613,11 @@ use namespace kGAMECLASS;
 				}
 			}
 			//Alter max stats depending on race
+			if (sheepScore() >= 4) {
+				maxSpe += 10;
+				maxInt -= 10;
+				maxTou += 10;
+			}
 			if (wolfScore() >= 4) {
 				maxSpe -= 10;
 				maxInt += 5;
@@ -2717,10 +2759,10 @@ use namespace kGAMECLASS;
 		}
 		
 		public function minotaurAddicted():Boolean {
-			return findPerk(PerkLib.MinotaurCumResistance) < 0 && (findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1);
+			return !hasPerk(PerkLib.MinotaurCumResistance) && (hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1);
 		}
 		public function minotaurNeed():Boolean {
-			return findPerk(PerkLib.MinotaurCumResistance) < 0 && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
+			return !hasPerk(PerkLib.MinotaurCumResistance) && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
 		}
 
 		public function clearStatuses(visibility:Boolean):void
@@ -3189,14 +3231,14 @@ use namespace kGAMECLASS;
 			}
 			else if (delta > 0) {
 				trace("and increasing");
-				if (findPerk(PerkLib.MessyOrgasms) >= 0) {
+				if (hasPerk(PerkLib.MessyOrgasms)) {
 					trace("and MessyOrgasms found");
 					delta *= 1.5
 				}
 			}
 			else if (delta < 0) {
 				trace("and decreasing");
-				if (findPerk(PerkLib.MessyOrgasms) >= 0) {
+				if (hasPerk(PerkLib.MessyOrgasms)) {
 					trace("and MessyOrgasms found");
 					delta *= 0.5
 				}
@@ -3211,7 +3253,7 @@ use namespace kGAMECLASS;
 		{
 			var bigCock:Boolean = false;
 	
-			if (findPerk(PerkLib.BigCock) >= 0)
+			if (hasPerk(PerkLib.BigCock))
 				bigCock = true;
 
 			return cocks[cockNum].growCock(lengthDelta, bigCock);

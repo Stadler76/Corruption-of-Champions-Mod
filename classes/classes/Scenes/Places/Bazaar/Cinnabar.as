@@ -40,13 +40,17 @@ private function cinnabarGreeting():void {
 		if (!player.hasCock()) {
 			outputText("You walk over towards the rat-morph, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She licks her lips and sidles alongside you, caressing your body as she offers, \"<i>50 gems for an hour.  That's all it takes to have Cinnabar be your companion...</i>\"  Her voice trails off into a husky vibration as she awaits your response.\n\n", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour", cinnabarNonHugeDickings, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
+			menu();
+			addButton(0, "Buy1Hour", cinnabarNonHugeDickings);
+			addButton(14, "Leave", bazaar.enterTheBazaar);
 		}
 		//(Small Cock)
 		else if (player.biggestCockArea() < 100) {
 			outputText("You walk over towards the rat-morph, and as you near she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She sidles up alongside you, caressing your body until she feels your bulge.  Her hand stops in place and licks her black, glossy lips,  giggling, \"<i>I see you've still got a little boy-cock, huh? Well, 50 gems will get you an hour of my time.  That's all it takes to have Cinnabar be your companion...</i>\"  The slutty rat-girl's voice trails off into a husky vibration while she awaits your response.", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour", cinnabarNonHugeDickings, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
+			menu();
+			addButton(0, "Buy1Hour", cinnabarNonHugeDickings);
+			addButton(14, "Leave", bazaar.enterTheBazaar);
 		}
 		//(Big enough Cock) 
 		else {
@@ -56,9 +60,14 @@ private function cinnabarGreeting():void {
 			else outputText("that thing", false);
 			outputText(" inside me... the name's Cinnabar, but I'd rather you plug me and call me whatever you want.</i>\"  Her voice trails off into a husky, barely heard vibration as she awaits your response.", false);
 			//[Fuck] [Leave]
-			if (player.cockTotal() > 2 && player.biggestCockArea2() >= 75)
-				simpleChoices("Fuck Her", cinnabarGetsFUKKKKED, "Multi-Fuck", cinnabarMultiCockPortalFuckFest, "", null, "", null, "Leave", bazaar.enterTheBazaar);
-			else simpleChoices("Fuck Her", cinnabarGetsFUKKKKED, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
+			menu();
+			addButton(0, "Fuck Her", cinnabarGetsFUKKKKED);
+			if (player.cockTotal() > 2 && player.biggestCockArea2() >= 75) {
+				addButton(1, "Multi-Fuck", cinnabarMultiCockPortalFuckFest);
+			} else {
+				addDisabledButton(1, "Multi-Fuck");
+			}
+			addButton(14, "Leave", bazaar.enterTheBazaar);
 		}
 	}
 	//Not first time
@@ -67,13 +76,17 @@ private function cinnabarGreeting():void {
 		if (!player.hasCock()) {
 			outputText("You walk over towards Cinnabar, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She licks her lips and sidles alongside you, caressing your body as she offers, \"<i>50 gems for an hour.  That's all it takes to have a companion...</i>\"  Her voice trails off into a husky vibration as she awaits your response.\n\n", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour", cinnabarNonHugeDickings, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
+			menu();
+			addButton(0, "Buy1Hour", cinnabarNonHugeDickings);
+			addButton(14, "Leave", bazaar.enterTheBazaar);
 		}
 		//(Small Cock)
 		else if (player.biggestCockArea() < 100) {
 			outputText("You walk over towards Cinnabar, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She sidles up alongside you, caressing your body until she feels your bulge.  Her hand stops in place and licks her black, glossy lips,  giggling, \"<i>I see you've still got a little boy, huh? Well, 50 gems will get you an hour of my time.  That's all it takes to have a VERY skilled companion...</i>\"  The slutty rat-girl's voice trails off into a husky vibration while she awaits your response.", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour", cinnabarNonHugeDickings, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
+			menu();
+			addButton(0, "Buy1Hour", cinnabarNonHugeDickings);
+			addButton(14, "Leave", bazaar.enterTheBazaar);
 		}
 		//(Big enough Cock) 
 		else {
@@ -83,9 +96,14 @@ private function cinnabarGreeting():void {
 			else outputText("that thing", false);
 			outputText(" inside me... We could sit here and talk, but I'd rather you plug me and call me your slut.</i>\"  Her voice trails off into a husky, barely heard vibration as she awaits your response.", false);
 			//[Fuck] [Leave]
-			if (player.cockTotal() > 2 && player.biggestCockArea2() >= 75)
-				simpleChoices("Fuck Her", cinnabarGetsFUKKKKED, "Multi-Fuck", cinnabarMultiCockPortalFuckFest, "", null, "", null, "Leave", bazaar.enterTheBazaar);
-			else simpleChoices("Fuck Her", cinnabarGetsFUKKKKED, "", null, "", null, "", null, "Leave", bazaar.enterTheBazaar);
+			menu();
+			addButton(0, "Fuck Her", cinnabarGetsFUKKKKED);
+			if (player.cockTotal() > 2 && player.biggestCockArea2() >= 75) {
+				addButton(1, "Multi-Fuck", cinnabarMultiCockPortalFuckFest);
+			} else {
+				addDisabledButton(1, "Multi-Fuck");
+			}
+			addButton(14, "Leave", bazaar.enterTheBazaar);
 		}
 	}
 }
@@ -198,7 +216,7 @@ private function cinnabarNonHugeDickings():void {
 	if (player.cumQ() >= 1000) outputText(" and the floor mopped", false);
 	outputText(" before I can get my next customer.</i>\"\n\n", false);
 	
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -329,7 +347,7 @@ private function fuckCinnabarHugerAndCorruptedEr():void {
 	
 	outputText("Once she lets you go, you leave, and you find yourself mulling over her statement about empathy for some time.", false);
 	//(-2 corruption!)
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", 3, "cor", -2);
 	player.takeDamage(25);
 	doNext(camp.returnToCampUseOneHour);
@@ -381,7 +399,7 @@ private function cinnabarHuger():void {
 	outputText("You smile back and go get dressed; it's way past time you checked on your campsite.  As you open the door, you can hear Cinnabar humming happily and trying to clean all the mess from her sheets", false);
 	if (player.cumQ() >= 1000) outputText(", the sloshing in her belly still quite audible", false);
 	outputText(".", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -4);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -432,7 +450,7 @@ private function cinnabarHuge():void {
 	outputText("Cinnabar looks at you over her shoulder and says, \"<i>What, you think I'd be taking " + player.mf("studs","breeders") + " like you if I couldn't really handle it?  Don't worry babe... I loved it.  You can come stretch me ANY time so long as you're hung like that!</i>\"  You smile – what a fuck – and go get dressed; it's past time you checked on your campsite.  As you depart, you can hear Cinnabar humming happily and trying to clean the sheets", false);
 	if (player.cumQ() > 500) outputText(", the sloshing in her belly still quite audible", false);
 	outputText(".", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -3);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -530,7 +548,7 @@ private function cinnabarMultiCockPortalFuckFest():void {
 	outputText("\"<i>You're still here?  Go on, I've got a lot of cleaning up to do before my next customer!</i>\" grunts Cinnabar before returning to her task.  You run your hand through your " + player.hairDescript() + ", exasperated, but quite satisfied.  You'll definitely have to visit her again sometime.\n\n", false);
 	
 	outputText("While you're getting dressed, the repeated slurps and moans pause enough for Cinnabar to say, \"<i>I didn't mean to be rude... those dicks... those wonderful, plump cocks... they're a gift.  Come back soon " + player.mf("stud","baby") + ", your cream filling tastes gooood.</i>\"  She goes back to licking herself, and you can't help but have a huge grin as you walk out.", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -6);
 	doNext(camp.returnToCampUseOneHour);
 }

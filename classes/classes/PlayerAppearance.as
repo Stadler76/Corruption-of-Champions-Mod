@@ -282,14 +282,19 @@ package classes
 			}
 
 			//Hair
+			//Hair
 			//if bald
 			if (player.hairLength == 0) 
 			{
 				if (player.hasFur()) 
 					outputText("  You have no hair, only a thin layer of fur atop of your head.  ");
+				else if (player.hasWool()) 
+					outputText("  You have no hair, only a thin layer of wool atop of your head.  ");
 				else outputText("  You are totally bald, showing only shiny " + player.skinTone + " " + player.skinDesc + " where your hair should be.");
 				if (player.earType == EARS_HORSE) 
 					outputText("  A pair of horse-like ears rise up from the top of your head.");
+				else if (player.earType == EARS_SHEEP) 
+					outputText("  Two tear drop shaped ears peek out from the sides of your head, their fluffy texture and lazy positioning giving you a cute and sleepy air.");
 				else if (player.earType == EARS_FERRET) 
 					outputText("  A pair of small, rounded ferret ears sit on top of your head.");
 				else if (player.earType == EARS_DOG) 
@@ -336,6 +341,8 @@ package classes
 					outputText("  Your [hair] looks good on you, accentuating your features well.");
 				else if (player.earType == EARS_FERRET) 
 					outputText("  A pair of small, rounded ferret ears burst through the top of your [hair].");
+				else if (player.earType == EARS_SHEEP) 
+					outputText("  Two tear drop shaped ears part your [hair] and peek out from the sides of your head, their fluffy texture and lazy positioning giving you a cute and sleepy air.");
 				else if (player.earType == EARS_HORSE) 
 					outputText("  The [hair] on your head parts around a pair of very horse-like ears that grow up from your head.");
 				else if (player.earType == EARS_DOG) 
@@ -453,6 +460,19 @@ package classes
 				if (player.horns > 0) 
 					outputText("  Two antlers, forking into " + num2Text(player.horns) + " points, have sprouted from the top of your head, forming a spiky, regal crown of bone.");
 			}
+			if (player.hornType == HORNS_SHEEP) {
+				if (player.horns == 1) 
+					outputText("  A pair of small sheep horns sit atop your head. They curl out and upwards in a slight crescent shape.");
+				else
+					outputText("  A pair of large sheep horns sit atop your head. They curl out and upwards in a crescent shape.");
+			}
+			if (player.hornType == HORNS_RAM) {
+				if (player.horns == 1) 
+					outputText("  A set of " + player.horns + " inch ram horns sit atop your head, curling around in a tight spiral at the side of your head before coming to an upwards hook around your ears.");
+				else
+					outputText("  A set of large " + player.horns + " inch ram horns sit atop your head, curling around in a tight spiral at the side of your head before coming to an upwards hook around your ears.");
+			}			
+
 			if (player.hornType == HORNS_GOAT)
 			{
 				if (player.horns == 1) 
@@ -732,6 +752,8 @@ package classes
 				outputText("  A long " + player.hairColor + " horsetail hangs from your " + player.buttDescript() + ", smooth and shiny.");
 			if (player.tailType == TAIL_TYPE_FERRET)
 				outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.furColor + " fur.");
+			if (player.tailType == TAIL_TYPE_SHEEP) 
+				outputText("  A fluffy sheep tail hangs down from your [butt]. It occasionally twitches and shakes, its puffy fluff begging to be touched.");
 			if (player.tailType == TAIL_TYPE_DOG) 
 				outputText("  A fuzzy " + player.furColor + " dogtail sprouts just above your " + player.buttDescript() + ", wagging to and fro whenever you are happy.");
 			if (player.tailType == TAIL_TYPE_DEMONIC) 

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by aimozg on 05.01.14.
  */
 package classes.Scenes
@@ -296,9 +296,16 @@ package classes.Scenes
 		}
 		
 		public function prisonFn():void {
+			if (flags[kFLAGS.PRISON_ENABLED] == true) {
 					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");
 					doYesNo(kGAMECLASS.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
+			} else if (flags[kFLAGS.PRISON_ENABLED] == false) {
+				clearOutput();
+				outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply. You take the wise decision of walking away.");
+				menu();
+				addButton(0, "Next", camp.returnToCampUseOneHour);
+			}
 		}
 
 		public function gargoyle():void {

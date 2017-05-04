@@ -118,8 +118,12 @@ private function doCamp():void { //Only called by playerMenu
 		getGame().ingnam.menuIngnam();
 		return;
 	}
-	if (prison.inPrison) { //Prison
+	if (prison.inPrison && flags[kFLAGS.PRISON_ENABLED] == true) { //Prison
 		getGame().prison.prisonRoom(true);
+		return;
+	} else if (prison.inPrison && flags[kFLAGS.PRISON_ENABLED] == false) {
+		flags[kFLAGS.IN_PRISON] == 0;
+		getGame().camp.returnToCamp(0); //Just drop ya in camp I guess
 		return;
 	}
 	if (flags[kFLAGS.GRIMDARK_MODE] > 0) {

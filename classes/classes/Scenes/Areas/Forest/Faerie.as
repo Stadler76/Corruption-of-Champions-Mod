@@ -1,15 +1,24 @@
 ﻿package classes.Scenes.Areas.Forest{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounter;
 
-	public class Faerie extends BaseContent{
+public class Faerie extends BaseContent implements Encounter{
 
 	public function Faerie()
 	{
 	}
 
+	public function encounterChance():Number {
+		return flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] <= 0 ? 1 : 0;
+	}
+
+	public function encounterName():String {
+		return "faerie";
+	}
+
 //faerie Encounter
-public function encounterFaerie():void {
+	public function execEncounter():void {
 	spriteSelect(17);
 	outputText("A faerie slightly taller and thicker than your middle finger flits about the air. Her flat chest and girlish bob of hair make her look quite cute, but the solid black stockings and leather straps covering her chest show her slutty nature. Her wings are a light red, the color of aroused genitals.\n\n", true);
 	if (player.cockTotal() > 0 && (player.biggestTitSize() <= BREAST_CUP_B || rand(2) == 0)) {

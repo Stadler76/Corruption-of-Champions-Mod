@@ -1,12 +1,23 @@
 ﻿package classes.Scenes.Areas.Lake{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounter;
 
-	public class Kaiju extends AbstractLakeContent {
+public class Kaiju extends AbstractLakeContent implements Encounter {
 
 	public function Kaiju()
 	{
+	}
+
+
+	public function encounterName():String {
+		return "kaiju";
+	}
+
+	public function encounterChance():Number {
+		return player.level >= 5
+			   && flags[kFLAGS.KAIJU_DISABLED] == 0
+			   && player.hasStatusEffect(StatusEffects.BoatDiscovery) ? 1 : 0;
 	}
 
 //const KAIJU_MEETINGS:int = 910;
@@ -17,7 +28,7 @@
 
 //First encounter
 //Boat
-public function kaijuMeeting():void {
+public function execEncounter():void {
 	clearOutput();
 	if (flags[kFLAGS.KAIJU_MEETINGS] == 0) {
 		outputText("Your explorations take you to a small island you haven't seen before.  It appears to be a large, smooth rock hill jutting out of the water.  Do you explore it?");

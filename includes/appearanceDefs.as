@@ -18,6 +18,7 @@ public static const SKIN_TYPE_GOO:int                                           
 public static const SKIN_TYPE_UNDEFINED:int                                         =    4; // DEPRECATED, silently discarded upon loading a saved game
 public static const SKIN_TYPE_DRAGON_SCALES:int                                     =    5;
 public static const SKIN_TYPE_FISH_SCALES:int                                       =    6; // NYI, for future use
+public static const SKIN_TYPE_WOOL:int                                              =    7;
 
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;
@@ -28,6 +29,7 @@ public static const HAIR_ANEMONE:int                                            
 public static const HAIR_QUILL:int                                                 =     5;
 public static const HAIR_BASILISK_SPINES:int                                       =     6;
 public static const HAIR_BASILISK_PLUME:int                                        =     7;
+public static const HAIR_WOOL:int                                                  =     8;
 
 // beardType
 public static const BEARD_NORMAL:int                                               =     0;
@@ -99,6 +101,7 @@ public static const EARS_RHINO:int                                              
 public static const EARS_ECHIDNA:int                                                =  16;
 public static const EARS_DEER:int                                                   =  17;
 public static const EARS_WOLF:int                                                   =  18;
+public static const EARS_SHEEP:int                                                  =  19;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -110,6 +113,8 @@ public static const HORNS_ANTLERS:int                                           
 public static const HORNS_GOAT:int                                                  =   6;
 public static const HORNS_UNICORN:int                                               =   7;
 public static const HORNS_RHINO:int                                                 =   8;
+public static const HORNS_SHEEP:int                                                 =   9;
+public static const HORNS_RAM:int                                                   =  10;
 
 // antennae
 public static const ANTENNAE_NONE:int                                               =   0;
@@ -166,6 +171,7 @@ public static const TAIL_TYPE_ECHIDNA:int                                       
 public static const TAIL_TYPE_DEER:int                                              =  24;
 public static const TAIL_TYPE_SALAMANDER:int                                        =  25;
 public static const TAIL_TYPE_WOLF:int                                              =  26;
+public static const TAIL_TYPE_SHEEP:int                                             =  27;
 
 // wingType
 public static const WING_TYPE_NONE:int                                              =   0;
@@ -217,6 +223,7 @@ public static const UNDER_BODY_TYPE_LIZARD:int                                  
 public static const UNDER_BODY_TYPE_DRAGON:int                                      =   2;
 public static const UNDER_BODY_TYPE_FUR:int                                         =   3;
 public static const UNDER_BODY_TYPE_NAGA:int                                        =   4;
+public static const UNDER_BODY_TYPE_WOOL:int                                        =   5;
 
 // rearBody
 public static const REAR_BODY_NONE:int                                              =   0;

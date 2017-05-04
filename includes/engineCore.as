@@ -1,4 +1,4 @@
-﻿import classes.*;
+import classes.*;
 import flash.text.TextFormat;
 // // import flash.events.MouseEvent;
 // 
@@ -27,13 +27,14 @@ import flash.text.TextFormat;
 // 
 // model.maxHP = maxHP;
 
+public static const MAX_BUTTON_INDEX:int = 14;
+
 public function maxHP():Number {
 	return player.maxHP();
 }
 
 public function silly():Boolean {
 	return flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1;
-
 }
 
 /**
@@ -207,7 +208,7 @@ public function displayHeader(string:String):void {
 }
 
 public function buttonIsVisible(index:int):Boolean {
-	if ( index < 0 || index > 14 ) {
+	if ( index < 0 || index > MAX_BUTTON_INDEX ) {
 		return undefined;
 	}
 	else {
@@ -247,7 +248,7 @@ public function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
 public function getButtonText(index:int):String {
 	var matches:*;
 
-	if (index < 0 || index > 14) {
+	if (index < 0 || index > MAX_BUTTON_INDEX) {
 		return '';
 	}
 	else {
@@ -358,19 +359,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if (buttonText.indexOf("Fake Mare") != -1) {
 		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
 	}
-	//Books
-	if (buttonText.indexOf("Dangerous Plants") != -1) {
-		toolTipText = "This is a book titled 'Dangerous Plants'.  As explained by the title, this tome is filled with information on all manner of dangerous plants from this realm.";
-	}
-	if (buttonText.indexOf("Traveler's Guide") != -1) {
-		toolTipText = "This traveler's guide is more of a pamphlet than an actual book, but it still contains some useful information on avoiding local pitfalls.";
-	}
-	if (buttonText.indexOf("Yoga Guide") != -1) {
-		toolTipText = "This leather-bound book is titled 'Yoga for Non-Humanoids.' It contains numerous illustrations of centaurs, nagas and various other oddly-shaped beings in a variety of poses.";
-	}
-	if (buttonText.indexOf("Hentai Comic") != -1) {
-		toolTipText = "This oddly drawn comic book is filled with images of fornication, sex, and overly large eyeballs.";
-	}
+	//Books - MOVED
 	//------------
 	// TITLE SCREEN 
 	//------------
@@ -506,17 +495,6 @@ public function createCallBackFunction(func:Function, arg:*, arg2:* = null, arg3
 		}
 	}
 }
-public function createCallBackFunction2(func:Function,...args):Function
-{
-	if (func == null){
-		CoC_Settings.error("createCallBackFunction(null,"+args+")");
-	}
-	return function():*
-	{
-		if (CoC_Settings.haltOnErrors) logFunctionInfo(func,args);
-		return func.apply(null,args);
-	}
-}
 
 /**
  * Adds a button.
@@ -534,7 +512,7 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	var callback:Function;
 
 	//Let the mainView decide if index is valid
-	if (pos > 14) {
+	if (pos > MAX_BUTTON_INDEX) {
 		trace("INVALID BUTTON");
 		return;
 	}
@@ -559,7 +537,7 @@ public function addButtonDisabled(pos:int, text:String = "", toolTipText:String 
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
-			trace("Button removed due to SFW mode.");
+			//trace("Button removed due to SFW mode.");
 			return;
 		}
 	}
@@ -591,7 +569,7 @@ public function removeButton(arg:*):void {
 		buttonToRemove = mainView.indexOfButtonWithLabel( arg as String );
 	}
 	if (arg is Number) {
-		if (arg < 0 || arg > 14) return;
+		if (arg < 0 || arg > MAX_BUTTON_INDEX) return;
 		buttonToRemove = Math.round(arg);
 	}
 	mainView.hideBottomButton( buttonToRemove );
@@ -601,7 +579,7 @@ public function removeButton(arg:*):void {
  * Hides all bottom buttons.
  */
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
-	for (var i:int = 0; i <= 14; i++) {
+	for (var i:int = 0; i <= MAX_BUTTON_INDEX; i++) {
 		mainView.hideBottomButton(i);
 		mainView.bottomButtons[i].alpha = 1; // Dirty hack.
 	}
@@ -613,7 +591,7 @@ public function menu():void { //The newer, simpler menu - blanks all buttons so 
  * 
  * I highly recommend you <b>DO NOT</b> use this for new content. Use addButton() instead.
  */
-public function choices(text1:String, butt1:Function,
+/*public function choices(text1:String, butt1:Function,
 						text2:String, butt2:Function,
 						text3:String, butt3:Function,
 						text4:String, butt4:Function,
@@ -635,67 +613,7 @@ public function choices(text1:String, butt1:Function,
 	addButton(7, text8, butt8);
 	addButton(8, text9, butt9);
 	addButton(9, text0, butt0);
-/*
-	var callback :Function;
-	var toolTipText :String;
-
-	var textLabels :Array;
-	var j :int;
-
-	textLabels = [
-		text1,
-		text2,
-		text3,
-		text4,
-		text5,
-		text6,
-		text7,
-		text8,
-		text9,
-		text0
-	];
-
-	//Transfer event code to storage
-	buttonEvents[0] = butt1;
-	buttonEvents[1] = butt2;
-	buttonEvents[2] = butt3;
-	buttonEvents[3] = butt4;
-	buttonEvents[4] = butt5;
-	buttonEvents[5] = butt6;
-	buttonEvents[6] = butt7;
-	buttonEvents[7] = butt8;
-	buttonEvents[8] = butt9;
-	buttonEvents[9] = butt0;
-
-	var tmpJ:int;
-
-	// iterate over the button options, and only enable the ones which have a corresponding event number
-	menu();
-	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
-	{
-		if (buttonEvents[tmpJ] == -9000 || buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
-			mainView.hideBottomButton( tmpJ );
-		}
-		else {
-			if (buttonEvents[tmpJ] is Number) {
-				addButton(tmpJ, textLabels[tmpJ], eventParser, buttonEvents[tmpJ]);
-				//callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
-			} else {
-				addButton(tmpJ, textLabels[tmpJ], buttonEvents[tmpJ]);
-				//callback = createCallBackFunction(buttonEvents[tmpJ], null);
-			}
-			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
-
-			//mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
-		}
-
-	}
-	// funcs = new Array();
-	// args = new Array();
-	//mainView.setOutputText( currentText );
-	output.flush();
-*/
-}
+}*/
 
 /****
 	This function is made for multipage menus of unpredictable length,
@@ -746,7 +664,7 @@ public function choices(text1:String, butt1:Function,
 			[ "Margle", gurgleFluidsInMouthEvent ] // no comma on last item.
 		]);
 ****/
-public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
+/*public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 	const itemsPerPage :int = 8;
 
 	var currentPageIndex :int;
@@ -817,7 +735,7 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 		cancelFunction = 0;
 
 	showPage( 0 );
-}
+}*/
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
 /**
@@ -825,30 +743,18 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
  * 
  * I highly recommend you <b>DO NOT</b> use this for new content. Use menu() + N x addButton() instead.
  */
-public function simpleChoices(text1:String, butt1:Function, 
+/*public function simpleChoices(text1:String, butt1:Function, 
 						text2:String, butt2:Function, 
 						text3:String, butt3:Function, 
 						text4:String, butt4:Function, 
 						text5:String, butt5:Function):void { //New typesafe version
-
-	//trace("SimpleChoices");
-/*	choices(text1,butt1,
-			text2,butt2,
-			text3,butt3,
-			text4,butt4,
-			text5,butt5,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0);*/
 	menu();
 	addButton(0, text1, butt1);
 	addButton(1, text2, butt2);
 	addButton(2, text3, butt3);
 	addButton(3, text4, butt4);
 	addButton(4, text5, butt5);
-}
+}*/
 
 /**
  * Clears all button and adds a 'Yes' and a 'No' button.
@@ -859,23 +765,6 @@ public function doYesNo(eventYes:Function, eventNo:Function):void { //New typesa
 	menu();
 	addButton(0, "Yes", eventYes);
 	addButton(1, "No", eventNo);
-/*
-	//Make buttons 1-2 visible and hide the rest.
-
-	//trace("doYesNo");
-	choices("Yes",eventYes,
-			"No",eventNo,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0);
-
-}
-*/
 }
 
 /**
@@ -888,22 +777,9 @@ public function doNext(event:Function):void { //Now typesafe
 		trace("Do next setup cancelled by game over");
 		return;
 	}
-	
-	//trace("DoNext have item:", eventNo);
-	//choices("Next", event, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
 	menu();
 	addButton(0, "Next", event);
 }
-
-/* Was never called
-public function doNextClear(eventNo:*):void 
-{
-	outputText("", true, true);
-	//trace("DoNext Clearing display");
-	//trace("DoNext have item:", eventNo);
-	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
-}
-*/
 
 public function invertGo():void{ 
 	mainView.invert();

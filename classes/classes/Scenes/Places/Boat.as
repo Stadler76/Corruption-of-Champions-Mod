@@ -6,6 +6,8 @@ package classes.Scenes.Places
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+import classes.Scenes.API.Encounter;
+import classes.Scenes.API.Encounters;
 	import classes.Scenes.Areas.Lake.*;
 	import classes.Scenes.Places.Boat.*;
 
@@ -14,7 +16,12 @@ package classes.Scenes.Places
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
 		
-		public function Boat() { }
+	public function Boat() {
+	}
+
+	public function isDiscovered():Boolean {
+		return player.hasStatusEffect(StatusEffects.BoatDiscovery);
+	}
 		
 		public function discoverBoat():void {
 			player.createStatusEffect(StatusEffects.BoatDiscovery,0,0,0,0);

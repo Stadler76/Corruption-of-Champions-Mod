@@ -79,6 +79,11 @@ package classes
 			else outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigible stick-in-the-mud with no sense of humor.");
 
 			outputText("\n\n");
+				
+			if (flags[kFLAGS.PRISON_ENABLED] == false) outputText("Prison: <font color=\"#008000\"><b>OFF</b></font>\nThe prison cannot be accessed.");
+			else outputText("Prison: <font color=\"#800000\"><b>ON</b></font>\nThe prison can be accessed. WARNING: The prison is very buggy and may break your game. Enter it at your own risk!");
+				
+			outputText("\n\n");
 			
 			outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
 			outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
@@ -120,6 +125,10 @@ package classes
 			
 			addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 			addButton(6, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
+			if (flags[kFLAGS.PRISON_ENABLED] == true) {
+				addButton(7, "No Prison", togglePrison, null, null, null, "Turn off the prison.");
+			} else {
+				addButton(7, "Yes Prison", togglePrison, null, null, null, "Turn on the prison.\n\n<font color=\"#080000\">WARNING: The prison is very buggy and may break your game. Enter it at your own risk!</font>"); }
 			if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt, null, null, null, "Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>", "Enable Survival Mode");	
 			if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt, null, null, null, "Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>", "Enable Realistic Mode");	
 			addButton(10, "Fetishes", fetishSubMenu, null, null, null, "Toggle some of the weird fetishes such as watersports and worms.");
@@ -159,6 +168,19 @@ package classes
 				debug = false;
 			else
 				debug = true;
+				
+			mainView.showMenuButton(MainView.MENU_DATA);
+			settingsScreenGameSettings();
+			return;
+		}
+
+		public function togglePrison():void
+		{
+			//toggle prison
+			if (flags[kFLAGS.PRISON_ENABLED])
+				flags[kFLAGS.PRISON_ENABLED] = false;
+			else
+				flags[kFLAGS.PRISON_ENABLED] = true;
 				
 			mainView.showMenuButton(MainView.MENU_DATA);
 			settingsScreenGameSettings();
@@ -515,11 +537,10 @@ package classes
 		//------------
 		public function fontSettingsMenu():void {
 			menu();
-			simpleChoices("Smaller Font", decFontSize,
-				"Larger Font", incFontSize,
-				"Reset Size", resetFontSize,
-				"", null,
-				"Back", settingsScreenMain);
+			addButton(0, "Smaller Font", decFontSize);
+			addButton(1, "Larger Font", incFontSize);
+			addButton(2, "Reset Size", resetFontSize);
+			addButton(4, "Back", settingsScreenMain);
 		}
 
 		public function incFontSize():void
