@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by K.Quesom 11.06.14
  */
 package classes.Scenes.Areas.Bog
@@ -13,7 +13,7 @@ package classes.Scenes.Areas.Bog
 			var damage:int;
 			//Only the bunny, goat and horse forms make physical attacks
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you due to his blindness!\n", false);
+				outputText(capitalA + short + " completely misses you due to his blindness!\n");
 			}
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY) {
 				damage = Math.round((60 + 30 + 10) - rand(player.tou) - player.armorDef); //60 == Bunny Strength, 30 == Bunny Weapon Attack
@@ -138,7 +138,7 @@ package classes.Scenes.Areas.Bog
 			else if (lustDelta >= 5)
 				outputText("\n\nThe " + this.short + " stops its assault for a moment.  A glob of precum oozes from its cock before it shakes its head and gets ready to attack again.");
 			else if (lustDelta > 0)
-				outputText("\n\nThe " + this.short + " hesitates and slows down.  You see its cock twitch and then it readies for the next attack.", false);
+				outputText("\n\nThe " + this.short + " hesitates and slows down.  You see its cock twitch and then it readies for the next attack.");
 			applyTease(lustDelta);
 		}
         

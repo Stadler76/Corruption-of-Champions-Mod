@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Quests{
+package classes.Scenes.Quests{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -1179,21 +1179,21 @@ private function urtaComboAttack():void {
 	}
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	var damage:Number;
 	//Determine if dodged!
 	if (!monster.hasStatusEffect(StatusEffects.Blind) && (rand(3) == 0 || (player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4) +80)) > 80))) {
-		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
-		outputText("\n", false);
+		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		outputText("\n");
 		if (player.hasStatusEffect(StatusEffects.Attacks)) {
 			urtaComboAttack();
 			return;
 		}
 		else {
-			outputText("\n", false);
+			outputText("\n");
 			monster.doAI();
 			return;
 		}
@@ -1247,10 +1247,10 @@ private function urtaComboAttack():void {
 	}
 	if (damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
+		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if (crit) outputText(" <b>*CRIT*</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
@@ -1258,7 +1258,7 @@ private function urtaComboAttack():void {
 		if (monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	outputText("\n", false);
+	outputText("\n");
 	//Kick back to main if no damage occured!
 	if (monster.HP >= 1 && monster.lust <= 99) {
 		if (player.hasStatusEffect(StatusEffects.Attacks)) {
@@ -1267,7 +1267,7 @@ private function urtaComboAttack():void {
 			return;
 		}
 		trace("DONE ATTACK");
-		outputText("\n", false);
+		outputText("\n");
 		monster.doAI();
 	}
 	else {
@@ -1290,7 +1290,7 @@ private function urtaDirtKick():void {
 	player.changeFatigue(5);
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards " + monster.a + monster.short + "!  ");
 	//Dodged!
@@ -1323,16 +1323,16 @@ private function urtaSidewinder():void {
 	player.changeFatigue(10);
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
 	var damage:Number;
 	//Determine if dodged!
 	if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4) +80)) > 80)) {
-		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
-		outputText("\n\n", false);
+		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		outputText("\n\n");
 		monster.doAI();
 		return;
 	}
@@ -1387,10 +1387,10 @@ private function urtaSidewinder():void {
 	}
 	if (damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
+		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if (crit) outputText(" <b>*CRIT*</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
@@ -1407,14 +1407,14 @@ private function urtaSidewinder():void {
 	else if (monster.findPerk(PerkLib.Resolute) >= 0) {
 		outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	}
-	outputText("\n", false);
+	outputText("\n");
 	//Kick back to main if no damage occured!
 	if (monster.HP >= 1 && monster.lust <= 99) {
 		if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
 		}
-		outputText("\n", false);
+		outputText("\n");
 		monster.doAI();
 	}
 	else {
@@ -1437,27 +1437,27 @@ private function urtaVaultAttack():void {
 	}
 	player.changeFatigue(20);
 	if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
-		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n", false);
+		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  The seals have made normal attack impossible!  Maybe you could try something else?\n\n");
 		monster.doAI();
 		return;
 	}
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) {
-		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
+		outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	}
 	else outputText("You leap into the air, intent on slamming your " + player.weaponName + " into your foe!  ");
 	var damage:Number;
 	//Determine if dodged!
 	if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4) +80)) > 80)) {
-		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
-		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
-		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
-		outputText("\n", false);
+		if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
+		if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
+		if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		outputText("\n");
 		if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
 		}
-		else outputText("\n", false);
+		else outputText("\n");
 		monster.doAI();
 		return;
 	}
@@ -1512,10 +1512,10 @@ private function urtaVaultAttack():void {
 	}
 	if (damage <= 0) {
 		damage = 0;
-		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".", false);
+		outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".");
 	}
 	else {
-		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")", false);
+		outputText("You hit " + monster.a + monster.short + "! (" + damage + ")");
 		if (crit) outputText(" <b>*CRIT*</b>");
 	}
 	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
@@ -1523,14 +1523,14 @@ private function urtaVaultAttack():void {
 		if (monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	outputText("\n", false);
+	outputText("\n");
 	//Kick back to main if no damage occured!
 	if (monster.HP >= 1 && monster.lust <= 99) {
 		if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
 		}
-		outputText("\n", false);
+		outputText("\n");
 		monster.doAI();
 	}
 	else {
@@ -1938,7 +1938,7 @@ public function loseToGnollPrincessAndGetGangBanged():void {
 
 		outputText("\n\nYour dick arches up on its own as more and more blood rushes into it, rhythmically clenching hidden muscles in ways that milky dollops of pre ooze out of your tip one after another.  \"<i>Cum,</i>\" the savanna princess commands, and this time you obey without thinking.  Your nipples pucker, hard as diamonds, and your cunt spasms around a phantom intruder, glazing the backside of your balls with tangy girl-cum.  That same taut sack, swollen and stretched by your aching balls, gradually diminishes in size, passing its cargo into your urethra, which stretches wide, bulging out into the plump pads. The gnoll curls a toe in front of your spurting slit, turning the long ropes you've begun to spray into high-pressure squirts of thick semen.  It soaks her foot-fur, your belly, your tits, your face, and your aggressor's lower body.  You cum and cum, releasing seemingly endless torrents of alabaster spooge to your foe's controlling toes, your body growing weaker and more exhausted with each passing burst of jism.");
 
-		outputText("\n\nThe gnoll's voice praises you again, \"<i>Good girl.</i>\"  Not minding how sinfully sticky you've become, you pass into a exhausted yet pleasant slumber, so deep you don't even feel yourself being moved.");
+		outputText("\n\nThe gnoll's voice praises you again, \"<i>Good girl.</i>\"  Not minding how sinfully sticky you've become, you pass into an exhausted yet pleasant slumber, so deep you don't even feel yourself being moved.");
 		player.orgasm('Dick');
 	}
 	//Lose Via HP✓
@@ -2430,7 +2430,7 @@ public function urtaLosesToMinotaurRoughVersion():void {
 
 	outputText("\n\nFrom her perch atop a fallen pillar, the succu-cow watches with a strange mix of desire to play with such a fearsome creature, concern that your furious power would overwhelm her, and curiosity as to why you transformed so strangely.  You lick your lips as you look her up and down, your mind filling the perverse fantasies of how you're going to rut and breed that curvy bitch.  The primal instinct to sate yourself with that voluptuous cow-girl body of hers drives your lust higher and higher, your hips bucking and facefucking the unfortunate recipient of your hunger.");
 
-	outputText("\n\nGritting your teeth and growing, you can't hold out for much longer, the sweet pressure building and building inside your titanic balls until the skin is tight over the big bloated orbs.  With just a few more brutal thrusts, your lust filled mind reels and fills with the ecstasy of your earth-shaking orgasm.  The massive cum-tanks between your legs clench and shift as they discharge their geyser-like streams of spunk into and onto your beaten, cock-sucking victim.  Under such a mighty, thirst-quenching flow, the minotaur lord's muscled gut quickly starts to round out, and more and more musky dick-milk is crammed into his belly.  Without such a accommodating vessel to fill, your second spewing stallion-prick blows its load all over his matted fur.  The potent streams even arch onto the cold, stone floor and quickly pool around your feet.  You continue to pump even more creamy gouts of sterile seed into your sticky cum drenched victim without pause.");
+	outputText("\n\nGritting your teeth and growing, you can't hold out for much longer, the sweet pressure building and building inside your titanic balls until the skin is tight over the big bloated orbs.  With just a few more brutal thrusts, your lust filled mind reels and fills with the ecstasy of your earth-shaking orgasm.  The massive cum-tanks between your legs clench and shift as they discharge their geyser-like streams of spunk into and onto your beaten, cock-sucking victim.  Under such a mighty, thirst-quenching flow, the minotaur lord's muscled gut quickly starts to round out, and more and more musky dick-milk is crammed into his belly.  Without such an accommodating vessel to fill, your second spewing stallion-prick blows its load all over his matted fur.  The potent streams even arch onto the cold, stone floor and quickly pool around your feet.  You continue to pump even more creamy gouts of sterile seed into your sticky cum drenched victim without pause.");
 
 	outputText("\n\nFor well over a few minutes you continue to cum with the fallen minotaur.   Roughly pulling your still-spurting column from the beastman's mouth, you grab hold of your twin dicks and pump them hard, masturbating to soak him in your alabaster spunk.  Finally, the tremendous orgasm ends, the fallen lord painted completely white with your seed, his once-muscular stomach completely rounded by the sheer amount of sperm you stuffed him with.");
 
@@ -2611,7 +2611,7 @@ public function urtaLosesToCowCubi():void {
 	else outputText("you start pulling at your [armor], struggling with every strap and piece of restraining, constricting leather.  Your lust-clouded mind can barely focus to work your fumbling fingers against the snaps and straps.  In your haste, with balancing forgotten, you tumble onto your face, smearing your dick exquisitely between your fallen form and a patch of soft moss.  You mewl pitifully in protest.  You need to fuck!");
 	outputText("\n\nThe succubus laughs cruelly, her throaty voice bursting with contemptuous mirth.  \"<i>Such a pretty little foxy...</i>\"  She kneels in front of you, meeting your lusty, vacant gaze as you slowly grind your hips in the dirt, smearing your pre beneath you like some kind of wanton, heat-addled animal.  \"<i>You have so much potential as a pet - a knock-out body, nice tits that have just enough bounce... not too saggy either... and that cock.  I always wanted a real dog for a pet.  Yes, yes, you're a fox,</i>\" she says, stroking your nose affectionately.  You lick her finger into your mouth, pleading with her to undress you and take you in the only way you can think to.  \"<i>You're still my little bitch, aren't you?</i>\"");
 
-	outputText("\n\nMaybe for now... just untill you let off some pressure.  You nod enthusiastically, her finger popping out of your slobbery maw, trailing a single strand of frothy vixen-spit.  The succubus doesn't seem to mind.  She wipes her messy digit off on your ear, smoothing back the fur as she does so.  \"<i>You probably think you'll get out of this somehow, but you're wrong.  The kind of pleasure I can offer is... addicting.</i>\"");
+	outputText("\n\nMaybe for now... just until you let off some pressure.  You nod enthusiastically, her finger popping out of your slobbery maw, trailing a single strand of frothy vixen-spit.  The succubus doesn't seem to mind.  She wipes her messy digit off on your ear, smoothing back the fur as she does so.  \"<i>You probably think you'll get out of this somehow, but you're wrong.  The kind of pleasure I can offer is... addicting.</i>\"");
 
 	outputText("\n\nHefting the expansive mass of her chest, the demoness hefts her teats up to her mouth, sampling the bounty within.  Of course, with four swollen nipples dangling and dripping, she's far more successful in wetting her skin to a healthy shine than actually devouring her lactic cargo.  \"<i>Mmmmm, so good.  A shame my milk won't affect me like it will you.</i>\"  She releases her ponderous tit, and it sways down, smacking into the other, setting off a waterfall of alabaster cream.  Some of it spatters off your head, but the vast majority winds up on the surrounding plant life. She wastes no time, and immediately begins to unlatch your coverings.  \"<i>Can't have my bitch's genitals covered now, can I?</i>\" she whispers sultrily, punctuating each word with the removal of a buckle, snap, or strap.");
 

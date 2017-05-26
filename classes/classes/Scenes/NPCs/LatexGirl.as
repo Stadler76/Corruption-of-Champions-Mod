@@ -1,4 +1,4 @@
-﻿package classes.Scenes.NPCs{
+package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -219,7 +219,7 @@ private function nameZeLatexGoo():void
 	if (mainView.nameBox.text == "") 
 	{
 		clearOutput();
-		outputText("<b>You must select a name.</b>", false);
+		outputText("<b>You must select a name.</b>");
 		mainView.nameBox.x = mainView.mainText.x + 5;
 		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		menu();
@@ -422,7 +422,7 @@ private function pureGooGalRecruitAftermathII():void {
 private function nameZeLatexGooNice():void {
 	if (mainView.nameBox.text == "") {
 		clearOutput();
-		outputText("<b>You must select a name.</b>", false);
+		outputText("<b>You must select a name.</b>");
 		mainView.nameBox.x = mainView.mainText.x + 5;
 		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		menu();

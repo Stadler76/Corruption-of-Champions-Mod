@@ -10,11 +10,12 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
+import classes.Scenes.API.IExplorable;
 import classes.Scenes.Areas.Swamp.*;
 
 	use namespace kGAMECLASS;
 
-	public class Swamp extends BaseContent
+	public class Swamp extends BaseContent implements IExplorable
 	{
 		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
@@ -93,7 +94,7 @@ import classes.Scenes.Areas.Swamp.*;
 					});
 			return _explorationEncounter;
 		}
-		public function exploreSwamp():void
+		public function explore():void
 		{
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			return explorationEncounter.execEncounter();

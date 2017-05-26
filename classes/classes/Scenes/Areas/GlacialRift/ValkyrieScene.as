@@ -12,14 +12,15 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function loseToValkyrie():void {
-			outputText("Unable to resist ", true)
+			clearOutput();
+			outputText("Unable to resist ")
 			if (player.HP <= 0) outputText("her onslaught")
 			else outputText("your rising lust")
-			outputText(", you collapse to your knees, utterly at the valkyrie’s mercy.  She plants her spear in the ground, just inches from your head, and rolls you onto your back with her foot. \n\n", false)
+			outputText(", you collapse to your knees, utterly at the valkyrie’s mercy.  She plants her spear in the ground, just inches from your head, and rolls you onto your back with her foot. \n\n")
 			if (monster.lust >= 70 && flags[kFLAGS.SFW_MODE] <= 0) loseToValkyrieForcedOral()
 			else {
-				outputText("With one swift, contemptuous kick to the head, she knocks you right out.", false)
-				outputText("  You are utterly freezing after such long exposure to the cold.", false)
+				outputText("With one swift, contemptuous kick to the head, she knocks you right out.")
+				outputText("  You are utterly freezing after such long exposure to the cold.")
 				if (player.str > 50) dynStats("str", -1);
 				dynStats("str", -1);
 				if (player.spe > 50) dynStats("spe", -1);
@@ -53,7 +54,8 @@ package classes.Scenes.Areas.GlacialRift
 			clearOutput();
 			
 			if (flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				clearOutput();
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
 				combat.cleanupAfterCombat();
 				return;
 			}

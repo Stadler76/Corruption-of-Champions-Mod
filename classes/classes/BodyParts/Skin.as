@@ -25,7 +25,7 @@ package classes.BodyParts
 				skinzilla += adj + ", ";
 
 			//Fur handled a little differently since it uses haircolor
-			skinzilla += hasFur() ? furColor : tone;
+			skinzilla += isFurry() ? furColor : tone;
 
 			return skinzilla + " " + desc;
 		}
@@ -41,7 +41,7 @@ package classes.BodyParts
 				skinzilla += tone + " ";
 
 			//Fur handled a little differently since it uses haircolor
-			skinzilla += hasFur() ? "skin" : desc;
+			skinzilla += isFurry() ? "skin" : desc;
 
 			return skinzilla;
 		}
@@ -54,6 +54,11 @@ package classes.BodyParts
 		public function hasWool():Boolean
 		{
 			return type == SKIN_TYPE_WOOL;
+		}
+
+		public function isFurry():Boolean
+		{
+			return [SKIN_TYPE_FUR, SKIN_TYPE_WOOL].indexOf(type) != -1;
 		}
 
 		public function restore(keepTone:Boolean = true):void

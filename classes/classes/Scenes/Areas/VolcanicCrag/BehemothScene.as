@@ -48,7 +48,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		//Talk
 		public function talkToBehemothMenu():void {
 			clearOutput();
-			outputText(images.showImage("behemoth-talk"), false);
+			outputText(images.showImage("behemoth-talk"));
 			outputText("You ask the behemoth if he's willing to have a conversation with you. The behemoth says, \"<i>Of course. What would you like to talk about?</i>\"");
 			menu();
 			addButton(0, "Yourself", talkAboutYourself, null, null, null, "Talk to the behemoth about yourself.");
@@ -131,7 +131,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("You ask him if he has anything else he wants to share, and he starts to shake his head, before slicking his hair back and nodding, resolute.\n\n");
 			//Sad story.
 			outputText("\"<i>This ain't a happy story,</i>\" he warns you, but you're interested in hearing anyway and he continues. \"<i>Even though I gave up on heading back home after a few weeks, I still kept checking the portal time and again, you know?  Habit, I guess.  For ages it was locked, but one day ... one day I try and get back through, but there's nothing there.  Nothing living, anyway: just destruction and the burnt-out remains of where my village used to be, and a lot of corpses.  Most of who I can't identify by this time, mind, us growing up pretty quick and it being a while since I was there.  I gave everybody proper burials, and I think I know which one was my old pa, and then I did the only thing I could do: pack up all the stuff I could salvage, move back to Mareth, and lock away the portal.</i>\"\n\n");
-			outputText("You let him finish, and you know he's not the only one this could happen to.  You're a champion, too, after all.\n\nYou move up close to him and then pull him into a hug, his fur and body noticably warmer than your own, and even with the tent being too warm for two people, he needs this.  \"<i>Thanks for listening,</i>\" he says eventually, and you shrug.  Anytime, you assure him, and you ask him if there's anything else he wants to share.\n\n");
+			outputText("You let him finish, and you know he's not the only one this could happen to.  You're a champion, too, after all.\n\nYou move up close to him and then pull him into a hug, his fur and body noticeably warmer than your own, and even with the tent being too warm for two people, he needs this.  \"<i>Thanks for listening,</i>\" he says eventually, and you shrug.  Anytime, you assure him, and you ask him if there's anything else he wants to share.\n\n");
 			outputText("\"<i>I'm kinda lonely,</i>\" he admits, and he gives you a considering look before shaking his head and dismissing the thought.  \"<i>You ever meet anybody pure who wants to help me start a whole family of behemoths, you let me know, okay?</i>\"\n\nYou assure him you will, and the both of you make your farewells before you return to your own camp.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] <= 2) flags[kFLAGS.BEHEMOTH_TALK_LEVEL]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -281,7 +281,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function analPitchBehemoth():void {
 			var x:int = player.cockThatFits(48);
 			clearOutput();
-			outputText(images.showImage("behemoth-anal-pitch"), false);
+			outputText(images.showImage("behemoth-anal-pitch"));
 			outputText("You tell the behemoth that you're going to take him from behind. \"<i>All right, let's get this started,</i>\" he says. " + player.clothedOrNaked("The two of you strip yourselves naked. You toss your " + player.armorName + " into a neat pile. ") + "The behemoth removes his loincloth, revealing his large cock.");
 			outputText("\n\n\"<i>Bend over,</i>\" you instruct the behemoth with a smirk. He gives you a nod as he gets down into a doggy position.");
 			outputText("\n\nYou give his butt-cheeks a gentle caress" + (player.cor >= 30 ? " followed by a sudden spank which causes him to yelp in surprise": " to assure him that you're going to be gentle.") + ".");
@@ -305,7 +305,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function analCatchBehemoth():void {
 			var isVirgin:Boolean = (player.looseness(false) == 0);
 			clearOutput();
-			outputText(images.showImage("behemoth-anal-catch"), false);
+			outputText(images.showImage("behemoth-anal-catch"));
 			if (player.HP <= 0 || player.lust >= player.maxLust()) {
 				outputText("The behemoth looks you over with a friendly leer as your face heats.  \"<i>Turn around,</i>\" he says, and you scramble to obey, too tired to do otherwise. \"<i>That's a nice ass," + player.mf("dude", "lady") + ", but I'd like to see more of it, yeah?</i>\"\n\n");
 			}
@@ -369,7 +369,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function vagCatchBehemoth():void {
 			var isVirgin:Boolean = player.hasVirginVagina()
 			clearOutput();
-			outputText(images.showImage("behemoth-vag-catch"), false);
+			outputText(images.showImage("behemoth-vag-catch"));
 			//Sorry, no centaur variant.
 			outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [vagina]. ");
 			outputText("" + player.clothedOrNaked("You toss your [armor] into a neat pile as you strip off your clothes. ") + "It's hot enough you're completely comfortable as you present yourself and your [vagina] to the behemoth, his erection tenting his loincloth as he shifts it aside to expose himself. \"<em>Wow</em>,\" he says, looking at you like you're the only person he's seen in ages. \"<i>That is a gorgeous pussy you've got there: I'll be gentle, I promise.</i>\"");
@@ -389,7 +389,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you " + player.clothedOrNaked("redress yourself in your [armor], and ") + "make your way back to your camp.");
 			player.orgasm('Vaginal');
 			player.slimeFeed();
-			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < 25 + player.corruptionTolerance()) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < (25 + player.corruptionTolerance())) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
@@ -402,7 +402,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			var hungerRefill:int = 100 - player.hunger;
 			if (hungerRefill < 40) hungerRefill = 40;
-			outputText(images.showImage("behemoth-blowjob"), false);
+			outputText(images.showImage("behemoth-blowjob"));
 			outputText("Your eyes draw near the big bulge in his loincloth and you lick your lips as if you're hungry. ");
 			if (player.hasStatusEffect(StatusEffects.LustyTongue)) {
 				outputText("Your body tingles with arousal as your " + player.tongueDescript() + " makes contact with your lips. ");
@@ -426,7 +426,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		private function haveACumBathLiterally():void {
 			clearOutput();
-			outputText(images.showImage("behemoth-cum-bath"), false);
+			outputText(images.showImage("behemoth-cum-bath"));
 			outputText("The behemoth looks at you and says, \"<i>Really? You want a cum bath? " + (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0 ? "You're in luck as I can make a cum bath, literally! Yes, a literal cum bath. Don't let the size of my balls fool you; I can cum much higher than what you think my balls can hold." : "No problem, I'm going to give you another cum bath.") + "</i>\"");
 			if (flags[kFLAGS.BEHEMOTH_CUM_BATH] <= 0) {
 				outputText("\n\nYou are already eager for a literal cum bath! ");
@@ -461,7 +461,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		private function watersportsWithBehemoth():void {
 			clearOutput();
-			outputText(images.showImage("behemoth-watersports"), false);
+			outputText(images.showImage("behemoth-watersports"));
 			outputText("\<i>You want to do some watersports with me? Of course,</i>\" the behemoth chuckles, \"<i>just follow me to my tent.</i>\"");
 			outputText("\n\nYou follow the behemoth all the way to his tent and he gestures for you to enter and you enter along with him.");
 			if (flags[kFLAGS.BEHEMOTH_TENT] <= 0) {

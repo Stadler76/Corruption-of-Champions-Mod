@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Areas.Mountain
+package classes.Scenes.Areas.Mountain
 {
 	import classes.*;
 	import classes.internals.*;
@@ -8,30 +8,30 @@
 		protected function hellhoundFire():void {
 			//Blind dodge change
 			if(hasStatusEffect(StatusEffects.Blind)) {
-				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!", false);
+				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!");
 				combatRoundOver();
 				return;
 			}
 			/*if(player.hasStatusEffect(StatusEffects.Web_dash_Silence)) {
-				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n", false);
+				outputText("You reach inside yourself to breathe flames, but as you ready to release a torrent of fire, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat.\n");
 				changeFatigue(10);
 				takeDamage(10+rand(20));
 				monster.doAI();
 				return;
 			}*/
 			if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 35 && rand(3) != 0) {
-				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You easily avoid the wave, diving to the side and making the most of your talents at evasion.", false);
+				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You easily avoid the wave, diving to the side and making the most of your talents at evasion.");
 			}
 			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s fire.\n", false);
+				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s fire.\n");
 			}
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && player.spe > 30 && rand(10) != 0) {
-				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You twist and drop with incredible flexibility, watching the fire blow harmlessly overhead.", false);
+				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you.  You twist and drop with incredible flexibility, watching the fire blow harmlessly overhead.");
 			}
 			else {
 				//Determine the damage to be taken
 				var temp:Number = 15 + rand(10);
-				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ", false);
+				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ");
 				player.takeDamage(temp, true);
 				game.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
@@ -53,13 +53,13 @@
 					return;
 				}
 				else {
-					outputText("The hellhound sniffs your scent again, seemingly gaining more and more energy as he circles faster around you.", false);
+					outputText("The hellhound sniffs your scent again, seemingly gaining more and more energy as he circles faster around you.");
 					spe = 100;	
 				}
 			}
 			else {
 				spe += 40;
-				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...", false);
+				outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a fiery grin - he seems to have acquired your scent!  It'll be hard to get away now...");
 				player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
 			}
 			combatRoundOver();
@@ -68,14 +68,15 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
+			clearOutput();
 			if (hpVictory) {
-				outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);
+				outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.");
 			} else {
-				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
+				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n");
 			}
 			game.menu();
 			
-			game.addButtonDisabled(0, "Fuck it", "Ride his twin cocks. This scene requires you to have vagina and sufficient arousal. This scene can not accomodate naga body.");
+			game.addButtonDisabled(0, "Fuck it", "Ride his twin cocks. This scene requires you to have vagina and sufficient arousal. This scene can not accommodate naga body.");
 			game.addButtonDisabled(1, "Lick", "Make him use his tongues. This scene requires you to have genitals and sufficient arousal. This scene requires lust victory.");
 			
 			if (player.lust >= 33 && !player.isGenderless()) {
@@ -93,7 +94,7 @@
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
-				outputText("\n\nThe hellhound snorts and leaves you to your fate.", false);
+				outputText("\n\nThe hellhound snorts and leaves you to your fate.");
 				doNext(game.combat.cleanupAfterCombat);
 			} else {
 				game.mountain.hellHoundScene.hellhoundRapesPlayer();

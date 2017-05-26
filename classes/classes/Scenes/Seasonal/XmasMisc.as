@@ -52,7 +52,7 @@ package classes.Scenes.Seasonal {
 		//INVESTIGATE
 		public function investigateCandyCaneBun():void {
 			clearOutput();
-			outputText("You make the decision to find out just what's going on.  You cautiously follow the small pools of goo, slightly on edge.  You approach a wall of low hanging vine which you quickly pull aside.  Sitting in the largest pudddle of semen you've seen yet, a trembling bunny-like figure kneels on its knees.");
+			outputText("You make the decision to find out just what's going on.  You cautiously follow the small pools of goo, slightly on edge.  You approach a wall of low hanging vine which you quickly pull aside.  Sitting in the largest puddle of semen you've seen yet, a trembling bunny-like figure kneels on its knees.");
 			//(If corruption and libido<50) 
 			if (player.cor < 50 && player.lib < 50) outputText("  Your eyes are quickly drawn to the rabbit morph's stark nudity.");
 			//(If corruption or libido>50) 
@@ -63,7 +63,7 @@ package classes.Scenes.Seasonal {
 			if (player.cor < 50 && player.lib < 50) outputText("leave, ");
 			//(If corruption or libido<50)
 			else outputText("approach, ");
-			outputText("but one of your [feet] snaps a twig and causes the bunny to turn at the sound. As its large eyes lock with your, you get your first good look at the figure.  It is predominantly human looking, but the floppy ears sprouting from its head and fluff adorning him from the thighs down indicates at least a little mutation.  Two small nipples lie on a flat chest, confirming him to be a male.  His eight inch dick and kiwi-sized balls leave even less to your imagination.  He is lightly tanned, his skin colored a non abrasive brown.  The hair on his body stands in a sharp contrast to his relatively regular skin.  A mop of shoulder length hair on his head is as white as freshly fallen snow, with sprinklings of red stripes highlighting it.  You can't help but notice how nicely it frames his surprisingly soft, feminine face.  The fur covering his legs is smiliary covered.  His hips jut out notably, adding even further to his overall girly appearance.");
+			outputText("but one of your [feet] snaps a twig and causes the bunny to turn at the sound. As its large eyes lock with your, you get your first good look at the figure.  It is predominantly human looking, but the floppy ears sprouting from its head and fluff adorning him from the thighs down indicates at least a little mutation.  Two small nipples lie on a flat chest, confirming him to be a male.  His eight inch dick and kiwi-sized balls leave even less to your imagination.  He is lightly tanned, his skin colored a non abrasive brown.  The hair on his body stands in a sharp contrast to his relatively regular skin.  A mop of shoulder length hair on his head is as white as freshly fallen snow, with sprinklings of red stripes highlighting it.  You can't help but notice how nicely it frames his surprisingly soft, feminine face.  The fur covering his legs is similarly covered.  His hips jut out notably, adding even further to his overall girly appearance.");
 			outputText("\n\n\"<i>You're not going to rape me?</i>\"  The bunny boy's remarkably high voice breaks your train of thought.  ");
 			//(If corruption<50)
 			if (player.cor < 50) outputText("You calmly inform him that you didn't have the intention of violating him. ");
@@ -1063,7 +1063,7 @@ package classes.Scenes.Seasonal {
 			outputText("Your arrival to Nieve's part of the camp elicits a friendly smile from the ice man.  He notices the longing in your eyes with a grin, and speaks in a gentle, yet low tone, \"<i>[Master], you seem to need help from me...</i>\"");
 			outputText("\n\nTo which you nod, ");
 			if (player.cor < 50) outputText("telling him that you find his form... appeasing to say the least, and would like to know how his 'parts' are working properly.");
-			else outputText("leting your creation know that you are interested in 'how' it can please you, giving him no room to imagine what you're insinuating you then tell him bluntly that you want him to fuck you like the plaything he is.");
+			else outputText("letting your creation know that you are interested in 'how' it can please you, giving him no room to imagine what you're insinuating you then tell him bluntly that you want him to fuck you like the plaything he is.");
 			
 			outputText("\n\nNieve bows subserviently, then moves closer to you, doing the work of disrobing you like he's practiced at it.  He caresses your [chest] and [nipples] as he nibbles on your neck and ears, the cool kisses and touches feeling electric in the contrasting warmth of the air, causing you to shiver in delight at his surprisingly experienced movements.");
 			//{Silly Mode:}

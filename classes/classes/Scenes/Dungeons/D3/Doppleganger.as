@@ -166,6 +166,10 @@ package classes.Scenes.Dungeons.D3
 			{
 				player.takeDamage(10 + (player.inte / 3 + rand(player.inte / 2)), true);
 			}
+			else if (spell == "blackfire")
+			{
+				player.takeDamage(30 + (player.inte / 3 + rand(player.inte / 2)), true); //REST IN FUCK
+			}
 			
 			addTalkShit();
 		}

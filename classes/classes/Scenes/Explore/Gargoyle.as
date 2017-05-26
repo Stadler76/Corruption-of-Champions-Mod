@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Explore{
+package classes.Scenes.Explore{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -120,7 +120,7 @@ private function nameZeGargoyle():void {
 		// Name flag is used to track access into Gargoyles content. Default is "0" so somewhere the "0" string is coalescing to integer 0.
 		// Solution? Fuck you for naming your Gargoyle "0".
 		clearOutput();
-		outputText("<b>You must name her.</b>", false);
+		outputText("<b>You must name her.</b>");
 		mainView.nameBox.text = "";
 		mainView.nameBox.visible = true;
 		mainView.nameBox.width = 165;
@@ -544,7 +544,7 @@ private function ritualGargoyle():void {
 //(PC decreases Libido and Sensitivity. Suffers 20% Max HP damage, to a minimum of 1 pt. remaining)
 private function bodyRitual():void {
 	clearOutput();
-	outputText("You tell " + flags[kFLAGS.GAR_NAME] + " that you could stand to reverse some of the corruption that has affected your body.  With an solemn nod, she takes you to a side alcove near the altar and instructs you to spread your arms and legs.  Hesitantly, you do so, and from the floor and ceiling " + flags[kFLAGS.GAR_NAME] + " produces leather straps with rough looped straps.  Before you can react, she binds your arms and legs, spreading you eagle against the cold stone wall.");
+	outputText("You tell " + flags[kFLAGS.GAR_NAME] + " that you could stand to reverse some of the corruption that has affected your body.  With a solemn nod, she takes you to a side alcove near the altar and instructs you to spread your arms and legs.  Hesitantly, you do so, and from the floor and ceiling " + flags[kFLAGS.GAR_NAME] + " produces leather straps with rough looped straps.  Before you can react, she binds your arms and legs, spreading you eagle against the cold stone wall.");
 	
 	outputText("\n\n\"<i>With pain comes purity,</i>\" " + flags[kFLAGS.GAR_NAME] + " says, so quietly you can barely hear her.  \"<i>Prepare yourself, Master,</i>\" she adds, and your heart nearly skips a beat when you hear the crack of a whip behind you.  Oh, shit, this is going to hu-CRACK!  You see stars as white-hot pain arcs through your body, making you scream into the wall.  You can feel the burning streak left across your back by the bullwhip, throbbing mercilessly in the moments before CRACK!  She hits you again, throwing you forward against your bonds with the force of the blow.");
 	

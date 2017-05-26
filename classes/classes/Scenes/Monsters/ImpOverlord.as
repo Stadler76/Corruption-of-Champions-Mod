@@ -70,14 +70,14 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 4 && fatigue <= (100 - spellCostHeal)) {
 				outputText("He focuses on his body and his desire to end pain, trying to draw on his arousal without enhancing it.");
 				var temp:int = int((inte/(2 + rand(3))) * (eMaxHP()/50));
-				outputText("He flushes with success as his wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
+				outputText("He flushes with success as his wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 				addHP(temp);
 				fatigue += spellCostHeal;
 			}
 			//Might
 			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
 				outputText("He flushes, drawing on his body's desires to empower his muscles and toughen his up.");
-				outputText("The rush of success and power flows through his body.  He feels like he can do anything!", false);
+				outputText("The rush of success and power flows through his body.  He feels like he can do anything!");
 				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
 				fatigue += spellCostMight;
 			}

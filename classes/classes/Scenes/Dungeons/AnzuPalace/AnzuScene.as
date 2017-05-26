@@ -311,7 +311,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		private function anzuTalkPast():void {
 			clearOutput();
 			outputText(images.showImage("anzu-talk-past"));
-			outputText("You ask Anzu about what was he doing before he lived in Mareth. He said he was a empty shell of his former power, and he protected a city called Mittani.");
+			outputText("You ask Anzu about what was he doing before he lived in Mareth. He said he was an empty shell of his former power, and he protected a city called Mittani.");
 			outputText("\n\n\"<i>First of all, I should explain to you about my full name,</i>\" Anzu says, \"<i>The Annuna is the common surname of the fifty powerful gods which are part of the council of gods that rule my former world. They're commonly known as the Council of the Annuna</i>\"");
 			outputText("\n\n\"<i>Generally, being selected to protect a city is a great honour, especially for medium or low ranking gods, as few members of the Council are sent to fulfill that labour. In my case Mittani was the city I was sent to. Honestly, I was hoping to be sent to Lagash, located near the coast, because everything around Mittani was dirt and sand.</i>\"");
 			outputText("\n\n\"<i>The people of Mittani received me well. The protection of the city was simple. I had to learn about making rain and growing plants in case of famine, but this is principally the job of the fertility goddess, so I didn’t have to do much. If the stupid leaders started a war with another city, my work was to assure victory. That caused trouble if the other city was also protected by a god of the council. When that happened, I and whichever god protected the opposing city sorted whoever would be the winner. If I lost the sort, I did nothing for the city and, after defeat, I chastised the city’s population for not praying or worshipping me enough. And if I won the sort, the other god did nothing, My city would win and the people would celebrate my greatness. Either way, I always got more people praying and worshipping me.</i>\"");
@@ -361,14 +361,14 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\n\"<i>A little cold at start, but when you get accustomed, it becomes really nice. You know, if you want to have a better view, you can follow me to the roof.</i>\"");
 			outputText("\n\nThe roof of the palace, surrounded by the forest pines, lead to a truly magnificent view. The hills extend for all the horizon, while the soft sound of the wind brings peace to your mind. Above you, the sky, framed by the treetops completes the setting.");
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) {
+				outputText("\n\n\"<i>When I’m bored or feel too nostalgic, I use to go here in the night. Makes me focus in what I have now. Previously, those stars didn't appear in the sky but for some reason those stars returned.</i>\"");			
+				outputText("\n\nYou tell Anzu of how you defeated Lethice and he congratulates you in your efforts, even giving you an appreciative nod for making the stars return. You chat in the top of the palace with Anzu about the constellations and shooting stars until the cold makes you ask him to go inside again.");
+			}
+			else {
 				outputText("\n\n\"<i>When I’m bored or feel too nostalgic, I use to go here in the night. Makes me focus in what I have now. In the end, the only thing that I really miss from my former world, are the things that I can’t have when looking at the sky.</i>\"");			
 				outputText("\n\nYou give him a confused look.");	
 				outputText("\n\n\"<i>Stars.</i>\"");	
 				outputText("\n\nThe lack of the stars in the night sky can be a little depressing. You recall how in the night, back on Ingnam you used to sit on the grass and count the stars of the sky. You chat in the top of the palace with Anzu about the constellations and shooting stars until the cold makes you ask him to go inside again.");	
-			}
-			else {
-				outputText("\n\n\"<i>When I’m bored or feel too nostalgic, I use to go here in the night. Makes me focus in what I have now. Previously, those stars didn't appear in the sky but for some reason those stars returned.</i>\"");			
-				outputText("\n\nYou tell Anzu of how you defeated Lethice and he congratulates you in your efforts, even giving you an appreciative nod for making the stars return. You chat in the top of the palace with Anzu about the constellations and shooting stars until the cold makes you ask him to go inside again.");
 			}
 			outputText("\n\nBack in the living room, you thank him for having showed his palace to you.");			
 			cheatTime(0.25);
@@ -461,7 +461,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\nAnother thing is the disorganization of her forces. Even the well trained warriors on her side act in separated groups. Before I said I gave a look around the realm before jumping in, enough to get some general information about the realm situation. That allowed me know where Marae was all the time, the existence of a city called Tel’Adre, the principal races in some zones, and some others details, which helped me to make a decision in the place that I’ll land. Obviously, that was fifteen years ago. By now, many things have changed for sure. But, things didn’t look well for her supporters in those times, and I doubt that they’re better organized now.");
 			outputText("\n\nThe attitude of Marae towards her followers doesn’t help. She stays on the Lake, being little more than a decorative figure or a kind of \"<i>symbol of resistance</i>\" instead of an active leader. She could, at least, give advice to her allies about how to act against the demons.</i>\"");
 			outputText("\n\nYou tell him about how she was getting corrupted by the fluids coming from of the demon factory, thus limiting their actions. When you met her, the first thing she did was send you to stop the corruption from the factory on the lake.");
-			outputText("\n\n\"<i>And why she didn’t send someone in the files of their followers, or even better, a entire force, to get rid of that place? All of that could be traced to one word: inefficiency. With all that in mind, the deplorable state of Marae’s forces is not a surprise. How do you even pretend to win a war if you are totally unprepared? And I don’t have the intention of siding with the loser’s side.</i>\"");
+			outputText("\n\n\"<i>And why she didn’t send someone in the files of their followers, or even better, an entire force, to get rid of that place? All of that could be traced to one word: inefficiency. With all that in mind, the deplorable state of Marae’s forces is not a surprise. How do you even pretend to win a war if you are totally unprepared? And I don’t have the intention of siding with the loser’s side.</i>\"");
 			outputText("\n\nReally? He prefers support the demons? You’ve thought better of him.");
 			outputText("\n\n\"<i>Not really, [name]. Lethice’s side isn’t any better. Even with more organized forces, better strategies and a more efficient leader, their goal is totally pointless. Corrupt every living being in this world. And after? There’s the option to invade and corrupt other worlds, but if that was a viable plan, they would've already started. Lethice knows than an invasion to another world sooner or later would end in a disaster. For example, imagine than the demons try to invade my former world.</i>\"");
 			outputText("\n\nYou don’t think than an invasion of a world ruled by a multitude of gods, with a character much less benign than Marae would be a good idea.");
@@ -857,7 +857,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			if (flags[kFLAGS.ANZU_FED_COUNTER] == 0) {
 				outputText("\n\n\"<i>Huh, that was…nice.</i>\"");
 				outputText("\n\nYou say that you’re glad that he liked his drink, and despite his embarrassment, he managed to even enjoy it. Anzu answers with a soft laugh, and giving your breast a look, he asks you.");
-				outputText("\n\n\"<i>So, i'd likei’dyou’d like to repeat it again, when your breasts feel to full again…Well  if you don’t mind</i>\"");
+				outputText("\n\n\"<i>So, i'd like to repeat it again, when your breasts feel to full again… Well if you don’t mind</i>\"");
 				outputText("\n\nOf course, but for now, they’re quite empty. You’ll return to the camp for rest and return to him when you’re in the mood to give him milk again. After saying your goodbyes to the avian, you find your way through the Rift and return safely to your camp.");
 			}
 			else {
@@ -1122,7 +1122,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText(images.showImage("anzu-bathtime-begin"));
 			outputText("Wandering again across the halls of the palace, you notice than Anzu isn't in his usual spot at this time of the day, reading a book in the tranquility of his living room. Actually, he isn’t in the kitchen either. A little confused about his whereabouts you search him across the palace, a task a bit difficult given its dimensions and the quantity of rooms.");
 			outputText("\n\nAfter an infructuous search you end looking at the window of the third floor, thinking that he may be gone outside, until you realize that you haven’t searched in one of the most obvious places: his bedroom. Joining action to the thought, you return downstairs to the first floor, and opening the gate to the opulent room, you find it empty. Seems like the bird doesn’t want to be found today.");
-			outputText("\n\nJust when you’re about to return to the camp, you manage to hear a low whistle coming from the end of hall, behind the large portion of the floor occupied by Anzu’s room. Soon you remember that this must be the bathroom, and that would explain the avian’s absence. Upon getting closer to the door, your nose is assaulted by an fragrance even more exquisite than the sweet scent of violets that perfumes the rooms.");
+			outputText("\n\nJust when you’re about to return to the camp, you manage to hear a low whistle coming from the end of hall, behind the large portion of the floor occupied by Anzu’s room. Soon you remember that this must be the bathroom, and that would explain the avian’s absence. Upon getting closer to the door, your nose is assaulted by a fragrance even more exquisite than the sweet scent of violets that perfumes the rooms.");
 			outputText("\n\nAs you push the door open, you spot the avian relaxing in his bath, or rather a pool from the look of its size. ");
 			outputText("\n\nFilled with a water so crystalline that you can see its bottom, despite some bubbles and soap here and there, the pool is big enough to give Anzu room to stretch his arms and legs easily, and even to have a couple of partner. Hell, this thing is big enough to gather most of your lovers inside. Scattered on a near table are a few flasks containing which must be aromatic oils from the scent you recognize some kinds of aromatic woods, and lavender.");
 			outputText("\n\nWhile you’re busy appreciating the scents, your giant lover notices your presence on the door and waves you over");
@@ -1179,7 +1179,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\nNow focusing on having all stressful thing that plague Mareth of your mind, you let your [legs] rest on the tiled bottom of the indoor pool, while your body enjoys the warm feeling of water on your [skin/fur/scales]. Your mind diverges to peaceful thoughts, away from this cursed place, reminiscences of your home on Ingnam, your village, and about all the good things that you have found that this land, that despite its cursed nature, has allowed to survive fills your mind and calm your troubled body.");
 			outputText("\n\nAfter a while, a tickling sensations distracts you from those musings, and you turn back your head to find Anzu pouring a small receptacle containing a pearlish pink, oily liquid over your back and shoulders and rubbing it softly over your [skin/fur/scales]. It’s floral and pleasant smells tells your quickly that it must be a kind of aromatic soap.");
 			outputText("\n\n\"<i>Rose’s essence, quite good for relieving tension and calming the mind and soul, at least, that’s what people says </i>\" Anzu confirms, at the time that pours a bit more on your head and gives it the same treatment.");
-			outputText("\n\nWith, your body thoroughly covered in a layer of pinkish soap, he starts giving your arms and back a massage, having care to tend to your most weary muscles. He turns being quite good at that, all the tension on your body dissapearing, aided without a doubt for the calming water surrounding you.");
+			outputText("\n\nWith, your body thoroughly covered in a layer of pinkish soap, he starts giving your arms and back a massage, having care to tend to your most weary muscles. He turns being quite good at that, all the tension on your body disappearing, aided without a doubt for the calming water surrounding you.");
 			outputText("\n\nAfter he’s assured that every bit on your body has been thoroughly massaged and cleaned, he takes some clean water and start pouring it over you, wiping away the soap from your [skinFurScales], carefully cleaning with his fingers every bit of you.");
 			outputText("\n\nFeeling in the mood to return the favor, you ask Anzu to turn back, so you can help the avian to get himself clean too.");
 			outputText("\n\n\"<i>Oh, that’s not necessary, [name]. I’m doing this as a favor to you.</i>\"");
@@ -1214,7 +1214,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function declineSleepingWithAnzu():void {
 			clearOutput();
-			outputText("Tired as you are, a task is a task. You answer the avian that sadly, you have to keep guard tonight on the portal, so it will be on another time. Though a bit disappointed, the avian quickly cheers up an nuzzles your neck playfully, then he hugs you again and helps you to stand up. Gathering your things, you make it to the door, not without getting another playful nibble as you leave.");
+			outputText("Tired as you are, a task is a task. You answer the avian that sadly, you have to keep guard tonight on the portal, so it will be on another time. Though a bit disappointed, the avian quickly cheers up and nuzzles your neck playfully, then he hugs you again and helps you to stand up. Gathering your things, you make it to the door, not without getting another playful nibble as you leave.");
 			outputText("\n\n\"<i>Be careful on your way to the camp, little friend</i>\" he says from the door while waving you. Waving him back you cross the Rift and return to your camp.");
 			kGAMECLASS.inDungeon = false;
 			kGAMECLASS.dungeonLoc = -1;

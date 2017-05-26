@@ -67,7 +67,7 @@ package classes
 			else if (player.faceType == FACE_RACCOON_MASK) 
 			{
 				//appearance for skinheads
-				if (!player.hasFurOrScales()) 
+				if (!player.isFurryOrScaley()) 
 				{
 					outputText("  Your face is human in shape and structure, with [skin]");
 					if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.hasPlainSkin() || player.hasGooSkin())) 
@@ -78,7 +78,7 @@ package classes
 				else 
 				{
 					//(black/midnight furscales)
-					if (((player.furColor == "black" || player.furColor == "midnight") && player.hasFurOrScales())) 
+					if (((player.furColor == "black" || player.furColor == "midnight") && player.isFurryOrScaley())) 
 						outputText("  Under your [skinFurScales] hides a black raccoon mask, barely visible due to your inky hue, and");
 					else outputText("  Your [skinFurScales] are decorated with a sly-looking raccoon mask, and under them");
 					outputText(" you have a human-shaped head with [skin.noadj].");
@@ -420,6 +420,9 @@ package classes
 				outputText("  Your mouth contains a thick, fleshy lizard tongue, bringing to mind the tongue of large predatory reptiles."
 				          +" It can reach up to one foot, its forked tips tasting the air as they flick at the end of each movement.");
 			//Horns
+			if (player.hornType == HORNS_IMP) {
+				outputText(" A set of pointed imp horns rest atop your head.");
+			}
 			//Demonic horns
 			if (player.hornType == HORNS_DEMON) 
 			{
@@ -534,6 +537,10 @@ package classes
 				outputText("  A pair of tiny-yet-beautiful bee-wings sprout from your back, too small to allow you to fly.");
 			if (player.wingType == WING_TYPE_BEE_LIKE_LARGE) 
 				outputText("  A pair of large bee-wings sprout from your back, reflecting the light through their clear membranes beautifully.  They flap quickly, allowing you to easily hover in place or fly.");
+			if (player.wingType == WING_TYPE_IMP) 
+				outputText(" A pair of imp wings sprout from your back, flapping cutely but otherwise being of little use.");
+			if (player.wingType == WING_TYPE_IMP_LARGE) 
+				outputText(" A pair of large imp wings fold behind your shoulders. With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
 			if (player.wingType == WING_TYPE_BAT_LIKE_TINY) 
 				outputText("  A pair of tiny bat-like demon-wings sprout from your back, flapping cutely, but otherwise being of little use.");
 			if (player.wingType == WING_TYPE_BAT_LIKE_LARGE) 
@@ -878,6 +885,10 @@ package classes
 			{
 				outputText("  A thick-furred wolf tail hangs above your [ass].");
 			}
+			else if (player.tailType == TAIL_TYPE_IMP) 
+			{
+				outputText(" A thin imp tail almost as long as you are tall hangs from above your [butt], dotted at the end with a small puff of hair.");
+			}
 			//</mod>
 			//LOWERBODY SPECIAL
 			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
@@ -934,6 +945,8 @@ package classes
 				outputText("  Your " + num2Text(player.legCount)+ " legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED) 
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs form below your [hips], ending in cloven hooves.");
+			else if (player.lowerBody == LOWER_BODY_TYPE_IMP) 
+				outputText(" " + Num2Text(player.legCount)+ " digitigrade legs form below your [hips], ending in clawed feet. Three extend out the front, and one smaller one is in the back to keep your balance.");
 			if (player.findPerk(PerkLib.Incorporeality) >= 0)
 				outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 			outputText("\n");

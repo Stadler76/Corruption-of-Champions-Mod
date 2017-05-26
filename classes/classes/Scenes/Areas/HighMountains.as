@@ -6,11 +6,15 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounters;
+	import classes.Scenes.API.FnHelpers;
+	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.HighMountains.*;
 
 	use namespace kGAMECLASS;
 
-	public class HighMountains extends BaseContent
+	public class HighMountains extends BaseContent implements IExplorable
 	{
 		public var basiliskScene:BasiliskScene = new BasiliskScene();
 		public var harpyScene:HarpyScene = new HarpyScene();
@@ -26,113 +30,120 @@ package classes.Scenes.Areas
 			return flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0;
 		}
 		public function discover():void {
-			outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)", true);
+			clearOutput();
+			outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)");
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
+		//Explore Mountain
+		private var _explorationEncounter:Encounter = null;
+		public function get explorationEncounter():Encounter {
+			const game:CoC     = kGAMECLASS;
+			const fn:FnHelpers = Encounters.fn;
+			if (_explorationEncounter == null) _explorationEncounter =
+					Encounters.group(game.commonEncounters, {
+						name: "d3",
+						when: function ():Boolean {
+							return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
+						},
+						call: game.d3.discoverD3
+					}, {
+						name: "snowangel",
+						when: function ():Boolean {
+							return player.gender > 0
+								   && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
+								   && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
+								   && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] == 0
+									   || player.hasKeyItem("North Star Key") >= 0);
+						},
+						call: game.xmas.snowAngel.gatsSpectacularRouter
+					}, {
+						name: "minerva",
+						when: function ():Boolean {
+							return flags[kFLAGS.MET_MINERVA] < 4;
+						},
+						call: minervaScene.encounterMinerva
+					}, {
+						name: "minomob",
+						when: function ():Boolean {
+							return flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] >= 3 && player.hasVagina();
+						},
+						call: minotaurMobScene.meetMinotaurSons,
+						mods: [game.commonEncounters.furriteMod]
+					}, {
+						name  : "harpychicken",
+						when  : function ():Boolean {
+							return player.hasItem(consumables.OVIELIX)
+								   || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0
+						},
+						chance: player.itemCount(consumables.OVIELIX),
+						call  : chickenHarpy
+					}, {
+						name: "phoenix",
+						when: game.dungeons.checkPhoenixTowerClear,
+						call: phoenixScene.encounterPhoenix
+					}, {
+						name: "minotaur",
+						when: function ():Boolean {
+							return flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0;
+						},
+						call: minoRouter,
+						mods: [game.commonEncounters.furriteMod]
+					}, {
+						name: "harpy",
+						call: harpyEncounter
+					}, {
+						name: "basilisk",
+						call: basiliskScene.basiliskGreeting
+					/* [INTERMOD:Stadler76]
+					}, {
+						name: "cockatrice",
+						call: cockatriceScene.greeting,
+						when: function():Boolean {
+							return flags[kFLAGS.COCKATRICES_UNLOCKED] > 0;
+						}
+					*/
+					}, {
+						name: "sophie",
+						when: function ():Boolean {
+							return flags[kFLAGS.SOPHIE_BIMBO] <= 0
+								   && flags[kFLAGS.SOPHIE_DISABLED_FOREVER] <= 0
+								   && !game.sophieFollowerScene.sophieFollower();
+						},
+						call: game.sophieScene.sophieRouter
+					}, {
+						name: "izumi",
+						call: izumiScenes.encounter
+					});
+			return _explorationEncounter;
+		}
 		//Explore High Mountain
-		public function exploreHighMountain():void
+		public function explore():void
 		{
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
-			doNext(playerMenu);
-			
-			if (kGAMECLASS.d3.discoverD3() == true)
-			{
-				return;
+			explorationEncounter.execEncounter();
+		}
+
+		public function harpyEncounter():void {
+			clearOutput();
+			outputText("A harpy wings out of the sky and attacks!");
+			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
 			}
-			
-			var chooser:Number = rand(4);
-			//Boosts mino and hellhound rates!
-			if (player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(3) == 0) {
-				chooser = 1;
-			}
-			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
-				return;
-			}
-			//Gats xmas adventure!
-			if (rand(5) == 0 && player.gender > 0 && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] == 0 || player.hasKeyItem("North Star Key") >= 0)) {
-				kGAMECLASS.xmas.snowAngel.gatsSpectacularRouter();
-				return;
-			}
-			//Minerva
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0 && flags[kFLAGS.MET_MINERVA] < 4) {
-				minervaScene.encounterMinerva();
-				return;
-			}
-			//25% minotaur sons!
-			if (flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] >= 3 && rand(4) == 0 && player.hasVagina()) {
-				spriteSelect(44);
-				minotaurMobScene.meetMinotaurSons();
-				return;
-			}
-			//Harpy odds!
-			if (player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0) {
-				if (player.hasItem(consumables.OVIELIX, 2)) {
-					if (rand(4) == 0) {
-						chickenHarpy();
-						return;
-					}
-				}
-				else {
-					if (rand(10) == 0) {
-						chickenHarpy();
-						return;
-					}
-				}
-			}
-			if (kGAMECLASS.dungeons.checkPhoenixTowerClear() && rand(4) == 0) {
-				phoenixScene.encounterPhoenix();
-				return;
-			}
-			//10% chance to mino encounter rate if addicted
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
-				spriteSelect(44);
-				//Cum addictus interruptus!  LOL HARRY POTTERFAG
-				//Withdrawl auto-fuck!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
-					getGame().mountain.minotaurScene.minoAddictionFuck();
-					return;
-				}
+			startCombat(new Harpy());
+			spriteSelect(26);
+		}
+
+		public function minoRouter():void {
+			spriteSelect(44);
+			//Cum addictus interruptus!  LOL HARRY POTTERFAG
+			//Withdrawl auto-fuck!
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
+				getGame().mountain.minotaurScene.minoAddictionFuck();
+			} else {
 				getGame().mountain.minotaurScene.getRapedByMinotaur(true);
 				spriteSelect(44);
-				return;
-			}
-			trace("Chooser goin for" + chooser);
-			
-			//Generic harpy
-			if (chooser == 0) {
-				outputText("A harpy wings out of the sky and attacks!", true);
-				if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
-				}
-				startCombat(new Harpy());
-				spriteSelect(26);
-				return;
-			}
-			//Basilisk!
-			if (chooser == 1) {
-				basiliskScene.basiliskGreeting();
-				return;
-			}
-			//Sophie
-			if (chooser == 2) {
-				if (flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || kGAMECLASS.sophieFollowerScene.sophieFollower()) {
-					outputText("A harpy wings out of the sky and attacks!", true);
-					startCombat(new Harpy());
-					spriteSelect(26);
-				}
-				else {
-					if (flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) kGAMECLASS.sophieScene.meetSophie();
-					else kGAMECLASS.sophieScene.meetSophieRepeat();
-				}
-			}
-			if (chooser == 3) 
-			{
-				this.izumiScenes.encounter();
-				return;
 			}
 		}
 		//\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING

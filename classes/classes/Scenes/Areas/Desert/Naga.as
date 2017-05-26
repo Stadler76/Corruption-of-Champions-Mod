@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Areas.Desert
+package classes.Scenes.Areas.Desert
 {
 	import classes.*;
 	import classes.internals.*;
@@ -10,9 +10,9 @@
 		protected function nagaPoisonBiteAttack():void {
 			//(Deals damage over 4-5 turns, invariably reducing 
 			//your speed. It wears off once combat is over.)
-			outputText("The naga strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
+			outputText("The naga strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if (!player.hasStatusEffect(StatusEffects.NagaVenom)) {
-				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.", false);
+				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.");
 				if (player.spe > 4) {
 					//stats(0,0,-3,0,0,0,0,0);
 					player.spe -= 3;
@@ -28,7 +28,7 @@
 				player.takeDamage(5+rand(5));
 			}
 			else {
-				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.", false);
+				outputText("The venom's effects intensify as your vision begins to blur and it becomes increasingly harder to stand.");
 				if (player.spe > 3) {
 					//stats(0,0,-2,0,0,0,0,0);
 					player.spe -= 2;
@@ -46,7 +46,7 @@
 		//2b)  Ability - Constrict - entangles player, raises lust 
 		//every turn until you break free
 		protected function nagaConstrict():void {
-			outputText("The naga draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!", false);
+			outputText("The naga draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
 			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {player.takeDamage(2+rand(4));
 			}
@@ -56,19 +56,19 @@
 		//2c) Abiliy - Tail Whip - minus ??? HP 
 		//(base it on toughness?)
 		protected function nagaTailWhip():void {
-			outputText("The naga tenses and twists herself forcefully.  ", false);
+			outputText("The naga tenses and twists herself forcefully.  ");
 			//[if evaded]
 			if ((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
-				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
 			else if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.", false);
+				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
 			}
 			else if (player.spe > rand(300)) {
-				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.", false);
+				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
 			}
 			else {
-				outputText("Before you can even think, you feel a sharp pain at your side as the naga's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side. ", false);
+				outputText("Before you can even think, you feel a sharp pain at your side as the naga's tail slams into you and shoves you into the sands. You pick yourself up, wincing at the pain in your side. ");
 				var damage:Number = 10;
 				if (player.armorDef < 10) damage += 10 - player.armorDef;
 				damage += rand(3);
@@ -85,7 +85,7 @@
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms){
-				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.", false);
+				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.");
 				player.orgasm('Generic');
 				doNext(game.combat.cleanupAfterCombat);
 			} else {

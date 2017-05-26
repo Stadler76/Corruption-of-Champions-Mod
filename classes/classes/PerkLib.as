@@ -189,8 +189,8 @@ package classes
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You choose the 'Iron Man' perk, reducing the fatigue cost of physical special attacks by 50%");
 		public static const Juggernaut:PerkType = mk("Juggernaut", "Juggernaut",
-				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed.",
-				"You choose the 'Juggernaut' perk, granting extra 10% damage resistance when wearing heavy armor and immunity to damage from been constricted/squeezed.");
+				"When wearing heavy armor, you have extra 10 armor points and are immune to damage from being constricted/squeezed.",
+				"You choose the 'Juggernaut' perk, granting extra 10 armor points when wearing heavy armor and immunity to damage from been constricted/squeezed.");
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if (player.spe>=60)" +
 						"Increases the attack damage for non-heavy weapons.</b>" +
@@ -352,6 +352,8 @@ package classes
 				"Spellcasting now consumes health instead of fatigue!",null,true);
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
+		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
+				"At the beginning of combat, lust raises to black magic threshold if lust is below black magic threshold.");
 
 		// Weapon perks
 		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
@@ -490,6 +492,230 @@ package classes
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
 		{
 			return new PerkType(id, name, desc, longDesc, keepOnAscension);
+		}
+		private static function initRequirements():void {
+			//------------
+			// STRENGTH
+			//------------
+			StrongBack.requireStr(25);
+			StrongBack2.requireStr(25)
+					   .requirePerk(StrongBack);
+			//Tier 1 Strength Perks
+			//Thunderous Strikes - +20% basic attack damage while str > 80.
+			ThunderousStrikes.requireStr(80)
+							 .requireLevel(6);
+			//Weapon Mastery - Doubles weapon damage bonus of 'large' type weapons. (Minotaur Axe, M. Hammer, etc)
+			WeaponMastery.requireStr(60)
+						 .requireLevel(6);
+			BrutalBlows.requireStr(75)
+					   .requireLevel(6);
+			IronFists.requireStr(50)
+					 .requireLevel(6);
+			IronFists2.requireStr(65)
+					  .requireLevel(6)
+					  .requireNGPlus(1)
+					  .requirePerk(IronFists);
+			IronFists3.requireStr(80)
+					  .requireLevel(6)
+					  .requireNGPlus(1)
+					  .requirePerk(IronFists2);
+			Parry.requireStr(50)
+				 .requireSpe(50)
+				 .requireLevel(6);
+			//Tier 2 Strength Perks
+			Berzerker.requireStr(75)
+					 .requireLevel(12);
+			HoldWithBothHands.requireStr(80)
+							 .requireLevel(12);
+			ShieldSlam.requireStr(80)
+					  .requireTou(60)
+					  .requireLevel(12);
+			//Tier 3 Strength Perks
+			ColdFury.requireStr(75)
+					.requireLevel(18)
+					.requirePerk(Berzerker)
+					.requirePerk(ImprovedSelfControl);
+			//------------
+			// TOUGHNESS
+			//------------
+			//slot 2 - toughness perk 1
+			Tank.requireTou(25);
+			//slot 2 - regeneration perk
+			Regeneration.requireTou(50)
+						.requirePerk(Tank);
+			ImprovedEndurance.requireStr(50)
+							 .requireTou(50);
+			//Tier 1 Toughness Perks
+			Tank2.requireTou(60)
+				 .requireLevel(6)
+				 .requirePerk(Tank);
+			Regeneration2.requireTou(70)
+						 .requireLevel(6)
+						 .requirePerk(Regeneration);
+			ImmovableObject.requireTou(75)
+						   .requireLevel(6);
+			ShieldMastery.requireTou(50)
+						 .requireLevel(6);
+			//Tier 2 Toughness Perks
+			Resolute.requireTou(75)
+					.requireLevel(12);
+			Juggernaut.requireTou(75)
+					  .requireLevel(12);
+			IronMan.requireTou(60)
+				   .requireLevel(12);
+			//------------
+			// SPEED
+			//------------
+			//slot 3 - speed perk
+			Evade.requireSpe(25);
+			//slot 3 - run perk
+			Runner.requireSpe(25);
+			//slot 3 - Double Attack perk
+			DoubleAttack.requireSpe(50)
+						.requirePerk(Evade)
+						.requirePerk(Runner);
+
+			//Tier 1 Speed Perks
+			//Speedy Recovery - Regain Fatigue 50% faster speed.
+			SpeedyRecovery.requireSpe(60)
+						  .requireLevel(6)
+						  .requirePerk(Evade);
+			//Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
+			Agility.requireSpe(75)
+				   .requireLevel(6)
+				   .requirePerk(Runner);
+			Unhindered.requireSpe(75)
+					  .requireLevel(6)
+					  .requirePerk(Evade)
+					  .requirePerk(Agility);
+			LightningStrikes.requireSpe(60)
+							.requireLevel(6);
+			/*
+			 Brawler.requireStr(60).requireSpe(60);
+			 */ //Would it be fitting to have Urta teach you?
+			//Tier 2 Speed Perks
+			LungingAttacks.requireSpe(75)
+						  .requireLevel(12);
+			Blademaster.requireStr(60)
+					   .requireSpe(80)
+					   .requireLevel(12);
+			//------------
+			// INTELLIGENCE
+			//------------
+			//Slot 4 - precision - -10 enemy toughness for damage calc
+			Precision.requireInt(25);
+			//Spellpower - boosts spell power
+			Spellpower.requireInt(50);
+			Mage.requireInt(50)
+				.requirePerk(Spellpower);
+			//Tier 1 Intelligence Perks
+			Tactician.requireInt(50)
+					 .requireLevel(6);
+			Channeling.requireInt(60)
+					  .requireLevel(6)
+					  .requirePerk(Spellpower)
+					  .requirePerk(Mage)
+					  .requireCustomFunction(function (player:Player):Boolean {
+						  return player.spellCount() > 0;
+					  }, "Any Spell");
+			Medicine.requireInt(60)
+					.requireLevel(6);
+			StaffChanneling.requireInt(60)
+						   .requireLevel(6)
+						   .requirePerk(Channeling);
+			//Tier 2 Intelligence perks
+			Archmage.requireInt(75)
+					.requireLevel(12)
+					.requirePerk(Mage);
+			FocusedMind.requireInt(75)
+					   .requireLevel(12)
+					   .requirePerk(Mage);
+
+			RagingInferno.requireInt(75)
+						 .requireLevel(12)
+						 .requirePerk(Archmage)
+						 .requirePerk(Channeling)
+						 .requireCustomFunction(function (player:Player):Boolean {
+							 return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+									 || player.hasPerk(FireLord)
+									 || player.hasPerk(Hellfire)
+									 || player.hasPerk(EnlightenedNinetails)
+									 || player.hasPerk(CorruptedNinetails);
+						 }, "Any Fire Spell");
+			// Spell-boosting perks
+			// Battlemage: auto-use Might
+			Battlemage.requireInt(80)
+					  .requireLevel(12)
+					  .requirePerk(Channeling)
+					  .requireStatusEffect(StatusEffects.KnowsMight, "Might Spell");
+			// Spellsword: auto-use Charge Weapon
+			Spellsword.requireInt(80)
+					  .requireLevel(12)
+					  .requirePerk(Channeling)
+					  .requireStatusEffect(StatusEffects.KnowsCharge, "Charge Weapon Spell");
+
+			//------------
+			// LIBIDO
+			//------------
+			//slot 5 - libido perks
+
+			//Slot 5 - Fertile+ increases cum production and fertility (+15%)
+			FertilityPlus.requireLib(25);
+			FertilityPlus.defaultValue1 = 15;
+			FertilityPlus.defaultValue2 = 1.75;
+			ImprovedSelfControl.requireInt(50).requireLib(25);
+			//Slot 5 - minimum libido
+			ColdBlooded.requireMinLust(20);
+			ColdBlooded.defaultValue1 = 20;
+			HotBlooded.requireLib(50);
+			HotBlooded.defaultValue1 = 20;
+			//Tier 1 Libido Perks
+			//Slot 5 - minimum libido
+			//Slot 5 - Fertility- decreases cum production and fertility.
+			FertilityMinus.requireLevel(6)
+						  .requireLibLessThan(25);
+			FertilityMinus.defaultValue1 = 15;
+			FertilityMinus.defaultValue2 = 0.7;
+			WellAdjusted.requireLevel(6).requireLib(60);
+			//Slot 5 - minimum libido
+			Masochist.requireLevel(6).requireLib(60).requireCor(50);
+			//------------
+			// SENSITIVITY
+			//------------
+			//Nope.avi
+			//------------
+			// CORRUPTION
+			//------------
+			//Slot 7 - Corrupted Libido - lust raises 10% slower.
+			CorruptedLibido.requireCor(25);
+			CorruptedLibido.defaultValue1 = 20;
+			//Slot 7 - Seduction (Must have seduced Jojo
+			Seduction.requireCor(50);
+			//Slot 7 - Nymphomania
+			Nymphomania.requirePerk(CorruptedLibido)
+					   .requireCor(75);
+			//Slot 7 - UNFINISHED :3
+			Acclimation.requirePerk(CorruptedLibido)
+					   .requireMinLust(20)
+					   .requireCor(50);
+			//Tier 1 Corruption Perks - acclimation over-rides
+			Sadist.requireLevel(6)
+				  .requirePerk(CorruptedLibido)
+				  .requireCor(60);
+			ArousingAura.requireLevel(6)
+						.requirePerk(CorruptedLibido)
+						.requireCor(70);
+			//Tier 1 Misc Perks
+			Resistance.requireLevel(6);
+			Survivalist.requireLevel(6)
+					   .requireHungerEnabled();
+			//Tier 2 Misc Perks
+			Survivalist2.requireLevel(12)
+						.requirePerk(Survivalist)
+						.requireHungerEnabled();
+		}
+		{
+			initRequirements();
 		}
 	}
 }

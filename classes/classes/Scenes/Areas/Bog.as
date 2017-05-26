@@ -13,11 +13,12 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
+	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Bog.*;
 
 	use namespace kGAMECLASS;
 
-	public class Bog extends BaseContent
+	public class Bog extends BaseContent implements IExplorable
 	{
 		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
@@ -34,7 +35,8 @@ package classes.Scenes.Areas
 			return flags[kFLAGS.BOG_EXPLORED] > 0;
 		}
 		public function discover():void {
-			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)", true);
+			clearOutput();
+			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)");
 			flags[kFLAGS.BOG_EXPLORED]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -104,7 +106,7 @@ package classes.Scenes.Areas
 					});
 			return _explorationEncounter;
 		}
-		public function exploreBog():void
+		public function explore():void
 		{
 			explorationEncounter.execEncounter();
 			flags[kFLAGS.BOG_EXPLORED]++;

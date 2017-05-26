@@ -267,7 +267,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
 			game.doNext(game.combat.combatMenu);
 			player.changeFatigue(30,1);
-			outputText("\n\n",false);
+			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			game.combat.combatAbilities.spellPerkUnlock();
 			game.statScreenRefresh();

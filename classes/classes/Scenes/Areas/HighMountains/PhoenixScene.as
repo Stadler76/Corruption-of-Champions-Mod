@@ -45,7 +45,8 @@ package classes.Scenes.Areas.HighMountains
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
 	
 			if (flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				clearOutput();
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
 				combat.cleanupAfterCombat();
 				return;
 			}

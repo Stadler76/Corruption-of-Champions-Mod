@@ -64,7 +64,7 @@ class BlackCockForTest extends BlackCock {
 		haveHarryFuckYou();
 	}
 	
-	override protected function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown:Boolean = false):void {
+	override protected function outputText(output:String):void {
 		collectedOutput.push(output);
 	}
 }

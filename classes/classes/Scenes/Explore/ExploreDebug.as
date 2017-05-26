@@ -87,7 +87,8 @@ package classes.Scenes.Explore
 			function ():Monster {return new TentacleBeast();},
 			function ():Monster {return new Valkyrie();},
 			function ():Monster {return new WormMass();},
-			function ():Monster {return new Yeti();},
+			function ():Monster {return new Yeti(); },
+			function ():Monster {return new Ghoul(); },
 			// ...NPCs, quest, and named monsters second, ...
 			function ():Monster {return new Akbal();},
 			function ():Monster {return new Amily();},

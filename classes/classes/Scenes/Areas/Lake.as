@@ -9,11 +9,12 @@ package classes.Scenes.Areas
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
+	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Lake.*;
 
 	use namespace kGAMECLASS;
 
-	public class Lake extends BaseContent
+	public class Lake extends BaseContent implements IExplorable
 	{
 		
 		public var fetishCultistScene:FetishCultistScene = new FetishCultistScene();
@@ -94,7 +95,7 @@ import classes.Scenes.API.FnHelpers;
 		}
 
 		//Explore Lake
-		public function exploreLake():void {
+		public function explore():void {
 			//Increment exploration count
 			flags[kFLAGS.TIMES_EXPLORED_LAKE]++;
 			exploreEncounter.execEncounter();
@@ -107,18 +108,20 @@ import classes.Scenes.API.FnHelpers;
 
 		public function lakeWalk():void {
 			if (player.level < 2 || player.spe < 50) {
-				outputText("Your quick walk along the lakeshore feels good.", true);
+				clearOutput();
+				outputText("Your quick walk along the lakeshore feels good.");
 				if (player.spe < 50) {
-					outputText("  You bet you could cover the same distance even faster next time.\n", false);
+					outputText("  You bet you could cover the same distance even faster next time.\n");
 					dynStats("spe", .75);
 				}
 			} else {
-				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ", true);
+				clearOutput();
+				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ");
 				if (player.cor >= 60 || player.lust >= 90 || player.lib >= 75) {
 					outputText("Your imaginings increasingly seem to turn into daydreams of raunchy perverted sex, flooding your groin with warmth.");
 					dynStats("lus", (player.cor / 10 + player.lib / 10));
 				} else if (player.cor > 30 || player.lust > 60 || player.lib > 40) {
-					outputText("Your imaginings increasingly seem to turn to thoughts of sex.", false);
+					outputText("Your imaginings increasingly seem to turn to thoughts of sex.");
 					dynStats("lus", (5 + player.lib / 10));
 				} else {
 					dynStats("int", 1);

@@ -93,11 +93,11 @@ package classes.Scenes
 			}
 			
 			if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 1) {
-				addButton(11, "Trash All", deleteItems, null, null, null, "Trash your items, one by one.\n\nClick to trash all in a stack.\nClick twice to stop.", "Trash Items");
+				addButton(11, "Del Item: One", deleteItems, null, null, null, "Trash your items, one by one.\n\nClick to trash all in a stack.\nClick twice to stop.", "Delete Items (Single)");
 			} else if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 2) {
-				addButton(11, "Trash Stop", deleteItems, null, null, null, "Trash all of your items in a stack.\n\nClick to stop.\nClick twice to trash your items one by one.", "Trash Items");
+				addButton(11, "Del Item: All", deleteItems, null, null, null, "Trash all of your items in a stack.\n\nClick to stop.\nClick twice to trash your items one by one.", "Delete Items (Stack)");
 			} else if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 0) {
-				addButton(11, "Trash One", deleteItems, null, null, null, "Start throwing away your items.\n\nClick to trash your items one by one.\nClick twice to trash all in a stack.", "Trash Items");
+				addButton(11, "Del Item: OFF", deleteItems, null, null, null, "Start throwing away your items.\n\nClick to trash your items one by one.\nClick twice to trash all in a stack.", "Delete Items (Off)");
 			}
 			
 			
@@ -121,12 +121,18 @@ package classes.Scenes
 				monster.doAI();
 				return;
 			}
-			outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
+			if (flags[kFLAGS.DELETE_ITEMS] > 0) outputText("\nWhich item will you discard?");
+			else outputText("\nWhich item will you use?");
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
+			addButton(14, "Back", exitInventory);
+		}
+		
+		private function exitInventory():void {
+			flags[kFLAGS.DELETE_ITEMS] = 0;
 			if (getGame().inCombat)
-				addButton(14, "Back", combat.combatMenu, false); //Player returns to the combat menu on cancel
+				combat.combatMenu(false); //Player returns to the combat menu on cancel
 			else
-				addButton(14, "Back", playerMenu);
+				playerMenu();
 		}
 		
 		public function stash():void {
@@ -186,7 +192,7 @@ package classes.Scenes
 				else outputText("next to your bedroll.");	
 				addButton(10, "J.Box Put", inventory.pickItemToPlaceInJewelryBox);
 				if (inventory.jewelryBoxDescription()) addButton(11, "J.Box Take", inventory.pickItemToTakeFromJewelryBox);
-				outputText("\n\n", false);
+				outputText("\n\n");
 			}
 			//Dresser
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0) {
@@ -271,11 +277,13 @@ package classes.Scenes
 		
 		public function giveHumanizer():void {
 			if (flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
-				outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
+				clearOutput();
+				outputText("<b>I was a cheater until I took an arrow to the knee...</b>");
 				getGame().gameOver();
 				return;
 			}
-			outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
+			clearOutput();
+			outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n");
 			inventory.takeItem(consumables.HUMMUS_, playerMenu);
 			flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 		}
@@ -380,35 +388,12 @@ package classes.Scenes
 		private function deleteItems():void {
 			if (flags[kFLAGS.DELETE_ITEMS] == 0) {
 				flags[kFLAGS.DELETE_ITEMS]++;
-				deleteYes();
 			} else if (flags[kFLAGS.DELETE_ITEMS] == 1) {
 				flags[kFLAGS.DELETE_ITEMS]++;
-				deleteYesMany();
 			} else if (flags[kFLAGS.DELETE_ITEMS] == 2) {
 				flags[kFLAGS.DELETE_ITEMS] = 0;
-				deleteNo();
 			}
-		}
-		
-		private function deleteYes():void {
-			clearOutput();
-			outputText("You are now deleting items one at a time.", false);
-			menu();
-			addButton(0, "Next", inventoryMenu);
-		}
-		
-		private function deleteYesMany():void {
-			clearOutput();
-			outputText("You are now deleting all the items within a stack at once.", false);
-			menu();
-			addButton(0, "Next", inventoryMenu);
-		}
-		
-		private function deleteNo():void {
-			clearOutput();
-			outputText("You are no longer deleting items.", false);
-			menu();
-			addButton(0, "Next", inventoryMenu);
+			inventoryMenu();
 		}
 		
 		private function deleteItemPrompt(item:Useable, slotNum:int):void {

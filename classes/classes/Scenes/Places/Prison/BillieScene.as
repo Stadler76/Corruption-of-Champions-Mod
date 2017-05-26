@@ -227,7 +227,7 @@ package classes.Scenes.Places.Prison
 			}
 			else if (branchChoice == "2")
 			{
-				outputText("(Placeholder) Billie is suprised, but proud of you. She assumes that you have decided to take responsibility for your actions and learn from your lesson, and so she gives you a wet kiss on the cheek and leaves you be.\n\n");
+				outputText("(Placeholder) Billie is surprised, but proud of you. She assumes that you have decided to take responsibility for your actions and learn from your lesson, and so she gives you a wet kiss on the cheek and leaves you be.\n\n");
 				prisonCaptorBillieHappinessSet(0);
 				prison.changeEsteem(1,prison.inPrison);
 			}
@@ -253,7 +253,7 @@ package classes.Scenes.Places.Prison
 			}
 			else if (branchChoice == "4")
 			{
-				outputText("(Placeholder) Billie quickly brings herself to orgasm, coating your face with her cum. She is suprised that you didn't want to be fed, but proud of you. She assumes that you have decided to take responsibility for your actions and learn from your lesson, and so she gives you a wet kiss on the cheek, then after briefly getting distracted licking her own seed from your face, leaves you be.\n\n");
+				outputText("(Placeholder) Billie quickly brings herself to orgasm, coating your face with her cum. She is surprised that you didn't want to be fed, but proud of you. She assumes that you have decided to take responsibility for your actions and learn from your lesson, and so she gives you a wet kiss on the cheek, then after briefly getting distracted licking her own seed from your face, leaves you be.\n\n");
 				if (prison.prisonRestraintMouthLevel() > 0 && !(prison.prisonRestraintMouthLevel() == 4))
 				{
 					outputText("(Placeholder) She replaces your gag before she leaves. ");

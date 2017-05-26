@@ -86,6 +86,7 @@ package classes
 		public static const KnowsHeal:StatusEffectType = mk("Knows Heal");
 		public static const KnowsMight:StatusEffectType = mk("Knows Might");
 		public static const KnowsWhitefire:StatusEffectType = mk("Knows Whitefire");
+		public static const KnowsBlackfire:StatusEffectType = mk("Knows Blackfire");
 		public static const LactationEndurance:StatusEffectType = mk("Lactation Endurance");
 		public static const LactationReduction:StatusEffectType = mk("Lactation Reduction");
 		public static const LactationReduc0:StatusEffectType = mk("Lactation Reduc0");

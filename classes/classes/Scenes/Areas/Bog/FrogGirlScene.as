@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Areas.Bog {
+package classes.Scenes.Areas.Bog {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 
@@ -237,7 +237,7 @@ private function superBonusFrogEggsInYerCooch():void {
 //Vaginal Egg birth
 public function layFrogEggs():void {
 	if (player.vaginas.length == 0) {
-		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold: a vagina.  ", false);
+		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold: a vagina.  ");
 		player.createVagina();
 	}
 	outputText("You shudder as you feel the familiar tingle of stimulant slime running down your thighs.");

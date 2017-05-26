@@ -23,7 +23,7 @@ package classes.Scenes.Areas.Bog
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, 5);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, 5);
 				}
-				if (player.cor > 50) {
+				if (player.cor > (50 + player.corruptionTolerance())) {
 					game.dynStats("str", -5, "spe", -5);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, 5);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, 5);					
@@ -44,7 +44,7 @@ package classes.Scenes.Areas.Bog
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, 5);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, 5);
 				}
-				if (player.cor > 50) {
+				if (player.cor > (50 + player.corruptionTolerance())) {
 					game.dynStats("tou", -5, "sens", 5);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, 5);
 					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, 5);					

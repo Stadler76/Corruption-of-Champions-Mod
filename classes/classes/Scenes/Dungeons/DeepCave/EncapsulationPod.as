@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Dungeons.DeepCave
+package classes.Scenes.Dungeons.DeepCave
 {
 	import classes.*;
 	import classes.internals.*;
@@ -18,14 +18,14 @@
 		public function encapsulationPodAI():void {
 			//[Round 1 Action]
 			if (!hasStatusEffect(StatusEffects.Round)) {
-				outputText("You shiver from the feeling of warm wetness crawling up your " + player.legs() + ".   Tentacles brush against your ", false);
+				outputText("You shiver from the feeling of warm wetness crawling up your " + player.legs() + ".   Tentacles brush against your ");
 				if (player.balls > 0) {
-					outputText(player.ballsDescriptLight() + " ", false);
-					if (player.hasVagina()) outputText("and ", false);
+					outputText(player.ballsDescriptLight() + " ");
+					if (player.hasVagina()) outputText("and ");
 				}
-				if (player.hasVagina()) outputText(player.vaginaDescript() + " ", false);
-				else if (player.balls == 0) outputText("taint ", false);
-				outputText("as they climb ever-further up your body.  In spite of yourself, you feel the touch of arousal licking at your thoughts.\n", false);
+				if (player.hasVagina()) outputText(player.vaginaDescript() + " ");
+				else if (player.balls == 0) outputText("taint ");
+				outputText("as they climb ever-further up your body.  In spite of yourself, you feel the touch of arousal licking at your thoughts.\n");
 				if (player.lust < 35) {
 					game.dynStats("lus", 1);
 					player.lust = 35;
@@ -34,42 +34,42 @@
 			}
 			//[Round 2 Action]
 			else if (statusEffectv1(StatusEffects.Round) == 2) {
-				outputText("The tentacles under your " + player.armorName + " squirm against you, seeking out openings to penetrate and genitalia to caress.  ", false);
-				if (player.balls > 0) outputText("One of them wraps itself around the top of your " + player.sackDescript() + " while its tip slithers over your " + player.ballsDescriptLight() + ".  Another ", false);
-				else outputText("One ", false);
+				outputText("The tentacles under your " + player.armorName + " squirm against you, seeking out openings to penetrate and genitalia to caress.  ");
+				if (player.balls > 0) outputText("One of them wraps itself around the top of your " + player.sackDescript() + " while its tip slithers over your " + player.ballsDescriptLight() + ".  Another ");
+				else outputText("One ");
 				if (player.cockTotal() > 0) {
-					outputText("prods your " + player.cockDescript(0) + " for a second before it begins slithering around it, snake-like.  Once it has you encircled from " + player.cockHead(0) + " to ", false);
-					if (!player.hasSheath()) outputText("base", false);
-					else outputText("sheath", false);
-					outputText(", it begins to squeeze and relax to a pleasant tempo.  ", false);
+					outputText("prods your " + player.cockDescript(0) + " for a second before it begins slithering around it, snake-like.  Once it has you encircled from " + player.cockHead(0) + " to ");
+					if (!player.hasSheath()) outputText("base");
+					else outputText("sheath");
+					outputText(", it begins to squeeze and relax to a pleasant tempo.  ");
 				}
 				else {
 					if (player.hasVagina()) {
-						outputText("prods at your groin, circling around your " + player.vaginaDescript(0) + " deliberately, as if seeking other toys to play with.  ", false);
-						if (player.getClitLength() > 4) outputText("It brushes your " + player.clitDescript() + " then curls around it, squeezing and gently caressing it with a slow, pleasing rhythm.  ", false);
+						outputText("prods at your groin, circling around your " + player.vaginaDescript(0) + " deliberately, as if seeking other toys to play with.  ");
+						if (player.getClitLength() > 4) outputText("It brushes your " + player.clitDescript() + " then curls around it, squeezing and gently caressing it with a slow, pleasing rhythm.  ");
 					}
 					else {
-						outputText("prods your groin before curling around to circle your " + player.assholeDescript() + " playfully.  The entire tendril pulses in a pleasant, relaxing way.  ", false);
+						outputText("prods your groin before curling around to circle your " + player.assholeDescript() + " playfully.  The entire tendril pulses in a pleasant, relaxing way.  ");
 					}
 				}
 				if (player.cockTotal() > 1) {
-					outputText("Your other ", false);
-					if (player.cockTotal() == 2) outputText(player.cockDescript(1) + " gets the same treatment, and soon both of your " + player.multiCockDescriptLight() + " are quite happy to be here.  ", false);
-					else outputText(player.multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ", false);
+					outputText("Your other ");
+					if (player.cockTotal() == 2) outputText(player.cockDescript(1) + " gets the same treatment, and soon both of your " + player.multiCockDescriptLight() + " are quite happy to be here.  ");
+					else outputText(player.multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ");
 				}
 				if (player.hasVagina()) {
-					outputText("The violation of your " + player.vaginaDescript() + " is swift and painless.  The fungus' slippery lubricants make it quite easy for it to slip inside, and you find your " + player.vaginaDescript() + " engorging with pleasure in spite of your need to escape.  The tentacle folds up so that it can rub its stalk over your " + player.clitDescript() + ", ", false);
-					if (player.getClitLength() > 3) outputText("and once it discovers how large it is, it wraps around it and squeezes.  It feels good!  ", false);
-					else outputText("and it has quite an easy time making your bud grow hard and sensitive.  The constant rubbing feels good!  ", false);
+					outputText("The violation of your " + player.vaginaDescript() + " is swift and painless.  The fungus' slippery lubricants make it quite easy for it to slip inside, and you find your " + player.vaginaDescript() + " engorging with pleasure in spite of your need to escape.  The tentacle folds up so that it can rub its stalk over your " + player.clitDescript() + ", ");
+					if (player.getClitLength() > 3) outputText("and once it discovers how large it is, it wraps around it and squeezes.  It feels good!  ");
+					else outputText("and it has quite an easy time making your bud grow hard and sensitive.  The constant rubbing feels good!  ");
 				}
-				outputText("One 'lucky' stalk manages to find your " + player.assholeDescript() + ".  As soon as it touches your rear 'entrance', it lunges forward to penetrate you.  The fluids coating the tentacle make your muscles relax, allowing it to slide inside you with ease.\n\n", false);
+				outputText("One 'lucky' stalk manages to find your " + player.assholeDescript() + ".  As soon as it touches your rear 'entrance', it lunges forward to penetrate you.  The fluids coating the tentacle make your muscles relax, allowing it to slide inside you with ease.\n\n");
 				
-				outputText("The rest of the mass continues to crawl up you.  They tickle at your ", false);
-				if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 120) outputText("pregnant ", false);
-				outputText("belly as they get closer and closer to ", false);
-				if (player.biggestTitSize() < 1) outputText("your chest", false);
-				else outputText("the underside of your " + player.allBreastsDescript(), false);
-				outputText(".  Gods above, this is turning you on!  Your lower body is being violated in every conceivable way and it's only arousing you more.  Between the mind-numbing smell and the sexual assault you're having a hard time focusing.\n", false);
+				outputText("The rest of the mass continues to crawl up you.  They tickle at your ");
+				if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 120) outputText("pregnant ");
+				outputText("belly as they get closer and closer to ");
+				if (player.biggestTitSize() < 1) outputText("your chest");
+				else outputText("the underside of your " + player.allBreastsDescript());
+				outputText(".  Gods above, this is turning you on!  Your lower body is being violated in every conceivable way and it's only arousing you more.  Between the mind-numbing smell and the sexual assault you're having a hard time focusing.\n");
 				if (player.lust < 65) {
 					game.dynStats("lus", 1);
 					player.lust = 65;
@@ -78,11 +78,11 @@
 			}
 			//[Round 3 Action]
 			else if (statusEffectv1(StatusEffects.Round) == 3) {
-				outputText("The wet, warm pressure of the fungus' protrusion working their way up your body feels better than it has any right to be.  It's like a combination of a warm bath and a gentle massage, and when combined with the thought-numbing scent in the air, it's nigh-impossible to resist relaxing a little.  In seconds the mass of tentacles is underneath your " + player.armorName + " and rubbing over your chest and " + player.nippleDescript(0) + "s.  You swoon from the sensation and lean back against the wall while they stroke and caress you, teasing your sensitive " + player.nippleDescript(0) + ".", false);
-				if (player.hasFuckableNipples()) outputText("  Proof of your arousal leaks from each " + player.nippleDescript(0) + " as their entrances part for the probing tentacles.  They happily dive inside to begin fucking your breasts, doubling your pleasure.", false);
-				outputText("  Moans escape your mouth as your hips begin to rock in time with the tentacles and the pulsing luminance of your fungus-pod.  It would be easy to lose yourself here.  You groan loudly enough to startle yourself back to attention.  You've got to get out!\n\n", false);
+				outputText("The wet, warm pressure of the fungus' protrusion working their way up your body feels better than it has any right to be.  It's like a combination of a warm bath and a gentle massage, and when combined with the thought-numbing scent in the air, it's nigh-impossible to resist relaxing a little.  In seconds the mass of tentacles is underneath your " + player.armorName + " and rubbing over your chest and " + player.nippleDescript(0) + "s.  You swoon from the sensation and lean back against the wall while they stroke and caress you, teasing your sensitive " + player.nippleDescript(0) + ".");
+				if (player.hasFuckableNipples()) outputText("  Proof of your arousal leaks from each " + player.nippleDescript(0) + " as their entrances part for the probing tentacles.  They happily dive inside to begin fucking your breasts, doubling your pleasure.");
+				outputText("  Moans escape your mouth as your hips begin to rock in time with the tentacles and the pulsing luminance of your fungus-pod.  It would be easy to lose yourself here.  You groan loudly enough to startle yourself back to attention.  You've got to get out!\n\n");
 				
-				outputText("The tentacles that aren't busy with your " + player.allBreastsDescript() + " are already climbing higher, and the slime has reached your waist.  If anything it actually makes the constant violation more intense and relaxing.  You start to sink down into it, but catch yourself and pull yourself back up.  No! You've got to fight!\n", false);
+				outputText("The tentacles that aren't busy with your " + player.allBreastsDescript() + " are already climbing higher, and the slime has reached your waist.  If anything it actually makes the constant violation more intense and relaxing.  You start to sink down into it, but catch yourself and pull yourself back up.  No! You've got to fight!\n");
 				if (player.lust < 85) {
 					game.dynStats("lus", 1);
 					player.lust = 85;
@@ -94,37 +94,37 @@
 				game.dynStats("lus", 1);
 				player.lust = player.maxLust();
 				statScreenRefresh();
-				outputText("What's happening to you definitely isn't rape.  Not any more.  You like it too much.  You lean back against a wall of the pod and thrust your " + game.player.hipDescript() + " pitifully against a phantom lover, moaning lewdly as you're forcibly pleasured.  You grab hold of the fleshy walls with your hands and try to hold yourself up, but your " + player.legs() + " have the consistency of jello.   They fold neatly underneath you as you slide into the ooze and begin to float inside it.  It's comforting in an odd way, and while you're gasping in between moans, your balance finally gives out.  You sink deeper into the fluid and lose all sense of direction.  Up and down become meaningless constructs that no longer matter to you.\n\n", false);
+				outputText("What's happening to you definitely isn't rape.  Not any more.  You like it too much.  You lean back against a wall of the pod and thrust your " + game.player.hipDescript() + " pitifully against a phantom lover, moaning lewdly as you're forcibly pleasured.  You grab hold of the fleshy walls with your hands and try to hold yourself up, but your " + player.legs() + " have the consistency of jello.   They fold neatly underneath you as you slide into the ooze and begin to float inside it.  It's comforting in an odd way, and while you're gasping in between moans, your balance finally gives out.  You sink deeper into the fluid and lose all sense of direction.  Up and down become meaningless constructs that no longer matter to you.\n\n");
 				
-				outputText("The thick slime passes over your lips and nose as you sink into the rising tide of bliss, and you find yourself wondering how you'll breathe.  Instinctively, you hold your breath.  Even riddled with sexual bliss and thought-obliterating drugs, you won't let yourself open your mouth when 'underwater'.  The lack of oxygen makes your heart hammer in your chest", false);
+				outputText("The thick slime passes over your lips and nose as you sink into the rising tide of bliss, and you find yourself wondering how you'll breathe.  Instinctively, you hold your breath.  Even riddled with sexual bliss and thought-obliterating drugs, you won't let yourself open your mouth when 'underwater'.  The lack of oxygen makes your heart hammer in your chest");
 				if (player.totalCocks() > 0) {
-					outputText(", and " + player.SMultiCockDesc() + " bloats with blood, getting larger than ever", false);
+					outputText(", and " + player.SMultiCockDesc() + " bloats with blood, getting larger than ever");
 				}
-				outputText(".  Before you can pass out, the constant penetration forces a moan from your lips.\n\n", false);
+				outputText(".  Before you can pass out, the constant penetration forces a moan from your lips.\n\n");
 				
-				outputText("A tentacle takes the opportunity to slip into your mouth along with a wave of the slime.  You try to cough out the fluid, but there isn't any air left in your lungs to push it out.  The orally-fixated tendril widens and begins to pour more of it inside you, and with nowhere else to go, it packs your goo-filled lungs to the brim before you start to swallow.  You relax and exhale the last of your air from your nose as your body calms itself.  Somehow you can breathe the fungus-pod's fluids!\n\n", false);
+				outputText("A tentacle takes the opportunity to slip into your mouth along with a wave of the slime.  You try to cough out the fluid, but there isn't any air left in your lungs to push it out.  The orally-fixated tendril widens and begins to pour more of it inside you, and with nowhere else to go, it packs your goo-filled lungs to the brim before you start to swallow.  You relax and exhale the last of your air from your nose as your body calms itself.  Somehow you can breathe the fungus-pod's fluids!\n\n");
 				
-				outputText("You're floating in pure liquid bliss.  Thoughts melt away before they can form, and every inch of your body is being caressed, squeezed, or penetrated by the warm, slime-slicked tentacles.  Nearly every muscle in your body goes completely slack as you're cradled with bliss.  Without your thoughts or stress bothering you, the pleasure swiftly builds to a crescendo.\n\n", false);
+				outputText("You're floating in pure liquid bliss.  Thoughts melt away before they can form, and every inch of your body is being caressed, squeezed, or penetrated by the warm, slime-slicked tentacles.  Nearly every muscle in your body goes completely slack as you're cradled with bliss.  Without your thoughts or stress bothering you, the pleasure swiftly builds to a crescendo.\n\n");
 				
-				outputText("The wave of need starts out inside your crotch, begging to be let out, but you can't even be bothered to move your " + game.player.hipDescript() + " anymore.  Without your help, release stays just out of reach, but the tentacles working your body seem intent on spurring it on.  The one inside your " + player.assholeDescript() + " begins to pump more quickly, and with the added pressure, you cum quickly.  ", false);
+				outputText("The wave of need starts out inside your crotch, begging to be let out, but you can't even be bothered to move your " + game.player.hipDescript() + " anymore.  Without your help, release stays just out of reach, but the tentacles working your body seem intent on spurring it on.  The one inside your " + player.assholeDescript() + " begins to pump more quickly, and with the added pressure, you cum quickly.  ");
 				if (!player.hasVagina()) {
-					outputText("Your body twitches weakly, too relaxed to move while it gets off from anal penetration.", false);
+					outputText("Your body twitches weakly, too relaxed to move while it gets off from anal penetration.");
 				}
-				else outputText("Your body twitches weakly, too relaxed to move while it gets off from being double-penetrated.", false);
+				else outputText("Your body twitches weakly, too relaxed to move while it gets off from being double-penetrated.");
 				if (player.hasFuckableNipples()) {
-					outputText("  Your " + player.nippleDescript(0) + "s squirt around their phallic partners, leaking sexual lubricant ", false);
-					if (player.biggestLactation() > 1) outputText("and milk ", false);
-					outputText("while the fucking continues.", false);
+					outputText("  Your " + player.nippleDescript(0) + "s squirt around their phallic partners, leaking sexual lubricant ");
+					if (player.biggestLactation() > 1) outputText("and milk ");
+					outputText("while the fucking continues.");
 				}
 				if (player.cockTotal() > 0) {
-					outputText("  The tentacles around " + player.sMultiCockDesc() + " squeeze and rotate, screwing you silly through your orgasm while cum dribbles in a steady stream from your loins.  Normally it would be squirting out in thick ropes, but the muscle-relaxing drugs in your system make the spurts a steady, weak flow.", false);
-					if (player.cumQ() > 800) outputText("  Of course with all the semen you produce, the flesh-pod's ooze clouds over quite quickly, blocking your vision with a purple-white haze.", false);
+					outputText("  The tentacles around " + player.sMultiCockDesc() + " squeeze and rotate, screwing you silly through your orgasm while cum dribbles in a steady stream from your loins.  Normally it would be squirting out in thick ropes, but the muscle-relaxing drugs in your system make the spurts a steady, weak flow.");
+					if (player.cumQ() > 800) outputText("  Of course with all the semen you produce, the flesh-pod's ooze clouds over quite quickly, blocking your vision with a purple-white haze.");
 				}
 				if (player.biggestLactation() > 1) {
-					outputText("Milk leaks out too, ", false);
-					if (player.biggestLactation() < 2) outputText("though the slight dribble is barely noticeable to you.", false);
-					else if (player.biggestLactation() < 3) outputText("coloring things a little more white.", false);
-					else outputText("thickening your fluid-filled prison with nutrients.", false);
+					outputText("Milk leaks out too, ");
+					if (player.biggestLactation() < 2) outputText("though the slight dribble is barely noticeable to you.");
+					else if (player.biggestLactation() < 3) outputText("coloring things a little more white.");
+					else outputText("thickening your fluid-filled prison with nutrients.");
 				}
 				//[NEXT – CHOOSE APPRORIATE]
 				doNext(game.dungeons.deepcave.loseToThisShitPartII);

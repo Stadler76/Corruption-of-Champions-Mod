@@ -764,7 +764,7 @@ package classes.Scenes
 			headerSub("Special attributes");
 			outputText("A Succubus' Milk can be an extraordinarily powerful aphrodisiac when drank straight from the source. If it is stored, the aphrodisiacal properties rapidly diminish while its mutagenic properties rapidly rise. Some more powerful succubi are able to use their milk with black magic in order to work changes on their partners.");
 			headerSub("Feeding");
-			outputText("Like most demons, Succubi gain power from corrupting others, and require a steady supply of sexual fluids to survive. In rare cases, if a Succubus has been deprived of ‘food’ for too long, she may find herself too weak to seduce a partner, and enter into an less than advantageous agreement in order to get her food. Amazingly, most succubi will hold themselves to such an agreement after 'eating' their fill. ");
+			outputText("Like most demons, Succubi gain power from corrupting others, and require a steady supply of sexual fluids to survive. In rare cases, if a Succubus has been deprived of ‘food’ for too long, she may find herself too weak to seduce a partner, and enter into a less than advantageous agreement in order to get her food. Amazingly, most succubi will hold themselves to such an agreement after 'eating' their fill. ");
 			setCodexMenusAfterDisplay();
 		}
 		
@@ -868,7 +868,7 @@ package classes.Scenes
 			          +" wears off. At first their gaze simply makes the individual feel sluggish and have difficulty moving, but the longer they"
 			          +" remain in eye contact the more extreme it becomes. Eye contact is gained through a mind based compulsion, similar to"
 			          +" hypnotism or a charm effect on the victim. When a basilisk uses its gaze to turn an individual to stone, it is often one who"
-			          +" has become a nuisance to the demons, and the resulting statue is gifted to them as a offering to ensure they do not further"
+			          +" has become a nuisance to the demons, and the resulting statue is gifted to them as an offering to ensure they do not further"
 			          +" screw over the species. Both abilities are referred to as petrification.");
 			outputText("\n\n(Written by MissBlackthorne)");
 			setCodexMenusAfterDisplay();

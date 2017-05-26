@@ -96,7 +96,7 @@ package classes.Items.Consumables
 			//Set clitlength down to 2 digits in length
 			game.player.setClitLength(int(game.player.getClitLength() * 100) / 100);
 			outputText("Your " + game.player.clitDescript() + " shrinks rapidly, dwindling down to almost half its old size before it finishes absorbing the paste.");
-			game.dynStats("sen", 2, "lus", 10);
+			game.dynStats("sen", -2, "lus", -10);
 			game.inventory.itemGoNext();
 		}
 		

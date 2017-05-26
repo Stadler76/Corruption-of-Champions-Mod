@@ -571,7 +571,7 @@ package classes.Scenes.Dungeons.D3
 		public function northwestcourtyardRoomFunc():Boolean
 		{
 			outputText("<b><u>Northwest Courtyard</u></b>\n");
-			outputText("The courtyard comes to an abrupt end here, hemmed in by a impressively high stone wall to the north, high enough to shame the walls in the other cardinal directions. The path is also bounded in by stonework to the west, forcing it to curve to the east and south around a bush that has been tastelessly shaped to resemble a turgid prick. The demons even went so far as to trim ivory flowers into a contiguous path along one side, very much looking like a stream of arboreal spunk.");
+			outputText("The courtyard comes to an abrupt end here, hemmed in by an impressively high stone wall to the north, high enough to shame the walls in the other cardinal directions. The path is also bounded in by stonework to the west, forcing it to curve to the east and south around a bush that has been tastelessly shaped to resemble a turgid prick. The demons even went so far as to trim ivory flowers into a contiguous path along one side, very much looking like a stream of arboreal spunk.");
 			return false;
 		}
 		

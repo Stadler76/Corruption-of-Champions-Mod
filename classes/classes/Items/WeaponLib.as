@@ -31,7 +31,8 @@ package classes.Items
 		public const L_HAMMR:LargeHammer = new LargeHammer();
 		public const L_STAFF:LethiciteStaff = new LethiciteStaff();
 		public const L_WHIP :Weapon = new Weapon("L. Whip", "L. Whip", "flaming whip", "a flaming whip once belonged to Lethice", "whip-crack", 16, 2000, "This whip once belonged to Lethice who was defeated at your hands. It gives off flames when you crack this whip.");
-		public const MACE   :Weapon = new Weapon("Mace   ","Mace","mace","a mace","smash",9,100,"This is a mace, designed to be able to crush against various defenses.");
+		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 100, "This is a mace, designed to be able to crush against various defenses.");
+		public const MRAPIER:MidnightRapier = new MidnightRapier();
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",5,25,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.");
 		public const PTCHFRK:Weapon = new Weapon("PtchFrk","Pitchfork","pitchfork","a pitchfork","stab",10,200,"This is a pitchfork.  Intended for farm work but also useful as stabbing weapon.");
 		public const RIDINGC:Weapon = new Weapon("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,50,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.");
@@ -45,6 +46,7 @@ package classes.Items
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();
 		public const WHIP   :Weapon = new Weapon("Whip   ","Whip","coiled whip","a coiled whip","whip-crack",5,500,"A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!");
+		public const U_SWORD:Weapon = new UglySword();
 
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {

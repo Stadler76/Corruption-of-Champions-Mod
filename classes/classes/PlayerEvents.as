@@ -301,7 +301,7 @@ package classes {
 			if (player.findPerk(PerkLib.Androgyny) < 0) { //Fix femininity ratings if out of whack!
 				var textHolder:String = player.fixFemininity();
 				if (textHolder != "") {
-					outputText(textHolder, false);
+					outputText(textHolder);
 					needNext = true;
 				}
 			}
@@ -610,7 +610,8 @@ package classes {
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
-				if (player.cor <= 20) { //Go away if pure
+				// Default purity level is 20, can be lowered with corruptiontolerance but can't go below 5
+				if (player.cor <= Math.max(5, (20 - player.corruptionTolerance())) || player.breastRows[0].breastRating <= 1) { //Go away if pure or A-Cup/flat
 					outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n");
 					player.removeStatusEffect(StatusEffects.Feeder);
 					player.removePerk(PerkLib.Feeder);

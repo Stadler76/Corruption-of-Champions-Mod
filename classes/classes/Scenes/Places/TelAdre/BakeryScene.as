@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places.TelAdre{
+package classes.Scenes.Places.TelAdre{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -37,7 +37,7 @@ public function bakeryuuuuuu():void {
 	menu();
 	//First time
 	if (flags[kFLAGS.TIMES_VISITED_BAKERY] == 0) {
-		outputText("You approach the bakery, but it appears to be sunk below the street level.  The entrance isn't even a set of doors – it's a double-wide ramp that takes you below ground level.  The passage leads directly into the bakery's interior, allowing unobstructed traffic to flow in and out from the cozy, underground building. The smell of yeasty bread, sweet treats, and fluffy snacks seems to even permeate the bricks of this place.  If it were shut down, you have no doubt it would smell delicious for weeks if not months.  You get in line and look at the menu while you wait.\n\n", false);
+		outputText("You approach the bakery, but it appears to be sunk below the street level.  The entrance isn't even a set of doors – it's a double-wide ramp that takes you below ground level.  The passage leads directly into the bakery's interior, allowing unobstructed traffic to flow in and out from the cozy, underground building. The smell of yeasty bread, sweet treats, and fluffy snacks seems to even permeate the bricks of this place.  If it were shut down, you have no doubt it would smell delicious for weeks if not months.  You get in line and look at the menu while you wait.\n\n");
 	}
 	//[Repeat approach]
 	else {
@@ -47,7 +47,7 @@ public function bakeryuuuuuu():void {
 			if (flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3, "Pudding", kGAMECLASS.xmas.xmasMisc.getWinterPudding);
 		}
 		//Normal repeats!
-		else outputText("You step into the bakery's domed interior and inhale, treated to a symphony of pleasant smells and the cozy warmth that radiates from the baking ovens.  There are plenty of tables and chairs around for one to eat at, and you find yourself stepping into line while you glance at the menu.\n\n", false);
+		else outputText("You step into the bakery's domed interior and inhale, treated to a symphony of pleasant smells and the cozy warmth that radiates from the baking ovens.  There are plenty of tables and chairs around for one to eat at, and you find yourself stepping into line while you glance at the menu.\n\n");
 	}
 	//Times visited!
 	flags[kFLAGS.TIMES_VISITED_BAKERY]++;
@@ -65,15 +65,15 @@ private function checkBakeryMenu():void {
 	//Turn on cum eclairs if PC is an addict!
 	if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] == 0) {
 		flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED]++;
-		outputText("While you're in line, a shaking centauress glances at you and whispers, \"<i>You need some too, don't ya hun?</i>\"  You look on in confusion, not really sure what she's insinuating.  Her eyes widen and she asks, \"<i>Aren't you addicted?</i>\" You nod, dumbly, and she smiles knowingly.  \"<i>There's a minotaur that works here with a bit of a fetish... just order a special eclair and he'll fix you right up.  Just keep it on the hush hush and hope there's some left after I get my dozen.</i>\"  The centaur licks her lips and prances around impatiently.\n\n", false);
+		outputText("While you're in line, a shaking centauress glances at you and whispers, \"<i>You need some too, don't ya hun?</i>\"  You look on in confusion, not really sure what she's insinuating.  Her eyes widen and she asks, \"<i>Aren't you addicted?</i>\" You nod, dumbly, and she smiles knowingly.  \"<i>There's a minotaur that works here with a bit of a fetish... just order a special eclair and he'll fix you right up.  Just keep it on the hush hush and hope there's some left after I get my dozen.</i>\"  The centaur licks her lips and prances around impatiently.\n\n");
 	}
 	//(display menu)
 	//Generic baked goods
-	outputText("Rich Chocolate Brownies - 3 gems.\n", false);
-	outputText("Fig Cookies - 4 gems.\n", false);
-	outputText("Berry Cupcakes - 3 gems.\n", false);
-	outputText("Doughnuts - 5 gems.\n", false);
-	outputText("Pound Cake - 4 gems.\n", false);
+	outputText("Rich Chocolate Brownies - 3 gems.\n");
+	outputText("Fig Cookies - 4 gems.\n");
+	outputText("Berry Cupcakes - 3 gems.\n");
+	outputText("Doughnuts - 5 gems.\n");
+	outputText("Pound Cake - 4 gems.\n");
 	addButton(0, "Brownies", nomnomnom, "brownies", 3);
 	addButton(1, "Cookies", nomnomnom, "cookies", 4);
 	addButton(2, "Cupcakes", nomnomnom, "cupcakes", 3);
@@ -98,7 +98,7 @@ private function checkBakeryMenu():void {
 	}
 	//Giant Cupcake
 	if (flags[kFLAGS.MADDIE_STATUS] >= 4) {
-		outputText("Giant Chocolate Cupcake - 500 gems.\n", false);
+		outputText("Giant Chocolate Cupcake - 500 gems.\n");
 		addButton(9, "GiantCupcake", buySlutCake);
 	}
 	outputText("\n");
@@ -255,7 +255,11 @@ private function buyCocoa():void {
 	outputText("You pay ten gems for some cocoa.  ");
 	player.gems -= 10;
 	statScreenRefresh();
-	inventory.takeItem(consumables.MOUSECO, ingredientsMenu);
+	
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.MOUSECO.useItem();
+		doNext(ingredientsMenu);
+	} else inventory.takeItem(consumables.MOUSECO, ingredientsMenu);
 }
 
 private function buyFerretFruit():void {
@@ -270,7 +274,11 @@ private function buyFerretFruit():void {
 	outputText("You pay twenty gems for a single ferret fruit.  ");
 	player.gems -= 20;
 	statScreenRefresh();
-	inventory.takeItem(consumables.FRRTFRT, ingredientsMenu);
+	
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.FRRTFRT.useItem();
+		doNext(ingredientsMenu);
+	} else inventory.takeItem(consumables.FRRTFRT, ingredientsMenu);
 }
 
 private function buyFig():void {
@@ -284,7 +292,11 @@ private function buyFig():void {
 	outputText("You pay five gems for a fig.  ");
 	player.gems -= 5;
 	statScreenRefresh();
-	inventory.takeItem(consumables.RINGFIG, ingredientsMenu);
+	
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.RINGFIG.useItem();
+		doNext(ingredientsMenu);
+	} else inventory.takeItem(consumables.RINGFIG, ingredientsMenu);
 }
 
 
@@ -325,7 +337,7 @@ public function nomnomnom(name:String,price:Number):void {
 	flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE] = price;
 	clearOutput();
 	if (player.gems < flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE]) {
-		outputText("You don't have enough gems to order that!", false);
+		outputText("You don't have enough gems to order that!");
 		//doNext(bakeryuuuuuu);
 		menu();
 		addButton(0,"Next",checkBakeryMenu);
@@ -334,67 +346,67 @@ public function nomnomnom(name:String,price:Number):void {
 	player.gems -= flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE];
 	statScreenRefresh();
 	if (flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "eclair") {
-		outputText("You hand over 10 gems and ask for the 'special eclair'.  The centaur working the counter smirks ", false);
-		if (player.tallness <= 52) outputText("down ", false);
-		else if (player.tallness >= 84) outputText("up ", false);
-		outputText("at you gives pulls a cream-filled pastry from a box concealed behind the counter.  It's warm... so very warm, and you try to steady your hands as you walk off to towards a table, sniffing in deep lungfuls of its 'special' scent.  The first bite is heaven, sating a craving you didn't even know you had.  You can't stop yourself from moaning with delight as you drain every drop and finish off the sweet doughnut shell.  The minotaur goo is all over your fingers, but you don't mind licking them all clean.  With the lust now you now feel burning inside you, you even try to make a show of it.  Though you make a few ", false);
-		if (player.femininity >= 75) outputText("males fill their pants", false);
-		else if (player.femininity <= 25) outputText("females squirm", false);
-		else outputText("other patrons squirm and fill out their pants", false);
-		outputText(", none of them tries to make a move.  Pity.", false);
+		outputText("You hand over 10 gems and ask for the 'special eclair'.  The centaur working the counter smirks ");
+		if (player.tallness <= 52) outputText("down ");
+		else if (player.tallness >= 84) outputText("up ");
+		outputText("at you gives pulls a cream-filled pastry from a box concealed behind the counter.  It's warm... so very warm, and you try to steady your hands as you walk off to towards a table, sniffing in deep lungfuls of its 'special' scent.  The first bite is heaven, sating a craving you didn't even know you had.  You can't stop yourself from moaning with delight as you drain every drop and finish off the sweet doughnut shell.  The minotaur goo is all over your fingers, but you don't mind licking them all clean.  With the lust now you now feel burning inside you, you even try to make a show of it.  Though you make a few ");
+		if (player.femininity >= 75) outputText("males fill their pants");
+		else if (player.femininity <= 25) outputText("females squirm");
+		else outputText("other patrons squirm and fill out their pants");
+		outputText(", none of them tries to make a move.  Pity.");
 		dynStats("lus", (20+player.lib/10));
 		player.minoCumAddiction(10);
 		player.refillHunger(20);
 	}
 	else {
-		outputText("You hand over " + num2Text(flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE]) + " gems and get your " + flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] + ".  A moment later you're at a table, licking the sugary residue from your fingertips and wondering just how they make the food so damned good.", false);
+		outputText("You hand over " + num2Text(flags[kFLAGS.TEMP_STORAGE_PASTRY_PRICE]) + " gems and get your " + flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] + ".  A moment later you're at a table, licking the sugary residue from your fingertips and wondering just how they make the food so damned good.");
 		if (flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "doughnuts") {
-			outputText(player.modTone(0,2), false);
-			outputText(player.modThickness(100,1), false);
+			outputText(player.modTone(0,2));
+			outputText(player.modThickness(100,1));
 			if (rand(3) == 0 && player.buttRating < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nWhen you stand back up your " + player.buttDescript() + " jiggles a little bit more than you'd expect.", false);
+				outputText("\n\nWhen you stand back up your " + player.buttDescript() + " jiggles a little bit more than you'd expect.");
 				player.buttRating++;
 			}
 			if (rand(3) == 0 && player.hipRating < 15 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?", false);
+				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?");
 				player.hipRating++;
 			}
 			player.refillHunger(25);
 		}
 		else if (flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cookies") {
-			outputText(player.modTone(0,1), false);
-			outputText(player.modThickness(100,2), false);
+			outputText(player.modTone(0,1));
+			outputText(player.modThickness(100,2));
 			if (rand(3) == 0 && player.hipRating < 20 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?", false);
+				outputText("\n\nAfter finishing, you find your gait has changed.  Did your hips widen?");
 				player.hipRating++;
 			}
 			player.refillHunger(20);
 		}
 		else if (flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "brownies") {
-			outputText(player.modThickness(100,4), false);
+			outputText(player.modThickness(100,4));
 			if (rand(2) == 0 && player.hipRating < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nAfter finishing, you find your gait has changed.  Your " + player.hipDescript() + " definitely got wider.", false);
+				outputText("\n\nAfter finishing, you find your gait has changed.  Your " + player.hipDescript() + " definitely got wider.");
 				player.hipRating += 2;
 			}
 			player.refillHunger(20);
 		}
 		else if (flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "cupcakes") {
-			outputText(player.modTone(0,4), false);
+			outputText(player.modTone(0,4));
 			if (rand(2) == 0 && player.buttRating < 30 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nWhen you stand back up your " + player.buttDescript() + " jiggles with a good bit of extra weight.", false);
+				outputText("\n\nWhen you stand back up your " + player.buttDescript() + " jiggles with a good bit of extra weight.");
 				player.buttRating += 2;
 			}
 			player.refillHunger(20);
 		}
 		else if (flags[kFLAGS.TEMP_STORAGE_PASTRY_NAME] == "pound cake") {
-			outputText(player.modTone(0,2), false);
-			outputText(player.modThickness(100,2), false);
+			outputText(player.modTone(0,2));
+			outputText(player.modThickness(100,2));
 			if (rand(3) == 0 && player.buttRating < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nWhen you stand back up your " + player.buttDescript() + " jiggles a little bit more than you'd expect.", false);
+				outputText("\n\nWhen you stand back up your " + player.buttDescript() + " jiggles a little bit more than you'd expect.");
 				player.buttRating++;
 			}
 			if (rand(3) == 0 && player.hipRating < 25 && (player.hunger > 25 || flags[kFLAGS.HUNGER_ENABLED] <= 0)) {
-				outputText("\n\nAfter finishing, you find your gait has changed.  Did your " + player.hipDescript() + " widen?", false);
+				outputText("\n\nAfter finishing, you find your gait has changed.  Did your " + player.hipDescript() + " widen?");
 				player.hipRating++;
 			}
 			player.refillHunger(50);
@@ -414,13 +426,13 @@ public function nomnomnom(name:String,price:Number):void {
 public function buySlutCake():void {
 	clearOutput();
 	if (player.gems < 500) {
-		outputText("You don't have enough gems for one of those!", false);
+		outputText("You don't have enough gems for one of those!");
 		//doNext(bakeryuuuuuu);
 		menu();
 		addButton(0,"Next",checkBakeryMenu);
 		return;
 	}
-	outputText("The minotaur chef emerges from the backroom bearing a box that contains your cupcake.  It's too big to scarf down immediately.\n\n", false);
+	outputText("The minotaur chef emerges from the backroom bearing a box that contains your cupcake.  It's too big to scarf down immediately.\n\n");
 	player.gems -= 500;
 	statScreenRefresh();
 	inventory.takeItem(consumables.CCUPCAK, bakeryuuuuuu);
@@ -437,7 +449,11 @@ private function buyFoxBerry():void {
 	outputText("You pay five gems for a fox berry.  ");
 	player.gems -= 5;
 	statScreenRefresh();
-	inventory.takeItem(consumables.FOXBERY, ingredientsMenu);
+	
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.FOXBERY.useItem();
+		doNext(ingredientsMenu);
+	} else inventory.takeItem(consumables.FOXBERY, ingredientsMenu);
 }
 
 private function buyHardBiscuits():void {
@@ -450,7 +466,11 @@ private function buyHardBiscuits():void {
 	outputText("You pay five gems for a pack of hard biscuits.  ");
 	player.gems -= 5;
 	statScreenRefresh();
-	inventory.takeItem(consumables.H_BISCU, checkBakeryMenu);
+	
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.H_BISCU.useItem();
+		doNext(checkBakeryMenu);
+	} else inventory.takeItem(consumables.H_BISCU, checkBakeryMenu);
 }
 
 private function buyTrailMix():void {
@@ -463,7 +483,11 @@ private function buyTrailMix():void {
 	outputText("You pay twenty gems for a pack of trail mix.  ");
 	player.gems -= 20;
 	statScreenRefresh();
-	inventory.takeItem(consumables.TRAILMX, checkBakeryMenu);
+	
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.TRAILMX.useItem();
+		doNext(checkBakeryMenu);
+	} else inventory.takeItem(consumables.TRAILMX, checkBakeryMenu);
 }
 
 private function buyHummus():void {
@@ -476,7 +500,11 @@ private function buyHummus():void {
 	outputText("You pay twenty gems for a pack of hummus.  ");
 	player.gems -= 100;
 	statScreenRefresh();
-	inventory.takeItem(consumables.HUMMUS_, checkBakeryMenu);
+	
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		consumables.HUMMUS_.useItem();
+		doNext(checkBakeryMenu);
+	} else inventory.takeItem(consumables.HUMMUS_, checkBakeryMenu);
 }
 
 private function easterBakeSale():void {
@@ -518,7 +546,7 @@ private function easterBakeSaleHelp():void {
 //[Male]
 private function malesHelpOutWithEaster():void {
 	clearOutput();
-	outputText("A idea crosses your mind; why not have the molten girl help you with your problem?  As if reading your mind, the girl continues her way to you, making her way with her eyes locked on your [cock biggest].  She is upon you now, flaccid streams drooling off her hand as she makes to grab your cock.  A heated pressure envelopes your shaft");
+	outputText("An idea crosses your mind; why not have the molten girl help you with your problem?  As if reading your mind, the girl continues her way to you, making her way with her eyes locked on your [cock biggest].  She is upon you now, flaccid streams drooling off her hand as she makes to grab your cock.  A heated pressure envelopes your shaft");
 	if (player.balls > 0) outputText(", sticky drops of chocolate trailing down your [balls]");
 	outputText(", each movement a not unpleasant sensation as the warmth infuses you.  The center of the pressure loosens, and your chocolate partner takes it upon herself to pin you to the floor, her warmness surrounding you.  Almost immediately you feel a similar pressure to the previous upon your groin, pulsating now as if stroking your cock in earnest.  You work out that she has enveloped your rod in what you assume is a vagina.  As if to confirm your suspicions, your captor lets out a small moan, increasing the fervor with which she rings out your dong.");
 	outputText("\n\nUnable now to contain your own lust, you start idly pumping into her velvety depths, the extreme warmth of which does nothing to discourage you.  Delighted by your newfound vigor, the mass riding you lets a sound out halfway between a squeal and a moan, increasing the vehemence of her own ministrations.  You pull your hand free from its prison only to thrust it higher up, gripping the highly malleable breast of the buxom girl.  Increasing the intensity of your pelvic endeavor, you elicit another moan from the bodacious vixen's lips, only adding fuel to your frenzied motions.  Jamming into her depths, intense heat assaults your body.  As if setting a spark to kindling, a torrid wave sweeps through you before you realize you are towards your limit.");

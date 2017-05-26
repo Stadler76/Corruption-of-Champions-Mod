@@ -1,11 +1,11 @@
 ﻿package classes
 {
-	import classes.internals.Serializable;
+	import classes.internals.ISerializable;
 	import classes.internals.Utils;
 	import mx.logging.ILogger;
 	import classes.internals.LoggerFactory;
 
-	public class VaginaClass implements Serializable
+	public class VaginaClass implements ISerializable
 	{
 		include "../../includes/appearanceDefs.as";
 		public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
@@ -110,26 +110,27 @@
 		 * @param hasFeraMilkingTwat true if the player has the given Perk
 		 * @return true if the vagina was stretched
 		 */
-		public function stretch(cArea:Number, hasFeraMilkingTwat:Boolean = false):Boolean {
+		public function stretch(cArea:Number, bonusCapacity:Number = 0, hasFeraMilkingTwat:Boolean = false):Boolean {
 			var stretched:Boolean = false;
-			if (hasFeraMilkingTwat || vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
-			//cArea > capacity = autostreeeeetch.
-			if (cArea >= capacity()) {
-				vaginalLooseness++;
-				stretched = true;
-			}
-			//If within top 10% of capacity, 50% stretch
-			else if (cArea >= .9 * capacity() && Utils.rand(2) == 0) {
-				vaginalLooseness++;
-				stretched = true;
-			}
-			//if within 75th to 90th percentile, 25% stretch
-			else if (cArea >= .75 * capacity() && Utils.rand(4) == 0) {
-				vaginalLooseness++;
-				stretched = true;
+			if (!hasFeraMilkingTwat || vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+				//cArea > capacity = autostreeeeetch.
+				if (cArea >= capacity(bonusCapacity)) {
+					vaginalLooseness++;
+					stretched = true;
+				}
+				//If within top 10% of capacity, 50% stretch
+				else if (cArea >= .9 * capacity(bonusCapacity) && Utils.rand(2) == 0) {
+					vaginalLooseness++;
+					stretched = true;
+				}
+				//if within 75th to 90th percentile, 25% stretch
+				else if (cArea >= .75 * capacity(bonusCapacity) && Utils.rand(4) == 0) {
+					vaginalLooseness++;
+					stretched = true;
 				}
 			}
 			if (vaginalLooseness > VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) vaginalLooseness = VAGINA_LOOSENESS_LEVEL_CLOWN_CAR;
+			if (hasFeraMilkingTwat && vaginalLooseness > VAGINA_LOOSENESS_LOOSE) vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 
 			if (virgin) {
 				virgin = false;
@@ -144,7 +145,7 @@
 		
 		public function serialize(relativeRootObject:*):void 
 		{
-			LOGGER.debug("Serializing vagina...")
+			LOGGER.debug("Serializing vagina...");
 			relativeRootObject.type = this.type;
 			relativeRootObject.vaginalWetness = this.vaginalWetness;
 			relativeRootObject.vaginalLooseness = this.vaginalLooseness;
@@ -162,20 +163,20 @@
 		
 		public function deserialize(relativeRootObject:*):void 
 		{
-			LOGGER.debug("Deserializing vagina...")
+			LOGGER.debug("Deserializing vagina...");
 			this.vaginalWetness = relativeRootObject.vaginalWetness;
 			this.vaginalLooseness = relativeRootObject.vaginalLooseness;
 			this.fullness = relativeRootObject.fullness;
 			this.virgin = relativeRootObject.virgin;
 			
-			if (relativeRootObject.type == undefined) {
+			if (relativeRootObject.type === undefined) {
 				this.type = 0;
 				LOGGER.warn("Vagina type not set, setting to {0}", this.type);
 			}else{
 				this.type = relativeRootObject.type;
 			}
 			
-			if (relativeRootObject.labiaPierced == undefined) {
+			if (relativeRootObject.labiaPierced === undefined) {
 				LOGGER.warn("Labia pierced not set, resetting labia and clit data");
 				this.labiaPierced = 0;
 				this.labiaPShort = "";
@@ -198,12 +199,12 @@
 				this.recoveryProgress = relativeRootObject.recoveryProgress;
 			}
 			
-			if(relativeRootObject.clitLength == undefined) {
+			if(relativeRootObject.clitLength === undefined) {
 				this.clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
 				LOGGER.warn("Clit length was not loaded, setting to default({0})", this.clitLength);
 			}
 			
-			if(relativeRootObject.recoveryProgress == undefined) {
+			if(relativeRootObject.recoveryProgress === undefined) {
 				this.recoveryProgress = 0;
 				LOGGER.warn("Stretch counter was not loaded, setting to {0}", this.recoveryProgress);
 			}

@@ -715,7 +715,7 @@ private function rebeccMenu():void {
 	menu();
 	addButton(0, "Appearance", rebeccAppearance);
 	addButton(1, "Bath", rebeccBathScene);
-	if (player.cor >= 66 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist)) {
+	if (player.cor >= (66 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist)) {
 		outputText("\n\nYou could try and force yourself on her, but you might not be welcome in town after...");
 		addButton(3, "Surprise Sex", rapeRebecc, false);
 	} else {
@@ -766,7 +766,7 @@ private function rapeRebecc(outside:Boolean = false):void {
 	if (player.hasCock()) {
 		outputText("Within three strides you are upon Rebecc; you slap her twice on her cheeks, brutally yank her hair and in a harsh gesture, you turn her around.  The woman yells, \"<i>W-what are you doing?  No, please stop!</i>\"  Completely caught unaware, she gasps and jolts in surprise, crying loudly until you slap her again to shut her up.");
 		outputText("\n\nYou quickly proceed to denude her, tearing her peasant dress to reveal her bountiful, jiggling breasts.  This enormous rack is begging to be touched; you ruthlessly grope them, forcefully bringing her nipples into their erect state.  She tries to struggle away but you hold her tight, her resistance and endless writhing making [eachCock] harder; to better please yourself, you pull it free of your [armor].  You grind against her plush butt through the coarse cloth of her dress until it is completely drenched with pre-cum, then feverishly remove it, tearing the poor girl's gown to rags in the process to give you a clear view of her ample buttocks.  Pressing yourself on her more, you thoroughly enjoy the soft touch of her healthy rump.  You pinch and grope her fat butt repeatedly, making her whimper in humiliation, until it goes red from your rough treatment.  Gods, this girl has a fine ass; you give it a few slaps here and there as it jiggles in the most enticing way.");
-		outputText("\n\nThe sight of her glorious rear is too tempting a target to resist, and you quickly shove the tip of your " + player.cockDescript(0) + " between her plush cheeks, bracing yourself for torrid anal penetration.  She keeps whining, unable to break free of your iron grasp.  In her constant struggles you notice an opening between her buttocks - you thrust inside with all your might, devastating her backdoor entrance, stretching her holes, tearing her insides and grinding against her rugged anal walls in a extremely rough way.");
+		outputText("\n\nThe sight of her glorious rear is too tempting a target to resist, and you quickly shove the tip of your " + player.cockDescript(0) + " between her plush cheeks, bracing yourself for torrid anal penetration.  She keeps whining, unable to break free of your iron grasp.  In her constant struggles you notice an opening between her buttocks - you thrust inside with all your might, devastating her backdoor entrance, stretching her holes, tearing her insides and grinding against her rugged anal walls in an extremely rough way.");
 		//[if cock is too long, >12 inches]
 		if (player.cocks[0].cockLength > 12) outputText("  You keep burying more of your " + player.cockDescript(0) + " deep inside her rectum until you reach her limit and can't fit more cock in.");
 		else outputText("  Eventually the entirety of your prick is lodged inside her lush asshole.");
@@ -853,12 +853,12 @@ public function beatUpOwca():void {
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	menu();
-	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= 60 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0)) {
+	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= (60 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0)) {
 		addButton(0, "Rape Rebecc", rapeRebecc, true);
 	} else {
 		addDisabledButton(0, "Rape Rebecc");
 	}
-	if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsBlackfire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
 		addButton(1, "Torch Village", torchOwcaMotherFuckers);
 	} else {
 		addDisabledButton(1, "Torch Village");
@@ -881,7 +881,7 @@ private function torchOwcaMotherFuckers():void {
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	dynStats("cor", 15);
 	menu();
-	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= 60 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0)) {
+	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= (60 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0)) {
 		addButton(0, "Abuse Her", rapeRebecc, true);
 	} else {
 		addDisabledButton(0, "Abuse Her");
@@ -1023,7 +1023,7 @@ private function subdueVapula():void {
 	//choices: [Disband the horde]/[Enslave Vapula(requires cock or non-centaur vagina, D2 completion, libido >= 60, and corr >= 70)]
 	menu();
 	addButton(0, "Disband", disbandHorde);
-	if (!player.isGenderless() && (player.cor >= 66 - player.corruptionTolerance())) {
+	if (!player.isGenderless() && (player.cor >= (66 - player.corruptionTolerance()))) {
 		addButton(1, "EnslaveVapula", enslaveVapulaWithYourWang);
 	} else {
 		addDisabledButton(1, "EnslaveVapula", "This scene requires you to have genitals and high enough corruption.");

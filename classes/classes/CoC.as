@@ -176,6 +176,7 @@ the text from being too boring.
 		public var playerAppearance:PlayerAppearance = new PlayerAppearance();
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
+		public var perkTree:PerkTree = new PerkTree();
 		// Items/
 		public var mutations:Mutations = Mutations.init();
 		public var consumables:ConsumableLib = new ConsumableLib();
@@ -203,6 +204,7 @@ the text from being too boring.
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
 		public var forest:Forest = new Forest();
+		public var deepWoods:DeepWoods = new DeepWoods(forest);
 		public var glacialRift:GlacialRift = new GlacialRift();
 		public var highMountains:HighMountains = new HighMountains();
 		public var lake:Lake = new Lake();
@@ -448,9 +450,9 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4.3"; //Version NUMBER
+			ver = "1.0.2_mod_1.4.6b"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
-			version = ver + " (<b>1,000,000 Views!</b>)"; //Version TEXT
+			version = ver + " (<b>The Chill Smith</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;

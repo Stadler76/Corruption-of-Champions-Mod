@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Areas.Mountain
+package classes.Scenes.Areas.Mountain
 {
 
 	import classes.*;
@@ -17,9 +17,10 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
+			clearOutput();
 			if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
-				outputText("You defeat a minotaur!  ", true);
+				outputText("You defeat a minotaur!  ");
 				game.desert.antsScene.phyllaBeatAMino();
 			} else {
 				game.mountain.minotaurScene.minoVictoryRapeChoices();
@@ -32,7 +33,7 @@
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){
-				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
+				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.");
 				game.combat.cleanupAfterCombat();
 			} else
 				game.mountain.minotaurScene.getRapedByMinotaur();

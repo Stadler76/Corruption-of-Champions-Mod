@@ -120,7 +120,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You smile and thank the centauress for her help.  “<i>It was nothing,</i>” she replies, looking quite pleased at your thanks all the same.\n\n");
 			flags[kFLAGS.KATHERINE_TRAINING] |= KBIT_TRAINING_TALK_EDRYN; //Using a mask so it doesn’t matter what order you talk to Edryn and Urta in
 			var cockFitIndex:int = player.cockThatFits(300);
-			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.countCocksOfType(CockTypesEnum.HORSE) > 0 || player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
+			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.countCocksOfType(CockTypesEnum.HORSE) > 0 || player.cor > (50 - player.corruptionTolerance()) || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
 				outputText("“<i>So... I don’t suppose there’s anything else you might have on your mind...?</i>”  She gives you a coy look and fiddles with a nipple through her shirt.");
 				doYesNo((edryn.pregnancy.isPregnant ? pregnantEdrynSexSelector : edryn.edrynSexSelecter), telAdre.barTelAdre);
 			}
@@ -356,11 +356,12 @@ package classes.Scenes.Places.TelAdre{
 			addDisabledButton(0, "Fuck Her", "This scene requires you to have fitting cock.");
 			addDisabledButton(1, "Give Anal", "This scene requires you to have fitting cock.");
 			addDisabledButton(2, "Give Both", "This scene requires you to have two fitting cocks.");
-			addDisabledButton(4, "Bath", "This scene is only available after her training is over.");
+			// bath always available
 			addDisabledButton(5, "Mount Her", "This scene requires you to have vagina. You should be able to pull out her knot - this is not the best place to be in such vulnerable state.");
 			addDisabledButton(6, "Take Anal", "Her knot should not be overly large.");
 			addDisabledButton(7, "Take Both", "This scene requires you to have vagina. Her knot should not be overly large. You should be able to pull out her knot - this is not the best place to be in such vulnerable state.");
 			
+			addButton(4, "Bath", katherine.bathTime);
 			if (player.cockThatFits(70) > -1) {
 				addButton(0, "Fuck Her", katherine.penetrateKatsVag);
 				addButton(1, "Give Anal", katherine.pcPenetratesKatAnally);

@@ -8,16 +8,16 @@ package classes.internals
 	import org.hamcrest.text.*;
 	import org.hamcrest.collection.*;
 	
-	import classes.internals.Serializable;
-	import classes.internals.SerializableAMF;
+	import classes.internals.ISerializable;
+	import classes.internals.ISerializableAMF;
 	
 	public class SerializationUtilTest
 	{
 		private static const TEST_INSTANCES:int = 5;
 		
 		private var testObject:Array;
-		private var testVector:Vector.<Serializable>;
-		private var testAMFVector:Vector.<SerializableAMF>;
+		private var testVector:Vector.<ISerializable>;
+		private var testAMFVector:Vector.<ISerializableAMF>;
 		private var deserializedVector:Vector.<*>;
 		
 		private function buildVector(instances:int):void
@@ -44,8 +44,8 @@ package classes.internals
 		public function setUp():void
 		{
 			testObject = null;
-			testVector = new Vector.<Serializable>();
-			testAMFVector = new Vector.<SerializableAMF>();
+			testVector = new Vector.<ISerializable>();
+			testAMFVector = new Vector.<ISerializableAMF>();
 			deserializedVector = new Vector.<*>();
 			
 			buildVector(TEST_INSTANCES);
@@ -151,39 +151,39 @@ package classes.internals
 			SerializationUtils.deserializeVectorWithAMF(new Array(), String);
 		}
 		
-		private function deserializeAMF():Vector.<SerializableAMF> {
+		private function deserializeAMF():Vector.<ISerializableAMF> {
 			testObject = SerializationUtils.serializeVectorWithAMF(testAMFVector);
 			return SerializationUtils.deserializeVectorWithAMF(testObject, AMFSerializationDummy);
 		}
 		
 		[Test]
 		public function deserializeVectorWithAMFSize():void {
-			var vector:Vector.<SerializableAMF> = deserializeAMF();
+			var vector:Vector.<ISerializableAMF> = deserializeAMF();
 			
 			assertThat(vector, arrayWithSize(TEST_INSTANCES));
 		}
 		
 		[Test]
 		public function deserializeVectorWithAMFType():void {
-			var vector:Vector.<SerializableAMF> = deserializeAMF();
+			var vector:Vector.<ISerializableAMF> = deserializeAMF();
 			
-			assertThat(vector[TEST_INSTANCES - 1], instanceOf(SerializableAMF));
+			assertThat(vector[TEST_INSTANCES - 1], instanceOf(ISerializableAMF));
 		}
 		
 		[Test]
 		public function deserializeVectorWithAMFProperty():void {
-			var vector:Vector.<SerializableAMF> = deserializeAMF();
+			var vector:Vector.<ISerializableAMF> = deserializeAMF();
 			
 			assertThat(vector[TEST_INSTANCES - 1], hasProperties({foo: TEST_INSTANCES - 1, bar: TEST_INSTANCES}));
 		}
 	}
 }
 
-import classes.internals.Serializable;
-import classes.internals.SerializableAMF;
+import classes.internals.ISerializable;
+import classes.internals.ISerializableAMF;
 import flash.errors.IllegalOperationError;
 
-class SerializationDummy implements Serializable
+class SerializationDummy implements ISerializable
 {
 	public var foo:int;
 	private var bar:int;
@@ -211,7 +211,7 @@ class SerializationDummy implements Serializable
 	}
 }
 
-class AMFSerializationDummy implements SerializableAMF
+class AMFSerializationDummy implements ISerializableAMF
 {
 	public var foo:int;
 	public var bar:int;

@@ -1,6 +1,7 @@
 package classes.Scenes.Monsters 
 {
 	import classes.Monster;
+	import classes.StatusEffects;
 	import classes.internals.WeightedDrop;
 	import classes.CockTypesEnum;
 	/**
@@ -32,6 +33,22 @@ package classes.Scenes.Monsters
 				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
+		}
+		
+		override protected function performCombatAction():void
+		{
+			if (player.hasStatusEffect(StatusEffects.KnockedBack)) {
+				outputText("The creature sits tight, being unable to reach you.");
+				combatRoundOver();
+				return;
+			}
+			
+			if (rand(2) == 0) {
+				eAttack();
+				combatRoundOver();
+			} else {
+				mimicBite();
+			}
 		}
 		
 		public function Mimic(type:int)

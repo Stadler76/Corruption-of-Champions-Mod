@@ -291,7 +291,7 @@ package classes.Items.Consumables
 				if (getGame().emberScene.emberAffection() >= 75 && !drakesHeart) output.text("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
 				changes++;
 			}
-			if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0) {
+			if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0 && (drakesHeart || player.hasCock() && getGame().emberScene.emberHasVagina() || player.hasVagina() && getGame().emberScene.emberHasCock())) {
 				output.text("\n\nA sudden swell of lust races through your ");
 				if (player.hasCock()) {
 					output.text(player.cockDescript(0));
@@ -299,20 +299,20 @@ package classes.Items.Consumables
 				}
 				if (player.hasVagina()) output.text(player.vaginaDescript());
 				output.text(", making you wish " + (drakesHeart ? "you had a dragon to go with." : "Ember hadn't run you off") + ".  All you can think about now is fucking " + (drakesHeart ? "a dragon-morph" : getGame().emberScene.emberMF("him", "her")) + "; ");
-				if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
+				if (player.hasCock() && (getGame().emberScene.emberHasVagina() || drakesHeart)) {
 					if (drakesHeart) {
 						output.text("filling a womb with your seed and fertilizing those eggs");
 					}
 					else {
 						output.text("filling her womb with your seed and fertilizing her eggs");
-						if (player.hasVagina() && flags[kFLAGS.EMBER_GENDER] == 3) output.text(" even while ");
+						if (player.hasVagina() && (getGame().emberScene.emberHasCock() || drakesHeart)) output.text(" even while ");
 					}
 				}
-				if (player.hasVagina() && (flags[kFLAGS.EMBER_GENDER] == 3 || flags[kFLAGS.EMBER_GENDER] == 1)) {
+				if (player.hasVagina() && (getGame().emberScene.emberHasCock() || drakesHeart)) {
 					output.text("taking that hard, spurting cock inside your own " + player.vaginaDescript(0));
 				}
 				output.text("... too late, you realize that <b>" + (drakesHeart ? "the flower" : "Ember's blood") + " has sent your draconic body into ");
-				if (player.hasCock() && (flags[kFLAGS.EMBER_GENDER] >= 2 || drakesHeart) && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
+				if (player.hasCock() && (getGame().emberScene.emberHasVagina() || drakesHeart) && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
 					output.text("rut");
 					
 					player.goIntoRut(false);

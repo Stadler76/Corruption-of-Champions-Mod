@@ -36,11 +36,11 @@ package classes.Scenes.Areas.HighMountains
 			}
 			else {
 				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
-					outputText("You dive to the ground just as the phoenix breathes a great gout of flame at you. The fire blooms over your back, singeing your [armor], but doesn’t harm you. As she swoops low you see the phoenix scowl, looking quite disappointed, but it’s clear she isn’t done yet!", false);
+					outputText("You dive to the ground just as the phoenix breathes a great gout of flame at you. The fire blooms over your back, singeing your [armor], but doesn’t harm you. As she swoops low you see the phoenix scowl, looking quite disappointed, but it’s clear she isn’t done yet!");
 				}
 				//MASSIVE DAMAGE!
 				else {
-					outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " badly. ", false);
+					outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " badly. ");
 					var damage:int = str + weaponAttack + 300 + rand(250);
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
@@ -146,6 +146,7 @@ package classes.Scenes.Areas.HighMountains
 			this.level = 23;
 			this.gems = 30 + rand(25);
 			this.drop = new ChainedDrop().add(weapons.SCIMITR,1/20)
+					.add(useables.EBNFLWR, 1/10)
 					.elseDrop(NO_DROP);
 			this.wingType = WING_TYPE_HARPY;
 			this.special1 = doubleSlash;

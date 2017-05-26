@@ -43,17 +43,16 @@ package classes
 		 *
 		 * This must not be made possible to be called directly from the outside, use wrapper-methods instead.
 		 *
-		 * @param   text              The text to be added
-		 * @param   parseAsMarkdown   set this to true, if you want the text to be formatted, using a markdown parser (NYI, sry)
+		 * @param   text    The text to be added
 		 * @return  The instance of the class to support the 'Fluent interface' aka method-chaining
 		 */
-		protected function _addText(text:String, parseAsMarkdown:Boolean = false):Output
+		protected function _addText(text:String):Output
 		{
 			// This is cleaup in case someone hits the Data or new-game button when the event-test window is shown. 
 			// It's needed since those buttons are available even when in the event-tester
 			mainView.hideTestInputPanel();
 
-			_currentText += kGAMECLASS.parser.recursiveParser(text, parseAsMarkdown);
+			_currentText += kGAMECLASS.parser.recursiveParser(text);
 			if (debug) mainView.setOutputText(_currentText);
 
 			return this;
@@ -70,20 +69,6 @@ package classes
 		public function text(text:String):Output
 		{
 			return _addText(text);
-		}
-
-		/**
-		 * Add markdown formatted text (NYI!) to the output-buffer
-		 *
-		 * Actually this is a wrapper around _addText(text, true)
-		 * Unfortunately no one succeded to support markdown formatting for CoC, so as of speaking, this does exactly the same, as text("...")
-		 *
-		 * @param   text    The text to be formatted with markdown (NYI!)
-		 * @return  The instance of the class to support the 'Fluent interface' aka method-chaining
-		 */
-		public function markdown(text:String):Output
-		{
-			return _addText(text, true);
 		}
 
 		/**

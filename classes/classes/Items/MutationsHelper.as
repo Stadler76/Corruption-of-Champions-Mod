@@ -152,9 +152,9 @@ package classes.Items
 		{
 			if (changes < changeLimit && player.hairType == HAIR_FEATHER && rand(4) == 0) {
 				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
+				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>");
 				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
+				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>");
 				player.hairType = HAIR_NORMAL;
 				changes++;
 				return true;
@@ -272,10 +272,10 @@ package classes.Items
 
 				case "PlayerEvents-benoitHairPin":
 				case "reptilum-basilisk":
-				case "reptilum-dracolisk":
-					if (player.hairType == HAIR_BASILISK_PLUME && player.cor < 65) return 0;
+				case "reptilum-dracolisk": //never 4get the basilisk hair discourse of may 2017
+					if (player.hairType == HAIR_BASILISK_PLUME && player.cor < Math.max(20, (65 - player.corruptionTolerance()))) return 0;
 
-					if (player.isFemaleOrHerm() && player.cor < 15 && player.featheryHairPinEquipped() && player.isBasilisk()) {
+					if (player.isFemaleOrHerm() && player.cor < Math.max(80, (15 + player.corruptionTolerance())) && player.featheryHairPinEquipped() && player.isBasilisk()) {
 						var benoitMFText:String = getGame().bazaar.benoit.benoitMF(
 							" your hair has changed into a plume of feathers that, like legend is told, belongs to a female basilisk!",
 							" you have a plume, like a female basilisk!"
@@ -304,7 +304,7 @@ package classes.Items
 						return 1; // --> gained basilisk hair (plume)
 					}
 
-					if (player.cor >= 65 && player.hairType != HAIR_BASILISK_SPINES && player.hasLizardScales() && player.hasReptileFace()) {
+					if (player.cor >= Math.max(80, (65 + player.corruptionTolerance())) && player.hairType != HAIR_BASILISK_SPINES && player.hasLizardScales() && player.hasReptileFace()) {
 						// Corrupted Basilisk
 						if (player.hairLength > 0 && [HAIR_GOO, HAIR_BASILISK_PLUME].indexOf(player.hairType) == -1) {
 							output.text("\n\nYour scalp feels tight and hot, causing you to run a hand through your [hair] to rub at it gingerly.");

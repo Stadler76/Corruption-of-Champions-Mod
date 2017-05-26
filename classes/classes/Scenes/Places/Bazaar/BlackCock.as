@@ -1193,7 +1193,7 @@ package classes.Scenes.Places.Bazaar
 					outputText("\n\nWhen the flared head of his long rhino dong touches your [asshole] you give him a lust filled groan. He rewards you with an eager thrust, the flared head of his rhino dong popping into you with no problem. His hands slide up your body as he begins to play around inside of you. First his big slab of rhino meat twirls around, sending a hurricane of sensation through your [ass]. Then he pulls his dick completely out of your hole and when you look back to see what he's doing he thrusts forward hard, shafting you in one go. He continues like this, enjoying the freedom of movement provided by your [asshole] as he sends crushing waves of pleasure through your body. Then he grabs you purposefully and you know that playtime is over.");
 				}
 				outputText("\n\nAs if reading your mind Harry pulls his long dong out of your body until only the head remains. You feel the void left in the wake of his cock as an empty hunger. Then he shoves forward, forcing the entirety of his rhino dick into your body with a sudden brutal pelvic slap against your [ass] that knocks the wind out of you. He repeats this a little more quickly again and again until he reaches top speed and there is no pause and no time to react. He just repeatedly pounds into your [asshole] with freight train force and there is nothing you can do but scream in ecstasy. The brutal passion of the powerful man fucking you for all he's worth crashes into your senses and forces your body and mind to convulse wildly. Your mind is filled with the painful pleasure of being smashed into the table, of your nails scratching the wooden surface, of the brutal assault on your [ass] as a greedy dick uses you for its own pleasure. As you howl and groan for all the world to ear you begin to feel a familiar pulsing sensation in your nethers. You hear a growl above you as Harry's thrusts became more brutal and less timed, he moves the table beneath the two of you with every thrust.");
-				outputText("\n\nHe pounds you with every bit of strength he has and suddenly his dick is shoved in to the hilt and trembling as a it fires hot semen into your body. Knowing that the married rhino is cumming pushes you over the edge and with one last unending scream you reach the nirvana of climax.");
+				outputText("\n\nHe pounds you with every bit of strength he has and suddenly his dick is shoved in to the hilt and trembling as it fires hot semen into your body. Knowing that the married rhino is cumming pushes you over the edge and with one last unending scream you reach the nirvana of climax.");
 				if (player.hasCock() && player.hasVagina()) {
 					outputText("\n\nYour entire body tingles as you unload, your [cock] and [vagina] both erupting without being touched as the giant dong trembles inside your [asshole]. You flail like a fish out of water as the trembling of [eachCock] and the flooding of your [pussy] drowns out every other feeling except that of the large dong pressed into your [asshole].");
 				}
@@ -1569,7 +1569,7 @@ package classes.Scenes.Places.Bazaar
 				dynStats("spe", -1);
 			}
 			if (rand(3) == 0 && player.tou < 50 && changes < changeLimit) {
-				outputText("\n\nYour skin feels clammy and a little rubbery. You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips. Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!", false);
+				outputText("\n\nYour skin feels clammy and a little rubbery. You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips. Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
 				dynStats("sen", -1);
 			}
 			if (rand(3) == 0 && player.inte > 15 && player.faceType == FACE_RHINO && player.horns == 2) {
@@ -1597,8 +1597,8 @@ package classes.Scenes.Places.Bazaar
 			//------------
 			//Removes wings
 			if (rand(4) == 0 && changes < changeLimit && player.wingType > WING_TYPE_NONE) {
-				if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine. After a moment the pain passes, though your fin is gone!", false);
-				else outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades. After a moment the pain passes, though your wings are gone!", false);
+				if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine. After a moment the pain passes, though your fin is gone!");
+				else outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades. After a moment the pain passes, though your wings are gone!");
 				player.wingType = WING_TYPE_NONE;
 				changes++;
 			}
@@ -1655,7 +1655,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			//Removes antennaes!
 			if (rand(3) == 0 && changes < changeLimit && player.antennae > ANTENNAE_NONE) {
-				outputText("\n\nYour " + player.hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>", false);
+				outputText("\n\nYour " + player.hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>");
 				changes++;
 				player.antennae = ANTENNAE_NONE;
 			}
@@ -1663,8 +1663,8 @@ package classes.Scenes.Places.Bazaar
 			if (rand(4) == 0 && changes < changeLimit && player.hairType != HAIR_NORMAL) {
 				switch(player.hairType) {
 					case HAIR_FEATHER:
-						if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye. Before you can blow the offending down away, you realize the feather is collapsing in on itself. It continues to curl inward until all that remains is a normal strand of hair. <b>Your hair is no longer feathery!</b>", false);
-						else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your feathers. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer feathery!</b>", false);
+						if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye. Before you can blow the offending down away, you realize the feather is collapsing in on itself. It continues to curl inward until all that remains is a normal strand of hair. <b>Your hair is no longer feathery!</b>");
+						else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your feathers. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer feathery!</b>");
 						break;
 					case HAIR_GOO:
 						outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head. Your head is not left bald for long, though. Within moments, a full head of hair sprouts from the skin of your scalp. <b>Your hair is normal again!</b>");
@@ -1800,7 +1800,7 @@ package classes.Scenes.Places.Bazaar
 				if (player.statusEffectv1(StatusEffects.BonusACapacity) < 60) {
 					if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
 					player.addStatusValue(StatusEffects.BonusACapacity, 1, 5);
-					outputText("\n\nYou feel... more accommodating somehow. Your " + player.assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
+					outputText("\n\nYou feel... more accommodating somehow. Your " + player.assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.");
 					changes++;
 				}
 			}
@@ -2051,9 +2051,9 @@ package classes.Scenes.Places.Bazaar
 				temp *= 0.1;
 				player.cumMultiplier += temp;
 				//Flavor text
-				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.", false);
-				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + player.ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.", false);
-				outputText(" A bit of milky pre dribbles from your " + player.multiCockDescriptLight() + ", pushed out by the change.", false);
+				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
+				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + player.ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.");
+				outputText(" A bit of milky pre dribbles from your " + player.multiCockDescriptLight() + ", pushed out by the change.");
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.gender == GENDER_MALE && player.averageBreastSize() > 2 && flags[kFLAGS.HYPER_HAPPY] == 0) {

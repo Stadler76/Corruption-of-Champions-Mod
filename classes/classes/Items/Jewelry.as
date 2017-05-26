@@ -45,7 +45,7 @@ package classes.Items
 						desc += "Reduces minimum lust by " + (-_effectMagnitude) + ".";
 					break;
 				case JewelryLib.MODIFIER_FERTILITY:
-					desc += "Increases cum production by " + _effectMagnitude + "% and ferility by " + _effectMagnitude + ".";
+					desc += "Increases cum production by " + _effectMagnitude + "% and fertility by " + _effectMagnitude + ".";
 					break;
 				case JewelryLib.MODIFIER_CRITICAL:
 					desc += "Increases critical chance by " + _effectMagnitude + "%.";

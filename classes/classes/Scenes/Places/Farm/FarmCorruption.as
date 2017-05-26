@@ -2,6 +2,7 @@ package classes.Scenes.Places.Farm
 {
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.Items.Consumables.SimpleConsumable;
 	import classes.ItemSlotClass;
@@ -390,7 +391,7 @@ package classes.Scenes.Places.Farm
 			addButton(14, "Back", rootScene);
 		}
 		
-		private function getItemObj(flag:int):SimpleConsumable
+		private function getItemObj(flag:int):Consumable
 		{
 			if (flag == kFLAGS.FARM_SUCCUMILK_STORED) return consumables.SUCMILK;
 			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
@@ -403,7 +404,7 @@ package classes.Scenes.Places.Farm
 		
 		private function takeItems(flag:int):void
 		{
-			var item:SimpleConsumable = getItemObj(flag);
+			var item:Consumable = getItemObj(flag);
 			
 			if (flag == kFLAGS.FARM_EGG_STORED) flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 			flags[flag]--;
@@ -509,7 +510,7 @@ package classes.Scenes.Places.Farm
 				return true; // Hook the corrupt menu here
 			}
 			
-			if (player.cor >= 70 && corruptFollowers() >= 2 && player.level >= 12)
+			if (player.cor >= (70 - player.corruptionTolerance()) && corruptFollowers() >= 2 && player.level >= 12)
 			{
 				if (flags[kFLAGS.FARM_CORRUPT_PROMPT_DISPLAY] == 0)
 				{	
@@ -869,7 +870,7 @@ package classes.Scenes.Places.Farm
 			{
 				if (player.hasStatusEffect(StatusEffects.Milked))
 				{
-					outputText("\n\n<b>Your " + player.nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
+					outputText("\n\n<b>Your " + player.nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>");
 				}
 				
 				addButton(3,"Get Milked", farm.getMilked);

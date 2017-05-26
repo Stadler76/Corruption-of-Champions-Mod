@@ -44,7 +44,7 @@ package classes.Scenes
 			outputText("Minimal lust: " + flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST] + "\n");
 			outputText("\n");
 			
-			outputText("<b>Face</b>: " + player.faceDesc() + ", feminity " + player.femininity + "\n");
+			outputText("<b>Face</b>: " + player.faceDesc() + ", femininity " + player.femininity + "\n");
 			outputText("<b>Tone</b>: " + player.tone + "\n");
 			outputText("<b>Hair</b>: length " + Math.round(player.hairLength) + ", " + player.hairDescript() + "\n");
 			outputText("<b>Tits</b>: " + player.breastDescript(0) + ", size: " + player.breastRows[0].breastRating + " (" + player.breastCup(0) + ") with " + player.nippleDescript(0) + " of size " + player.nippleLength + "\n");
@@ -273,7 +273,7 @@ package classes.Scenes
 						if (rand(10) == 0 || (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING && rand(2)==0)) {
 							outputText("pressing it harder and harder. You start moaning, your hands shaking, unable to think straight. Your well-lubricated [pussy] aches for it, and you give so much desired push. ");
 							player.cuntChange(8, true, true, true);
-							outputText(" You scream in pain an pleasure, as your [pussy] stretches, accommodating to a throbbing item inside. You take a deep breath, then push again, this time further. It becomes impossible to think of anything but wild urge in your [vagina].");
+							outputText(" You scream in pain and pleasure, as your [pussy] stretches, accommodating to a throbbing item inside. You take a deep breath, then push again, this time further. It becomes impossible to think of anything but wild urge in your [vagina].");
 							player.cuntChange(16, true, true, false);
 							getGame().dynStats("cor", 3);
 							useDildo = 2;
@@ -375,7 +375,7 @@ package classes.Scenes
 				// Liquids
 				
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && useDildo > 0) {
-					outputText(" Your [pussy] gushes fluids down your leg as you cry in a mind-shattering orgasm. You sprawl there, wiggling and cumming your brains out for what feels like an eternity.\n", false);
+					outputText(" Your [pussy] gushes fluids down your leg as you cry in a mind-shattering orgasm. You sprawl there, wiggling and cumming your brains out for what feels like an eternity.\n");
 					flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST]++;
 					if (player.inte > 5) getGame().dynStats("int", -1);
 					getGame().dynStats("cor", 0.2);
@@ -389,13 +389,13 @@ package classes.Scenes
 					outputText(" You feel a trickle of your pussy juice down your leg, as you moan in a powerful orgasm.\n");
 				}
 				else if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) {
-					outputText(" You let a final shriek as pleasure rises its peak, moisture of your [pussy] all over your hands.\n", false);
+					outputText(" You let a final shriek as pleasure rises its peak, moisture of your [pussy] all over your hands.\n");
 				}
 				else if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) {
-					outputText(" You moan reaching a powerful orgasm, wet lips of your [pussy] clenching.\n", false);
+					outputText(" You moan reaching a powerful orgasm, wet lips of your [pussy] clenching.\n");
 				}
 				else  {
-					outputText(" You make a loud moan as you finally reach an orgasm.\n", false);
+					outputText(" You make a loud moan as you finally reach an orgasm.\n");
 				}
 				if (rand(3) == 0) {
 					temp = player.vaginas.length;
@@ -442,7 +442,7 @@ package classes.Scenes
 			}
 			
 			if (titPlay && rand(2) == 0 && player.biggestLactation() >= 2 ) {
-				outputText("\nWith your mind numb, your hands raise up to your " + player.breastDescript(0) + " as your body is shaken by waves of pleasure. ", false);
+				outputText("\nWith your mind numb, your hands raise up to your " + player.breastDescript(0) + " as your body is shaken by waves of pleasure. ");
 				getGame().masturbation.titCum();
 				getGame().masturbation.titDrink();
 			}
@@ -578,19 +578,19 @@ package classes.Scenes
 					getGame().dynStats("cor", 0.2);
 
 					if (player.biggestTitSize() >= 8.5 && player.nippleLength < 2) {
-						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh. ", false);
+						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh. ");
 						player.nippleLength = 2;
 					}
 					if (player.biggestTitSize() >= 7 && player.nippleLength < 1) {
-						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh. ", false);
+						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh. ");
 						player.nippleLength = 1;
 					}
 					if (player.biggestTitSize() >= 5 && player.nippleLength < .75) {
-						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh. ", false);
+						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh. ");
 						player.nippleLength = .75;
 					}
 					if (player.biggestTitSize() >= 3 && player.nippleLength < .5) {
-						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your blossoming breast-flesh. ", false);
+						outputText("A tender ache starts at your " + player.nippleDescript(0) + "s as they grow to match your blossoming breast-flesh. ");
 						player.nippleLength = .5;
 					}
 					
@@ -684,7 +684,7 @@ package classes.Scenes
 						outputText("\n\nSeconds, minutes, and maybe even hours are passing, but they're of little consequence to you. ");
 						outputText(" You're lead, squirming and moaning, from one milk-dripping orgasm to the next, coating yourself so thickly in the sticky fluid that its all you can smell anymore.  On and on, the cascades of ecstasy wash over you, exuded from your prominent buds as easily as the constant streams, but eventually, even seemingly timeless pleasure must abate. You dimly become aware that your milk has stopped flowing, your reserves exhausted. ");
 						if 		(player.inte < 10) outputText(" You moo with delight, totally relaxed after good milking. ");
-						else if (player.inte < 20) outputText(" You stretch and let out a contented moo, long and loud, aroused even more by the silliness of it. ", false);
+						else if (player.inte < 20) outputText(" You stretch and let out a contented moo, long and loud, aroused even more by the silliness of it. ");
 						else if (player.inte < 30) outputText(" You quietly moo, your mind barely register how strange you're acting.");
 						player.boostLactation(.4);
 						getGame().dynStats("cor", 0.5);
@@ -1258,7 +1258,7 @@ package classes.Scenes
 			var temp3:Number = 0;
 			
 			//If the player has at least one dick, decrease the size of each slightly,
-			outputText("\n\n", false);
+			outputText("\n\n");
 			//Find biggest cock
 			while (temp2 > 0) {
 				temp2--;
@@ -1272,11 +1272,11 @@ package classes.Scenes
 			temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
 			player.lengthChange(temp3, 1);
 			if (player.cocks[temp].cockLength < 2) {
-				outputText("  ", false);
+				outputText("  ");
 				if (player.cockTotal() == 1 && !player.hasVagina()) {
-					outputText("Your " + player.cockDescript(0) + " suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.", false);
-					if (player.balls > 0) outputText("  At the same time, your " + player.ballsDescriptLight() + " fall victim to the same sensation; eagerly swallowed whole by your crotch.", false);
-					outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>", false);
+					outputText("Your " + player.cockDescript(0) + " suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
+					if (player.balls > 0) outputText("  At the same time, your " + player.ballsDescriptLight() + " fall victim to the same sensation; eagerly swallowed whole by your crotch.");
+					outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
 					player.balls = 0;
 					player.ballSize = 1;
 					player.createVagina();
@@ -1304,7 +1304,7 @@ package classes.Scenes
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 				player.vaginas[0].virgin = true;
 				player.setClitLength(.25);
-				outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
+				outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!");
 				getGame().dynStats("lus", 10);
 					}						
 				
@@ -1316,7 +1316,7 @@ package classes.Scenes
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 			player.vaginas[0].virgin = true;
 			player.setClitLength(.25);
-			outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
+			outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!");
 			getGame().dynStats("lus", 10);
 		}
 		
@@ -1332,7 +1332,7 @@ package classes.Scenes
 					player.milked();
 				}
 				else if (player.biggestLactation() > 2) {
-					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and drink deeply of your bounty.  It floods your cheeks with its creamy flavor, and you greedily gulp it down. Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from your swollen jug. It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.", false);
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and drink deeply of your bounty.  It floods your cheeks with its creamy flavor, and you greedily gulp it down. Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from your swollen jug. It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.");
 
 					player.refillHunger( (player.biggestLactation() - 2) * 30 + 20);
 					player.boostLactation(.1);

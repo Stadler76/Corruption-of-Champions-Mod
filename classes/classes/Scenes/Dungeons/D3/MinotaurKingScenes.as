@@ -407,7 +407,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(". The artificial euphoria this has brought you makes it difficult not to crawl over to the nearest incubus and offer your body up, but you still have to deal with Lethice. Maybe you can make her lick the drippings from your slit after you take her down.");
 			outputText("\n\nWith that fantasy firmly in mind, you stand up and fix your [armor]. You can still do this, right?");
 			player.orgasm('Generic');
-			dynStats("lus",5,"resisted",false);
+			dynStats("lus",5,"resisted", false);
 			player.createStatusEffect(StatusEffects.MinotaurKingsTouch,0,0,0,0);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
 			player.minoCumAddiction(20);
@@ -469,7 +469,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" sort of... nice... sexy even");
 			}
 			outputText(", or you might have had second thoughts. Her creampied honeypot ought to feel like teflon-treated silk against your [cock " + x + "]. It glitters in the flickering, bedroom light of Lethice’s throne room, beckoning you to plunge inside and see just how good it will feel.");
-			outputText("\n\n<i>“Hrmmm, again?”</i> Excellia dreamily coos, lifting her ass up into position. <i>“...yes sir, I’m always rarin’ for a fuck.”</i> She happily sighs and wiggles her ass in your direction, completely unaware that you’re the one advancing toward her ass with a aching cock");
+			outputText("\n\n<i>“Hrmmm, again?”</i> Excellia dreamily coos, lifting her ass up into position. <i>“...yes sir, I’m always rarin’ for a fuck.”</i> She happily sighs and wiggles her ass in your direction, completely unaware that you’re the one advancing toward her ass with an aching cock");
 			if (player.balls > 0)
 			{
 				outputText(" and " + num2Text(player.balls) + " balls full of cum");

@@ -158,7 +158,7 @@ import classes.Scenes.NPCs.IsabellaFollowerScene;
 class IsabellaFollowerSceneForTest extends IsabellaFollowerScene {
 	public var collectedOutput:Vector.<String> = new Vector.<String>(); 
 	
-	override protected function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown:Boolean = false):void {
+	override protected function outputText(output:String):void {
 		collectedOutput.push(output);
 	}
 	

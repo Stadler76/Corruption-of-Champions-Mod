@@ -1,10 +1,13 @@
 package classes.Scenes 
 {
 	import classes.*;
-	import classes.Items.*
+import classes.BodyParts.Skin;
+import classes.Items.*
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.MainViewManager;
+	import classes.internals.Profiling;
+
 	import flash.utils.describeType;
 	import flash.utils.*
 	
@@ -37,6 +40,7 @@ package classes.Scenes
 		
 		public function accessDebugMenu():void {
 			//buildArray();
+			Profiling.LogProfilingReport();
 			if (!getGame().inCombat) {
 				hideMenus();
 				mainView.nameBox.visible = false;
@@ -44,7 +48,8 @@ package classes.Scenes
 				mainView.nameBox.maxChars = 16;
 				mainView.nameBox.restrict = null;
 				mainView.nameBox.width = 140;
-				outputText("Welcome to the super secret debug menu!", true);
+				clearOutput();
+				outputText("Welcome to the super secret debug menu!");
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
@@ -139,13 +144,14 @@ package classes.Scenes
 			transformativeArray.push(consumables.BOARTRU);
 			transformativeArray.push(consumables.BULBYPP);
 			transformativeArray.push(consumables.CANINEP);
+			transformativeArray.push(consumables.CLOVERS);
 			transformativeArray.push(consumables.DBLPEPP);
 			transformativeArray.push(consumables.DRAKHRT);
 			transformativeArray.push(consumables.DRYTENT);
 			transformativeArray.push(consumables.ECTOPLS);
 			transformativeArray.push(consumables.EQUINUM);
-			transformativeArray.push(consumables.FOXBERY);
 			//Page 2
+			transformativeArray.push(consumables.FOXBERY);
 			transformativeArray.push(consumables.FOXJEWL);
 			transformativeArray.push(consumables.FRRTFRT);
 			transformativeArray.push(consumables.GLDRIND);
@@ -157,8 +163,8 @@ package classes.Scenes
 			transformativeArray.push(consumables.KANGAFT);
 			transformativeArray.push(consumables.KNOTTYP);
 			transformativeArray.push(consumables.LABOVA_);
-			transformativeArray.push(consumables.LARGEPP);
 			//Page 3
+			transformativeArray.push(consumables.LARGEPP);
 			transformativeArray.push(consumables.MAGSEED);
 			transformativeArray.push(consumables.MGHTYVG);
 			transformativeArray.push(consumables.MOUSECO);
@@ -170,8 +176,8 @@ package classes.Scenes
 			transformativeArray.push(consumables.PROBOVA);
 			transformativeArray.push(consumables.P_DRAFT);
 			transformativeArray.push(consumables.P_S_MLK);
-			transformativeArray.push(consumables.PSDELIT);
 			//Page 4
+			transformativeArray.push(consumables.PSDELIT);
 			transformativeArray.push(consumables.PURHONY);
 			transformativeArray.push(consumables.SATYR_W);
 			transformativeArray.push(consumables.SDELITE);
@@ -183,8 +189,8 @@ package classes.Scenes
 			transformativeArray.push(consumables.S_GOSSR);
 			transformativeArray.push(consumables.SALAMFW);
 			transformativeArray.push(consumables.SHARK_T);
-			transformativeArray.push(consumables.SNAKOIL);
 			//Page 5
+			transformativeArray.push(consumables.SNAKOIL);
 			transformativeArray.push(consumables.SPHONEY);
 			transformativeArray.push(consumables.TAURICO);
 			transformativeArray.push(consumables.TRAPOIL);
@@ -193,6 +199,7 @@ package classes.Scenes
 			transformativeArray.push(consumables.VIXVIGR);
 			transformativeArray.push(consumables.W_FRUIT);
 			transformativeArray.push(consumables.WETCLTH);
+			transformativeArray.push(consumables.WOLF_PP);
 			
 			//------------
 			// Consumables
@@ -326,9 +333,9 @@ package classes.Scenes
 			materialArray.push(useables.B_CHITN);
 			materialArray.push(useables.T_SSILK);
 			materialArray.push(useables.D_SCALE);
+			materialArray.push(useables.EBNFLWR);
 			materialArray.push(useables.IMPSKLL);
 			materialArray.push(useables.LETHITE);
-			materialArray.push(null);
 			materialArray.push(null);
 			materialArray.push(null);
 			materialArray.push(null);
@@ -369,13 +376,14 @@ package classes.Scenes
 			weaponArray.push(weapons.L_STAFF);
 			weaponArray.push(weapons.L_WHIP);
 			weaponArray.push(weapons.MACE);
+			weaponArray.push(weapons.MRAPIER);
 			weaponArray.push(weapons.PIPE);
 			weaponArray.push(weapons.PTCHFRK);			
 			weaponArray.push(weapons.RIDINGC);
 			weaponArray.push(weapons.RRAPIER);
 			weaponArray.push(weapons.S_BLADE);
-			weaponArray.push(weapons.S_GAUNT);
 			//Page 3
+			weaponArray.push(weapons.S_GAUNT);
 			weaponArray.push(weapons.SCARBLD);
 			weaponArray.push(weapons.SCIMITR);
 			weaponArray.push(weapons.SPEAR);
@@ -383,6 +391,7 @@ package classes.Scenes
 			weaponArray.push(weapons.W_STAFF);
 			weaponArray.push(weapons.WARHAMR);
 			weaponArray.push(weapons.WHIP);
+			weaponArray.push(weapons.U_SWORD);
 			
 			//------------
 			// Shields
@@ -407,10 +416,14 @@ package classes.Scenes
 			armourArray.push(armors.CHBIKNI);
 			armourArray.push(armors.CLSSYCL);
 			armourArray.push(armors.DBARMOR);
+			armourArray.push(armors.EBNARMR);
+			armourArray.push(armors.EBNROBE);
+			armourArray.push(armors.EBNJACK);
+			//Page 2
+			armourArray.push(armors.EBNIROB);
 			armourArray.push(armors.FULLCHN);
 			armourArray.push(armors.FULLPLT);
 			armourArray.push(armors.GELARMR);
-			//Page 2
 			armourArray.push(armors.GOOARMR);
 			armourArray.push(armors.I_CORST);
 			armourArray.push(armors.I_ROBES);
@@ -419,11 +432,11 @@ package classes.Scenes
 			armourArray.push(armors.LEATHRA);
 			armourArray.push(armors.URTALTA);
 			armourArray.push(armors.LMARMOR);
+			//Page 3
 			armourArray.push(armors.LTHCARM);
 			armourArray.push(armors.LTHRPNT);
 			armourArray.push(armors.LTHRROB);
 			armourArray.push(armors.M_ROBES);
-			//Page 3
 			armourArray.push(armors.TBARMOR);
 			armourArray.push(armors.NURSECL);
 			armourArray.push(armors.OVERALL);
@@ -432,11 +445,11 @@ package classes.Scenes
 			armourArray.push(armors.S_SWMWR);
 			armourArray.push(armors.SAMUARM);
 			armourArray.push(armors.SCALEML);
+			//Page 4
 			armourArray.push(armors.SEDUCTA);
 			armourArray.push(armors.SEDUCTU);
 			armourArray.push(armors.SS_ROBE);
 			armourArray.push(armors.SSARMOR);
-			//Page 4
 			armourArray.push(armors.T_BSUIT);
 			armourArray.push(armors.TUBETOP);
 			armourArray.push(armors.W_ROBES);
@@ -457,10 +470,18 @@ package classes.Scenes
 			undergarmentArray.push(undergarments.LTX_BRA);
 			undergarmentArray.push(undergarments.LTXSHRT);
 			undergarmentArray.push(undergarments.LTXTHNG);
-			undergarmentArray.push(undergarments.SS_BRA);
 			//Page 2
+			undergarmentArray.push(undergarments.SS_BRA);
 			undergarmentArray.push(undergarments.SS_LOIN);
 			undergarmentArray.push(undergarments.SSPANTY);
+			undergarmentArray.push(undergarments.EBNCRST);
+			undergarmentArray.push(undergarments.EBNVEST);
+			undergarmentArray.push(undergarments.EBNJOCK);
+			undergarmentArray.push(undergarments.EBNTHNG);
+			undergarmentArray.push(undergarments.EBNCLTH);
+			undergarmentArray.push(undergarments.EBNRJCK);
+			undergarmentArray.push(undergarments.EBNRTNG);
+			undergarmentArray.push(undergarments.EBNRLNC);
 			
 			//------------
 			// Accessories
@@ -523,7 +544,8 @@ package classes.Scenes
 
 		
 		private function statChangeMenu():void {
-			outputText("Which attribute would you like to alter?", true);
+			clearOutput();
+			outputText("Which attribute would you like to alter?");
 			menu();
 			addButton(0, "Strength", statChangeAttributeMenu, "str");
 			addButton(1, "Toughness", statChangeAttributeMenu, "tou");
@@ -537,7 +559,8 @@ package classes.Scenes
 		
 		private function statChangeAttributeMenu(stats:String = ""):void {
 			var attribute:* = stats;
-			outputText("Increment or decrement by how much?", true);
+			clearOutput();
+			outputText("Increment or decrement by how much?");
 			addButton(0, "Add 1", statChangeApply, stats, 1);
 			addButton(1, "Add 5", statChangeApply, stats, 5);
 			addButton(2, "Add 10", statChangeApply, stats, 10);
@@ -558,17 +581,784 @@ package classes.Scenes
 		}
 		
 		private function styleHackMenu():void {
-			menu()
-			outputText("TEST STUFFZ", true);
+			menu();
+			clearOutput();
+			outputText("TEST STUFFZ");
 			addButton(0, "ASPLODE", styleHackMenu);
 			addButton(1, "Scorpion Tail", changeScorpionTail);
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
 			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
+			addButton(8, "BodyPartEditor", bodyPartEditorRoot,null,null,null, "Inspect and fine-tune the player body parts");
 			addButton(14, "Back", accessDebugMenu);
 		}
-		
+		private function generateTagDemos(...tags:Array):String {
+			return tags.map(function(tag:String,index:int,array:Array):String {
+				return "\\["+tag+"\\] = " +
+					   getGame().parser.recursiveParser("["+tag+"]").replace(' ','\xA0')
+			}).join(",\t");
+		}
+		private function showChangeOptions(backFn:Function, page:int, constants:Array, functionPageIndex:Function):void {
+			var N:int = 12;
+			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
+				var e:* = constants[i];
+				if (!(e is Array)) e = [i,e];
+				addButton(i % N, e[1], curry(functionPageIndex, page, e[0]));
+			}
+			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
+			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
+			addButton(14, "Back", backFn);
+		}
+		private function dumpPlayerData():void {
+			clearOutput();
+			var pa:PlayerAppearance = getGame().playerAppearance;
+			pa.appearance(); // Until the PlayerAppearance is properly refactored
+			/* [INTERMOD: xianxia]
+			pa.describeRace();
+			pa.describeFaceShape();
+			outputText("  It has " + player.faceDesc() + ".", false); //M/F stuff!
+			pa.describeEyes();
+			pa.describeHairAndEars();
+			pa.describeBeard();
+			pa.describeTongue();
+			pa.describeHorns();
+			outputText("[pg]");
+			pa.describeBodyShape();
+			pa.describeWings();
+			pa.describeRearBody();
+			pa.describeArms();
+			pa.describeLowerBody();
+			*/
+			outputText("[pg]");
+	/*		outputText("player.skin = " + JSON.stringify(player.skin.saveToObject())
+											  .replace(/":"/g,'":&nbsp; "')
+											  .replace(/,"/g, ', "') + "\n");
+			outputText("player.facePart = " + JSON.stringify(player.facePart.saveToObject()).replace(/,/g, ", ") + "\n");
+	*/	}
+		private function bodyPartEditorRoot():void {
+			menu();
+			dumpPlayerData();
+			addButton(0,"Head",bodyPartEditorHead);
+			addButton(1,"Skin & Hair",bodyPartEditorSkin);
+			addButton(2,"Torso & Limbs",bodyPartEditorTorso);
+//			addButton(3,"",bodyPartEditorValues);
+//			addButton(4,"",bodyPartEditorCocks);
+//			addButton(5,"",bodyPartEditorVaginas);
+//			addButton(6,"",bodyPartEditorBreasts);
+//			addButton(7,"",bodyPartEditorPiercings);
+//			addButton(,"",change);
+//			addButton(13, "Page2", bodyPartEditor2);
+			addButton(14, "Back", accessDebugMenu);
+		}
+		private function bodyPartEditorSkin():void {
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			/* [INTERMOD: xianxia]
+			addButton(0,"Skin Coverage",changeSkinCoverage);
+			*/
+
+			addButton(1,"SkinType",curry(changeLayerType,true));
+			addButton(2,"SkinColor",curry(changeLayerColor,true));
+			addButton(3,"SkinAdj",curry(changeLayerAdj,true));
+			addButton(4,"SkinDesc",curry(changeLayerDesc,true));
+			addButton(7,"FurColor",curry(changeLayerColor,false));
+			/* [INTERMOD: xianxia]
+			addButton(1,"SkinBaseType",curry(changeLayerType,true));
+			addButton(2,"SkinBaseColor",curry(changeLayerColor,true));
+			addButton(3,"SkinBaseAdj",curry(changeLayerAdj,true));
+			addButton(4,"SkinBaseDesc",curry(changeLayerDesc,true));
+			addButton(6,"SkinCoatType",curry(changeLayerType,false));
+			addButton(7,"SkinCoatColor",curry(changeLayerColor,false));
+			addButton(8,"SkinCoatAdj",curry(changeLayerAdj,false));
+			addButton(9,"SkinCoatDesc",curry(changeLayerDesc,false));
+			*/
+			addButton(10,"HairType",changeHairType);
+			addButton(11,"HairColor",changeHairColor);
+			addButton(12,"HairLength",changeHairLength);
+			addButton(14, "Back", bodyPartEditorRoot);
+		}
+
+		private static const SKIN_BASE_TYPES:Array = [
+			/* [INTERMOD: xianxia]
+			[SKIN_TYPE_PLAIN,"(0) PLAIN"],
+			[SKIN_TYPE_GOO,"(3) GOO"],
+			[SKIN_TYPE_STONE,"(7) STONE"]
+			*/
+			[SKIN_TYPE_PLAIN,"(0) PLAIN"],
+			[SKIN_TYPE_FUR,"(1) FUR"],
+			[SKIN_TYPE_LIZARD_SCALES,"(2) LIZARD_SCALES"],
+			[SKIN_TYPE_GOO,"(3) GOO"],
+			[SKIN_TYPE_UNDEFINED,"(4) UNDEFINED"],
+			[SKIN_TYPE_DRAGON_SCALES,"(5) DRAGON_SCALES"],
+			[SKIN_TYPE_FISH_SCALES,"(6) FISH_SCALES"],
+			[SKIN_TYPE_WOOL,"(7) WOOL"],
+		];
+		private static const SKIN_COAT_TYPES:Array = SKIN_BASE_TYPES;
+		/* [INTERMOD: xianxia]
+		private static const SKIN_COAT_TYPES:Array = [
+			[SKIN_TYPE_FUR,"(1) FUR"],
+			[SKIN_TYPE_SCALES,"(2) SCALES"],
+			[SKIN_TYPE_CHITIN,"(5) CHITIN"],
+			[SKIN_TYPE_BARK,"(6) BARK"],
+			[SKIN_TYPE_STONE,"(7) STONE"],
+			[SKIN_TYPE_TATTOED,"(8) TATTOED"],
+			[SKIN_TYPE_AQUA_SCALES,"(9) AQUA_SCALES"],
+			[SKIN_TYPE_DRAGON_SCALES,"(10) DRAGON_SCALES"],
+			[SKIN_TYPE_MOSS,"(11) MOSS"]
+		];
+		*/
+		private static const SKIN_TONE_CONSTANTS:Array = [
+			"pale", "light", "dark", "green", "gray",
+			"blue", "black", "white", "dirty red", "blueish yellow",
+			"ghostly pale", "bubblegum pink",
+		];
+		private static const SKIN_ADJ_CONSTANTS:Array = [
+			"(none)", "tough", "smooth", "rough", "sexy",
+			"freckled", "glistering", "shiny", "slimy","goopey",
+			"latex", "rubber"
+		];
+		private static const SKIN_DESC_CONSTANTS:Array = [
+			"(default)", "covering", "feathers", "hide",
+			"shell", "plastic", "skin", "fur",
+			"scales", "bark", "stone", "chitin"
+		];
+		/* [INTERMOD: xianxia]
+		private static const SKIN_COVERAGE_CONSTANTS:Array = [
+				[Skin.COVERAGE_NONE, "NONE (0)"],
+				[Skin.COVERAGE_LOW, "LOW (1, partial)"],
+				[Skin.COVERAGE_MEDIUM, "MEDIUM (2, mixed)"],
+				[Skin.COVERAGE_HIGH, "HIGH (3, full)"],
+				[Skin.COVERAGE_COMPLETE, "COMPLETE (4, full+face)"]
+		];
+		*/
+		private static const HAIR_TYPE_CONSTANTS:Array = [
+			[HAIR_NORMAL,"(0) NORMAL"],
+			[HAIR_FEATHER,"(1) FEATHER"],
+			[HAIR_GHOST,"(2) GHOST"],
+			[HAIR_GOO,"(3) GOO"],
+			[HAIR_ANEMONE,"(4) ANEMONE"],
+			[HAIR_QUILL,"(5) QUILL"],
+			/* [INTERMOD: xianxia]
+			[HAIR_GORGON,"(6) GORGON"],
+			[HAIR_LEAF,"(7) LEAF"],
+			[HAIR_FLUFFY,"(8) FLUFFY"],
+			[HAIR_GRASS,"(9) GRASS"],
+			*/
+			[HAIR_BASILISK_SPINES, "(6) BASILISK_SPINES"],
+			[HAIR_BASILISK_PLUME, "(7) BASILISK_PLUME"],
+			[HAIR_WOOL, "(8) WOOL"],
+		];
+		private static const HAIR_COLOR_CONSTANTS:Array = [
+			"blond", "brown", "black", "red", "white",
+			"silver blonde","sandy-blonde", "platinum blonde", "midnight black", "golden blonde",
+			"rainbow", "seven-colored",
+		];
+		private static const HAIR_LENGTH_CONSTANTS:Array = [
+			0,0.5,1,2,4,
+			8,12,24,32,40,
+			64,72
+		];
+		private function tagDemosSkin():void {
+			outputText("[pg]");
+			outputText(generateTagDemos(
+					"hairorfur", "skin", "skin.noadj", "skinfurscales", "skintone",
+					"underbody.skinfurscales", "underbody.skintone", "face"
+			)+".\n");
+
+			/* [INTERMOD: xianxia]
+			outputText(generateTagDemos(
+							"skin", "skin base", "skin coat", "skin full",
+							"skin noadj", "skin base.noadj", "skin coat.noadj", "skin full.noadj",
+							"skin notone", "skin base.notone", "skin coat.notone", "skin full.notone",
+							"skin type", "skin base.type", "skin coat.type", "skin full.type",
+							"skin color", "skin base.color", "skin coat.color",
+							"skin isare", "skin base.isare", "skin coat.isare",
+							"skin vs","skin base.vs", "skin coat.vs",
+							"skinfurscales", "skintone") + ".\n");
+			outputText(generateTagDemos("face","face deco","face full","player.facePart.isDecorated")+".\n");
+			*/
+		}
+		private function changeLayerType(editBase:Boolean,page:int=0,setIdx:int=-1):void {
+			/* [INTERMOD: xianxia]
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).type = setIdx;
+			*/
+			if (setIdx>=0) player.skin.type = setIdx;
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorSkin, page, editBase?SKIN_BASE_TYPES:SKIN_COAT_TYPES, curry(changeLayerType,editBase));
+		}
+		private function changeLayerColor(editBase:Boolean,page:int=0,setIdx:int=-1):void {
+			/* [INTERMOD: xianxia]
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = SKIN_TONE_CONSTANTS[setIdx];
+			*/
+			if (setIdx>=0) {
+				if (editBase) player.skin.tone = SKIN_TONE_CONSTANTS[setIdx];
+				else player.skin.furColor = SKIN_TONE_CONSTANTS[setIdx];
+			}
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_TONE_CONSTANTS, curry(changeLayerColor,editBase));
+		}
+		private function changeLayerAdj(editBase:Boolean,page:int=0,setIdx:int=-1):void {
+			/* [INTERMOD: xianxia]
+			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
+			*/
+			var tgt:Skin = player.skin;
+			if (setIdx==0) tgt.adj = "";
+			if (setIdx>0) tgt.adj = SKIN_ADJ_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_ADJ_CONSTANTS, curry(changeLayerAdj,editBase));
+		}
+		private function changeLayerDesc(editBase:Boolean,page:int=0,setIdx:int=-1):void {
+			/* [INTERMOD: xianxia]
+			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
+			*/
+			var tgt:Skin = player.skin;
+			if (setIdx==0) tgt.desc = "";
+			if (setIdx>0) tgt.desc = SKIN_DESC_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_DESC_CONSTANTS, curry(changeLayerDesc,editBase));
+		}
+		/* [INTERMOD: xianxia]
+		private function changeSkinCoverage(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.skin.coverage = setIdx;
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_COVERAGE_CONSTANTS, changeSkinCoverage);
+		}
+		*/
+		private function changeHairType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.hairType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorSkin, page, HAIR_TYPE_CONSTANTS, changeHairType);
+		}
+		private function changeHairColor(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.hairColor = HAIR_COLOR_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorSkin, page, HAIR_COLOR_CONSTANTS, changeHairColor);
+		}
+		private function changeHairLength(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.hairLength = HAIR_LENGTH_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorSkin, page, HAIR_LENGTH_CONSTANTS, changeHairLength);
+		}
+		private function bodyPartEditorHead():void {
+			menu();
+			dumpPlayerData();
+			addButton(0,"FaceType",changeFaceType);
+			addButton(1,"TongueType",changeTongueType);
+			addButton(2,"EyeType",changeEyeType);
+			addButton(3,"EarType",changeEarType);
+			addButton(4,"AntennaeType",changeAntennaeType);
+			addButton(5,"HornType",changeHornType);
+			addButton(6,"HornCount",changeHornCount);
+			addButton(7,"GillType",changeGillType);
+			addButton(8,"BeardStyle",changeBeardStyle);
+			addButton(9,"BeardLength",changeBeardLength);
+			/*addButton(,"FaceDecoType",changeFaceDecoType);
+			addButton(,"FaceDecoAdj",changeFaceDecoAdj);*/
+			addButton(14, "Back", bodyPartEditorRoot);
+		}
+		private static const FACE_TYPE_CONSTANTS:Array = [
+			[FACE_HUMAN,"(0) HUMAN"],
+			[FACE_HORSE,"(1) HORSE"],
+			[FACE_DOG,"(2) DOG"],
+			[FACE_COW_MINOTAUR,"(3) COW_MINOTAUR"],
+			[FACE_SHARK_TEETH,"(4) SHARK_TEETH"],
+			[FACE_SNAKE_FANGS,"(5) SNAKE_FANGS"],
+			[FACE_CAT,"(6) CAT"],
+			[FACE_LIZARD,"(7) LIZARD"],
+			[FACE_BUNNY,"(8) BUNNY"],
+			[FACE_KANGAROO,"(9) KANGAROO"],
+			[FACE_SPIDER_FANGS,"(10) SPIDER_FANGS"],
+			[FACE_FOX,"(11) FOX"],
+			[FACE_DRAGON,"(12) DRAGON"],
+			[FACE_RACCOON_MASK,"(13) RACCOON_MASK"],
+			[FACE_RACCOON,"(14) RACCOON"],
+			[FACE_BUCKTEETH,"(15) BUCKTEETH"],
+			[FACE_MOUSE,"(16) MOUSE"],
+			[FACE_FERRET_MASK,"(17) FERRET_MASK"],
+			[FACE_FERRET,"(18) FERRET"],
+			[FACE_PIG,"(19) PIG"],
+			[FACE_BOAR,"(20) BOAR"],
+			[FACE_RHINO,"(21) RHINO"],
+			[FACE_ECHIDNA,"(22) ECHIDNA"],
+			[FACE_DEER,"(23) DEER"],
+			[FACE_WOLF,"(24) WOLF"],
+			/* [INTERMOD: xianxia]
+			[FACE_MANTICORE,"(25) MANTICORE"],
+			[FACE_SALAMANDER_FANGS,"(26) SALAMANDER_FANGS"],
+			[FACE_YETI_FANGS,"(27) YETI_FANGS"],
+			[FACE_ORCA,"(28) ORCA"],
+			[FACE_PLANT_DRAGON,"(29) PLANT_DRAGON"]
+			*/
+		];
+		/* [INTERMOD: xianxia]
+		private static const DECO_DESC_CONSTANTS:Array = [
+			[DECORATION_NONE,"(0) NONE"],
+			[DECORATION_GENERIC,"(1) GENERIC"],
+			[DECORATION_TATTOO,"(2) TATTOO"],
+		];
+		private static const DECO_ADJ_CONSTANTS:Array = [
+			"(none)", "magic", "glowing", "sexy","",
+			"", "", "mark", "burn", "scar"
+		];
+		*/
+		private static const TONGUE_TYPE_CONSTANTS:Array = [
+			[TONGUE_HUMAN, "(0) HUMAN"],
+			[TONGUE_SNAKE, "(1) SNAKE"],
+			[TONGUE_DEMONIC, "(2) DEMONIC"],
+			[TONGUE_DRACONIC, "(3) DRACONIC"],
+			[TONGUE_ECHIDNA, "(4) ECHIDNA"],
+			/* [INTERMOD: xianxia]
+			[TONGUE_CAT, "(5) CAT"],
+			*/
+		];
+		private static const EYE_TYPE_CONSTANTS:Array = [
+			[EYES_HUMAN, "(0) HUMAN"],
+			[EYES_FOUR_SPIDER_EYES, "(1) FOUR_SPIDER_EYES"],
+			[EYES_BLACK_EYES_SAND_TRAP, "(2) BLACK_EYES_SAND_TRAP"],
+			/* [INTERMOD: xianxia]
+			[EYES_CAT_SLITS, "(3) CAT_SLITS"],
+			[EYES_GORGON, "(4) GORGON"],
+			[EYES_FENRIR, "(5) FENRIR"],
+			[EYES_MANTICORE, "(6) MANTICORE"],
+			[EYES_FOX, "(7) FOX"],
+			[EYES_REPTILIAN, "(8) REPTILIAN"],
+			[EYES_SNAKE, "(9) SNAKE"],
+			[EYES_DRAGON, "(10) DRAGON"],
+			*/
+			[EYES_LIZARD, "(3) LIZARD"],
+			[EYES_DRAGON, "(4) DRAGON"],
+			[EYES_BASILISK, "(5) BASILISK"],
+			[EYES_WOLF, "(6) WOLF"],
+		];
+		private static const EAR_TYPE_CONSTANTS:Array    = [
+			[EARS_HUMAN, "(0) HUMAN"],
+			[EARS_HORSE, "(1) HORSE"],
+			[EARS_DOG, "(2) DOG"],
+			[EARS_COW, "(3) COW"],
+			[EARS_ELFIN, "(4) ELFIN"],
+			[EARS_CAT, "(5) CAT"],
+			[EARS_LIZARD, "(6) LIZARD"],
+			[EARS_BUNNY, "(7) BUNNY"],
+			[EARS_KANGAROO, "(8) KANGAROO"],
+			[EARS_FOX, "(9) FOX"],
+			[EARS_DRAGON, "(10) DRAGON"],
+			[EARS_RACCOON, "(11) RACCOON"],
+			[EARS_MOUSE, "(12) MOUSE"],
+			[EARS_FERRET, "(13) FERRET"],
+			[EARS_PIG, "(14) PIG"],
+			[EARS_RHINO, "(15) RHINO"],
+			[EARS_ECHIDNA, "(16) ECHIDNA"],
+			[EARS_DEER, "(17) DEER"],
+			[EARS_WOLF, "(18) WOLF"],
+			/* [INTERMOD: xianxia]
+			[EARS_LION, "(19) LION"],
+			[EARS_YETI, "(20) YETI"],
+			[EARS_ORCA, "(21) ORCA"],
+			[EARS_SNAKE, "(22) SNAKE"],
+			*/
+			[EARS_SHEEP, "(19) SHEEP"],
+		];
+		private static const HORN_TYPE_CONSTANTS:Array    = [
+			[HORNS_NONE, "(0) NONE"],
+			[HORNS_DEMON, "(1) DEMON"],
+			[HORNS_COW_MINOTAUR, "(2) COW_MINOTAUR"],
+			[HORNS_DRACONIC_X2, "(3) DRACONIC_X2"],
+			[HORNS_DRACONIC_X4_12_INCH_LONG, "(4) DRACONIC_X4_12_INCH_LONG"],
+			[HORNS_ANTLERS, "(5) ANTLERS"],
+			[HORNS_GOAT, "(6) GOAT"],
+			[HORNS_UNICORN, "(7) UNICORN"],
+			[HORNS_RHINO, "(8) RHINO"],
+			/* [INTERMOD: xianxia]
+			[HORNS_OAK, "(9) OAK"],
+			[HORNS_GARGOYLE, "(10) GARGOYLE"],
+			[HORNS_ORCHID, "(11) ORCHID"],
+			*/
+		];
+		private static const HORN_COUNT_CONSTANTS:Array = [
+				0,1,2,3,4,
+				5,6,8,10,12,
+				16,20
+		];
+		private static const ANTENNA_TYPE_CONSTANTS:Array = [
+			[ANTENNAE_NONE, "(0) NONE"],
+			/* [INTERMOD: xianxia]
+			[ANTENNAE_MANTIS, "(1) MANTIS"],
+			 */
+			[ANTENNAE_BEE, "(2) BEE"],
+		];
+		private static const GILLS_TYPE_CONSTANTS:Array   = [
+			[GILLS_NONE, "(0) NONE"],
+			[GILLS_ANEMONE, "(1) ANEMONE"],
+			[GILLS_FISH, "(2) FISH"],
+			/* [INTERMOD: xianxia]
+			[GILLS_IN_TENTACLE_LEGS, "(3) IN_TENTACLE_LEGS"],
+			 */
+		];
+		private static const BEARD_STYLE_CONSTANTS:Array = [
+			[BEARD_NORMAL,"(0) NORMAL"],
+			[BEARD_GOATEE,"(1) GOATEE"],
+			[BEARD_CLEANCUT,"(2) CLEANCUT"],
+			[BEARD_MOUNTAINMAN,"(3) MOUNTAINMAN"],
+		];
+		private static const BEARD_LENGTH_CONSTANTS:Array = [
+			0,0.1,0.3,2,4,
+			8,12,16,32,64,
+		];
+		private function changeFaceType(page:int=0,setIdx:int=-1):void {
+			/* [INTERMOD: xianxia]
+			if (setIdx>=0) player.facePart.type = setIdx;
+			*/
+			if (setIdx>=0) player.faceType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, FACE_TYPE_CONSTANTS, changeFaceType);
+		}
+		/* [INTERMOD: xianxia]
+		private function changeFaceDecoType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.facePart.decoType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, DECO_DESC_CONSTANTS, changeFaceDecoType);
+		}
+		private function changeFaceDecoAdj(page:int=0,setIdx:int=-1):void {
+			if (setIdx==0) player.facePart.decoAdj = "";
+			if (setIdx>0) player.facePart.decoAdj = DECO_ADJ_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, DECO_ADJ_CONSTANTS, changeFaceDecoAdj);
+		}
+		*/
+		private function changeTongueType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.tongueType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, TONGUE_TYPE_CONSTANTS, changeTongueType);
+		}
+		private function changeEyeType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.eyeType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, EYE_TYPE_CONSTANTS, changeEyeType);
+		}
+		private function changeEarType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.earType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, EAR_TYPE_CONSTANTS, changeEarType);
+		}
+		private function changeHornType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.hornType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, HORN_TYPE_CONSTANTS, changeHornType);
+		}
+		private function changeHornCount(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.horns = HORN_COUNT_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorHead, page, HORN_COUNT_CONSTANTS, changeHornCount);
+		}
+		private function changeAntennaeType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.antennae = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, ANTENNA_TYPE_CONSTANTS, changeAntennaeType);
+		}
+		private function changeGillType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.gillType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, GILLS_TYPE_CONSTANTS, changeGillType);
+		}
+		private function changeBeardStyle(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.beardStyle = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorHead, page, BEARD_STYLE_CONSTANTS, changeBeardStyle);
+		}
+		private function changeBeardLength(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.beardLength = BEARD_LENGTH_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			tagDemosSkin();
+			showChangeOptions(bodyPartEditorHead, page, BEARD_LENGTH_CONSTANTS, changeBeardLength);
+		}
+		private function bodyPartEditorTorso():void {
+			menu();
+			dumpPlayerData();
+			addButton(0,"ArmType",changeArmType);
+			addButton(1,"ClawType",changeClawType);
+			addButton(2,"ClawTone",changeClawTone);
+			addButton(3,"TailType",changeTailType);
+			addButton(4,"TailCount",changeTailCount);
+			addButton(5,"WingType",changeWingType);
+			addButton(6,"WingDesc",changeWingDesc);
+			addButton(7,"LowerBodyType",changeLowerBodyType);
+			addButton(8,"LegCount",changeLegCount);
+			/* [INTERMOD: xianxia]
+			addButton(9,"ReadBodyType",changeRearBodyType);
+			*/
+			addButton(14, "Back", bodyPartEditorRoot);
+		}
+		private static const ARM_TYPE_CONSTANTS:Array   = [
+			[ARM_TYPE_HUMAN, "(0) HUMAN"],
+			[ARM_TYPE_HARPY, "(1) HARPY"],
+			[ARM_TYPE_SPIDER, "(2) SPIDER"],
+			/* [INTERMOD: xianxia]
+			[ARM_TYPE_MANTIS, "(3) MANTIS"],
+			[ARM_TYPE_BEE, "(4) BEE"],
+			*/
+			[ARM_TYPE_SALAMANDER, "(5) SALAMANDER"],
+			/* [INTERMOD: xianxia]
+			[ARM_TYPE_PHOENIX, "(6) PHOENIX"],
+			[ARM_TYPE_PLANT, "(7) PLANT"],
+			[ARM_TYPE_SHARK, "(8) SHARK"],
+			[ARM_TYPE_GARGOYLE, "(9) GARGOYLE"],
+			[ARM_TYPE_WOLF, "(10) WOLF"],
+			[ARM_TYPE_LION, "(11) LION"],
+			[ARM_TYPE_KITSUNE, "(12) KITSUNE"],
+			[ARM_TYPE_FOX, "(13) FOX"],
+			[ARM_TYPE_LIZARD, "(14) LIZARD"],
+			[ARM_TYPE_DRAGON, "(15) DRAGON"],
+			[ARM_TYPE_YETI, "(16) YETI"],
+			[ARM_TYPE_ORCA, "(17) ORCA"],
+			[ARM_TYPE_PLANT2, "(18) PLANT2"],
+			*/
+			[ARM_TYPE_WOLF, "(6) WOLF"],
+		];
+		private static const CLAW_TYPE_CONSTANTS:Array = [
+			[CLAW_TYPE_NORMAL,"(0) NORMAL"],
+			[CLAW_TYPE_LIZARD,"(1) LIZARD"],
+			[CLAW_TYPE_DRAGON,"(2) DRAGON"],
+			[CLAW_TYPE_SALAMANDER,"(3) SALAMANDER"],
+			[CLAW_TYPE_CAT,"(4) CAT"],
+			[CLAW_TYPE_DOG,"(5) DOG"],
+			[CLAW_TYPE_RAPTOR,"(6) RAPTOR"],
+			[CLAW_TYPE_MANTIS,"(7) MANTIS"],
+		];
+		private static const TAIL_TYPE_CONSTANTS:Array  = [
+			[TAIL_TYPE_NONE, "(0) NONE"],
+			[TAIL_TYPE_HORSE, "(1) HORSE"],
+			[TAIL_TYPE_DOG, "(2) DOG"],
+			[TAIL_TYPE_DEMONIC, "(3) DEMONIC"],
+			[TAIL_TYPE_COW, "(4) COW"],
+			[TAIL_TYPE_SPIDER_ADBOMEN, "(5) SPIDER_ADBOMEN"],
+			[TAIL_TYPE_BEE_ABDOMEN, "(6) BEE_ABDOMEN"],
+			[TAIL_TYPE_SHARK, "(7) SHARK"],
+			[TAIL_TYPE_CAT, "(8) CAT"],
+			[TAIL_TYPE_LIZARD, "(9) LIZARD"],
+			[TAIL_TYPE_RABBIT, "(10) RABBIT"],
+			[TAIL_TYPE_HARPY, "(11) HARPY"],
+			[TAIL_TYPE_KANGAROO, "(12) KANGAROO"],
+			[TAIL_TYPE_FOX, "(13) FOX"],
+			[TAIL_TYPE_DRACONIC, "(14) DRACONIC"],
+			[TAIL_TYPE_RACCOON, "(15) RACCOON"],
+			[TAIL_TYPE_MOUSE, "(16) MOUSE"],
+			[TAIL_TYPE_FERRET, "(17) FERRET"],
+			[TAIL_TYPE_BEHEMOTH, "(18) BEHEMOTH"],
+			[TAIL_TYPE_PIG, "(19) PIG"],
+			[TAIL_TYPE_SCORPION, "(20) SCORPION"],
+			[TAIL_TYPE_GOAT, "(21) GOAT"],
+			[TAIL_TYPE_RHINO, "(22) RHINO"],
+			[TAIL_TYPE_ECHIDNA, "(23) ECHIDNA"],
+			[TAIL_TYPE_DEER, "(24) DEER"],
+			[TAIL_TYPE_SALAMANDER, "(25) SALAMANDER"],
+			/* [INTERMOD: xianxia]
+			[TAIL_TYPE_KITSHOO, "(26) KITSHOO"],
+			[TAIL_TYPE_MANTIS_ABDOMEN, "(27) MANTIS_ABDOMEN"],
+			[TAIL_TYPE_MANTICORE_PUSSYTAIL, "(28) MANTICORE_PUSSYTAIL"],
+			[TAIL_TYPE_WOLF, "(29) WOLF"],
+			[TAIL_TYPE_GARGOYLE, "(30) GARGOYLE"],
+			[TAIL_TYPE_ORCA, "(31) ORCA"],
+			[TAIL_TYPE_YGGDRASIL, "(32) YGGDRASIL"],
+			*/
+			[TAIL_TYPE_WOLF, "(26) WOLF"],
+			[TAIL_TYPE_SHEEP, "(27) SHEEP"],
+		];
+		private static const TAIL_COUNT_CONSTANTS:Array = [
+			[0,"0"],1,2,3,4,
+			5,6,7,8,9,
+			10,16
+		];
+		private static const WING_TYPE_CONSTANTS:Array  = [
+			[WING_TYPE_NONE, "(0) NONE"],
+			[WING_TYPE_BEE_LIKE_SMALL, "(1) BEE_LIKE_SMALL"],
+			[WING_TYPE_BEE_LIKE_LARGE, "(2) BEE_LIKE_LARGE"],
+			[WING_TYPE_HARPY, "(4) HARPY"],
+			[WING_TYPE_IMP, "(5) IMP"],
+			[WING_TYPE_BAT_LIKE_TINY, "(6) BAT_LIKE_TINY"],
+			[WING_TYPE_BAT_LIKE_LARGE, "(7) BAT_LIKE_LARGE"],
+			[WING_TYPE_SHARK_FIN, "(8) SHARK_FIN"],
+			[WING_TYPE_FEATHERED_LARGE, "(9) FEATHERED_LARGE"],
+			[WING_TYPE_DRACONIC_SMALL, "(10) DRACONIC_SMALL"],
+			[WING_TYPE_DRACONIC_LARGE, "(11) DRACONIC_LARGE"],
+			[WING_TYPE_GIANT_DRAGONFLY, "(12) GIANT_DRAGONFLY"],
+			/* [INTERMOD: xianxia]
+			[WING_TYPE_BAT_LIKE_LARGE_2, "(13) BAT_LIKE_LARGE_2"],
+			[WING_TYPE_DRACONIC_HUGE, "(14) DRACONIC_HUGE"],
+			[WING_TYPE_FEATHERED_PHOENIX, "(15) FEATHERED_PHOENIX"],
+			[WING_TYPE_FEATHERED_ALICORN, "(16) FEATHERED_ALICORN"],
+			[WING_TYPE_MANTIS_LIKE_SMALL, "(17) MANTIS_LIKE_SMALL"],
+			[WING_TYPE_MANTIS_LIKE_LARGE, "(18) MANTIS_LIKE_LARGE"],
+			[WING_TYPE_MANTIS_LIKE_LARGE_2, "(19) MANTIS_LIKE_LARGE_2"],
+			[WING_TYPE_GARGOYLE_LIKE_LARGE, "(20) GARGOYLE_LIKE_LARGE"],
+			[WING_TYPE_PLANT, "(21) PLANT"],
+			[WING_TYPE_MANTICORE_LIKE_SMALL, "(22) MANTICORE_LIKE_SMALL"],
+			[WING_TYPE_MANTICORE_LIKE_LARGE, "(23) MANTICORE_LIKE_LARGE"],
+			*/
+			[WING_TYPE_IMP_LARGE, "(13) IMP_LARGE"],
+		];
+		private static const WING_DESC_CONSTANTS:Array = [
+			"(none)","non-existent","tiny hidden","huge","small",
+			"giant gragonfly","large bee-like","small bee-like",
+			"large, feathered","fluffy featherly","large white feathered","large crimson feathered",
+			"large, bat-like","two large pairs of bat-like",
+			"imp","small black faerie wings",
+			"large, draconic","large, majestic draconic","small, draconic",
+			"large manticore-like","small manticore-like",
+			"large mantis-like","small mantis-like",
+		];
+		private static const LOWER_TYPE_CONSTANTS:Array = [
+			[LOWER_BODY_TYPE_HUMAN, "(0) HUMAN"],
+			[LOWER_BODY_TYPE_HOOFED, "(1) HOOFED"],
+			[LOWER_BODY_TYPE_DOG, "(2) DOG"],
+			[LOWER_BODY_TYPE_NAGA, "(3) NAGA"],
+			[LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, "(5) DEMONIC_HIGH_HEELS"],
+			[LOWER_BODY_TYPE_DEMONIC_CLAWS, "(6) DEMONIC_CLAWS"],
+			[LOWER_BODY_TYPE_BEE, "(7) BEE"],
+			[LOWER_BODY_TYPE_GOO, "(8) GOO"],
+			[LOWER_BODY_TYPE_CAT, "(9) CAT"],
+			[LOWER_BODY_TYPE_LIZARD, "(10) LIZARD"],
+			[LOWER_BODY_TYPE_PONY, "(11) PONY"],
+			[LOWER_BODY_TYPE_BUNNY, "(12) BUNNY"],
+			[LOWER_BODY_TYPE_HARPY, "(13) HARPY"],
+			[LOWER_BODY_TYPE_KANGAROO, "(14) KANGAROO"],
+			[LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS, "(15) CHITINOUS_SPIDER_LEGS"],
+			[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, "(16) DRIDER_LOWER_BODY"],
+			[LOWER_BODY_TYPE_FOX, "(17) FOX"],
+			[LOWER_BODY_TYPE_DRAGON, "(18) DRAGON"],
+			[LOWER_BODY_TYPE_RACCOON, "(19) RACCOON"],
+			[LOWER_BODY_TYPE_FERRET, "(20) FERRET"],
+			[LOWER_BODY_TYPE_CLOVEN_HOOFED, "(21) CLOVEN_HOOFED"],
+			[LOWER_BODY_TYPE_ECHIDNA, "(23) ECHIDNA"],
+			[LOWER_BODY_TYPE_SALAMANDER, "(25) SALAMANDER"],
+			/* [INTERMOD: xianxia]
+			[LOWER_BODY_TYPE_SCYLLA, "(26) SCYLLA"],
+			[LOWER_BODY_TYPE_MANTIS, "(27) MANTIS"],
+			[LOWER_BODY_TYPE_SHARK, "(29) SHARK"],
+			[LOWER_BODY_TYPE_GARGOYLE, "(30) GARGOYLE"],
+			[LOWER_BODY_TYPE_PLANT_HIGH_HEELS, "(31) PLANT_HIGH_HEELS"],
+			[LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, "(32) PLANT_ROOT_CLAWS"],
+			[LOWER_BODY_TYPE_WOLF, "(33) WOLF"],
+			[LOWER_BODY_TYPE_PLANT_FLOWER, "(34) PLANT_FLOWER"],
+			[LOWER_BODY_TYPE_LION, "(35) LION"],
+			[LOWER_BODY_TYPE_YETI, "(36) YETI"],
+			[LOWER_BODY_TYPE_ORCA, "(37) ORCA"],
+			[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "(38) YGG_ROOT_CLAWS"],
+			*/
+			[LOWER_BODY_TYPE_WOLF, "(26) WOLF"],
+		];
+		private static const LEG_COUNT_CONSTANTS:Array = [
+			1,2,4,6,8,
+			10,12,16
+		];
+		/* [INTERMOD: xianxia]
+		private static const REAR_TYPE_CONSTANTS:Array  = [
+			[REAR_BODY_NONE, "(0) NONE"],
+			[REAR_BODY_DRACONIC_MANE, "(1) DRACONIC_MANE"],
+			[REAR_BODY_DRACONIC_SPIKES, "(2) DRACONIC_SPIKES"],
+			[REAR_BODY_FENRIR_ICE_SPIKES, "(3) FENRIR_ICE_SPIKES"],
+			[REAR_BODY_LION_MANE, "(4) LION_MANE"],
+			[REAR_BODY_BEHEMOTH, "(5) BEHEMOTH"],
+			[REAR_BODY_SHARK_FIN, "(6) SHARK_FIN"],
+			[REAR_BODY_ORCA_BLOWHOLE, "(7) ORCA_BLOWHOLE"],
+		];
+		*/
+		private function changeArmType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.armType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, ARM_TYPE_CONSTANTS, changeArmType);
+		}
+		private function changeClawType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.clawType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, CLAW_TYPE_CONSTANTS, changeClawType);
+		}
+		private function changeClawTone(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.clawTone = SKIN_TONE_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, SKIN_TONE_CONSTANTS, changeClawTone);
+		}
+		private function changeTailType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.tailType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, TAIL_TYPE_CONSTANTS, changeTailType);
+		}
+		private function changeTailCount(page:int=0,setIdx:int=-1):void {
+			/* [INTERMOD: xianxia]
+			if (setIdx>=0) player.tailCount = TAIL_COUNT_CONSTANTS[setIdx];
+			*/
+			if (setIdx>=0) player.tailVenom = TAIL_COUNT_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, TAIL_COUNT_CONSTANTS, changeTailCount);
+		}
+		private function changeWingType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.wingType = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, WING_TYPE_CONSTANTS, changeWingType);
+		}
+		private function changeWingDesc(page:int=0,setIdx:int=-1):void {
+			if (setIdx==0) player.wingDesc = "";
+			if (setIdx>=0) player.wingDesc = WING_DESC_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, WING_DESC_CONSTANTS, changeWingDesc);
+		}
+		private function changeLowerBodyType(page:int=0,setIdx:int=-1):void {
+			/* [INTERMOD: xianxia]
+			if (setIdx>=0) player.lowerBodyPart.type = setIdx;
+			*/
+			if (setIdx>=0) player.lowerBody = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, LOWER_TYPE_CONSTANTS, changeLowerBodyType);
+		}
+		private function changeLegCount(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.legCount = LEG_COUNT_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, LEG_COUNT_CONSTANTS, changeLegCount);
+		}
+		/* [INTERMOD: xianxia]
+		private function changeRearBodyType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.rearBody = setIdx;
+			menu();
+			dumpPlayerData();
+			showChangeOptions(bodyPartEditorTorso, page, REAR_TYPE_CONSTANTS, changeRearBodyType);
+		}
+		*/
 		private function changeScorpionTail():void {
 			clearOutput();
 			outputText("<b>Your tail is now that of a scorpion's. Currently, scorpion tail has no use but it will eventually be useful for stinging.</b>");

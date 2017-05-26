@@ -523,7 +523,7 @@ package classes.Scenes.Dungeons.D3
 			if(mainView.nameBox.text == "")
 			{
 				clearOutput();
-				outputText("<b>You must select a name.</b>",false);
+				outputText("<b>You must select a name.</b>");
 				mainView.nameBox.x = mainView.mainText.x + 5;
 				mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 				menu();
@@ -879,7 +879,13 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("<b>Weeks later...</b>\nThey had it. The damned bastards had it. Syrena, the head researcher had figured out how to open a stable portal months ago, but for whatever reason, she kept it from Lethice. There’s a shortage of evidence about what she was actually scheming, but you’d guess she was planning to take a cadre of loyal demons to an untainted plane and set herself up as a queen.");
-			outputText("\n\nNo room for loyalty among demons, you suppose. Still, with the information in these books, you can go home. Taking them back to your camp, you work the rituals on the portal to Ingnam{, assisted by your follower{s}}, and before you know it, the portal’s hazy mists resolve into a perfectly circle opening, one that leads to a familiar cave.");
+			outputText("\n\nNo room for loyalty among demons, you suppose. Still, with the information in these books, you can go home. Taking them back to your camp, you work the rituals on the portal to Ingnam");
+			if (camp.companionsCount() > 0) {
+				outputText(", assisted by your follower");
+				if (camp.companionsCount() > 1)
+					outputText("s");
+			}
+			outputText(", and before you know it, the portal’s hazy mists resolve into a perfectly circle opening, one that leads to a familiar cave.");
 			outputText("\n\nWill you seek vengeance or justice or with your return?");
 			menu();
 			addButton(0,"Vengeance",goHomeVeng);
@@ -928,10 +934,12 @@ package classes.Scenes.Dungeons.D3
 				outputText(" The townsfolk lynched their traitorous leaders right there and then under the watchful eyes of the Champion. " + player.mf("He","She") + " nodded approvingly when they gave their last twitches, seemingly happy to let small-town justice run its course.");
 			}
 			outputText("\n\nLife continued on. A new council was chosen, but it was Champion [name] that most people followed. " + player.mf("He","She") + " had left on the cusp of adulthood and returned a grizzled");
-			outputText(" warrior. With a seemingly infallable champion there to defend it");
+			outputText(" warrior. With a seemingly infallible champion there to defend it");
 			if(getGame().camp.companionsCount() > 0)
 			{
-				outputText(" to say nothing of " + player.mf("his","her") + " bizarre friends");
+				outputText(" to say nothing of " + player.mf("his","her") + " bizarre friend");
+				if (camp.companionsCount() > 1)
+					outputText("s");
 			}
 			outputText(", Ingnam prospered. The tiny village soon grew into a bustling town, and later a city.");
 			outputText("\n\nWhen age finally claimed the unexpected " + player.mf("hero","heroine") + ", a stone statue of immense proportions was erected so that future generations could forever live under the protection of their greatest hero.");

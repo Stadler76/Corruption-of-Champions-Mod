@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by aimozg on 06.01.14.
  */
 package classes.Scenes.Areas
@@ -9,11 +9,12 @@ package classes.Scenes.Areas
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
+	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Forest.*;
 	
 	use namespace kGAMECLASS;
 
-	public class Forest extends BaseContent
+	public class Forest extends BaseContent implements IExplorable
 	{
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
@@ -32,41 +33,11 @@ import classes.Scenes.API.FnHelpers;
 			return flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0;
 		}
 		public function discover():void {
-			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>", true);
+			clearOutput();
+			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>");
 			flags[kFLAGS.TIMES_EXPLORED]++;
 			flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
 			doNext(camp.returnToCampUseOneHour);
-		}
-		public function deepwoodsDiscovered():Boolean {
-			return player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
-		}
-
-		public function exploreDeepwoods():void
-		{
-			clearOutput();
-			//Increment deepwoods exploration counter.
-			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
-			deepwoodsEncounter.execEncounter();
-		}
-
-		private function deepwoodsWalkFn():void {
-			outputText("You enjoy a peaceful walk in the deepwoods.  It gives you time to think over the recent, disturbing events.", true);
-			dynStats("tou", .5, "int", 1);
-			doNext(camp.returnToCampUseOneHour);
-		}
-
-		public function tentacleBeastDeepwoodsEncounterFn():void {
-			if (player.gender > 0) flags[kFLAGS.GENDERLESS_CENTAUR_MADNESS] = 0;
-			//Tentacle avoidance chance due to dangerous plants
-			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
-				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", true);
-				menu();
-				addButton(0,"Continue", tentacleBeastScene.encounter);
-				addButton(4, "Leave", camp.returnToCampUseOneHour);
-			}else {
-				tentacleBeastScene.encounter();
-			}
 		}
 
 		//==============================
@@ -88,7 +59,7 @@ import classes.Scenes.API.FnHelpers;
 						chance: 0.5
 					}, {
 						name  : "deepwoods",
-						call  : discoverDeepwoods,
+						call  : kGAMECLASS.deepWoods.discover,
 						when  : function ():Boolean {
 							return (flags[kFLAGS.TIMES_EXPLORED_FOREST] >= 20) && !player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
 						},
@@ -147,58 +118,6 @@ import classes.Scenes.API.FnHelpers;
 					});
 			return _forestEncounter;
 		}
-		private var _deepwoodsEncounter:Encounter = null;
-		public function get deepwoodsEncounter():Encounter { // lateinit because it references getGame()
-			return _deepwoodsEncounter ||= Encounters.group(kGAMECLASS.commonEncounters, {
-				name: "kitsune",
-				call: kitsuneScene
-			}, /*{ // [INTERMOD:8chan]
-				name: "dullahan",
-				call: dullahanScene
-			}, */{
-				name: "akbal",
-				call: akbalScene
-			}, {
-				name: "tamani",
-				call: tamaniScene
-			}, {
-				name: "faerie",
-				call: faerie
-			}, {
-				name: "erlking",
-				call: erlkingScene
-			}, {
-				name: "fera",
-				call: getGame().fera
-			}, {
-				name: "lumber",
-				call: getGame().camp.cabinProgress.forestEncounter
-			}, {
-				name  : "glade",
-				call  : corruptedGlade,
-				chance: 2
-			}, {
-				name: "tentabeast",
-				call: tentacleBeastDeepwoodsEncounterFn,
-				when: Encounters.fn.ifLevelMin(2)
-			}, {
-				name: "dungeon",
-				call: getGame().dungeons.enterDeepCave,
-				when: getGame().dungeons.canFindDeepCave
-			}, {
-				name  : "walk",
-				call  : deepwoodsWalkFn,
-				chance: 0.01
-			});
-		}
-
-
-
-		public function discoverDeepwoods():void {
-			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
-			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>", true);
-			doNext(camp.returnToCampUseOneHour);
-		}
 
 		public function tentacleBeastEncounterFn():void {
 			clearOutput();
@@ -206,7 +125,7 @@ import classes.Scenes.API.FnHelpers;
 			//Tentacle avoidance chance due to dangerous plants
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
-				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
+				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");
 				menu();
 				addButton(0, "Continue", tentacleBeastScene.encounter);
 				addButton(4, "Leave", camp.returnToCampUseOneHour);
@@ -217,7 +136,7 @@ import classes.Scenes.API.FnHelpers;
 		}
 
 		public function tripOnARoot():void {
-			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.", false);
+			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.");
 			player.takeDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -236,16 +155,16 @@ import classes.Scenes.API.FnHelpers;
 		}
 		public function forestWalkFn():void {
 			if (player.cor < 80) {
-				outputText("You enjoy a peaceful walk in the woods, it gives you time to think.", false);
+				outputText("You enjoy a peaceful walk in the woods, it gives you time to think.");
 				dynStats("tou", .5, "int", 1);
 			}
 			else {
-				outputText("As you wander in the forest, you keep ", false);
-				if (player.gender == 1) outputText("stroking your half-erect " + player.multiCockDescriptLight() + " as you daydream about fucking all kinds of women, from weeping tight virgins to lustful succubi with gaping, drooling fuck-holes.", false);
-				if (player.gender == 2) outputText("idly toying with your " + player.vaginaDescript(0) + " as you daydream about getting fucked by all kinds of monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.", false);
-				if (player.gender == 3) outputText("stroking alternatively your " + player.multiCockDescriptLight() + " and your " + player.vaginaDescript(0) + " as you daydream about fucking all kinds of women, from weeping tight virgins to lustful succubi with gaping, drooling fuck-holes, before, or while, getting fucked by various monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.", false);
-				if (player.gender == 0) outputText("daydreaming about sex-demons with huge sexual attributes, and how you could please them.", false);
-				outputText("", false);
+				outputText("As you wander in the forest, you keep ");
+				if (player.gender == 1) outputText("stroking your half-erect " + player.multiCockDescriptLight() + " as you daydream about fucking all kinds of women, from weeping tight virgins to lustful succubi with gaping, drooling fuck-holes.");
+				if (player.gender == 2) outputText("idly toying with your " + player.vaginaDescript(0) + " as you daydream about getting fucked by all kinds of monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.");
+				if (player.gender == 3) outputText("stroking alternatively your " + player.multiCockDescriptLight() + " and your " + player.vaginaDescript(0) + " as you daydream about fucking all kinds of women, from weeping tight virgins to lustful succubi with gaping, drooling fuck-holes, before, or while, getting fucked by various monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.");
+				if (player.gender == 0) outputText("daydreaming about sex-demons with huge sexual attributes, and how you could please them.");
+				outputText("");
 				dynStats("tou", .5, "lib", .25, "lus", player.lib / 5);
 			}
 			doNext(camp.returnToCampUseOneHour);
@@ -260,7 +179,7 @@ import classes.Scenes.API.FnHelpers;
 			//end event
 			doNext(camp.returnToCampUseOneHour);
 		}
-		public function exploreForest():void
+		public function explore():void
 		{
 			clearOutput();
 			//Increment forest exploration counter.

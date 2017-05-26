@@ -1,4 +1,4 @@
-﻿/*
+/*
 	Debug pane and related functions
 	Author: Fake-Name
 */
@@ -46,6 +46,7 @@ public function doThatTestingThang():void
 	//
 	//
 
+	clearOutput();
 	outputText(<![CDATA[
 
 <b>Parser Tests!</b>
@@ -295,7 +296,7 @@ convert "
 "derp a herp"
 
 
-	]]>, true, true);
+	]]>);
 
 
 	menu();
@@ -334,7 +335,8 @@ public function eventTesterGo():void {
 	trace("Temp = ", temp);
 
 	menu();
-	outputText(temp, true, true);
+	clearOutput();
+	outputText(temp);
 
 	addButton(14, "Back", eventTester);
 	output.flush();

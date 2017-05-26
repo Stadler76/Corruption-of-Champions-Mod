@@ -7,7 +7,7 @@ package classes.internals
 	 * to a shared object or file.
 	 * The interface also provides a function to reverse the process.
 	 */
-	public interface Serializable 
+	public interface ISerializable 
 	{
 		/**
 		 * Serialize a class so it can be stored. Any state that is not serialized will be lost and replaced with the

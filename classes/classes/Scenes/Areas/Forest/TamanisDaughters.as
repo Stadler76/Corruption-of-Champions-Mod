@@ -10,22 +10,22 @@ package classes.Scenes.Areas.Forest
 		private function midRoundMadness():void {
 			var selector:Number = rand(4);
 			if (selector == 0) {
-				outputText("A slender hand reaches inside your " + player.armorName + " and gives your ", false);
+				outputText("A slender hand reaches inside your " + player.armorName + " and gives your ");
 				if (player.balls > 0) {
-					if (rand(2) == 0) outputText(player.multiCockDescriptLight(), false);
-					else outputText(player.ballsDescriptLight(), false);
+					if (rand(2) == 0) outputText(player.multiCockDescriptLight());
+					else outputText(player.ballsDescriptLight());
 				}
-				else outputText(player.multiCockDescriptLight(), false);
-				outputText(" a gentle squeeze.  You twist away but your breathing gets a little heavier.\n\n", false);
+				else outputText(player.multiCockDescriptLight());
+				outputText(" a gentle squeeze.  You twist away but your breathing gets a little heavier.\n\n");
 			}
 			else if (selector == 1) {
-				outputText("A girl latches onto your " + player.legs() + " and begins caressing your body lovingly, humming happily.  You quickly shake her loose but the attention makes you blush a little more.\n\n", false);
+				outputText("A girl latches onto your " + player.legs() + " and begins caressing your body lovingly, humming happily.  You quickly shake her loose but the attention makes you blush a little more.\n\n");
 			}
 			else if (selector == 2) {
-				outputText("One of your daughters launches onto your back and presses her hard, pierced nipples against your neck.  She whispers in your ear, \"<i>Twist my nipples dad!</i>\"\n\n", false);
-				outputText("You reach back and throw her off, but her perverted taunts still leave you feeling a little hot under the collar.\n\n", false);
+				outputText("One of your daughters launches onto your back and presses her hard, pierced nipples against your neck.  She whispers in your ear, \"<i>Twist my nipples dad!</i>\"\n\n");
+				outputText("You reach back and throw her off, but her perverted taunts still leave you feeling a little hot under the collar.\n\n");
 			}
-			else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your " + player.armorName + ".\n\n", false);
+			else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your " + player.armorName + ".\n\n");
 			game.dynStats("lus", 1 + player.lib/15+rand(player.cor/30));
 		}
 
@@ -35,8 +35,8 @@ package classes.Scenes.Areas.Forest
 			}
 			else if (rand(6) == 0) {
 				TamainsDaughtersScene.tamaniPresent = true;
-				outputText("A high-pitched yet familiar voice calls out, \"<i><b>So this is where you skanks ran off to---wait a second.  Are you trying to poach Tamani's man!?</b></i>\"\n\n", false);
-				outputText("You can see Tamani lurking around the rear of the goblin pack, visibly berating her daughters.  On one hand it sounds like she might help you, but knowing goblins, she'll probably forget about her anger and help them subdue you for more cum...\n\n", false);
+				outputText("A high-pitched yet familiar voice calls out, \"<i><b>So this is where you skanks ran off to---wait a second.  Are you trying to poach Tamani's man!?</b></i>\"\n\n");
+				outputText("You can see Tamani lurking around the rear of the goblin pack, visibly berating her daughters.  On one hand it sounds like she might help you, but knowing goblins, she'll probably forget about her anger and help them subdue you for more cum...\n\n");
 				//(+5 mob strength)
 				str += 5;
 				//(+5 mob toughness)

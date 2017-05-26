@@ -14,7 +14,7 @@ package classes.Scenes.Areas.Bog
 		public function lizanIntro():void {
 			clearOutput();
 			var lizan:LizanRogue = new LizanRogue();
-			if (player.cor > 30) {
+			if (player.cor > (30 + player.corruptionTolerance())) {
 				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skinTone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise the lizan tentatively sniffs the air between the two of you. Without warning he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack and you realize he's waiting for you to back down. What will you do?");
 				if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
@@ -81,14 +81,15 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 	
 			if (flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				clearOutput();
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
 				combat.cleanupAfterCombat();
 				return;
 			}
 			
 			outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 			menu();
-			if (player.cor > 30) {
+			if (player.cor > (30 - player.corruptionTolerance())) {
 				addDisabledButton(0, "Use Dick", "This scene requires you to have cock and sufficient arousal.");
 				addDisabledButton(1, "Use Pussy", "This scene requires you to have vagina and sufficient arousal.");
 				if (player.lust >= 33 && player.gender > 0) {
@@ -123,7 +124,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function loseToLizan():void {
 			clearOutput();
-			if (player.cor > 30) {
+			if (player.cor > (30 + player.corruptionTolerance())) {
 				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxLust() ? "overwhelming desires": "your injuries") + ". The lizan steps over to you, intent on punishing you. ");
 				combat.cleanupAfterCombat();
 			}
@@ -162,7 +163,7 @@ package classes.Scenes.Areas.Bog
 				}
 				else {
 					outputText("\n\nLike a snake his tongue slithers from his lips and begins to encircle your swollen [cock]. The long saliva dripping muscle covers your [cock] in dripping gobs of spit as it forms coils, slowly pulling your [cock] towards the lizan's obviously experienced mouth. He closes his lips around the first 10 inches of your [cock], unable to fit anymore into his mouth. He drags his lips across your impressive [cock] with obvious relish, maybe its not often he gets to service a cock as big as yours. The combination of the rapid cooling sensation combined with the awe inspiring suction has you trembling before long.");
-					outputText("\n\nHe suddenly twists his head, a movement that almost brings you to your knees. He begins to bob up and down and you watch as your [cock] is partially engulfed again and again. His tongue coils with each fluid motion and unwraps everytime he pulls off. The intense sensation almost brings you to your peak but before you reach that glorious point of no return he pulls off your [cockHead] with an audible pop, licking his lips and giving you a self satisfied smile.");
+					outputText("\n\nHe suddenly twists his head, a movement that almost brings you to your knees. He begins to bob up and down and you watch as your [cock] is partially engulfed again and again. His tongue coils with each fluid motion and unwraps every time he pulls off. The intense sensation almost brings you to your peak but before you reach that glorious point of no return he pulls off your [cockHead] with an audible pop, licking his lips and giving you a self satisfied smile.");
 				}
 			}
 			else { //Multi cocks
@@ -172,7 +173,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nThis lizan is obviously used to orally accommodating multiple cocks. His head begins to bob slightly, pulling [eachCock] wrapped in his gloriously talented tongue with it. The lizan rubs your [legs] with his cool scaly hands, causing you to thrust towards his face. After a few minutes of intense cock squeezing he begins to untangle his insanely long tongue from [eachCock]. The process gives your surging erections time to cool down before the main event. Once finished he licks his lips before giving you a self satisfied smile.");
 			}
 			outputText("\n\nAs you marvel at the lizan's oral talents he gets on his back and wraps his arms around his well defined calf muscles. You feel like the luckiest guy in the world as you watch the flexible lizan practically fold himself in half. The lean globes of his toned " + monster.skinTone + " ass points up at you, a natural part forming to make his naked hole visible. The way his hole winks at you causes [eachCock] to twitch in anticipation.");
-			outputText("\n\nBefore you can get down there and take full advantage of his position his tongue makes an encore appearance. You watch as it slithers down his body, tickling his pert nippples before diving down to his sculpted abdominals. It moves like a snake, wrapping around his dual cocks before the tip dips into his spread hole. He begins to lube up his anal passage, even stretching his hole a little bit. The lizan roughly tongue fucks his own hole, making a show of it as he swishes his tail and pulls his legs closer to his chest. He begins to release soft little sexy gasps as he drills his tongue deeper and deeper into his well relaxed hole. [EachCock] twitches at the sight and soon he slurps his last and retracts his tongue. You can't help but smile as you push him forward and aim straight for his wet little rosebud.");
+			outputText("\n\nBefore you can get down there and take full advantage of his position his tongue makes an encore appearance. You watch as it slithers down his body, tickling his pert nipples before diving down to his sculpted abdominals. It moves like a snake, wrapping around his dual cocks before the tip dips into his spread hole. He begins to lube up his anal passage, even stretching his hole a little bit. The lizan roughly tongue fucks his own hole, making a show of it as he swishes his tail and pulls his legs closer to his chest. He begins to release soft little sexy gasps as he drills his tongue deeper and deeper into his well relaxed hole. [EachCock] twitches at the sight and soon he slurps his last and retracts his tongue. You can't help but smile as you push him forward and aim straight for his wet little rosebud.");
 			if (player.smallestCockLength() < 7) { // actually, it's not the smallest cock used here, but first...
 				outputText("\n\nYou push your [cock] into a slickened passage suffused with sweltering heat. The lizan sighs as you begin to rock back and forth inside of him, obviously enjoying the repeated incursions of your [cock] as it moves through him. He widens his legs and teasingly flicks that talented tongue at you. You accept his little challenge and promptly begin roughly pounding the lizan's upturned hole. Beneath you his two bouncing dicks are already leaking small droplets of pale fluid as each thrust causes them to bounce across his toned little stomach.");
 			}
@@ -184,7 +185,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nSlightly frustrated you shove, causing a sharp yelp to come from your partner. He gives you a withering look before your apologetic smile causes him to smile back at you, excusing your impatience. As you begin again the lizan's hole is finally beginning to open up. You can tell from the slight edge in his voice that your [cock] is breaching unexplored territory. You rock yourself in deeper and deeper until you've completely shafted the guy. His chest heaves as you hold your entire length deep inside of his quivering anal sleeve. It takes him a few moments to get used to your [cock] and once he gives you the go ahead you begin to fuck him at a medium pace. He trembles and grunts, rolling his hips and convulsing as you big cock makes him practically delirious.");
 				outputText("\n\nAfter a while you decide to pick up the pace. After a few moderate strokes into the tight wet sleeve you lean forward and press his knees into his chest. The lizan growls as you begin to fuck his little scaly ass as hard as you can. Beneath you his two bumpy purple lizan dicks are leaking a heavy river of sticky pale fluid as your madly pumping [cock] causes them to flap around on his toned and heaving stomach.");
 			}
-			outputText("\n\nYour thrusts are a echoing smack against his " + monster.skinTone + " ass as you begin fucking him with the entire length of your [cock]. Soon, your abuse of his prostate becomes too much. His rectal passage clenches tightly as his twin shafts burst, spraying dual torrents of pale cream across everywhere as you fuck him through his orgasm. His flexing tail hole and the sight of his exploding lizan dicks push you over the edge.");
+			outputText("\n\nYour thrusts are an echoing smack against his " + monster.skinTone + " ass as you begin fucking him with the entire length of your [cock]. Soon, your abuse of his prostate becomes too much. His rectal passage clenches tightly as his twin shafts burst, spraying dual torrents of pale cream across everywhere as you fuck him through his orgasm. His flexing tail hole and the sight of his exploding lizan dicks push you over the edge.");
 			if (player.cumQ() < 350) outputText("Your [face] twists around a strained groan and you spray your own impressive load deep into the lizan's bowels.");
 			else if (player.cumQ() < 1000) outputText("Your [face] twists around a deep growl as you pour your load deep into the lizan's bowels. As you fuck your seed deeper into his clenching bowls you can feel some of it gushing out and dripping down your [legs].");
 			else if (player.cumQ() < 2500) outputText("Your [face] twists into a chilling howl as you explode deep within the lizan's bowels. As you fuck your seed deep into his bowels his stomach becomes a little less defined, a testament to how much seed you've poured into him. You can even feel it dripping down your [legs].");

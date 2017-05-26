@@ -60,7 +60,7 @@ import classes.Scenes.API.Encounters;
 				name: "lumber",
 				call: gatherWoods,
 				when: function ():Boolean {
-					return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4
+					return (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 || player.hasKeyItem("Carpenter's Toolbox") >= 0)
 						   && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply();
 				}
 			});
@@ -69,7 +69,7 @@ import classes.Scenes.API.Encounters;
 			combat.cleanupAfterCombat();
 			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees. \n\n");
 			menu();
-			if (player.fatigue > player.maxFatigue() - 30) {
+			if (player.fatigueLeft() < 30) {
 				outputText("<b>You are too tired to consider cutting down the trees. Perhaps some rest will suffice?</b>");
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -365,7 +365,7 @@ import classes.Scenes.API.Encounters;
 			outputText("Now that you have a solid foundation in place, it’s time to raise the walls and the roof. This is going to take a lot of nails, probably as much as the toolbox can carry. You’ll also need quite a bit of wood, around 75 units of it if your math is right.\n\n");
 			outputText("You know this is going to be a long, hard day of work.\n\n");
 			outputText("You’re going to need some paint too, for protection.\n\n");
-			outputText("Raise walls and the roof?");
+			outputText("Raise walls and the roof?\n\n");
 			checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")) {
 				if (player.keyItemv1("Carpenter's Toolbox") >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 75){
@@ -449,7 +449,7 @@ import classes.Scenes.API.Encounters;
 		//Stage 9 - Build cabin part 4 - Install flooring.
 		private function buildCabinPart4():void {
 			clearOutput();
-			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n"); //What about adding few stones here additionaly? 50 maybe?
+			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n\n"); //What about adding few stones here additionaly? 50 maybe?
 			checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox"))
 			{
