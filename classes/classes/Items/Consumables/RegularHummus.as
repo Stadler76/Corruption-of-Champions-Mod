@@ -57,6 +57,32 @@ package classes.Items.Consumables
 				player.removePerk(PerkLib.Incorporeality);
 				changes++;
 			}
+			//Remove Dragonfire Perk
+			if (player.hasPerk(PerkLib.Dragonfire) && player.perkv4(PerkLib.Dragonfire) == 0 && changes < changeLimit && rand(10) == 0) {
+				outputText("\n\nYou have the strange feeling, that you've been missing something in your chest. The burning sensation you've always felt seems to be cooling off until it completely disappears. \n<b>(Perk Lost: Dragonfire!)</b>");
+				player.removePerk(PerkLib.Dragonfire);
+				changes++;
+			}
+			//<mod name="Dragon mod" author="Stadler76">
+			var meetsLongNeckReq:Boolean = player.dragonScore() >= 6 && player.hasDraconicBackSide();
+			if (!player.hasNormalNeck() && rand(meetsLongNeckReq ? 10 : 4) == 0) {
+				outputText("\n\n<b>Your draconic neck and its position on your head revert to its normal position and length.</b> ");
+				if (player.hasDragonRearBody()) {
+					outputText("  After that you feel a tingling on your backside, telling you that <b>your");
+					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText("draconic mane is disappearing, too.</b>");
+				}
+				outputText("  Well, your rear isn't worthy to gaze at it anymore.\n");
+				player.rearBody.restore();
+				player.neck.restore();
+			}
+			if (!player.hasNormalNeck() && player.hasDragonRearBody() && rand(meetsLongNeckReq ? 6 : 4) == 0) {
+					outputText("\n\nYou feel a tingling on your backside, telling you that <b>your");
+					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
+					outputText("draconic mane is disappearing.</b>");
+					player.rearBody.restore();
+			}
+			//</mod>
 			//-Skin color change – light, fair, olive, dark, ebony, mahogany, russet
 			if ((player.skinTone !== "light" && player.skinTone !== "fair" && player.skinTone !== "olive" && player.skinTone !== "dark" && player.skinTone !== "ebony" && player.skinTone !== "mahogany" && player.skinTone !== "russet") && changes < changeLimit && rand(5) === 0) {
 				changes++;
