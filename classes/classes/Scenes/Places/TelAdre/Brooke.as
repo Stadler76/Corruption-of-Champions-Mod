@@ -331,7 +331,7 @@ public function talkWithBrookeAboutWorkingOut():void {
 	else outputText("\n\nThat damn Shepherd knows all of your buttons and all your weaknesses.  Every shower, she teases you in just the right ways, and it gets harder and harder to not just fuck her there in the stall.  Not that she'd mind, you're sure... but, it's a game you two play.  She likes pushing your limits, knowing that, when that limit breaks, it'll be a much harder workout than anything the gym could give her.  Which is something you both wouldn't mind.");
 	// (Lust increases by 10, Int increases by 1 with a cap of 50)
 	dynStats("lus", 10, "resisted", false);
-	if (player.inte < 50) dynStats("int", .5);
+	if (player.inte100 < 50) dynStats("int", .5);
 	brookeAffection(4);
 	doNext(camp.returnToCampUseOneHour);
 }

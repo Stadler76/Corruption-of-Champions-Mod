@@ -113,7 +113,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			outputText("While traversing an unfamiliar part of this desert wasteland, ");
-			if (player.cor > 75 && player.lust > 50) outputText(" looking for something to slake your unquenchable lusts, ");
+			if (player.cor > 75 && player.lust100 > 50) outputText(" looking for something to slake your unquenchable lusts, ");
 			outputText("you come across an abandoned merchant's cart.  The cart looks eerily disheveled, with a majority of its contents strewn about the sand.  Whoever or whatever deserted this thing did so in a hurry, and for seemingly no reason. Curious, you decide to inspect it for anything worthwhile.");
 			outputText("\n\nSuddenly a loud crash erupts from inside the cart.  Instinctually you dive behind some large rocks, quickly re-evaluating the cart's dereliction.  The crash is followed by a clattering of sounds as if someone is stumbling around from within.");
 			outputText("\n\nYou watch as a creature awkwardly climbs out the back of the wooden mess. As you've never seen anything like her before, you hold your position, deciding to watch before assessing the potential threat.  Quietly and stealthily, you shift position to get a better view of this ransacker.");
@@ -140,7 +140,7 @@ package classes.Scenes.Areas.Desert
 			//If Female/[Use Vagina - Herm] and Corruption & Libido Over 41 Leads to - If  Over 41 - Female
 			clearOutput();
 			//If Under 40
-			if ((player.lib < 41 && player.lust < 50) || player.cor < (66 + player.corruptionTolerance()) || player.gender == 0) {
+			if ((player.lib100 < 41 && player.lust100 < 50) || player.cor < (66 + player.corruptionTolerance()) || player.gender == 0) {
 				outputText("After seeing the large pack of demons you decide it's best not to act.  You yourself are in no condition to help the poor creature, and knowing full well what comes after demons 'subdue' their prey, you don't want to stick around either.  You glance over and realize the skirmish has already started.  It's too late to really help her anyway, you argue to yourself, plus she's covered in muscle.");
 				outputText("\n\nAssuring yourself that she'll be fine, you take the opportunity to flee while the demons are distracted, heading back to camp.  Leaving the ant-girl to her fate.");
 				//[End of Event]

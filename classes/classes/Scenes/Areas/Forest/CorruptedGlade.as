@@ -1,7 +1,9 @@
 package classes.Scenes.Areas.Forest {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounter;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 public class CorruptedGlade extends BaseContent implements TimeAwareInterface,Encounter {
 
@@ -44,7 +46,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 		}
 		
 		public function intro():void {
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.");
 			if (player.cor <= 33) { //disgusted reaction
 				//Get plant-cum dripped on you if not fast and unlucky!
@@ -90,7 +92,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 		
 		private function flowerFun():void {
 			clearOutput();
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			if (player.hasCock()) { //Sex scenes for those with cawks
 				if (player.cocks.length == 1) { //Single Cawk
 					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stem bends with ease as you grasp it and bend it towards your groin, your other hand fumbling to open your " + player.armorName + ".  In seconds you free yourself and gingerly bring the folds closer, the musky scent that fills the air rapidly bringing you to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flower looks fairly deep, you quickly feel yourself bottom out inside the petal's slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your " + player.cockDescript(0) + ".  As you pound away, you begin to notice a change in the rear of the flower.\n\n");
@@ -150,7 +152,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 		
 		private function tentacleFun():void {
 			clearOutput();
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			if (player.vaginas.length > 0 && rand(2) == 0) { //Vaginal Variant 50% of the time
 				outputText("You saunter over to a dangling group of perverted looking vines, discarding your " + player.armorName + " along the way. Running your fingertips along the bulbous-tipped tentacle-like vines, you find one that looks ");
 				var tentacle:int = rand(3); //Big, medium or small size tentacle
@@ -269,7 +271,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 		
 		private function treeBoobFun():void {
 			clearOutput();
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			outputText("Stepping carefully around the other hazards of the glade, you close on the strange trees with equal parts curiosity and desire.  Up close, it's easy to see the strange growths that sprout from the bark – dozens of full ripe-looking breasts, each capped with a swollen and leaking nipple.  You touch one, marveling at the smooth texture of its chocolate-colored skin.   In response a runner of sap oozes free of the nipple and slides down the curved surface.\n\n");
 			outputText("You lean forwards and lick around the nipple's surface, sampling the sweetness of the trickling sap.   The stuff nearly overpowers you with a taste like syrupy cream as more sap drips free of the fully-erect tree-nipple.  Unable to resist testing this nonsensical oddity, you engulf the entire nipple between your lips, suckling hard.   The tree seems to oblige your efforts with a fresh discharge of the sticky sap.   Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from swollen plant-jug.  It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.\n\n");
 			outputText("In time you realize the breast has long since been emptied by your hungry mouth, and you pull free with a pop, letting your tongue run over your now over-sensitive lips.  It seems your entire mouth has been affected by the tree's sap, and is now as sensitive and receptive as a maiden's box.  You don't think you could drink any more sap with how full you feel, and you make ready to depart this perverted place.");
@@ -395,7 +397,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 	//Will be standalone
 	private function trappedSatyr():void {
 		clearOutput();
-		spriteSelect(99);
+		spriteSelect(SpriteDb.s_stuckSatyr);
 		outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n");
 
 		outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.\n\n");
@@ -422,7 +424,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 	//[=No=]
 	private function ignoreSatyr():void {
 		clearOutput();
-		spriteSelect(99);
+		spriteSelect(SpriteDb.s_stuckSatyr);
 		outputText("You shake your head, ");
 		if (player.cor < 50) outputText("disgusted by the strange thoughts this place seems to put into your mind");
 		else outputText("not feeling inclined to rape some satyr butt right now");
@@ -433,7 +435,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 	//Player returns to camp
 	private function rapeSatyr():void {
 		clearOutput();
-		spriteSelect(99);
+		spriteSelect(SpriteDb.s_stuckSatyr);
 		var x:Number = player.biggestCockIndex();
 
 		//(Low Corruption)
@@ -490,7 +492,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 	//[=Leave=]
 	private function dontRepeatFuckSatyr():void {
 		clearOutput();
-		spriteSelect(99);
+		spriteSelect(SpriteDb.s_stuckSatyr);
 		outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your " + player.armorName + " and leave the rutting satyr behind.\n\n");
 		doNext(camp.returnToCampUseOneHour);
 	}

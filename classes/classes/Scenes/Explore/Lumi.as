@@ -2,6 +2,8 @@ package classes.Scenes.Explore{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Lumi extends BaseContent{
 
@@ -27,7 +29,7 @@ package classes.Scenes.Explore{
 }
 
 public function lumiLabChoices():void {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
 	//First time meeting
 	if (flags[kFLAGS.LUMI_MET] == 0) {
@@ -52,7 +54,7 @@ public function lumiLabChoices():void {
 }
 
 public function lumiShop():void {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	//Set item handling to lumi shop
 	clearOutput();
 	outputText("You ask Lumi if you can see her potions.  She smiles at you and pulls out several bottles from her desk and shows them to you.\n\n\"<i>Gawantied qwality, made by Lumi herself,</i>\" she says proudly.\n\n");
@@ -80,7 +82,7 @@ public function lumiShop():void {
 
 //Lust Draft
 private function lumiLustDraftPitch():void {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n");
 	outputText("Will you buy the lust draft?");
@@ -90,7 +92,7 @@ private function lumiLustDraftPitch():void {
 }
 //Goblin Ale
 private function lumiPitchGobboAle():void {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n");
 	outputText("Will you buy the goblin ale?");
@@ -100,7 +102,7 @@ private function lumiPitchGobboAle():void {
 }
 //Ovi Elixir
 private function lumiPitchOviElixer():void {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
 	outputText("Will you buy the Ovi Elixir?");
@@ -110,7 +112,7 @@ private function lumiPitchOviElixer():void {
 }
 
 private function lumiPurchase(itype:ItemType, cost:int):void {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
 	//After choosing, and PC has enough gems
 	outputText("You pay Lumi the gems, and she hands you " + itype.longName + " saying, \"<i>Here ya go!</i>\"\n\n");
@@ -124,7 +126,7 @@ private function lumiPurchase(itype:ItemType, cost:int):void {
 }
 
 public function lumiEnhance():void {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
 	outputText("\"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"");
 	menu();
@@ -185,7 +187,7 @@ public function lumiEnhance():void {
 
 private function lumiEnhanceGo(itype:ItemType):void
 {
-	spriteSelect(37);
+	spriteSelect(SpriteDb.s_lumi);
 	trace("LUMI ENHANCE");
 	//If (player has less than 100 gems)
 	if (player.gems < 100) {

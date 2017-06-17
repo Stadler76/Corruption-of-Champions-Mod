@@ -4,6 +4,7 @@
 package classes.Scenes.Monsters
 {
 	import classes.*;
+	import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -594,7 +595,7 @@ package classes.Scenes.Monsters
 		
 		public function impGangabangaEXPLOSIONS(loss:Boolean = false):void {
 			player.slimeFeed();
-			spriteSelect(18);
+			spriteSelect(SpriteDb.s_fenimp);
 			var titsOrgasm:Boolean = false;
 			//Set imp monster values
 			//Clear arrays in preparation
@@ -1490,7 +1491,7 @@ package classes.Scenes.Monsters
 		//IMP LORD
 		public function impLordEncounter():void {
 			clearOutput();
-			spriteSelect(29);
+			spriteSelect(SpriteDb.s_imp);
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 				if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
@@ -1514,7 +1515,7 @@ package classes.Scenes.Monsters
 		
 		//IMP WARLORD
 		public function impWarlordEncounter():void {
-			spriteSelect(125);
+			spriteSelect(SpriteDb.s_impWarlord);
 			clearOutput();
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
@@ -1529,7 +1530,7 @@ package classes.Scenes.Monsters
 		//IMP OVERLORD
 		public function impOverlordEncounter():void {
 			clearOutput();
-			spriteSelect(126);
+			spriteSelect(SpriteDb.s_impOverlord);
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
 			startCombat(new ImpOverlord());

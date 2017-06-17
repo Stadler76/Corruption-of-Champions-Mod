@@ -1,6 +1,8 @@
 package classes.Scenes.Areas.Desert {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Oasis extends BaseContent{
 
@@ -9,7 +11,7 @@ package classes.Scenes.Areas.Desert {
 		}
 
 public function oasisEncounter():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	//Find oasis, sit there.
 	clearOutput();
 	outputText("You wander in the desert for what seems like hours, sweating profusely in the sweltering heat. Eventually you come across a small watering hole surrounded by scrappy trees and shrubs. It would be foolish not to take this opportunity to drink, freshen up and paddle your " + player.legs() + " in the cooling water, so you settle into what little shade you can find for a quick break.\n\n");
@@ -27,12 +29,12 @@ public function oasisEncounter():void {
 
 private function chooseToFight():void{
 	startCombat(new DemonPack());
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	playerMenu();
 }
 
 private function oasisRunAway():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	//Run away successfully if fast enough.  80 speed = autosuccess.
 	if (player.spe > 15 && player.spe/2 > rand(40)) {
 		clearOutput();
@@ -48,7 +50,7 @@ private function oasisRunAway():void {
 }
 
 private function oasisTalk():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	//Nice weather...
 	clearOutput();
 	outputText("You rise cautiously from the shade of your scraggly little bush and look over the demons arrayed before you. Briefly you wonder how exactly conversations start in a desert oasis, before settling on 'nice weather we're having.' The reaction is mixed. Some laugh, some stare in utter confusion. The ludicrously endowed leader in the snakeskin cloak throws his head back and produces a deep, thundering laugh. When he regains his composure he brings his head back around to level a deadly smile full of sharp teeth in your direction. 'Yes,' he says '...nice.'\n\n");
@@ -61,7 +63,7 @@ private function oasisTalk():void {
 }
 
 private function oasisTalkDecline():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	clearOutput();
 	outputText("You consider the invitation, but do your best to politely decline. The little giggle this produces in a small implike creature in the back of the group send chills down your spine and you turn to go, but as you do so you catch the eye of the leader. His grin has widened, as if he knows something that you do not. With a deliberate slowness he starts to chuckle, and your worst fears are confirmed when you hear the words 'Silly creature. The offer to feast is never denied. Take it alive and kicking.'\n\n");
 	//MORTAL KOMBAAAAAT
@@ -70,7 +72,7 @@ private function oasisTalkDecline():void {
 	doNext(playerMenu);
 }
 private function oasisTalkAccept():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	//You slut!
 	clearOutput();
 	outputText("The leader smiles in genuine delight and excited chatter rises up from the group of demons. 'This is excellent. It has been so long since we last had one of your kind join us.' Behind him the demons begin to slide free of their tattered rags, hardening, dampening and licking their lips. As the leader steps forward to caress the curves and angles of your body you begin to suspect that the hunger this feast is to satisfy is not for food, but all that is forgotten as the demons swarm silently around you and you stumble back onto the hot sand, ");
@@ -86,7 +88,7 @@ private function oasisTalkAccept():void {
 	doNext(oasisSexing);
 }
 internal function oasisSexing():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	player.slimeFeed();
 	//New screen
 	clearOutput();
@@ -167,7 +169,7 @@ internal function oasisSexing():void {
 		outputText("You do your best to keep a vague mental catalogue of what has been in where, but eventually it becomes impossible to remember the type or number of demonic dicks that have filled you with their cum. The sand below your ass is wet with seed that has spilled out of your overflowing " + player.vaginaDescript(0) + " and there is every indication of more to come.\n\n");
 	}
 	//If you got here by winning combat!
-	if ((monster.HP < 1 || monster.lust >= monster.eMaxLust()) && getGame().inCombat) {
+	if ((monster.HP < 1 || monster.lust >= monster.maxLust()) && getGame().inCombat) {
 		outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.");
 		combat.cleanupAfterCombat();
 		player.orgasm('Generic');
@@ -202,7 +204,7 @@ internal function oasisSexing():void {
 
 //Desert Tribe Bad End
 private function oasisBadEnd():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	//You get this ending if you are a fully corrupt female/herm/centaur with low intelligence and had over 5-10 'Feast' encounters with the Desert Tribe, once the leader starts laying a claim on you because of your large clit
 	clearOutput();
 	outputText("You fuck for hours, 'feasting' with the demons. Pain, pleasure and exhaustion intermingle; no matter how hard you try to cling to consciousness, you are in no state to concentrate enough to succeed. You dangle over the edge for what seems like eternity before an orgasm stronger than any other hits you like a solid wall. You black out...\n\n");
@@ -230,7 +232,7 @@ private function oasisBadEnd():void {
 	doNext(oasisBadEndEpilogue);
 }
 private function oasisBadEndEpilogue():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	clearOutput();
 	outputText("After one year");
 	if (player.gender <= 1) outputText(" and a few doses of fermented succubi milk");

@@ -12,6 +12,8 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	use namespace kGAMECLASS;
 
@@ -178,7 +180,7 @@ package classes.Scenes.Areas
 		}
 
 		private function minotaurRouter():void {
-			spriteSelect(44);
+			spriteSelect(SpriteDb.s_minotaur);
 			//Every 16 explorations chance at mino bad-end!
 			if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(3) == 0) {
 				minotaurScene.minoAddictionBadEndEncounter();

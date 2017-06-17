@@ -346,7 +346,7 @@ package classes.Scenes.Combat
 				flags[kFLAGS.SPELLS_CAST]++;
 				spellPerkUnlock();
 				doNext(playerMenu);
-				if (monster.lust >= monster.eMaxLust()) doNext(combat.endLustVictory);
+				if (monster.lust >= monster.maxLust()) doNext(combat.endLustVictory);
 				else monster.doAI();
 				return;
 			}
@@ -358,35 +358,35 @@ package classes.Scenes.Combat
 				return;
 			}
 			var lustDmg:Number = monster.lustVuln * (player.inte/5*player.spellMod() + rand(monster.lib - monster.inte*2 + monster.cor)/5);
-			if (monster.lust < 30) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
-			if (monster.lust >= 30 && monster.lust < 60) {
+			if (monster.lust100 < 30) outputText(monster.capitalA + monster.short + " squirms as the magic affects " + monster.pronoun2 + ".  ");
+			if (monster.lust100 >= 30 && monster.lust100 < 60) {
 				if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
 				else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			}
-			if (monster.lust >= 60) {
+			if (monster.lust100 >= 60) {
 				outputText(monster.capitalA + monster.short + "'");
 				if (!monster.plural) outputText("s");
 				outputText(" eyes glaze over with desire for a moment.  ");
 			}
 			if (monster.cocks.length > 0) {
-				if (monster.lust >= 60 && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
-				if (monster.lust >= 30 && monster.lust < 60 && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
-				if (monster.lust >= 30 && monster.lust < 60 && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
+				if (monster.lust100 >= 60 && monster.cocks.length > 0) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " dribble pre-cum.  ");
+				if (monster.lust100 >= 30 && monster.lust100 < 60 && monster.cocks.length == 1) outputText(monster.capitalA + monster.short + "'s " + monster.cockDescriptShort(0) + " hardens, distracting " + monster.pronoun2 + " further.  ");
+				if (monster.lust100 >= 30 && monster.lust100 < 60 && monster.cocks.length > 1) outputText("You see " + monster.pronoun3 + " " + monster.multiCockDescriptLight() + " harden uncomfortably.  ");
 			}
 			if (monster.vaginas.length > 0) {
 				if (monster.plural) {
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 				}
 				else {
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-					if (monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 				}
 			}
 			monster.teased(lustDmg);
@@ -394,7 +394,7 @@ package classes.Scenes.Combat
 			doNext(playerMenu);
 			flags[kFLAGS.SPELLS_CAST]++;
 			spellPerkUnlock();
-			if (monster.lust >= monster.eMaxLust()) doNext(combat.endLustVictory);
+			if (monster.lust >= monster.maxLust()) doNext(combat.endLustVictory);
 			else monster.doAI();
 			return;	
 		}
@@ -1139,7 +1139,7 @@ package classes.Scenes.Combat
 			if (monster.HP < 1) {
 				doNext(combat.endHpVictory);
 			}
-			else if (monster.lust >= 99) {
+			else if (monster.lust100 >= 99) {
 				doNext(combat.endLustVictory);
 			}
 			else monster.doAI();
@@ -1699,7 +1699,7 @@ package classes.Scenes.Combat
 			outputText("\n\n");
 		 	combat.checkAchievementDamage(damage);
 			//Kick back to main if no damage occured!
-			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			if (monster.HP > 0 && monster.lust < monster.maxLust()) {
 				monster.doAI();
 			}
 			else {
@@ -1765,7 +1765,7 @@ package classes.Scenes.Combat
 		       outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 			}
 			outputText("\n\n");
-			if (monster.HP < 1 || monster.lust >= monster.eMaxLust()) combat.combatRoundOver();
+			if (monster.HP < 1 || monster.lust >= monster.maxLust()) combat.combatRoundOver();
 			else monster.doAI();
 		}
 		
@@ -1814,7 +1814,7 @@ package classes.Scenes.Combat
 		       outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, pushing you back out of range.");
 			}
 			outputText("\n\n");
-			if (monster.HP < 1 || monster.lust >= monster.eMaxLust()) combat.combatRoundOver();
+			if (monster.HP < 1 || monster.lust >= monster.maxLust()) combat.combatRoundOver();
 			else monster.doAI();
 		}
 		
@@ -2061,7 +2061,7 @@ package classes.Scenes.Combat
 			}
 			outputText("\n\n");
 		 	combat.checkAchievementDamage(damage);
-			if (monster.HP < 1 || monster.lust >= monster.eMaxLust()) combat.combatRoundOver();
+			if (monster.HP < 1 || monster.lust >= monster.maxLust()) combat.combatRoundOver();
 			else monster.doAI();
 		}
 		
@@ -2161,10 +2161,10 @@ package classes.Scenes.Combat
 		 	combat.checkAchievementDamage(damage);
 			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 			//Victory ORRRRR enemy turn.
-			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) monster.doAI();
+			if (monster.HP > 0 && monster.lust < monster.maxLust()) monster.doAI();
 			else {
 				if (monster.HP <= 0) doNext(combat.endHpVictory);
-				if (monster.lust >= monster.eMaxLust()) doNext(combat.endLustVictory);
+				if (monster.lust >= monster.maxLust()) doNext(combat.endLustVictory);
 			}
 		}
 		
@@ -2257,10 +2257,10 @@ package classes.Scenes.Combat
 			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 		 	combat.checkAchievementDamage(damage);
 			//Victory/monster attack
-			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) monster.doAI();
+			if (monster.HP > 0 && monster.lust < monster.maxLust()) monster.doAI();
 			else {
 				if (monster.HP <= 0) doNext(combat.endHpVictory);
-				if (monster.lust >= monster.eMaxLust()) doNext(combat.endLustVictory);
+				if (monster.lust >= monster.maxLust()) doNext(combat.endLustVictory);
 			}
 		}
 		
@@ -2345,10 +2345,10 @@ package classes.Scenes.Combat
 			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 		 	combat.checkAchievementDamage(damage);
 			//Victory ORRRRR enemy turn.
-			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) monster.doAI();
+			if (monster.HP > 0 && monster.lust < monster.maxLust()) monster.doAI();
 			else {
 				if (monster.HP <= 0) doNext(combat.endHpVictory);
-				if (monster.lust >= monster.eMaxLust()) doNext(combat.endLustVictory);
+				if (monster.lust >= monster.maxLust()) doNext(combat.endLustVictory);
 			}
 		}
 		
@@ -2404,7 +2404,7 @@ package classes.Scenes.Combat
 			//Use tail mp
 			player.tailVenom -= 25;
 			//Kick back to main if no damage occured!
-			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) monster.doAI();
+			if (monster.HP > 0 && monster.lust < monster.maxLust()) monster.doAI();
 			else doNext(combat.endLustVictory);
 		}
 		
@@ -2455,7 +2455,7 @@ package classes.Scenes.Combat
 			}
 			awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 			outputText("\n\n");
-			if (monster.HP < 1 || monster.lust >= monster.eMaxLust()) combat.combatRoundOver();
+			if (monster.HP < 1 || monster.lust >= monster.maxLust()) combat.combatRoundOver();
 			else monster.doAI();
 		}
 		

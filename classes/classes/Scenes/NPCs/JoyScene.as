@@ -3,6 +3,8 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
 	import classes.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	/**
 	 * Bimbo Jojo by LukaDoc
@@ -408,7 +410,7 @@ package classes.Scenes.NPCs
 		
 		//Jojo gets bimbofied! Joy Emerges.
 		private function joyEmerges():void {
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			outputText("Jojo doubles over and groans; you watch helpless as his fur changes from white to platinum blonde. He sprawls on the floor and you can see his lips getting fuller, his eyelashes longer and his chest begins expanding; a tearing sound rips through the air, as Jojo's new pillowy boobs rip his robes apart, perky nipples erect.");
 			outputText("\n\nYou see his pants suddenly become much less baggy as his butt, hips and thighs grow; his whole figure shifts towards the feminine and a ripping sound confirms his pants have also torn up somewhere.");
@@ -834,11 +836,11 @@ package classes.Scenes.NPCs
 					else if (player.cor > 40)
 						cleanse -= 1;
 					dynStats("cor", cleanse - player.countCockSocks("alabaster"));
-					if (player.str < 45) dynStats("str", 1); //Str boost to 45
-					if (player.tou < 45) dynStats("tou", 1); //Tou boost to 45
-					if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
-					if (player.inte < 80) dynStats("int", 1); //Int boost to 80
-					if (player.lib > 0) dynStats("lib", -1); //Libido lower to 15
+					if (player.str100 < 45) dynStats("str", 1); //Str boost to 45
+					if (player.tou100 < 45) dynStats("tou", 1); //Tou boost to 45
+					if (player.spe100 < 75) dynStats("spe", 1); //Speed boost to 75
+					if (player.inte100 < 80) dynStats("int", 1); //Int boost to 80
+					if (player.lib100 > 0) dynStats("lib", -1); //Libido lower to 15
 					flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 					if (flags[kFLAGS.JOY_INTELLIGENCE] < 50) flags[kFLAGS.JOY_INTELLIGENCE]++;
 				}
@@ -884,7 +886,7 @@ package classes.Scenes.NPCs
 		private function trainWithJoy():void {
 			clearOutput();
 			outputText("You ask Joy if she'd be willing to help you train; you could use the workout.");
-			if (player.lust >= 70) { //Too horny!
+			if (player.lust100 >= 70) { //Too horny!
 				outputText("\n\nThe bimbofied mouse looks you over, a mischievous expression on her face, and makes a show of sniffing the air. \"<i>My oh my, now if my senses aren't, like, telling me lies, you, my naughty little friend, are, like, way too horny to concentrate on training. Let's have some fun instead...</i>\" She coos, posing flirtatiously and waiting to see your response.");
 				doYesNo(screwTrainingLetsFuck, screwTrainingButNoThanks);
 				return;
@@ -911,7 +913,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou smirk at her, telling her this is her idea, so you hope she won't regret this.");
 			outputText("\n\n\"<i>Like, don't worry about me. You just took me by surprise.</i>\" The bimbo mouse says, repositioning herself to be more comfortable in yours. \"<i>Okey-dokey, lift away!</i>\" She commands.");
 			//Strength check
-			if (player.str <= 33) { //Low strength
+			if (player.str100 <= 33) { //Low strength
 				outputText("\n\nYou begin lifting her and lowering her like a set of weights, but you quickly grow tired and as you try to push for one more press your arms give out and you end up nearly dropping Joy out of your grasp.");
 				outputText("\n\n\"<i>Like, come on, [name]; put your back into it... or are you saying I'm fat?</i>\" She pouts.");
 				outputText("\n\nFinally your strength gives and you end up dropping Joy on her butt, thankfully she was fairly close to the ground...");
@@ -919,7 +921,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou apologize and tell her that you'll be more careful in the future.");
 				outputText("\n\n\"<i>That's okay. Go and get some rest now; you, like, need to recover.</i>\" She tells you. Picking herself up off the ground, she stretches with a groan. \"<i>That's, like, what I'm going to do.</i>\" She mutters, and walks away.");
 			}
-			else if (player.str <= 66) { //Medium strength
+			else if (player.str100 <= 66) { //Medium strength
 				outputText("\n\nYou begin lifting her and lowering her like a set of weights; while awkward at first, once you get used to it, you set upon a steady rhythm; although it doesn't help that Joy squirms once in awhile.");
 				outputText("\n\n\"<i>Like, come on, [name]; put your back into it... or are you saying I'm fat?</i>\" She pouts.");
 				outputText("\n\nYou do as she tells and speed up slightly, going slightly faster.");
@@ -951,9 +953,9 @@ package classes.Scenes.NPCs
 				dynStats("lus", 20);
 			}
 			//Increase strength
-			if (player.str <= 33) dynStats("str", 0.5);
-			if (player.str <= 66) dynStats("str", 0.5);
-			if (player.str < 90) dynStats("str", 0.5);
+			if (player.str100 <= 33) dynStats("str", 0.5);
+			if (player.str100 <= 66) dynStats("str", 0.5);
+			if (player.str100 < 90) dynStats("str", 0.5);
 			dynStats("str", 0.5);
 			player.changeFatigue(40);
 			doNext(camp.returnToCampUseOneHour);
@@ -983,7 +985,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou can't help but cock an eyebrow at her, wondering what in the world she's thinking. Still, you're not about to disrupt her; who knows? Maybe this is legitimately part of the exercise.");
 			outputText("\n\nYou don't have long to wonder that though... \"<i>Okay, like, this might hurt a bit, but it's necessary.</i>\" Then she digs her fingers on your sides painfully.");
 			//Toughness check
-			if (player.tou <= 33) {
+			if (player.tou100 <= 33) {
 				outputText("\n\nYou let out a cry of pain as her fingers dig into your flesh, thrashing at the surprising level of torment they are inflicting upon you. You try to tough it out, but you simply cannot stand it; you beg Joy to stop.");
 				outputText("\n\nJoy gasps at your reaction and stops immediately. \"<i>Sorry, [name]! I'm, like, so sorry! Do you want me to give you a kiss to make it all better?</i>\"");
 				outputText("\n\nYou can't help but manage to smile at that and suggest it would be nice. ");
@@ -998,7 +1000,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou promise her you'll keep that in mind.");
 				player.takeDamage(30);
 			}
-			else if (player.tou <= 66) {
+			else if (player.tou100 <= 66) {
 				outputText("\n\nYou have to struggle to bite back a yell, but you manage to avoid bucking and thrashing around. It hurts, you can't deny it hurts, but you refuse to give in. Eventually, though, the pain is too much and you beg Joy to stop.");
 				outputText("\n\nJoy stops and begins rubbing your sides, as if trying to wipe the pain away. \"<i>I'm, like, so sorry [name]! But you were able to, like, put up with it for a while. You're, like, so brave! Little Joyjoy's thinking about rewarding you,</i>\" she suggests with a smile.");
 				outputText("\n\nYou can't help but smile back and ask what she has in mind.");
@@ -1025,9 +1027,9 @@ package classes.Scenes.NPCs
 				outputText("\n\nWatching her go, you redress yourself and then head your separate ways.");
 			}
 			//Increase toughness
-			if (player.tou <= 33) dynStats("tou", 0.5);
-			if (player.tou <= 66) dynStats("tou", 0.5);
-			if (player.tou < 90) dynStats("tou", 0.5);
+			if (player.tou100 <= 33) dynStats("tou", 0.5);
+			if (player.tou100 <= 66) dynStats("tou", 0.5);
+			if (player.tou100 < 90) dynStats("tou", 0.5);
 			dynStats("tou", 0.5);
 			player.changeFatigue(40);
 			doNext(camp.returnToCampUseOneHour);
@@ -1042,7 +1044,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou take the cup, understanding dawning. You ask if you're going to have to run a course without spilling the water?");
 			outputText("\n\nJoy doesn't bother answering you, she simply hooks her hands around your back and grins up to you. \"<i>Now we dance!</i>\" Then she swings her body taking you with her.");
 			outputText("\n\nYou are startled, but hasten to follow, striving to avoid spilling the water as she suddenly pulls you out of balance.");
-			if (player.spe <= 33) {
+			if (player.spe100 <= 33) {
 				outputText("\n\nYou try your hardest, but as the surprisingly graceful mouse swings you and dips you and takes you through steps you've only heard of in stories back in Ingnam, it's no surprise that you end up accidentally dropping the entire cup onto the ground underfoot.");
 				outputText("\n\nJoy stops to gaze at the cup on the floor. \"<i>Awww... you, like, dropped the whole cup?</i>\" she asks with a pout.");
 				outputText("\n\nYou apologise, but point out you were expecting to run with her, not dance with her.");
@@ -1050,7 +1052,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou tell her that's true, and promise her you'll try and be better prepared the next time.");
 				outputText("\n\nShe giggles and gives you a little peck on the cheek for encouragement.");
 			}
-			else if (player.spe <= 66) {
+			else if (player.spe100 <= 66) {
 				outputText("\n\nYou try your hardest to avoid spilling things while, at the same time, keeping up with Joy. She's a very graceful thing; you never would have thought of her as a dancer before. Luckily, you're quick and graceful enough to keep up with her without too much difficulty, but the fancier moves mean you still spill at least a third of the water in your cup.");
 				outputText("\n\nJoy pants in exhaustion. \"<i>Like, that was fun!</i>\" she declares, then gazes at the cup of water in your hand. She quickly swipes it and drinks all the water inside. \"<i>Thanks! I, like, really needed that!</i>\" she declares.");
 				outputText("\n\nFeeling torn between amusement and indignation, you pointed out that Joy was supposed to at least check and see how much water you had spilled before drinking it.");
@@ -1072,9 +1074,9 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou give her a teasing wave of your finger and walk back to camp.");
 			}
 			//Increase speed
-			if (player.spe <= 33) dynStats("spe", 0.5);
-			if (player.spe <= 66) dynStats("spe", 0.5);
-			if (player.spe < 90) dynStats("spe", 0.5);
+			if (player.spe100 <= 33) dynStats("spe", 0.5);
+			if (player.spe100 <= 66) dynStats("spe", 0.5);
+			if (player.spe100 < 90) dynStats("spe", 0.5);
 			dynStats("spe", 0.5);
 			player.changeFatigue(40);
 			doNext(camp.returnToCampUseOneHour);

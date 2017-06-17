@@ -7,7 +7,7 @@ package classes.Scenes.Areas.Desert
 	{
 		public function cumWitchAI():void {
 			//Hurt!
-			if (HPRatio() < .6 && fatigue <= 90) {
+			if (HPRatio() < .6 && fatigue100 <= 90) {
 				sandWitchCuntHeals();
 				return;
 			}
@@ -121,9 +121,9 @@ package classes.Scenes.Areas.Desert
 		//*Intelligence dependant attack with possibility of very high lust gain.
 		public function cocknosisAttack():void {
 			outputText("Lifting her robes enticingly, the Cum Witch reveals her ");
-			if (lust < 50) outputText("half-hard");
-			else if (lust < 70) outputText("hard");
-			else if (lust < 85) outputText("throbbing");
+			if (lust100 < 50) outputText("half-hard");
+			else if (lust100 < 70) outputText("hard");
+			else if (lust100 < 85) outputText("throbbing");
 			else outputText("hard, dripping");
 			outputText(" cock.  She gently begins to sway her hips, bouncing back and forth with near-mechanical precision, her softly bobbing cock catching your eyes with its metronome-like precision.  She softly begins to speak, enunciating each word to the time and tune of her movements.");
 			
@@ -136,7 +136,7 @@ package classes.Scenes.Areas.Desert
 				outputText("The Witch smirks, though you're too focused on her cock to see, and she continues, \"<i>Good " + player.mf("boy","girl") + ".  Watch it sway.  You're so focused on my cock now that the world is just falling away around it, sinking into nothingness, leaving only that wonderful cock behind for you to watch.  And since it's filling your view, you can feel it filling your mind as well, can't you?</i>\"");
 				outputText("\n\nYou nod, your view rigidly attached to her equally rigid tool as you utterly and completely fixate on her penis, admiring its curves, its thickness, and the way it seems to pulsate happily for you whenever you look at it just right.  The Witch keeps talking, but it's her dick that's important.  You start to drool as your [skin] flushes and your body heats.  Gods, her cock is gorgeous.  Reaching down, you begin to masturbate without thinking.  You don't know why, but it just feels like the right thing to do.");
 				game.dynStats("lus", 20);
-				if (player.lust <= 99) outputText("\n\nYou bump against something, startling yourself out of the cocknosis before you can completely fall for it.  Still, you keep seeing her dick every time you close your eyes, and your body is very turned on from how you were touching yourself.");
+				if (player.lust100 <= 99) outputText("\n\nYou bump against something, startling yourself out of the cocknosis before you can completely fall for it.  Still, you keep seeing her dick every time you close your eyes, and your body is very turned on from how you were touching yourself.");
 				else outputText("\n\nYou play with yourself until you're on the very edge of orgasm.  At that moment, a loud *SNAP* startles you back to wakefulness, and as you look down at the cock bobbing just a few inches away, you realize it's hopeless.  You can't fight this.");
 				outputText("\n\nThe witch smiles knowingly.");
 			}
@@ -147,7 +147,7 @@ package classes.Scenes.Areas.Desert
 		//*Restores one third of her HP.
 		public function sandWitchCuntHeals():void {
 			outputText("The Witch smirks at you and holds her free hand under her robes.  When she pulls it out, you realize she's gathered a handful of her cum.  She holds it up and exhales over it, the air making a slight whistle as it blows through her parted lips.  The ebony sorceress then smears the goop over her wounds, which seem to drink in the cum and vanish before your eyes.  She scolds, \"<i>Physical damage?  How artless.</i>\"");
-			addHP(eMaxHP()*0.33);
+			addHP(maxHP() * 0.33);
 			fatigue += 10;
 			combatRoundOver();
 		}

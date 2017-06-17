@@ -22,6 +22,8 @@ package classes.Scenes
 	import flash.ui.Keyboard;
 	import classes.internals.LoggerFactory;
 	import mx.logging.ILogger;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	use namespace kGAMECLASS;
 
@@ -65,7 +67,7 @@ package classes.Scenes
 				callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				spriteSelect(-1);
+				spriteSelect(null);
 				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
@@ -138,7 +140,7 @@ package classes.Scenes
 		public function stash():void {
 			hideMenus();
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			if (flags[kFLAGS.ANEMONE_KID] > 0) {
 				kGAMECLASS.anemoneScene.anemoneBarrelDescription();

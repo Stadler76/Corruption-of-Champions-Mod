@@ -90,7 +90,7 @@ package classes.Scenes.NPCs
 			var choice:Number = rand(5);
 			if (choice <= 1) eAttack();
 			if (choice == 2) {
-				if (player.fatigue >= 80) choice = 3;
+				if (player.fatigue100 >= 80) choice = 3;
 				else IzmaSpecials1();
 			}
 			if (choice == 3) {
@@ -112,7 +112,7 @@ package classes.Scenes.NPCs
 			var choice:Number = rand(5);
 			if (choice <= 1) eAttack();
 			if (choice == 2) {
-				if (player.fatigue >= 80) choice = 3;
+				if (player.fatigue100 >= 80) choice = 3;
 				else IzmaSpecials1();
 			}
 			if (choice == 3) {

@@ -339,6 +339,12 @@ inputManager.AddBindableControl(
 			executeButtonClick(14);
 		}
 	});
+inputManager.AddBindableControl(
+		"History",
+		"Show text history",
+		function():void {
+			kGAMECLASS.output.showHistory();
+		});
 
 inputManager.AddBindableControl(
 	"Cheat! Give Hummus",
@@ -502,5 +508,6 @@ inputManager.BindKeyToControl(Keyboard.S, "Button 12", InputManager.SECONDARYKEY
 inputManager.BindKeyToControl(Keyboard.D, "Button 13", InputManager.SECONDARYKEY);
 inputManager.BindKeyToControl(Keyboard.F, "Button 14", InputManager.SECONDARYKEY);
 inputManager.BindKeyToControl(Keyboard.G, "Button 15", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.H, "History");
 
 inputManager.RegisterDefaults();

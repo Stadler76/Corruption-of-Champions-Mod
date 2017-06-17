@@ -1,6 +1,8 @@
 package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class SpiderMorphMob extends Monster
 	{
@@ -63,7 +65,7 @@ package classes.Scenes.Areas.Swamp
 
 		private function kihaSPOIDAHAI():void {
 			outputText("[pg]");
-			game.spriteSelect(72);
+			game.spriteSelect(SpriteDb.s_kiha);
 			outputText("While they're tangled up with you, however, Kiha takes the opportunity to get in a few shallow swings with her axe, to the accompaniment of crunching chitin.");
 			//horde loses HP
 			HP -= 50;
@@ -72,7 +74,7 @@ package classes.Scenes.Areas.Swamp
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(72);
+			game.spriteSelect(SpriteDb.s_kiha);
 			if (rand(2) == 0 || player.hasStatusEffect(StatusEffects.UBERWEB)) spiderStandardAttack();
 			else spoidahHordeWebLaunchahs();
 		}

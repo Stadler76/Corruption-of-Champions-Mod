@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.display.SpriteDb;
 	import classes.internals.*;
 
 	public class Ceraph extends Monster
@@ -11,7 +12,7 @@ package classes.Scenes.NPCs
 //[SPECIAL 1] – Ubercharge!
 		private function ceraphSpecial1():void
 		{
-			game.spriteSelect(7);
+			game.spriteSelect(SpriteDb.s_ceraph);
 			if (!hasStatusEffect(StatusEffects.Uber)) {
 				if (rand(2) == 0) {
 					outputText("Ceraph winks and says, \"<i>Have you ever cum without being touched? You will.</i>\"\n\n");
@@ -129,7 +130,7 @@ package classes.Scenes.NPCs
 		private function ceraphSpecial3():void
 		{
 			//[Mini-cum] – takes place of double-attack if very horny
-			if (lust >= 75) {
+			if (lust100 >= 75) {
 				outputText("Ceraph spreads her legs and buries three fingers in her sopping twat, her thumb vigorously rubbing against the base of her bumpy prick.  Her other hand wraps around the meaty pole and begins jerking it rapidly.  In one practiced movement she stops jerking long enough to wrap the whip around her nodule-studded demon-cock, using it like a cockring.  The organ swells thanks to the forced blood-flow, and after a few more seconds of intense masturbation, the demoness cums hard.  Her cunny squirts all over her hand, dripping clear feminine drool down her thighs.  Ceraph's masculine endowment pulses and twitches, blasting out two big squirts of jizm before it slows to a trickle.\n");
 				outputText("Letting out a throaty sigh, the demon unties her self-induced binding and gives you a wink.  Did you really just stand there and watch the whole thing?  Amazingly Ceraph actually seems stronger after such a crude display...");
 				//(+10 str/toughness, 1 level, and 10 xp reward.)

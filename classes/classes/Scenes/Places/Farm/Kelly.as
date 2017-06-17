@@ -2,6 +2,8 @@ package classes.Scenes.Places.Farm{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
 
@@ -77,7 +79,7 @@ private function hasPinkEgg():Boolean {
 //First encounter
 public function breakingKeltOptions():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	if ((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusEffectv2(StatusEffects.Kelt) >= 40 || !player.hasStatusEffect(StatusEffects.Kelt)) {
 		farm.keltScene.keltEncounter();
 		return;
@@ -110,7 +112,7 @@ public function fightToBeatKelt():void {
 //Resist
 private function resistKeltsBSBreakHimIntro():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	if (flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
 		outputText("You are more and more annoyed by Kelt's rudeness and dick-waving.  The centaur may be imposing at first and his archery skills are impressive, but you're sure that behind his false display of virility, there's nothing an experienced champion like you can't deal with.  With your superior strength and speed, you could probably take him by surprise and teach him a good lesson.  Of course, you won't ever be able to learn archery from him after that.");
 		//[if (PC doesn't have items)
@@ -157,14 +159,14 @@ private function resistKeltsBSBreakHimIntro():void {
 		outputText("\n\nYou don't have time to consider it any further - Kelt draws his bow, ready to fight!");
 		//[Start Combat]
 		startCombat(new Kelt());
-		spriteSelect(35);
+		spriteSelect(SpriteDb.s_kelt);
 	}
 	else if (flags[kFLAGS.KELT_BREAK_LEVEL] == 3) {
-		spriteSelect(-1);
+		spriteSelect(null);
 		finalKeltBreaking();
 	}
 	else {
-		spriteSelect(-1);
+		spriteSelect(null);
 		approachKelly();
 	}
 }
@@ -177,7 +179,7 @@ private function resistKeltsBSBreakHimIntro():void {
 
 private function neverBreakKeltIntoKelly():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	flags[kFLAGS.NEVER_RESIST_KELT] = 1;
 	outputText("You decide that trying to break Kelt is something you'd never want to do.  Besides, he's teaching you a useful skill, and there's just something charming about that bastard...");
 	menu();
@@ -188,7 +190,7 @@ private function neverBreakKeltIntoKelly():void {
 
 private function breakKeltGo():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	outputText("You approach the uppity centaur with glinting eyes, determined to take him down.  Kelt mistakes your anger for desire and sneers.");
 	
 	outputText("\n\n\"<i>What do you want, you little "+ player.mf("sissy", "bitch") +"?  I'm done with you.  I'm already doing you a favor by teaching you a skill sluts like you will never use nor master.</i>\"");
@@ -320,7 +322,7 @@ private function breakKeltGo():void {
 /*10 succubi milk (or 1 pink egg - large or small - and 5 succubi milk) */
 private function secondKeltBreaking():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	outputText("You stroll up to Kelt, not afraid to tame the beastman a second time.  As soon as he spots you, he snorts and tramples the floor furiously.  At the same time, he turns his head back as if he was ready to gallop at any moment.  Torn between his fear of you and his desire for revenge, he doesn't dare charge you, but he doesn't move away either.  You profit from his indecision to walk straight up to him until you are face to face.  But his masculine visage doesn't appeal to you, for your main focus is the tool hanging between his hind legs.");
 	
 	outputText("\n\nYou point at it and laugh.");
@@ -335,7 +337,7 @@ private function secondKeltBreaking():void {
 	
 	outputText("\n\nIt's a fight!");
 	startCombat(new Kelt());
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 }
 
 
@@ -345,7 +347,8 @@ internal function defeatKellyNDBREAKHIM():void {
 	//Cut these: You swing your [weapon], ready to use force against the restless centaur if necessary.
 	//Cut these: \"<i>Easy now, okay? You don't have your bow, and you know what I can do with my [weapon]. Now if you just calm down I promise I'll be much nicer this time.</i>\"
 	//lust/HP: 
-	if (monster.lust >= monster.eMaxLust()) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
+
+	if (monster.lust >= monster.maxLust()) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
 	else outputText("Kelt groans, slumping slightly from all the damage you've done to him");
 	outputText(".  You close in, saying, \"<i>Easy now, okay?  You know what I can do with my [weapon].  Now if you just calm down, I promise I'll be much nicer this time.</i>\"");
 	

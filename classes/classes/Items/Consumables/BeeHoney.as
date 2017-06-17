@@ -96,7 +96,7 @@ package classes.Items.Consumables
 				if (player.cor > 0) outputText("It quickly passes, leaving you more clearheaded");
 				getGame().dynStats("cor", -(1 + (player.cor / 20)));
 				//Libido Reduction
-				if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
+				if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib100 > 40) {
 					outputText(" and settling your overcharged sex-drive a bit.");
 					getGame().dynStats("lib", -3, "lus", -20);
 					changes++;
@@ -112,8 +112,8 @@ package classes.Items.Consumables
 			}
 			//(removes tentacle hair status, restarts hair growth if not prevented by reptile status)
 			//Intelligence Boost
-			if (changes < changeLimit && Utils.rand(2) == 0 && player.inte < 80) {
-				getGame().dynStats("int", 0.1 * (80 - player.inte));
+			if (changes < changeLimit && Utils.rand(2) == 0 && player.inte100 < 80) {
+				getGame().dynStats("int", 0.1 * (80 - player.inte100));
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.");
 				changes++;
 			}

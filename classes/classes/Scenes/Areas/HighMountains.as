@@ -11,6 +11,8 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.HighMountains.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	use namespace kGAMECLASS;
 
@@ -22,7 +24,8 @@ package classes.Scenes.Areas
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		
+		public var cockatriceScene:CockatriceScene = new CockatriceScene();
+
 		public function HighMountains()
 		{
 		}
@@ -95,14 +98,12 @@ package classes.Scenes.Areas
 					}, {
 						name: "basilisk",
 						call: basiliskScene.basiliskGreeting
-					/* [INTERMOD:Stadler76]
 					}, {
 						name: "cockatrice",
 						call: cockatriceScene.greeting,
 						when: function():Boolean {
 							return flags[kFLAGS.COCKATRICES_UNLOCKED] > 0;
 						}
-					*/
 					}, {
 						name: "sophie",
 						when: function ():Boolean {
@@ -132,18 +133,18 @@ package classes.Scenes.Areas
 				outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
 			}
 			startCombat(new Harpy());
-			spriteSelect(26);
+			spriteSelect(SpriteDb.s_harpy);
 		}
 
 		public function minoRouter():void {
-			spriteSelect(44);
+			spriteSelect(SpriteDb.s_minotaur);
 			//Cum addictus interruptus!  LOL HARRY POTTERFAG
 			//Withdrawl auto-fuck!
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 				getGame().mountain.minotaurScene.minoAddictionFuck();
 			} else {
 				getGame().mountain.minotaurScene.getRapedByMinotaur(true);
-				spriteSelect(44);
+				spriteSelect(SpriteDb.s_minotaur);
 			}
 		}
 		//\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING
@@ -151,7 +152,7 @@ package classes.Scenes.Areas
 		public function chickenHarpy():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] == 0) {
 				outputText("Taking a stroll along the mountains, you come across a peculiar-looking harpy wandering around with a large wooden cart in tow.  She's far shorter and bustier than any regular harpy you've seen before, reaching barely 4' in height but managing to retain some semblance of their thick feminine asses.  In addition to the fluffy white feathers decorating her body, the bird-woman sports about three more combed back upon her forehead like a quiff, vividly red in color.");
 				outputText("\n\nHaving a long, hard think at the person you're currently making uncomfortable with your observational glare, you've come to a conclusion - she must be a chicken harpy!");
@@ -183,7 +184,7 @@ package classes.Scenes.Areas
 		public function giveTwoOviElix():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX);
 			player.consumeItem(consumables.OVIELIX);
 			outputText("You hand over two elixirs, the harpy more than happy to take them from you.  In return, she unties a corner of the sheet atop the cart, allowing you to take a look at her collection of eggs.");
@@ -201,7 +202,7 @@ package classes.Scenes.Areas
 		public function giveThreeOviElix():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX, 3);
 			outputText("You hand over three elixirs, the harpy ecstatic over the fact that you're willing to part with them.  In return, she unties a side of the sheet atop the cart, allowing you to take a look at a large collection of her eggs.");
 			//[Black][Blue][Brown][Pink][Purple]
@@ -218,7 +219,7 @@ package classes.Scenes.Areas
 		public function getHarpyEgg(itype:ItemType):void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			flags[kFLAGS.EGGS_BOUGHT]++;
 			outputText("You take " + itype.longName + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
 			inventory.takeItem(itype, chickenHarpy);
@@ -228,7 +229,7 @@ package classes.Scenes.Areas
 		public function leaveChickenx():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
 			outputText("\n\nYou decide to take your own path, heading back to camp while you can.");
 			doNext(camp.returnToCampUseOneHour);

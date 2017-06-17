@@ -6,6 +6,8 @@ package classes.Scenes.Areas.Lake
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class FetishZealotScene extends AbstractLakeContent
 	{
@@ -63,7 +65,7 @@ package classes.Scenes.Areas.Lake
 			}
 			//next button, go to zealot fight
 			startCombat(new FetishZealot());
-			spriteSelect(20);
+			spriteSelect(SpriteDb.s_fetish_zealot);
 		}
 
 //Regular encounter
@@ -73,7 +75,7 @@ package classes.Scenes.Areas.Lake
 			clearOutput();
 			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.");
 			startCombat(new FetishZealot());
-			spriteSelect(20);
+			spriteSelect(SpriteDb.s_fetish_zealot);
 		}
 
 //Raping the player

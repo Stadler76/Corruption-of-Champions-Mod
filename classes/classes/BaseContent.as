@@ -150,8 +150,11 @@ package classes
 			kGAMECLASS.inRoomedDungeonResume = v;
 		}
 
-		/** Displays the sprite on the lower-left corner. */
-		protected function spriteSelect(choice:Number = 0):void
+		/**
+		 * Displays the sprite on the lower-left corner.
+		 * Can accept frame index or SpriteDb.s_xxx (class extends Bitmap)
+		 * */
+		protected function spriteSelect(choice:Object = 0):void
 		{
 			kGAMECLASS.spriteSelect(choice);
 		}
@@ -227,7 +230,7 @@ package classes
 		
 		protected function clearOutput():void
 		{
-			kGAMECLASS.currentText = "";
+			kGAMECLASS.output.clear();
 			kGAMECLASS.mainView.clearOutputText();
 		}
 

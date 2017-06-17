@@ -37,19 +37,19 @@ package classes.Items.Consumables
 
 			//Statistical changes:
 			//-Reduces speed down to 70.
-			if (player.spe > 70 && changes < changeLimit && rand(4) === 0) {
+			if (player.spe100 > 70 && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
 				dynStats("spe", -1);
 				changes++;
 			}
 			//-Reduces intelligence down to 60.
-			if (player.inte > 60 && changes < changeLimit && rand(4) === 0) {
+			if (player.inte100 > 60 && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
 				dynStats("int", -1);
 				changes++;
 			}
 			//-Raises libido up to 90.
-			if (player.lib < 90 && changes < changeLimit && rand(3) === 0) {
+			if (player.lib100 < 90 && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
 				//(DICK)
 				if (player.cocks.length > 0 && (player.gender !== 3 || rand(2) === 0)) {
@@ -66,14 +66,14 @@ package classes.Items.Consumables
 			}
 			//-Raises toughness up to 90.
 			//(+3 to 50, +2 to 70, +1 to 90)
-			if (player.tou < 90 && changes < changeLimit && rand(3) === 0) {
+			if (player.tou100 < 90 && changes < changeLimit && rand(3) === 0) {
 				//(+3)
-				if (player.tou < 50) {
+				if (player.tou100 < 50) {
 					outputText("\n\nYour body and skin both thicken noticeably.  You pinch your " + player.skinDesc + " experimentally and marvel at how much tougher it is now.");
 					dynStats("tou", 3);
 				}
 				//(+2)
-				else if (player.tou < 70) {
+				else if (player.tou100 < 70) {
 					outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
 					dynStats("tou", 2);
 				}
@@ -85,7 +85,7 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//-Raises strength to 80.
-			if (player.str < 80 && rand(3) === 0 && changes < changeLimit) {
+			if (player.str100 < 80 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nWhile heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength than before.");
 				dynStats("str", 1);
 				changes++;
@@ -227,10 +227,11 @@ package classes.Items.Consumables
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType === EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
-					outputText("  <b>You have normal, humanoid eyes again.</b>");
+					if (player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeType === EYES_SPIDER) outputText(" <b>Your arachnid eyes are gone!</b>");
+					outputText(" <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//Human face

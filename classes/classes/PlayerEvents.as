@@ -93,10 +93,10 @@ package classes {
 					player.hunger -= (2 * multiplier); //Hunger depletes faster in prison.
 				}
 				else {
-					if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
-					if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
-					if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
-					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
+					if (player.hunger100 > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
+					if (player.hunger100 > 50) player.hunger -= (0.5 * multiplier);
+					if (player.hunger100 > 25) player.hunger -= (0.5 * multiplier);
+					if (player.hunger100 > 0) player.hunger -= (0.5 * multiplier);
 				}
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = 100; //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger <= 0)
@@ -1059,7 +1059,7 @@ package classes {
 					getGame().dreams.fuckedUpCockDreamChange();
 					return true;
 				}
-				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here
+				if (player.lib100 > 50 || player.lust100 > 40) { //Randomly generated dreams here
 					if (getGame().dreams.dreamSelect()) return true;
 				}
 			}
@@ -1081,8 +1081,8 @@ package classes {
 			//Rigidly enforce cock size caps
 			if (player.hasCock()) {
 				for (var i:int = 0; i < player.cocks.length; i++) {
-					if (player.cocks[i].cockLength > 499.9) player.cocks[i].cockLength = 499.9;
-					if (player.cocks[i].cockThickness > 99.9) player.cocks[i].cockThickness = 99.9;
+					if (player.cocks[i].cockLength > 9999.9) player.cocks[i].cockLength = 9999.9;
+					if (player.cocks[i].cockThickness > 999.9) player.cocks[i].cockThickness = 999.9;
 				}
 			}
 			

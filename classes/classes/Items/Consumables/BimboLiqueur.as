@@ -158,10 +158,10 @@ package classes.Items.Consumables
 				if (game.player.tone > 0) {
 					outputText("Like, weirdest of all, your muscles seem to be vanishing!  Before your eyes, all muscle tone vanishes, leaving your body soft and gently curvy.  You poke yourself and giggle!  Everyone's totally going to want to, like, rub up against you at every opportunity.  Your thighs are so soft you bet you could squeeze a pair of dicks to orgasm without even touching your moist cunny.");
 					game.player.tone = 0;
-					if (game.player.str >= 30) {
-						if (game.player.str >= 90) game.dynStats("str", -10);
-						if (game.player.str >= 70) game.dynStats("str", -10);
-						if (game.player.str >= 50) game.dynStats("str", -10);
+					if (game.player.str100 >= 30) {
+						if (game.player.str100 >= 90) game.dynStats("str", -10);
+						if (game.player.str100 >= 70) game.dynStats("str", -10);
+						if (game.player.str100 >= 50) game.dynStats("str", -10);
 						game.dynStats("str", -5);
 						outputText("  It does get a bit harder to carry yourself around with your diminished strength, but that's, like, what big strong hunks are for anyways!  You can just flirt until one of them volunteers to help out or something!  Besides, you don't need to be strong to jerk off cocks or finger slutty pussies!");
 					}

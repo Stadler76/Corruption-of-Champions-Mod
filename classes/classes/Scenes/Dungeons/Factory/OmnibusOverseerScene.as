@@ -5,6 +5,8 @@ package classes.Scenes.Dungeons.Factory
 	import classes.StatusEffects;
 	import classes.PerkLib;
 	import classes.CockTypesEnum;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	public class OmnibusOverseerScene extends BaseContent
 	{
@@ -13,7 +15,7 @@ package classes.Scenes.Dungeons.Factory
 		
 		public function encounterOmnibus():void {
 			menu();
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			outputText("\n\nA nearly nude demonic woman is standing behind the desk, appraising you.  She is gorgeous in the classical sense, with a curvy hourglass figure that radiates pure sexuality untamed by any desire for proper appearance.  Shiny black lip-gloss encapsulates her bubbly lips, while dark eyeshadow highlights her bright red eyes.  The closest thing she has to clothing is a narrow band of fabric that wraps around her significant chest, doing little to hide the pointed nubs of her erect nipples.  Her crotch is totally uncovered, revealing the hairless lips of her glistening womanhood.\n\n");
 			outputText("She paces around the edge of the desk, licking her lips and speaking, \"<i>So you've made it all the way here have you, 'champion'?  Too bad you've wasted your time.  Have you figured it out yet?  Have you discovered why you were sent here with no weapons or blessed items?  Have you found out why there are more humans here than anywhere else in this realm?  I'll tell you why.  You weren't a champion.  You were a sacrificial cow, meant to be added to our herd.  You just got lucky enough to get free.</i>\"\n\n");
 			outputText("A part of you wants to deny her, to scream that she is wrong.  But it makes too much sense to be a lie... and the evidence is right behind you, on the factory floor.  All those women must be the previous champions, kept alive and cumming for years in order to feed these insatiable demons.  The demoness watches your reaction with something approaching sexual bliss, as if the monstrous betrayal of it all is turning her on.\n\n");
@@ -27,12 +29,12 @@ package classes.Scenes.Dungeons.Factory
 			outputText("You strike a combat pose and prepare your " + player.weaponName + ".  She smiles and saunters around the desk, letting something bulbous and fleshy drop free from between her nether-lips.  You watch in shock as it hardens into a dick, growing right from where her clit should be.\n\nShe taunts, \"<i>Like what you see cow?  I'll be sure to visit you in the pens.</i>'\" \n\nAn unseen force closes the glass door to the north, preventing you from running away!");
 			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
 			startCombat(new OmnibusOverseer(), true);
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			return;
 		}
 		
 		private function acceptOmnibus():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("She smiles, sauntering closer.  Your eyes widen in shock as her vulva are spread apart by something inside her.   A slick and growing cock emerges, sprouting from where her clit should be located.  She's a hermaphrodite.  You don't have time to contemplate the implications, as the demoness used your temporary distraction to sink a needle into your neck.  You sigh and black out almost instantaneously, letting her catch you with her strong arms and soft bosom.");
 			doNext(getGame().dungeons.factory.doBadEndGeneric);
@@ -45,7 +47,7 @@ package classes.Scenes.Dungeons.Factory
 		//Choose your poison
 		public function winAgainstOmnibus():void {
 			clearOutput();
-			if (monster.lust >= monster.eMaxLust()) {
+			if (monster.lust >= monster.maxLust()) {
 				outputText("The omnibus trembles where she stands, her proud demonic dick twitching and pulsating as her desires totally overwhelm her.  The tainted nodules covering the purplish hermaphrodite's member ripple and swell from the base towards the tip, culminating with an explosive eruption of sticky, white demon-seed.  She moans with shame and pleasure, pumping larger and larger volumes of cum onto her office's floor.  She drops to her knees, too exhausted and ashamed by her premature orgasm to continue fighting.\n\n");
 				outputText("\"<i>Ooooh no.  You can't tell the other demons I got off so easily!  I'll never live it down,</i>\" she cries, \"<i>You've beaten me, please if you let me go and promise not to tell the other demons I'll use my magic to give you a gift!  My magic is powerful, I can do nearly ANYTHING with it when the subject desires the changes.</i>\"\n\n");
 			}
@@ -67,7 +69,7 @@ package classes.Scenes.Dungeons.Factory
 		}
 		
 		private function chooseBreasts():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			//Grow if none
 			if (player.breastRows.length == 0) {
@@ -111,7 +113,7 @@ package classes.Scenes.Dungeons.Factory
 			postOmnibusBoon();
 		}
 		private function chooseDick():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			//No dick?  Grow one!
 			if (player.cocks.length == 0) {
@@ -172,7 +174,7 @@ package classes.Scenes.Dungeons.Factory
 			return;
 		}
 		private function normalFace():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			if (player.horns > 0 || player.antennae > ANTENNAE_NONE) {
 				outputText("Your forehead itches intensely.  You cannot help but stratch madly at it.  ");
@@ -199,7 +201,7 @@ package classes.Scenes.Dungeons.Factory
 			postOmnibusBoon();
 		}
 		private function normalChest():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			temp = 0;
 			if (player.breastRows.length > 1) {
@@ -243,7 +245,7 @@ package classes.Scenes.Dungeons.Factory
 			postOmnibusBoon();
 		}
 		private function normalGroin():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			//Temp used to track changes
 			temp = 0;
 			clearOutput();
@@ -331,7 +333,7 @@ package classes.Scenes.Dungeons.Factory
 			postOmnibusBoon();
 		}
 		private function normalLegs():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("You feel as if you should slap yourself for stupidy.  Your legs are already normal!  You flush hotly as the corrupt magics wash over you, changing nothing.");
 			else outputText("You collapse as your " + player.legs() + " are unable to support you.  The sounds of bones breaking and reshaping fills the room, but oddly you feel no pain, only mild arousal.  You blink your eyes and sigh, and when you look down again <b>you have normal human legs</b>!");
@@ -361,14 +363,14 @@ package classes.Scenes.Dungeons.Factory
 		}
 		
 		private function letGoOmnibus():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("You refuse to fall for her ploy, and decide not to take her up on her offer.  However, being that she is so thoroughly defeated, you allow her to escape, promising her far worse should she ever oppose you in the future.\n\n\"<i>Thank you, merciful hero!</i>\" she says and she sprints out the door.  Wings unfurl from her back and she takes flight, disappearing out a skylight above the main factory floor.");
 			combat.cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
 		private function killOmnibus():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.");
 			flags[kFLAGS.D1_OMNIBUS_KILLED] = 1;

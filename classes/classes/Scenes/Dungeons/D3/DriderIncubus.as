@@ -85,11 +85,11 @@ package classes.Scenes.Dungeons.D3
 		override protected function performCombatAction():void
 		{
 			this._combatRound++;
-			if (this.lust < 65 && this.HP < 33)
+			if (this.lust100 < 65 && this.HP < 33)
 			{
 				this.gainHpAndLust();
 			}
-			else if (this.lust >= 65 && this.HP >= 33)
+			else if (this.lust100 >= 65 && this.HP >= 33)
 			{
 				this.dropHpAndLust();
 			}
@@ -121,7 +121,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				opts = [spiderMorphWebAttack, this.kick, this.kick, this.doubleStrike, this.doubleStrike];
-				if (this.fatigue < 100) opts.push(this.bite);
+				if (this.fatigue100 < 100) opts.push(this.bite);
 				opts[rand(opts.length)]();
 			}
 		}
@@ -160,7 +160,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function gainHpAndLust():void
 		{
-			this.addHP(this.eMaxHP() * 0.1);
+			this.addHP(this.maxHP() * 0.1);
 			this.lust += 8;
 			if (this._hpGains == 0)
 			{
@@ -180,7 +180,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			this._hpGains++;
 			outputText(" The demon gestures wildly, drawing a rune across his own chest. It flares, blood red and pulsing. Your foe’s wounds slowly edge close, fueled by magic. When the luminous symbol fades, the drider pants, his black skin flushing purple in places.");
-			if (this.lust > 65)
+			if (this.lust100 > 65)
 			{
 				if (this._goblinFree)
 				{
@@ -197,7 +197,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function dropHpAndLust():void
 		{
-			this.HP = this.HP - this.eMaxHP() * 0.08;
+			this.HP   = this.HP - this.maxHP() * 0.08;
 			this.lust = this.lust - 10;
 			outputText("The demon snarls and draws his spear back, placing it blade down against his arm. Grinning malevolently, he slides the razor-sharp edge along his skin, leaving a trail of glittering ruby on his wounded flesh. <i>“Pain brings clarity of mind - something you couldn’t understand.”</i> He grins wider, mastering his baser emotions. <i>“Let me teach you.”</i>\n\n");
 		}
@@ -400,7 +400,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			game.dynStats("lus",player.lib / 10 + player.cor / 10 + 15);
 			outputText(". Your body rebels against you under the unholy influence");
-			if (player.lust < 100)
+			if (player.lust100 < 100)
 				outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
 			else
 				outputText(".");
@@ -467,7 +467,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			outputText("The determined goblin love-slave opens wide, launching a tongue that must be at least three feet long toward her master’s member with pinpoint accuracy. It makes contact with a wet ‘snap’ and wraps round the oozing, demonic length before either you or the drider can react. His motions slow from the attention, and he nearly stumbles, giving the goblin time to close to the distance, mummifying his member under layers of hot pink pleasure.");
 			lust += 5;
-			if (lust <= 100)
+			if (lust100 <= 100)
 			{
 				outputText("\n\nThe drider skitters back, the motion dropping the goblin to her knees. Her tongue stretches taut a long moment, then slips from his shaft, snapping back into her mouth hard enough to make her recoil. Both parties look disappointed with the outcome, none moreso than the goblin. Fortunately for her, she’ll get another chance - the drider is focusing on you once more.");
 			}

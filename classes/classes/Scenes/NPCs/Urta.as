@@ -6,6 +6,8 @@ package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Urta extends NPCAwareContent implements TimeAwareInterface {
 
@@ -102,8 +104,8 @@ package classes.Scenes.NPCs{
 		//End of Interface Implementation
 		
 public function urtaSprite():void {
-	if (urtaDrunk()) spriteSelect(84);
-	else spriteSelect(1);
+	if (urtaDrunk()) spriteSelect(SpriteDb.s_urtaDrunk);
+	else spriteSelect(SpriteDb.s_urta);
 }
 
 public function urtaCapacity():Number {
@@ -1155,7 +1157,7 @@ internal function goBackToUrtasForLuvinz():void {
 	outputText("Walking a little strangely, you make your way to a waitress and pay off Urta's tab, feeling a bit flushed from the kiss and the action you're expecting later on.  Once done with the onerous task, you turn and realize Urta has vanished, though the backdoor to the bar is swinging once again.  You head out after her, stumbling directly into her exposed member as you step out into the alley.  Urta blushes fiercely and shivers, stammering, \"<i>It hurt too much to keep it penned up.  I'm sorry.</i>\"\n\n");
 
 	outputText("You assure her that you aren't offended");
-	if (player.lib > 50 || player.cor > 50) outputText(" and are actually turned on by the thought of walking through the city with such a 'big' lover hanging off your arm");
+	if (player.lib100 > 50 || player.cor > 50) outputText(" and are actually turned on by the thought of walking through the city with such a 'big' lover hanging off your arm");
 	outputText(".  Urta smiles weakly and hooks her arm through yours, leading you towards her apartment, making sure to stick to the more abandoned back-roads.  Her caution doesn't stop the pair of you from giving a few free shows, and if anything, each brief encounter with a passerby seems to be making her bigger and harder, revealing a half-buried exhibitionist streak.\n\n");
 	goBackToUrtasForLuvinzII();
 }
@@ -1213,7 +1215,7 @@ private function rideUrtaTenderFemale():void {
 	outputText("\"<i>Do you like them that much?</i>\" she asks.\n\n");
 
 	outputText("You nod ");
-	if (player.cor < 50 || player.lib < 50) outputText("sheepishly ");
+	if (player.cor < 50 || player.lib100 < 50) outputText("sheepishly ");
 	else outputText("eagerly ");
 	outputText("and grab ahold of her latex-wrapped member, giving it gentle strokes along the underside.  Urta moans loudly and twitches her hips, already eager for more, and the ");
 	if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("growing moistness in your loins");
@@ -1864,7 +1866,7 @@ private function rideUrtasCoochLoveyDovey():void {
 	doNext(camp.returnToCampUseOneHour);
 	//if (flags[kFLAGS.URTA_FERTILE] == 1) player.knockUp(21,515,80);
 	player.orgasm('Vaginal');
-	if (player.sens > 30) dynStats("sen", -1);
+	if (player.sens100 > 30) dynStats("sen", -1);
 }
 
 //[RIDE ANAL]
@@ -3179,9 +3181,9 @@ private function urtaDiscussesSexAndRomance():void {
 	if (urtaOpenAboutEdryn()) outputText("\n\nThe pensive fox-girl trails off and then looks at you, contemplatively, before beginning to speak again.  \"<i>I have to admit... Edryn... she took my cock's virginity.  She's really been my only friend that's equipped to handle it, and from time to time... we take care of each other.  Even then, we're more friends with benefits than anything else.  We get along great, but we just don't click romantically.  The sex is good, but we roll apart and get back to work.</i>\"");
 	outputText("\n\nShe looks at you, then, her eyes fixed on yours.  \"<i>When I saw you walk into the city, alone and vulnerable, I thought you might be a kindred spirit, and well, I thought you were kind of cute too.  I had to hurry away to the Wet Bitch because I couldn't stop thinking about having sex with you, throwing you against the wall and fucking you.  I didn't want to scare you away like all the others by showing you my cock.  Yet, you followed me, and you didn't care that I was a herm, and, well, you were there for the rest.</i>\"");
 	outputText("\n\nIt's quite clear that she's finished telling you everything she has to say on the subject.  You could just leave it at that and go, or you could take advantage of what she's been talking about and see if you can get her all hot and bothered under the collar.");
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 	//[Leave] [Tease]
 	menu();
@@ -3235,9 +3237,9 @@ private function urtaDiscussesEmployment():void {
 	outputText("\n\nShe just grins at you in response.  \"<i>Well, most of my duties involve filling out paperwork, and because I'm the one in charge, well... so long as the paperwork gets filled out, it doesn't matter where I fill it out from, understand?  Besides, I'm not in here ALL day.  I spend a lot of time out in the streets, keeping my ear to the ground.  You're just lucky enough to catch me whenever I drop in to wet my whistle.</i>\"");
 	outputText("\n\nAlmost as if to punctuate her words, a centaur suddenly comes racing into the Wet Bitch.  \"<i>Captain Urta!</i>\" he cries out.");
 	outputText("\n\nUrta shrugs.  \"<i>See what I mean?  Duty calls, it's been nice chatting with you,</i>\" she says, standing up and racing off, easily leaping up onto the startled centaur's back, who rears up and spins around before galloping off.  Seeing that Urta obviously has her hands full, you leave the bar.");
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3254,9 +3256,9 @@ private function urtaDiscussesPrejudice():void {
 	outputText("\n\nYou ask what changed that.");
 	outputText("\n\n\"<i>Ironically enough, the demons.  All the pollutants and toxins they dump into the ground, the water, the air; it's messed with a lot of races, so even technically pure men and women started giving birth to the odd hermaphrodite.  Combine that with all the people who accidentally got turned into herms - or changed themselves on purpose - and then didn't run away to join the demon army because they weren't complete idiots, and, well...</i>\"  She shrugs.");
 	outputText("\n\nYou nod in understanding, thank her for being willing to talk about something so personal, and then leave her, still nursing her empty glass.");
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3268,9 +3270,9 @@ private function urtaDiscussesEdrynHistory():void {
 	outputText("You ask Urta what her past with Edryn is.");
 	outputText("\n\nUrta simply shrugs at you. \"<i>To be honest?  We never knew each other until we started working on the Watch together.  I can't recall why it was she joined - maybe something about her father hoping it'd teach her to curb her lust? - but she signed up a few weeks after I did.  We got sent on patrol with each other a few times, started talking and, well, we hit it off.  Edryn's my best friend, and she's been a rock of support since she entered my life.</i>\"");
 	outputText("\n\nSeeing that there isn't much more she knows than that, you thank Urta for answering your question and excuse yourself.");
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3283,9 +3285,9 @@ private function urtaDiscussesWorkingWithEdryn():void {
 	outputText("\n\nCurious about the arrangement, you ask why that is.");
 	outputText("\n\n\"<i>Centaurs are big and strong, but they're not really maneuverable - oh, they can run like anything when they want, but they suck at making tight turns or getting around in narrow spaces.  Plus, that four-on-the-floor configuration of theirs means they have a hard time defending their entire body,</i>\" Urta explains.  \"<i>We're not just a good team, we're good friends, so we prefer to work with each other; we've got good chemistry on the job, and our skills complement each other well, so the Covenant doesn't mind us being assigned together.</i>\"  She smirks at you.  \"<i>The others in the Watch refer to Edryn as my right-hand mare.</i>\"");
 	outputText("\n\nYou thank Urta for her time and let her get back to her drinking.");
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3376,9 +3378,9 @@ private function urtaDiscussesEdrynRomance():void {
 			urtaLove(.5);
 		}
 	}
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 }
 
 //[=Accept=]
@@ -3449,9 +3451,9 @@ private function urtaDiscussesWatchMembership():void {
 	outputText("\n\nUrta smiles at you.  \"<i>Joining's easy, but you'd have to give up that adventuring business - you can't serve the city when you never spend any time in the city.  As for us...</i>\" she taps her clawed fingers idly on the table, clearly trying to remember precedent.  \"<i>So long as you don't let it interfere with work - like, blowing off a case to fuck in an alley - nobody will bat an eye.  'Course, it means you'll need to work a little harder than the others, or else they'll say I'm going softer on you because we're in each others' pants.  And if they aren't leery about that, they'll be teasing you about us.  So...</i>\" she trails off, shrugging her shoulders, unable to articulate any more because of the nebulousness of the subject.");
 	outputText("\n\nYou thank her for the explanation, and note you don't think you'll be able to seriously consider signing up at the present time.  Out of things to talk about, you thank her for her time, and leave her to nurse her drink.");
 	doNext(camp.returnToCampUseOneHour);
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 }
 
@@ -3466,9 +3468,9 @@ private function urtaDiscussesWatchRole():void {
 	//(PC is too corrupt:
 	else outputText("\n\nYou simply nod your head in understanding; maybe having Urta wrapped around your finger was a smarter move than you thought.  Last thing you need is a bunch of misguided killjoys taking you down.  You change the subject and make small talk for a while longer, and then see yourself out.");
 	doNext(camp.returnToCampUseOneHour);
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 }
 
@@ -3485,9 +3487,9 @@ private function urtaDiscussesTheWatchsReach():void {
 	outputText("\n\nShe morosely finishes off her drink and starts pouring herself another.  You wait for her to take the first sip before warily asking if she was, perhaps, blamed for the attack because of her sex.  She looks at you and then shakes her head.  \"<i>No.  I got an extensive debriefing... understandable, but they didn't accuse me of anything.  In the end, I got the notoriety I was after... but not in a way I wanted it.</i>\"  She sighs softly and drinks again.  \"<i>When I became captain, the first thing I did was order all teams to focus on stealth, and to run rather than fight whenever possible.  We normally only patrol into the desert, as far as the badlands - most critters don't want anything to do with either place, so we don't run into the big nasties I hear are in lusher places.  When we need outside supplies, we send out specific procurement teams who've been to our sources before and can get back there quickly and quietly.</i>\"");
 	outputText("\n\nYou thank Urta for the explanation and politely excuse yourself, leaving Urta to drink off her depression.");
 	doNext(camp.returnToCampUseOneHour);
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 }
 //[=Crime & Punishment=]
@@ -3510,9 +3512,9 @@ private function urtaDiscussesCrimeAndPunishment():void {
 	outputText("\n\n\"<i>Not a chance,</i>\" Urta answers confidently.  \"<i>The Watch and the Council both work together closely on that; when somebody is exiled from the city, the Council updates the warding - that person can never find their way back to Tel'Adre.  Certainly not at the head of a demonic army; that much corruption would set even the weakest wards ringing and the whole Council would turn up the power and make the city vanish.</i>\"");
 	outputText("\n\nShe looks puzzled for a few moments, lost in thought.  \"<i>I'm sure we do still have the death penalty, but in all my years of service I can't remember it ever being carried out.  I think that would require the most extreme treachery to be committed against the city.</i>\"  She shrugs and then carries on.  \"<i>For lesser crimes, we have more mild punishments - fines, time in prison mixed with public service, even things like whippings or the stocks if need be.</i>\"");
 	outputText("\n\nYou thank her for the informative discussion and politely excuse yourself.");
-	if (player.inte < 20) dynStats("int", .5);
-	if (player.inte < 40) dynStats("int", .5);
-	if (player.inte < 60) dynStats("int", .5);
+	if (player.inte100 < 20) dynStats("int", .5);
+	if (player.inte100 < 40) dynStats("int", .5);
+	if (player.inte100 < 60) dynStats("int", .5);
 	urtaLove(.5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -4448,8 +4450,8 @@ private function lickOutUrtaAtHome():void {
 	player.orgasm('Lips');
 	player.slimeFeed();
 	knockUpUrtaChance();
-	if (player.lib > 50) dynStats("lib", -1);
-	if (player.lib > 90) dynStats("lib", -1);
+	if (player.lib100 > 50) dynStats("lib", -1);
+	if (player.lib100 > 90) dynStats("lib", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -5372,7 +5374,7 @@ private function urtaTakesPCOnWalkies():void {
 		player.changeFatigue(40);
 		player.orgasm('Generic');
 		player.slimeFeed();
-		if (player.lib < 60) dynStats("lib", 1);
+		if (player.lib100 < 60) dynStats("lib", 1);
 		for (var i:int = 0; i < 3; i++) { //Attempt 3x
 			knockUpUrtaChance();
 		}

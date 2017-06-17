@@ -99,10 +99,10 @@ package classes.Scenes.Places.TelAdre
 				outputText("\n\nNodding, you hop up, grasping the bar. You work out for an hour, exchanging various stories of your adventures in Mareth. He adds in commentary whenever appropriate, as well as the occasional witty banter.");
 				outputText("\n\nWhen your hour is up, you hop down from your bar and make your way to the showers, Pablo waving goodbye to you as you do so. Once you finish with your shower, you return to camp.");
 			}
-			if (player.str < 40) dynStats("str", 0.5);
-			if (player.str < 60) dynStats("str", 0.5);
-			if (player.str < 80) dynStats("str", 0.5);
-			if (player.str < 90) dynStats("str", 0.4);
+			if (player.str100 < 40) dynStats("str", 0.5);
+			if (player.str100 < 60) dynStats("str", 0.5);
+			if (player.str100 < 80) dynStats("str", 0.5);
+			if (player.str100 < 90) dynStats("str", 0.4);
 			dynStats("str", 0.1);
 			player.modTone(90);
 			flags[kFLAGS.PABLO_WORKOUT_COUNTER]++;

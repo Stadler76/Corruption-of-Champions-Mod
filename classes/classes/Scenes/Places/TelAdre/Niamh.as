@@ -280,16 +280,16 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	HPChange(40 + rand(21),false);
 	var lib:Number = 0;
 	if (player.hasStatusEffect(StatusEffects.BlackCatBeer)) {
-		if (100 - player.lib >= 10) lib = 10;
-		else lib = 100 - player.lib;
+		if (player.getMaxStats('lib') - player.lib >= 10) lib = 10;
+		else lib = player.getMaxStats('lib') - player.lib;
 		player.addStatusValue(StatusEffects.BlackCatBeer,1,4);
 		player.addStatusValue(StatusEffects.BlackCatBeer,2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");
 		dynStats("spe", -1, "int", -1, "lib", lib, "lus", 30+rand(player.lib/4));
 	}
 	else {
-		if (100 - player.lib >= 10) lib = 10;
-		else lib = 100 - player.lib;
+		if (player.getMaxStats('lib') - player.lib >= 10) lib = 10;
+		else lib = player.getMaxStats('lib') - player.lib;
 		player.createStatusEffect(StatusEffects.BlackCatBeer,8,lib,0,0);
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
@@ -718,7 +718,7 @@ private function sellYourBooze():void {
 	if (player.cockTotal() > 1) outputText("s");
 	outputText(".");
 	//If lust is low
-	if (player.lust < 50 || player.gender == 0) {
+	if (player.lust100 < 50 || player.gender == 0) {
 		player.growTits(2, player.bRows(), false, 2);
 		outputText("\n\nYou feel flushed from the sensations, but finally you run dry.  Your breasts have shrunk back down, but they still feel a little larger than they were earlier.  As little droplets of milk instead of booze return to dripping from your nipples, Niamh hands you your cut of the gems you earned from the sales.");
 		//[LEAVE]

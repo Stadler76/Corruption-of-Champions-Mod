@@ -31,20 +31,20 @@ package classes.Scenes.Monsters
 		
 		protected function lustMagicAttack():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
-			game.dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
-			if (player.lust < 30) outputText("You feel strangely warm.  ");
-			if (player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
-			if (player.lust >= 60) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
+			var lustDmg:int = player.lib / 10 + player.cor / 10 + 10;
+			if (player.lust100 < 30) outputText("You feel strangely warm.  ");
+			if (player.lust100 >= 30 && player.lust100 < 60) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
+			if (player.lust100 >= 60) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
 			if (player.cocks.length > 0) {
-				if (player.lust >= 60)
+				if (player.lust100 >= 60)
 					outputText("You feel your " + player.multiCockDescriptLight() + " dribble pre-cum.");
-				else if (player.lust >= 30 && player.cocks.length == 1)
+				else if (player.lust100 >= 30 && player.cocks.length == 1)
 					outputText("Your " + player.cockDescript(0) + " hardens, distracting you further.");
-				else if (player.lust >= 30 && player.cocks.length > 1)
+				else if (player.lust100 >= 30 && player.cocks.length > 1)
 					outputText("Your " + player.multiCockDescriptLight() + " harden uncomfortably.");
 				if (player.hasVagina()) outputText("  ");
 			}
-			if (player.lust >= 60 && player.hasVagina()) {
+			if (player.lust100 >= 60 && player.hasVagina()) {
 				switch (player.vaginas[0].vaginalWetness) {
 					case VAGINA_WETNESS_NORMAL:
 						outputText("Your " + player.allVaginaDescript() + " dampen" + (player.vaginas.length > 1 ? "" : "s") + " perceptibly.");
@@ -64,7 +64,7 @@ package classes.Scenes.Monsters
 						
 				}
 			}
-			outputText("\n");
+			player.takeLustDamage(lustDmg, true);
 			if (player.lust >= player.maxLust())
 				doNext(game.combat.endLustLoss);
 			else doNext(game.playerMenu);

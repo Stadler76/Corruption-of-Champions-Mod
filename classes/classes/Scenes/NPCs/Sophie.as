@@ -54,20 +54,20 @@ package classes.Scenes.NPCs
 				outputText("  Blood rushes to " + player.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ");
 				game.sophieScene.luststickApplication(2);
 				game.dynStats("lus", (12+player.lib/10));
-				if (player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
-				else if (player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if (player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
-				else if (player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
+				if (player.lust100 < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
+				else if (player.lust100 < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
+				else if (player.lust100 < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+				else if (player.lust100 < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
 				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n");
 			}
 			else {
 				outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ");
 				game.sophieScene.luststickApplication(2);
 				game.dynStats("lus", 8+player.lib/10);
-				if (player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
-				else if (player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if (player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
-				else if (player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
+				if (player.lust100 < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
+				else if (player.lust100 < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
+				else if (player.lust100 < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+				else if (player.lust100 < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
 				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n");
 			}
 		}

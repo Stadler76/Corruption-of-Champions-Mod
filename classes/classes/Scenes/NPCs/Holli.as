@@ -47,7 +47,7 @@ package classes.Scenes.NPCs
 					addHP(25);
 				}
 				//[(monster lust > 0)]
-				if (lust > 20 && lust <= 99) {
+				if (lust > 20 && lust100 <= 99) {
 					outputText("\n\nA single rent forms in the tree's armor-like surface; you can actually see the demon touching her pussy inside, and her eyes roll back as she comes!  It looks like teasing her won't be very effective if you can't distract her from pleasuring herself inside her shell.");
 					lust -= 10;
 					//repair monster HP and lust by significant amounts

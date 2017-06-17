@@ -41,21 +41,21 @@ package classes.Scenes.Areas.Forest
 					if (player.totalCocks() > 1) outputText("Each of y");
 					else outputText("Y");
 					outputText("our " + player.multiCockDescriptLight());
-					if (player.lust > 80) outputText(" drips pre-cum");
-					else if (player.lust > 40) outputText(" grows harder");
+					if (player.lust100 > 80) outputText(" drips pre-cum");
+					else if (player.lust100 > 40) outputText(" grows harder");
 					else outputText(" hardens");
 					outputText(" from the sexual sight, and you feel a compulsion to rush to your wife and take her on the spot.  Obviously she's not really your wife, but after so many fuckings it kind of makes sense to think of her that way.");
-					if (player.lust < 70) outputText("  Still, you don't want to fuck her right now!");
+					if (player.lust100 < 70) outputText("  Still, you don't want to fuck her right now!");
 				}
 				else {
 					outputText("Struggling, you pull your eyes back into your head and away from Tamani's gorgeous slit.  You shudder, feeling ");
 					if (player.totalCocks () > 1) outputText("each of ");
 					outputText("your " + player.multiCockDescriptLight());
-					if (player.lust <= 41) outputText(" thicken perceptibly");
-					else if (player.lust <= 81) outputText(" twitch eagerly");
+					if (player.lust100 <= 41) outputText(" thicken perceptibly");
+					else if (player.lust100 <= 81) outputText(" twitch eagerly");
 					else outputText("drip pre-cum");
 					outputText(", responding to the overly sensual goblin's body.  You start to approach her, but stop yourself, realizing you were about to pick up your wife and fuck her on the spot.  You know she's not really your wife, but you have a hard time thinking of her as anything else, save for maybe your mistress.");
-					if (player.lust < 70) outputText("  Regardless, you're resolute in your desire not to fuck her right now!");
+					if (player.lust100 < 70) outputText("  Regardless, you're resolute in your desire not to fuck her right now!");
 				}
 			}
 			//HIGH HYPNO VALUE

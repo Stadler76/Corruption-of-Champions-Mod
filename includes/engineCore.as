@@ -95,7 +95,7 @@ public function clone(source:Object):* {
  */
 public function clearOutput():void {
 	forceUpdate();
-	currentText = "";
+	output.clear();
 	mainView.clearOutputText();
 	if (_gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
@@ -117,14 +117,14 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 		//if (!debug) mainText.htmlText = output;
 		//trace("Purging and writing Text", output);
 		clearOutput();
-		currentText = output;
+		this.output.raw(output);
 		mainView.setOutputText( output );
 		// mainText.htmlText = output;
 	}
 	else
 	{
 		//trace("Adding Text");
-		currentText += output;
+		this.output.raw(output);
 		mainView.appendOutputText( output );
 		// mainText.htmlText += output;
 	}
@@ -148,14 +148,12 @@ public function outputText(output:String):void
 	// It's needed since those buttons are available even when in the event-tester
 	mainView.hideTestInputPanel();
 
-	output = this.parser.recursiveParser(output);
-
-		currentText += output;
+	this.output.text(output);
 		//if (!debug) mainText.htmlText = currentText;
-	if (debug) 
+	/*if (debug)
 	{
 		mainView.setOutputText( currentText );
-	}
+	}*/
 
 }
 
@@ -476,7 +474,10 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
 	mainView.bottomButtons[pos].alpha = 1; // failsafe to avoid possible problems with dirty hack
-	mainView.showBottomButton(pos, text, callback, toolTipText, toolTipHeader);
+	mainView.showBottomButton(pos, text, function():void {
+		output.record("<br>["+text+"]<br>");
+		callback();
+	}, toolTipText, toolTipHeader);
 	//mainView.setOutputText( currentText );
 	output.flush();
 }
@@ -958,20 +959,4 @@ public function isPeaceful():Boolean {
 
 public function doNothing():void {
 	//This literally does nothing.
-}
-
-public function spriteSelect(choice:Number = 0):void {
-	var type:int = flags[kFLAGS.SPRITE_STYLE]; //0 for new, 1 for old.
-	if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
-	{
-		mainView.selectSprite(choice, type);
-	}
-	else
-	{
-		if (choice >= 0)
-		{
-			trace ("hiding sprite because flags");
-			mainView.selectSprite(-1);
-		}
-	}
 }

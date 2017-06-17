@@ -1,5 +1,6 @@
 ﻿		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
 		import classes.GlobalFlags.kGAMECLASS;
+		import classes.Items.ArmorLib;
 
 
 
@@ -22,6 +23,7 @@
 				"minute"			: function(thisPtr:*):* {return  kGAMECLASS.model.time.minutes;},
 				"hour"				: function(thisPtr:*):* {return  kGAMECLASS.model.time.hours;},
 				"days"				: function(thisPtr:*):* {return  kGAMECLASS.model.time.days;},
+				"hasarmor"			: function(thisPtr:*):* {return  kGAMECLASS.player.armor != ArmorLib.NOTHING;},
 				"tallness"			: function(thisPtr:*):* {return  kGAMECLASS.player.tallness;},
 				"hairlength"		: function(thisPtr:*):* {return  kGAMECLASS.player.hairLength;},
 				"femininity"		: function(thisPtr:*):* {return  kGAMECLASS.player.femininity;},
@@ -37,12 +39,16 @@
 				"milkquantity"		: function(thisPtr:*):* {return  kGAMECLASS.player.lactationQ();},
 				"hasvagina"			: function(thisPtr:*):* {return  kGAMECLASS.player.hasVagina();},
 				"istaur"			: function(thisPtr:*):* {return  kGAMECLASS.player.isTaur();},
+				"ishoofed"			: function(thisPtr:*):* {return  kGAMECLASS.player.isHoofed();},
+				"iscentaur"			: function(thisPtr:*):* {return  kGAMECLASS.player.isCentaur();},
 				"isnaga"			: function(thisPtr:*):* {return  kGAMECLASS.player.isNaga();},
 				"isgoo"				: function(thisPtr:*):* {return  kGAMECLASS.player.isGoo();},
 				"isbiped"			: function(thisPtr:*):* {return  kGAMECLASS.player.isBiped();},
 				"hasbreasts"		: function(thisPtr:*):* {return  (kGAMECLASS.player.biggestTitSize() >= 1);},
 				"hasballs"			: function(thisPtr:*):* {return  (kGAMECLASS.player.balls > 0);},
 				"hascock"			: function(thisPtr:*):* {return  kGAMECLASS.player.hasCock();},
+				"hassheath"			: function(thisPtr:*):* {return  kGAMECLASS.player.hasSheath();},
+				"hasbeak"			: function(thisPtr:*):* {return  kGAMECLASS.player.hasBeak();},
 				"isherm"			: function(thisPtr:*):* {return  (kGAMECLASS.player.gender == 3);},
 				"cumnormal"			: function(thisPtr:*):* {return  (kGAMECLASS.player.cumQ() <= 150);},
 				"cummedium"			: function(thisPtr:*):* {return  (kGAMECLASS.player.cumQ() > 150 && kGAMECLASS.player.cumQ() <= 350);},
@@ -50,11 +56,16 @@
 				"cumveryhigh"		: function(thisPtr:*):* {return  (kGAMECLASS.player.cumQ() > 1000 && kGAMECLASS.player.cumQ() <= 2500);},
 				"cumextreme"		: function(thisPtr:*):* {return  (kGAMECLASS.player.cumQ() > 2500);},
 				"issquirter"		: function(thisPtr:*):* {return  (kGAMECLASS.player.wetness() >= 4);},
+				"vaginalwetness"	: function(thisPtr:*):* {return  kGAMECLASS.player.wetness();},
+				"anallooseness"		: function(thisPtr:*):* {return  kGAMECLASS.player.ass.analLooseness;},
+				"buttrating"		: function(thisPtr:*):* {return  kGAMECLASS.player.buttRating;},
 				"ispregnant"		: function(thisPtr:*):* {return  (kGAMECLASS.player.pregnancyIncubation > 0);},
 				"isbuttpregnant"	: function(thisPtr:*):* {return  (kGAMECLASS.player.buttPregnancyIncubation > 0);},
 				"hasnipplecunts"	: function(thisPtr:*):* {return  kGAMECLASS.player.hasFuckableNipples();},
+				"totalnipples"		: function(thisPtr:*):* {return  kGAMECLASS.player.totalNipples();},
 				"canfly"			: function(thisPtr:*):* {return  kGAMECLASS.player.canFly();},
 				"islactating"		: function(thisPtr:*):* {return  (kGAMECLASS.player.lactationQ() > 0);},
+				"isbimbo"			: function(thisPtr:*):* {return  kGAMECLASS.player.isBimbo();},
 				"true"				: function(thisPtr:*):* {return  true;},
 				"false"				: function(thisPtr:*):* {return  false;},
 				

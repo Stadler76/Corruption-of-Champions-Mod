@@ -2,13 +2,14 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.display.SpriteDb;
 
 	public class SandTrap extends Monster
 	{
 		//Wait:
 		public function sandTrapWait():void {
 			clearOutput();
-			game.spriteSelect(97);
+			game.spriteSelect(SpriteDb.s_sandtrap);
 			if (!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			outputText("Instead of attacking, you turn away from the monster and doggedly attempt to climb back up the pit, digging all of your limbs into the soft powder as you climb against the sandslide.");
 			if (trapLevel() == 4) {
@@ -45,7 +46,7 @@
 
 		//sandtrap pheromone attack:
 		private function sandTrapPheremones():void {
-			game.spriteSelect(97);
+			game.spriteSelect(SpriteDb.s_sandtrap);
 			outputText("The sandtrap puckers its lips.  For one crazed moment you think it's going to blow you a kiss... but instead it spits clear fluid at you!   You desperately try to avoid it, even as your lower half is mired in sand.");
 			if (player.spe/10 + rand(20) > 10 || player.getEvasionRoll(false)) {
 				outputText("  Moving artfully with the flow rather than against it, you are able to avoid the trap's fluids, which splash harmlessly into the dune.");
@@ -61,7 +62,7 @@
 
 		//sandtrap quicksand attack:
 		private function nestleQuikSandAttack():void {
-			game.spriteSelect(97);
+			game.spriteSelect(SpriteDb.s_sandtrap);
 			outputText("The sandtrap smiles at you winningly as it thrusts its hands into the sifting granules.  The sand beneath you suddenly seems to lose even more of its density; you're sinking up to your thighs!");
 			//Quicksand attack fail:
 			if (player.spe/10 + rand(20) > 10  || player.getEvasionRoll(false)) {

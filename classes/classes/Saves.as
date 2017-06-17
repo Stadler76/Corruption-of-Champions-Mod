@@ -883,6 +883,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.hairLength = player.hairLength;
 		saveFile.data.beardLength = player.beardLength;
 		saveFile.data.eyeType = player.eyeType;
+		saveFile.data.eyeCount = player.eyeCount;
 		saveFile.data.beardStyle = player.beardStyle;
 		saveFile.data.skinType = player.skinType;
 		saveFile.data.skinTone = player.skinTone;
@@ -909,6 +910,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.clawType = player.clawType;
 		// </mod>
 		saveFile.data.wingType = player.wingType;
+		saveFile.data.wingColor = player.wingColor;
 		saveFile.data.lowerBody = player.lowerBody;
 		saveFile.data.legCount = player.legCount;
 		saveFile.data.tailType = player.tailType;
@@ -1804,6 +1806,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		// </mod>
 
 		player.wingType = saveFile.data.wingType;
+		player.wingColor = saveFile.data.wingColor || "no";
 		player.lowerBody = saveFile.data.lowerBody;
 		player.tailType = saveFile.data.tailType;
 		player.tailVenom = saveFile.data.tailVenum;
@@ -1811,18 +1814,28 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.hipRating = saveFile.data.hipRating;
 		player.buttRating = saveFile.data.buttRating;
 		
+		if (player.lowerBody === 4) {
+			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			player.legCount = 4;
+		}
+		
+		if (player.lowerBody === 24) {
+			player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+			player.legCount = 4;
+		}
+		
 		if (saveFile.data.legCount == undefined) {
 			if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) {
 				player.legCount = 8;
 			}
-			else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+			else if (player.lowerBody == 4) {
 				player.legCount = 4;
 				player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			}
 			else if (player.lowerBody == LOWER_BODY_TYPE_PONY) {
 				player.legCount = 4;
 			}
-			else if (player.lowerBody == LOWER_BODY_TYPE_DEERTAUR) {
+			else if (player.lowerBody == 24) {
 				player.legCount = 4;
 				player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
 			}
@@ -1836,7 +1849,27 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		else
 			player.legCount = saveFile.data.legCount;
-		
+			
+		if (saveFile.data.eyeCount == undefined) {
+			if (player.eyeType == EYES_SPIDER) {
+				player.eyeCount = 4;
+			}
+			else if (player.eyeType == EYES_FOUR_SPIDER_EYES) {
+				player.eyeType = EYES_SPIDER;
+				player.eyeCount = 4;
+			}
+			else player.eyeCount = 2;
+		}
+		else
+			player.eyeCount = saveFile.data.eyeCount;
+			
+
+		// Fix deprecated and merged underBody-types
+		switch (player.underBody.type) {
+			case UNDER_BODY_TYPE_DRAGON: player.underBody.type = UNDER_BODY_TYPE_REPTILE; break;
+			case UNDER_BODY_TYPE_WOOL:   player.underBody.type = UNDER_BODY_TYPE_FURRY;   break;
+		}
+
 		//Sexual Stuff
 		player.balls = saveFile.data.balls;
 		player.cumMultiplier = saveFile.data.cumMultiplier;
@@ -1891,8 +1924,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 				//trace("LoadOne Cock i(" + i + ")");
 		}
+		
 		player.vaginas = new Vector.<VaginaClass>();
 		SerializationUtils.deserializeVector(player.vaginas as Vector.<*>, saveFile.data.vaginas, VaginaClass);
+		
+		if (player.hasVagina() && player.vaginaType() != 5 && player.vaginaType() != 0)
+			player.vaginaType(0);
 		
 		//NIPPLES
 		if (saveFile.data.nippleLength == undefined)
@@ -2283,6 +2320,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 public function unFuckSave():void
 {
 	//Fixing shit!
+	if (player.wings.type == WING_TYPE_FEATHERED_LARGE && player.wings.color == "no") {
+		// Player has harpy wings from an old save, let's fix its color
+		player.wings.color = player.hasFur() ? player.furColor : player.hairColor;
+	}
 
 	// Fix duplicate elven bounty perks
 	if (player.findPerk(PerkLib.ElvenBounty) >= 0) {
@@ -2523,8 +2564,8 @@ public function unFuckSave():void
 	//Rigidly enforce cock size caps
 	if (player.hasCock()) {
 		for (var i:int = 0; i < player.cocks.length; i++) {
-			if (player.cocks[i].cockLength > 499.9) player.cocks[i].cockLength = 499.9;
-			if (player.cocks[i].cockThickness > 99.9) player.cocks[i].cockThickness = 99.9;
+			if (player.cocks[i].cockLength > 9999.9) player.cocks[i].cockLength = 9999.9;
+			if (player.cocks[i].cockThickness > 999.9) player.cocks[i].cockThickness = 999.9;
 		}
 	}
 	//If converting from vanilla, set Grimdark flag to 0.

@@ -2,6 +2,8 @@ package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 // ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
@@ -217,7 +219,7 @@ private function dontHelpArianWhenYouMeetHim(never:Boolean = false):void {
 //[=Help=]
 private function helpArianWhenYouMeetHim():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 
 	flags[kFLAGS.ARIAN_PARK] = 1;
 	flags[kFLAGS.ARIAN_COCK_SIZE] = 1;
@@ -264,7 +266,7 @@ private function helpArianWhenYouMeetHim():void {
 //Use variable ArianPark to determine the number of visits.
 public function visitThePark():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText(images.showImage("arian-park"));
 	outputText("As you enter the ragged remnants of the park, you spot the sickly lizan, Arian, sitting at his usual bench, and greet him.  \"<i>Oh, hello there [name].  Good to see you.</i>\"  He waves lazily.");
 	
@@ -359,7 +361,7 @@ public function visitThePark():void {
 //First Visit
 public function visitAriansHouse():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	if (flags[kFLAGS.ARIAN_HEALTH] < 29 || flags[kFLAGS.ARIAN_VIRGIN] == 1) arianHealth(1);
 	if (arianFollower()) {
 		if (arianMF("m", "f") == "f")
@@ -607,7 +609,7 @@ private function dontSleepWithArian():void {
 //[=Eavesdrop=]
 private function eavesDropOnArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText(images.showImage("arian-fap"));
 	outputText("You sidle up to the door, pressing your ear against the wood and start to listen intently.");
 	outputText("\n\n\"<i>Curse my illness... curse my dreams... oh, [name]... if only you knew....</i>\"  Arian pants and moans, the distinct fapping sound of a hand slapping reaches your ears.  \"<i>Ah! The things you do to me... the things I wish you would do to me... ah....</i>\"");
@@ -620,7 +622,7 @@ private function eavesDropOnArian():void {
 //[=Peep=]
 private function peepOnArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText(images.showImage("arian-fap"));
 	outputText("Curious, you decide to take a little peek through the lock; you press yourself against it as best you can, looking through into the bedroom beyond.  True to what your ears heard, the sickly albino's health has improved enough for him to focus on more... carnal matters.  Naked from the waist down, he sits on the edge of his bed, groinal slit disgorging a single, average-sized phallus.  Maybe 6 inches long, it's a bright purple-red color, covered in strange lumps");
 	if (player.countCocksOfType(CockTypesEnum.LIZARD) > 0) outputText(" just like yours");
@@ -639,7 +641,7 @@ private function peepOnArian():void {
 //[=Leave=]
 private function leaveFappingArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You decide to let Arian have some privacy and leave for the moment... after all, what the lizan mage does in his free time is not really your business....");
 	outputText("\n\nAs you make your way back to the entryway, Boon sees you and asks, \"<i>Leaving already? Usually you stay with master Arian for at least an hour... what happened?</i>\"");
 	outputText("\n\nYou tell Boon that Arian seems to be a bit busy at the moment, so you'll just come back later.");
@@ -652,7 +654,7 @@ private function leaveFappingArian():void {
 //[=Barge in=]
 private function bargeInOnArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText(images.showImage("arian-fap"));
 	outputText("With a wry smirk you turn the knob and find that Arian's door is unlocked; without missing a beat, you open the door and step in right in time to see a sticky rope of pre paint Arian's slender belly as he scrambles to cover himself up.");
 	outputText("\n\n\"<i>[name]!  W-Wait, I can explain!  I swear I... I... oh, Marae!</i>\"  He hides himself under the covers of his bed, his white-scaled face red with shame.");
@@ -706,7 +708,7 @@ private function bargeInOnArian():void {
 //[=Like Male=]
 private function hermsLikeMaleArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell him that's not the case for you; you don't have a problem with him being a guy.  In fact, you think he looks very cute, earning you a nervous smile.  Arian relaxes, letting you look over his body and decide what you want to do....");
 	//(Should you penetrate him or mount him?)
 	//Penetrate - (Proceed to appropriate scene)
@@ -722,7 +724,7 @@ private function hermsLikeMaleArian():void {
 //[=Prefer Female=]
 private function hermsLikeFemaleArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell him that while you do like to play with guys once in a while, you prefer girls.");
 	outputText("\n\n\"<i>So... you'd prefer if I was a girl... right?</i>\"");
 	outputText("\n\nYou scratch your chin in thought, and imagine how he would look as a girl; then you tell him you'd love it if he was a girl.  \"<i>Okay then... I... I'll do it!</i>\"");
@@ -744,7 +746,7 @@ private function hermsLikeFemaleArian():void {
 //[=Don't mind=]
 private function youDontMindBeingGayForArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell him that you don't have a problem with males, as long as they're cute.  You smile at him.  \"<i>You... do you really think I'm cute?</i>\"");
 	outputText("\n\nYou nod, it's not everyday you see a grown man acting like a hopeless virgin.  At the mention of the word ‘virgin' Arian recoils.... Surprised by this development you ask him if he really is a virgin.");
 	outputText("\n\nArian hides his face once more inside his covers and says in a whisper, \"<i>Yes....</i>\"");
@@ -762,7 +764,7 @@ private function youDontMindBeingGayForArian():void {
 //[=Like Girls=]
 private function youLikeGirlsNotSickLizardDudes():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell him that you prefer females.... Arian looks at you expectantly.  \"<i>So... if I was a girl... then you wouldn't mind?</i>\"");
 	outputText("\n\nYou scratch your chin in thought; and let him know that if he was a girl, then you wouldn't mind at all.  \"<i>Okay then... I... I'll do it!</i>\"");
 	outputText("\n\nYou raise your eyebrows. What is he planning on doing?");
@@ -788,7 +790,7 @@ private function youLikeGirlsNotSickLizardDudes():void {
 private function arianStoryDialogue1():void {
 	arianHealth(1);
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You feel like you'd like to know a bit more about Arian, so you ask if he would mind sharing some of [Arian eir] history with you.  After all, as a survivor from at least the early days of the demon war, and a wizard to boot, he's got to have some stories up [Arian eir] voluminous sleeves.");
 	outputText("\n\nArian nods.  \"<i>I guess it isn't fair that I'm the only one that gets to hear your stories... but before we start....  How long ago do you think this whole demon trouble started?</i>\"");
 	outputText("\n\nYou shrug your shoulders; ");
@@ -850,7 +852,7 @@ private function arianStoryDialogue1():void {
 private function arianStoryDialogue2():void {
 	clearOutput();
 	arianHealth(1);
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You look Arian over, remarking that he seems to be getting better after all.");
 	outputText("\n\n\"<i>Thanks to you.</i>\" Arian smiles, then he looks down and sighs.  You ask him what's wrong.");
 	outputText("\n\n\"<i>I've been having... erm, confusing dreams lately.</i>\" Arian explains. Curious, you ask him what sorts of dreams; not bad ones, you hope.");
@@ -874,7 +876,7 @@ private function arianStoryDialogue2():void {
 //=Drop It=
 private function arianStory2DropIt():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("Though you do feel a little curious, you decide to stop making him uncomfortable, and tell him that it's okay, you'll let him get some sleep now.");
 	outputText("\n\n\"<i>Thanks, [name].  I'll see you later then.</i>\"  Arian tucks himself in.  You watch until he's settled in, and then start the trek back to your home-away-from home in the Marethian wilderness.");
 	doNext(camp.returnToCampUseOneHour);
@@ -883,7 +885,7 @@ private function arianStory2DropIt():void {
 //=Pry=
 private function arianStoryPry():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("Oh, no, you're not letting him wriggle out of this that easily.  You playfully tap [Arian eir] nose and tell him he should come clean and confess");
 	if (player.cor < 40) outputText("; he'll sleep better with the burden off [Arian eir] conscience");
 	outputText(".");
@@ -897,7 +899,7 @@ private function arianStoryPry():void {
 private function arianDialogue3():void {
 	clearOutput();
 	arianHealth(1);
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("Before you can say anything, Arian asks you, \"<i>[name], I've been wondering....  Do you have any interest in magic?  You've done so much for me; I believe I should return the favor somehow.</i>\"");
 	//ArianSDialogue++;
 	flags[kFLAGS.ARIAN_S_DIALOGUE]++;
@@ -910,7 +912,7 @@ private function arianDialogue3():void {
 //=Yes=
 private function yesArianShouldMagicTeach():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell [Arian em] that sounds fascinating.  You'd love to learn how to cast spells the way [Arian ey] can, and you're grateful [Arian ey] wants to take you on as an apprentice.  Especially when [Arian ey]'s already so busy with the ones [Arian ey] already has.  Arian rubs the back of [Arian eir] neck.  \"<i>Sorry, [name].  But I can't actually teach you how to cast spells the same way I do....  That would take years to teach, not to mention it's very dangerous; I mean, look at what it's done to me....</i>\"  [Arian Ey] smiles at you.  \"<i>But I could still teach you about magic in general - how to cast more spells, how to make them more powerful, the principles behind every spell....  Basically, theory that might help you in the pursuit of magical studies.  I spent my whole childhood buried in books, so I'm sure I could help you out somehow.</i>\"");
 	
 	outputText("\n\nYou smirk and point out that's basically what you meant, but you're definitely still interested either way.  Arian nods happily.  \"<i>Okay, then, where to start....</i>\"");
@@ -923,7 +925,7 @@ private function yesArianShouldMagicTeach():void {
 //=No=
 private function noArianShouldntMagicTeach():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You think it over for a moment, and then tell Arian that while you are flattered by the offer and willing to consider it, you can't say that you want to study magic right this moment.  You'd like to discuss it at some other time, please.");
 	outputText("\n\nArian nods happily.  \"<i>Certainly, I'd be happy to be of some help to you.  So... is there something you'd like to do today?</i>\"");
 	
@@ -936,7 +938,7 @@ private function noArianShouldntMagicTeach():void {
 private function arianImbue():void {
 	clearOutput();
 	arianHealth(1);
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("Before you can say anything, Arian gasps, \"<i>Oh, [name].  I have a surprise for you.</i>\"  Arian says with a smile.");
 	
 	outputText("\n\nA surprise?  What is it?");
@@ -976,7 +978,7 @@ private function arianImbue():void {
 //=Yes=
 private function yesPlotSexArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You approach the awkwardly amorous lizan and place your arms around [Arian eir] neck.  Leaning in close, you whisper into [Arian eir] ear that [Arian ey] only had to ask.");
 	//(Display Sex Menu)
 	arianSexMenu(false);
@@ -985,7 +987,7 @@ private function yesPlotSexArian():void {
 //=No=
 private function noPlotSexNauArian():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You apologize to the lizan, telling [Arian em] that you aren't in the mood right now....");
 	outputText("\n\nArian looks a bit disappointed, but doesn't press the issue.  \"<i>Oh... Okay then, but... maybe, next time?</i>\" [Arian ey] asks hopefully, smiling nervously despite [Arian eir] embarrassment....");
 	
@@ -1000,7 +1002,7 @@ private function noPlotSexNauArian():void {
 private function arianPlot4():void {
 	clearOutput();
 	arianHealth(1);
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("Before you can say anything, Arian says, \"<i>Oh, I have good news, [name]!</i>\"");
 	outputText("\n\nGood news?  What is it?");
 	outputText("\n\n\"<i>I'm feeling well enough that I think I can channel my magic through you and help you if you feel you're getting overwhelmed by this world's corruption.  But due to the intensity of the treatment, I don't think I'd be able to do it more than once per day....</i>\"");
@@ -1019,7 +1021,7 @@ private function arianPlot4():void {
 private function arianPlot5():void {
 	clearOutput();
 	arianHealth(1);
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("Before you can say anything, Arian stops you.  \"<i>I've been meaning to ask you something, [name].  I've been feeling a lot better lately; in fact, I may be even better than I was before.</i>\"  Arian blushes.");
 	
 	outputText("\n\n\"<i>I wanted to ask you if we could... well... live together?</i>\"  Arian bites [Arian eir] lower lip.");
@@ -1046,7 +1048,7 @@ private function arianPlot5():void {
 //[=Accept=]
 private function acceptArianMovingIntoCamp():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell Arian you'd be delighted to have [Arian em] move in with you.  Arian's face lights up like a kid's who's been given a bucket of candy.  \"<i>Really!?  Great!  I'll pack my stuff and we can go right away!</i>\"");
 	
 	//(Skip to ‘Invite to Camp')
@@ -1057,7 +1059,7 @@ private function acceptArianMovingIntoCamp():void {
 //[=Deny=]
 private function denyAriansMoveIn():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell Arian you'd like some time to think about it.  Arian looks disappointed at first, but smiles at you all the same.  \"<i>I understand... no pressure....  So, what are we going to do today?</i>\"");
 	
 	//(Display Options)
@@ -1067,7 +1069,7 @@ private function denyAriansMoveIn():void {
 //Talk
 private function talkToArianChoices():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You tell Arian you'd like to talk to [Arian em].  Arian smiles at the prospect of chatting with you.  \"<i>I love talking with you; so what do you want to talk about?</i>\"");
 
 	menu();
@@ -1084,7 +1086,7 @@ private function talkToArianChoices():void {
 private function arianMagicLessons():void {
 	clearOutput();
 	arianHealth(1);
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You ask Arian if [Arian ey] wouldn't mind giving you some magic lessons.");
 	
 	//(if ArianMLesson >= 4)
@@ -1098,7 +1100,7 @@ private function arianMagicLessons():void {
 	outputText("\n\nArian nods.  \"<i>Of course!  Now where do I begin....</i>\"");
 	
 	//(if PC int < 25) //Basics!
-	if (player.inte < 25) {
+	if (player.inte100 < 25) {
 		outputText("\n\nYou let Arian know you're actually pretty new to magic in general, so maybe [Arian ey] could teach you a few basics?  Arian nods.  \"<i>Very well...</i>\"  Arian clears [Arian eir] throat.");
 		outputText("\n\n\"<i>The basis of all magic is mental strength, or more appropriately, your willpower - the desire, the wish, the passion to make something that is not... be.  Which is the reason mages study so hard to begin with.</i>\"");
 		outputText("\n\nYou pay attention to Arian's every word, making mental notes of the more important lessons....");
@@ -1110,7 +1112,7 @@ private function arianMagicLessons():void {
 		else outputText("return to your duties.");
 	}
 	//(else if PC int < 50 //Teach Charge Weapon if PC doesn't know.
-	else if (player.inte < 50) {
+	else if (player.inte100 < 50) {
 		outputText("\n\nYou tell Arian you've got the fundamentals down, so why not cover something a bit more advanced?");
 		outputText("\n\nArian taps [Arian eir] chin in thought, then smiles.  \"<i>I know!  Let's talk about channeling.</i>\"");
 		outputText("\n\nChanneling? You ask.");
@@ -1131,7 +1133,7 @@ private function arianMagicLessons():void {
 			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 		}
 	}
-	else if (player.inte < 75) {
+	else if (player.inte100 < 75) {
 		//Teach Blind if PC doesn't know.
 		outputText("\n\nYou say you have a pretty good understanding of how magic works now, so you'd like [Arian em] to get started on the more complex theories.");
 		outputText("\n\nArian rubs [Arian eir] chin in thought.  \"<i>Hmm.... Aha!  Let's discuss conjuration.  This is where we start getting to the more complex theories and methods.  I know I don't have to say it, but pay attention.  Conjuration is an important art for any mage.</i>\"");
@@ -1175,8 +1177,8 @@ private function arianMagicLessons():void {
 	}
 	flags[kFLAGS.ARIAN_LESSONS]++;
 	dynStats("int", 1);
-	if (player.inte < 75) dynStats("int", 1);
-	if (player.inte < 50) dynStats("int", 1);
+	if (player.inte100 < 75) dynStats("int", 1);
+	if (player.inte100 < 50) dynStats("int", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
 //Sex:
@@ -1184,7 +1186,7 @@ private function arianMagicLessons():void {
 private function arianSexingTalk():void {
 	clearOutput();
 	arianHealth(1);
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You smirk knowingly at [Arian em] and ask how [Arian ey] feels about sex now that [Arian ey]'s had [Arian eir] first time?");
 	
 	outputText("\n\nArian bites [Arian eir] lower lip in embarrassment.  \"<i>I... umm... can't we talk about something else?</i>\"  You shake your head and tell [Arian em] there's nothing to be ashamed of.  The two of you have already shared intimacy after all; and you'd like to know [Arian eir] kinks and wishes as well.");
@@ -1296,7 +1298,7 @@ private function arianSexingTalk():void {
 //[=Yes=]
 private function yesYouButtslutIllFuckYou():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("How could you refuse such a request?  You tell [Arian em] to strip and get ready.");
 	outputText("\n\nArian jumps to the task and eagerly strips, laying down in bed and swaying [Arian eir] tail back and forth as [Arian ey] waits for you to do the same.");
 	//(Go to Give Anal)
@@ -1307,14 +1309,14 @@ private function yesYouButtslutIllFuckYou():void {
 //[=No=]
 private function goddamnitNoYouButtSlut():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("You apologize, but you really can't do that right now.  Arian looks a bit disappointed, but smiles at you all the same.  \"<i>Oh... okay.  Next time then?</i>\"");
 	outputText("\n\nYou nod.");
 	sexTalkFinish(false);
 }
 
 private function sexTalkFinish(newl:Boolean = false):void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	if (newl) clearOutput();
 	else outputText("\n\n");
 	outputText("Satisfied with your little chat, you pat the lizan's head and excuse yourself, heading back to camp.");
@@ -1324,7 +1326,7 @@ private function sexTalkFinish(newl:Boolean = false):void {
 //Invite to Camp:
 //Only available if ArianHealth == 100.
 private function inviteArianToCamp():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You ask the lizan if [Arian ey] still really wants to leave [Arian eir] comfortable home in the city and come out to live with you in your little camp in the wastelands?");
 	outputText("\n\n\"<i>Of course I do!</i>\" Arian says enthusiastically.");
@@ -1371,7 +1373,7 @@ private function inviteArianToCamp():void {
 
 private function takeYerLizardHomePartII():void {
 	clearOutput();
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	outputText("Upon arriving at the camp, the first thing Arian notices is the shimmering portal.  \"<i>Is this... where you came from?</i>\" Arian asks.");
 	outputText("\n\nYou nod your head and confirm that, yes, this was your doorway from your world into Mareth.");
 	outputText("\n\n\"<i>I heard that sometimes people from other worlds wandered into Mareth through portals, but I have never seen one up close before.</i>\"  Arian stares deeply at the portal.  \"<i>It's beautiful... and menacing, too.</i>\"  Shaking [Arian em]self out of [Arian eir] reverie, Arian takes an open spot close to your ");
@@ -1413,7 +1415,7 @@ private function takeYerLizardHomePartII():void {
 //Sex
 //ArianHealth must be at least 20 before you can even pick Sex as an option.
 private function arianSexMenu(output:Boolean = true):void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	if (output) {
 		clearOutput();
 		outputText("You ask Arian if [Arian ey] feels strong enough to do a little lovemaking.");
@@ -1495,7 +1497,7 @@ private function arianSexMenu(output:Boolean = true):void {
 //Modified by AnalXP.
 //PC must have a cock that fits (cock area 50 or less)
 private function giveArianAnal():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	var x:int = player.cockThatFits(50);
 	clearOutput();
 	arianHealth(3);
@@ -1791,7 +1793,7 @@ private function giveArianAnal():void {
 //Get Blown:
 //PC must have a cock.
 private function getBlownByArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -1881,7 +1883,7 @@ private function getBlownByArian():void {
 //Arian must be herm/female.
 //PC must have a cock that fits (cock area 50 or less)
 private function penetrateArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	var x:int = player.cockThatFits(50);
 	if (x < 0) x = player.smallestCockIndex();
 	clearOutput();
@@ -2005,7 +2007,7 @@ private function penetrateArian():void {
 //Get Anal:
 //Arian must have a cock.
 private function getButtWreckedByArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2164,7 +2166,7 @@ private function getButtWreckedByArian():void {
 //Blow:
 //Arian must have a cock.
 private function suckAriansDick():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2262,7 +2264,7 @@ private function suckAriansDick():void {
 //PC must have a vagina.
 //Arian must have a cock.
 private function getPenetratedByArianAndHisHitlerMustache():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2421,7 +2423,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 //PC must have at least 2 cocks that fit. That means two cocks with a cock area of <= 50.
 //This isn't meant to give AnalXP, but given the fact that Arian's ass will get pen'd it would also be justified. Up to you Fen!
 private function doublePenetrateArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2560,7 +2562,7 @@ private function doublePenetrateArian():void {
 //ArianCockSize needs to be below 3. (ArianDblCock does not affect this decision.) 
 //PC cock area must be <= 30.
 private function arianDocking():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_VIRGIN] += 1;
 	arianHealth(3);
@@ -2662,7 +2664,7 @@ private function arianDocking():void {
 
 //Give Item
 private function giveArianAnItem():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("Thinking about the many items in your possession, you ask if Arian would be willing to take something for you?");
 	
@@ -2722,7 +2724,7 @@ private function giveArianAnItem():void {
 //increases ArianHealth by 4.
 //Remove this option once Arian's health hits 100.
 private function arianVitalityTincture():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("Fishing around amongst your pockets, you withdraw a vial of that strange potion Giacomo peddles and offer it to the sickly lizan, explaining it will bolster [Arian eir] constitution and fill [Arian em] with permanent vitality.");
 	
@@ -2753,7 +2755,7 @@ private function arianVitalityTincture():void {
 //If cock(s) size is maxed, next dose reduces breast size.
 //If at min breast size, next dose reverts Arian to male. (Lose breasts and vagina.)
 private function giveIncubusDraftToArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	player.consumeItem(consumables.P_DRAFT);
 	outputText("Fishing around in your pockets, your hand closes on the vial of purified incubus draft.  You offer this to Arian, asking ");
@@ -2894,7 +2896,7 @@ private function giveIncubusDraftToArian():void {
 //Extra doses increase breasts size.
 //If breasts is at maximum size, extra doses reduce Cock Size. Removing first the second cock and then the first one if necessary.
 private function succubiMilkForArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	player.consumeItem(consumables.P_S_MLK);
 	outputText("Fishing out the bottle of purified demon's milk, you ask if Arian is willing to get ");
@@ -3018,7 +3020,7 @@ private function succubiMilkForArian():void {
 //Triggers Scene with temporary lactation
 //If Arian has breasts, Increases breasts size by 1.
 private function giveArianLactaid():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	player.consumeItem(consumables.LACTAID);
 	outputText("Your hand closes around the vial of lactation-inducing potion that is Lactaid.  You almost reject it automatically, but then you stop and think.  There's odder things in this world, after all.  You remove the vial and ask Arian if [Arian ey] would be willing to let you see what lizan milk tastes like.");
@@ -3090,7 +3092,7 @@ private function giveArianLactaid():void {
 //Reduces the size of a part
 //Has a Back option, it displays no text, just cancels the interaction and goes back to previous menu.
 private function giveArianReducto():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("Eyeing Arian up and down, you fish your pouches for a tube of Reducto.  Once you've found it, you hand it over to Arian and tell [Arian em] you'd like [Arian em] to reduce something for you.");
 	outputText("\n\n\"<i>Umm... sure, which part?</i>\"");
@@ -3105,7 +3107,7 @@ private function giveArianReducto():void {
 //Breasts:
 //Cannot go flat (NOT ANYMORE! Maleherms FTW!)
 private function useReductoOnAriansBreasts():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	player.consumeItem(consumables.REDUCTO);
 	outputText("You point at Arian's ");
@@ -3134,7 +3136,7 @@ private function useReductoOnAriansBreasts():void {
 //Removes 2nd cock if at minimum size.
 //Cannot remove cocks.
 private function useReductoOnArianCocks():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	player.consumeItem(consumables.REDUCTO);
 	outputText("You point at [Arian eir] crotch, mentioning that you'd like [Arian em] to be smaller.");
@@ -3199,7 +3201,7 @@ private function useReductoOnArianCocks():void {
 //Lose AnalXP, can't reduce it past 1.
 //How much AnalXP should be lost per use is up to Fen.
 private function useReductoOnAriansAsshole():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	player.consumeItem(consumables.REDUCTO);
 	outputText("You ask Arian to hand the tube of reducto back over to you, telling [Arian em] that you want to make [Arian em] a little tighter when you do [Arian em] from behind.  The lizard-");
@@ -3269,7 +3271,7 @@ private function useReductoOnAriansAsshole():void {
 //Makes Arian horny and high, like giving catnip to a cat in some ways. 
 //Chance to make Arian grow a second dick, if [Arian ey] has only one. (high chance: 50%)
 private function giveArianReptilum():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	player.consumeItem(consumables.REPTLUM);
 	outputText("Fingering the vial of reptilum, you smirk to yourself.  Quickly wiping it off your face, you instruct Arian to close [Arian eir] eyes and open [Arian eir] mouth, as you have a special surprise for [Arian em].");
@@ -3406,7 +3408,7 @@ private function giveArianReptilum():void {
 //Balancing it is up to Fen.
 //Reduce corruption, maybe libido, once per day.
 private function treatCorruption():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You ask Arian if [Arian ey] thinks [Arian ey] can help you reduce some of the taint that has infected your soul.");
 	
@@ -3453,7 +3455,7 @@ private function treatCorruption():void {
 //Perhaps introduce a cooldown to the talisman?
 //Ultimately, balance is in Fen's hands.
 private function imbueTalisman():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You tell Arian that, if it's not too much trouble, you'd like [Arian em] to ");
 	if (player.hasKeyItem("Arian's Talisman") >= 0) outputText("place a spell in the enchanted talisman [Arian ey] created for you");
@@ -3502,7 +3504,7 @@ private function imbueTalisman():void {
 }
 
 private function arianSpellPlace(spell:*):void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You tell Arian that you want [Arian em] to place the " + spell + " spell in your talisman for you.");
 	
@@ -3571,7 +3573,7 @@ The small tent that Arian dwells in is in its usual place in a quiet corner of t
 
 //Sleep With Arian
 public function sleepWithArian(newl:Boolean = false):void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	if (newl) clearOutput();
 	flags[kFLAGS.SLEEP_WITH] = "Arian";
 	outputText("Tired after a whole day of adventuring, you decide to retire and catch some shut-eye.  While going through the day's events, you recall Arian had offered to let you stay in [Arian eir] tent and sleep with [Arian em] in [Arian eir] bed.  Your tired body could surely use a soft bed today, and maybe a certain lizan to keep you company too.  With that in mind, you head to [Arian eir] tent.");
@@ -3639,7 +3641,7 @@ public function sleepWithArian(newl:Boolean = false):void {
 
 //[=Sleep=]
 private function dontListenToLowAnalXPArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
@@ -3648,7 +3650,7 @@ private function dontListenToLowAnalXPArian():void {
 
 //[=Listen=]
 private function listenToLowAnalXPArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_MORNING] = 1;
 	outputText("You turn you head to try and catch what Arian might be dreaming about.");
@@ -3673,7 +3675,7 @@ private function listenToLowAnalXPArian():void {
 
 //[=Sleep=]
 private function dontListenToMediumAnalXPArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
 	camp.sleepRecovery(false);
@@ -3682,7 +3684,7 @@ private function dontListenToMediumAnalXPArian():void {
 }
 //[=Listen=]
 private function listenToMediumAnalXPArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_MORNING] = 1;
 	outputText("You turn you head to try and catch what Arian might be dreaming about.");
@@ -3719,7 +3721,7 @@ private function listenToMediumAnalXPArian():void {
 
 //[=Sleep=]
 private function dontTeaseHighAnalXPArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on [Arian eir] neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams [Arian ey] was having have faded and [Arian ey]'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
@@ -3728,7 +3730,7 @@ private function dontTeaseHighAnalXPArian():void {
 
 //[=Tease=]
 private function TeaseHighAnalXPArian():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	
 	if (flags[kFLAGS.ARIAN_VAGINA] > 0)	
@@ -3774,7 +3776,7 @@ private function TeaseHighAnalXPArian():void {
 //Always happens the morning after sleeping with Arian.
 //Outcome slightly modified by AnalXP.
 public function wakeUpAfterArianSleep():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	if (player.hasCock()) {
 		if (arianMF("m", "f") == "f")
@@ -3956,7 +3958,7 @@ public function wakeUpAfterArianSleep():void {
 //It always happens the first time you visit Arian, every 30th day.
 //If you don't visit Arian, you miss this event, and the eggs [Arian ey] would be laying.
 public function arianEggingEvent():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_EGG_EVENT] = 1;
 	if (flags[kFLAGS.ARIAN_EGG_CHAT] == 0) {
@@ -4014,7 +4016,7 @@ public function arianEggingEvent():void {
 
 //Pick a color
 private function pickAnEggArian(color:String = "pink"):void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	flags[kFLAGS.ARIAN_EGG_COLOR] = color;
 	outputText("You tell Arian you'd like [Arian em] to make you a " + color + " egg.");
@@ -4028,7 +4030,7 @@ private function pickAnEggArian(color:String = "pink"):void {
 }
 //Leave
 private function leaveEggs():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	outputText("You tell [Arian em] that you don't want any colored eggs from [Arian em] this month.  The lizan nods, deciding it's not necessary for [Arian em] to spell out that this means [Arian ey]'ll just produce ordinary eggs and eat them for breakfast after [Arian ey]'s laid them.  \"<i>So, do you want something?</i>\" [Arian ey] asks.");
 	doNext(camp.returnToCampUseOneHour);
@@ -4040,7 +4042,7 @@ private function leaveEggs():void {
 //Even if you miss, trigger it the next visit anyways, so as long as you don't miss the egging event, you don't miss out on your colored eggs.
 //Randomly decide between small or large egg, I'd say 50% chance of either.
 public function arianLaysEggs():void {
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	var color:String = flags[kFLAGS.ARIAN_EGG_COLOR];
 	flags[kFLAGS.ARIAN_EGG_COUNTER] = 0;
@@ -4104,7 +4106,7 @@ private function arianDildoFun():void {
 	//Cocks are going to be more or less forgotten here.
 	//PC must have the dildo sex toy from Giacomo to access this scene
 	//PC and Arian must both have vaginas to access this scene
-	spriteSelect(107);
+	spriteSelect(SpriteDb.s_arian);
 	clearOutput();
 	//1st time:
 	if (flags[kFLAGS.TIMES_ARIAN_DILDOED] == 0) {

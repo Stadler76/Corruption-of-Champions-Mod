@@ -230,12 +230,12 @@ package classes.Scenes.Combat
 					if (player.tone == 100) choices[choices.length] = 8;
 				}
 				//9 Heroic Pose
-				if (player.tone >= 60 && player.str >= 50) {
+				if (player.tone >= 60 && player.str100 >= 50) {
 					choices[choices.length] = 9;
 					if (player.tone >= 80) choices[choices.length] = 9;
-					if (player.str >= 70) choices[choices.length] = 9;
+					if (player.str100 >= 70) choices[choices.length] = 9;
 					if (player.tone >= 90) choices[choices.length] = 9;
-					if (player.str >= 80) choices[choices.length] = 9;
+					if (player.str100 >= 80) choices[choices.length] = 9;
 				}	
 				//Cock flash!
 				if (player.hasCock()) {
@@ -408,7 +408,7 @@ package classes.Scenes.Combat
 				choices[choices.length] = 25;
 			}
 			//26 SMART PEEPS! 70+ int, arouse spell!
-			if (player.inte >= 70 && player.hasStatusEffect(StatusEffects.KnowsArouse)) {
+			if (player.inte100 >= 70 && player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 				choices[choices.length] = 26;
 				choices[choices.length] = 26;
 				choices[choices.length] = 26;
@@ -594,13 +594,13 @@ package classes.Scenes.Combat
 					if (player.breastRows.length == 1) {
 						//50+ breastsize% success rate
 						outputText("Your lift your top, exposing your " + player.breastDescript(0) + " to " + monster.a + monster.short + ".  You shake them from side to side enticingly.");
-						if (player.lust >= 50) outputText("  Your " + player.nippleDescript(0) + "s seem to demand " + monster.pronoun3 + " attention.");
+						if (player.lust100 >= 50) outputText("  Your " + player.nippleDescript(0) + "s seem to demand " + monster.pronoun3 + " attention.");
 					}
 					//Multirow
 					if (player.breastRows.length > 1) {
 						//50 + 10% per breastRow + breastSize%
 						outputText("You lift your top, freeing your rows of " + player.breastDescript(0) + " to jiggle freely.  You shake them from side to side enticingly");
-						if (player.lust >= 50) outputText(", your " + player.nippleDescript(0) + "s painfully visible.");
+						if (player.lust100 >= 50) outputText(", your " + player.nippleDescript(0) + "s painfully visible.");
 						else outputText(".");
 						chance++;
 					}
@@ -677,7 +677,7 @@ package classes.Scenes.Combat
 				case 5:
 					outputText("You lean forward, letting the well-rounded curves of your " + player.allBreastsDescript() + " show to " + monster.a + monster.short + ".");
 					outputText("  You cup them in your palms and lewdly bounce them, putting on a show and giggling the entire time.  An inch at a time, your " + player.armorName + " starts to come down, dropping tantalizingly slowly until your " + player.nippleDescript(0) + "s pop free.");
-					if (player.lust >= 50) {
+					if (player.lust100 >= 50) {
 						if (player.hasFuckableNipples()) {
 							chance++;
 							outputText("  Clear slime leaks from them, making it quite clear that they're more than just nipples.");
@@ -1415,7 +1415,7 @@ package classes.Scenes.Combat
 				
 				if (flags[kFLAGS.PC_FETISH] >= 1 && !getGame().urtaQuest.isUrta()) 
 				{
-					if (player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
+					if (player.lust100 < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 					else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
 					if (!justText) dynStats("lus", 2 + rand(3));
 				}

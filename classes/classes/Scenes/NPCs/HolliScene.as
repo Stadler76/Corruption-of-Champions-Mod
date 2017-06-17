@@ -832,8 +832,8 @@ private function eatHolliFruit():void {
 	}
 	flags[kFLAGS.HOLLI_FRUIT]--;
 	dynStats("cor", 1);
-	if (player.tou < 50) dynStats("tou", 1);
-	if (player.str < 50) dynStats("str", 1);
+	if (player.tou100 < 50) dynStats("tou", 1);
+	if (player.str100 < 50) dynStats("str", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
 

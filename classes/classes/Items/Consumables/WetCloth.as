@@ -21,16 +21,16 @@ package classes.Items.Consumables
 			outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your " + player.skinDesc + " slowly.");
 			//Stat changes
 			//libido up to 80
-			if (player.lib < 80) {
+			if (player.lib100 < 80) {
 				dynStats("lib", (.5 + (90 - player.lib) / 10), "lus", player.lib / 2);
 				outputText("\n\nBlushing and feeling horny, you make sure to rub it over your chest and erect nipples, letting the strange slimy fluid soak into you.");
 			}
 			//sensitivity moves towards 50
-			if (player.sens < 50) {
+			if (player.sens100 < 50) {
 				outputText("\n\nThe slippery slime soaks into your " + player.skinDesc + ", making it tingle with warmth, sensitive to every touch.");
 				dynStats("sen", 1);
 			}
-			else if (player.sens > 50) {
+			else if (player.sens100 > 50) {
 				outputText("\n\nThe slippery slime numbs your " + player.skinDesc + " slightly, leaving behind only gentle warmth.");
 				dynStats("sen", -1);
 			}

@@ -12,7 +12,7 @@ package classes.Items.Armors
 	public class BimboSkirt extends ArmorWithPerk {
 		
 		public function BimboSkirt() {
-			super("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,50,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light", PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", null,0,0,0,0,"", false, false);
+			super("BimboSk","BimboSk","bimbo skirt","A skirt that looks like it belongs on a bimbo",1,50,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light", PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", null,0,0,0,0,"", false, false);
 		}
 		
 		override public function useText():void { //Produces any text seen when equipping the armor normally
@@ -21,8 +21,8 @@ package classes.Items.Armors
 			var wornLower:Boolean = (game.player.lowerGarment != UndergarmentLib.NOTHING);
 			
 			if (wornLower && wornLower) {
-				outputText("You look very awkward wearing " + game.player.lowerGarment.longName + " and putting your skirt on.");
-				outputText(" You realize that you probably won't be able to seduce much of your foes in this ludicrous outfit. For a moment you consider putting your " + game.player.lowerGarment.longName + " off, but then decide against it.");
+				outputText("You look very awkward wearing " + game.player.lowerGarment.longName + " while putting your skirt on.");
+				outputText(" You realize that you probably won't be able to seduce many of your foes in this ludicrous outfit. For a moment you consider taking your " + game.player.lowerGarment.longName + " off, but then decide against it.");
 				return;
 			}
 		
@@ -30,34 +30,34 @@ package classes.Items.Armors
 			
 			if (!wornUpper) {
 				if (game.player.biggestTitSize() >= 8) {
-					outputText("The halter top clings tightly to your bustline, sending a shiver of pleasure through your body. You feel how your erect [nipples] protrude from the soft fabric of you beautiful dress, and sensation make you feel slightly dizzy. ");
+					outputText("The halter top clings tightly to your bustline, sending a shiver of pleasure through your body. You feel how your erect [nipples] protrude from the soft fabric of your beautiful dress, and the sensation makes you feel slightly dizzy. ");
 					if (game.player.isLactating()) {
-						outputText("You feel how the top your dress become wet, as droplets of milk sip from your [nipples]. ");
+						outputText("You feel how the top of your dress becomes wet, as droplets of milk leak from your [nipples]. ");
 					}
 				}
 				else if (game.player.biggestTitSize() >= 5) {
 					outputText("The halter top clings to your bustline, sending a shiver of pleasure through your body. ");
 					if (game.player.isLactating()) {
-						outputText("You feel how the top your dress becomes wet, as droplets of milk sip from your [nipples]. ");
+						outputText("You feel how the top of your dress becomes wet, as droplets of milk leak from your [nipples]. ");
 					}
 					game.dynStats("lus", 2);
 				}
 				else if (game.player.biggestTitSize() >= 2) {
-					outputText("The halter top of your sluttish outfit snugly embraces your " + game.player.breastDescript(0) + ". Sensation of a soft fabric on your bare [nipples] makes you feel warm and sexy. ");
+					outputText("The halter top of your sluttish outfit snugly embraces your " + game.player.breastDescript(0) + ". The sensation of the soft fabric on your bare [nipples] makes you feel warm and sexy. ");
 					if (game.player.isLactating()) {
-						outputText("You feel how the top your dress become wet, as droplets of milk sip from your [nipples]. ");
+						outputText("You feel how the top of your dress becomes wet, as droplets of milk leak from your [nipples]. ");
 					}
 					game.dynStats("lus", 5);
 				}
 				else if (game.player.biggestTitSize() >= 1) {
-					outputText("You feel how soft fabric of your dress caresses your " + game.player.breastDescript(0) + ". Sensation is very erotic and you touch your sensitive [nipples], feeling the spread of arousal. You idly notice that halter top of your whorish dress is somewhat loose, and it would feel much better if only your breasts would be bigger and suppler. ");
+					outputText("You feel how the soft fabric of your dress caresses your " + game.player.breastDescript(0) + ". The sensation is very erotic and you touch your sensitive [nipples], feeling the spread of arousal. You idly notice that the halter top of your whorish dress is somewhat loose, and it would feel much better if your breasts were bigger and suppler. ");
 					if (game.player.isLactating()) {
-						outputText("You feel how the top your dress become wet, as droplets of milk sip from your [nipples]. ");
+						outputText("You feel how the top of your dress becomes wet, as droplets of milk leak from your [nipples]. ");
 					}
 					game.dynStats("lus", 10);
 				}
 				else {
-					outputText("You feel rather stupid putting the top part on like this, but you're willing to bear with it. As you put it on, you feel how soft fabric of your dress touches your [nipples], making them erect.");
+					outputText("You feel rather stupid putting the top part on like this, but you're willing to bear with it. As you put it on, you feel how the soft fabric of your dress touches your [nipples], making them erect.");
 					game.dynStats("lus", 15);
 				}
 				outputText("\n\n");
@@ -66,12 +66,12 @@ package classes.Items.Armors
 			
 			if (!wornLower) {
 				if (game.player.buttRating < 8) {
-					outputText("Sensation of tender fabric clinging to your [butt] arouses you immensely, as you smooth your skirt. ");
+					outputText("The sensation of tender fabric clinging to your [butt] arouses you immensely, as you smooth your skirt. ");
 				}
 				else {
-					outputText("You feel how fine fabric of your sluttish skirt don't quite cover your [ass]");
+					outputText("You can feel how the fine fabric of your sluttish skirt doesn't quite cover your [ass]");
 					if (game.player.hipRating > 8) {
-						outputText(", and smooth skirt is stretched by your [hips]. ");
+						outputText(", and how the smooth skirt is stretched by your [hips]. ");
 					}
 					else outputText(". ");
 				}
@@ -85,7 +85,7 @@ package classes.Items.Armors
 							game.dynStats("lus", 5);
 							break;
 						case 4:
-							outputText("Thin stream of your girl-cum escapes your [pussy] and spoils your skirt. ");
+							outputText("A thin stream of your girl-cum escapes your [pussy] and spoils your skirt. ");
 							game.dynStats("lus", 5);
 							break;
 						case 3:

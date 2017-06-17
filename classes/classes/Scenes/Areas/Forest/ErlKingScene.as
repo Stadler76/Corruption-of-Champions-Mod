@@ -291,7 +291,7 @@ public class ErlKingScene extends BaseContent implements Encounter
 
 			outputText("It seems the Erlking has no interest in chasing prey that won’t run.\n\n");
 
-			if (player.inte < 80) player.inte++;
+			if (player.inte100 < 80) player.inte++;
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -1059,7 +1059,7 @@ public class ErlKingScene extends BaseContent implements Encounter
 				player.skinAdj = "";
 				player.skinDesc = "fur";
 				player.furColor = "brown";
-				player.underBody.type = UNDER_BODY_TYPE_FUR;
+				player.underBody.type = UNDER_BODY_TYPE_FURRY;
 				player.underBody.copySkin({furColor: "white"});
 				changes++;
 			}

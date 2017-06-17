@@ -15,7 +15,7 @@ package classes.Scenes.Quests.UrtaQuest
 			if (!hasStatusEffect(StatusEffects.MilkyUrta) && rand(3) == 0) cowCubiMilkSprayAttack();
 			else if (HP < 400) drinkMinoCum();
 			else if (player.HP < 100) eAttack();
-			else if (player.lust >= 90) succubusTease();
+			else if (player.lust100 >= 90) succubusTease();
 			else if (rand(2) == 0) succubusTease();
 			else eAttack();
 		}

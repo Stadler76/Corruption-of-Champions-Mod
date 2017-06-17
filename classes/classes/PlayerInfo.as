@@ -8,6 +8,8 @@ import flash.events.Event;
 	import classes.*;
 	import classes.Scenes.NPCs.IsabellaScene;
 	import classes.GlobalFlags.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	/**
 	 * The new home of Stats and Perks
@@ -21,7 +23,7 @@ import flash.events.Event;
 		// STATS
 		//------------
 		public function displayStats():void {
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			displayHeader("Stats");
 			// Begin Combat Stats
@@ -192,11 +194,11 @@ import flash.events.Event;
 				if (player.hunger <= 0) bodyStats += "<font color=\"#ff0000\">Dying</font>";
 				if (player.hunger > 0 && player.hunger < 10) bodyStats += "<font color=\"#C00000\">Starving</font>";
 				if (player.hunger >= 10 && player.hunger < 25) bodyStats += "<font color=\"#800000\">Very hungry</font>";
-				if (player.hunger >= 25 && player.hunger < 50) bodyStats += "Hungry";
-				if (player.hunger >= 50 && player.hunger < 75) bodyStats += "Not hungry";
-				if (player.hunger >= 75 && player.hunger < 90) bodyStats += "<font color=\"#008000\">Satiated</font>";
-				if (player.hunger >= 90 && player.hunger < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
-				if (player.hunger >= 100) bodyStats += "<font color=\"#00C000\">Very full</font>";
+				if (player.hunger >= 25 && player.hunger100 < 50) bodyStats += "Hungry";
+				if (player.hunger100 >= 50 && player.hunger100 < 75) bodyStats += "Not hungry";
+				if (player.hunger100 >= 75 && player.hunger100 < 90) bodyStats += "<font color=\"#008000\">Satiated</font>";
+				if (player.hunger100 >= 90 && player.hunger100 < 100) bodyStats += "<font color=\"#00C000\">Full</font>";
+				if (player.hunger100 >= 100) bodyStats += "<font color=\"#00C000\">Very full</font>";
 				bodyStats += ")\n";
 			}
 
@@ -380,6 +382,9 @@ import flash.events.Event;
 			}
 			if (player.beeScore() > 0) {
 				raceScores += "<b>Bee Score:</b> " + player.beeScore() + "\n";
+			}
+			if (player.cockatriceScore() > 0) {
+				raceScores += "<b>Cockatrice Score:</b> " + player.cockatriceScore() + "\n";
 			}
 			
 			if (raceScores != "")

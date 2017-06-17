@@ -4,7 +4,11 @@ package classes
 	import classes.*
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import flash.display.Shape;
+
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.IBitmapDrawable;
+import flash.display.Shape;
 	import flash.display.GradientType;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
@@ -29,8 +33,9 @@ package classes
 	import flash.ui.Keyboard;
 	
 	import flash.utils.Timer;
-	
-	//import fl.transition.Tween;
+import flash.utils.setTimeout;
+
+//import fl.transition.Tween;
 	//import fl.transition.easing.*
 	
 	public class MainViewManager extends BaseContent
@@ -295,7 +300,31 @@ package classes
 			}
 			
 		}
-		
+
+		public function hideSprite():void {
+			// Inlined from lib/src/coc/view/MainView.as
+			mainView.sprite.visible = false;
+			mainView.spriteOld.visible = false;
+		}
+		public function showSpriteBitmap(bmp:BitmapData):void {
+			if (!bmp) return;
+			mainView.spriteOld.visible = false;
+			var element:MovieClip = mainView.sprite;
+			element.gotoAndStop(200);
+			element.visible = true;
+			element.scaleX = 1;
+			element.scaleY = 1;
+			element.graphics.clear();
+			element.graphics.beginBitmapFill(bmp,null,false,false);
+			element.graphics.drawRect(0, 0, bmp.width, bmp.height);
+			element.graphics.endFill();
+			rescaleSprite(element);
+		}
+		private function rescaleSprite(element:MovieClip):void {
+			var scale:Number = 80 / element.height;
+			element.scaleX = scale;
+			element.scaleY = scale;
+		}
 		//------------
 		// REFRESH
 		//------------

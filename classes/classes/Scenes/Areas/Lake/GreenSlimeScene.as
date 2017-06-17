@@ -544,7 +544,7 @@ private function oozeRapesYouOrally():void
 		outputText("It pistons the head of its shaft back and forth in your mouth for a bit as you rock your head back and forth and suck on it.  A pleasant tingle starts in your mouth and the thing pushes itself to the back of your throat and holds it there, making you squirm in anticipation.  It pulls back slowly, then fiercely thrusts forward.  You feel the soft material of its member squeeze into your throat and contort to perfectly fill you, going deeper and deeper until the bulk of its body is just a few inches away from your face.\n");
 		if (player.cockTotal() > 0)
 		{
-			if (player.lust > 40) outputText("Your erect " + player.multiCockDescriptLight() + " throbs as you work the creature, a surge of even greater arousal flowing through your body.  You feel almost desperate for release and even thrust your hips impotently against the empty air, wishing for some form of release.  You try to reach for yourself to masturbate, but find yourself unable to reach around the slime's massive bulk.  ");
+			if (player.lust100 > 40) outputText("Your erect " + player.multiCockDescriptLight() + " throbs as you work the creature, a surge of even greater arousal flowing through your body.  You feel almost desperate for release and even thrust your hips impotently against the empty air, wishing for some form of release.  You try to reach for yourself to masturbate, but find yourself unable to reach around the slime's massive bulk.  ");
 			else outputText("You feel your " + player.multiCockDescriptLight() + " begin to harden just slightly as you work the creature, a surge of arousal flowing through your body.");
 		}
 		if (player.vaginas.length > 0) {
@@ -552,11 +552,11 @@ private function oozeRapesYouOrally():void
 			if (player.cockTotal() > 0) outputText("also ");
 			outputText("grows wet as you work the creature, a surge of arousal flowing through your body.  You rub your thighs together and moan into the creatures cock, desperate to be touched by something.");
 			// this line is here because it makes no sense for the player to try to reach their genitals twice.  i think i got the logic right.
-			if (player.cockTotal() < 1 || player.lust <= 40) outputText("You try to reach for yourself to masturbate, but find yourself unable to reach around the slime's massive bulk.");
+			if (player.cockTotal() < 1 || player.lust100 <= 40) outputText("You try to reach for yourself to masturbate, but find yourself unable to reach around the slime's massive bulk.");
 		}
 		outputText("The slime lets itself rest in your throat for a moment and you relish the feeling of it pressing against the inside of your throat, and your entire body begins to tingle with arousal.  Before long you find yourself moving with the creature, and before long you're taking its cock all the way into your throat, pressing your nose up against it as you try to coax if further into you.  The slime speeds up and begins to throb inside you, each pulse of its cock making your throat feel even tighter, but never quite enough to be painful.\n");
 		outputText("With a final strong thrust the thing rams your face against its hips and you feel a surge of fluid flow down its member and explode into your stomach.  It releases several spurts of fluid into your gullet before it begins to draw out, dribbling fluid into your throat.  It pauses as it pulls its cock head into your mouth and releases a final blast of fluid, which you quickly swallow as it pulls out.  It releases a few final spurts onto your face as it begins to withdraw, and you lick your lips and begin to rub the fluid into your skin.  ");
-		if (player.lust > 40) {
+		if (player.lust100 > 40) {
 			outputText("The creature withdraws as you begin to masturbate, furiously working yourself to a quick, but powerful, orgasm.  By the time you recover, it is long gone.");
 			player.orgasm('Lips');
 		}
@@ -807,7 +807,7 @@ public function slimeVictory():void {
 			//Service for lower corruption
 			if (player.cor <= 33) {
 				clearOutput();
-				if (player.lust < 60) serviceLowCorruption();
+				if (player.lust100 < 60) serviceLowCorruption();
 				else serviceLowCorruptionHighLust();
 			}
 			//higher corruption raaaaeeeep

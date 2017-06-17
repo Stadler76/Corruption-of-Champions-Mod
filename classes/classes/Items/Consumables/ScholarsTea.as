@@ -23,13 +23,13 @@ package classes.Items.Consumables
 				outputText(player.modTone(15, 1));
 			}
 			//Now NERFED!
-			if (player.inte < 40) {
+			if (player.inte100 < 40) {
 				game.dynStats("int", 1.5 + rand(4));
 			}
-			else if (player.inte < 60) {
+			else if (player.inte100 < 60) {
 				game.dynStats("int", 1 + rand(3));
 			}
-			else if (player.inte < 80) {
+			else if (player.inte100 < 80) {
 				game.dynStats("int", 0.5 + rand(2));
 			}
 			else {

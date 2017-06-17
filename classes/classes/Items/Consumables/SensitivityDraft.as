@@ -34,7 +34,7 @@ package classes.Items.Consumables
 				player.createStatusEffect(StatusEffects.LustyTongue, 25, 0, 0, 0);
 			}
 			outputText("\n\nAfter the wave of sensation passes, your " + player.skinDesc + " feels a little more receptive to touch.  ");
-			if (player.lust > 70 || player.lib > 70) {
+			if (player.lust100 > 70 || player.lib100 > 70) {
 				outputText("You shiver and think of how much better it'll make sex and masturbation.");
 			}
 			else outputText("You worry it'll make it harder to resist the attentions of a demon.");

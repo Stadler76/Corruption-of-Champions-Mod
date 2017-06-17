@@ -101,7 +101,7 @@ package classes.Scenes {
 				choices[choices.length] = 14;
 				choices[choices.length] = 14;
 			}
-			if (getGame().anemoneScene.kidAXP() >= 40 && player.lust >= 70 && player.gender > 0) {
+			if (getGame().anemoneScene.kidAXP() >= 40 && player.lust100 >= 70 && player.gender > 0) {
 				choices[choices.length] = 15;
 				choices[choices.length] = 15;
 				choices[choices.length] = 15;

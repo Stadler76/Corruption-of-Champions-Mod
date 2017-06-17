@@ -7,7 +7,7 @@ package classes.Scenes.Dungeons.DeepCave
 	{
 		public function impGangAI():void {
 			if (hasStatusEffect(StatusEffects.ImpUber)) impGangUber();
-			else if (lust > 50 && rand(2) == 0) impGangBukkake();
+			else if (lust100 > 50 && rand(2) == 0) impGangBukkake();
 			else {
 				var choice:Number = rand(4);
 				if (choice < 3) imtacularMultiHitzilla();

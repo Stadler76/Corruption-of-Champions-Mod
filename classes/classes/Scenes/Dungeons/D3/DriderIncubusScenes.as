@@ -134,7 +134,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" Lethice thanks you for preparing Whitney’s farm");
 			}
 			outputText(", or worse. You go limp, defeated");
-			if (player.lust >= 90)
+			if (player.lust100 >= 90)
 			{
 				outputText(" and horny");
 			}
@@ -174,7 +174,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" judging by the way pre is pouring out of your [cocks], she’s not the only one.");
 			}
-			else if (player.lust >= 95)
+			else if (player.lust100 >= 95)
 			{
 				outputText(" judging by how much you’re salivating, she’s not the only one.");
 			}
@@ -575,7 +575,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("You grin at the goblin and push your [armor] out of the way to expose your [cocks], explaining that you’d like to see her please your [cock biggest] with her tits before you make any decisions about taking her as a slave of your own. After all, her and her master are responsible for your current, rigid state");
-			if (player.balls > 0 && player.lust >= 75)
+			if (player.balls > 0 && player.lust100 >= 75)
 			{
 				outputText(" and too-full feeling balls");
 			}

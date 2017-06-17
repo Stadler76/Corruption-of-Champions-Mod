@@ -134,7 +134,7 @@ package classes.Scenes.Areas.Lake
 
 		override public function teased(lustDelta:Number):void
 		{
-			if (lust <= 99) {
+			if (lust100 <= 99) {
 				if (lustDelta <= 0) outputText("\nThe goo-girl looks confused by your actions, as if she's trying to understand what you're doing.");
 				else if (lustDelta < 13) outputText("\nThe curious goo has begun stroking herself openly, trying to understand the meaning of your actions by imitating you.");
 				else outputText("\nThe girl begins to understand your intent. She opens and closes her mouth, as if panting, while she works slimy fingers between her thighs and across her jiggling nipples.");

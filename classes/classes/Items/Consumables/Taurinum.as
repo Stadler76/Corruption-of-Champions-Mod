@@ -24,7 +24,7 @@ package classes.Items.Consumables
 			player.slimeFeed();
 			clearOutput();
 			outputText("You down the potion, grimacing at the strong taste.");
-			if (changes < changeLimit && rand(2) === 0 && player.spe < 80) {
+			if (changes < changeLimit && rand(2) === 0 && player.spe100 < 80) {
 				changes++;
 				outputText("\n\nAfter drinking the potion, you feel a bit faster.");
 				dynStats("spe", 1);

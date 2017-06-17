@@ -1,8 +1,10 @@
 package classes.Scenes.NPCs{
 	import classes.GlobalFlags.*;
 	import classes.*;
-import classes.Scenes.API.Encounter;
-import classes.Scenes.API.Encounters;
+	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounters;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -93,8 +95,8 @@ import classes.Scenes.API.Encounters;
 
 public function jojoSprite():void {
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
-		if (tentacleJojo()) spriteSelect(81);
-		else spriteSelect(34);
+		if (tentacleJojo()) spriteSelect(SpriteDb.s_jojoTentacle);
+		else spriteSelect(SpriteDb.s_jojo);
 	}
 	//No Joy sprite yet.
 }
@@ -784,7 +786,7 @@ private function milkJojoFirst():void {
 			if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release");
 			else outputText("You figure the machine will probably pump him for quite a while before it allows release");
 			outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and pull out " + player.oMultiCockDesc() + ", feeling ");
-			if (player.lust < 50) outputText("it stiffen in your hand");
+			if (player.lust100 < 50) outputText("it stiffen in your hand");
 			else outputText("it's rigidity with your hand");
 			outputText(".  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  You sigh, wishing you were small enough to fit inside him, but there's more than one way to fuck a mouse.  Resting your heavy male endowment between his asscheeks, you twirl his tail around your member and turn it into an impromptu cock-ring.  Jojo cranes his head back to see what's going on.  His blush seems to deepen three shades at the sight.  Giving him a wink, you start rocking back and forth.  His ass serves as the perfect hotdog 'bun' while the tightness of his tail keeps your " + player.cockDescript(x) + " so hard it feels like it could burst.\n\n");
 		}
@@ -793,7 +795,7 @@ private function milkJojoFirst():void {
 			if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release");
 			else outputText("You figure the machine will probably pump him for quite a while before it allows release");
 			outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and pull out " + player.oMultiCockDesc() + ", feeling ");
-			if (player.lust < 50) outputText("it stiffen in your hand");
+			if (player.lust100 < 50) outputText("it stiffen in your hand");
 			else outputText("it's rigidity with your hand");
 			outputText(".  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  You smile and push forward, sheathing yourself inside Jojo's spasming asshole.  His happily convulsing muscles clamp tight around you, seizing your " + player.cockDescript(x) + " in his hot innards.  Swatting his plump, furry cheeks, you start to fuck him, noting that the machine all but stops its rhythmic motions.  It seems pounding Jojo's prostate into mush is as effective at milking his dick as the unholy semen-seeking machinery.\n\n");
 		}
@@ -1100,11 +1102,11 @@ public function jojoFollowerMeditate():void {
 		else if (player.cor > 40)
 			cleanse -= 1;
 		dynStats("cor", cleanse - player.countCockSocks("alabaster"));
-		if (player.str < 45) dynStats("str", 1); //Str boost to 45
-		if (player.tou < 45) dynStats("tou", 1); //Tou boost to 45
-		if (player.spe < 75) dynStats("spe", 1); //Speed boost to 75
-		if (player.inte < 80) dynStats("int", 1); //Int boost to 80
-		if (player.lib > 0) dynStats("lib", -1); //Libido lower to 15
+		if (player.str100 < 45) dynStats("str", 1); //Str boost to 45
+		if (player.tou100 < 45) dynStats("tou", 1); //Tou boost to 45
+		if (player.spe100 < 75) dynStats("spe", 1); //Speed boost to 75
+		if (player.inte100 < 80) dynStats("int", 1); //Int boost to 80
+		if (player.lib100 > 0) dynStats("lib", -1); //Libido lower to 15
 		flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
 		player.addStatusValue(StatusEffects.JojoMeditationCount, 1, 1);
 	}
@@ -3139,10 +3141,10 @@ public function apparantlyJojoDOESlift():void
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
-	if (player.str < 50) dynStats("str", 0.5);
-	if (player.str < 80) dynStats("str", 0.5);
-	if (player.inte < 50) dynStats("inte", 0.5);
-	if (player.inte < 80) dynStats("inte", 0.5);
+	if (player.str100 < 50) dynStats("str", 0.5);
+	if (player.str100 < 80) dynStats("str", 0.5);
+	if (player.inte100 < 50) dynStats("inte", 0.5);
+	if (player.inte100 < 80) dynStats("inte", 0.5);
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }

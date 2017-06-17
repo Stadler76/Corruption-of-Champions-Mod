@@ -4,6 +4,8 @@ package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.HighMountains.Harpy;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class SophieScene extends BaseContent implements TimeAwareInterface {
 
@@ -125,7 +127,7 @@ package classes.Scenes.NPCs{
 						else sophieBimbo.sophieFenCraftedSex(true);
 						return true;
 					}
-					if (sophieFollowerScene.sophieFollower() && player.lust >= 50 && player.smallestCockArea() <= 5 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
+					if (sophieFollowerScene.sophieFollower() && player.lust100 >= 50 && player.smallestCockArea() <= 5 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 						sophieFollowerScene.sophieSmallDongTeases();
 						return true;
 					}
@@ -292,7 +294,7 @@ public function meetSophieRepeat():void {
 			outputText("  Sophie releases her talons and you drop smartly onto the far side.  She pants, \"<i>It's breeding time.  " + player.mf("Boy","Girl") + ", fertilize me; NOW.</i>\"\n\n");
 			
 			//(low lust?)
-			if (player.lust < 60 || rand(3) <= 1) {
+			if (player.lust100 < 60 || rand(3) <= 1) {
 				outputText("Her need amplifies the compulsion, making it difficult to resist.  It looks like if you turned her down now she'd probably try to force herself on you anyway.  Do you give in to her demand?");
 				//[Yes-Consentual sex] [No - fight]
 				menu();
@@ -387,7 +389,7 @@ private function PCIgnoresSophieAndHarpyIsFought():void {
 	clearOutput();
 	outputText("A harpy wings out of the sky and attacks!");
 	startCombat(new Harpy());
-	spriteSelect(26);
+	spriteSelect(SpriteDb.s_harpy);
 }
 
 
@@ -398,7 +400,7 @@ private function sophieLookingForDemons():void {
 	outputText("Sophie throws her head back and laughs. \"<i>Don't worry about any demons here.  Any time a demon is dumb enough to wander too close to our nests, we give him a 'foot-job' he won't forget.</i>\"  To illustrate, the busty harpy lifts her leg and proudly displays her razor-sharp talons.");
 	//Check her out if you're in the mood or dirty-minded
 	//Requires wang
-	if ((player.cor > (60 - player.corruptionTolerance()) || player.lust > 60 || player.lib > 70) && player.hasCock()) {
+	if ((player.cor > (60 - player.corruptionTolerance()) || player.lust100 > 60 || player.lib > 70) && player.hasCock()) {
 		outputText("  In spite of the danger of the situation, your gaze drops between her legs to her completely exposed sex.  You nod in agreement with her, buying a few extra seconds to inspect her vagina.  Tinged pink, it's much larger than a human's; perhaps due to the size of the eggs she lays?\n\n");
 	}
 	//Otherwise leave.
@@ -423,8 +425,8 @@ private function shootDownSophieSex():void {
 	clearOutput();
 	outputText("Sophie pouts for a moment, leaning forward to better display her cleavage. \"<i>Really?  Well if you change your mind, come back and visit me.</i>\"  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.  You climb down, careful to avoid any other nests as you head back to check on your camp and its portal.");
 	doNext(camp.returnToCampUseOneHour);
-	if (player.lib > 25) dynStats("lib", -1);
-	if (player.lust > 50) dynStats("lus", -5);
+	if (player.lib100 > 25) dynStats("lib", -1);
+	if (player.lust100 > 50) dynStats("lus", -5);
 }
 
 //[Sex]
@@ -491,7 +493,7 @@ private function sophieMeetingGotLost():void {
 		outputText("Mmm, it's a shame you don't have a penis, or you could show me what I was missing.</i>\"  The sexually deprived bird-woman plies you with questions about the world for the better part of an hour, masturbating to several mid-conversation orgasms.  Once she exhausts herself, she thanks you and leans down for her nap.  Her tail-feathers fluff in what is clearly a dismissal.");
 		//(+10 + libmod lust, +1 int up to 50 int))
 		dynStats("lus", (10+player.lib/4));
-		if (player.inte < 50) dynStats("int", 1);
+		if (player.inte100 < 50) dynStats("int", 1);
 		//[Go to camp if neither of the above]
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -507,7 +509,7 @@ private function tellSophieYoureForagingForStuff():void {
 	
 	//(+10 + libmod lust, +1 int up to 50 int))
 	dynStats("lus", (10+player.lib/4));
-	if (player.inte < 50) dynStats("int", 1);
+	if (player.inte100 < 50) dynStats("int", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -521,7 +523,7 @@ private function cramANippleInIt():void {
 	//COMBAT
 	else {
 		//(Lust Win)
-		if (monster.lust >= monster.eMaxLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n");
+		if (monster.lust >= monster.maxLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n");
 		//(HP Win)
 		else outputText("You pull the dazed and defeated harpy up to her knees.  She sways unsteadily as you undress and expose your " + player.allBreastsDescript() + " to the cool mountain air.   Sophie's eyes open wider as she struggles back to consciousness, and the hungry harpy happily opens her mouth into a wide 'O', begging for your milk.\n\n");
 	}
@@ -997,8 +999,8 @@ private function maleVictorySophieRape():void {
 	if (monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.");
 	else outputText("too turned on to resist, and is vigorously fisting her large pussy.");
 	outputText("  Not satisfied with a simple victory, you undress and expose your ");
-	if (player.lust > 90) outputText("dripping ");
-	else if (player.lust > 50) outputText("hard ");
+	if (player.lust100 > 90) outputText("dripping ");
+	else if (player.lust100 > 50) outputText("hard ");
 	else outputText("hardening ");
 	outputText("member.  The harpy doesn't even notice your nudity until you're grasping her legs just above the talons.  She struggles weakly, but you force her feet up over her head, pinning her to the ground.  The view of her thick thighs and large, slippery slit is the perfect enticement.\n\n");
 	
@@ -1030,8 +1032,8 @@ private function maleVictorySophieRapeHUGE():void {
 	clearOutput();
 	
 	outputText("Not satisfied with a simple victory, you undress and expose your ");
-	if (player.lust > 90) outputText("dripping ");
-	else if (player.lust > 50) outputText("hard ");
+	if (player.lust100 > 90) outputText("dripping ");
+	else if (player.lust100 > 50) outputText("hard ");
 	else outputText("hardening ");
 	outputText("member.  The harpy doesn't even notice your nudity until you're grasping her legs just above the talons.  She struggles weakly, but you force her feet up over her head, pinning her to the ground.  The view of her thick thighs and large, slippery slit is the perfect enticement.\n\n");
 	

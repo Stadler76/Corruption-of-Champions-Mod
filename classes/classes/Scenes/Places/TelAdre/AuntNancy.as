@@ -100,7 +100,7 @@ private function strongStuff():void {
 	outputText("You pay a few gems and take a sip.  The alcohol burns a bit, but it tastes deliciously, achingly sweet, and before you know it the glass is empty.\n\n");
 
 	//[(If Toughness is >= 30)]
-	if (player.tou >= 30) {
+	if (player.tou100 >= 30) {
 		outputText("It was good, but it seems to have gone straight to your head with surprising speed, giving you a pleasant buzz after only one glass. It might be a prudent idea to walk it off before you get another.  You thank Aunt Nancy for the drink, before climbing to your " + player.feet() + " and leaving.  She eyes you respectfully as you go.");
 		//[+10 Relationship with Aunt Nancy]
 		flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] += 10;

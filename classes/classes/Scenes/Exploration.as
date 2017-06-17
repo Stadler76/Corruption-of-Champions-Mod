@@ -12,6 +12,8 @@ package classes.Scenes
 	import classes.Scenes.Areas.DeepWoods;
 	import classes.Scenes.Explore.ExploreDebug;
 	import classes.Scenes.Monsters.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Exploration extends BaseContent
 	{
@@ -147,7 +149,7 @@ package classes.Scenes
 						clearOutput();
 						outputText("An imp wings out of the sky and attacks!");
 						startCombat(new Imp());
-						spriteSelect(29);
+						spriteSelect(SpriteDb.s_imp);
 					}
 					//Unlock if haven't already.
 					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
@@ -196,7 +198,7 @@ package classes.Scenes
 						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
 					}
 					startCombat(new Goblin());
-					spriteSelect(24);
+					spriteSelect(SpriteDb.s_goblin);
 					return;
 				}
 				else {
@@ -207,7 +209,7 @@ package classes.Scenes
 						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
 					}
 					startCombat(new Goblin());
-					spriteSelect(24);
+					spriteSelect(SpriteDb.s_goblin);
 					return;
 				}
 			}

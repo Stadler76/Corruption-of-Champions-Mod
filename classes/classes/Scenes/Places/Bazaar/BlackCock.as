@@ -3,6 +3,8 @@ package classes.Scenes.Places.Bazaar
 	import classes.GlobalFlags.*;
 	import classes.Items.Mutations;
 	import classes.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	/**
 	 * The Black Cock by Foxxling
 	 * @author Kitteh6660
@@ -56,7 +58,7 @@ package classes.Scenes.Places.Bazaar
 		
 		public function enterTheBlackCock():void {
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			outputText(images.showImage("location-bazaar-theblackcock"));
 			//General descriptor
 			outputText("You enter the tent to find much of what you'd expect: A bunch of wooden tables and a sectioned-off portion in the back where you presume the cooking happens. Next to the flap leading into the kitchen there is a big \"keep out\" sign stuck into the ground through the tent's bottom. ");
@@ -172,7 +174,7 @@ package classes.Scenes.Places.Bazaar
 				doNext(checkFoodMenu);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger100 >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider eating that.</b>");
 				doNext(checkFoodMenu);
 				return;
@@ -201,12 +203,12 @@ package classes.Scenes.Places.Bazaar
 				case "P. Potatoes":
 					player.refillHunger(70);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 2);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.buttRating++;
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger100 >= 80)) player.buttRating++;
 					break;
 				case "Spicy Chilli":
 					player.refillHunger(60);
 					if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 1);
-					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger >= 80)) player.hipRating++;
+					if (flags[kFLAGS.HUNGER_ENABLED] == 0 || (rand(2) == 0 && player.hunger100 >= 80)) player.hipRating++;
 					break;
 				case "Prot. Shake":
 					player.refillHunger(30);
@@ -1251,7 +1253,7 @@ package classes.Scenes.Places.Bazaar
 				doNext(enterTheBlackCock);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger100 >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusEffect(StatusEffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider ordering that that.</b>");
 				doNext(enterTheBlackCock);
 				return;
@@ -1412,8 +1414,8 @@ package classes.Scenes.Places.Bazaar
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");
 				dynStats("lus", 25);
-				if (player.lib < 100) {
-					if (player.lib < 50) dynStats("lib", 1);
+				if (player.lib100 < 100) {
+					if (player.lib100 < 50) dynStats("lib", 1);
 					dynStats("lib", 1);
 				}
 			}
@@ -1549,9 +1551,9 @@ package classes.Scenes.Places.Bazaar
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			// Stats Changes
 			//------------
-			if (rand(3) == 0 && player.str < 100) {
+			if (rand(3) == 0 && player.str100 < 100) {
 				changes++;
-				if (player.str < 50) {
+				if (player.str100 < 50) {
 					outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
 					dynStats("str", .5);
 				}
@@ -1560,15 +1562,15 @@ package classes.Scenes.Places.Bazaar
 				}
 				dynStats("str", .5);
 			}
-			if (rand(3) == 0 && player.tou < 100) {
+			if (rand(3) == 0 && player.tou100 < 100) {
 				outputText("\n\nYou thump your chest and grin - your foes will have a harder time taking you down while you're fortified by liquid courage.");
 				dynStats("tou", 1);
 			}
-			if (rand(2) == 0 && player.spe > 80 && player.str >= 50) {
+			if (rand(2) == 0 && player.spe100 > 80 && player.str100 >= 50) {
 				outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
 				dynStats("spe", -1);
 			}
-			if (rand(3) == 0 && player.tou < 50 && changes < changeLimit) {
+			if (rand(3) == 0 && player.tou100 < 50 && changes < changeLimit) {
 				outputText("\n\nYour skin feels clammy and a little rubbery. You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips. Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
 				dynStats("sen", -1);
 			}
@@ -1865,9 +1867,10 @@ package classes.Scenes.Places.Bazaar
 			//Remove gills
 			if (rand(3) == 0 && changes < changeLimit && player.hasGills()) mutations.updateGills();
 
-			if (rand(3) == 0 && changes < changeLimit && player.eyeType == EYES_FOUR_SPIDER_EYES) {
-				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark. You touch your forehead to inspect your eyes, only to find out that they have disappeared. <b>You only have two eyes now!</b>");
+			if (rand(3) == 0 && changes < changeLimit && player.eyeType == EYES_FOUR_SPIDER_EYES || player.eyeType == EYES_SPIDER) {
+				outputText("\n\nYour eyes start throbbing painfully, your sight in them eventually going dark. You touch your head to inspect your eyes, only to find out that they have changed. <b>You have human eyes now!</b>");
 				player.eyeType == EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() > 4) {

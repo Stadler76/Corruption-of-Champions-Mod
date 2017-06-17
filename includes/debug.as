@@ -169,10 +169,10 @@ public function doThatTestingThang():void
 * 15 [if (analcapacity > 0)  HERP|DERP]
 * 16 \[if (analcapacity > 0) HERP|DERP\]
 * 16 [if (analcapacity > 0) HERP|DERP]
-* 17 \[if (hasCock == True) HERP|DERP\]
-* 17 [if (hasCock == True) HERP|DERP]
-* 18 \[if (hasVagina == True) HERP|DERP\]
-* 18 [if (hasVagina == True) HERP|DERP]
+* 17 \[if (hasCock) HERP|DERP\]
+* 17 [if (hasCock) HERP|DERP]
+* 18 \[if (hasVagina) HERP|DERP\]
+* 18 [if (hasVagina) HERP|DERP]
 
 ** Member Accessors**
 
@@ -192,8 +192,8 @@ public function doThatTestingThang():void
 * 25 [if (player.isBiped == true) IS A BIPEDDDDD | not a biped. Wat?]
 * 26 \[if (player.isBiped) IS A BIPEDDDDD | not a biped. Wat?\]
 * 26 [if (player.isBiped) IS A BIPEDDDDD | not a biped. Wat?]
-* 27 \[if (player.isBipd) IS A BIPEDDDDD | not a biped. Wat?\]
-* 27 [if (player.isBipd) IS A BIPEDDDDD | not a biped. Wat?]
+* 27 \[if (player.canFly) can fly | can't fly\]
+* 27 [if (player.canFly) can fly | can't fly]
 * 28 \[if (player.tailType != 0)wagging your \[tail\]\]
 * 28 [if (player.tailType != 0)wagging your [tail]]
 * 29 \[if (player.tailType != 0)wagging your \[tail\]|\[butt\] in the air\]

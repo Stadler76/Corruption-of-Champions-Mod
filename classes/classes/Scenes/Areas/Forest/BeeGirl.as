@@ -51,11 +51,11 @@
 				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
 				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
 				game.dynStats("lus", 25);
-				if (player.lust > 60) {
+				if (player.lust100 > 60) {
 					outputText(" You shake your head and struggle to stay focused,");
 					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");
 					if (player.gender == 2) outputText(" but can't ignore the soaking wetness in your groin.");
-					if (player.sens > 50) outputText("  The sensitive nubs of your nipples rub tightly under your " + player.armorName + ".");
+					if (player.sens100 > 50) outputText("  The sensitive nubs of your nipples rub tightly under your " + player.armorName + ".");
 				}
 				else outputText(" You shake your head and clear the thoughts from your head, focusing on the task at hand.");
 				if (!player.hasStatusEffect(StatusEffects.lustvenom)) player.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);

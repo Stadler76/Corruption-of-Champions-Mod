@@ -43,22 +43,22 @@ package classes.Items.Consumables
 			//Strength h
 			if (rand(3) === 0 && changes < changeLimit) {
 				//weaker characters gain more
-				if (player.str <= 50) {
+				if (player.str100 <= 50) {
 					outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");
 					//very weak players gain more
-					if (player.str <= 20) dynStats("str", 3);
+					if (player.str100 <= 20) dynStats("str", 3);
 					else dynStats("str", 2);
 				}
 				//stronger characters gain less
 				else {
 					//small growth if over 75
-					if (player.str >= 75) dynStats("str", .5);
+					if (player.str100 >= 75) dynStats("str", .5);
 					//faster from 50-75
 					else dynStats("str", 1);
 					outputText("\n\nYour muscles grow tighter, bulging outwards powerfully as you get even stronger!");
 				}
 				//Chance of speed drop
-				if (rand(2) === 0 && player.str > 50) {
+				if (rand(2) === 0 && player.str100 > 50) {
 					outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
 					dynStats("spe", -1);
 				}
@@ -67,31 +67,31 @@ package classes.Items.Consumables
 			//Toughness (chance of - sensitivity)
 			if (rand(3) === 0 && changes < changeLimit) {
 				//weaker characters gain more
-				if (player.tou <= 50) {
+				if (player.tou100 <= 50) {
 					outputText("\n\nYour hide... skin... whatever... you can feel it getting tougher as it thickens perceptibly.");
 					//very weak players gain more
-					if (player.tou <= 20) dynStats("tou", 3);
+					if (player.tou100 <= 20) dynStats("tou", 3);
 					else dynStats("tou", 2);
 				}
 				//stronger characters gain less
 				else {
 					//small growth if over 75
-					if (player.tou >= 75) dynStats("tou", .5);
+					if (player.tou100 >= 75) dynStats("tou", .5);
 					//faster from 50-75
 					else dynStats("tou", 1);
 					outputText("\n\nYour tough hide grows slightly thicker.");
 				}
 				//chance of less sensitivity
-				if (rand(2) === 0 && player.sens > 10) {
-					if (player.tou > 75) {
+				if (rand(2) === 0 && player.sens100 > 10) {
+					if (player.tou100 > 75) {
 						outputText("\n\nIt becomes much harder to feel anything through your leathery skin.");
 						dynStats("sen", -3);
 					}
-					if (player.tou <= 75 && player.tou > 50) {
+					if (player.tou100 <= 75 && player.tou100 > 50) {
 						outputText("\n\nThe level of sensation from your skin diminishes noticeably.");
 						dynStats("sen", -2);
 					}
-					if (player.tou <= 50) {
+					if (player.tou100 <= 50) {
 						outputText("\n\nYour sense of touch diminishes due to your tougher hide.");
 						dynStats("sen", -3);
 					}

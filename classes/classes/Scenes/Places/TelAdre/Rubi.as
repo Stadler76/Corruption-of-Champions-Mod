@@ -3,6 +3,8 @@ package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){
@@ -69,8 +71,8 @@ public function Rubi(){
 //const RUBI_SETUP:int = 1014;
 
 private function rubiSprite():void {
-	if (flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(102);
-	else spriteSelect(101);
+	if (flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(SpriteDb.s_rubi_horns);
+	else spriteSelect(SpriteDb.s_rubi_hornless);
 }
 
 private function initializeRubi():void {

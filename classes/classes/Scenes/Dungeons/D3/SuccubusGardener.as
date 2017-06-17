@@ -176,8 +176,8 @@ package classes.Scenes.Dungeons.D3
 				
 				if (this.lustVuln <= 0.3) outputText(" Whatever is in that healing nectar must be weakening her self-control.");
 			}
-			
-			this.HP = this.eMaxHP();
+
+this.HP = this.maxHP();
 			this.lustVuln += 0.3;
 			this.fatigue += 5;
 			if (fatigue >= 100) { //Exhausted!
@@ -326,27 +326,27 @@ package classes.Scenes.Dungeons.D3
 			player.addStatusValue(StatusEffects.ShowerDotEffect, 1, -1);
 			
 				//Dot effect
-			if (player.lust < 50) outputText("The tentacles' sex-juices are still covering you - still slowly arousing you. You've got a good handle on it for now.\n\n");
-			else if (player.lust < 60) 
+			if (player.lust100 < 50) outputText("The tentacles' sex-juices are still covering you - still slowly arousing you. You've got a good handle on it for now.\n\n");
+			else if (player.lust100 < 60)
 			{
 				outputText("You try to wipe some of the fragrant seed from your palm, but all you succeed in doing is smearing it into your [hips].");
 				if (player.cor < 50) outputText(" You're ashamed to admit");
 				else outputText(" You're a little irritated to admit"); 
 				outputText(" that it's starting to feel really good.\n\n");
 			}
-			else if (player.lust < 70)
+			else if (player.lust100 < 70)
 			{
 				outputText("You groan at the warm slipperiness enveloping your [skinFurScales] as the tainted tentacles' fluids go to work on you. There's nothing you can do but try to endure it. If only it didn't feel so... hot to be drenched in. If you wind up losing, you hope she'll do this again....\n\n");
 			}
-			else if (player.lust < 80)
+			else if (player.lust100 < 80)
 			{
 				outputText("You whimper as the insidious plant-sperm works on your vulnerable " + player.skinDesc + ", building pernicious desires in tiny, insistent increments. It's getting harder to focus... harder not to think about how good all those tentacles would feel in you and on you, caressing your most intimate places.\n\n");
 			}
-			else if (player.lust < 90)
+			else if (player.lust100 < 90)
 			{
 				outputText("You shudder in place, stumbling dazedly as your ardor rises to a fever pitch. Soon, you're going to wind up too turned-on to resist, and when that happens, those tentacles are going to take you. The worst part? It's starting to sound really, really... really good to you. Not struggling, no tension... just giving in to what your body craves and loving it.\n\n");
 			}
-			else if (player.lust < 100)
+			else if (player.lust100 < 100)
 			{
 				outputText("Ohhhh, you're close now. You can feel the need hammering inside of you, soaking in through your [skinFurScales] to stoke the fires between your [legs] into a blazing inferno, one you couldn't resist even if you wanted to. Then... then you'll be free to cum. You shake your head. Gotta hold it together");
 				if (player.hasCock())

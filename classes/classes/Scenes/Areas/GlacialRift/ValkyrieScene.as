@@ -17,13 +17,13 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.HP <= 0) outputText("her onslaught")
 			else outputText("your rising lust")
 			outputText(", you collapse to your knees, utterly at the valkyrie’s mercy.  She plants her spear in the ground, just inches from your head, and rolls you onto your back with her foot. \n\n")
-			if (monster.lust >= 70 && flags[kFLAGS.SFW_MODE] <= 0) loseToValkyrieForcedOral()
+			if (monster.lust100 >= 70 && flags[kFLAGS.SFW_MODE] <= 0) loseToValkyrieForcedOral()
 			else {
 				outputText("With one swift, contemptuous kick to the head, she knocks you right out.")
 				outputText("  You are utterly freezing after such long exposure to the cold.")
-				if (player.str > 50) dynStats("str", -1);
+				if (player.str100 > 50) dynStats("str", -1);
 				dynStats("str", -1);
-				if (player.spe > 50) dynStats("spe", -1);
+				if (player.spe100 > 50) dynStats("spe", -1);
 				dynStats("spe", -1);
 				combat.cleanupAfterCombat();
 			}

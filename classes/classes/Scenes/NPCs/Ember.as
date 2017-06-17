@@ -117,7 +117,7 @@ package classes.Scenes.NPCs
 		
 		override protected function performCombatAction():void
 		{
-			if (lust >= eMaxLust() * 0.6) {
+			if (lust >= maxLust() * 0.6) {
 				emberReactsToLustiness();
 				return;
 			}

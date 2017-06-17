@@ -45,19 +45,19 @@ package classes.Items.Consumables
 
 			//Statistical changes:
 			//-Reduces speed down to 50.
-			if (player.spe > player.ngPlus(50) && changes < changeLimit && rand(4) === 0) {
+			if (player.spe100 > 50 && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
 				dynStats("spe", -1);
 				changes++;
 			}
 			//-Reduces sensitivity.
-			if (player.sens > 20 && changes < changeLimit && rand(3) === 0) {
+			if (player.sens100 > 20 && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nThe sensation of prickly pins and needles moves over your body, leaving your senses a little dulled in its wake.");
 				dynStats("sen", -1);
 				changes++;
 			}
 			//Raises libido greatly to 50, then somewhat to 75, then slowly to 100.
-			if (player.lib < 100 && changes < changeLimit && rand(3) === 0) {
+			if (player.lib100 < 100 && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nA knot of fire in your gut doubles you over but passes after a few moments.  As you straighten you can feel the heat seeping into you, ");
 				//(DICK)
 				if (player.cocks.length > 0 && (player.gender !== 3 || rand(2) === 0)) {
@@ -70,23 +70,23 @@ package classes.Items.Consumables
 				//(TARDS)
 				else outputText("puddling in your featureless crotch for a split-second before it slides into your " + player.assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
 				//+3 lib if less than 50
-				if (player.lib < 50) dynStats("lib", 1);
+				if (player.lib100 < 50) dynStats("lib", 1);
 				//+2 lib if less than 75
-				if (player.lib < 75) dynStats("lib", 1);
+				if (player.lib100 < 75) dynStats("lib", 1);
 				//+1 if above 75.
 				dynStats("lib", 1);
 				changes++;
 			}
 			//-Raises toughness to 70
 			//(+3 to 40, +2 to 55, +1 to 70)
-			if (player.tou < player.ngPlus(70) && changes < changeLimit && rand(3) === 0) {
+			if (player.tou100 < 70 && changes < changeLimit && rand(3) === 0) {
 				//(+3)
-				if (player.tou < player.ngPlus(40)) {
+				if (player.tou100 < 40) {
 					outputText("\n\nYour body and skin both thicken noticeably.  You pinch your " + player.skinDesc + " experimentally and marvel at how much tougher your hide has gotten.");
 					dynStats("tou", 3);
 				}
 				//(+2)
-				else if (player.tou < player.ngPlus(55)) {
+				else if (player.tou100 < 55) {
 					outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
 					dynStats("tou", 2);
 				}
@@ -294,10 +294,11 @@ package classes.Items.Consumables
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType === EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
-					outputText("  <b>You have normal, humanoid eyes again.</b>");
+					if (player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeType === EYES_SPIDER) outputText(" <b>Your arachnid eyes are gone!</b>");
+					outputText(" <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//-Ears become smaller nub-like openings?
@@ -343,7 +344,7 @@ package classes.Items.Consumables
 					adj: "",
 					desc: "scales"
 				});
-				player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+				player.underBody.type = UNDER_BODY_TYPE_REPTILE;
 				player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
 					desc: "ventral scales", // ... and only override the desc
 					tone: newSkinTones[1]   // ... and the color (tone)

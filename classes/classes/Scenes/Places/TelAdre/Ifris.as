@@ -1,6 +1,8 @@
 package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Ifris extends TelAdreAbstractContent {
 public function Ifris(){
@@ -20,7 +22,7 @@ public function ifrisIntro():Boolean {
 
 //2-Approach and Greeting-
 public function approachIfris():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	clearOutput();
 	if (flags[kFLAGS.MET_IFRIS] == 0) {
 		flags[kFLAGS.MET_IFRIS] = 1;
@@ -63,7 +65,7 @@ public function approachIfris():void {
 }
 //3a-PC responds they want to work out-
 private function workOutForIfris():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	clearOutput();
 	outputText("You smile to the devil-looking-girl and tell her you're just here to get your work-out on.\n\n");
 
@@ -77,7 +79,7 @@ private function workOutForIfris():void {
 }
 //3b-PC asks if she'd like to join them-
 private function askIfrisToJoinYou():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	clearOutput();
 	outputText("You ask Ifris if she'd like to join you in some exercises. Her eyes glint mischievously, obviously finding unintended meaning in your words, and you can't help but blush.\n\n");
 
@@ -92,7 +94,7 @@ private function askIfrisToJoinYou():void {
 
 //4a-PC does a modest work out-
 private function liftWhileIfrisWatches():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	clearOutput();
 	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
@@ -106,8 +108,8 @@ private function liftWhileIfrisWatches():void {
 
 	outputText("\"<i>Mmm... lovely. Maybe next time I'll get to see a little more.</i>\" She grins a little then, exposing her fanged teeth to you briefly before she turns and slinks from the gym, her posh little bottom swaying more than it has any real right to. You can't help but stare until she's gone, and you shake your head, trying to clear it to go about your business...");
 	//Stat changes HERE!
-	if (player.str < 90) dynStats("str", .5);
-	if (player.tou < 40) dynStats("tou", .3);
+	if (player.str100 < 90) dynStats("str", .5);
+	if (player.tou100 < 40) dynStats("tou", .3);
 	dynStats("lus", 5);
 	//Body changes here
 	//Muscleness boost!
@@ -117,7 +119,7 @@ private function liftWhileIfrisWatches():void {
 }
 //4b-PC decides to show off, possible strength requirement?-
 private function showOffForIfris():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	player.changeFatigue(30);
 	clearOutput();
@@ -158,8 +160,8 @@ private function showOffForIfris():void {
 	if (player.isGenderless() || (player.femininity < 40 && player.cor > (75 + player.corruptionTolerance()) && player.faceType == FACE_COW_MINOTAUR)) {
 		outputText("Ifris watches you for a moment as you move down to the bench, but her eyes clearly wander elsewhere now and then. The pleasant smile never leaves her pretty face, but it's clear she's distracted or even disinterested for some reason. Soon enough she turns to leave, a bored little sigh leaving her. Her hips sway with a sexy gait as though it were natural, though nothing about her seems particularly excited at the moment...");
 		//Stat changes HERE!
-		if (player.str < 90) dynStats("str", .5);
-		if (player.tou < 40) dynStats("tou", .3);
+		if (player.str100 < 90) dynStats("str", .5);
+		if (player.tou100 < 40) dynStats("tou", .3);
 		//Body changes here
 		//Muscleness boost!
 		outputText(player.modTone(85,5+rand(5)));
@@ -253,8 +255,8 @@ private function showOffForIfris():void {
 		flags[kFLAGS.TIMES_FUCKED_IFRIS_LICKED]++;
 	}
 	//Stat changes HERE!
-	if (player.str < 90) dynStats("str", .5);
-	if (player.tou < 40) dynStats("tou", .3);
+	if (player.str100 < 90) dynStats("str", .5);
+	if (player.tou100 < 40) dynStats("tou", .3);
 	player.orgasm('Generic');
 	//Body changes here
 	//Muscleness boost!
@@ -335,8 +337,8 @@ private function ifrisDP():void {
 	outputText("It is some time until you gain the energy to rise.");
 	player.changeFatigue(10);
 	//Stat changes HERE!
-	if (player.str < 90) dynStats("str", .75);
-	if (player.tou < 40) dynStats("tou", .5);
+	if (player.str100 < 90) dynStats("str", .75);
+	if (player.tou100 < 40) dynStats("tou", .5);
 	player.orgasm('Generic');
 	//Body changes here
 	//Muscleness boost!

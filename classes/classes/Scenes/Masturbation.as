@@ -4,6 +4,8 @@ package classes.Scenes {
 	import classes.GlobalFlags.kGAMECLASS;
 //	import classes.Scenes.NPCs.*;
 	import classes.Items.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	public class Masturbation extends BaseContent {
 		
@@ -342,17 +344,17 @@ package classes.Scenes {
 				}
 				if (player.cocks.length == 1) {
 					outputText("You stroke your " + player.cockDescript());
-					if (player.lib < 45)
+					if (player.lib100 < 45)
 						outputText(" eagerly, quickly bringing yourself to a full, throbbing state.  ");
-					else if (player.lib < 70)
+					else if (player.lib100 < 70)
 						outputText(" languidly, reveling at its near-constant hardness.  ");
 					else outputText(" teasingly, pre-cum running down your length from your constant state of arousal.  ");
 				}
 				else {
 					outputText("You stroke your " + player.cockDescript());
-					if (player.lib < 45)
+					if (player.lib100 < 45)
 						outputText(" eagerly, quickly bringing your cocks to a full, throbbing state.  ");
-					else if (player.lib < 70)
+					else if (player.lib100 < 70)
 						outputText(" languidly, reveling at their near-constant hardness.  ");
 					else outputText(" teasingly, pre-cum running down your cocks from your constant state of arousal, pooling around you.  ");
 				}
@@ -360,9 +362,9 @@ package classes.Scenes {
 			if (player.vaginas.length > 0) {
 				if (player.vaginas.length == 1) {
 					//0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
-					if (player.lib < 45)
+					if (player.lib100 < 45)
 						outputText("You touch and play with your " + player.vaginaDescript() + ", ");
-					else if (player.lib < 70)
+					else if (player.lib100 < 70)
 						outputText("You slap your pussy softly, ")
 					else outputText("You touch your enflamed and aroused " + player.vaginaDescript() + ", ");
 					switch (player.vaginas[0].vaginalWetness) {
@@ -381,9 +383,9 @@ package classes.Scenes {
 					}
 				}
 				if (player.vaginas.length > 1) {
-					if (player.lib < 45)
+					if (player.lib100 < 45)
 						outputText("You touch and play with your many folds, ");
-					else if (player.lib < 70)
+					else if (player.lib100 < 70)
 						outputText("You slap your pussies softly, ")
 					else outputText("Touch your enflamed and aroused " + player.vaginaDescript() + "s, ");
 					switch (player.vaginas[0].vaginalWetness) {
@@ -803,11 +805,11 @@ package classes.Scenes {
 			if (player.cocks.length > 0) {
 				//Single Cock
 				if (player.cocks.length == 1) {
-					if (player.lib < 30)
+					if (player.lib100 < 30)
 						outputText("You quickly fall asleep, spent. ");
-					else if (player.lib < 55)
+					else if (player.lib100 < 55)
 						outputText("You roll and begin to doze, your semi-erect " + player.cockDescript() + " flopping against you. ");
-					else if (player.lib <= 80) {
+					else if (player.lib100 <= 80) {
 						outputText("As you close your eyes and relax, your " + player.cockDescript() + " surges back to erectness, ensuring ");
 						if (player.cor < 50)
 							outputText("your dreams will be filled with sex.");
@@ -817,11 +819,11 @@ package classes.Scenes {
 				}
 				//Multi Cock
 				else {
-					if (player.lib < 30)
+					if (player.lib100 < 30)
 						outputText("You quickly fall asleep, spent. ");
-					else if (player.lib < 55)
+					else if (player.lib100 < 55)
 						outputText("You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ");
-					else if (player.lib <= 80) {
+					else if (player.lib100 <= 80) {
 						outputText("As you close your eyes and relax, your dicks surge back to erectness, ensuring ");
 						if (player.cor < 50)
 							outputText("your dreams will be filled with sex.");
@@ -902,7 +904,7 @@ package classes.Scenes {
 				else outputText("hand");
 				outputText(" and see it coated in the warm lube you produce. The scent and ecstasy you are in drive you over the edge and you begin to lick what once was inside you clean. Another orgasm drills through you and your body shakes for several seconds.");
 				//Still Horny - 
-				if (player.lib >= 75)
+				if (player.lib100 >= 75)
 					outputText("\n\nRolling over, you fall to sleep while your hole drips and twitches, ensuring your dreams to be filled with the most erotic of thoughts.");
 				else outputText("\n\nRolling over, you are completely spent and fall to sleep while your well-worked hole drips.");
 			}
@@ -922,7 +924,7 @@ package classes.Scenes {
 				else outputText("it");
 				outputText(" off.");
 				//Still Horny - 
-				if (player.lib > 75)
+				if (player.lib100 > 75)
 					outputText("  Satisfied, you roll over and drift off to sleep. Your hole remains warm, ready for another round.");
 				else outputText("  Satisfied, you roll over and drift off to sleep.");
 			}
@@ -931,16 +933,16 @@ package classes.Scenes {
 		public  function titForeplay():void {
 			//Ok lets touch our boobies if we haz them and they are big enough
 			if (player.breastRows.length == 1 && player.biggestTitSize() > 3) {
-				if (player.lib < 45)
+				if (player.lib100 < 45)
 					outputText("You caress your " + player.breastDescript(0) + " gently with your fingers");
-				else if (player.lib < 70)
+				else if (player.lib100 < 70)
 					outputText("You grope your " + player.breastDescript(0) + " aggressively with both hands");
 				else outputText("You squeeze your " + player.breastDescript(0) + " brutally with both hands");
 			}
 			else if (player.breastRows.length > 1 && player.biggestTitSize() > 3) {
-				if (player.lib < 45)
+				if (player.lib100 < 45)
 					outputText("You hesitantly run your hands across your front, caressing each of your " + num2Text(player.totalBreasts()) + " breasts in turn. ");
-				else if (player.lib < 70)
+				else if (player.lib100 < 70)
 					outputText("You run your hands across your front, squeezing each of your " + num2Text(player.totalBreasts()) + " breasts in turn. ");
 				else outputText("You aggressively run your hands across your front, groping each of your " + num2Text(player.totalBreasts()) + " breasts in turn. ");
 				//different attitude based on player.corruption (ashamed/feels too good to care/reveling in how fucked up you are)
@@ -955,7 +957,7 @@ package classes.Scenes {
 				//more than one row?
 				if (player.breastRows.length >= 1) outputText(" as you move your attention to your nipples");
 				//Different attitude based on libido
-				if (player.lib < 60)
+				if (player.lib100 < 60)
 					outputText(". Hesitantly, you rub your fingers across the ");
 				else outputText(". Eagerly, you begin to roughly stroke the ");
 				//Different description based on vag looseness
@@ -968,9 +970,9 @@ package classes.Scenes {
 					outputText("many ");
 				else outputText("swollen, cunt-like lips that top each breast. ");
 				//Different noise based on sensitivity
-				if (player.sens < 45)
+				if (player.sens100 < 45)
 					outputText("You sigh contentedly as ");
-				else if (player.sens < 70)
+				else if (player.sens100 < 70)
 					outputText("You moan lewdly as ");
 				else outputText("You squeal with pleasure as ");
 				//Different description based on wetness
@@ -995,15 +997,15 @@ package classes.Scenes {
 			else if (player.breastRows.length > 0 && player.biggestTitSize() > 3) {
 				outputText(", emitting ");
 				//different noises depending on sensitivity
-				if (player.sens < 45)
+				if (player.sens100 < 45)
 					outputText("soft gasps of pleasure each time you flick one of your ");
-				else if (player.sens < 70)
+				else if (player.sens100 < 70)
 					outputText("loud moans of pleasure each time you flick one of your ");
 				else outputText("squeals of pleasure each time you flick one of your ");
 				//extra bit if you have LOTS of nipples
 				if (player.totalNipples() > 2) outputText("many ");
 				//different description based on size of nips
-				if (player.lust >= 50) {
+				if (player.lust100 >= 50) {
 					if (player.biggestLactation() > 2)
 						outputText("huge, swollen nipples. ");
 					else if (player.biggestLactation() > 1)
@@ -1040,9 +1042,9 @@ package classes.Scenes {
 			outputText(". ");*/
 			
 			//different based on player.libido
-			if (player.lib < 45)
+			if (player.lib100 < 45)
 				outputText("You grip your " + player.cockDescript() + " and begin cautiously guiding it towards ");
-			else if (player.lib < 70) {
+			else if (player.lib100 < 70) {
 				outputText("Shivering with anticipation, you place the ");
 				switch (player.cocks[0].cockType) { //Different way of choosing cock to use, results in consistent description of cock[0]
 					case CockTypesEnum.ANEMONE:
@@ -1268,9 +1270,9 @@ package classes.Scenes {
 			//Round and compare cock thickness to vag looseness
 			if (Math.round(player.cockArea(0)) >= player.vaginalCapacity()) {
 				//Different noises based on sensitivity
-				if (player.sens < 45)
+				if (player.sens100 < 45)
 					outputText("ou grunt with exertion as you attempt to stuff your " + player.cockDescript() + " into ");
-				else if (player.sens < 70)
+				else if (player.sens100 < 70)
 					outputText("ou blink back tears as you attempt to stuff your "  + player.cockDescript() + " into ");
 				else outputText("ou scream with a combination of pain and pleasure as you attempt to stuff your "  + player.cockDescript() + " into ");
 				//Different based on looseness
@@ -1402,9 +1404,9 @@ package classes.Scenes {
 			}
 			if (Math.round(player.cockArea(0)) < player.vaginalCapacity()) {
 				//Different noises based on sensitivity
-				if (player.sens < 45)
+				if (player.sens100 < 45)
 					outputText("ou sigh with pleasure");
-				else if (player.sens < 70)
+				else if (player.sens100 < 70)
 					outputText("ou moan with pleasure");
 				else outputText("ou scream with delight");
 				outputText(" as your "  + player.cockDescript() + " slides into ");
@@ -1527,9 +1529,9 @@ package classes.Scenes {
 			//Round and compare cock thickness to vag looseness
 			if (Math.round(player.cockArea(randomCock)) >= player.vaginalCapacity()) {
 				//Different noises based on sensitivity
-				if (player.sens < 45)
+				if (player.sens100 < 45)
 					outputText("ou grunt with exertion as you attempt to stuff your cocks into ");
-				else if (player.sens < 70)
+				else if (player.sens100 < 70)
 					outputText("ou blink back tears as you attempt to stuff your cocks into ");
 				else outputText("ou scream with a combination of pain and pleasure as you attempt to stuff your cocks into ");
 				//Different based on looseness
@@ -1569,9 +1571,9 @@ package classes.Scenes {
 			if (Math.round(player.cockArea(randomCock)) < player.vaginalCapacity()) {
 				if (!doubleUp) {
 					//Different noises based on sensitivity
-					if (player.sens < 45)
+					if (player.sens100 < 45)
 						outputText("ou sigh with pleasure as your stiff cocks slide into ");
-					else if (player.sens < 70)
+					else if (player.sens100 < 70)
 						outputText("ou moan with pleasure as your stiff cocks slide into ");
 					else outputText("ou scream with delight as your stiff cocks slide into ");
 					//Different based on looseness
@@ -1592,9 +1594,9 @@ package classes.Scenes {
 				}
 				else {
 					//Different noises based on sensitivity
-					if (player.sens < 45)
+					if (player.sens100 < 45)
 						outputText("ou sigh with pleasure as your stiff cocks slide into ");
-					else if (player.sens < 70)
+					else if (player.sens100 < 70)
 						outputText("ou moan with pleasure as your stiff cocks slide into ");
 					else outputText("ou scream with delight as your stiff cocks slide into ");
 					//if you have really small dicks or HUGE nipples - THIS I LIKE
@@ -1632,7 +1634,7 @@ package classes.Scenes {
 		private function multiNippleFuckPrep(randomCock:Number):void {
 			//Start with some detail on one random cock
 			//different based on libido
-			if (player.lib < 70)
+			if (player.lib100 < 70)
 				outputText("Shivering with anticipation, you place the ");
 			else outputText("Without hesitation, you shove the ");
 			//I love it when the new code makes things simpler.	
@@ -1670,7 +1672,7 @@ package classes.Scenes {
 					outputText("one of your " + num2Text(player.countCocksOfType(CockTypesEnum.HUMAN)) + " " + player.cockDescript(randomCock) + "s ");
 				else outputText("your " + player.cockDescript(randomCock) + " ");	
 			}
-			if (player.lib < 70)
+			if (player.lib100 < 70)
 				outputText("against the opening of ");
 			else outputText("into ");
 			//More than one row?
@@ -1904,8 +1906,8 @@ package classes.Scenes {
 			if (player.hasFuckableNipples()) {
 				outputText("A strange feeling builds in your breasts as your nipples seem to tighten and quiver with anticipation. You ");
 				//Different noise based on sensitivity
-				if (player.sens < 70) outputText("moan with ecstasy as your freakishly swollen nipples ");
-				if (player.sens >= 70) outputText("scream with ecstasy as your freakishly swollen nipples ");
+				if (player.sens100 < 70) outputText("moan with ecstasy as your freakishly swollen nipples ");
+				if (player.sens100 >= 70) outputText("scream with ecstasy as your freakishly swollen nipples ");
 				//Different description based on wetness
 				if (player.averageVaginalWetness() < 2) outputText("dribble ");
 				if (player.averageVaginalWetness() >= 2 && player.averageVaginalWetness() < 4) outputText("spray ");
@@ -1998,7 +2000,7 @@ package classes.Scenes {
 				
 				//Sensitivity based orgasms.
 				//(Low sensitivity) 
-				if (player.sens < 80) {
+				if (player.sens100 < 80) {
 					outputText("Practically brutalizing your cunt with the swollen puss-plug, you bring yourself to orgasm.  Your " + player.hipDescript() + " leap off the ground, quivering in the air against your hands as you ram the toy into yourself as far as it will go.  You can feel it spurting inside you, just like a real man.  You wiggle and moan as the muscle spasms work their way through your " + player.legs() + ", leaving you drained and exhausted.  The pink dildo suddenly shrinks back to its original size and flops free, leaving your " + player.vaginaDescript() + " stretched open to drool a puddle of pink cum.");
 					//(+sensitivity by 5)
 					dynStats("sen", 5);
@@ -2070,7 +2072,7 @@ package classes.Scenes {
 			
 			//Sensitivity based orgasms.
 			//(Low sensitivity) 
-			if (player.sens < 80) {
+			if (player.sens100 < 80) {
 				outputText("Practically brutalizing your [ass] with the swollen puss-plug, you bring yourself to orgasm.  Your " + player.hipDescript() + " leap off the ground, quivering in the air against your hands as you ram the toy into yourself as far as it will go.  You can feel it spurting inside you, just like a real man.  You wiggle and moan as the muscle spasms work their way through your " + player.legs() + ", leaving you drained and exhausted.  The pink dildo suddenly shrinks back to its original size and flops free, leaving your [asshole] stretched open to drool a puddle of pink cum.");
 				//(+sensitivity by 5)
 				dynStats("sen", 5);
@@ -2293,7 +2295,7 @@ package classes.Scenes {
 		}
 		
 		private function allNaturalSelfStimulationBeltBadEnd():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
 			outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");
@@ -2477,14 +2479,14 @@ package classes.Scenes {
 			dynStats("sen", -1);
 			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.orgasm('Generic');
-			if (player.lib < 30) dynStats("lib", .5);
-			if (player.lib < 50) dynStats("lib", .5);
-			if (player.lib < 60) dynStats("lib", .5);
-			if (player.sens > 40) player.sens -= 1;
-			if (player.sens > 60) player.sens -= 1;
-			if (player.sens > 80) player.sens -= 1;
-			if (player.tou > 50) dynStats("tou", -1);
-			if (player.tou > 75) dynStats("tou", -1);
+			if (player.lib100 < 30) dynStats("lib", .5);
+			if (player.lib100 < 50) dynStats("lib", .5);
+			if (player.lib100 < 60) dynStats("lib", .5);
+			if (player.sens100 > 40) player.sens -= 1;
+			if (player.sens100 > 60) player.sens -= 1;
+			if (player.sens100 > 80) player.sens -= 1;
+			if (player.tou100 > 50) dynStats("tou", -1);
+			if (player.tou100 > 75) dynStats("tou", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2703,7 +2705,7 @@ package classes.Scenes {
 					outputText(" slowly grow limp and slide back inside your sheath.");
 				else outputText(" slowly growing limp and sliding back inside your sheath.");
 			}
-			else if (player.minLust() > 40 || player.lib > 50) {
+			else if (player.minLust() > 40 || player.lib100 > 50) {
 				if (plural)
 					outputText(" grow slightly less hard.  As much as you seem to need sex, that doesn't surprise you.");
 				else outputText(" growing slightly less hard.  As much as you seem to need sex, that doesn't surprise you.");
@@ -3211,7 +3213,7 @@ package classes.Scenes {
 			outputText(".  The slick slit is slowly parting as you reach to wrangle the wiggly cock");
 			if (player.cocks.length > 1) {
 				outputText(", brushing your hand against your other ");
-				if (player.lust <= 70)
+				if (player.lust100 <= 70)
 					outputText("half-hard");
 				else outputText("erect");
 				outputText(" penis");
@@ -3387,11 +3389,11 @@ package classes.Scenes {
 			if (player.cocks.length > 0) {
 				//Single Cock
 				if (player.cocks.length == 1) {
-					if (player.lib < 30)
+					if (player.lib100 < 30)
 						outputText("  You quickly fall asleep, spent. ");
-					else if (player.lib < 55)
+					else if (player.lib100 < 55)
 						outputText("  You roll and begin to doze, your semi-erect " + player.cockDescript() + " flopping against you. ");
-					else if (player.lib <= 80) {
+					else if (player.lib100 <= 80) {
 						outputText("  As you close your eyes and relax, your " + player.cockDescript() + " surges back to erectness, ensuring ");
 						if (player.cor < 50)
 							outputText("your dreams will be filled with sex.");
@@ -3401,11 +3403,11 @@ package classes.Scenes {
 				}
 				//Multi Cock
 				if (player.cocks.length > 1) {
-					if (player.lib < 30)
+					if (player.lib100 < 30)
 						outputText("  You quickly fall asleep, spent. ");
-					else if (player.lib < 55)
+					else if (player.lib100 < 55)
 						outputText("  You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ");
-					else if (player.lib <= 80) {
+					else if (player.lib100 <= 80) {
 						outputText("  As you close your eyes and relax, your dicks surge back to erectness, ensuring ");
 						if (player.cor < 50)
 							outputText("your dreams will be filled with sex.");
@@ -3649,7 +3651,7 @@ package classes.Scenes {
 				else outputText("hand");
 				outputText(" and see it coated in the warm lube you produce. The scent and ecstasy you are in drive you over the edge and you begin to lick what once was inside you clean. Another orgasm drills through you and your body shakes for several seconds.");
 				//Still Horny - 
-				if (player.lib >= 75)
+				if (player.lib100 >= 75)
 					outputText("\n\nRolling over, you fall to sleep while your hole drips and twitches, ensuring your dreams to be filled with the most erotic of thoughts.");
 				else outputText("\n\nRolling over, you are completely spent and fall to sleep while your well-worked hole drips.");
 			}
@@ -3669,7 +3671,7 @@ package classes.Scenes {
 				else outputText("it");
 				outputText(" off.");
 				//Still Horny - 
-				if (player.lib > 75)
+				if (player.lib100 > 75)
 					outputText("  Satisfied, you roll over and drift off to sleep. Your hole remains warm, ready for another round.");
 				else outputText("  Satisfied, you roll over and drift off to sleep.");
 			}

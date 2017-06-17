@@ -2,6 +2,8 @@ package classes.Scenes.Areas.HighMountains
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	/**
 	 * ...
@@ -13,7 +15,7 @@ package classes.Scenes.Areas.HighMountains
 			var teased:Boolean = false;
 			var damage:Number = 0;
 			var oldLust:Number = player.lust;
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			//(Big taur pre-cum tease)
 			if (rand(2) == 0) {
 				teased = true;
@@ -63,7 +65,7 @@ package classes.Scenes.Areas.HighMountains
 			//(Medium damage taken)
 			else if (damage <= 14) {
 				outputText("The powerful pheromones and scents hanging in the air around you make your body flush hotly.  Your " + player.nippleDescript(0) + "s grow harder");
-				if (player.lust > 70) outputText(", though you didn't think such a thing was possible");
+				if (player.lust100 > 70) outputText(", though you didn't think such a thing was possible");
 				else outputText(", feeling like two bullets scraping along the inside of your " + player.armorName);
 				outputText(", but it... it could have been worse.  You shudder as a little fantasy of letting them dribble it all over your body works through your mind.");
 				if (player.lust >= player.maxLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.");
@@ -86,7 +88,7 @@ package classes.Scenes.Areas.HighMountains
 				}
 				if (player.hasCock()) outputText("  " + player.SMultiCockDesc() + " twitches and dribbles its own pre-seed, but it doesn't smell anywhere near as good!");
 				outputText("  Shuddering and moaning, your body is wracked by ever-increasing arousal.  Fantasies of crawling under the beast-men's soaked legs and lapping at their drooling erections inundate your mind, your body shivering and shaking in response.  ");
-				if (player.lust <= 99) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
+				if (player.lust100 <= 99) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
 				else outputText("You sigh and let your tongue loll out.  It wouldn't so bad, would it?");
 			}
 			combatRoundOver();
@@ -94,16 +96,16 @@ package classes.Scenes.Areas.HighMountains
 
 		//Grope
 		private function minotaurGangGropeAttack():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + player.chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + player.nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now");
-			if (player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
+			if (player.lust100 >= 80) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
 			game.dynStats("lus", (5 + player.sens/10));
 			combatRoundOver();
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + game.player.buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your " + player.chestDesc() + " and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
 			game.dynStats("lus", (15 + player.sens/10));
 			combatRoundOver();
@@ -111,14 +113,14 @@ package classes.Scenes.Areas.HighMountains
 		//Waste  a turn
 		private function minotaurGangWaste():void {
 			flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 1;
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 			combatRoundOver();
 		}
 
 		override public function doAI():void
 		{
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 0;
 			var select:Number = rand(7);
 			if (select <= 2) precumTease();

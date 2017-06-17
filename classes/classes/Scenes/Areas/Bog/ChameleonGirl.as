@@ -1,6 +1,8 @@
 package classes.Scenes.Areas.Bog
 {
 	import classes.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class ChameleonGirl extends Monster
 	{
@@ -69,7 +71,7 @@ package classes.Scenes.Areas.Bog
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(89);
+			game.spriteSelect(SpriteDb.s_chameleon);
 			var select:int = rand(3);
 			if (select == 0) rollKickClawWhatTheFuckComboIsThisShit();
 			else if (select == 1) chameleonTongueAttack();

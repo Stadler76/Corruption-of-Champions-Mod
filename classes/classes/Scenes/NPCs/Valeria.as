@@ -4,6 +4,8 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armor;
 	import classes.Scenes.Areas.Lake.GooGirl;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Valeria extends NPCAwareContent implements TimeAwareInterface {
 
@@ -44,7 +46,7 @@
 
 //Camp Menu -- [Followers] -- [Valeria]
 public function valeriaFollower():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText("You walk over to Valeria.  Seeing you approach, the armor-goo turns a slightly brighter shade of blue beneath her plates and grins.");
 	outputText("\n\n\"<i>Hey there, partner! Need anything while we're safe at camp?</i>\"");
@@ -66,7 +68,7 @@ public function feedValeria(amnt:Number):void {
 //[Valeria] -- [Appearance]
 private function valeriaAppearance():void {
 	clearOutput();
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	outputText(images.showImage("monster-gooarmor"));
 	outputText("Valeria is a 6 foot tall goo-girl composed of a viscous blue goop.  She is currently wearing a suit of plated armor, and wields her gooey greatsword as a weapon.  She has a beautiful feminine face with strong, angular features, and has affected short-cropped gooey hair, hanging just past her cheeks.  Her hips are average, with a muscular, gropable bum.  Unlike most goos, Valeria has formed two normal human legs ending in normal human feet out of her gooey lower body.");
 	outputText("\n\nShe has a pair of C-cup breasts, with a single 0.5 inch nipple on each breast.");
@@ -79,7 +81,7 @@ private function valeriaAppearance():void {
 //Valeria] -- [Spar]
 private function valeriaSpar():void {
 	clearOutput();
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	outputText("You ask Valeria if she would be up for a bit of battle practice.");
 	outputText("\n\n\"<i>Hey, that'd be great, partner. Gotta keep our skills sharp if we wanna have a chance against the demons, after all! Let's do it.</i>\"");
 	outputText("\n\nYou take Valeria out to the fringe of camp and ready your [weapon] as she forms a gooey greatsword in her hands.");
@@ -93,7 +95,7 @@ private function valeriaSpar():void {
 //[Valeria] -- [Spar] -- PC Victorious
 internal function pcWinsValeriaSpar():void {
 	clearOutput();
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	outputText("\"<i>Oof!</i>\" Valeria grunts, nearly losing her human shape as she tumbles to the hard-packed dirt.  \"<i>All right, all right, you win!  Take it easy, partner,</i>\" she laughs, letting her greatsword dissipate back into her body.");
 	outputText("\n\nYou offer to help her up, but she easily reconstitutes herself into a standing pose, giving you a little wink afterwards.  \"<i>Thanks for the ass-whoopin', [name],</i>\" she laughs.  \"<i>C'mon, let's get back to it.  Demons aren't gonna defeat themselves, after all.</i>\"");
 	combat.cleanupAfterCombat();
@@ -102,7 +104,7 @@ internal function pcWinsValeriaSpar():void {
 //[Valeria] -- [Spar] -- PC Defeated
 public function pcWinsValeriaSparDefeat(offCamp:Boolean = false):void {
 	clearOutput();
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	if (!offCamp) {
 		outputText("You collapse, ");
 		if (player.HP < 1) outputText("in too much pain");
@@ -129,7 +131,7 @@ public function pcWinsValeriaSparDefeat(offCamp:Boolean = false):void {
 
 //Followers -- [Valeria] -- [Sex]
 private function followersValeriaSex(display:Boolean = true):void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	if (display) {
 		clearOutput();
 		outputText("With a lusty grin, you ask your gooey friend if ");
@@ -150,7 +152,7 @@ private function followersValeriaSex(display:Boolean = true):void {
 
 //Valeria -- [Sex] -- [Dick/No Dick]
 private function valeriaDickToggle():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	//[If Valeria has a dick:] 
 	if (flags[kFLAGS.VELARIA_FUTA] == 1) {
@@ -188,7 +190,7 @@ private function valeriaDickToggle():void {
 
 //Valeria -- [Sex] -- [Get Fucked]
 public function valeriaGetFucked():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText(images.showImage("valeria-sex-getfucked"));
 	outputText("You disrobe and, ");
@@ -280,7 +282,7 @@ public function valeriaGetFucked():void {
 }
 
 public function gooFlation(clearText:Boolean = true):void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	if (clearText) {
 		clearOutput();
 		outputText("\"<i>Just relax, partner,</i>\" she grins, reaching up to run a hand through your [hair].  \"<i>Just let ol' Valeria take care of everything...</i>\"");
@@ -313,7 +315,7 @@ public function gooFlation(clearText:Boolean = true):void {
 
 //Valeria -- [Sex] -- [Penetrate Her] (Dickwielders only)
 public function penetrateValeria():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText(images.showImage("valeria-sex-penetration"));
 	outputText("\"<i>Mmm, that's a tasty-looking cock,</i>\" Valeria says as you disrobe, letting your " + player.cockDescript(0) + " flop free.  \"<i>I just might have to get a sample,</i>\" she chuckles, squatting down before you and taking your shaft in hand.  Rather than giving you a simple handy, however, the goo-girl places her palm against the head of your cock and presses forward.");
@@ -339,7 +341,7 @@ public function penetrateValeria():void {
 
 //[Valeria] -- [Sex] -- [Get Dominated]
 public function valeriaSexDominated(offCamp:Boolean = false):void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText(images.showImage("valeria-sex-domination"));
 	outputText("Making a show of playing hesitant and nervous, you tell Valeria you'd like her to take charge.  A wide grin quickly spreads across her girlish features.  \"<i>Mmm, feeling subby today, partner?  Good, good... You just let Valeria take good care of you, " + player.mf("handsome","cutie") + ".</i>\"");
@@ -405,7 +407,7 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 
 //Followers -- [Valeria] -- [Talk]
 private function talkWithValeria():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText(images.showImage("valeria-talk"));
 	outputText("You ask Valeria if she wouldn't mind just talking for a little bit.");
@@ -428,7 +430,7 @@ private function talkWithValeria():void {
 
 //[Flirt]
 private function flirtWithValeria():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText("You slip an arm around Valeria's slender shoulders and pull her close.  Patting your crotch, you tell her you're practically a gourmet chef for a girl like her.  She giggles and slips a hand easily into your [armor], ");
 	if (player.hasCock()) outputText("brushing along the length of your rapidly-hardening cock");
@@ -442,7 +444,7 @@ private function flirtWithValeria():void {
 
 //[Accept]
 private function acceptValeriasNeeds():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText("You smile and tell Valeria that you're perfectly all right with her special needs");
 	if (player.hasStatusEffect(StatusEffects.SlimeCraving)) outputText(" after all, you have the same ones");
@@ -453,7 +455,7 @@ private function acceptValeriasNeeds():void {
 }
 //[Gross]
 private function declineValeriasNeeds():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText("You grimace and push the goo-girl away.  You've got no interest in her corrupted 'needs,' especially with a look like that on her face.  She gasps as you push her, nearly falling over; she catches herself and glowers angrily.");
 	outputText("\n\n\"<i>Well, fuck you kindly, [name],</i>\" she says with a huff.  \"<i>Pardon me for being... me.</i>\"  She turns up her chin and saunters off to a part of camp about as far away from you as possible.");
@@ -462,7 +464,7 @@ private function declineValeriasNeeds():void {
 }
 
 private function takeValeria():void {
-	spriteSelect(79);
+	spriteSelect(SpriteDb.s_valeria);
 	clearOutput();
 	outputText(images.showImage("valeria-take"));
 	armors.GOOARMR.useText();

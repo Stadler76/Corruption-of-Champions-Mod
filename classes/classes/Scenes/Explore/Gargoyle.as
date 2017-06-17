@@ -58,7 +58,7 @@ private function gargoyleMeeting2():void {
 	outputText("\n\nIt's quite dark inside, illuminated only by thin shafts of light streaming in from the shattered windows and sundered doors.  You can make out a few dozen wooden pews, all either thrown aside and rotting or long-since crushed, leading up to a stone altar and an effigy of a great green tree, now covered in graffiti and filth.  Stairs beside the altar lead up to the towers, and down to what must be catacombs or dungeons deep underground.");
 	
 	outputText("\n\nHowever, what most catches your eye upon entering the sanctuary are the statues that line the walls.  Beautifully carved gray stone idols of creatures, chimeras, and nearer to the altar, god-like beings, are each set into their own little alcove.  Unfortunately most have been destroyed along with the cathedral, each lying in a pile of its own shattered debris; some having whole limbs or other extremities broken off and carried away by looters, leaving them mere shadows of their former glory.");
-	
+	outputText(images.showImage("gargoyle-cathedral"));
 	outputText("\n\nAll of them but one.  In the farthest, darkest alcove you see a single statue that still seems intact. It is of a woman – well, more like a succubus than a human woman.  Though posed in a low, predatory crouch, she would normally stand nearly six feet tall, hair sculpted to fall playfully about her shoulders.  A pair of bat-like wings protruding from her back curl back to expose the lush, smooth orbs of her breasts, easily DD's on a human.  A spiked, mace-like tail curls about her legs that are attached to the pedestal upon which she's placed.  As you stand marveling at the statue's beauty, you cannot help but notice the slit of her pussy nearly hidden beneath her.  Oddly, it seems to have been carved hollow so that you could easily stick a few fingers inside if you so choose.");
 	if (player.lib >= 40) outputText("  Maybe you could take this with you as a life-sized sex toy?");
 	
@@ -89,6 +89,7 @@ private function dontBreakThatShit():void {
 //[b]Break Chains[/b]
 private function breakZeChains():void {
 	clearOutput();
+	outputText(images.showImage("gargoyle-cathedral"));
 	//Introduces two new values: " + flags[kFLAGS.GAR_NAME] + ", the gargoyle's name, given by the Champion, and Confidence, a value that has a base score of 0 (submissive/slave) rising to 100 (equal). Negatives are possible.
 	outputText("You swing your [weapon] up over your head and strike the chains.");
 	//if using your hands:
@@ -174,6 +175,7 @@ private function carnalOrder():void {
 //[b]Talk (First Time)[/b]
 private function firstGargoyleTalk():void {
 	clearOutput();
+	outputText(images.showImage("gargoyle-cathedral"));
 	outputText("You decide against giving " + flags[kFLAGS.GAR_NAME] + " an order for now.  Instead, you right a nearby toppled pew and seat yourself across from the crouching gargoyle, returning her intense stare with one of your own.");
 	outputText("\n\n\"<i>Why were you chained up?</i>\" you finally ask, glancing at the shattered bonds on the ground.");
 	outputText("\n\n\"<i>Master found a new toy and soon grew tired of me.  Still, she did not want me stolen.</i>\"");
@@ -199,6 +201,7 @@ private function berateTheGargoyle():void {
 	clearOutput();
 	//(Confidence - 10)
 	gargoyleConfidence(-10);
+	outputText(images.showImage("gargoyle-cathedral"));
 	outputText("A pillar of rage boils up inside you.  You are [name], Champion of Ingnam, you tell her, rising to your feet, fists clenched.  Your duty is the same as hers was, to protect your home.  And she failed.  She let all those people down.  You tell her that she's worthless, disgusting, a failure.");
 	outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " recoils, flinching from you in expectation of assault. Instead, you spit on the ground and start for the exit.  You shout over your shoulder for her to stay here and wallow in her failure until you deign to use her.");
 	outputText("\n\nYou storm out of the cathedral with a knot of disdain in your gut.  From behind you, you're not quite sure, but perhaps you heard \"<i>I couldn't leave here if I wanted to.</i>\"");
@@ -210,6 +213,8 @@ private function berateTheGargoyle():void {
 private function reassureTheGargoyle():void {
 	clearOutput();
 	//(Confidence +10)
+	gargoyleConfidence(10);
+	outputText(images.showImage("gargoyle-cathedral"));
 	outputText("You can't help but feel sorry for the poor gargoyle.  It isn't hard to figure out what happened, and in truth, she reminds you a bit of yourself – and of the consequences if you ever fail.  You reach over and put a hand on her smooth, cold shoulder.  As reassuringly as you can, you tell her that you are [name], the Champion of Ingnam.  Your duty isn't entirely dissimilar to what hers was, while you hope you'll never know what she's gone through, you can certainly sympathize.");
 	
 	outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " looks up at you, her ruby-red eyes shining in the dim hit of light in the cathedral.  You cup her cheek and give her a smile.  \"<i>Come on, now,</i>\" you reply, offering her a hand up.  \"<i>Let's get out of here.</i>\"");
@@ -239,6 +244,7 @@ public function returnToCathedral(woken:Boolean = false):void {
 	//[b]Cathedral Interior – 06:00 –> 09:00 & 18:00 –> 21:00[/b]
 	if (model.time.hours <= 9 || model.time.hours >= 18 || woken) {
 		if (!woken) {
+			outputText(images.showImage("gargoyle-cathedral"));
 			outputText("\n\nIn the dim ");
 			if (model.time.hours <= 9) outputText("early morning");
 			else outputText("late evening");
@@ -295,6 +301,7 @@ public function returnToCathedral(woken:Boolean = false):void {
 //[b]Sex[/b]
 private function gargoyleSexMenu():void {
 	clearOutput();
+	outputText(images.showImage("gargoyle-cathedral"));
 	outputText("You approach " + flags[kFLAGS.GAR_NAME] + " and tell her you have some... pressure that needs relieving.");
 	//(if Confidence =< 69:
 	if (gargoyleConfidence() <= 69) outputText("  The gargoyle bows low before you, her face expressionless.  \"<i>By your command, Master.  How would you have me?</i>\"");
@@ -816,6 +823,7 @@ private function banishPervRitual():void {
 private function talkToGargoyle(output:Boolean = true):void {
 	if (output) {
 		clearOutput();
+		outputText(images.showImage("gargoyle-cathedral"));
 		outputText("You take a seat on one of the sanctuary's pews, motioning for " + flags[kFLAGS.GAR_NAME] + " to join you.");
 		//If Confidence <50:
 		if (gargoyleConfidence() < 50) outputText("  She meekly approaches her Master and kneels before you, head bowed submissively.");
@@ -1278,6 +1286,7 @@ private function berateGargoyleC():void {
 //[b]Appearance[/b]
 private function gargoyleAppearance():void {
 	clearOutput();
+	outputText(images.showImage("gargoyle-cathedral"));
 	outputText("" + flags[kFLAGS.GAR_NAME] + " is a gray marble statue that, through magics you can't quite grasp, has been animated.");
 	outputText("\n\nShe stands roughly six feet tall, with a slender, girly frame.  She wears no clothes, seemingly possessing no modesty at all, and uses her brutally spiked tail as a weapon.  She has a cute, somewhat angular face that is very feminine.  Her skin and hair are a light shade of gray, though she has solid, ruby-red eyes which ");
 	if (gargoyleConfidence() < 70) outputText("glow timidly, reflecting a submissive and servile nature in the gargoyle.");

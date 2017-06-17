@@ -103,7 +103,7 @@ package classes.Items.Consumables
 			//STRENGTH
 			if (rand(2) === 0) {
 				//Maxxed
-				if (player.str >= 60) {
+				if (player.str100 >= 60) {
 					outputText("\n\nYou feel strong enough to single-handedly pull a fully-loaded wagon.");
 				}
 				//NOT MAXXED
@@ -116,7 +116,7 @@ package classes.Items.Consumables
 			//TOUGHNESS
 			if (rand(2) === 0) {
 				//MAXXED ALREADY
-				if (player.tou >= 75) {
+				if (player.tou100 >= 75) {
 					outputText("\n\nYour body is as tough and solid as a ");
 					if (player.gender === 1 || player.gender === 3) outputText("stallion's.");
 					else outputText("mare's.");
@@ -130,30 +130,30 @@ package classes.Items.Consumables
 			}
 			//INTELLECT
 			if (rand(3) === 0) {
-				if (player.inte <= 5) {
+				if (player.inte100 <= 5) {
 					outputText("\n\nYou let out a throaty \"Neiiiigh\" as your animalistic instincts take over.");
 				}
-				if (player.inte < 10 && player.inte > 5) {
+				if (player.inte100 < 10 && player.inte100 > 5) {
 					dynStats("int", -1);
 					outputText("\n\nYou smile vacantly as you drink the potion, knowing you're just a big dumb animal who loves to fuck.");
 					changes++;
 				}
-				if (player.inte <= 20 && player.inte >= 10) {
+				if (player.inte100 <= 20 && player.inte100 >= 10) {
 					dynStats("int", -2);
 					outputText("\n\nYou find yourself looking down at the empty bottle in your hand and realize you haven't thought ANYTHING since your first sip.");
 					changes++;
 				}
-				if (player.inte <= 30 && player.inte > 20) {
+				if (player.inte100 <= 30 && player.inte100 > 20) {
 					dynStats("int", -3);
 					outputText("\n\nYou smile broadly as your cares seem to melt away.  A small part of you worries that you're getting dumber.");
 					changes++;
 				}
-				if (player.inte <= 50 && player.inte > 30) {
+				if (player.inte100 <= 50 && player.inte100 > 30) {
 					dynStats("int", -4);
 					outputText("\n\nIt becomes harder to keep your mind focused as your intellect diminishes.");
 					changes++;
 				}
-				if (player.inte > 50) {
+				if (player.inte100 > 50) {
 					dynStats("int", -5);
 					outputText("\n\nYour usually intelligent mind feels much more sluggish.");
 					changes++;
@@ -426,10 +426,11 @@ package classes.Items.Consumables
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType === EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+					if (player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeType === EYES_SPIDER) outputText("  Your arachnid eyes are gone!</b>");
 					outputText("  <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//HorseFace - Req's Fur && Ears

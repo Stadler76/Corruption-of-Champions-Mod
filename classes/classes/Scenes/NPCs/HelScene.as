@@ -4,6 +4,8 @@ package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -20,10 +22,10 @@ package classes.Scenes.NPCs{
 		private var checkedHeliaIsabellaThreesome:int;
 		
 		public function spriteChooser():void {
-			if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] >= 1 && flags[kFLAGS.HEL_BONUS_POINTS] < 150) spriteSelect(110); //bandanna, no pale flame
-			else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0 && flags[kFLAGS.HEL_BONUS_POINTS] >= 150) spriteSelect(111); //no bandanna, pale flame
-			else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] >= 1 && flags[kFLAGS.HEL_BONUS_POINTS] >= 150) spriteSelect(112); //bandanna, pale flame
-			else spriteSelect(68); //no bandanna, no pale flame
+			if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] >= 1 && flags[kFLAGS.HEL_BONUS_POINTS] < 150) spriteSelect(SpriteDb.s_hel_sprite_BB); //bandanna, no pale flame
+			else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0 && flags[kFLAGS.HEL_BONUS_POINTS] >= 150) spriteSelect(SpriteDb.s_hel_sprite_PF); //no bandanna, pale flame
+			else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] >= 1 && flags[kFLAGS.HEL_BONUS_POINTS] >= 150) spriteSelect(SpriteDb.s_hel_sprite_BB_PF); //bandanna, pale flame
+			else spriteSelect(SpriteDb.s_hel_sprite); //no bandanna, no pale flame
 		}
 		
 		//Implementation of TimeAwareInterface
@@ -71,12 +73,12 @@ package classes.Scenes.NPCs{
 			if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && getGame().isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				trace("ISABELLA/HELL TEST");
 				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) { //Hell/Izzy threesome intro
-					spriteSelect(31);
+					spriteSelect(SpriteDb.s_isabella);
 					followrIzzyxSallyThreesomePretext();
 					return true;
 				}
 				else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) { //Propah threesomes here!
-					spriteSelect(31);
+					spriteSelect(SpriteDb.s_isabella);
 					isabellaXHelThreeSomeCampStart();
 					return true;
 				}

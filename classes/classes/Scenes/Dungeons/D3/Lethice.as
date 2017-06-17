@@ -207,23 +207,23 @@ package classes.Scenes.Dungeons.D3
 				l = l * 1.25;
 			}
 			game.dynStats("lus",l);
-			if (player.lust <= 30)
+			if (player.lust100 <= 30)
 			{
 				outputText("\n\nYou feel strangely warm.");
 			}
-			else if (player.lust <= 60)
+			else if (player.lust100 <= 60)
 			{
 				outputText("\n\nBlood rushes to your groin as a surge of arousal hits you, making your knees weak.");
 			}
-			else if (player.lust <= 75)
+			else if (player.lust100 <= 75)
 			{
 				outputText("\n\nDespite the dire situation, your mind keeps filling with images of Lethice fully uncovered, her body poised just inches away. You can’t help but want her.");
 			}
-			else if (player.lust <= 90)
+			else if (player.lust100 <= 90)
 			{
 				outputText("\n\nThe dark power forces ideas into your mind, thoughts of you on your knees, hands shackled behind you and your mistress’s perfect, pretty pussy in front of you, awaiting your tongue. You barely shake it off.");
 			}
-			else if (player.lust <= 100)
+			else if (player.lust100 < 100)
 			{
 				outputText("\n\nYour mind is filled with visions of lovely pussies, perfect tits, and one overriding emotion - submission. She’s making you want to give up and indulge in her tainted wiles, and the worst part is... you’re having a hard time coming up with a reason not to. You barely pull back from an all-consuming image of her slick, juicy snatch, shaking your head in wonderment. How can you possibly defeat her?");
 			}
@@ -372,7 +372,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			outputText("\n\n<i>“I tire of this game!”</i> she shouts, grasping at the arms of her towering throne. Suddenly, her gaze snaps from you, to the horde of demons clamoring in the stands. <i>“What are you waiting for, fools!? Get " + player.mf("him", "her") + "!”</i>");
 			outputText("\n\nOh, shit. You look up in time to see a cavalcade of demonic flesh swooping down from on high, bodies practically tumbling one over the other to get at you. The horde takes every physical form imaginable: towering, hulking brutish males, inhumanly curvaceous succubi, and the reverse of both - not to mention hermaphrodites masculine and feminine - and all with every sort of transformation. Bestial creatures, dragon-like incubi, and succubi whose skins range the colors of the rainbow and so, so much more come piling down the throne hall in a ceaseless barrage of flesh and decadence. They won’t stop until they’ve dragged you to the ground and fucked you into submission!");
-			HP = eMaxHP();
+			HP   = maxHP();
 			lust = 10;
 			_fightPhase = 2;
 			a = "the ";
@@ -411,7 +411,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText("\n\nYou close your eyes, focusing the entirety of your will inwards. Though a burn of arousal stings your flesh, you keep your mind centered long enough to resist the brunt of the demon's magic. Taking a deep breath, you let out a raging battle cry and shove the horde back, punishing those who dared try to ensorcell you.");
 			}
-			else if (player.lust <= 33)
+			else if (player.lust100 <= 33)
 			{
 				outputText("\n\nYou try your hardest to push back the lustful, submissive thoughts that begin to permeate your mind, but against so many concentrated wills... even you can't hold back. You moan as the first hints of arousal spread through you, burning in your loins. What you wouldn't give for a fuck about now!");
 				l = player.lib / 10 + player.cor / 10 + 10;
@@ -421,7 +421,7 @@ package classes.Scenes.Dungeons.D3
 				}
 				game.dynStats("lus",l);
 			}
-			else if (player.lust <= 66)
+			else if (player.lust100 <= 66)
 			{
 				outputText("\n\nAt first, you try to think of something else... but in your state, that just ends up being sex: hot, dirty, sweaty fucking surrounded by a sea of bodies. With a gasp, you realize you've left yourself open to the demons, and they're all too happy to flood your mind with images of submission and wanton debauchery, trying to trick you into letting them take you!");
 				l = player.lib / 10 + player.cor / 10 + 10;
@@ -453,11 +453,11 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				if (player.lust <= 33)
+				if (player.lust100 <= 33)
 				{
 					outputText("\n\nYou try and push back, to ignore the lustful bodies and lurid performances going on around you, but the effect they have on you is undeniable -- heat spreads like wildfire through your [skinFurScales], and your [armor] suddenly feels a whole lot less comfortable.");
 				}
-				else if (player.lust <= 66)
+				else if (player.lust100 <= 66)
 				{
 					outputText("\n\nTry as you might to resist, the demons are having an effect on you! Your whole body is flushed with unbidden arousal, burning with lust for the demonic sluts pressing against you. The temptresses are almost enough to want to make you lay down your arms and bend one of them double for a good, hard fuck!");
 				}
@@ -742,7 +742,7 @@ package classes.Scenes.Dungeons.D3
 		private function beginPhase3(doLethNext:Boolean):void
 		{
 			_fightPhase = 3;
-			HP = eMaxHP();
+			HP   = maxHP();
 			lust = 10;
 			_defMode = 1;
 			a = "";

@@ -83,6 +83,7 @@
 				"skintone"					: function(thisPtr:*):* { return kGAMECLASS.player.skinTone; },
 				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
 				"tits"						: function(thisPtr:*):* { return kGAMECLASS.player.breastDescript(0); },
+				"breastcup"					: function(thisPtr:*):* { return kGAMECLASS.player.breastCup(0); },
 				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.player.tongueDescript(); },
 				"underbody.skinfurscales"	: function(thisPtr:*):* { return kGAMECLASS.player.underBody.skinFurScales(); } ,
 				"underbody.skintone"		: function(thisPtr:*):* { return kGAMECLASS.player.underBody.skin.tone; } ,

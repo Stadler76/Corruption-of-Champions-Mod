@@ -19,6 +19,8 @@ package classes.Scenes.Areas
  	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.GlacialRift.*;
 	import classes.Scenes.NPCs.GooArmor;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	use namespace kGAMECLASS;
 	
@@ -143,7 +145,7 @@ package classes.Scenes.Areas
 
 		private function valeriaAtRift():void {
 			//Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
 			clearOutput();
 			outputText("As you make your way across the Rift's icy extremities, you hear a metallic CLANK CLANK approaching through the snow flurries. You turn in time to see a suit of plated mail charging toward you, its helm and limbs filled with bright blue goo. It skids to a stop a few yards away, a greatsword forming from the goo of its hand. A beautiful, feminine face appears beneath the armor’s visor grinning at you. You suddenly recognize her face!\n\n");
@@ -185,7 +187,7 @@ package classes.Scenes.Areas
 		}
 
 		private function amarokEncounter():void {
-			spriteSelect(109);
+			spriteSelect(SpriteDb.s_amarok);
 			clearOutput();
 			outputText("As your feet carry you through the barren tundra, you can't shake the feeling of being watched. Your paranoia gets the better of you, and you come to a stop to listen for anything nearby. You hear nothing. You turn around just to be sure, and see nothing. You laugh at your silliness and continue walking, now with a hand on your " + player.weaponName + ". As though on cue, you hear a snarl from behind you. You whip around and strike with your " + player.weaponName + ", barely keeping an enormous wolf from tackling you. Between its black fur and golden eyes, you aren't quite sure how you managed to miss it. It hardly matters, though-- the wolf, most definitely an Amarok, has already recovered and is preparing another attack. It's time for a fight!");
 			startCombat(new Amarok());

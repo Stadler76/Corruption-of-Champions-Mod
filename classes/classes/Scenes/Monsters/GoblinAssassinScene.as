@@ -6,6 +6,8 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class GoblinAssassinScene extends BaseContent
 	{
@@ -43,7 +45,7 @@ package classes.Scenes.Monsters
 		 */
 		public function goblinAssassinEncounter():void {
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			//First Time Intro
 			if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] == 0)
 			{
@@ -69,7 +71,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (doSFWloss()) return;
 			var x:int;
-			if (player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
+			if (player.lust100 <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
 			//i. *Lust Loss – Male/Herm (Fits)(FENCRAFTED)
 			//50% odds for herms
 			if (player.cockThatFits(monster.vaginalCapacity()) >= 0 && player.hasCock() && (!player.hasVagina() || rand(2) == 0)) 
@@ -191,7 +193,7 @@ package classes.Scenes.Monsters
 //[WIN RAEPZ]
 		public function gobboAssassinRapeIntro():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.")
 			dynStats("lus", 20);
@@ -215,7 +217,7 @@ package classes.Scenes.Monsters
 			//Dick stuff:
 			if (player.hasCock() && player.lust >= 33) {
 				//Corrupt too big scene
-				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.cor > (80 - player.corruptionTolerance())) || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.cor > (80 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1))
 					addButton(2, "CorruptDick", rapeAGoblinCorruptTooBig);
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
@@ -257,7 +259,7 @@ package classes.Scenes.Monsters
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -284,7 +286,7 @@ package classes.Scenes.Monsters
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
@@ -395,7 +397,7 @@ package classes.Scenes.Monsters
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			outputText("You begin to remove your " + player.armorName + ", looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + player.multiCockDescriptLight());
 			if (player.cockTotal() == 1) outputText(" is");
@@ -475,7 +477,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			var x:Number = player.biggestCockIndex();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			outputText("You whip out your stiffening maleness, revealing its ");
 			if (player.cockArea(x) < 80) outputText("nearly ");
 			outputText(" absurd size to your victim.  The goblin-girl's eyes grow to the size of dinner plates in shock as she takes in the view.   Knowing you'll try regardless of the size-mismatch, she spreads her legs and settles herself more comfortably on the ground.\n\n");
@@ -509,7 +511,7 @@ package classes.Scenes.Monsters
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
@@ -590,7 +592,7 @@ package classes.Scenes.Monsters
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));

@@ -88,11 +88,11 @@ package classes.Scenes.Dungeons.Factory
 			}
 			else { //Fall down go boom
 				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.");
-				if (player.lust >= 80 || player.cor >= 80) {
+				if (player.lust100 >= 80 || player.cor >= 80) {
 					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
 					game.dynStats("lus", 13, "cor", 1);
 				}
-				else if (player.lust >= 50 || player.cor >= 50) {
+				else if (player.lust100 >= 50 || player.cor >= 50) {
 					outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
 					game.dynStats("lus", 8 + player.cor / 20);
 				}
@@ -204,7 +204,7 @@ package classes.Scenes.Dungeons.Factory
 				this.spe += 15;
 				this.inte += 20;
 				this.weaponAttack += 5;
-				this.HP = eMaxHP();
+				this.HP = maxHP();
 			}
 			this.special1 = cockTripAttack;
 			this.special2 = spoogeAttack;

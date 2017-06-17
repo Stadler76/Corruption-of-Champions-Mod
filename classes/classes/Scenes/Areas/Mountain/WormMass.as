@@ -33,13 +33,13 @@ package classes.Scenes.Areas.Mountain
 		public function wormsEntice():void {
 			//FAIL
 			if (rand(2) == 0) {
-				if (player.lust < 50) outputText("The worm colony stands before you and begins secreting a significant amount of slime. You are perplexed as to why the worms have done this. You shrug your shoulders and remain on guard.\n");
+				if (player.lust100 < 50) outputText("The worm colony stands before you and begins secreting a significant amount of slime. You are perplexed as to why the worms have done this. You shrug your shoulders and remain on guard.\n");
 				else outputText("The worm colony shambles over to you and attempts to grapple you. Quickly sidestepping the clumsy movements of the creature, you avoid what could have been a horrible fate as the mass falls over and splatters in its failed attempt to engulf you.\n");
 				combatRoundOver();
 				return;
 			}
 			//SUCCESS
-			if (player.lust < 50) {
+			if (player.lust100 < 50) {
 				outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your " + player.cockDescript(0) + " is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n");
 				game.dynStats("lus", 10+player.lib/20+player.cor/20);
 			}
@@ -75,7 +75,7 @@ package classes.Scenes.Areas.Mountain
 			game.mountain.wormsScene.infest1();
 		}
 		
-		override public function eMaxHP():Number
+		override public function maxHP():Number
 		{
 			return 40 + (player.newGamePlusMod() * 20);
 		}

@@ -51,7 +51,7 @@ package classes.Items.Consumables
 				outputText("\n\nNumbness clouds your mind, making you feel slow witted and dull.  Maybe these candies weren't such an exceptio... fantas... good idea.");
 				dynStats("int", -(1 + rand(5)));
 			}
-			if (player.findPerk(PerkLib.ThickSkin) < 0 && player.sens < 30 && rand(4) === 0) {
+			if (player.findPerk(PerkLib.ThickSkin) < 0 && player.sens100 < 30 && rand(4) === 0) {
 				outputText("Slowly, ");
 				if (player.hasPlainSkin()) outputText("your skin");
 				else outputText("the skin under your " + player.skinDesc);

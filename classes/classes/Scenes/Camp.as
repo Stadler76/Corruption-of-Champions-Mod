@@ -7,6 +7,8 @@ package classes.Scenes{
 	import classes.Scenes.Camp.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Dungeons.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	import coc.view.MainView;
 
@@ -43,7 +45,7 @@ package classes.Scenes{
 			if (timeUsed == 1)
 				outputText("An hour passes...\n");
 			else outputText(Num2Text(timeUsed) + " hours pass...\n");
-			if (!getGame().inCombat) spriteSelect(-1);
+			if (!getGame().inCombat) spriteSelect(null);
 			hideMenus();
 			timeQ = timeUsed;
 			goNext(timeUsed, false);
@@ -900,7 +902,7 @@ public function loversCount():Number {
 public function campLoversMenu(descOnly:Boolean = false):void {
 	if (!descOnly) {
 		hideMenus();
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		getGame().inCombat = false;
 		menu();
@@ -1168,7 +1170,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 public function campSlavesMenu(descOnly:Boolean = false):void {
 	if (!descOnly) {
 		hideMenus();
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		getGame().inCombat = false;
 		menu();
@@ -1217,7 +1219,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 public function campFollowers(descOnly:Boolean = false):void {
 	if (!descOnly) {
 		hideMenus();
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		getGame().inCombat = false;
 		//ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
@@ -2013,7 +2015,7 @@ public function allNaturalSelfStimulationBeltContinuation():void {
 }
 
 public function allNaturalSelfStimulationBeltBadEnd():void {
-	spriteSelect(23);
+	spriteSelect(SpriteDb.s_giacomo);
 	clearOutput();
 	outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
 	outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");
@@ -2203,10 +2205,10 @@ public function wakeFromBadEnd():void {
 	if (player.gems < 0) player.gems = 0;
 	if (player.XP < 0) player.XP = 0;
 	//Deduct attributes.
-	if (player.str > 20) dynStats("str", Math.ceil(-player.str * 0.02) * penaltyMultiplier);
-	if (player.tou > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
-	if (player.spe > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
-	if (player.inte > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
+	if (player.str100 > 20) dynStats("str", Math.ceil(-player.str * 0.02) * penaltyMultiplier);
+	if (player.tou100 > 20) dynStats("tou", Math.ceil(-player.tou * 0.02) * penaltyMultiplier);
+	if (player.spe100 > 20) dynStats("spe", Math.ceil(-player.spe * 0.02) * penaltyMultiplier);
+	if (player.inte100 > 20) dynStats("inte", Math.ceil(-player.inte * 0.02) * penaltyMultiplier);
 	menu();
 	addButton(0, "Next", playerMenu);
 }

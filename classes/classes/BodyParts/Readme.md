@@ -130,7 +130,7 @@ player.skin.restore(false); // Restores all values including the skin tone
 #### Property table
 | Property | Access example          | Description / Examples                                                 |
 |----------|-------------------------|------------------------------------------------------------------------|
-| `type`   | `player.underBody.type` | **The type**<br>`player.underBody.type = UNDER_BODY_TYPE_DRAGON;`      |
+| `type`   | `player.underBody.type` | **The type**<br>`player.underBody.type = UNDER_BODY_TYPE_REPTILE;`     |
 | `skin`   | `player.underBody.skin` | **The skin on the underbody**<br>`player.underBody.skin = new Skin();` |
 
 #### Additional methods
@@ -157,7 +157,7 @@ player.skin.setProps({
 	adj: "",
 	desc: "scales"
 });
-player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+player.underBody.type = UNDER_BODY_TYPE_REPTILE;
 player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
 	desc: "ventral scales"  // ... and only override the desc
 });
@@ -170,7 +170,7 @@ player.skin.setProps({
 	adj: "",
 	desc: "scales"
 });
-player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+player.underBody.type = UNDER_BODY_TYPE_REPTILE;
 player.underBody.copySkin();                     // copy the main skin props to the underBody skin ...
 player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
 ```
@@ -180,14 +180,14 @@ Let's say, we intend to have some kind of turtle girl TF in CoC, the TF code *co
 
 ```as3
 // First step: The player grows lizard scales on his/her skin and/or underbody
-if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_TURTLE].indexOf(player.underBody.type) == -1) && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
+if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_REPTILE, UNDER_BODY_TYPE_TURTLE].indexOf(player.underBody.type) == -1) && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
 	outputText("... You grow " + player.skin.tone + " scales on your skin!");
 	player.skin.setProps({
 		type: SKIN_TYPE_LIZARD_SCALES,
 		adj: "",
 		desc: "scales"
 	});
-	player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+	player.underBody.type = UNDER_BODY_TYPE_REPTILE;
 	player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
 		desc: "ventral scales"  // ... and only override the desc
 	});
@@ -195,7 +195,7 @@ if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_TURTL
 }
 
 // Second step: The player grows the signature turtle shell on his/her belly
-if (player.hasLizardScales() && player.underBody.type == UNDER_BODY_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
+if (player.hasLizardScales() && player.underBody.type == UNDER_BODY_TYPE_REPTILE && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
 	outputText("... The [underBody.skinFurScales] on your belly start to harden to become a sturdy frontal shell to protect your body as a natural armor");
 	player.underBody.type = UNDER_BODY_TYPE_TURTLE; // We're done, yay!
 	changes++;
@@ -254,7 +254,7 @@ If set to true (the default), the underBody is restored before setting the other
 
 ##### Example
 ```as3
-player.setFurColor(catFurColors, {type: UNDER_BODY_TYPE_FUR}, true);
+player.setFurColor(catFurColors, {type: UNDER_BODY_TYPE_FURRY}, true);
 ```
 See the example above for potential `catFurColors`
 

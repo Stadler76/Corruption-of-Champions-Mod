@@ -6,6 +6,8 @@ package classes.Scenes.Areas.Plains
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class GnollSpearThrowerScene extends BaseContent
 	{
@@ -28,7 +30,7 @@ package classes.Scenes.Areas.Plains
 //Female Gnoll.  First Page.
 		public function gnoll2Encounter():void
 		{
-			spriteSelect(54);
+			spriteSelect(SpriteDb.s_spear_gnoll);
 			clearOutput();
 			//<First Encounter>
 			if (flags[kFLAGS.HAVE_ENCOUNTERED_GNOLL_PLAINS] == 0) {
@@ -64,7 +66,7 @@ package classes.Scenes.Areas.Plains
 //<Hyena Victorious – Anal> 
 		public function hyenaSpearLossAnal():void
 		{
-			spriteSelect(54);
+			spriteSelect(SpriteDb.s_spear_gnoll);
 			if (doSFWloss()) return;
 			//Oh shit get anal raped.
 			if (player.hasItem(consumables.S_DREAM)) {
@@ -156,7 +158,7 @@ package classes.Scenes.Areas.Plains
 
 		public function hyenaVictory():void
 		{
-			spriteSelect(54);
+			spriteSelect(SpriteDb.s_spear_gnoll);
 			clearOutput();
 			outputText("The gnoll draws one final javelin, the sharp point distinct as it points at you.  The javelin drops, sticking deep into the dry ground, as the amazon is too");
 			if (monster.HP <= 0) outputText(" dazed");
@@ -184,7 +186,7 @@ package classes.Scenes.Areas.Plains
 //<Hyena Defeat - Fellatio>
 		private function hyenaVictoryRapeFellatio():void
 		{
-			spriteSelect(54);
+			spriteSelect(SpriteDb.s_spear_gnoll);
 			var x:Number = player.cockThatFits(40);
 			if (x < 0) x = 0;
 			var y:Number = player.cockThatFits2(40);
@@ -254,7 +256,7 @@ package classes.Scenes.Areas.Plains
 //<Hyena Defeat – Cunnilingus>
 		private function victoryRapeHyenaCunnilingus():void
 		{
-			spriteSelect(54);
+			spriteSelect(SpriteDb.s_spear_gnoll);
 			clearOutput();
 			outputText("Dark brown eyes watch your approach, already slightly glazed in lust.  Slowly, the tawny head bows before you, acknowledging you as dominant.  It amazes you that this powerful, feral woman who fought so hard would now be so meek, but part of you knows that this submission will not last forever.\n\n");
 

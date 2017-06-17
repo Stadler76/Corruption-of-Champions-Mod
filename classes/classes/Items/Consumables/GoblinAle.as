@@ -33,18 +33,18 @@ package classes.Items.Consumables
 			outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
 			dynStats("lus", 15);
 			//Stronger
-			if (player.str > 50) {
+			if (player.str100 > 50) {
 				dynStats("str", -1);
-				if (player.str > 70) dynStats("str", -1);
-				if (player.str > 90) dynStats("str", -2);
+				if (player.str100 > 70) dynStats("str", -1);
+				if (player.str100 > 90) dynStats("str", -2);
 				outputText("\n\nYou feel a little weaker, but maybe it's just the alcohol.");
 			}
 			///Less tough
-			if (player.tou > 50) {
+			if (player.tou100 > 50) {
 				outputText("\n\nGiggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
 				dynStats("tou", -1);
-				if (player.tou > 70) dynStats("tou", -1);
-				if (player.tou > 90) dynStats("tou", -2);
+				if (player.tou100 > 70) dynStats("tou", -1);
+				if (player.tou100 > 90) dynStats("tou", -2);
 			}
 			//antianemone corollary:
 			if (changes < changeLimit && player.hairType === 4 && rand(2) === 0) {
@@ -60,7 +60,7 @@ package classes.Items.Consumables
 				player.tallness -= (1 + rand(5));
 			}
 			//Speed boost
-			if (rand(3) === 0 && player.spe < 50 && changes < changeLimit) {
+			if (rand(3) === 0 && player.spe100 < 50 && changes < changeLimit) {
 				dynStats("spe", 1 + rand(2));
 				outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
 				changes++;
@@ -129,10 +129,11 @@ package classes.Items.Consumables
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType === EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+					if (player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeType === EYES_SPIDER) outputText("  Yourarachnid eyes are gone!</b>");
 					outputText("  <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//-Remove extra breast rows

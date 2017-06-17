@@ -17,8 +17,8 @@ package classes.Scenes.Monsters
 		public function castSpell():void {
 			var spellChooser:int = rand(6);
 			//Makes sure to not stack spell effects.
-			if (lust < 50) spellChooser = rand(3);
-			if (lust > 75) spellChooser = rand(3) + 3;
+			if (lust100 < 50) spellChooser = rand(3);
+			if (lust100 > 75) spellChooser = rand(3) + 3;
 			if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				spellChooser = rand(5) + 1;
 			}
@@ -28,14 +28,14 @@ package classes.Scenes.Monsters
 			}
 			//Spell time!
 			//Charge Weapon
-			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
+			if (spellChooser == 0 && fatigue <= (maxFatigue() - spellCostCharge)) {
 				outputText("The imp utters word of power, summoning an electrical charge around his scimitar. <b>It looks like he'll deal more physical damage now!</b>");
 				createStatusEffect(StatusEffects.ChargeWeapon, 25, 0, 0, 0);
 				this.weaponAttack += 25;
 				fatigue += spellCostCharge;
 			}
 			//Blind
-			else if (spellChooser == 1 && fatigue <= (100 - spellCostBlind)) {
+			else if (spellChooser == 1 && fatigue <= (maxFatigue() - spellCostBlind)) {
 				outputText("The imp glares at you and points at you! A bright flash erupts before you!  ");
 				if (rand(player.inte / 5) <= 4) {
 					outputText("<b>You are blinded!</b>");
@@ -47,7 +47,7 @@ package classes.Scenes.Monsters
 				fatigue += spellCostBlind;
 			}
 			//Whitefire
-			else if (spellChooser == 2 && fatigue <= (100 - spellCostWhitefire)) {
+			else if (spellChooser == 2 && fatigue <= (maxFatigue() - spellCostWhitefire)) {
 				outputText("The imp narrows his eyes and focuses his mind with deadly intent. He snaps his fingers and you are enveloped in a flash of white flames!  ");
 				var damage:int = inte + rand(50);
 				if (player.isGoo()) {
@@ -58,24 +58,23 @@ package classes.Scenes.Monsters
 				fatigue += spellCostWhitefire;
 			}
 			//Arouse
-			else if (spellChooser == 3 && fatigue <= (100 - spellCostArouse)) {
+			else if (spellChooser == 3 && fatigue <= (maxFatigue() - spellCostArouse)) {
 				outputText("He makes a series of arcane gestures, drawing on his lust to inflict it upon you! ");
-				var lustDamage:int = (inte / 5) + rand(10);
-				lustDamage = lustDamage * (player.lustPercent() / 100);
-				game.dynStats("lus", lustDamage, "resisted", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
+				var lustDmg:int = (inte / 5) + rand(10);
+				lustDmg = lustDmg * (player.lustPercent() / 100);
+				player.takeLustDamage(lustDmg, true);
 				fatigue += spellCostArouse;
 			}
 			//Heal
-			else if (spellChooser == 4 && fatigue <= (100 - spellCostHeal)) {
+			else if (spellChooser == 4 && fatigue <= (maxFatigue() - spellCostHeal)) {
 				outputText("He focuses on his body and his desire to end pain, trying to draw on his arousal without enhancing it.");
-				var temp:int = int((inte/(2 + rand(3))) * (eMaxHP()/50));
+				var temp:int = int((inte / (2 + rand(3))) * (maxHP() / 50));
 				outputText("He flushes with success as his wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 				addHP(temp);
 				fatigue += spellCostHeal;
 			}
 			//Might
-			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
+			else if (spellChooser == 5 && fatigue <= (maxFatigue() - spellCostMight)) {
 				outputText("He flushes, drawing on his body's desires to empower his muscles and toughen his up.");
 				outputText("The rush of success and power flows through his body.  He feels like he can do anything!");
 				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
@@ -91,7 +90,8 @@ package classes.Scenes.Monsters
 			//[-HP // +Lust(minor)]
 			var damage:int = 80 + rand(20);
 			player.takeDamage(damage, true);
-			game.dynStats("lus", 20 + player.cor / 10);
+			var lustDmg:int = 20 + player.cor / 10;
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 
@@ -100,7 +100,8 @@ package classes.Scenes.Monsters
 		{
 			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 			//[+Lust]
-			game.dynStats("lus", 15 + player.lib / 5 + player.cor / 5);
+			var lustDmg:int = 15 + player.lib / 5 + player.cor / 5;
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 
@@ -111,7 +112,8 @@ package classes.Scenes.Monsters
 			var damage:int = 12 + rand(25);
 			player.takeDamage(damage, true);
 			//[-HP(minor) // +Lust]
-			game.dynStats("lus", 25 + player.sens / 4 + player.cor / 10);
+			var lustDmg:int = 25 + player.sens / 4 + player.cor / 10;
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 		
@@ -135,7 +137,8 @@ package classes.Scenes.Monsters
 			else {
 				outputText("The cum lands on you, staining your [armor] and the cum even gets on your [skinfurscales]! You feel aroused from his cum.");
 				player.slimeFeed();
-				game.dynStats("lus", 30 + player.sens / 4 + player.cor / 10);
+				var lustDmg:int = 30 + player.sens / 4 + player.cor / 10;
+				player.takeLustDamage(lustDmg, true);
 			}
 			combatRoundOver();
 		}

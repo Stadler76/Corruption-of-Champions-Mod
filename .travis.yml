@@ -41,3 +41,10 @@ env:
     # different configurations that should be built
     - BUILD="release"
     - BUILD="debug"
+
+# Just so Travis.CI won't complain about Vanilla+ failing, since V+ wasn't intended to use Travis.
+branches:
+  except:
+    VanillaPlus
+  only:
+    master

@@ -65,7 +65,7 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//- If speed is > 80, increase speed:
-			if (player.spe < 80 && rand(3) === 0 && changes < changeLimit) {
+			if (player.spe100 < 80 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYour muscles begin to twitch rapidly, but the feeling is not entirely unpleasant.  In fact, you feel like running.");
 				dynStats("spe",1);
 				changes++;
@@ -170,10 +170,11 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//If the PC has four eyes:
-			if (player.eyeType === EYES_FOUR_SPIDER_EYES && rand(3) === 0 && changes < changeLimit)
+			if ((player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeCount > 2) && rand(3) === 0 && changes < changeLimit)
 			{
-				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark.  You touch your forehead to inspect your eyes, only to find out that they have disappeared.  <b>You only have two eyes now!</b>");
+				outputText("\n\nYour eyes start throbbing painfully, your sight in them eventually going dark.  You touch your head to inspect your eyes, only to find out that they have changed.  <b>You have human eyes now!</b>");
 				player.eyeType = 0;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//Go into heat

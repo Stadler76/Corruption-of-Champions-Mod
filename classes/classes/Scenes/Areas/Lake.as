@@ -107,20 +107,20 @@ import classes.Scenes.API.FnHelpers;
 		}
 
 		public function lakeWalk():void {
-			if (player.level < 2 || player.spe < 50) {
+			if (player.level < 2 || player.spe100 < 50) {
 				clearOutput();
 				outputText("Your quick walk along the lakeshore feels good.");
-				if (player.spe < 50) {
+				if (player.spe100 < 50) {
 					outputText("  You bet you could cover the same distance even faster next time.\n");
 					dynStats("spe", .75);
 				}
 			} else {
 				clearOutput();
 				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ");
-				if (player.cor >= 60 || player.lust >= 90 || player.lib >= 75) {
+				if (player.cor >= 60 || player.lust100 >= 90 || player.lib >= 75) {
 					outputText("Your imaginings increasingly seem to turn into daydreams of raunchy perverted sex, flooding your groin with warmth.");
 					dynStats("lus", (player.cor / 10 + player.lib / 10));
-				} else if (player.cor > 30 || player.lust > 60 || player.lib > 40) {
+				} else if (player.cor > 30 || player.lust100 > 60 || player.lib > 40) {
 					outputText("Your imaginings increasingly seem to turn to thoughts of sex.");
 					dynStats("lus", (5 + player.lib / 10));
 				} else {

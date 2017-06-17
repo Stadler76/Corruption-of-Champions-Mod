@@ -3,11 +3,13 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.ChainedDrop;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Kiha extends Monster
 	{
 		private function kihaTimeWaster():void {
-			game.spriteSelect(72);
+			game.spriteSelect(SpriteDb.s_kiha);
 			outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving you an unintended show.  ");
 			game.dynStats("lus", 5);
 			combatRoundOver();
@@ -15,7 +17,7 @@ package classes.Scenes.NPCs
 
 		//This could be silly mode worthy! Should Expand? oh ok
 		private function sillyModeKihaAttack():void {
-			game.spriteSelect(72);
+			game.spriteSelect(SpriteDb.s_kiha);
 			outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ");
 			//Miss:
 			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4) +80)) > 80) {
@@ -40,7 +42,7 @@ package classes.Scenes.NPCs
 		}
 
 		private function kihaFirePunch():void {
-			game.spriteSelect(72);
+			game.spriteSelect(SpriteDb.s_kiha);
 			outputText("The draconic girl throws her trusty weapon into the sodden ground, using the distraction to build up balls of flame around her fists.  She runs towards you, launching herself in your direction with a flurry of punches.\n");
 
 			//Dodged
@@ -72,7 +74,7 @@ package classes.Scenes.NPCs
 
 		//Fire breath
 		private function kihaFireBreath():void {
-			game.spriteSelect(72);
+			game.spriteSelect(SpriteDb.s_kiha);
 			outputText("Kiha throws her arms back and roars, exhaling a swirling tornado of fire directly at you!\n");
 			//Miss:
 			//Determine if evaded

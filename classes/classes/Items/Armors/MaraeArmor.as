@@ -69,7 +69,7 @@ package classes.Items.Armors
 				outputText("You leave the silken loincloth in your possessions for the time being.");
 			}
 			outputText("You are suited up and all good to go. ");
-			if (getGame().player.lust < 20)
+			if (getGame().player.lust100< 20)
 			{
 				outputText("\n\nYou can feel the tentacles inside your breastplate slither their way and tease your [butt]. You " + (game.player.cor < 60 ? "gasp in surprise" : "moan in pleasure") + ".");
 				game.dynStats("lust", 30);

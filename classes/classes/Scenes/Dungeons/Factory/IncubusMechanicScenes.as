@@ -7,6 +7,8 @@ package classes.Scenes.Dungeons.Factory
 	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
 	import classes.CockTypesEnum;
 	import classes.PregnancyStore;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	/**
 	 * ...
@@ -42,7 +44,7 @@ package classes.Scenes.Dungeons.Factory
 		// Dungeon 1
 		//------------
 		public function encounterIncubusFactory():void {
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) {
 				outputText("\n\nThe incubus mechanic is here, thumbing through a hentai comic and laughing to himself at the absurdity of it.  That doesn't stop him from stroking his half-hard member the whole time...");
 				// no menu reset - you can just leave him alone
@@ -57,7 +59,7 @@ package classes.Scenes.Dungeons.Factory
 		}
 		
 		private function talkIncubus():void {
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			clearOutput();
 			if (player.hasKeyItem("Hentai Comic") >= 0) {
 				outputText("The incubus speaks to you with calm deep voice, \"<i>And so the insect, heedless of it's path, stumbled directly into the spider's web.  Tiny insect... wait, what is that book you're carrying?  Is that hentai?  It IS!  Let me offer you a deal – I'm not really hungry or interested in fighting. So if you hand over the comic, I'll happily ignore your presence here. Though, I guess you could also just submit. Then I could put you to work and still get the comic.</i>\"");
@@ -74,7 +76,7 @@ package classes.Scenes.Dungeons.Factory
 		}
 		
 		private function doTradeIncubus():void {
-		spriteSelect(30);
+		spriteSelect(SpriteDb.s_incubus_mechanic);
 			clearOutput();
 			outputText("You hand over the Hentai Comic tentatively to the male sex demon.  As soon as he has it in his grubby mits he sits down and starts thumbing through the pages, toying with his half-hard member the entire time.  He must really like porn.");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
@@ -85,14 +87,14 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function doFightIncubus():void {
 			flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] = 1;
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			clearOutput();
 			outputText("\"<i>You're going down!</i>\" you yell at him as you ready your " + player.weaponName + "! \n\nAn unseen force closes the door, preventing you from running away. \n\nIt's a fight! ")
 			startCombat(new IncubusMechanic(), true);
 		}
 		
 		private function doSubmitIncubus():void {
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			outputText("\"<i>It is good to see the insect accept its fate as the spider closes in,</i>\" intones the strange demonic mechanic as he takes you by the arm and leads you deeper into the facility.  ");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 				outputText("\n\nYou enter the main milking chamber, and the incubus gives a start when he realizes what has happened.  With a grunt of rage he throws you through the doorways back into his chamber.  The demon stalks after you, taking up a fighting stance.");

@@ -6,8 +6,10 @@ package classes.Scenes.Areas.Forest
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
-import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounter;
 	import classes.Scenes.Monsters.Imp;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class KitsuneScene extends BaseContent implements Encounter
 	{
@@ -39,9 +41,9 @@ import classes.Scenes.API.Encounter;
 
 		private function kitsuneSprite():void
 		{
-			if (monster.hairColor == "blonde") spriteSelect(105);
-			else if (monster.hairColor == "black") spriteSelect(104);
-			else spriteSelect(106);
+			if (monster.hairColor == "blonde") spriteSelect(SpriteDb.s_kitsune_blonde);
+			else if (monster.hairColor == "black") spriteSelect(SpriteDb.s_kitsune_black);
+			else spriteSelect(SpriteDb.s_kitsune_red);
 		}
 
 //[Enter the Trickster] (Coded)
@@ -92,9 +94,9 @@ import classes.Scenes.API.Encounter;
 			kitsuneSprite();
 			outputText("\"<i>Oh, thank you, thank you!  I don't know </i>what<i> would have happened if you hadn't come along.</i>\"\n\n" + ((player.cor < 50) ? "As the imp falls at your feet, you lower your [weapon] and turn to the grateful woman.  Beating down an imp is really nothing special, but you were glad to be of assistance, and tell her as much with a friendly smile." : "You scoff haughtily, lowering your [weapon] and turning to the woman.  Beating down an imp was hardly worth your time, you tell her, crossing your arms in irritation.") + "\n\n");
 			outputText("\"<i>My hero!</i>\"  she swoons, beaming.  \"<i>Oh, if there's </i>anything<i> I can do to repay you, please, tell me!</i>\"\n\n");
-			outputText("You find yourself gazing deep into her eyes, a dim haze entering your mind as you are drawn deeper and deeper into the glistening green pools.  The corners of her lips curl into a broad smile as she starts to step toward you, and for a moment you swear you can see a subtle change in her.  You rub your eyes, certain they are playing tricks on you, slowly following the gentle sway of her six tails as she strolls up to you." + ( ((player.lust > 70) || (player.inte < 40)) ? "  Nope, nothing wrong here...\n\n\"<i>Mm...  my hero...</i>\" she croons again, reaching up to caress your cheek." : "\n\nWait.") + "\n\n");
+			outputText("You find yourself gazing deep into her eyes, a dim haze entering your mind as you are drawn deeper and deeper into the glistening green pools.  The corners of her lips curl into a broad smile as she starts to step toward you, and for a moment you swear you can see a subtle change in her.  You rub your eyes, certain they are playing tricks on you, slowly following the gentle sway of her six tails as she strolls up to you." + ( ((player.lust100 > 70) || (player.inte < 40)) ? "  Nope, nothing wrong here...\n\n\"<i>Mm...  my hero...</i>\" she croons again, reaching up to caress your cheek." : "\n\nWait.") + "\n\n");
 			//PC saw through glamour
-			if ((player.lust < 70) || (player.inte >= 40)) {
+			if ((player.lust100 < 70) || (player.inte >= 40)) {
 				outputText("You push her away, almost cracking your head open as you stumble over a stump.  Now that you have broken free of her sorcery, you can see her for what she is.  A pair of large triangular fox ears poke up from her ");
 				if (monster.hairColor == "blonde") outputText("back-length, flaxen");
 				else if (monster.hairColor == "black") outputText("ass-length, raven");
@@ -225,7 +227,7 @@ import classes.Scenes.API.Encounter;
 			//MERGE
 			outputText("You twist away, trying to shake off the tingling sensations that are crawling across your body, impairing your ability to think rationally.\n\n");
 			outputText("\"<i>Oh, you're no fun,</i>\" she says, smirking a bit as you pull away.  \"<i>Won't you come and play?  I promise that you won't be disappointed... my sisters and I will see to that.</i>\"\n\n");
-			outputText("Self-preservation battles with curiosity " + ((player.lust > 50) ? "and lust " : "" ) + "as you consider her offer, " + ((player.lib < 50) ? "weighing your chances against the possible dangers." : "eying the voluptuous curves that fill out her robes."));
+			outputText("Self-preservation battles with curiosity " + ((player.lust100 > 50) ? "and lust " : "" ) + "as you consider her offer, " + ((player.lib < 50) ? "weighing your chances against the possible dangers." : "eying the voluptuous curves that fill out her robes."));
 
 			//[Follow { mansion(willing = true) }] [Leave]
 			menu();
@@ -285,7 +287,7 @@ import classes.Scenes.API.Encounter;
 			if (willing) outputText("\n\n\"<i>We've been expecting you,</i>\" the blonde one says, stepping forward with a flirtatious grin.");
 			else {
 				if (flags[kFLAGS.MANSION_VISITED] > 0) {
-					if (player.fatigue < 70) outputText("\n\n\"<i>We're all so thrilled you decided to come see us once again!</i>\"");
+					if (player.fatigue100 < 70) outputText("\n\n\"<i>We're all so thrilled you decided to come see us once again!</i>\"");
 					else outputText("\n\n\"<i>You know, if you keep coming back like this, we just might have to keep you...</i>\"");
 				}
 				else outputText("\n\n\"<i>I'm so glad you decided to come with me...</i>\"");
@@ -659,7 +661,7 @@ import classes.Scenes.API.Encounter;
 			player.changeFatigue(15);
 			kitsuneSprite();
 			dynStats("tou", -2);
-			if (player.fatigue > 80 && player.fatigue < 100) {
+			if (player.fatigue100 > 80 && player.fatigue100 < 100) {
 				outputText("\n\nYour dreams are haunted by visions of yourself wandering through the halls of an impressive manor, searching desperately for a way out.  No matter where you turn, the twisting hallways all seem to turn back on each other.  You are trapped, forever doomed to wander the halls of this manor, being toyed with at the whims of your three beautiful mistresses.");
 			}
 			if (player.fatigue >= player.maxFatigue()) {
@@ -791,9 +793,9 @@ import classes.Scenes.API.Encounter;
 			//Futa rape - chance increases as redhead's lust increases
 			if (monster.hairColor == "red") {
 				scene.push(getRapedByRedHeadFutaKitsune);
-				if (monster.lust > 50) scene.push(getRapedByRedHeadFutaKitsune);
-				if (monster.lust > 70) scene.push(getRapedByRedHeadFutaKitsune);
-				if (monster.lust > 85) scene.push(getRapedByRedHeadFutaKitsune);
+				if (monster.lust100 > 50) scene.push(getRapedByRedHeadFutaKitsune);
+				if (monster.lust100 > 70) scene.push(getRapedByRedHeadFutaKitsune);
+				if (monster.lust100 > 85) scene.push(getRapedByRedHeadFutaKitsune);
 			}
 			scene[rand(scene.length)]();
 		}

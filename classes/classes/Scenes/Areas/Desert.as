@@ -104,7 +104,7 @@ package classes.Scenes.Areas
 					}, {
 						name: "wstaff",
 						when: function ():Boolean {
-							return flags[kFLAGS.FOUND_WIZARD_STAFF] == 0 && player.inte > 50;
+							return flags[kFLAGS.FOUND_WIZARD_STAFF] == 0 && player.inte100 > 50;
 						},
 						call: wstaffEncounter
 					}, {
@@ -205,12 +205,12 @@ package classes.Scenes.Areas
 			//Chance of boost == 50%
 			if (rand(2) == 0) {
 				//50/50 strength/toughness
-				if (rand(2) == 0 && player.str < 50) {
+				if (rand(2) == 0 && player.str100 < 50) {
 					outputText("The effort of struggling with the uncertain footing has made you stronger.");
 					dynStats("str", .5);
 				}
 				//Toughness
-				else if (player.tou < 50) {
+				else if (player.tou100 < 50) {
 					outputText("The effort of struggling with the uncertain footing has made you tougher.");
 					dynStats("tou", .5);
 				}

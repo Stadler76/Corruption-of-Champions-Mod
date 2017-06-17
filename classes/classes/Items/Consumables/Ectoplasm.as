@@ -29,27 +29,27 @@ package classes.Items.Consumables
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Effect script 1:  (higher intelligence)
-			if (player.inte < 100 && rand(3) === 0 && changes < changeLimit) {
+			if (player.inte100 < 100 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
 				dynStats("int", 1);
-				if (player.inte < 50) dynStats("int", 1);
+				if (player.inte100 < 50) dynStats("int", 1);
 				changes++;
 			}
 			//Effect script 2:  (lower sensitivity)
-			if (player.sens >= 20 && rand(3) === 0 && changes < changeLimit) {
+			if (player.sens100 >= 20 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nWoah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely lowered your sensitivity.");
 				dynStats("sen", -2);
-				if (player.sens >= 75) dynStats("sen", -2);
+				if (player.sens100 >= 75) dynStats("sen", -2);
 				changes++;
 			}
 			//Effect script 3:  (higher libido)
-			if (player.lib < 100 && rand(3) === 0 && changes < changeLimit) {
+			if (player.lib100 < 100 && rand(3) === 0 && changes < changeLimit) {
 				//([if libido >49]
-				if (player.lib < 50) outputText("\n\nIdly, you drop a hand to your crotch as");
+				if (player.lib100 < 50) outputText("\n\nIdly, you drop a hand to your crotch as");
 				else outputText("\n\nWith a substantial amount of effort, you resist the urge to stroke yourself as");
 				outputText(" a trace amount of the ghost girl's lust is transferred into you.  How horny IS she, you have to wonder...");
 				dynStats("lib", 1);
-				if (player.lib < 50) dynStats("lib", 1);
+				if (player.lib100 < 50) dynStats("lib", 1);
 				changes++;
 			}
 			//Effect script a:  (human wang)

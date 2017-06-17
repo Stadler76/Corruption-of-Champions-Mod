@@ -215,6 +215,20 @@ package classes.Items
 			return ["invalid", "invalid"]; // Will never happen. Suppresses 'Error: Function does not return a value.'
 		}
 
+		public function newCockatriceColors():Array
+		{
+			var cockatriceColors:Array = [
+				["blue",   "turquoise", "blue"],
+				["orange", "red",       "orange"],
+				["green",  "yellow",    "green"],
+				["purple", "pink",      "purple"],
+				["black",  "white",     "black"],
+				["blonde", "brown",     "blonde"],
+				["white",  "grey",      "white"],
+			];
+			return randomChoice(cockatriceColors);
+		}
+
 		public function updateClaws(clawType:int = CLAW_TYPE_NORMAL):String
 		{
 			var clawTone:String = "";
@@ -426,6 +440,7 @@ package classes.Items
 
 				case "reptilum":
 				case "echidnaTFs":
+				case "TonOTrice":
 					if (player.findPerk(PerkLib.Oviposition) >= 0) return 0;
 					outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
 					          +"  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");

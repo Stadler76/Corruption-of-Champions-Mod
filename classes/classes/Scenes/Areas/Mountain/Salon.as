@@ -1,6 +1,8 @@
 package classes.Scenes.Areas.Mountain{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Salon extends BaseContent implements TimeAwareInterface {
 
@@ -110,7 +112,7 @@ private function buyMinoCum():void{
 
 public function salonPurchaseMenu():void {
 	flags[kFLAGS.SALON_PAID] = 1;
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	var mudFacialEnabled:Boolean = false;
 	var sandFacialEnabled:Boolean = false;
 	//Enable mud facial
@@ -146,7 +148,7 @@ public function salonPurchaseMenu():void {
 }
 
 private function hairDresserGreeting():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText(images.showImage("location-salon"));
 	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling implements.  It reminds you of the hair-cutter's shop in your hometown.");
@@ -164,7 +166,7 @@ private function hairDresserGreeting():void {
 }
 private function hairDresserRepeatGreeting():void {
 	clearOutput();
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	outputText(images.showImage("location-salon"));
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
@@ -374,7 +376,7 @@ private function giveCumToLynnette(type:int):void {
 }
 
 private function goblinHairDresserFacefuck():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	outputText(images.showImage("lynnette-blowjob"));
 	outputText("Lynnette licks her lips and practically tears her way into your " + player.armorName + ", having your crotch exposed in seconds.  Your " + player.cockDescript(0) + " flops out immediately, slapping her on the nose as it grows hard.  She wraps both hands around you and begins pumping with practiced ease, flicking her tongue over your crown and wrapping her lips ");
 	if (player.cocks[0].cockThickness >= 4) outputText("around as much of you as she can");
@@ -388,7 +390,7 @@ private function goblinHairDresserFacefuck():void {
 	hairDressingMainMenu();
 }
 private function hairDressingMainMenu():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	outputText("Lynnette offers and explains their options, \"<i>So what'll it be hun?  We could cut it down or give you a lengthening treatment. Or you can get a hair-dye to use on your own.  Just remember to come back in a few days for a touchup.</i>\"");
 	if (flags[kFLAGS.SALON_MINOCUM_UNLOCKED] > 0) {
 		outputText("\n\nOf course you could always spend some gems and buy some minotaur cum instead...");
@@ -398,7 +400,7 @@ private function hairDressingMainMenu():void {
 
 private function cutShort():void {
 	clearOutput();
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	//-trying to get a goblin to cut tentacle hair:
 	if (player.hairType == 4) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
@@ -411,7 +413,7 @@ private function cutShort():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function cutMedium():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	//-trying to get a goblin to cut tentacle hair:
 	if (player.hairType == 4) {
@@ -425,7 +427,7 @@ private function cutMedium():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function cutLong():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	//-trying to get a goblin to cut tentacle hair:
 	if (player.hairType == 4) {
@@ -439,7 +441,7 @@ private function cutLong():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function hairGrow():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	//-asking for a lengthening treatment with tentacle hair:
 	if (player.hairType == 4) {
@@ -470,7 +472,7 @@ private function removeHair():void {
 		}
 		
 private function dyeMenu():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText("Lynnette pulls open a cabinet in the corner, displaying a wide array of exotic hair-dyes.  Which kind do you want?");
 	menu();
@@ -665,7 +667,7 @@ private function minotaurCumBukkakeInSalon():void {
 	doNext(minotaurSalonFollowUp);
 }
 private function minotaurSalonFollowUp():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	if (flags[kFLAGS.SALON_MINOCUM_UNLOCKED] == 0) {
 		//Unlock mino cum purchase
@@ -682,7 +684,7 @@ private function minotaurSalonFollowUp():void {
 }
 
 private function mudFacial():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special mud'.  You close your eyes, letting them plaster your " + player.face() + " with the stuff in hopes that it will improve your complexion as much as you've been promised.  A pair of cucumber slices are laid out on your eyes, obscuring your view.\n\n");
 
@@ -692,7 +694,7 @@ private function mudFacial():void {
 }
 
 private function sandFacial():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special sand'.  You close your eyes, letting them splatter your " + player.face() + " with the rough, textured goop.  It doesn't feel very good, but that won't matter if it makes you as handsome as it's supposed to.\n\n");
 
@@ -735,7 +737,7 @@ private function fuckLynnette():void {
 	else {
 		outputText("Lynnette licks her lips at your decision and sashays forward, her immense hips rocking with enough sensuality that her plush ass is practically having a sexquake.  \"<i>You'll understand if we do a quick check then, right, [name]?</i>\" She doesn't wait for an answer, pressing herself against you so that you can get a good feel of her soft, sopping-wet tits conform to the shape of your body, letting the moist heat that seems to radiate from every pore of Lynnette's petite shape soak into your exposed " + player.skinFurScales() + ".  Her hand dives right into your underwear without asking, seizing tight around [oneCock] to heft it.");
 		outputText("\n\nYou give up an appreciative groan, [eachCock] twitching in lewd enjoyment as ");
-		if (player.lust <= 75) outputText("it fills to full size almost immediately");
+		if (player.lust100 <= 75) outputText("it fills to full size almost immediately");
 		else outputText("it's fully-erect state makes itself known");
 		outputText(". Lynnette strokes a few times to make sure you're suitably engorged and then shifts lower, squeezing ");
 		if (player.balls == 0) outputText("around your [sheath] to get a feel for how pent-up you are");

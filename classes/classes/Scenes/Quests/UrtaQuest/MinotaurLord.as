@@ -94,7 +94,7 @@ package classes.Scenes.Quests.UrtaQuest
 				outputText("you realize what you've been doing.  Your embarrassment gives you the strength to re-adopt your fighting pose, but it's hard with how ");
 				if (player.hasCock()) {
 					outputText("rigid");
-					if (player.lust >= 80) outputText(" and drippy");
+					if (player.lust100 >= 80) outputText(" and drippy");
 					outputText(" your cock has become.  ")
 					
 				}
@@ -115,7 +115,7 @@ package classes.Scenes.Quests.UrtaQuest
 			outputText("The minotaur smiles at you and lifts his loincloth, flicking it at you.  Thick ropes of pre-cum fly through the air in a swarm,");
 			if (rand(2) == 0) {
 				outputText(" slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
-				if (player.lust >= 70) outputText("swallowing it into your mouth without thinking.  You greedily guzzle the potent, narcotic aphrodisiac down, even going so far as to lick it from each of your fingers in turn, sucking every drop into your waiting gullet.");
+				if (player.lust100 >= 70) outputText("swallowing it into your mouth without thinking.  You greedily guzzle the potent, narcotic aphrodisiac down, even going so far as to lick it from each of your fingers in turn, sucking every drop into your waiting gullet.");
 				else outputText("feeling your heart hammer lustily.");
 				kGAMECLASS.dynStats("lus", 15 + player.lib / 8 + player.sens / 8);
 			}
@@ -126,7 +126,7 @@ package classes.Scenes.Quests.UrtaQuest
 				kGAMECLASS.dynStats("lus", 11 + player.lib / 10);
 			}
 			//(1)
-			if (player.lust <= 75) outputText("  You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.");
+			if (player.lust100 <= 75) outputText("  You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.");
 			else outputText("  <b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
 			combatRoundOver();
 		}

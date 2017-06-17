@@ -40,19 +40,19 @@ package classes.Items.Consumables
 			//STAT CHANGES - TOU SPE INT RANDOM CHANCE, LIB LUST COR ALWAYS UPPED
 			dynStats("lib", 1 + rand(2), "lus", 5 + rand(10), "cor", 1 + rand(5));
 			outputText("\n\nYou lick your lips after you finish. That spiciness hit you in more ways than one.");
-			if (player.tou < 70 && rand(3) === 0 && changes < changeLimit) {
+			if (player.tou100 < 70 && rand(3) === 0 && changes < changeLimit) {
 				dynStats("tou", (1 * crit));
 				if (crit > 1) outputText("\n\nYou roll your shoulders and tense your arms experimentally. You feel more durable, and your blood seems to run through you more clearly. You know you have more endurance.");
 				else outputText("\n\nYour muscles feel denser and more durable. Not so much that feel stronger, but you feel like you can take more hits.");
 				changes++;
 			}
-			if (player.spe > 30 && rand(7) === 0 && changes < changeLimit) {
+			if (player.spe100 > 30 && rand(7) === 0 && changes < changeLimit) {
 				dynStats("spe", (-1 * crit));
 				if (crit > 1) outputText("\n\nThe pepper's strong taste makes you take a couple steps back and lean against the nearest solid object. You don't feel like you'll be moving very fast anymore.");
 				else outputText("\n\nYou stumble forward, but manage to catch yourself. Still, though, you feel somewhat slower.");
 				changes++;
 			}
-			if (player.inte < 60 && rand(7) === 0 && changes < changeLimit) {
+			if (player.inte100 < 60 && rand(7) === 0 && changes < changeLimit) {
 				dynStats("int", (1 * crit));
 				outputText("\n\nThe spiciness makes your head twirl, but you manage to gather yourself. A strange sense of clarity comes over you in the aftermath, and you feel ");
 				if (crit > 1) outputText("a lot ");
@@ -97,10 +97,11 @@ package classes.Items.Consumables
 					outputText("\n\nYou feel a twinge in your eyes and you blink. It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
 				} else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you. As you steady and open your eyes, you realize something seems different. Your vision is changed somehow.");
-					if (player.eyeType === EYES_FOUR_SPIDER_EYES) outputText(" Your multiple, arachnid eyes are gone!");
+					if (player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeType == EYES_SPIDER) outputText(" Your arachnid eyes are gone!");
 					outputText("  <b>You have normal, human eyes.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//normal legs
@@ -328,7 +329,7 @@ package classes.Items.Consumables
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
 				player.setFurColor(wolfFurColors, {
-					type: UNDER_BODY_TYPE_FUR
+					type: UNDER_BODY_TYPE_FURRY
 				}, true);
 				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of " + player.furColor + " fur. You stare at it. Fur. Wait, you just grew fur?! What happened?! Your mind reeling, you do know one thing for sure: <b>you now have fur!</b>");
 				changes++;

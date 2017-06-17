@@ -53,10 +53,10 @@ package classes.Items.Consumables
 			//(if outside combat)
 			if (!kGAMECLASS.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
 			//+ speed to 70!
-			if (player.spe < 70 && rand(2) === 0) {
+			if (player.spe100 < 70 && rand(2) === 0) {
 				dynStats("spe", (2 - (player.spe / 10 / 5)));
 				outputText("\n\nYour muscles quiver, feeling ready to strike as fast as a snake!");
-				if (player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.");
+				if (player.spe100 < 40) outputText("  Of course, you're nowhere near as fast as that.");
 				changes++;
 			}
 			if (rand(5) === 0) {

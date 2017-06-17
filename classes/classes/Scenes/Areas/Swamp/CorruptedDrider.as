@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
+	import classes.display.SpriteDb;
 	import classes.internals.*;
 
 	/**
@@ -62,7 +63,7 @@ package classes.Scenes.Areas.Swamp
 				if (player.tallness < 72) outputText("down");
 				else outputText("over");
 				outputText(" to plant a sloppy, wet kiss upon your lips.  Her glossy lip-venom oozes everywhere, dribbling down your collective chins and sliding into your mouth.  You shudder, trying to resist, but your tongue betrays you.  It slides between her moist, puffy entrance, lapping at her venom and making love to her tongue.");
-				if (player.lust <= 99) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.");
+				if (player.lust100 <= 99) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.");
 				player.createStatusEffect(StatusEffects.DriderKiss,0,0,0,0);
 			}
 			//Get hit 2nd time) 
@@ -75,7 +76,7 @@ package classes.Scenes.Areas.Swamp
 					if (player.hasCock()) outputText("  " + player.SMultiCockDesc() + " spews a rope of pre-cum into your " + player.armorName + ", desperate to get out and fuck.");
 					if (player.hasVagina()) outputText("  Fem-cum dribbles down your " + player.legs() + " while your " + player.clitDescript() + " gets so hard you think it'll explode.");
 					outputText("  This time, the drider is the one to break the kiss.  She asks, \"<i>Are you ready, my horny little morsel?</i>\"\n");
-					if (player.lust <= 99) outputText("You shake your head 'no' and stand your ground!\n");
+					if (player.lust100 <= 99) outputText("You shake your head 'no' and stand your ground!\n");
 				}
 				//(Get hit 3rd+ time)
 				else {
@@ -88,7 +89,7 @@ package classes.Scenes.Areas.Swamp
 						else if (player.wetness() < 5 && player.cumQ() < 500) outputText("large");
 						else outputText("massive");
 						outputText(" wet stain that reeks of your sheer sexual ache has formed in your " + player.armorName + ".");
-						if (player.lust <= 99) outputText("  Amazingly, you resist her and pull back, panting for breath.");
+						if (player.lust100 <= 99) outputText("  Amazingly, you resist her and pull back, panting for breath.");
 					}
 				}
 			}
@@ -110,8 +111,8 @@ package classes.Scenes.Areas.Swamp
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(77);
-			if (lust > 70 && rand(4) == 0) driderMasturbate();
+			game.spriteSelect(SpriteDb.s_drider);
+			if (lust100 > 70 && rand(4) == 0) driderMasturbate();
 			//1/4 chance of silence if pc knows spells
 			else if (player.hasSpells() && !player.hasStatusEffect(StatusEffects.WebSilence) && rand(4) == 0) {
 				spiderSilence();

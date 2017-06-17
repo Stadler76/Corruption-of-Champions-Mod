@@ -1,5 +1,7 @@
 package classes.Scenes.Areas.Desert {
 	import classes.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Wanderer extends BaseContent{
 
@@ -8,7 +10,7 @@ package classes.Scenes.Areas.Desert {
 		}
 
 		public function wandererRouter():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	//First meeting...
 	if (!player.hasStatusEffect(StatusEffects.MeetWanderer)) {
 		wandererFirstMeeting();
@@ -45,14 +47,14 @@ private function wandererFirstMeeting():void {
 }
 //Leave
 private function wandererLeave():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	clearOutput();
 	outputText("Marcus looks disappointed and sighs, hefting his wheelbarrow and waddling away.  Lucia bounces after him, looking like the cat that got the cream.  You wonder what all that was about.   What a strange land.");
 	doNext(camp.returnToCampUseOneHour);
 }
 //Repeated encounter if he left
 private function wandererRepeatMeeting():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	clearOutput();
 	outputText("Marcus waves to you as he crests a nearby dune, yelling a greeting.  \"<i>Hey traveler!  Do you have a moment to help a man with a question of theological and moral imperatives?</i>\"\n\nHis succubus accomplice, Lucia, snorts in disdain.");
 	menu();
@@ -61,7 +63,7 @@ private function wandererRepeatMeeting():void {
 }
 //Volunteer to help
 private function wandererHelpHim():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	clearOutput();
 	outputText("\"<i>Oh good!</i>\" he exclaims as he begins elaborating.  \"<i>My dear succubus here is growing tired of our arrangement, and she wants me to give up the last of my humanity and become a demon like her.  I'm not really sure I want to lose my soul, but at the same time, I know enough about their kind to know I'd REALLY enjoy being an incubus, if you know what I mean.  Before I make the plunge, I'd like a second opinion – what do you think?</i>\"\n\nHe glances over his shoulder with almost a small measure of fear.");
 	menu();
@@ -70,7 +72,7 @@ private function wandererHelpHim():void {
 }
 //Ask marcus to stay human
 private function wandererStayHuman():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	clearOutput();
 	outputText("\"<i>You little mortal fuckwit!</i>\" screams Lucia before turning to her human lover, \"<i>Don't listen to the foolish mortal, love; think of the fun we could have together!</i>\"\n\n");
 	outputText("Marcus shakes his head sadly, \"<i>" + player.mf("He", "She") + " is right, my soul is immortal and not to be sacrificed so lightly.  Why don't we stick to our original agreement another decade and mull it over then?</i>\"\n\n");
@@ -82,7 +84,7 @@ private function wandererStayHuman():void {
 }
 //Ask marcus to go demon
 private function wandererGoDemon():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	clearOutput();
 	outputText("Lucia breaks into a mischievous smile as you suggest taking her up on her offer.  She sashays over to you, flesh jiggling enticingly the whole way.  She leans close, sliding a slender finger down the center of your chest.  \"<i>Thank you for this.  Should we meet again, I promise rewards fit to make a whore faint.</i>\"\n\n");
 	outputText("Marcus raises an eyebrow at the exchange, but smiles as his demonic lover returns to his side.  Lucia winks again, and huge wings explode from her back.  She grabs Marcus, who bleats in surprise, and lifts off, flying away with her prize to her lair.");
@@ -93,7 +95,7 @@ private function wandererGoDemon():void {
 
 //Demonic epilogue v1
 private function wandererDemonEpilogue():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	if (player.hasStatusEffect(StatusEffects.WandererDemon)) {
 		//First time...
 		if (player.statusEffectv1(StatusEffects.WandererDemon) == 0) {
@@ -125,7 +127,7 @@ private function wandererDemonEpilogue():void {
 }
 //Human Epilogue 1
 private function wandererEpilogueHuman():void {
-	spriteSelect(42);
+	spriteSelect(SpriteDb.s_markus_and_lucia);
 	if (player.hasStatusEffect(StatusEffects.WandererHuman)) {
 		//Human Epilogue 1
 		if (player.statusEffectv1(StatusEffects.WandererHuman) == 0) {

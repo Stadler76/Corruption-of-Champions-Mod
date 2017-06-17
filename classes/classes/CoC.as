@@ -8,7 +8,12 @@
 package classes
 {
 	// BREAKING ALL THE RULES.
-	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
+	import classes.GlobalFlags.kFLAGS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
+	import flash.display.BitmapData;
+
+// This file contains most of the persistent gamestate flags.
 	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
 	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
 	import classes.Scenes.Combat.Combat;
@@ -300,8 +305,6 @@ the text from being too boring.
 		public var bindings:Bindings = new Bindings();
 		public var output:Output = Output.init();
 		public var measurements:Measurements = Measurements.init();
-		public function get currentText():String { return output.currentText; }
-		public function set currentText(text:String):void { output.currentText = text; }
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
@@ -450,9 +453,9 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4.6b"; //Version NUMBER
+			ver = "1.0.2_mod_1.4.7"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
-			version = ver + " (<b>The Chill Smith</b>)"; //Version TEXT
+			version = ver + " (<b>Bug Fixin</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -515,8 +518,7 @@ the text from being too boring.
 			model.time = time;
 
 			//The string holds all the "story" text, mainly used in engineCore
-			currentText = "";
-			//}endregion 
+			//}endregion
 
 			// These are toggled between by the [home] key.
 			mainView.textBGWhite.visible = false;
@@ -611,6 +613,20 @@ the text from being too boring.
 			{
 				_updateHack.x = 0;
 				_updateHack.removeEventListener(Event.ENTER_FRAME, moveHackUpdate);
+			}
+		}
+
+		public function spriteSelect(choice:Object = 0):void {
+			// Inlined call from lib/src/coc/view/MainView.as
+			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
+			if (choice <= 0 || choice == null || flags[kFLAGS.SHOW_SPRITES_FLAG] == 1) {
+				mainViewManager.hideSprite();
+			} else {
+				if (choice is Class) {
+					mainViewManager.showSpriteBitmap(SpriteDb.bitmapData(choice as Class));
+				} else {
+					mainViewManager.hideSprite();
+				}
 			}
 		}
 	}

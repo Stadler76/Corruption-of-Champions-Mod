@@ -49,7 +49,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//--burns 20 lust to restore 20% hp. 
 			if (lust > 50 && HPRatio() <= .5) {
 				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
-				addHP(0.25 * eMaxHP());
+				addHP(0.25 * maxHP());
 				lust -= 20;
 				game.dynStats("lus", 2);
 			}
@@ -98,19 +98,19 @@ package classes.Scenes.Dungeons.DeepCave
 		public function gigaArouse():void {
 			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp.\n\n");
 			game.dynStats("lus", rand(player.lib/10) +player.cor/10+15);
-			if (player.lust < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
-			if (player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
-			if (player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
+			if (player.lust100 < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
+			if (player.lust100 >= 30 && player.lust100 < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
+			if (player.lust100 >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
 			if (player.cocks.length > 0) {
-				if (player.lust >= 60 && player.cocks.length > 0) outputText("You feel " + player.SMultiCockDesc() + " dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ");
-				if (player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
+				if (player.lust100 >= 60 && player.cocks.length > 0) outputText("You feel " + player.SMultiCockDesc() + " dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ");
+				if (player.lust100 >= 30 && player.lust100 < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
 			}
 			if (player.vaginas.length > 0) {
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " dampens perceptibly, feeling very empty.  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " dampens perceptibly, feeling very empty.  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
 			if (player.lust >= player.maxLust()) doNext(game.combat.endLustLoss)
 			else combatRoundOver();

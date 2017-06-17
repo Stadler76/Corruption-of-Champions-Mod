@@ -637,6 +637,7 @@ package classes
 						 .requirePerk(Channeling)
 						 .requireCustomFunction(function (player:Player):Boolean {
 							 return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+									 || player.hasStatusEffect(StatusEffects.KnowsBlackfire)
 									 || player.hasPerk(FireLord)
 									 || player.hasPerk(Hellfire)
 									 || player.hasPerk(EnlightenedNinetails)

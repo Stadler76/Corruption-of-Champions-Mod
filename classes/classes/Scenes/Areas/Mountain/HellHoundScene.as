@@ -5,6 +5,8 @@ package classes.Scenes.Areas.Mountain
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class HellHoundScene extends BaseContent
 	{
@@ -34,7 +36,7 @@ package classes.Scenes.Areas.Mountain
 				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
 			}
 			startCombat(new HellHound());
-			spriteSelect(27);
+			spriteSelect(SpriteDb.s_hellhound);
 		}
 
 

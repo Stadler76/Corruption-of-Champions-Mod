@@ -145,8 +145,7 @@ package classes
 			_drop = value;
 			initedDrop = true;
 		}
-
-		public function eMaxHP():Number
+		public override function maxHP():Number
 		{
 			//Base HP
 			var temp:Number = 50 + this.bonusHP;
@@ -179,24 +178,23 @@ package classes
 			return temp;
 		}
 
-		public function eMaxLust():Number {
+		override public function maxLust():Number {
 			//Base Lust
 			var temp:Number = 100 + this.bonusLust;
 			if (findPerk(PerkLib.ImprovedSelfControl) >= 0) temp += 20;
 			return temp;
 		}
-		
 		public function addHP(hp:Number):void {
 			this.HP += hp;
 			if (this.HP<0) this.HP = 0;
-			else if (this.HP>eMaxHP()) this.HP = eMaxHP();
+			else if (this.HP > maxHP()) this.HP = maxHP();
 		}
 
 		/**
 		 * @return HP/eMaxHP()
 		 */
 		public function HPRatio():Number {
-			return HP/eMaxHP();
+			return HP / maxHP();
 		}
 
 		/**
@@ -581,7 +579,7 @@ package classes
 			if (!isFullyInit()) {
 				error += "Missing phases: "+missingInits()+". ";
 			}
-			this.HP = eMaxHP();
+			this.HP = maxHP();
 			this.XP = totalXP();
 			error += super.validate();
 			error += Utils.validateNonNegativeNumberFields(this, "Monster.validate",[
@@ -1088,7 +1086,7 @@ package classes
 			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe+", inte=" + inte+", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + eMaxHP() + " HP, " + lust + "/" + eMaxLust() + " lust, " + fatigue+"/100 fatigue. " + Pronoun3 + " bonus HP=" + bonusHP + ", and lust vulnerability=" + lustVuln + ".\n";
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/100 fatigue. " + Pronoun3 + " bonus HP=" + bonusHP + ", and lust vulnerability=" + lustVuln + ".\n";
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
@@ -1193,7 +1191,7 @@ package classes
 				}
 				//Deal damage if still wounded.
 				else {
-					store = eMaxHP() * (3 + rand(4))/100;
+					store = maxHP() * (3 + rand(4)) / 100;
 					store = game.combat.doDamage(store);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
@@ -1209,7 +1207,7 @@ package classes
 				}
 				//Deal damage if still on fire.
 				else {
-					store = eMaxHP() * (4 + rand(5))/100;
+					store = maxHP() * (4 + rand(5)) / 100;
 					store = game.combat.doDamage(store);
 					if (plural) outputText(capitalA + short + " continue to burn from the flames engulfing " + pronoun2 + ". <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " continues to burn from the flames engulfing " + pronoun2 + ". <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
@@ -1265,17 +1263,17 @@ package classes
 				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);
 			}
 			if (this is SecretarialSuccubus || this is MilkySuccubus) {
-				if (player.lust < 45) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
-				if (player.lust >= 45 && player.lust < 70) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
-				if (player.lust >= 70 && player.lust < 90) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
-				if (player.lust >= 90) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
+				if (player.lust100 < 45) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
+				if (player.lust100 >= 45 && player.lust100 < 70) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
+				if (player.lust100 >= 70 && player.lust100 < 90) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
+				if (player.lust100 >= 90) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
 				game.dynStats("lus", 1+rand(8));
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if (hasStatusEffect(StatusEffects.LustAura)) {
-				if (player.lust < 33) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
-		 		if (player.lust >= 33 && player.lust < 66) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
-		  		if (player.lust >= 66) {
+				if (player.lust100 < 33) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n");
+		 		if (player.lust100 >= 33 && player.lust100 < 66) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n");
+		  		if (player.lust100 >= 66) {
 					outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ");
 					temp = rand(4);
 					if (temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n");

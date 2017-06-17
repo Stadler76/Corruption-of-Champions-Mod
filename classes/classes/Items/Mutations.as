@@ -588,19 +588,19 @@ package classes.Items
 				outputText("\n\nYou feel yourself relaxing as gentle warmth spreads through your body.  Honestly you don't think you'd mind running into a demon or monster right now, they'd make for good entertainment.");
 				if (player.cor < 50) outputText("  You shake your head, blushing hotly.  Where did that thought come from?");
 			}
-			if (player.str < 50 && rand(3) == 0) {
+			if (player.str100 < 50 && rand(3) == 0) {
 				dynStats("str", (crit));
 				if (crit > 1) outputText("\n\nYour muscles ripple and grow, bulging outwards.");
 				else outputText("\n\nYour muscles feel more toned.");
 				changes++;
 			}
-			if (player.spe < 30 && rand(3) == 0 && changes < changeLimit) {
+			if (player.spe100 < 30 && rand(3) == 0 && changes < changeLimit) {
 				dynStats("spe", (crit));
 				if (crit > 1) outputText("\n\nYou find your muscles responding quicker, faster, and you feel an odd desire to go for a walk.");
 				else outputText("\n\nYou feel quicker.");
 				changes++;
 			}
-			if (player.inte > 30 && rand(3) == 0 && changes < changeLimit && type != 3) {
+			if (player.inte100 > 30 && rand(3) == 0 && changes < changeLimit && type != 3) {
 				dynStats("int", (-1 * crit));
 				outputText("\n\nYou feel ");
 				if (crit > 1) outputText("MUCH ");
@@ -1093,10 +1093,11 @@ package classes.Items
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+					if (player.eyeType == EYES_FOUR_SPIDER_EYES || player.eyeType == EYES_SPIDER) outputText("  Your arachnid eyes are gone!</b>");
 					outputText("  <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//Master Furry Appearance Order:
@@ -1741,7 +1742,7 @@ package classes.Items
 			}
 			//Decrease player spd if it is over 30:
 			if (changes < changeLimit && rand(3) == 0) {
-				if (player.spe > 30) {
+				if (player.spe100 > 30) {
 					outputText("\n\nThe body mass you've gained is making your movements more sluggish.");
 					changes++;
 					temp = (player.spe - 30) / 10;
@@ -2143,31 +2144,31 @@ package classes.Items
 			else if (type == 1) outputText("You have no idea why, but you decide to eat the pointed, glowing tooth. To your surprise, it's actually quite brittle, crumbling into a fishy-tasting dust. Maybe it's just a tablet made to look like a shark's tooth.");
 			//STATS
 			//Increase strength 1-2 points (Up to 50) (60 for tiger)
-			if (((player.str < 60 && type == 1) || player.str < 50) && rand(3) == 0) {
+			if (((player.str100 < 60 && type == 1) || player.str100 < 50) && rand(3) == 0) {
 				dynStats("str", 1 + rand(2));
 				outputText("\n\nA painful ripple passes through the muscles of your body.  It takes you a few moments, but you quickly realize you're a little bit stronger now.");
 				changes++;
 			}
 			//Increase Speed 1-3 points (Up to 75) (100 for tigers)
-			if (((player.spe < 100 && type == 1) || player.spe < 75) && rand(3) == 0) {
+			if (((player.spe100 < 100 && type == 1) || player.spe100 < 75) && rand(3) == 0) {
 				dynStats("spe", 1 + rand(3));
 				changes++;
 				outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.");
 			}
 			//Reduce sensitivity 1-3 Points (Down to 25 points)
-			if (player.sens > 25 && rand(1.5) == 0 && changes < changeLimit) {
+			if (player.sens100 > 25 && rand(1.5) == 0 && changes < changeLimit) {
 				dynStats("sen", (-1 - rand(3)));
 				changes++;
 				outputText("\n\nIt takes a while, but you eventually realize your body has become less sensitive.");
 			}
 			//Increase Libido 2-4 points (Up to 75 points) (100 for tigers)
-			if (((player.lib < 100 && type == 1) || player.lib < 75) && rand(3) == 0 && changes < changeLimit) {
+			if (((player.lib100 < 100 && type == 1) || player.lib100 < 75) && rand(3) == 0 && changes < changeLimit) {
 				dynStats("lib", (1 + rand(3)));
 				changes++;
 				outputText("\n\nA blush of red works its way across your skin as your sex drive kicks up a notch.");
 			}
 			//Decrease intellect 1-3 points (Down to 40 points)
-			if (player.inte > 40 && rand(3) == 0 && changes < changeLimit) {
+			if (player.inte100 > 40 && rand(3) == 0 && changes < changeLimit) {
 				dynStats("int", -(1 + rand(3)));
 				changes++;
 				outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
@@ -2233,10 +2234,11 @@ package classes.Items
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+					if (player.eyeType == EYES_FOUR_SPIDER_EYES || player.eyeType == EYES_SPIDER) outputText("  Your arachnid eyes are gone!</b>");
 					outputText("  <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//Tail TF
@@ -2325,27 +2327,27 @@ package classes.Items
 			}
 			//STATS CHANGURYUUUUU
 			//Boost speed (max 80!)
-			if (changes < changeLimit && rand(3) == 0 && player.spe < 80) {
-				if (player.spe < 30) outputText("\n\nTingles run through your muscles, and your next few movements seem unexpectedly fast.  The egg somehow made you faster!");
-				else if (player.spe < 50) outputText("\n\nYou feel tingles running through your body, and after a moment, it's clear that you're getting faster.");
-				else if (player.spe < 65) outputText("\n\nThe tight, ready feeling you've grown accustomed to seems to intensify, and you know in the back of your mind that you've become even faster.");
+			if (changes < changeLimit && rand(3) == 0 && player.spe100 < 80) {
+				if (player.spe100 < 30) outputText("\n\nTingles run through your muscles, and your next few movements seem unexpectedly fast.  The egg somehow made you faster!");
+				else if (player.spe100 < 50) outputText("\n\nYou feel tingles running through your body, and after a moment, it's clear that you're getting faster.");
+				else if (player.spe100 < 65) outputText("\n\nThe tight, ready feeling you've grown accustomed to seems to intensify, and you know in the back of your mind that you've become even faster.");
 				else outputText("\n\nSomething changes in your physique, and you grunt, chopping an arm through the air experimentally.  You seem to move even faster than before, confirming your suspicions.");
 				changes++;
-				if (player.spe < 35) dynStats("spe", 1);
+				if (player.spe100 < 35) dynStats("spe", 1);
 				dynStats("spe", 1);
 			}
 			//Boost libido
 			if (changes < changeLimit && rand(5) == 0) {
 				changes++;
 				dynStats("lib", 1, "lus", (5 + player.lib / 7));
-				if (player.lib < 30) dynStats("lib", 1);
-				if (player.lib < 40) dynStats("lib", 1);
-				if (player.lib < 60) dynStats("lib", 1);
+				if (player.lib100 < 30) dynStats("lib", 1);
+				if (player.lib100 < 40) dynStats("lib", 1);
+				if (player.lib100 < 60) dynStats("lib", 1);
 				//Lower ones are gender specific for some reason
-				if (player.lib < 60) {
+				if (player.lib100 < 60) {
 					//(Cunts or assholes!
 					if (!player.hasCock() || (player.gender == 3 && rand(2) == 0)) {
-						if (player.lib < 30) {
+						if (player.lib100 < 30) {
 							outputText("\n\nYou squirm a little and find your eyes glancing down to your groin.  Strange thoughts jump to mind, wondering how it would feel to breed until you're swollen and pregnant.  ");
 							if (player.cor < 25) outputText("You're repulsed by such shameful thoughts.");
 							else if (player.cor < 60) outputText("You worry that this place is really getting to you.");
@@ -2356,7 +2358,7 @@ package classes.Items
 					}
 					//WANGS!
 					if (player.hasCock()) {
-						if (player.lib < 30) {
+						if (player.lib100 < 30) {
 							outputText("\n\nYou squirm a little and find your eyes glancing down to your groin.  Strange thoughts jump to mind, wondering how it would feel to fuck a ");
 							if (rand(2) == 0) outputText("female hare until she's immobilized by all her eggs");
 							else outputText("herm rabbit until her sack is so swollen that she's forced to masturbate over and over again just to regain mobility");
@@ -2370,7 +2372,7 @@ package classes.Items
 					}
 				}
 				//Libido over 60? FUCK YEAH!
-				else if (player.lib < 80) {
+				else if (player.lib100 < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat");
 					if (!player.hasPlainSkin()) outputText(" through your " + player.skinDesc);
 					outputText(".  ");
@@ -2386,13 +2388,13 @@ package classes.Items
 					else if (player.cor < 66) outputText("You pant and groan, not sure how long you'll even want to resist.");
 					else {
 						outputText("You smile and wonder if you can ");
-						if (player.lib < 100) outputText("get your libido even higher.");
+						if (player.lib100 < 100) outputText("get your libido even higher.");
 						else outputText("find someone to fuck right now.");
 					}
 				}
 			}
 			//BIG sensitivity gains to 60.
-			if (player.sens < 60 && changes < changeLimit && rand(3) == 0) {
+			if (player.sens100 < 60 && changes < changeLimit && rand(3) == 0) {
 				changes++;
 				outputText("\n\n");
 				//(low)
@@ -2577,16 +2579,16 @@ package classes.Items
 			//Bunny Breeder Perk?
 			//FAILSAAAAFE
 			if (changes == 0) {
-				if (player.lib < 100) changes++;
+				if (player.lib100 < 100) changes++;
 				dynStats("lib", 1, "lus", (5 + player.lib / 7));
-				if (player.lib < 30) dynStats("lib", 1);
-				if (player.lib < 40) dynStats("lib", 1);
-				if (player.lib < 60) dynStats("lib", 1);
+				if (player.lib100 < 30) dynStats("lib", 1);
+				if (player.lib100 < 40) dynStats("lib", 1);
+				if (player.lib100 < 60) dynStats("lib", 1);
 				//Lower ones are gender specific for some reason
-				if (player.lib < 60) {
+				if (player.lib100 < 60) {
 					//(Cunts or assholes!
 					if (!player.hasCock() || (player.gender == 3 && rand(2) == 0)) {
-						if (player.lib < 30) {
+						if (player.lib100 < 30) {
 							outputText("\n\nYou squirm a little and find your eyes glancing down to your groin.  Strange thoughts jump to mind, wondering how it would feel to breed until you're swollen and pregnant.  ");
 							if (player.cor < 25) outputText("You're repulsed by such shameful thoughts.");
 							else if (player.cor < 60) outputText("You worry that this place is really getting to you.");
@@ -2597,7 +2599,7 @@ package classes.Items
 					}
 					//WANGS!
 					if (player.hasCock()) {
-						if (player.lib < 30) {
+						if (player.lib100 < 30) {
 							outputText("\n\nYou squirm a little and find your eyes glancing down to your groin.  Strange thoughts jump to mind, wondering how it would feel to fuck a ");
 							if (rand(2) == 0) outputText("female hare until she's immobilized by all her eggs");
 							else outputText("herm rabbit until her sack is so swollen that she's forced to masturbate over and over again just to regain mobility");
@@ -2611,7 +2613,7 @@ package classes.Items
 					}
 				}
 				//Libido over 60? FUCK YEAH!
-				else if (player.lib < 80) {
+				else if (player.lib100 < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat");
 					if (!player.hasPlainSkin()) outputText(" through your " + player.skinDesc);
 					outputText(".  ");
@@ -2627,7 +2629,7 @@ package classes.Items
 					else if (player.cor < 66) outputText("You pant and groan, not sure how long you'll even want to resist.");
 					else {
 						outputText("You smile and wonder if you can ");
-						if (player.lib < 100) outputText("get your libido even higher.");
+						if (player.lib100 < 100) outputText("get your libido even higher.");
 						else outputText("find someone to fuck right now.");
 					}
 				}
@@ -2657,17 +2659,17 @@ package classes.Items
 			//Stats:
 			//****************
 			//-Speed increase to 100.
-			if (player.spe < 100 && rand(3) == 0) {
+			if (player.spe100 < 100 && rand(3) == 0) {
 				changes++;
-				if (player.spe >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
+				if (player.spe100 >= 75) outputText("\n\nA familiar chill runs down your spine. Your muscles feel like well oiled machinery, ready to snap into action with lightning speed.");
 				else outputText("\n\nA chill runs through your spine, leaving you feeling like your reflexes are quicker and your body faster.");
 				//Speed gains diminish as it rises.
-				if (player.spe < 40) dynStats("spe", .5);
-				if (player.spe < 75) dynStats("spe", .5);
+				if (player.spe100 < 40) dynStats("spe", .5);
+				if (player.spe100 < 75) dynStats("spe", .5);
 				dynStats("spe", .5);
 			}
 			//-Toughness decrease to 50
-			if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
+			if (player.tou100 > 50 && rand(3) == 0 && changes < changeLimit) {
 				changes++;
 				if (rand(2) == 0) outputText("\n\nA nice, slow warmth rolls from your gut out to your limbs, flowing through them before dissipating entirely. As it leaves, you note that your body feels softer and less resilient.");
 				else outputText("\n\nYou feel somewhat lighter, but consequently more fragile.  Perhaps your bones have changed to be more harpy-like in structure?");
@@ -2677,39 +2679,39 @@ package classes.Items
 			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
-				player.hairType = 1;
+				player.hairType = HAIR_FEATHER;
 				changes++;
 			}
 			//-Strength increase to 70
-			if (player.str < 70 && rand(3) == 0 && changes < changeLimit) {
+			if (player.str100 < 70 && rand(3) == 0 && changes < changeLimit) {
 				changes++;
 				//(low str)
-				if (player.str < 40) outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
+				if (player.str100 < 40) outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
 				//(hi str – 50+)
 				else outputText("\n\nHeat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength.");
 				//Faster until 40 str.
-				if (player.str < 40) dynStats("str", .5);
+				if (player.str100 < 40) dynStats("str", .5);
 				dynStats("str", .5);
 			}
 			//-Libido increase to 90
-			if ((player.lib < 90 || rand(3) == 0) && rand(3) == 0 && changes < changeLimit) {
+			if ((player.lib100 < 90 || rand(3) == 0) && rand(3) == 0 && changes < changeLimit) {
 				changes++;
-				if (player.lib < 90) dynStats("lib", 1);
+				if (player.lib100 < 90) dynStats("lib", 1);
 				//(sub 40 lib)
-				if (player.lib < 40) {
+				if (player.lib100 < 40) {
 					outputText("\n\nA passing flush colors your " + player.face() + " for a second as you daydream about sex. You blink it away, realizing the item seems to have affected your libido.");
 					if (player.hasVagina()) outputText(" The moistness of your " + player.vaginaDescript() + " seems to agree.");
 					else if (player.hasCock()) outputText(" The hardness of " + player.sMultiCockDesc() + " seems to agree.");
 					dynStats("lus", 5);
 				}
 				//(sub 75 lib)
-				else if (player.lib < 75) outputText("\n\nHeat, blessed heat, works through you from head to groin, leaving you to shudder and fantasize about the sex you could be having right now.\n\n");
+				else if (player.lib100 < 75) outputText("\n\nHeat, blessed heat, works through you from head to groin, leaving you to shudder and fantasize about the sex you could be having right now.\n\n");
 				//(hi lib)
-				else if (player.lib < 90) outputText("\n\nSexual need courses through you, flushing your skin with a reddish hue while you pant and daydream of the wondrous sex you should be having right now.\n\n");
+				else if (player.lib100 < 90) outputText("\n\nSexual need courses through you, flushing your skin with a reddish hue while you pant and daydream of the wondrous sex you should be having right now.\n\n");
 				//(90+)
 				else outputText("\n\nYou groan, something about the seed rubbing your libido in just the right way to make you horny. Panting heavily, you sigh and fantasize about the sex you could be having.\n\n");
 				//(fork to fantasy)
-				if (player.lib >= 40) {
+				if (player.lib100 >= 40) {
 					dynStats("lus", (player.lib / 5 + 10));
 					//(herm – either or!)
 					//Cocks!
@@ -2870,10 +2872,11 @@ package classes.Items
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+					if (player.eyeType == EYES_FOUR_SPIDER_EYES || player.eyeType == EYES_SPIDER) outputText("  Your arachnid eyes are gone!</b>");
 					outputText("  <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//****************
@@ -2902,15 +2905,19 @@ package classes.Items
 			}
 			//-Propah Wings
 			if (player.wingType == WING_TYPE_NONE && changes < changeLimit && (type == 1 || player.armType == ARM_TYPE_HARPY) && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>");
-				player.wingType = WING_TYPE_FEATHERED_LARGE;
+				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and");
+				player.wings.setProps({
+					type: WING_TYPE_FEATHERED_LARGE,
+					color: player.hasFur() ? player.furColor : player.hairColor
+				});
+				outputText(" <b>you're able to curve the new growths far enough around to behold your brand new, " + player.wings.color + " wings.</b>");
 				changes++;
 			}
 			//-Remove old wings
-			if ([WING_TYPE_NONE, WING_TYPE_FEATHERED_LARGE].indexOf(player.wingType) == -1 && changes < changeLimit && rand(4) == 0) {
+			if (player.wingType != WING_TYPE_FEATHERED_LARGE && player.wingType > WING_TYPE_NONE && changes < changeLimit && rand(4) == 0) {
 				if (player.wingType != WING_TYPE_SHARK_FIN) outputText("\n\nSensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
 				else outputText("\n\nSensation fades from your large fin slowly but surely, leaving it a dried out husk that breaks off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
-				player.wingType = WING_TYPE_NONE;
+				player.wings.restore();
 				changes++;
 			}
 			//-Feathery Arms
@@ -2921,9 +2928,9 @@ package classes.Items
 				updateClaws();
 			}
 			//-Feathery Hair
-			if (player.hairType != 1 && changes < changeLimit && (type == 1 || player.faceType == FACE_HUMAN) && rand(4) == 0) {
+			if (player.hairType != HAIR_FEATHER && changes < changeLimit && (type == 1 || player.faceType == FACE_HUMAN) && rand(4) == 0) {
 				outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!");
-				player.hairType = 1;
+				player.hairType = HAIR_FEATHER;
 				changes++;
 			}
 			//-Human face
@@ -3022,9 +3029,9 @@ package classes.Items
 				outputText("\n\nWhile chewing, your mind becomes more and more tranquil.  You find it hard to even remember your mission, let alone your name.  <b>Maybe more kanga fruits will help?</b>");
 			}
 			//-Speed to 70
-			if (player.spe < 70 && rand(3) == 0) {
+			if (player.spe100 < 70 && rand(3) == 0) {
 				//2 points up if below 40!
-				if (player.spe < 40) dynStats("spe", 1);
+				if (player.spe100 < 40) dynStats("spe", 1);
 				dynStats("spe", 1);
 				outputText("\n\nYour legs fill with energy as you eat the kanga fruit.  You feel like you could set a long-jump record!  You give a few experimental bounds, both standing and running, with your newfound vigor.  Your stride seems longer too; you even catch a bit of air as you push off with every powerful step.");
 				changes++;
@@ -3060,10 +3067,11 @@ package classes.Items
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+					if (player.eyeType == EYES_FOUR_SPIDER_EYES || player.eyeType == EYES_SPIDER) outputText("  Your arachnid eyes are gone!</b>");
 					outputText("  <b>You have normal, humanoid eyes again.</b>");
 				}
 				player.eyeType = EYES_HUMAN;
+				player.eyeCount = 2;
 				changes++;
 			}
 			//****************
@@ -3217,13 +3225,13 @@ package classes.Items
 			//Stat Changes
 			//*************
 			//(If speed<70, increases speed)
-			if (player.spe < 70 && changes < changeLimit && rand(3) == 0) {
+			if (player.spe100 < 70 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour reflexes feel much faster. Experimentally, you make a grab at a fly on a nearby rock and quickly snatch it out of the air.  A compulsion to stuff it in your mouth and eat it surfaces, but you resist the odd desire.  Why would you ever want to do something like that?");
 				dynStats("spe", 1.5);
 				changes++;
 			}
 			//(If speed>80, decreases speed down to minimum of 80)
-			if (player.spe > 80 && changes < changeLimit && rand(3) == 0) {
+			if (player.spe100 > 80 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou feel like resting high in the trees and waiting for your unsuspecting prey to wander below so you can take them without having to exert yourself.  What an odd thought!");
 				dynStats("spe", -1.5);
 				changes++;
@@ -3241,13 +3249,13 @@ package classes.Items
 				changes++;
 			}
 			//(increase toughness to 60)
-			if (changes < changeLimit && rand(3) == 0 && player.tou < 60) {
+			if (changes < changeLimit && rand(3) == 0 && player.tou100 < 60) {
 				outputText("\n\nStretching languidly, you realize you're feeling a little tougher than before, almost as if you had a full-body shell of armor protecting your internal organs.  How strange.  You probe at yourself, and while your " + player.skinFurScales() + " doesn't feel much different, the underlying flesh does seem tougher.");
 				dynStats("tou", 1);
 				changes++;
 			}
 			//(decrease strength to 70)
-			if (player.str > 70 && rand(3) == 0) {
+			if (player.str100 > 70 && rand(3) == 0) {
 				outputText("\n\nLethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  ");
 				if (player.spiderScore() < 4) outputText("Wait, you're not a spider, that doesn't make any sense!");
 				else outputText("Well, maybe you should put your nice, heavy abdomen to work.");
@@ -3379,7 +3387,8 @@ package classes.Items
 			}
 			//eyes!
 			if (player.hasPlainSkin() && (player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_HUMAN) && player.eyeType == EYES_HUMAN && rand(4) == 0 && changes < changeLimit) {
-				player.eyeType = EYES_FOUR_SPIDER_EYES;
+				player.eyeType = EYES_SPIDER;
+				player.eyeCount = 4;
 				changes++;
 				outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!");
 				dynStats("int", 5);
@@ -3500,32 +3509,32 @@ package classes.Items
 				}
 			}
 			//[increase Intelligence, Libido and Sensitivity]
-			if (changes < changeLimit && rand(3) == 0 && (player.lib < 80 || player.inte < 80 || player.sens < 80)) {
+			if (changes < changeLimit && rand(3) == 0 && (player.lib100 < 80 || player.inte100 < 80 || player.sens100 < 80)) {
 				outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
-				if (player.inte < 80) dynStats("int", 4);
-				if (player.lib < 80) dynStats("lib", 1);
-				if (player.sens < 80) dynStats("sen", 1);
+				if (player.inte100 < 80) dynStats("int", 4);
+				if (player.lib100 < 80) dynStats("lib", 1);
+				if (player.sens100 < 80) dynStats("sen", 1);
 				//gain small lust also
 				dynStats("lus", 10);
 				changes++;
 			}
 			//[decrease Strength] (to some floor) // I figured 15 was fair, but you're in a better position to judge that than I am.
-			if (changes < changeLimit && rand(3) == 0 && player.str > 40) {
+			if (changes < changeLimit && rand(3) == 0 && player.str100 > 40) {
 				outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
 				dynStats("str", -1);
-				if (player.str > 60) dynStats("str", -1);
-				if (player.str > 80) dynStats("str", -1);
-				if (player.str > 90) dynStats("str", -1);
+				if (player.str100 > 60) dynStats("str", -1);
+				if (player.str100 > 80) dynStats("str", -1);
+				if (player.str100 > 90) dynStats("str", -1);
 				changes++;
 			}
 			//[decrease Toughness] (to some floor) // 20 or so was my thought here
-			if (changes < changeLimit && rand(3) == 0 && player.tou > 30) {
-				if (player.tou < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
+			if (changes < changeLimit && rand(3) == 0 && player.tou100 > 30) {
+				if (player.tou100 < 60) outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your supple skin isn't going to offer you much protection.");
 				else outputText("\n\nYou feel your skin becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
 				dynStats("tou", -1);
-				if (player.tou > 60) dynStats("tou", -1);
-				if (player.tou > 80) dynStats("tou", -1);
-				if (player.tou > 90) dynStats("tou", -1);
+				if (player.tou100 > 60) dynStats("tou", -1);
+				if (player.tou100 > 80) dynStats("tou", -1);
+				if (player.tou100 > 90) dynStats("tou", -1);
 				changes++;
 			}
 
@@ -3737,7 +3746,7 @@ package classes.Items
 							colorChoices = KitsuneScene.basicKitsuneFur;
 				else
 					colorChoices = foxFurColors;
-				player.setFurColor(colorChoices, {type: UNDER_BODY_TYPE_FUR}, true);
+				player.setFurColor(colorChoices, {type: UNDER_BODY_TYPE_FURRY}, true);
 				changes++;
 			}
 			//[Grow Fox Legs]
@@ -3830,29 +3839,29 @@ package classes.Items
 			//BASIC STATS
 			//**********************
 			//[increase Intelligence, Libido and Sensitivity]
-			if (player.inte < 100 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
+			if (player.inte100 < 100 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
 				outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
 				//Raise INT, Lib, Sens. and +10 LUST
 				dynStats("int", 2, "lib", 1, "sen", 2, "lus", 10);
 				changes++;
 			}
 			//[decrease Strength toward 15]
-			if (player.str > 15 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			if (player.str100 > 15 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
 				dynStats("str", -1);
-				if (player.str > 70) dynStats("str", -1);
-				if (player.str > 50) dynStats("str", -1);
-				if (player.str > 30) dynStats("str", -1);
+				if (player.str100 > 70) dynStats("str", -1);
+				if (player.str100 > 50) dynStats("str", -1);
+				if (player.str100 > 30) dynStats("str", -1);
 				changes++;
 			}
 			//[decrease Toughness toward 20]
-			if (player.tou > 20 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			if (player.tou100 > 20 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				//from 66 or less toughness
-				if (player.tou <= 66) outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
+				if (player.tou100 <= 66) outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
 				//from 66 or greater toughness
 				else outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
 				dynStats("tou", -1);
-				if (player.tou > 66) dynStats("tou", -1);
+				if (player.tou100 > 66) dynStats("tou", -1);
 				changes++;
 			}
 			if (mystic && changes < changeLimit && rand(2) == 0 && player.cor < (100 + player.corruptionTolerance())) {
@@ -4009,7 +4018,7 @@ package classes.Items
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
 			var theFurColor:String = player.furColor;
-			if (player.hasFur() && player.underBody.type == UNDER_BODY_TYPE_FUR && player.furColor != player.underBody.skin.furColor)
+			if (player.hasFur() && player.underBody.type == UNDER_BODY_TYPE_FURRY && player.furColor != player.underBody.skin.furColor)
 				theFurColor = player.furColor + " and " + player.underBody.skin.furColor;
 
 			if ((player.hasFur() 

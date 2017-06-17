@@ -1288,7 +1288,7 @@ private function sheilaXPThreeSexyTimeGuardDuty():void {
 	
 	//set sheila xp = 4, small lib-based lust damage if lib < 40, or large if lib >= 40; advance time 1 hr
 	flags[kFLAGS.SHEILA_XP] = 4;
-	if (player.lib < 40) dynStats("lus", 5);
+	if (player.lib100 < 40) dynStats("lus", 5);
 	else dynStats("lus", 15);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2849,7 +2849,7 @@ private function sheilaGetsRapedWithADildont():void {
 internal function getBeatUpBySheila():void {
 	clearOutput();
 	outputText("You slump down before Sheila, breathing heavily; the woman ");
-	if (monster.lust < 75) {
+	if (monster.lust100 < 75) {
 		outputText("takes the opportunity to grab her catch and take off running!  Even if you wanted to, you couldn't catch her now... you collapse, head swimming in ");
 		if (player.HP < 1) outputText("colorful spots");
 		else outputText("fantasies of her, stark naked but for her hat and waiting with her legs open");
@@ -3894,7 +3894,7 @@ private function talkToDemonSheilaAboutWhatNow():void {
 private function demonSheilaTalkAnotherQuestion():void {
 	clearOutput();
 	//(if lust <=99)
-	if (player.lust <= 99) {
+	if (player.lust100 <= 99) {
 		outputText("Sheila reaches farther down, ");
 		//(cock)
 		if (player.hasCock()) outputText("slipping more of her finger and thumb around your penis");

@@ -20,15 +20,15 @@ package classes.Items.Consumables
 		{
 			clearOutput();
 			outputText("You open the small black book, and discover it to be an instructional book on the use of black magic.  Most of it is filled with generic information about black magic - how it is drawn from emotions (typically lust), and how it has the power to affect bodies and emotions.  It also warns against using it on oneself, as it is difficult to draw on your emotions while meddling with your own body.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (player.inte < 30) {
+			if (player.inte100 < 30) {
 				outputText("\n\nYou feel greatly enlightened by your time spent reading.");
 				dynStats("int", 4);
 			}
-			else if (player.inte < 60) {
+			else if (player.inte100 < 60) {
 				outputText("\n\nSpending some time reading was probably good for you, and you definitely feel smarter for it.");
 				dynStats("int", 2);
 			}
-			else if (player.inte < 80) {
+			else if (player.inte100 < 80) {
 				outputText("\n\nAfter reading the small tome your already quick mind feels invigorated.");
 				dynStats("int", 1);
 			}

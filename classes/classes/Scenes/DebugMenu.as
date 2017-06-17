@@ -193,6 +193,7 @@ import classes.Items.*
 			transformativeArray.push(consumables.SNAKOIL);
 			transformativeArray.push(consumables.SPHONEY);
 			transformativeArray.push(consumables.TAURICO);
+			transformativeArray.push(consumables.TOTRICE);
 			transformativeArray.push(consumables.TRAPOIL);
 			transformativeArray.push(consumables.TSCROLL);
 			transformativeArray.push(consumables.TSTOOTH);
@@ -928,7 +929,6 @@ import classes.Items.*
 		];
 		private static const EYE_TYPE_CONSTANTS:Array = [
 			[EYES_HUMAN, "(0) HUMAN"],
-			[EYES_FOUR_SPIDER_EYES, "(1) FOUR_SPIDER_EYES"],
 			[EYES_BLACK_EYES_SAND_TRAP, "(2) BLACK_EYES_SAND_TRAP"],
 			/* [INTERMOD: xianxia]
 			[EYES_CAT_SLITS, "(3) CAT_SLITS"],
@@ -944,6 +944,7 @@ import classes.Items.*
 			[EYES_DRAGON, "(4) DRAGON"],
 			[EYES_BASILISK, "(5) BASILISK"],
 			[EYES_WOLF, "(6) WOLF"],
+			[EYES_SPIDER, "(7) SPIDER"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[EARS_HUMAN, "(0) HUMAN"],
@@ -1050,7 +1051,8 @@ import classes.Items.*
 			showChangeOptions(bodyPartEditorHead, page, TONGUE_TYPE_CONSTANTS, changeTongueType);
 		}
 		private function changeEyeType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.eyeType = setIdx;
+			if (setIdx >= 0) player.eyeType = setIdx;
+			if (player.eyeType == EYES_SPIDER) player.eyeCount = 4;
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorHead, page, EYE_TYPE_CONSTANTS, changeEyeType);
@@ -1404,7 +1406,7 @@ import classes.Items.*
 			player.skinAdj = "tough";
 			player.skinDesc = "shield-shaped dragon scales";
 			player.furColor = player.hairColor;
-			player.underBody.type = UNDER_BODY_TYPE_DRAGON;
+			player.underBody.type = UNDER_BODY_TYPE_REPTILE;
 			player.underBody.copySkin({        // copy the main skin props to the underBody skin ...
 				desc: "ventral dragon scales"  // ... and only override the desc
 			});

@@ -335,7 +335,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(". You reverse direction and slide up, filling the air with the sloppy sound of withdrawing phallus, then drop back down, using the momentum to spread your buttery lips over the first obstruction. Your eyes actually roll back from the raw sensation of it.");
 			outputText("\n\nSplashes of warm pre-cum splatter off of your cervix. The big boy likes it.");
 			outputText("\n\nIt’s hard to think about much right now. Whether it’s his pheromone-laced scent pushing you into an artificial heat");
-			if (player.lust >= 80)
+			if (player.lust100 >= 80)
 			{
 				outputText(" - not that you needed much help -");
 			}

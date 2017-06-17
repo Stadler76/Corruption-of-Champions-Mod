@@ -37,14 +37,14 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
 			//Speed raises up to 75
-			if (player.spe < 75 && rand(3) === 0 && changes < changeLimit) {
+			if (player.spe100 < 75 && rand(3) === 0 && changes < changeLimit) {
 				//low speed
-				if (player.spe <= 30) {
+				if (player.spe100 <= 30) {
 					outputText("\n\nYou feel... more balanced, sure of step. You're certain that you've become just a little bit faster.");
 					dynStats("spe", 2);
 				}
 				//medium speed
-				else if (player.spe <= 60) {
+				else if (player.spe100 <= 60) {
 					outputText("\n\nYou stumble as you shift position, surprised by how quickly you move. After a moment or two of disorientation, you adjust. You're certain that you can run faster now.");
 					dynStats("spe", 1);
 				}
@@ -56,7 +56,7 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Strength raises to 40
-			if (player.str < 40 && rand(3) === 0 && changes < changeLimit) {
+			if (player.str100 < 40 && rand(3) === 0 && changes < changeLimit) {
 				if (rand(2) === 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
 				else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
 				dynStats("str", 1);
@@ -64,22 +64,22 @@ package classes.Items.Consumables
 			}
 			//Strength ALWAYS drops if over 60
 			//Does not add to change total
-			else if (player.str > 60 && rand(2) === 0) {
+			else if (player.str100 > 60 && rand(2) === 0) {
 				outputText("\n\nShivers run from your head to your toes, leaving you feeling weak.  Looking yourself over, your muscles seemed to have lost some bulk.");
 				dynStats("str", -2);
 			}
 			//Toughness drops if over 50
 			//Does not add to change total
-			if (player.tou > 50 && rand(2) === 0) {
+			if (player.tou100 > 50 && rand(2) === 0) {
 				outputText("\n\nYour body seems to compress momentarily, becoming leaner and noticeably less tough.");
 				dynStats("tou", -2);
 			}
 			//Intelliloss
 			if (rand(4) === 0 && changes < changeLimit) {
 				//low intelligence
-				if (player.inte < 15) outputText("\n\nYou feel like something is slipping away from you but can't figure out exactly what's happening.  You scrunch up your " + player.face() + ", trying to understand the situation.  Before you can reach any kind of conclusion, something glitters in the distance, distracting your feeble mind long enough for you to forget the problem entirely.");
+				if (player.inte100 < 15) outputText("\n\nYou feel like something is slipping away from you but can't figure out exactly what's happening.  You scrunch up your " + player.face() + ", trying to understand the situation.  Before you can reach any kind of conclusion, something glitters in the distance, distracting your feeble mind long enough for you to forget the problem entirely.");
 				//medium intelligence
-				else if (player.inte < 50) {
+				else if (player.inte100 < 50) {
 					outputText("\n\nYour mind feels somewhat sluggish, and you wonder if you should just lie down ");
 					if (rand(2) === 0) {
 						outputText("somewhere and ");
@@ -97,7 +97,7 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Libido gain
-			if (player.lib < 80 && changes < changeLimit && rand(4) === 0) {
+			if (player.lib100 < 80 && changes < changeLimit && rand(4) === 0) {
 				//Cat dicked folks
 				if (player.countCocksOfType(CockTypesEnum.CAT) > 0) {
 					temp = player.findFirstCockType(CockTypesEnum.CAT);
@@ -109,7 +109,7 @@ package classes.Items.Consumables
 				//Else –
 				else {
 					outputText("\n\nA rush of tingling warmth spreads through your body as it digests the fruit.  You can feel your blood pumping through your extremities, making them feel sensitive and surprisingly sensual.  It's going to be hard to resist getting ");
-					if (player.lust > 60) outputText("even more ");
+					if (player.lust100 > 60) outputText("even more ");
 					outputText("turned on.");
 				}
 				dynStats("lib", 1, "sen", .25);
@@ -311,7 +311,7 @@ package classes.Items.Consumables
 				outputText("\n\nYour " + player.skinDesc + " begins to tingle, then itch. ");
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
-				player.setFurColor(catFurColors, {type: UNDER_BODY_TYPE_FUR}, true);
+				player.setFurColor(catFurColors, {type: UNDER_BODY_TYPE_FURRY}, true);
 				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of " + player.furColor + " fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
 				changes++;
 			}

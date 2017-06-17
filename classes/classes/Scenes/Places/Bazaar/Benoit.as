@@ -751,7 +751,15 @@ private function talkToBenoit():void {
 		var choice:int;
 		
 		/* BUILD ZE CHOICES!*/
-		var choices:Array = [0,1,2,3,4,5,6,7,8];
+		var choices:Array = [0, 1, 2, 3, 4, 5, 6, 7];
+		//option 8 (cockatrice talk) only, if met harpies and basilisks before
+		if (flags[kFLAGS.CODEX_ENTRY_HARPIES] > 0 && flags[kFLAGS.CODEX_ENTRY_BASILISKS] > 0) {
+			choices[choices.length] = 8;
+			if (flags[kFLAGS.COCKATRICES_UNLOCKED] <= 0) {
+				// higher chance, if not yet unlocked
+				choices[choices.length] = 8;
+			}
+		}
 		//option 9 is non-lover non-fem only
 		if (!benoitLover() && benoitMF("he","she") == "he") choices[choices.length] = 9;
 		//Special male benoit fucker only talks
@@ -823,8 +831,17 @@ private function talkToBenoit():void {
 			if (silly()) outputText("\n\nThe basilisk rubs Pierre behind the ear as " + benoitMF("he","she") + " thinks.  \"<i>I did once get a group of demons coming in ere, asking me what 'cheese omelette' is in basilisk.  When I told zem, zey ran away laughing, shouting 'Zat is all you can say! Zat is all you can say!'</i>\"  " + benoitMF("He","She") + " shrugs, irritated.  \"<i>Arseholes.</i>\"");
 		}
 		else if (choice == 8) {
-			outputText("You ask " + benoitMF("Benoit","Benoite") + " what results when basilisks mate with harpies.");
-			outputText("\n\n\"<i>Most of ze time?  Basilisks,</i>\" " + benoitMF("he","she") + " replies, carefully counting gems with " + benoitMF("his","her") + " fingers.  \"<i>Some of ze time?  'Arpies.  But ze arpies feed zeir basilisk children to zeir chicks if ze former do not get away in time, so it works out.  Really, we are doing zem and ze world a favor by stealing zeir eggs - if we weren't around ze 'ole world would be drowned in guano by now.</i>\"  Satisfied with the takings, " + benoitMF("he","she") + " stows the money away underneath the counter.  \"<i>Very rarely, you get cockatrices.  Now ZEY are weird-looking.</i>\"");
+			outputText("You ask [benoit name] what results when basilisks mate with harpies.");
+			outputText("\n\n\"<i>Most of ze time?  Basilisks,</i>\" [benoit ey] replies, carefully counting gems with [benoit eir] fingers."
+			          +"  \"<i>Some of ze time?  'Arpies.  But ze arpies feed zeir basilisk children to zeir chicks if ze former do not get away"
+			          +" in time, so it works out.  Really, we are doing zem and ze world a favor by stealing zeir eggs - if we weren't around ze"
+			          +" 'ole world would be drowned in guano by now.</i>\"  Satisfied with the takings, [benoit ey] stows the money away underneath"
+			          +" the counter.  \"<i>Very rarely, you get cockatrices.  Now ZEY are weird-looking.</i>\"");
+			if (flags[kFLAGS.COCKATRICES_UNLOCKED] <= 0) {
+				outputText("\n\n<b>Perhaps you should try to find one of these elusive hybrids."
+				          +" You suspect the high mountains would be the best place to look.</b>");
+				flags[kFLAGS.COCKATRICES_UNLOCKED] = 1;
+			}
 		}
 		else if (choice == 9) {
 			//non-lover non-fem only

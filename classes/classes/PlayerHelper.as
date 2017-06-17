@@ -42,6 +42,11 @@ package classes
 			return hasUnderBody(noSnakes) && underBody.skin.hasFur();
 		}
 
+		public function hasFeatheredUnderBody(noSnakes:Boolean = false):Boolean
+		{
+			return hasUnderBody(noSnakes) && underBody.skin.hasFeathers();
+		}
+
 		public function hasDragonHorns(fourHorns:Boolean = false):Boolean
 		{
 			return (!fourHorns && horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
@@ -65,8 +70,7 @@ package classes
 		public function hasReptileUnderBody(withSnakes:Boolean = false):Boolean
 		{
 			var underBodies:Array = [
-				UNDER_BODY_TYPE_LIZARD,
-				UNDER_BODY_TYPE_DRAGON,
+				UNDER_BODY_TYPE_REPTILE,
 			];
 
 			if (withSnakes) {
@@ -74,6 +78,16 @@ package classes
 			}
 
 			return underBodies.indexOf(underBody.type) != -1;
+		}
+
+		public function hasCockatriceSkin():Boolean
+		{
+			return skinType == SKIN_TYPE_LIZARD_SCALES && underBody.type == UNDER_BODY_TYPE_COCKATRICE;
+		}
+
+		public function hasNonCockatriceAntennae():Boolean
+		{
+			return [ANTENNAE_NONE, ANTENNAE_COCKATRICE].indexOf(antennae) == -1
 		}
 
 		public function hasDragonWings(large:Boolean = false):Boolean

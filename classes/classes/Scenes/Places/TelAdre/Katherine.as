@@ -2,6 +2,8 @@ package classes.Scenes.Places.TelAdre {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Katherine extends TelAdreAbstractContent implements TimeAwareInterface {
 
@@ -550,10 +552,10 @@ package classes.Scenes.Places.TelAdre {
 		
 		public function katherineSprite(naked:Boolean = false):void {
 			if (naked) {
-				spriteSelect(127);
+				spriteSelect(SpriteDb.s_katherine_vagrant);
 				return;
 			}
-			spriteSelect(128); //Currently returns this sprite.
+			spriteSelect(SpriteDb.s_katherine_vagrant); //Currently returns this sprite.
 		}
 		
 //If player has Silver Bell key item and is at Wet Bitch when Scylla is not busy with her Addicts Anonymous group
@@ -5268,7 +5270,7 @@ private function suckleTacularKats():void {
 	else {
 		outputText("quickly striding over and waiting, impatiently, as you " + (isAt(KLOC_KATHS_APT) ? "position yourself on her bed" : "find a comfortable position and sit down") + ".  Once you have, she wastes no time in plopping down in front of you.  She nuzzles her cheek against your breast but then, to your amazement, shyly backs away.\n\n");
 		outputText("“<i>I... um... is this really okay?</i>” she asks, her voice barely above a whisper.  With a hint of exasperation you roll ");
-		if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("both sets of ");
+		if (player.eyeType == EYES_FOUR_SPIDER_EYES || player.eyeCount > 2) outputText("all of ");
 		outputText("your eyes and");
 	}
 	outputText(" gently take her by the cheeks, insistently bringing her head close so that her lips are bumping right against your " + player.nippleDescript(0) + "s.  She takes the obvious hint and eagerly swallows it, eyes closing as she leans in and starts to suckle.  Purring with contentment, she sends the most delicious vibrations into your breasts, her rough, bristly tongue stroking and caressing to help coax your body into giving up its sweet, rich milk.\n\n");

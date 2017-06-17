@@ -40,18 +40,18 @@
 					outputText("Jojo frantically jerks his " + player.cockDescriptShort(0) + ", stroking the " + player.cockDescriptShort(0) + " as it leaks pre-cum at the sight of you.  ");
 					lust += 15;
 			}
-			
-			if (lust >= eMaxLust()) {
+
+if (lust >= maxLust()) {
 				doNext(game.combat.endLustVictory);
 				return;
 			}
-			else if (lust >= 85)
+			else if (lust100 >= 85)
 				outputText("The mouse is panting and softly whining, each movement seeming to make his bulge more pronounced.  You don't think he can hold out much longer.  ");
-			else if (lust >= 70)
+			else if (lust100 >= 70)
 				outputText("The mouse is having trouble moving due to the rigid protrusion from his groin.  ");
-			else if (lust >= 60)
+			else if (lust100 >= 60)
 				outputText("The mouse's eyes constantly dart over your most sexual parts, betraying his lust.  ");
-			else if (lust > 50)
+			else if (lust100 > 50)
 				outputText("The mouse's skin remains flushed with the beginnings of arousal.  ");
 			doNext(game.playerMenu);
 		}

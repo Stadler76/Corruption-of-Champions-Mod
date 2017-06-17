@@ -8,6 +8,8 @@ package classes.Scenes.Dungeons
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Scenes.Dungeons.DesertCave.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	import classes.Scenes.Areas.Desert.CumWitch;
 	
@@ -66,7 +68,7 @@ package classes.Scenes.Dungeons
 			playerMenu();
 		}
 		public function fightCumWitch():void {
-			spriteSelect(108);
+			spriteSelect(SpriteDb.s_cumWitch);
 			clearOutput();
 			outputText("A robed witch crests one of the dunes, her sable skin glistening with moisture in the unforgiving desert sun.  She spies you, and her dusky lips curl up in a smile while a white staff materializes in her hands.  Playfully, the woman calls, \"<i>I'm going to cast a spell on you...</i>\"");
 			startCombat(new CumWitch());
@@ -460,10 +462,10 @@ package classes.Scenes.Dungeons
 			outputText("writhing pile of female flesh, you place your hands on your [hips] and survey the pile for the prettiest of the litter.  They're all gorgeously tanned with lustrous, blonde hair, but there's enough variety in facial features, hair style, breast size, and hips for you to narrow down which one you'd like to take the most.  She's a true beauty in the classical sense, at least facially.  She has a small, button nose, ripe lips, and hair that's tied back in a waist-length ponytail.  Her four breasts are well-rounded E-cups, big and round enough for your fingers to sink into but just barely pert enough not to show any sag.");
 			
 			outputText("\n\nBig, brown eyes look up at you with obvious fear as you approach.  Well, that won't do.  You hold your hand out to her calmly, putting as welcoming a smile as you can for your fallen foe.  She looks around her ");
-			if (monster.lust >= monster.eMaxLust()) outputText("masturbating companions");
+			if (monster.lust >= monster.maxLust()) outputText("masturbating companions");
 			else outputText("groaning companions");
 			outputText(" for advice but finds none, and with no other choice, she takes your hand and allows you to separate her from her kin.  You put a hand to her cheek and tell her that you won't hurt her.  She and her kind have incited a great deal of lust in you, and while you intend to vent it on her, you don't see why it has to be unpleasant for her.");
-			if (monster.lust >= monster.eMaxLust()) outputText("  Judging by the omnipresent flush on her cheeks and the scent of female honey inundating the air, she's more than ready to help you with your problem.");
+			if (monster.lust >= monster.maxLust()) outputText("  Judging by the omnipresent flush on her cheeks and the scent of female honey inundating the air, she's more than ready to help you with your problem.");
 			else outputText("  Her cheekbones slowly color at the thought, turning almost entirely beet-red.  At the same time, her nipples seem to tighten beneath her robes, signalling her body's acceptance of your intent.");
 			
 			outputText("\n\nThe beautiful sand witch shudders and shrugs out of her robes, allowing her four, sweat-glossed breasts to sway free just inches away.  You immediately grasp one in your hand and grope it - not too forcefully, just enough to admire her curvy bosom properly.  She flinches at the contact, but when your exploratory thumb caresses the side of her areola, she tilts her head back and sighs.  A single drop of milk escapes her lusty teat onto your finger, and you lift it to your lips to taste.  Creamy, sweet flavor tickles your tongue.  You hum in unexpected delight, how marvellous!");
@@ -473,7 +475,7 @@ package classes.Scenes.Dungeons
 			if (player.tallness < 60) outputText("through her buttcheeks");
 			else outputText("along her arched spine");
 			outputText(", fully engorged and ready for action.  For now, you're content to continue to molest your chosen fuck-toy, dipping a pair of fingers into her ");
-			if (monster.lust >= monster.eMaxLust()) outputText("well-soaked");
+			if (monster.lust >= monster.maxLust()) outputText("well-soaked");
 			else outputText("rapidly-moistening");
 			outputText(" cunts in order to make sure she's prepared.  The witch bites her lip to stifle a lewd moan, so you drag the pads of your fingers across each of her clits simultaneously.  This shatters whatever restraint she was showing into a little more than slick cunt-juice.  Even now, it's dripping down her inner thighs.  She's properly moaning with your strokes now, and you judge she's ready.");
 			
@@ -634,8 +636,8 @@ package classes.Scenes.Dungeons
 			}
 			
 			outputText("\n\nThe dark-skinned futanari strokes");
-			if (monster.lust < 65) outputText(" herself to full hardness, smiling when thick strings of cum begin to drizzle from her swollen cock-tip.");
-			else if (monster.lust < 85) outputText(" herself until cum begins to drizzle from her swollen cock-tip.");
+			if (monster.lust100 < 65) outputText(" herself to full hardness, smiling when thick strings of cum begin to drizzle from her swollen cock-tip.");
+			else if (monster.lust100 < 85) outputText(" herself until cum begins to drizzle from her swollen cock-tip.");
 			else outputText(" herself, gathering up the constantly-dripping cum and smearing it all over her shaft.");
 			
 			outputText("\n\nHer tongue licks her lips in anticipation as she readies herself, though she stops a moment later when she sees you still have a bit of fight in your eyes");
@@ -844,9 +846,9 @@ package classes.Scenes.Dungeons
 				outputText("Collapsing under the weight of your injuries, you tumble back onto your [butt], kicking up a cloud of sand as you fall fully prone.  Laughing at your predicament, the ebony futanari cooly advances, tossing her wide-brimmed hat aside as she goes.  \"<i>Oh you poor, poor Champion.  Did you ask the Sand Mother to let us out so that we could this?  Does the strong, mighty " + player.mf("hero","heroine") + " have a thing for submitting to my touches and fat cock?  Or perhaps, you want something else...</i>\"");
 			
 				outputText("\n\nCaressing you as she removes your [armor], the witch shows remarkable tenderness for your injuries, knitting the worst with magic to ensure your well-being and kissing others as if it would somehow make them all better.  She stops at your groin to consider [eachCock] for a moment, slithering her fingers around [oneCock] and hefting its supple, ");
-				if (player.lust < 40) outputText("flaccid");
-				else if (player.lust < 60) outputText("semi-flaccid");
-				else if (player.lust < 70) outputText("semi-hard");
+				if (player.lust100 < 40) outputText("flaccid");
+				else if (player.lust100 < 60) outputText("semi-flaccid");
+				else if (player.lust100 < 70) outputText("semi-hard");
 				else outputText("turgid");
 				outputText(" weight.  Pumping her hand with deft strokes and watching your expression intently, the curvy woman works you into a pleasant, erotic warmth, excitement coursing through your body with such fervor that your remaining wounds seem insignificant in comparison.");
 			}
@@ -1041,7 +1043,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nWorking that black bar is quite an experience.  It feels very different from your " + player.multiCockDescriptLight() + ".  ");
 			//[if (sensitivity < 70)]
-			if (player.sens < 70) outputText("It's more sensitive than yours, for one thing, and");
+			if (player.sens100 < 70) outputText("It's more sensitive than yours, for one thing, and");
 			else outputText("It isn't as sensitive as yours {are/is}, for one thing, but");
 			outputText(" the flow of her constantly dribbling pre, tingling with magical power is something that you've never felt before.  Making things more interesting, the position that you're in leaves your grip on her dick remarkably different than how you'd grab your own while masturbating.  Of course what is important is that you want to rub every last inch of her lovely length, and feel every second of it through her strange spell.  The feeling of your cum being sucked out of your [balls] only makes the whole experience feel even better.");
 			
@@ -1071,7 +1073,7 @@ package classes.Scenes.Dungeons
 
 
 		public function defeatedByCumWitch():void {
-			spriteSelect(108);
+			spriteSelect(SpriteDb.s_cumWitch);
 			if (kGAMECLASS.inDungeon) {
 				//Dudally-diddly.
 				if (player.hasCock() && (player.gender == 1 || rand(2) == 0)) cumWitchCumPumpBadEnd();
@@ -1092,7 +1094,7 @@ package classes.Scenes.Dungeons
 
 		//*Victory Intro
 		public function cumWitchDefeated():void {
-			spriteSelect(108);
+			spriteSelect(SpriteDb.s_cumWitch);
 			clearOutput();
 			//(HP)
 			if (monster.HP < 1) outputText("The chocolate-skinned witch collapses down onto her hands and knees with the tattered remnants of her robes swirling about her.  With her clothing destroyed, you're treated to the perfect view of her semi-erect cock and swollen testes swaying enticingly beneath her, paired with the glimmering wetness of her juicy cunny - also on display.  Her udder-like melons sway and jiggle in sympathy to her uncoordinated swaying.  She grumbles, \"<i>You've beaten me, interloper...</i>\"");
@@ -1137,7 +1139,7 @@ package classes.Scenes.Dungeons
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			outputText("You shuck out of your [armor] in eager anticipation, [eachCock] already ");
-			if (player.lust < 50) outputText("half-hard");
+			if (player.lust100 < 50) outputText("half-hard");
 			else outputText("rock-hard");
 			outputText(" and pulsing with growing readiness.  The cum witch looks up at you with disdain, but the rigidity of her shaft and sloppy wetness of her flushed quim leave no doubt as to her state.   Her body blushes honestly as you reposition her, spreading her legs nice and wide.  You have to lift her hefty sack to expose the thick, wet lips of her pussy.  Jumping in response, her fat cock oozes a trickle of precum onto her dusky belly, oiling her dusky skin into a sensual shine.");
 			
@@ -1461,7 +1463,7 @@ package classes.Scenes.Dungeons
 				
 			outputText("\n\nSanura asks that you kneel, and you eagerly comply.  ");
 			//[if dick isn't already hard and PC knows what's coming]
-			if (player.lust < 50 && flags[kFLAGS.PAWJOBS] == 0) {
+			if (player.lust100 < 50 && flags[kFLAGS.PAWJOBS] == 0) {
 				outputText("Even as you drop to your knees before Sanura, your cock");
 				if (player.cockTotal() > 1) outputText("s");
 				outputText(" begin");
@@ -1476,7 +1478,7 @@ package classes.Scenes.Dungeons
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" with a soft, skilled tongue.");
 			//[if pc was soft before]
-			if (player.lust < 50 && flags[kFLAGS.PAWJOBS] == 0) {
+			if (player.lust100 < 50 && flags[kFLAGS.PAWJOBS] == 0) {
 				outputText("  It isn't long before her oral ministrations have your cock");
 				if (player.cockTotal() > 1) outputText("s");
 				outputText(" standing erect, throbbing with hunger for more sensation.  You wonder as to what exactly she has planned, but you think it's shaping up to be something good.");
@@ -1491,7 +1493,7 @@ package classes.Scenes.Dungeons
 			else outputText("it");
 			outputText(" sufficiently lubricated, Sanura lifts a foreleg and carefully guides her paw towards your crotch.");
 			//[if PC doesn't expect it]
-			if (player.lust < 50 && flags[kFLAGS.PAWJOBS] == 0) outputText("  You raise your eyebrows in surprise, but you're not in much of a position to do anything about her foot's advance.");
+			if (player.lust100 < 50 && flags[kFLAGS.PAWJOBS] == 0) outputText("  You raise your eyebrows in surprise, but you're not in much of a position to do anything about her foot's advance.");
 			outputText("  She playfully taps at your cock, purring sensually as she sets it bouncing with a light bat.  After watching it for a moment, she hesitantly pushes forward so that her paw gingerly rests against ");
 			if (player.cockTotal() > 1) outputText("one of ");
 			outputText("your shaft");

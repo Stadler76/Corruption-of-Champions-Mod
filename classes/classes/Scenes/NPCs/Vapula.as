@@ -565,9 +565,9 @@ package classes.Scenes.NPCs
 			//lust set to 0
 			player.orgasm('Dick');
 			dynStats("cor", 1);
-			if (player.lib > 10) dynStats("lib", -1);
-			if (player.lib > 50) dynStats("lib", -1);
-			if (player.lib > 70) dynStats("lib", -1);
+			if (player.lib100 > 10) dynStats("lib", -1);
+			if (player.lib100 > 50) dynStats("lib", -1);
+			if (player.lib100 > 70) dynStats("lib", -1);
 			flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
 			flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 			doNext(camp.returnToCampUseOneHour);

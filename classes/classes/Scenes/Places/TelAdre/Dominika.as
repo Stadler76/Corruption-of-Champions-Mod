@@ -2,6 +2,8 @@ package classes.Scenes.Places.TelAdre {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class Dominika extends TelAdreAbstractContent {
 public function Dominika(){
@@ -23,7 +25,7 @@ private function timesFellatrixSucked():Number {
 	return (flags[kFLAGS.DOMINIKA_TIMES_HYPNO_BJ] + flags[kFLAGS.DOMINIKA_TIMES_MULTICOCK_SLOBBERED] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_DOGCOCKS] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_LARGE_COCKS] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_SMALL_COCKS] + flags[kFLAGS.DOMINIKA_VAGINAL_ORAL_RECEIVED] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_HORSECOCKS]);
 }
 public function fellatrixBarApproach():void {
-	spriteSelect(10);
+	spriteSelect(SpriteDb.s_cloaked_dominika);
 	clearOutput();
 	outputText(images.showImage("dominika-first-meeting-at-bar"));
 	//Get the emporerors new groove (sword)
@@ -102,7 +104,7 @@ public function fellatrixBarApproach():void {
 }
 //[\"<i>No thanks</i>\"]
 private function turnDownDominikasKnowledge():void {
-	spriteSelect(10);
+	spriteSelect(SpriteDb.s_cloaked_dominika);
 	clearOutput();
 	outputText("\"<i>Fair enough,</i>\" Dominika nods. \"<i>Let me know if you change your mind.</i>\" The two of you make small talk for a while longer, before you decide to get back to work and excuse yourself.\n\n");
 	cheatTime(1);
@@ -110,7 +112,7 @@ private function turnDownDominikasKnowledge():void {
 }
 //[\"<i>Sure</i>\"]
 private function acceptDominikasKnowledge():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	//Set that PC has received oral offer (its coming further down for sure)
 	flags[kFLAGS.DOMINIKA_STAGE]++;
@@ -223,7 +225,7 @@ private function acceptDominikasKnowledge():void {
 }
 //[All scenes lead to:]
 private function fellatrixSexWarmup():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	//Cooldown ongoing!
 	if (flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] > 0) {
@@ -261,7 +263,7 @@ private function fellatrixSexWarmup():void {
 
 //If \"<i>No.</i>\"]
 private function declineFellatrixOral():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	//No BJs yet.
 	if (!fellatrixSucked()) {
@@ -286,7 +288,7 @@ private function declineFellatrixOral():void {
 }
 //[If \"<i>No.</i>\" twice]
 private function declineFellatrixOralHARDCORE():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText("\"<i>Really?</i>\" she asks again. \"<i>But, I mean... fucking look at these!</i>\" She purses her dark lips, running her tongue over them to emphasize how they glisten in the light. \"<i>Don't tell me you don't think these would feel fucking rad on you.</i>\"\n\nIt's VERY tempting.  Maybe one little round of fellatio?");
 	dynStats("lus", (10 + player.lib/10));
@@ -295,7 +297,7 @@ private function declineFellatrixOralHARDCORE():void {
 
 //[If \"<i>No.</i>\" three times]
 private function declineFellatrixOralSUPERHARDCORE():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText("Dominika stares at you incredulously, then turns away. \"<i>Fine. Just go then. You know where the door is.</i>\" She walks away into another room, closing the door behind her.\n\n");
 
@@ -308,7 +310,7 @@ private function declineFellatrixOralSUPERHARDCORE():void {
 
 
 private function acceptFellatrixOral():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText(images.showImage("dominika-oral-sex"));
 	var x:Number = player.cockThatFits(36);
@@ -591,7 +593,7 @@ private function acceptFellatrixOral():void {
 
 //[Agree with her]
 private function agreeWithDominika():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	//(Corruption increases)
 	dynStats("cor", 2);
@@ -623,7 +625,7 @@ private function agreeWithDominika():void {
 
 //[Non-committal]
 private function ehhhhDominika():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText("You make a small grunt, not even sitting up. Dominika's eyebrows lower after a time, and a bored but amused expression comes to her features. \"<i>I suppose I shouldn't bother asking you anything after we're done, mm?</i>\" She seems content to amuse herself with this telling of events, and you don't question it. \"<i>Well, you should get going soon,</i>\" she says, turning back to her mirror and adjusting her hair. \"<i>You don't want to walk through the desert too late at night. Do visit again.</i>\"\n\n");
 
@@ -635,7 +637,7 @@ private function ehhhhDominika():void {
 }
 //[Disagree with her]
 private function disagreeDominika():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	//(Corruption decrease)
 	dynStats("cor", -2);
@@ -658,7 +660,7 @@ private function disagreeDominika():void {
 
 //[Dream after above scene]
 public function fellatrixDream():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] += 3;
 	outputText("Breathing heavily, you cut through foliage so dark it seems as though you're splitting the night itself. Only the blinking of stars above betrays that you have not stepped directly into the sky. You feel cold, nude, and alone. There is no one for you this far into the woods, no parent to lift you up and carry you to safety, no lover to hold you within her embrace when you are scared. There is only you and the darkness, your enemy and your only companion.\n\n");
 
@@ -693,7 +695,7 @@ private function dominidrama():void {
 
 //[Yes]
 private function dominidramaYes():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText("You have a few guesses as to why the Covenant might be looking for Dominika, and you want to help them. You look back up the road to explain where she's living but as you look at the streets you have an odd feeling in the back of your head. Try as hard as you might, every time you try to picture the path you took to her home all that appears in your mind is her smirking lips. They are gorgeous, but this is not the time you want to be thinking about them.\n\n");
 
@@ -869,7 +871,7 @@ private function dominikaBlowjobs():void {
 }
 
 private function dominikaBlowjobs2():void {
-	spriteSelect(58);
+	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText("Groaning, you roll over, sitting up in your bedroll.  The rays of the sun hitting your face feel particularly unwelcome.  You're not sure what you drank last night, but given your hangover you must have done so.\n\n");
 	outputText("After a lot of water, you feel a little better.  Something nags at the back of your mind, an itch you can't quite scratch but persistently remains.  You feel as though you've forgotten something important, and perhaps even essential, but cannot think of any clues as to what.  ");

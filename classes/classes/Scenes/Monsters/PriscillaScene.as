@@ -3,6 +3,8 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class PriscillaScene extends BaseContent
 	{
@@ -18,7 +20,7 @@ package classes.Scenes.Monsters
 		*/
 		public function goblinElderEncounter():void {
 			clearOutput();
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			//First Time Intro
 			if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ELDER] == 0)
 			{
@@ -68,7 +70,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (doSFWloss()) return;
 			var x:int;
-			if (player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious elder saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back. \n\n");
+			if (player.lust100 <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious elder saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back. \n\n");
 
 			if (player.cockThatFits(monster.vaginalCapacity()) >= 0 && player.hasCock() && (!player.hasVagina() || rand(2) == 0)) 
 			{
@@ -189,7 +191,7 @@ package classes.Scenes.Monsters
 		//[WIN RAEPZ]
 		public function goblinElderRapeIntro():void
 		{
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			clearOutput();
 			outputText("The elder falls to her feet, smashing her titties against the confines of her armor. She looks up at you and sniffles.");
 			
@@ -254,7 +256,7 @@ package classes.Scenes.Monsters
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -281,7 +283,7 @@ package classes.Scenes.Monsters
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblinelder-win-female-taur-rapedfem"));
@@ -392,7 +394,7 @@ package classes.Scenes.Monsters
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			outputText(images.showImage("goblinelder-win-male-corruptedfuck"));
 			outputText("You begin to remove your " + player.armorName + ", looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + player.multiCockDescriptLight());
 			if (player.cockTotal() == 1) outputText(" is");
@@ -472,7 +474,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText(images.showImage("goblinelder-win-male-corruptedbj"));
 			var x:Number = player.biggestCockIndex();
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			outputText("You whip out your stiffening maleness, revealing its ");
 			if (player.cockArea(x) < 80) outputText("nearly ");
 			outputText(" absurd size to your victim.  The goblin-girl's eyes grow to the size of dinner plates in shock as she takes in the view.   Knowing you'll try regardless of the size-mismatch, she removes her spider-silk loincloth, spreads her legs and settles herself more comfortably on the ground.\n\n");
@@ -506,7 +508,7 @@ package classes.Scenes.Monsters
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
@@ -587,7 +589,7 @@ package classes.Scenes.Monsters
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(122);
+			spriteSelect(SpriteDb.s_priscilla);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblinelder-win-male-goblincondomed"));

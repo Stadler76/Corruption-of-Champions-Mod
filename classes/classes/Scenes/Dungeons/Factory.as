@@ -8,6 +8,8 @@ package classes.Scenes.Dungeons
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Scenes.Dungeons.Factory.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	import coc.model.GameModel;
 	
@@ -146,7 +148,7 @@ package classes.Scenes.Dungeons
 		
 		private function drinkCoffee():void {
 			clearOutput();
-			spriteSelect(96);
+			spriteSelect(SpriteDb.s_mrsCoffee);
 			outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or a victim of this place's dark master.");
 			dynStats("lus", 1);
 			HPChange(35, false);
@@ -348,7 +350,7 @@ package classes.Scenes.Dungeons
 					addButton(0, "Iron Key", takeIronKey, null, null, null, "Pick up the iron key. It looks like it might unlock the door in this factory.");
 				}
 				addButton(1, "Coffee", drinkCoffee, null, null, null, "Drink some coffee.");
-				spriteSelect(96);
+				spriteSelect(SpriteDb.s_mrsCoffee);
 			}
 			else {
 				secretarialSuccubus.encounterSuccubus();

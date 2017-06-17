@@ -4,6 +4,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
 
@@ -33,7 +35,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	//End of Interface Implementation
 
 	public function encounterMarae():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		outputText(images.showImage("marae-first-encounter"));
 		outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your " + player.legs() + ".  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ");
 		//Dungeon operational
@@ -238,7 +240,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	private function maraeBadEnd():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		clearOutput();
 		outputText(images.showImage("marae-bad-end"));
 		if (flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n");
@@ -288,7 +290,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	private function maraeStealLethicite(deliberate:Boolean = false):void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		clearOutput();
 		//(SUCCESS)
 		if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate) {
@@ -353,7 +355,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	public function level2MaraeEncounter():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
 		clearOutput();
 		outputText(images.showImage("marae-second-encounter"));
@@ -410,7 +412,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	private function MaraeIIStageII():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		clearOutput();
 		outputText(images.showImage("marae-second-encounter-pt-two"));
 		flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
@@ -420,7 +422,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 			outputText("Marae coos with pleasure and allows a nectar-slicked tentacle to slip free of her flower.   Her sweet, corrupted smell filters through the air, like pollen carried on a spring breeze.  The goddess' fingers trace the outline of her budding clit, and you watch, enraptured, as it swells up and turns purple.  A clear ridge forms underneath the tip, delineating the under-side of a newly grown cock-tip.  Marae bats her eyelashes and strokes the newly-formed growth as it fills out, surpassing the length of any mortal man.  The crown is a shiny, almost slick purple color, fading to green the further down the stalk-like shaft it goes.   She climbs to her feet, fingernails tracing the outline of the newly-formed urethral bulge on her shaft as she glides closer to you.\n\n");
 
 			outputText("Paralyzed by ");
-			if (player.lust > 80) outputText("lust");
+			if (player.lust100 > 80) outputText("lust");
 			else if (player.cor > 50) outputText("indecision");
 			else outputText("worry");
 			outputText(", you don't manage a single backwards step before the warm bulge is rubbing ");
@@ -454,7 +456,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 			outputText("Marae coos with pleasure and allows a nectar-slicked tentacle to slip free of her flower.   Her sweet, corrupted smell filters through the air, like pollen carried on a spring breeze.  You watch, awestruck while the curvy goddess approaches you, cradling a squirming tree-tentacle in each of her hands.  The one in her right twitches and spurts, dribbling seed over her hand in a surprisingly weak display that seems to invigorate the lusty, tainted deity.\n\n");
 
 			outputText("You watch, standing stock-still and paralyzed with ");
-			if (player.lust > 80) outputText("lust");
+			if (player.lust100 > 80) outputText("lust");
 			else if (player.cor > 50) outputText("indecision");
 			else outputText("worry");
 			outputText(".  Marae's advance seems like an inexorable march to your eyes, and before you have a chance to react, she's crushed against you in a full-body hug.  Her tongue digs into your mouth, rooting out your tongue and melting your resistance in an overwhelming, lust-powered assault.  You vision swims for a moment when she releases you and pulls back.  It's hard to focus with the busty, nude image of fertility beckoning you.  It makes " + player.sMultiCockDesc() + " strain to reach her, but she dances back with a knowing smile and says, \"<i>Not yet my eager little subject.  Let me undress you, THEN you can worship me.</i>\"\n\n");
@@ -552,7 +554,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	private function MaraePt2RoundIIIPrizes():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		clearOutput();
 		//[EPILOGUE]
 		//[Dudes]
@@ -672,7 +674,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	private function MaraeIIFlyAway():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		clearOutput();
 		outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!");
 		doNext(camp.returnToCampUseOneHour);
@@ -703,7 +705,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	public function talkToMaraeAboutMinervaPurification():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. She may be Minerva’s best chance of being healed. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 
 		outputText("\n\n\"<i>You return to my island, champion? What brings you here? Is there something troubling you?</i>\" the deity gently asks you.");
@@ -722,7 +724,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 	}
 
 	public function encounterPureMaraeEndgame():void {
-		spriteSelect(40);
+		spriteSelect(SpriteDb.s_marae);
 		clearOutput();
 		outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. After all, you need a good challenge. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 		if (flags[kFLAGS.PURE_MARAE_ENDGAME] == 0) {

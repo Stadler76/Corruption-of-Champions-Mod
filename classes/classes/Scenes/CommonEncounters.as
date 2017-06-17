@@ -12,6 +12,8 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.Monsters.Imp;
+import classes.display.SpriteDb;
+import classes.internals.*;
 
 public class CommonEncounters extends BaseContent implements Encounter {
 
@@ -175,7 +177,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 		unlockCodexImps();
 		doNext(playerMenu);
 		startCombat(new Imp());
-		spriteSelect(29);
+		spriteSelect(SpriteDb.s_imp);
 	}
 
 	public function goblinCombatEncounter():void {
@@ -192,7 +194,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 			outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
 		}
 		startCombat(new Goblin());
-		spriteSelect(24);
+		spriteSelect(SpriteDb.s_goblin);
 	}
 
 

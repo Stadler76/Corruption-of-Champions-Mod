@@ -32,6 +32,7 @@ def getImageIDList():
 							ret.add(name)
 
 	ret.add("monster-hollispawn")  # Hack because matching this would be a giant pain in the ass
+	ret.add("monster-cockatricewithwings")  # Didn't want to add a class WingedCockatrice extends Cockatrice just for that
 
 	print "Found %s image IDs" % len(ret)
 	return ret

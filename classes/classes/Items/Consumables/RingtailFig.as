@@ -31,23 +31,23 @@ package classes.Items.Consumables
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//stat gains:
 			//gain speed to ceiling of 80
-			if (player.spe < 80 && rand(3) === 0 && changes < changeLimit) {
+			if (player.spe100 < 80 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYou twitch and turn your head this way and that, feeling a bit more alert.  This will definitely help when defending your personal space from violators.");
 				changes++;
-				if (player.spe < 40) dynStats("spe", 1);
+				if (player.spe100 < 40) dynStats("spe", 1);
 				dynStats("spe", 1);
 			}
 			//gain sensitivity
-			if (player.sens < 80 && rand(3) === 0 && changes < changeLimit) {
+			if (player.sens100 < 80 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nThe wrinkled rind suddenly feels alarmingly distinct in your hands, and you drop the remnants of the fruit.  Wonderingly, you touch yourself with a finger - you can feel even the lightest pressure on your " + player.skinFurScales() + " much more clearly now!");
-				if (player.sens < 60) dynStats("sen", 2);
+				if (player.sens100 < 60) dynStats("sen", 2);
 				dynStats("sen", 2);
 				changes++;
 			}
 			//lose toughness to floor of 50
-			if (rand(4) === 0 && player.tou > 50 && changes < changeLimit) {
+			if (rand(4) === 0 && player.tou100 > 50 && changes < changeLimit) {
 				outputText("\n\nYou find yourself wishing you could just sit around and eat all day, and spend a while lazing about and doing nothing before you can rouse yourself to get moving.");
-				if (player.tou > 75) dynStats("tou", -1);
+				if (player.tou100 > 75) dynStats("tou", -1);
 				dynStats("tou", -1);
 				changes++;
 			}

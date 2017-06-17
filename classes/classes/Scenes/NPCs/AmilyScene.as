@@ -6,6 +6,8 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -167,8 +169,8 @@ package classes.Scenes.NPCs
 			return flags[kFLAGS.AMILY_FOLLOWER] == 2;
 		}
 		public function amilySprite():void {
-			if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) spriteSelect(3);
-			else spriteSelect(65);
+			if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) spriteSelect(SpriteDb.s_amily);
+			else spriteSelect(SpriteDb.s_amily_defurr);
 		}
 
 		//[Exploring the Ruined Village]

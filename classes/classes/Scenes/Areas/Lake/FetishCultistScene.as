@@ -5,7 +5,9 @@ package classes.Scenes.Areas.Lake
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounter;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 public class FetishCultistScene extends AbstractLakeContent implements Encounter {
 		public function FetishCultistScene()
@@ -47,7 +49,7 @@ public class FetishCultistScene extends AbstractLakeContent implements Encounter
 				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
 			}
 			startCombat(new FetishCultist());
-			spriteSelect(19);
+			spriteSelect(SpriteDb.s_fetish_cultist);
 			doNext(playerMenu);
 		}
 		}

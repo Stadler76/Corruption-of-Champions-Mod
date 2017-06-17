@@ -1,6 +1,8 @@
 package classes 
 {
-	/**
+import flash.utils.setTimeout;
+
+/**
 	 * Class to replace the old and somewhat outdated output-system, which mostly uses the include-file includes/engineCore.as
 	 * @since  08.08.2016
 	 * @author Stadler76
@@ -13,6 +15,7 @@ package classes
 		import coc.view.MainView;
 
 		private static var _instance:Output = new Output();
+		private static const HISTORY_MAX:int = 20;
 
 		public function Output()
 		{
@@ -25,8 +28,7 @@ package classes
 		public static function init():Output { return _instance; }
 
 		protected var _currentText:String = "";
-		public function get currentText():String { return _currentText; }
-		public function set currentText(value:String):void { _currentText = value; }
+		protected var _history:Array = [""];
 
 		public function get mainViewManager():MainViewManager { return kGAMECLASS.mainViewManager; }
 		public function forceUpdate():void { kGAMECLASS.forceUpdate(); }
@@ -52,7 +54,9 @@ package classes
 			// It's needed since those buttons are available even when in the event-tester
 			mainView.hideTestInputPanel();
 
-			_currentText += kGAMECLASS.parser.recursiveParser(text);
+			text = kGAMECLASS.parser.recursiveParser(text);
+			record(text);
+			_currentText += text;
 			if (debug) mainView.setOutputText(_currentText);
 
 			return this;
@@ -120,7 +124,7 @@ package classes
 				mainView.hideMenuButton(MainView.MENU_PERKS);
 				mainView.hideMenuButton(MainView.MENU_STATS);
 			}
-
+			nextEntry();
 			_currentText = "";
 			mainView.clearOutputText();
 			return this;
@@ -138,9 +142,78 @@ package classes
 		public function raw(text:String):Output
 		{
 			_currentText += text;
+			record(text);
 			mainView.setOutputText(_currentText);
 			return this;
 		}
 
+		/**
+		 * Appends a raw text to history, appending to last entry
+		 * @param text The text to be added to history
+		 * @return this
+		 */
+		public function record(text:String):Output {
+			if (_history.length==0) _history=[""];
+			_history[_history.length-1] += text;
+			return this;
+		}
+		/**
+		 * Appends a new text entry to the history
+		 * @param text The text to be added to history as a separate and complete entry
+		 * @return this
+		 */
+		public function entry(text:String):Output {
+			nextEntry();
+			record(text);
+			nextEntry();
+			return this;
+		}
+
+		/**
+		 * Finishes the history entry, starting a new one and removing old entries as
+		 * history grows
+		 * @return this
+		 */
+		public function nextEntry():Output {
+			if (_history.length==0) _history=[""];
+			if (_history[_history.length-1].length>0) _history.push("");
+			while(_history.length > HISTORY_MAX) _history.shift();
+			return this;
+		}
+
+		/**
+		 * Clears current history enter -- removes everything recorded since last 'clearOutput', 'entry', or 'nextEntry'
+		 * @return this
+		 */
+		public function clearCurrentEntry():Output {
+			if (_history.length==0) _history=[""];
+			_history[_history.length-1] = "";
+			return this;
+		}
+		/**
+		 * @return this
+		 */
+		public function clearHistory():Output {
+			_history = [""];
+			return this;
+		}
+
+		/**
+		 * Displays all recorded history (with current text at the end), and scrolls to the bottom.
+		 * @return this
+		 */
+		public function showHistory():Output
+		{
+			clear();
+			var txt:String = _history.join("<br>");
+			nextEntry();
+			raw(txt);
+			clearCurrentEntry();
+			// On the next animation frame
+			setTimeout(function():void {
+				mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
+			},0);
+			return this;
+		}
 	}
 }

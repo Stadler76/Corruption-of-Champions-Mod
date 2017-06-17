@@ -3,6 +3,8 @@ package classes.Scenes.NPCs{
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Consumables.SimpleConsumable;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 
 	public class SophieBimbo extends NPCAwareContent
 	{
@@ -44,8 +46,8 @@ Chance of waking the PC by whispering how much they need to fuck her in their sl
 Bimbo harpy pussy apparently tastes tangy with an undertone of sweet, almost peach-like flavor.
 */
 internal function sophieSprite():void {
-	if (flags[kFLAGS.SOPHIE_BIMBO] > 0 && flags[kFLAGS.SOPHIE_DISABLED_FOREVER] == 0) spriteSelect(83);
-	else spriteSelect(53);
+	if (flags[kFLAGS.SOPHIE_BIMBO] > 0 && flags[kFLAGS.SOPHIE_DISABLED_FOREVER] == 0) spriteSelect(SpriteDb.s_sophieBimbo);
+	else spriteSelect(SpriteDb.s_sophie);
 }
 
 override public function bimboSophie():Boolean {
@@ -81,10 +83,10 @@ internal function bimbotizeMeCaptainSophie():void {
 	clearOutput();
 	player.consumeItem(consumables.BIMBOLQ);
 	outputText("A wicked idea takes hold of you while you watch the harpy ");
-	if (monster.lust >= monster.eMaxLust()) outputText("touch herself");
+	if (monster.lust >= monster.maxLust()) outputText("touch herself");
 	else outputText("squirm in the dirt around her nest");
 	outputText(".  Releasing the ties on one of your pouches, you reach inside to claim the contents.  You produce the bottle of bimbo liqueur with a flourish, swirling the potent fluid inside its prison as you approach the downed harpy matron; she looks up at you with dumb, ");
-	if (monster.lust >= monster.eMaxLust()) outputText("lust");
+	if (monster.lust >= monster.maxLust()) outputText("lust");
 	else outputText("pain");
 	outputText("-glazed eyes, her beautiful but uncomprehending visage slack-jawed and empty.  It's a good look for her.\n\n");
 	

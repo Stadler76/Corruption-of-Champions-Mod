@@ -2,6 +2,8 @@ package classes.Scenes.Seasonal {
 
 	import classes.*;
 	import classes.GlobalFlags.*;
+	import classes.display.SpriteDb;
+	import classes.internals.*;
 	
 	public class XmasElf extends BaseContent
 	{
@@ -10,7 +12,7 @@ package classes.Scenes.Seasonal {
 		public function xmasBitchEncounter():void
 		{
 			clearOutput();
-			spriteSelect(9);
+			spriteSelect(SpriteDb.s_christmas_elf);
 			outputText("Your sleep is disturbed by something repeatedly smacking into your side.  Groggily at first, you grumble and throw back your blanket.  Then you remember where you are, and snap to full wakefulness.  You launch onto your feet, bring up your fists, and stare bewildered at the sight in front of you.\n\n");
 
 			outputText("Standing there, innocent as can be, ");
@@ -68,7 +70,7 @@ package classes.Scenes.Seasonal {
 
 		//[Decline]
 		public function declineXmasPresent():void {
-			spriteSelect(9);
+			spriteSelect(SpriteDb.s_christmas_elf);
 			clearOutput();
 			outputText("You shake your head 'no', and inform the elf that you'll have nothing to do with her 'gifts' or 'surprises'.  She looks on the verge of tears as she whines, \"<i>I'm going to get reamed for this!</i>\"\n\n");
 			
@@ -78,7 +80,7 @@ package classes.Scenes.Seasonal {
 		}
 		//[Open Present]
 		public function openXmasPresent():void {
-			spriteSelect(9);
+			spriteSelect(SpriteDb.s_christmas_elf);
 			clearOutput();
 			outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
 			if (player.cor >= (90 + player.corruptionTolerance()) || flags[kFLAGS.JOJO_STATUS] >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
@@ -114,7 +116,7 @@ package classes.Scenes.Seasonal {
 
 		//[Unwrap the elf]
 		public function unwrapElfyPresent():void {
-			spriteSelect(9);
+			spriteSelect(SpriteDb.s_christmas_elf);
 			clearOutput();
 			outputText("The elf tosses the present to the side and saunters up to you, her hips swaying sensually.  She ");
 			if (player.tallness > 60) outputText("reaches up and presses herself against you seductively, caressing your body.");
