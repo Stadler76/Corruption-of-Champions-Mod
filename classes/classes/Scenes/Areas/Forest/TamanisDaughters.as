@@ -26,7 +26,8 @@ package classes.Scenes.Areas.Forest
 				outputText("You reach back and throw her off, but her perverted taunts still leave you feeling a little hot under the collar.\n\n");
 			}
 			else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your " + player.armorName + ".\n\n");
-			game.dynStats("lus", 1 + player.lib/15+rand(player.cor/30));
+			var lustDmg:int = 1 + player.lib/15+rand(player.cor/30);
+			player.takeLustDamage(lustDmg, true);
 		}
 
 		private function tamaniShowsUp():void {

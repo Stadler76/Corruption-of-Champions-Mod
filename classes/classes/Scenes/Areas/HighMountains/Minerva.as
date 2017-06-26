@@ -123,7 +123,7 @@ package classes.Scenes.Areas.HighMountains
 		private function bootyShortInYoFaceSon():void
 		{
 			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did. ");
-			game.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 			combatRoundOver();
 		}
 
@@ -132,7 +132,7 @@ package classes.Scenes.Areas.HighMountains
 		private function lickDatPole():void
 		{
 			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\" ");
-			game.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 			combatRoundOver();
 		}
 

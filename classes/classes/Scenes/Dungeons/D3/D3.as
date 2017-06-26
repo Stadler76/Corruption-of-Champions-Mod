@@ -251,6 +251,7 @@ package classes.Scenes.Dungeons.D3
 				flags[kFLAGS.D3_DISCOVERED] = 1;
 				
 				clearOutput();
+				outputText(images.showImage("dungeon-entrance-stronghold"));
 				outputText("During your exploration, you come across a familiar looking patch of ground. In fact... you pull out Zetaz’s map, your eyes widening as they realize what you’ve just found: Lethice’s Keep. You follow a concealed trail past several harpy nests directly to an almost invisible cave entrance. You never would’ve found it without the map.");
 				outputText("\n\n<b>You’ve discovered a hidden entrance to Lethice’s lair. It can be accessed from the Dungeons submenu in the future.</b>");
 				outputText("\n\nDo you step inside, or wait until you’re better prepared?");

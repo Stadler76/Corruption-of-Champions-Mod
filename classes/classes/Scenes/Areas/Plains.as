@@ -154,11 +154,13 @@ package classes.Scenes.Areas
 		}
 
 		private function findKangaFruit():void {
+			outputText(images.showImage("area-plain"));
 			outputText("While exploring the plains you come across a strange-looking plant.  As you peer at it, you realize it has some fruit you can get at.  ");
 			inventory.takeItem(consumables.KANGAFT, camp.returnToCampUseOneHour);
 		}
 
 		private function findOviElix():void {
+			outputText(images.showImage("area-plain"));
 			outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");
 			inventory.takeItem(consumables.OVIELIX, camp.returnToCampUseOneHour);
 		}

@@ -49,7 +49,7 @@ package classes.Scenes.Areas.HighMountains
 					          +" them in your mind’s eye, staring in at your thoughts, making you feel sluggish and unable to coordinate."
 					          +" Something about the helplessness of it feels so good... you can’t banish the feeling that really,"
 					          +" you want to look in the cockatrice’s eyes forever, for it to have total control over you.");
-					game.dynStats("lus", 3);
+					player.takeLustDamage(3, true);
 					//apply status here
 					Basilisk.speedReduce(player,20);
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
@@ -123,7 +123,7 @@ package classes.Scenes.Areas.HighMountains
 				          +" looks over at you with a smouldering gaze, cocking his head to the side as if beckoning you to ‘come play’."
 				          +" You seriously consider his offer as you feel your loins burn with desire.");
 			}
-			game.dynStats("lus", 12 + rand(player.lib / 8));
+			player.takeLustDamage(12 + rand(player.lib / 8), true);
 			game.combat.combatRoundOver();
 		}
 

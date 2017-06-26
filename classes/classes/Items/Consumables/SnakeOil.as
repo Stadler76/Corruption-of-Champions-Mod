@@ -70,10 +70,8 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Removes antennae
-			if (player.antennae > ANTENNAE_NONE && rand(3) === 0 && changes < changeLimit) {
-				outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your antennae have vanished!");
-				player.antennae = ANTENNAE_NONE;
-				changes++;
+			if (player.antennae != ANTENNAE_NONE && rand(3) === 0 && changes < changeLimit) {
+				mutations.removeAntennae();
 			}
 			//9c) II The tongue (sensitivity bonus, stored as a perk?)
 			if (changes === 0 && rand(3) === 0) {

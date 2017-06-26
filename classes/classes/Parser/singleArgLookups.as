@@ -47,6 +47,7 @@
 				"hair"						: function(thisPtr:*):* { return kGAMECLASS.player.hairDescript(); },
 				"haircolor"					: function(thisPtr:*):* { return kGAMECLASS.player.hairColor; },
 				"hairorfur"					: function(thisPtr:*):* { return kGAMECLASS.player.hairOrFur(); },
+				"hairorfurcolors"			: function(thisPtr:*):* { return kGAMECLASS.player.hairOrFurColors; },
 				"he"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("he", "she"); },
 				"he2"						: function(thisPtr:*):* { return kGAMECLASS.player2.mf("he", "she"); },
 				"him"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("him", "her"); },

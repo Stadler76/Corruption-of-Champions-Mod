@@ -109,6 +109,7 @@ import classes.Scenes.API.FnHelpers;
 		public function lakeWalk():void {
 			if (player.level < 2 || player.spe100 < 50) {
 				clearOutput();
+				outputText(images.showImage("area-lake"));
 				outputText("Your quick walk along the lakeshore feels good.");
 				if (player.spe100 < 50) {
 					outputText("  You bet you could cover the same distance even faster next time.\n");
@@ -116,6 +117,7 @@ import classes.Scenes.API.FnHelpers;
 				}
 			} else {
 				clearOutput();
+				outputText(images.showImage("area-lake"));
 				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ");
 				if (player.cor >= 60 || player.lust100 >= 90 || player.lib >= 75) {
 					outputText("Your imaginings increasingly seem to turn into daydreams of raunchy perverted sex, flooding your groin with warmth.");
@@ -145,12 +147,14 @@ import classes.Scenes.API.FnHelpers;
 
 		public function findWFruit():void {
 			clearOutput();
+			outputText(images.showImage("area-lake"));
 			outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n");
 			inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);
 		}
 
 		public function findEquinum():void {
 			clearOutput();
+			outputText(images.showImage("area-lake"));
 			outputText("You find a long and oddly flared vial half-buried in the sand.  Written across the middle band of the vial is a single word: 'Equinum'.\n");
 			inventory.takeItem(consumables.EQUINUM, camp.returnToCampUseOneHour);
 		}

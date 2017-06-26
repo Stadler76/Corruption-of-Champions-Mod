@@ -114,11 +114,13 @@ package classes.Scenes.Areas
 
 		public function walk():void {
 			clearOutput();
+			outputText(images.showImage("area-bog"));
 			outputText("You wander around through the humid muck, but you don't run into anything interesting.");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function findMurkyChest():void {
+			outputText(images.showImage("area-bog"));
 			var gemsFound:int = 200 + rand(300);
 			outputText("While you're minding your own business, you spot a waterlogged chest. You wade in the murky waters until you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It would make a good storage once you clean the inside of the chest.");
 			player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0);

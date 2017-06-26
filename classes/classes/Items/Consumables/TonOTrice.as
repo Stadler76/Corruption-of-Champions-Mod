@@ -276,7 +276,9 @@ package classes.Items.Consumables
 				//Cock < 6 inches - increase by 1-2 inches
 				if (player.shortestCockLength() < 6 && rand(3) == 0 && changes < changeLimit) {
 					var increment:Number = player.increaseCock(player.shortestCockIndex(), 1 + rand(2));
-					outputText("Your [if (cocks > 1)shortest] cock fills to its normal size, but doesn’t just stop there. Your cock feels incredibly tight as a few more inches of length seem to pour out from your crotch. Your cock has gained " + increment + " inches.");
+					outputText("Your [if (cocks > 1)shortest] cock fills to its normal size, but doesn’t just stop there. Your cock feels incredibly"
+					          +" tight as a few more inches of length seem to pour out from your crotch."
+					          +" Your cock has gained "+ increment + " inches.");
 					changes++;
 				}
 
@@ -284,8 +286,8 @@ package classes.Items.Consumables
 				if (player.biggestCockLength() > 16 && rand(3) == 0 && changes < changeLimit) {
 					var idx:int = player.biggestCockIndex();
 						outputText("\n\nYou feel a tightness in your groin like someone tugging on your shaft from behind you. Once the sensation"
-						          +" fades you check inside your [lower armor] and see that your [if (cocks > 1)largest] [cock] has shrunk to a"
-						          +" slightly shorter length.");
+						          +" fades you check [if (hasLowerGarment)inside your [lowergarment]|your [multicock]] and see that your"
+						          +" [if (cocks > 1)largest] [cock] has shrunk to a slightly shorter length.");
 					player.cocks[idx].cockLength -= (rand(10) + 5) / 10;
 					if (player.cocks[idx].cockThickness > 3) {
 						outputText(" Your " + player.cockDescript(idx) + " definitely got a bit thinner as well.");
@@ -404,10 +406,7 @@ package classes.Items.Consumables
 			//Physical changes:
 			//Removes other antennae
 			if (player.hasNonCockatriceAntennae() && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead."
-				          +" When it passes, you touch yourself and discover your antennae have vanished!");
-				player.antennae = ANTENNAE_NONE;
-				changes++;
+				mutations.removeAntennae();
 			}
 			//Gain antennae like feathers
 			if (player.antennae == ANTENNAE_NONE && player.faceType == FACE_COCKATRICE && player.earType == EARS_COCKATRICE && rand(3) == 0 && changes < changeLimit) {
@@ -492,7 +491,7 @@ package classes.Items.Consumables
 				          +" arm begins to shed. A coat of " + (player.hasCockatriceSkin() ? player.furColor : player.hairColor) + " feathers sprouts"
 				          +" from your skin, covering your upper arm and shoulder entirely, ending at your elbow in a fluffy cuff."
 				          +" A few long feathers decorate your elbows like vestigial wings. Your lower arm however as grown a layer thick leathery"
-				          +" scales and dangerous looking claws tip your fingers. As suddenly as the itching came it fades, leaving you to marvel"
+				          +" scales and dangerous looking talons tip your fingers. As suddenly as the itching came it fades, leaving you to marvel"
 				          +" over your new arms.");
 				outputText("\n<b>You now have cockatrice arms!</b>");
 				player.armType = ARM_TYPE_COCKATRICE;

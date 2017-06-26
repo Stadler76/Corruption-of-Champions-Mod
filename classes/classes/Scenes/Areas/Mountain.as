@@ -274,6 +274,7 @@ package classes.Scenes.Areas
 
 		private function hike():void {
 			clearOutput();
+			outputText(images.showImage("area-mountain"));
 			if (player.cor < 90) {
 				outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.");
 				dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);

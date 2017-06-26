@@ -57,6 +57,7 @@ public function farmExploreEncounter():void {
 	var temporary:Number = 0;
 	//Farm not yet discovered
 	clearOutput();
+	outputText(images.showImage("location-ingnam-farm"));
 	if (player.statusEffectv1(StatusEffects.MetWhitney) < 2) {
 		spriteSelect(SpriteDb.s_whitney);
 		if (!player.hasStatusEffect(StatusEffects.MetWhitney)) {
@@ -73,6 +74,7 @@ public function farmExploreEncounter():void {
 	//Repeat Offender
 	else {
 		clearOutput();
+		outputText(images.showImage("location-ingnam-farm"));
 		spriteSelect(SpriteDb.s_whitney);
 		player.addStatusValue(StatusEffects.MetWhitney,1,1); //Used for progress towards achievement.
 		if (flags[kFLAGS.KELT_KILLED] >= 1) {

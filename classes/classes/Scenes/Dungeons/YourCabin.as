@@ -19,6 +19,7 @@ package classes.Scenes.Dungeons
 			kGAMECLASS.dungeonLoc = -10;
 			menu();
 			clearOutput();
+			outputText(images.showImage("location-cabin"));
 			outputText("<b><u>Your Cabin</u></b>\n")
 			outputText("You are in your cabin.  Behind you is a door leading back to your camp.  Next to the door is a window to let the sunlight in. \n\n");
 			

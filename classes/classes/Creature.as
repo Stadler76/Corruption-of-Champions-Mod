@@ -2676,6 +2676,22 @@ package classes
 			return skinType == SKIN_TYPE_PLAIN;
 		}
 
+		public function get hairOrFurColors():String
+		{
+			if (!isFluffy())
+				return hairColor;
+
+			if (!underBody.skin.isFluffy() || ["no", furColor].indexOf(underBody.skin.furColor) != -1)
+				return furColor;
+
+			// Uses formatStringArray in case we add more skin layers
+			// If more layers are added, we'd probably need some remove duplicates function
+			return formatStringArray([
+				furColor,
+				underBody.skin.furColor,
+			]);
+		}
+
 		public function isBiped():Boolean
 		{
 			return legCount == 2;

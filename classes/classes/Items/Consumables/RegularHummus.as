@@ -182,9 +182,7 @@ package classes.Items.Consumables
 			//-----------------------
 			//Removes antennae
 			if (player.antennae !== ANTENNAE_NONE && rand(3) === 0 && changes < changeLimit) {
-				outputText("\n\nThe muscles in your brow clench tightly, and you feel a tremendous pressure on your upper forehead.  When it passes, you touch yourself and discover your antennae have vanished!");
-				player.antennae = ANTENNAE_NONE;
-				changes++;
+				mutations.removeAntennae();
 			}
 			//Removes horns
 			if (changes < changeLimit && (player.hornType !== HORNS_NONE || player.horns !== 0) && rand(5) === 0) {

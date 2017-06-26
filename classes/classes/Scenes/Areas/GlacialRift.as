@@ -114,11 +114,13 @@ package classes.Scenes.Areas
 
 		private function walk():void {
 			clearOutput();
+			outputText(images.showImage("area-glacialrift"));
 			outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting.");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function findChest():void {
+			outputText(images.showImage("area-glacialrift"));
 			var gemsFound:int = 400 + rand(400);
 			outputText("While you're minding your own business, you spot an ornately-decorated chest somewhat buried in the snow. You walk on the snowy grounds you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It looks nice and would make a good storage.");
 			player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0);
@@ -133,12 +135,14 @@ package classes.Scenes.Areas
 
 		private function lootGodmead():void {
 			clearOutput();
+			outputText(images.showImage("area-glacialrift"));
 			outputText("As you make your way across the icy wastes, you notice a small corked ivory horn half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horn of mead in your bag and continue on your way. ");
 			inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);
 		}
 
 		private function lootIcicle():void {
 			clearOutput();
+			outputText(images.showImage("area-glacialrift"));
 			outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
 			inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
 		}

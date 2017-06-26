@@ -78,6 +78,7 @@ import classes.Scenes.Areas.Lake.*;
 		}
 
 		private function nothingSpecial():void {
+			outputText(images.showImage("location-boat"));
 			if (rand(2) == 0) {
 				outputText("You row for nearly an hour, until your arms practically burn with exhaustion from all the rowing.");
 			} else {

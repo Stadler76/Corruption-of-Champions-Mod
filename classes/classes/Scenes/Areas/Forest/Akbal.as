@@ -87,7 +87,7 @@ package classes.Scenes.Areas.Forest
 			{
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.");
 				//(Lust increase)
-				game.dynStats("lus", 7 + (100 - player.inte) / 10);
+				player.takeLustDamage(7 + (100 - player.inte) / 10, true);
 				player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			}
 			//Continuous Lust Attack - 
@@ -95,7 +95,8 @@ package classes.Scenes.Areas.Forest
 			{
 				outputText("The whispering in your head grows, many voices of undetermined sex telling you all the things the demon wishes to do to you. You can only blush.");
 				//(Lust increase)
-				game.dynStats("lus", 12 + (100 - player.inte) / 10);
+				var lustDmg:int = 12 + (100 - player.inte) / 10;
+				player.takeLustDamage(lustDmg, true);
 			}
 			game.combat.combatRoundOver();
 		}

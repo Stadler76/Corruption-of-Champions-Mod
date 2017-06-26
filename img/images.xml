@@ -345,6 +345,38 @@
 				<ImageFile>./img/anzu-talk-rift</ImageFile>
 				<ImageFile>./img/anzu-talk-rift_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="area-bog">
+				<ImageFile>./img/area-bog</ImageFile>
+				<ImageFile>./img/area-bog_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="area-desert">
+				<ImageFile>./img/area-desert</ImageFile>
+				<ImageFile>./img/area-desert_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="area-forest">
+				<ImageFile>./img/area-forest</ImageFile>
+				<ImageFile>./img/area-forest_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="area-glacialrift">
+				<ImageFile>./img/area-glacialrift</ImageFile>
+				<ImageFile>./img/area-glacialrift_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="area-lake">
+				<ImageFile>./img/area-lake</ImageFile>
+				<ImageFile>./img/area-lake_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="area-mountain">
+				<ImageFile>./img/area-mountain</ImageFile>
+				<ImageFile>./img/area-mountain_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="area-plain">
+				<ImageFile>./img/area-plain</ImageFile>
+				<ImageFile>./img/area-plain_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="area-vulcaniccrag">
+				<ImageFile>./img/area-vulcaniccrag</ImageFile>
+				<ImageFile>./img/area-vulcaniccrag_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="arian-fap">
 				<ImageFile>./img/arian-fap</ImageFile>
 				<ImageFile>./img/arian-fap_1</ImageFile>
@@ -648,6 +680,10 @@
 			<ImageSet id="dungeon-entrance-phoenixtower">
 				<ImageFile>./img/dungeon-entrance-phoenixtower</ImageFile>
 				<ImageFile>./img/dungeon-entrance-phoenixtower_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="dungeon-entrance-stronghold">
+				<ImageFile>./img/dungeon-entrance-stronghold</ImageFile>
+				<ImageFile>./img/dungeon-entrance-stronghold_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="edryn-bar-chat">
 				<ImageFile>./img/edryn-bar-chat</ImageFile>
@@ -1265,6 +1301,14 @@
 				<ImageFile>./img/location-bazaar-theblackcock</ImageFile>
 				<ImageFile>./img/location-bazaar-theblackcock_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="location-boat">
+				<ImageFile>./img/location-boat</ImageFile>
+				<ImageFile>./img/location-boat_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="location-cabin">
+				<ImageFile>./img/location-cabin</ImageFile>
+				<ImageFile>./img/location-cabin_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="location-ingnam">
 				<ImageFile>./img/location-ingnam</ImageFile>
 				<ImageFile>./img/location-ingnam_1</ImageFile>
@@ -1300,6 +1344,10 @@
 			<ImageSet id="location-teladre-thewetbitch">
 				<ImageFile>./img/location-teladre-thewetbitch</ImageFile>
 				<ImageFile>./img/location-teladre-thewetbitch_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="location-townruins">
+				<ImageFile>./img/location-townruins</ImageFile>
+				<ImageFile>./img/location-townruins_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="loppe-comes-after-moar-orgasm-denial">
 				<ImageFile>./img/loppe-comes-after-moar-orgasm-denial</ImageFile>
@@ -2332,6 +2380,22 @@
 			<ImageSet id="scylla-share-tentacle-addiction-two">
 				<ImageFile>./img/scylla-share-tentacle-addiction-two</ImageFile>
 				<ImageFile>./img/scylla-share-tentacle-addiction-two_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="tentaclebeast-loss-female">
+				<ImageFile>./img/tentaclebeast-loss-female</ImageFile>
+				<ImageFile>./img/tentaclebeast-loss-female_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="tentaclebeast-loss-male">
+				<ImageFile>./img/tentaclebeast-loss-male</ImageFile>
+				<ImageFile>./img/tentaclebeast-loss-male_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="tentaclebeast-win-female">
+				<ImageFile>./img/tentaclebeast-win-female</ImageFile>
+				<ImageFile>./img/tentaclebeast-win-female_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="tentaclebeast-win-male">
+				<ImageFile>./img/tentaclebeast-win-male</ImageFile>
+				<ImageFile>./img/tentaclebeast-win-male_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="urta-bar">
 				<ImageFile>./img/urta-bar</ImageFile>

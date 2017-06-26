@@ -69,7 +69,7 @@ package classes.Scenes.Areas.Desert
 				}
 				hits--;
 			}
-			game.dynStats("lus", damage+bonus);
+			player.takeLustDamage(damage+bonus, true);
 			combatRoundOver();
 		}
 
@@ -78,7 +78,7 @@ package classes.Scenes.Areas.Desert
 			//*Used on males only, casts spell that causes balls to temporarily swell and increase lust by a moderate amount.  Unavoidable.
 			outputText("Gesticulating with her free hand, the Cum Witch utters impossible to pronounce words before closing her fingers tightly into a fist.  That same instant, you feel an onset of warmth in your [balls], a spreading heat that makes you tremble with growing lust.  A second later, [eachCock] is throbbing, and a runner of cum trickles from the [cockHead], a hint of your temporarily-enhanced virility.");
 			//(15-30 lust, based on libido)
-			game.dynStats("lus", 5+player.lib/12);
+			player.takeLustDamage(5+player.lib/12, true);
 			player.hoursSinceCum += 100;
 			combatRoundOver();
 		}
@@ -92,7 +92,7 @@ package classes.Scenes.Areas.Desert
 				return;
 			}
 			outputText("It worms around your uterus, tickling it faintly before gently kneading your ovaries.  Your [legs] go weak as your womb throbs, hungering for something to fill it.  A trickle of wetness squirts from your [vagina] as the magic fades, and you squirm as your lust rises. If only something would make you pregnant!  Your eyes dart unbidden to the Witch's groin before you yank them away.");
-			game.dynStats("lus", 5+player.lib/12);
+			player.takeLustDamage(5+player.lib/12, true);
 			combatRoundOver();
 		}
 

@@ -67,9 +67,7 @@ package classes.Items.Consumables
 			}
 			//remove antennae
 			if (player.antennae !== ANTENNAE_NONE && rand(3) === 0 && changes < changeLimit) {
-				outputText("\n\nYou tilt your head down as a wave of dizziness passes over you. Your antennae fall to the ground. You touch where they were on your head and confirm that they did indeed just fall off. <b>You have lost your antennae!</b>");
-				player.antennae = ANTENNAE_NONE;
-				changes++;
+				mutations.removeAntennae();
 			}
 			//remove horns
 			if ((player.hornType !== HORNS_NONE || player.horns > 0) && rand(3) === 0 && changes < changeLimit) {

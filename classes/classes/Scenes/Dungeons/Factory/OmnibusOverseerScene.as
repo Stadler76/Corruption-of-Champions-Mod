@@ -183,10 +183,7 @@ package classes.Scenes.Dungeons.Factory
 					player.horns = 0;
 					player.hornType = HORNS_NONE;
 				}
-				if (player.antennae > ANTENNAE_NONE) {
-					outputText("Antennae pop free, and float lightly down towards the floor.  ");
-					player.antennae = ANTENNAE_NONE;
-				}
+				mutations.removeAntennae(true);
 			}
 			//EARS
 			if (player.earType != EARS_HUMAN) {

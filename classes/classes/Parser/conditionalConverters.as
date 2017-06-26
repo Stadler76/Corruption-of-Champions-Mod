@@ -1,6 +1,7 @@
 ﻿		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
 		import classes.GlobalFlags.kGAMECLASS;
 		import classes.Items.ArmorLib;
+		import classes.Items.UndergarmentLib;
 
 
 
@@ -24,6 +25,7 @@
 				"hour"				: function(thisPtr:*):* {return  kGAMECLASS.model.time.hours;},
 				"days"				: function(thisPtr:*):* {return  kGAMECLASS.model.time.days;},
 				"hasarmor"			: function(thisPtr:*):* {return  kGAMECLASS.player.armor != ArmorLib.NOTHING;},
+				"haslowergarment"	: function(thisPtr:*):* {return  kGAMECLASS.player.lowerGarment != UndergarmentLib.NOTHING;},
 				"tallness"			: function(thisPtr:*):* {return  kGAMECLASS.player.tallness;},
 				"hairlength"		: function(thisPtr:*):* {return  kGAMECLASS.player.hairLength;},
 				"femininity"		: function(thisPtr:*):* {return  kGAMECLASS.player.femininity;},

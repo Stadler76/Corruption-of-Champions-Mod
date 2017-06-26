@@ -161,6 +161,7 @@ package classes.Scenes.Places
 		// SCAVENGING
 		//------------
 		private function scavengeTownRuinsOption():void {
+			outputText(images.showImage("location-townruins"));
 			if (flags[kFLAGS.TOWN_RUINS_SCAVENGE_CONSIDERED] == 0) {
 				outputText("Even though the village is in ruins, there are plenty of resources to salvage; wood, stones, and nails are all there for you to haul. You contemplate which structure you should focus on salvaging for resources to bring to your camp.");
 				flags[kFLAGS.TOWN_RUINS_SCAVENGE_CONSIDERED] = 1;

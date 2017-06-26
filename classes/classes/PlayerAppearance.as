@@ -611,7 +611,7 @@ package classes
 				outputText("  Your arms are covered in " + (player.hasCockatriceSkin() ? player.furColor : player.hairColor) + " feathers from the"
 				          +" shoulder down to the elbow where they stop in a fluffy cuff. A handful of long feathers grow from your elbow in the form"
 				          +" of vestigial wings, and while they may not let you fly, they certainly help you jump. Your lower arm is coated in"
-				          +" leathery " + player.skinTone + " scales and your fingertips terminate in deadly looking reptilian claws.");
+				          +" leathery " + player.skinTone + " scales and your fingertips terminate in deadly looking avian talons.");
 			}
 			//Done with head bits. Move on to body stuff
 			// <mod name="BodyParts.UnderBody" author="Stadler76">
@@ -858,8 +858,8 @@ package classes
 			else if (player.tailType == TAIL_TYPE_FOX) 
 			{
 				if (player.tailVenom <= 1) 
-					outputText("  A swishing " + player.furColor + " fox's brush extends from your " + player.assDescript() + ", curling around your body - the soft fur feels lovely.");
-				else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.furColor + " fox's tails extend from your " + player.assDescript() + ", curling around your body - the soft fur feels lovely.");
+					outputText("  A swishing [hairOrFurColors] fox's brush extends from your [ass], curling around your body - the soft fur feels lovely.");
+				else outputText("  " + Num2Text(player.tailVenom) + " swishing [hairOrFurColors] fox's tails extend from your [ass], curling around your body - the soft fur feels lovely.");
 			}
 			else if (player.tailType == TAIL_TYPE_DRACONIC) 
 			{

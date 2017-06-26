@@ -73,7 +73,8 @@ package classes.Scenes.Areas.Forest
 					outputText("our " + player.multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.");
 				}
 			}
-			game.dynStats("lus", (rand(player.lib/5) +3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])));
+			var lustDmg:int = rand(player.lib/5) +3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]);
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 

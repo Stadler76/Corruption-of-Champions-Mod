@@ -1506,9 +1506,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			if (rand(4) == 0 && changes < changeLimit && player.antennae != ANTENNAE_NONE) {
-				outputText("You feel heat blooming in your head, centered at your antennae. It is a feeling similar to the burn of alcohol. When you reach up to inspect them your hands find nothing but quickly dispersing smoke. <b>You no longer have a pair of antennae.</b>");
-				player.antennae = ANTENNAE_NONE;
-				changes++;
+				mutations.removeAntennae();
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.HUMAN) == 0) {
 				outputText("\n\nYou feel a stirring in your loins as your cock grows rock hard. You " + player.clothedOrNakedLower("pull it out from your [armor], to ") + "take a look. It seems you now <b>have a human dick again</b>.");
@@ -1657,9 +1655,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			//Removes antennaes!
 			if (rand(3) == 0 && changes < changeLimit && player.antennae > ANTENNAE_NONE) {
-				outputText("\n\nYour " + player.hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground. What a relief. <b>You've lost your antennae!</b>");
-				changes++;
-				player.antennae = ANTENNAE_NONE;
+				mutations.removeAntennae();
 			}
 			//Hair turns back to normal
 			if (rand(4) == 0 && changes < changeLimit && player.hairType != HAIR_NORMAL) {

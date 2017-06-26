@@ -109,18 +109,16 @@ package classes.Items.Consumables
 			}
 			//GENERAL APPEARANCE STUFF BELOW
 			//REMOVAL STUFF
-			//Removes wings and antennaes!
+			//Removes wings!
 			if ((player.wingType === WING_TYPE_BEE_LIKE_SMALL || player.wingType === WING_TYPE_BEE_LIKE_LARGE || player.wingType >= WING_TYPE_HARPY) && changes < changeLimit && rand(4) === 0) {
 				if (player.wingType === WING_TYPE_SHARK_FIN) outputText("\n\nYour back tingles, feeling lighter.  Something lands behind you with a 'thump', and when you turn to look, you see your fin has fallen off.  This might be the best (and worst) booze you've ever had!  <b>You no longer have a fin!</b>");
 				else outputText("\n\nYour shoulders tingle, feeling lighter.  Something lands behind you with a 'thump', and when you turn to look you see your wings have fallen off.  This might be the best (and worst) booze you've ever had!  <b>You no longer have wings!</b>");
 				player.wingType = WING_TYPE_NONE;
 				changes++;
 			}
-			//Removes wings and antennaes!
-			if (player.antennae > ANTENNAE_NONE && changes < changeLimit && rand(3) === 0) {
-				outputText("\n\nYour " + player.hairDescript() + " itches so you give it a scratch, only to have your antennae fall to the ground.  What a relief.  <b>You've lost your antennae!</b>");
-				changes++;
-				player.antennae = ANTENNAE_NONE;
+			//Removes antennae!
+			if (player.antennae != ANTENNAE_NONE && changes < changeLimit && rand(3) === 0) {
+				mutations.removeAntennae();
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) === 0 && player.eyeType > EYES_HUMAN) {

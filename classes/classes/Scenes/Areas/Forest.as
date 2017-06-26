@@ -136,24 +136,29 @@ import classes.Scenes.API.FnHelpers;
 		}
 
 		public function tripOnARoot():void {
+			outputText(images.showImage("area-forest"));
 			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.");
 			player.takeDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function findTruffle():void {
+			outputText(images.showImage("area-forest"));
 			outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
 			inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
 		}
 		public function findHPill():void {
+			outputText(images.showImage("area-forest"));
 			outputText("You find a pill stamped with the letter 'H' discarded on the ground. ");
 			inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
 		}
 		public function findChitin():void {
+			outputText(images.showImage("area-forest"));
 			outputText("You find a large piece of insectile carapace obscured in the ferns to your left. It's mostly black with a thin border of bright yellow along the outer edge. There's still a fair portion of yellow fuzz clinging to the chitinous shard. It feels strong and flexible - maybe someone can make something of it. ");
 			inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
 		}
 		public function forestWalkFn():void {
+			outputText(images.showImage("area-forest"));
 			if (player.cor < 80) {
 				outputText("You enjoy a peaceful walk in the woods, it gives you time to think.");
 				dynStats("tou", .5, "int", 1);

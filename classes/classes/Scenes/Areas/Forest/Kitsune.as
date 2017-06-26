@@ -16,7 +16,8 @@ package classes.Scenes.Areas.Forest
 			outputText("The kitsune closes in on you with a mischievous glint in her eyes.  You raise your guard, keeping your eyes trained on her to ensure that she doesn't try to pull anything.  Suddenly, you feel something coiling around your " + player.leg() + ", and let out a yelp as you are suddenly lifted into the air, entangled in the kitsune's tails!");
 			outputText("\n\nYour limbs are bound tightly while coils of delightfully soft fur caress you on all sides.  You can do little besides struggle against your furry bonds as the constant writhing of her tails sends shudders flying up and down your spine.");
 			createStatusEffect(StatusEffects.PCTailTangle, 0, 0, 0, 0);
-			game.dynStats("lus", 10 + player.sens / 8);
+			var lustDmg:int = 10 + player.sens / 8;
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 
@@ -36,7 +37,8 @@ package classes.Scenes.Areas.Forest
 			else {
 				outputText("  Despite your valiant efforts, your wriggling only serves to get you deeper entangled in the fluffy tails, eliciting an amused giggle from the kitsune.");
 				outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
-				game.dynStats("lus", 5 + player.sens / 10);
+				var lustDmg:int = 5 + player.sens / 10;
+				player.takeLustDamage(lustDmg, true);
 				addStatusValue(StatusEffects.PCTailTangle, 1, 3);
 				combatRoundOver();
 			}
@@ -48,7 +50,8 @@ package classes.Scenes.Areas.Forest
 			outputText("Happily, you slump deeper into the fluffy tails, eliciting an amused giggle from the kitsune.");
 			if (game.silly()) outputText("  You're so glad you got to touch fluffy tail.");
 			outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
-			game.dynStats("lus", 5 + player.sens / 10);
+			var lustDmg:int = 5 + player.sens / 10;
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 
@@ -154,7 +157,8 @@ package classes.Scenes.Areas.Forest
 			else if (select == 2) outputText("Turning her back to you, the kitsune fans out her tails, peering back as she lifts the hem of her robe to expose her plump hindquarters.  Her tails continually shift and twist, blocking your view, but it only serves to make you want it even <i>more</i>, licking your lips in anticipation.");
 			//Redhead only:
 			else outputText("The kitsune sways her hips enticingly as she appears in front of you abruptly, rubbing up against your side.  Her teasing caresses make you shiver with arousal, and you can feel something thick and warm pressing against your [hips].  She gives you a wry grin as she breaks away from you, sporting an obvious tent in her robes.  \"<i>Just you wait...</i>\"");
-			game.dynStats("lus", 5 + player.sens / 7);
+			var lustDmg:int = 5 + player.sens / 7;
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 
