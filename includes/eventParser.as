@@ -1,4 +1,4 @@
-import classes.GlobalFlags.kFLAGS;
+﻿import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
 import classes.Items.Consumable;

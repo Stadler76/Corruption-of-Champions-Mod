@@ -59,7 +59,7 @@ package classes.Scenes.Dungeons.Factory
 						game.dynStats("lus", 5);
 					}
 				}
-				game.dynStats("lus", 7 + player.sens / 20);
+				player.takeLustDamage(7 + player.sens / 20, true);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your " + player.allBreastsDescript() + " in sympathy.");
 			}
 			game.combat.combatRoundOver();

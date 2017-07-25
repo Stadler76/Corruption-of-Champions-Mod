@@ -237,7 +237,7 @@ package classes
 		public var rearBody:RearBody = new RearBody();
 		public var neck:Neck = new Neck();
 		//</mod>
-		public var underBody:UnderBody;
+		public var underBody:UnderBody = new UnderBody();
 
 		/*EarType
 		-1 - none!
@@ -589,7 +589,6 @@ package classes
 			_perks = [];
 			statusEffects = [];
 			//keyItems = new Array();
-			underBody = new UnderBody(this);
 		}
 
 		//Functions			
@@ -2163,6 +2162,12 @@ package classes
 			if (!hasCock())
 				return false;
 			return (cocks[0].cockLength >= 20);
+		}
+
+		public function copySkinToUnderBody(p:Object = null):void
+		{
+			underBody.skin.setProps(skin);
+			if (p != null) underBody.skin.setProps(p);
 		}
 
 		public static const canFlyWings:Array = [

@@ -2348,10 +2348,10 @@ public static const AMAROK_LOSSES:int                                           
 public static const MRAPIER_BOUGHT:int                                  	    = 2340; //You only get one due to its OPness
 public static const GOTTEN_INQUISITOR_CORSET:int                                    = 2341;
 public static const GOTTEN_INQUISITOR_ROBES:int                                     = 2342;
-public static const UNKNOWN_FLAG_NUMBER_02343:int                                   = 2343;
-public static const UNKNOWN_FLAG_NUMBER_02344:int                                   = 2344;
-public static const UNKNOWN_FLAG_NUMBER_02345:int                                   = 2345;
-public static const UNKNOWN_FLAG_NUMBER_02346:int                                   = 2346;
+public static const GOBLIN_ELDER_FOREPLAY_COUNTER:int                               = 2343;
+public static const GOBLIN_ELDER_RELATION_COUNTER:int                               = 2344;
+public static const GOBLIN_ELDER_WRESTLE_COUNTER:int                                = 2345;
+public static const GOBLIN_ELDER_BEAST_COUNTER:int                                  = 2346;
 public static const UNKNOWN_FLAG_NUMBER_02347:int                                   = 2347;
 public static const UNKNOWN_FLAG_NUMBER_02348:int                                   = 2348;
 public static const UNKNOWN_FLAG_NUMBER_02349:int                                   = 2349;

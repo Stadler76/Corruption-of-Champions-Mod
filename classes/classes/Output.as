@@ -57,7 +57,7 @@ import flash.utils.setTimeout;
 			text = kGAMECLASS.parser.recursiveParser(text);
 			record(text);
 			_currentText += text;
-			if (debug) mainView.setOutputText(_currentText);
+			//if (debug) mainView.setOutputText(_currentText);
 
 			return this;
 		}
@@ -143,7 +143,7 @@ import flash.utils.setTimeout;
 		{
 			_currentText += text;
 			record(text);
-			mainView.setOutputText(_currentText);
+			//mainView.setOutputText(_currentText);
 			return this;
 		}
 

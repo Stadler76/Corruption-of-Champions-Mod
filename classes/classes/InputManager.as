@@ -55,8 +55,7 @@
 		// Visual shit
 		private var _mainView:MainView;
 		private var _mainText:TextField;
-		private var _mainTextScollBar:UIScrollBar;
-		
+
 		// A new UI element that we can embed buttons into to facilitate key rebinding
 		private var _bindingPane:BindingPane;
 		
@@ -68,25 +67,26 @@
 		/**
 		 * Init the InputManager. Attach the keyboard event listener to the stage and prepare the subobjects for usage.
 		 * @param	stage	Reference to core stage on which to add display objects
+		 * @param	_mainView
 		 * @param	debug	Emit debugging trace statements
 		 */
-		public function InputManager(stage:Stage, debug:Boolean = true)
+		public function InputManager(stage:Stage,
+									 _mainView: MainView,
+									 debug:Boolean = true)
 		{
 			_bindingMode = false;
 			_debug = debug;
 			
 			_stage = stage;
-			_mainView = _stage.getChildByName("mainView") as MainView;
+			this._mainView = _mainView;
 			_availableControlMethods = 0;
 			_availableCheatControlMethods = 0;
 			
 			_stage.addEventListener(KeyboardEvent.KEY_DOWN, this.KeyHandler);
 			
-			_mainView = _stage.getChildByName("mainView") as MainView;
-			_mainText = (_stage.getChildByName("mainView") as MovieClip).mainText as TextField;
-			_mainTextScollBar = (_stage.getChildByName("mainView") as MovieClip).scrollBar as UIScrollBar;
-			
-			_bindingPane = new BindingPane(this, _mainText.x, _mainText.y, _mainText.width, _mainText.height, _mainTextScollBar.width);
+			_mainText = _mainView.mainText as TextField;
+
+			_bindingPane = new BindingPane(this, _mainText.x+2, _mainText.y+2, _mainText.width+2, _mainText.height+3);
 		}
 		
 		/**
@@ -291,12 +291,12 @@
 		public function DisplayBindingPane():void
 		{
 			_mainText.visible = false;
-			_mainTextScollBar.visible = false;
-			
+
 			_bindingPane.functions = this.GetAvailableFunctions();
 			_bindingPane.ListBindingOptions();
 			
-			_stage.addChild(_bindingPane);
+			_mainText.parent.addChild(_bindingPane);
+			_bindingPane.update();
 		}
 		
 		/**
@@ -305,8 +305,7 @@
 		public function HideBindingPane():void
 		{
 			_mainText.visible = true;
-			_mainTextScollBar.visible = true;
-			_stage.removeChild(_bindingPane);
+			_bindingPane.parent.removeChild(_bindingPane);
 		}
 		
 		/**

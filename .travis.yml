@@ -46,5 +46,4 @@ env:
 branches:
   except:
     VanillaPlus
-  only:
-    master
+

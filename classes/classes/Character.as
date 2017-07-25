@@ -896,6 +896,16 @@ import classes.GlobalFlags.kFLAGS;
 			return Appearance.eyesDescript(this);
 		}
 
+		public function extraEyesDescript():String
+		{
+			return Appearance.extraEyesDescript(this);
+		}
+
+		public function extraEyesDescriptShort():String
+		{
+			return Appearance.extraEyesDescriptShort(this);
+		}
+
 		public function nagaLowerBodyColor2():String
 		{
 			return Appearance.nagaLowerBodyColor2(this);

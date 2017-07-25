@@ -1407,7 +1407,7 @@ import classes.Items.*
 			player.skinDesc = "shield-shaped dragon scales";
 			player.furColor = player.hairColor;
 			player.underBody.type = UNDER_BODY_TYPE_REPTILE;
-			player.underBody.copySkin({        // copy the main skin props to the underBody skin ...
+			player.copySkinToUnderBody({       // copy the main skin props to the underBody skin ...
 				desc: "ventral dragon scales"  // ... and only override the desc
 			});
 			player.tongueType = TONGUE_DRACONIC;

@@ -26,7 +26,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		public function tease():void {
 			outputText("\"Want a piece of this?\" the behemoth says, and you avert your eyes as he flips up his loincloth, his huge cock alluring under the red silk and gold chains.");
-			game.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
+			player.takeLustDamage(10 + (player.cor / 10) + (player.lib / 10), true);
 			combatRoundOver();
 		}
 		

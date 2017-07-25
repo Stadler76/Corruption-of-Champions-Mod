@@ -18,12 +18,15 @@ package classes.Scenes.NPCs
 	import classes.Scenes.NPCs.IsabellaFollowerScene;
 	import classes.PerkLib;
 	import classes.CockTypesEnum;
+	import classes.helper.FireButtonEvent;
+	import classes.CoC;
 	
 	public class IsabellaFollowerSceneTest 
 	{
 		private var isabellaScene : IsabellaScene;
 		private var cut:IsabellaFollowerSceneForTest;
 		private var player:Player;
+		private var fireButon:FireButtonEvent;
 		
 		private static const INCUBATION_DELTA : int = 10;
 		/**
@@ -56,6 +59,8 @@ package classes.Scenes.NPCs
 			
 			player = new Player();
 			kGAMECLASS.player = player;
+			
+			fireButon = new FireButtonEvent(kGAMECLASS.mainView, CoC.MAX_BUTTON_INDEX);
         }
 		
 		[Test]
@@ -147,6 +152,47 @@ package classes.Scenes.NPCs
 			
 			assertThat(cut.collectedOutput, hasItem(containsString(IsabellaFollowerScene.DESC_APPEAR_EVENT_LAST_STAGE_PREGNANT)));
 		}
+		
+		private function createTentaCocks(count:int, length:Number) :void {
+			for (var i:int = 0; i < count; i++){
+				player.createCock(length, 1, CockTypesEnum.TENTACLE);
+			}
+		}
+		
+		[Test]
+		public function isabellaTentacleSexNotAvailableWithShortCocks() : void {
+			player.lust = 70;
+			createTentaCocks(3, 23);
+		
+			cut.campSexMenu();
+			
+
+			assertThat(cut.collectedOutput, not(hasItem(containsString("numerous tentacles"))));
+		}
+		
+		[Test]
+		public function isabellaTentacleSex() : void {
+			player.lust = 70;
+			
+			createTentaCocks(3, 24);
+		
+			cut.campSexMenu();
+			fireButon.fireButtonClick(4);
+
+			assertThat(cut.collectedOutput, hasItem(containsString("numerous tentacles")));
+			assertThat(cut.collectedOutput, hasItem(containsString("exposing your monstrous tentacle-cocks")));
+		}
+		
+		[Test]
+		public function isabellaTentacleSexNotAvailableWithTooFewTentacles() : void {
+			player.lust = 70;
+			createTentaCocks(2, 24);
+		
+			cut.campSexMenu();
+			
+
+			assertThat(cut.collectedOutput, not(hasItem(containsString("numerous tentacles"))));
+		}
 	}
 }
 
@@ -169,7 +215,15 @@ class IsabellaFollowerSceneForTest extends IsabellaFollowerScene {
 		this.isabellasAppearance();
 	}
 	
+	public function campSexMenu() : void {
+		this.campIzzySexMenu();	
+	}
+	
 	override protected function isabellasAppearance():void {
 		super.isabellasAppearance();
+	}
+	
+	override protected function campIzzySexMenu() : void {
+		super.campIzzySexMenu();
 	}
  }

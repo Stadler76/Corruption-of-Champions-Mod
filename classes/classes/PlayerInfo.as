@@ -934,14 +934,14 @@ import flash.events.Event;
 				doNext(playerMenu);
 				return;
 			}
-			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n");
+			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n\n");
 			mainView.aCb.x = 210;
 			mainView.aCb.y = 112;
 			
 			if (mainView.aCb.parent == null) {
 				mainView.addChild(mainView.aCb);
-				mainView.aCb.visible = true;
 			}
+			mainView.aCb.visible = true;
 			menu();
 			addButton(1, "Skip", perkSkip);
 		}
@@ -965,7 +965,7 @@ import flash.events.Event;
 			clearOutput();
 			var selected:PerkClass = ComboBox(event.target).selectedItem.perk;
 			mainView.aCb.move(210, 85);
-			outputText("You have selected the following perk:\n\n");
+			outputText("You have selected the following perk:\n\n\n");
 			outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
 			var unlocks:Array = kGAMECLASS.perkTree.listUnlocks(selected.ptype);
 			if (unlocks.length>0){

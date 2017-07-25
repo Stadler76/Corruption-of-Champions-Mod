@@ -2,6 +2,11 @@ package classes.display
 {
 	import classes.BoundControlMethod;
 	import classes.InputManager;
+
+import coc.view.Block;
+
+import mx.core.ScrollControlBase;
+
 	import fl.containers.ScrollPane;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -32,9 +37,9 @@ package classes.display
 		private var _functions:Array;
 		private var _newFuncs:Array;
 		
-		private var _content:MovieClip;
+		private var _content:Block;
 		private var _contentChildren:int;
-		
+
 		/**
 		 * Initiate the BindingPane, setting the stage positioning and reference back to the input manager
 		 * so we can generate function callbacks later.
@@ -45,21 +50,11 @@ package classes.display
 		 * @param	width			Fixed width of the containing ScrollPane
 		 * @param	height			Fixed height of the containing ScrollPane
 		 */
-		public function BindingPane(inputManager:InputManager, xPos:int, yPos:int, width:int, height:int, uiscrollwidth:int) 
+		public function BindingPane(inputManager:InputManager, xPos:int, yPos:int, width:int, height:int)
 		{
 			_inputManager = inputManager;
-			
-			/* This is a super super fucking annoying fix. The TextField class, whilst it supports being bound to a
-			*  doesn't include a scrollbar by default, it has to be attached as a sperate, distinct component. It's
-			*  literally bolted onto the side, and isn't part of the sizing information of the TextField itself.
-			*  ScrollPanes on the other hand, DO feature a scrollbar as a core part of their functionality. And
-			*  for ScrollPanes, the UIScrollBar is included in the total sizing information. Whoever wrote this shit
-			*  was literally on crack, I SWEAR TO GOD. */
-			this.width = width + uiscrollwidth + 3;
-			this.height = height - 3;
-			
-			this.x = xPos - 1;
-			this.y = yPos;
+			move(xPos,yPos);
+			setSize(width,height);
 			
 			// Cheap hack to remove the stupid styling elements of the stock ScrollPane
 			var blank:MovieClip = new MovieClip();
@@ -69,10 +64,19 @@ package classes.display
 			this.PopulateKeyboardDict();
 			
 			// Initiate a new container for content that will be placed in the scroll pane
-			_content = new MovieClip();
+			_content = new Block({layoutConfig:{
+				type: Block.LAYOUT_FLOW,
+				direction: 'column',
+				gap: 4
+			}});
 			_content.name = "controlContent";
+			_content.addEventListener(Block.ON_LAYOUT,function(e:Event):void{
+				if (source) {
+					update();
+				}
+			});
 			_contentChildren = 0;
-			
+
 			// Hook into some stuff so that we can fix some bugs that ScrollPane has
 			this.addEventListener(Event.ADDED_TO_STAGE, AddedToStage);
 		}
@@ -114,8 +118,9 @@ package classes.display
 			{
 				UpdateContentObjects();
 			}
-			
+
 			this.source = _content;
+			update();
 		}
 		
 		/**
@@ -146,20 +151,18 @@ package classes.display
 			helpLabel.htmlText += "Duplicate keys are automatically unbound from their old control action.\n\n";
 			helpLabel.htmlText += "<b>Reset Ctrls</b> will reset all of the control bindings to their defaults.\n\n";
 			helpLabel.htmlText += "<b>Clear Ctrls</b> will remove all of the current control bindings, leaving everything Unbound.\n\n";
-			
+
 			//helpLabel.height *= 2; 
 			
 			_contentChildren++;
-			_content.addChild(helpLabel);
+			_content.addElement(helpLabel);
 			
 			for (var i:int = 0; i < _functions.length; i++)
 			{
 				_contentChildren++;
 				
-				var newLabel:BindDisplay = new BindDisplay(this.width);
+				var newLabel:BindDisplay = new BindDisplay(this.width-20);
 				newLabel.name = _functions[i].Name;
-				newLabel.x = 2;
-				newLabel.y = ( BindDisplay.BUTTON_Y_DELTA * i ) + ( 7 + helpLabel.textHeight );
 				newLabel.htmlText = "<b>" + _functions[i].Name + ":</b>";
 				newLabel.button1Text = _keyDict[_functions[i].PrimaryKey];
 				newLabel.button2Text = _keyDict[_functions[i].SecondaryKey];
@@ -172,7 +175,7 @@ package classes.display
 						inMan.ListenForNewBind(funcName, InputManager.PRIMARYKEY);
 						_stage.focus = _stage;
 					}
-				}
+				};
 				
 				var genSecondaryCallback:Function = function(funcName:String, inMan:InputManager):Function
 				{
@@ -181,13 +184,13 @@ package classes.display
 						inMan.ListenForNewBind(funcName, InputManager.SECONDARYKEY);
 						_stage.focus = _stage;
 					}
-				}
+				};
 				// ... Warned you.
 
 				newLabel.button1Callback = genPrimaryCallback(_functions[i].Name, _inputManager);
 				newLabel.button2Callback = genSecondaryCallback(_functions[i].Name, _inputManager);
 				
-				_content.addChild(newLabel);
+				_content.addElement(newLabel);
 			}
 		}
 		
@@ -200,7 +203,7 @@ package classes.display
 		{
 			for (var i:int = 0; i < _functions.length; i++)
 			{
-				var currLabel:BindDisplay = _content.getChildByName(_functions[i].Name) as BindDisplay;
+				var currLabel:BindDisplay = _content.getElementByName(_functions[i].Name) as BindDisplay;
 				
 				currLabel.button1Text = _keyDict[_functions[i].PrimaryKey];
 				currLabel.button2Text = _keyDict[_functions[i].SecondaryKey];

@@ -51,7 +51,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
 				addHP(0.25 * maxHP());
 				lust -= 20;
-				game.dynStats("lus", 2);
+				player.takeLustDamage(2, true);
 			}
 			else {
 				var attackChoice:Number = rand(3);

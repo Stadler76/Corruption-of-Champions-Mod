@@ -63,6 +63,8 @@ public function encounter():void {
 	//Gender hilarity chance.
 	if (player.gender == 0 && rand(3) == 0 && !player.isNaga() && !player.isTaur() && !player.isGoo()) {
 		//Warm up for neuters as per the old event:
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-sad-monster"));
 		outputText("You see a massive, shambling form emerge from the underbrush. While first appearing to be a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs. Sensing your presence, it lumbers at you, full speed, tentacles outstretched.\n\n");
 		
 		if (player.cor > 50 && player.cor <= 75)
@@ -83,6 +85,8 @@ public function encounter():void {
 		return;
 	}
 	//Combat starter
+	//Picture is here
+	outputText(images.showImage("monster-tentaclebeast"));
 	outputText("You see a massive, shambling form emerge from the underbrush.  While it resembles a large shrub, a collection of thorny tendrils and cephalopodic limbs sprout from its bulbous mass.  Sensing your presence, it lumbers at you, full speed, tentacles outstretched.\n\n");
 	if (player.cor > 50 && player.cor <= 75)
 		outputText("You debate the merits of running from such a creature.\n\n");
@@ -144,9 +148,10 @@ internal function tentacleVictoryRape():void {
 	spriteSelect(SpriteDb.s_tentacleMonster);
 	//Male/Herm
 	if (player.gender == 1 || player.gender == 3) {
-		outputText(images.showImage("tentaclebeast-win-male"));
 		outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest hollow tentacle you can find and summarily shit-kick the beast onto the ground. Holding the creature down with one foot, you take the hollow tentacle and poise it in front of your raging erection.\n\n"); 
 		outputText("\"<i>You want dick milk, you freak?!</i>\" you bellow in triumph. \"<i>HERE YOU GO!</i>\"\n\n");
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-win-male"));
 		outputText("You impale the tentacle on your penis and begin humping wildly, treating the creature's armature as your own personal onahole. The creature squirms wildly, trying to escape your lust-driven strength. Replying with a swift kick with your free foot, the creature's resolve to escape wavers.\n\n"); 
 		outputText("\"<i>Quit fuckin' squirming and take your MEDICINE!</i>\" you thunder as you cheap-shot the beast for good measure.\n\n");
 		outputText("Feeling your peak approach, you allow your muscles into their rhythmic contractions as you unload your cum into the creature like a howitzer attacking a fort. Laughing like a maniac with each shot, you see your jizz leak out as the creature struggles to assimilate your 'donation'.\n\n");
@@ -154,7 +159,6 @@ internal function tentacleVictoryRape():void {
 	}
 	//Female:
 	else {
-		outputText(images.showImage("tentaclebeast-win-female"));
 		player.slimeFeed();
 		//High Corruption
 		if (player.cor >= 66) {
@@ -173,6 +177,8 @@ internal function tentacleVictoryRape():void {
 			outputText("\n\nSensing your needs, the tamed beast extends a tendril from the main tentacle that easily pushes past your cervical opening and breeches the deepest parts of your womb. The feeler penetrates past your uterus and lodges itself as deeply as possible. The beast begins rapidly vibrating and undulating its member, stimulating the deepest parts of your sex.\n\n");
 			outputText("You quickly reach a cunt-cramping orgasm, which forces the creature to unload a torrent of hot, musky fluids inside you. You feel bloated and stuffed as the beast reflexively sprays the entire contents of its seminal sacs... or whatever it stores its cum in... inside you. With a quick squeeze, you start expelling the tentacle, which prompts the creature to withdraw its tendril and leave your body. You walk away well satisfied while the abomination is too exhausted to move.");
 		}
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-win-female"));
 	}
 	player.orgasm('Generic');
 	combat.cleanupAfterCombat();
@@ -185,6 +191,8 @@ private function futaTentacleBadEnd():void {
 	spriteSelect(SpriteDb.s_tentacleMonster);
 	outputText("Having repeatedly been ravaged by the tentacle beast in your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n");
 	outputText("The last rays of light fade as the creature closes its beak, trapping you inside. You begin flailing and fighting in sheer panic at the prospect of being eaten alive. As you struggle, countless tentacles wrap around your arms and legs, essentially binding you inside the creature. A thick tentacle forces its way down your mouth and you feel the familiar sensation of salty lust being emptied into your mouth. Your " + player.cockDescript(0) + " instantly becomes erect, triggering a tentacle to encapsulate your member completely. As this occurs, another limb buries itself deep within your ass.\n\n");
+	//Picture is here
+	outputText(images.showImage("badend-tentaclebeast"));
 	outputText("The beast then begins to milk your dick as fiercely as it ever has been in your entire life. You feel as if your prick will be ripped from your crotch as you immediately climax, dumping load after load of your semen into the horror. Your ejaculations only make the beast milk you harder, prompting an almost constant orgasmic cycle. After awhile, the shock and pain subside as you become utterly drunk off the sensation of the constant stream of cock milk you are producing.\n\n"); 
 	outputText("In your last moments of lucidity, you realize that you are not being eaten or technically harmed at all. The creature has bonded with you as a living producer of food.  As long as you are healthy and cumming, it has all the food it could ever possibly want... so long as your gonads hold out.\n\n");
 	outputText("You pass out, only to awaken briefly to the constant sensation of semen flowing out of your body.  Were it not for the tentacle force-feeding you, you would weakly moan with pleasure at the feeling of constant orgasm.  You slip in and out of consciousness countless times. When lucid, you can only enjoy the fact you are STILL blowing a load.\n\n");
@@ -238,6 +246,8 @@ internal function tentacleLossRape():void {
 			return;
 		}
 		else {
+			//Picture is here
+			outputText(images.showImage("tentaclebeast-sad-monster"));
 			if (player.cor < 75) outputText("While you attempt to resist the abomination, its raw muscle mass is too much. ");
 			outputText("It pins you to the ground easily. You feel slimy tentacles run up and down your groin as the creature searches for whatever gonads it expected you to have. When it realizes that you have neither penis nor vagina, it smartly casts you to the ground in apparent disgust.\n\n\"<i>WHAT THE FUCK IS THIS SHIT?!!</i>\" The creature speaks in an unnervingly human voice.  Completely confused, all you can do is sit there in shock.\n\n");
 			outputText("\"<i>Where are your naughty bits, goddammit!</i>\" the creature bellows. \"<i>Us tentacle creatures need to FEED!</i>\"\n\n");
@@ -259,6 +269,8 @@ internal function tentacleLossRape():void {
 		outputText("Amused as well as aroused, you choose to lull the creature into reticence as it keeps trying to suck your horsecock in. Each wave of pleasure makes your prick bob about");
 		if (player.balls > 0) outputText(", and you feel your " + player.ballsDescript() + " rise and drop in unison to the muscular contractions pumping freshly made cum into position for release");
 		outputText(".\n\n");
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-loss-horse"));
 		outputText("You bask in the glow of pleasure as the creature still fumbles around your dong, not realizing that you are just too big. An evil thought crosses your mind. Since this thing wants you bad enough, why not oblige it? Not expecting your increased strength due to your equine features, you wrench yourself free of the creature's restraints and summarily grasp the tentacle trying to cover your cock. With a great buck and heave, you force your dick into the tentacle, stretching it immensely. The creature lets out an inhuman howl as it reacts painfully to your newfound zeal.\n\n");
 		outputText("You begin pumping and thrusting like mad, working yourself to an orgasm. The creature tries to pull away, but finds that it is the one that cannot escape. Feeling your ");
 		if (player.balls > 0) outputText("balls ");
@@ -313,6 +325,8 @@ internal function tentacleLossRape():void {
 				outputText("\n\n");
 			}
 		}
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-loss-taur"));
 		// has vagina: 
 		if (player.hasVagina()) {
 			outputText("A squirming tentacle forces its way inside your " + player.vaginaDescript(0) + ", undulating and squirming as it works its way deeper and deeper.  Your body responds by pumping out more fluid, making the passage of the monstrous thing easier.");
@@ -491,9 +505,10 @@ internal function tentacleLossRape():void {
 	}
 	if (player.gender == 1) 
 	{
-		outputText(images.showImage("tentaclebeast-loss-male"));
 		dynStats("str", -1,"int", -1, "lib", 5, "sen", 2, "lus", 25, "cor", 1);
 		if (player.cor < 75) outputText("It grabs you before you can get away!\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. ");
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-loss-male"));
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain ");
 		if (player.cockTotal() > 1) outputText("at the base of your " + player.multiCockDescriptLight() + ".");
 		outputText("  You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel the creature inject you with some sort of liquid. As the pain sears through you, ");
@@ -505,12 +520,13 @@ internal function tentacleLossRape():void {
 	}
 	if (player.gender == 2)
 	{
-		outputText(images.showImage("tentaclebeast-loss-female"));
 		player.slimeFeed();
 		dynStats("spe", -1, "int", -1, "lib", 5, "sen", 3, "lus", 20, "cor", 1);
 		if (player.cor < 75) outputText("It grabs you before you can get away!\n\nWhile you struggle valiantly, the beast's raw might is more than a match for you. ");
 		outputText("Tentacles burst from the mass and bind your arms, legs, and midriff. ");
 		if (player.cor < 75) outputText("You struggle to break free, but the creature only constricts you further, ensuring your immobility. ");
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-loss-female"));
 		outputText("A quick flex of the tentacles securing your legs leaves you spreadeagled before the maw of the horror.  ");
 		if (player.cor < 75) outputText("Fearing for your life, you scream and struggle for help, but only the apathetic sounds of nature respond.");
 		outputText("\n\n" + (player.totalBreasts() + 1) + " thorny tendrils appear and pierce your breasts and groin. A sharp pain and a burning sensation tear through you, overriding the previous wave of pleasure. You feel fluids being injected into you and a distinctive, agonizing misery flows into your veins.  Your breasts and ");
@@ -526,6 +542,8 @@ internal function tentacleLossRape():void {
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your ");
 		if (player.cockTotal() > 1) outputText("cocks");
 		else outputText(player.cockDescript(0));
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-loss-herm"));
 		outputText(".  You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel the creature inject you with some sort of liquid. As the pain sears through you, your ");
 		if (player.cockTotal() > 1) outputText(player.multiCockDescriptLight() + " immediately become fully erect and leak pre-cum liberally from their tips.  ");
 		else outputText("member immediately becomes fully erect and pre-cum leaks liberally from your tip.  ");
@@ -547,6 +565,7 @@ private function tentacleRapeContinuation():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_tentacleMonster);
 	if (player.gender == 1) {
+		//Picture is here
 		outputText(images.showImage("tentaclebeast-loss-male"));
 		outputText("You next feel the wretched sensation of another tentacle pushing its way past your anus and into your rectum. You cry more out of frustration and anger than pain as the foreign body settles a few inches inside your body. With a furious, coordinated rhythm, the monstrosity begins swelling the tentacle in your ass and ");
 		if (player.cockTotal() == 1)
@@ -563,6 +582,7 @@ private function tentacleRapeContinuation():void {
 		else player.orgasm('Dick');
 	}
 	else if (player.gender == 2) {
+		//Picture is here
 		outputText(images.showImage("tentaclebeast-loss-female"));
 		outputText("The beast rears up to reveal a beak-like maw. It opens its massive jaws to reveal ");
 		if (player.vaginas.length == 1)
@@ -594,6 +614,8 @@ private function tentacleRapeContinuation():void {
 		return;
 	}
 	else if (player.gender == 3) {
+		//Picture is here
+		outputText(images.showImage("tentaclebeast-loss-herm"));
 		if (player.cockTotal() == 1)
 		{
 			outputText("A sharp tug tells you that the creature has sealed itself upon your " + player.cockDescript(0) + ". You see " + player.totalBreasts() + " smaller tentacles latch onto your erect nipples. You feel milk begin to leak out as the creature makes a perfect seal around your areola. A thick, phallic tentacle probes underneath your trapped " + player.cockDescript(0) + " until it finds your vaginal opening. You cry out as the member punches past your opening and bottoms out in your womb. The tentacle swells up until it completely fills your " + player.vaginaDescript(0) + ".  ");
@@ -626,6 +648,8 @@ private function tentacleRapeContinuation():void {
 private function tentacleRapeContinuationForFemales():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_tentacleMonster);
+	//Picture is here
+	outputText(images.showImage("tentaclebeast-loss-female"));
 	if (player.vaginas.length == 1) { //single coochie
 		outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away.  Covered completely in cum, you see that your clitoris has swollen up to ");
 		//Big clit girls get huge clits
@@ -672,6 +696,8 @@ private function tentacleRapeContinuationForFemales():void {
 private function centaurGenderlessRetardation():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_tentacleMonster);
+	//Picture is here
+	outputText(images.showImage("tentaclebeast-sad-monster"));
 	if (flags[kFLAGS.GENDERLESS_CENTAUR_MADNESS] == 0 || player.balls == 0) {
 		flags[kFLAGS.GENDERLESS_CENTAUR_MADNESS] = 1;
 		outputText("Tentacles wrap around your legs before you can make a move to stop them, binding you tightly and coiling upwards.  One slides slowly along your underside, making you shiver in ");
@@ -739,6 +765,8 @@ private function centaurGenderlessRetardation():void {
 private function genderlessHilarityForNagaKenDolls():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_tentacleMonster);
+	//Picture is here
+	outputText(images.showImage("tentaclebeast-sad-monster"));
 	outputText("Out of nowhere tentacles bind your arms and tail, holding you firm in a matter of seconds.  You struggle to free yourself but can do nothing against the strength of the beast holding you in your current state.  More of the appendages start teasing around your body, as if looking for something.  A handful test the entrance to your " + player.assholeDescript() + " but evidently that's not what they're after.\n\n");
 
 	outputText("An oddly human voice comes from the undergrowth, catching you off-guard.  \"<i>Look, I'm really sorry about this, but I'm really not all that familiar with, uh, whatever it is you are.  Where do you keep the naughty bits?</i>\"\n\n");
@@ -759,6 +787,8 @@ private function genderlessHilarityForNagaKenDolls():void {
 private function tentacularGenderGooTimes():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_tentacleMonster);
+	//Picture is here
+	outputText(images.showImage("tentaclebeast-sad-monster"));
 	outputText("All of a sudden, tentacles come whipping out of the undergrowth to grab you.  Though, they're moving a little too fast, and manage to compress your body walls so far together that you're almost squeezed in half.\n\n");
 
 	outputText("\"<i>SHIT. SHIT. SHIT. SHIT.</i>\"  An oddly human voice is profaning loudly.  \"<i>Are you dead?</i>\"\n\n");

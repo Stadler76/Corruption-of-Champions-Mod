@@ -13,6 +13,17 @@ package classes
 	 */
 	public class CharSpecial extends BaseContent
 	{
+		public static const MIRVANNA_NAME:String = "Mirvanna";
+		public static const ARIA_NAME: String = "Aria";
+		public static const CHARAUN_NAME: String = "Charaun";
+		public static const GALATEA_NAME: String = "Galatea";
+		public static const HIKARI_NAME: String = "Hikari";
+		public static const KATTI_NAME: String = "Katti";
+		public static const LUCINA_NAME: String = "Lucina";
+		public static const NAVORN_NAME: String = "Navorn";
+		public static const LUKAZ_NAME: String = "Lukaz";
+		public static const MARA_NAME: String = "Mara";
+		
 		
 		public function CharSpecial() {}
 		
@@ -20,16 +31,16 @@ package classes
 		public const customs:Array = [
 			// 
 			[ "Without pre-defined history:", null, false, "" ],
-			[ "Aria", customAria, false, "It's really no surprise that you were sent through the portal to deal with the demons - you look enough like one as-is.  Your numerous fetish-inducing piercings, magical fox-tails, and bimbo-licious personality were all the motivation the elders needed to keep you from corrupting the village youth." ],
+			[ ARIA_NAME, customAria, false, "It's really no surprise that you were sent through the portal to deal with the demons - you look enough like one as-is.  Your numerous fetish-inducing piercings, magical fox-tails, and bimbo-licious personality were all the motivation the elders needed to keep you from corrupting the village youth." ],
 			[ "Betram", customBetram, false, "You're quite the foxy herm, and as different as you were compared to the rest of Ingnam, it's no surprise you were sent through first." ],
-			[ "Charaun", customCharaun, false, "As a gifted fox with a juicy, thick knot, a wet cunt, and magical powers, you have no problems with being chosen as champion." ],
+			[ CHARAUN_NAME, customCharaun, false, "As a gifted fox with a juicy, thick knot, a wet cunt, and magical powers, you have no problems with being chosen as champion." ],
 			[ "Cody", customCody, false, "Your orange and black tiger stripes make you cut a more imposing visage than normal, and with your great strength, armor, and claymore, you're a natural pick for champion." ],
-			[ "Galatea", customGalatea, false, "You've got large breasts prone to lactation.  You aren't sure WHY you got chosen as a champion, but with your considerable strength, you're sure you'll do a good job protecting Ingnam." ],
+			[ GALATEA_NAME, customGalatea, false, "You've got large breasts prone to lactation.  You aren't sure WHY you got chosen as a champion, but with your considerable strength, you're sure you'll do a good job protecting Ingnam." ],
 			[ "Gundam", customGundam, false, "You're fabulously rich, thanks to a rather well-placed bet on who would be the champion.  Hopefully you can buy yourself out of any trouble you might get in." ],
-			[ "Hikari", customHikari, false, "As a herm with a super-thick cat-cock, D-cup breasts, and out-of-this-world armor, you're a natural pick for champion." ],
-			[ "Katti", customKatti, false, "You have big breasts with big, fuckable nipples on them, and no matter what, your vagina always seems to be there to keep you company." ],
-			[ "Lucina", customLucina, false, "You're a blond, fair-skinned lass with a well-made bow and the skills to use it.  You have D-cup breasts and a very moist cunt that's seen a little action.  You're fit and trim, but not too thin, nor too well-muscled.  All in all, you're a good fit for championing your village's cause." ],
-			[ "Navorn", customNavorn, false, "There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion." ],
+			[ HIKARI_NAME, customHikari, false, "As a herm with a super-thick cat-cock, D-cup breasts, and out-of-this-world armor, you're a natural pick for champion." ],
+			[ KATTI_NAME, customKatti, false, "You have big breasts with big, fuckable nipples on them, and no matter what, your vagina always seems to be there to keep you company." ],
+			[ LUCINA_NAME, customLucina, false, "You're a blond, fair-skinned lass with a well-made bow and the skills to use it.  You have D-cup breasts and a very moist cunt that's seen a little action.  You're fit and trim, but not too thin, nor too well-muscled.  All in all, you're a good fit for championing your village's cause." ],
+			[ NAVORN_NAME, customNavorn, false, "There's been something special about you since day one, whether it's your numerous sexual endowments or your supernatural abilities.  You're a natural pick for champion." ],
 			[ "Rope", customRope, false, "Despite outward appearances, you're actually something of a neuter, with shark-like teeth, an androgynous face, and a complete lack of genitalia." ],
 			[ "Sora", customSora, false, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic..." ],
 			
@@ -42,10 +53,10 @@ package classes
 			[ "Isaac", customIsaac, true, "Born of a disgraced priestess, Isaac was raised alone until she was taken by illness.  He worked a number of odd jobs until he was eventually chosen as champion." ],
 			//[ "Kitteh6660", customKitteh6660, true, "" ],
 			[ "Leah", customLeah, true, "No Notes Available." ],
-			[ "Lukaz", customLukaz, true, "No Notes Available." ],
-			[ "Mara", customMara, true, "You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past." ],
+			[ LUKAZ_NAME, customLukaz, true, "No Notes Available." ],
+			[ MARA_NAME, customMara, true, "You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past." ],
 			[ "Mihari", customMihari, true, "The portal is not something you fear, not with your imposing armor and inscribed spellblade.  You're much faster and stronger than every champion that came before you, but will it be enough?" ],
-			[ "Mirvanna", customMirvanna, true, "You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though." ],
+			[ MIRVANNA_NAME, customMirvanna, true, "You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though." ],
 			[ "Nami", customNami, true, "Your exotic appearance caused you some trouble growing up, but you buried your nose in books until it came time to go through the portal." ],
 			[ "Nixi", customNixi, true, "As a German-Shepherd morph, the rest of the village never really knew what to do with you... until they sent you through the portal to face whatever's on the other side..." ],
 			[ "Prismere", customPrismere, true, "You're more of a scout than a fighter, but you still feel confident you can handle your responsibilities as champion.  After all, what's to worry about when you can outrun everything you encounter?  You have olive skin, deep red hair, and a demonic tail and wings to blend in with the locals." ],
@@ -114,7 +125,7 @@ package classes
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailVenom = 9;
 			player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
-			player.breastRows[0].breastRating = 5;
+			player.createBreastRow(Appearance.BREAST_CUP_DD);
 			player.femininity = 100;
 			player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			player.skinTone = "pink";
@@ -261,16 +272,13 @@ package classes
 			player.hipRating = 6;
 			player.buttRating = 3;
 			player.femininity = 50;
-			player.createBreastRow();
-			player.createBreastRow();
-			player.createBreastRow();
-			player.breastRows[0].breastRating = 4;
+			player.createBreastRow(Appearance.BREAST_CUP_D);
+			player.createBreastRow(Appearance.BREAST_CUP_C);
+			player.createBreastRow(Appearance.BREAST_CUP_B);
+			player.createBreastRow(Appearance.BREAST_CUP_A);
 			player.breastRows[0].fuckable = true;
-			player.breastRows[1].breastRating = 3;
 			player.breastRows[1].fuckable = true;
-			player.breastRows[2].breastRating = 2;
 			player.breastRows[2].fuckable = true;
-			player.breastRows[3].breastRating = 1;
 			player.breastRows[3].fuckable = true;
 			player.tongueType = TONGUE_DEMONIC;
 			player.nippleLength = 0.1;
@@ -383,7 +391,7 @@ package classes
 			//Hair length: Very long
 			player.hairLength = 22;
 			//Breast size: HH
-			player.breastRows[0].breastRating = 21;
+			player.createBreastRow(Appearance.BREAST_CUP_HH);
 			//Femininity/Beauty: Very high
 			player.femininity = 90;
 			// Height: 5'4
@@ -433,7 +441,7 @@ package classes
 			player.cocks[0].cockLength = 10;
 			player.cocks[0].cockThickness = 4;
 			if (!player.hasVagina()) player.createVagina();
-			player.breastRows[0].breastRating = 4;
+			player.createBreastRow(Appearance.BREAST_CUP_D);
 			player.hairLength = 10;
 			player.setArmor(armors.GELARMR);
 		}
@@ -521,7 +529,7 @@ package classes
 			player.tailType = TAIL_TYPE_RABBIT;
 			//Face: Human
 			//Breasts: H-cup with 4.5 inch fuckable nipples"
-			player.breastRows[0].breastRating = 19;
+			player.createBreastRow(Appearance.BREAST_CUP_H);
 			player.nippleLength = 4.5;
 			player.breastRows[0].fuckable = true;
 		}
@@ -595,7 +603,7 @@ package classes
 			player.tone = 60;
 			player.hairLength = 30;
 			player.hairColor = "light blonde";
-			player.breastRows[0].breastRating = 4;
+			player.createBreastRow(Appearance.BREAST_CUP_D);
 			player.skinTone = "light";
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
@@ -642,7 +650,6 @@ package classes
 			player.thickness = 50;
 			player.skinDesc = "skin";
 			player.hoursSinceCum = 0;
-			player.setClitLength(0);
 			player.ass.analLooseness = 0;
 			player.ass.analWetness = 0;
 			player.ass.fullness = 0;
@@ -673,12 +680,12 @@ package classes
 			outputText("You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past.");
 			player.spe+=3;
 			player.inte+=2;
-			player.setClitLength(.5);
 			player.tone = 30;
 			player.fertility = 10;
 			player.hairLength= 15;
 			player.createBreastRow();
 			player.createVagina();
+			player.setClitLength(.5);
 			player.tallness = 67;
 			player.breastRows[0].breastRating = 7;
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
@@ -765,7 +772,6 @@ package classes
 			player.spe+=3;
 			player.inte+=2;
 			player.str += 3;
-			player.setClitLength(.5);
 			player.fertility = 20;
 			player.hairLength= 15;
 			player.createBreastRow();
@@ -773,6 +779,7 @@ package classes
 			player.createCock();
 			player.tallness = 73;
 			player.breastRows[0].breastRating = 5;
+			player.setClitLength(.5);
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 			player.vaginas[0].virgin = false;
@@ -909,21 +916,16 @@ package classes
 			player.furColor = "silver";
 			player.faceType = FACE_FOX;
 			player.earType = EARS_FOX;
-			player.createBreastRow();
-			player.createBreastRow();
-			player.createBreastRow();
-			player.breastRows[0].breastRating = 5;
-			player.breastRows[0].nipplesPerBreast = 4;
+			
+			player.createBreastRow(BREAST_CUP_DD,4);
+			player.createBreastRow(BREAST_CUP_DD,4);
+			player.createBreastRow(BREAST_CUP_DD,4);
+			player.createBreastRow(BREAST_CUP_DD,4);
 			player.breastRows[0].fuckable = true;
-			player.breastRows[1].breastRating = 5;
-			player.breastRows[1].nipplesPerBreast = 4;
 			player.breastRows[1].fuckable = true;
-			player.breastRows[2].breastRating = 5;
-			player.breastRows[2].nipplesPerBreast = 4;
 			player.breastRows[2].fuckable = true;
-			player.breastRows[3].breastRating = 5;
-			player.breastRows[3].nipplesPerBreast = 4;
 			player.breastRows[3].fuckable = true;
+			
 			if (!player.hasCock()) player.createCock();
 			player.createCock();
 			player.createCock();

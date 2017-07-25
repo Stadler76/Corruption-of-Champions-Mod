@@ -167,7 +167,9 @@ package classes.Scenes.Combat
 		{
 			clearOutput();
 			outputText("You close the distance between you and " + monster.a + monster.short + " as quickly as possible.\n\n");
-			player.removeStatusEffect(StatusEffects.KnockedBack);
+			while (player.hasStatusEffect(StatusEffects.KnockedBack)) {
+				player.removeStatusEffect(StatusEffects.KnockedBack);
+			}
 			if (player.weaponName == "flintlock pistol") {
 				if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0) {
 					flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;

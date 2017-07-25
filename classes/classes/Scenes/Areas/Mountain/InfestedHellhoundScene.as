@@ -108,6 +108,8 @@ package classes.Scenes.Areas.Mountain
 
 					outputText("The demonic dog backs away with what looks like a grin on its face after filling you with worms and boiling spooge, your urethra stretched and dripping with white squirming goop.  Pushed beyond your endurance, you start blacking out, your last thought a lamentation on how you'll be a carrier for these parasites, just like this demon-dog.");
 				}
+				//Picture is here
+				outputText(images.showImage("worm-mass-infested"));
 				//(+infested)
 				player.createStatusEffect(StatusEffects.Infested, 0, 0, 0, 0);
 				player.orgasm('Generic');
@@ -137,7 +139,8 @@ package classes.Scenes.Areas.Mountain
 
 				if (player.cor < 66) outputText("You beg, \"<i>Please, no, no!  I don't want them... in me!</i>\"\n\n");
 				else outputText("You start to beg it not to put them inside you, but your protests drop off when you realize how good they could feel squirming inside you.\n\n");
-
+				//Picture is here
+				outputText(images.showImage("hellhound-loss-vag"));
 				outputText("The demon-dog tries to double-penetrate you all at once, but it isn't lined up properly, and all it manages to do is bump against your taint and drag its main member across your labia.   You gasp in pain, momentarily thankful not to be impaled by such bestial implements, but knowing all too well the brief reprieve will be over all too soon.   As if it can read your thoughts, the beast on top of you repositions itself and slams forward, this time managing to line its two dog-dicks up to your holes correctly.  The pair of them feel far larger than they looked, filling you with a painful suddenness that brings tears to your eyes.\n\n");
 				outputText("Incredible heat radiates from the pair of rods inside you, making your whole body break out in a cold sweat in an attempt to deal with the situation.  You're rocked back and forth as the beast begins fucking you in earnest, slamming its fur-covered hips against your " + player.assDescript() + " with animalistic intensity.  Thankfully, the fucking isn't that painful, but the small mercy is ruined by the hot fluid you can feel starting to pour into you.\n\n");
 
@@ -181,7 +184,8 @@ package classes.Scenes.Areas.Mountain
 				outputText("The hell-hound rises up, looking nearly humanoid in shape for a moment before it drops down, planting its paws on your shoulders.  ");
 				if (player.cor < 80) outputText("You beg, \"<i>Please, no, no!  I don't want it... in me!</i>\"\n\n");
 				else outputText("You start to beg it not to put it inside you, but your protests drop off when you realize how good they could feel squirming inside you.\n\n");
-
+				//Picture is here
+				outputText(images.showImage("hellhound-loss-butt"));
 				outputText("The demon-dog tries to penetrate you all at once, but it isn't lined up properly, and all it manages to do is bump against your taint and rub its other dick on your back.   You gasp in pain, momentarily thankful not to be impaled by such a bestial implement, but knowing all too well the brief reprieve will be over all too soon.   As if it can read your thoughts, the demon-hound repositions itself and slams forward, this time managing to line its dog-dicks up with your " + player.assholeDescript() + " correctly.  It feels far larger than it looked, filling you with a painful suddenness that brings tears to your eyes.\n\n");
 				outputText("Incredible heat radiates from the thick black rod inside you, making your whole body break out in a cold sweat in an attempt to deal with the situation.  You're rocked back and forth as the beast begins fucking you in earnest, slamming its fur-covered hips against your " + player.assDescript() + " with animalistic intensity.  Thankfully, the fucking isn't that painful, but the small mercy is ruined by the hot fluid you can feel starting to pour into your " + player.assholeDescript() + " and onto your back.\n\n");
 

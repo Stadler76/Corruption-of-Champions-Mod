@@ -57,7 +57,7 @@ package classes.Scenes.NPCs
 				//If player has l2 piercing
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  Gods this turns you on!");
-					game.dynStats("lus", 5);
+					player.takeLustDamage(5, true);
 				}
 				player.createStatusEffect(StatusEffects.Bound, 2 + rand(5), 0, 0, 0);
 			}
@@ -65,7 +65,7 @@ package classes.Scenes.NPCs
 			else {
 				if (rand(2) == 0) {
 					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your " + player.skinDesc + ", smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your " + player.armorName + " to caress you more intimately while you're at her mercy.");
-					game.dynStats("lus", 9 + player.sens / 10);
+					player.takeLustDamage(9 + player.sens / 10, true);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
 				else {
@@ -74,7 +74,7 @@ package classes.Scenes.NPCs
 					else if (player.lust < 60) outputText("It gets inside you and turns you on, stoking the flames of your desire.");
 					else if (player.lust < 80) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.");
 					else outputText("It makes you ache and tremble with need, practically begging for another touch.");
-					game.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
+					player.takeLustDamage(5 + player.cor / 10 + player.lib / 20, true);
 				}
 			}
 			combatRoundOver();
@@ -118,9 +118,9 @@ package classes.Scenes.NPCs
 			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.");
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.");
-				game.dynStats("lus", 5);
+				player.takeLustDamage(5, true);
 			}
-			game.dynStats("lus", player.lib / 20 + 5 + rand(5));
+			player.takeLustDamage(player.lib / 20 + 5 + rand(5), true);
 			outputText("\n\n");
 			doAI();
 		}

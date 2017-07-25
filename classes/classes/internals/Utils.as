@@ -185,13 +185,13 @@ package classes.internals
 
 		/**
 		 * Convert a mixed array to an array of strings
-		 * 
+		 *
 		 * Some string lists (color lists for example) may contain strings and arrays containing 2+ strings.
 		 * e. g.: ["blue", "green", ["black", "white", "gray"], ["red", "orange"], "blue"]
 		 * With this method such an array would be converted to contain only string.
 		 * So the above example would return:
 		 * ["blue", "green", "black, white and gray", "red and orange", "blue"]
-		 * 
+		 *
 		 * @param   list  An array with mixed strings and arrays of strings
 		 * @return  An array of strings
 		 */
@@ -334,6 +334,11 @@ package classes.internals
 			if (n == 0) return "no " + pluralForm;
 			if (n == 1) return "one " + name;
 			return n + " " + pluralForm;
+		}
+		public static function repeatString(s:String,n:int):String {
+			var rslt:String = "";
+			while (n-->0) rslt += s;
+			return rslt;
 		}
 
 		/* None of these functions are called anymore

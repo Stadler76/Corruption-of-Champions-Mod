@@ -1134,7 +1134,7 @@ package classes.Scenes.Areas.Forest
 				} else 
 					addDisabledButton(button++, "Use L-Aid", "This scene requires you to have cock and a bottle of lactaid.", "Use LactAid");
 				//[Ovi Elixir]
-				if (player.hasItem(consumables.OVIELIX)) {
+				if (player.hasItem(consumables.OVIELIX) && player.isMaleOrHerm()) {
 					addButton(button++, "Use OviElix", doseAKitsuneWithOviElixirs, undefined, undefined, undefined, "You could use an oviposition elixir on her...");
 				} else 
 					addDisabledButton(button++, "Use OviElix", "This scene requires you to have cock and a bottle of ovi elixir.", "Use Ovi Elixir");

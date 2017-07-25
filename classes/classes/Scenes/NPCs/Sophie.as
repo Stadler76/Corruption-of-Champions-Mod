@@ -53,7 +53,7 @@ package classes.Scenes.NPCs
 			if (player.hasStatusEffect(StatusEffects.Luststick)) {
 				outputText("  Blood rushes to " + player.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ");
 				game.sophieScene.luststickApplication(2);
-				game.dynStats("lus", (12+player.lib/10));
+				player.takeLustDamage(12+player.lib/10, true);
 				if (player.lust100 < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
 				else if (player.lust100 < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
 				else if (player.lust100 < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
@@ -63,7 +63,7 @@ package classes.Scenes.NPCs
 			else {
 				outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ");
 				game.sophieScene.luststickApplication(2);
-				game.dynStats("lus", 8+player.lib/10);
+				player.takeLustDamage(8+player.lib/10, true);
 				if (player.lust100 < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
 				else if (player.lust100 < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
 				else if (player.lust100 < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
@@ -109,7 +109,7 @@ package classes.Scenes.NPCs
 			outputText("She hits you hard, nearly bowling you over.  Thankfully, her talons passed to either side of your torso.  They lock together behind your back and your face is pulled tightly into Sophie's smotheringly large mounds!");
 			if (rand(2) == 0) outputText("  She jiggles them around you pleasantly and coos, \"<i>Don't fight it baby.  Just let your body do what comes naturally.</i>\"\n");
 			else outputText("  She runs her long fingernails through your hair as she whispers, \"<i>Why fight it?  I'll make you feel so good.  Just relax and play with momma Sophie's tits.</i>\"\n");
-			game.dynStats("lus", (13 + player.sens/10));
+			player.takeLustDamage(13 + player.sens/10, true);
 		}
 		
 		//Compulsion (Male Only)
@@ -122,7 +122,7 @@ package classes.Scenes.NPCs
 			if (player.inte < 40 || (player.inte < 80 && rand(40) > (player.inte - 40))) {
 				outputText("You moan out loud as your arms move of their own volition.  They reach inside your " + player.armorName + " and stroke " + player.sMultiCockDesc() + ", caress the tip, and continue to fondle you a few moments.");
 				outputText("Even after regaining control of your limbs, you're left far more turned on by the ordeal.");
-				game.dynStats("lus", (15 + player.cor/20 + player.lib/20));
+				player.takeLustDamage(15 + player.cor/20 + player.lib/20, true);
 			}
 			//Player resists
 			else {

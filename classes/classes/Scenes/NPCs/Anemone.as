@@ -25,13 +25,13 @@ package classes.Scenes.NPCs
 			//First application
 			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
-			game.dynStats("lus", (2 * str));
+			player.takeLustDamage((2 * str), true);
 
 			//Loop through applying 1 point of venom at a time.
 			while (str > 0) {
 				str--;
 				//Str bottommed out, convert to lust
-				if (player.str < 2) game.dynStats("lus", 2);
+				if (player.str < 2) player.takeLustDamage(2, true);
 				//Lose a point of str.
 				else {
 					showStatDown("str");
@@ -41,7 +41,7 @@ package classes.Scenes.NPCs
 					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 1);
 				}
 				//Spe bottomed out, convert to lust
-				if (player.spe < 2) game.dynStats("lus", 2);
+				if (player.spe < 2) player.takeLustDamage(2, true);
 				//Lose a point of spe.
 				else {
 					showStatDown("spe");

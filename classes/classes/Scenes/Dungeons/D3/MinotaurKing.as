@@ -213,7 +213,7 @@ package classes.Scenes.Dungeons.D3
 				else
 					outputText(" Why did you do that? And why did it feel so good.");
 			}
-			game.dynStats("lus",15 + player.lib / 20);
+			player.takeLustDamage(15 + player.lib / 20, true);
 		}
 		
 		private function battleaxe():void
@@ -248,12 +248,12 @@ package classes.Scenes.Dungeons.D3
 				if (player.lust100 > 75)
 				{
 					outputText("swallowing it into your mouth without thinking.  ");
-					game.dynStats("lus",15 + player.lib / 10);
+					player.takeLustDamage(15 + player.lib / 10, true);
 				}
 				else
 				{
 					outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
-					game.dynStats("lus",7.5 + player.lib / 20);
+					player.takeLustDamage(7.5 + player.lib / 20, true);
 				}
 			}
 			else
@@ -261,7 +261,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("right past your head.  ");
 			}
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-			game.dynStats("lus",15 + player.lib / 20);
+			player.takeLustDamage(15 + player.lib / 20, true);
 			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
 			{
 				if (rand(2) == 0)
@@ -272,7 +272,7 @@ package classes.Scenes.Dungeons.D3
 				{
 					outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
 				}
-				game.dynStats("lus",5 + rand(5));
+				player.takeLustDamage(5 + rand(5), true);
 			}
 		}
 		
@@ -318,7 +318,7 @@ package classes.Scenes.Dungeons.D3
 				{
 					outputText("Excellia rises up onto her knees and arches her back to display her monumental mammaries, letting their chocolatey nipples jut accusingly in your direction. Her fingers travel to them, squeezing out thin flows of milk that she gathers and smears across each orb in turn, rubbing it into her skin like high-grade massage oil. When she’s finished, her tits are shining, and you’re a little hotter under the collar.");
 				}
-				game.dynStats("lus",5);
+				player.takeLustDamage(5, true);
 			}
 		}
 		

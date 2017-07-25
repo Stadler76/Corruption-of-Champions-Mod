@@ -206,7 +206,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				l = l * 1.25;
 			}
-			game.dynStats("lus",l);
+			player.takeLustDamage(l, true);
 			if (player.lust100 <= 30)
 			{
 				outputText("\n\nYou feel strangely warm.");
@@ -419,7 +419,7 @@ package classes.Scenes.Dungeons.D3
 				{
 					l = l * 1.25;
 				}
-				game.dynStats("lus",l);
+				player.takeLustDamage(l, true);
 			}
 			else if (player.lust100 <= 66)
 			{
@@ -429,7 +429,7 @@ package classes.Scenes.Dungeons.D3
 				{
 					l = l * 1.25;
 				}
-				game.dynStats("lus",l);
+				player.takeLustDamage(l, true);
 			}
 			else
 			{
@@ -439,7 +439,7 @@ package classes.Scenes.Dungeons.D3
 				{
 					l = l * 1.25;
 				}
-				game.dynStats("lus",l);
+				player.takeLustDamage(l, true);
 			}
 		}
 		
@@ -470,7 +470,7 @@ package classes.Scenes.Dungeons.D3
 				{
 					l = l * 1.25;
 				}
-				game.dynStats("lus",l);
+				player.takeLustDamage(l, true);
 			}
 		}
 		
@@ -539,12 +539,12 @@ package classes.Scenes.Dungeons.D3
 			else if (evade == EVASION_EVADE)
 			{
 				outputText(" You at least manage to close your eyes before the wave of spooge hits you, splattering all over your [armor].");
-				game.dynStats("lus",5);
+				player.takeLustDamage(5, true);
 			}
 			else
 			{
 				outputText(" You take a huge, fat, musky glob of spunk right to the eyes! You yelp in alarm, trying to wipe the salty, burning demonic cock-cream out, but it's simply too thick! Yuck!");
-				game.dynStats("lus",5);
+				player.takeLustDamage(5, true);
 				player.createStatusEffect(StatusEffects.Blind,2 + rand(2),0,0,0);
 			}
 		}
@@ -834,7 +834,7 @@ package classes.Scenes.Dungeons.D3
 				{
 					l = l * 1.25;
 				}
-				game.dynStats("lus",l);
+				player.takeLustDamage(l, true);
 				damage = str + weaponAttack - rand(player.tou);
 				outputText(" You can’t avoid them all! One clips you on its way past, ripping into your [skin] and leaving you feeling... flushed and hot in its wake.");
 				if (player.hasCock() && rand(player.tou + 50) < 25) {

@@ -1,4 +1,4 @@
-package classes
+﻿package classes
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -609,7 +609,7 @@ use namespace kGAMECLASS;
 			}
 			return returnDamage;
 		}
-		
+
 		public function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = false):Number{
 			//Round
 			lustDmg = Math.round(lustDmg);
@@ -1807,9 +1807,9 @@ use namespace kGAMECLASS;
 		public function sirenScore():Number 
 		{
 			var sirenCounter:Number = 0;
-			if (faceType == 4 && tailType == 7 && wingType == WING_TYPE_FEATHERED_LARGE && armType == ARM_TYPE_HARPY)
+			if (faceType == FACE_SHARK_TEETH && tailType == TAIL_TYPE_SHARK && wingType == WING_TYPE_FEATHERED_LARGE && armType == ARM_TYPE_HARPY)
 				sirenCounter+= 4;
-			if (hasVagina()) 
+			if (sirenCounter > 0 && hasVagina())
 				sirenCounter++;
 			//if (hasCock() && findFirstCockType(CockTypesEnum.ANEMONE) >= 0)
 			//	sirenCounter++;
@@ -2364,7 +2364,7 @@ use namespace kGAMECLASS;
 		
 		public function addToWornClothesArray(armor:Armor):void {
 			for (var i:int = 0; i < previouslyWornClothes.length; i++) {
-				if (previouslyWornClothes[i].shortName == armor.shortName) return; //Already have?
+				if (previouslyWornClothes[i] == armor.shortName) return; //Already have?
 			}
 			previouslyWornClothes.push(armor.shortName);
 		}
@@ -2682,11 +2682,33 @@ use namespace kGAMECLASS;
 		}
 		
 		public override function getMaxStats(stats:String):int {
+			var obj:Object = getAllMaxStats();
+			if (stats == "str" || stats == "strength") return obj.str;
+			else if (stats == "tou" || stats == "toughness") return obj.tou;
+			else if (stats == "spe" || stats == "speed") return obj.spe;
+			else if (stats == "inte" || stats == "int" || stats == "intelligence") return obj.inte;
+			/* [INTERMOD: xianxia]
+			 else if (stats == "wis" || stats == "wisdom") return obj.wis;
+			 else if (stats == "lib" || stats == "libido") return obj.lib;
+			 */
+			else return 100;
+		}
+		public function getAllMaxStats():Object {
 			var maxStr:int = 100;
 			var maxTou:int = 100;
 			var maxSpe:int = 100;
 			var maxInt:int = 100;
-			
+			//Apply New Game+
+			maxStr += ascensionFactor();
+			maxTou += ascensionFactor();
+			maxSpe += ascensionFactor();
+			maxInt += ascensionFactor();
+			/* [INTERMOD: xianxia]
+			var maxWis:int = 100;
+			var maxLib:int = 100;
+			var newGamePlusMod:int = this.newGamePlusMod();
+			 */
+
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
@@ -2866,11 +2888,6 @@ use namespace kGAMECLASS;
 			}
 			if (isNaga()) maxSpe += 10;
 			if (isTaur() || isDrider()) maxSpe += 20;
-			//Apply New Game+
-			maxStr += ascensionFactor();
-			maxTou += ascensionFactor();
-			maxSpe += ascensionFactor();
-			maxInt += ascensionFactor();
 			//Might
 			if (hasStatusEffect(StatusEffects.Might)) {
 				maxStr += statusEffectv1(StatusEffects.Might);
@@ -2880,11 +2897,16 @@ use namespace kGAMECLASS;
 				maxSpe -= statusEffectv2(StatusEffects.AndysSmoke);
 				maxInt += statusEffectv3(StatusEffects.AndysSmoke);
 			}
-			if (stats == "str" || stats == "strength") return maxStr;
-			else if (stats == "tou" || stats == "toughness") return maxTou;
-			else if (stats == "spe" || stats == "speed") return maxSpe;
-			else if (stats == "inte" || stats == "int" || stats == "intelligence") return maxInt;
-			else return 100;
+			return {
+				str:maxStr,
+				tou:maxTou,
+				spe:maxSpe,
+				inte:maxInt
+				/* [INTERMOD: xianxia]
+				wis:maxWis,
+				lib:maxLib
+				*/
+			};
 		}
 		
 		public function requiredXP():int {
@@ -3503,7 +3525,7 @@ use namespace kGAMECLASS;
 				skinTone = (choice is Array) ? choice[0] : choice;
 
 			if (doCopySkin)
-				underBody.copySkin();
+				copySkinToUnderBody();
 
 			if (choice is Array)
 				if (what == "fur")

@@ -11,7 +11,7 @@ package classes.Scenes.NPCs
 		private function kihaTimeWaster():void {
 			game.spriteSelect(SpriteDb.s_kiha);
 			outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving you an unintended show.  ");
-			game.dynStats("lus", 5);
+			player.takeLustDamage(5, true);
 			combatRoundOver();
 		}
 

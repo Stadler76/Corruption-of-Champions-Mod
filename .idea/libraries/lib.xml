@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="lib" type="flex">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/lib/bin" />
+      <root url="file://$PROJECT_DIR$/lib/bin/flexunit" />
+      <root url="jar://$PROJECT_DIR$/lib/bin/MainView.swc!/" />
+      <root url="jar://$PROJECT_DIR$/lib/bin/ScrollPane.swc!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/lib/bin" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/bin/flexunit" recursive="false" />
   </library>
 </component>

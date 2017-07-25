@@ -46,15 +46,16 @@ package classes.Scenes.Dungeons.HelDungeon
 		
 		//ATTACK THREE: LUSTY HARPIES!
 		public function harpyHordeLustAttack():void {
+			var lustDmg:int = 10;
 			outputText("The harpies back off for a moment, giving you room to breathe - only to begin a mini strip-tease, pulling off bits of clothing to reveal their massive asses and hips or bearing their small, perky tits.  They caress themselves and each other, moaning lewdly.  Distracted by the burlesque, you don't notice a lipstick-wearing harpy approach you until it's too late!  She plants a kiss right on your lips, ");
 			if (player.findPerk(PerkLib.LuststickAdapted) >= 0) outputText("doing relatively little thanks to your adaptation");
 			else {
 				outputText("sending shivers of lust up your spine");
-				game.dynStats("lus", 5);
-				if (player.hasCock()) game.dynStats("lus", 15);
+				lustDmg += 5;
+				if (player.hasCock()) lustDmg += 15;
 			}
 			outputText(".");
-			game.dynStats("lus", 10);
+			player.takeLustDamage(lustDmg, true);
 			combatRoundOver();
 		}
 		

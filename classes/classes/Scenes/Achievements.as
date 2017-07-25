@@ -207,6 +207,7 @@ package classes.Scenes
 			addAchievement("Off With Her Head!", kACHIEVEMENTS.GENERAL_OFF_WITH_HER_HEAD, "You've managed to behead Lethice and show her head to the demons!", "", true);
 			addAchievement("NOOOOOOOOOOOO!", kACHIEVEMENTS.GENERAL_NOOOOOOO, "You've managed to kill yourself before Lethice takes you as her slave.", "", true);
 			addAchievement("Make Mareth Great Again", kACHIEVEMENTS.GENERAL_MAKE_MARETH_GREAT_AGAIN, "Build a wall around your camp to defend from those pesky imps.");
+			addAchievement("Terracotta Impy", kACHIEVEMENTS.GENERAL_TERRACOTTA_IMPY, "You've placed 100 imp statues around your camp wall. No, bassy. Bad bassy! Baaad Mr. Bassy!!!", "", true);
 			
 			menu();
 			addButton(13, "" + achievementsEarned + "/" + achievementsTotal + " unlocked", kGAMECLASS.doNothing);

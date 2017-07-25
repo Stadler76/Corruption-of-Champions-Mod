@@ -16,7 +16,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//(½ chance during any round):
 			if (rand(2) == 0) {
 				outputText("\nOne of the tiny demons latches onto one of your " + player.legs() + " and starts humping it.  You shake the little bastard off and keep fighting!");
-				game.dynStats("lus", 1);
+				player.takeLustDamage(1, true);
 			}
 			combatRoundOver();
 		}
@@ -29,7 +29,6 @@ package classes.Scenes.Dungeons.DeepCave
 			else {
 				//(OH SHIT IT GOES OFF) 
 				//+50 lust!
-				game.dynStats("lus", 50);
 				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + player.nippleDescript(0));
 				if (player.biggestLactation() > 1) outputText(" as they begin to drip milk");
 				outputText(".  The lower portions of your coverings ");
@@ -44,6 +43,7 @@ package classes.Scenes.Dungeons.DeepCave
 					if (player.getClitLength() > 3) outputText(" as your clit swells up in a more sensitive imitation of a cock");
 				}
 				if (player.gender == 0) outputText("rub the sensitive skin of your thighs and featureless groin in a way that makes you wish you had a sex of some sort");
+				player.takeLustDamage(50, true);
 				outputText(".\n");
 				removeStatusEffect(StatusEffects.ImpUber);
 			}
@@ -107,7 +107,7 @@ package classes.Scenes.Dungeons.DeepCave
 					if (damage == 3) outputText("Seed lands in your " + player.hairDescript() + ", slicking you with demonic fluid.\n");
 					if (damage == 4) outputText("Another blast of jizz splatters against your face, coating your lips and forcing a slight taste of it into your mouth.\n");
 					if (damage == 5) outputText("The last eruption of cum soaks your thighs and the lower portions of your " + player.armorName + ", turning it a sticky white.\n");
-					game.dynStats("lus", (7+int(player.lib/40+player.cor/40)));
+					player.takeLustDamage((7+int(player.lib/40+player.cor/40)), true);
 				}
 				lust -= 5;
 				hits--;

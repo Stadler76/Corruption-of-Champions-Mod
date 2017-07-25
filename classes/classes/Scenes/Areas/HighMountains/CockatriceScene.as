@@ -36,6 +36,8 @@ package classes.Scenes.Areas.HighMountains
 				          +" and begins to preen itself, attention focused purely on itself. With a small sigh of relief you work your way across the"
 				          +" ridge you had been clinging to, eventually managing to come across a small plateau, a godsend in this uneven terrain"
 				          +" which allows you to observe the creature in relative safety.\n\n");
+				//Picture is here
+				outputText(images.showImage("monster-cockatrice"));
 				outputText("The creature before you is easily 6 feet tall, covered in a layer of vibrant midnight blue feathers with"
 				          +" turquoise accents.  It appears to be relatively avian in appearance, more so than the harpies you’ve seen flying around."
 				          +" It has a beaked face with large feathered ears, reminiscent of those of an owl. A ruff of thicker and fluffier turquoise"
@@ -149,6 +151,8 @@ package classes.Scenes.Areas.HighMountains
 			//spriteSelect(75);
 			clearOutput();
 			rideCockatriceForeplay();
+			//Picture is here
+			outputText(images.showImage("cockatrice-ridehim"));
 			outputText("\n\nHis cute begging face and the way he keeps his tongue working your [if (hasCock)turgid cock|hungry cunt] regardless of"
 			          +" your actions speeds up your decision, making you push him back by his firm but downy shoulders. You slowly make your way to"
 			          +" your knees, letting him get a good look at your body as you do so. His breath is coming out in short pants now, devouring"
@@ -218,6 +222,8 @@ package classes.Scenes.Areas.HighMountains
 			//spriteSelect(75);
 			clearOutput();
 			rideCockatriceForeplay();
+			//Picture is here
+			outputText(images.showImage("cockatrice-ridehim"));
 			outputText("\n\nHis large rounded pupils give him a cute, almost puppy dog look, as he stares up at you. If it werent for his flushed"
 			          +" face and lolling tongue adding such a lewd edge, you’d sweep him up into a big hug and pet him. But you have a better idea,"
 			          +" one that will make this face seem absolutely innocent by the time you’re done with him. You push him down to the ground by"
@@ -322,7 +328,9 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nHis purple member strains out from its slit, pre beading at the tip as you knead his behind. Running your free hand up"
 			          +" and over his length you use his slick pre to further lube your fingers before introducing a second, this time at as much"
 			          +" faster pace. He groans by the time your fingers are at their furthest, his cock twitching towards his belly as his walls"
-			          +" stretch around your fingers.");
+			          +" stretch around your fingers.\n");
+			//Picture is here
+			outputText(images.showImage("cockatrice-win-buttfuck"));
 			outputText("\n\nThrusting them in and out, you try to stretch him slowly while you make sure his tight tunnel is sufficiently slick."
 			          +" Once your fingers are moving smoothly back and forth you stroke your [cock] to full hardness. You line yourself up before"
 			          +" pulling out your fingers entirely and pushing your [cockhead] into him with a slow constant pressure, relishing in the tight"
@@ -391,6 +399,8 @@ package classes.Scenes.Areas.HighMountains
 		{
 			//spriteSelect(75);
 			clearOutput();
+			//Picture is here
+			outputText(images.showImage("cockatrice-ridehim"));
 			outputText("You casually approach him [if (hasArmor)stripping your [armor] and tossing it aside confidently], admiring his prone form."
 			          +" The cockatrice lays on his back, tail lazily resting between his legs as he runs a clawed finger over his pecs."
 			          +" His sapphire eyes are fixed firmly on you, drinking in your naked form. His eyes linger on your"
@@ -444,6 +454,8 @@ package classes.Scenes.Areas.HighMountains
 		{
 			//spriteSelect(75);
 			clearOutput();
+			//Picture is here
+			outputText(images.showImage("cockatrice-ridehim"));
 			outputText("You casually approach him[if (hasArmor) stripping your [armor] and tossing it aside confidently], admiring his prone form."
 			          +" The cockatrice lays on his back, tail lazily resting between his legs as he runs a clawed finger over his pecs. His sapphire"
 			          +" eyes are fixed firmly on you, drinking in your naked form. His eyes linger on your [if (hasBreasts)[breasts]|chest] for a"
@@ -481,6 +493,8 @@ package classes.Scenes.Areas.HighMountains
 		{
 			//spriteSelect(75);
 			clearOutput();
+			//Picture is here
+			outputText(images.showImage("cockatrice-ridehim"));
 			outputText("As you decide what to do with the cockatrice, your loins heated with arousal, you realise a you’ll have a hard time managing"
 			          +" anything, what with your tauric form being less than compatible with what many folk are packing. Looking around briefly,"
 			          +" you notice an alcove on the mountainside which spawns a brilliant idea. You could use the rock to pin him at the right"
@@ -544,6 +558,8 @@ package classes.Scenes.Areas.HighMountains
 				choice = player.hasVagina() ? CHOICE_PUSSY : CHOICE_COCK;
 			//spriteSelect(75);
 			clearOutput();
+			//Picture is here
+			outputText(images.showImage("cockatrice-ridehim"));
 			outputText("As you decide what to do with the cockatrice, your loins heated with arousal, you realise a you’ll have a hard time managing"
 			          +" anything, what with your spider like form being less than compatible with what many folk are packing. Looking around"
 			          +" briefly, you notice an alcove on the mountainside which spawns a brilliant idea. You could tie him up in there and get him"
@@ -628,6 +644,8 @@ package classes.Scenes.Areas.HighMountains
 				outputText(" as if asking for permission with his gaze. While he may be head level with your groin which would suggest your intent,"
 				          +" he hasn’t moved to touch you once.");
 			}
+			//Picture is here
+			outputText(images.showImage("cockatrice-foreplay"));
 			outputText(" The moment you tell him to start he smiles, scaled hands slowly sliding up the back of your"
 			          +" [if (isNaga)serpentine lower body|calves]. Surprisingly smooth and warm, his powerful grip massages up your"
 			          +" [if (isNaga)tail|legs], palms coming to rest on your [butt] as he leans forward. The heat of his breath on your"
@@ -752,6 +770,8 @@ package classes.Scenes.Areas.HighMountains
 			          +" [if (isNaga)coils trapped beneath|[if (isGoo)mound trapped beneath|legs spread around]] his curved hips."
 			          +" His thick purple cock eagerly pokes from his genital slit as it rubs against [if (hasCock)your own [cock]|your belly],"
 			          +" smearing you with viscous pre cum.");
+			//Picture is here
+			outputText(images.showImage("cockatrice-loss-butt"));
 			outputText("\n\nWith a buck of his hips as he shifts forwards, he forces you to curl up enough for his cock to press insistently at your"
 			          +" rear entrance while [if (isNaga)your coils are bunched up beneath him|[if (isGoo)mound is bunched up beneath him|your legs"
 			          +" hook over his hips]]. The slick heat that is spread against your pucker makes you flush as his tapered tip teases you open."
@@ -790,6 +810,8 @@ package classes.Scenes.Areas.HighMountains
 			          +" [if (isNaga)coils trapped beneath|[if (isGoo)mound trapped beneath|legs spread around]] his curved hips."
 			          +" His thick purple cock eagerly pokes from his genital slit as it rubs against [if (hasCock)your own [cock]|your belly],"
 			          +" smearing you with viscous pre cum.");
+			//Picture is here
+			outputText(images.showImage("cockatrice-loss-vag"));
 			outputText("\n\nHe gently rubs the tip of his member against your [cunt], parting the lips gently and nuzzling your [clit] enough to make"
 			          +" you gasp. Your [if (vaginalWetness <= 2)drenched|wet] slit clings to his cock as he slowly enters you, spreading your cunt"
 			          +" as his shaft widens. [if (player.balls > 0 || hasCock)Your [if (hasCock) hard [cock] gently twitches, batting against your"

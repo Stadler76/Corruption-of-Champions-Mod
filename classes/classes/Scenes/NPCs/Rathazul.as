@@ -97,7 +97,6 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface, Enc
 	//Rat is definitely not sexy!
 	if (player.lust > 30) dynStats("lus", -10);
 	//Introduction
-	outputText(images.showImage("rathazul-lake"));
 	if (player.hasStatusEffect(StatusEffects.MetRathazul)) {
 		if (player.hasStatusEffect(StatusEffects.CampRathazul))
 			outputText("You walk over to Rathazul's corner of the camp.  He seems as busy as usual, with his nose buried deep in some tome or alchemical creation, but he turns to face you as soon as you walk within a few paces of him.\n\n");
@@ -121,6 +120,8 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface, Enc
 		outputText("He sighs dejectedly, \"<i>I am not sure what I can do for you, youngling.  This world is fraught with unimaginable dangers, and you're just scratching the surface of them.</i>\"\n\nYou nod and move on, leaving the depressed alchemist to his sadness.");
 		doNext(camp.returnToCampUseOneHour);
 	}
+	//Picture is here
+	outputText(images.showImage("rathazul"));
 }
 
 private function rathazulMoveToCamp():void {
@@ -175,8 +176,9 @@ public function campRathazul():void {
 	if (player.lust100 > 65) dynStats("lus", -5);
 	if (player.lust100 > 80) dynStats("lus", -5);
 	if (player.lust100 > 90) dynStats("lus", -5);
+	//Picture is here
+	outputText(images.showImage("rathazul"));
 	//Introduction
-	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, " + player.short + "?</i>\"\n\n");
 	//player.createStatusEffect(StatusEffects.metRathazul,0,0,0,0);
 	offered = rathazulWorkOffer();
@@ -457,8 +459,9 @@ public function rathazulArmorMenu():void {
 private function craftOozeArmor():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul-craft-gelarmor"));
 	outputText("Rathazul takes the green gel from you and drops it into an empty cauldron.  With speed well beyond what you'd expect from such an elderly creature, he nimbly unstops a number of vials and pours them into the cauldron.  He lets the mixture come to a boil, readying a simple humanoid-shaped mold from what you had thought was piles of junk material.  In no time at all, he has cast the boiling liquid into the mold, and after a few more minutes he cracks it open, revealing a suit of glistening armor.\n\n");
+	//Picture is here
+	outputText(images.showImage("item-gelArmor"));
 	player.destroyItems(useables.GREENGL, 5);
 	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(armors.GELARMR, returnToRathazulMenu);
@@ -468,13 +471,14 @@ private function craftOozeArmor():void {
 private function craftCarapace():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul-craft-chitinarmor"));
 	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Rathazul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ");
 	outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots.  You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth");
 	if (player.mf("m", "f") == "f") outputText(" with stockings and garters");
 	outputText(".  He still manages to look somewhat pleased with himself in spite of the blunder, even bragging a little bit, \"<i>Let me show you the different lengths of string I used.</i>\"\n\n");
 	if (player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n");
 	if (player.biggestTitSize() >= 8) outputText("Your " + player.biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n");
+	//Picture is here
+	outputText(images.showImage("item-chitinArmor"));
 	player.destroyItems(useables.B_CHITN, 5);
 	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(armors.BEEARMR, returnToRathazulMenu);
@@ -577,31 +581,36 @@ private function collectSilkArmor():void {
 	var itype:ItemType;
 	switch(flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE]) {
 		case 1: //Armor
-			outputText(images.showImage("rathazul-craft-silkarmor"));
+			//Picture is here
+			outputText(images.showImage("item-silkArmor"));
 			outputText("A glittering white suit of armor sits atop a crude armor rack, reflecting the light that plays across its surface beautifully.  You definitely didn't expect anything like this!  It looks nearly identical to a set of light platemail, though instead of having a cold metal surface, the armor feels slightly spongy, with just a little bit of give in it.\n\n");
 			outputText("While you marvel at the strange equipment, Rathazul explains, \"<i>When you said you wanted armor, I realized I could skip a few of the alchemical processes used to soften material.  The savings let me acquire a cheap metal set of armor to use as a base, and I molded half the armor around each piece, then removed it and created the outer, defensive layers with the rest of the webbing.  Unfortunately, I didn't have enough silk for a solid codpiece, but I did manage to make a you thin loincloth from the leftover scraps  - for modesty.</i>\"\n\n");
 			itype = armors.SSARMOR;
 			break;
 		case 2: //Robes
-			outputText(images.showImage("rathazul-craft-silkrobes"));
+			//Picture is here
+			outputText(images.showImage("item-silkRobes"));
 			outputText("Hanging from a small rack is a long, flowing robe.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  The sleeves match the cowl, circled with intricate threads laid out in arcane patterns.\n\n");
 			outputText("Rathazul gingerly takes down the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This robe is tougher than many armors, and the spider-silk's properties may even help you in your spell-casting as well.</i>\"\n\n");
 			itype = armors.SS_ROBE;
 			break;
 		case 3: //Bra
-			outputText(images.showImage("rathazul-craft-silkbra"));
+			//Picture is here
+			outputText(images.showImage("item-silkBra"));
 			outputText("On a table is a pair of white bra.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n");
 			outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These bras are very durable and should be comfortable as well.</i>\"\n\n");
 			itype = undergarments.SS_BRA;
 			break;
 		case 4: //Panties
-			outputText(images.showImage("rathazul-craft-silkpanties"));
+			//Picture is here
+			outputText(images.showImage("item-silkPanties"));
 			outputText("On a table is a pair of white panties.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n");
 			outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  These panties are very durable and should be comfortable as well.</i>\"\n\n");
 			itype = undergarments.SSPANTY;
 			break;
 		case 5: //Loincloth
-			outputText(images.showImage("rathazul-craft-silkloincloth"));
+			//Picture is here
+			outputText(images.showImage("item-silkLoincloth"));
 			outputText("On a table is a white loincloth.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  \n\n");
 			outputText("Rathazul gingerly takes the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This loincloth is very durable and should be comfortable as well.</i>\"\n\n");
 			itype = undergarments.SS_LOIN;
@@ -1075,7 +1084,8 @@ private function buyReducto():void {
 	clearOutput();
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
-		outputText(images.showImage("rathazul-buy-reducto"));
+		//Picture is here
+		outputText(images.showImage("item-reducto"));
 		outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n");
 		player.gems -= cost;
 		inventory.takeItem(consumables.REDUCTO, returnToRathazulMenu);
@@ -1095,7 +1105,8 @@ private function buyGroPlus():void {
 	clearOutput();
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
-		outputText(images.showImage("rathazul-buy-groplus"));
+		//Picture is here
+		outputText(images.showImage("item-groPlus"));
 		outputText("Rathazul hands you the GroPlus with a nod before returning to his work.\n\n");
 		player.gems -= cost;
 		inventory.takeItem(consumables.GROPLUS, returnToRathazulMenu);

@@ -25,12 +25,13 @@ package classes.Scenes.Dungeons.DeepCave
 				}
 				if (player.hasVagina()) outputText(player.vaginaDescript() + " ");
 				else if (player.balls == 0) outputText("taint ");
-				outputText("as they climb ever-further up your body.  In spite of yourself, you feel the touch of arousal licking at your thoughts.\n");
+				outputText("as they climb ever-further up your body.  In spite of yourself, you feel the touch of arousal licking at your thoughts.");
 				if (player.lust < 35) {
-					game.dynStats("lus", 1);
+					player.takeLustDamage(1, true);
 					player.lust = 35;
 					statScreenRefresh();
 				}
+				outputText("\n");
 			}
 			//[Round 2 Action]
 			else if (statusEffectv1(StatusEffects.Round) == 2) {
@@ -69,12 +70,13 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("belly as they get closer and closer to ");
 				if (player.biggestTitSize() < 1) outputText("your chest");
 				else outputText("the underside of your " + player.allBreastsDescript());
-				outputText(".  Gods above, this is turning you on!  Your lower body is being violated in every conceivable way and it's only arousing you more.  Between the mind-numbing smell and the sexual assault you're having a hard time focusing.\n");
+				outputText(".  Gods above, this is turning you on!  Your lower body is being violated in every conceivable way and it's only arousing you more.  Between the mind-numbing smell and the sexual assault you're having a hard time focusing.");
 				if (player.lust < 65) {
-					game.dynStats("lus", 1);
+					player.takeLustDamage(1, true);
 					player.lust = 65;
 					statScreenRefresh();
 				}
+				outputText("\n");
 			}
 			//[Round 3 Action]
 			else if (statusEffectv1(StatusEffects.Round) == 3) {
@@ -82,12 +84,13 @@ package classes.Scenes.Dungeons.DeepCave
 				if (player.hasFuckableNipples()) outputText("  Proof of your arousal leaks from each " + player.nippleDescript(0) + " as their entrances part for the probing tentacles.  They happily dive inside to begin fucking your breasts, doubling your pleasure.");
 				outputText("  Moans escape your mouth as your hips begin to rock in time with the tentacles and the pulsing luminance of your fungus-pod.  It would be easy to lose yourself here.  You groan loudly enough to startle yourself back to attention.  You've got to get out!\n\n");
 				
-				outputText("The tentacles that aren't busy with your " + player.allBreastsDescript() + " are already climbing higher, and the slime has reached your waist.  If anything it actually makes the constant violation more intense and relaxing.  You start to sink down into it, but catch yourself and pull yourself back up.  No! You've got to fight!\n");
+				outputText("The tentacles that aren't busy with your " + player.allBreastsDescript() + " are already climbing higher, and the slime has reached your waist.  If anything it actually makes the constant violation more intense and relaxing.  You start to sink down into it, but catch yourself and pull yourself back up.  No! You've got to fight!");
 				if (player.lust < 85) {
-					game.dynStats("lus", 1);
+					player.takeLustDamage(1, true);
 					player.lust = 85;
 					statScreenRefresh();
 				}
+				outputText("\n");
 			}
 			//[Round 4 Action]
 			else {

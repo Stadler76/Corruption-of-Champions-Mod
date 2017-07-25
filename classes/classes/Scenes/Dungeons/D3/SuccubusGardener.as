@@ -237,8 +237,8 @@ this.HP = this.maxHP();
 				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 					player.takeDamage(75 + rand(15));
 				}
-				game.dynStats("lus+", 3 + rand(3));
-				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus+", 5);
+				player.takeLustDamage(3 + rand(3), true);
+				if (flags[kFLAGS.PC_FETISH] >= 2) player.takeLustDamage(7, true);
 				combatRoundOver();
 			}
 		}
@@ -265,7 +265,7 @@ this.HP = this.maxHP();
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(75 + rand(15));
 			}
-			game.dynStats("lus+", 3 + rand(3));
+			player.takeLustDamage(3 + rand(3), true);
 			combatRoundOver();
 		}
 		
@@ -288,7 +288,7 @@ this.HP = this.maxHP();
 			if (damage >= 0)
 			{
 				var sL:Number = player.lust;
-				game.dynStats("lus+", damage);
+				player.takeLustDamage(damage, true);
 				sL = Math.round(player.lust - sL);
 				outputText(" The sinuous plant-based tentacles lash at you like a dozen tiny whips! Preparing for stinging pain, you're somewhat taken aback when they pull back at the last moment, sensually caressing your most sensitive places! (" + sL + ")");
 			}
@@ -321,7 +321,7 @@ this.HP = this.maxHP();
 		
 		private function showerDotEffect():void
 		{
-			game.dynStats("lus+", 2 + rand(2));
+			player.takeLustDamage(2 + rand(2), true);
 			
 			player.addStatusValue(StatusEffects.ShowerDotEffect, 1, -1);
 			
@@ -413,7 +413,7 @@ this.HP = this.maxHP();
 			if (this.hasStatusEffect(StatusEffects.LustAura))
 			{
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
-				game.dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
+				player.takeLustDamage((8+int(player.lib/20 + player.cor/25)), true);
 			}
 			else 
 			{
@@ -434,7 +434,8 @@ this.HP = this.maxHP();
 				outputText("\n\nIt hangs there for a moment while the succubus yanks your mouth open, just in time to receive the undoubtedly drugged jism. It practically sizzles on your tongue, tasting of almonds and walnuts with a distinctly fruity aftertaste. Your mouth gulps it down automatically, and with slow-dawning comprehension, you understand how the succubus could be so obsessed with these plants. Your groin heats eagerly as the plant spunk absorbs into your system. Your pupils dilate. Gods, it feels good!");
 				
 				outputText("\n\nYou barely even realize that the temptress has stepped away. How can you fight this?");
-				game.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)), "cor+", 5);
+				player.takeLustDamage(8 + int(player.lib / 20 + player.cor / 25), true);
+				game.dynStats("cor+", 5);
 			}
 			else
 			{

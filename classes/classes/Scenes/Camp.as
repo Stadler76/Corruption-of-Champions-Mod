@@ -2230,8 +2230,8 @@ private function buildCampWallPrompt():void {
 		outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 20) + "/5\n\n");
 	}
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
-	outputText("\n\nIt will cost 100 nails and 100 wood to work on a segment of the wall.\n\n");
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 100) {
+	outputText("\n\nIt will cost 50 nails, 50 stones and 100 wood to work on a segment of the wall.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 50 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) {
 		doYesNo(buildCampWall, doCamp);
 	}
 	else {
@@ -2255,8 +2255,9 @@ private function buildCampWall():void {
 		helperArray[helperArray.length] = "Kiha";
 		helpers++;
 	}
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-	player.addKeyValue("Carpenter's Toolbox", 1, -100);
+	player.addKeyValue("Carpenter's Toolbox", 1, -50);
 	clearOutput();
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 1) {
 		outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a wall. You spend minutes looking at the instructions and memorize the procedures.");
@@ -2308,8 +2309,8 @@ private function buildCampGatePrompt():void {
 	}
 	outputText("You can build a gate to further secure your camp by having it closed at night.\n\n");
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
-	outputText("\n\nIt will cost 100 nails and 100 wood to build a gate.\n\n");
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 100) {
+	outputText("\n\nIt will cost 100 nails, 100 stones and 100 wood to build a gate.\n\n");
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 100 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 100) {
 		doYesNo(buildCampGate, doCamp);
 	}
 	else {
@@ -2334,6 +2335,7 @@ private function buildCampGate():void {
 		helperArray[helperArray.length] = "Kiha";
 		helpers++;
 	}
+	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 100;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
 	player.addKeyValue("Carpenter's Toolbox", 1, -100);
 	clearOutput();
@@ -2974,6 +2976,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.KELT_BREAK_LEVEL] == 4) NPCsDedicked++;
 	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 	if (NPCsDedicked >= 7) awardAchievement("You Bastard", kACHIEVEMENTS.GENERAL_YOU_BASTARD); //Take that, dedickers!
+	if (flags[kFLAGS.CAMP_WALL_STATUES] >= 100) awardAchievement("Terracotta Impy", kACHIEVEMENTS.GENERAL_TERRACOTTA_IMPY);
 }
 
 /*

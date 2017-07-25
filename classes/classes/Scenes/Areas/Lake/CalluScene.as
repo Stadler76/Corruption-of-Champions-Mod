@@ -27,7 +27,6 @@ import classes.Scenes.API.Encounter;
 		//Just want to do a quick Ottergirl event submission after you mentioned it!
 	public function execEncounter():void {
 			clearOutput();
-			outputText(images.showImage("callu-intro"));
 			flags[kFLAGS.MET_OTTERGIRL]++;
 			//First Time
 			if (flags[kFLAGS.MET_OTTERGIRL] == 1) {
@@ -39,7 +38,8 @@ import classes.Scenes.API.Encounter;
 				outputText("\n\nYou watch the fish for a few minutes until you notice that you're not alone on the shoreline. Further down the sandy beaches sits a solitary, feminine figure, her legs parted and arched.  A fishing rod is held lazily in her hands.  You trace the fishing line with your eyes, seeing a little piece of flotsam bobbing up and down a fair distance into the water.");
 
 				outputText("\n\nYou decide to approach this figure, who notices your advance. You spot her subtly shift her position, as though she's readying her body to bolt if you turn out to be hostile.  But still, she lets you approach.  The closer you get, the more of her features you can make out.  Her skin appears to be covered with damp, brown fur.  A long, thick tail sticks out from behind her, at least as wide-around as her leg, narrowing down into a rounded tip.  A short mop of sun bleached blonde hair, barely reaching down to her chin, frames a human-like face with a cute, upturned button nose. Her body, which is lithe and toned like that of a champion swimmer, is covered only by a two-piece bikini.  Her chest is surprisingly small, perhaps only A-cups, though she looks physically mature.  Identifying this person as an otter-girl, you'd guess larger breasts would make it harder to swim.");
-
+				//Piicture is here
+				outputText(images.showImage("callu-intro"));
 				outputText("\n\nYou stop a few feet away from her. She gives you a friendly smile.  \"<i>Well hey there, friend. You don't smell like one of them demon fellers,</i>\" she says with a light accent, reminding you of the farmers' daughters back in Ingnam. Her eyes travel up and down your body.  \"<i>So,</i>\" she says cheerfully, \"<i>you wanna fish'n'fuck?</i>\"");
 
 				outputText("\n\nYou can't help your eyebrow from quirking upwards.  What did she say?");
@@ -59,6 +59,8 @@ import classes.Scenes.API.Encounter;
 			}
 			//Repeats
 			else {
+				//Piicture is here
+				outputText(images.showImage("callu-intro"));
 				outputText("Your explorations of the lake lead you back to Callu, the otter girl. She sits lazily on the beach; fishing rod in hand, as usual. She gives a friendly wave as you approach, and pats the sandy patch of lakeside next to her.");
 				outputText("\n\n\"<i>Well ain't you a sight for sore eyes.</i>\"  You sit down next to her and relax, just sitting and watching the makeshift bobber tip and sway in the water.  \"<i>You up for a fish'n'fuck then?</i>\" she asks suddenly, brushing a strand of her sun bleached blonde hair out of her face.");
 
@@ -88,7 +90,6 @@ import classes.Scenes.API.Encounter;
 		private function ottergirlLikesDongs():void
 		{
 			clearOutput();
-			outputText(images.showImage("callu-sex-fuck"));
 			outputText("The moment you agree, a sly smile spreads across her face.  She jams the end of her fishing pole into the sand like a post, to prevent it from going anywhere, and stands up.  There's no tease, no ceremony as she strips out of her bikini bottoms and tosses them aside.  Her newly revealed mound has only the barest tuft of pubic hair, a little wisp of blonde hair amongst the sparse brown fur.");
 
 			outputText("\n\nYou move forward, intent on groping Callu's little breasts still hidden beneath the bikini top, but she holds up a hand and says, \"<i>Whoa there darlin', that ain't how a fish'n'fuck works.  You just lay down, and I'll take care of everything. And make sure you're as naked as a newborn babe.</i>\"");
@@ -127,8 +128,24 @@ import classes.Scenes.API.Encounter;
 
 			outputText("\n\nLikewise, her tongue and lips dance over your " + player.cockDescript(x) + " like a trio of dancers. They spin, twist, hop and tease, ensuring that no inch is left untouched.");
 			outputText("  She pays particularly close attention ");
-
-
+			
+			//Picture is here
+			if (player.cocks[x].cockType == CockTypesEnum.AVIAN) outputText(images.showImage("callu-sex-avian"));
+			else if (player.cocks[x].cockType == CockTypesEnum.CAT) outputText(images.showImage("callu-sex-cat"));
+			else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(images.showImage("callu-sex-demon"));
+			else if (player.cocks[x].cockType == CockTypesEnum.DOG) outputText(images.showImage("callu-sex-dog"));
+			else if (player.cocks[x].cockType == CockTypesEnum.DRAGON) outputText(images.showImage("callu-sex-dragon"));
+			else if (player.cocks[x].cockType == CockTypesEnum.ECHIDNA) outputText(images.showImage("callu-sex-echidna"));
+			else if (player.cocks[x].cockType == CockTypesEnum.FOX) outputText(images.showImage("callu-sex-fox"));
+			else if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(images.showImage("callu-sex-horse"));
+			else if (player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText(images.showImage("callu-sex-human"));
+			else if (player.cocks[x].cockType == CockTypesEnum.KANGAROO) outputText(images.showImage("callu-sex-kangaroo"));
+			else if (player.cocks[x].cockType == CockTypesEnum.LIZARD) outputText(images.showImage("callu-sex-lizard"));
+			else if (player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(images.showImage("callu-sex-tentacle"));
+			else if (player.cocks[x].cockType == CockTypesEnum.WOLF) outputText(images.showImage("callu-sex-wolf"));
+			else outputText(images.showImage("callu-sex-fuck"));
+			
+			
 			//[equine]
 			if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("to your flare, sucking, teasing and ");
 			//[canine]
@@ -199,7 +216,6 @@ import classes.Scenes.API.Encounter;
 		private function ottersForGals():void
 		{
 			clearOutput();
-			outputText(images.showImage("callu-sex-facesit"));
 			outputText("The moment you agree, a sly smile spreads across her face.  She jams the end of her fishing pole into the sand like a post, to prevent it from going anywhere, and stands up.  There's no tease, no ceremony as she strips out of her bikini bottoms and tosses them aside.  Her newly revealed mound has only the barest tuft of pubic hair, a little wisp of blonde hair amongst the sparse brown fur.");
 
 			outputText("\n\nYou move forward, intent on groping Callu's little breasts still hidden beneath the bikini top, but she holds up a hand and says, \"<i>Whoa there darlin', that ain't how a fish'n'fuck works.  You just lay down, and I'll take care of everything. And make sure you're as naked as a newborn babe.</i>\"");
@@ -219,7 +235,8 @@ import classes.Scenes.API.Encounter;
 			outputText("\n\nAfter several minutes of this tasty sixty-nine Callu gives your mound one last kiss and sits up, practically burying your face in her snatch.  \"<i>Ya'll just sit tight and put that tongue to work, kay?  Key ingredient in a fish'n'fuck, is of course, the fish.</i>\"  You voice your disapproval, though all that comes out is a garbled \"<i>mmmrrrrppphh.</i>\"  Callu ignores your protests, instead retrieving her fishing pole and sitting back further, pressing herself even harder against your face.  With her fantastic behind blocking your view, you can't see anything that's going on, and are only able to hear the quiet \"<i>tick-tick</i>\" of her fishing pole.");
 
 			outputText("\n\nYou know full well that you could get out of this if you wanted to, however the scent of the girl's musky mustelid muff is just too powerful, too intoxicating, too heavenly to ignore.  Instead of struggling you go to town, rubbing your face in it as you lick, slurp and suck at the lips pressed against your mouth.  Up and down your tongue goes, in and out, teasing her soft, swollen lips and pressing hard against her hard, aching clit as you gorge yourself on her pussy.");
-
+			//Picture is here
+			outputText(images.showImage("callu-sex-facesit"));
 			if (player.hasLongTongue()) outputText("\n\nYou extend your abnormal tongue, plunging it deep into Callu's depths. This actually elicits a little squeak from the fisherwoman, who shifts from side to side in shock.  You let your tongue push further in, as if it were a cock.  Spreading her as you delve deep, you taste the otter from the inside out, reveling in the taste of her sweet, tight hole.  Eventually your tongue comes to an obstruction, a tight ring that bars your way forward.  You grin, or at least try as hard as you can to do so, what with the weight of an otter-girl sitting on your face and 12 inches of tongue sticking out of your mouth.  The tip of your tongue whirls around her cervix before finding the center and slowly pushing inside.  Another \"<i>eep</i>\" arises from Callu, though this one turns into a contented sigh.  With the tip of your tongue in her womb, you begin to slather her walls with saliva.  Every tender flick of your tongue makes the girl riding your face shiver with pleasure.  All good things must come to an end, however, and your tongue eventually gets so tired you have no choice but to draw it back in.");
 
 			outputText("\n\nThis goes on for the better part of an hour.  You find yourself hunting for the little spots that make your sexy little friend jump and squeal, all while she reels in fish after fish.  Several orgasms, half a dozen fish and one extremely messy face later, you hear Callu reel in her line for the last time before setting it off to the side with a clatter.  She rises from your face, allowing you to breathe the fresh air once more.");
@@ -269,7 +286,8 @@ import classes.Scenes.API.Encounter;
 		{
 			clearOutput();
 			outputText("You tell Callu you're a little more interested in the fish than the fuck, at least for today.  She shrugs once before jamming the end of her fishing pole into the sand like a post and turning towards her pack.");
-
+			//Picture is here
+			outputText(images.showImage("callu-fishing"));
 			outputText("\n\nShe retrieves a delicious-smelling slab of roasted fish, properly salted and wrapped in a large green leaf.  \"<i>Here ya're, fresh as it comes 'less you want it still walkin' and talkin'.</i>\"");
 
 			outputText("\n\nYou thank Callu for the food and take your leave.  ");

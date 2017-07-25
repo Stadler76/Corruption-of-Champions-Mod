@@ -13,7 +13,8 @@ Everything in original game is copyright Fenoxo (fenoxo.com).
 
 Check out the wiki for information and the FAQ.
 
-**Playable releases can be found in the Releases tab.**
+**Playable releases can be found in the Releases tab.**  
+**Android Releases:** https://github.com/Hexxah/CoC-MOD-Android-Build  
 
 **Discord Server:** https://discord.gg/R25MZEx
 

@@ -90,15 +90,16 @@ package classes.Scenes.Dungeons.Factory
 				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.");
 				if (player.lust100 >= 80 || player.cor >= 80) {
 					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
-					game.dynStats("lus", 13, "cor", 1);
+					player.takeLustDamage(13, true);
+					game.dynStats("cor", 1);
 				}
 				else if (player.lust100 >= 50 || player.cor >= 50) {
 					outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
-					game.dynStats("lus", 8 + player.cor / 20);
+					player.takeLustDamage(8 + player.cor / 20, true);
 				}
 				else {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ".");
-					game.dynStats("lus", 5 + player.cor / 20);
+					player.takeLustDamage(5 + player.cor / 20, true);
 				}
 				player.takeDamage(5);
 			}

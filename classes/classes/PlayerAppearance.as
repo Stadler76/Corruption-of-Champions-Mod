@@ -290,7 +290,8 @@ package classes
 				if (player.eyeType == EYES_BASILISK)
 					outputText(" Others seem compelled to look into them.");
 			}
-			if (player.eyeCount > 2) outputText(" In addition to your primary two eyes, you have " + player.eyeCount + " eyes positioned on your forehead.");
+			if (player.eyeCount > 2)
+				outputText(" In addition to your primary two eyes, you have [extraEyesShort] positioned on your forehead.");
 
 			//Hair
 			//Hair

@@ -2055,6 +2055,16 @@ package classes
 			return DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
 		}
 
+		public static function extraEyesDescript(i_creature:Creature):String
+		{
+			return num2Text(i_creature.eyeCount - 2) + " " + DEFAULT_EYES_NAMES[i_creature.eyeType] + (i_creature.eyeCount == 3 ? " eye" : " eyes");
+		}
+
+		public static function extraEyesDescriptShort(i_creature:Creature):String
+		{
+			return num2Text(i_creature.eyeCount - 2) + (i_creature.eyeCount == 3 ? " eye" : " eyes");
+		}
+
 		public static function nagaLowerBodyColor2(i_creature:Creature):String
 		{
 			if (i_creature.underBody.skin.tone in NAGA_LOWER_BODY_COLORS)

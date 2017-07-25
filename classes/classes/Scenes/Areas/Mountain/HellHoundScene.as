@@ -54,6 +54,8 @@ package classes.Scenes.Areas.Mountain
 			if (player.vaginas.length > 0 && player.lowerBody != LOWER_BODY_TYPE_NAGA) outputText("slamming his twin dicks into your " + player.vaginaDescript(0) + " and your " + player.assholeDescript() + ".  ");
 			else outputText("slamming his lower dick into your " + player.assholeDescript() + ", while rubbing the other between the cheeks of your " + player.buttDescript() + ".  ");
 			if (player.vaginas.length > 0 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
+				//Picture is here
+				outputText(images.showImage("hellhound-loss-vag"));
 				if (player.vaginalCapacity() < monster.cockArea(0)) outputText("You feel an intense mixture of sensations in your lower body as your " + player.assholeDescript() + " feels like it is being torn apart, while your " + player.vaginaDescript(0) + " is filled with an intense pleasure at being filled with the creature's large member.  ");
 				else outputText("Your lower body explodes with pain as the hellhound forces himself in too quickly for either your " + player.assholeDescript() + " or your " + player.vaginaDescript(0) + " to handle.  ");
 				if (player.vaginas[0].virgin) outputText("<b>You are no longer a virgin!  </b>");
@@ -70,6 +72,8 @@ package classes.Scenes.Areas.Mountain
 				player.orgasm('Vaginal',false);
 			}
 			else {
+				//Picture is here
+				outputText(images.showImage("hellhound-loss-butt"));
 				outputText("Your lower body explodes with pain as the hellhound forces himself in too quickly for your " + player.assholeDescript() + " to handle. He pauses and pants for a few seconds, but you barely have enough time to catch your breath before the beast starts thrusting in and out again. However, this time the beast starts pumping in and out more gently, only a short distance at a time as the hellhound continues panting.  As the pain in your " + player.assholeDescript() + " fades, you start feeling strong pleasure from it. Each thrust of the beast's lower manhood, combined with the upper one tickling and teasing your " + player.buttDescript() + " above it brings you closer and closer to your peak.\n\n");
 				//Cum
 				outputText("As you reach your climax, the beast howls and you feel its incredibly hot seed pour into you and onto your back.  ");
@@ -155,7 +159,8 @@ package classes.Scenes.Areas.Mountain
 			outputText("The interior of the fort is obviously just the outer fortifications of a much bigger complex that goes deep inside a cave system.  As you move further inside, you find yourself stopping in front of the kennels.  These seem to be for the strongest of the hellhounds, and those that have their own demon masters.  You see a few other incubi and succubi playing with their hellhound pets.  For the most part though, you don't pay attention to the details of the fortress.  You're far too excited to get to the deepest part and meet up with your master, so you hurry on past.\n\n");
 
 			outputText("You quickly move through the kennels, the pleasure pits, and the lab to get to the inner sanctum.  Inside you find a mighty and beautiful masculine demon.  He grins as he sees you and tells you to stand up so he can get a good look at you.  You eagerly rise up onto your hind legs and give a happy yip as he starts to walk around you and examine you.  At the same time, you get a chance to have a closer look at him.  He stands about seven feet tall, and has beautifully carved muscles and dark skin.  It is quite clear that he likes the appearance of his hounds, as he takes a form that has a build that is very close to that of the male hounds.  Well, save for only having one head, having both two dicks and two cunts.  He probably samples his hounds all the time.  The thought that he might do the same to you too brings on more than a little excitement.\n\n");
-
+			//Picture is here
+			outputText(images.showImage("hellhound-master"));
 			outputText("After getting a good look at you, he speaks up.  \"<i>Well, well, well, how interesting!  So you were such a fan of my pets that you wanted to become one yourself, huh?  I'm flattered!</i>\"  He takes a step back and gets a look at the whole package.  \"<i>Very nice!  You've gotten very close to being a hellhound without my help, but it isn't a perfect job.  If I'm not mistaken, you haven't got the signature hellfire, have you?</i>\"  He pauses for a moment, while he taps his chin and strokes one of his shafts.  \"<i>Tell you what, If you can find me a piece of a pink crystal filled with soul power, I'll give you the power of hellfire.  Nothing else to it!  Just follow my call when you've got it, and you'll find your way back, don't worry.</i>\"\n\n");
 
 			outputText("Some time later, you find yourself at the base of the mountains.  Your mind is once again your own.  After a few moments you realize that you can still feel the faint call of the hellhound master's voice in your mind, then it's gone.  You could probably find it again without too much trouble if you just head back into the mountains, but there isn't really much point unless you've got something to trade for the hellfire he mentioned...");
@@ -266,6 +271,8 @@ package classes.Scenes.Areas.Mountain
 						player.removeCock(2, 1);
 					}
 				}
+				//Picture is here
+				outputText(images.showImage("badend-hellhound-male"));
 				outputText("You don't hesitate.  You pounce on the horny barghest, slamming your two dog pricks inside her two cunts without hesitation.  The bitch responds with a low growl, and starts bucking her rear against you, while you thrust into her with abandon.  The pleasure of her interior drives you mad like no other that you've ever been in before.  The loud squelching and stimulation of her slobbering pussies don't give you a chance to do anything but thrust and lose yourself in the feeling.\n\n");
 
 				outputText("\n\nIn a matter of moments, you're releasing yourself inside her and feeling your knots swell to tie the two of you together.  The master caresses your head a moment before whispering in your ear, \"<i>Normally, dog knots are about the only thing I don't like about regular old doggies, but for this, it's perfect.</i>\"  He grins at you and holds up a brilliantly glowing hand, before smacking you on your " + player.assDescript() + ".  You feel like you've been forced even further inside Cremera, and can't help but release yourself once more inside her from the pleasure.  \"<i>Not enough!</i>\" the omnibus yells and smacks you again, pushing you even further inside her.  You don't even have a chance to think about how the hell this is happening, you're too overwhelmed by the pleasure, but when you try to cum, you find you can't!  You give a whimper, but the demon ignores you and smacks you again, forcing you even further in.  You cry out at not being able to cum, but all you're met with is another smack, then another, and another...\n\n");
@@ -281,7 +288,8 @@ package classes.Scenes.Areas.Mountain
 				outputText("Instantly Cimer moves behind you and puts one of his clawed hands on your head and starts to push you down, his twin dog dicks pushing into your back.  The master steps up in front of you and puts his hand under your chin.  \"<i>Don't disappoint my pet.</i>\"  He says and brings his hand down your body, and your " + player.armorName + " tumbles to the ground.  Before Cimer has a chance to push you down, you bend over, ready to take his members in your " + player.vaginaDescript(0) + " and your " + player.assholeDescript() + ".  \"<i>Wait, one last preparation...</i>\"\n\n");
 
 				outputText("He steps around behind you, and you feel something cool and small get put inside your " + player.assholeDescript() + ".  It seems to extend further inside you, and wriggles around.  You get an odd feeling in your gut, like it's being rearranged.  After a moment the object is removed and you notice that your " + player.buttDescript() + " now feels remarkably like your " + player.vaginaDescript(0) + "!  \"<i>How do you like your new second vagina?  It will be perfect for my pet's rods, I even added the knots back to his cocks.  Normally, knots are about the only thing I don't like about regular old doggies, but for this, it's perfect.</i>\"\n\n");
-
+				//Picture is here
+				outputText(images.showImage("badend-hellhound-female"));
 				outputText("You barely register that he's finished talking when your whole lower body feels like it's being filled in the most wonderful way imaginable!\n\n");
 
 				//If (PC's vag can't fit an area of 45)
@@ -305,6 +313,8 @@ package classes.Scenes.Areas.Mountain
 			outputText("You feel inclined to agree at the wonderful feeling of your new body, and the incredible amount of power you feel rushing through you.  You move one of your hands so that you can play with both your dicks and your cunts, relishing in the feeling of them and the flames that lie within.  You gasp for a moment, and open your mouth as a rush of heat rises up from your chest and a burst of flame emerges from your mouth.\n\n");
 
 			outputText("A powerful demon steps out in front of you, and picks up the crystal.  You can feel a strong connection with him, and you know this is your master.  \"<i>Well now, I think you need a new name now in commemoration of being the first three headed hellhound, and for being the one who will give me the world.</i>\"  He unceremoniously puts the crystal in his mouth and swallows it.  \"<i>Your new name is Cerberus, and you're my greatest pet.</i>\"  He steps closer and looks into your center head's eyes for a moment.  \"<i>That's much better than being a champion ever was, isn't it?</i>\"  You can't help but eagerly nod in agreement.");
+			//Picture is here
+			outputText(images.showImage("badend-hellhound-cerberus"));
 			player.orgasm('Generic');
 			dynStats("lib", 50, "cor", 100);
 			getGame().gameOver();
@@ -357,7 +367,8 @@ package classes.Scenes.Areas.Mountain
 				//--- IF PC HAS BALLS ---
 				if (player.balls > 0) outputText("  Whenever you lower your hips to your mates belly, your " + player.ballsDescriptLight() + " touches his. The magical flames fill your scrotum with unnatural heat but no pain. You literally feel the cum in your balls boiling upwards, building up immense pressure.");
 				outputText("\n\n");
-
+				//Picture is here
+				outputText(images.showImage("hellhound-win-vag"));
 				outputText("Way too early, the two doggie pricks stuffed inside you start to twitch, unloading four balls worth of spunk into you. In ecstasy, the hellhound's eyes look in four different directions. The dual eruptions in your love-canal and rectum feel amazing as they pulse in and out of sync, dumping cum into your body over and over.  The hellhound's contractions ebb away as he finishes, but you're not done yet. You slowly start tilting your hips back and forth, continuing to fiercely fuck the prime member while the other rests nearly motionless in your ass. Soon the hellhound whines from the unwanted stimulation of his now sensitive pricks, but he is too defeated to put up much of a struggle.\n\n");
 
 				outputText("Slowly but steadily you bring yourself to the verge of orgasm. The hellhound under you squirms and tries to get free, his hind legs flailing through the air behind your back. You keep riding his magnificent member, grinding it up and down in your moist cave. Finally you feel the familiar rippling of your vaginal walls, milking his cock and intensifying your pleasant sensations. Clamping down on his members, you keep moving your hips in a circling motion, working your clit, vagina and butt in equal measure. The sensations eventually grant you an intense orgasm while the hellhound's still-distended members apply the perfect pressure to all of your sensitive spots and prolong your bliss.");

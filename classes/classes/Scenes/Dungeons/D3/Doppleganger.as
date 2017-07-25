@@ -59,7 +59,7 @@ package classes.Scenes.Dungeons.D3
 
 				outputText("\n\n“<i>What’s the matter, [name]?</i>” " + player.mf("he", "she") +" breathes, staring lustfully into your eyes ;as " + player.mf("he", "she") +" sinks both hands into " + player.mf("his", "her") +" crotch and bends forward, forcing you close to " + player.mf("his", "her") +" face. “<i>Never tried it in front of a mirror? You were missing out on the nasty little tramp you are.</i>”");
 				
-				game.dynStats("lus", damage + (rand(7) - 3));
+				player.takeLustDamage(damage + (rand(7) - 3), true);
 			}
 			addTalkShit();
 		}

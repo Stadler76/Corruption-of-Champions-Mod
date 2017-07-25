@@ -118,14 +118,14 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 		//trace("Purging and writing Text", output);
 		clearOutput();
 		this.output.raw(output);
-		mainView.setOutputText( output );
+		//mainView.setOutputText( output );
 		// mainText.htmlText = output;
 	}
 	else
 	{
 		//trace("Adding Text");
 		this.output.raw(output);
-		mainView.appendOutputText( output );
+		//mainView.appendOutputText( output );
 		// mainText.htmlText += output;
 	}
 	// trace(getCurrentStackTrace())
@@ -922,7 +922,7 @@ public function showUpDown():void { //Moved from StatsView.
 		oldStatName:String,
 		allStats:Array;
 
-	mainView.statsView.upDownsContainer.visible = true;
+//	mainView.statsView.upDownsContainer.visible = true;
 
 	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];
 

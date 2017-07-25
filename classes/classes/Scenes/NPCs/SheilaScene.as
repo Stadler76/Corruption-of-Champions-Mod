@@ -474,6 +474,8 @@ private function apologySheilaSayNothing():void {
 //Sheila apologizes to PC for taking advantage of him while she was horny
 private function sheilaIsSorrySheRapedYou():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-talk"));
 	outputText("You stalk through the plains, hunting for a bite to eat or something to give you an advantage in this harsh land.  A rustle follows you as you move into some tall grass; it takes several minutes before you realize with alarm that it's slightly out of phase with your steps.  You whirl around, only to find... Sheila, staring at you sheepishly.  Has she been following you this whole time?  You watch each other for a few minutes, neither of you making any move but her cheeks glowing brighter red with every word that doesn't pass between you.");
 	
 	outputText("\n\n\"<i>Er... g'day,</i>\" she begins, finally taking the plunge.  \"<i>Before you say anything, I want to... well, apologize for before...</i>\"  She hesitates, then continues breathlessly.  \"<i>I kind of got caught up in the moment - not that that's an excuse, mind!  But I just wanted to let you know that's not really me and that I'd never... um...</i>\"");
@@ -643,7 +645,8 @@ private function sheilaReallyMadStandGround():void {
 private function sheilaReconcile():void {
 	clearOutput();
 	outputText("\"<i>Oy, it's you,</i>\" sings out a voice behind you.  \"<i>Back again?</i>\"");
-	
+	//Picture is here
+	outputText(images.showImage("monster-sheila"));
 	outputText("\n\nYou turn around quickly, panning the horizon for the source.  It doesn't take you long to pick out the head and long ears of Sheila, sitting up above the grass she must have been lying in until now.  A simple wave answers her greeting, but you keep a buttoned lip, remembering the last chilly reception.");
 	
 	outputText("\n\n\"<i>Heh,</i>\" she says, grinning.  \"<i>You catch on quick, mate.</i>\"  The grass rustles next to her and her hand appears, holding a bundle of several dead rabbits by their tied-together feet.  \"<i>I have plenty of protein donors already, though.  Was just lazing a bit before I decided what to do for grub, and then there you are, standing out like dog's balls.</i>\"  She rubs the back of her head and looks away.  \"<i>Well... care to join me for tea?  I guess I was a wee bit rude before, and it gives me an excuse to cook one of these beasties.  BYOB, of course.</i>\"");
@@ -723,7 +726,8 @@ private function sheilaReconcileKay2():void {
 private function sheilaGettingFamiliar():void {
 	clearOutput();
 	outputText("\"<i>Hey, it's [name].</i>\"");
-	
+	//Picture is here
+	outputText(images.showImage("monster-sheila"));
 	outputText("\n\nSheila's voice rings out from your right.  You turn and face her; the formerly-reticent woman smiles warmly from her seat in the grass.  \"<i>Ya just missed tucker,</i>\" she opens, \"<i>a pity.</i>\"");
 	
 	outputText("\n\nThere's no campfire in evidence nearby, a face which makes you raise an eyebrow.  \"<i>Cut lunch,</i>\" Sheila amends.  \"<i>Just some dried meat and fruit on bread.  A real shame you didn't show up sooner, I enjoyed our barbecue pit.</i>\"  Even having just eaten, Sheila's eyes light with appetite.");
@@ -946,6 +950,8 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 	clearOutput();
 	//(has cockfit 32)
 	if (player.hasCock() && player.cockThatFits(32) >= 0) {
+		//Picture is here
+		outputText(images.showImage("sheila-vag"));
 		outputText("Her hand slips down to your groin and, overcoming its trepidation, grabs your [cockFit 32] and begins to pump languidly, slowly stimulating blood back into it.  \"<i>I don't know what's come over me,</i>\" she says, giggling.  \"<i>Maybe I'm just greedy, but... I want you again.</i>\"  She pushes you");
 		//[(horse)]
 		if (player.isTaur()) outputText(" and you playfully roll");
@@ -1033,7 +1039,8 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		outputText("\n\nSheila's hand stops and she looks upset for a moment, as if she were worried that might actually be the case.  \"<i>Do you really think so, mate?</i>\"");
 		
 		outputText("\n\nIrritated, you pull away from her and sit up, then push the timorous woman onto her back.  \"<i>Don't dwell on it so much.  Be happy you have someone who wants you as well.</i>\"  Spreading her legs, you expose her slight, smooth labia and tickle them with a finger, opening them gently.  Sheila gasps, tensing and relaxing in the waves of sensation, and her pussy begins to drool clear lubricant onto your finger.  \"<i>If you can get into it like this, what's the problem?</i>\"");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-lickhergina"));
 		outputText("\n\n\"<i>R-right,</i>\" she pants, as she releases another trickle of fluid.  \"<i>Ohh god... fuck me.  I don't care how, just fuck me, please!</i>\"");
 		
 		outputText("\n\nSmiling, you kiss her softly on the inner thigh, then withdraw your hand.  ");
@@ -1144,7 +1151,8 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		outputText("\n\nYou smile at the admission");
 		if (player.hasCock()) outputText(", stroking your oversized tool despite her dismissal");
 		outputText(".  \"<i>But you do?</i>\"");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-masti"));
 		outputText("\n\nSheila reddens a bit and nods again, still frigging herself.  \"<i>But I feel like an arse, ogling you without reason or sense; like I'm a goblin or something, getting wet for anyone she meets.</i>\"");
 		
 		outputText("\n\n\"<i>And yet,</i>\" you reply.  Emphasizing your unspoken point, you grab Sheila's hand and pull it out of her crotch, popping the finger into your mouth.  Sheila shivers as you roll it on your tongue, and her pussy drools a drop of lube.  Smiling, you substitute your own hand for hers, penetrating the slick hole.  The woman's free hand quickly goes to yours, but simply rests atop it, caressing you and offering no resistance as you draw your fingers in and out of her.  Her mouth forms the word 'no', but the only sound that comes out is a soft sigh.");
@@ -1296,6 +1304,8 @@ private function sheilaXPThreeSexyTimeGuardDuty():void {
 //XP4: Fancy meeting you here (sheila xp >= 4 and demon sheila = 0):
 private function fuckBuddySheilaMeeting():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-talk"));
 	outputText("\"<i>Hey...</i>\"");
 	outputText("\n\nThe soft voice, coming from a shrub, halts your progress.  You peer around it; Sheila is sitting with her hat in her lap, and looking up at you.  She smiles shyly when you make eye contact.  \"<i>Fancy meeting you here,</i>\" she says.");
 	outputText("\n\nYou plunk down beside her and ask how it's going.");
@@ -1369,6 +1379,8 @@ private function fuckBuddySheilaMeetingChat():void {
 //[XP4 - Chat - Family&Friends]
 private function fuckBuddySheilaMeetingChatFamilyAndFriends():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-private-talk"));
 	outputText("\"<i>Them?  They're doing fine.</i>\"  Sheila stares at you obtusely, trying to will you into changing the subject; you stare right back.  She sighs.  \"<i>No go, huh?</i>\"");
 	
 	outputText("\n\n\"<i>It's the least you could do to tell me a bit about them, seeing as we may never meet,</i>\" you remind her, gently.");
@@ -1431,6 +1443,8 @@ private function fuckBuddySheilaMeetingChatFamilyAndFriends():void {
 //[XP4 - Chat - Old Loves]
 private function fuckBuddySheilaMeetingChatOldLoves():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-private-talk"));
 	outputText("\"<i>[name], I don't want to talk about that,</i>\" Sheila says, \"<i>it leaves a bad taste in my mouth.</i>\"");
 	
 	outputText("\n\nYou offer to tell her about your own history, as an enticement, but she shakes her head.  \"<i>I don't want to talk about that either!  Look, no matter how cosmopolitan, nobody really wants to hear about the dicks " + player.mf("his","her") + " girl's had growing out of her face.  I mean, how many is the right answer?</i>\"");
@@ -1526,9 +1540,10 @@ private function fuckBuddySheilaMeetingChatKids():void {
 	//if joeycount = 1
 	if (flags[kFLAGS.SHEILA_JOEYS] == 1) {
 		outputText("\"<i>Ah?</i>\" Sheila says, turning toward you sheepishly.");
-		
+
 		outputText("\n\n\"<i>I said, 'how's the kid doing?',</i>\" you repeat.");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-private-talk"));
 		outputText("\n\n\"<i>I heard you, mate... I was just a little surprised.</i>\"  Sheila wraps her arm around yours.  \"<i>The baby's fine.  Eats well and loves attention.  The other day I stuck my finger into that chubby little hand and it closed around me and wouldn't let go... I sat there for about an hour, just watching and sighing.  Sometimes it feels like I'm turning into one of those mush-headed new moms that always embarrassed me before, though.</i>\"  She looks at you with a half-smile.");
 	
 		outputText("\n\n\"<i>Strong grip?</i>\" you ask.");
@@ -1707,6 +1722,8 @@ private function sheilaXP4Sex(display:Boolean = false):void {
 //[Consensual - Either 69] - Fenoxo beware, omnibus scene!(req. vag or dix; both buttons direct here but decide the focus)
 private function consensualSheila69(cock:Boolean = true):void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-private-talk"));
 	outputText("As you lean into the woman and buzz her ear, her skin flushes.  \"<i>[name], you're incorrigible.  Don't taunt me so much this time, just get into it.</i>\"  Smiling and humming, you sit up and begin unfastening your armor; Sheila takes the opportunity to do the same, and finishes denuding herself before you do.");
 	
 	outputText("\n\nA raised eyebrow from you greets her exposed flesh.  She turns up a red face in response, staring close-mouthed with quiet embarrassment as she waits for you to finish disrobing.");
@@ -2245,7 +2262,8 @@ private function sheilaMutualMasturbation():void {
 		if (silly()) outputText(", even just a paperclip");
 		outputText(".");
 	}
-	
+	//Picture is here
+	outputText(images.showImage("sheila-masti"));
 	outputText("\n\nSheila places a hand alongside your head even as she gasps and shoves her fingers deep inside her pussy.  \"<i>[name], as long as you'll touch me like this, I'll be your star; I'll beg on my knees!</i>\"  Her hand moves irregularly now, as her hips jerk and swivel");
 	//[(if fucking nothing)
 	if (target != "cock" && target != "cunt" && target != "nipplecunt") outputText(", and yours joins her, slipping into her entrance alongside");
@@ -2363,7 +2381,8 @@ private function sheilaMutualMasturbation():void {
 private function sheilaCorruptionWarningsChooseFondle():void {
 	clearOutput();
 	outputText("Fuck it.  You move your hand right to her entrance.  \"<i>Don't be like that...</i>\" you say softly into her neck.  She shivers under your touch as her resistance begins to subside, and you slide two fingers into her gently.  \"<i>No,</i>\" she says quietly, and then, as you slip in, \"<i>NO!</i>\"  Violently coming to herself, she pushes you away and scrambles to her feet.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-private-talk"));
 	outputText("\n\n\"<i>That's it, [name]!  Bloody well listen when I speak!  I can NOT do this again with you while you are like this or I will fall over the edge and never come back!  I need to get myself under control and I don't need you making it harder, so rack off if you don't get that!</i>\"");
 	
 	outputText("\n\nShe turns her back on you and walks away briskly with her clothes, leaving you ");
@@ -2384,7 +2403,8 @@ private function sheilaCorruptionWarningsChooseFondle():void {
 private function sheilaCorruptionWarningListenToHer():void {
 	clearOutput();
 	outputText("\"<i>So...</i>\" you answer, your feel frozen in mid-cop, \"<i>what?</i>\"");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-private-talk"));
 	outputText("\n\nSheila stares at you for a long minute.  \"<i>[name], I like you more than anyone I've ever known.  I don't want to stop seeing you.  But we can NOT have sex again while you are tainted like this.  Do you understand?  I will not be able to think about anything but rooting, ever, if we do.  I do not want to be some brainless, demonic wombat!</i>\"");
 	
 	outputText("\n\nShe looks pointedly down at your hand, and you remove it.");
@@ -2462,7 +2482,8 @@ private function rapeSheilasCooter():void {
 	//[(monster HP < 1)
 	if (monster.HP < 1) outputText("sliding it between her labia and producing a damp spot, then ");
 	outputText("dragging the wet fabric around her vulva.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-vag"));
 	outputText("\n\nSatisfying yourself as to her readiness, you unfasten your [armor] to extract your [cockFit 48]; the " + player.cockHead(x) + " drips with pre-cum as you pull it loose, and you lay it on her crotch, letting the goo soak the white fabric until you can see her light-brown skin through it.  She squirms under it, bringing up another droplet with her motion, and you place the tip at the entrance to her pussy, pressing eagerly against the fabric.  \"<i>Please...</i>\" she whimpers, \"<i>I'm begging you; don't.</i>\"");
 	
 	//fuck-fork
@@ -2640,6 +2661,8 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 			outputText("jabbing at her undersized mouth with your enormous [cockHead shortest].  \"<i>It's too thick!</i>\" she complains, trying to turn away.");
 			outputText("\n\n\"<i>So?  Think of something, then!</i>\"  You drag her face along the tip of your penis, smearing her lips and cheeks with pre-cum, and she eventually gives up, taking your shaft in her hands for control and playing her tongue over and down your urethra.  Your shudder comes simultaneously with hers... though hers is more probably from humiliation.");
 		}
+		//Picture is here
+		outputText(images.showImage("sheila-blowjob"));
 		outputText("  The reticent woman brings her lips into play, sucking gingerly, ");
 		//start length fork, no new PG
 		//[(dick length <= 8)
@@ -2782,7 +2805,8 @@ private function sheilaGetsRapedWithADildont():void {
 	outputText("\n\n\"<i>What are you doing?</i>\" she asks, panicked.  Ignoring her, you unfasten her belt and yank down both her shorts and her panties; as you pull the fabric away from her vulva, she squirms uncomfortably.  \"<i>Stop it, please!</i>\"");
 	
 	outputText("\n\n\"<i>Why?</i>\" you reply coldly.  Grabbing her tail and yanking it upward, you produce a shriek from the woman at the same time as you jam the dildo into her cunt without warning.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-dildofuck"));
 	outputText("\n\n\"<i>Wait!</i>\" Sheila yelps.  \"<i>Take it out!</i>\"  Instead, you give the toy a squeeze, forcing lust-inspiring goblin fluids from the end and into her body.  Swirling it around, you smear the chemicals into the walls of her pussy; soon she's panting greedily, having all but forgotten her desire to escape.  You watch her push herself off the ground with one hand and grope her breast with the other...");
 	
 	outputText("\n\nSeems the perfect time to pull back out.  You release Sheila and begin to back away - she notices the painful absence immediately.  \"<i>Uh?  Where are you going?  Hey!</i>\"");
@@ -2914,7 +2938,8 @@ private function sheilaCowgirlRapesYou():void {
 		outputText("\n\n\"<i>Problem?</i>\" you ask, innocently.");
 		
 		outputText("\n\nSheila bites her lip and nods.  \"<i>I could never fit that inside... I can't use it.</i>\"");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-vag"));
 		outputText("\n\nRather, she means she's not imaginative enough to use it?  Sheila seems to see some of your assumed insult in your eyes, and she sets her jaw.  \"<i>Alright,</i>\" she says ominously, \"<i>challenge accepted.</i>\"  The woman unfastens her belt, stripping off her shorts and panties with the same haste as her top.  Her underwear comes away with ease, sticking hardly a bit - maybe she plans to make up the deficit in her arousal with willpower?  Sheila pushes your back flat against the ground again");
 		//[(horse)
 		if (player.isTaur()) outputText(", or at least as flat as you can get it");
@@ -3106,7 +3131,8 @@ private function sheilaForcedOralGeneric():void {
 	outputText("\n\n\"<i>That's-</i>\"  Your words are cut off as she suddenly climbs atop you, bringing her pussy to eye level");
 	if (player.str < 61) outputText("; her weight bears you slowly to the ground");
 	outputText(".  Sheila rubs the smooth slit on your [face], trying to part her labia on you, and shivers a bit when your lips brush hers.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-lickhergina"));
 	outputText("\n\n\"<i>Lick...</i>\" she whispers, almost apologetically, \"<i>... please.  Or... or I'll have to hit you again.</i>\"  She sets her face and takes a handful of your hair, twisting it");
 	if (player.hairType == 4) outputText(" and flushing as your stingers release their payloads into her palm");
 	outputText(".  You obediently stick out your tongue");
@@ -3187,6 +3213,8 @@ private function normalSheilaPregNotifNumberOne():void {
 	pregnancy.knockUpForce(); //Clear Pregnancy
 	clearOutput();
 	outputText("Traipsing through the grass, you can see Sheila sitting under the shade of a low tree from a long way off.  The reverse is also true, as she waves to you from her seat, beckoning you over.  You make your way to her curiously.");
+	//Picture is here
+	outputText(images.showImage("sheila-talk"));
 	outputText("\n\n\"<i>G'day, [name],</i>\" she opens, slightly nervous.  \"<i>I needta tell you something.  Sit down?</i>\"");
 	
 	outputText("\n\nYou oblige, planting yourself next to her.  She leans affectionately against you, though her nervousness doesn't disappear - if anything, it becomes more acute.");
@@ -3685,7 +3713,8 @@ private function sheilaGoesDemon():void {
 	outputText("\"<i>G-gonna come!  Finally gonna come!</i>\"  Her thighs clench and her pussy begins to spasm as her groin knocks against your chin.  A viscous, clingy liquid squirts from her pussy and into your mouth, pooling on your tongue; in your surprise, you release the black tail and it forces into the gap and through your lips, releasing something foul-tasting.  You quickly turn your head and push it away; it forces out the rest on your cheek, a black, slimy mess.  Fantasies of riding her face the same way and filling her mouth flit through your mind as Sheila finishes convulsing, then goes limp and releases you, falling to the ground.  You drool the mess in your mouth into your hand; the thick fluid you felt first is a light lavender, but as the black sludge from her tail suffuses it, it darkens to a deep purple.  The mixture clings together, gelling and then solidifying into an irregular, lustrous stone - a crystal.  It heats up in your hand, and you can feel an arousing power leaking into you.");
 	
 	outputText("\n\nSheila watches half-interestedly as it hardens but once the substance stops moving, her attention turns to her changed body.  \"<i>Oh... oh, mate... what did you do to me?</i>\" she sighs.  You give her a cursory glance.  Her fur is completely gone and her tail is split; her feet jut with wicked-looking talons instead of straight nails, though the middle one is still slightly larger than the others.  Aside from that, she's the same slender, huge-busted woman you remember.  Well... her skin may be a bit darker, perhaps?");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted"));
 	outputText("\n\n\"<i>You look fine,</i>\" you say dismissively, standing and tucking away your new crystal.  Gathering your things, you turn to leave with your prize.");
 	
 	outputText("\n\n\"<i>Really?</i>\" she calls after you, eagerly.  \"<i>Will you still make love to me next time we meet?  Because... I could go again anytime, you know?  I don't care about hunting anymore... we could just root all day!  As long as I'm with you!</i>\"  Sheila's voice cuts off abruptly as the magic of the realm brings you out of the plains and back to camp.");
@@ -3705,6 +3734,8 @@ private function sheilaGoesDemon():void {
 //Demon Sheila encounter (demon sheila = 1 and sheilapreg < 4)
 private function demonSheilaEncounter():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted"));
 	outputText("A shadow drops out of a low tree behind you with a rustle.  \"<i>Hey, lover; been a while... how about spending some time with me?</i>\"");
 	
 	outputText("\n\nAs you turn around, Sheila sashays over to you.  Apart from a little lavender crystal dangling from her long, bare ear and several finger rings, she's naked as a jaybird now, exposing her " + sheilaCup() + " breasts and smooth, dripping snatch for all the world to see.  Two lithe tails, one spaded and one not, rub against her labia in anticipation as she takes a horse stance in front of you to wait on your answer, and her eyes smolder with lust.");
@@ -3845,6 +3876,8 @@ private function askDemonSheilaAboutHerColony():void {
 //[ Demon Sheila - Talk - What Now?]
 private function talkToDemonSheilaAboutWhatNow():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted"));
 	//fucking daddy issues
 	outputText("\"<i>What will I do now?  What else, my silly love?</i>\"  Sheila looks out over the plains.  \"<i>I'm always hot for you.  We could have a bit of a naughty, and make each other feel good.</i>\"");
 	
@@ -3921,6 +3954,8 @@ private function demonSheilaTalkAnotherQuestion():void {
 //[Demon Sheila - Let Her Fuck]
 private function sheilaLetHerFuckYou():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted-prepare"));
 	outputText("The naked flesh pressed against you fills your mind with indulgent daydreams, and Sheila reads them right from your distracted face as if you were a book.  \"<i>That'll be a yes, then?</i>\" she asks, playing the slitted tip of her spade along your fingers.  \"<i>Or are you going to make me use this on myself again?  I get quite lonely, you know.</i>\"");
 	
 	outputText("\n\nYou shake your head and, opening your posture, allow her to wrap her arm completely around you.  \"<i>Oh, [name].  I knew you loved me.</i>\"  She kisses you passionately, pressing her ");
@@ -4054,6 +4089,8 @@ internal function loseToSheila(consensual:Boolean = false):void {
 
 private function loseToDemonSheila():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted-loss"));
 	outputText("Eight hours later, you come to, bruised and sore... and find yourself lying on the ground with your head in Sheila's lap; she's petting your [hair] absently.  \"<i>Awake, are you?</i>\" she grins, looking down at you.  \"<i>Where did you get all those wounds, anyway?  Ya know... you can ask for my help if the wildlife's giving you trouble - we'll just go back to my place and spend all our time in the nuddy.  Our imps can bring us food and drinks.  New playmates, too.  Want to come home with me?</i>\"");
 
 	outputText("\n\nThe fog in your head begins to clear.  Were you really just watched over by a demon?");
@@ -4113,7 +4150,8 @@ private function loseToNormalSheilaAndGetRidden():void {
 		outputText("\n\nSheila's pussy spasms around you and she looks into your eyes; you feel a wave of compulsion from them, and arousal flows into you from each place your [skin] touches her body.  Unable to withstand her orgasm-fueled power, your [balls] pull close to your shaft and you let go of your climax, grabbing her hips and dumping semen into her cunt");
 		if (player.cockTotal() > 1) outputText(" and lap");
 		outputText(" just like she's dumping feelings into your head.  \"<i>Lover!</i>\" she screams.  \"<i>Pack me with your babies!</i>\"");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-loss-male"));
 		outputText("\n\nAs if you could help it at this point... your [cockFit 56] fills her pussy with thick spunk and the pressure begins forcing it into her womb; as Sheila's mouth hangs open in awe, your balls shift upwards again and a second orgasm begins!  You force her down to the base of your cock using your ");
 		if (player.isTaur()) outputText("forelegs");
 		else outputText("hands");
@@ -4183,7 +4221,8 @@ private function loseToNormalSheilaAndGetRidden():void {
 		if (player.cumQ() >= 1000) outputText("; she quickly reaches capacity and pulls off, jerking your messy, slimy [cockFit 56] and letting you squirt the last of your strokes all over her face and chest");
 		if (player.cumQ() >= 6000) outputText(".  So much is left that she's practically underwater by the time you're finished; she giggles and bubbles form in the oozing liquid covering her lips");
 		outputText(".");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-loss-male"));
 		outputText("\n\n\"<i>That was fun,</i>\" Sheila laughs, scooting backward away from you and leaving a trail of white on the grass.  \"<i>I'll see you later... remember what I said, mate.  Sack up and propose to me soon.</i>\"  She laughs at her own joke, then blows you a sloppy kiss and stands up to leave.  Having done most of the actual work, you take the opportunity to keel over and pass out.");
 		
 		//end scene, reduce lust, normal sheilapreg check, reduce sheila corruption by 10 and increase PC corr by 10]
@@ -4217,7 +4256,8 @@ private function tailSpadeSoundingForFuckHugeDongsWithDemonSheila():void {
 	outputText("\n\n\"<i>Nnnn,</i>\" she moans, \"<i>c-coming!</i>\"  The woman's cunt drools and her tail twitches and swells; you can literally see the latter thickening progressively as something forces its way past the brown noose and into your urethra, stretching it wide.  As the bulge reaches the point where you can feel her spade lodged, the end of her tail swells and disgorges a stream of hot, thick slime; it agitates inside your cock as it slides down, pushing past precum with its greater density and sinking into you.  You wait with mounting horror as it passes the [sheath] of your cock and enters your body - as if spurred on by your reticence or the closeness of your innermost places, the voracious slime seems to speed up, racing toward your prostate.  In a wave, the foreign substance passes through it, trying to press outward and tickling the organ; in response to the hot stimulation, your body begins dumping cum into your urethra to fight back.");
 
 	outputText("\n\n\"<i>Hahh,</i>\" Sheila laughs, out of breath.  \"<i>I can feel your dick jerking, mate... did my climax find your insides, then?</i>\"  She pulls her spent tail limply from you, letting it hang between her legs, and turns around to watch the fireworks.  The last half of the demon's climax slides down your dick, trying to push its vanguard up against your prostate for as long as possible, but your body eventually wins out; you can feel your own involuntary orgasm forcing hers back toward the open end of your [cock biggest].  The demon grins and slips a hand beneath you, stroking the underside of your prick just behind the glans, and the stimulation pushes you over the edge.  Your nerves fire, sending another load after the first, and a messy multi-shaded fan of fluid is ejected.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted-vag"));
 	outputText("\n\nSheila's eyes gloss over with desire, and she turns around once more, raising her pussy to your [cockHead biggest].  \"<i>Inside...</i>\" she mumbles, and then more loudly, \"<i>Squirt it inside!</i>\"  She guides your tip to her pussy with both tails now, spreading her labia with two fingers, and the next splat goes into her.  Black and white liquid drools from Sheila's messy cunt as your oversized cock ejaculates into and onto the woman");
 	if (player.cockTotal() > 1) outputText("; unguided, the ");
 	if (player.cockTotal() == 2) outputText("other twitches and sprays");
@@ -4292,7 +4332,8 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		if (!player.isTaur()) outputText("[chest]");
 		else outputText(player.buttDescript());
 		outputText(" as she shallowly pumps your " + player.clitDescript() + " in and out of her spade.  Your pelvis twitches uselessly; with her tail waving in the air instead of braced against her, controlling the pace of the fuck is beyond you.  \"<i>Naughty sheila,</i>\" she says, squeezing your wiggling hip with a hand.  You think privately that she could just as easily be talking about herself.  \"<i>Am I not going fast enough for you?  Let me speed up.</i>\"");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-corrupted-anal"));
 		outputText("\n\nYour demon lover turns around again and, planting her hands once more against the ground, lifts her backside.  Her snubby spade plunges onto your rod with aplomb, going so fast that the lubrication begins to dissipate as quick strokes force fluid out of the tight confines.  Heat overtakes your clit again, not from chemicals but simply from your growing body temperatures and the friction between you.  Soon, you can feel the hot sensation of dry skin-on-skin contact closer to her tip, where the lube has been pushed out completely.  \"<i>God... yes... fuck you, fuck my filthy tail, fuck it raw, rub all my dirty cum out with your freaky clit, penetrate me, show me who's the man!</i>\"  Sheila's voice reaches the pitch of a scream as she finishes her demands.  \"<i>F-fuck!  I'm coming!</i>\"  She slumps forward as ");
 		//[(PC corr<50)
 		if (player.cor < 50) {
@@ -4317,7 +4358,8 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 	//(else if clit >6" initially)
 	else {
 		outputText("\n\nShe pulls her tail free of your clit, watching nervously as the coating of dark oil left behind is absorbed into the skin and it widens another half-inch.  Sheila turns uncertain eyes on you and speaks again.  \"<i>Eh-heh.  Even as a woman, it looks like you're too much of a man for my little hole.</i>\"  She plays with her nipples idly, watching as your breathing causes the abnormally elongated skin to bob in the warm air, then leans down and blows on it with a grin; you squirm, raising a giggle from her.  \"<i>I could just jerk you off like any old cock... would you like that?</i>\"  The demon caresses you with her hand and considers a bit.  \"<i>Ahh, no good.  I'm horny too, after having you inside me.  But this absurd thing... oh, I know.</i>\"");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-corrupted-anal"));
 		outputText("\n\nYou stare at Sheila as she turns around");
 		//[(horse)
 		if (player.isTaur()) outputText(" and rolls onto her back");
@@ -4464,7 +4506,8 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 	if (player.cor < 40) outputText("Your ardor subsides a bit at her performance, but seeing your look of contrition, ");
 	else outputText("Your scowl hardens at her shameless playacting, and ");
 	outputText("she breaks into laughter.  \"<i>I'm just having you on, love.  You know my body's yours for the using.</i>\"");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted-vag"));
 	outputText("\n\nShe tosses her hair out of her face and extends her hand to you.  \"<i>No need to be coy about wanting me, my best mate.</i>\"  When you place your own hand in hers grudgingly, she pulls you forward until you're positioned atop her.  You can feel a gentle pressure on the underside of your [cockFit 56] as one of her slick tails guides it into position.  \"<i>This is where you belong, after all.  Welcome home.</i>\"  She wraps her arms around your ");
 	if (!player.isTaur()) outputText("shoulders");
 	else outputText("flanks");
@@ -4537,7 +4580,8 @@ private function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		outputText(", you look away and break the connection, but Sheila's smile only widens.");
 		
 		outputText("\n\n\"<i>Did you see it?  Our future together?</i>\"  The demon reaches up and plays with your hair.  \"<i>Our wonderful family... our children... so full of seed to give, just like their " + player.mf("father","mother") + ".  I can feel you getting hard again inside me - am I exciting you?</i>\"  Her hand drifts down to your mouth, and she brushes your lips gently with her thumb.  \"<i>Why don't you go ahead and do me again?  Show me how you feel, mate; I won't do anything except touch you, so you can take your time.  I'm your obedient, loving wife, here to make you happy.</i>\"  She caresses your cheek one last time and lowers her hand to your chest, tracing a meaningless pattern as she turns expectant eyes on you.");
-		
+		//Picture is here
+		outputText(images.showImage("sheila-corrupted-vag"));
 		outputText("\n\nIt's too much.  ");
 		if (!player.isTaur()) outputText("You kiss Sheila on the lips, pushing your tongue through to play with hers, as your arms push your spent body into position to thrust again.");
 		else outputText("You reach down with a hand and place it alongside Sheila's face; her ear twitches as she looks at you brightly, and for a moment you recapture your earlier impression of her as a sweet, devoted lover.  Your legs struggle to push your equine bulk upwards as you return to a thrusting position, dragging her groin into the air by your erect cock.");
@@ -4601,7 +4645,8 @@ private function analHateFuck():void {
 private function sheilaAnalHateFuckAGoGo():void {
 	clearOutput();
 	outputText("Your [cockFit 56] gets hard in your [armor] as you watch her diddle her pussy, but you set your jaw to resist giving her what she wants - a better idea is taking shape in your head.  \"<i>Turn around,</i>\" you demand.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted-anal"));
 	outputText("\n\nSheila bites her lip and blushes, then turns her back to you, pressing her chest into the ground and waving her ass in the air, twin tails bobbing over her round cheeks and drooling, eager cunt.  \"<i>Heehee, I'm ready for you, mate... look how wet I am!</i>\"  You strip, releasing your " + player.multiCockDescriptLight() + ", and approach.  She hums in anticipation as you rub against her smooth labia, smearing her moisture onto your [cockHeadFit 56].  \"<i>Come on; time to put it in already!  Don't tease me!</i>\"");
 	
 	outputText("\n\nYour smile widens, unseen, as you silently agree.  ");
@@ -4724,7 +4769,8 @@ private function analHateFucksWithJojo():void {
 	outputText("\n\n\"<i>Haha...</i>\"  Sheila composes her expression into one of mock-gravity, and recites, \"<i>Please, [master], may I have your minion's semen in my pussy, to make you a baby?</i>\"  Her eyes are fairly lit at the prospect; it's evident she regards this as no more than a game.");
 	
 	outputText("\n\n\"<i>No, this will not do,</i>\" you decide, squeezing her face from below until her cheeks bulge.  \"<i>Good slaves exhibit proper humility when making a request.  Jojo, you will fuck this haughty girl's asshole, instead.</i>\"  Her eyes widen as you place your other hand on her shoulder and push down, allowing the mouse's meat to spear her anus.  She struggles under your grip, jerking free from your hand and trying to rise up; you reach back and slap her across the face.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted-jojo"));
 	outputText("\n\n\"<i>You are disgraceful!</i>\" you shout.  Stunned by the sudden violence, Sheila doesn't move; Jojo takes the opportunity presented to start working his prick in her butthole.  Grabbing and twisting one of her long ears, you begin haranguing the demon.  \"<i>Look at yourself; what about you is satisfactory?  Do you call this dirty mop on your head hair?  When's the last time you washed?  You're not even cute; I could throw a stone anywhere and find a face like yours!</i>\"  You release her ear and squeeze her breast callously.  ");
 	//[(if sheila corruption <40)]
 	if (sheilaCorruption() < 40) outputText("\"<i>What's with these tiny titties?  Could any man possibly be aroused by your bug bites?  I've seen bigger breasts on incubi!</i>\"");
@@ -4803,7 +4849,8 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	if (sheilaCorruption() >= 40) outputText("Her breasts tighten up, shedding cup sizes rapidly; t");
 	else outputText("T");
 	outputText("he ex-monk's testicles swell again, to the size of basketballs, and his sack slips from your grip as the skin on it peels - your hand comes away with nothing more than a crumbling patch.  Finally free to come, Jojo's scrotum jerks upward and veins bulge on his cock as he begins ejaculating.  Sheila's eyes roll back in her head as Jojo dumps his semen directly into her womb, his recently engorged balls producing far more than their normal share.  With nowhere for the cum to go, her stomach stretches far and away past its normal volume, worrying you slightly.  A bump actually forms in Jojo's cock as she fills, and slowly starts to make its way upward; the ex-monk groans and thrashes as it gets stuck at the entrance to Sheila's pussy, which tightens like a vice around his ridiculously-expanded member.  He howls and tries to tilt his head, but only succeeds in jerking Sheila a bit higher on his cock with his new horns.  Reaching down to help, you can actually feel something hard through the erect flesh of his prick, and you gently coax and push it upward with your hands until it slips into the vagina.");
-	
+	//Picture is here
+	outputText(images.showImage("sheila-corrupted-superjojo"));
 	outputText("\n\nHaving ejected this last lump, Jojo relaxes, falling backwards and pulling the swollen woman with him.  You blink in surprise as he stretches out; he's at least eight feet tall now and even makes Sheila look small by comparison.  The latter's face assumes a more normal mien as the reclining monk and the deflating shaft finally pull the head free from her cervix, and her hands dart to her rounded belly.  \"<i>Ohh, god... too much cum...</i>\"  A slow trickle begins to leak out around Jojo's cock from her pushes.  As the oozing slime coats his crotch, he begins panting again, and the flow cuts off as he hardens once more.  Realizing her predicament for the first time, Sheila begins struggling against Jojo's horns, trying to pull her nearly-flat chest free from the bony harness, though there's not enough room to move.  Still, her thrashing must be irritating the former monk; he reaches up with two huge hands to grab and steady her hips, then begins thrusting again, squeezing leisurely splats of semen out of the stuffed pussy.  Sheila's face pinches as the head once again presses up to her cervix, and you peer under the tensing woman at your ex-mouse.  What greets you are not the meek, pliant eyes of your slave, but the hard, covetous eyes of a demon.");
 	
 	outputText("\n\n\"<i>Well then,</i>\" you announce.  \"<i>I'm pleased to preside over the union of these two in holy matrimony.  I now pronounce you cum and dumpster.</i>\"  Leaning over Sheila, you whisper, \"<i>Maybe, if you're a good enough wife, you might even be able to squeeze out a baby.  You'll have to be obedient and clever to keep your new husband from just pounding you twenty-four hours a day in revenge and never even pulling out...  but even if he doesn't, you'll be okay with that, right?  After all, fucking is what you're meant for.</i>\"");
