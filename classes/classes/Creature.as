@@ -10,8 +10,6 @@ package classes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;
 	import classes.StatusEffectType;
-	import classes.BodyParts.Neck;
-	import classes.BodyParts.RearBody;
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
 	import classes.VaginaClass;

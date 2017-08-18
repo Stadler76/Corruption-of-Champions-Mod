@@ -111,6 +111,7 @@ package classes
 			return hasDragonWings(large) || hasBatLikeWings(large);
 		}
 
+		// To be honest: I seriously considered naming it drDragonCox() :D
 		public function dragonCocks():int
 		{
 			return countCocksOfType(CockTypesEnum.DRAGON);

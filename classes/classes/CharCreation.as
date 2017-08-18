@@ -200,10 +200,6 @@ package classes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player.tailType = TAIL_TYPE_NONE;
 			player.tongueType = TONGUE_HUMAN;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player.femininity = 50;
-			//<mod name="Dragon patch" author="Stadler76">
-			player.rearBody.restore();
-			player.neck.restore();
-			//</mod>
 			player.beardLength = 0;
 			player.beardStyle = 0;
 			player.tone = 50;
