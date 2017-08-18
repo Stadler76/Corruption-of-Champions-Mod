@@ -25,6 +25,7 @@ package classes.Scenes.Camp
 		{
 			this.a = "a ";
 			this.short = "mob of imps";
+			this.imageName = "impMob";
 			this.plural = true;
 			this.removeStatuses();
 			this.removePerks();

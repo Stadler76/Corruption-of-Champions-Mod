@@ -15,6 +15,7 @@ package classes.Scenes.Explore{
 	clearOutput();
 	//1st time lumi meeting
 	if (flags[kFLAGS.LUMI_MET] == 0) {
+		outputText(images.showImage("event-lumi"));
 		//placeholder text for outside the cathedral
 		outputText("You spot an anomaly in the barren wastes; a door that seems to be standing out in the middle of nowhere. Somehow, you figure that it must lead to some other part of the world, and the only reason it's here is because you can't get to where the door should be right now.\n\n");
 		outputText("Do you open it?");
@@ -35,6 +36,7 @@ public function lumiLabChoices():void {
 	if (flags[kFLAGS.LUMI_MET] == 0) {
 		//Set Lumi met flag 
 		flags[kFLAGS.LUMI_MET]++;
+		outputText(images.showImage("event-lumi-encounter"));
 		outputText("You open the door and carefully check inside for any enemies that may be trying to ambush you. The room seems to be some kind of alchemical lab, with shelves full of apparatuses all along the walls, a desk on one side of the room, and a long table across the room from you that is full of alchemical experiments in progress, many give off lots of smoke, and others are bottles of bubbling fluids.  A goblin wearing an apron and some kind of headband is sitting on a tall, wheeled stool; she is otherwise nude and seems to be watching at least 3 experiments right now. She suddenly turns around and looks straight in your direction.  It's hard to tell thanks to the dark goggles that hide her eyes from view, but you're fairly certain she's watching you.  After a few seconds she yells \"<i>Cuths-tohmer!</i>\" in a thick lisp. She looks harmless enough, so you step inside while she fiddles with her experiments, reducing the bubbling smoke.  She jumps down from her stool, tears off her apron, bounds over to the desk, and scrambles on top of it.\n\n");
 
 		outputText("She's about 3 feet tall, with yellow-green skin, and wears her orange hair in a long ponytail that reaches to her knees.  Her breasts are about B cup, with average nipples that have been colored orange. All of her nails have been painted orange to match. She doesn't seem to ever stop moving, and while the majority of her face looks cute, it's a little hard to be sure while she's wearing those thick goggles.  The solid black lenses of her goggles make her look quite unsettling, stifling any appeal her form could inspire in you.\n\n");
@@ -84,6 +86,7 @@ public function lumiShop():void {
 private function lumiLustDraftPitch():void {
 	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
+	outputText(images.showImage("item-lDraft"));
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n");
 	outputText("Will you buy the lust draft?");
 	menu();
@@ -94,6 +97,7 @@ private function lumiLustDraftPitch():void {
 private function lumiPitchGobboAle():void {
 	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
+	outputText(images.showImage("item-gAle"));
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n");
 	outputText("Will you buy the goblin ale?");
 	menu();
@@ -104,6 +108,7 @@ private function lumiPitchGobboAle():void {
 private function lumiPitchOviElixer():void {
 	spriteSelect(SpriteDb.s_lumi);
 	clearOutput();
+	outputText(images.showImage("item-oElixir"));
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
 	outputText("Will you buy the Ovi Elixir?");
 	menu();

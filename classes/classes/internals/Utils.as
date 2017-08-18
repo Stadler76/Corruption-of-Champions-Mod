@@ -204,6 +204,11 @@ package classes.internals
 			return returnArray;
 		}
 
+		public static function isObject(val:*):Boolean
+		{
+			return typeof val == "object" && val != null;
+		}
+
 		public static function num2Text(number:int):String {
 			if (number >= 0 && number <= 10) return NUMBER_WORDS_NORMAL[number];
 			return number.toString();

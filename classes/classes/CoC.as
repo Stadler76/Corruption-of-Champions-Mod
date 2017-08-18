@@ -55,7 +55,6 @@ the text from being too boring.
 	import classes.AssClass; // Creates the class that holds ass-related variables as described above. 
 	import classes.BreastRowClass; // Creates the class that holds breast-related variables.
 	import classes.BodyParts.Neck;
-	import classes.BodyParts.RearBody;
 	import classes.BodyParts.Skin;
 	import classes.BodyParts.UnderBody;
 	import classes.Items.*; // This pulls in all the files in the Items folder. Basically any inventory item in the game
@@ -586,7 +585,6 @@ the text from being too boring.
 			registerClassAlias("StatusEffectClass", StatusEffectClass);
 			registerClassAlias("VaginaClass", VaginaClass);
 			registerClassAlias("Neck", Neck);
-			registerClassAlias("RearBody", RearBody);
 			registerClassAlias("Skin", Skin);
 			registerClassAlias("UnderBody", UnderBody);
 

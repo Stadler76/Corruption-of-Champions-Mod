@@ -179,6 +179,7 @@ package classes.Scenes.Places.Prison
 		{
 			hideMenus();
 			clearOutput();
+			outputText(images.showImage("monster-scruffy"));
 			var newCleanliness:int = 0;
 			var refuse:Function = prisonCaptorRandomEventJizzJanitorRefuse;
 			var accept:Function = prisonCaptorRandomEventJizzJanitorAccept;
@@ -289,6 +290,7 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("assume a friendly posture and communicate your refusal by shaking your head. ");
 				}
+				outputText(images.showImage("prison-scruffy-fuck"));
 				outputText("\n\nBefore you can even begin to react, you see his face turn to a mask of rage as he hammers you over the head with the bucket he was so recently using to clean up your filth. You momentarily black out, and when you come to you realize that he has bound your hands behind your back and used them to hang you by a chain to an eyelet in the ceiling. Your body is suspended in a fashion such that your back is arched suggestively, your head is hanging at knee height, and your feet are only touching the ground with the tips of your toes. [if (isBiped = true) \"What's more, he has used his mop as a makeshift spreader bar to hold your ankles as far apart as they will go leaving your [vagOrAss] completely exposed between the parted cheeks of your [ass]\"][if (isBiped = false) \"With your [legs] hanging as they are your [vagOrAss] is completely exposed between the cheeks of your [ass]\"].");
 				outputText("\n\n(Placeholder) Scruffy then fucks your [vagOrAss], makes you lick up the cum pool to 'feed' you, leaves you hogtied with a stern warning to improve your behavior.");
 				if (player.hasVagina())
@@ -326,6 +328,7 @@ package classes.Scenes.Places.Prison
 			{
 				outputText("by nodding your head. ");
 			}
+			outputText(images.showImage("prison-scruffy"));
 			outputText("\n\n(Placeholder)  Scruffy puts on/switches you to an open mouth gag because he doesn't want you biting but removes other bindings, doesn't find your performance good enough and fucks your [face]. He leaves you telling you to improve your performance, and your body via the item he gives you.");
 			outputText("\n\n\"<i>Well, at least you show you understand that you are only here to be used by your betters. Put some effort into it next time and maybe I'll give you a little something extra as well. Be sure to eat what I have given you, though -- it'll help make your body more pleasing to old Scruffy the next time I come around.</i>\"");
 			player.slimeFeed();
@@ -375,6 +378,7 @@ package classes.Scenes.Places.Prison
 				{
 					outputText("he has savagely tightened your bindings. ");
 				}
+				outputText(images.showImage("prison-scruffy"));
 				outputText("You also notice that his dick has gone limp and wonder how that bodes for your fortunes. The answer comes quickly enough.\n\n ");
 				outputText("\"<i>You ungrateful little bitch. Normally I'd teach you a lesson in humility and obedience more directly, but somehow you've managed to kill my mood.</i>\" He punctuates the sentence by delivering a swift kick to your ribs, and then dramatically draws the largest dildo gag you've ever seen from behind his back. \"<i>Well, I suppose this will have to suffice for your reeducation today. Perhaps the next time you see me you'll remember how much better off you would have been with my prick in your mouth instead.</i>\"");
 				outputText("\n\nAnd with that he forces the monstrous rubber phallus into your mouth, locks the straps behind your head, grabs his mop and bucket and leaves the room in an exaggerated huff. You manage to take some solace in the fact that you stood up for yourself and avoided servicing the little jizz janitor, but you are unsure if the price was worth it.\n");
@@ -393,6 +397,7 @@ package classes.Scenes.Places.Prison
 		{
 			clearOutput();
 			var freeitemslots:int = inventory.getMaxSlots() - inventory.getOccupiedSlots();
+			outputText(images.showImage("prison-scruffy"));
 			outputText("(Placeholder) Scruffy puts on/switches you to an open mouth gag because he doesn't want you biting but removes other bindings, you give a super hot BJ including a titfuck if you have tits, and he leaves giving you praise for being a good slave, but tells you to improve your body with the items he gives you.");
 			outputText("\n\n\"<i>Well, it certainly is nice to see that you've been taking your lessons to heart and know how you are expected to behave. In fact, ");
 			if (freeitemslots > 1)
@@ -444,6 +449,7 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			if (player.HP <= 0) outputText("<b>Scruffy has knocked you off your feet.</b>");
 			else outputText("<b>You are too aroused to continue fighting. You give in.</b>");
+			outputText(images.showImage("prison-scruffy"));
 			outputText("\n\n\"<i>You ungrateful little bitch. Normally I'd teach you a lesson in humility and obedience more directly, but somehow you've managed to kill my mood.</i>\" He punctuates the sentence by delivering a swift kick to your ribs, and then dramatically draws the largest dildo gag you've ever seen from behind his back. \"<i>Well, I suppose this will have to suffice for your reeducation today. Perhaps the next time you see me you'll remember how much better off you would have been with my prick in your mouth instead.</i>\"");
 			outputText("\n\nAnd with that he forces the monstrous rubber phallus into your mouth, locks the straps behind your head, grabs his mop and bucket and leaves the room in an exaggerated huff. You manage to take some solace in the fact that you stood up for yourself and avoided servicing the little jizz janitor, but you are unsure if the price was worth it.\n");
 			player.changeStatusValue(StatusEffects.PrisonRestraints, 2, 2);

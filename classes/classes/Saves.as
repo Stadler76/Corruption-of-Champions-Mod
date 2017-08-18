@@ -1,8 +1,7 @@
-package classes
+﻿package classes
 {
 
 	import classes.BodyParts.Neck;
-	import classes.BodyParts.RearBody;
 	import classes.BodyParts.UnderBody;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
@@ -899,13 +898,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		// <mod name="BodyParts.Skin and UnderBody" author="Stadler76">
 		saveFile.data.underBody = player.underBody;
 		// </mod>
-		// <mod name="Dragon patch" author="Stadler76">
 		saveFile.data.neck = player.neck;
-		delete saveFile.data.neckType;
-		delete saveFile.data.neckLength;
-		delete saveFile.data.neckLen;
-		saveFile.data.rearBody = player.rearBody;
-		delete saveFile.data.rearBodyType;
+		saveFile.data.rearBody = player.rearBody.toObject();
+		// <mod name="Predator arms" author="Stadler76">
 		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
@@ -1788,18 +1783,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.underBody is UnderBody)
 			player.underBody.setAllProps(saveFile.data.underBody);
 		// </mod>
-		// <mod name="Dragon patch" author="Stadler76">
 		if (saveFile.data.neck is Neck)
 			player.neck.setAllProps(saveFile.data.neck);
-		if (saveFile.data.rearBody == undefined && saveFile.data.rearBodyType != undefined)
-			saveFile.data.rearBody = saveFile.data.rearBodyType;
-		if (saveFile.data.rearBody != undefined) {
-			if (saveFile.data.rearBody is RearBody)
-				player.rearBody.setAllProps(saveFile.data.rearBody);
-			else
-				player.rearBody.type = saveFile.data.rearBody;
-		}
-		// </mod>
+		if (isObject(saveFile.data.rearBody))
+			player.rearBody.setAllProps(saveFile.data.rearBody);
 		// <mod name="Predator arms" author="Stadler76">
 		player.clawTone = (saveFile.data.clawTone == undefined) ? ""               : saveFile.data.clawTone;
 		player.clawType = (saveFile.data.clawType == undefined) ? CLAW_TYPE_NORMAL : saveFile.data.clawType;
@@ -1814,6 +1801,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.hipRating = saveFile.data.hipRating;
 		player.buttRating = saveFile.data.buttRating;
 		
+
+		if (player.wingType == 8) {
+			player.wings.restore();
+			player.rearBody.setAllProps({type: REAR_BODY_SHARK_FIN});
+		}
+
 		if (player.lowerBody === 4) {
 			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			player.legCount = 4;

@@ -36,6 +36,7 @@ package classes.Scenes.Areas
 		}
 		public function discover():void {
 			clearOutput();
+			outputText(images.showImage("area-bog"));
 			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)");
 			flags[kFLAGS.BOG_EXPLORED]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -120,8 +121,8 @@ package classes.Scenes.Areas
 		}
 
 		public function findMurkyChest():void {
-			outputText(images.showImage("area-bog"));
 			var gemsFound:int = 200 + rand(300);
+			outputText(images.showImage("item-chest"));
 			outputText("While you're minding your own business, you spot a waterlogged chest. You wade in the murky waters until you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It would make a good storage once you clean the inside of the chest.");
 			player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0);
 			for (var i:int = 0; i < 4; i++) {

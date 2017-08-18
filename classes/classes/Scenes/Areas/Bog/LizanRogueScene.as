@@ -13,6 +13,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function lizanIntro():void {
 			clearOutput();
+			outputText(images.showImage("monster-lizanrogue"));
 			var lizan:LizanRogue = new LizanRogue();
 			if (player.cor > (30 + player.corruptionTolerance())) {
 				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skinTone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise the lizan tentatively sniffs the air between the two of you. Without warning he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack and you realize he's waiting for you to back down. What will you do?");
@@ -153,6 +154,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function consensualButtfuck():void {
 			clearOutput();
+			outputText(images.showImage("lizanrogue-smex"));
 			outputText("The lizan watches you with obvious interest as he asks \"<i>How do you like to do this?</i>\"");
 			outputText("\n\nYou tell him you want his ass, making sure to assert your dominance. He doesn't seem to mind as he turns away and peels off his loincloth, exposing his tight little toned ass with a lift of his glistening " + monster.skinTone + " tail. After he has discarded the meager clothing he turns back around to face you, displaying dual bumpy purple lizan dicks, neither of which are small.");
 			outputText("\n\nTaking charge of the situation you take him by the shoulders and push him down to his knees. He doesn't seem to mind the gentle reminder of your dominance. From the way he begins flicking his tongue at [eachCock] you feel that he is actually quite turned on by the gesture.");
@@ -199,6 +201,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function consensualGetFucked():void {
 			clearOutput();
+			outputText(images.showImage("lizanrogue-smex"));
 			outputText("The lizan watches you with unabashed interest and asks \"<i>How would you like to do this?</i>\" you tell him you are going to ride him, which causes a huge grin to spread across his face. He confidently peels off his loincloth, exposing two bumpy purple erect lizan dicks not lacking in length or girth. He is a stunning visage with his " + monster.skinTone + " scales, powerful tail and dual cocks all on display for you, his audience of one.");
 			outputText("\n\nWhen the two of you come together he displays his patience by sliding his hands onto your waist and pulling you into a kiss. As your tongues wrestle he massages your lower back and you feel the tension draining from your body. ");
 			if (player.isLactating()) outputText("\n\nThe lizan begins to paint kisses down your neck, leaving a trail of tender suck marks in his wake. When he reaches your [fullChest] he takes one look at your [nipples] and cocks his head to the side in confusion. His tongue slips out to taste a single bead of creamy white, a taste you see repeated on the next breast. He seems to really like your lactating nipples. He opens his mouth wide and latches on to one of your [nipples], his hand playing with another. The tingling sensation he causes is quite pleasant. He quite happily slurps milk from your [nipples] and massages the soft flesh in a way that is both firm and erotic.");
@@ -266,12 +269,11 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nThe lizan aims a underhanded smack at your [ass], getting a good grope in the process. Before you can turn to protest he shoves his face into your [ass] and his long slippery tongue slides against your [asshole].");
 				outputText("\n\nYou paw the ground as the lizan's tongue penetrates your back passage. He laps at your [asshole] with the skill of a seasoned pro before pushing his tongue into you. The oral penetration causes all kinds of strange sounds to come out of your throat. Whenever your think his tongue will end it surprises you by tunneling deeper. Like a wet slimy endless snake it winds its way through your anal sleeve, filling your body with agonizing pleasure.");
 			}
-			if (player.hasVagina()) {
-				outputText("\n\nAs he tongue fucks your [asshole] he uses a single scaled digit to rub your [clit], causing a sudden shiver of longing to jump up your spine. He doesn't even try to penetrate your [vagina], he just teases the surface and makes you moan.");
-			}
-			if (player.hasCock()) {
-				outputText("\n\nAs he continues to shove his tongue in and out of your now relaxed and receptive [asshole] his scaled hand slides down to your [cock]. He firmly tugs it down before sliding his soft thumb up the underbelly and playfully teases your dick-slit, smearing your [cockHead] with your own precum.");
-			}
+			if (player.hasVagina()) outputText("\n\nAs he tongue fucks your [asshole] he uses a single scaled digit to rub your [clit], causing a sudden shiver of longing to jump up your spine. He doesn't even try to penetrate your [vagina], he just teases the surface and makes you moan.");
+				
+			if (player.hasCock()) outputText("\n\nAs he continues to shove his tongue in and out of your now relaxed and receptive [asshole] his scaled hand slides down to your [cock]. He firmly tugs it down before sliding his soft thumb up the underbelly and playfully teases your dick-slit, smearing your [cockHead] with your own precum.");
+			
+			outputText(images.showImage("lizanrogue-getbuttfucked"));
 			outputText("\n\nAnother shiver rocks your body as he pulls his long tongue out of your [asshole]. He takes both of his lizan dicks and places them in the crevice of your [ass] and begins teasing your [asshole] with slow strokes as his free hand grip your [ass]. Both of his pumpy purple lizan dicks feel good as he continues to tease you until you can't stand it. " + (player.hasVagina() ? "He asks if he can put his other lizan dick in your [vagina] and you tell him, in no uncertain terms, that your front door is off limits. He takes it in stride, not pushing the matter.": "") + "Then he plants his feet and lines his lower dick up with your [asshole] and pushes it in.");
 			player.buttChange(24, true, true, true);
 			if (player.looseness(false) < 2) {
@@ -313,6 +315,8 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nHis hands slide down to your [ass]. He gets a good grope in, massaging your rear and using it as a lever to pull you against him. " + (player.tailType > 0 ? "He even wraps his scaled hand around the base of your [tail], softly massaging the point where it meets your [ass].": "") + "");
 			if (player.hasCock()) outputText("\n\nYou gasps against his lips as he wraps a hand around your [cock]. He rubs its rigid surface, firmly tugging your [cock] as smacks your [ass]. As his hands massage and grips [eachCock] you can't help sliding your hands across his body, pulling him into you as your mouths remain locked together.");
 			outputText("\n\nOnce the touchy feely face sucky grope fest is over he takes you by the hips, whirling you around. Something about you is driving the lizan mad. His dual peckers split across your body, one sliding against your [vagina] while the other slides up into the crevice of your [ass]. He says something about fucking both your holes and with a grin you tell him to go for it.");
+			
+			outputText(images.showImage("lizanrogue-win-female"));
 			if (player.looseness(false) < 2) {
 				outputText("\n\nThe lizan spreads your [ass], obviously set on entering from the rear first. When he gets a good look at your [asshole] you hear a low whistle. He spits onto his cock several times, making sure it is extra slick before he presses the swollen head against your [asshole].");
 				outputText("\n\nA grunt forces its way out of you clenched teeth as the large cock forces your anal ring to widen around its mushroom shaped head. Thanks to his last minute preparations the lizan slides in without causing you too much pain. Even so he maintains a strong grip around your waist as he rocks in and out of your [asshole] until his scaled trunk presses into your [ass], his dick fully submerged in your anal depths. He grinds his hips into you, causing you to tremble as your voice strains into fluttering yelp.");
@@ -321,21 +325,16 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nThe lizan spreads your [ass], obviously set on entering you from the rear first. You feel a glob of spit land on your upturned [asshole]. The sudden coolness of the saliva dripping down your hole is quickly followed by the large head of the lizan's cock.");
 				outputText("\n\nYour voice vibrating your chest and stretching out into infinity is all the incentive the lizan needs. He slides his big bumpy dick into your [asshole], his hands pulling your [ass] back into him. Once he's buried the full length of his big purple dick in your backdoor he begins swirling his dick around in your guts, causing you to groan loudly as you push back against his large dick.");
 			}
-			else {
-				outputText("\n\nThe lizan spreads your [ass], obviously set on entering you from the rear first. When he gets a good look at your [asshole] he shoves his fist into the air. He happily enters you after taking a moment to spit shine his bumpy purple dick. As his cock tunnels through you you make sure to squeeze it, massaging the lizan as he begins t swirl his cock around inside of you as if trying to stir your guts.");
-			}
+			else outputText("\n\nThe lizan spreads your [ass], obviously set on entering you from the rear first. When he gets a good look at your [asshole] he shoves his fist into the air. He happily enters you after taking a moment to spit shine his bumpy purple dick. As his cock tunnels through you you make sure to squeeze it, massaging the lizan as he begins t swirl his cock around inside of you as if trying to stir your guts.");
 			player.buttChange(24, true, true, true);
+			
 			outputText("\n\nThe Lizan then slides himself out of your [asshole] until the mushroom shaped head of his cock is all that remains in your rear. He reaches around and pulls his other cock up, aiming for your [vagina] as he pushes forward.");
-			if (player.looseness(true) < 2) {
-				outputText("\n\nAs his giant cock penetrates your [vagina] you can't help but tremble. He takes it slow, allowing your mind to make sense of the dual sensations erupting within your body. The cocks slowly invade your two holes. The lizan is careful to gently rock himself into your [pussy] even though your [asshole] has already eagerly accepted his invasions. You calm yourself, attempting to relax until you feel his trunk mash against your [ass], both dicks buried within you.");
-			}
-			else if (player.looseness(true) < 4) {
-				outputText("\n\nAs his large cock penetrates your [vagina] you find yourself squeezing his invading sex organ. He tells you how much he likes that by kissing your neck as he rubs your lower back just above your [ass]. He slowly begins to stir both of his dicks around inside you, holding you tightly as he shudders while being enveloped by your [asshole] and your [pussy].");
-			}
-			else {
-				outputText("\n\nAs his impressive cock penetrates your [vagina] you find yourself pushing back into him with greedy need. He fills the hungry space inside your pussy with a single sharp thrust. Strong arms pull you back.");
-			}
+			
+			if (player.looseness(true) < 2) outputText("\n\nAs his giant cock penetrates your [vagina] you can't help but tremble. He takes it slow, allowing your mind to make sense of the dual sensations erupting within your body. The cocks slowly invade your two holes. The lizan is careful to gently rock himself into your [pussy] even though your [asshole] has already eagerly accepted his invasions. You calm yourself, attempting to relax until you feel his trunk mash against your [ass], both dicks buried within you.");
+			else if (player.looseness(true) < 4) outputText("\n\nAs his large cock penetrates your [vagina] you find yourself squeezing his invading sex organ. He tells you how much he likes that by kissing your neck as he rubs your lower back just above your [ass]. He slowly begins to stir both of his dicks around inside you, holding you tightly as he shudders while being enveloped by your [asshole] and your [pussy].");
+			else outputText("\n\nAs his impressive cock penetrates your [vagina] you find yourself pushing back into him with greedy need. He fills the hungry space inside your pussy with a single sharp thrust. Strong arms pull you back.");
 			player.cuntChange(24, true, true, true);
+			
 			outputText("\n\nThen the lizan begins to unceremoniously fuck your brains out. With his hands wrapped around your waist he pounds your [vagina] and you [asshole] inward with reckless thrusts that cause you to shudder and shout. He fucks you standing, his hips clapping against your upturned [ass] as he jerks you back into his rapid thrusts.");
 			outputText("\n\nHis hurried fucking of both of your holes is causing your entire body to tingle as you are crushed under waves of pure delight. From the way he soundly fucks you into a frenzy you know he's enjoying every moment of your body just as you enjoy every moment of his.");
 			if (player.hasCock()) {
@@ -365,6 +364,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function consensualWatersports():void { //Yay watersports!
 			clearOutput();
+			outputText(images.showImage("lizanrogue-smex"));
 			outputText("A kinky idea crosses your mind. You tell him that you'd like to take things a bit further. \"<i>I get it. Some urine activity,</i>\" he says. " + player.clothedOrNaked("You slowly disrobe and toss your [armor] into a neat pile on one of the nearby trees.", "You don't waste time showing your naked form to the lizan.") + " The lizan slowly strips his loincloth off, exposing his wonderful dual reptilian cocks.");
 			outputText("\n\n\"<i>You can go first,</i>\" he says. You thank him for letting you go first. ");
 			if (player.hasVagina() && !player.hasCock()) {
@@ -398,6 +398,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function rapeLizanInTheAss():void {
 			clearOutput();
+			outputText(images.showImage("lizanrogue-smex"));
 			if (monster.lust >= monster.maxLust()) {
 				outputText("The lizan does little to resist. He just continues his intense masturbation as you push him over to make his rectal passage more accessible. The horny guy even lifts his tail, eagerly giving you access to his back door. From the look of things he is neither a virgin nor a frequent taker. ");
 				outputText("\n\nWith his chest on the ground he continues to pump his cocks, his hole winking in invitation. When you slide your hands across his self parting ass cheeks he arches his back and groans, begging for it. Not being one to disappoint you spit into your hand while marveling at how simple lust has turned this pure creature into your hot little boy slut. After spit shining your [cock] you aim it towards the horny guy's back door, and enter without one thought of knocking.");
@@ -435,6 +436,7 @@ package classes.Scenes.Areas.Bog
 		}
 		
 		public function rapeLizanWithPussy():void {
+			outputText(images.showImage("lizanrogue-smex"));
 			outputText("With a grin you slip off your [armor], the lizan doesn’t fight it in the least. In fact as you shove him onto his back he breathes a sigh of relief. Despite your having beaten him he is obviously quite attracted to you. He groans when you grab his twin peckers and inspect them. Each irregularly patterned bump is mirrored on its counterpart, like two sexy phallic twins. They grow hard in your hand. With a grin you look up into his face and watch his sexual attraction war with his lofty morals.");
 			outputText("\n\nWhen you straddle him with his lizan dicks pointed up at your [vagina] you look down into his eyes and watch as your body causes his lust to win the war.");
 			if (player.looseness(true) < 2) {

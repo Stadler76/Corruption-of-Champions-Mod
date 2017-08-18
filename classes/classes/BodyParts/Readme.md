@@ -58,6 +58,18 @@ player.rearBody.setProps({
 ### setAllProps(p:Object)
 same as above, but skipped propertys are being reset to their default values
 
+### canDye() / canOil()
+Returns `true` if you can apply hair dye, respectively skin oil to that bodypart
+
+### hasDyeColor(_color:String) / hasOilColor(_color:String)
+Returns `true` if the bodypart already has the color to be applied
+
+### applyDye(_color:String) / applyOil(_color:String)
+Applies the color to the bodypart
+
+### toObject() (Currently RearBody only)
+Returns an object with all the public propertys that should be stored in a save file.
+
 BodyParts
 ---------
 
@@ -108,8 +120,24 @@ Assuming that:
 - `desc` is set to "fur"
 
 ##### public function hasFur():Boolean
-Moved from and aliased to `Creature.hasFur()`<br>
+Moved from and alias of `Creature.hasFur()`<br>
 Returns true if the player has fur (aka `player.skin.type == SKIN_TYPE_FUR`). Nuff said.
+
+##### public function hasWool():Boolean
+Alias of `Creature.hasWool()`<br>
+Returns true if the player has wool (aka `player.skin.type == SKIN_TYPE_WOOL`).
+
+##### public function hasFeathers():Boolean
+Alias of `Creature.hasFeathers()`<br>
+Returns true if the player has feathers (aka `player.skin.type == SKIN_TYPE_FEATHERED`).
+
+##### public function isFurry():Boolean
+Alias of `Creature.isFurry()`<br>
+Returns true if the player has fur or wool.
+
+##### public function isFluffy():Boolean
+Alias of `Creature.isFluffy()`<br>
+Returns true if the player has fur, wool or feathers.
 
 #### Note
 I've added the optional param `keepTone` to the methods `restore()` and `setAllProps()` which defaults to true.
@@ -142,13 +170,6 @@ Alias of `skin.skinFurScales()` (Same as above, but for the skin on the underbod
 
 Parser tag: `[underbody.skinfurscales]` (case insensitive)
 
-##### copySkin(p:Object = null)
-This is mainly a wrapper around
-```as3
-player.underBody.skin.setProps(player.skin);
-```
-The param `p:Object = null` can optionally be used to override certain skin propertys after copying them (See in the examples below)
-
 #### Examples
 ##### From lizard scales TF:
 ```as3
@@ -158,7 +179,7 @@ player.skin.setProps({
 	desc: "scales"
 });
 player.underBody.type = UNDER_BODY_TYPE_REPTILE;
-player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
+player.copySkinToUnderBody({    // copy the main skin props to the underBody skin ...
 	desc: "ventral scales"  // ... and only override the desc
 });
 ```
@@ -171,7 +192,7 @@ player.skin.setProps({
 	desc: "scales"
 });
 player.underBody.type = UNDER_BODY_TYPE_REPTILE;
-player.underBody.copySkin();                     // copy the main skin props to the underBody skin ...
+player.copySkinToUnderBody();                    // copy the main skin props to the underBody skin ...
 player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
 ```
 
@@ -188,7 +209,7 @@ if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_REPTILE, UNDER_BODY_TYPE_TURT
 		desc: "scales"
 	});
 	player.underBody.type = UNDER_BODY_TYPE_REPTILE;
-	player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
+	player.copySkinToUnderBody({    // copy the main skin props to the underBody skin ...
 		desc: "ventral scales"  // ... and only override the desc
 	});
 	changes++;
@@ -202,17 +223,53 @@ if (player.hasLizardScales() && player.underBody.type == UNDER_BODY_TYPE_REPTILE
 }
 ```
 
-
-### RearBody
-placeholder
+### Wings
+#### Property table
+| Property | Access example       | Description / Examples                                           |
+|----------|----------------------|------------------------------------------------------------------|
+| `type`   | `player.wings.type`  | **The type**<br>`player.wings.type = WING_TYPE_FEATHERED_LARGE;` |
+| `color`  | `player.wings.color` | **The color**<br>`player.wings.color = "green";`                 |
 
 ### Neck
-placeholder
+#### Property table
+| Property | Access example      | Description / Examples                                                                         |
+|----------|---------------------|------------------------------------------------------------------------------------------------|
+| `type`   | `player.neck.type`  | **The type**<br>`player.neck.type = NECK_TYPE_DRACONIC;`                                       |
+| `len`    | `player.neck.len`   | **The length**<br>`player.neck.len = 30;`                                                      |
+| `pos`    | `player.neck.pos`   | **The position related to the head, true if its behind the face**<br>`player.neck.pos = true;` |
+| `color`  | `player.neck.color` | **The color (e. g. the feathers of a cockatrice neck**<br>`player.neck.color = "green";`       |
+
+#### Additional methods
+##### modify(diff:Number, newType:Number = -1)
+Modify the length of the neck by `diff`. Optinally set the type to `newType` before modifying the length
+
+##### isFullyGrown()
+Checks, if the neck has reached its max length for the type
+
+##### Notes
+Currently only the dragon neck (`NECK_TYPE_DRACONIC`) uses the methods `modify` and `isFullyGrown` and the propertys `len` and `pos`. Ideas for more races with inhuman necks would be appreciated.
+
+### RearBody
+#### Property table
+| Property | Access example          | Description / Examples                                                                      |
+|----------|-------------------------|---------------------------------------------------------------------------------------------|
+| `type`   | `player.rearBody.type`  | **The type**<br>`player.rearBody.type = REAR_BODY_DRACONIC_MANE;`                           |
+| `color`  | `player.rearBody.color` | **The color (e. g. the hair of a hair draconic mane**<br>`player.rearBody.color = "green";` |
+
+#### Additional methods
+None so far
 
 Changed or new related methods
 ------------------------------
 
 Syntax: ClassName.methodName
+
+##### Creature.copySkinToUnderBody(p:Object = null)
+This is mainly a wrapper around
+```as3
+player.underBody.skin.setProps(player.skin);
+```
+The param `p:Object = null` can optionally be used to override certain skin propertys after copying them (See in the examples for UnderBody)
 
 ### Player.setFurColor
 Set the new furColor or furColors randomly and, if wanted: set the new underBody as well.

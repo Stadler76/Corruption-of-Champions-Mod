@@ -527,9 +527,8 @@ package classes
 				else
 					outputText("  It has developed its own cute little spiral. You estimate it to be about "+numInchesOrCentimetres(12)+" long, "+numInchesOrCentimetres(2)+" thick and very sturdy. A very useful natural weapon.");
 			}
-			// <mod name="Dragon patch" author="Stadler76">
 			// neckLen
-			if (!player.hasNormalNeck())
+			if (player.neck.type == NECK_TYPE_DRACONIC)
 			{
 				// length description
 				if (player.hasDragonNeck())
@@ -551,8 +550,9 @@ package classes
 					else if (player.neck.len < 16) outputText("  You can bend it more than others with low effort.");
 					else outputText("  You are able to bend it in almost every direction and with some effort you even manage to take a glimpse at your back.");
 				}
+			} else if (player.neck.type == NECK_TYPE_COCKATRICE) {
+				outputText("  Around your neck is a ruff of [neckColor] feathers which tends to puff out with your emotions.");
 			}
-			// </mod>
 			//BODY PG HERE
 			outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.");
 			//WINGS!
@@ -568,8 +568,6 @@ package classes
 				outputText("  A pair of tiny bat-like demon-wings sprout from your back, flapping cutely, but otherwise being of little use.");
 			if (player.wingType == WING_TYPE_BAT_LIKE_LARGE) 
 				outputText("  A pair of large bat-like demon-wings fold behind your shoulders.  With a muscle-twitch, you can extend them, and use them to soar gracefully through the air.");
-			if (player.wingType == WING_TYPE_SHARK_FIN) 
-				outputText("  A large shark-like fin has sprouted between your shoulder blades.  With it you have far more control over swimming underwater.");
 			if (player.wingType == WING_TYPE_FEATHERED_LARGE) 
 				outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the " + player.wings.color + "-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.");
 			if (player.wingType == WING_TYPE_DRACONIC_SMALL) 
@@ -579,20 +577,24 @@ package classes
 			else if (player.wingType == WING_TYPE_GIANT_DRAGONFLY) 
 				outputText("  Giant dragonfly wings hang from your shoulders.  At a whim, you could twist them into a whirring rhythm fast enough to lift you off the ground and allow you to fly.");
 
-			// <mod name="Dragon patch" author="Stadler76">
+			// <mod name="BodyParts.RearBody" author="Stadler76">
 			// rearBody
 			switch (player.rearBody.type) {
+				case REAR_BODY_SHARK_FIN:
+					outputText("  A large shark-like fin has sprouted between your shoulder blades."
+					          +" With it you have far more control over swimming underwater.");
+					break;
 				case REAR_BODY_DRACONIC_MANE:
-					// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
-					outputText("  Tracing your spine, a mane of hair grows; starting at the base of your neck and continuing down your tail, ending on the tip of your tail in a small tuft.");
-					outputText("  It is the same color as the hair on your head, but shorter and denser; it grows in a thick vertical strip, maybe two inches wide.");
-					outputText("  It reminds you vaguely of a horse's mane.");
+					outputText("  Tracing your spine, a mane of [rearBodyColor] hair grows; starting at the base of your neck and continuing down"
+					          +" your tail, ending on the tip of your tail in a small tuft. It grows in a thick vertical strip,"
+					          +" maybe two inches wide. It reminds you vaguely of a horse's mane.");
 					break;
 
 				case REAR_BODY_DRACONIC_SPIKES:
 					// Teh spiky mane, similar to the hairy one.
-					outputText("  Tracing your spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of your neck and continuing down your tail, ending on the tip of your tail.");
-					outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
+					outputText("  Tracing your spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of your"
+					          +" neck and continuing down your tail, ending on the tip of your tail. They've grown in a thick vertical strip,"
+					          +" maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
 					break;
 			}
 			// </mod>
@@ -618,7 +620,7 @@ package classes
 			// <mod name="BodyParts.UnderBody" author="Stadler76">
 			if (player.hasCockatriceSkin()) {
 				outputText("  You’ve got a thick layer of " + player.furColor + " feathers covering your body, while [skinFurScales] coat you from"
-				          +" chest to groin. Around your neck is a ruff of [underBody.skinFurScales] which tends to puff out with your emotions.");
+				          +" chest to groin.");
 			} else if (player.hasDifferentUnderBody()) {
 				outputText("  While most of your body is covered by [skinFurScales] you have [underBody.skinFurScales] covering your belly.");
 			}

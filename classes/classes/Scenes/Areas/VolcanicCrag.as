@@ -36,6 +36,7 @@ package classes.Scenes.Areas
 
 		public function discover():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+			outputText(images.showImage("area-vulcaniccrag"));
 			outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
 			outputText("<b>You've discovered the Volcanic Crag!</b>");
 			doNext(camp.returnToCampUseTwoHours);
@@ -82,7 +83,7 @@ package classes.Scenes.Areas
 
 		private function lootDrakHrt():void {
 			clearOutput();
-			outputText(images.showImage("area-vulcaniccrag"));
+			outputText(images.showImage("item-dHeart"));
 			outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
 			inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
 		}
@@ -95,6 +96,7 @@ package classes.Scenes.Areas
 		}
 
 		private function cragAprilFools():void {
+			outputText(images.showImage("event-dlc"));
 			getGame().aprilFools.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
 		}
 		

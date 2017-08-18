@@ -63,26 +63,11 @@ package classes.Items.Consumables
 				player.removePerk(PerkLib.Dragonfire);
 				changes++;
 			}
-			//<mod name="Dragon mod" author="Stadler76">
-			var meetsLongNeckReq:Boolean = player.dragonScore() >= 6 && player.hasDraconicBackSide();
-			if (!player.hasNormalNeck() && rand(meetsLongNeckReq ? 10 : 4) == 0) {
-				outputText("\n\n<b>Your draconic neck and its position on your head revert to its normal position and length.</b> ");
-				if (player.hasDragonRearBody()) {
-					outputText("  After that you feel a tingling on your backside, telling you that <b>your");
-					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
-					outputText("draconic mane is disappearing, too.</b>");
-				}
-				outputText("  Well, your rear isn't worthy to gaze at it anymore.\n");
-				player.rearBody.restore();
-				player.neck.restore();
-			}
-			if (!player.hasNormalNeck() && player.hasDragonRearBody() && rand(meetsLongNeckReq ? 6 : 4) == 0) {
-					outputText("\n\nYou feel a tingling on your backside, telling you that <b>your");
-					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
-					outputText("draconic mane is disappearing.</b>");
-					player.rearBody.restore();
-			}
-			//</mod>
+			//Restore neck
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(5) == 0)
+				mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//-Skin color change – light, fair, olive, dark, ebony, mahogany, russet
 			if ((player.skinTone !== "light" && player.skinTone !== "fair" && player.skinTone !== "olive" && player.skinTone !== "dark" && player.skinTone !== "ebony" && player.skinTone !== "mahogany" && player.skinTone !== "russet") && changes < changeLimit && rand(5) === 0) {
 				changes++;
@@ -195,9 +180,15 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Removes wings
-			if (player.wingType !== WING_TYPE_NONE && rand(5) === 0 && changes < changeLimit) {
-				if (player.wingType === WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine.  After a moment the pain passes, though your fin is gone!");
-				else outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
+			if ((player.wingType !== WING_TYPE_NONE || player.rearBody.type == REAR_BODY_SHARK_FIN) && rand(5) === 0 && changes < changeLimit) {
+				if (player.rearBody.type == REAR_BODY_SHARK_FIN) {
+					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine."
+					          +" After a moment the pain passes, though your fin is gone!");
+					player.rearBody.restore();
+				} else {
+					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your"
+					          +" shoulder-blades.  After a moment the pain passes, though your wings are gone!");
+				}
 				player.wingType = WING_TYPE_NONE;
 				changes++;
 			}

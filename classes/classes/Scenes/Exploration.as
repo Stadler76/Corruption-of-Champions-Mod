@@ -33,12 +33,14 @@ package classes.Scenes
 			// Introductions to exploration //
 			if (flags[kFLAGS.TIMES_EXPLORED] <= 0) {
 				clearOutput();
+				outputText(images.showImage("event-first-steps"));
 				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.");
 				flags[kFLAGS.TIMES_EXPLORED]++;
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			} else if (flags[kFLAGS.TIMES_EXPLORED_FOREST] <= 0) {
 				clearOutput();
+				outputText(images.showImage("area-forest"));
 				outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>");
 				flags[kFLAGS.TIMES_EXPLORED]++;
 				flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
@@ -130,6 +132,7 @@ package classes.Scenes
 				else {
 					if (rand(10) == 0) { //Two imps clashing, UTG stuff.
 						clearOutput();
+						outputText(images.showImage("monster-imp"));
 						outputText("A small imp bursts from behind a rock and buzzes towards you. You prepare for a fight, but it stays high and simply flies above you. Suddenly another imp appears from nowhere and attacks the first. In the tussle one of them drops an item, which you handily catch, as the scrapping demons fight their way out of sight. ");
 						switch(rand(3)) {
 							case 0:
@@ -192,6 +195,7 @@ package classes.Scenes
 				}
 				if (player.gender > 0) {
 					clearOutput();
+					outputText(images.showImage("monster-goblin"));
 					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
 					if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
@@ -304,6 +308,7 @@ package classes.Scenes
 		}
 		
 		public function prisonFn():void {
+			outputText(images.showImage("event-wagon"));
 			if (flags[kFLAGS.PRISON_ENABLED] == true) {
 					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");

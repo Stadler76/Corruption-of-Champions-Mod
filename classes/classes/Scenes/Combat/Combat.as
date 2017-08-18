@@ -1,4 +1,4 @@
-//Combat 2.0
+﻿//Combat 2.0
 package classes.Scenes.Combat 
 {
 	import classes.*;
@@ -782,7 +782,7 @@ package classes.Scenes.Combat
 				if (rand(100) + player.inte/3 >= 50) {
 					temp = int(player.str/5 - rand(5));
 					if (temp == 0) temp = 1;
-					outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + temp + "</font></b> damage.\n\n");
+					outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"" + mainViewManager.colorHpMinus() + "\">" + temp + "</font></b> damage.\n\n");
 					monster.HP -= temp;
 					if (monster.HP <= 0) {
 						doNext(endHpVictory);
@@ -958,7 +958,7 @@ package classes.Scenes.Combat
 			else {
 				outputText("You hit " + monster.a + monster.short + "! ");
 				if (crit) outputText("<b>Critical hit! </b>");
-				outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")
+				outputText("<b>(<font color=\"" + mainViewManager.colorHpMinus() + "\">" + damage + "</font>)</b>")
 			}
 			if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
 				if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage " + monster.a + monster.short + "'s defenses!");
@@ -1181,9 +1181,9 @@ package classes.Scenes.Combat
 		public function getDamageText(damage:Number):String
 		{
 			var color:String;
-			if (damage > 0)  color = "#800000";
+			if (damage > 0)  color = mainViewManager.colorHpMinus();
 			if (damage == 0) color = "#000080";
-			if (damage < 0)  color = "#008000";
+			if (damage < 0)  color = mainViewManager.colorHpPlus();
 			return "<b>(<font color=\"" + color + "\">" + damage + "</font>)</b>";
 		}
 
@@ -1485,12 +1485,12 @@ package classes.Scenes.Combat
 					var bleed:Number = (2 + rand(4))/100;
 					bleed *= player.HP;
 					bleed = takeDamage(bleed);
-					outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
+					outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"" + mainViewManager.colorHpMinus() + "\">" + temp + "</font>)</b>\n\n");
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.AcidSlap)) {
 				var slap:Number = 3 + (player.maxHP() * 0.02);
-				outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
+				outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"" + mainViewManager.colorHpMinus() + "\">" + slap + "</font>)</b></b>\n\n");
 			}
 			if (player.findPerk(PerkLib.ArousingAura) >= 0 && monster.lustVuln > 0 && player.cor >= (70 - player.corruptionTolerance())) {
 				if (monster.lust100 < 50) outputText("Your aura seeps into " + monster.a + monster.short + " but does not have any visible effects just yet.\n\n");

@@ -137,12 +137,30 @@ private function acceptDominikasKnowledge():void {
 	}
 
 	//If no dominika cooldown up
+	var spellList:Vector.<Object> = new <Object>[
+			{status:StatusEffects.KnowsArouse, name:"Arouse", color:"Black"},
+			{status:StatusEffects.KnowsHeal, name:"Heal", color:"Black"},
+			{status:StatusEffects.KnowsMight, name:"Might", color:"Black"},
+			{status:StatusEffects.KnowsCharge, name:"Charge Weapon", color:"White"},
+			{status:StatusEffects.KnowsBlind, name:"Blind", color:"White"},
+			{status:StatusEffects.KnowsWhitefire, name:"Whitefire", color:"White"},
+			];
+	var knowsallDominikaSpells:Boolean = true;
+	var knowssomeDominikaSpells:Boolean = false;
+	for each(var spell:Object in spellList){
+		trace(spell);
+		if (player.hasStatusEffect(spell.status)){
+			knowssomeDominikaSpells = true;
+		}else{
+			knowsallDominikaSpells = false;
+		}
+	}
 	if (flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] == 0) {
 		flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] = 7 + rand(3);
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n");
 
 		//[If player knows all spells]
-		if (player.spellCount() == 6) {
+		if (knowsallDominikaSpells) {
 			if (flags[kFLAGS.DOMINIKA_EMBARRASSED_ABOUT_MAGIC] == 0) {
 				flags[kFLAGS.DOMINIKA_EMBARRASSED_ABOUT_MAGIC]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n");
@@ -153,12 +171,20 @@ private function acceptDominikasKnowledge():void {
 			dynStats("int", 1+rand(4));
 		}
 		//[If player knows some spells]
-		else if (player.spellCount() > 0) {
+		else if (knowssomeDominikaSpells){
 			outputText("You take a step backwards in surprise, but your experience with magic makes you realize that she's not doing anything dangerous. You explain that you've learned a bit of sorcery from books, and she nods thoughtfully. \"<i>I see,</i>\" she muses, stroking her chin. \"<i>I think I may be able to show you a thing or two. Let's see here...</i>\"\n\n");
-
 			outputText("Dominika seems to be quite good at magic, and you find yourself picking up the spell she demonstrates fairly quickly.");
 			//(Player receives random unlearned spell.)
-			if (!player.hasStatusEffect(StatusEffects.KnowsMight)) {
+			for each(var spell:Object in spellList){
+				trace(spell);
+				if (!player.hasStatusEffect(spell.status)){
+					player.createStatusEffect(spell.status, 0, 0, 0, 0);
+					outputText("\n\n<b>New " + spell.color + " Spell Learned: " + spell.name + "</b>");
+					dynStats("int", 2);
+					break;
+				}
+			}
+			/*if (!player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>");
 			}
@@ -183,7 +209,7 @@ private function acceptDominikasKnowledge():void {
 				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>");
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==");
-			dynStats("int", 2);
+			*/
 		}
 		//[If player knows no spells]
 		else {

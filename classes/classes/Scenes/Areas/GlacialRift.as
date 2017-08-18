@@ -41,6 +41,7 @@ package classes.Scenes.Areas
 
 		public function discover():void {
 			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
+			outputText(images.showImage("area-glacialrift"));
 			outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
 			outputText("<b>You've discovered the Glacial Rift!</b>");
 			doNext(camp.returnToCampUseTwoHours);
@@ -120,7 +121,7 @@ package classes.Scenes.Areas
 		}
 
 		private function findChest():void {
-			outputText(images.showImage("area-glacialrift"));
+			outputText(images.showImage("item-chest"));
 			var gemsFound:int = 400 + rand(400);
 			outputText("While you're minding your own business, you spot an ornately-decorated chest somewhat buried in the snow. You walk on the snowy grounds you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It looks nice and would make a good storage.");
 			player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0);
@@ -135,14 +136,14 @@ package classes.Scenes.Areas
 
 		private function lootGodmead():void {
 			clearOutput();
-			outputText(images.showImage("area-glacialrift"));
+			outputText(images.showImage("item-gMead"));
 			outputText("As you make your way across the icy wastes, you notice a small corked ivory horn half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horn of mead in your bag and continue on your way. ");
 			inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);
 		}
 
 		private function lootIcicle():void {
 			clearOutput();
-			outputText(images.showImage("area-glacialrift"));
+			outputText(images.showImage("item-icicle"));
 			outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
 			inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
 		}
@@ -152,6 +153,7 @@ package classes.Scenes.Areas
 			spriteSelect(SpriteDb.s_valeria);
 			flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
 			clearOutput();
+			outputText(images.showImage("monster-gooarmor"));
 			outputText("As you make your way across the Rift's icy extremities, you hear a metallic CLANK CLANK approaching through the snow flurries. You turn in time to see a suit of plated mail charging toward you, its helm and limbs filled with bright blue goo. It skids to a stop a few yards away, a greatsword forming from the goo of its hand. A beautiful, feminine face appears beneath the armor’s visor grinning at you. You suddenly recognize her face!\n\n");
 			outputText("\"<i>This is my territory!</i>\" she shouts, bringing her two-handed sword to bare. \"<i>You’ll give me your fluids, or I’ll take them.</i>\"");
 			addButton(0, "Fight", fightValeria);
@@ -198,6 +200,7 @@ package classes.Scenes.Areas
 		}
 
 		private function riftAprilFools():void {
+			outputText(images.showImage("event-dlc"));
 			getGame().aprilFools.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
 		}
 

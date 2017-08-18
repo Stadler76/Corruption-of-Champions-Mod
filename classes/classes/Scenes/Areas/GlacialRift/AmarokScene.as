@@ -63,6 +63,7 @@ package classes.Scenes.Areas.GlacialRift
 		public function amarokBadEnd():void { //Hungry Hungry Hipp-- err, Wolves
 			clearOutput();
 			spriteSelect(SpriteDb.s_amarok);
+			outputText(images.showImage("badend-amarok"));
 			outputText("You've been here before. The Amarok will carry you to its den, let its pups deal with you as they will, and it'll vanish off somewhere. You'll wake up later and flee before it returns or its pups get hungry. You close your eyes and wait for it to pick you up. You just want to get this over with.");
 			outputText("\n\nThe Amarok, however, has other plans. Instead of coming behind you and picking you up, it hits you with a paw that rolls you onto your back, then puts said paw on your chest. You wheeze under its weight. It managed to step in just the right spot to knock your breath out of you. As though the air wasn't freezing enough, a wave of cold horror washes through your spine. You don't know what's going to happen, but you don't like it.");
 			outputText("\n\nYou writhe under its grasp as your throat closes in terror. Your efforts are fruitless, and the Amarok watches you in mild amusement. Your blood starts to pound in your ears. You need something-- anything --that'll help you get away. You flop an arm at the leg holding you down, praying it'll knock the Amarok off. It doesn't work. You try to get a foot under it and kick it off. You can't even roll your legs up. You try to scream for help in a futile hope anyone is nearby. You instead choke on your own breath. The Amarok's cruel gaze watches you with glee.");

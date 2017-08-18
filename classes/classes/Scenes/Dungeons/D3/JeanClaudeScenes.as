@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.D3 
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
@@ -306,12 +306,12 @@
 
 			outputText("\n\nOnce he has finished his gloating, Jean-Claude once again considers your frozen form.");
 
+			outputText(images.showImage("basilisk-vag-fuck"));
 			outputText("\n\n“<i>I suppose I should deliver you to the throne room pristine,</i>” he says. He snaps his claws. “<i>Here, you two- ah, you know what? Fuck it. I deserve this.</i>” He stamps forward and flips you onto your back, ripping off his tunic as he does. Throughout all of this a tiny voice in your mind cries out for you to feel horror at your situation, at the fate which has befallen you. It is drowning though, drowning in a bottomless pit of molten arousal, and as the basilisk rex’s bulging purple prick");
 			if (player.hasVagina()) outputText("s");
 			outputText(" push roughly against your [asshole]");
 			if (player.hasVagina()) outputText(" and [vagina]");
 			outputText(", it disappears into the depths forever. Your mind is a blank canvas of pure, submissive pleasure and it, like your limitless future, is golden.");
-			
 			getGame().gameOver();
 		}
 		
@@ -338,7 +338,7 @@
 				else outputText(" position yourself");
 				outputText(" for him, your breeder’s body aching to be taken.");
 			}
-
+			outputText(images.showImage("basilisk-vag-fuck"));
 			outputText("\n\nIn front of your huge audience- who for once are the ones who can’t tear their eyes away- the basilisk rex mounts you, pinning your arms down with his hands; his hot, agitated breath rolls over your face as with one powerful thrust, he spears into your sopping cunt with one of his bulging pricks. You arch your back to the sensation, opening your mouth as he pushes into your wet, sensitive tunnel, fucking you with the roughness of bestial urgency.");
 
 			if (player.averageVaginalLooseness() < 2)

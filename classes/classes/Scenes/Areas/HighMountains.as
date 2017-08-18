@@ -34,6 +34,7 @@ package classes.Scenes.Areas
 		}
 		public function discover():void {
 			clearOutput();
+			outputText(images.showImage("area-highmountains"));
 			outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)");
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -127,6 +128,7 @@ package classes.Scenes.Areas
 
 		public function harpyEncounter():void {
 			clearOutput();
+			outputText(images.showImage("monster-harpy"));
 			outputText("A harpy wings out of the sky and attacks!");
 			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
@@ -153,6 +155,7 @@ package classes.Scenes.Areas
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
+			outputText(images.showImage("event-chicken"));
 			if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] == 0) {
 				outputText("Taking a stroll along the mountains, you come across a peculiar-looking harpy wandering around with a large wooden cart in tow.  She's far shorter and bustier than any regular harpy you've seen before, reaching barely 4' in height but managing to retain some semblance of their thick feminine asses.  In addition to the fluffy white feathers decorating her body, the bird-woman sports about three more combed back upon her forehead like a quiff, vividly red in color.");
 				outputText("\n\nHaving a long, hard think at the person you're currently making uncomfortable with your observational glare, you've come to a conclusion - she must be a chicken harpy!");
@@ -187,6 +190,7 @@ package classes.Scenes.Areas
 			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX);
 			player.consumeItem(consumables.OVIELIX);
+			outputText(images.showImage("item-oElixir"));
 			outputText("You hand over two elixirs, the harpy more than happy to take them from you.  In return, she unties a corner of the sheet atop the cart, allowing you to take a look at her collection of eggs.");
 			//[Black][Blue][Brown][Pink][Purple]
 			menu();
@@ -204,6 +208,7 @@ package classes.Scenes.Areas
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX, 3);
+			outputText(images.showImage("item-oElixir"));
 			outputText("You hand over three elixirs, the harpy ecstatic over the fact that you're willing to part with them.  In return, she unties a side of the sheet atop the cart, allowing you to take a look at a large collection of her eggs.");
 			//[Black][Blue][Brown][Pink][Purple]
 			menu();
@@ -221,6 +226,7 @@ package classes.Scenes.Areas
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
 			flags[kFLAGS.EGGS_BOUGHT]++;
+			outputText(images.showImage("item-hEgg"));
 			outputText("You take " + itype.longName + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
 			inventory.takeItem(itype, chickenHarpy);
 		}

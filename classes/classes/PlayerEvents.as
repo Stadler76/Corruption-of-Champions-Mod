@@ -428,21 +428,6 @@ package classes {
 					}
 				}
 			}
-			// <mod name="Dragon mod" author="Stadler76">
-			if (!player.hasNormalNeck() && player.neck.type == NECK_TYPE_DRACONIC && (player.dragonScore() < 6 || !player.hasDraconicBackSide())) {
-				outputText("\n<b>Your draconic neck and its position on your head reverts to its normal position and length. ");
-				if (player.hasDragonRearBody()) {
-					outputText("  After that you feel a tingling on your backside, telling you that your");
-					outputText((player.rearBody.type == REAR_BODY_DRACONIC_MANE) ? " hairy " : " spiky ");
-					outputText("draconic mane is disappearing, too.");
-				}
-				outputText("  Well, your rear isn't worthy to gaze at it anymore.</b>\n");
-				player.rearBody.restore();
-				player.neck.restore();
-				needNext = true;
-			}
-			// </mod>
-
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
 					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "resisted", false, "noBimbo", true);

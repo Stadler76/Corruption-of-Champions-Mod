@@ -33,6 +33,7 @@ package classes.Scenes.Areas
 		}
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = 1;
+			outputText(images.showImage("area-mountain"));
 			outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -186,6 +187,7 @@ package classes.Scenes.Areas
 				minotaurScene.minoAddictionBadEndEncounter();
 			} else {
 				if (!player.hasStatusEffect(StatusEffects.TF2) && player.level <= 1 && player.str <= 40) {
+					outputText(images.showImage("monster-minotaur"));
 					if (silly()) {
 						//(Ideally, this should occur the first time the player would normally get an auto-rape encounter with the minotaur. The idea is to give a breather encounter to serve as a warning of how dangerous the mountain is)
 						clearOutput();
@@ -209,6 +211,7 @@ package classes.Scenes.Areas
 					doNext(camp.returnToCampUseOneHour);
 				} else if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl) || rand(10) == 0) {
 					//Mino gangbang
+					outputText(images.showImage("minotaur-cumslut"));
 					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && player.minotaurAddicted()) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
@@ -253,8 +256,6 @@ package classes.Scenes.Areas
 						}
 						outputText("A part of your mind registers bits of clothing tossed aside and the heady scent of impending sex in the air, but your attention is riveted on the actions of the pair. The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur. The minotaur closes the distance between them in a single step.\n\n");
 						outputText("She bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands. Her tail raises to expose a glistening wet snatch, its lips already parted with desire. She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.\n\n");
-						//Picture is here
-						outputText(images.showImage("minotaur-cumslut"));
 						outputText("With a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings. She screams in half pain, half ecstasy and pushes back, hungry for his full length. After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.\n\n");
 						outputText("The pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess. To you it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise. She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits. He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
 						doNext(minotaurScene.continueMinoVoyeurism);
@@ -266,9 +267,11 @@ package classes.Scenes.Areas
 				} else if (rand(5) == 0 && player.level >= 10) {
 					//Rare Minotaur Lord
 					clearOutput();
+					outputText(images.showImage("monster-minotaurlord"));
 					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!");
 					startCombat(new MinotaurLord());
 				} else {
+					outputText(images.showImage("monster-minotaur"));
 					minotaurScene.getRapedByMinotaur(true);
 				}
 			}

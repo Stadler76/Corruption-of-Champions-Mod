@@ -1,6 +1,8 @@
 ﻿//CoC Creature.as
 package classes
 {
+	import classes.BodyParts.Neck;
+	import classes.BodyParts.RearBody;
 	import classes.BodyParts.Skin;
 	import classes.BodyParts.UnderBody;
 	import classes.BodyParts.Wings;
@@ -233,10 +235,8 @@ package classes
 		public var clawTone:String = "";
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
-		//<mod name="Dragon patch" author="Stadler76">
 		public var rearBody:RearBody = new RearBody();
 		public var neck:Neck = new Neck();
-		//</mod>
 		public var underBody:UnderBody = new UnderBody();
 
 		/*EarType

@@ -988,7 +988,11 @@ package classes.Scenes.NPCs
 				else {
 					outputText("\n\nEmber's body is a curvy thing, not rough like you'd expect from a reptilian creature, but rounded and almost soft-looking, with a taut belly and a perfect hourglass figure, giving " + emberMF("him", "her") + " the silhouette of an amazon from your village's histories: beautiful but powerful.  Excepting the wings and horns, of course.");
 				}
-				outputText("  Embers neck starts at the backside of " + emberMF("his", "her") + " head and is about two and a half feet long, roughly six inches longer, than " + emberMF("his", "her") + " arm length. " + emberMF("He", "She") + " manages to bend it in every direction " + emberMF("he", "she") + " wants with absolutely no effort and can easily look at " + emberMF("his", "her") + " back.");
+				if (flags[kFLAGS.EMBER_ROUNDFACE] == 0) {
+					outputText("  [Ember Eir] neck starts at the backside of [Ember eir] head and is about two and a half feet long, roughly six inches"
+					          +" longer, than [Ember eir] arm length. [Ember Ey] manages to bend it in every direction [Ember ey] wants with"
+					          +" absolutely no effort and can easily look at [Ember eir] back.");
+				}
 				outputText("\n\nThe dragon scorns clothing and exposes " + emberMF("him", "her") + "self to both you and the elements with equal indifference, claiming " + emberMF("his", "her") + " scales are all the covering " + emberMF("he", "she") + " needs... and yet when you admire " + emberMF("his", "her") + " body, " + emberMF("he", "she") + " is quick to hide it from your wandering gaze.");
 				outputText("\n\n" + emberMF("His", "Her") + " head is reptilian, with sharp teeth fit for a predator and strong ridges on the underside of the jaw.  At the sides of " + emberMF("his", "her") + " head are strange, fin-like growths concealing small holes; you presume these to be the dragon equivalent of ears.  Atop " + emberMF("his", "her") + " head sit two pairs of ebony horns that curve backwards elegantly; despite being as tough as steel, their shape is not fit for use in combat, instead it is simply aesthetical, giving Ember a majestic look.  A long tongue occasionally slips out, to lick at " + emberMF("his", "her") + " jaws and teeth.  Prideful, fierce eyes, with slit pupils and burning orange irises, glitter even in the darkness.");
 				outputText("  They come with the typical second set of eyelids, allowing " + emberMF("him", "her") + " to blink twice as much as others.");
@@ -1002,14 +1006,14 @@ package classes.Scenes.NPCs
 				else if (flags[kFLAGS.EMBER_HAIR] == 2) {
 					outputText("  Tracing " + emberMF("his", "her") + " spine, a mane of hair grows; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail in a small tuft.  It is the same color as the hair on " + emberMF("his", "her") + " head, but shorter and denser; it grows in a thick vertical strip, maybe two inches wide.  It reminds you vaguely of a horse's mane.");
 				}
-				// <mod name="Dragon patch" author="Stadler76">
 				// rearBody
 				if (flags[kFLAGS.EMBER_HAIR] != 2) {
 					// Teh spiky mane, similar to the hairy one.
-					outputText("  Tracing " + emberMF("his", "her") + " spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of " + emberMF("his", "her") + " neck and continuing down " + emberMF("his", "her") + " tail, ending on the tip of " + emberMF("his", "her") + " tail.");
-					outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
+					outputText("  Tracing [Ember eir] spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of"
+					          +" [Ember eir] neck and continuing down [Ember eir] tail, ending on the tip of [Ember eir] tail."
+					          +"  They've grown in a thick vertical strip, maybe an inch wide and two inches high."
+					          +" It reminds you very vaguely of a horse's mane.");
 				}
-				// </mod>
 				outputText("\n\n" + emberMF("His", "Her") + " back supports a pair of strong, scaly dragon wings, covered in membranous leathery scales.  The muscles are held taut, as though ready to extend and take to the skies at any notice.");
 
 				//(Male)
@@ -3732,6 +3736,8 @@ package classes.Scenes.NPCs
 			outputText("\n");
 			//PC Gives Live Birth
 			if (flags[kFLAGS.EMBER_OVIPOSITION] == 0) {
+				//Picture is here
+				outputText(images.showImage("birth-ember-live"));
 				//40% chance of boy, 40% chance of girl and 20% chance of both
 				//(If the PC has no pussy)
 				if (!player.hasVagina()) {
@@ -3816,6 +3822,8 @@ package classes.Scenes.NPCs
 			}
 			//PC Lays Egg
 			else {
+				//Picture is here
+				outputText(images.showImage("birth-ember-egg"));
 				//(If the PC has no pussy)
 				if (!player.hasVagina()) {
 					outputText("A terribly painful ripping feeling comes from your crotch. Reaching down to touch the tender spot you feel a spike of pleasure and moistness.  <b>You've grown a vagina!</b>\n\n");

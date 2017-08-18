@@ -179,8 +179,12 @@ package classes.Items.Consumables
 					player.breastRows[temp].nipplesPerBreast = 1;
 				}
 			}
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Lose reptile oviposition!
-			if (Utils.rand(4) == 0) mutations.updateOvipositionPerk(tfSource);
+			if (rand(4) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain bee oviposition!
 			if (changes < changeLimit && player.findPerk(PerkLib.BeeOvipositor) < 0 && player.tailType == CoC.TAIL_TYPE_BEE_ABDOMEN && Utils.rand(2) == 0) {
 				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
@@ -216,10 +220,26 @@ package classes.Items.Consumables
 			}
 
 			//Grow new bee wings if player has none.
-			if (changes < changeLimit && (player.wingType == CoC.WING_TYPE_NONE || player.wingType == CoC.WING_TYPE_SHARK_FIN) && Utils.rand(4)) {
+			if (changes < changeLimit && (player.wingType == WING_TYPE_NONE || player.rearBody.type == REAR_BODY_SHARK_FIN) && Utils.rand(4)) {
+				if (player.rearBody.type == REAR_BODY_SHARK_FIN) {
+					outputText("\n\nYou feel an itching on your large back-fin as something begins growing there.  You twist and contort yourself,"
+					          +" trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel"
+					          +" something new grow out from your fin.  You hastily remove the top portion of your " + player.armorName
+					          +" and marvel as a pair of small bee-like wings sprout from your back, replacing the fin that once grew there."
+					          +"  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap"
+					          +" your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your "
+					          + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
+					player.rearBody.restore();
+				} else {
+					outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there."
+					          +"  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably."
+					          +"  A sense of relief erupts from you as you feel something new grow out from your body.  You hastily remove the top"
+					          +" portion of your " + player.armorName + " and marvel as a pair of small bee-like wings sprout from your back."
+					          +"  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap"
+					          +" your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your "
+					          + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
+				}
 				changes++;
-				if (player.wingType == CoC.WING_TYPE_SHARK_FIN) outputText("\n\nYou feel an itching on your large back-fin as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your fin.  You hastily remove the top portion of your " + player.armorName + " and marvel as a pair of small bee-like wings sprout from your back, replacing the fin that once grew there.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your " + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
-				else outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.  You hastily remove the top portion of your " + player.armorName + " and marvel as a pair of small bee-like wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your " + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
 				player.wingType = CoC.WING_TYPE_BEE_LIKE_SMALL;
 			}
 			//Melt demon wings!

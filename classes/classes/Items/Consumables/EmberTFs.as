@@ -186,7 +186,7 @@ package classes.Items.Consumables
 			 Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swings harmlessly through the air in front of your target.
 			 */
 			//Grow Dragon Wings
-			if (player.wingType != WING_TYPE_DRACONIC_LARGE && changes < changeLimit && rand(3) == 0) {
+			if ((player.wingType != WING_TYPE_DRACONIC_LARGE || player.rearBody.type == REAR_BODY_SHARK_FIN) && changes < changeLimit && rand(3) == 0) {
 				if (player.wingType == WING_TYPE_NONE) {
 					output.text("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
@@ -196,8 +196,9 @@ package classes.Items.Consumables
 					output.text("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
 					player.wingType = WING_TYPE_DRACONIC_LARGE;
 				}
-				else if (player.wingType == WING_TYPE_SHARK_FIN) {
+				else if (player.rearBody.type == REAR_BODY_SHARK_FIN) {
 					output.text("\n\nA sensation of numbness suddenly fills your fin.  When it does away, it feels... different.  Looking back, you realize that it has been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your shark-like fin has changed into dragon wings.</b>");
+					player.rearBody.restore();
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
 				}
 				//(If other wings present)
@@ -207,33 +208,39 @@ package classes.Items.Consumables
 				}
 				changes++;
 			}
-			// <mod name="Dragon patch" author="Stadler76">
+			// <mod name="BodyParts.RearBody" author="Stadler76">
 			//Gain Dragon Rear Body
-			if (!drakesHeart && !player.hasDragonRearBody() && player.hasDragonNeck() && player.dragonScore() >= 4 && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
+			if (!drakesHeart && !player.hasDragonRearBody() && (player.hasDragonNeck() || flags[kFLAGS.EMBER_ROUNDFACE] == 1) && player.dragonScore() >= 4 && player.hasDraconicBackSide() && changes < changeLimit && rand(3) == 0) {
 				var emberRear:Number = player.fetchEmberRearBody();
 				switch (emberRear) {
 					case REAR_BODY_DRACONIC_MANE:
 						// if (player.hairLength == 0) // Let's simply ignore baldness here for now. It wouldn't affect the PCs mane anyway.
-						outputText("\n\nYou feel a sudden tingle just above your spine. Eager to see, what is the cause of it you bend your draconic neck to take a closer look at it.");
-						outputText(" Looking at your back you see tiny splotches of hair beginning to grow out of your scaly skin. The hair grows longer and the splotches grow until");
-						outputText(" they slowly merge to a vertical strip right above your spine.");
-						outputText("\n\nTracing your spine, a mane of hair has grown; starting at the base of your neck and continuing down your tail, ending on the tip of your tail in a small tuft.");
-						outputText("  It is the same color as the hair on your head, but shorter and denser; it has grown in a thick vertical strip, maybe two inches wide.");
-						outputText("  It reminds you vaguely of a horse's mane.");
-						outputText("  <b>You now have a hairy mane on your rear.</b>");
-						player.rearBody.type = REAR_BODY_DRACONIC_MANE;
+						outputText("\n\nYou feel a sudden tingle just above your spine. Eager to see, what is the cause of it you bend your"
+						          +" [if (hasDragonNeck)draconic neck|tail] to take a closer look at it. Looking at your"
+						          +" [if (hasDragonNeck)back|tail] you see tiny splotches of hair beginning to grow out of your scaly skin. The hair"
+						          +" grows longer and the splotches grow until they slowly merge to a vertical strip right above your spine.");
+						outputText("\n\nTracing your spine, a mane of hair has grown; starting at the base of your neck and continuing down your"
+						          +" tail, ending on the tip of your tail in a small tuft. It is the same color as the hair on your head,"
+						          +" but shorter and denser; it has grown in a thick vertical strip, maybe two inches wide. It reminds you vaguely"
+						          +" of a horse's mane. <b>You now have a hairy mane on your rear.</b>");
+						player.rearBody.setAllProps({
+							type:  REAR_BODY_DRACONIC_MANE,
+							color: player.hairColor
+						});
 						break;
 
 					case REAR_BODY_DRACONIC_SPIKES:
 						// Teh spiky mane, similar to the hairy one.
-						outputText("\n\nYou feel a sudden pain coming from your spine. Eager to see, what is the cause of it you bend your draconic neck to take a closer look at it.");
-						outputText(" You watch your back in growing pain as small bulges start emerging from your spine, growing bigger and bigger, until you feel a sudden burst of pain, when small spikes");
-						outputText(" begin to break through your skin. Hardly bearing the growing pain you continue watching them slowly growing longer curving backwards until finally the pain has ceased.");
-						outputText("\n\nTracing your spine, a row of short steel-gray and curved backwards spikes protrude;");
-						outputText("  starting at the base of your neck and continuing down your tail, ending on the tip of your tail.");
-						outputText("  They've grown in a thick vertical strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
+						outputText("\n\nYou feel a sudden pain coming from your spine. Eager to see, what is the cause of it you bend your"
+						          +" [if (hasDragonNeck)draconic neck|tail] to take a closer look at it. You watch your [if (hasDragonNeck)back|tail]"
+						          +" in growing pain as small bulges start emerging from your spine, growing bigger and bigger, until you feel a"
+						          +" sudden burst of pain, when small spikes begin to break through your skin. Hardly bearing the growing pain you"
+						          +" continue watching them slowly growing longer curving backwards until finally the pain has ceased.");
+						outputText("\n\nTracing your spine, a row of short steel-gray and curved backwards spikes protrude; starting at the base of"
+						          +" your neck and continuing down your tail, ending on the tip of your tail. They've grown in a thick vertical"
+						          +" strip, maybe an inch wide and two inches high. It reminds you very vaguely of a horse's mane.");
 						outputText("  <b>Your rear is now decorated with a row of curved spikes.</b>");
-						player.rearBody.type = REAR_BODY_DRACONIC_SPIKES;
+						player.rearBody.setAllProps({type: REAR_BODY_DRACONIC_SPIKES});
 						break;
 
 					default:
@@ -241,10 +248,15 @@ package classes.Items.Consumables
 						trace("Invalid Ember rearBody: " + emberRear);
 				}
 			}
+			// </mod>
+			//Restore non dragon neck
+			if (player.neck.type != NECK_TYPE_DRACONIC && changes < changeLimit && rand(4) == 0)
+				mutations.restoreNeck(tfSource);
 			//Gain Dragon Neck
 			//public function hasDraconicBackSide():Boolean { return hasDragonWings(true) && skinType == SKIN_TYPE_DRACONIC && hasReptileTail() && hasReptileArms() && hasReptileLegs(); }
 			//If you are considered a dragon-morph and if your backside is dragon-ish enough, your neck is eager to allow you to take a look at it, right? ;-)
-			if (!drakesHeart && !player.hasDragonNeck() && player.dragonScore() >= 6 && player.hasDraconicBackSide() && changes < changeLimit) {
+			if (!drakesHeart && !player.hasDragonNeck() && player.dragonScore() >= 6 && player.hasDraconicBackSide() && player.faceType == FACE_DRAGON && changes < changeLimit) {
+				mutations.restoreNeck(tfSource + "-forceRestoreNeck");
 				var nlChange:int = 4 + rand(5);
 				if (!player.hasNormalNeck()) { // Note: hasNormalNeck checks the length, not the type!
 					player.neck.modify(nlChange);
@@ -256,14 +268,11 @@ package classes.Items.Consumables
 				}
 				if (player.hasDragonNeck() && !player.neck.pos) {
 					outputText("\n\nAfter the enlongation has finally ceased, your spine begins to readjust its position on your head until its settled at the backside of your head. After that you want to try out your new draconic neck and begin to bend your neck finding that you can bend it at ease like a snake can bend its tail. Eager to see, how you look from behind you quickly turn your head around. Staring at your magnificent draconic rear your mouth and eyes open wide in astonishment. You muster your tail, your backside fully covered in scales and finally, you unfold your wings. This is the first time, you can see every single scale of them. You look at them from all sides, flapping them slowly, just to watch them moving.");
-					//outputText("  Then you lift off ...\n\nWhile you fly and soar through the mountain-range you watch yourself flying and gliding through the air elegantly, not forgetting to take a glimpse to that, what lies before you from time to time, so you don't crash into anything. " + (drakesHeart ? "The flower" : "Ember") + " gifted you with a view you'll never forget in a lifetime, no matter what will happen to you in the future. The view of a draconic body. And its your draconic body!");
-					//outputText("\n\n<b>You now have a fully grown dragon neck.</b>");
 					outputText("  <b>You now have a fully grown dragon neck.</b>");
 					player.neck.pos = true;
 				}
 				changes++;
 			}
-			// </mod>
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
 			if (player.armType != ARM_TYPE_PREDATOR && player.hasDragonScales() && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {

@@ -1,4 +1,4 @@
-package classes 
+﻿package classes 
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -504,12 +504,12 @@ package classes
 		{
 			return kGAMECLASS.mainView;
 		}
-		
-		protected function set mainView(val:*):void
+
+		protected function get mainViewManager():MainViewManager
 		{
-			kGAMECLASS.mainView = val;
+			return kGAMECLASS.mainViewManager;
 		}
-		
+
 		protected function get model():GameModel
 		{
 			return kGAMECLASS.model;

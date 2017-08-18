@@ -183,6 +183,11 @@ package classes.Items.Consumables
 						changes++;
 				}
 			}
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			//Ovi perk loss
 			if (rand(5) === 0) {
 				mutations.updateOvipositionPerk(tfSource);
 			}

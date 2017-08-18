@@ -195,7 +195,7 @@ public static const WING_TYPE_HARPY:int                                         
 public static const WING_TYPE_IMP:int                                               =   5;
 public static const WING_TYPE_BAT_LIKE_TINY:int                                     =   6;
 public static const WING_TYPE_BAT_LIKE_LARGE:int                                    =   7;
-public static const WING_TYPE_SHARK_FIN:int                                         =   8;
+public static const WING_TYPE_SHARK_FIN:int                                         =   8; // Deprecated, moved to the rearBody slot.
 public static const WING_TYPE_FEATHERED_LARGE:int                                   =   9;
 public static const WING_TYPE_DRACONIC_SMALL:int                                    =  10;
 public static const WING_TYPE_DRACONIC_LARGE:int                                    =  11;
@@ -246,14 +246,12 @@ public static const UNDER_BODY_TYPE_COCKATRICE:int                              
 public static const REAR_BODY_NONE:int                                              =   0;
 public static const REAR_BODY_DRACONIC_MANE:int                                     =   1;
 public static const REAR_BODY_DRACONIC_SPIKES:int                                   =   2;
-public static const REAR_BODY_FENRIR_ICE_SPIKES:int                                 =   3; // NYI, placeholder for Xianxia
-public static const REAR_BODY_BEHEMOTH:int                                          =   4; // NYI, Its just there as an example.
+public static const REAR_BODY_SHARK_FIN:int                                         =   3;
 
 // neckType
 public static const NECK_TYPE_NORMAL:int                                            =   0; // normal human neck. neckLen = 2 inches
 public static const NECK_TYPE_DRACONIC:int                                          =   1; // (western) dragon neck. neckLen = 2-30 inches
-public static const NECK_TYPE_EASTERN:int                                           =   2; // (eastern) dragon neck. neckLen = 2-36 (or 48?) inches. NYI, example
-public static const NECK_TYPE_HYDRA:int                                             =   3; // neckLen = 2-24 (48? 72?) inches. NYI, example. Maybe never implemented.
+public static const NECK_TYPE_COCKATRICE:int                                        =   2;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;

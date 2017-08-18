@@ -2,7 +2,6 @@
 package classes 
 {
 	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
 
 	import coc.view.BitmapDataSprite;
 	import coc.view.MainView;
@@ -14,7 +13,8 @@ package classes
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
 	import flash.events.TimerEvent;
-	import flash.ui.Keyboard;
+import flash.text.TextFormat;
+import flash.ui.Keyboard;
 	import flash.utils.Timer;
 	import flash.utils.getQualifiedClassName;
 
@@ -23,9 +23,9 @@ package classes
 		//Interface flags
 		public var registeredShiftKey:Boolean = false;
 
-		public const textColorArray:Array = [0, 0, 0, 0xC0C0C0, 0xC0C0C0, 0, 0, 0, 0, 0];
-		public const mainColorArray:Array = [0, 0, 0, 0, 0xC0C0C0, 0, 0, 0, 0, 0];
-		public const barAlphaArray:Array = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 0.4];
+		public const textColorArray:Array = [0, 0, 0, 0xFFFFFF, 0xFFFFFF, 0, 0, 0, 0, 0];
+		public const darkThemes:Array = [false, false, false, false, true, false, false, false, false, false];
+		public const barAlphaArray:Array  = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 1];
 
 		public var statsHidden:Boolean = false;
 		public var buttonsTweened:Boolean = false;
@@ -38,6 +38,19 @@ package classes
 		//------------
 		// SHOW/HIDE
 		//------------
+		public function isDarkTheme():Boolean {
+			return darkThemes[flags[kFLAGS.BACKGROUND_STYLE]];
+		}
+		public function isDarkText():Boolean {
+			return isDarkTheme() && !mainView.textBGTan.visible && !mainView.textBGWhite.visible;
+		}
+		public function colorHpMinus():String {
+			return isDarkText() ? '#ff0000' : '#800000';
+		}
+		public function colorHpPlus():String {
+			return isDarkText() ? '#00ff00' : '#008000';
+		}
+
 		public function setTheme():void {
 			//Set background
 			mainView.background.bitmapClass = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
@@ -229,6 +242,14 @@ package classes
 			}
 			var obj:Stage = getGame().stage;
 			return chdump(obj, 0, obj.alpha, obj.visible, obj.scaleX, obj.scaleY);
+		}
+		public function setText(_currentText:String):void {
+			var fmt:TextFormat = mainView.mainText.defaultTextFormat;
+			if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
+			fmt.color = isDarkText() ? 0xffffff : 0;
+
+			mainView.mainText.defaultTextFormat = fmt;
+			mainView.setOutputText(_currentText);
 		}
 	}
 }

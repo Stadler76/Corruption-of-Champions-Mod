@@ -5,7 +5,7 @@ package classes.BodyParts
 	 * @since May 01, 2017
 	 * @author Stadler76
 	 */
-	public class Wings
+	public class Wings extends BaseBodyPart
 	{
 		include "../../../includes/appearanceDefs.as";
 
@@ -32,9 +32,19 @@ package classes.BodyParts
 			setProps(p);
 		}
 
-		public function canDye():Boolean
+		override public function canDye():Boolean
 		{
 			return [WING_TYPE_HARPY, WING_TYPE_FEATHERED_LARGE].indexOf(type) != -1;
+		}
+
+		override public function hasDyeColor(_color:String):Boolean
+		{
+			return color == _color;
+		}
+
+		override public function applyDye(_color:String):void
+		{
+			color = _color;
 		}
 	}
 }

@@ -1041,6 +1041,11 @@ public class ErlKingScene extends BaseContent implements Encounter
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			// Main TFs
 			//------------
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			//Ovi perk loss
 			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain deer ears
 			if (rand(3) == 0 && changes < changeLimit && player.earType != EARS_DEER) {

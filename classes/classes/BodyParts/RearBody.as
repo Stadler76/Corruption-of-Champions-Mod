@@ -7,34 +7,54 @@ package classes.BodyParts
 	 * @since December 20, 2016
 	 * @author Stadler76
 	 */
-	public class RearBody 
+	public class RearBody extends BaseBodyPart
 	{
 		include "../../../includes/appearanceDefs.as";
 
 		public var type:Number = REAR_BODY_NONE;
-		public var color:String = "";
-		public var skin:Skin = new Skin();
+		public var color:String = "no";
 
 		public function RearBody() {}
 
-		public function restore(keepTone:Boolean = true):void
+		public function restore():void
 		{
 			type  = REAR_BODY_NONE;
-			color = "";
-			skin.restore(keepTone);
+			color = "no";
 		}
 
 		public function setProps(p:Object):void
 		{
 			if (p.hasOwnProperty('type'))  type  = p.type;
 			if (p.hasOwnProperty('color')) color = p.color;
-			if (p.hasOwnProperty('skin'))  skin.setProps(p.skin);
 		}
 
-		public function setAllProps(p:Object, keepTone:Boolean = true):void
+		public function setAllProps(p:Object):void
 		{
-			restore(keepTone);
+			restore();
 			setProps(p);
+		}
+
+		override public function canDye():Boolean
+		{
+			return type == REAR_BODY_DRACONIC_MANE;
+		}
+
+		override public function hasDyeColor(_color:String):Boolean
+		{
+			return color == _color;
+		}
+
+		override public function applyDye(_color:String):void
+		{
+			color = _color;
+		}
+
+		public function toObject():Object
+		{
+			return {
+				type:  type,
+				color: color
+			};
 		}
 	}
 }

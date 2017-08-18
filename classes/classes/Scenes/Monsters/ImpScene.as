@@ -74,7 +74,7 @@ package classes.Scenes.Monsters
 			// " + (condomed ? "": "") + "
 			//Single cock
 			clearOutput();
-			outputText(images.showImage("imp-win-male-fuck"));
+			outputText(images.showImage("monster-imp"));
 			if (player.cocks.length == 1) {
 				outputText("With a demonic smile you grab the insensible imp and lift him from the ground by his neck.  The reduced airflow doesn't seem to slow his feverish masturbation at all, and only serves to make him harder.");
 				if (!player.isTaur()) {
@@ -150,6 +150,7 @@ package classes.Scenes.Monsters
 		private function sprocketImp():void {
 			player.slimeFeed();
 			clearOutput();
+			outputText(images.showImage("monster-imp"));
 			outputText("You fall to your knees, lost in thoughts of what you want the imp to do to you.  Your body burns with desire, ready for the anal assault to come.  At least that's what you think.  You reach a hand out to the imp, wanting to pull him to you, to make him take you the way you need to be taken.  But he doesn't, not this time.\n\n");
 			//New PG
 			outputText("Much to your surprise, the imp flutters upward on his small leathery wings and rushes toward you.  ");
@@ -203,6 +204,7 @@ package classes.Scenes.Monsters
 		}
 		private function centaurGirlOnImps():void {
 			clearOutput();
+			outputText(images.showImage("player-centaur-female"));
 			outputText("You stand over the thoroughly defeated demon and get an amusing idea. The tiny creatures are far from a threat, but their features seem like they might be useful. You pick the imp up and place him in a tree with explicit orders to him to stay, much to his confusion. Once you're sure he won't move, you wolf whistle and wait.\n\n");
 			outputText("A goblin appears from the underbrush behind you, but a swift kick sends her flying; she's not what you're after. You're soon rewarded with a trio of imps, who fly up to you, cocks at the ready.  Grabbing the defeated imp by the head, you explain your need to the group and waft a bit of your scent over to them with your tail. They confer among themselves only briefly, clear on the decision, as you toss their weaker fellow underneath them. The larger of the three, evidently the leader, smiles lewdly at you and agrees to your 'demands'.\n\n");
 			//[Female:
@@ -251,6 +253,7 @@ package classes.Scenes.Monsters
 				outputText("You trot over to the leader, still using the nearly unconscious imp as a cock sleeve, and pull the abused creature off of him. He looks shocked as you grab his cock and squeeze his balls, causing him to orgasm hard and spray you down in white hot seed. He collapses onto the ground, spent, as you wipe yourself down as best you can.");
 		
 				outputText("  Collecting your things, you give the assorted bodies one last look and stumble back to camp.");
+				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 				player.orgasm('Vaginal');
 				player.orgasm('Anal');
 				dynStats("cor", 1);
@@ -287,6 +290,8 @@ package classes.Scenes.Monsters
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			if (vape) clearOutput();
+			if (player.gender == 3) outputText(images.showImage("player-centaur-herm"));
+			else outputText(images.showImage("player-centaur-male"));
 			outputText("As your shadow falls over the imp, it looks between your " + player.legs() + " with a hint of fear.  ");
 			if (player.cockArea(x) <= 15) {
 				outputText("Relief washes over it followed by intense lust as is throws itself onto a mossy rock and eagerly presents its " + monster.assholeDescript() + ".   The sound of your hooves moving on either side of its body seems to send the creature into a frenzy as it begins humping the air while small mewling sounds escape its lips.  ");
@@ -414,6 +419,7 @@ package classes.Scenes.Monsters
 			//{{Player has a cunt}}
 			player.slimeFeed();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			outputText(images.showImage("player-centaur-herm"));
 			outputText("As the imp lays beaten its hands stroke its " + monster.cockDescriptShort(0) + " as its eyes look over you in the hope that you might abuse it in some manner.  You lick your lips as you stare at the large member and you turn around to display your " + player.vaginaDescript(0) + ".  ");
 			//Not gaping?
 			if (player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_GAPING) {
@@ -573,6 +579,7 @@ package classes.Scenes.Monsters
 		
 		private function areImpsLactoseIntolerant():void {
 			clearOutput();
+			outputText(images.showImage("monster-imp"));
 			outputText("You advance on the masturbating imp, baring your " + player.allBreastsDescript() + " and swinging them from side to side. The little creature watches them, mesmerized as he masturbates his foot-long erection.\n\n");
 		
 			outputText("You sit down in front of the little creature and grab ahold of his hair. The imp squeals slightly in pain before his cries are silenced with a " + player.nippleDescript(0) + ".  It fills his mouth as he yields, defeated. At once he starts to drink down as much of your milk as he can.\n\n");
@@ -601,6 +608,7 @@ package classes.Scenes.Monsters
 			//Clear arrays in preparation
 			monster = new ImpGang();
 			outputText("\n");
+			outputText(images.showImage("event-impGang"));
 			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a + monster.short + "</b>!\n\n");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) {
 				outputText("You look at the door to see that it's open. Shit. You forgot to lock the door before you've went to sleep!\n\n");
@@ -659,6 +667,7 @@ package classes.Scenes.Monsters
 						player.boostLactation(.3);
 						titsOrgasm = true;
 					}
+					outputText(images.showImage("gangbang-loss-centaur"));
 					outputText("Dimly through your haze of lust and pain you see a large imp step forward from the mob. Four feet tall and broader and stronger looking than any imp you've seen before, with a face as much bull as imp, this new imp has mottled grey skin, broad purple demon wings, two curving bull-horns on his head, and a " + Appearance.cockNoun(CockTypesEnum.HORSE) + " big enough to choke a minotaur. The mushroom-like head of it bobs just below his mouth, and his snake-tongue darts out to flick a bit of pre-cum off the head and onto your face. You shudder as the hot fluid stings the sensitive skin of your lips. His " +  monster.ballsDescriptLight() + " are each the size of your fist and slick with sweat. He slaps his sweaty cock-head against your cheek, nearly scalding you with the heat.  ");
 					//(Low corruption)
 					if (player.cor < 50) outputText("You yelp and twist your head to escape the heat.  ");
@@ -827,7 +836,7 @@ package classes.Scenes.Monsters
 					//(High Corruption)
 					else outputText("You suckle eagerly at the musky balls in your mouth. Abuse falls on you from all sides, imps leaving tiny marks on your skin as they nip and scratch at you. You whimper in delight as tiny hands slap your chest and flanks.");
 					outputText("\n\n");
-					
+					outputText(images.showImage("gangbang-loss-centaur"));
 					outputText("With a loud sucking sound, the imp pulls his balls out of your mouth. Spit and ball-sweat drip over your cheeks as he repositions himself, bending almost completely over on your shoulders to rub his cock-head against your lips. You nearly choke as pre-cum dribbles into your mouth and runs down the back of your throat. The " + monster.cockDescriptShort(0) + " blocks most of your vision, but in the corners of your eyes you see the master of this imp horde step forward. Four feet tall and broader and stronger than any imp in the pack, with a face as much dog as imp, this new imp has black fur, broad red demon wings, two long demon-horns on his head, and a " + Appearance.cockNoun(CockTypesEnum.DOG) + " big enough to choke a minotaur. He leers at your helpless body and grabs ");
 					//(If the player has breasts)
 					if (player.biggestTitSize() > 2) outputText("one of your sore " + player.biggestBreastSizeDescript() + " in his calloused hand, brutally pressing his fingers into your flesh");
@@ -992,7 +1001,7 @@ package classes.Scenes.Monsters
 					//(High corruption)
 					else outputText("You buck your hips, trying to capture his " + monster.cockDescriptShort(0) + " with your " + player.vaginaDescript(0) + ".  ");
 					outputText("Before he can thrust into you, the imp is shoved aside by the biggest imp you've ever seen.\n\n");
-					
+					outputText(images.showImage("gangbang-loss-human"));
 					outputText("Four feet tall and broader and healthier looking than any imp you've seen before, with a face as much bull as imp, this new imp has mottled grey skin, broad purple demon wings, two curving bull-horns on his head, and a " + Appearance.cockNoun(CockTypesEnum.HORSE) + " big enough to choke a minotaur. The mushroom-like head of it bobs just below his mouth, and his snake-tongue darts out to flick a bit of pre-cum off the head and onto your groin. You shudder as the hot fluid stings the sensitive skin of your " + player.vaginaDescript(0));
 					//(If the player has a dick)
 					if (player.cockTotal() > 0) outputText(" and " + player.multiCockDescriptLight());
@@ -1136,6 +1145,7 @@ package classes.Scenes.Monsters
 						player.growTits(2, player.breastRows.length, false, 1);
 						player.boostLactation(.5);
 					}
+					outputText(images.showImage("gangbang-loss-human"));
 					outputText("The master of this " + monster.short + " steps up ");
 					if (player.isNaga()) outputText("alongside your taut tail");
 					else outputText("between your " + player.legs());
@@ -1350,9 +1360,9 @@ package classes.Scenes.Monsters
 				}
 				//Male or genderless
 				if (player.gender == 0 || player.gender == 1) {
+				outputText(images.showImage("monster-imp"));
 					//Alternate male-only case
 					if (player.gender == 1 && rand(2) == 0) {
-						outputText(images.showImage("imp-loss-male-fuck"));
 						outputText("Your eyes glaze over with lust as the imp's dark magic destroys your will to continue fighting. You sink to your ");
 						if (player.isTaur()) outputText("hocks and knees, your " + player.cockDescript(0) + " hurting from the massive blood pressure caused by your unbridled lust. He approaches you and stops about two feet in front of you, watching with delight your helpless state");
 						else outputText("knees, pull out your " + player.cockDescript(0) + " and begin mindlessly stroking yourself as the imp approaches you, a wicked grin on his face. Your mind races with thoughts and images of sucking the imp's cock. He approaches you and stops about two feet in front of you, watching with delight as you succumb to your own lust");
@@ -1399,6 +1409,7 @@ package classes.Scenes.Monsters
 		//noogai McNipple-holes
 		private function noogaisNippleRape():void {
 			clearOutput();
+			outputText(images.showImage("monster-imp"));
 			outputText("You slowly walk over to the masturbating imp, your " + player.hipDescript() + " and " + player.buttDescript() + " swaying suggestively with every step.\n\n");
 			
 			outputText("Shedding your clothes you push the imp to the ground and straddle him, keeping his hands away from his twitching pecker while you quickly tie him up with his own loincloth.  The lust-addled demon utterly incapacitated, you start to use both of your hands to toy freely with your slimy nipple-holes, as well as your ");
@@ -1492,6 +1503,7 @@ package classes.Scenes.Monsters
 		public function impLordEncounter():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_imp);
+			outputText(images.showImage("monster-implord"));
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 				if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
@@ -1517,6 +1529,7 @@ package classes.Scenes.Monsters
 		public function impWarlordEncounter():void {
 			spriteSelect(SpriteDb.s_impWarlord);
 			clearOutput();
+			outputText(images.showImage("monster-impwarlord"));
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
 			startCombat(new ImpWarlord());
@@ -1531,6 +1544,7 @@ package classes.Scenes.Monsters
 		public function impOverlordEncounter():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_impOverlord);
+			outputText(images.showImage("monster-impoverlord"));
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
 			startCombat(new ImpOverlord());
@@ -1599,7 +1613,7 @@ package classes.Scenes.Monsters
 		//MALE ANAL
 		private function impLordBumPlug():void {
 			clearOutput();
-			outputText(images.showImage("implord-win-male-fuck"));
+			outputText(images.showImage("monster-implord"));
 			var x:int = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			outputText("You grab the muscular creature by one of his long pointed ears, pulling him to his feet. He protests slightly, and gives a slightly defiant snarl of discomfort.  Lucky for him you're in a forgiving mood and ignore his whining.");
@@ -1657,7 +1671,7 @@ package classes.Scenes.Monsters
 		//MALE BLOW
 		private function getBlownByAnImpLord():void {
 			clearOutput();
-			outputText(images.showImage("implord-win-male-bj"));
+			outputText(images.showImage("monster-implord"));
 			outputText("You lay your [cock biggest] along the demon's muscular chest.  Thrusting experimentally, your [cock biggest] leaves a thick trail of precum across the imp's cheek.  You begin to moan as you continue your casual thrusting across the imp's body.  The defeated creature squirms under you in protest, oblivious to the fact that the squirming is only increasing your stimulation.  It doesn't take you long to coat the imp's face and part of his chest in your thick precum.  Casually stepping back, you look at the imp from top to bottom, and back again.  You can't help but chuckle at what you see.");
 			
 			outputText("\n\nYour scent has overwhelmed the imp, his thick red dick is painfully hard and dripping, while he pants like a dog.  No longer being pinned down seems to have improved his mood however as he gets to his knees and crawls back towards your [cock biggest].  The imp sits between your [feet] and looks up at you nervously.");
@@ -1705,7 +1719,7 @@ package classes.Scenes.Monsters
 		//FEMALE VAGINAL
 		private function femaleVagRape():void {
 			clearOutput();
-			outputText(images.showImage("implord-win-female-fuck"));
+			outputText(images.showImage("imp-win-female-fuck"));
 			outputText("With little ceremony you grab the imp's " + monster.cockDescriptShort(0) + " and begin to jerk your hand up and down roughly.  The little muscular beast begins to whine loudly, in protest to the rough and likely painful mistreatment of his " + monster.cockDescriptShort(0) + ".  In spite of the protests, the rough treatment goes over well, as the creature begins to leak hot demon pre across your hand, which you smear across the shaft as a natural hot lube.");
 			outputText("\n\nLicking your lips, you squat above the little demon, positioning your " + player.vaginaDescript(0) + " above the thick log of meat.  You stay still for a moment, and question if this was a good idea.  The demon was so thick you hadn't even been able to fit your hand around his shaft.  There was little chance you'd get out of this without some rather rough stretching, but the scent of the demon's arousal, and your corrupt lust spur you onwards.");
 			
@@ -1752,7 +1766,7 @@ package classes.Scenes.Monsters
 		//FEEDER BREASTFEED RAPE
 		public function feederBreastfeedRape():void {
 			clearOutput();
-			outputText(images.showImage("implord-win-female-breastfeed"));
+			outputText(images.showImage("monster-implord"));
 			outputText("Standing over the fallen creature you lean forward and grab him by the horns, forcing his face against your [chest].  He protests wildly for a few moments, until you tire of this game.  Pushing him back to the ground, you step on his chest, keeping him pinned.  You start massaging your [nipple] and quickly feel your corrupt milk building up.  Timing things just right, you pinch your [nipple] one last time, causing a small eruption of milk to shoot out, just as you give the imp a swift kick to the gut.");
 			
 			outputText("\n\nThe kick knocks the wind out of the little demon, causing him to gasp.  His mouth opens just long enough and wide enough for the corrupt milk to go straight down his throat.  The reaction is almost instant; his eyes go wide with horror and disgust, but quickly change to awe and desire.  The poor thing tries to get up from under you but can't escape.");
@@ -1951,7 +1965,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			//IMP EGGS
 			//(functions for bipedal bee morphs.  At time of writing, unsure as to whether bee abdomen worked for centaur/naga/goo forms)
-			outputText(images.showImage("imp-egg"));
+			outputText(images.showImage("monster-imp"));
 			outputText("You glance down at the masturbating imp, feeling a twitch in your swollen, insectile abdomen.  As the red-skinned homunculus writhes on the ground, beating his meat, you smile, feeling a globule of sweet nectar oozing out of your ovipositor.");
 			
 			outputText("\n\nHe’s too busy humping the air and stroking himself to notice you hooking the tip of one of your [feet] under him.  You kick up one of your [legs], flipping the fapping imp over.  He gasps as he lands face-down on the ground, startled enough to stop jerking his tool.");
@@ -2040,6 +2054,7 @@ package classes.Scenes.Monsters
 			var benoitE:String = getGame().bazaar.benoit.benoitMF("Benoit", "Benoite");
 
 			output.clear();
+			outputText(images.showImage("monster-imp"));
 			if (monster.HP >= 1 && (50 + 50 * (1 - monster.HPRatio())) < rand(100)) {
 				outputText("You decide to teach this imp and his buddies a lesson that won't be forgotten. You grab the imp roughly, making sure you have his attention as you make eye contact. The imp struggles in your grasp and manages to struggle himself free.");
 				outputText("\n\nPerhaps your should have beaten him down a little" + (monster.HPRatio() < 1 ? " more" : "") + ", before you've attempted the turn him into a statue?");
@@ -2097,6 +2112,7 @@ package classes.Scenes.Monsters
 			timeText = timeToReturn > 1 ? num2Text(timeToReturn) + " hours" : "hour";
 
 			clearOutput();
+			outputText(images.showImage("event-impStatue"));
 			if (flags[kFLAGS.CAMP_WALL_STATUES] <= 0) { // First time carrying it back
 				flags[kFLAGS.CAMP_WALL_STATUES] = 0; // Failsafe
 				switch (timeToReturn) {
@@ -2135,6 +2151,7 @@ package classes.Scenes.Monsters
 			addButton(1, "Leave", combat.cleanupAfterCombat);
 		}
 		private function takeSkull():void {
+			outputText(images.showImage("item-impSkull"));
 			inventory.takeItem(useables.IMPSKLL, combat.cleanupAfterCombat);
 		}
 	}

@@ -70,6 +70,8 @@ package classes.Scenes.Areas.Bog
 		protected function phoukaFaerieFire():void
 		{ //In old Irish legends the Phouka are responsible for Will-o’-the-wisps. In the deep woods it’s Kitsune, but in the bog it’s a Phouka
 			clearOutput();
+			//Picture is here
+			outputText(images.showImage("phouka-encounter"));
 			outputText("As you’re wading through the bog a flickering light off in the distance catches your eye.  ");
 			if (flags[kFLAGS.PHOUKA_ENCOUNTER_STATUS] != 0) {
 				outputText("You recall your last encounter with one of these 'lanterns' out here in the bog.\n\nPerhaps it would be best to leave this faerie fire alone.");
@@ -465,6 +467,8 @@ package classes.Scenes.Areas.Bog
 
 		public function phoukaPregBirth():void
 		{
+			//Picture is here
+			outputText(images.showImage("birth-phouka"));
 			outputText("\n<b>You feel something give way inside your belly...</b>\n\n");
 			if (player.vaginas.length == 0) {
 				outputText("There's a painful pressure in your groin... then you nearly black out and feel your crotch pull apart.  At first you assume it's some kind of hernia, then you realize you have a vagina once more.\n\n");
@@ -576,6 +580,8 @@ package classes.Scenes.Areas.Bog
 			if ((player.lust100 > 80) || (player.cor > 50))
 				outputText(" You can only moan in response.  The thought of this rabbit stuffing you has your [vagina] leaking already.");
 			else
+			//Picture is here
+			outputText(images.showImage("phouka-sex-bunny"));
 				outputText(" You are powerless to stop the bunny-morph as he undoes the last few straps holding your [armor] in place.");
 			outputText("\n\nThe bunny's large feet take up position on either side of your [if (isNaga = true)tail][if (isNaga = false)rump] and you feel the tip of his cock brush against your cunt.  The bunny whispers <i>“[if (isPregnant = true)Time te feed the baby][if (isPregnant = false)Maybe today I'll leave ye a present].”</i>\n\nThe " + phoukaName() + " [if (isNaga = true)bends you over backwards, exposing your slit.  He][if (isTaur = true)strokes your flanks with his paws.  Next he] begins to grind his cock [if (isNaga = true)against your exposed underbelly][if (isNaga = false)between your legs], sliding it against your [clit] each time.  Shivers run up your spine as his fur tickles your [if (isNaga = true)scales from the top to the tip of your tail][if (isNaga = false)legs, back, butt and thighs].  When the bunny-morph is good and ready, he lines up and jams his pole into your moist pussy.  ");
 			if (player.hasVirginVagina())
@@ -615,6 +621,8 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\n<i>“Aw missy, why’d ye have te be so cruel? Ye’ve got that sexy cunt there just beggin’ fer a cock,”</i> says the goat, wrapping his front legs around your [if (isTaur = true)flanks][if (isTaur = false)upper body]. When you stare at him he laughs and adds <i>“I’ll give yer ass a good poundin if that’s what ye want - don’t worry about that. I just don’t know why ye don’t want me in here.”</i> His smooth hoof slides up and down your slit before he gets down to business.\n\n");
 			else
 				outputText("\n\n<i>“I can't wait to plunder that [butt] of yours.”</i> says the goat, wrapping his front legs around your [if (isTaur = true)flanks][if (isTaur = false)upper body].\n\n");
+				//Picture is here
+				outputText(images.showImage("phouka-sex-goat"));
 			if (postCombat)
 				outputText("He mounts you immediately, giving you no chance to adjust to his invading cock.  The goat-morph's first powerful thrust drives your face into the muck as his tries to force his narrow cockhead into your ass.");
 			else
@@ -683,6 +691,8 @@ package classes.Scenes.Areas.Bog
 				outputText("  You hear the " + phoukaName() + " say <i>“Now line me up with yer cunt lass, or I'll lay down on top of ya and have a nap.”</i> Not wanting to be crushed under that kind of bulk, you reach [if (isNaga = true)up][if (isNaga = false)behind you] and grab his member.  You place his cock at the entrance to your [vagina] and the stallion steps forward.  [if (vagCapacity < 50)His cock bends and then snaps free of your cunt, slapping against his belly. <i>“Again! And do it right this time!”</i> he shouts.  You line it up once more and press against it with your hands so it has nowhere to go but in.]");
 			}
 			outputText("  You're convinced you're going to be split in half by this monster horse cock.\n\n");
+			//Picture is here
+			outputText(images.showImage("phouka-sex-horse"));
 			if (player.hasVirginVagina())
 				outputText("You scream as the " + phoukaName() + "'s cock tears your hymen apart.  He stops mid-thrust and asks <i>“A virgin? Here? Good goddess missy ya should have told me.”</i> In a lower tone he adds <i>“so I could have enjoyed it more.”</i> Your whole vagina burns as every fold is stretched and widened by the passage of the " + phoukaName() + "'s huge horse cock.  You think he's delighted to have taken a woman from virgin to gaping in just one thrust.  ");
 			else if ((postCombat) && (player.vaginas[0].vaginalLooseness < 3))
@@ -712,6 +722,8 @@ package classes.Scenes.Areas.Bog
 		protected function phoukaSexFaerie(postCombat:Boolean):void
 		{
 			clearOutput();
+			//Picture is here
+			outputText(images.showImage("phouka-sex"));
 			outputText("The faerie doesn't look like he's in any condition to refuse your orders.  You grab him by his tiny pointed ears to get his attention.  The " + phoukaName() + " looks startled.  A firm, commanding voice should be all you need to get what you want.  You let him know that you're in charge right now and you've decided you want to feel his cock inside your [vagOrAss].  The " + phoukaName() + " looks both surprised and worried. <i>“I... I don't know if I have the control right now,”</i> he sputters.  He concentrates for a moment, his form goes fuzzy, but then he snaps back.  You rub his cock and ask if he can manage just one change. <i>“Errr - maybe?”</i> As you stroke his inch long pecker, he furrows his brow and sure enough you see it begin to grow.  Then it deflates like a balloon.\n\nHe brushes your hand away. <i>“Just gimme a sec,”</i> he says, now determined to grow his cock.  You're beginning to wonder if that vein on his forehead is going to pop when suddenly his cock expands to be over a foot long.  Just as suddenly, it shrinks again and his balls expand.  Then, they shrink but his hips expands.  It's painful to look at.\n\nAfter another few moments all his parts stabilize and you're left looking at a much larger " + phoukaName() + ", about four and a half feet tall, with cock and balls both only slightly larger than those of a normal human. <i>“Huh”</i> he says, looking himself over, <i>“well that's new.  Didn't know I could do that.”</i> He tugs on his cock and fondles his balls, then declares, <i>“Yup, everything's workin,”</i> and smiles at you.\n\n");
 			if (player.isTaur())
 				outputText("You know you can’t really keep control of him.  Once he’s behind your rear legs he’ll be able to do whatever he wants.  Before he realizes that, you spin round and flick your tail at him.  He grins and slides his fingers over your rump.  You let your belly settle against the thick mire of the bog and your partner gently slides his cock inside you.  He must know a thing or two about centaurs thanks to being able to take the form of a stallion.  His fingers start to massage some sensitive areas on the insides of your rear thighs.  Then he starts to nibble at the base of your tail with his teeth.  You can’t help but moan and he takes that as a sign to pick up the pace.  Soon enough his human-sized cock is slamming in and out of your ");
@@ -754,6 +766,8 @@ package classes.Scenes.Areas.Bog
 
 		protected function phoukaSexFaerieFemale(postCombat:Boolean):void
 		{
+			//Picture is here
+			outputText(images.showImage("phouka-sex-faerie"));
 			outputText("\n\nThe faerie doesn't look like he's in any condition to refuse your orders.  You grab him by his tiny pointed ears to get his attention.  The " + phoukaName() + " looks startled.  A firm, commanding voice should be all you need to get what you want.  You let him know that you're in charge right now and you're going to do unto others.  He looks confused, then realizes you intend to fuck him.  You ask if he can change shape into a woman, like the faeries in the forest.\n\n<i>“Yeah, I guess.  None of us phouka like doin’ that 'cause round here somebody always tries to fuck ya if ya got a cunt.”</i>");
 			if (flags[kFLAGS.PHOUKA_LORE] == 0) flags[kFLAGS.PHOUKA_LORE] = 1; //Now you know what to call them
 			outputText(" You point out to him that you are about to fuck him, cunt or no.  The phouka tries to backpedal but realizes he's not getting away from you.\n\n<i>“Okay, okay, just gimme a sec.”</i> He concentrates and you see his inch long cock begin to shrink.  Soon you've got a black skinned, black winged and black haired little faerie girl who wouldn't look too out of place in the forest.\n\n'He' looks a little uncomfortable so you ask him what's wrong. <i>“Ahem - it's ah, easier fer us to turn inta girls than the other way round.  I'll be like this fer hours, trying to hide out an' keep from gettin raped.”</i> Well isn't that too bad.  [if (corruption <= 50)Maybe some time as a woman will teach him a lesson][if (corruption > 50)You hope the little rapist gets fucked for hours on end.  It's what he deserves and you are certainly going to do your part].\n\nYou tell him you want more.  You want the most feminine faerie 'he' can be.  The phouka stares at you, but he knows he's beaten.  He closes his eyes and soon his breasts begin to swell up.  Both together couldn't fill a thimble, but on such a tiny body you would say they're B cups.\n\nWhen the phouka speaks again his rough voice has changed to the high pitched, melodious voice of a faerie as well. <i>“Okay, there.”</i> He sucks in his breath and his eyes go wide. <i>“HEY! I didn't wanna change my voice.  Oh crap... I'm rape bait!”</i> He’s right - by now anyone who met this phouka would see him as a very attractive and desirable faerie woman.  You [if (corruption <= 50)suppress][if (corruption > 50)let out] a snicker at her predicament and begin to rub your finger along her tiny cunt.  The phouka tilts her head back, losing herself in the sensation. <i>“Oh, p-please.  I can't take much more of that.  Please - I'm so sensitive as a girl.”</i> You feel fluids flood her pussy and you get the faerie to the edge of an orgasm.  Then you stop, holding her legs apart, and look into her lusty green eyes.\n\n<i>“Please let me cum, please sir!”</i> You ask how she intends to take your cock when her pussy is so small.  The faerie twists in your arms, trying desperately to rub her pussy against something and find release. <i>“Okay. Fine! I... I hope this works.”</i> Her eyes roll back in her head and her body begins to expand.  You lose your grip as her thighs balloon but it seems the phouka is concentrating so hard that she doesn't even notice her momentary freedom.  Her arms, legs, head and torso all stretch out and snap back at different times.  It's painful to watch, but she isn’t crying out in pain. She seems all right when she finally stops changing.\n\nWhen it’s over she's about four and a half feet tall and looks quite human overall.  Her features are delicate");

@@ -33,9 +33,8 @@ import classes.Scenes.API.FnHelpers;
 
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_LAKE] = 1;
-			outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
-			//Picture is here
 			outputText(images.showImage("area-lake"));
+			outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -109,10 +108,9 @@ import classes.Scenes.API.FnHelpers;
 		}
 
 		public function lakeWalk():void {
+				outputText(images.showImage("area-lake"));
 			if (player.level < 2 || player.spe100 < 50) {
 				clearOutput();
-				//Picture is here
-				outputText(images.showImage("area-lake"));
 				outputText("Your quick walk along the lakeshore feels good.");
 				if (player.spe100 < 50) {
 					outputText("  You bet you could cover the same distance even faster next time.\n");
@@ -120,8 +118,6 @@ import classes.Scenes.API.FnHelpers;
 				}
 			} else {
 				clearOutput();
-				//Picture is here
-				outputText(images.showImage("area-lake"));
 				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ");
 				if (player.cor >= 60 || player.lust100 >= 90 || player.lib >= 75) {
 					outputText("Your imaginings increasingly seem to turn into daydreams of raunchy perverted sex, flooding your groin with warmth.");
@@ -138,7 +134,6 @@ import classes.Scenes.API.FnHelpers;
 
 		public function eggChooserMenu():void {
 			clearOutput();
-			//Picture is here
 			outputText(images.showImage("lake-lights"));
 			outputText("While wandering along the lakeshore, you spy beautiful colored lights swirling under the surface.  You lean over cautiously, and leap back as they flash free of the lake's liquid without making a splash.  The colored lights spin in a circle, surrounding you.  You wonder how you are to fight light, but they stop moving and hover in place around you.  There are numerous colors: Blue, Pink, White, Black, Purple, and Brown.  They appear to be waiting for something; perhaps you could touch one of them?");
 			menu();
@@ -153,17 +148,15 @@ import classes.Scenes.API.FnHelpers;
 
 		public function findWFruit():void {
 			clearOutput();
-			outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n");
-			//Picture is here
 			outputText(images.showImage("item-wFruit"));
+			outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n");
 			inventory.takeItem(consumables.W_FRUIT, camp.returnToCampUseOneHour);
 		}
 
 		public function findEquinum():void {
 			clearOutput();
-			outputText("You find a long and oddly flared vial half-buried in the sand.  Written across the middle band of the vial is a single word: 'Equinum'.\n");
-			//Picture is here
 			outputText(images.showImage("item-equinum"));
+			outputText("You find a long and oddly flared vial half-buried in the sand.  Written across the middle band of the vial is a single word: 'Equinum'.\n");
 			inventory.takeItem(consumables.EQUINUM, camp.returnToCampUseOneHour);
 		}
 		
@@ -192,3 +185,4 @@ import classes.Scenes.API.FnHelpers;
 
 	}
 }
+

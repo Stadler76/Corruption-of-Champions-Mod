@@ -2044,6 +2044,16 @@ package classes
 			}
 			return description;
 		}
+
+		public static function rearBodyDescript(i_creature:Creature):String
+		{
+			return DEFAULT_REAR_BODY_NAMES[i_creature.rearBody.type];
+		}
+
+		public static function neckDescript(i_creature:Creature):String
+		{
+			return DEFAULT_NECK_NAMES[i_creature.neck.type] + " neck";
+		}
 		
 		public static function wingsDescript(i_creature:Creature):String
 		{
@@ -2350,6 +2360,21 @@ package classes
 					[TAIL_TYPE_COCKATRICE, "cockatrice"],
 				]
 		);
+		public static const DEFAULT_REAR_BODY_NAMES:Object = createMapFromPairs(
+				[
+					[REAR_BODY_NONE, "none"],
+					[REAR_BODY_DRACONIC_MANE, "draconic hairy mane"],
+					[REAR_BODY_DRACONIC_SPIKES, "draconic spiky mane"],
+					[REAR_BODY_SHARK_FIN, "shark fin"],
+				]
+		);
+		public static const DEFAULT_NECK_NAMES:Object = createMapFromPairs(
+				[
+					[NECK_TYPE_NORMAL, "normal"],
+					[NECK_TYPE_DRACONIC, "long draconic"],
+					[NECK_TYPE_COCKATRICE, "feathery cockatrice"],
+				]
+		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
 				[
 					[WING_TYPE_NONE, "non-existent"],
@@ -2360,7 +2385,6 @@ package classes
 					[WING_TYPE_IMP_LARGE, "large imp"],
 					[WING_TYPE_BAT_LIKE_TINY, "tiny bat-like"],
 					[WING_TYPE_BAT_LIKE_LARGE, "large bat-like"],
-					[WING_TYPE_SHARK_FIN, "shark fin"],
 					[WING_TYPE_FEATHERED_LARGE, "large feathered"],
 					[WING_TYPE_DRACONIC_SMALL, "small draconic"],
 					[WING_TYPE_DRACONIC_LARGE, "large draconic"],
@@ -2377,7 +2401,6 @@ package classes
 					[WING_TYPE_IMP_LARGE, "large"],
 					[WING_TYPE_BAT_LIKE_TINY, "tiny, bat-like"],
 					[WING_TYPE_BAT_LIKE_LARGE, "large, bat-like"],
-					[WING_TYPE_SHARK_FIN, ""],
 					[WING_TYPE_FEATHERED_LARGE, "large, feathered"],
 					[WING_TYPE_DRACONIC_SMALL, "small, draconic"],
 					[WING_TYPE_DRACONIC_LARGE, "large, draconic"],
@@ -2414,24 +2437,6 @@ package classes
 					[LOWER_BODY_TYPE_COCKATRICE, "cockatrice"],
 				]
 		);
-		// <mod name="Dragon patch" author="Stadler76">
-		public static const DEFAULT_REAR_BODY_NAMES:Object = createMapFromPairs(
-				[
-					[REAR_BODY_NONE, "none"],
-					[REAR_BODY_DRACONIC_MANE, "draconic hairy mane"],
-					[REAR_BODY_DRACONIC_SPIKES, "draconic spiky mane"],
-					[REAR_BODY_BEHEMOTH, "behemoth spikes"]
-				]
-		);
-		public static const DEFAULT_NECK_NAMES:Object = createMapFromPairs(
-			[
-				[NECK_TYPE_NORMAL, "normal"],
-				[NECK_TYPE_DRACONIC, "dragon"],
-				[NECK_TYPE_EASTERN, "eastern dragon"],
-				[NECK_TYPE_HYDRA, "hydra"]
-			]
-		);
-		// </mod>
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
 				[
 					[PIERCING_TYPE_NONE, "none"],

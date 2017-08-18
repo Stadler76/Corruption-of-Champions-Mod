@@ -357,7 +357,7 @@ import flash.events.Event;
 				raceScores += "<b>Raccoon Score:</b> " + player.raccoonScore() + "\n";
 			}
 			if (player.bunnyScore() > 0) {
-				raceScores += "<b>Naga Score:</b> " + player.bunnyScore() + "\n";
+				raceScores += "<b>Bunny Score:</b> " + player.bunnyScore() + "\n";
 			}
 			if (player.kangaScore() > 0) {
 				raceScores += "<b>Kangaroo Score:</b> " + player.kangaScore() + "\n";
@@ -631,7 +631,7 @@ import flash.events.Event;
 			menu();
 			addButton(0, "Next", playerMenu);
 			if (player.statPoints > 0) {
-				outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.");
+				outputText("\n\n<b>You have " + num2Text(player.statPoints) + " attribute point" + (player.statPoints == 1 ? "" : "s") + " to distribute.</b>");
 				addButton(1, "Stat Up", attributeMenu);
 			}
 		}

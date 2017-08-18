@@ -172,6 +172,11 @@ package classes
 			return [REAR_BODY_DRACONIC_MANE, REAR_BODY_DRACONIC_SPIKES].indexOf(rearBody.type) != -1;
 		}
 
+		public function hasNonSharkRearBody():Boolean
+		{
+			return [REAR_BODY_NONE, REAR_BODY_SHARK_FIN].indexOf(rearBody.type) == -1;
+		}
+
 		public function fetchEmberRearBody():Number
 		{
 			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_DRACONIC_MANE : REAR_BODY_DRACONIC_SPIKES;

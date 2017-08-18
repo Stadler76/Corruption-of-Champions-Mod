@@ -1459,6 +1459,11 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Transformations
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			//Ovi perk loss
 			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 
 			if (rand(3) == 0 && changes < changeLimit && player.hasScales()) {
@@ -1579,6 +1584,11 @@ package classes.Scenes.Places.Bazaar
 			if (rand(3) == 0 && player.rhinoScore() >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
 				player.goIntoRut(true);
 			}
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			//Ovi perk loss
 			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			// Special TFs
 			//------------
@@ -1596,10 +1606,16 @@ package classes.Scenes.Places.Bazaar
 			// Normal TFs
 			//------------
 			//Removes wings
-			if (rand(4) == 0 && changes < changeLimit && player.wingType > WING_TYPE_NONE) {
-				if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine. After a moment the pain passes, though your fin is gone!");
-				else outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades. After a moment the pain passes, though your wings are gone!");
-				player.wingType = WING_TYPE_NONE;
+			if (rand(4) == 0 && changes < changeLimit && (player.wingType != WING_TYPE_NONE || player.rearBody.type == REAR_BODY_SHARK_FIN)) {
+				if (player.rearBody.type == REAR_BODY_SHARK_FIN) {
+					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine."
+					          +" After a moment the pain passes, though your fin is gone!");
+					player.rearBody.restore();
+				} else {
+					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your"
+					          +" shoulder-blades. After a moment the pain passes, though your wings are gone!");
+				}
+				player.wings.restore();
 				changes++;
 			}
 			//Fur/scales fall out
@@ -2060,6 +2076,11 @@ package classes.Scenes.Places.Bazaar
 				player.shrinkTits();
 				changes++;
 			}
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			//Ovi perk gain
 			if (rand(4) == 0 && changes < changeLimit && player.echidnaScore() >= 3 && player.hasVagina() && player.findPerk(PerkLib.Oviposition) < 0) {
 				mutations.updateOvipositionPerk(tfSource);
 			}

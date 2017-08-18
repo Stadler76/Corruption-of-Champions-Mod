@@ -34,9 +34,8 @@ import classes.Scenes.API.FnHelpers;
 		}
 		public function discover():void {
 			clearOutput();
-			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>");
-			//Picture is here
 			outputText(images.showImage("area-forest"));
+			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>");
 			flags[kFLAGS.TIMES_EXPLORED]++;
 			flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -127,6 +126,7 @@ import classes.Scenes.API.FnHelpers;
 			//Tentacle avoidance chance due to dangerous plants
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
+				outputText(images.showImage("item-dPlants"));
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");
 				menu();
 				addButton(0, "Continue", tentacleBeastScene.encounter);
@@ -138,27 +138,23 @@ import classes.Scenes.API.FnHelpers;
 		}
 
 		public function tripOnARoot():void {
-			//Picture is here
-			outputText(images.showImage("area-forest"));
+			outputText(images.showImage("minomob-falling"));
 			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.");
 			player.takeDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function findTruffle():void {
-			//Picture is here
 			outputText(images.showImage("item-pigTruffle"));
 			outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
 			inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
 		}
 		public function findHPill():void {
-			//Picture is here
 			outputText(images.showImage("item-hPill"));
 			outputText("You find a pill stamped with the letter 'H' discarded on the ground. ");
 			inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
 		}
 		public function findChitin():void {
-			//Picture is here
 			outputText(images.showImage("item-bChitin"));
 			outputText("You find a large piece of insectile carapace obscured in the ferns to your left. It's mostly black with a thin border of bright yellow along the outer edge. There's still a fair portion of yellow fuzz clinging to the chitinous shard. It feels strong and flexible - maybe someone can make something of it. ");
 			inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
@@ -186,7 +182,6 @@ import classes.Scenes.API.FnHelpers;
 			clearOutput();
 			outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
 			outputText("\n\nShe goes up to the imp, and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large pile of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
-			//Picture is here
 			outputText(images.showImage("monster-marble"));
 			outputText("\n\nShe gives a wistful sigh. \"<i>I haven't really explored much since getting to the farm.  Between the jobs Whitney gives me, keeping in practice with my hammer, milking to make sure I don't get too full, cooking, and beauty sleep, I don't get a lot of free time to do much else.</i>\"  She sighs again.  \"<i>Well, I need to get this back, so I'll see you later!</i>\"");
 			//end event

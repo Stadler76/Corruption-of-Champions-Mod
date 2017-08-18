@@ -267,7 +267,7 @@ private function tamaniMaleRepeatEncounter():void {
 
 private function tamaniStartFight():void {
 	clearOutput();
-	outputText("Tamani adopts a fighting pose and says, \"<i>If I have to I'll beat my children out of you!</b>\"");
+	outputText("Tamani adopts a fighting pose and says, \"<i>If I have to I'll beat my children out of you!</i>\"");
 	startCombat(new Tamani());
 }
 

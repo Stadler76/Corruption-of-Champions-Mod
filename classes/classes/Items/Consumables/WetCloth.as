@@ -36,14 +36,25 @@ package classes.Items.Consumables
 			}
 
 			//Cosmetic changes based on 'goopyness'
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			//Ovi perk loss
 			if (rand(5) === 0) {
 				mutations.updateOvipositionPerk(tfSource);
 			}
-			//Remove wings
-			if (player.wingType > WING_TYPE_NONE) {
-				if (player.wingType === WING_TYPE_SHARK_FIN) outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your fin slowly turn to sludge, dripping to the ground as your body becomes more goo-like.");
-				else outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your wings slowly turn to sludge, dripping to the ground as your body becomes more goo-like.");
-				player.wingType = WING_TYPE_NONE;
+			//Remove wings and shark fin
+			if (player.wingType != WING_TYPE_NONE || player.rearBody.type == REAR_BODY_SHARK_FIN) {
+				if (player.rearBody.type == REAR_BODY_SHARK_FIN) {
+					outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your fin slowly turn to"
+					          +" sludge, dripping to the ground as your body becomes more goo-like.");
+					player.rearBody.restore();
+				} else {
+					outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your wings slowly turn to"
+					          +" sludge, dripping to the ground as your body becomes more goo-like.");
+				}
+				player.wings.restore();
 				return false;
 			}
 			//Goopy hair

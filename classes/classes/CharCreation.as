@@ -191,6 +191,8 @@ package classes
 			player.hairLength = 5;
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.underBody.restore();
+			player.neck.restore();
+			player.rearBody.restore();
 			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
 			player.legCount = 2;
 			player.faceType = FACE_HUMAN;

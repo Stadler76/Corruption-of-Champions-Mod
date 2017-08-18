@@ -31,6 +31,7 @@ package classes.Scenes.Areas
 		{
 			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
 			clearOutput();
+			outputText(images.showImage("area-deepwoods"));
 			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -46,7 +47,7 @@ package classes.Scenes.Areas
 		private function deepwoodsWalkFn():void
 		{
 			clearOutput();
-			outputText(images.showImage("area-forest"));
+			outputText(images.showImage("area-deepwoods"));
 			outputText("You enjoy a peaceful walk in the deepwoods.  It gives you time to think over the recent, disturbing events.");
 			dynStats("tou", .5, "int", 1);
 			doNext(camp.returnToCampUseOneHour);
@@ -59,6 +60,7 @@ package classes.Scenes.Areas
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				clearOutput();
+				outputText(images.showImage("item-dPlants"));
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");
 				menu();
 				addButton(0,"Continue", forest.tentacleBeastScene.encounter);

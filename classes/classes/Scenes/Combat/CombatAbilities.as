@@ -295,7 +295,7 @@ package classes.Scenes.Combat
 			temp = calcInfernoMod(temp);
 			if (monster.short == "goo-girl") temp = Math.round(temp * 1.5);
 			if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2);
-			outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.");
+			outputText(monster.capitalA + monster.short + " takes <b><font color=\"" + mainViewManager.colorHpMinus() + "\">" + temp + "</font></b> damage.");
 			//Using fire attacks on the goo]
 			if (monster.short == "goo-girl") {
 				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
@@ -2178,7 +2178,7 @@ package classes.Scenes.Combat
 			}
 			if (player.fatigue + player.physicalCost(10) > player.maxFatigue()) {
 				outputText("You're too fatigued to use a charge attack!");
-				doNext(combat.combatMenu);
+				doNext(curry(combat.combatMenu,false));
 				return;
 			}
 			player.changeFatigue(10,2);
@@ -2241,6 +2241,7 @@ package classes.Scenes.Combat
 				outputText("<b>Your impact also manages to stun " + monster.a + monster.short + "!</b> ");
 				monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			}
+				outputText("<b>(<font color=\"" + mainViewManager.colorHpMinus() + "\">" + damage + "</font>)</b>");
 				outputText("\n\n");
 			}
 			//Miss

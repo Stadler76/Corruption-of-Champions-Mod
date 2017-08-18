@@ -91,9 +91,10 @@ package classes.Items.Consumables
 					outputText("Your small imp wings stretch and grow, tingling with the pleasure of being attached to such a tainted body. You stretch over your shoulder to stroke them as they unfurl, turning into large imp-wings. <b>Your imp wings have grown!</b>");
 					player.wingType = WING_TYPE_IMP_LARGE;
 				}
-				else if (player.wingType === WING_TYPE_SHARK_FIN) {
+				else if (player.rearBody.type === REAR_BODY_SHARK_FIN) {
 					outputText("\n\n");
 					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support the new bat-like wings growing from your back. You twist your head as far as you can for a look and realize your fin has changed into imp-wings!");
+					player.rearBody.restore();
 					player.wingType = WING_TYPE_IMP;
 				}
 				//No wings
@@ -255,6 +256,11 @@ package classes.Items.Consumables
 				changes++;
 			}
 			
+			//Neck restore
+			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			//Ovi perk loss
 			if (rand(5) === 0 && changes < changeLimit) {
 				mutations.updateOvipositionPerk(tfSource);
 			}

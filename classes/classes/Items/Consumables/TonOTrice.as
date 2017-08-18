@@ -498,8 +498,14 @@ package classes.Items.Consumables
 				mutations.updateClaws(CLAW_TYPE_COCKATRICE);
 				changes++;
 			}
+			//Neck loss, if not cockatrice neck
+			if (player.neck.type != NECK_TYPE_COCKATRICE && changes < changeLimit && rand(4) == 0)
+				mutations.restoreNeck(tfSource);
+			//Rear body restore
+			if (player.rearBody.type != REAR_BODY_NONE && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Body TF
 			if (!player.hasCockatriceSkin() && player.faceType == FACE_COCKATRICE && changes < changeLimit && rand(3) == 0) {
+				mutations.restoreNeck(tfSource + "-forceRestoreNeck");
 				var colorChoice:Array = mutations.newCockatriceColors();
 				outputText("\n\nYour body feels hot and your skin feels tight, making you fall to your knees in a bout of lightheadedness."
 				          +" You kneel there panting as the pressure increases, sweat dripping from your brow. You don’t know how long you can take"
@@ -507,7 +513,7 @@ package classes.Items.Consumables
 				outputText("\nWhen you awaken you check yourself to see what has changed now that the overwhelming pressure has left your body."
 				          +" The first thing you notice is feathers, lots and lots of feathers that now cover your body in a downy layer."
 				          +" Around your neck a ruff of soft fluffy feathers has formed like that of an exotic bird. As you look down to your [chest]"
-				          +" you see that from your chest to your groin you are covered in a layer of cream scales.");
+				          +" you see that from your chest to your groin you are covered in a layer of " + colorChoice[2] + " scales.");
 				outputText("\n<b>Your body is now covered in scales and feathers!</b>");
 
 				player.skin.setAllProps({
@@ -524,6 +530,22 @@ package classes.Items.Consumables
 						tone:     colorChoice[2],
 						desc:     "feathers"
 					}
+				});
+				player.neck.setAllProps({
+					type: NECK_TYPE_COCKATRICE,
+					color: colorChoice[1]
+				});
+				changes++;
+			}
+			//Neck TF, if not already TFed from Body TF above
+			if (player.neck.type != NECK_TYPE_COCKATRICE && player.hasCockatriceSkin() && player.faceType == FACE_COCKATRICE && changes < changeLimit && rand(3) == 0) {
+				mutations.restoreNeck(tfSource);
+				outputText("\n\nYour neck starts to tingle and [secondary furcolor] feathers begin to grow out of it one after another until a ruff"
+				          +" of soft fluffy feathers has formed like that of an exotic bird.");
+				outputText("\n<b>You now have a cockatrice neck!</b>");
+				player.neck.setAllProps({
+					type: NECK_TYPE_COCKATRICE,
+					color: colorChoice[1]
 				});
 				changes++;
 			}

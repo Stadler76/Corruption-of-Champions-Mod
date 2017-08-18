@@ -145,6 +145,9 @@ internal function oasisSexing():void {
 		//Preggers chance!
 		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
 	}
+	if (player.gender == 3) outputText(images.showImage("demonmob-surround-herm"));
+	else if (player.gender == 2) outputText(images.showImage("demonmob-surround-female"));
+	else outputText(images.showImage("demonmob-surround-male"));
 	//Buttbutt buuuuuttt
 	if (player.gender > 0) outputText("However, the demons are interested in every part of you, not just your crotch.  ");
 	outputText("Soon you feel hands and dicks grabbing and jabbing at your " + player.buttDescript() + ", edging inwards bit by bit and jostling for position as a slippery cock positions itself at the opening of your " + player.assholeDescript() + ". It pauses for a second and then dives straight into your waiting asshole.  ");
@@ -207,6 +210,7 @@ private function oasisBadEnd():void {
 	spriteSelect(SpriteDb.s_oasis_demons);
 	//You get this ending if you are a fully corrupt female/herm/centaur with low intelligence and had over 5-10 'Feast' encounters with the Desert Tribe, once the leader starts laying a claim on you because of your large clit
 	clearOutput();
+	outputText(images.showImage("demonmob-end"));
 	outputText("You fuck for hours, 'feasting' with the demons. Pain, pleasure and exhaustion intermingle; no matter how hard you try to cling to consciousness, you are in no state to concentrate enough to succeed. You dangle over the edge for what seems like eternity before an orgasm stronger than any other hits you like a solid wall. You black out...\n\n");
 	//[If female/herm] 
 	
@@ -234,6 +238,7 @@ private function oasisBadEnd():void {
 private function oasisBadEndEpilogue():void {
 	spriteSelect(SpriteDb.s_oasis_demons);
 	clearOutput();
+	outputText(images.showImage("badend-demonmob"));
 	outputText("After one year");
 	if (player.gender <= 1) outputText(" and a few doses of fermented succubi milk");
 	outputText("...\n\n");

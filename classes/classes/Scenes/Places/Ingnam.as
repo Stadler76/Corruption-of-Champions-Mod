@@ -401,7 +401,7 @@ package classes.Scenes.Places
 			if (player.horns > 0 && player.hornType > 0) {
 				outputText("\n\n\"<i>Are these " + (player.hornType == HORNS_ANTLERS ? "antlers" : "horns") + "? I can imagine they must be real,</i>\" The innkeeper says before touching your [horns]. You can already feel his fingers rubbing against your [horns]. \"<i>Yes, they're real and I think you look better,</i>\" he says. You thank him for complimenting on your horns.");
 			}
-			if (player.wingType > 0 && player.wingType != WING_TYPE_SHARK_FIN) {
+			if (player.wingType != WING_TYPE_NONE) {
 				outputText("\n\nNext, he looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
 				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>" + player.mf("He", "She") + " can fly!</i>\"");
 			}

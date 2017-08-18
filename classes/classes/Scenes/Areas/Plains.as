@@ -29,6 +29,7 @@ package classes.Scenes.Areas
 		}
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
+			outputText(images.showImage("area-plain"));
 			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -154,13 +155,13 @@ package classes.Scenes.Areas
 		}
 
 		private function findKangaFruit():void {
-			outputText(images.showImage("area-plain"));
+			outputText(images.showImage("item-kFruit"));
 			outputText("While exploring the plains you come across a strange-looking plant.  As you peer at it, you realize it has some fruit you can get at.  ");
 			inventory.takeItem(consumables.KANGAFT, camp.returnToCampUseOneHour);
 		}
 
 		private function findOviElix():void {
-			outputText(images.showImage("area-plain"));
+			outputText(images.showImage("item-oElixir"));
 			outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");
 			inventory.takeItem(consumables.OVIELIX, camp.returnToCampUseOneHour);
 		}

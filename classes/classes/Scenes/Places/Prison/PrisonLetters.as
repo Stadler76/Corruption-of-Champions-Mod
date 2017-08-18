@@ -11,6 +11,7 @@ package classes.Scenes.Places.Prison
 		public function deliverChildWhileInPrison():Boolean {
 			if (flags[kFLAGS.IN_PRISON] == 0) return false;
 			if (player.vaginas.length == 0) {
+				outputText(images.showImage("birth-prison"));
 				outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n");
 				player.createVagina();
 			}
@@ -48,6 +49,7 @@ package classes.Scenes.Places.Prison
 		
 		public function initialMessage(npcName:String):void {
 			outputText("\nMistress Elly opens the door and hands you the letter. \"<i>This is for you, slave. It's from " + npcName + ",</i>\" she says as she walks out, leaving you in your cell with the letter. You open the letter and read. \n\n");
+			outputText(images.showImage("item-letter"));	
 		}
 		
 		//------------

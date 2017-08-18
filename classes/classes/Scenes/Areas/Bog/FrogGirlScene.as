@@ -12,6 +12,8 @@ package classes.Scenes.Areas.Bog {
 //Intro
 public function findTheFrogGirl():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("froggirl"));
 	if (flags[kFLAGS.TIMES_ENCOUNTERED_FROG] == 0) {
 		outputText("You begin your trudge through the bog, slogging through the soupy muck.  Insects buzz by every second, spinning in hectic spirals around your head.");
 		outputText("\n\nYou soon become aware of a new sound behind the buzzing - a musical chirping.  Step by step, you move toward it, pushing aside hanging curtains of gray moss until the dark trees of the swamp give way to the wide roots of mangroves.  The sporadic notes trickle into your ears, and you feel unusually relaxed as you move toward their source.");
@@ -38,6 +40,8 @@ public function findTheFrogGirl():void {
 //Follow:
 private function followDatFrog():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("froggirl-anal"));
 	outputText("You splash your way up the terrace of pools, shedding your [armor] as you do so, leaving your gear draped over the mangrove ridges.  She holds her arms out to you as you step naked into her pool.  She rises to meet you, and you notice that the water concealed a swollen, pregnant belly.");
 	outputText("\n\nHer skin is slimy to the touch, and as she pulls you in close, she leaves her ichor on your arms and [chest].  It tingles where it touches you, and the sunlight seems to grow a bit brighter around you.  Her song continues, and you swear that you can see the music floating in the air, every different note a different neon light drifting through the air.  Half focused, your eyes dart back and forth, tracking the tiny motes of light.");
 	outputText("\n\nHer round belly rubs against ");
@@ -80,6 +84,8 @@ private function getFrogButtFilled():void {
 //Resist:
 private function resistDatFrog():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("froggirl"));
 	outputText("You shake your head and drop to the ground, dunking your head in one of the crystal clear pools.  You emerge with your head clear, cold water dripping from your [hair], frowning at the frog girl.");
 	outputText("\n\nRealizing that you’ve shaken off her hypnosis, the frog girl gulps, the action producing a curious croaking noise.  As you stomp up the terrace, she scrambles up out of the pool, or at least attempts to.");
 	outputText("\n\nShe’s weighed down by a massively pregnant belly, the size of a beachball, pale as the moon and glistening with amphibian slime.  She hauls herself out of deep pool, only to slip back down into it with a splash.");
@@ -102,6 +108,8 @@ private function leaveFrogBe():void {
 //Question the frog girl:
 private function questDatFrogGirl():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("froggirl"));
 	outputText("You decide to question the pouting amphibian and take a seat at the edge of her pool, asking her why she just tried to lure you in.");
 	outputText("\n\n\"<i>I’m pregnant,</i>\" she bubbles shortly, still half-sunk in the pool.  She purses her lips to one side, eyes shifting away from you.");
 	outputText("\n\nYou raise an eyebrow, requesting more information than just that.");
@@ -129,6 +137,8 @@ private function continueOnYourWay():void {
 //Offer to carry her eggs:
 private function carryBeeGirlsEggsVoluntarilyYouButtSlut():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("froggirl-anal"));
 	outputText("Feeling sympathy for the frog girl, you volunteer to help with her burden.");
 	outputText("\n\n\"<i>Omigosh, really?</i>\" she says, lunging forward with a splash.  She throws her arms around your shoulders.  \"<i>I promise to make it absolutely amazing for you.</i>\"");
 	outputText("\n\nThe slime on her arms tingles against you, and as she undresses you, peeling away your [armor], she leaves slimy, tingly prints on your arms, stomach, and [chest].  As you watch her, her movements seem to leave trails of light, and the sunlight seems to grow a bit brighter around you.  She hums to herself, and you swear that you can see the music floating in the air, every different note a different neon light drifting through the air.  Half focused, your eyes dart back and forth, tracking the tiny motes of light.");
@@ -170,6 +180,8 @@ private function voluntarilyGetEggedEpilogue():void {
 //Teach Her a Lesson
 private function teachDatFrogALesson():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("froggirl"));
 	outputText("This frog bitch needs to be careful about who she lures in.");
 	outputText("\n\nYou say so, and hop down into the water, sinking waist-deep, striding forward toward the frog girl, grabbing her by the wrist.  Slowed down by her pregnancy, it seems that she can do little to resist.");
 	outputText("\n\nYour hand tingles, but that’s not going to stop you from bending this frog girl over and fucking her hard in the purple-orange water... under the trees made out of bread... and with dildos?");
@@ -192,6 +204,8 @@ private function lessonFollowup():void {
 
 //Laying the Eggs
 public function birthFrogEggsAnal():void {
+	//Picture is here
+	outputText(images.showImage("birth-froggirl-anal"));
 	outputText("\n<b>Oh no...</b>\nYou groan, feeling a shudder from deep inside, a churning from your gut.  A trickle of slime leaks from your [asshole] down your [legs] and you feel a pressure from deep inside.");
 	outputText("\n\nWater - you need to be near water!  The instinct is sudden and clear, and you stagger toward the small creek near your camp.  You crouch low on the river bank, hands on the ground, and knees angled up in an oddly frog-like pose.");
 	outputText("\n\nSlime pools beneath you, running down into the water as he first egg begins shoving out of you.  It feels... weird.  The pressure isn’t as intense as some of the things you’ve encountered in Mareth, but it’s still incredibly large.  Your asshole stretches wide, numbed a bit by the slime, but still far larger than you would have thought possible.  As the egg squelches to the ground, you realize that the eggs are jelly-like, and pliant enough to give you some leeway in laying them.");
@@ -211,6 +225,8 @@ public function birthFrogEggsAnal():void {
 //Superbonus Vaginal Eggs!
 private function superBonusFrogEggsInYerCooch():void {
 	clearOutput();
+	//Picture is here
+	outputText(images.showImage("froggirl-vag"));
 	outputText("\"<i>Wait, you want them where?</i>\" asks the frog girl, incredulously.");
 	outputText("\n\nYou repeat that you’d like her to lay her clutch in your womb, licking your lips and running your fingers down to your [vagina].");
 	outputText("\n\n\"<i>Huh, now why didn’t I think of that?</i>\" mutters the frog girl, furrowing her brow.  \"<i>It’s a fantastic idea, though,</i>\" she chirps.  \"<i>I just need you in the right position.</i>\"");
@@ -236,6 +252,8 @@ private function superBonusFrogEggsInYerCooch():void {
 
 //Vaginal Egg birth
 public function layFrogEggs():void {
+	//Picture is here
+	outputText(images.showImage("birth-froggirl-vag"));
 	if (player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold: a vagina.  ");
 		player.createVagina();

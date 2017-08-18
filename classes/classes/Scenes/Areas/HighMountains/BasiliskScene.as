@@ -122,6 +122,7 @@ package classes.Scenes.Areas.HighMountains
 		private function tongueBasiliskSmex():void {
 			spriteSelect(SpriteDb.s_basilisk);
 			clearOutput();
+			outputText(images.showImage("monster-basilisk"));
 			outputText("You tap your jaw as you stare down at the defeated reptile, smiling at his oddly formal gesture of surrender. You'd very much like to take some satisfaction from the basilisk, extract a bit of pleasurable payment for what he tried to do to you: but the more you get to look at him properly, the more difficult doing that seems. The tall, thin creature is all angles, tough scales and pointed edges. You don't like the thought of putting your genitals anywhere near his sickle claws or curved fangs.\n\n");
 		
 			outputText("It is as you are taking in this latter article that the basilisk swallows nervously, and you get a glimpse inside his mouth at a long, sticky, pale purple tongue, another gift of his reptilian ancestors. It's the only part you've seen of him so far which looks... soft. Pliable. Your smile widens and you step forward, slowly loosening your " + player.armorName + ".\n\n");
@@ -167,6 +168,7 @@ package classes.Scenes.Areas.HighMountains
 		private function defeatBasiliskAndAnal(corrupt:Boolean):void {
 			spriteSelect(SpriteDb.s_basilisk);
 			clearOutput();
+			outputText(images.showImage("monster-basilisk"));
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			//Requires: Corruption 70 or more, cock (for now) 
 			//Prelude: 
@@ -328,7 +330,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\n");
 			
 			outputText("The basilisk gets up and again stares back into your eyes and you feel his will press indomitably against your pliable mind. At the very edge of your vision, underneath the creature you can see a hint of shiny purple; the creature's cock has slid out of his genital slit. How long it is and what it looks like you cannot see, but as with another raspy moan you finally accept what is about to happen, there is no doubt you are going to get to know about it very personally.\n\n");
-			
+			outputText(images.showImage("basilisk-vag-fuck"));
 			outputText("The creature suddenly raps something out in his strange, dry tongue, and you feel something - something deep and red - flinch in your mind. Suddenly, you are wet, wetter than you've ever been, your pussy slavering so badly you can hear the pitter-patter of your juices hitting the ground beneath you. The basilisk says something else, more softly this time as he slides in close, his long claws reaching around to clutch your " + player.buttDescript() + ". With a kind of horror you feel your limbs move involuntarily, your arms reaching around the thing's thin, muscled back, your bottom half slackening until you are supported entirely by the wiry strength of the lizard. You expose your crotch in complete submission as the basilisk walks forward, and you feel the head of his cock teasingly touch your dripping, treasonous cunt. As soon as your limbs are where it wants them to be, they lock in position again; you heave at them desperately, but once again your ability to do anything with your own body is simply not there. You are less of a statue and more of a fuck toy, an extension of the basilisk's lust-maddened will. Your jailer keeps walking until you feel the rough surface of a boulder against your back, and using this support the basilisk pushes itself straight into your " + player.vaginaDescript(0) + ".");
 			player.cuntChange(monster.cockArea(0),true,true,false);
 			outputText("\n\n");
@@ -364,6 +366,7 @@ package classes.Scenes.Areas.HighMountains
 		public function basiliskBirth():void {
 			spriteSelect(SpriteDb.s_basilisk);
 			outputText("\n");
+			outputText(images.showImage("birth-basilisk"));
 			if (player.vaginas.length == 0) {
 				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh. <b>You look down and behold a new vagina</b>.\n\n");
 				player.createVagina();
@@ -445,7 +448,7 @@ package classes.Scenes.Areas.HighMountains
 			spriteSelect(SpriteDb.s_basilisk);
 			clearOutput();
 			outputText("Moving has become intensely difficult. You cannot explain why something that came naturally to you ten minutes ago is now like wading neck deep through quicksand, but that is what moving your limbs now feels like. With a huge, straining amount of effort, you desperately raise your arms and crane your neck away from the basilisk as he now approaches you, but with a pathetic amount of ease the creature slides through your guard, grabs you by the chin and looks directly into your eyes. Your reactions are so slow your mind's screaming order for your eyelids to close takes several seconds for your nerves to compute, by which time it is far too late.\n\n");
-		
+			outputText(images.showImage("badend-basilisk-statue"));
 			outputText("You stare deep into the creature's eyes. There really is an infinity in there, a grey fractal abyss which spirals upwards and downwards forever. You want nothing more than to spend the rest of your life following it... you fall into that endless abyss for what seems like years, decades, uncharted aeons. You lose all sense of yourself, your situation, your purpose; you do not feel the tips of your fingers slowly turning cold and grey, rivulets of the texture advancing slowly up your hand, any more than you notice the turn of a planet a thousand light years away. There is only the wet grey, and you, an infinitesimally tiny speck lost in a universe, a universe that knows, sees, and controls. When the basilisk's pupils dilate, and you feel its hypnotic compulsion press upon your mind, you can no sooner resist him than a tadpole can an endless, grey waterfall. When he demands that you be horny, you cannot disobey him any more than you can disobey gravity. You are submerged in a sea of sex.");
 			if (player.gender == 3) outputText(" You moan through your still throat as you feel blood rushing to your groin, your " + player.multiCockDescriptLight() + " stiffening and your " + player.vaginaDescript(0) + " beginning to drip.");
 			if (player.gender == 1) outputText(" You moan through your still throat as you feel blood rushing to your groin, your " + player.multiCockDescriptLight() + " stiffening.");
@@ -464,6 +467,7 @@ package classes.Scenes.Areas.HighMountains
 		//Defeated, Taken Advantage of: nobody
 		private function basiliskAdvantageNobody():void {
 			spriteSelect(SpriteDb.s_basilisk);
+			outputText(images.showImage("badend-basilisk-statue"));
 			outputText("Time stretches by at an agonizingly slow pace as you stand there, a bizarre, motionless flesh statue. You have no way of measuring how much time is passing; the sun is not in your direct line of vision.  You try to move any and every part of yourself in turn, but it is hopeless. Your body is a cage, and you begin to hate the basilisk less because it paralyzed you and more because it left your mind entirely aware of it. Every so often another unbidden backwash of erotic memories overwhelms your senses, keeping you helplessly aroused and reminded of who did this to you. Coupled with the unscratchable itches and the aching in your limbs the experience is one of sensational hell.\n\n");
 		
 			outputText("Eventually, and with gushing, overwhelming joy, you find you can with effort move one of your little fingers again. Concentrating hard, you move backwards from there until you can move your hand, your other fingers, your arm, and then, with a creaking finality, you break entirely free of the paralyzing spell. You spend the next few minutes scratching and touching yourself all over with cries of deepest relief, before putting your garments back on and staggering slowly towards camp. You suppose you should count yourself lucky that nothing found you whilst you were in your incredibly vulnerable state, but you struggle to think of yourself as lucky as you reflect soberly on the last couple of hours.");
@@ -471,7 +475,7 @@ package classes.Scenes.Areas.HighMountains
 		//Defeated, Taken Advantage of: Imp
 		private function basiliskAdvantageImp():void {
 			outputText("Time stretches by at an agonizingly slow pace as you stand there, a bizarre, motionless flesh statue. You have no way of measuring how much time is passing; the sun is not in your direct line of vision.  You try to move any and every part of yourself in turn, but it is hopeless. Your body is a cage, and you begin to hate the basilisk less because it paralyzed you and more because it left your mind entirely aware of it. Every so often another unbidden backwash of erotic memories overwhelms your senses, keeping you helplessly aroused and reminded of who did this to you.\n\n");
-			
+			outputText(images.showImage("monster-imp"));
 			outputText("You hear a whirring of small wings behind you and something lands on your shoulder. You feel a weary despondency as you guess what it is, right before a reedy, sneering voice speaks into your ear. \"<i>Well, well, well... ain't I the luckiest imp in Mareth?</i>\"\n\n");
 		
 			outputText("The evil little creature wastes no time. Crawling around your motionless face until he is braced against your shoulders and clutching tightly onto your " + player.hairDescript() + ", the imp begins to rub his cock against your cheeks and lips, smearing you with his pre-cum and filling your nose with the smell of it. You will every piece of your strength into moving your arm and batting the creature away, but your body refuses to comply; frozen as you are, you are merely a sex doll to the imp's twisted desires. His cock swiftly grows as he rubs it against your flesh, until it is almost as big as the imp himself, and then with a grunt he pushes against your slightly open mouth.\n\n");
@@ -489,6 +493,7 @@ package classes.Scenes.Areas.HighMountains
 		private function basiliskAdvantageHarpy():void {
 			spriteSelect(SpriteDb.s_basilisk);
 			outputText("Time stretches by at an agonizingly slow pace as you stand there, a bizarre, motionless flesh statue. You have no way of measuring how much time is passing; the sun is not in your direct line of vision.  You try to move any and every part of yourself in turn, but it is hopeless. Your body is a cage, and you begin to hate the basilisk less because it paralyzed you and more because it left your mind entirely aware of it. Every so often another unbidden backwash of erotic memories overwhelms your senses, keeping you helplessly aroused and reminded of who did this to you. Coupled with the unscratchable itches and the aching in your limbs the experience is one of sensational hell.\n\n");
+			outputText(images.showImage("monster-harpy"));
 			outputText("You hear a shrill cry from above you, half eagle scream and half mocking, female laughter. With a fluttering flap of feathers, a harpy lands at your side before proceeding to stalk around you, taking in your helpless, frozen form with stiff, jerky movements. You reflect bitterly that if the big bottomed bird woman had turned up fifteen minutes ago she would probably have scared the basilisk off. As it is, you are going to have to take whatever she can throw at you... with a stiff upper lip, as it were.\n\n");
 				
 			//Male/Herm: 
@@ -556,7 +561,7 @@ package classes.Scenes.Areas.HighMountains
 		private function basiliskAdvantageGoblin():void {
 			spriteSelect(SpriteDb.s_basilisk);
 			outputText("Time stretches by at an agonizingly slow pace as you stand there, a bizarre, motionless flesh statue. You have no way of measuring how much time is passing; the sun is not in your direct line of vision.  You try to move any and every part of yourself in turn, but it is hopeless. Your body is a cage, and you begin to hate the basilisk less because it paralyzed you and more because it left your mind entirely aware of it. Every so often another unbidden backwash of erotic memories overwhelms your senses, keeping you helplessly aroused and reminded of who did this to you.\n\n");
-		
+			outputText(images.showImage("monster-goblin"));
 			//Male/Herm: 
 			if (player.hasCock()) {
 				outputText("At the corner of your vision, you see a small, familiar green shape hover into view. The goblin is so busy sorting through her inventory of drugs that you actually manage to see her before she sees you. When she does lift her head up and notices the petrified, naked individual in front of her, she is so surprised she drops her satchel.\n\n");
@@ -636,7 +641,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Time stretches by at an agonizingly slow pace as you stand there, a bizarre, motionless flesh statue. You have no way of measuring how much time is passing; the sun is not in your direct line of vision.  You try to move any and every part of yourself in turn, but it is hopeless. Your body is a cage, and you begin to hate the basilisk less because it paralyzed you and more because it left your mind entirely aware of it. Every so often another unbidden backwash of erotic memories overwhelms your senses, keeping you helplessly aroused and reminded of who did this to you.\n\n");
 		
 			outputText("You hear a deep, rumbling, snuffling sound from behind you, and the earth shakes as something big approaches you from behind. <i>Please not a minotaur,</i> you think. <i>Anything but a minotaur. Please not a minotaur...</i> Hands roughly grab your sides and a brutally powerful musk fills your nostrils as you groan in despair.\n\n");
-		
+			outputText(images.showImage("minotaur-loss-butt"));
 			outputText("The huge bull-man is not one to look a gift fuck in the mouth. Without bothering to take you in, bar a long wet sniff of your " + player.hairDescript() + ", he sticks his cock between your ass cheeks. He grunts as he forces his head past your sphincter, squirting pre-cum into your passage as he does so. Your body is incapable of clenching instinctively against the invasion, but there is no escaping how huge the dong feels as he impatiently forces your ass open.");
 			player.buttChange(60,true,true,false);
 			//(Tight: 
@@ -667,6 +672,8 @@ package classes.Scenes.Areas.HighMountains
 		private function driderPCEggLaysBasilisk():void {
 			spriteSelect(SpriteDb.s_basilisk);
 			clearOutput();
+			if (player.gender == 2) outputText(images.showImage("player-drider-female"));
+			else outputText(images.showImage("player-drider-male"));
 			outputText("Leaning back on your carapace-clad abdomen, you try and look over your defeated opponent. Even slumped over in ");
 			if (monster.HP < 1) outputText("exhaustion");
 			else outputText("arousal");
@@ -717,6 +724,8 @@ package classes.Scenes.Areas.HighMountains
 		private function layBeeEggsInABasilisk():void {
 			spriteSelect(SpriteDb.s_basilisk);
 			clearOutput();
+			if (player.gender == 1) outputText(images.showImage("player-bee-male"));
+			else outputText(images.showImage("player-bee-herm"));
 			outputText("Completely destroyed, the basilisk lays face down on the ground, struggling pathetically to get up. You giggle at the attempt as you ");
 			if (player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE ) outputText("buzz lightly over to the basilisk's writhing body");
 			else outputText("saunter arrogantly over to the basilisk's crumpled up figure");

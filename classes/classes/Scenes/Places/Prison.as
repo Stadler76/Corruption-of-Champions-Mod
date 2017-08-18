@@ -996,6 +996,7 @@ package classes.Scenes.Places
 				outputText("While you were unconscious you were captured by slavers, stripped of your items and equipment, and thrown into a locked cell.");
 				if (prisonCaptor.captorName != "Elly")
 				{
+					outputText(images.showImage("item-Bread"));
 					outputText("\n\nThe door opens and a guard tosses a pathetic piece of bread at your feet.");
 					outputText("\n\n\"<i>" + prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " sends " + prisonGuard.guardPronoun3 + " regards,</i>\" the guard says brusquely, and slams the door shut.\n\n");
 					inventory.takeItem(consumables.P_BREAD, camp.returnToCampUseOneHour);
@@ -1038,6 +1039,7 @@ package classes.Scenes.Places
 			}
 			if ((trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && !trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp())
 			{
+				outputText(images.showImage("item-cBread"));
 				outputText("\n\n(Placeholder) Mistress Elly enters the room and chastises you for not being out working on her quest.\n\n");
 				inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
 				return true;
@@ -1072,6 +1074,7 @@ package classes.Scenes.Places
 				{
 				  outputText("you are filled with lament at its loss and a consuming desire to learn whatever lessons your Mistress wishes to teach you.");
 				}
+				outputText(images.showImage("item-cBread"));
 				outputText("\n\nShe moves back towards the door. \"<i>Since you have been disobedient I shouldn't be giving you any food at all until you earn it. But I have a soft spot for you, little slave, so I suppose we can just think of this a homecoming gift of sorts.</i>\" Out of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n");
 				changeObey(3, true);
 				inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
@@ -1100,6 +1103,7 @@ package classes.Scenes.Places
 			outputText("\n\n\"<i>You will feel jealousy every time you hear the screams of another slave being taught their place. You will envy the fact that they will soon enjoy the wonderful epiphany of understanding what they really are. And, quite likely, you will stage fake rebellions simply to enjoy the rush of having your bad behavior corrected.</i>\"");
 			outputText("\n\n\"<i>Finally, you will think back on the times when you genuinely tried to resist your true nature -- a pliable, obedient, servile piece of flesh whose only reason to exist is to entertain and please others -- and you will feel grateful that your kind Mistress found you and saved you from your foolish ways.</i>\"");
 			outputText("\n\nShe emphasizes this final point by turning and walking to the door, then adding, almost as an afterthought, \"<i>Please do resist all you like, by the way, and even escape if you can. Don't worry, it usually doesn't take long catch you again, and more often than not you'll just come back to me on your own. In any case, your resistance creates useful, teachable moments. You can only learn how wrong you are about yourself if you have the opportunity to have your behaviors corrected, after all.</i>\"");
+			outputText(images.showImage("item-Bread"));
 			outputText("\n\n\"<i>Here, a special meal to help you get comfortable. Remember how good it tastes, since you'll need to earn it in the future.</i>\" She throws a pitiful looking loaf of bread on the floor next to you, and abruptly leaves you alone in your cell. ");
 			if (player.obey < 45 && player.cor < 70)
 			{
@@ -1362,6 +1366,7 @@ package classes.Scenes.Places
 				doNext(playerMenu);
 				return;
 			}
+			outputText(images.showImage("prison-workout"));
 			if (player.fatigue > player.maxFatigue() - 25)
 			{
 				outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ");
@@ -1420,6 +1425,7 @@ package classes.Scenes.Places
 				doNext(playerMenu);
 				return;
 			}
+			outputText(images.showImage("prison-cardio"));
 			if (player.fatigue > player.maxFatigue() - 30)
 			{
 				outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ");
@@ -1473,6 +1479,9 @@ package classes.Scenes.Places
 		//Special training
 		public function prisonCaptorTrainSelfControl():void
 		{
+			if (player.gender == 3) outputText(images.showImage("prison-selfcontrol-herm"));
+			else if (player.gender == 2) outputText(images.showImage("prison-selfcontrol-female"));
+			else outputText(images.showImage("prison-selfcontrol-male"));
 			outputText("(Placeholder) You decide to spend some time working on your sexual self control -- i.e., masturbating without orgasming. \n\nVarious scenes will play out depending on your esteem, obedience, and corruption, as well as randomized factors, and you will receive stat boosts as appropriate to the scene. For now, this placeholder just gives you a small increase to your obedience, a small hit to your self esteem,.and an increase to lust.\n\n");
 			dynStats("lus", 20);
 			changeObey(1,inPrison);
@@ -1483,6 +1492,7 @@ package classes.Scenes.Places
 		public function prisonCaptorTrainAnalCapcity():void
 		{
 			var lustChange:int = 0;
+			outputText(images.showImage("masti-dDildo-anal"));
 			outputText("(Placeholder) You decide to spend some time working on your anal capacity and endurance -- i.e., working fingers, hands, and other props into yourself to increase your ability to perform anal sex. \n\nVarious scenes will play out depending on your esteem, obedience, and corruption, as well as randomized factors, and you will receive stat boosts as appropriate to the scene. For now, this placeholder just gives you a small increase to your obedience, a small hit to your self esteem, and an increase to lust.\n\n");
 			dynStats("lus", 20);
 			changeObey(1, inPrison);
@@ -1506,6 +1516,7 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorTrainPuppyTricks():void
 		{
+			outputText(images.showImage("prison-doggie"));
 			outputText("(Placeholder) You decide to practice behaving like a dog -- crawling, sitting, begging, posing as if in heat with high corruption. \n\nVarious scenes will play out depending on your esteem, obedience, and corruption, as well as your state of restraint and other random factors, and you will receive stat boosts as appropriate to the scene. For now, this placeholder just gives you a small increase to your obedience and a small boost to your self esteem.\n");
 			changeObey(1,inPrison);
 			changeEsteem(1,inPrison);
@@ -1519,6 +1530,7 @@ package classes.Scenes.Places
 		public function prisonStudyMenu():void
 		{
 			clearOutput();
+			outputText(images.showImage("prison-cell"));
 			outputText("You consider ways to use your time to improve your mind.\n\n");
 			menu();
 			addButton(0, "Inner Peace", doPrisonStudyInnerpeace, null, null, null, "Calm your nerves and bring balance to your emotions to improve your self esteem.");
@@ -1532,6 +1544,7 @@ package classes.Scenes.Places
 		
 		public function doPrisonStudyInnerpeace():void
 		{
+			outputText(images.showImage("prison-selfesteem"));
 			outputText("You turn your thoughts inward in an attempt to calm your nerves and bring balance to your emotions.\n");
 			if (player.lust > 60)
 			{
@@ -1547,6 +1560,7 @@ package classes.Scenes.Places
 		
 		public function doPrisonStudyDetermination():void
 		{
+			outputText(images.showImage("prison-determination"));
 			outputText("You turn your thoughts inward in an attempt to improve your determination and strength of will.\n");
 			if (player.cor > 50)
 			{
@@ -1563,6 +1577,7 @@ package classes.Scenes.Places
 		
 		public function doPrisonStudySelfpity():void
 		{
+			outputText(images.showImage("prison-selfcontrol-female"));
 			outputText("You turn your thoughts inward in an attempt to calm your nerves and bring balance to your emotions, but end up wallowing in self pity over your hopeless situation instead.\n");
 			changeEsteem(-5,inPrison);
 			doNext(camp.returnToCampUseOneHour);
@@ -1570,6 +1585,7 @@ package classes.Scenes.Places
 		
 		public function doPrisonStudyDiscipline():void
 		{
+			outputText(images.showImage("prison-workout"));
 			outputText("You turn your thoughts inward in an attempt to improve your determination, but end up daydreaming about how pleasant it is to be told what to do rather than having to think for yourself.\n");
 			changeObey(5,inPrison);
 			doNext(camp.returnToCampUseOneHour);
@@ -1578,6 +1594,7 @@ package classes.Scenes.Places
 		//Special study
 		public function prisonCaptorStudyManners():void
 		{
+			outputText(images.showImage("prison-maiden"));
 			outputText("(Placeholder) You decide to spend some time working on your manners -- i.e., conditioning yourself to think of your captor as [captorTitle] and to use the proper form of address when speaking to her. \n\n Various scenes will play out depending on your esteem, obedience, and corruption, as well as randomized factors, and you will receive stat boosts as appropriate to the scene. For now, this placeholder just gives you a small increase to your obedience and a small hit to your self esteem.\n\n");
 			changeObey(1,inPrison);
 			changeEsteem(-1,inPrison);
@@ -1586,6 +1603,7 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorStudyBreathing():void
 		{
+			outputText(images.showImage("prison-selfcontrol"));
 			outputText("(Placeholder) You decide to spend some time working on your breathing -- i.e., working on holding your breath, practicing rhythmic breathing, and if corruption is high enough and props are available (the dildo bat weapon, the dildo rack, or your own very long penis), using said props to aid in this endeavor. \n\nVarious scenes will play out depending on your esteem, obedience, and corruption, as well as randomized factors, and you will receive stat boosts as appropriate to the scene. For now, this placeholder just gives you a small increase to your obedience and a small boost to your self esteem.\n\n");
 			changeObey(1,inPrison);
 			changeEsteem(1,inPrison);
@@ -1596,6 +1614,7 @@ package classes.Scenes.Places
 		{
 			clearOutput();
 			var newCleanliness:int = 0;
+			outputText(images.showImage("prison-maiden"));
 			outputText("You decide to spend some time cleaning your cell, fearing what your " + prisonCaptor.captorTitle + " might do if you let it get too messy.");
 			newCleanliness = player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) - 5;
 			if (player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
@@ -2451,6 +2470,7 @@ package classes.Scenes.Places
 				}
 				billieScene.prisonCaptorBillieEventChange(1);
 				trace("Elly");
+				outputText(images.showImage("prison-elly"));
 				outputText(prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room to find you writhing on the floor with unmanageable lust and is clearly amused by your pathetic state of affairs. After a moment's thought " + prisonCaptor.captorPronoun1 + " comes to a decision and says, \"<i>Beg me to fuck you, and I might take pity on you.</i>\"\n\n");
 				outputText("Do you give in to your lust and beg your " + prisonCaptor.captorTitle + " to fuck you, or do you try to resist? " + prisonWillCostDescript(15));
 				menu();
@@ -2504,6 +2524,7 @@ package classes.Scenes.Places
 			hideMenus();
 			clearOutput();
 			var cleanlinessLevel:int = 0;
+			outputText(images.showImage("prison-elly"));
 			outputText(prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room and begins to inspect its level of cleanliness. ");
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)
 			{
@@ -2576,6 +2597,7 @@ package classes.Scenes.Places
 	  
 		public function prisonCaptorRestraintCheckEvent():Boolean
 		{
+			outputText(images.showImage("prison-elly"));
 			if (player.statusEffectv2(StatusEffects.PrisonRestraints) == 0 && player.statusEffectv3(StatusEffects.PrisonRestraints) == 0 && player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 			{
 				if (player.obey >= 95 && player.statusEffectv1(StatusEffects.PrisonRestraints) > 0)
@@ -2689,6 +2711,10 @@ package classes.Scenes.Places
 					billieScene.prisonCaptorBilliePunishmentFuck("choose");
 					return;
 				case 6:
+					if (player.gender == 3) outputText(images.showImage("prison-elly-herm"));
+					else if (player.gender == 2) outputText(images.showImage("prison-elly-female"));
+					else outputText(images.showImage("prison-elly-male"));
+					
 					if (player.hasVagina())
 					{
 						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" After a brief hesitation, you do so. She makes you present yourself like a bitch in heat while continuing to beg. Finally she gives you want you want, and fills your womb with her potent seed.\n\n");
@@ -2789,6 +2815,10 @@ package classes.Scenes.Places
 				case 4:
 				case 5:
 				case 6:
+					if (player.gender == 3) outputText(images.showImage("prison-elly-herm"));
+					else if (player.gender == 2) outputText(images.showImage("prison-elly-female"));
+					else outputText(images.showImage("prison-elly-male"));
+					
 					if (player.hasVagina())
 					{
 						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" You petulantly refuse, ");
@@ -2835,6 +2865,7 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorPunishmentFuck():void
 		{
+			outputText(images.showImage("prison-elly"));
 			outputText("[captorTitle] [captorName] wears a beguiling half smile while studying you intently with [captorhis] piercing eyes, then reaches a decision. \"<i>A good fucking should suffice; whether you try to resist or not, your own body is going to correct your bad behavior today. Either way we're both going to enjoy this, so the only question is how hard you want to make it for yourself?</i>\"[if (lust > 75) \" You wonder if [captorhe] can see just how horny you currently are as you consider how to respond.\"]\n\n");
 			outputText("Do you give in and take your punishment submissively, or do you make an effort to resist?");
 			menu();
@@ -2870,6 +2901,7 @@ package classes.Scenes.Places
 
 			if (cumBread)
 			{
+				outputText(images.showImage("item-cBread"));
 				if (lickPrompt && trainingPet.prisonCaptorPetTier() > 0 && !trainingPet.prisonCaptorPetOptedOut())
 				{
 					trainingPet.prisonCaptorPetLickCumBowl("choose");
