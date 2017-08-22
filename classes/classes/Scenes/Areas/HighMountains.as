@@ -80,7 +80,7 @@ package classes.Scenes.Areas
 							return player.hasItem(consumables.OVIELIX)
 								   || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0
 						},
-						chance: player.itemCount(consumables.OVIELIX),
+						chance: function():Number { return player.itemCount(consumables.OVIELIX); },
 						call  : chickenHarpy
 					}, {
 						name: "phoenix",

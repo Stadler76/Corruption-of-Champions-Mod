@@ -40,11 +40,6 @@ package classes.Items.Consumables
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
 				game.HPChange(30 + player.tou / 3, true);
 				dynStats("lus", 3, "cor", 1);
-				//Shrinkage!
-				if (rand(2) === 0 && player.tallness > 42) {
-					outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n");
-					player.tallness -= 1 + rand(3);
-				}
 				//Red or orange skin!
 				if (rand(30) === 0 && ["red", "orange"].indexOf(player.skinTone) === -1) {
 					if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
@@ -55,7 +50,6 @@ package classes.Items.Consumables
 					mutations.updateClaws(player.clawType);
 					kGAMECLASS.rathazul.addMixologyXP(20);
 				}
-				return false;
 			}
 			else {
 				outputText("The food tastes... corrupt, for lack of a better word.\n");
@@ -84,7 +78,7 @@ package classes.Items.Consumables
 			}
 			
 			//Imp wings - I just kinda robbed this from demon changes ~Foxwells
-			if (rand(3) === 0 && changes < changeLimit && [WING_TYPE_IMP_LARGE, WING_TYPE_IMP].indexOf(player.wingType) === -1 && player.cor >= (25 - player.corruptionTolerance())) {
+			if (rand(3) == 0 && changes < changeLimit && player.wingType != WING_TYPE_IMP_LARGE && player.cor >= (25 - player.corruptionTolerance())) {
 				//grow smalls to large
 				if (player.wingType === WING_TYPE_IMP && player.cor >= (50 - player.corruptionTolerance())) {
 					outputText("\n\n");
@@ -286,10 +280,7 @@ package classes.Items.Consumables
 				}
 				if (player.nippleLength > 0.25) {
 					outputText("\n\nA strange burning sensation fills you, and you look in your " + player.armorName + " to see your nipples have shrunk! <b>Your nipples have shrunk due to being an imp!</b>");
-					for(var y:int = 0; y < player.bRows(); y++)
-					{
-						player.breastRows[y].nippleLength = 0.25;
-					}
+					player.nippleLength = 0.25;
 				}
 				if (player.hasVagina()) {
 					outputText("\n\nA sudden pain in your groin brings you to your knees. You move your armor out of the way and watch as your cunt seals up, vanishing from your body entirely. <b>Your cunt has gone away due to being an imp!</b>");
@@ -310,7 +301,7 @@ package classes.Items.Consumables
 				changes++;
 				dynStats("cor", 20);
 			}
-			
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

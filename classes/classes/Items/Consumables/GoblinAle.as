@@ -227,7 +227,7 @@ package classes.Items.Consumables
 				if (rand(2) === 0) player.modTone(15, 5);
 			}
 			player.refillHunger(15);
-			
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

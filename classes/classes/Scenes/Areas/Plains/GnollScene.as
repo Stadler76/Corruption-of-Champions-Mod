@@ -19,6 +19,7 @@ package classes.Scenes.Areas.Plains
 		{
 			spriteSelect(SpriteDb.s_club_gnoll);
 			clearOutput();
+			outputText(images.showImage("monster-gnoll"));
 			outputText("The sound of distant laughter comes across the plains, then seems to die off suddenly.  A moment later, a gnoll comes bounding from the nearest scrap of cover and barrels into you.  The monstrous thing giggles as it bounces back and forth before you, looking for an opening to exploit.");
 			startCombat(new Gnoll());
 		}
@@ -44,6 +45,7 @@ package classes.Scenes.Areas.Plains
 			else outputText("flat, featureless groin.  ");
 			//  (if cockTotal=0 AND vaginas=1)
 			if (!player.hasCock()) {
+				outputText(images.showImage("gnoll-fuck-vag"));
 				if (player.hasVagina()) {
 					outputText("The gnoll looks a little disappointed at the void between your legs.  \"<i>Aw, I was hoping for something substantial,</i>\" she titters.  That doesn't stop her from hefting her engorged clit-dick and slapping its tip onto the entrance of your " + player.vaginaDescript(0) + ".  With one jittery lurch forward, she shoves her clit up inside you, her pubic mound mashing up against your " + player.clitDescript() + ".");
 					player.cuntChange(9, true, true, false);
@@ -54,6 +56,7 @@ package classes.Scenes.Areas.Plains
 			}
 			//(if cockTotal>0 AND 
 			if (player.cockTotal() > 0) {
+				outputText(images.showImage("gnoll-fuck-with-her-clit"));
 				//thickestCock()>2")
 				if (player.thickestCockThickness() > 2) {
 					//(if cockTotal>1)
@@ -141,6 +144,7 @@ package classes.Scenes.Areas.Plains
 		private function dickDownGnollClit():void
 		{
 			clearOutput();
+			outputText(images.showImage("gnoll-fuck-with-her-clit"));
 			outputText("This is not an opportunity you can pass up.  You roughly roll her onto her back and pull her long clit up to a vertical position.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger, fuller, until finally it looks nearly wide enough.  You don't wait any further; you position the head of your dick against the end of hers and jam it inside.\n\n");
 			outputText("Inch by inch, you sink your dick down into the warm tunnel of her monstrous clitoris.  The interior, you are happy to find, is not as rough as the exterior, and in fact is just slick enough to make your invasion possible.  After a few thrusts, you find it easiest to adopt a sort of reverse-cowgirl position, facing her feet as you roll your hips forward and shove more and more of your dick inside her.   Beneath you, the gnoll is clutching at the ground and making little submissive whimpers.\n\n");
 			var x:Number = player.longestCock();
@@ -168,6 +172,7 @@ package classes.Scenes.Areas.Plains
 		private function dickInGnollAss():void
 		{
 			clearOutput();
+			outputText(images.showImage("gnoll-win-fuck-her-butt"));
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			var y:Number = player.cockThatFits2(monster.analCapacity());
@@ -244,6 +249,7 @@ package classes.Scenes.Areas.Plains
 		private function suckGnollClit():void
 		{
 			clearOutput();
+			outputText(images.showImage("gnoll-win-suck-her-clit"));
 			outputText("Since you first saw this strange anatomy, you knew it needed to be inside you.  You roughly roll her onto her back and pull her long clit up to a vertical position.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger and fuller, until it might be too wide for your purposes.  Without losing any more time, you lean forward and stuff the clit's end into your mouth.\n\n");
 			outputText("The gnoll yelps in surprise and then moans appreciatively as your mouth and tongue roam across her sensitive skin.  Her hips squirm against the hard-baked dirt, tentatively pushing her clit deeper into your mouth.\n\n");
 			outputText("You're only too happy to oblige her, slowly and carefully swallowing the strange member down your throat.  Inch by inch you draw it deeper into yourself, eliciting increasing groans from the hyena girl.  Finally your nose buries itself in the rough, curly hair of her crotch, your chin rubbing up against the fake scrotum formed out of her distorted labia.\n\n");
@@ -262,6 +268,7 @@ package classes.Scenes.Areas.Plains
 			outputText("You roughly roll her onto her back and pull her long clit up to a vertical position.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger, fuller, until it might be too wide for your purposes.  You line up your " + player.vaginaDescript(0) + " and lower yourself onto the long, narrow faux-cock.");
 			player.cuntChange(9, true, true, false);
 			outputText("\n\n");
+			outputText(images.showImage("gnoll-fuck-vag"));
 			outputText("It slithers up your love canal with alacrity, and you quickly find yourself sitting on the gnoll's haunches.  You pump your hips up and down, relishing the feel of the thin spike slipping around within you.  This was not, however, what her anatomy was designed to do, and you can feel her monstrous clitoris flagging within you, collapsing down and denying you your well-deserved fucking.\n\n");
 			outputText("\"<i>Hey!</i>\" you shout, and reach forward to slap the gnoll across the face.  Abruptly the clit-dick hardens inside you, even as the girl's face registers little response.  With a smirk, you try it again.  A second hard slap brings the hyena's pseudocock ramrod straight up inside you, and you roll your hips atop her appreciatively.\n\n");
 			outputText("Every few strokes, the fake dick starts to fail you and you reach forward to slap her again.  Pump pump slap.  Thrust thrust smack.  Grunt grunt slap.  By the time your body rises up to the quivering summit of orgasm, the gnoll's face is purple with bruises.  You scream your orgasm to the sky, bearing down hard on her hollow clitoris, and come hard enough that you see stars.\n\n");
@@ -298,7 +305,7 @@ package classes.Scenes.Areas.Plains
 			outputText(".  The amazon wastes no time, guiding her monstrous clit to your " + player.assholeDescript() + " with gasping pleasure, thrusting the barrel-like pseudo-cock deeply inside your nethers, drawing a cry of penetration from your lips.  The plush interior of your anus parts before her energized clitoris, her cunt flowing with warm lubrication so heavily that its deluge inundates your bowels like a flood of pre-cum.");
 			player.buttChange(30, true, true, false);
 			outputText("\n\n");
-
+			outputText(images.showImage("gnoll-fuck-butt"));
 			outputText("Roughly, she bucks against your hips, pushing your face against the grass and dirt, moving with relentless speed as she fucks you with every ounce of strength in her well-toned body.  She snarls and cries out, even laughing with a mad desperation, as she plunges her rock-hard joy buzzer into your loins trying to achieve release.  Your struggles are useless against the rutting passion of the hyena-girl, who uses you like a beast in heat.  In mere minutes, her body seizes, muscles straining with the blissful throes of imminent orgasm and you whisper a prayer that she'll be done shortly.  Gnashing her teeth, she hooks both spotted paws around your shoulders and drives her jet-black member into the velvet folds of your clenching asshole, her sweltering cunny gushing with her girl-cum.\n\n");
 
 			outputText("Her bucking pauses for a split-second and you can feel her fuzzy balls throbbing against your " + player.buttDescript() + ", the stimulation of her fucking filling them with fresh loads, eager to spill into your violated hole.  But, without a passage to let loose the torrent of her sperm with, the gnoll's balls merely swell with unspent passion, lewdly quivering against");

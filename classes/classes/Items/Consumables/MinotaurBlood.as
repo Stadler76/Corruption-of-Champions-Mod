@@ -438,7 +438,7 @@ package classes.Items.Consumables
 				dynStats("lus", 50);
 			}
 			player.refillHunger(25);
-			
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

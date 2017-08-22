@@ -183,20 +183,38 @@ package classes.Scenes.Seasonal {
 			else if ((player.hasStatusEffect(StatusEffects.PureCampJojo) || getGame().jojoScene.campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
 				//Pure
 				if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
-					outputText("Jojo is sitting on his usual rock, one hand out to catch snowflakes with a beatific smile of awe on his face.  \"<i>Look, [name], snow!  I haven't seen snow since I was a very, very small boy.</i>\"  He tells you.");
-					
-					outputText("\n\nSo is he enjoying it?  You ask.  If so, then it was worth it getting someone to make it snow on your camp.");
-					outputText("\n\n\"<i>Yes, I'm enjoying it - it's a wonderful reminder of purer times.</i>\"  The mouse says, still catching flakes and watching them melt in the palms of his hands.");
-					
-					outputText("\n\nOut of the monk's sight you take a small bit of snow and slowly roll it into a ball.  Then taking your time to place your shot carefully, you swing your arm at full speed, hurling the small ball of snow right at the back of the white-furred monk's head.");
-					outputText("\n\nThe snowball explodes as it lands, knocking Jojo right off his perch with a startled squeak.  \"<i>[name], what was that for!?</i>\" he splutters.");
-					outputText("\n\nYou can't resist laughing out loud.  You were just testing to see if he had his guard up.");
-					
-					outputText("\n\nFaster than you would have expected, Jojo stoops down, rolls a snowball and smacks you right in the face with it.  \"<i>Two can play at that game,</i>\" he says, a faint grin playing on his features.");
-					
-					outputText("\n\nYou calmly wipe the snow off your face and smile evilly at the monk, asking him if he realizes this means war...");
-					outputText("\n\n\"<i>Bring it on,</i>\" Jojo states, already bouncing another snowball in his palm.");
-					outputText("\n\nLaughter echoes as the two of you exchange snowballs...");
+					if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+						outputText("Jojo is sitting on his usual rock, one hand out to catch snowflakes with a beatific smile of awe on his face.  \"<i>Look, [name], snow!  I haven't seen snow since I was a very, very small boy.</i>\"  He tells you.");
+						
+						outputText("\n\nSo is he enjoying it?  You ask.  If so, then it was worth it getting someone to make it snow on your camp.");
+						outputText("\n\n\"<i>Yes, I'm enjoying it - it's a wonderful reminder of purer times.</i>\"  The mouse says, still catching flakes and watching them melt in the palms of his hands.");
+						
+						outputText("\n\nOut of the monk's sight you take a small bit of snow and slowly roll it into a ball.  Then taking your time to place your shot carefully, you swing your arm at full speed, hurling the small ball of snow right at the back of the white-furred monk's head.");
+						outputText("\n\nThe snowball explodes as it lands, knocking Jojo right off his perch with a startled squeak.  \"<i>[name], what was that for!?</i>\" he splutters.");
+						outputText("\n\nYou can't resist laughing out loud.  You were just testing to see if he had his guard up.");
+						
+						outputText("\n\nFaster than you would have expected, Jojo stoops down, rolls a snowball and smacks you right in the face with it.  \"<i>Two can play at that game,</i>\" he says, a faint grin playing on his features.");
+						
+						outputText("\n\nYou calmly wipe the snow off your face and smile evilly at the monk, asking him if he realizes this means war...");
+						outputText("\n\n\"<i>Bring it on,</i>\" Jojo states, already bouncing another snowball in his palm.");
+						outputText("\n\nLaughter echoes as the two of you exchange snowballs...");
+					}
+					else { // Bimbo Jojo
+						outputText("Joy is sitting on her usual rock, one hand out to catch snowflakes with a beatific smile of awe on her face.  \"<i>Look, [name], snow!  I haven't, like, seen snow since I was a very, very small mouse!</i>\"  She tells you excitedly.");
+						
+						outputText("\n\nSo is she enjoying it?  You ask.  If so, then it was worth it getting someone to make it snow on your camp.");
+						outputText("\n\n\"<i>Yes, I'm enjoying it - it's beautiful and pure, all cold!</i>\"  The mouse says, still catching flakes and watching them melt in the palms of her hands.");
+						
+						outputText("\n\nOut of the monk's sight you take a small bit of snow and slowly roll it into a ball.  Then taking your time to place your shot carefully, you swing your arm at full speed, hurling the small ball of snow right at the back of the white-furred monk's head.");
+						outputText("\n\nThe snowball explodes as it lands, knocking Joy right off her perch with a startled squeak.  \"<i>Hey [name]! Like, what was that for!?</i>\" she splutters.");
+						outputText("\n\nYou can't resist laughing out loud.  You were just testing to see if she had her guard up.");
+						
+						outputText("\n\nFaster than you would have expected, Joy stoops down, rolls a snowball and smacks you right in the face with it.  \"<i>Two can play at that game,</i>\" she says, a faint grin playing on her features.");
+						
+						outputText("\n\nYou calmly wipe the snow off your face and smile evilly at the monk, asking her if she realizes this means war...");
+						outputText("\n\n\"<i>Bring it on,</i>\" Joy states, already bouncing another snowball in her palm.");
+						outputText("\n\nLaughter echoes as the two of you exchange snowballs...");
+					}
 					menu();
 					addButton(0,"Next",processJackFrostEvent);
 					flags[kFLAGS.JACK_FROST_PROGRESS] = 5;

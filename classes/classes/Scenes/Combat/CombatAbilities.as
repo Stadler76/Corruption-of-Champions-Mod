@@ -2286,19 +2286,7 @@ package classes.Scenes.Combat
 				monster.doAI();
 				return;
 			}
-			//Bigger horns = better success chance.
-			//Small horns - 60% hit
-			if (player.horns >= 6 && player.horns < 12) {
-				temp = 60;
-			}
-			//bigger horns - 75% hit
-			if (player.horns >= 12 && player.horns < 20) {
-				temp = 75;
-			}
-			//huge horns - 90% hit
-			if (player.horns >= 20) {
-				temp = 80;
-			}
+			temp = 80; // Basic chance. Just as minos with fully grown horns.
 			//Vala dodgy bitch!
 			if (monster.short == "Vala") {
 				temp = 20;
@@ -2309,8 +2297,6 @@ package classes.Scenes.Combat
 			temp += player.spe/2;
 			//Hit & calculation
 			if (temp >= rand(100)) {
-				var horns:Number = player.horns;
-				if (player.horns > 40) player.horns = 40;
 				damage = int(player.str + (player.tou / 2) + (player.spe / 2) + (player.level * 2) * 1.2 * (monster.damagePercent() / 100)); //As normal attack + horn length bonus
 				if (damage < 0) damage = 5;
 				//Normal
@@ -2566,6 +2552,11 @@ package classes.Scenes.Combat
 		//hit
 		public function tailWhipAttack():void {
 			clearOutput();
+			if (player.fatigue + player.physicalCost(15) > player.maxFatigue()) {
+				outputText("You are too tired to perform a tail whip.");
+				doNext(curry(combat.combatMenu,false));
+				return;
+			}
 			//miss
 			if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
 				outputText("Twirling like a top, you swing your tail, but connect with only empty air.");
@@ -2583,12 +2574,18 @@ package classes.Scenes.Combat
 				monster.addStatusValue(StatusEffects.CoonWhip,2,2);
 				if (player.tailType == TAIL_TYPE_RACCOON) monster.addStatusValue(StatusEffects.CoonWhip,2,2);
 			}
+			player.changeFatigue(15,2);
 			outputText("\n\n");
 			monster.doAI();
 		}
 		
 		public function tailSlapAttack():void {
 			clearOutput();
+			if (player.fatigue + player.physicalCost(30) > player.maxFatigue()) {
+				outputText("You are too tired to perform a tail slap.");
+				doNext(curry(combat.combatMenu,false));
+				return;
+			}
 			outputText("With a simple thought you set your tail ablaze.");
 			//miss
 			if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
@@ -2603,7 +2600,7 @@ package classes.Scenes.Combat
 				outputText("  Your tail slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 				combat.checkAchievementDamage(damage);
 			}
-			player.changeFatigue(40,2);
+			player.changeFatigue(30,2);
 			outputText("\n\n");
 			monster.doAI();
 		}

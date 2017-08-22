@@ -1,5 +1,6 @@
 package classes.Items.Consumables
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.PerkLib;
@@ -154,7 +155,7 @@ package classes.Items.Consumables
 				outputText("\n\nYour breasts feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach " + player.breastCup(0) + "-cup. You rub the tender orbs as you get used to your larger breast flesh.");
 				changes++;
 			}
-			
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

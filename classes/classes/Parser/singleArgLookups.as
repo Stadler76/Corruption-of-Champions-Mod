@@ -8,6 +8,7 @@
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
 		import classes.GlobalFlags.kFLAGS;
 		import classes.GlobalFlags.kGAMECLASS;
+		import classes.internals.Utils;
 		
 		public var singleArgConverters:Object =
 		{
@@ -47,6 +48,7 @@
 				"feet"						: function(thisPtr:*):* { return kGAMECLASS.player.feet(); },
 				"foot"						: function(thisPtr:*):* { return kGAMECLASS.player.foot(); },
 				"fullchest"					: function(thisPtr:*):* { return kGAMECLASS.player.allChestDesc(); },
+				"furcolor"					: function(thisPtr:*):* { return kGAMECLASS.player.furColor; },
 				"hair"						: function(thisPtr:*):* { return kGAMECLASS.player.hairDescript(); },
 				"haircolor"					: function(thisPtr:*):* { return kGAMECLASS.player.hairColor; },
 				"hairorfur"					: function(thisPtr:*):* { return kGAMECLASS.player.hairOrFur(); },
@@ -62,6 +64,8 @@
 				"his2"						: function(thisPtr:*):* { return kGAMECLASS.player2.mf("his", "her"); },
 				"horns"						: function(thisPtr:*):* { return kGAMECLASS.player.hornDescript(); },
 				"leg"						: function(thisPtr:*):* { return kGAMECLASS.player.leg(); },
+				"legcounttext"				: function(thisPtr:*):* { return Utils.num2Text(kGAMECLASS.player.legCount); },
+				"legcounttextuc"			: function(thisPtr:*):* { return Utils.Num2Text(kGAMECLASS.player.legCount); },
 				"legs"						: function(thisPtr:*):* { return kGAMECLASS.player.legs(); },
 				"lowergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.lowerGarmentName; },
 				"man"						: function(thisPtr:*):* { return kGAMECLASS.player.mf("man", "woman"); },
@@ -87,6 +91,7 @@
 				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
 				"skin"						: function(thisPtr:*):* { return kGAMECLASS.player.skinDescript(); },
 				"skin.noadj"				: function(thisPtr:*):* { return kGAMECLASS.player.skinDescript(true); },
+				"skindesc"					: function(thisPtr:*):* { return kGAMECLASS.player.skinDesc; },
 				"skinfurscales"				: function(thisPtr:*):* { return kGAMECLASS.player.skinFurScales(); },
 				"skintone"					: function(thisPtr:*):* { return kGAMECLASS.player.skinTone; },
 				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },

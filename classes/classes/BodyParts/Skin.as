@@ -94,5 +94,16 @@ package classes.BodyParts
 			restore(keepTone);
 			setProps(p);
 		}
+
+		public function toObject():Object
+		{
+			return {
+				type:     type,
+				tone:     tone,
+				desc:     desc,
+				adj:      adj,
+				furColor: furColor
+			};
+		}
 	}
 }

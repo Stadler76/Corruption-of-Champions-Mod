@@ -358,7 +358,11 @@ package classes.Scenes {
 						outputText(" languidly, reveling at their near-constant hardness.  ");
 					else outputText(" teasingly, pre-cum running down your cocks from your constant state of arousal, pooling around you.  ");
 				}
-			}			
+			}
+				if (player.gender == 3) outputText(images.showImage("masti-herm"));
+				else if (player.gender == 2) outputText(images.showImage("masti-female"));
+				else outputText(images.showImage("masti-male"));
+
 			if (player.vaginas.length > 0) {
 				if (player.vaginas.length == 1) {
 					//0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
@@ -1950,6 +1954,7 @@ package classes.Scenes {
 			clearOutput();
 			//[USE FEMALE]
 			if (player.hasVagina()) {
+				outputText(images.showImage("masti-dDildo-vag"));
 				//(highcor)
 				if (player.cor > 66)
 					outputText("You retrieve the floppy pink dildo from your possessions and strip down in the middle of your camp, shivering with the sexual thrill of your exhibitionism.");
@@ -2028,6 +2033,7 @@ package classes.Scenes {
 		private function deluxeDildoAnal():void {
 			player.slimeFeed();
 			clearOutput();
+			outputText(images.showImage("masti-dDildo-anal"));
 			//(highcor)
 			if (player.cor > 66)
 				outputText("You retrieve the floppy pink dildo from your possessions and strip down in the middle of your camp, shivering with the sexual thrill of your exhibitionism.");
@@ -2309,6 +2315,7 @@ package classes.Scenes {
 		
 		private function lickYerGirlParts():void { //Female cat masturbation
 			clearOutput();
+			outputText(images.showImage("masti-lick-girl"));
 			if (player.findPerk(PerkLib.Flexibility) < 0) {
 				outputText("You undress from your " + player.armorName + " and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your " + player.vaginaDescript() + " You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your " + player.vaginaDescript() + ". You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.");
 				dynStats("lus", 15);
@@ -2344,6 +2351,7 @@ package classes.Scenes {
 		private function catAutoLick():void { //Male cat masturbation
 			clearOutput();
 			//NOT FEXIBLE
+			outputText(images.showImage("masti-lick-boy"));
 			if (player.findPerk(PerkLib.Flexibility) < 0) {
 				//Fails [Herm has a 50/50 chance of getting either.]
 				//[Male]

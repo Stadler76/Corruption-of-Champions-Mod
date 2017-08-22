@@ -13,6 +13,7 @@ package classes
 		protected function shortSuffix(...args):String { return measurements.shortSuffix.apply(null, args); }
 
 		public function appearance():void {
+			if (CoC_Settings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
 			funcs = new Array();
 			args = new Array();
 			//Temp vars
@@ -62,7 +63,7 @@ package classes
 			else if (player.faceType == FACE_FERRET)
 			{
 				if (player.hasPlainSkin()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.");
-				else outputText("  Your face is coated in " + player.furColor + " fur with [skin] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
+				else outputText("  Your face is coated in [furColor] fur with [skin] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
 			}
 			else if (player.faceType == FACE_RACCOON_MASK) 
 			{
@@ -166,7 +167,7 @@ package classes
 					if (player.hasDifferentUnderBody())
 						outputText("  You have a cat-like face, complete with moist nose and whiskers.  You have [skinFurScales] on your upper jaw and head, while your lower jaw is decorated by [underBody.skinFurScales], hiding your [skin.noadj] underneath.");
 					else
-						outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.");
+						outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skinDesc] is [furColor], hiding your [skin.noadj] underneath.");
 				if (player.hasScales()) 
 					outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skinFurScales].");
 				if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP)
@@ -179,7 +180,7 @@ package classes
 			if (player.faceType == FACE_COW_MINOTAUR) 
 			{
 				if (player.hasPlainSkin() || player.hasGooSkin()) 
-					outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of " + player.furColor + " fuzz.");
+					outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of [furColor] fuzz.");
 				if (player.hasFur()) 
 					outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your [skinFurScales] thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.");
 				if (player.hasScales()) 
@@ -216,13 +217,13 @@ package classes
 			//<mod>
 			if (player.faceType == FACE_PIG)
 			{
-				outputText("  Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
+				outputText("  Your face is like that of a pig, with [skinTone] skin, complete with a snout that is always wiggling.");
 			}
 			if (player.faceType == FACE_BOAR)
 			{
 				outputText("  Your face is like that of a boar, ");
 				if (player.hasFur()) 
-					outputText("with " + player.skinTone + " skin underneath your " + player.furColor + " fur"); 
+					outputText("with [skinTone] skin underneath your [furColor] fur"); 
 				outputText(", complete with tusks and a snout that is always wiggling.");
 			}
 			if (player.faceType == FACE_RHINO)
@@ -260,7 +261,7 @@ package classes
 			if (player.faceType == FACE_COCKATRICE)
 			{
 				if (player.underBody.skin.type == SKIN_TYPE_FEATHERED)
-					outputText("  You have a cockatrice’s face, complete with " + player.furColor + " feathered skin and a muzzle like beak.");
+					outputText("  You have a cockatrice’s face, complete with [furColor] feathered skin and a muzzle like beak.");
 				else
 					outputText("  You have a cockatrice’s face, complete with [skinFurScales] and a muzzle like beak.");
 			}
@@ -302,7 +303,7 @@ package classes
 					outputText("  You have no hair, only a thin layer of fur atop of your head.  ");
 				else if (player.hasWool()) 
 					outputText("  You have no hair, only a thin layer of wool atop of your head.  ");
-				else outputText("  You are totally bald, showing only shiny " + player.skinTone + " " + player.skinDesc + " where your hair should be.");
+				else outputText("  You are totally bald, showing only shiny [skinTone] [skinDesc] where your hair should be.");
 				if (player.earType == EARS_HORSE) 
 					outputText("  A pair of horse-like ears rise up from the top of your head.");
 				else if (player.earType == EARS_SHEEP) 
@@ -450,13 +451,13 @@ package classes
 			if (player.hornType == HORNS_DEMON) 
 			{
 				if (player.horns == 2) 
-					outputText("  A small pair of pointed horns has broken through the " + player.skinDesc + " on your forehead, proclaiming some demonic taint to any who see them.");
+					outputText("  A small pair of pointed horns has broken through the [skinDesc] on your forehead, proclaiming some demonic taint to any who see them.");
 				if (player.horns == 4) 
-					outputText("  A quartet of prominent horns has broken through your " + player.skinDesc + ".  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.");
+					outputText("  A quartet of prominent horns has broken through your [skinDesc].  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.");
 				if (player.horns == 6) 
-					outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost "+numInchesOrCentimetres(8)+" long upwards and a little forward.");
+					outputText("  Six horns have sprouted through your [skinDesc], the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost "+numInchesOrCentimetres(8)+" long upwards and a little forward.");
 				if (player.horns >= 8) 
-					outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly "+numInchesOrCentimetres(10)+" while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.");	
+					outputText("  A large number of thick demonic horns sprout through your [skinDesc], each pair sprouting behind the ones before.  The front jut forwards nearly "+numInchesOrCentimetres(10)+" while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.");	
 			}
 			//Minotaur horns
 			if (player.hornType == HORNS_COW_MINOTAUR) 
@@ -603,7 +604,7 @@ package classes
 			if (player.armType == ARM_TYPE_HARPY) 
 				outputText("  Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
 			else if (player.armType == ARM_TYPE_WOLF) 
-				outputText("  Your arms are shaped like a wolf's, overly muscular at your shoulders and biceps before quickly slimming down. They're covered in " + player.furColor + " fur and end in paws with just enough flexibility to be used as hands. They're rather difficult to move in directions besides back and forth.");	
+				outputText("  Your arms are shaped like a wolf's, overly muscular at your shoulders and biceps before quickly slimming down. They're covered in [furColor] fur and end in paws with just enough flexibility to be used as hands. They're rather difficult to move in directions besides back and forth.");	
 			else if (player.armType == ARM_TYPE_SPIDER) 
 				outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");	
 			else if (player.armType == ARM_TYPE_SALAMANDER)
@@ -614,12 +615,12 @@ package classes
 				outputText("  Your arms are covered in " + (player.hasCockatriceSkin() ? player.furColor : player.hairColor) + " feathers from the"
 				          +" shoulder down to the elbow where they stop in a fluffy cuff. A handful of long feathers grow from your elbow in the form"
 				          +" of vestigial wings, and while they may not let you fly, they certainly help you jump. Your lower arm is coated in"
-				          +" leathery " + player.skinTone + " scales and your fingertips terminate in deadly looking avian talons.");
+				          +" leathery [skinTone] scales and your fingertips terminate in deadly looking avian talons.");
 			}
 			//Done with head bits. Move on to body stuff
 			// <mod name="BodyParts.UnderBody" author="Stadler76">
 			if (player.hasCockatriceSkin()) {
-				outputText("  You’ve got a thick layer of " + player.furColor + " feathers covering your body, while [skinFurScales] coat you from"
+				outputText("  You’ve got a thick layer of [furColor] feathers covering your body, while [skinFurScales] coat you from"
 				          +" chest to groin.");
 			} else if (player.hasDifferentUnderBody()) {
 				outputText("  While most of your body is covered by [skinFurScales] you have [underBody.skinFurScales] covering your belly.");
@@ -629,20 +630,20 @@ package classes
 			if (player.isTaur()) 
 			{
 				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
-					outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount)+ " legs capped by hooves.");
+					outputText("  From the waist down you have the body of a horse, with all [legCountText] legs capped by hooves.");
 				else if (player.lowerBody == LOWER_BODY_TYPE_PONY) 
-					outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all " + num2Text(player.legCount)+ " legs ending in flat, rounded feet.");
+					outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all [legCountText] legs ending in flat, rounded feet.");
 				else
-					outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount)+ " legs.");
+					outputText("  Where your legs would normally start you have grown the body of a feral animal, with all [legCountText] legs.");
 			}
 			if (player.isDrider()) 
-				outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount) + " spindly legs that sprout from its sides.");
+				outputText("  Where your legs would normally start you have grown the body of a spider, with [legCountText] spindly legs that sprout from its sides.");
 			//Hip info only displays if you aren't a centaur. 
 			if (!player.isTaur()) 
 			{
 				if (player.thickness > 70) 
 				{
-					outputText("  You have " + player.hipDescript());
+					outputText("  You have [hips]");
 					if (player.hipRating < 6) 
 					{
 						if (player.tone < 65) 
@@ -660,7 +661,7 @@ package classes
 				}
 				else if (player.thickness < 30) 
 				{
-					outputText("  You have " + player.hipDescript());
+					outputText("  You have [hips]");
 					if (player.hipRating < 6) 
 						outputText(" that match your trim, lithe body, and");
 					if (player.hipRating >= 6 && player.hipRating < 10) 
@@ -675,7 +676,7 @@ package classes
 				//STANDARD
 				else 
 				{
-					outputText("  You have " + player.hipDescript());
+					outputText("  You have [hips]");
 					if (player.hipRating < 6) 
 						outputText(", and");
 					if (player.femininity > 50) 
@@ -719,7 +720,7 @@ package classes
 				//FATBUTT
 				if (player.tone < 65) 
 				{
-					outputText("  Your " + player.buttDescript());
+					outputText("  Your [butt]");
 					if (player.buttRating < 4) 
 						outputText(" is lean, from what you can see of it.");
 					if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -736,7 +737,7 @@ package classes
 				//GIRL LOOK AT DAT BOOTY
 				else 
 				{
-					outputText("  Your " + player.buttDescript());
+					outputText("  Your [butt]");
 					if (player.buttRating < 4) 
 						outputText(" is barely noticeable, showing off the muscles of your haunches.");
 					if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -757,7 +758,7 @@ package classes
 				//TUBBY ASS
 				if (player.tone < 60) 
 				{
-					outputText(" your " + player.buttDescript());
+					outputText(" your [butt]");
 					if (player.buttRating < 4) 
 						outputText(" looks great under your gear.");
 					if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -774,7 +775,7 @@ package classes
 				//FITBUTT
 				else 
 				{
-					outputText(" your " + player.buttDescript());
+					outputText(" your [butt]");
 					if (player.buttRating < 4) 
 						outputText(" molds closely against your form.");
 					if (player.buttRating >= 4 && player.buttRating < 6) 
@@ -791,15 +792,15 @@ package classes
 			}
 			//TAILS
 			if (player.tailType == TAIL_TYPE_HORSE) 
-				outputText("  A long " + player.hairColor + " horsetail hangs from your " + player.buttDescript() + ", smooth and shiny.");
+				outputText("  A long [hairColor] horsetail hangs from your [butt], smooth and shiny.");
 			if (player.tailType == TAIL_TYPE_FERRET)
-				outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.furColor + " fur.");
+				outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy [furColor] fur.");
 			if (player.tailType == TAIL_TYPE_SHEEP) 
 				outputText("  A fluffy sheep tail hangs down from your [butt]. It occasionally twitches and shakes, its puffy fluff begging to be touched.");
 			if (player.tailType == TAIL_TYPE_DOG) 
-				outputText("  A fuzzy " + player.furColor + " dogtail sprouts just above your " + player.buttDescript() + ", wagging to and fro whenever you are happy.");
+				outputText("  A fuzzy [furColor] dogtail sprouts just above your [butt], wagging to and fro whenever you are happy.");
 			if (player.tailType == TAIL_TYPE_DEMONIC) 
-				outputText("  A narrow tail ending in a spaded tip curls down from your " + player.buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.");
+				outputText("  A narrow tail ending in a spaded tip curls down from your [butt], wrapping around your [leg] sensually at every opportunity.");
 			if (player.tailType == TAIL_TYPE_COW) 
 				outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 			if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) 
@@ -828,7 +829,7 @@ package classes
 			}
 			if (player.tailType == TAIL_TYPE_CAT) 
 			{
-				outputText("  A soft " + player.furColor + " cat-tail sprouts just above your " + player.buttDescript() + ", curling and twisting with every step to maintain perfect balance.");
+				outputText("  A soft [furColor] cat-tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.");
 			}
 			if (player.tailType == TAIL_TYPE_LIZARD) 
 			{
@@ -844,19 +845,19 @@ package classes
 			}
 			if(player.tailType == TAIL_TYPE_SALAMANDER) 
 			{
-				outputText("  A tapered, covered in red scales tail hangs down from just above your " + player.assDescript() + ".  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.");
+				outputText("  A tapered, covered in red scales tail hangs down from just above your [ass].  It sways back and forth, assisting you with keeping your balance. When you are in battle or when you want could set ablaze whole tail in red-hot fire.");
 			}
 			if (player.tailType == TAIL_TYPE_RABBIT) 
-				outputText("  A short, soft bunny tail sprouts just above your " + player.assDescript() + ", twitching constantly whenever you don't think about it.");
+				outputText("  A short, soft bunny tail sprouts just above your [ass], twitching constantly whenever you don't think about it.");
 			else if (player.tailType == TAIL_TYPE_HARPY) 
-				outputText("  A tail of feathers fans out from just above your " + player.assDescript() + ", twitching instinctively to help guide you if you were to take flight.");
+				outputText("  A tail of feathers fans out from just above your [ass], twitching instinctively to help guide you if you were to take flight.");
 			else if (player.tailType == TAIL_TYPE_KANGAROO) 
 			{
 				outputText("  A conical, ");
 				if (player.hasGooSkin()) 
-					outputText("gooey, " + player.skinTone);
-				else outputText("furry, " + player.furColor);
-				outputText(", tail extends from your " + player.assDescript() + ", bouncing up and down as you move and helping to counterbalance you.");
+					outputText("gooey, [skinTone]");
+				else outputText("furry, [furColor]");
+				outputText(" tail extends from your [ass], bouncing up and down as you move and helping to counterbalance you.");
 			}
 			else if (player.tailType == TAIL_TYPE_FOX) 
 			{
@@ -880,12 +881,12 @@ package classes
 			//appearance
 			else if (player.tailType == TAIL_TYPE_RACCOON) 
 			{
-				outputText("  A black-and-" + player.furColor + "-ringed raccoon tail waves behind you.");
+				outputText("  A black-and-[furColor]-ringed raccoon tail waves behind you.");
 			}
 			else if (player.tailType == TAIL_TYPE_MOUSE) 
 			{
 				//appearance
-				outputText("  A naked, " + player.skinTone + " mouse tail pokes from your butt, dragging on the ground and twitching occasionally.");
+				outputText("  A naked, [skinTone] mouse tail pokes from your butt, dragging on the ground and twitching occasionally.");
 			}
 			//<mod>
 			else if (player.tailType == TAIL_TYPE_BEHEMOTH) 
@@ -927,20 +928,20 @@ package classes
 			else if (player.tailType == TAIL_TYPE_COCKATRICE) 
 			{
 				outputText(" A thick, scaly, prehensile reptilian tail hangs from your [butt], about half as long as you are tall."
-				          +" The first inch or so is feathered, terminating in a 'v'shape and giving way to your " + player.skinTone + " scales.");
+				          +" The first inch or so is feathered, terminating in a 'v'shape and giving way to your [skinTone] scales.");
 			}
 			//</mod>
 			//LOWERBODY SPECIAL
 			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
-				outputText("  " + Num2Text(player.legCount)+ " normal human legs grow down from your waist, ending in normal human feet.");
+				outputText("  [legCountTextUC] normal human legs grow down from your waist, ending in normal human feet.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_FERRET) 
-				outputText("  " + Num2Text(player.legCount)+ " furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.");
+				outputText("  [legCountTextUC] furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
-				outputText("  Your " + num2Text(player.legCount)+ " legs are muscled and jointed oddly, covered in fur, and end in a bestial hooves.");
+				outputText("  Your [legCountText] legs are muscled and jointed oddly, covered in fur, and end in a bestial hooves.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_WOLF) 
-				outputText("  You have " + num2Text(player.legCount) + " digitigrade legs that end in wolf paws.");
+				outputText("  You have [legCountText] digitigrade legs that end in wolf paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) 
-				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
+				outputText("  [legCountTextUC] digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 				if (player.hasReptileUnderBody(true)) {
 					var nagaColors:Array = ["", ""];
@@ -956,45 +957,45 @@ package classes
 					outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 			//Horse body is placed higher for readability purposes
 			else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) 
-				outputText("  Your " + num2Text(player.legCount)+ " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");
+				outputText("  Your [legCountText] perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS) 
-				outputText("  Your " + num2Text(player.legCount)+ " lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.");
+				outputText("  Your [legCountText] lithe legs are capped with flexible clawed feet.  Sharp black nails grow where once you had toe-nails, giving you fantastic grip.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_BEE) 
-				outputText("  Your " + num2Text(player.legCount)+ " legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.");
+				outputText("  Your [legCountText] legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_GOO) 
 				outputText("  In place of legs you have a shifting amorphous blob.  Thankfully it's quite easy to propel yourself around on.  The lowest portions of your " + player.armorName + " float around inside you, bringing you no discomfort.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_CAT) 
-				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.");
+				outputText("  [legCountTextUC] digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_LIZARD) 
-				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow down from your " + player.hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
+				outputText("  [legCountTextUC] digitigrade legs grow down from your [hips], ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 			else if(player.lowerBody == LOWER_BODY_TYPE_SALAMANDER) 
-				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your " + player.hipDescript() + ", ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
+				outputText("  [legCountTextUC] digitigrade legs covered in thick, leathery red scales up to the mid-thigh grow down from your [hips], ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_BUNNY) 
-				outputText("  Your " + num2Text(player.legCount)+ " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.");
+				outputText("  Your [legCountText] legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_HARPY) 
-				outputText("  Your " + num2Text(player.legCount)+ " legs are covered with " + player.furColor + " plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.");
+				outputText("  Your [legCountText] legs are covered with [furColor] plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_KANGAROO) 
-				outputText("  Your " + num2Text(player.legCount)+ " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.");
+				outputText("  Your [legCountText] furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) 
-				outputText("  Your " + num2Text(player.legCount)+ " legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
+				outputText("  Your [legCountText] legs are covered in a reflective black, insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_FOX) 
-				outputText("  Your " + num2Text(player.legCount)+ " legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
+				outputText("  Your [legCountText] legs are crooked into high knees with hocks and long feet, like those of a fox; cute bulbous toes decorate the ends.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DRAGON) 
-				outputText("  " + Num2Text(player.legCount)+ " human-like legs grow down from your " + player.hipDescript() + ", sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
+				outputText("  [legCountTextUC] human-like legs grow down from your [hips], sheathed in scales and ending in clawed feet.  There are three long toes on the front, and a small hind-claw on the back.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_RACCOON) 
-				outputText("  Your " + num2Text(player.legCount)+ " legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
+				outputText("  Your [legCountText] legs, though covered in fur, are humanlike.  Long feet on the ends bear equally long toes, and the pads on the bottoms are quite sensitive to the touch.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED) 
-				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs form below your [hips], ending in cloven hooves.");
+				outputText("  [legCountTextUC] digitigrade legs form below your [hips], ending in cloven hooves.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_IMP) 
-				outputText(" " + Num2Text(player.legCount) + " digitigrade legs form below your [hips], ending in clawed feet. Three extend out the front, and one smaller one is in the back to keep your balance.");
+				outputText(" [legCountTextUC] digitigrade legs form below your [hips], ending in clawed feet. Three extend out the front, and one smaller one is in the back to keep your balance.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_COCKATRICE) {
-				outputText(" " + Num2Text(player.legCount) + " digitigrade legs grow down from your [hips], ending in clawed feet."
+				outputText(" [legCountTextUC] digitigrade legs grow down from your [hips], ending in clawed feet."
 				          +" There are three long toes on the front, and a small hind-claw on the back."
 				          +" A layer of " + (player.hasCockatriceSkin() ? player.furColor : player.hairColor) + " feathers covers your legs from the"
 				          +" hip to the knee, ending in a puffy cuff.");
 			}
 			if (player.findPerk(PerkLib.Incorporeality) >= 0)
-				outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
+				outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 			outputText("\n");
 			if (player.hasStatusEffect(StatusEffects.GooStuffed))
 			{

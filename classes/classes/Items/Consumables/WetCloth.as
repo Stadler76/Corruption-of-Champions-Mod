@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.StatusEffects;
@@ -161,7 +162,7 @@ package classes.Items.Consumables
 			if (rand(2) === 0) outputText(player.modFem(85, 3));
 			if (rand(2) === 0) outputText(player.modThickness(20, 3));
 			if (rand(2) === 0) outputText(player.modTone(15, 5));
-			
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

@@ -67,8 +67,14 @@ Returns `true` if the bodypart already has the color to be applied
 ### applyDye(_color:String) / applyOil(_color:String)
 Applies the color to the bodypart
 
-### toObject() (Currently RearBody only)
+### toObject()
 Returns an object with all the public propertys that should be stored in a save file.
+
+Used in:
+- `Neck`
+- `RearBody`
+- `Skin`
+- `UnderBody`
 
 BodyParts
 ---------

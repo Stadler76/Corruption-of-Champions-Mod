@@ -16,6 +16,7 @@ import coc.view.MainView;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
 public function playerMenu():void {
+	mainViewManager.hidePlayerDoll();
 	if (!inCombat) spriteSelect(null);
 	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
 	mainView.nameBox.visible = false;

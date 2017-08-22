@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.PerkLib;
@@ -63,8 +64,8 @@ package classes.Items.Consumables
 					//dynStats("cor", 0);
 					changes++;
 				}
-			}			
-			
+			}
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

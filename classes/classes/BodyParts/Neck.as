@@ -78,5 +78,15 @@ package classes.BodyParts
 		{
 			color = _color;
 		}
+
+		public function toObject():Object
+		{
+			return {
+				type:  type,
+				len:   len,
+				pos:   pos,
+				color: color
+			};
+		}
 	}
 }

@@ -1206,6 +1206,7 @@ package classes.Items
 				dynStats("lus", 3);
 			}
 			player.refillHunger(15);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 	
 		public function succubisDelight(tainted:Boolean,player:Player):void
@@ -2107,6 +2108,7 @@ package classes.Items
 			if (rand(3) == 0) outputText(player.modThickness(70, 4));
 			if (rand(5) == 0) outputText(player.modTone(10, 5));
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function lustDraft(fuck:Boolean,player:Player):void

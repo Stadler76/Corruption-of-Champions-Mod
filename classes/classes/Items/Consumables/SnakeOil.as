@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
@@ -142,7 +143,7 @@ package classes.Items.Consumables
 			//Default change - blah
 			if (changes === 0) outputText("\n\nRemakarbly, the snake-oil has no effect.  Should you really be surprised at snake-oil NOT doing anything?");
 			player.refillHunger(5);
-			
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

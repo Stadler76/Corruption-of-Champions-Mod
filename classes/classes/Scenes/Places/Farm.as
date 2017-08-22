@@ -340,7 +340,7 @@ private function talkWhitney():void {
 	outputText("You tell her of your recent trials and tribulations ");
 	if (player.cor > 50) outputText("or at least the parts you think she would want to hear ");
 	outputText("and she listens attentively, chiming in with witty quips and comfort when appropriate.  When you finish she tells you ");
-	if (!flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("how well the farm has been going");
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] < 2) outputText("how well the farm has been going");
 	else outputText("how poorly the farm has been going since the lake became tainted.  She has to work three times as hard to keep her livestock and crops from succumbing to the taint, and the demons and monsters of the forest are many times more bold");
 	outputText(".  It feels good to get a chance to talk with another sane individual, but before long Whitney has to return to work, and you should check back on your camp.");
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.

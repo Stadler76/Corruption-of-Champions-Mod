@@ -1749,7 +1749,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nYou begin to feel an annoying tingling sensation at the edge of your nose, above your field of vision. Reaching up you feel the sharp edge of a curved horn growing out the edge of your face. The itchy tingle continues as you feel both of your horns become sharp and tall. You estimate your older horn to be a mere seven inches and your new horn to be around a foot long. They’ll be useful natural weapons.");
 				outputText("\n<b>(Gained physical special: Upheaval! Any time you lose your rhino face or horns, you will lose this ability.)</b>");
 				player.horns = 2;
-				player.tailType = HORNS_RHINO;
+				player.hornType = HORNS_RHINO;
 				changes++;
 			}
 			// Other Changes

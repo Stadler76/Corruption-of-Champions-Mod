@@ -2,6 +2,7 @@
  * Coded by aimozg on 06.06.2017.
  */
 package coc.view {
+import classes.internals.LoggerFactory;
 import classes.internals.Utils;
 
 import flash.display.DisplayObject;
@@ -13,12 +14,15 @@ import flash.text.TextFieldAutoSize;
 import flash.utils.Dictionary;
 import flash.utils.setTimeout;
 
+import mx.logging.ILogger;
+
 public class Block extends Sprite {
 	public static const ON_LAYOUT:String                       = 'coc$layout';
+	private static const LOGGER:ILogger = LoggerFactory.getLogger(Block);
 	/**
 	 * Null layout. All elements' positions and sizes are NOT adjusted
 	 */
-						public static const LAYOUT_NONE:String = 'none';
+	public static const LAYOUT_NONE:String = 'none';
 	/**
 	 * Common layout parameters:
 	 * * padding{s,Horiz,Vert,Top,Right,Bottom,Left} - a distance from borders of this block to its elements
@@ -279,7 +283,7 @@ public class Block extends Sprite {
 			case "none":
 				break;
 			default:
-				trace("Unknown layout config type ", type);
+				LOGGER.warn("Unknown layout config type ", type);
 				break;
 		}
 		dispatchEvent(new Event(ON_LAYOUT, true, true));

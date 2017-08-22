@@ -21,7 +21,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$" skip-build="true">
+      <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$">
         <dependencies target-player="11.1" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
@@ -52,7 +52,6 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/assets" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
-      <excludeFolder url="file://$MODULE_DIR$/devTools" />
       <excludeFolder url="file://$MODULE_DIR$/generated" />
       <excludeFolder url="file://$MODULE_DIR$/obj" />
     </content>

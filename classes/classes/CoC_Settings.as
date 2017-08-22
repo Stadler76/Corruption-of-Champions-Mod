@@ -9,7 +9,8 @@
 
 
 		public static var debugBuild:Boolean = true;
-		
+		public static var charviewEnabled:Boolean = CONFIG::debug;
+
 		// Horrible static abuse FTW
 		public static var haltOnErrors:Boolean = false;
 		public static var buttonEvents:Array = [];

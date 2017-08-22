@@ -153,6 +153,7 @@ public class MainView extends Block {
 	protected var callbacks:Object = {};
 	protected var options:Object;
 
+	public var charView:CharView;
 	public function MainView():void {
 		super();
 		addElement(blackBackground = new BitmapDataSprite({
@@ -299,6 +300,12 @@ public class MainView extends Block {
 		this.height = SCREEN_H;
 		this.scaleX = 1;
 		this.scaleY = 1;
+		charView         = new CharView();
+		charView.name    = "charview";
+		charView.x       = 0;
+		charView.y       = TEXTZONE_Y;
+		charView.visible = false;
+		addElement(charView);
 	}
 
 	/*override public function get width():Number {

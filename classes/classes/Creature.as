@@ -2826,6 +2826,7 @@ package classes
 				case CLAW_TYPE_NORMAL: return "fingernails";
 				case CLAW_TYPE_LIZARD: return "short curved" + toneText + "claws";
 				case CLAW_TYPE_DRAGON: return "powerful, thick curved" + toneText + "claws";
+				case CLAW_TYPE_IMP:    return "long" + toneText + "claws";
 				// Since mander and cockatrice arms are hardcoded and the others are NYI, we're done here for now
 			}
 			return "fingernails";

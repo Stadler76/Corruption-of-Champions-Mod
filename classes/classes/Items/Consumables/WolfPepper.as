@@ -406,7 +406,7 @@ package classes.Items.Consumables
 				outputText(player.modThickness(75, 3));
 			}
 			player.refillHunger(10);
-				
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}

@@ -3,12 +3,16 @@ import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
+import classes.internals.LoggerFactory;
 import classes.internals.Utils;
 
 import flash.text.TextField;
 import flash.text.TextFormat;
 
+import mx.logging.ILogger;
+
 public class StatsView extends Block {
+	private static const LOGGER:ILogger = LoggerFactory.getLogger(StatsView);
 	[Embed(source = "../../../res/ui/sidebar1.png")]
 	public static var SidebarBg1:Class;
 	[Embed(source = "../../../res/ui/sidebar2.png")]
@@ -286,13 +290,13 @@ public class StatsView extends Block {
 	public function showStatUp(statName:String):void {
 		var stat:StatBar = statByName(statName);
 		if (stat) stat.isUp        = true;
-		else trace("[ERROR] Cannot showStatUp "+statName);
+		else LOGGER.error("Cannot showStatUp "+statName);
 	}
 
 	public function showStatDown(statName:String):void {
 		var stat:StatBar = statByName(statName);
 		if (stat) stat.isDown      = true;
-		else trace("[ERROR] Cannot showStatDown "+statName);
+		else LOGGER.error("[ERROR] Cannot showStatDown "+statName);
 	}
 	public function toggleHungerBar(show:Boolean):void {
 		hungerBar.visible = show;

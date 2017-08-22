@@ -520,6 +520,7 @@ package classes.Items.Consumables
 				dynStats("lus", 3);
 			}
 			player.refillHunger(15);
+			game.flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			return false;
 		}
 	}
