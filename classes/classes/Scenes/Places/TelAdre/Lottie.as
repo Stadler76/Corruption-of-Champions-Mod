@@ -166,7 +166,7 @@ public function encounterLottie(charge:Boolean = false):void {
 			menu();
 			addButton(0, "Yes", gotInShapeAcceptTrainingOffer);
 			addButton(1, "No", gotInShapeButTurnedDownLottie);
-			if (silly() && (player.cor >= (80 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0)) {
+			if (silly() && (player.isCorruptEnough(80) || player.hasPerk(PerkLib.Sadist))) {
 				addButton(2, "God No", gotInShapeComedyDeclineLottie);
 			}
 			return;
@@ -1665,7 +1665,7 @@ public function hamSammitchTimeBIATCH():void {
 		outputText("You reach for a high five that never comes.");
 	}
 	//[If Ham Sandwich, Repeat Encounter, High Corruption]
-	else if (player.cor >= (75 + player.corruptionTolerance())) {
+	else if (player.isCorruptEnough(75)) {
 		outputText("You walk over to the cafe, Lottie watching as you order a sandwich from their menu. In a matter of seconds the collie-like clerk pulls one up from the glass display and hands it over to you, mumbling something about giving a pig-girl a ham sandwich being a stupid fucking idea. You exchange a smile before quickly walking out of the cafe and into the currently empty pool area. You hastily remove your " + player.armorName + " and take out your " + player.cockDescript(0) + ", jamming it straight into the sandwich and fucking it relentlessly. In moments you cum between the velvety slices of ham, leaving a large puddle inside and leaving the rest of your spunk leaking out the back and pooling onto the floor. You dress yourself before walking back to the table and handing Lottie the incredibly moist meal, explaining that you saw the ham sandwich the other day, figuring she might enjoy it – and that you've taken care into adding your own 'special mayonnaise'. Lottie throws it on the floor. \"<i>Don't cum inside ham sandwiches, asshole!</i>\"\n\n");
 		outputText("You reach for a high five that never comes.");
 		player.orgasm('Dick');
@@ -1998,7 +1998,7 @@ public function hugTheShitOutOfYourHam():void {
 	outputText("You stand up, telling Lottie to come over to you. She hesitates, unsure as to what you have in mind, but follows accordingly. Soon, the rosy pig-girl stands in front of you, looking curiously with grey-green eyes. You suddenly reach out towards her, Lottie flinching and instinctively attempting to move out of the way – but it's too late. \"<i>BIG OL' BEAR HUG!</i>\" you scream, wrapping your arms around the short, shrieking pork-woman. \"<i>GRR GRR, ALL HUGS ARE GO!</i>\" You start shaking about, bringing Lottie with you as you try to hug her with all the cuddliness of a grizzly. At this point, Lottie's screams have turned into giggles, laughing and shaking while faux-attempting to escape from your grasp. \"<i>S-stop it, babe! Nooo!</i>\" she cries, flailing helplessly. You both laugh as you put her down, Lottie pretending to punch your gut while you pretend to reel in pain. It's no question that your bear hugs are simply the best.\n\n");
 	if (lottieMorale() < 70) lottieMorale(1);
 	//[If Encouragement 0 – 30]
-	if (lottieMorale() <= 30 && player.cor >= (75 + player.corruptionTolerance())) {
+	if (lottieMorale() <= 30 && !player.isPureEnough(75)) {
 		outputText("You tell Lottie to wake up, slapping her face into consciousness. She yelps at the pain, a strand of drool flying as she jerks awake from her fantasy. She sniffs quietly, keeping her thoughts to herself. \"<i>What kind of useless slut daydreams?</i>\" You smirk.\n\n");
 		outputText("The kind that wishes for the day that her life will change, Lottie thinks back.");
 		lottieMorale(-4);

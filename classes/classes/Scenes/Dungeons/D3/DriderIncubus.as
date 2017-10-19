@@ -233,22 +233,7 @@ package classes.Scenes.Dungeons.D3
 			var evade:String = player.getEvasionReason();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || player.spe <= 1 && player.statusEffectv1(StatusEffects.Web) >= 2)
 			{
-				if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
-				{
-					player.changeStatusValue(StatusEffects.DriderIncubusVenom,1,5);
-				}
-				else
-				{
-					player.createStatusEffect(StatusEffects.DriderIncubusVenom,5,0,0,0);
-				}
-				amount = 30;
-				if (player.str - amount < 1)
-				{
-					amount = player.str - 1;
-				}
-				player.str = player.str - amount;
-				showStatDown("str");
-				player.addStatusValue(StatusEffects.DriderIncubusVenom,2,amount);
+				player.createOrFindStatusEffect(StatusEffects.DriderIncubusVenom);
 				outputText("Taking his time, the arachnid demon bares his fangs, easily biting deeply into you. His tongue slides sensually around the wounds as he pumps you full of venom, tasting your fear and desperation. You wince while the venom robs you of your strength.");
 				if (player.str <= 25)
 				{
@@ -281,16 +266,7 @@ package classes.Scenes.Dungeons.D3
 				else {
 					outputText(" Those needle-like canines punch into you, delivering their venomous payload! You already feel weaker, your muscles not responding as effectively.");
 					outputText("<i>“I do love watching you struggle.”</i> He flashes a crooked smile.");
-					if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
-						player.changeStatusValue(StatusEffects.DriderIncubusVenom,1,5);
-					else
-						player.createStatusEffect(StatusEffects.DriderIncubusVenom,5,0,0,0);
-					amount = 30;
-					if (player.str - amount < 1)
-						amount = player.str - 1;
-					player.str = player.str - amount;
-					showStatDown("str");
-					player.addStatusValue(StatusEffects.DriderIncubusVenom,2,amount);
+					player.createOrFindStatusEffect(StatusEffects.DriderIncubusVenom);
 				}
 			}
 		}

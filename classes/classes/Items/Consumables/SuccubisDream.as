@@ -37,15 +37,15 @@ package classes.Items.Consumables
 			//high corruption
 			if (player.cor >= 66) outputText("  You lick your lips, marvelling at how thick and sticky it is.");
 			//Corruption increase
-			if (player.cor < (50 - player.corruptionTolerance()) || rand(2)) {
+			if (player.cor < 50 || rand(2)) {
 				outputText("\n\nThe drink makes you feel... dirty.");
 				temp = 1;
   				//Corrupts the uncorrupted faster
- 				if (player.cor < (50 - player.corruptionTolerance())) temp++;
- 				if (player.cor < (40 - player.corruptionTolerance())) temp++;
- 				if (player.cor < (30 - player.corruptionTolerance())) temp++;
+ 				if (player.cor < 50) temp++;
+ 				if (player.cor < 40) temp++;
+ 				if (player.cor < 30) temp++;
   				//Corrupts the very corrupt slower
- 				if (player.cor >= (90 + player.corruptionTolerance())) temp = .5;
+ 				if (player.cor >= 90) temp = .5;
 				dynStats("cor", temp + 2);
 				changes++;
 			}

@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs{
+﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Swamp.SpiderMorphMob;
@@ -157,7 +157,7 @@ internal function kihaSpiderEventIntro():void {
 	outputText("Furious, she screams, \"<i>I knew it!  You really ARE one of Lethice's spies, aren't you?  Why else would you keep harassing me?  What do you WANT!?</i>\"\n\n");
 
 	outputText("What the fuck?  ");
-	if (player.cor < (66 + player.corruptionTolerance())) outputText("You try to calm the dragoness down, explaining that you aren't one of Lethice's minions, that what you told her the first time around was true - that you're here to end the demon threat.  Kiha doesn't seem to be buying it, though...\n\n");
+	if (!player.isPureEnough(66)) outputText("You try to calm the dragoness down, explaining that you aren't one of Lethice's minions, that what you told her the first time around was true - that you're here to end the demon threat.  Kiha doesn't seem to be buying it, though...\n\n");
 	else outputText("Irate, you stare her down, and with a dangerous gentleness, remind her that you're here to crush the demons.  Your fist tightens as, not unexpectedly, the erratic woman appears to hear none of it.\n\n");
 
 	outputText("\"<i>Bullshit!  You're working for the demons!</i>\" she howls.  \"<i>First you try and make me go soft, tell me I don't need to fight, and then suddenly you're sneaking into my home.  Well, no more!</i>\"  Her axe swings around to point straight at you.  \"<i>I've killed the Demon Queen's agents before, and if I have to, I'll kill you too, " + player.short + "!</i>\"\n\n");
@@ -336,7 +336,7 @@ internal function kihaFriendlyGreeting(output:Boolean = true):void {
 		warmLoverKihaIntro(output);
 		return;
 	}
-	if (output && flags[kFLAGS.KIHA_TALK_STAGE] == 6 && player.cor <= (50 + player.corruptionTolerance())) {
+	if (output && flags[kFLAGS.KIHA_TALK_STAGE] == 6 && player.isPureEnough(50)) {
 		//Talk to Friendly Kiha - Fourth Time (requires <=30 corruption on account of making the PC act like a bitch) (Z)
 		//(SPECIAL: Play next time the PC encounters Kiha after Talk 3 if he meets reqs, skipping the main menu)
 		outputText("As you wander through the swamp, you eventually come to the familiar territory of your friend, Kiha.  Remembering her hasty departure the last time you talked, a pang of worry takes hold in your chest.  She mentioned taking the fight to the demons.... Surely she didn't, did she? Grimacing at the thought, you pick up the pace and make your way to her little islet.");
@@ -380,9 +380,9 @@ internal function kihaFriendlyGreeting(output:Boolean = true):void {
 	}
 	//(Display Options: [Talk] [Spar] [Hug] [Leave]
 	menu();
-	if (flags[kFLAGS.KIHA_TALK_STAGE] < 6) addButton(0, "Talk", talkToFriendlyKiha, null, null, null, "Talk to Kiha. She might not like it but you might make some progress.");
-	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
-	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
+	if (flags[kFLAGS.KIHA_TALK_STAGE] < 6) addButton(0, "Talk", talkToFriendlyKiha).hint("Talk to Kiha. She might not like it but you might make some progress.");
+	addButton(1, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
+	addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 //Spar with Friendly Kiha - Intro (Z)
@@ -568,7 +568,7 @@ private function lieThere():void {
 	outputText("[pg]\"<i>See?</i>\"  Kiha shouts, grabbing at the stain you've left on her thighs, \"<i>" + player.short + " obviously likes me better - " + player.mf("he","she") + " dropped " + player.mf("his","her") + " cum RIGHT next to my vag.  " + player.mf("He","She") + " probably wants to knock me up even, don't you, " + player.short + "?</i>\"");
 	outputText("[pg]\"<i>Oh, is that right?</i>\"  Hel laughs, giving her ample hips a shake forceful enough to dislodge your spooge, hitting Kiha full on the face.  \"<i>" + player.short + " put a load right in my asscheeks - " + player.mf("he","she") + " gave me the last AND the dirtiest load.  What do you get? Oh, that's right, a vag shot.  How unique!</i>\"");
 	outputText("[pg]\"<i>What would you even know about it, slut?</i>\"  Kiha roars, breathing fire right in Hel's face.  The salamander just waves it off indignantly.");
-	outputText("[pg]\"<i>Hey, hey dragon bitch.  You've got a little SOMETHING ON YOUR <i>FACE!</i>\"  She shouts, whipping her tail around and swatting Kiha right in the cheek.  The dragoness recoils, clasping her now beat-red cheek before lashing out, punching Hel right in the tit.");
+	outputText("[pg]\"<i>Hey, hey dragon bitch.  You've got a little SOMETHING ON YOUR </i>FACE!\"  She shouts, whipping her tail around and swatting Kiha right in the cheek.  The dragoness recoils, clasping her now beat-red cheek before lashing out, punching Hel right in the tit.");
 	outputText("[pg]Okay, fuck this, you think to yourself, trying to grab your torn clothing as the two fire-girls start to go at it all-out.  You grab your shit and try to stumble out of the line of fire as you redress, watching the two girls throw each other into the mud and start beating the shit out of each other.");
 	outputText("[pg]When you're finally dressed and ready, you shout \"<i>BREAK IT UP!</i>\"  as loud as you can, hopefully trying to break through the sounds of their wet wrestling and flying punches.  It takes a moment, but the girls finally stop their fighting, rolling up to sit in the mud.");
 	outputText("[pg]For the life of you, you can't tell them apart - Kiha's wings and horns are invisible in the thick cake of half-baked mud coating whichever one she is, and Hel's more ample endowments are out of sight under two pairs of sitting butts and crossed arms.");
@@ -667,9 +667,9 @@ private function kihaAdmitsSheLikesYourWang():void {
 		outputText("[pg]Do you hug her, and potentially take things to the next level, or would you rather do something else?");
 	}
 	menu();
-	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
-	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
-	addButton(3, "LovinHug", lovinHugKiha, null, null, null, "Give the dragoness a hug and take things to a whole new level!");
+	addButton(1, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
+	addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
+	addButton(3, "LovinHug", lovinHugKiha).hint("Give the dragoness a hug and take things to a whole new level!");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
 //Loving Hug
@@ -844,18 +844,18 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 			if (canKihaGetPregnant()) outputText("\n\n<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilize her and become a father.</b>");
 			leave = camp.campLoversMenu;
 			menu();
-			addButton(0, "Appearance", kihaCampAppearance, null, null, null, "Examine Kiha's appearance.");
-			addButton(1, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
-			addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
-			addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
-			addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
+			addButton(0, "Appearance", kihaCampAppearance).hint("Examine Kiha's appearance.");
+			addButton(1, "Hang Out", hangOutWithKiha).hint("Spend some quality time with Kiha.");
+			addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
+			addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.");
+			addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) {
-				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle, null, null, null, "Request Kiha to destroy any corrupted glades she can find.");
-				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle, null, null, null, "Request Kiha to stop destroying the corrupted glades.");
+				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] == 0) addButton(7, "Destroy Glades", kihaDestroyGladesToggle).hint("Request Kiha to destroy any corrupted glades she can find.");
+				else addButton(7, "Stop Destroying", kihaDestroyGladesToggle).hint("Request Kiha to stop destroying the corrupted glades.");
 			}
-			if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha, null, null, null, "Request her to stop guarding.");
-			else addButton(8,"Guard Camp",guardMyCampKiha, null, null, null, "Request her to guard your camp.");
-			if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 && (player.hasItem(undergarments.SSPANTY) || player.hasItem(undergarments.SS_LOIN))) addButton(6, "Give Underwear", giveKihaUndergarmentsPrompt, null, null, null, "Give Kiha something to wear to conceal her nether regions?");
+			if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha).hint("Request her to stop guarding.");
+			else addButton(8,"Guard Camp",guardMyCampKiha).hint("Request her to guard your camp.");
+			if (flags[kFLAGS.KIHA_UNDERGARMENTS] == 0 && (player.hasItem(undergarments.SSPANTY) || player.hasItem(undergarments.SS_LOIN))) addButton(6, "Give Underwear", giveKihaUndergarmentsPrompt).hint("Give Kiha something to wear to conceal her nether regions?");
 			addButton(14,"Leave", leave);
 			return;
 		}
@@ -875,12 +875,12 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 	//-[Invite to Camp] (If KihaAffection >= 200)
 	//-[Leave])
 	menu();
-	addButton(0, "Appearance", kihaCampAppearance, null, null, null, "Examine Kiha's appearance.");
-	addButton(1, "Hang Out", hangOutWithKiha, null, null, null, "Spend some quality time with Kiha.");
-	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
-	addButton(3, "Sex", kihaSexMenu, null, null, null, "Initiate sex session with Kiha.");
-	addButton(4, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
-	addButton(5, "InviteCamp", campo, null, null, null, "Invite Kiha to your camp.");
+	addButton(0, "Appearance", kihaCampAppearance).hint("Examine Kiha's appearance.");
+	addButton(1, "Hang Out", hangOutWithKiha).hint("Spend some quality time with Kiha.");
+	addButton(2, "Hug", hugFriendWarmKiha).hint("Give the dragoness a hug.");
+	addButton(3, "Sex", kihaSexMenu).hint("Initiate sex session with Kiha.");
+	addButton(4, "Spar", sparWithKiha).hint("Do some quick battle with Kiha!");
+	addButton(5, "InviteCamp", campo).hint("Invite Kiha to your camp.");
 	addButton(14, "Leave", leave);
 }
 
@@ -924,8 +924,8 @@ private function hangOutWithKiha():void {
 		outputText("[pg]You give the stringy, yet juicy, meat a few experimental chews before giving your answer:");
 		//[It's Good] [Blech]
 		menu();
-		addButton(0, "It's Good", itsGood, null, null, null, "The meat is delicious. Tell Kiha that the meat is great.");
-		addButton(1, "Blech", blechKihaYourCooking, null, null, null, "The meat is disgusting! Throw it out and hunt some boars.");
+		addButton(0, "It's Good", itsGood).hint("The meat is delicious. Tell Kiha that the meat is great.");
+		addButton(1, "Blech", blechKihaYourCooking).hint("The meat is disgusting! Throw it out and hunt some boars.");
 		return;
 	}
 	//Hang Out 3
@@ -2200,7 +2200,7 @@ private function guardMyCampKiha():void {
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\nYou tell about how you've defeated Lethice and put an end to the demonic threats. Kiha and her young " + (totalKihaChildren() == 1 ? "dragon-morph" : "dragon-morphs") + " look at you, amazed about your victory.");
 			else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice for once and for all.");
 			outputText("\n\nThe " + (totalKihaChildren() == 1 ? "kid" : "kids") + " are happy to hear about the story. \"<i>Thank you for being with me and listening to my story, my Doofus,</i>\" Kiha says before giving you a peck on your cheek.");
-			dynStats("lib", -2, "cor", -2, "lus", -50, "resisted", false, "noBimbo", true);
+			dynStats("lib", -2, "cor", -2, "lus", -50, "scale", false);
 			
 			menu();
 			doNext(camp.returnToCampUseOneHour);

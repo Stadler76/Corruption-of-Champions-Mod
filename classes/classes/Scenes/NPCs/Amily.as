@@ -1,8 +1,9 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+import classes.StatusEffects.Combat.AmilyVenomDebuff;
 
-	/**
+/**
 	 * ...
 	 * @author ...
 	 */
@@ -187,25 +188,8 @@ package classes.Scenes.NPCs
 			else {
 				outputText("Amily dashes at you and swipes her knife at you, surprisingly slowly.  You easily dodge the attack; but it was a feint - her other hand tries to strike at you with a poisoned dart. However, she only manages to scratch you, only causing your muscles to grow slightly numb.");
 				//Set status
-				if (!player.hasStatusEffect(StatusEffects.AmilyVenom)) player.createStatusEffect(StatusEffects.AmilyVenom, 0, 0, 0, 0);
-				var poison:Number = 2 + rand(5);
-				while (poison > 0) {
-					poison--;
-					if (player.str >= 2) {
-						player.str--;
-						showStatDown("str");
-						// strDown.visible = true;
-						// strUp.visible = false;
-						player.addStatusValue(StatusEffects.AmilyVenom, 1, 1);
-					}
-					if (player.spe >= 2) {
-						player.spe--;
-						showStatDown("spe");
-						// speDown.visible = true;
-						// speUp.visible = false;
-						player.addStatusValue(StatusEffects.AmilyVenom, 2, 1);
-					}
-				}
+				var venom:AmilyVenomDebuff = player.createOrFindStatusEffect(StatusEffects.AmilyVenom) as AmilyVenomDebuff;
+				venom.increase();
 				//If PC is reduced to 0 Speed and Strength, normal defeat by HP plays.
 				if (player.spe <= 2 && player.str <= 2) {
 					outputText("  You've become so weakened that you can't even make an attempt to defend yourself, and Amily rains blow after blow down upon your helpless form.");

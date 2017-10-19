@@ -146,7 +146,7 @@ private function sharkgirlDickFuck():void {
 	combat.cleanupAfterCombat();
 	player.orgasm('Dick');
 	dynStats("sen", -1);
-	if (player.cor < (33 + player.corruptionTolerance())) dynStats("cor", 1);
+	if (player.cor < 33) dynStats("cor", 1);
 }
 
 private function sharkgirlSixtyNine():void {
@@ -183,7 +183,7 @@ private function sharkgirlSixtyNine():void {
 	combat.cleanupAfterCombat();
 	player.orgasm('Lips');
 	dynStats("sen", -1);
-	if (player.cor < (33 + player.corruptionTolerance())) dynStats("cor", 1);
+	if (player.cor < 33) dynStats("cor", 1);
 }
 
 //RAEP SOME FUKKIN SHARKGIRLZ NIGGA WITH DILDO!
@@ -337,7 +337,7 @@ internal function sharkLossRape():void {
 		outputText("The shark girl stands to leave and winks at you before diving back into the water. You eventually pass out from the exertion.");
 		//(Corruption +2, Intelligence -4)
 		player.orgasm('Vaginal');
-		if (player.cor < (30 + player.corruptionTolerance())) dynStats("cor", 1);
+		if (player.cor < 30) dynStats("cor", 1);
 		combat.cleanupAfterCombat();
 		return;
 	}
@@ -357,7 +357,7 @@ internal function sharkLossRape():void {
 		outputText("Eventually, her vagina clamps down on your cock and she cries out in orgasm. You grunt loudly and cum a few seconds after, pumping your seed into her womb. The shark girl leans over and plants a tiny kiss on your lips. \"<i>Good boy. I'll be sure to see you again</i>\". She gets up again and you watch her re-enter the water before you pass out.");
 		player.orgasm('Dick');
 		dynStats("sen", 1);
-		if (player.cor < (30 + player.corruptionTolerance())) dynStats("cor", 1);
+		if (player.cor < 30) dynStats("cor", 1);
 		combat.cleanupAfterCombat();
 		return;
 	}

@@ -35,6 +35,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("A hot slick throbbing length is quickly nestled between your asscheeks, humping between your firm mounds as you feel the welcome warmth of the yeti’s cock. You gasp as the naturally slick monster prick drools over your " + player.assholeDescript() + ", smearing the warm preparation fluids all along your taint. The yeti continues to hump you earnestly as his warm furred body lays over yours, and you can’t help but the soft warmth oddly pleasurable despite your limbs being trapped in ice.  ");
 			if (player.hasCock()) outputText("Your " + player.multiCockDescriptLight() + " is now fully erect, despite being in the cold air.  ");
 			outputText("With a needy grunt the yeti ceases his humping, and when you turn your head, you can see him lining up, one of his hands gripping the hilt of his monstrous length. He presses the pulsing cockhead to your pucker, pushing in against your resistance and coaxing a low moan from your lips. With a persistent shove he slides in past the stiff flesh of your rim, nestling in your warmth. The beast gives a guttural moan from his maw, bucking his hips as he gets more of his massive cock inside you. You can only whimper and strain against the ice binding your limbs in place as the beast takes your hole.\n\n");
+			outputText(images.showImage("yeti-loss"));
 			outputText("The sound of flesh smacking flesh bounces off the ice walls of the cavern as the yeti beats your ass into oblivion, his giant huge member impaling you fully over and over, each savage thrust making your limbs ache from the strain of your bindings. Moans slip past your lips despite your discomforts, the furred beast wrapped around you like a heated fur sweater, the brutal thrusts against your ass making it burn up in all the right ways. You can feel his prespunk dripping out of your pucker and leaving warm trails down your taint and legs.  ");
 			if (player.hasCock()) {
 				outputText("Some gets onto your fully erect " + player.multiCockDescriptLight() + ", making ");
@@ -111,6 +112,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		private function rideYetisCock():void {
 			clearOutput();
+			outputText(images.showImage("yeti-vag-ride"));
 			outputText("More than a little wet yourself, you decide to give the fallen beast a nice, warm sheath for his vulnerable rod. You pull open your " + player.armorName + " just enough to expose your " + player.vaginaDescript() + " as you straddle the downed yeti. He looks up at you with wary, yet hopeful eyes. Grinning, you take his big, furry hands in yours and push them back from his stiff red prick. The yeti gives a little yelp as the cold air assaults him, but you’re quick to line yourself up with him and drop down, burying his length inside you in one powerful motion. \n\n");
 			if (player.looseness(true) <= 1) outputText("You whimper slightly as his thick cock stretches your walls painfully.  ");
 			player.cuntChange(18, true);

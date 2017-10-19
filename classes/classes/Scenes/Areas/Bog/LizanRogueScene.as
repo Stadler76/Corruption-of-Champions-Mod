@@ -15,7 +15,7 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			outputText(images.showImage("monster-lizanrogue"));
 			var lizan:LizanRogue = new LizanRogue();
-			if (player.cor > (30 + player.corruptionTolerance())) {
+			if (!player.isPureEnough(30)) {
 				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skinTone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise the lizan tentatively sniffs the air between the two of you. Without warning he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack and you realize he's waiting for you to back down. What will you do?");
 				if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
@@ -45,7 +45,7 @@ package classes.Scenes.Areas.Bog
 				menu();
 				addButton(0, "Spar", fightLizan, true, null, null, "Do a spar session with the lizan!");
 				if (player.lust >= 33) {
-					addButton(1, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
+					addButton(1, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
 				} else {
 					addDisabledButton(1, "Sex", "You are not aroused enough.");
 				}
@@ -90,13 +90,13 @@ package classes.Scenes.Areas.Bog
 			
 			outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 			menu();
-			if (player.cor > (30 - player.corruptionTolerance())) {
+			if (player.isCorruptEnough(30)) {
 				addDisabledButton(0, "Use Dick", "This scene requires you to have cock and sufficient arousal.");
 				addDisabledButton(1, "Use Pussy", "This scene requires you to have vagina and sufficient arousal.");
 				if (player.lust >= 33 && player.gender > 0) {
 					outputText("You wonder what you should do to the lizan.");
-					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss, null, null, null, "Anally penetrate him with your [cocks].");
-					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy, null, null, null, "Get on top of the lizan and stuff his cock into your [pussy].");
+					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your [cocks].");
+					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your [pussy].");
 					addButton(14, "Leave", combat.cleanupAfterCombat);
 					return;
 				}
@@ -110,7 +110,7 @@ package classes.Scenes.Areas.Bog
 				dynStats("str", 1, "tou", 1);
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
-					addButton(0, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
+					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
 					addButton(14, "Leave", leaveLizanAfterCombat);
 					return;
 				}
@@ -125,7 +125,7 @@ package classes.Scenes.Areas.Bog
 		
 		public function loseToLizan():void {
 			clearOutput();
-			if (player.cor > (30 + player.corruptionTolerance())) {
+			if (!player.isPureEnough(30)) {
 				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxLust() ? "overwhelming desires": "your injuries") + ". The lizan steps over to you, intent on punishing you. ");
 				combat.cleanupAfterCombat();
 			}
@@ -142,14 +142,14 @@ package classes.Scenes.Areas.Bog
 				outputText("You tell the male lizan you're game as you " + player.clothedOrNaked("begin to pull off your [armor]", "show your naked form") + ". His bulge becomes more pronounced as your body comes into view. He quite obviously likes what he sees. Which one of your body parts do you plan to use on the horny male lizan?");
 			}
 			menu();
-			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck, null, null, null, "Anally penetrate him with your penis.");
+			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck).hint("Anally penetrate him with your penis.");
 			else addDisabledButton(0, "Use Dick", "This scene requires you to have cock.");
-			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked, null, null, null, "Have him take you vaginally.");
+			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked).hint("Have him take you vaginally.");
 			else addDisabledButton(1, "Use Vagina", "This scene requires you to have vagina.");
-			addButton(2, "Use Ass", consensualGetButtFucked, null, null, null, "Have him take you anally.");
-			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration, null, null, null, "Have him stuff both your holes with his dual cocks.", "Double Penetration");
+			addButton(2, "Use Ass", consensualGetButtFucked).hint("Have him take you anally.");
+			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration).hint("Have him stuff both your holes with his dual cocks.", "Double Penetration");
 			else addDisabledButton(3, "Dbl.Penetration", "This scene requires you to have vagina.", "Double Penetration");
-			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 && flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER] >= 3 && !continuation) addButton(4, "Watersports", consensualWatersports, null, null, null, "Participate into urine activity with him. \n\nNOTE: Contains watersports!");
+			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 && flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER] >= 3 && !continuation) addButton(4, "Watersports", consensualWatersports).hint("Participate into urine activity with him. \n\nNOTE: Contains watersports!");
 		}
 		
 		public function consensualButtfuck():void {

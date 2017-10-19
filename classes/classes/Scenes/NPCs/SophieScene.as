@@ -400,7 +400,7 @@ private function sophieLookingForDemons():void {
 	outputText("Sophie throws her head back and laughs. \"<i>Don't worry about any demons here.  Any time a demon is dumb enough to wander too close to our nests, we give him a 'foot-job' he won't forget.</i>\"  To illustrate, the busty harpy lifts her leg and proudly displays her razor-sharp talons.");
 	//Check her out if you're in the mood or dirty-minded
 	//Requires wang
-	if ((player.cor > (60 - player.corruptionTolerance()) || player.lust100 > 60 || player.lib > 70) && player.hasCock()) {
+	if ((player.isCorruptEnough(60) || player.lust100 > 60 || player.lib > 70) && player.hasCock()) {
 		outputText("  In spite of the danger of the situation, your gaze drops between her legs to her completely exposed sex.  You nod in agreement with her, buying a few extra seconds to inspect her vagina.  Tinged pink, it's much larger than a human's; perhaps due to the size of the eggs she lays?\n\n");
 	}
 	//Otherwise leave.

@@ -168,7 +168,7 @@ private function meetRaphaelPtII():void {
 		addDisabledButton(2, "Swoon");
 	}
 	addButton(1, "Slap", RaphaelFirstMeetingSLAP);
-	if (player.lust >= 33 && player.hasCock() && (player.cor >= (60 - player.corruptionTolerance()) || player.findPerk(PerkLib.Pervert))) {
+	if (player.lust >= 33 && player.hasCock() && (player.isCorruptEnough(60) || player.findPerk(PerkLib.Pervert))) {
 		addButton(3, "Rape", rapeRaphael);
 	} else {
 		addDisabledButton(3, "Rape");

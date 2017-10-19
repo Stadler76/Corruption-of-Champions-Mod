@@ -106,8 +106,7 @@ package classes.Items.Armors
 		}
 	
 		override public function get supportsUndergarment():Boolean {
-			if (game.player.cor >= (10 + game.player.corruptionTolerance())) return false;
-			return true; 
+			return game.player.isPureEnough(10);
 		}
 		
 		override public function canUse():Boolean {
@@ -115,7 +114,7 @@ package classes.Items.Armors
 			var wornUpper:Boolean = game.player.upperGarment != UndergarmentLib.NOTHING;
 			var wornLower:Boolean = game.player.lowerGarment != UndergarmentLib.NOTHING;
 			
-			if (game.player.cor >= (10 + game.player.corruptionTolerance())) {
+			if (!game.player.isPureEnough(10)) {
 				if (wornUpper || wornLower) {
 					var output:String = "";
 					output += "It would be awkward to put on " + longName + " when you're currently wearing ";

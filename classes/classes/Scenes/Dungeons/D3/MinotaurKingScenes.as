@@ -19,6 +19,7 @@ package classes.Scenes.Dungeons.D3
 		public function encounterMinotaurKing():void
 		{
 			clearOutput();
+			outputText(images.showImage("monster-minotaurlord"));
 			outputText("The moment you step away from the defeated demon, Lethice’s assembled host parts like some kind of tentacled sea, revealing a path that would lead directly to the Queen of Corruption were it not barred by a form out of nightmares. A minotaur like none you’ve ever seen bars your path - the last obstacle before a face-to-face encounter with the cause of so much discontent.");
 			outputText("\n\nEven for one of the bovine beast-men, he’s a giant among giants. His broad shoulders seem ready to scrape the gilding from the cavernous chamber. His crimson-rimmed eyes glare down like a pair of low-burning coals. Stretching from end to end, a cow-girl could barely touch each end of his wide-spread horns. If it weren’t for the three feet of glistening, freshly-fucked maleness jutting from between his legs, he’d look almost regal.");
 			outputText("\n\n<i>“You’re strong, Champion, but your quest ends here,”</i> the brute promises. He snorts and extends a hand toward the crowd. <i>“Excellia, my weapon.”</i>");
@@ -88,6 +89,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 			clearOutput();
+			outputText(images.showImage("monster-minotaurlord"));
 			outputText("With a dick that big and that hard at your disposal... you could do something that some might consider crazy, something with enough erotic potential that it makes your [cocks] even harder than the fuck-scent in the air and the nude, well-endowed figures before you.");
 			outputText("\n\nThe wildly flaring tip of the Minotaur King’s dick is neatly adorned with a nice, big cumslit, one that’s spread wide by pre-cum even now. It’s big enough to be a pussy. Bigger than some goblins’ pussies, you bet, and twice as wet looking. The three medial rings that stud the length between sheath and tip would make great grips for your hands, the better to hold onto while you literally fuck the exotic minotaur-dick. You briefly wonder if those extra rings make such cocks even more pleasurable to ride than");
 			if (player.countCocksOfType(CockTypesEnum.HORSE) > 0)
@@ -101,9 +103,9 @@ package classes.Scenes.Dungeons.D3
 			outputText(", but you discard the thought as irrelevant.");
 			outputText("\n\nYou’ll be the one doing the fucking this time.");
 			outputText("\n\nYou grab the monarch’s masturbating hands and pull them from your prize, a task made easier by his physical exhaustion. He grumbles weakly, but when your fingers make contact, he abruptly goes quiet, realizing that someone else may do him the favor of bringing him off. Little does he know just what you have planned. His jet-black member is slicker than you would have thought possible, coated with layer upon layer of jism. Your hands feel buttery after the briefest contact, like you’ve dipped them in a vat of grease.");
-			outputText("\n\nHis bulging flare and unique anatomy help you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock " + cockIdx + "] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead " + cockIdx + "]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
-			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead " + cockIdx + "] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
-			outputText("\n\nYou waver momentarily, bathing your [cock " + cockIdx + "]");
+			outputText("\n\nHis bulging flare and unique anatomy help you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock " + (cockIdx + 1) + "] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead " + (cockIdx + 1) + "]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
+			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead " + (cockIdx + 1) + "] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
+			outputText("\n\nYou waver momentarily, bathing your [cock " + (cockIdx + 1) + "]");
 			if (player.balls > 0)
 			{
 				outputText(" and [balls]");
@@ -143,8 +145,9 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
-			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + cockIdx + "].");
-			outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
+			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + (cockIdx + 1) + "].\n\n");
+			outputText(images.showImage("badend-minotaurlord-knot"));
+			outputText("Orgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
 			if (player.balls == 0)
 			{
 				outputText(", fat with bull-cream.");
@@ -163,6 +166,7 @@ package classes.Scenes.Dungeons.D3
 			var x:int = player.cockThatFits(200);
 			flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 			clearOutput();
+			outputText(images.showImage("monster-minotaurlord"));
 			outputText("Why fuck the spoiled tart when you’ve got such a virile, muscular specimen at your beck and call? He’s pumping his cock with wild, frenetic strokes, spurting bullet-sized bursts of pre-cum over his musky balls and abdominal fur, but no matter how he tugs or squeezes, he doesn’t seem to be getting any closer to release.");
 			outputText("\n\nHow perfect. You shed your [armor], intent on a little relief yourself. Normally a brute like this might take offense to the forceful claiming of his backdoor. Now, when he’s writhing and bleating, begging the demons in the audience to mount him and provide relief? He’ll accept anything you give him, even if it’s a thorough prostate pounding. Your [cocks] swell");
 			if (player.cocks.length == 1)
@@ -310,11 +314,11 @@ package classes.Scenes.Dungeons.D3
 			}
 			if (player.averageVaginalLooseness() >= 5)
 			{
-				outputText("\n\nEasing his tremendous dick into your gaping cunt feels like the most natural thing in the world. All your previous encounters were nothing more than practice to take this bestial rod deep inside yourself. It’s flaring too, imbued with more lust than any mere mortal was meant to handle, swelling to push and stroke against your straining walls as it nestles its way inside of you. It’s perfect. To find such a perfectly-shaped lover so close to your goal... you couldn’t have planned it any better.");
+				outputText("\n\nEasing his tremendous dick into your gaping cunt feels like the most natural thing in the world. All your previous encounters were nothing more than practice to take this bestial rod deep inside yourself. It’s flaring too, imbued with more lust than any mere mortal was meant to handle, swelling to push and stroke against your straining walls as it nestles its way inside of you. It’s perfect. To find such a perfectly-shaped lover so close to your goal... you couldn’t have planned it any better.\n\n");
 			}
 			else if (player.averageVaginalLooseness() >= 1)
 			{
-				outputText("\n\nThe first attempt to guide the King’s cock into your anxious slit is nearly a failure. The flaring, flat-headed tip spreads you open, but not nearly far enough for it to slide into your honey-coated cavern. Grunting in distress, you give it a little wiggle, slipping the left side of the horse-like cock inside before working in the other. You have to stop, gasping and panting at the raw sensation of it, struggling to come to grips with it before you can continue your delectable descent. Never before have you been so wholly filled with cock, and you’re just now lowering yourself down the rest of the way.");
+				outputText("\n\nThe first attempt to guide the King’s cock into your anxious slit is nearly a failure. The flaring, flat-headed tip spreads you open, but not nearly far enough for it to slide into your honey-coated cavern. Grunting in distress, you give it a little wiggle, slipping the left side of the horse-like cock inside before working in the other. You have to stop, gasping and panting at the raw sensation of it, struggling to come to grips with it before you can continue your delectable descent. Never before have you been so wholly filled with cock, and you’re just now lowering yourself down the rest of the way.\n\n");
 			}
 			else
 			{
@@ -325,9 +329,10 @@ package classes.Scenes.Dungeons.D3
 				}
 				outputText(" gates meets with about as much success as one could expect. Despite the almost hilarious mismatch in the sizes of your genitalia, you’re determined to take it all. Holding it in both hands, you press against the flared tip, gyrating your lips against the blunt crown until his pre and your juices are intermingled into a fuck-happy slurry. Then, one of your lips catches on the edge of his beastly flesh, pulled apart with surprising elasticity.");
 				outputText("\n\nYou repeat the action on the other side and gasp in delight as your entrance blooms like an exotic flower, opening up to reveal its pink-tinged interior to its mate. Somehow, your [vagina] is opening wider and wider, and it doesn’t hurt in the slightest. Perhaps the bath of royal pre-spunk is loosening it up, or maybe the Minotaur King is blessed with some sort of inherent magic that allows him to claim even the smallest of willing females as his own. Either way, it’s for the best.");
-				outputText("\n\nYou go from a needful vacuum of sensuous hunger to more stuffed than a Christmas turkey in all of about five seconds, and you couldn’t be happier. The torment of an empty, unfilled pussy has been replaced with a seductive pleasure that steals your breath and addles your reason. You wish you could somehow be even wetter, even hotter, to wring still greater surges of bliss from your sex.");
+				outputText("\n\nYou go from a needful vacuum of sensuous hunger to more stuffed than a Christmas turkey in all of about five seconds, and you couldn’t be happier. The torment of an empty, unfilled pussy has been replaced with a seductive pleasure that steals your breath and addles your reason. You wish you could somehow be even wetter, even hotter, to wring still greater surges of bliss from your sex.\n\n");
 			}
-			outputText("\n\nThree rings are the next challenge standing between you and total impalement. Equidistant along the Minotaur King’s shaft, those medial rings are small but significant obstacles along your erotic journey. The first actually bumps against your [clit]");
+			outputText(images.showImage("minotaurlord-vag"));
+			outputText("Three rings are the next challenge standing between you and total impalement. Equidistant along the Minotaur King’s shaft, those medial rings are small but significant obstacles along your erotic journey. The first actually bumps against your [clit]");
 			if (player.hasCock())
 			{
 				outputText(", stimulating the base of your jutting she-dick");
@@ -407,7 +412,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(". The artificial euphoria this has brought you makes it difficult not to crawl over to the nearest incubus and offer your body up, but you still have to deal with Lethice. Maybe you can make her lick the drippings from your slit after you take her down.");
 			outputText("\n\nWith that fantasy firmly in mind, you stand up and fix your [armor]. You can still do this, right?");
 			player.orgasm('Generic');
-			dynStats("lus",5,"resisted", false);
+			dynStats("lus",5,"scale", false);
 			player.createStatusEffect(StatusEffects.MinotaurKingsTouch,0,0,0,0);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
 			player.minoCumAddiction(20);
@@ -419,6 +424,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] = 1;
 			clearOutput();
+			outputText(images.showImage("minotaurlord-cow"));
 			outputText("Forget that beefcake; there’s a primo slut close at hand with a set of tits that’d be worth damnation to fuck. It’s a good thing Lethice is giving you this chance to sate yourself. You might have had to risk giving them a good fucking even if she didn’t. Pulling [oneCock] out of your [armor], you advance on the fallen slut, feeling momentarily sorry for her.");
 			outputText("\n\nExcellia is barely conscious. Her pussy is gaped wide open and still drooling her master’s excess spunk. Her eyes are glassy and a little unfocused. When you climb atop her though, she manages to smile at you and grab hold of her boobs. The touch alone sends her into a moaning fit with her eyes half rolled back and her tongue hanging out. Her tits are <i>sensitive</i>. You aren’t sure if she’s naturally a perfect tit-fuck-slut or if it’s an effect of her master’s druggy cum, but it really doesn’t matter to you.");
 			outputText("\n\nThe quivering cow moans once you place your [cock] into her canyon-like cleavage and props her tits up with her elbows, sealing you inside the mountains of mammary flesh. Her fingers nearly disappear into the soft pillows, squeezing jets of uncontrolled milk from her chocolate-brown nipples. Remembering what it did to your fallen foe, you avoid drinking it yourself, letting it cascade back over the bouncy tits and into the oh-so-pleasant crevasse between.");
@@ -502,8 +508,9 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" You don’t think she could possibly confuse your slab of cock for a smaller sample like her minotaur master’s, but she doesn’t show much sign of caring. Perhaps all the minotaur jism stuffed in her twat has left her so inundated with pleasure that worry is beyond her. So long as she’s split with a massive shaft, what’s the difference?");
 			}
-			outputText(" You can see why the overgrown beast-man keeps her around.");
-			outputText("\n\nThe quivering cow-slut’s cunt is fucking magic too. It feels like her muscles are pulling you deeper with every thrust, coaxing your [cock " + x + "] to sprout another inch if only to better fill. Gods, you’re getting harder and harder. She feels so damned good that it’s making your head spin, making it impossible to do anything but grab hold of her ass and squeeze like your life depends on it. In this moment, bereft of anything but the sinful squelches emanating from Excellia’s too-moist muff, you feel like you love her, or at least her pussy.");
+			outputText(images.showImage("minotaurlord-excelia-sex"));
+			outputText(" You can see why the overgrown beast-man keeps her around.\n\n");
+			outputText("The quivering cow-slut’s cunt is fucking magic too. It feels like her muscles are pulling you deeper with every thrust, coaxing your [cock " + x + "] to sprout another inch if only to better fill. Gods, you’re getting harder and harder. She feels so damned good that it’s making your head spin, making it impossible to do anything but grab hold of her ass and squeeze like your life depends on it. In this moment, bereft of anything but the sinful squelches emanating from Excellia’s too-moist muff, you feel like you love her, or at least her pussy.");
 			outputText("\n\nFuck, you could love almost anyone right now. If the crowd around you wasn’t composed of soulless abominations, you’d probably love them too. You knead her ass some more, watching it give beneath your fingers. Your digits nearly disappear into the cushy, fuckable asscheeks, and you grunt in approval. It’s hypnotic. You’re still fucking her, of course. You couldn’t stop if you wanted to, but there’s a strange disconnect between your hips and the rest of your awareness, like there’s so much pleasure that you’ve gone with numb it.");
 			outputText("\n\nArcs of electric bliss hum and sizzle through your [cock] from second to second, popping in starbursts behind your eyes that make it hard to focus on anything but the swaying ass in front of you. You ravage Excellia on autopilot, groaning in delight as realization finally dawns on you - all the minotaur cum inside of her is affecting you, somehow. And there’s so much of the stuff! Creamy white blobs slop out whenever you pull out or thrust in, but there’s always more inside her to bathe your member, cocooning it in layer after layer of narcotic aphrodisiac.");
 			outputText("\n\nPart of you wants to stop, but that part of you is getting smaller with every thrust. This is wonderful, the raw, almost feral feeling of an athletic fuck unbounded by civilization or decency. Excellia’s pussy was designed to glove your [cock " + x + "] perfectly, to match its ravenous thrusting with a sordid massage. Faintly, you hear cheering and the greedy slut begging for more. She wants you to cum inside of her; you can tell. Everything from her body-language to the pitch of her delirious voice is begging you to feed her overactive ovaries their second meal of the hour. Her body is ravenous for cum, even when she’s so stuffed with it that it won’t stop pouring out.");
@@ -552,6 +559,7 @@ package classes.Scenes.Dungeons.D3
 		public function hailToTheKingBaby(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			clearOutput();
+			outputText(images.showImage("monster-minotaurlord"));
 			var mk:MinotaurKing = monster as MinotaurKing;
 			if (!hpVictory)
 			{
@@ -617,6 +625,7 @@ package classes.Scenes.Dungeons.D3
 		private function gurglegurgle():void
 		{
 			clearOutput();
+			outputText(images.showImage("badend-minotaurlord-gurgle"));
 			outputText("You wind up being grateful for that half-forgotten assfucking later, when the minotaur King finally lays claim to your other end. That little bit of extra gape and lubrication is enough to help him lodge his humongous pecker deep into your asshole. Just like with your throat, you find him easier to handle than his size alone would suggest, but that does nothing to diminish the obscene fullness occupying your mind.");
 			outputText("\n\nIt’s wonderful. Even when he’s not fucking your ass, he’s rock hard and dribbling, giving you a constant feed of the fluid you’ve fallen in love with. You let him carry you around like that. That’s what you tell yourself, anyway. The big lug would probably pin you in place if you tried to struggle, but you can’t imagine yourself fighting this.");
 			outputText("\n\nSo what if you’re a dick-cozy, mounted on a minotaur’s beastly cock like some kind of trophy? Who cares if sometimes you have to lick out the Demon Queen while being reamed from behind? Everything is great. You never worry about anything, and there’s always someone filling you, fucking you full of liquid happiness.");

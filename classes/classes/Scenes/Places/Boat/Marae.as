@@ -65,7 +65,7 @@ package classes.Scenes.Places.Boat
 			else {
 				outputText("Without warning, the lightning hits you! Surge of electricity rushes through you painfully. ");
 				if (player.cor >= 50) outputText("The intensity of the pain is unbearable. ");
-				var damage:int = 100 + str + ((player.cor - player.corruptionTolerance()) * 5);
+				var damage:int = 100 + str + (player.corAdjustedDown() * 5);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}

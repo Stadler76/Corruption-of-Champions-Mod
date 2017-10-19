@@ -173,8 +173,8 @@ package classes.Scenes.Places.TelAdre
 			outputText("\n\nYour mouth hangs agape, shocked at your friend’s confession. At the same time, you can’t help but feel incredibly flattered by it. He clearly likes you in more ways than one!");
 			outputText("\n\n\"<i>Oh, forget it! Forget I said anything! I should’ve known that this was a stupid idea!</i>\" he cries, his head in his hands. He appears to have taken your stunned silence as a rejection. He turns toward the entrance of the room, intent on leaving. Should you stop him, or maybe it’d be better to just let him go?");
 			menu();
-			addButton(0, "Let him go", pabloShowerLetGo, null, null, null, "Let Pablo go. There's no harm in letting him go. You're sure you'll be able to see him again.");
-			addButton(1, "Stop him", pabloShowerStopHim, null, null, null, "Stop Pablo. This will lead to some sexy times.");
+			addButton(0, "Let him go", pabloShowerLetGo).hint("Let Pablo go. There's no harm in letting him go. You're sure you'll be able to see him again.");
+			addButton(1, "Stop him", pabloShowerStopHim).hint("Stop Pablo. This will lead to some sexy times.");
 		}
 		
 		private function pabloShowerLetGo():void {

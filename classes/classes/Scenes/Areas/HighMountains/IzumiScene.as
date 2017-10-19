@@ -518,7 +518,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				outputText("Sooner or later, you’re going to have to face up to the large Oni.  No time like the present, right?\n\n");
 
-				outputText("Izumi can clearly tell that you have no intentions of running away on her... again.  To your surpise, rather than lunging forwards to attack or flying off the handle, she beams at you.  “<i>Alright! I’ll tell you what I’ll do... I’ll give myself a handicap.</i>”  Izumi turns to face you, cracks her neck, then extends a hand, folding the other arm behind her back.  “<i>I’ll only use one arm.  I wouldn’t want to put you in your place </i>too<i> quickly.  Where would be the fun in that?”  She leers, “<i>If you can beat me, I’ll let you go.  If not, well... to the victor go the spoils.  Know what I mean?</i>”\n\n");
+				outputText("Izumi can clearly tell that you have no intentions of running away on her... again.  To your surpise, rather than lunging forwards to attack or flying off the handle, she beams at you.  “<i>Alright! I’ll tell you what I’ll do... I’ll give myself a handicap.</i>”  Izumi turns to face you, cracks her neck, then extends a hand, folding the other arm behind her back.  “<i>I’ll only use one arm.  I wouldn’t want to put you in your place </i>too<i> quickly.  Where would be the fun in that?</i>”  She leers, “<i>If you can beat me, I’ll let you go.  If not, well... to the victor go the spoils.  Know what I mean?</i>”\n\n");
 			}
 			else
 			{
@@ -580,7 +580,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You try to look away, blushing crimson, but the weight on your");
 			if (player.isTaur()) outputText(" flank");
 			else outputText(" chest");
-			outputText(" suddenly disappears as Izumi grips your chin with her free hand, forcing you to lock gazes with her.  “<i>Hey, don’t look away!</i>”  She chides.  “<i>Seeing your face during all this is the best part... aw, hey, are you embarrassed?  You’re blushing!  That’s so </i > cute !” She trills.  “<i> Here, look.  I know what’ll make ya feel better....</i>”  Before you can respond, the domineering Oni woman");
+			outputText(" suddenly disappears as Izumi grips your chin with her free hand, forcing you to lock gazes with her.  “<i>Hey, don’t look away!</i>”  She chides.  “<i>Seeing your face during all this is the best part... aw, hey, are you embarrassed?  You’re blushing!  That’s so </i> cute !” She trills.  “<i> Here, look.  I know what’ll make ya feel better....</i>”  Before you can respond, the domineering Oni woman");
 			if (player.isTaur()) outputText(" perches her muscular ass on your flank, your body making for a suitable seat.");
 			else outputText(" drops to the floor, laying next to you on her side.");
 			outputText("  She releases your chin, but her hand snakes around behind your head to your other cheek, pulling you in towards her.  You can’t help but grunt in surprise as the side of your head is forcibly pushed up against one massive, pillowy-soft breast");
@@ -926,7 +926,7 @@ package classes.Scenes.Areas.HighMountains
 
 				outputText("Izumi reaches around from behind you and you half turn to look at her, but she grips you by the chin with her free hand and firmly turns your head away from her.  Your gaze flits nervously around the cave at random as you feel Izumi’s feet run across your [skinfurscales], her toes squirming against your underbelly.\n\n");
 
-				outputText("“<i>Well now, let’s see...”<i>  She murmurs, softly.  “<i>What can I possibly do with you, hmm?</i>”  She jerks your arms painfully forward, elbows locked straight thanks to her iron-hard grip around your wrists.  The motion prompts you to stumble a half step forward, edging you closer to the entrance of her cave.  “<i>You’re really pretty, you know that?</i>”  She purrs.  “<i>It’d be a shame to hide such a pretty thing away in a dark place like this, wouldn’t it?</i>”\n\n");
+				outputText("“<i>Well now, let’s see...</i>”  She murmurs, softly.  “<i>What can I possibly do with you, hmm?</i>”  She jerks your arms painfully forward, elbows locked straight thanks to her iron-hard grip around your wrists.  The motion prompts you to stumble a half step forward, edging you closer to the entrance of her cave.  “<i>You’re really pretty, you know that?</i>”  She purrs.  “<i>It’d be a shame to hide such a pretty thing away in a dark place like this, wouldn’t it?</i>”\n\n");
 
 				outputText("Struggling helplessly against the enormous Oni’s manacle-like grip around your wrists, you gradually stagger over to the mouth of the cave under her direction, another jolt delivered to your arms whenever Izumi deems your progress too slow.  A gust of cold mountain air blows over you, chilling your [skinfurscales] and causing you to shiver as your nipples harden.  Izumi tugs backward on your ‘reins’ to stop your wobbling advance dead.  You gaze out at the scenery, the vast mountain range spread out below you, and for a moment you’re filled with an irrational fear that she intends to simply drive you off the cliffside and leave you to fend for yourself without your gear.  Then, without warning, Izumi kicks your legs out from under you, forcing you to collapse to the floor with a surprised shriek.\n\n");
 

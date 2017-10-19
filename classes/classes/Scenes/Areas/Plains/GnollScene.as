@@ -128,13 +128,13 @@ package classes.Scenes.Areas.Plains
 			//Do You Rape The Gnoll?
 			if (player.lust >= 33) {
 				if (player.hasCock()) {
-					addButton(0, "DickDownClit", dickDownGnollClit, null, null, null, "Fuck the gnoll's clit with your penis.", "Dick Down Clit");
-					addButton(1, "DickInAss", dickInGnollAss, null, null, null, "Fuck the gnoll's ass with your penis.", "Dick In Ass");
+					addButton(0, "DickDownClit", dickDownGnollClit).hint("Fuck the gnoll's clit with your penis.", "Dick Down Clit");
+					addButton(1, "DickInAss", dickInGnollAss).hint("Fuck the gnoll's ass with your penis.", "Dick In Ass");
 				}
 				if (player.hasVagina()) {
-					addButton(2, "TakeHerClit", takeGnollClit, null, null, null, "Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
+					addButton(2, "TakeHerClit", takeGnollClit).hint("Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
-				addButton(3, "SuckHerClit", suckGnollClit, null, null, null, "Suck the gnoll's clit.", "Suck Her Clit");
+				addButton(3, "SuckHerClit", suckGnollClit).hint("Suck the gnoll's clit.", "Suck Her Clit");
 			}
 			
 			addButton(14, "Leave", combat.cleanupAfterCombat);

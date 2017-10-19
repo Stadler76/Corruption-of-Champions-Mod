@@ -642,7 +642,7 @@ internal function victoryMinotaurGang():void {
 	//(Lust) 
 	else outputText("The last minotaur sinks to his knees, pulling aside his loincloth with thread-rending strength to expose the pulsating, needy shaft to the air.  He begins to masturbate himself just like his brother, spilling his pre-seed over the ground into the messy, growing puddle.  The smell hangs thick in the air, but you've won and kept enough of your wits about you to walk away if you want.\n\n");
 	//+lust regardless 
-	if (player.lust < 33) dynStats("lus=", 33, "resisted", false);
+	if (player.lust < 33) dynStats("lus=", 33, "scale", false);
 	else dynStats("lus", 20);
 	
 	outputText("Your body is burning up, buzzing with growing lust from the obscenity going on a few feet away from you.  What do you do?");

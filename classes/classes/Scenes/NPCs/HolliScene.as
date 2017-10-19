@@ -294,7 +294,7 @@ public function fuckPlantGrowsToLevel2():void {
 	outputText("  Is this Marae's idea of a gift?");
 	if (player.gender > 0) outputText("  Well, you could give it a whirl... just being around it seems to slowly turn you on.");
 	outputText("  Of course, destroying it would be the safest option.");
-	dynStats("lus", 33, "resisted", false);
+	dynStats("lus", 33, "scale", false);
 	if (silly()) outputText("\n\n<b>What do?</b>");
 	else outputText("\n\n<b>What do you do?</b>");
 	//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]
@@ -911,7 +911,7 @@ private function domUpSomeHolli():void {
 //Guard Camp
 private function askBrokenHolliToGuard():void {
 	clearOutput();
-	outputText("Holli bows her head when you mention her guarding camp.  She asks, \"<i>Shall I keep watch for foes to drain or let them into camp for you to have the pleasure of dealing with, [name]?  <b>I've been ");
+	outputText("Holli bows her head when you mention her guarding camp.  She asks, \"<i>Shall I keep watch for foes to drain or let them into camp for you to have the pleasure of dealing with, [name]?  I've been ");
 	if (flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) outputText("keeping watch");
 	else outputText("sleeping, instead");
 	outputText(".</i>\"");

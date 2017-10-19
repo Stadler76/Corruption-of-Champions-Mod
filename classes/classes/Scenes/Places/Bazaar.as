@@ -50,17 +50,16 @@ public function findBazaar():void {
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
 private function approachBazaarGuard():void {
 	clearOutput();
-	outputText("You step from concealment and walk up to the strange man, calling out in greeting.  He folds his arms across his chest and looks you up and down, peering at you with intense, black eyes.  They aren't solid onyx, but his irises are just as dark as the seemingly bottomless depths of his pupils.  His appraising gaze watches you, unblinking as second after second ticks by.  Just when you start to wonder if he speaks your language, he interrupts you by saying, \"<i>");
-	if (player.cor < (33 - player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.");
-	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.");
-	outputText("</i>\"");
-	menu();
-	if (player.cor < (33 - player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+	outputText("You step from concealment and walk up to the strange man, calling out in greeting.  He folds his arms across his chest and looks you up and down, peering at you with intense, black eyes.  They aren't solid onyx, but his irises are just as dark as the seemingly bottomless depths of his pupils.  His appraising gaze watches you, unblinking as second after second ticks by.  Just when you start to wonder if he speaks your language, he interrupts you by saying, ");
+	if (!player.isCorruptEnough(33)) {
+		outputText("\"<i>Leave at once.  You are not yet ready for the wonders of the Bazaar.</i>\"");
+		menu();
 		addButton(0, "FIGHT!",initiateFightGuard);
 	} else {
+		outputText("\"<i>Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.</i>\"");
+		menu();
 		addButton(0, "Enter",enterTheBazaar);
 	}
-	
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -106,11 +105,11 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	menu();
 	addButton(0, "Shops", shopMenu);
 	addButton(1, (flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] > 0 ? "Fap Arena" : "Tent"), fapArena.fapArenaGOOOO);
-	addButton(2, "Food Tent", blackCock.enterTheBlackCock, null, null, null, "The incredible smell seems to come from that tent.", "The Black Cock");
+	addButton(2, "Food Tent", blackCock.enterTheBlackCock).hint("The incredible smell seems to come from that tent.", "The Black Cock");
 	if (flags[kFLAGS.PRISON_ENABLED] == true) {
-		addButton(4, "Back Alley", investigateBackAlley, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
+		addButton(4, "Back Alley", investigateBackAlley).hint("That back alley looks suspicious. Do you dare investigate?");
 	} else {
-		addButton(4, "Back Alley", investigateBackAlleyNoPrison, null, null, null, "That back alley looks suspicious. Do you dare investigate?");
+		addButton(4, "Back Alley", investigateBackAlleyNoPrison).hint("That back alley looks suspicious. Do you dare investigate?");
 	}
 	//Cinnabar
 	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
@@ -122,7 +121,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	if ((flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 1 || flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 2) && demons && rand(10) == 0) {
 		//[Repeat Variant]
 		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>");
-		addButton(6, "GripingDemons", overHearDemonsAboutSyrena, null, null, null, "Overhear the conversation of the two griping demons.", "Griping Demons");
+		addButton(6, "GripingDemons", overHearDemonsAboutSyrena).hint("Overhear the conversation of the two griping demons.", "Griping Demons");
 	}
 	//Lilium
 	if (lilium.LiliumText(false) != null) {
@@ -279,7 +278,7 @@ private function joeyAndrogyny():void {
 private function joeyMassage():void {
 	clearOutput();
 	if (player.gems < 10) {
-		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, " + player.short + " but I can't give freebies - our special potions cost us plenty.");
+		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, " + player.short + " but I can't give freebies - our special potions cost us plenty.</i>\"");
 		doNext(enterTheBazaar);
 		return;
 	}
@@ -573,7 +572,7 @@ private function gretasGarments():void {
 		if (flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) outputText(", except maybe a super-skimpy chain bikini that's chased with white and gold highlights");
 	}
 	outputText(".");
-	dynStats("lus", 2, "resisted", false);
+	dynStats("lus", 2, "scale", false);
 	menu();
 	if (flags[kFLAGS.FOUND_SOCKS] == 0) addButton(4,"Low Stock",askGretaAboutInventory);
 	else {
@@ -1065,7 +1064,7 @@ private function assaultYoRapistYo():void {
 		//open options [Leave][Abuse ass(70 or more corruption)]
 		menu();
 		addButton(4,"Leave", assaultWinAndLeave);
-		if (player.cor >= (66 - player.corruptionTolerance()) || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) addButton(0,"Abuse Ass",abuseHisAss);
+		if (player.isCorruptEnough(66)) addButton(0,"Abuse Ass",abuseHisAss);
 	}
 }
 

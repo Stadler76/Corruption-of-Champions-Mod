@@ -1,7 +1,8 @@
 package classes.Scenes.Areas.Bog 
 {
 	import classes.*;
-	import classes.internals.*;
+import classes.StatusEffects.Combat.LizanBlowpipeDebuff;
+import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	
@@ -17,17 +18,7 @@ package classes.Scenes.Areas.Bog
 			}
 			else {
 				outputText("The lizan flings himself back.  In the air he puts his blowgun to his lips and fires a single dart into your neck.  As you pull it out your limbs begin to feel like wet noodles, it appears you’ve been poisoned.");
-				game.dynStats("str", -5, "spe", -5);
-				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, 5, 0, 5, 0);
-				else {
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, 5);
-				}
-				if (player.cor > (50 + player.corruptionTolerance())) {
-					game.dynStats("str", -5, "spe", -5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 1, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 3, 5);					
-				}
+				(player.createOrFindStatusEffect(StatusEffects.LizanBlowpipe) as LizanBlowpipeDebuff).debuffStrSpe();
 			}
 			combatRoundOver();
 		}
@@ -39,16 +30,7 @@ package classes.Scenes.Areas.Bog
 			else {
 				outputText("The lizan rushes at you.  As you raise your [weapon] to defend yourself he dives to the side, using his blowgun to fire a single stinging dart into your neck.  You pull out the dart and your skin begins to feel hypersensitive, you’re going to have trouble defending yourself");
 				game.dynStats("tou", -5, "sens", 5);
-				if (!player.hasStatusEffect(StatusEffects.LizanBlowpipe)) player.createStatusEffect(StatusEffects.LizanBlowpipe, 0, 5, 0, 5);
-				else {
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, 5);
-				}
-				if (player.cor > (50 + player.corruptionTolerance())) {
-					game.dynStats("tou", -5, "sens", 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 2, 5);
-					player.addStatusValue(StatusEffects.LizanBlowpipe, 4, 5);					
-				}
+				(player.createOrFindStatusEffect(StatusEffects.LizanBlowpipe) as LizanBlowpipeDebuff).debuffTouSens();
 			}
 			combatRoundOver();
 		}

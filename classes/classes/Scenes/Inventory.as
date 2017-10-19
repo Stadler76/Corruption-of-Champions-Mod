@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 12.01.14.
  */
 package classes.Scenes
@@ -95,11 +95,11 @@ package classes.Scenes
 			}
 			
 			if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 1) {
-				addButton(11, "Del Item: One", deleteItems, null, null, null, "Trash your items, one by one.\n\nClick to trash all in a stack.\nClick twice to stop.", "Delete Items (Single)");
+				addButton(11, "Del Item: One", deleteItems).hint("Trash your items, one by one.\n\nClick to trash all in a stack.\nClick twice to stop.", "Delete Items (Single)");
 			} else if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 2) {
-				addButton(11, "Del Item: All", deleteItems, null, null, null, "Trash all of your items in a stack.\n\nClick to stop.\nClick twice to trash your items one by one.", "Delete Items (Stack)");
+				addButton(11, "Del Item: All", deleteItems).hint("Trash all of your items in a stack.\n\nClick to stop.\nClick twice to trash your items one by one.", "Delete Items (Stack)");
 			} else if (!getGame().inCombat && flags[kFLAGS.DELETE_ITEMS] == 0) {
-				addButton(11, "Del Item: OFF", deleteItems, null, null, null, "Start throwing away your items.\n\nClick to trash your items one by one.\nClick twice to trash all in a stack.", "Delete Items (Off)");
+				addButton(11, "Del Item: OFF", deleteItems).hint("Start throwing away your items.\n\nClick to trash your items one by one.\nClick twice to trash all in a stack.", "Delete Items (Off)");
 			}
 			
 			
@@ -615,32 +615,32 @@ package classes.Scenes
 			outputText("Which would you like to unequip?\n\n");
 			menu();
 			if (player.weapon != WeaponLib.FISTS)
-				addButton(0, "Weapon", unequipWeapon, null, null, null, player.weapon.description, capitalizeFirstLetter(player.weapon.name));
+				addButton(0, "Weapon", unequipWeapon).hint(player.weapon.description, capitalizeFirstLetter(player.weapon.name));
 			else 
 				addButtonDisabled(0, "Weapon");
 				
 			if (player.shield != ShieldLib.NOTHING)
-				addButton(1, "Shield", unequipShield, null, null, null, player.shield.description, capitalizeFirstLetter(player.shield.name));
+				addButton(1, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 			else
 				addButtonDisabled(1, "Shield");
 				
 			if (player.jewelry != JewelryLib.NOTHING)
-				addButton(2, "Accessory", unequipJewel, null, null, null, player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
+				addButton(2, "Accessory", unequipJewel).hint(player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
 			else 
 				addButtonDisabled(2, "Accessory");
 				
 			if (player.armor != ArmorLib.NOTHING)
-				addButton(5, "Armour", unequipArmor, null, null, null, player.armor.description, capitalizeFirstLetter(player.armor.name));
+				addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 			else 
 				addButtonDisabled(5, "Armour");
 				
 			if (player.upperGarment != UndergarmentLib.NOTHING)
-				addButton(6, "Upperwear", unequipUpperwear, null, null, null, player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
+				addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
 			else 
 				addButtonDisabled(6, "Upperwear");
 				
 			if (player.lowerGarment != UndergarmentLib.NOTHING)
-				addButton(7, "Lowerwear", unequipLowerwear, null, null, null, player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
+				addButton(7, "Lowerwear", unequipLowerwear).hint(player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
 			else 
 				addButtonDisabled(7, "Lowerwear");
 				
@@ -709,7 +709,7 @@ package classes.Scenes
 				if (!countOnly) {
 					var benoitPinDesc:String;
 					benoitPinDesc = "The feathery hair-pin " + getGame().bazaar.benoit.benoitMF("Benoit", "Benoite") + " gave to you as a present.";
-					addButton(button++, "F. Hairpin", getGame().bazaar.benoit.equipUnequipHairPin, null, null, null, benoitPinDesc, "Feathery Hair-pin");
+					addButton(button++, "F. Hairpin", getGame().bazaar.benoit.equipUnequipHairPin).hint(benoitPinDesc, "Feathery Hair-pin");
 				}
 				foundItem = true;
 			}

@@ -110,7 +110,7 @@ package classes.Scenes.Areas.Forest
 					default: //Any other attitude options lead to the classic bee encounter
 						outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
 						//Chance to avoid raaaaeeeeep
-						if ((player.lib + player.cor < (140 + player.corruptionTolerance())) || rand(2) == 0) {
+						if ((player.lib100 + player.corAdjustedDown() < 140) || rand(2) == 0) {
 							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
 							menu();
 							addButton(0, "Fight", fightTheBeeGirl);
@@ -130,7 +130,7 @@ package classes.Scenes.Areas.Forest
 			else outputText("Come here little one, I’ll help you become a real bee boy");
 			outputText(",”</i> she says opening her arms wide to accept you.");
 			//Chance to avoid raaaaeeeeep
-			if ((player.lib + player.cor < (140 + player.corruptionTolerance())) || rand(2) == 0) {
+			if ((player.lib100 + player.corAdjustedDown() < 140) || rand(2) == 0) {
 				if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
 					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
@@ -328,7 +328,7 @@ package classes.Scenes.Areas.Forest
 		private function beeEncounterSheBeatsYouRegularly():void {
 			outputText(" in the light.\n\n");
 			outputText("Her mouth breaks out in a grin at the sight of you.  <i>“Hello again naughty " + player.mf("boy", "girl") + ",”</i> her buzzing really starting to get inside your head as she stands up and beckons to you.  <i>“Juzzzt make it eazzier on yourzzzelf and let me lay my eggzzz in you.  No fuzzzzz, no fighting.  Just let yourzzzelf be carried away.”</i>\n\n");
-			if ((player.lib + player.cor < (70 + player.corruptionTolerance())) || rand(4) == 0) { //Chance to avoid raaaaeeeeep
+			if ((player.lib100 + player.corAdjustedDown() < 70) || rand(4) == 0) { //Chance to avoid raaaaeeeeep
 				outputText("With great difficulty you manage to stop yourself from throwing yourself into her arms.  Losing to this girl isn’t helping you resist her charms at all.  You’re finding It harder and harder to fight the call of her incredible song and unnatural scent, it may be wise to run now; but what will you do now that you have your senses again?");
 				menu();
 				addButton(0, "Fight", fightTheBeeGirl);
@@ -349,7 +349,7 @@ package classes.Scenes.Areas.Forest
 		}
 		
 		private function beeEncounterSheBeatsYouRegularlyLastChance():void {
-			if ((player.lib + player.cor < (70 + player.corruptionTolerance())) || rand(4) == 0) { //Chance to avoid raaaaeeeeep
+			if ((player.lib100 + player.corAdjustedDown() < 70) || rand(4) == 0) { //Chance to avoid raaaaeeeeep
 				menu();
 				addButton(0, "Yes", beeEncounterSheBeatsYouRegularlyAndYouLetHerLaysEggs);
 				addButton(1, "No", beeEncounterSheBeatsYouRegularlyDontLetHer);
@@ -941,7 +941,7 @@ package classes.Scenes.Areas.Forest
 		private function beeMaidenConversation():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
-			if (conversation > 2 && player.cor > (20 - player.corruptionTolerance())) conversation = 2;
+			if (conversation > 2 && !player.isPureEnough(20)) conversation = 2;
 			switch (conversation) {
 				case  0:
 						conversation = 1;
@@ -1369,7 +1369,7 @@ package classes.Scenes.Areas.Forest
 				outputText("You smile in satisfaction as the " + monster.short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
 			}
 			
-			dynStats("lus", 50, "resisted", false);
+			dynStats("lus", 50, "scale", false);
 			
 			//OPTIONS HERE!
 			menu();
@@ -1404,7 +1404,7 @@ package classes.Scenes.Areas.Forest
 			if (player.isNaga() && player.faceType == FACE_SNAKE_FANGS) {
 				addButton(6, "Naga", corruptNagaBitchesRapeABee, undefined, undefined, undefined, "You could focus on your snakelike, 'naga' attributes.", "Naga");
 			}
-			if ((player.cor >= (75 - player.corruptionTolerance()) || player.findPerk(PerkLib.Pervert) >= 0 || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)
+			if ((player.isCorruptEnough(75) || player.findPerk(PerkLib.Pervert) >= 0 || player.findPerk(PerkLib.Sadist) >= 0)
 					&& player.str >= 60
 					&& (player.tongueType == TONGUE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
 				addButton(7, "Self-Egg", beeGirlRapeForTheDistinguishedGentleman, undefined, undefined, undefined, "You could play with her a bit and try to make her lay eggs into herself.", "Self-Egg");

@@ -157,21 +157,21 @@ package classes.Scenes.Explore
 				m.onDefeated = function (hpVictory:Boolean):void
 				{
 					getGame().inCombat = false;
-					getGame().combat.clearStatuses(false);
+					getGame().combat.clearStatuses();
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onWon = function (hpVictory:Boolean, pcCameWorms:Boolean):void
 				{
 					getGame().inCombat = false;
-					getGame().combat.clearStatuses(false);
+					getGame().combat.clearStatuses();
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};
 				m.onPcRunAttempt = function ():void
 				{
 					getGame().inCombat = false;
-					getGame().combat.clearStatuses(false);
+					getGame().combat.clearStatuses();
 					statScreenRefresh();
 					exploreDebugMonsters(monsterIdx + 1);
 				};

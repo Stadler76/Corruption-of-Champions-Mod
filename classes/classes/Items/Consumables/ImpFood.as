@@ -78,9 +78,9 @@ package classes.Items.Consumables
 			}
 			
 			//Imp wings - I just kinda robbed this from demon changes ~Foxwells
-			if (rand(3) == 0 && changes < changeLimit && player.wingType != WING_TYPE_IMP_LARGE && player.cor >= (25 - player.corruptionTolerance())) {
+			if (rand(3) == 0 && changes < changeLimit && player.wingType != WING_TYPE_IMP_LARGE && player.isCorruptEnough(25)) {
 				//grow smalls to large
-				if (player.wingType === WING_TYPE_IMP && player.cor >= (50 - player.corruptionTolerance())) {
+				if (player.wingType === WING_TYPE_IMP && player.isCorruptEnough(50)) {
 					outputText("\n\n");
 					outputText("Your small imp wings stretch and grow, tingling with the pleasure of being attached to such a tainted body. You stretch over your shoulder to stroke them as they unfurl, turning into large imp-wings. <b>Your imp wings have grown!</b>");
 					player.wingType = WING_TYPE_IMP_LARGE;

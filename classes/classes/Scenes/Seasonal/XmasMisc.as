@@ -78,7 +78,7 @@ package classes.Scenes.Seasonal {
 			menu();
 			addButton(0,"Yes",helpWithTheCandyCane);
 			addButton(1,"No",declineCandyCaneCawks);
-			dynStats("lus", 10+player.lib/10, "resisted", false);
+			dynStats("lus", 10+player.lib/10, "scale", false);
 		}
 
 		//NO
@@ -110,7 +110,7 @@ package classes.Scenes.Seasonal {
 			//(If corruption>50) 
 			else outputText("  Despite your rising urge to take advantage of the unknowing bunny, you decide to retire and return to camp.");
 			//(Lust set to 100, hour passes.)
-			dynStats("lib", 1, "sen", 1, "lus=", 100, "cor", -5, "resisted", false);
+			dynStats("lib", 1, "sen", 1, "lus=", 100, "cor", -5, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -867,7 +867,7 @@ package classes.Scenes.Seasonal {
 				outputText("\n\nTo top it all off, at the same time a gush of glacial girl-spunk spills out onto your face.  You can't help but taste some of it, and you are pleasantly surprised to find it has a strong minty flavor.  You lap at the juices, at least until Nieve finally falls forward, completely spent.  Gratefully, you inhale properly, getting a good whiff of fem-cum and spearmint mingling in the air.");
 				
 				outputText("\n\nWith a smirk, you get to your feet and survey the situation.  Nieve has collapsed, face down in the icy powder, and there are two rather oddly shaped snow angels.  The smirk turns into a grin as you wipe the juices from your face and head back to camp, leaving Nieve to recover.");
-				dynStats("lus", 10+player.lib/10, "resisted", false);
+				dynStats("lus", 10+player.lib/10, "scale", false);
 			}
 			//Silly Mode:
 			else {
@@ -904,7 +904,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nSucking as hard as you can, you slither your tongue around the length inside your mouth, licking everywhere you can in spite of having your mouth full already.  Cupping those swollen balls in your hands you gently fondle them, massaging them tenderly even as they lurch and swell, their icy payload ready to burst and gush into your mouth already.  Giving you only seconds notice, the pleasure filed gasps warn you of the impending orgasm.  Letting out a long moan of pure ecstasy Nieve blows his minty load inside your mouth.  Pulse after pulse, burst after thick burst of creamy minty cum flows over your tongue and down your throat.  With each gush your tongue is overwhelmed by the strong minty flavor, the thick stuff gushing down your throat to pool inside your stomach.  With his body presumably made from ice and snow, you're unsure as to where he is keeping all this minty cream, more and more gushing until your belly swells just a little under the chilling amount.  Shivering from the icy cum in your tummy you slowly pull back, sucking the last streams of pearly seed from your wintery lover before popping off.");
 			
 			outputText("\n\nLetting out a deep sigh you grin and look up, wanting to see the look on Nieve's face.  The iceborn man looks like he couldn't be happier, a silly smile on his face as he looks down at you.  \"<i>Oh [Master]... that was amazing, I've never met someone so skilled before.  I hope you're not too cold now,</i>\" he says with a hint of worry, knowing that his body and by extension, his cum, must be quite cold.  Reassuring him you tell your frosty friend you're fine and that he actually tasted pretty good. Looking quite pleased Nieve helps you up before sweeping you up into a squeezing hug.  \"<i>Thank you so much for this, but next time let me do you though, you need to be pleasured as well,</i>\" the elemental spirit says gently before helping you get cleaned up and ready for your adventures.");
-			dynStats("lus", 10+player.lib/10, "resisted", false);
+			dynStats("lus", 10+player.lib/10, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 

@@ -99,19 +99,19 @@ package classes.Scenes.Areas.HighMountains
 			if (player.lust >= 33) {
 				outputText(" Certain that the creature won't dare try and turn his eyes on you again, you take your time to look the tall reptile over directly for the first time. Perhaps you could use him to satisfy your baser urges. If so, what part of him do you choose?");
 				//[Tongue][Ass]
-				addButton(0, "Tongue", tongueBasiliskSmex, null, null, null, "Put that creature's tongue to a good use.");
+				addButton(0, "Tongue", tongueBasiliskSmex).hint("Put that creature's tongue to a good use.");
 				if (player.cockThatFits(monster.analCapacity()) >= 0) {
 					addButton(1, "Ass (Gentle)", defeatBasiliskAndAnal, false, null, null, "Fuck the basilisk's ass gently!");
-					if (player.cor >= (66 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0)
+					if (player.isCorruptEnough(66) || player.findPerk(PerkLib.Sadist) >= 0)
 						addButton(2, "Ass (Cruel)", defeatBasiliskAndAnal, true, null, null, "Dominate and fuck the basilisk in the ass! He wouldn't like it though.");
 				}
 			}
 			
 			if (player.canOvipositSpider()) {
-				addButton(3, "Lay Eggs", driderPCEggLaysBasilisk, null, null, null, "Lay your eggs in the basilisk.");
+				addButton(3, "Lay Eggs", driderPCEggLaysBasilisk).hint("Lay your eggs in the basilisk.");
 			}
 			if (player.canOvipositBee() && !player.isGenderless()) {
-				addButton(3, "Lay Eggs", layBeeEggsInABasilisk, null, null, null, "Lay your eggs in the basilisk.");
+				addButton(3, "Lay Eggs", layBeeEggsInABasilisk).hint("Lay your eggs in the basilisk.");
 			}
 			
 			addButton(14, "Leave", combat.cleanupAfterCombat);
@@ -267,13 +267,7 @@ package classes.Scenes.Areas.HighMountains
 		
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you. You are free of his spell! Except... you can't move. You are standing there, gazing into nothing, and you can't move. You can feel your arms and legs and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed. The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n");
 			//Undo slow to determine if bad end time
-			if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
-				player.spe += player.statusEffectv1(StatusEffects.BasiliskSlow);
-				mainView.statsView.showStatUp( 'spe' );
-				// speUp.visible = true;
-				// speDown.visible = false;
-				player.removeStatusEffect(StatusEffects.BasiliskSlow);
-			}
+			player.removeStatusEffect(StatusEffects.BasiliskSlow);
 			dynStats("spe", player.findPerk(PerkLib.BasiliskResistance) < 0 ? 3 : 1, "lus", 399);
 			//Bad end
 			if (player.spe < 5 && player.findPerk(PerkLib.BasiliskResistance) < 0 && !player.canUseStare()) {

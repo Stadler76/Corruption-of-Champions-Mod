@@ -19,11 +19,11 @@ package classes.Scenes.Areas.VolcanicCrag
 
 		private function behemothMenu():void {
 			menu();
-			addButton(0, "Fight", startFight, null, null, null, "Challenge the Behemoth.");
-			addButton(1, "Talk", talkToBehemothMenu, null, null, null, "Talk to Behemoth and discuss.");
+			addButton(0, "Fight", startFight).hint("Challenge the Behemoth.");
+			addButton(1, "Talk", talkToBehemothMenu).hint("Talk to Behemoth and discuss.");
 			if (player.lust >= 33) addButton(2, "Sex", behemothSexMenu, false, null, null, "Initiate sexy time with the Behemoth.");
 			else addButtonDisabled(2, "Sex", "You are not aroused enough to initiate sex with the Behemoth.");
-			if (flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] > 0) addButton(3, "Get Cum", getCum, null, null, null, "Get some of Behemoth's cum!");
+			if (flags[kFLAGS.BEHEMOTH_TALKED_ABOUT_CUM] > 0) addButton(3, "Get Cum", getCum).hint("Get some of Behemoth's cum!");
 			else addButtonDisabled(3, "???", "You need to have talked to the Behemoth about his cum.");
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -51,13 +51,13 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText(images.showImage("behemoth-talk"));
 			outputText("You ask the behemoth if he's willing to have a conversation with you. The behemoth says, \"<i>Of course. What would you like to talk about?</i>\"");
 			menu();
-			addButton(0, "Yourself", talkAboutYourself, null, null, null, "Talk to the behemoth about yourself.");
-			addButton(1, "Behemoth", talkAboutBehemoth, null, null, null, "Talk to the behemoth about himself.");
-			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] >= 1) addButton(2, "His Past", talkAboutSadStory, null, null, null, "Talk to the behemoth about his past.");
+			addButton(0, "Yourself", talkAboutYourself).hint("Talk to the behemoth about yourself.");
+			addButton(1, "Behemoth", talkAboutBehemoth).hint("Talk to the behemoth about himself.");
+			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] >= 1) addButton(2, "His Past", talkAboutSadStory).hint("Talk to the behemoth about his past.");
 			else addButtonDisabled(2, "His Past", "Talk to the behemoth at least once to unlock this.");
-			if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum, null, null, null, "Talk to the behemoth about the special properties of his cum."); 
+			if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum).hint("Talk to the behemoth about the special properties of his cum.");
 			else addButtonDisabled(3, "His Cum", "Have sex with the behemoth at least twice to unlock this.");
-			if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0) addButton(4, "Children", talkAboutHisChildren, null, null, null, "Talk to the behemoth about his son" + (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1 ? "" : "s") + ".");
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0) addButton(4, "Children", talkAboutHisChildren).hint("Talk to the behemoth about his son" + (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1 ? "" : "s") + ".");
 			else addButtonDisabled(4, "???", "Have at least 1 child with him to unlock this.");
 			addButton(14, "Back", behemothMenu);
 		}
@@ -114,7 +114,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (player.isBiped() || player.isGoo()) outputText("You turn it to face the behemoth and then sit down, intrigued.");
 			else outputText("You move it out of the way and find a comfortable position for you to listen to him on the floor rug.");
 			//Early life
-			outputText("\n\nThe behemoth clears his throat, uncertain how to begin, and you suspect he hasn't shared this too often.  \"<i>I don't have many complaints about my childhood,</i>\" he admits, his claws in his mane as he thinks.  \"<em>When I was a year old -- that's adolescence for us; we're adults around our second birthday -- I saw my father participate in the Feats of Strength.  It's a three-day competition and whoever does the best is declared tribe leader, and of course that was my father.  He was the biggest and strongest of all of us and I was so proud.</i>\"\n\n");
+			outputText("\n\nThe behemoth clears his throat, uncertain how to begin, and you suspect he hasn't shared this too often.  \"<i>I don't have many complaints about my childhood,</i>\" he admits, his claws in his mane as he thinks.  \"<i>When I was a year old -- that's adolescence for us; we're adults around our second birthday -- I saw my father participate in the Feats of Strength.  It's a three-day competition and whoever does the best is declared tribe leader, and of course that was my father.  He was the biggest and strongest of all of us and I was so proud.</i>\"\n\n");
 			outputText("But of course that's not the end of it, and you wait patiently for him to continue.\n\n");
 			outputText("\"<i>It was good for a long while,</i>\" he says, \"<i>but when my second birthday rolled around, my father told me I was the one to be sent through the portal.  I argued with him, of course, but he's the tribe leader: what was I supposed to do?  If you get told you gotta go or your whole world will be doomed, you do it, no matter that I think it's bullshit.  He gave me two hundred gems to support myself with and then tossed me through and that was it: no matter how I tried, the portal wouldn't let me go back and I was stuck here.</i>\"");
 			outputText("\n\nThat story sounds familiar, you comment, and he grins toothily.  He clearly didn't stay at the portal forever, though, and you ask him what he did after he realized he's stuck.\n\n");
@@ -122,7 +122,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			//Tel'Adre
 			if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) {
 				outputText("\n\nThere's a whole city that's still pure, you point out.  Has he ever visited Tel'Adre?");
-				outputText("\n\n\"<i>Of course!  It's pretty great, and that fox Urta who hangs out at the Wet Bitch is hot as hell.  No clue what that name's about, though: the one bar that's not corrupted ought to show it somehow, but there's no accounting for taste, eh?</em>\"  He laughs, but he doesn't really mind.  \"<em>And then there's the bakery -- try the brownies if you haven't; they're great -- and there ain't many places better to hang out than that gym of theirs.  Yeah, you can definitely say I've been there before.</i>\"");
+				outputText("\n\n\"<i>Of course!  It's pretty great, and that fox Urta who hangs out at the Wet Bitch is hot as hell.  No clue what that name's about, though: the one bar that's not corrupted ought to show it somehow, but there's no accounting for taste, eh?</i>\"  He laughs, but he doesn't really mind.  \"<i>And then there's the bakery -- try the brownies if you haven't; they're great -- and there ain't many places better to hang out than that gym of theirs.  Yeah, you can definitely say I've been there before.</i>\"");
 			}
 			//Behemoth the Imp Slayer!
 			outputText("\n\n\"<i>What really gets me, though, is how when I'm walking about, all the imps run away from me except for this one fucker.  I let him come up to me, 'cause I'm a nice guy like that, but he got that sly look on his face and tried to force himself on me and big mistake.  For him, I mean.  I clocked him right in the jaw and he flies back, but he didn't have the sense to cut and run and tried AGAIN.</i>\"\n\n");
@@ -160,7 +160,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				
 			}
 			outputText("\n\nYou play with your lover and offspring for a while, then head back to camp.");
-			dynStats("lib", -1, "lus", -20, "resisted", false, "noBimbo", true);
+			dynStats("lib", -1, "lus", -20, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Cum offer
@@ -263,18 +263,18 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			menu();
 			if (player.hasCock()) {
-				if (player.cockThatFits(72) >= 0) addButton(0, "Anal Fuck", analPitchBehemoth, null, null, null, "Anally penetrate the behemoth.");
+				if (player.cockThatFits(72) >= 0) addButton(0, "Anal Fuck", analPitchBehemoth).hint("Anally penetrate the behemoth.");
 				else outputText("\n\n<b>Unfortunately, your cock is too big to fit in his butthole.</b>");
 			}
 			else addButtonDisabled(0, "Anal Fuck", "You need a cock for this.");
-			addButton(1, "GetAnalFucked", analCatchBehemoth, null, null, null, "Have him penetrate you anally.");
-			if (player.hasVagina()) addButton(2, "GetVagFucked", vagCatchBehemoth, null, null, null, "Have him penetrate you vaginally.");
+			addButton(1, "GetAnalFucked", analCatchBehemoth).hint("Have him penetrate you anally.");
+			if (player.hasVagina()) addButton(2, "GetVagFucked", vagCatchBehemoth).hint("Have him penetrate you vaginally.");
 			else addButtonDisabled(2, "GetVagFucked", "You need a vagina for this.");
-			addButton(3, "Suck His Cock", suckThatBigCock, null, null, null, "Suck his wonderful cock and get stuffed with cum!");
-			if (timesSexed() >= 3) addButton(4, "Cum Bath", haveACumBathLiterally, null, null, null, "Have a (literal) cum bath!");
+			addButton(3, "Suck His Cock", suckThatBigCock).hint("Suck his wonderful cock and get stuffed with cum!");
+			if (timesSexed() >= 3) addButton(4, "Cum Bath", haveACumBathLiterally).hint("Have a (literal) cum bath!");
 			else addButtonDisabled(4, "Cum Bath", "Have sex with the behemoth enough times to unlock this!");
 			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0) {
-				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth, null, null, null, "Do some urine activity with him.");
+				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth).hint("Do some urine activity with him.");
 				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
 			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
@@ -386,7 +386,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you " + player.clothedOrNaked("redress yourself in your [armor], and ") + "make your way back to your camp.");
 			player.orgasm('Vaginal');
 			player.slimeFeed();
-			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < (25 + player.corruptionTolerance())) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
+			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.isPureEnough(25)) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
 			HPChange(50 + (player.maxHP() / 5), false);
@@ -468,8 +468,8 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			//outputText("\n\n\"<i>So, what would you like? Bucket or golden shower?</i>\"");
 			//menu();
-			//addButton(0, "Bucket", watersportsBucket, null, null, null, "Just urinate into the bucket together and do a bit of foreplay.");
-			//addButton(1, "Get Showered", watersportsShower, null, null, null, "Get showered in behemoth's urine!");
+			//addButton(0, "Bucket", watersportsBucket).hint("Just urinate into the bucket together and do a bit of foreplay.");
+			//addButton(1, "Get Showered", watersportsShower).hint("Get showered in behemoth's urine!");
 			flags[kFLAGS.BEHEMOTH_WATERSPORTS]++;
 			outputText("\n\n");
 			watersportsBucket();

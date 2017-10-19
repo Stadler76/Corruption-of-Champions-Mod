@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs{
+﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -196,11 +196,11 @@ public function totalIzmaChildren():int {
 		}
 	}
 	menu();
-	addButton(0, "Borrow", tradeWithFuckingSharkBitches, null, null, null, "Borrow a book from Izma of your choice.");
-	addButton(1, "Talk", talkToASharkCoochie, null, null, null, "Talk to Izma and see what's up.");
+	addButton(0, "Borrow", tradeWithFuckingSharkBitches).hint("Borrow a book from Izma of your choice.");
+	addButton(1, "Talk", talkToASharkCoochie).hint("Talk to Izma and see what's up.");
 	if (flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] >= 4) {
-		addButton(2, "Fight", fightSharkCunt, null, null, null, "Engage in a fight with Izma to see who will get to dom!");
-		addButton(3, "Sex", chooseYourIzmaWeapon, null, null, null, "Initiate sexy times with the tigershark.");
+		addButton(2, "Fight", fightSharkCunt).hint("Engage in a fight with Izma to see who will get to dom!");
+		addButton(3, "Sex", chooseYourIzmaWeapon).hint("Initiate sexy times with the tigershark.");
 	}
 	addButton(4, "Leave", leaveSumSharkPussyOnTheBeach);
 }
@@ -217,14 +217,14 @@ private function sharkBookMenus(free:Boolean = false):void {
 	//[C.Manual] [E.Guide] [Porn][Back]
 	menu();
 	if (free) {
-		addButton(0, "C.Manual", campCuntManual, null, null, null, "This book will teach you about some combat techniques. This should improve your combat abilities.\n\nIzma will let you read a book for free right now.");
-		addButton(1, "E.Guide", entropyGuideByStephenHawking, null, null, null, "This book will teach you how to be a better person. This should reduce your libido and corruption.\n\nIzma will let you read a book for free right now.");
-		addButton(2, "Porn", stephenHawkingPorn, null, null, null, "Exactly what it says on the tin. For the perverted, of course. This should definitely make you horny.\n\nIzma will let you read a book for free right now.");
+		addButton(0, "C.Manual", campCuntManual).hint("This book will teach you about some combat techniques. This should improve your combat abilities.\n\nIzma will let you read a book for free right now.");
+		addButton(1, "E.Guide", entropyGuideByStephenHawking).hint("This book will teach you how to be a better person. This should reduce your libido and corruption.\n\nIzma will let you read a book for free right now.");
+		addButton(2, "Porn", stephenHawkingPorn).hint("Exactly what it says on the tin. For the perverted, of course. This should definitely make you horny.\n\nIzma will let you read a book for free right now.");
 	}
 	else {
-		addButton(0, "C.Manual", readSharkCuntManual, null, null, null, "This book will teach you about some combat techniques. This should improve your combat abilities.");
-		addButton(1, "E.Guide", sharkEdgingGuideLOL, null, null, null, "This book will teach you how to be a better person. This should reduce your libido and corruption.");
-		addButton(2, "Porn", sharkgirlPronz, null, null, null, "Exactly what it says on the tin. For the perverted, of course. This should definitely make you horny.");
+		addButton(0, "C.Manual", readSharkCuntManual).hint("This book will teach you about some combat techniques. This should improve your combat abilities.");
+		addButton(1, "E.Guide", sharkEdgingGuideLOL).hint("This book will teach you how to be a better person. This should reduce your libido and corruption.");
+		addButton(2, "Porn", sharkgirlPronz).hint("Exactly what it says on the tin. For the perverted, of course. This should definitely make you horny.");
 	}
 	addButton(4, "Back", flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0 ? execEncounter : izmaFollowerMenu);
 }
@@ -1751,10 +1751,10 @@ public function izmaFollowerMenu():void {
 	}
 	//OMG MENUZ!
 	menu();
-	addButton(0, "Appearance", izmaPearance, null, null, null, "Examine the tigershark's appearance.");
+	addButton(0, "Appearance", izmaPearance).hint("Examine the tigershark's appearance.");
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1) {
-		addButton(1, "Books", IzmaCampBooks, null, null, null, "Engage in a book-reading session with Izma.");
-		if (totalIzmaChildren() > 0) addButton(2, "Children", izmaKidsPlaytime, null, null, null, "Watch the children of Izma play together.");
+		addButton(1, "Books", IzmaCampBooks).hint("Engage in a book-reading session with Izma.");
+		if (totalIzmaChildren() > 0) addButton(2, "Children", izmaKidsPlaytime).hint("Watch the children of Izma play together.");
 		else addButtonDisabled(2, "???", "Perhaps if you have a child with Izma.");
 	}
 	else {
@@ -1762,13 +1762,13 @@ public function izmaFollowerMenu():void {
 		if (totalIzmaChildren() > 0) addButtonDisabled(2, "Children", "This can only be done at your camp.");
 		else addButtonDisabled(2, "???", "Perhaps if you have a child with Izma.");
 	}
-	if (player.lust >= 33) addButton(3, "Sex", izmaSexMenu, null, null, null, "Do some romp with the tigershark!");
+	if (player.lust >= 33) addButton(3, "Sex", izmaSexMenu).hint("Do some romp with the tigershark!");
 	else addButtonDisabled(3, "Sex", "You are not horny enough to consider that.");
-	addButton(4, "Talk", talkWivIzma, null, null, null, "Talk to Izma about some stuff.");
-	addButton(5, "Tooth", gatASharkTooth, null, null, null, "Ask Izma for the tigershark tooth.");
+	addButton(4, "Talk", talkWivIzma).hint("Talk to Izma about some stuff.");
+	addButton(5, "Tooth", gatASharkTooth).hint("Ask Izma for the tigershark tooth.");
 	if (flags[kFLAGS.IZMA_BROFIED] != -1) {
-		if (flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(6, "Remove Dick", removeIzmasPenis, null, null, null, "Get Izma to remove her dick for you. Why would you do that? You monster.");
-		else addButton(6, "Go Herm", izmaDickToggle, null, null, null, "Tell Izma to regrow her dick. She would be quite grateful if you choose to do so.");
+		if (flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(6, "Remove Dick", removeIzmasPenis).hint("Get Izma to remove her dick for you. Why would you do that? You monster.");
+		else addButton(6, "Go Herm", izmaDickToggle).hint("Tell Izma to regrow her dick. She would be quite grateful if you choose to do so.");
 	}
 	else addButtonDisabled(6, "Remove Dick", "You cannot remove Izma's penis as she has Futa Form perk.");
 	addButton(7, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "NoKidsPlease" : "Have Kids?", childToggle, null, null, null, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "Tell Izma that she should start taking the herbal contraceptives." : "Tell Izma to stop taking contraceptives to allow for reproduction.", flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 ? "No Kids Please" : "Have Kids?");
@@ -1855,15 +1855,15 @@ private function izmaSexMenu():void {
 	//[Get Anal] [Her Vag] [69] [Izma Mounts PC]
 	menu();
 	if (flags[kFLAGS.IZMA_NO_COCK] == 0) {
-		addButton(0, "Anal 'Catch'", followerIzmaTakesItInPooper, null, null, null, "It's Izma's turn to be alpha! Let her dom your ass with her penis.");
-		addButton(1, "DomWithAss", radarIzmaAnalDominant, null, null, null, "Be dominant and take her dick anally.", "Dominate with Ass");
+		addButton(0, "Anal 'Catch'", followerIzmaTakesItInPooper).hint("It's Izma's turn to be alpha! Let her dom your ass with her penis.");
+		addButton(1, "DomWithAss", radarIzmaAnalDominant).hint("Be dominant and take her dick anally.", "Dominate with Ass");
 	}
 	if (player.hasCock()) {
-		if (player.cockThatFits(65) >= 0) addButton(2,"Dom Vagina",fuckIzmasPussyDominate, null, null, null, "Dominate Izma and pound her pussy!", "Dominate Vagina");
-		addButton(3, "Get Mounted", followerIzmaMountsPC, null, null, null, "Order Izma to mount your dick with her pussy.");
-		addButton(4, "Izma's Vagina", followerIzmaTakesItInVagoo, null, null, null, "Have some play with the tigershark's pussy and fuck her.");
+		if (player.cockThatFits(65) >= 0) addButton(2,"Dom Vagina",fuckIzmasPussyDominate).hint("Dominate Izma and pound her pussy!", "Dominate Vagina");
+		addButton(3, "Get Mounted", followerIzmaMountsPC).hint("Order Izma to mount your dick with her pussy.");
+		addButton(4, "Izma's Vagina", followerIzmaTakesItInVagoo).hint("Have some play with the tigershark's pussy and fuck her.");
 	}
-	if (player.hasVagina() && flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(5,"RideIzmaCock",inCampRideIzmasDickDongTheWitchIsDead, null, null, null, "Ride Izma's member vaginally.", "Ride Izma's Cock");
+	if (player.hasVagina() && flags[kFLAGS.IZMA_NO_COCK] == 0) addButton(5,"RideIzmaCock",inCampRideIzmasDickDongTheWitchIsDead).hint("Ride Izma's member vaginally.", "Ride Izma's Cock");
 	if (player.gender > 0) addButton(6,"Sixtynine",followerIzmaTakesIt69);
 	
 	if (flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0 && latexGirl.latexGooFollower()) addButton(8,flags[kFLAGS.GOO_NAME],izmaLatexySubmenu);

@@ -406,10 +406,10 @@ package classes.Items
 
 				case "PlayerEvents-benoitHairPin":
 				case "reptilum-basilisk":
-				case "reptilum-dracolisk": //never 4get the basilisk hair discourse of may 2017
-					if (player.hairType == HAIR_BASILISK_PLUME && player.cor < Math.max(20, (65 - player.corruptionTolerance()))) return 0;
+				case "reptilum-dracolisk":
+					if (player.hairType == HAIR_BASILISK_PLUME && player.cor < 65) return 0;
 
-					if (player.isFemaleOrHerm() && player.cor < Math.max(80, (15 + player.corruptionTolerance())) && player.featheryHairPinEquipped() && player.isBasilisk()) {
+					if (player.isFemaleOrHerm() && player.cor < 15 && player.featheryHairPinEquipped() && player.isBasilisk()) {
 						var benoitMFText:String = getGame().bazaar.benoit.benoitMF(
 							" your hair has changed into a plume of feathers that, like legend is told, belongs to a female basilisk!",
 							" you have a plume, like a female basilisk!"
@@ -438,7 +438,7 @@ package classes.Items
 						return 1; // --> gained basilisk hair (plume)
 					}
 
-					if (player.cor >= Math.max(80, (65 + player.corruptionTolerance())) && player.hairType != HAIR_BASILISK_SPINES && player.hasLizardScales() && player.hasReptileFace()) {
+					if (player.cor >= 65 && player.hairType != HAIR_BASILISK_SPINES && player.hasLizardScales() && player.hasReptileFace()) {
 						// Corrupted Basilisk
 						if (player.hairLength > 0 && [HAIR_GOO, HAIR_BASILISK_PLUME].indexOf(player.hairType) == -1) {
 							output.text("\n\nYour scalp feels tight and hot, causing you to run a hand through your [hair] to rub at it gingerly.");

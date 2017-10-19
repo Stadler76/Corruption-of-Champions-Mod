@@ -199,7 +199,7 @@ public function edrynBarTalk():void {
 		//Non horsedick
 		else {
 			outputText("but the potent musky scent only reminds you of how different things are here.");
-			if (player.cor > (50 - player.corruptionTolerance()) || player.statusEffectv1(StatusEffects.Edryn) > 0 || flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
+			if (player.isCorruptEnough(50) || player.statusEffectv1(StatusEffects.Edryn) > 0 || flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
 				outputText("  Unbidden, your mind wonders what her juicy horse-snatch would feel like, and your " + player.cockDescript(0) + " responds immediately, thickening with readiness.  You squirm uncomfortably from how constricting your " + player.armorName + " feels.\n\n");
 				outputText("You give the rapidly dissipating scent a sniff and note that it isn't unpleasant, just strong, and once again you find yourself imagining standing ");
 				if (player.tallness < 60) outputText("on a stool ");

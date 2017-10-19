@@ -3757,7 +3757,7 @@ private function katPenetrate():void {
 	if (!hasCock() || knotSize > 4) {
 		addDisabledButton(3, "SucknFuck", "This scene requires Kath to have cock with not too large knot.");
 	} else {
-		addButton(2, "SucknFuck", suckNFuck);
+		addButton(3, "SucknFuck", suckNFuck);
 	}
 	
 	addButton(14, "Back", katSexMenu);
@@ -4017,7 +4017,7 @@ public function pcPenetratesKatDoubly():void {
 				addButton(1, "Cuddle", pcPenetratesKatDoublyNormalEnd);
 				return;
 			}
-			if (player.cor >= (75 - player.corruptionTolerance()) || (player.findPerk(PerkLib.Pervert) >= 0 && player.cor >= 33) || player.findPerk(PerkLib.Sadist) >= 0) { //First time you have to be corrupt
+			if (player.isCorruptEnough(75) || (player.findPerk(PerkLib.Pervert) >= 0 && player.cor >= 33) || player.findPerk(PerkLib.Sadist) >= 0) { //First time you have to be corrupt
 				outputText("your perverse mind comes up with a way to ‘help’ her.");
 				menu();
 				addButton(0, "Help", pcPenetratesKatDoublyHighCumCorrupt);
@@ -5736,7 +5736,7 @@ private function firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo
 	outputText("\n\n“<i>[name]</i>” she says");
 	if (player.short == "Kath" || player.short == "Katherine" || player.short == "Helena" || player.short == "Evelyn" || player.short == "Oswald") outputText(".  “<i>Well isn’t that a coincidence! All right, ");
 	else outputText(", rolling the foreign word around in her mouth. “<i>Well, ");
-	outputText("[name], that was an amazing first date.  I hope we can do some more things like that - and believe me, I’ve got some ideas!");
+	outputText("[name], that was an amazing first date.  I hope we can do some more things like that - and believe me, I’ve got some ideas!</i>”");
 	
 	//(Set KATHERINE_UNLOCKED to 1)
 	flags[kFLAGS.KATHERINE_UNLOCKED] = 1; //If Kath was recruited through Scyllia then KATHERINE_MET_SCYLLA will be set to 1
@@ -6093,7 +6093,14 @@ private function bathTimePenetrated():void {
 
 		outputText("With your hand in the way her cock can go no deeper.  You try to make it up to her by flexing your muscles, gently milking her " + cockAdj() + "erection.  Katherine throws her head back and starts to beg.  “<i>Oh please " + playerText() + "!  Please let me go, let me fuck you.  I need to go deeper.</i>”  Her cock" + cockMultiple(" is", "s are") + " throbbing and leaking globs of warm pre into your cunt" + cockMultiple(".", " and the stream."));
 		
-		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4 && (player.cor >= (75 - player.corruptionTolerance()) || (player.findPerk(PerkLib.Pervert) >= 0 && player.cor >= 33) || player.findPerk(PerkLib.Sadist) >= 0 || doneSubmissive(KBIT_SUB_ORGASM_DENIAL))) {
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4
+			&& (
+					player.isCorruptEnough(75)
+					|| (player.findPerk(PerkLib.Pervert) >= 0 && player.isCorruptEnough(33))
+					|| player.findPerk(PerkLib.Sadist) >= 0
+					|| doneSubmissive(KBIT_SUB_ORGASM_DENIAL)
+			)
+		) {
 			outputText("\n\nYou lick your lips.  Your poor little slut is so horny she can’t even move.  She’s so close to cumming, but she can’t make it there on her own.  You could hold her like this for hours and probably drive her out of her mind.  Or you could pull away and give her a nasty case of blue balls.");
 			menu();
 			addButton(0, "Let Her Cum", bathTimePenetratedNormalEnd);

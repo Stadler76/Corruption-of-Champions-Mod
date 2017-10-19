@@ -182,7 +182,7 @@ package classes.Items.Consumables
 					if (player.fertility > 0) outputText("mostly ");
 					outputText("sterile system.");
 					//[Low/No fertility + Trap/Corruption  >70:
-					if (player.cor > (70 - player.corruptionTolerance())) outputText("  For some reason the fact that you cannot function as nature intended makes you feel helpless and submissive.  Perhaps the only way to be a useful creature now is to find a dominant, fertile being willing to plow you full of eggs? You shake the alien, yet oddly alluring thought away.");
+					if (player.isCorruptEnough(70)) outputText("  For some reason the fact that you cannot function as nature intended makes you feel helpless and submissive.  Perhaps the only way to be a useful creature now is to find a dominant, fertile being willing to plow you full of eggs? You shake the alien, yet oddly alluring thought away.");
 				}
 				player.fertility -= 1 + rand(3);
 				if (player.fertility < 4) player.fertility = 4;

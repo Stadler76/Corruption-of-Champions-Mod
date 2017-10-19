@@ -752,7 +752,7 @@ package classes.Scenes.NPCs {
 		{
 		 	outputText("\n\n\"<i>Now it seems Marble’s frustrations are also my frustrations.  ‘Oh he is just a wonderful person!’ she said, ‘I could never force him to change his body for me,’ she said!  Fuck you Marble!  What good is a lover if you can’t actually fuck them!</i>\"  ");
 		}
-	 	outputText("She continues ranting for several minutes before turning to you.  \"<i>YOOU!  Didn’t you ever stop to consider the needs of dainty girls like me before you started abusing transformatives?</i>\"  She sighs, apparently running out of steam.  \"<i>Who knew this plan would be so hard?");
+	 	outputText("She continues ranting for several minutes before turning to you.  \"<i>YOOU!  Didn’t you ever stop to consider the needs of dainty girls like me before you started abusing transformatives?</i>\"  She sighs, apparently running out of steam.  \"<i>Who knew this plan would be so hard?</i>");
 	 	outputText("\n\n\"<i>Well, I can’t actually fuck you, but I guess I can get something else from you.  Just remember that the first thing that we’re fixing is that size problem of yours, got it?</i>\"");
 
 		//Proceed to cockless scene.
@@ -1355,7 +1355,7 @@ package classes.Scenes.NPCs {
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;
 		player.changeStatusValue(StatusEffects.Marble,4,10);
 		getGame().inCombat = false;
-		player.clearStatuses(false);
+		player.clearStatuses();
 		//Marble's breast size is set to 0 (integer, 0=DD cups, 1=G cups, 2=HH, 3=J)
 		//advance time of day by 4 hours
 		//end event
@@ -1515,7 +1515,7 @@ package classes.Scenes.NPCs {
 			//Restore 30 fatigue
 			player.changeFatigue(-30);
 			//increase lust by 15
-			kGAMECLASS.stats(0,0,0,0,0,0,15,0);
+			dynStats("lus",15);
 			//increase Marble lust by 10
 			flags[kFLAGS.MARBLE_LUST] += 10;
 			flags[kFLAGS.MARBLE_TIME_SINCE_NURSED_IN_HOURS] = 0;

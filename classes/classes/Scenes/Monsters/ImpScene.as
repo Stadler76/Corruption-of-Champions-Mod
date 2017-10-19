@@ -2143,6 +2143,7 @@ package classes.Scenes.Monsters
 
 		private function killImp():void {
 			clearOutput();
+			outputText(images.showImage("item-impSkull"));
 			flags[kFLAGS.IMPS_KILLED]++;
 			outputText("You make a quick work of the imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
@@ -2151,7 +2152,7 @@ package classes.Scenes.Monsters
 			addButton(1, "Leave", combat.cleanupAfterCombat);
 		}
 		private function takeSkull():void {
-			outputText(images.showImage("item-impSkull"));
+			clearOutput();
 			inventory.takeItem(useables.IMPSKLL, combat.cleanupAfterCombat);
 		}
 	}

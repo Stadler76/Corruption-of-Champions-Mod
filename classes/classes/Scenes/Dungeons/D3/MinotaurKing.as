@@ -149,7 +149,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("Feinting with his axe, the Minotaur King flings a powerful backhand in your direction.");
 			var damage:Number = str + weaponAttack - rand(player.tou);
 			var evade:String = player.getEvasionReason();
-			if (damage <= 0 || evade == EVASION_SPEED || evade == EVASION_FLEXIBILITY || EVASION_UNHINDERED)
+			if (damage <= 0 || evade == EVASION_SPEED || evade == EVASION_FLEXIBILITY || evade == EVASION_UNHINDERED)
 			{
 				outputText(" Luckily, you dodge aside.");
 			}
@@ -262,7 +262,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
 			player.takeLustDamage(15 + player.lib / 20, true);
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
+			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2)
 			{
 				if (rand(2) == 0)
 				{

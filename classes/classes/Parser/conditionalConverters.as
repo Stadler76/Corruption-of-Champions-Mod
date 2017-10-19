@@ -53,7 +53,11 @@
 				"hasbeak"			: function(thisPtr:*):* {return  kGAMECLASS.player.hasBeak();},
 				"hasdragonneck"		: function(thisPtr:*):* {return  kGAMECLASS.player.hasDragonNeck();},
 				"neckpos"			: function(thisPtr:*):* {return  kGAMECLASS.player.neck.pos;},
-				"isherm"			: function(thisPtr:*):* {return  (kGAMECLASS.player.gender == 3);},
+				"ismale"			: function(thisPtr:*):* {return  (kGAMECLASS.player.isMale());},
+				"isfemale"			: function(thisPtr:*):* {return  (kGAMECLASS.player.isFemale());},
+				"isherm"			: function(thisPtr:*):* {return  (kGAMECLASS.player.isHerm());},
+				"ismaleorherm"		: function(thisPtr:*):* {return  (kGAMECLASS.player.isMaleOrHerm());},
+				"isfemaleorherm"	: function(thisPtr:*):* {return  (kGAMECLASS.player.isFemaleOrHerm());},
 				"cumnormal"			: function(thisPtr:*):* {return  (kGAMECLASS.player.cumQ() <= 150);},
 				"cummedium"			: function(thisPtr:*):* {return  (kGAMECLASS.player.cumQ() > 150 && kGAMECLASS.player.cumQ() <= 350);},
 				"cumhigh"			: function(thisPtr:*):* {return  (kGAMECLASS.player.cumQ() > 350 && kGAMECLASS.player.cumQ() <= 1000);},
@@ -76,5 +80,9 @@
 				//Prison
 				"esteem"			: function(thisPtr:*):* {return  kGAMECLASS.player.esteem; },
 				"obey"				: function(thisPtr:*):* {return  kGAMECLASS.player.obey; },
-				"will"				: function(thisPtr:*):* {return  kGAMECLASS.player.will; }
+				"will"				: function(thisPtr:*):* {return  kGAMECLASS.player.will; },
+
+				//---[NPCs]---
+				//Joy
+				"joyhascock"		: function(thisPtr:*):* {return  kGAMECLASS.joyScene.joyHasCock(); }
 			}

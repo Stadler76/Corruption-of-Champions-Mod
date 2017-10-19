@@ -240,8 +240,8 @@ package classes.Scenes.Dungeons
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
 			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
 			else addButtonDisabled(8, "Masturbate", "You are not horny enough to do that.");
-			addButton(13, "Inventory", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-			addButton(14, "Map", map.displayMap, null, null, null, "View the map of this dungeon.");
+			addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+			addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
 			setTopButtons();
 			palace.setAnzuButton();
 		}

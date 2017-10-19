@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by aimozg on 03.01.14.
  */
 package classes.Scenes.Areas.Plains
@@ -32,6 +32,7 @@ package classes.Scenes.Areas.Plains
 		{
 			spriteSelect(SpriteDb.s_spear_gnoll);
 			clearOutput();
+			outputText(images.showImage("monster-gnollspearthrower"));
 			//<First Encounter>
 			if (flags[kFLAGS.HAVE_ENCOUNTERED_GNOLL_PLAINS] == 0) {
 				flags[kFLAGS.HAVE_ENCOUNTERED_GNOLL_PLAINS]++;
@@ -119,7 +120,8 @@ package classes.Scenes.Areas.Plains
 			//<For characters without tails>
 			else outputText("One furred paw disappears before a single claw presses roughly against your " + player.assholeDescript() + " until she hears your breath catch in your throat.");
 			outputText("  A soft whimper escapes your lips when something hard and damp slides firmly along your rump.  You can hear lust-filled panting from the hyena as she grinds her massive clit against your trapped form, letting you feel the warmth of her body.\n\n");
-
+			
+			outputText(images.showImage("gnoll-fuck-butt"));
 			outputText("Clawed hands slide around your sides to roughly squeeze your " + player.chestDesc() + ", using the painful hold to brace her body.  The hardened shaft vanishes as her hips pull back suddenly.  The barest touches against your entrance is all the warning you have before she shoves the two inch thick hyena meat roughly forward, stretching your poor hole wide around the sudden intruder.");
 			player.buttChange(30, true, true, false);
 			outputText("  The air fills with the sound of mocking laughter as the warrior forces herself deep into your passage.  Your ass is forced wide as your body tries desperately to cope with the sudden intrusion until her hips finally press against your " + player.buttDescript() + ".\n\n");
@@ -176,8 +178,8 @@ package classes.Scenes.Areas.Plains
 			
 			if (player.lust >= 33 && !player.isGenderless()) {
 				outputText("\n\nUsing the hyena to get off would be easy.  What do you do?");
-				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio, null, null, null, "Make the gnoll suck you off.", "Get Blowjob");
-				if (player.hasVagina()) addButton(1, "Get Licked", victoryRapeHyenaCunnilingus, null, null, null, "Make the gnoll lick your pussy.");
+				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio).hint("Make the gnoll suck you off.", "Get Blowjob");
+				if (player.hasVagina()) addButton(1, "Get Licked", victoryRapeHyenaCunnilingus).hint("Make the gnoll lick your pussy.");
 			}
 			
 			addButton(14, "Leave", combat.cleanupAfterCombat);
@@ -195,6 +197,7 @@ package classes.Scenes.Areas.Plains
 				if (y == x) y = 1;
 			}
 			clearOutput();
+			outputText(images.showImage("gnoll-fuck-oral"));
 			outputText("Sensing the gnoll's will has broken, you impulsively order her to strip.  Tawny, spotted paws fall to the leather band around her waist, deftly untying the loincloth.  The material falls away from her groin, exposing a long, black shaft slipping free from a furred sheath.  You gaze in wonder, realizing that this hardening member is not a cock, but instead a long, thick clit.  The barrel-like tip of her pseudopenis is actually the entrance to her pussy.  You begin to understand why bondage and dominance are so ingrained in the culture of this savage race.\n\n");
 
 			outputText("Dark brown eyes watch your hands as you slowly slip out of your " + player.armorName + ".  The potent smell of hyena musk starts to fill the air as the dark shaft of the gnoll's pseudopenis slides from her sheath.  Eyes of brown fire fix on your now exposed " + player.multiCockDescriptLight() + ".  Her pink tongue slides along her powerful teeth and dark lips, giving you pause, but her gaze is filled with nothing but lust and need.  Soft whines escape from her lips as she all but strains towards your " + player.cockDescript(x) + ".  Her spotted paws slide up to her heavy breasts, squeezing the orbs as the now submissive amazon tries to tempt you.\n\n");
@@ -267,7 +270,7 @@ package classes.Scenes.Areas.Plains
 			outputText("A heady musk fills the air from the warrior's arousal, leaving you feeling light headed.  The scent alone causes juices to flow in your " + player.vaginaDescript(0) + ".  At another command, the hyena's deft paws slide along your form, roving about as they slowly remove your " + player.armorName + ", letting your bare skin warm in the air.  The strong, tawny paws linger even after you stand nude in the soft breeze.\n\n");
 
 			outputText("On impulse, you command the hyena to use that eager muzzle on you.  Instantly, her paws clutch you around the waist and lift, hefting you high into the air.  A girlish squeal escapes your lips as you find yourself dangling above the warrior.  The gnoll's powerful arms hold you steady as you squirm almost ten feet off the ground.  The amazon ignores all further commands as she lowers your vulnerable slit directly above her nose.\n\n");
-
+			outputText(images.showImage("gnoll-fuck-cunny"));
 			outputText("A wet, pink tongue slides along your intimate lips, sending a jolt of pleasure through your very core.  The long, broad tongue laps eagerly against the entrance of your pussy until you start to writhe in the air.  At the end of each stroke, the broad tongue starts to curl around your " + player.clitDescript() + ", eliciting a gasp of pleasure from your suspended form.  Time starts to lose meaning as the gnoll holds you there, tirelessly, as she works her velvet tongue sensuously against your " + player.vaginaDescript(0) + ".\n\n");
 
 			outputText("You are so lost in the building pleasure that when the licking suddenly stops, a howl of need is torn from your lips.  You start to squirm, desperate for the tongue to return, when you feel yourself spun rapidly around before the hyena's warm nose presses lightly against your slit.  Looking down the length of your body, you see the twinkle in the dark brown eyes.  Her long pink tongue lolls out the front of her muzzle.  The amazon's hot breath slides over your dripping slit.\n\n");

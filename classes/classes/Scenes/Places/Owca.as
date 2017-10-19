@@ -376,7 +376,7 @@ public function defeetVapulasHorde():void {
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even has hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
 	}
 	//[(requires genitals and and corr >60)
-	if ((player.cor > (60 - player.corruptionTolerance()) || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1) && player.gender > 0) {
+	if (player.isCorruptEnough(60) && player.gender > 0) {
 		outputText("\n\nDo you take advantage of them?");
 		doYesNo(rapeZeVapula,noVapulaSex);
 	}
@@ -715,7 +715,7 @@ private function rebeccMenu():void {
 	menu();
 	addButton(0, "Appearance", rebeccAppearance);
 	addButton(1, "Bath", rebeccBathScene);
-	if (player.cor >= (66 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist)) {
+	if (player.isCorruptEnough(66) || player.findPerk(PerkLib.Sadist)) {
 		outputText("\n\nYou could try and force yourself on her, but you might not be welcome in town after...");
 		addButton(3, "Surprise Sex", rapeRebecc, false);
 	} else {
@@ -853,7 +853,7 @@ public function beatUpOwca():void {
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	menu();
-	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= (60 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0)) {
+	if (!player.isGenderless() && player.lust >= 33 && (player.isCorruptEnough(60) || player.findPerk(PerkLib.Sadist) >= 0)) {
 		addButton(0, "Rape Rebecc", rapeRebecc, true);
 	} else {
 		addDisabledButton(0, "Rape Rebecc");
@@ -881,7 +881,7 @@ private function torchOwcaMotherFuckers():void {
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	dynStats("cor", 15);
 	menu();
-	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= (60 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0)) {
+	if (!player.isGenderless() && player.lust >= 33 && (player.isCorruptEnough(60) || player.findPerk(PerkLib.Sadist) >= 0)) {
 		addButton(0, "Abuse Her", rapeRebecc, true);
 	} else {
 		addDisabledButton(0, "Abuse Her");
@@ -1023,7 +1023,7 @@ private function subdueVapula():void {
 	//choices: [Disband the horde]/[Enslave Vapula(requires cock or non-centaur vagina, D2 completion, libido >= 60, and corr >= 70)]
 	menu();
 	addButton(0, "Disband", disbandHorde);
-	if (!player.isGenderless() && (player.cor >= (66 - player.corruptionTolerance()))) {
+	if (!player.isGenderless() && (player.isCorruptEnough(66))) {
 		addButton(1, "EnslaveVapula", enslaveVapulaWithYourWang);
 	} else {
 		addDisabledButton(1, "EnslaveVapula", "This scene requires you to have genitals and high enough corruption.");

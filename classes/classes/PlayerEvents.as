@@ -50,12 +50,12 @@ package classes {
 			}
 			//Normal
 			if (player.findPerk(PerkLib.WellAdjusted) < 0) {
-				dynStats("lus", player.lib * 0.04, "resisted", false); //Raise lust
-				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.02, "resisted", false); //Double lust rise if lusty.
+				dynStats("lus", player.lib * 0.04, "scale", false); //Raise lust
+				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.02, "scale", false); //Double lust rise if lusty.
 			}
 			else { //Well adjusted perk
-				dynStats("lus", player.lib * 0.02, "resisted", false); //Raise lust
-				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "resisted", false); //Double lust rise if lusty.
+				dynStats("lus", player.lib * 0.02, "scale", false); //Raise lust
+				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "scale", false); //Double lust rise if lusty.
 			}
 			//Feathery hairpin Effects
 			if (player.featheryHairPinEquipped() && mutations.lizardHairChange("PlayerEvents-benoitHairPin") != 0)
@@ -164,7 +164,7 @@ package classes {
 					flags[kFLAGS.VALERIA_FLUIDS]--;
 				}
 				else if (player.armor == armors.GOOARMR) {
-					dynStats("lus", 2 + (player.lib / 10), "resisted", false);
+					dynStats("lus", 2 + (player.lib / 10), "scale", false);
 					needNext = true;
 				}
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 100) flags[kFLAGS.VALERIA_FLUIDS] = 100;
@@ -430,7 +430,7 @@ package classes {
 			}
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
-					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "resisted", false, "noBimbo", true);
+					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "scale");
 					player.removeStatusEffect(StatusEffects.Heat); //remove heat
 					if (player.lib < 1) player.lib = 1;
 					getGame().statScreenRefresh();
@@ -443,7 +443,7 @@ package classes {
 			if (player.inRut) { //Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
 				trace("RUT:" + player.statusEffectv3(StatusEffects.Rut));
 				if (player.statusEffectv3(StatusEffects.Rut) <= 1 || player.totalCocks() == 0) { //Remove bonus libido from rut
-					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Rut), "resisted", false, "noBimbo", true);
+					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Rut), "scale", false);
 					player.removeStatusEffect(StatusEffects.Rut); //remove heat
 					if (player.lib < 10) player.lib = 10;
 					getGame().statScreenRefresh();

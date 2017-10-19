@@ -108,9 +108,9 @@ import classes.Scenes.API.FnHelpers;
 		}
 
 		public function lakeWalk():void {
-				outputText(images.showImage("area-lake"));
 			if (player.level < 2 || player.spe100 < 50) {
 				clearOutput();
+				outputText(images.showImage("area-lake"));
 				outputText("Your quick walk along the lakeshore feels good.");
 				if (player.spe100 < 50) {
 					outputText("  You bet you could cover the same distance even faster next time.\n");
@@ -118,6 +118,7 @@ import classes.Scenes.API.FnHelpers;
 				}
 			} else {
 				clearOutput();
+				outputText(images.showImage("area-lake"));
 				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ");
 				if (player.cor >= 60 || player.lust100 >= 90 || player.lib >= 75) {
 					outputText("Your imaginings increasingly seem to turn into daydreams of raunchy perverted sex, flooding your groin with warmth.");
@@ -185,4 +186,3 @@ import classes.Scenes.API.FnHelpers;
 
 	}
 }
-

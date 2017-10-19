@@ -268,13 +268,13 @@ package classes.Scenes.Dungeons.AnzuPalace
 			clearOutput();
 			outputText("\"<i>Do you need anything?</i>\" Anzu asks patiently.");
 			menu();
-			addButton(0, "Appearance", anzuAppearance, null, null, null, "Take a closer look at the avian deity.");
-			addButton(1, "Talk", anzuTalkMenu, null, null, null, "Get to know Anzu better.");
-			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 3) addButton(2, "Sex", anzuSexMenu, null, null, null, "Have some sexy times with the sexy avian deity.");
+			addButton(0, "Appearance", anzuAppearance).hint("Take a closer look at the avian deity.");
+			addButton(1, "Talk", anzuTalkMenu).hint("Get to know Anzu better.");
+			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 3) addButton(2, "Sex", anzuSexMenu).hint("Have some sexy times with the sexy avian deity.");
 			else addButtonDisabled(2, "Sex", "Maybe if Anzu likes you better, he will let you do that.");
 			if (kGAMECLASS.dungeonLoc == DungeonCore.DUNGEON_ANZU_ROOF) {
 				if (player.canFly()) {
-					if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) addButton(3, "Race Him", null, null, null, null, "Challenge Anzu to a race and have some fun!");
+					if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) addButton(3, "Race Him", null).hint("Challenge Anzu to a race and have some fun!");
 					else addButtonDisabled(3, "Race Him", "Maybe if Anzu likes you better, he'll consider letting you race against him.");
 				}
 				else addButtonDisabled(3, "Race Him", "You'll need a pair of flight-enabling wings to do that.");
@@ -300,11 +300,11 @@ package classes.Scenes.Dungeons.AnzuPalace
 			clearOutput();
 			outputText("\"<i>What would you like to talk about, " + player.mf("boy", "girl") + "?</i>\" Anzu asks.");
 			menu();
-			addButton(0, "His Past", anzuTalkPast, null, null, null, "Ask Anzu about his past.");
-			addButton(1, "The Palace", anzuTalkPalace, null, null, null, "Ask Anzu about the palace he currently lives in.");
-			addButton(2, "Glacial Rift", anzuTalkRift, null, null, null, "Ask Anzu about the Glacial Rift.");
-			addButton(3, "His Powers", anzuTalkPowers, null, null, null, "Ask Anzu about his powers. Surely as a deity, he has some interesting powers?");
-			addButton(4, "Marae & Lethice", anzuTalkMaraeAndLethice, null, null, null, "Ask Anzu what he thinks about Marae and Lethice.");
+			addButton(0, "His Past", anzuTalkPast).hint("Ask Anzu about his past.");
+			addButton(1, "The Palace", anzuTalkPalace).hint("Ask Anzu about the palace he currently lives in.");
+			addButton(2, "Glacial Rift", anzuTalkRift).hint("Ask Anzu about the Glacial Rift.");
+			addButton(3, "His Powers", anzuTalkPowers).hint("Ask Anzu about his powers. Surely as a deity, he has some interesting powers?");
+			addButton(4, "Marae & Lethice", anzuTalkMaraeAndLethice).hint("Ask Anzu what he thinks about Marae and Lethice.");
 			addButton(14, "Back", anzuMenus);
 		}
 		
@@ -502,15 +502,15 @@ package classes.Scenes.Dungeons.AnzuPalace
 				}
 			}
 			menu();
-			addButton(0, "Anal Catch", catchAnalPart1, null, null, null, "Have Anzu stuff you anally. \n\nNOTE: This is a REALLY long scene.");
-			if (player.hasVagina()) addButton(1, "Vaginal Catch", catchVaginal, null, null, null, "Have Anzu fill you vaginally to the brim.");
+			addButton(0, "Anal Catch", catchAnalPart1).hint("Have Anzu stuff you anally. \n\nNOTE: This is a REALLY long scene.");
+			if (player.hasVagina()) addButton(1, "Vaginal Catch", catchVaginal).hint("Have Anzu fill you vaginally to the brim.");
 			else addButtonDisabled(1, "Vaginal Catch", "You need a cooter for that.");
-			if (player.hasCock()) addButton(2, "Get Sucked", getBlown, null, null, null, "Have Anzu suck you off? Though his beak can prove to be a challenge.");
+			if (player.hasCock()) addButton(2, "Get Sucked", getBlown).hint("Have Anzu suck you off? Though his beak can prove to be a challenge.");
 			else addButtonDisabled(2, "Get Sucked", "You need to have a cock for that.");
-			addButton(3, "Blow Him", suckOffDeitysCock, null, null, null, "Suck off that big cock. You have the hunch that it will get your belly stuffed.");
-			if (player.hasCock()) addButton(4, "Fuck Him", fuckGodlyBirdButt, null, null, null, "Put that cock of yours to a good use and fuck that divine ass!");
+			addButton(3, "Blow Him", suckOffDeitysCock).hint("Suck off that big cock. You have the hunch that it will get your belly stuffed.");
+			if (player.hasCock()) addButton(4, "Fuck Him", fuckGodlyBirdButt).hint("Put that cock of yours to a good use and fuck that divine ass!");
 			else addButtonDisabled(4, "Fuck Him", "You need to have a cock to fuck that divine butt.");
-			if (player.lactationQ() >= 100 || player.findPerk(PerkLib.Feeder) >= 0) addButton(5, "Feed Him", feedAnzu, null, null, null, "Anzu is certainly thirsty. Put those breasts of yours to a good use.");
+			if (player.lactationQ() >= 100 || player.findPerk(PerkLib.Feeder) >= 0) addButton(5, "Feed Him", feedAnzu).hint("Anzu is certainly thirsty. Put those breasts of yours to a good use.");
 			else addButtonDisabled(5, "Feed Him", "This option is only available if you have lactating breasts.");
 			addButton(14, "Back", anzuMenus);
 		}

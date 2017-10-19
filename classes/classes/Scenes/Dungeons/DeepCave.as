@@ -463,7 +463,10 @@ package classes.Scenes.Dungeons
 			if (player.totalCocks() > 0) {
 				outputText("Some of the other imps, feeling left out, fish out your " + player.multiCockDescript() + ".  They pull their own members alongside yours and begin humping against you, frotting as their demonic lubricants coat the bundle of cock with slippery slime.   Tiny hands bundle the dicks together and you find yourself enjoying the stimulation in spite of the brutal fucking you're forced to take.  Pre bubbles up, mixing with the demonic seed that leaks from your captors members until your crotch is sticky with frothing pre.\n\n");
 			}
-			outputText(images.showImage("gangbang-loss"));
+			if (player.isTaur()) {
+				 outputText(images.showImage("gangbang-loss-centaur"));
+			}
+			else outputText(images.showImage("gangbang-loss-human"));
 			//(ORGAZMO)
 			outputText("As one, the crowd of demons orgasm.  Hot spunk gushes into your ass, filling you with uncomfortable pressure.  ");
 			if (player.hasVagina()) outputText("A thick load bastes your pussy with whiteness, and you can feel it seeping deeper inside your fertile womb.  ");
@@ -539,9 +542,9 @@ package classes.Scenes.Dungeons
 			outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n");
 			//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
 			menu();
-			addButton(0, "Sexual", sexualInterrogation, null, null, null, "Chain the imp up and sexually interrogate him.");
-			addButton(1, "End Him", endZetaz, null, null, null, "Kill the imp. After all, he deserves to be bad-ended.");
-			addButton(2, "Safety", releaseZForInfo, null, null, null, "Release the imp after you get the information you need.");
+			addButton(0, "Sexual", sexualInterrogation).hint("Chain the imp up and sexually interrogate him.");
+			addButton(1, "End Him", endZetaz).hint("Kill the imp. After all, he deserves to be bad-ended.");
+			addButton(2, "Safety", releaseZForInfo).hint("Release the imp after you get the information you need.");
 			//addButton(3, "Rape", rapeZetaz);
 		}
 
@@ -610,9 +613,9 @@ package classes.Scenes.Dungeons
 			outputText("What do you do?");
 			//['Release' him] [Tighten Strap] [End Him]
 			menu();
-			addButton(0, "'Release'", sexualTortureReleaseZetaz, null, null, null, "Let the imp cum and release him from the bonds.");
-			addButton(1, "Tighten", sexualTortureTightenZetaz, null, null, null, "Tighten the straps.");
-			addButton(2, "End Him", endZetaz, null, null, null, "Kill the imp. After all, he deserves to be bad-ended.");
+			addButton(0, "'Release'", sexualTortureReleaseZetaz).hint("Let the imp cum and release him from the bonds.");
+			addButton(1, "Tighten", sexualTortureTightenZetaz).hint("Tighten the straps.");
+			addButton(2, "End Him", endZetaz).hint("Kill the imp. After all, he deserves to be bad-ended.");
 		}
 
 		//[Release Him]
@@ -820,31 +823,23 @@ package classes.Scenes.Dungeons
 		public function hermZetazOverPtII():void {
 			hideUpDown();
 			clearOutput();
-			outputText(images.showImage("zetaz-loss-herm"));
 			outputText("You awaken midway through a loud moan and nearly jump out of your " + player.skinDesc + " in surprise, but the fire of your unnaturally stoked libido immediately reasserts yourself.  You twitch your hips to and fro, thrusting against a ");
 			if (player.cockTotal() > 1) outputText("number of ");
 			outputText("mechanical milking device");
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(".  " + player.SMultiCockDesc() + " is sucked rhythmically, producing a loud, wet, slurping noise that echoes around the small room.  You're suspended from a set of shackles on the wall, next to Vala.  The sexy faerie is chained up in a similar manner, but she's locked in coitus with a well-endowed imp, and making no secret of her enjoyment.  The sexual sight stirs your well-stimulated loins and you groan, filling the milker with what feels like gallons of male cream over the next minute and a half.\n\n");
-			
 			outputText("Slumping forwards, you hang there, but the corruption and lust in your blood refuses to be sated.  " + player.SMultiCockDesc() + " is already hard again, and after sucking your cum down some tubes, the milker begins its oh-so-pleasurable work again.  Still, you estimate it will be a few minutes before it gets you off again, so you look around the room.  A platform is set up in front of you, about knee-height and poorly built.  Judging by its height, it's probably there so that the imps can use it to fuck you without having to fly.  There's also a pair of platforms built into the walls next to each of your shoulders, though their function is less clear.\n\n");
-			
 			outputText("The door to the room bangs open, and Zetaz steps in, followed by two scrawnier-than-usual imps.  He smiles when he sees you awake and flushed, and steps up onto the platform, rubbing his palms together in excitement.\n\n");
-			
 			outputText("\"<i>You took quite well to our little experiment,</i>\" he announces, \"<i>In fact, your body is a demonic fucking machine.  I won't be transforming you into an actual demon though.  But we're going to have to have a little training to get you ready to meet Lethice.  After all the trouble you've caused her, she might want to turn you herself, or maybe hook you up in a factory?  I can't say for sure.</i>\"\n\n");
-			
 			outputText("With a flourish, the imp lord discards his loincloth, tossing it over his shoulder to reveal his erect demon dick.  He taunts, \"<i>Like what you see?</i>\" and orders his lackeys, \"<i>Go on, you know what to do.</i>\"  The pair of scrawny imps flit up to their perches while Zetaz advances and strokes himself, preparing for penetration.  Dozens of unanswered questions swarm through your mind, actually distracting you from your pending orgasm enough to ask, \"<i>Wha-what are you going to do to me?</i>\"\n\n");
 			
+			outputText(images.showImage("zetaz-loss-herm"));
 			outputText("\"<i>Shhhh, shhh,</i>\" responds Zetaz, \"<i>just relax my pet.</i>\"  He ");
 			if (player.balls > 0) outputText("gently shifts your  " + player.ballsDescript() + " out of the way and ");
 			outputText("lines up with your drooling fuck-hole, and with a long smooth stroke, he's inside you.  You cum immediately and hard, barely noticing the chanting that has started up on the adjacent platforms.  Each squirt of cum is accompanied by a thrust from Zetaz, sliding over your lube-leaking walls with ease.  The orgasm lasts nearly twice as long as your last one.  It never seems to end, but when it slowly trails off, you find yourself wondering how soon you can cum again.\n\n");
-			
 			outputText("You envision yourself on all fours, being taken in both openings by a pair of imps while you suck off a shadowy figure that your mind recognizes as your lord and master.  " + player.SMultiCockDesc() + " spurts and squirts with each penetration as your twin violators get off and stuff you full of their yummy imp cum, glazing your insides with corrupted white goo.  Maybe you'll get pregnant this time?  It's been a few weeks since your last litter.  You suck harder on your master's penis and caress his balls until he shows his affection by giving you a salty treat.  He pulls out and blasts a few ropes over your face and hair, so you do your best to look slutty to encourage him.  When he finishes, you lick your lips and beam at your master, Zetaz.\n\n");
-			
 			outputText("Wait- what!?  You shake your head and clear away the fantasy, though your sexual organs' constant delightful throbbings aren't doing much to help.  Zetaz is still fucking your pussy, taking it with long slow strokes that would've made your demonic legs give out ages ago if you weren't hanging on a wall.  The chanting is so loud, so insidious.  You can feel it snaking through your brain, twisting your thoughts and ideas.  You close your eyes, desperate to fight it, but it only enhances the sensation of dick-milking and being fucked by your- no, by that demon!\n\n");
-			
 			outputText("Glancing down at him, you remark that the little bastard is quite handsome for an imp.  With his perfect jawline and marvelous cock, you find yourself hard-pressed to justify resisting him so long ago.    How did you resist his charms?  His cock feels soooo fucking good inside you.  With an explosive burst, " + player.sMultiCockDesc() + " erupts again, squirting thick arousal and submission into the milker while your " + player.vaginaDescript(0) + " wrings Zetaz's nodule-ringed cock incessantly.  His turgid member bulges obscenely, and he starts to cum inside you, squirting master's thick seed into your breeding hole.  Breeding hole?  Why would you call your slutty fuck-hole a breeding hole?  Something seems off about that last thought, but you can't place it.\n\n");
-			
 			outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your " + player.face() + ".  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.");
 			player.orgasm('Vaginal');
 			dynStats("cor", 50);
@@ -1034,13 +1029,15 @@ package classes.Scenes.Dungeons
 		
 		public function zetazBadEndEpilogue():void {
 			clearOutput();
+			//[Epilogue]
 			if (player.gender == 2) {
+				outputText(images.showImage("badend-impbirth"));
 				outputText("The once-champion, " + player.short + " was raped repeatedly by every imp that survived her initial assault.  Her mind never recovered from the initial orgy, and she found herself happy to be named 'Fuck-cow'.  She quickly became a favorite of Zetaz's ever growing brood, and surprised them all with her fertility and rapidly decreasing incubation times.  Within a few months, she was popping out litters of tiny masters even faster than Vala.  Within a year, her body was so well trained and her womb so stretched that she could keep multiple litters growing within at all times.\n\n");
 			
 				outputText("It was rare for Fuck-cow's cunt or mouth to be empty, and she delighted in servicing any male she was presented with.  Her masters even captured bee-girls, so that fuck-cow's ass could be kept as pregnant as her belly.  Fuck-cow came to love her masters dearly, and with her constantly growing ability to birth imps, she was able to incubate enough troops for Zetaz to challenge Lethice's armies.  The imps never managed to overthrow the old demon lord, but the land was eventually divided in half, split between two growing demonic empires.");
 			}
 			else if (player.gender == 3) {
-				//[Epilogue]
+				outputText(images.showImage("badend-lethice"));
 				outputText("The champion was fucked and brainwashed repeatedly for a few more days until Zetaz was sure she understood her place in the world.  Once rendered completely obedient, they released her from her bindings.  It was time she was turned over to Lethice.  ");
 				if (player.wingType != WING_TYPE_BAT_LIKE_TINY || player.wingType != WING_TYPE_BAT_LIKE_LARGE) outputText("Zetaz gave her one of the weaker imps to penetrate and taught her to fly with her new, demonic wings.  ");
 				else outputText("Zetaz gave her one of the weaker imps to penetrate during the journey.  ");
@@ -1049,6 +1046,7 @@ package classes.Scenes.Dungeons
 				outputText("The champion was presented to Lethice, and the demonic mistress was so pleased with Zetaz's gift that she gave him a pair of nubile slave-girls and promoted him over a small army of his own kind.  Once the imps departed, Lethice put the champion through her paces, using her as a fucktoy whenever the mood took her.  The rest of the time the champion was kept bound and unable to orgasm, tortured with unholy levels of arousal, but she didn't mind.  When Lethice allowed her to cum, the champion's orgasms were long and intense enough for her to love her mistress in spite of having to be so pent up.");
 			}
 			else {
+				outputText(images.showImage("badend-impbirth"));
 				outputText("The imps never released the champion from that chamber after that.  'He' gave birth to a healthy litter of imps a few weeks later, and the hormones from the pregnancy ");
 				if (player.biggestTitSize() < 1) outputText("created a decent set of chest-bumps.");
 				else outputText("swelled her already impressive rack with milk.");
@@ -1056,7 +1054,6 @@ package classes.Scenes.Dungeons
 				
 				outputText("After a few months the champion started to become acclimated to her new life, and began birthing imps in larger broods with shorter gestations.  She had become the ideal broodmother, and her worldview shrank down to two powerful priorities: acquiring cum, and birthing.");
 			}
-			outputText(images.showImage("badend-impbirth"));
 			player.orgasm('Generic');
 			player.HP += 150;
 			getGame().gameOver();
@@ -1065,8 +1062,8 @@ package classes.Scenes.Dungeons
 		public function roomEntrance():void {
 			clearOutput();
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_ENTRANCE;
-			outputText("<b><u>The Cave Entrance</u></b>\n");
 			outputText(images.showImage("dungeon-entrance-deepcave"));
+			outputText("<b><u>The Cave Entrance</u></b>\n");
 			outputText("The entrance to this cave is far bigger than the cave itself.  It looks to be a totally natural formation.  Outside, to the south, is a veritable jungle of plant-life.  There are massive trees, vines, and ferns everywhere.  The cave grows narrower the further north you go, until it's little more than a claustrophobic tunnel burrowing deep into the earth.");
 			dungeons.setDungeonButtons(roomTunnel, null, null, null);
 			addButton(11, "Leave", exitDungeon);
@@ -1086,8 +1083,8 @@ package classes.Scenes.Dungeons
 		public function roomTunnel():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_TUNNEL;
 			clearOutput();
-			outputText("<b><u>Cave Tunnel</u></b>\n");
 			outputText(images.showImage("deepCave-cTunnel"));
+			outputText("<b><u>Cave Tunnel</u></b>\n");
 			outputText("This cave tunnel slants downwards to the north, and upwards to the south.  You can see sunlight and feel a fresh breeze from the latter direction, though the walls and air around you are damp with moisture.  You realize that the floor of this cave is fairly smooth and even, as if some attempt had been made to level it out.  You can see a bricked up wall along the north end of the tunnel.  It has a crudely fashioned wooden door in the center of it.");
 			dungeons.setDungeonButtons(roomGatheringHall, roomEntrance, null, null);
 		}
@@ -1095,8 +1092,8 @@ package classes.Scenes.Dungeons
 		public function roomGatheringHall():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_GATHERING_HALL;
 			clearOutput();
-			outputText("<b><u>Gathering Hall</u></b>\n");
 			outputText(images.showImage("deepCave-gHall"));
+			outputText("<b><u>Gathering Hall</u></b>\n");
 			outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.");
 			//[Imp Mob Fight]
 			if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] == 0) {
@@ -1112,8 +1109,8 @@ package classes.Scenes.Dungeons
 		public function roomFungusCavern():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_FUNGUS_CAVERN;
 			clearOutput();
-			outputText("<b><u>Fungus Cavern</u></b>\n");
 			outputText(images.showImage("deepCave-fCavern"));
+			outputText("<b><u>Fungus Cavern</u></b>\n");
 			outputText("This cavern is huge!  Though you can see the edge of a large stalactite to the west, the rest of the cave disappears into darkness beyond twenty or thirty feet away.  The floor is covered in spongy, leaf-shaped fungus.  They're huge, shiny, and purple, and they cover the cavern floor for as far as the illumination will reach.  ");
 			if (flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] == 0) {
 				outputText("A strange, sweet smell hangs in the cavern's humid air, probably coming from the copious fungal flora.  At the edge of your vision you can see a humanoid skeleton propped up against a stalagmite.  There's a rapier laying a few feet in front of it, and it still looks as good as new.  What do you do?");
@@ -1135,8 +1132,8 @@ package classes.Scenes.Dungeons
 		public function roomTortureRoom():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_TORTURE_ROOM;
 			clearOutput();
-			outputText("<b><u>Filthy Torture Room</u></b>\n");
 			outputText(images.showImage("deepCave-tRoom"));
+			outputText("<b><u>Filthy Torture Room</u></b>\n");
 			outputText("You step into a dank room, outfitted somewhere between a prison cell and a torture chamber. The ceiling of the sulfur-lined room is hung with an inventive variety of shackles, chains, and devices whose intent are not clear to you. Against the north wall, there appears to be an alchemy lab, laden with a dizzying collection of vials, flasks, and beakers. Against the south, there is a long, sinister-looking wooden rack bearing a sequence of progressively larger and thicker devices, carved to resemble monstrous cocks.  ");
 			dungeons.setDungeonButtons(roomSecretPassage, null, roomGatheringHall, null);
 			//Vala here?
@@ -1172,8 +1169,8 @@ package classes.Scenes.Dungeons
 		public function roomSecretPassage():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_SECRET_TUNNEL;
 			clearOutput();
-			outputText("<b><u>Secret Tunnel</u></b>\n");
 			outputText(images.showImage("deepCave-sPassage"));
+			outputText("<b><u>Secret Tunnel</u></b>\n");
 			outputText("This passage is the least livable area that you've seen out of the entire cave.  The walls and floor are little more than dirt and rocks, and explosions of dust burst from the ceiling with each tentative movement you make.  For a moment, a wave of claustrophobia threatens to rob you of your nerve, but you blink the pervasive particles from your eyes and focus on why you're here.  ");
 			//If zetaz not yet defeated
 			if (flags[kFLAGS.DEFEATED_ZETAZ] == 0) outputText("You're going to find Zetaz and pay him back for drugging you on your first day here.  ");
@@ -1190,8 +1187,8 @@ package classes.Scenes.Dungeons
 		public function roomZetazChamber():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_ZETAZ_CHAMBER;
 			clearOutput();
-			outputText("<b><u>Zetaz's Chambers</u></b>\n");
 			outputText(images.showImage("deepCave-zChambers"));
+			outputText("<b><u>Zetaz's Chambers</u></b>\n");
 			outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.");
 			if (flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {
 				outputText("  <b>There's a bolt holding a door to the south closed, but you give it a gentle tug and it comes unlocked.</b>");

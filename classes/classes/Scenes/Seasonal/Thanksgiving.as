@@ -430,7 +430,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\n\"<i>Gobbles, gobble,</i>\" you command, poking a finger into her drooling slit.");
 			
 			outputText("\n\n\"<i>Gobble!</i>\" she answers, rolling off of you and hiking her legs up, knees sinking into her bust to show off her slit for you, so eager and inviting.  You rise to your [feet], grabbing the lusty fowl behind her hooked knees and pulling her in to line up with your " + player.multiCockDescriptLight() + ".  \"<i>G-gobble!</i>\" she begs, fluttering her plumage against your [legs], staring up at you imploringly as her skin further reddens, so hot with desperate lust you can practically feel the sexual hunger radiating off of her.  Time to finish this turkey off in style!");
-			dynStats("lus=", player.maxLust(), "resisted", false);
+			dynStats("lus=", player.maxLust(), "scale", false);
 			menu();
 			addButton(0,"Next",turkeyDesertBitches);
 		}
@@ -599,7 +599,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nYour hands are a blur as they play some unknown rhythm on her bouncing booty, as if they were acting on their own. The piggy slut has her hands clenching down on a nearby pillow, teeth gritted as you have your way with her colossal ass. Tears streak down onto the pillow, staining the fabric wet. The sight of her weeping sex is all you need to know to continue; the desperately oinking whore turns out to be a bit of a masochist...");
 			
 			outputText("\n\nYou look around the room for a more fitting tool to use on this pain-loving slut, even as you turn the whore's jiggling butt cheeks into a pair of booty bongos.");
-			dynStats("lus", 25, "resisted", false);
+			dynStats("lus", 25, "scale", false);
 			//[ Hardcore ] [ Softcore ]
 			menu();
 			addButton(0,"Softcore",hamRoastTenderizeHerSoftcore);
@@ -622,7 +622,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\n\"<i>Oink! OINK! <b>OINK!</b></i>\" her pathetic squealing only excites you more, the sounds of loud strikes from your whip filling the room.");
 			
 			outputText("\n\nYou lose yourself in the excitement, your own [vagOrAss] twitching with delight each time your whip comes down on her bubbly buttocks.");
-			dynStats("lus", 25, "resisted", false);
+			dynStats("lus", 25, "scale", false);
 			//[ Next ]
 			menu();
 			addButton(0,"Next",spankEpilogueColonYoureAHorriblePersonForAbusingADumbPigGirl);
@@ -650,7 +650,7 @@ package classes.Scenes.Seasonal {
 			
 			outputText("\n\nYou lose yourself in the excitement, your own [vagOrAss] twitching with delight each time your paddle comes down on her bubbly buttocks.");
 			
-			dynStats("lus", 25, "resisted", false);
+			dynStats("lus", 25, "scale", false);
 			menu();
 			addButton(0,"Next",spankEpilogueColonYoureAHorriblePersonForAbusingADumbPigGirl);
 			//[ Next ]

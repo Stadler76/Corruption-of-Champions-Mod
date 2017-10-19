@@ -25,7 +25,7 @@ public static const AKBAL_SUBMISSION_COUNTER:int                                
 public static const AKBAL_SUBMISSION_STATE:int                                      =   17; // Akbal submission state. -1=Lost to him, 1=Beaten him, 2=Akbal is your bitch
 public static const MINOTAUR_CUM_ADDICTION_TRACKER:int                              =   18; // Minotaur cum Addiction Tracker
 public static const TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM:int                       =   19; // Time Since Last Minocum fix
-public static const MINOTAUR_CUM_ADDICTION_STATE:int                                =   20; // Current Addict State (0 = normal, 1= addicted, 1 = needy, 2= withdrawal)
+public static const MINOTAUR_CUM_ADDICTION_STATE:int                                =   20; // Current Addict State (0 = normal, 1= addicted, 2 = needy, 3= withdrawal)
 public static const MINOTAUR_CUM_REALLY_ADDICTED_STATE:int                          =   21; // lust status affect timer
 public static const IN_COMBAT_USE_PLAYER_WAITED_FLAG:int                            =   22; // Did PC Wait in combat?
 public static const PC_FETISH:int                                                   =   23; // Fetish Level 1 - exhibitionism, 2 - bondage, 3 - pacifism

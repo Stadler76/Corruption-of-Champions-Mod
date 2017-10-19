@@ -1022,7 +1022,7 @@ private function giveKellySuccubiMilk():void {
 	
 	outputText("\n\nYou swat her rump affectionately and nod, not deigning to give her the pleasure of your praise.");
 	flags[kFLAGS.KELLY_CUNT_TYPE] = 0;
-	outputText("\n\n<b>Kelly now has a human-like pussy.</i>");
+	outputText("\n\n<b>Kelly now has a human-like pussy.</b>");
 	player.consumeItem(consumables.SUCMILK);
 	menu();
 	addButton(0,"Next",approachKelly);

@@ -303,7 +303,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 			//SCENE END = FOR ALL OTHER CHARACTERS
 			else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + player.multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually, your body tenses and a light load of jizz erupts from your loins, but the orgasm is truly mild compared to what you need.  You're far too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later, " + player.sMultiCockDesc() + " has softened enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the forest floor.");
 		}
-		dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
+		dynStats("lus", 25 + rand(player.cor / 5), "scale", false);
 		player.changeFatigue(5);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -367,7 +367,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 		else if (player.isTaur()) outputText("  You struggle and work your equine legs against the surface of the dune you are trapped on.  Your " + player.feet() + " have consistent trouble finding footing, the soft sand failing to provide enough leverage to lift your bulk.  You breath in deeply and lean from side to side, trying to find some easier vertical leverage.  Eventually, with a crude crawl, your legs manage to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals across the sandscape and back to camp.");
 		//SCENE END = FOR ALL OTHER CHARACTERS
 		else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + player.multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + player.sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.");
-		dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
+		dynStats("lus", 25 + rand(player.cor / 5), "scale", false);
 		player.changeFatigue(5);
 		doNext(camp.returnToCampUseOneHour);
 	}

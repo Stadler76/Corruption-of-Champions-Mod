@@ -26,7 +26,7 @@ package classes.Scenes.Monsters
 			{
 				outputText("As you take a stroll, you catch the glimpse of an imposing goblin. Unlike most of the goblins you've seen so far, she's clad in primitive bone armor, wielding a metal sword lined with lethicite crystal, and holding a metal greatshield. Her hair is crimson and black. She walks over to you in a peaceful manner.");
 				if (player.hasCock()) {
-					if (player.cor < (60 + player.corruptionTolerance())) outputText("\n\n\"<i>Would you like to fuck me? I'll promise to teach my newborn goblins the values of pre-corruption lifestyle.</i>\"");
+					if (player.isPureEnough(60)) outputText("\n\n\"<i>Would you like to fuck me? I'll promise to teach my newborn goblins the values of pre-corruption lifestyle.</i>\"");
 					else outputText("\n\n\"<i>Please don't fuck me! You're too corrupt!</i>\"");
 				}
 				else {
@@ -40,7 +40,7 @@ package classes.Scenes.Monsters
 			else {
 				outputText("As you walk, the familiar sight of a powerful goblin catches your eye. You have encountered " + (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] > 0 ? "Priscilla" : "the goblin elder") + " again!");
 				if (player.hasCock()) {
-					if (player.cor < (60 + player.corruptionTolerance())) outputText("\n\n\"<i>Hello again" + (player.hasCock() ? ", stud. Ready to knock me up with your cum? Or are you here to duel?" : ",") + "</i>\" she says.");
+					if (player.isPureEnough(60)) outputText("\n\n\"<i>Hello again" + (player.hasCock() ? ", stud. Ready to knock me up with your cum? Or are you here to duel?" : ",") + "</i>\" she says.");
 					else outputText("\n\n\"<i>Please don't fuck me! You're too corrupt!</i>\"");
 				}
 				else {
@@ -55,12 +55,12 @@ package classes.Scenes.Monsters
 			menu();
 			addButton(0, "Fight", startFight);
 			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] < 2) addButton(1, "Talk", talkToGoblinElder);
-			if (player.hasVagina() && player.lust >= 33 && player.cor < (60 + player.corruptionTolerance())) {
+			if (player.hasVagina() && player.lust >= 33 && player.isPureEnough(60)) {
 				monster = new Priscilla();
 				addButton(2, "Sex Anyway", startffaction);
 				if (flags[kFLAGS.GOBLIN_ELDER_RELATION_COUNTER] == 3 || player.hasCock()) addButton(2, "Sex", startforeplay);
 			}
-			if (player.hasCock() && player.lust >= 33 && player.cor < (60 + player.corruptionTolerance())) {
+			if (player.hasCock() && player.lust >= 33 && player.isPureEnough(60)) {
 				monster = new Priscilla();
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2, "Sex", startforeplay);
 				else outputText("\n\n<b>There is no way you can fit your cock into her cunt!</b>");
@@ -222,7 +222,7 @@ package classes.Scenes.Monsters
 			//Dick stuff:
 			if (player.hasCock() && player.lust >= 33) {
 				//Corrupt too big scene
-				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.cor > (80 - player.corruptionTolerance())) || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.isCorruptEnough(80) || player.findPerk(PerkLib.Sadist) >= 0)
 					addButton(2, "CorruptDick", rapeAGoblinCorruptTooBig);
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
@@ -233,7 +233,7 @@ package classes.Scenes.Monsters
 					addButton(4, "Jog Fuck", gobboGetsRapedMaleFits);
 				}
 				//Buttsex toggle
-				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > (70 - player.corruptionTolerance())) || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1) addButton(3, "Dick In Ass", gobboButtSecks);
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.isCorruptEnough(70) || player.findPerk(PerkLib.Sadist) >= 0)) addButton(3, "Dick In Ass", gobboButtSecks);
 				//Spidercondom
 				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
 					addButton(6, "Web Condom", goblinCondomed, 0);

@@ -12,13 +12,13 @@ package classes.Items.Weapons
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (kGAMECLASS.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] < 2) boost += (kGAMECLASS.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] * 2) + (((game.player.cor + game.player.corruptionTolerance()) - 90) / 3);
-			else boost += 4 + (kGAMECLASS.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] - 2) + (((game.player.cor + game.player.corruptionTolerance()) - 90) / 3);
+			if (kGAMECLASS.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] < 2) boost += (kGAMECLASS.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] * 2) + ((game.player.corAdjustedUp() - 90) / 3);
+			else boost += 4 + (kGAMECLASS.flags[kFLAGS.RAPHAEL_RAPIER_TRANING] - 2) + ((game.player.corAdjustedUp() - 90) / 3);
 			return (15 + boost); 
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.cor > (90 - game.player.corruptionTolerance())) return true;
+			if (game.player.isCorruptEnough(90)) return true;
 			outputText("You grab hold of the handle of the rapier only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the rapier must be disgusted. ");
 			return false;
 		}

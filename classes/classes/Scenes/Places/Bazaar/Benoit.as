@@ -1,4 +1,4 @@
-package classes.Scenes.Places.Bazaar {
+﻿package classes.Scenes.Places.Bazaar {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
@@ -369,9 +369,9 @@ public function benoitsBuyMenu():void {
 	addButton(0, flags[kFLAGS.BENOIT_1], benoitTransactBuy, 1);
 	addButton(1, flags[kFLAGS.BENOIT_2], benoitTransactBuy, 2);
 	addButton(2, flags[kFLAGS.BENOIT_3], benoitTransactBuy, 3);
-	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack, null, null, null, "This backpack will allow you to carry more items.");
+	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] <= 0) addButton(6, "Flintlock", buyFlintlock);
-	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(7, "Alarm Clock", buyAlarmClock, null, null, null, "This mechanical clock looks like it was originally constructed by the Goblins before the corruption spread throughout Mareth.");
+	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(7, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spread throughout Mareth.");
 	addButton(14, "Back", benoitIntro);
 }
 
@@ -654,13 +654,14 @@ private function talkToBenoit():void {
 		          +" you of me in your travels.</i>\"");
 		outputText("\n\nYou feel a blush creep across your [face] as you thank the blind basilisk, hugging " + benoitMF("him", "her")
 		          +" to you tight before you leave");
-		// Equip only, if you have hair and if it's not gooey.
-		outputText((hasSolidHair && player.cor < Math.max(80, (55 + player.corruptionTolerance()))) ? ", slipping the pin into your [hair] as you exit the store." : ".");
-		// value1: hairPinIsEquipped, value2: just (re)equipped, but TF not triggered yet.
-		if (hasSolidHair && player.cor < Math.max(80, (55 + player.corruptionTolerance())))
+		if (hasSolidHair && player.cor < 55) { // Equip only, if you have hair and if it's not gooey.
+			outputText(", slipping the pin into your [hair] as you exit the store.");
+			// value1: hairPinIsEquipped, value2: just (re)equipped, but TF not triggered yet.
 			player.createKeyItem("Feathery hair-pin", 1, 1, 0, 0);
-		else
+		} else {
+			outputText(".");
 			player.createKeyItem("Feathery hair-pin", 0, 0, 0, 0);
+		}
 		outputText("\n\n(<b>Gained Key Item: Feathery hair-pin</b>)");
 		doNext(camp.returnToCampUseOneHour);
 		return;
@@ -940,7 +941,7 @@ private function benoitHairPinTalk():void
 
 private function benoitHairPinTFCheck():void
 {
-	if (player.cor < Math.max(80, (30 + player.corruptionTolerance())) && player.isFemaleOrHerm() && player.featheryHairPinEquipped() && [HAIR_BASILISK_PLUME, HAIR_GOO].indexOf(player.hairType) == -1)
+	if (player.cor < 30 && player.isFemaleOrHerm() && player.featheryHairPinEquipped() && [HAIR_BASILISK_PLUME, HAIR_GOO].indexOf(player.hairType) == -1)
 	{
 		outputText("\n\nYou feel the hair pin " + benoitMF("Benoit", "Benoite") + " gave you heat up, a gentle warmth suffusing through your body."
 		          +" Something tells you that if you let it, this feminine hair piece will evoke some sort of change.");
@@ -1342,7 +1343,7 @@ public function equipUnequipHairPin():void
 			outputText("You try to slide the hair pin into your " + player.hairDescript() + ", but their semi-liquid state isn't enough to hold it in"
 			          +" place. The pin falls to the ground with a wet splat the moment you let it go. With a sigh you clean it up and then you put"
 			          +" it back.");
-		else if (player.cor >= Math.max(80, (55 + player.corruptionTolerance())))
+		else if (player.cor >= 55)
 				outputText("You go to slide the hair-pin into your " + player.hairDescript() + ", but the moment it touches your scalp it heats up,"
 			              +" causing you to drop it in shock. Seems it doesn't want you dirty its purity... you pick it up and put it back into your"
 			              +" inventory for now.");
@@ -1704,7 +1705,7 @@ public function femoitNextDayEvent():void
 	
 	outputText("\n\nShe leans across the counter, her smile fading.  \"<i> Seriously, [name], you 'ave done my people a service I cannot repay.  I can lay eggs, zere can be more female basilisks, away from Lethice and 'er thugs.  All zis time I 'ave been trading potions, I could 'ave done it myself, and I never did.  Per'aps I sought I was too much a man or somesing.  Pah!  I was a coward, a cringing coward.  You forced me to decide, and because of zat, my people 'ave a chance.  Sank you. </i>\"");
 	
-	outputText("\n\nShe sounds slightly choked, and stops for a moment. \"<i> It is very, very little, but for you I buy and sell sings at zeir true value.  If zere is anysing I can do for you, ever, please just say. </i >\"  You are slightly embarrassed by her effusiveness and mumble something along the lines of it being all her doing.  Perhaps aware of this, Benoite sits back down, hatches her fingers and smiles at you primly.  \"<i> Now... is " + player.mf("sir", "madam") + " buying or selling? </i>\" ");
+	outputText("\n\nShe sounds slightly choked, and stops for a moment. \"<i> It is very, very little, but for you I buy and sell sings at zeir true value.  If zere is anysing I can do for you, ever, please just say. </i>\"  You are slightly embarrassed by her effusiveness and mumble something along the lines of it being all her doing.  Perhaps aware of this, Benoite sits back down, hatches her fingers and smiles at you primly.  \"<i> Now... is " + player.mf("sir", "madam") + " buying or selling? </i>\" ");
 
 	//[Benoite buys at same rate Oswald does and sells at a 33% discount]
 }
@@ -1737,7 +1738,7 @@ public function femoitFirstTimeYes():void
 	if (player.isTaur()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your flanks.  \"<i>Good Gods!</i>\" she cries out as she follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" she says, rubbing your side back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  She sighs.  \"<i>Zis is going to be... awkward, but I guess you are probably used to zat by now, yes?</i>\"");
 	else if (player.isDrider()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your abdomen. \"<i>Good Gods!</i>\" she cries out as she follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click clacking,</i>\" she says, her fingers feeling around one of your intricate, many-jointed legs in wonder . \"<i>But to know it and actually feel it, zey are very different.</i>\"");
 	else if (player.demonScore() > 4) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"")
-	else if (player.dogScore() >= 4 && player.earType == 2 && player.tailType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogs but not ZAT much, \"<i>[name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"");
+	else if (player.dogScore() >= 4 && player.earType == 2 && player.tailType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogs but not ZAT much, [name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"");
 	else if ((player.bunnyScore() >= 4 && player.earType == 7 && player.tailType == 10) || (player.catScore() >= 4 && player.earType == 5 && player.tailType == 8)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your ears, outright laughs when she reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" she giggles.");
 	else if (player.harpyScore() >= 4 && player.wingType != 0 && player.armType == 1) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your wings and follows them up as far as she can reach; she carefully shifts her feet forward to touch at your own clawed toes.  \"<i>So zis is what irony is,</i>\" she murmurs, a smile playing on her lips as she touches your shoulder.  \"<i>My saviour is an 'arpy, come to ravish me.</i>\"");
 	else if (player.beeScore() >= 4 && player.wingType != 0 && player.lowerBody == 7) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your diaphanous wings and follows them up as far as she can reach, her grip on your sensitive membranes making you twitch a bit; then she sends her hands trailing down your carapace-armored limbs. \"<i>I always sought you just liked wearing big boots,</i>\" she murmurs. \"<i>But zis is actually a part of you?  'Ow... interesting.</i>\"");

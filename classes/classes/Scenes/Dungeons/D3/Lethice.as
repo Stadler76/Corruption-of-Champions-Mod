@@ -27,6 +27,7 @@ package classes.Scenes.Dungeons.D3
 			super();
 			this.a = "";
 			this.short = "Lethice";
+			this.imageName = "lethice";
 			this.long = "";
 			this.tallness = 12 * 9;
 			this.createVagina(false,3,3);
@@ -576,6 +577,7 @@ package classes.Scenes.Dungeons.D3
 		private function p2DemonFuck(hpVictory:Boolean):void
 		{
 			clearOutput();
+			outputText(images.showImage("monster-demonmob"));
 			outputText("Rather than advance on Lethice, you turn your attention to the pile of demons");
 			if (hpVictory)
 			{
@@ -628,11 +630,13 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			if (player.hasCock())
 			{
+				outputText(images.showImage("lethice-oral-male"));
 				outputText("You ignore the horde’s jeers, grinding your hips against the omnibus’s face until you feel the tell-tale rise of climax surging through you. Her throat bulges around your [cock] and the load of salty spunk you pour down her gullet, right up until you pull out and give her face a showering for good measure.");
 				outputText("\n\nSated, you give the well-used omnibus a shove back into the demon fuck-pile and ready your [weapon]. Confident in your readiness, you advance on Lethice.");
 			}
 			else
 			{
+				outputText(images.showImage("lethice-oral-female"));
 				outputText("You disregard the demons’ demands, instead focusing on grinding your hips on the omnibus’s face, slathering her chin and cheeks with slick feminine excitement. She moans in appreciation, wrapping a hand around her over-sized doggy-cock and stroking it furiously to the same rhythm of her tongue’s exploration of your [cunt]. With such single-minded intention, it doesn’t take the demon slut long at all to bring you to a well-deserved climax - and herself as well, spraying a thick, musky rope of cum across your [feet] while you smear her face with orgasmic juices.");
 				outputText("\n\nSated, you give the well-used omnibus a shove back into the demon fuck-pile and ready your [weapon]. Confident in your readiness, you advance on Lethice.");
 			}
@@ -643,6 +647,7 @@ package classes.Scenes.Dungeons.D3
 		private function fuckDemon():void
 		{
 			clearOutput();
+			outputText(images.showImage("lethice-plow-her-pussy"));
 			outputText("The demons’ urging tears down your self-control, and with a grunt of effort and desire, you shove the omnibus down on her back. She yelps with surprise, but her fall is cushioned by the massive, milky tits of a cow-girl-turned-demon behind her who’s busily sucking a pair of demonic dongs. Your omnibus recovers from her surprise in a heartbeat, turning it into a luxurious stretch that spreads her pussy-lips open under the hefty, churning weight of her equine-like balls.");
 			outputText("\n\nYou lunge on her the moment you see that vermillion slit opening, driving your [cock] to the hilt inside the sloppy twat and making the omnibus moan with delight. Her canid cock bobs up at full mast, poking at your [chest]");
 			if (player.hasFuckableNipples())
@@ -686,6 +691,8 @@ package classes.Scenes.Dungeons.D3
 			outputText("Considering the demons seem intent on having you get down and dirty with their defeated compatriot, you figure you might as well get the most out of the moment. Lethice doesn’t seem to be in any hurry to resume your battle, after all!");
 			outputText("\n\nYou give the buxom demon hermaphrodite down on her ass, letting her rest her head in the lap of another cow-girl demon who’s busy sucking off a two-cock’d incubus, and crawl up her shapely red body. <i>“Oooh,”</i> the omnibus coos as her throbbing red rocket is pressed between your bodies. <i>“Gonna go for a ride, Champion?”</i>");
 			outputText("\n\nDamn right you are. You grab her tits, sinking your fingers into the soft, crimson udders as you straddle her hips and grind your [vagOrAss] against the demon’s tumescent shaft. She’s hung like a stud, rock hard and ready to roll before you even get near her pointed crown. You feel her hands grasp your [hips], guiding you down until your [vagOrAss] is sinking onto her thick rod. Your belly bulges with the sheer length of cockflesh sliding into you, and your mind goes blank with overwhelming pleasure.");
+			if (player.hasVagina()) outputText(images.showImage("lethice-phase-female-ride"));
+			else outputText(images.showImage("lethice-phase-male-ride"));
 			outputText("\n\nIt takes you a moment to recover from the initial shock, but when you do, you start moving with a vengeance, bouncing on the demonic doggy-cock with mounting speed. Its owner moans and squirms beneath you, too weakened from your fight to do anything but go along for the ride. Still, her big, black nipples are hard as rocks in your hand, and her pussy soaks both your thighs in her ever-rising excitement.");
 			outputText("\n\nSuddenly, your entire body tenses, shivering with new sensation. You look over your shoulder in time to see another succubus crawling up behind you,");
 			if (player.hasVagina())
@@ -944,6 +951,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function gropehands():void
 		{
+			outputText(images.showImage("badend-masti"));
 			outputText("<i>“Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,”</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScales]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
 			outputText("\n\nYou glare daggers at Lethice, but she merely laughs. <i>“A shame I never got to convince him that his hands were so much more effective when used like this.”</i>");
 			game.dynStats("lus",5);

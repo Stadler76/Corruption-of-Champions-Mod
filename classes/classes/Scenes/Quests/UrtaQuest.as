@@ -1,4 +1,4 @@
-package classes.Scenes.Quests{
+﻿package classes.Scenes.Quests{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -444,7 +444,7 @@ private function getHelBangedAsUrta():void {
 	outputText(".  You sit and listen for a long few minutes, sipping at the beer until the liquid courage starts to work its wonders, giving you a little tingle... and helping to open you up, too.  Soon, you're drawn into the conversation, joking and teasing with the other girls as if you'd been friends for ages.");
 
 	outputText("\n\nEventually, though, a particularly lewd joke from the salamander causes your old \"<i>friend</i>\" to remind you of your quest, hitting the underside of the table with an audible THUMP! that shocks the others. They look at you with questioning eyes.... It's time to either hit the road or get some much-needed relief, because this boner isn't going anywhere without your help.");
-	dynStats("lus", 20, "resisted", false);
+	dynStats("lus", 20, "scale", false);
 	flags[kFLAGS.URTA_MET_HEL] = 1;
 	//[Head Out] [Get \"<i>Help</i>\"]
 	menu();
@@ -653,13 +653,13 @@ private function pcBlowsUrtasDong(truth:Boolean):void {
 
 	outputText("\n\nRemoving " + player2.mf("his","her") + ", now clean, hand from your lips with a <b>POP</b>, " + player2.short + " smiles wryly at you as " + player2.mf("he","she") + " grabs your legs and lifts them over your shoulders.  \"<i>Now what are you-</i>\"  You start to say, curious about what your lover has in mind.  " + player2.mf("He","She") + " silences you by shoving " + player2.mf("his","her") + " fingers down your pussy once again. You blink in surprise, but are too pleased at what's happening now to care much, enthusiastically bucking your hips to meet " + player2.mf("his","her") + " probing fingers, then whimpering in disappointment when they are removed again.");
 
-	outputText("\n\nYou're presented with " + player2.mf("his","her") + " slick fingers once more.  \"<i>Heh, do you get off on seeing me suck your fingers, " + player2.short + "?</i>\"  You're sincerely curious, but eagerly accept them all the same, sucking them clean a second time. You smack your lips as the fingers are extracted from your mouth once more.  You impatiently wriggle and squirm in your seat, \"<i>" + player2.short + ", I'm going mad here - let me cum, please?  Pretty please?</i>\"   " + player2.short + " traces a finger along your shaft, down your balls, along your slit, and gently moves to prod your tight little rosebud.  \"<i>W-what are you up to now?<i>\"  You ask, at once scared and excited to see what " + player2.mf("he","she") + " has in mind.");
+	outputText("\n\nYou're presented with " + player2.mf("his","her") + " slick fingers once more.  \"<i>Heh, do you get off on seeing me suck your fingers, " + player2.short + "?</i>\"  You're sincerely curious, but eagerly accept them all the same, sucking them clean a second time. You smack your lips as the fingers are extracted from your mouth once more.  You impatiently wriggle and squirm in your seat, \"<i>" + player2.short + ", I'm going mad here - let me cum, please?  Pretty please?</i>\"   " + player2.short + " traces a finger along your shaft, down your balls, along your slit, and gently moves to prod your tight little rosebud.  \"<i>W-what are you up to now?</i>\"  You ask, at once scared and excited to see what " + player2.mf("he","she") + " has in mind.");
 
 	outputText("\n\n" + player2.mf("His","Her") + " only reply is to shove " + player2.mf("his","her") + " slick finger into you, roughly stimulating your prostate.  You vent a throaty howl of equal parts shock, disapproval and ecstasy.  The prostate milking proves to be more than your poor, over-hyped cock can take.  Your balls squeeze themselves up into your crotch as pleasure burns through your stallionhood like hard liquor burns down your gullet, climaxing in a veritable eruption of foxy herm seed that explodes dramatically from your dessert-plate-sized flare, jetting straight at your chest and impacting with enough force to splatter your surroundings.  The bubbling torrent of spunk rains down in a heady, musky, kinky deluge that drenches your face and tits alike.  Unthinkingly, you open your mouth and loll out your tongue, gulping down mouthful after mouthful of your own spooge until finally your balls empty themselves.");
 
 	outputText("\n\n" + player2.short + " releases you, letting your legs flop on the floor nervelessly.  " + player2.mf("He","She") + " pats your thigh and glances at you questioningly.  \"<i>Did fox enjoy her bath?</i>\"  " + player2.mf("He","She") + " asks with a chuckle, rubbing your belly.");
 
-	outputText("\n\n\"<i>I can think of better ways to have a bath,<i>\" you answer primly... then realize your treacherous leg is kicking with pleasure at the belly rub, and you have to concentrate hard to force it to stop.  \"<i>Besides, I thought I was supposed to be giving you a feeding, not myself a bath?</i>\"  You laugh.  " + player2.short + " looks pensive for a moment, but ultimately, " + player2.mf("he","she") + " just shrugs and redoubles " + player2.mf("his","her") + " effort, rubbing your belly even harder to get you to kick your leg a bit more.  \"<i>S-stop that!</i>\"  You blurt, trying to keep the fact that this does feel good out of your voice even as you wriggle at the ticklish sensation.  Of course, maybe a belly-rub on top of a decent bellyful of cum isn't such a good idea; you feel queasy for a moment, then can't hold back a loud burp.  This shocks your mischievous lover into loosening " + player2.mf("his","her") + " grip, and you promptly seize advantage of that; you surge forward and swiftly overpower " + player2.mf("him","her") + ", wrestling " + player2.mf("him","her") + " to the floor and then giving " + player2.mf("him","her") + " a wet, sloppy, deep-throating, tongue-filled kiss.  You noisily make out with your lover for a couple of minutes, then let " + player2.mf("him","her") + " go.  \"<i>See what bad " + player2.mf("boys","girl") + " get?<i>\"  You chuckle.  " + player2.short + " just grins innocently at you.");
+	outputText("\n\n\"<i>I can think of better ways to have a bath,</i>\" you answer primly... then realize your treacherous leg is kicking with pleasure at the belly rub, and you have to concentrate hard to force it to stop.  \"<i>Besides, I thought I was supposed to be giving you a feeding, not myself a bath?</i>\"  You laugh.  " + player2.short + " looks pensive for a moment, but ultimately, " + player2.mf("he","she") + " just shrugs and redoubles " + player2.mf("his","her") + " effort, rubbing your belly even harder to get you to kick your leg a bit more.  \"<i>S-stop that!</i>\"  You blurt, trying to keep the fact that this does feel good out of your voice even as you wriggle at the ticklish sensation.  Of course, maybe a belly-rub on top of a decent bellyful of cum isn't such a good idea; you feel queasy for a moment, then can't hold back a loud burp.  This shocks your mischievous lover into loosening " + player2.mf("his","her") + " grip, and you promptly seize advantage of that; you surge forward and swiftly overpower " + player2.mf("him","her") + ", wrestling " + player2.mf("him","her") + " to the floor and then giving " + player2.mf("him","her") + " a wet, sloppy, deep-throating, tongue-filled kiss.  You noisily make out with your lover for a couple of minutes, then let " + player2.mf("him","her") + " go.  \"<i>See what bad " + player2.mf("boys","girl") + " get?</i>\"  You chuckle.  " + player2.short + " just grins innocently at you.");
 
 	outputText("\n\nYou yawn loudly, feeling tired now.  You promptly make yourself comfortable lying on " + player2.short + "'s belly, and kiss " + player2.mf("him","her") + " on the nose.  \"<i>Night, " + player2.short + "; sleep well.</i>\"  You say, then close your eyes and allow yourself to drift off to sleep, happily using " + player2.mf("him","her") + " as a full-body pillow.");
 	player.orgasm('Dick');
@@ -1118,12 +1118,12 @@ public function urtaSpecials():void {
 		return;
 	}
 	menu();
-	addButton(0, "Combo", urtaComboAttack, null, null, null, "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 25");
-	addButton(1, "Vault", urtaVaultAttack, null, null, null, "Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes. \n\nFatigue cost: 20");
-	addButton(2, "Sidewinder", urtaSidewinder, null, null, null, "An attack that hits for reduced damage but has a high chance of stunning. \n\nFatigue cost: 10");
-	addButton(3, "Dirt Kick", urtaDirtKick, null, null, null, "Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 5");
-	addButton(4, "Metabolize", urtaMetabolize, null, null, null, "Convert 10% of your maximum HP into fatigue.");
-	addButton(5, "SecondWind", urtaSecondWind, null, null, null, "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.", "Second Wind");
+	addButton(0, "Combo", urtaComboAttack).hint("Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 25");
+	addButton(1, "Vault", urtaVaultAttack).hint("Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes. \n\nFatigue cost: 20");
+	addButton(2, "Sidewinder", urtaSidewinder).hint("An attack that hits for reduced damage but has a high chance of stunning. \n\nFatigue cost: 10");
+	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 5");
+	addButton(4, "Metabolize", urtaMetabolize).hint("Convert 10% of your maximum HP into fatigue.");
+	addButton(5, "SecondWind", urtaSecondWind).hint("Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.", "Second Wind");
 	addButton(14, "Back", combat.combatMenu, false);
 }
 
@@ -1564,7 +1564,7 @@ public function nagaPleaseNagaStoleMyDick():void {
 	outputText("\n\n\"<i>You invade my territory... ssstep on my tail... and have the gall to tell me you're not going to make up for it!</i>\"  He hisses ominously.  \"<i>Hey, it was an acci-</i>\"  \"<i>Worthlesss female!  You are mine!</i>\"  He charges at you!");
 
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.combat.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses();
 	startCombat(new Sirius());
 }
 
@@ -1648,7 +1648,7 @@ private function urtaWinFucksSirius():void {
 	outputText("\n\nYou shake your head, feeling kind of dizzy, but good... also, still kind of horny.  Wow, he looks really cute with his face splashed with semen... and his belly starting to bulge from the load you shot down his throat...  That's so... hot...  Your cock starts to harden up again, anticipating your intentions.  Funny... you vaguely remember needing to do something... something besides fucking this sexy snake here.  Eh, it can wait; round two, coming up!");
 
 	outputText("\n\nSirius coughs pathetically, spitting a small gob of seed in the process.  Then he licks his lips and looks up, only to meet your hungry stare.  \"<i>Why are you looking at me like that?  No... oh nononononono... Wa - GH!</i>\"  You cram his mouth full again, already humping his face as if your life depends on it... mmm, his throat feels so good wrapped around your cock...");
-	dynStats("lus=", player.maxLust(), "resisted", false);
+	dynStats("lus=", player.maxLust(), "scale", false);
 	//Next Page button to trigger scene finish
 	menu();
 	addButton(0,"Next",fuckSiriusRadioII);
@@ -1781,7 +1781,7 @@ private function gnollAlphaBitchIntro():void {
 
 	outputText("\n\nHow wrong you are.  A spear smacks into the ground, the tip exploding into some sticky, restraining substance by your foot.  A high pitched war-cry chases the missile, barely giving you the warning you need to avoid the onrushing gnoll!  This one doesn't quite look like what you'd expect from their race, but she's moving too fast to really dwell on it.");
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.combat.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses();
 	startCombat(new GnollSpearThrower());
 	monster.bonusHP = 350;
 	monster.short = "alpha gnoll";
@@ -2221,7 +2221,7 @@ private function introSuccubiAndMinotaur():void {
 	outputText("\n\nThe minotaur lord thunders towards you, picking up the loose chain to use a weapon.  It's a fight!");
 
 	//{start fight}
-	kGAMECLASS.combat.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses();
 	startCombat(new MinotaurLord());
 }
 
@@ -2488,7 +2488,7 @@ public function beatMinoLordOnToSuccubi():void {
 	outputText("\n\n\"<i>We'll see how your tune changes when you're licking my heels and begging for a drop of my milk!</i>\"  She snaps her whip angrily.");
 
 	outputText("\n\n<b>It's a fight!</b>");
-	kGAMECLASS.combat.clearStatuses(false);
+	kGAMECLASS.combat.clearStatuses();
 	player.setWeapon(weapons.URTAHLB);
 	//player.weapon = weapons.URTAHLB;
 	startCombat(new MilkySuccubus(),true);
@@ -2534,7 +2534,7 @@ public function urtaBeatsUpCowcubi():void {
 	outputText("\n\nYou take a deep breath of relief at taking out both the succubus-cow and her pet minotaur... which proves to be a mistake, since the air is saturated with pheromones from the cow's milk and minotaur's cum.  You can't help but groan as you feel your loins burn with desire.  Demon or not, the woman kneeling before you is extraordinarily attractive; those huge full breasts - you've never seen a woman that busty before - and that gloriously squeezable ass...  If she keeps a minotaur as a fucktoy, then surely she has to be loose enough to take even your king-sized cock; the waterfall of lubricant drooling out of her cunt seems to whisper to you, begging you to fill her full of your cum.");
 
 	outputText("\n\nIt's risky, but... surely one fuck can't hurt?  You do want to be faithful to " + player2.short + ", you do, but " + player2.mf("he","she") + "'s not here, is " + player2.mf("he","she") + "?  Still, you're sure you can be strong and leave it, you do have the willpower... oh, but the temptation...");
-	dynStats("lus", 40, "resisted", false);
+	dynStats("lus", 40, "scale", false);
 	//[Leave] [Fuck]
 	menu();
 	addButton(0,"Fuck",fuckTheCowCubi);
@@ -2726,7 +2726,7 @@ private function deadGodsDreaming():void {
 	outputText("\n\nThen you awake with a start, still kneeling before the unmoving statue.  Was it all a dream?  You don't know...  Your head is throbbing like mad, and you can't think clearly.  But even as the pain dims, you become aware of another, more pressing matter.  Lust.  That familiar yearning burns inside your arm-length prick like a raging inferno, the tower of equine fuckmeat thrusting boldly before you and steadily gushing precum onto the ground.  Naked, hungry NEED screams and claws and gibbers behind your eyes... " + player2.short + ", you must have " + player2.short + "!");
 
 	outputText("\n\nAbsently licking drool from your lips, you stagger upright and, using your halberd for support, start loping home from the shrine.  In your wake you leave a slug-like trail of sexual lubricants, too focused on finding and fucking your lover to care about the glistening slime caking your dick and plastering your inner thighs.");
-	dynStats("lus=", player.maxLust(), "resisted", false);
+	dynStats("lus=", player.maxLust(), "scale", false);
 	//Revert to PC control and change page to Urta Arrives At Camp
 	menu();
 	addButton(0,"Next",urtaArrivesAtCampForFukks);

@@ -44,7 +44,7 @@ package classes.Items.Consumables
 				dynStats("spe", -1);
 			}
 			//- corruption increases by 1 up to low threshold (~20)
-			if (rand(3) === 0 && player.cor < (20 + player.corruptionTolerance()) && changes < changeLimit) {
+			if (rand(3) === 0 && player.cor < 20 && changes < changeLimit) {
 				outputText("\n\nYou shiver, a sudden feeling of cold rushing through your extremities.");
 				changes++;
 				dynStats("cor", 1);

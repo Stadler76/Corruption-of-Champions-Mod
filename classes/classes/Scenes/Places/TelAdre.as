@@ -1,4 +1,4 @@
-package classes.Scenes.Places {
+﻿package classes.Scenes.Places {
 	import classes.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.Armor;
@@ -139,18 +139,18 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if (!getGame().telAdre.isDiscovered()) setStatus(true,false);
 	//-70+ corruption, or possessed by exgartuan
-	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.cor >= (70 + player.corruptionTolerance())) {
+	if (player.hasStatusEffect(StatusEffects.Exgartuan) || !player.isPureEnough(70)) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n");
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.");
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
 	//-50+ corruption or corrupted Jojo
-	else if (player.cor >= (50 + player.corruptionTolerance()) || flags[kFLAGS.JOJO_STATUS] >= 5) {
+	else if (!player.isPureEnough(50) || flags[kFLAGS.JOJO_STATUS] >= 5) {
 		outputText("The crystal pendant shimmers, vibrating in place and glowing a purple hue.  Edryn steps back, watching you warily, \"<i>You've been deeply touched by corruption.  You balance on a razor's edge between falling completely and returning to sanity.  You may enter, but we will watch you closely.</i>\"\n\n");
 	}
 	//-25+ corruption or corrupted Marae
-	else if (player.cor >= (25 + player.corruptionTolerance()) || flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
+	else if (!player.isPureEnough(25) || flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 		outputText("The crystal pendant twirls in place, glowing a dull red.  Edryn takes a small step back and murmurs, \"<i>You've seen the darkness of this land first hand, but its hold on you is not deep.  You'll find sanctuary here.  The demons cannot find this place yet, and we promise you safe passage within the walls.</i>\"\n\n");
 	}
 	//-Low corruption/pure characters
@@ -2430,7 +2430,7 @@ private function gymMenu():void {
 	addButton(2, "LiftWeights", weightLifting);
 	//addButton(3, "Go Swimming", goSwimming);
 	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0 && player.gems >= 500)
-		addButton(4, "Life Member", buyGymLifeTimeMembership, null, null, null, "Buy lifetime membership for 500 gems? It could save you gems in the long run.", "Lifetime Membership");
+		addButton(4, "Life Member", buyGymLifeTimeMembership).hint("Buy lifetime membership for 500 gems? It could save you gems in the long run.", "Lifetime Membership");
 	else if (flags[kFLAGS.LIFETIME_GYM_MEMBER] > 0)
 		addButtonDisabled(4, "Life Member", "You already have the lifetime membership. So go ahead and use the facilities.", "Lifetime Membership");
 	else

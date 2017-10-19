@@ -118,24 +118,24 @@ package classes.Scenes.Areas.HighMountains
 				outputText("What do you do with him?");
 				if (!player.isTaur() && !player.isDrider()) {
 					if (player.hasVagina()) {
-						addButton(0, "Ride Him Vag", cockatriceRideHimVag, null, null, null, "Let him fuck your pussy.");
+						addButton(0, "Ride Him Vag", cockatriceRideHimVag).hint("Let him fuck your pussy.");
 					}
-					addButton(1, "Ride Him Anal", cockatriceRideHimAnal, null, null, null, "Let him fuck your butt.");
+					addButton(1, "Ride Him Anal", cockatriceRideHimAnal).hint("Let him fuck your butt.");
 					if (player.cockThatFits(monster.analCapacity()) >= 0) {
-						addButton(2, "Buttfuck", cockatriceButtfuck, null, null, null, "Fuck the cockatrices's ass!");
+						addButton(2, "Buttfuck", cockatriceButtfuck).hint("Fuck the cockatrices's ass!");
 					}
 					if (player.hasCock()) {
-						addButton(3, "Oral (Cock)", cockatriceOralCock, null, null, null, "Get a blowjob!");
+						addButton(3, "Oral (Cock)", cockatriceOralCock).hint("Get a blowjob!");
 					}
 					if (player.hasVagina()) {
-						addButton(4, "Oral (Vag)", cockatriceOralVag, null, null, null, "Get a vaginal blowjob!");
+						addButton(4, "Oral (Vag)", cockatriceOralVag).hint("Get a vaginal blowjob!");
 					}
 				} else {
 					if (player.isTaur() && (player.hasVagina() || player.hasCock())) {
-						addButton(5, "Taur sex", cockatriceTaurButtFuck, null, null, null, "Let him fuck your tauric butt!");
+						addButton(5, "Taur sex", cockatriceTaurButtFuck).hint("Let him fuck your tauric butt!");
 					}
 					if (player.isDrider() && (player.hasVagina() || player.hasCock())) {
-						addButton(5, "Drider sex", cockatriceDriderButtFuck, null, null, null, "Let him fuck your drider butt!");
+						addButton(5, "Drider sex", cockatriceDriderButtFuck).hint("Let him fuck your drider butt!");
 					}
 				}
 			}

@@ -459,7 +459,7 @@ private function sateRutWithSoberUrtaButHuegDicked():void {
 		else outputText("soaking the shocked fox-morph in your jism");
 		outputText("; though you still feel the urge to breed fertile females, your lust is momentarily sated.  Urta wipes ");
 		if (player.cumQ() >= 500) outputText("halfheartedly ");
-		outputText("at the cum on her faces and gives you a friendly smile.  \"<i<There, that should feel better; I know what it's like to be all pent up with no release.</i>\"  She rises to her feet, still holding your cock, and gives it a squeeze.  \"<i>In the meantime, if you want to really cut loose, I suggest you go and find something to shrink this down.</i>\"");
+		outputText("at the cum on her faces and gives you a friendly smile.  \"<i>There, that should feel better; I know what it's like to be all pent up with no release.</i>\"  She rises to her feet, still holding your cock, and gives it a squeeze.  \"<i>In the meantime, if you want to really cut loose, I suggest you go and find something to shrink this down.</i>\"");
 		outputText("\n\nWith surprisingly vulpine shake of her body and a soft sigh, she turns and heads home at a swift pace, her erection bobbing up and down before her; evidently, she's intending to use some of her toys to find some release of her own. You re-dress and head back yourself, trying to make sense of your inhuman breeding rut.");
 	}
 	//Lover Urta Path/

@@ -1,5 +1,7 @@
-import classes.*;
+﻿import classes.*;
 import flash.text.TextFormat;
+
+import coc.view.CoCButton;
 
 // at least one import or other usage of *class* so it won't be marked unused.
 import classes.internals.Profiling;
@@ -59,7 +61,7 @@ public function HPChange(changeNum:Number, display:Boolean):Number
 			mainView.statsView.showStatDown( 'hp' );
 		}
 	}
-	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
+	player.dynStats("lust", 0, "scale", false); //Workaround to showing the arrow.
 	statScreenRefresh();
 	return player.HP - before;
 }
@@ -166,7 +168,7 @@ public function buttonIsVisible(index:int):Boolean {
 		return undefined;
 	}
 	else {
-		return mainView.bottomButtons[index].visible;
+		return button(index).visible;
 	}
 };
 
@@ -206,115 +208,9 @@ public function getButtonText(index:int):String {
 		return '';
 	}
 	else {
-		return mainView.bottomButtons[index].labelText;
+		return button(index).labelText;
 	}
 }
-
-public function getButtonToolTipHeader(buttonText:String):String
-{
-	var toolTipHeader:String;
-	
-	if (buttonText.indexOf(" x") != -1)
-	{
-		buttonText = buttonText.split(" x")[0];
-	}
-	
-	//Get items
-	var itype:ItemType = ItemType.lookupItem(buttonText);
-	var temp:String = "";
-	if (itype != null) temp = itype.longName;
-	itype = ItemType.lookupItemByShort(buttonText);
-	if (itype != null) temp = itype.longName;
-	if (temp != "") {
-		temp = Utils.capitalizeFirstLetter(temp);
-		toolTipHeader = temp;
-	}
-	
-	//Set tooltip header to button.
-	if (toolTipHeader == null) {
-		toolTipHeader = buttonText;
-	}
-	
-	return toolTipHeader;
-}
-
-// Returns a string or undefined.
-public function getButtonToolTipText(buttonText:String):String
-{
-	var toolTipText :String;
-
-	buttonText = buttonText || '';
-
-	//Items
-	//if (/^....... x\d+$/.test(buttonText)){
-	//	buttonText = buttonText.substring(0,7);
-	//}
-	
-	// Fuck your regex
-	if (buttonText.indexOf(" x") != -1)
-	{
-		buttonText = buttonText.split(" x")[0];
-	}
-	
-	var itype:ItemType = ItemType.lookupItem(buttonText);
-	if (itype != null) toolTipText = itype.description;
-	itype = ItemType.lookupItemByShort(buttonText);
-	if (itype != null) toolTipText = itype.description;
-
-	//------------
-	// COMBAT 
-	//------------
-	if (buttonText.indexOf("Defend") != -1) { //Not used at the moment.
-		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
-	}
-	//Urta's specials - MOVED
-	//P. Special attacks - MOVED
-	//M. Special attacks - MOVED
-
-	//------------
-	// MASTURBATION 
-	//------------
-	//Masturbation Toys
-	if (buttonText == "Masturbate") {
-		toolTipText = "Selecting this option will make you attempt to manually masturbate in order to relieve your lust buildup.";
-	}
-	if (buttonText == "Meditate") {
-		toolTipText = "Selecting this option will make you attempt to meditate in order to reduce lust and corruption.";
-	}
-	if (buttonText.indexOf("AN Stim-Belt") != -1) {
-		toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
-	}
-	if (buttonText.indexOf("Stim-Belt") != -1) {
-		toolTipText = "This is a self-stimulation belt.  Commonly referred to as stim-belts, these are clockwork devices designed to pleasure the female anatomy.";
-	}
-	if (buttonText.indexOf("AN Onahole") != -1) {
-		toolTipText = "An all-natural onahole, this device looks more like a bulbous creature than a sex-toy.  Nevertheless, the slick orifice it presents looks very inviting.";
-	}
-	if (buttonText.indexOf("D Onahole") != -1) {
-		toolTipText = "This is a deluxe onahole, made of exceptional materials and with the finest craftsmanship in order to bring its user to the height of pleasure.";
-	}
-	if (buttonText.indexOf("Onahole") != -1) {
-		toolTipText = "This is what is called an 'onahole'.  This device is a simple textured sleeve designed to fit around the male anatomy in a pleasurable way.";
-	}
-	if (buttonText.indexOf("Dual Belt") != -1) {
-		toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
-	}
-	if (buttonText.indexOf("C. Pole") != -1) {
-		toolTipText = "This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion.  Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.";
-	}
-	if (buttonText.indexOf("Fake Mare") != -1) {
-		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
-	}
-	//Books - MOVED
-	//------------
-	// TITLE SCREEN 
-	//------------
-	if (buttonText.indexOf("ASPLODE") != -1) {
-		toolTipText = "MAKE SHIT ASPLODE";
-	}
-	return toolTipText;
-}
-
 
 // Hah, finally a place where a dictionary is actually required!
 import flash.utils.Dictionary;
@@ -453,59 +349,49 @@ public function createCallBackFunction(func:Function, arg:*, arg2:* = null, arg3
  * @param	toolTipText The text that will appear on tooltip when the mouse goes over the button.
  * @param	toolTipHeader The text that will appear on the tooltip header. If not specified, it defaults to button text.
  */
-public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void {
-	if (func1==null) return;
+public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
+	var btn:CoCButton = button(pos);
+	if (func1==null) {
+		return btn.hide();
+	}
 	var callback:Function;
-
-	//Let the mainView decide if index is valid
-	if (pos > MAX_BUTTON_INDEX) {
+/*
+	Let the mainView decide if index is valid
+	if(pos > 14) {
 		trace("INVALID BUTTON");
 		return;
 	}
+*/
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
 			trace("Button removed due to SFW mode.");
-			return;
+			return btn.hide();
 		}
 	}
 	callback = createCallBackFunction(func1, arg1, arg2, arg3);
 
-	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
-	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
-	mainView.bottomButtons[pos].alpha = 1; // failsafe to avoid possible problems with dirty hack
-	mainView.showBottomButton(pos, text, function():void {
-		output.record("<br>["+text+"]<br>");
-		callback();
-	}, toolTipText, toolTipHeader);
-	//mainView.setOutputText( currentText );
+	btn.show(text,callback, toolTipText, toolTipHeader);
 	output.flush();
+	return btn;
 }
 
-public function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void {
+public function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
+	var btn:CoCButton = button(pos);
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
-			//trace("Button removed due to SFW mode.");
-			return;
+			trace("Button removed due to SFW mode.");
+			return btn.hide();
 		}
 	}
 
-	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
-	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
-	mainView.showBottomButtonDisabled(pos, text, toolTipText, toolTipHeader);
-	output.flush();
+	btn.showDisabled(text,toolTipText,toolTipHeader);
+	return btn;
 }
 
-public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
-	mainView.showBottomButton(index, mainView.bottomButtons[index].labelText, mainView.bottomButtons[index].callback, toolTipText, toolTipHeader);
-}
-
-public function hasButton(arg:*):Boolean {
-	if ( arg is String )
-		return mainView.hasButton( arg as String );
-	else
-		return false;
+public function button(pos:int):CoCButton {
+	return mainView.bottomButtons[pos];
 }
 
 /**
@@ -519,7 +405,7 @@ public function removeButton(arg:*):void {
 	}
 	if (arg is Number) {
 		if (arg < 0 || arg > MAX_BUTTON_INDEX) return;
-		buttonToRemove = Math.round(arg);
+		buttonToRemove = int(arg);
 	}
 	mainView.hideBottomButton( buttonToRemove );
 }
@@ -530,7 +416,6 @@ public function removeButton(arg:*):void {
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
 	for (var i:int = 0; i <= MAX_BUTTON_INDEX; i++) {
 		mainView.hideBottomButton(i);
-		mainView.bottomButtons[i].alpha = 1; // Dirty hack.
 	}
 	output.flush();
 }
@@ -639,29 +524,11 @@ public function awardAchievement(title:String, achievement:*, display:Boolean = 
 	else outputText("\n<b>ERROR: Invalid achievement!</b>");
 }
 
-// returns OLD OP VAL
-public function applyOperator(old:Number, op:String, val:Number):Number {
-	switch(op) {
-		case "=":
-			return val;
-		case "+":
-			return old + val;
-		case "-":
-			return old - val;
-		case "*":
-			return old * val;
-		case "/":
-			return old / val;
-		default:
-			trace("applyOperator(" + old + ",'" + op + "'," + val + ") unknown op");
-			return old;
-	}
-}
 
 public function testDynStatsEvent():void {
 	clearOutput();
 	outputText("Old: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
-	dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
+	player.dynStats("tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
 	outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
 	outputText("New: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
 	doNext(playerMenu);
@@ -673,245 +540,15 @@ public function testDynStatsEvent():void {
  * Arguments should come in pairs nameOp:String, value:Number/Boolean <br/>
  * where nameOp is ( stat_name + [operator] ) and value is operator argument<br/>
  * valid operators are "=" (set), "+", "-", "*", "/", add is default.<br/>
- * valid stat_names are "str", "tou", "spe", "int", "lib", "sen", "lus", "cor" or their full names; also "resisted"/"res" (apply lust resistance, default true) and "noBimbo"/"bim" (do not apply bimbo int gain reduction, default false)
- */
-public function dynStats(... args):void
-{
-	Begin("engineCore","dynStats");
-	// Check num of args, we should have a multiple of 2
-	if ((args.length % 2) != 0)
-	{
-		trace("dynStats aborted. Keys->Arguments could not be matched");
-		Profiling.End("engineCore","dynStats");
-		return;
-	}
-	
-	var argNamesFull:Array 	= 	["strength", "toughness", "speed", "intellect", "libido", "sensitivity", "lust", "corruption", "resisted", "noBimbo"]; // In case somebody uses full arg names etc
-	var argNamesShort:Array = 	["str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"]; // Arg names
-	var argVals:Array = 		[0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false]; // Default arg values
-	var argOps:Array = 			["+",	"+",    "+",    "+",    "+",    "+",    "+",    "+",    "=",    "="];   // Default operators
-	
-	for (var i:int = 0; i < args.length; i += 2)
-	{
-		if (typeof(args[i]) == "string")
-		{
-			// Make sure the next arg has the POSSIBILITY of being correct
-			if ((typeof(args[i + 1]) != "number") && (typeof(args[i + 1]) != "boolean"))
-			{
-				trace("dynStats aborted. Next argument after argName is invalid! arg is type " + typeof(args[i + 1]));
-				continue;
-			}
-			
-			var argIndex:int = -1;
-			
-			// Figure out which array to search
-			var argsi:String = (args[i] as String);
-			if (argsi == "lust") argsi = "lus";
-			if (argsi == "sens") argsi = "sen";
-			if (argsi == "inte") argsi = "int";
-			if (argsi.length <= 4) // Short
-			{
-				argIndex = argNamesShort.indexOf(argsi.slice(0, 3));
-				if (argsi.length == 4 && argIndex != -1) argOps[argIndex] = argsi.charAt(3);
-			}
-			else // Full
-			{
-				if ("+-*/=".indexOf(argsi.charAt(argsi.length - 1)) != -1) {
-					argIndex = argNamesFull.indexOf(argsi.slice(0, argsi.length - 1));
-					if (argIndex != -1) argOps[argIndex] = argsi.charAt(argsi.length - 1);
-				} else {
-					argIndex = argNamesFull.indexOf(argsi);
-				}
-			}
-			
-			if (argIndex == -1) // Shit fucked up, welp
-			{
-				trace("Couldn't find the arg name " + argsi + " in the index arrays. Welp!");
-				continue;
-			}
-			else // Stuff the value into our "values" array
-			{
-				argVals[argIndex] = args[i + 1];
-			}
-		}
-		else
-		{
-			trace("dynStats aborted. Expected a key and got SHIT");
-			Profiling.End("engineCore","dynStats");
-			return;
-		}
-	}
-	// Got this far, we have values to statsify
-	var newStr:Number = applyOperator(player.str, argOps[0], argVals[0]);
-	var newTou:Number = applyOperator(player.tou, argOps[1], argVals[1]);
-	var newSpe:Number = applyOperator(player.spe, argOps[2], argVals[2]);
-	var newInte:Number = applyOperator(player.inte, argOps[3], argVals[3]);
-	var newLib:Number = applyOperator(player.lib, argOps[4], argVals[4]);
-	var newSens:Number = applyOperator(player.sens, argOps[5], argVals[5]);
-	var newLust:Number = applyOperator(player.lust, argOps[6], argVals[6]);
-	var newCor:Number = applyOperator(player.cor, argOps[7], argVals[7]);
-	// Because lots of checks and mods are made in the stats(), calculate deltas and pass them. However, this means that the '=' operator could be resisted
-	// In future (as I believe) stats() should be replaced with dynStats(), and checks and mods should be made here
-	stats(newStr - player.str,
-		  newTou - player.tou,
-		  newSpe - player.spe,
-		  newInte - player.inte,
-		  newLib - player.lib,
-		  newSens - player.sens,
-		  newLust - player.lust,
-		  newCor - player.cor,
-		  argVals[8],argVals[9]);
-	End("engineCore","dynStats");
+ * valid stat_names are "str", "tou", "spe", "int", "lib", "sen", "lus", "cor" or their full names;
+ * also "scaled"/"sca" (default true: apply resistances, perks; false - force values)
+ *
+ * @return Object of (newStat-oldStat) with keys str, tou, spe, int, lib, sen, lus, cor
+ * */
+public function dynStats(... args):Object {
+	return player.dynStats.apply(player,args);
 }
 
-public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true, noBimbo:Boolean = false):void
-{
-	//Easy mode cuts lust gains!
-	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
-	
-	//Set original values to begin tracking for up/down values if
-	//they aren't set yet.
-	//These are reset when up/down arrows are hidden with 
-	//hideUpDown();
-	//Just check str because they are either all 0 or real values
-	if (oldStats.oldStr == 0) {
-		oldStats.oldStr = player.str;
-		oldStats.oldTou = player.tou;
-		oldStats.oldSpe = player.spe;
-		oldStats.oldInte = player.inte;
-		oldStats.oldLib = player.lib;
-		oldStats.oldSens = player.sens;
-		oldStats.oldCor = player.cor;
-		oldStats.oldHP = player.HP;
-		oldStats.oldLust = player.lust;
-		oldStats.oldFatigue = player.fatigue;
-		oldStats.oldHunger = player.hunger;
-	}
-	//MOD CHANGES FOR PERKS
-	//Bimbos learn slower
-	if (!noBimbo)
-	{
-		if (player.findPerk(PerkLib.FutaFaculties) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0  || player.findPerk(PerkLib.BroBrains) >= 0) {
-			if (intel > 0) intel /= 2;
-			if (intel < 0) intel *= 2;
-		}
-		if (player.findPerk(PerkLib.FutaForm) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0  || player.findPerk(PerkLib.BroBody) >= 0) {
-			if (libi > 0) libi *= 2;
-			if (libi < 0) libi /= 2;
-		}
-	}
-	
-	// Uma's Perkshit
-	if (player.findPerk(PerkLib.ChiReflowSpeed)>=0 && spee < 0) spee *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
-	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-	if (player.findPerk(PerkLib.ChiReflowLust)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-	
-	//Apply lust changes in NG+.
-	if (resisted) lust2 *= 1 + (player.newGamePlusMod() * 0.2);
-	
-	//lust resistance
-	if (lust2 > 0 && resisted) lust2 *= player.lustPercent()/100;
-	if (libi > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) libi *= 0.75;
-	if (corr > 0 && player.findPerk(PerkLib.PurityBlessing) >= 0) corr *= 0.5;
-	if (corr > 0 && player.findPerk(PerkLib.PureAndLoving) >= 0) corr *= 0.75;
-	if (corr > 0 && player.weapon == weapons.HNTCANE) corr *= 0.5;
-	if (player.findPerk(PerkLib.AscensionMoralShifter) >= 0) corr *= 1 + (player.perkv1(PerkLib.AscensionMoralShifter) * 0.2);
-	//Change original stats
-	player.str+=stre;
-	player.tou+=toug;
-	player.spe+=spee;
-	player.inte+=intel;
-	player.lib += libi;
-	
-	if (player.sens > 50 && sens > 0) sens/=2;
-	if (player.sens > 75 && sens > 0) sens/=2;
-	if (player.sens > 90 && sens > 0) sens/=2;
-	if (player.sens > 50 && sens < 0) sens*=2;
-	if (player.sens > 75 && sens < 0) sens*=2;
-	if (player.sens > 90 && sens < 0) sens*=2;
-	
-	player.sens+=sens;
-	player.lust+=lust2;
-	player.cor += corr;
-	
-	//Bonus gain for perks!
-	if (player.findPerk(PerkLib.Strong) >= 0 && stre >= 0) player.str+=stre*player.perk(player.findPerk(PerkLib.Strong)).value1;
-	if (player.findPerk(PerkLib.Tough) >= 0 && toug >= 0) player.tou+=toug*player.perk(player.findPerk(PerkLib.Tough)).value1;
-	if (player.findPerk(PerkLib.Fast) >= 0 && spee >= 0) player.spe+=spee*player.perk(player.findPerk(PerkLib.Fast)).value1;
-	if (player.findPerk(PerkLib.Smart) >= 0 && intel >= 0) player.inte+=intel*player.perk(player.findPerk(PerkLib.Smart)).value1;
-	if (player.findPerk(PerkLib.Lusty) >= 0 && libi >= 0) player.lib+=libi*player.perk(player.findPerk(PerkLib.Lusty)).value1;
-	if (player.findPerk(PerkLib.Sensitive) >= 0 && sens >= 0) player.sens += sens * player.perk(player.findPerk(PerkLib.Sensitive)).value1;
-	
-	//Keep stats in bounds
-	if (player.cor < 0) player.cor = 0;
-	if (player.cor > 100) player.cor= 100;
-	if (player.str > player.getMaxStats("str")) player.str = player.getMaxStats("str");
-	if (player.str < 1) player.str = 1;
-	if (player.tou > player.getMaxStats("tou")) player.tou = player.getMaxStats("tou");
-	if (player.tou < 1) player.tou = 1;
-	if (player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
-	if (player.spe < 1) player.spe = 1;
-	if (player.inte > player.getMaxStats("inte")) player.inte= player.getMaxStats("inte");
-	if (player.inte < 1) player.inte = 1;
-	if (player.lib > 100) player.lib = 100;
-	if (player.lib < 0) player.lib = 0;
-	//Minimum libido. Rewritten.
-	var minLib:Number = 0;
-	
-	if (player.gender > 0) minLib = 15;
-	else minLib = 10;
-	
-	if (player.armorName == "lusty maiden's armor") {
-		if (minLib < 50)
-		{
-			minLib = 50;
-		}
-	}
-	if (minLib < (player.minLust() * 2 / 3))
-	{
-		minLib = (player.minLust() * 2 / 3);
-	}
-	if (player.jewelryEffectId == JewelryLib.PURITY)
-	{
-		minLib -= player.jewelryEffectMagnitude;
-	}
-	if (player.findPerk(PerkLib.PurityBlessing) >= 0) {
-		minLib -= 2;
-	}
-	if (player.findPerk(PerkLib.HistoryReligious) >= 0) {
-		minLib -= 2;
-	}
-	//Applies minimum libido.
-	if (player.lib < minLib)
-	{
-		player.lib = minLib;
-	}
-	
-	//Minimum sensitivity.
-	if (player.sens > 100) player.sens = 100;
-	if (player.sens < 10) player.sens = 10;
-	
-	//Add HP for toughness change.
-	if (toug > 0) HPChange(toug * 2, false);
-	//Reduce hp if over max
-	if (player.HP > maxHP()) player.HP = maxHP();
-	
-	//Combat bounds
-	if (player.lust > player.maxLust()) player.lust = player.maxLust();
-	//if (player.lust < player.lib) {
-	//        player.lust=player.lib;
-	//
-	//Update to minimum lust if lust falls below it.
-	if (player.lust < player.minLust()) player.lust = player.minLust();
-	//worms moved to minLust() in Player.as.
-	if (player.lust > player.maxLust()) player.lust = player.maxLust();
-	if (player.lust < 0) player.lust = 0;
-
-	//Refresh the stat pane with updated values
-	//mainView.statsView.showUpDown();
-	showUpDown();
-	statScreenRefresh();
-}
 	
 public function showUpDown():void { //Moved from StatsView.
 	function _oldStatNameFor(statName:String):String {

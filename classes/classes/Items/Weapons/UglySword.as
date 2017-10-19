@@ -13,13 +13,13 @@ package classes.Items.Weapons
 		}
 		
 		override public function get attack():Number { 
-			var temp:int = 7 + int(((game.player.cor + game.player.corruptionTolerance()) - 70) / 3)
+			var temp:int = 7 + int((game.player.corAdjustedUp() - 70) / 3)
 			if (temp < 5) temp = 5;
 			return temp; 
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.cor > (70 - game.player.corruptionTolerance())) return true;
+			if (game.player.isCorruptEnough(70)) return true;
 			outputText("You grab hold of the handle of the sword only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the sword must be disgusted. ");
 			return false;
 		}

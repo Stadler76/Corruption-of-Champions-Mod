@@ -182,6 +182,7 @@ package classes.Scenes.Places.Prison
 			happiness = prisonCaptorBillieHappiness();
 			if (branchChoice == "choose")
 			{
+				outputText(images.showImage("prison-billie"));
 				outputText("(Placeholder) Billie sneaks into your cell and says that she heard you moaning, and was worried about you. Now that she's here, she completely understands -- you've been a bad [boy] and Mistress has is letting your desire teach you a lesson. Knowing all too well how challenging such a lesson can be, she feels quite badly for you.\n\n");
 				if (happiness > 0)
 				{
@@ -216,6 +217,7 @@ package classes.Scenes.Places.Prison
 			}
 			if (branchChoice == "1")
 			{
+				outputText(images.showImage("prison-billie-fuck"));
 				outputText("(Placeholder) Billie rolls you onto your stomach and fucks you very sweetly in your [vagOrAss].\n\n");
 				if (rand(2) == 1)
 				{
@@ -227,12 +229,14 @@ package classes.Scenes.Places.Prison
 			}
 			else if (branchChoice == "2")
 			{
+				outputText(images.showImage("prison-billie-wet"));
 				outputText("(Placeholder) Billie is surprised, but proud of you. She assumes that you have decided to take responsibility for your actions and learn from your lesson, and so she gives you a wet kiss on the cheek and leaves you be.\n\n");
 				prisonCaptorBillieHappinessSet(0);
 				prison.changeEsteem(1,prison.inPrison);
 			}
 			else if (branchChoice == "3")
 			{
+				outputText(images.showImage("prison-billie-seeding"));
 				if (prison.prisonRestraintMouthLevel() == 4)
 				{
 					outputText("(Placeholder) Thanks to your ring gag, your mouth hangs open awaiting her deposit, and it isn't long before Billie fills it with a load of her sperm. ");
@@ -253,6 +257,7 @@ package classes.Scenes.Places.Prison
 			}
 			else if (branchChoice == "4")
 			{
+				outputText(images.showImage("prison-billie-seeding"));
 				outputText("(Placeholder) Billie quickly brings herself to orgasm, coating your face with her cum. She is surprised that you didn't want to be fed, but proud of you. She assumes that you have decided to take responsibility for your actions and learn from your lesson, and so she gives you a wet kiss on the cheek, then after briefly getting distracted licking her own seed from your face, leaves you be.\n\n");
 				if (prison.prisonRestraintMouthLevel() > 0 && !(prison.prisonRestraintMouthLevel() == 4))
 				{
@@ -272,6 +277,7 @@ package classes.Scenes.Places.Prison
 			if (branchChoice == "choose")
 			{
 				prisonCaptorBillieMetChange(1);
+				outputText(images.showImage("prison-billie"));
 				outputText("(Placeholder) You assume a submissive position, by your [captorTitle] says \"<i>Actually, I've changed my mind. Don't worry, you're still going to get fucked, but you're going to help me reward a much better behaved slave in the process.</i>\" [captorhe] leaves the room momentarily, then returns with a buxom platinum blond with bunny ears and tail. Although her body is model of feminity, she appears to only be endowed with male genitals, and is quite well endowed at that. \n\n");
 				outputText("\"<i>This is Billie. She's one of Scruffy's favorites, despite the fact that she seems incapable of sprouting a cunt for him to fuck no matter how hard she tries. Today, though, she gets to fuck you.</i>\" As [captorTitle] [captorName] explains, the bunny girl seems to quickly loose interest in studying you and is distracted by the sight of your [captorTitle]'s erect shaft. She very daintily falls to her knees, grabs hold of the tip, and begins licking her way up and down the underside of the shaft.\n\n");
 				outputText("\"<i>Isn't she the sweetest little thing? As you can see, she's willing and eager to treat you right. Behave yourself, and I'll allow her to.</i>\" Billie attentions have begun to make your [captorTitle] drip precum, and she makes an alluring show of drawing out strings of it with her tongue until they fall and drip luridly across her perky tits. \"<i>But if you fail to live up to her example of good behavior, I'll have to make her punish you. It will make her sad, but she'll know it's for your own good.</i>\" At that Billie turns to face you, her hand still squeezing at the tip of the cock and her lips still sliding along its side, and fixes you with a sincere, plaintive look.\n\n");
@@ -285,12 +291,14 @@ package classes.Scenes.Places.Prison
 			if (branchChoice == "happy")
 			{
 				prisonCaptorBillieHappinessChange(2);
+				outputText(images.showImage("prison-billie-seeding"));
 				outputText("(Placeholder) Choose happy and you go and assist in blowing your [captorTitle], then are instructed to 69 with you on the bottom. Billie teases you by giving you excellent head but preventing you from coming, and fucks your throat savagely while doing so. Once she gets going, [captorTitle] [captorName] takes a turn in your mouth for extra lubrication, then begins to fuck her ass directly above your [face]. [captorTitle] [captorName] comes in her ass several times, and after each time she takes a turn at plowing your throat to clean her cock before it returns to Billie's eager asshole. All the while, cum drips down from Billie's ass, over her tiny balls, and all over your nose, cheeks, and brow. Finally [captorTitle] [captorName] withdraws and tells Billie to make you come, and as you explode she finally does as well, pumping your stomach full of her seed. The muscle spasms from her orgasm force more of [captorTitle] [captorName]'s cum out of her ass, soaking your [hair]. She then turns around and gives you a long passionate kiss, and if you have a dick, feeds you the cum she ingested from your orgasm.\n\n");
 				player.orgasm('Lips');
 			}
 			else if (branchChoice == "sad")
 			{
 				prisonCaptorBillieHappinessChange(-2);
+				outputText(images.showImage("prison-billie-sosad"));
 				outputText("(Placeholder) Choose sad and you don't go to help with the BJ. Once [captorTitle] [captorName] sees your hesitation, she quickly pins you on your back. Before you know it your hands are bound above your head and fastened to an eyelet in the floor, and your calves are bound to your thighs. Restrained in this way, your legs are naturally raised and spread leaving your crotch and ass exposed. She then instructs Billie to begin fucking your ass. She does so gently at first with a pouty look on her face, until [captorTitle] [captorName] admonishes her for not teaching you your lesson properly. At that she begins pounding you with ferocity, and her face becomes a mask of passion. Assuming you have a cock or a cunt, though, she uses her hands to skillfully arouse you so that you are quickly moaning uncontrollably with every stroke. Once you are lost in pleasure, [captorTitle] [captorName] smothers your [face] with her cunt and instructs you to service her, which you do without complaint. If you have large enough tits, she wraps them around her dick and fucks them while you bury your tongue in her slit. [captorTitle] [captorName] and Billie each come several times, but don't stop using your body until you lose all control and beg repeatedly for release through the folds of her lower lips.\n\n");
 				player.buttChange(24, true, true, false);
 				player.orgasm('Anal');

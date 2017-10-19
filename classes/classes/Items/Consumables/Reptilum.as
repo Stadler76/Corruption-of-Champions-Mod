@@ -45,7 +45,7 @@ package classes.Items.Consumables
 
 			//Statistical changes:
 			//-Reduces speed down to 50.
-			if (player.spe100 > 50 && changes < changeLimit && rand(4) === 0) {
+			if (player.spe > player.ngPlus(50) && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
 				dynStats("spe", -1);
 				changes++;
@@ -79,14 +79,14 @@ package classes.Items.Consumables
 			}
 			//-Raises toughness to 70
 			//(+3 to 40, +2 to 55, +1 to 70)
-			if (player.tou100 < 70 && changes < changeLimit && rand(3) === 0) {
+			if (player.tou < player.ngPlus(70) && changes < changeLimit && rand(3) === 0) {
 				//(+3)
-				if (player.tou100 < 40) {
+				if (player.tou < player.ngPlus(40)) {
 					outputText("\n\nYour body and skin both thicken noticeably.  You pinch your " + player.skinDesc + " experimentally and marvel at how much tougher your hide has gotten.");
 					dynStats("tou", 3);
 				}
 				//(+2)
-				else if (player.tou100 < 55) {
+				else if (player.tou < player.ngPlus(55)) {
 					outputText("\n\nYou grin as you feel your form getting a little more solid.  It seems like your whole body is toughening up quite nicely, and by the time the sensation goes away, you feel ready to take a hit.");
 					dynStats("tou", 2);
 				}

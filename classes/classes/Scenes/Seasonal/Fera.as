@@ -459,7 +459,7 @@ import classes.Scenes.API.Encounter;
 			outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, scratching [oneCock] and smiling as you feel how hard and sensitive it is.  You're already feeling pretty anxious for a fuck, especially after the crazy wet dreams you had last night, and you resolve to find a nice hole to dump a few loads into before too long.  First, you had better go check back up on your camp.  You've got to bring your A-game if you're going to fuck stronger babies into every weak pussy you come across.  Besides, the wait will only make your eventual sexual enjoyment that much messier.");
 			//Add ten more corruption.
 			//Add 50 lust.
-			dynStats("lus", 25, "cor", 10, "resisted", false);
+			dynStats("lus", 25, "cor", 10, "scale", false);
 			doNext(camp.returnToCampUseFourHours);
 		}
 
@@ -557,7 +557,7 @@ import classes.Scenes.API.Encounter;
 			outputText("  You idly reach into your [armor] and stuff four fingers into yourself before sighing and removing them.  It just isn't the same as being full of cock.");
 			outputText("\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
 			//Add ten more corruption.
-			dynStats("lus", 20, "cor", 10, "resisted", false);
+			dynStats("lus", 20, "cor", 10, "scale", false);
 			doNext(camp.returnToCampUseFourHours);
 		}
 
@@ -609,7 +609,7 @@ import classes.Scenes.API.Encounter;
 			clearOutput();
 			outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, stretching as you rub your back, sore from lying against a tree for so long.  You suppose you could find yourself something to fight and fuck, but you ought to head back to camp first.  You idly reach into your [armor] and slip a finger into your [vagina], feeling your tight walls instinctively clamp down and squeeze it.  It's nice, but it's just so much better when you can do that to a captive cock until it has no choice but to impregnate you with its hot seed.  What better way to save the world than by making sure that the strongest get to breed as often as possible?");
 			outputText("\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
-			dynStats("lus", 20, "cor", 10, "resisted", false);
+			dynStats("lus", 20, "cor", 10, "scale", false);
 			doNext(camp.returnToCampUseFourHours);
 			//Add ten more corruption.
 		}

@@ -1,4 +1,4 @@
-package classes.Scenes.Places.Boat {
+﻿package classes.Scenes.Places.Boat {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -44,13 +44,13 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 			if (flags[kFLAGS.MET_MARAE] <= 0) {
 				flags[kFLAGS.MET_MARAE] = 1;
 				outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n");
-				if (player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
+				if (!player.isPureEnough(66)) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
 				//Explain the dungeon scenario
 				else {
 					flags[kFLAGS.MARAE_QUEST_START] = 1;
 					outputText("\"<i>You seem so surprised by me, Champion.   I suppose that is inevitable.  Your origin is not of Mareth, our land, and few save for the demons remember me,</i>\" says the tree.\n\n");
 					outputText("You take a step back, amazed to find such a creature, apparently uncorrupted.  ");
-					if (player.lib + player.cor > (80 - player.corruptionTolerance())) outputText("Your eyes can't help but take note of the tree-woman's shapely breasts, and wonder if they feel like tits or wood.  ");
+					if (player.isCorruptEnough(80 - player.lib100)) outputText("Your eyes can't help but take note of the tree-woman's shapely breasts, and wonder if they feel like tits or wood.  ");
 					outputText("Feeling a bit confused, you introduce yourself and ask her who she is.\n\n");
 					outputText("\"<i>Me?</i>\" she asks, \"<i>I am the life-goddess Marae.  I am Mareth, for my roots touch every part of it.   Or I was.  Before THEY came.</i>\"\n\n");
 					outputText("You suggest, \"<i>The demons?</i>\"\n\n");
@@ -59,7 +59,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 					outputText("She sighs heavily, and you notice the bark of her nipples stiffening.  Her brow creases with something approximating worry as she continues, \"<i>They know of me.  My power originally kept them far from the shores of the lake, but they seek to corrupt me – to make me like them.   They've used magic and industry to trap the pure rains in the clouds around their mountain, starving me, and in its place they spill their tainted sexual fluids.   For... years now, my furthest reaches have been bathed in their vile cum.   While my power is great, I... I cannot resist forever.  My reach has dwindled to little more than this lake.  Parts of me have already fallen, taking the surrounding life with them.  I do not know how much longer I can endure... even now, the desire to mate with you rises within me.</i>\"\n\n");
 					outputText("She practically begs, \"<i>Please champion, you must help me.  The demons have a factory at the foot of the mountains.  It produces much of the fluid they use to taint me.  If you could find a way to shut it down, I... all of Mareth, might stand a chance.</i>\"\n\n");
 					outputText("You nod, understanding.  She commands, \"<i>Now go, there is nothing to be gained by your presence here.  Return if you manage to close that vile place.</i>\"\n\n");
-					if (player.lib + player.cor > (80 - player.corruptionTolerance())) {
+					if (player.isCorruptEnough(80-player.lib)) {
 						outputText("You could leave, but the desire to feel her breast will not go away.  What do you do?");
 						menu();
 						addButton(0, "Boob", grabHerBoob);
@@ -73,9 +73,10 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 			//Second meeting
 			else {
 				outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n");
-				if (player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+				if (!player.isPureEnough(66)) {
 					outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
-					if (player.level >= 30) outputText("  f course, you could probably try to overthrow her.");
+					// ???
+//					if (player.level >= 30) outputText(" Of course, you could probably try to overthrow her.");
 					doNext(camp.returnToCampUseOneHour);
 				}
 				else {
@@ -687,7 +688,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 		outputText("\n\n(Do you fight Marae or stay with her and abandon your quests? Or you could leave if you want.)");
 		menu();
 		addButton(0, "Fight Her", promptFightMarae, level3MaraeEncounter, null, null, "Fight Marae the corrupted goddess!");
-		addButton(1, "Stay With Her", maraeBadEnd, null, null, null, "Stay with Marae and end your adventures?");
+		addButton(1, "Stay With Her", maraeBadEnd).hint("Stay with Marae and end your adventures?");
 		addButton(4, "Leave", camp.returnToCampUseOneHour);
 	}
 
@@ -737,7 +738,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 		}
 		flags[kFLAGS.PURE_MARAE_ENDGAME] = 1;
 		menu();
-		addButton(0, "Bring it on!", initiateFightMarae, null, null, null, "Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 30+");
+		addButton(0, "Bring it on!", initiateFightMarae).hint("Challenge Marae to a fight. This is going to be an extremely HARD boss fight! \n\nRecommended level: 30+");
 		addButton(1, "Not yet!", camp.returnToCampUseOneHour);
 	}
 

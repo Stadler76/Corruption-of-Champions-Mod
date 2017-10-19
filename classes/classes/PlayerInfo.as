@@ -661,7 +661,7 @@ import flash.events.Event;
 		
 			if (player.findPerk(PerkLib.AscensionTolerance) >= 0){
 				outputText("\n<b>You can adjust your Corruption Tolerance threshold.</b>");
-				addButton(button++,"Tol. Options",ascToleranceOption,null,null,null,"Set whether or not Corruption Tolerance is applied.");
+				addButton(button++,"Tol. Options",ascToleranceOption).hint("Set whether or not Corruption Tolerance is applied.");
 			}
 			addButton(9, "Database", perkDatabase);
 		}
@@ -911,7 +911,7 @@ import flash.events.Event;
 			{
 				outputText("\nYou may allocate your remaining stat points later.");
 			}
-			dynStats("str", player.tempStr, "tou", player.tempTou, "spe", player.tempSpe, "int", player.tempInt, "noBimbo", true); //Ignores bro/bimbo perks.
+			dynStats("str", player.tempStr, "tou", player.tempTou, "spe", player.tempSpe, "int", player.tempInt, "scale", false);
 			player.tempStr = 0;
 			player.tempTou = 0;
 			player.tempSpe = 0;

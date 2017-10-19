@@ -156,8 +156,6 @@ package classes.Items.Consumables
 					}
 					else {
 						outputText("\n\nA tightness in your groin is the only warning you get before your <b>" + player.vaginaDescript(0) + " disappears forever</b>!");
-						//Goodbye womanhood!
-						player.removeVagina(0, 1);
 						if (player.cocks.length === 0) {
 							outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>");
 							player.createCock();
@@ -166,6 +164,9 @@ package classes.Items.Consumables
 							player.cocks[0].cockType = CockTypesEnum.HORSE;
 							player.setClitLength(.25);
 						}
+						//Goodbye womanhood!
+						player.removeVagina(0, 1);
+
 					}
 					changes++;
 				}

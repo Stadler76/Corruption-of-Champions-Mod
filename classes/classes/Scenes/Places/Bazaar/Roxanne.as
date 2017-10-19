@@ -661,7 +661,7 @@ private function bigBootyRoxanneContestLoss():void {
 	outputText("\n\n[if (hasCock = true) \"[EachCock] twitches, only half-hard and yet trembling from the light bumps your poor prostate receives.  You moan and give a saucy wiggle as your ass caresses the bulbous invader, pulling it deeper to rub up against your anal G-spot.  A tiny jet of pre squirts on the bed sheets, foreshadowing the fun to come.\"]");
 	if (player.hasCock() && player.hasVagina()) outputText("  ");
 	outputText("[if (hasVagina = true) \"Meanwhile, your [vagina] gets slicker and slicker, your lust permeating the air with potent female musk.  Oh, if only Roxanne would fuck you there too!\"]");
-	outputText("  Roxanne grunts, \"<i>That's a good girl...");
+	outputText("  Roxanne grunts, \"<i>That's a good girl...</i>");
 	if (!player.hasVagina()) outputText(" \"<i>Oh, I know you don't have a pussy, but tonight, you're my big-bootied, cum-dumpster bitch!</i>\"");
 	else outputText("\"<i>Oh, you'll make such a great anal cum-dumpster for me.  Your poor pussy will be so cum-starved, but you'll be so stuffed with jizz that you'll look pregnant anyhow!</i>\"");
 	outputText("\n\nYou whimper as Roxanne thrusts herself further forward, burying another few inches of potent lizard-cock inside you.  Its sheer size shifts your innards slightly, and you're sure there must be a visible bulge on your tummy by now.  The shemale sighs blissfully and continues to work her dick further and further inside you.  Finally, when you feel you can fit no more, her large, quaking testes press against your rump.  If you didn't have such a round ass, she'd probably still be trying to go further inside, but your plump derriere actually helps to distance her from your vulnerable pucker - by a bit.");

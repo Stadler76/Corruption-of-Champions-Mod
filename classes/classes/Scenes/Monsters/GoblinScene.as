@@ -229,7 +229,7 @@ package classes.Scenes.Monsters
 			//Dick stuff:
 			if (player.hasCock() && player.lust >= 33) {
 				//Corrupt too big scene
-				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.cor > (80 - player.corruptionTolerance()) || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1))
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.isCorruptEnough(80) || player.findPerk(PerkLib.Sadist) >= 0))
 					addButton(2, "CorruptDick", rapeAGoblinCorruptTooBig);
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
@@ -240,7 +240,7 @@ package classes.Scenes.Monsters
 					addButton(4, "Jog Fuck", gobboGetsRapedMaleFits);
 				}
 				//Buttsex toggle
-				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > (70 - player.corruptionTolerance())) || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1) addButton(3, "Dick In Ass", gobboButtSecks);
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.isCorruptEnough(70) || player.findPerk(PerkLib.Sadist) >= 0)) addButton(3, "Dick In Ass", gobboButtSecks);
 				//Spidercondom
 				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
 					addButton(6, "Web Condom", goblinCondomed, 0);

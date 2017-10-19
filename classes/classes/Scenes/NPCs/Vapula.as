@@ -156,7 +156,7 @@ package classes.Scenes.NPCs
 			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3)
 				outputText("\n\n\"<i>She's still a demon! Like, a succubus! She'll, like, suck the soul out of you!</i>\"");
 			//Intelligence check
-			if (player.inte < (60 + (player.cor/2))) {
+			if (player.inte < (60 + (player.corAdjustedDown()/2))) {
 				//[if libido >=50]
 				if (player.lib >= 50) outputText("\n\n\"<i>Well, as long as she swallows, I don't care,</i>\" you quip.");
 				outputText("\n\n\"<i>That's it!</i>\"  The ");
@@ -189,7 +189,7 @@ package classes.Scenes.NPCs
 					flags[kFLAGS.AMILY_CAMP_CORRUPTION_FREAKED] = 0;
 				}
 				//[(if PC corr > 70)
-				if (player.cor > (70 + player.corruptionTolerance()) && !(jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3)) outputText("\n\n\"<i><i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
+				if (!player.isPureEnough(70) && !(jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3)) outputText("\n\n\"<i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
 				outputText("\n\n");
 				if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo");
 				if (amily && (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText(" and ");

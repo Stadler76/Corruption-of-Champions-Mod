@@ -13,6 +13,7 @@
 
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
+	import coc.view.CoCButton;
 	import coc.view.MainView;
 	/**
 	 * Quick hacky method to wrap new content in a class-based structure
@@ -297,29 +298,27 @@
 			kGAMECLASS.doYesNo(eventYes, eventNo);
 		}
 
-		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void
+		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+			return kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
-		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
-		
-		protected function addDisabledButton(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		protected function addDisabledButton(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+		}
+		protected function button(pos:int):CoCButton
+		{
+			return kGAMECLASS.button(pos);
 		}
 		
 		protected function removeButton(arg:*):void
 		{
 			kGAMECLASS.removeButton(arg);
-		}
-
-		protected function hasButton(arg:*):Boolean
-		{
-			return kGAMECLASS.hasButton(arg);
 		}
 		
 		protected function openURL(url:String):void{
@@ -340,11 +339,12 @@
 		 *     will add 1 to str, subtract 2 from tou, increase spe by 10%, decrease int by 50%, and set cor to 0
 		 * 
 		 * @param	... args
+		 * @return Object of (newStat-oldStat) with keys str, tou, spe, int, lib, sen, lus, cor
 		 */
-		protected function dynStats(... args):void
+		protected function dynStats(... args):Object
 		{
 			// Bullshit to unroll the incoming array
-			kGAMECLASS.dynStats.apply(null, args);
+			return kGAMECLASS.dynStats.apply(null, args);
 		}
 
 		protected function silly():Boolean

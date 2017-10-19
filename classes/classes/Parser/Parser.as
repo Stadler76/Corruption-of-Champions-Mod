@@ -603,7 +603,7 @@ package classes.Parser
 			else
 			{
 				if (this._settingsClass.haltOnErrors) throw new Error("Invalid if statement!", textCtnt);
-				return "<b>Invalid IF Statement<b/>" + textCtnt;
+				return "<b>Invalid IF Statement</b>" + textCtnt;
 			}
 			return "";
 		}
@@ -867,12 +867,18 @@ package classes.Parser
 
 		private function isIfStatement(textCtnt:String):Boolean
 		{
-			if (textCtnt.toLowerCase().indexOf("if") == 0)
-				return true;
-			else
-				return false;
+			return textCtnt.toLowerCase().indexOf("if") == 0;
 		}
 
+		private function isSpeechStatement(textCtnt:String):Boolean
+		{
+			return textCtnt.toLowerCase().indexOf("say: ") == 0;
+		}
+
+		private function parseSpeech(textCtnt:String):String{
+			return "\u201c<i>" + textCtnt.substring(5,textCtnt.length + 1) + "</i>\u201d";
+		}
+		
 		// Called to determine if the contents of a bracket are a parseable statement or not
 		// If the contents *are* a parseable, it calls the relevant function to evaluate it
 		// if not, it simply returns the contents as passed
@@ -1001,6 +1007,10 @@ package classes.Parser
 							retStr += parseConditional(tmpStr, depth)
 							if (conditionalDebug) trace("WARNING: ------------------0000000000000000000000000000000000000000000000000000000000000000-----------------------")
 							//trace("WARNING: Parsed Ccnditional - ", retStr)
+						}
+						else if (isSpeechStatement(tmpStr))
+						{
+							retStr += parseSpeech(recParser(tmpStr,depth));
 						}
 						else if (tmpStr)
 						{

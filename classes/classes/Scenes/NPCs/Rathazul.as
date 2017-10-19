@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs {
+﻿package classes.Scenes.NPCs {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -109,7 +109,7 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface, Enc
 		player.createStatusEffect(StatusEffects.MetRathazul,0,0,0,0);
 	}
 	//Camp offer!
-	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 3 && player.statusEffectv3(StatusEffects.MetRathazul) != 1 && player.cor < (75 + player.corruptionTolerance())) {
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 3 && player.statusEffectv3(StatusEffects.MetRathazul) != 1 && player.isPureEnough(75)) {
 		outputText("\"<i>You know, I think I might be able to do this worn-out world a lot more good from your camp than by wandering around this lake.  What do you say?</i>\" asks the rat.\n\n(Move Rathazul into your camp?)");
 		doYesNo(rathazulMoveToCamp, rathazulMoveDecline);
 		//Set rathazul flag that he has offered to move in (1 time offer)
@@ -372,7 +372,7 @@ private function rathazulWorkOffer():Boolean {
 		var button:int = 5; //After the 8th button, the menus will dynamically fill in.
 		//Armour sub-menu
 		if (showArmorMenu)
-			addButton(0, "Craft", rathazulArmorMenu, null, null, null, "Ask Rathazul to craft something for you.");
+			addButton(0, "Craft", rathazulArmorMenu).hint("Ask Rathazul to craft something for you.");
 		else
 			addButtonDisabled(0, "Craft", "You don't have sufficient materials that can be crafted.");
 		//Shop sub-menu
@@ -382,22 +382,22 @@ private function rathazulWorkOffer():Boolean {
 			addButtonDisabled(1, "Shop", "You can't afford anything Rathazul has to offer.");
 		//Purification sub-menu
 		if (purify) {
-			addButton(2, "Purify", purifySomething, null, null, null, "Ask him to purify any tainted potions.\n\nCost: 20 Gems.");
+			addButton(2, "Purify", purifySomething).hint("Ask him to purify any tainted potions.\n\nCost: 20 Gems.");
 		}
 		else {
 			addButtonDisabled(2, "Purify", "You don't have any items that can be purified.");
 		}
 		//Alchemy sub-menu
 		if (alchemy) {
-			addButton(3, "Alchemy", rathazulAlchemyMenu, null, null, null, "Have Rathazul make something out of the ingredients you carry.");
+			addButton(3, "Alchemy", rathazulAlchemyMenu).hint("Have Rathazul make something out of the ingredients you carry.");
 		}
 		//Silly Mode: Straight-up kill Rathazul (He'll revive, this is silly mode. Just, no longer a follower)
 		//I blame the Wikia Discord chat for this, they egged me on
 		if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) {
-			addButton(4, "Flirt", getThatRatAss, null, null, null, "Try to score with Rathazul.");
+			addButton(4, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
 		}
 		//These will be filled in.
-		if (lethiciteDefense != null) addButton(button++, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
+		if (lethiciteDefense != null) addButton(button++, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
 
 		if (player.hasStatusEffect(StatusEffects.CampRathazul))
 			addButton(14,"Leave", camp.campFollowers);
@@ -916,9 +916,9 @@ private function takethatMarmorD():void {
 private function rathazulShopMenu(dyes:Boolean = false, philters:Boolean = false, reductos:Boolean = false):void {
 	//Dyes
 	if (dyes) {
-		addButton(0, "Hair Dyes", buyDyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
-		addButton(1, "Skin Oils", buyOils, null, null, null, "Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
-		addButton(2, "Body Lotions", buyLotions, null, null, null, "Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
+		addButton(0, "Hair Dyes", buyDyes).hint("Ask him to make a dye for you. \n\nCost: 50 Gems.");
+		addButton(1, "Skin Oils", buyOils).hint("Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
+		addButton(2, "Body Lotions", buyLotions).hint("Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
 	}
 	else {
 		addButtonDisabled(0, "Hair Dyes", "You can't afford to buy dyes. \n\n50 gems required.");
@@ -950,8 +950,8 @@ private function rathazulShopMenu(dyes:Boolean = false, philters:Boolean = false
 
 //Hair dyes
 private function buyDyes():void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText(images.showImage("rathazul-vials"));
 	outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
 	outputText("\n\n<b>(-50 Gems)</b>");
@@ -998,10 +998,10 @@ private function buyDyeNevermind():void {
 
 //Skin Oils
 private function buyOils(fromPage2:Boolean = false):void {
+	clearOutput();
 	spriteSelect(SpriteDb.s_rathazul);
-	outputText(images.showImage("rathazul-oils"));
 	if (!fromPage2) {
-		clearOutput();
+		outputText(images.showImage("rathazul-oils"));
 		outputText("Rathazul smiles and pulls forth several bottles of skin oil.  Which type of skin oil would you like?");
 		outputText("\n\n<b>(-50 Gems)</b>");
 		player.gems -= 50;
@@ -1029,6 +1029,7 @@ private function buyOils(fromPage2:Boolean = false):void {
 	addButton(14, "Nevermind", buyOilNevermind);
 }
 private function buyOilsPage2():void {
+	clearOutput();
 	if (mixologyXP() < 80) { // Failsafe, should probably never happen (Stadler76)
 		buyOils(true);
 		return;
@@ -1059,8 +1060,8 @@ private function buyOilsPage2():void {
 	addButton(14, "Nevermind", buyOilNevermind);
 }
 private function buyOil(oil:ItemType):void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText(images.showImage("item-oil"));
 	inventory.takeItem(oil, returnToRathazulMenu);
 	statScreenRefresh();
@@ -1068,8 +1069,8 @@ private function buyOil(oil:ItemType):void {
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 private function buyOilNevermind():void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("You change your mind about the oil, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
@@ -1078,8 +1079,8 @@ private function buyOilNevermind():void {
 
 //Body Lotions
 private function buyLotions():void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText(images.showImage("rathazul-vials"));
 	outputText("Rathazul smiles and pulls forth several vials of body lotion.  Which type of body lotion would you like?");
 	outputText("\n\n<b>(-50 Gems)</b>");
@@ -1093,8 +1094,8 @@ private function buyLotions():void {
 	addButton(14, "Nevermind", buyLotionNevermind);
 }
 private function buyLotion(lotion:ItemType):void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText(images.showImage("item-lotion"));
 	inventory.takeItem(lotion, returnToRathazulMenu);
 	statScreenRefresh();
@@ -1102,8 +1103,8 @@ private function buyLotion(lotion:ItemType):void {
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 private function buyLotionNevermind():void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("You change your mind about the lotion, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
@@ -1112,8 +1113,8 @@ private function buyLotionNevermind():void {
 
 //Reducto
 private function buyReducto():void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
 		outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n");
@@ -1132,13 +1133,13 @@ private function buyReducto():void {
 
 //GroPlus
 private function buyGroPlus():void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
+		outputText(images.showImage("item-groPlus"));
 		outputText("Rathazul hands you the GroPlus with a nod before returning to his work.\n\n");
 		player.gems -= cost;
-		outputText(images.showImage("item-groPlus"));
 		inventory.takeItem(consumables.GROPLUS, returnToRathazulMenu);
 		statScreenRefresh();
 		addMixologyXP(4);
@@ -1164,8 +1165,8 @@ private function buyPuritySomething(item:ItemType):void {
 // PURIFY
 //------------
 private function purifySomething():void {
-	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("Rathazul asks, \"<i>What would you like me to purify?</i>\"");
 	menu();
 	//Item purification offer
@@ -1244,7 +1245,7 @@ private function rathazulAlchemyMenu():void {
 	menu();
 	//Distill Honey
 	if (player.hasItem(consumables.BEEHONY)) {
-		addButton(0, "Distill Honey", rathazulMakesPureHoney, null, null, null, "Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+		addButton(0, "Distill Honey", rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
 	}
 	else {	
 		addButtonDisabled(0, "Distill Honey", "You don't have any bee honey to be distilled.");
@@ -1252,7 +1253,7 @@ private function rathazulAlchemyMenu():void {
 	//Debimbo
 	if (flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] > 0) {
 		if (player.hasItem(consumables.SMART_T,5) && player.gems >= 250)
-			addButton(1, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+			addButton(1, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
 		else
 			addButtonDisabled(1, "Debimbo", "You don't have everything needed for this item. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
 	}
@@ -1262,7 +1263,7 @@ private function rathazulAlchemyMenu():void {
 	//Purification Potion for Minerva
 	if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) {
 		if ((player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.PPHILTR, 1)) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0)
-			addButton(2, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
+			addButton(2, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
 		else if (player.hasKeyItem("Rathazul's Purity Potion") >= 0)
 			addButtonDisabled(2, "Pure Potion", "You already have the potion made. Bring it to Minerva.");
 		else
@@ -1272,12 +1273,12 @@ private function rathazulAlchemyMenu():void {
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) {
 		//Pro Lactaid
 		if (player.gems >= 250 && player.hasItem(consumables.LACTAID, 5) && player.hasItem(consumables.P_LBOVA, 2))
-			addButton(5, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
+			addButton(5, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
 		else
 			addButtonDisabled(5, "ProLactaid", "You don't have everything needed for this item. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
 		//Taurinum
 		if (player.gems >= 100 && player.hasItem(consumables.EQUINUM, 2) && player.hasItem(consumables.MINOBLO, 1))
-			addButton(6, "Taurinum", rathazulMakesTaurPotion, null, null, null, "Ask him to brew a special potion that could aid in becoming a centaur. \n\nCost: 100 Gems \nNeeds 2 Equinum and 1 Minotaur Blood.");
+			addButton(6, "Taurinum", rathazulMakesTaurPotion).hint("Ask him to brew a special potion that could aid in becoming a centaur. \n\nCost: 100 Gems \nNeeds 2 Equinum and 1 Minotaur Blood.");
 		else
 			addButtonDisabled(6, "Taurinum", "You don't have everything needed for this item. \n\nCost: 100 Gems \nNeeds 2 Equinum and 1 Minotaur Blood.");
 	}
@@ -1287,7 +1288,7 @@ private function rathazulAlchemyMenu():void {
 	}
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5 && flags[kFLAGS.TIMES_ENCOUNTERED_COCKATRICES] > 0) {
 		if (player.gems >= 100 && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.GLDSEED, 1))
-			addButton(7, "Ton o' Trice", rathazulMakesCockatricePotion, null, null, null, "Ask him to brew a special potion that could aid in becoming a cockatrice. \n\nCost: 100 Gems \nNeeds 1 Reptilum and 1 Golden Seed.");
+			addButton(7, "Ton o' Trice", rathazulMakesCockatricePotion).hint("Ask him to brew a special potion that could aid in becoming a cockatrice. \n\nCost: 100 Gems \nNeeds 1 Reptilum and 1 Golden Seed.");
 		else
 			addButtonDisabled(7, "Ton o' Trice", "You don't have everything needed for this item.\n\nCost: 100 Gems\nNeeds 1 Reptilum and 1 Golden Seed.");
 	} else {
@@ -1487,7 +1488,7 @@ private function growLethiciteDefenseYesYesYes():void {
 private function growLethiciteDefenseGuessNot():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText("Rathazul nods sagely, \"<i>That may be wise.  Perhaps there will be another use for this power.");
+	outputText("Rathazul nods sagely, \"<i>That may be wise.  Perhaps there will be another use for this power.</i>\"");
 	doNext(returnToRathazulMenu);
 }
 

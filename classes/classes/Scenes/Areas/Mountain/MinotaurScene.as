@@ -512,7 +512,7 @@ public function minoPheromones():void {
 	else outputText("right past your head.  ");
 	outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
 	dynStats("lus", 10 + player.lib/20);
-	if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
+	if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2) {
 		if (rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 		else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
 		dynStats("lus", 5+rand(5));
@@ -854,7 +854,7 @@ public function minoCumUpdate():Boolean {
 		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48) {
 			dynStats("lus", 2);
 		}
-		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2 && flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48) {
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2 && flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 24) {
 			dynStats("lus", 1);
 		}
 	}

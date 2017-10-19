@@ -118,6 +118,7 @@ internal function tamaniChest():String {
 private function tamaniFemaleEncounter():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
+	outputText(images.showImage("tamani-encounter"));
 	outputText("A goblin leaps out from behind a rock outcropping.  She keeps her arms folded across her " + tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n");
 	outputText("She says, \"<i>There's only so much cock around, and I got dibs on ALL of it, O.K. skank?</i>\"\n\n");
 	//[Umm OK?] [No]
@@ -131,15 +132,22 @@ private function tamaniFemaleEncounter():void {
 private function tamaniFemaleYes():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
+	outputText(images.showImage("tamani-dDildo"));
 	outputText("\"<i>That's what I thought,</i>\" says the goblin as she fishes around in her pouches, \"<i>but I'm not cruel, I'll give you my best dildo so you can keep your hot little box stuffed all the time.</i>\"\n\n");
 	outputText("She pulls out a long pink dick and tosses it to you.  You catch it and it flops around, nearly slapping you in the cheek.  ");
 	if (player.cor < 50) outputText("Gross.\n\n");
 	else outputText("Getting cock-slapped would've been kind of hot...\n\n");
 	outputText("The goblin leaves you with a warning, \"<i>Be careful, it likes to leak aphrodisiacs like crazy.  Believe me, those are FUN to get addicted to.  Oh, and remember – Tamani owns all the cocks around here, so if you ever grow one, come pay your dues!</i>\"\n\n");
+	doNext(tamaniFemaleItem);
+}
+private function tamaniFemaleItem():void {
+	clearOutput();
+	outputText(images.showImage("item-dDildo"));
 	outputText("(<b>Deluxe Dildo acquired!</b>)");
 	player.createKeyItem("Deluxe Dildo",0,0,0,0);
 	doNext(camp.returnToCampUseOneHour);
 }
+
 //[No] 
 private function tamaniFemaleNo(): void {
 	spriteSelect(SpriteDb.s_tamani);
@@ -157,6 +165,7 @@ private function tamaniMaleFirstEncounter():void {
 	spriteSelect(SpriteDb.s_tamani);
 	flags[kFLAGS.TAMANI_MET] = 1; //Indicates you've met her as a male at least once
 	clearOutput();
+	outputText(images.showImage("tamani-encounter"));
 	outputText("A goblin leaps out from behind a rock outcropping.  For something so small, she has a lot of curves.  She advances towards you, rolling her hips in a suggestive way, immediately diverting your blood-flow to your crotch.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts jiggles pleasantly with every step, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n");
 	outputText("The goblin makes you an offer that's difficult to turn down, \"<i>Hey there stud, want to fuck me pregnant?  I promise my box will milk your dick dry.  Just let Tamani take care of all your boners OK?</i>\"");
 	//[Fuck Her] [Refuse]
@@ -169,6 +178,7 @@ private function tamaniFirstTimeConsentual():void {
 	spriteSelect(SpriteDb.s_tamani);
 	tamaniKnockUp();
 	clearOutput();
+	outputText(images.showImage("tamani-fuck"));
 	outputText("You almost can't believe your good fortune.  Finally you meet a creature willing to talk instead of just launching into violent rape.   Her direct advances were so crude and overtly sexual that you felt yourself stiffening before she could even finish her offer.   Your decision was made by the tent in your " + player.armorName + ".  You'll give Tamani exactly what you both want.\n\n");
 	outputText("Her hips sway seductively as she approaches with her right hand dipping into the moist honeypot of her sex.  You disrobe, throwing your " + player.armorName + " to the side before you reach down and lift her up, pressing her curvy body against your ");
 	if (player.biggestTitSize() > 1) outputText(player.allBreastsDescript());
@@ -246,8 +256,9 @@ private function tamaniSecondRefusal(): void {
 private function tamaniMaleRepeatEncounter():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
+	outputText(images.showImage("tamani-encounter"));
 	//(IF FUCKED - check to see if she's pregnant or has given birth) 
-	if (pregnancy.isPregnant || flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani there, grinning wolfishly,  \"<i>Ready for another fuck, big " + player.mf("boy", "girl") + "?\"\n\n");
+	if (pregnancy.isPregnant || flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani there, grinning wolfishly,  \"<i>Ready for another fuck, big " + player.mf("boy", "girl") + "?</i>\"\n\n");
 	//(ELSE) 
 	else outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani the goblin there, grinning with desire, \"<i>Ready to stuff me with cum?  I'm not taking no for an answer this time.</i>\"\n\n");
 	if (flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
@@ -277,6 +288,7 @@ internal function tamaniSexLetHer():void {
 	spriteSelect(SpriteDb.s_tamani);
 	tamaniKnockUp();
 	clearOutput();
+	outputText(images.showImage("tamani-letHer-fuck"));
 	//[lost combat]
 	if (getGame().inCombat) {
 		//Taurs
@@ -505,6 +517,8 @@ internal function tamaniSexLost():void {
 	if (player.balls > 0) outputText("cups your " + player.ballsDescriptLight() + " tightly");
 	else outputText("caresses you around the ring");
 	outputText(" and asks, \"<i>So are you sorry for making me wait for my cream " + player.mf("stud","slut") + "?  If you are, just say <b>I'm sorry mistress Tamani, please milk my cock whenever you want</b> and then beg me to cum.</i>\"\n\n");
+
+	outputText(images.showImage("tamani-loss-fuck"));
 	outputText("You NEED to cum.  Her hands... they keep stroking you, and each time your body begins to orgasm it's held back, trapped within you painfully.  ");
 	if (player.balls > 0) outputText("Your balls are getting VERY swollen and tender.");
 	else outputText("Your body aches inside, feeling bloated and ready to pop.");
@@ -534,6 +548,7 @@ internal function tamaniSexWon():void {
 	var x:Number = player.cockThatFits(90);
 	if (x == -1) x = player.biggestCockIndex();
 	clearOutput();
+	outputText(images.showImage("tamani-win-fuck"));
 	if (player.cockArea(x) <= 90) {
 		outputText("You grab hold of the insensate goblin by her pink-dyed hair and shove her into the mud, irritated with her constant demands and rape attempts.  The horny slut doesn't even have the grace to be ashamed of her defeat.  She just lies in the mud, wiggling her exposed ass back and forth in the air, trying to tempt you with it.\n\n");
 		outputText("It's too tempting of a target to resist.  You open your " + player.armorName + " and allow your " + player.multiCockDescriptLight() + " to flop free.  You're already hard from the enticing display, and in a moment you're pressing against her lust-slicked pussy");
@@ -606,6 +621,7 @@ internal function tamaniSexWon():void {
 private function tamaniPregnantEncounter():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
+	outputText(images.showImage("tamani-preggo-encounter"));
 	outputText("Tamani strolls out from behind a boulder, and wow is she ever pregnant.  It doesn't diminish the look of lust in her eyes when she meets your gaze, but her hands do keep rubbing the outside of her belly, only pausing to squeeze drops of milk from her nipples.  Her leather straps seem to fit her even better than before, accentuating her expanding curves and looking fantastic on her pregnant form.\n\n");
 	outputText("She parts her legs and rubs her lower lips while she begs you, \"<i>Please fuck me!   I'm so horny from the pregnancy and I can't wait to give you daughters so you can knock me up all over again!</i>\"");
 	//[Fuck Her] [Refuse]
@@ -633,11 +649,11 @@ private function tamaniPregnantFuck():void {
 	//(Very large: 
 	if (flags[kFLAGS.TAMANI_TIMES_IMPREGNATED] > 6) outputText("  They're almost too big for you to handle; they probably make it hard for the poor girl to walk.");
 	outputText("\n\n");
-	
-	outputText("Tired of the teasing, Tamani yanks her nipples free of your mouth and kisses you fiercely.  Her lips are hot, almost feverish, and taste of sweet cherries.  Fiery warmth races through your body, collecting at your groin as her tongue curls around yours.  She sucks on your lower lip before pulling back and giving you an all-too-knowing smile.  Your " + player.cockDescript(0) + " is just getting harder and harder, so tight it almost hurts.  You whine softly as Tamani wraps her feet around it, stroking it with her bare soles as she pulls herself down.\n\n");
 
+	outputText("Tired of the teasing, Tamani yanks her nipples free of your mouth and kisses you fiercely.  Her lips are hot, almost feverish, and taste of sweet cherries.  Fiery warmth races through your body, collecting at your groin as her tongue curls around yours.  She sucks on your lower lip before pulling back and giving you an all-too-knowing smile.  Your " + player.cockDescript(0) + " is just getting harder and harder, so tight it almost hurts.  You whine softly as Tamani wraps her feet around it, stroking it with her bare soles as she pulls herself down.\n\n");
 	outputText("Her pregnancy swollen belly and growing breasts rub along your shaft as she kisses and squeezes it.  You're so turned on it hurts, and you KNOW it's from whatever she put in her lipstick this time.  You beg her, \"<i>Please, fuck me, I'm so horny it hurts!</i>\"\n\n");
 	
+	outputText(images.showImage("tamani-preggo-fuck"));
 	//(Fits) – pregnant capacity is lowered by about 50%
 	if (player.cockArea(0) <= 50) {
 		outputText("Tamani pulls herself up to her feet and grabs your " + player.cockDescript(0) + " with a two-handed grip, guiding it towards her dripping cunny.  She squats down, taking the entire length in a quick thrust.   She giggles and starts bouncing on you relentlessly, teasing her nipples and talking dirty to you the whole time, \"<i>Come on stud, fuck your pregnant goblin wife.   I want to walk around pregnant and dripping with your cum for the rest of the day.  If you really stuff me up I can bring it back and share with the rest of my family, what do you think about that?  Dozens of my hot little sisters and daughters stuffed with your babies?</i>\"\n\n");
@@ -645,9 +661,7 @@ private function tamaniPregnantFuck():void {
 		if (player.balls > 0) outputText(player.ballsDescriptLight());
 		else outputText("genitals");
 		outputText(" ache from the explosive discharge, leaving you sore and exhausted.\n\n");
-		
 		outputText("For her part, Tamani staggers to her feet, letting you flop free as a river of your cum pours between her legs, soaking your lower body.  She staggers over to your face, pleasure-drunk, and leans down to give you another sloppy kiss.\n\n");
-		
 		outputText("\"<i>Thanks for the good fuck, " + player.mf("stud","lover") + ",</i>\" she says, smiling cruelly as you find yourself getting hard again from her drug-laced kisses.  Tamani doesn't hang around to help though; she waddles off, cradling her belly and smiling.\n\n");
 		player.orgasm('Dick');
 		dynStats("lus", 25);
@@ -658,12 +672,9 @@ private function tamaniPregnantFuck():void {
 		if (player.balls > 0) outputText("massaging your balls with her feet");
 		else outputText("jacking the base of your " + player.cockDescript(0) + " with her feet");
 		outputText(" while her hands caress and tease you.   Tamani pulls herself downwards, pressing the " + player.cockHead() + " partway up her drooling box.  She grinds hard against your cock-head, nearly driving you mad with pleasure.  She grabs her " + tamaniChest() + " and squeezes, splattering you with a thick coating of milk before returning to jacking you off with her feet and hands.\n\n");
-
 		outputText("You cum with near-painful intensity.  Tamani is actually pushed back a bit by your first blast, getting splattered from her chest down as jizz tries to escape her suddenly fluid-filled cunt.  She lunges forwards, grinding her pregnancy-bloated body against your pole, using her arms and legs like tight cock-rings.  Her gash and hard little clit spread her fragrant wetness as she orgasms with you, feeling each wave of your spunk pass underneath her.   With no receptacle, you end up drenched in a puddle of the stuff.  While it does eventually end, your sore body is a clear indication that some drug in her lipstick probably helped you push out such a ludicrous volume.\n\n");
-
 		outputText("Tamani grinds on you a bit longer before staggering up and stretching.  She pauses to get a narrow bottle and abruptly jams the end into your urethra.  With one practiced motion, she squeezes your " + player.cockDescript(0) + " from bottom to top, squeezing the last of your spoo into the container.  She pops it free, corks it, and pockets it.  She pats her pockets and explains, \"<i>A few of the girls back home aren't pregnant, and I thought you might like to help contribute to the local slut population.  Don't worry though baby, I'll always own your cock.</i>\"\n\n");
 		flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] += 3;
-
 		outputText("Tamani comes over to you and gives you a sloppy goodbye kiss, sending an immediate surge of hardness and desire to your groin.  She looks back and giggles, then waddles off, patting her pouches and dripping with your spooge.");
 		player.orgasm('Dick');
 	}
@@ -674,6 +685,7 @@ private function tamaniPregnantFuck():void {
 private function tamaniPoopsOutBabies():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
+	outputText(images.showImage("tamani-encounter-preggo"));
 	outputText("You hear orgiastic screams in the distance as you explore.  You turn to investigate, and as you go, they become even louder and higher pitched.  You crest a rise and find Tamani ");
 	if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) outputText("with her daughters, "); //She always has at least two daughters if she has any
 	outputText("laying against a scrubby tree with her legs spread wide and surrounded by a small puddle.  Her " + tamaniChest() + " heave with deep breaths as she pushes hard, stretching her cunt wide.  Her eyes roll back as a green form slips free, revealing a tiny goblin that immediately stands up on wobbly legs.  The little girl turns and latches onto her mother's bloated nipple as another child slips free.");
@@ -747,12 +759,11 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 	var primary:Number = player.cockThatFits(65);	
 	var secondary:Number = 0;
 	var cocks:Number = player.totalCocks();
-	
 	outputText("Tamani crooks her finger and you come running, already feeling yourself straining against your " + player.armorName + " for a chance to fuck your wife and mistress.  She giggles, \"<i>Ohhh, how sweet, you're so ready to do your duty.</i>\"\n\n");
-	
 	outputText("The goblin traces her fingers over the bulge in your " + player.armorName + " before reaching inside of it to give you a tender squeeze.  You sigh, happy to have earned such tender treatment from your lovely wife.  Automatically, your hands undo your " + player.armorName + ", removing the troublesome garment so as not to interfere with your lovemaking.   Tamani gives you another squeeze and teases, \"<i>Oh baby, you're hooked on Tamani's pussy, aren't you?  I can tell, you're practically trembling.  Let Tamani help take care of that for you.</i>\"\n\n");
-	
 	outputText("She smirks and bends over, looking back up at you from between her legs.  She offers, \"<i>Go ahead and stick it in.  A horny " + player.mf("boy","herm") + " like you needs to have that delicious cock inside a nice, tight wife like myself.</i>\"\n\n");
+	
+	outputText(images.showImage("tamani-willing-sex"));
 	//[FITS]
 	if (primary >= 0) {
 		outputText("Tamani is completely right.  You grab her ass, feeling your fingers sink in to her supple flesh as you pull her back towards your ");
@@ -914,6 +925,7 @@ public function tamaniVictoryMenu():void {
 }
 
 private function tamaniStealDildo():void {
+	outputText(images.showImage("item-dDildo"));
 	outputText("And to the victor go the spoils. You open her satchel and take a look inside. ");
 	outputText("\n\n<b>(You find a well-crafted pink dildo inside! There are also some other stuff.)</b>");
 	player.createKeyItem("Deluxe Dildo", 0, 0, 0, 0);
@@ -924,18 +936,13 @@ internal function tamaniAnalShits():void {
 	spriteSelect(SpriteDb.s_tamani);
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	clearOutput();
+	outputText(images.showImage("tamani-fuck"));
 	outputText("You grab hold of the insensate goblin by her pink-dyed hair and shove her into the mud, irritated with her constant demands and rape attempts.  The horny slut doesn't even have the grace to be ashamed of her defeat.  She just lies in the mud, wiggling her exposed ass back and forth in the air, trying to tempt you with it.\n\n");
-
 	outputText("It's too tempting of a target to resist.  You open your " + player.armorName + " and allow your prick to flop free.  You're already hard from the enticing display, and unable to resist any longer, you grab her hips and pull her plump ass up towards you.  She gasps as she's dragged along the ground and tries to crane her neck to face you.  \"<i>H-hey stud,</i>\" Tamani stammers, suddenly nervous, \"<i>you aren't thinking of-</i>\" You pull her close and press the tip of your " + player.cockDescript(x) + " against her tight asshole.  \"<i>HEY!</i>\" she shouts back, glaring threateningly at you.  \"<i>You better not, I need that baby batter in my womb, not my ass!</i>\"\n\n");
-
 	outputText("Your menacing grin betrays no pity for the goblin, though.  You slowly press into her, her face contorting in pain as the tightness of her ass envelops you.  She grunts, hands clenched into tight fists as you bottom out in her.  \"<i>Please,</i>\" she begs, her eyes watering in pain and frustration, \"<i>I need you in my cunt! It... I don't want- oof!</i>\"  You start pumping your shaft forcefully in and out of her, slamming her full cheeks against you with every thrust.  You can tell from the way she feels around you that she's not very experienced with this way of doing things.\n\n");
-
 	outputText("The more your " + player.cockDescript(x) + " stretches her tight anus, though, the more comfortable she seems to get with it.  She still protests weakly between grunts, but every once in a while a moan bursts from her, and the passion in them tells you that she's starting to like this.  Eventually she relaxes in your grip, resigning herself to letting you abuse her ass like it's a cheap toy.  One of her hands even sneaks up to her wet snatch and dips in.  Her hips start to move a bit without your influence, too, bouncing back and forth and you ram into her harder and harder.  Clearly she likes the feeling, even if she knows she won't get pregnant from it.\n\n");
-
 	outputText("The slutty creature's moans turn to shouts as the sensation overwhelms her, and she bucks wildly back against you, face still in the dirt and tongue lolling out of her mouth.  \"<i>Oh, fuck yes, harder, HARDER!</i>\" she bursts forth wildly.  You oblige and pick up the intensity, absolutely ravaging her tight ass now with the motions of your " + player.cockDescript(x) + ".  She squeals somewhere down below you as her face is ground against the mud.  You rock her whole body back and forth as you slam into her, reveling in the feeling of her tight ass squeezing your cock as you slide inches in and out of her.\n\n");
-
 	outputText("You can feel the cum building up inside you, and you know that you won't be able to hold out much longer.  Looking down, you can see that Tamani isn't far from orgasm, either.  Her fingers slip rapidly in and out of her cunt, and the look on her face is one of thoughtless bliss.  She shudders and goes limp in your grasp just as you cum, painting the insides of her ass with your semen.  Her eyes are still rolled up into the back of her head as you pull your softening prick out of her ass.  You drop her, letting her legs fall back to the ground with a dull thud.  She turns over onto her side, looking up at you.  Between exhausted pants, she manages to say, \"<i>Don't... think that I... enjoyed that... or anything... I'll be back for you, and you better not...</i>\" before she passes out.  You shake your head and laugh at the stubborn little slut as you tuck " + player.sMultiCockDesc() + " back into your " + player.armorName + " and head back to your camp.");
-	
 	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 }
@@ -946,24 +953,20 @@ internal function tamaniBeaten():void {
 	if (player.hasCock()) outputText("licks her lips in anticipation, eyes locked on [eachCock]");
 	else outputText("frowns in displeasure, noting your lack of a penis");
 	outputText(".  She's clueless to the growing size that dangles beneath your spider-half, the secret drider treasure that you usually keep retracted.  A dollop of green goo drips from the tip of the semi-hard organ, still hidden from the goblin matron.");
-	
 	outputText("\n\nYou skitter up to her and calmly say, \"<i>Bend over.  I want to take you with my spider half.</i>\"");
-	
 	outputText("\n\nThe eager slut smirks and chuckles, \"<i>Whatever you say, ");
 	if (flags[kFLAGS.TIMES_OVIPOSITED_TAMANI] == 0) outputText("my baby-" + player.mf("daddy","momma"));
 	else outputText("my egg-obsessed arachnophile");
-	outputText(".</i>\"  Soon, the purple-haired skank has assumed the position, though she has the temerity to look back over her shoulder and lick her lips.  Her smouldering gaze is just beckoning for cock, but in this case, she'll be making do with your ovipositor.  You look away from her hungry eyes down to the green bubble-butt, admiring the swell of her cheeks, her puckered anus, and best of all, her sopping wet nethers.");
+	outputText(".</i>\"  Soon, the purple-haired skank has assumed the position, though she has the temerity to look back over her shoulder and lick her lips.  Her smouldering gaze is just beckoning for cock, but in this case, she'll be making do with your ovipositor.  You look away from her hungry eyes down to the green bubble-butt, admiring the swell of her cheeks, her puckered anus, and best of all, her sopping wet nethers.\n\n");
 	
-	outputText("\n\nTamani exhales, \"<i>Eyes up here, " + player.mf("stud","breeder") + ".  I want to watch your face while you fuck me,</i>\" in a tone that promises delights beyond imagining.  \"<i>Put it in my pussy and give me your babies.  There's nothing like fucking a woman who'll take your cock straight into her womb and let you bathe her eggs with cum");
+	outputText(images.showImage("goblinelder-win-drider-egged"));
+	outputText("Tamani exhales, \"<i>Eyes up here, " + player.mf("stud","breeder") + ".  I want to watch your face while you fuck me,</i>\" in a tone that promises delights beyond imagining.  \"<i>Put it in my pussy and give me your babies.  There's nothing like fucking a woman who'll take your cock straight into her womb and let you bathe her eggs with cum");
 	if (flags[kFLAGS.TIMES_OVIPOSITED_TAMANI] > 0) outputText(", or in your case even more eggs");
 	outputText(".</i>\"  Petite hands massage the goblin's perky, lust-thickened nipples as she talks and wiggles her bouncy bum in your direction.");
-	
 	outputText("\n\nYour hard legs clatter noisily as you advance on the prostrate, baby-hungry goblin.  Flexing foreign muscles, you bring your abdomen down and align the turgid organ with the goblin's gushing lips.  Her glistening gateway parts for your masculine egg-layer, easily allowing the ooze-dripping prong to slide right through her passage, and soon enough, your carapace is rubbing on jiggly green bottom, the ovipositor completely swallowed by the goblin's rapacious cunt.  Her rippling passages squeezes it gently, as if to say 'hi'.  Your drider instincts answer with a thick squirt of green goo.");
 	outputText("\n\nTamani giggles happily and asks, \"<i>A little eager today, " + player.mf("stud","baby") + "?  Is your spider-stick that happy to experience a little goblin loving?</i>\"  She gleefully begins to move herself, riding your arachnid tool like a bucking show-pony.  You moan at that, enjoying it for a moment before remembering that you just defeated this arrogant, cock-hungry slut.  You place your hands on her shoulders and push her down, filling her as you flatten her against the dirt, where she belongs.  With the goblin firmly hilted, you clench and release the first of your eggs; as soon as you allow one to roll down your fleshy tube, the next chases after.");
-	
 	outputText("\n\n\"<i>W-wha... oooohhhh.  That's niiiicccce,</i>\" Tamani sighs while trying to meet your gaze.  You smirk mirthfully at her and reach down to play with her " + tamaniChest() + ", squeezing and groping roughly while your eggs roll unimpeded into her willing, elastic womb.  The green girl shivers and moans, \"<i>Yes!  Fill me!  Fill me up!</i>\"");
 	outputText("\n\nStill holding her fast, you simply enjoy the sensation, slowly stuffing Tamani's womb full of round orbs and gushy green padding.  A trickle of extra ooze escapes the curvy skank's thighs, mixed with her own clear juices.  It forms a sticky puddle beneath her that only grows larger as the goblin bloats.  Trickles of milk suddenly burst from the darkened nipples to wet your fingers, so you squeeze harder, milking the little slut like the whore-cow she is.  She cries, \"<i>FUCK YES!  Make me carry your babes and squirt milk everywhere!  Gods... so... pregnant...</i>\"");
-
 	outputText("\n\nTamani's hands begin to roam across the taut dome of her gravid belly as it swells still bigger, and with a jubilant shriek, she climaxes, spraying gouts of green-tinged pussy-juice in a fan beneath her.  She goes limp in your grip, though her milk keeps flowing unimpeded.  You let her go, though she's held to your prong by the pressure of the last few eggs that pass into her stretchy, fertile womb.  You hum happily, feeling completely relieved, utterly languid and satisfied.");
 	if (player.hasCock()) outputText("  White coats the goblin from her shoulders up, the only evidence of your male satisfaction.  You were so focused on the act of impregnation and the unique pleasure that it provides that you barely noticed [eachCock] erupting in sympathetic pleasure.");
 	outputText("\n\nAt last, the bloated bitch slides into the gooey green puddle with a splash, freeing your ovipositor to retract.  She immediately begins snoring, clearly as satisfied as you.  What a strange creature.");
@@ -998,12 +1001,13 @@ private function killTamani():void {
 }
 private function spareTamani():void {
 	clearOutput();
-	outputText("You tell her that should she ever cross paths again, she's going to have a really bad time. \"<i>Yes...</i>\" Tamani sniffles, tears welling up in her face. She gets up and leaves her satchel on the ground before running into the foliage, never to be seen again.");
+	outputText("You tell her that should she ever cross paths again, she's going to have a really bad time. \"<i>Yes...</i>\" Tamani sniffles, tears welling up in her face. She gets up and leaves her satchel on the ground before running into the foliage, never to be seen again.\n\n");
 	flags[kFLAGS.TAMANI_BAD_ENDED] = 0.5;
 	postTamaniRemoval();
 }
 private function postTamaniRemoval():void {
-	outputText("\n\nWith Tamani no more, you take her satchel and return to your camp.");
+	outputText(images.showImage("tamani-satchel"));
+	outputText("With Tamani no more, you take her satchel and return to your camp.");
 	monster.XP += 100; //Gain more XP as Tamani's removed from the game.
 	player.createKeyItem("Tamani's Satchel", 2, 1, 1, 100);
 	if (pregnancy.isPregnant) pregnancy.knockUpForce(); //Clear pregnancy.
@@ -1034,6 +1038,7 @@ private function declineZeFacesits():void {
 //(("Accept" choice))
 private function acceptTamaniFacesits():void {
 	clearOutput();
+	outputText(images.showImage("tamani-fuck"));
 	outputText("You eye the goblin's wide hips again before you nod, anticipating the idea.");
 	outputText("\n\nTamani's impish smirk blooms into a wide grin, and the little goblin gently shoves you.  \"<i>Lay down, then!</i>\" she tells you.  You decide to comply, reaching for your [armor] - but she stops your hand.  \"<i>No need to strip, skank. Just lay down,</i>\" she tells you, pushing again.  You shrug and comply with her request, finding a comfortable spot on the ground to lay on, and then look over at her.");
 	outputText("\n\nShe's pulled a vial off of one of the straps of fabric draped over her body and uncorked it; she empties the vial's purple-hued contents into a hand, not even looking at you, and then smears them all over her pussy.  The goblin gives a lusty moan as her fingers dig in, jilling herself as her knees shake, and a heat starts to build between your legs as you watch her getting off.  Just as your hands are about to creep south for a little self-pleasuring of your own, Tamani starts to walk over to you, her engorged, green cunt dripping with her juices, rather than the fluid she just rubbed all over it.");
@@ -1060,26 +1065,31 @@ public function openTamanisSatchel():void {
 	var isEmpty:Boolean = true;
 	outputText("You open the satchel taken from Tamani and take a look inside. ");
 	if (player.hasKeyItem("Deluxe Dildo") < 0) {
+		outputText(images.showImage("item-dDildo"));
 		outputText("\n\n<b>(You find a well-crafted pink dildo inside! There are also other stuff you can take if you like.)</b>");
 		player.createKeyItem("Deluxe Dildo", 0, 0, 0, 0);
 	}
 	menu();
 	if (player.keyItemv1("Tamani's Satchel") > 0) {
+		outputText(images.showImage("item-reducto"));
 		outputText("\nThere " + (player.keyItemv1("Tamani's Satchel") == 1 ? "is a container" : "are two containers") + " of pasty substance labelled as 'Reducto'.");
 		addButton(0, consumables.REDUCTO.shortName, satchelTakeItem, consumables.REDUCTO, 1);
 		isEmpty = false;
 	}
 	if (player.keyItemv2("Tamani's Satchel") > 0) {
+		outputText(images.showImage("item-dye"));
 		outputText("\nThere's a bottle of pink hair dye inside.");
 		addButton(1, consumables.PINKDYE.shortName, satchelTakeItem, consumables.PINKDYE, 2);
 		isEmpty = false;
 	}
 	if (player.keyItemv3("Tamani's Satchel") > 0) {
+		outputText(images.showImage("item-lDraft"));
 		outputText("\nThere " + (player.keyItemv3("Tamani's Satchel") == 1 ? "is a bottle" : "are two bottles") + " of pink fluid, labelled 'Lust Draft'.");
 		addButton(2, consumables.L_DRAFT.shortName, satchelTakeItem, consumables.L_DRAFT, 3);
 		isEmpty = false;
 	}
 	if (player.keyItemv4("Tamani's Satchel") > 0) {
+		outputText(images.showImage("item-gems"));
 		outputText("\nThere are 100 gems inside within the satchel. You can take them if you want.");
 		addButton(3, "Gems", satchelTakeGems);
 		isEmpty = false;

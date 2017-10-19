@@ -1372,7 +1372,7 @@ public function exgartuanNagaStoleMyMasturbation():void {
 		//[if cocks ≥ 3]
 		else if (player.cockTotal() >= 3) outputText(", your remaining poles hiding away inside you, uninvited.");
 		else outputText(".");
-		outputText("  Just how the hell does Exgartuan manage to-\"<i>No time for your feeble mind to try and comprehend my power, champion,\" your rod interrupts, \"I wouldn't want you to hurt yourself BEFORE I get the chance to.\"  Now you REALLY want to get this over with and move on.  With a dejected sigh and a preparatory stretch of your shoulders, you reach down to do the dirty deed.\n\n");
+		outputText("  Just how the hell does Exgartuan manage to-\"<i>No time for your feeble mind to try and comprehend my power, champion,</i>\" your rod interrupts, \"<i>I wouldn't want you to hurt yourself BEFORE I get the chance to.</i>\"  Now you REALLY want to get this over with and move on.  With a dejected sigh and a preparatory stretch of your shoulders, you reach down to do the dirty deed.\n\n");
 		
 		outputText("Well, you had planned on it.  Your arms have frozen in place above your unholy pecker.  \"I have no need for your inexperienced fumbling today, my needy little slut.  Sit back and tremble as I rock your world.\"\n\n");
 	}
@@ -1419,11 +1419,11 @@ public function exgartuanNagaStoleMyMasturbation():void {
 	
 	outputText("Self stimulation should never feel this good.  This doesn't even seem like masturbation.  All you've been able to contribute to this action are clenched fists, various sounds, and shuffling expressions.  ");
 	//[if corruption <33]
-	if (player.cor < 33) outputText("\"<i>You can't measure up to treatment of this magnitude, champion,\" Exgartuan insults you, his voice trembling as the slick massage persists, \"But don't think that I'm giving you permission to slack off.  A slut like you can go on dreaming; one day maybe you'll have the perseverance to get close.\"");
+	if (player.cor < 33) outputText("\"<i>You can't measure up to treatment of this magnitude, champion,</i>\" Exgartuan insults you, his voice trembling as the slick massage persists, \"<i>But don't think that I'm giving you permission to slack off.  A slut like you can go on dreaming; one day maybe you'll have the perseverance to get close.</i>\"");
 	//[if corruption ≥33 & <66]
 	else if (player.cor < 66) outputText("Your corrupt cock begins to speak up, the demon's unrelenting motions refusing to ease off, \"You're loving every bit of this champion.  There isn't a hint of uncertainty lingering in your senses.  If only you were this accepting all the time.\"");
 	//[else]
-	else outputText("\"<i>Isn't this great, " + player.short + "? With both of our sexual expertise combined, we'll own this land in no time, and enjoy the fuck out of any downtime.\"");
+	else outputText("\"<i>Isn't this great, " + player.short + "? With both of our sexual expertise combined, we'll own this land in no time, and enjoy the fuck out of any downtime.</i>\"");
 	outputText("  You're at your wits' end, the demon's words triggering your release.  You can feel a ");
 	//[if cumQ()<50]
 	if (player.cumQ() < 50) outputText("modest");

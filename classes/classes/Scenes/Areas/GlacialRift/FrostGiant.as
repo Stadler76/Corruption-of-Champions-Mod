@@ -1,14 +1,15 @@
 package classes.Scenes.Areas.GlacialRift 
 {
 	import classes.*;
-	import classes.internals.WeightedDrop;
+import classes.StatusEffects.Combat.GiantStrLossDebuff;
+import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class FrostGiant extends Monster
 	{
 		private function giantStrengthLoss(magnitude:int = 0):void {
-			game.dynStats("str", -magnitude);
-			player.addStatusValue(StatusEffects.GiantStrLoss, 2, magnitude);
+			var gsl:GiantStrLossDebuff = player.createOrFindStatusEffect(StatusEffects.GiantStrLoss) as GiantStrLossDebuff;
+			gsl.applyEffect(magnitude);
 		}
 		
 		public function giantAttackPunch():void {
@@ -20,7 +21,7 @@ package classes.Scenes.Areas.GlacialRift
 			else {
 				if (rand(player.spe + 40) < spe) {
 					outputText("You take the full force of his grand slam, sending you flying a good 40 feet, plunging through a snowdrift. As you right yourself, his laugh shakes the ground, \"<i>Puny! Haaaa!</i>\" ");
-					damage = ((str + 50) + rand(100))
+					damage = ((str + 50) + rand(100));
 					damage = player.reduceDamage(damage);
 					if (damage < 40) damage = 40;
 					player.takeDamage(damage, true);
@@ -51,7 +52,6 @@ package classes.Scenes.Areas.GlacialRift
 			else {
 				outputText("Your attempt to make way fails, and the giant grabs you in his very large, very cold, very strong hands. \"<i>Now, you die!</i>\"");
 				player.createStatusEffect(StatusEffects.GiantGrabbed, 2, 0, 0, 0);
-				if (!player.hasStatusEffect(StatusEffects.GiantStrLoss)) player.createStatusEffect(StatusEffects.GiantStrLoss, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}

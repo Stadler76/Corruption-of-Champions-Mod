@@ -1144,7 +1144,7 @@ package classes.Scenes
 							//genderless: 
 							else outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
 							outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-							dynStats("lus=", player.maxLust(), "resisted", false);
+							dynStats("lus=", player.maxLust(), "scale", false);
 							displayedUpdate = true;
 						}
 						else {
@@ -1259,7 +1259,7 @@ package classes.Scenes
 						//genderless: 
 						else outputText("  Your asshole begins twitching, aching for something to push through it over and over again.");
 						outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-						dynStats("lus=", player.maxLust(), "resisted", false);
+						dynStats("lus=", player.maxLust(), "scale", false);
 						displayedUpdate = true;
 					}
 				}
@@ -1593,7 +1593,7 @@ package classes.Scenes
 					player.knockUpForce(); //Clear Pregnancy
 					return true;
 				}
-				else if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0 && player.cor < (25 + player.corruptionTolerance()) && flags[kFLAGS.ANEMONE_KID] == 0) {
+				else if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0 && player.isPureEnough(25) && flags[kFLAGS.ANEMONE_KID] == 0) {
 					outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The ensuing pain in your labia and " + player.clitDescript() + " makes you lock up and nearly takes away your consciousness, and with " + player.multiCockDescript() + " in the way, you can't get any leverage on the pull at all!  The anemone detaches weakly, but writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back toward your " + player.vaginaDescript(0)+ ".  Searching about weakly with the feelers, it touches along your thigh and searches out the entrance of your pussy.  When the tentacled crown brushes past your lips a venomous heat stirs your crotch and fills you with energy; shocked into sense, you look at the absurd creature.  You raise your arm to slap at it, but something stays your hand.  As if sensing your hesitation, it stands upright and holds itself at attention for inspection.  It would be easy to knock it away... and yet, the unprepossessing little thing looks so proud that you can't quite bring yourself to do so.");
 					outputText("\n\nYou scoop the diminutive anemone up and look around for somewhere wet to put it.  The stream is too far, the lake doubly so; you'd never make it to either, as sick as you feel from yanking viciously on your clitoris.  Driven to last resorts, you lurch over to the water barrel in your camp and, wrenching the lid off, drop the blue stalk unceremoniously inside.  Exhausted by the shock and pain of the ordeal, you slump down beside the barrel and slip into a doze...");
 					player.cuntChange(20,true,true,false);
@@ -1757,7 +1757,7 @@ package classes.Scenes
 						if (flags[kFLAGS.MARBLE_BOYS] == 0)
 						//has Marble had male kids before?
 						{
-							outputText("You notice that Marble seems to be deep in thought, and you ask her what is wrong.  She starts after a moment and says, \"<i>Oh sweetie, no, it's nothing really.  I just never thought that I'd actually be able to father a son is all.  The thought never occurred to me.");
+							outputText("You notice that Marble seems to be deep in thought, and you ask her what is wrong.  She starts after a moment and says, \"<i>Oh sweetie, no, it's nothing really.  I just never thought that I'd actually be able to father a son is all.  The thought never occurred to me.</i>\"");
 						}
 						//Add to marble-kids:
 						flags[kFLAGS.MARBLE_KIDS]++;
@@ -2033,7 +2033,7 @@ package classes.Scenes
 							outputText("You are interrupted as you find yourself overtaken by an uncontrollable urge to undress and squat.   You berate yourself for giving in to the urge for a moment before feeling something shift.  You hear the splash of fluid on the ground and look down to see a thick greenish fluid puddling underneath you.  There is no time to ponder this development as a rounded object passes down your birth canal, spreading your feminine lips apart and forcing a blush to your cheeks.  It plops into the puddle with a splash, and you find yourself feeling visibly delighted to be laying such healthy eggs.   Another egg works its way down and you realize the process is turning you on more and more.   In total you lay ");
 							outputText(eggDescript()); 
 							outputText(", driving yourself to the very edge of orgasm.");
-							dynStats("lus=", player.maxLust(), "resisted", false);
+							dynStats("lus=", player.maxLust(), "scale", false);
 						}
 						//High quantity
 						else {
@@ -2043,7 +2043,7 @@ package classes.Scenes
 							if (player.getClitLength() <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself until "); 
 							outputText("you quiver in orgasm, popping out the last of your eggs as your body twitches nervelessly on the ground.   In total you lay " + eggDescript() + ".");
 							player.orgasm('Vaginal');
-							dynStats("resisted", false);
+							dynStats("scale", false);
 						}
 					}
 					//Large egg scene
@@ -2060,7 +2060,7 @@ package classes.Scenes
 						if (player.statusEffectv3(StatusEffects.Eggs) >= 11) outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + player.vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ");
 						outputText("\n\nYou gaze down at the mess, counting " + eggDescript() + ".");
 						player.orgasm('Vaginal');
-						dynStats("resisted", false);
+						dynStats("scale", false);
 					}
 					outputText("\n\n<b>You feel compelled to leave the eggs behind, ");
 					if (player.hasStatusEffect(StatusEffects.AteEgg)) outputText("but you remember the effects of the last one you ate.\n</b>");

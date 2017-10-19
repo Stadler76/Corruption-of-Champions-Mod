@@ -51,8 +51,7 @@ package classes.Scenes.Places
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
 			showStats();
 			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
-			mainView.newGameButton.toolTipText = "Return to main menu.";
-			mainView.newGameButton.toolTipHeader = "Main Menu";
+			mainView.newGameButton.hint("Return to main menu.","Main Menu");
 			if (camp.setLevelButton()) return;
 			hideUpDown();
 			menu();
@@ -73,7 +72,18 @@ package classes.Scenes.Places
 					removeButton(4);
 				}
 				addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= (66 + player.corruptionTolerance())) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance()))) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
+				if (
+						(
+								player.hasPerk(PerkLib.HistoryReligious) && player.isPureEnough(66)
+								||
+								player.findPerk(PerkLib.Enlightened) >= 0 && player.isPureEnough(10)
+						) && (
+								!player.hasStatusEffect(StatusEffects.Exgartuan)
+								||
+								player.statusEffectv2(StatusEffects.Exgartuan) != 0
+						)
+						|| flags[kFLAGS.SFW_MODE] >= 1
+				) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", kGAMECLASS.camp.doWait);
@@ -380,10 +390,10 @@ package classes.Scenes.Places
 				return;
 			}
 			menu();
-			addButton(0, "Order Drink", orderDrink, null, null, null, "Buy some refreshing beverages.");
-			addButton(1, "Order Food", orderFood, null, null, null, "Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 50 ? " and curb that hunger of yours!": ".") + "");
-			if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors, null, null, null, "Hear the story the innkeeper has to offer.");
-			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", whoreForGems, null, null, null, "Seek someone who's willing to have sex with you for profit.");
+			addButton(0, "Order Drink", orderDrink).hint("Buy some refreshing beverages.");
+			addButton(1, "Order Food", orderFood).hint("Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 50 ? " and curb that hunger of yours!": ".") + "");
+			if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors).hint("Hear the story the innkeeper has to offer.");
+			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", whoreForGems).hint("Seek someone who's willing to have sex with you for profit.");
 			addButton(14, "Leave", menuIngnam);
 		}
 		

@@ -860,7 +860,7 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 		//[Cowgirl][CockWorship][TakeVaginal][Boobjob][TakeAnal][Squeezejob][Bail]
 	}
 	if (player.lust < 33) {
-		dynStats("lus=", 33, "resisted", false);
+		dynStats("lus=", 33, "scale", false);
 	}
 	//Display sex options
 	//[Cowgirl][Frot][TakeVaginal][Boobjob][TakeAnal][Bail]
@@ -980,7 +980,7 @@ private function loppeRidesCocks():void {
 		menu();
 		addButton(0,"Next",loppeRidesYouNoFaceJizz);
 	}
-	dynStats("lus=", player.maxLust(), "resisted", false);
+	dynStats("lus=", player.maxLust(), "scale", false);
 }
 
 //{If NoFace:
@@ -1801,7 +1801,7 @@ private function letsLoppeGoCum():void {
 	}
 	//set LoppeDenial to 4
 	flags[kFLAGS.LOPPE_DENIAL_COUNTER] = 3;
-	dynStats("lus", 30+player.lib/10, "resisted", false);
+	dynStats("lus", 30+player.lib/10, "scale", false);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1843,7 +1843,7 @@ private function superLoppeOrgasmDenialGo():void {
 		flags[kFLAGS.LOPPE_DENIAL_COUNTER] = 10;
 		//leave, set LoppeDenial flag = 14 (an extra 7 for being a jerk)
 	}
-	dynStats("lus", 30+player.lib/10, "resisted", false);
+	dynStats("lus", 30+player.lib/10, "scale", false);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseOneHour);
 }

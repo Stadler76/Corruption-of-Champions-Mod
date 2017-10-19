@@ -59,6 +59,36 @@ package classes.internals
 			if (!isFinite(x)) return min;
 			return x < min ? min : x > max ? max : x;
 		}
+		public static function ipow(base:int,exponent:int):int {
+			if (exponent<0) return 0;
+			var x:int=1;
+			while(exponent-->0) x*=base;
+			return x;
+		}
+		/**
+		 * Round (value) to (decimals) decimal digits
+		 */
+		public static function round(value:Number,decimals:int=0):Number {
+			if (decimals<=0) return Math.round(value);
+			var factor:Number = ipow(10,decimals);
+			return Math.round(value*factor)/factor;
+		}
+		/**
+		 * Round (value) up to (decimals) decimal digits
+		 */
+		public static function ceil(value:Number,decimals:int=0):Number {
+			if (decimals<=0) return Math.ceil(value);
+			var factor:Number = ipow(10,decimals);
+			return Math.ceil(value*factor)/factor;
+		}
+		/**
+		 * Round (value) down to (decimals) decimal digits
+		 */
+		public static function floor(value:Number,decimals:int=0):Number {
+			if (decimals<=0) return Math.floor(value);
+			var factor:Number = ipow(10,decimals);
+			return Math.floor(value*factor)/factor;
+		}
 		/**
 		 * Deleting obj[key] with default.
 		 *

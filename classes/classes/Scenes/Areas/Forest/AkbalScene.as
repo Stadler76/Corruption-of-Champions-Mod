@@ -1066,14 +1066,9 @@ public class AkbalScene extends BaseContent implements Encounter
 			}
 			//[After 8th submission, if whispered and corruption is greater than 80%]
 			//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
-			else if (flags[kFLAGS.PLAYER_RESISTED_AKBAL] == 0 && flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80)
+			else if (flags[kFLAGS.PLAYER_RESISTED_AKBAL] == 0 && flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.isCorruptEnough(80))
 			{
-				if (player.cor < (80 + player.corruptionTolerance()) || player.findPerk(PerkLib.FireLord) >= 0)
-				{
-					outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.");
-				}
-				else
-				{
+				if (!player.hasPerk(PerkLib.FireLord)) {
 					outputText("You open your eyes and almost yell in surprise when you see Akbal's emerald eyes looking into yours.  You are still in the forest and his lithe jaguar body is still over you; you quickly realize he hasn't moved you, as you're still resting in a puddle of mixed sex juices.\n\n");
 					outputText("\"<i>You are a loyal pet,</i>\" Akbal says as he stands. The compliment makes you smile, but it quickly fades into a look of fear when he suddenly releases a bone-chilling roar right in your face.  Green flames begin to pour from his open maw, and you scream as you flail your hands in a pointless attempt to block the fire.\n\n");
 					outputText("After a moment of horror, you realize you aren't burning.  You can feel the emerald flames inside your lungs, glowing with a palpable warmth.  Akbal snaps his teeth together, a feral grin on his face as he halts the torrent of flame.\n\n");
@@ -1082,10 +1077,12 @@ public class AkbalScene extends BaseContent implements Encounter
 					//['LOTF' or 'Terrestrial Fire Lord' appears as perk]
 					//[Gain 'Terrestrial Fire' in Specials]
 					player.createPerk(PerkLib.FireLord, 0, 0, 0, 0);
+				} else {
+					outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.");
 				}
 			}
 			//[After 4th submission if corruption is greater than 40%]
-			else if (player.findPerk(PerkLib.Whispered) < 0 && player.cor >= (40 - player.corruptionTolerance()))
+			else if (!player.hasPerk(PerkLib.Whispered) && player.isCorruptEnough(40))
 			{
 				outputText("You awake in your camp with Akbal standing over you, the chorus of voices in your head reaching the apex of an agonizingly beautiful song, and then falling silent.  When you rise, Akbal licks your face before turning away and sprinting into the forest.\n\n");
 				if (player.findPerk(PerkLib.Whispered) < 0)
@@ -1202,7 +1199,7 @@ public class AkbalScene extends BaseContent implements Encounter
 			outputText("As you explore the deep woods you begin to hear a soft slurping sound. In this world you know that any strange sound, especially the wet ones, most likely means something dangerous is up ahead... or something dangerous is fucking something a little less dangerous.  As you cautiously advance you spy the pelt of the jaguar demon, Akbal.  The demon jaguar sits in the middle of the clearing with one leg extended as he repeatedly swipes his wide tongue against his hole, probably cleaning up imp spunk thanks to you.  He is so utterly focused on the task that he doesn’t notice your approach.");
 			flags[kFLAGS.AKBAL_BITCH_Q] = 1;
 			//{corruption < 40/choose no}
-			if ((player.cor < (40 + player.corruptionTolerance()) && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0 && player.findPerk(PerkLib.Pervert) < 0 && player.findPerk(PerkLib.Sadist) < 0) || player.lust < 33)
+			if ((!player.isCorruptEnough(40) && player.findPerk(PerkLib.Pervert) < 0 && player.findPerk(PerkLib.Sadist) < 0) || player.lust < 33)
 				akbitchNoThnx(false);
 			//{corruption > 40}
 			else

@@ -44,18 +44,18 @@ package classes.Scenes.Areas.HighMountains
 			if (player.lust >= 33) {
 				outputText("  What do you do to her?");
 				if (player.hasCock()) {
-					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal", winAndRapeHarpyAnally, null, null, null, "Put your cock to a good use and take the harpy from behind.");
-					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Pussy", victoryHarpyGetsHerPussyRaped, null, null, null, "That harpy's pussy looks inviting...");
+					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal", winAndRapeHarpyAnally).hint("Put your cock to a good use and take the harpy from behind.");
+					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Pussy", victoryHarpyGetsHerPussyRaped).hint("That harpy's pussy looks inviting...");
 				}
-				addButton(2, "Oral", WinOnHarpyAndOralRape, null, null, null, "Those lips are inviting, but her drugged lipstick can be dangerous.");
+				addButton(2, "Oral", WinOnHarpyAndOralRape).hint("Those lips are inviting, but her drugged lipstick can be dangerous.");
 				if (player.hasVagina()) {
-					if (!player.isNaga()) addButton(3, "Scissor", harpyScissorSurprise, null, null, null, "Get into some girl-on-girl activity with the harpy.");
-					if (player.getClitLength() >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy, null, null, null, "Fuck the harpy with your big clit.");
+					if (!player.isNaga()) addButton(3, "Scissor", harpyScissorSurprise).hint("Get into some girl-on-girl activity with the harpy.");
+					if (player.getClitLength() >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy).hint("Fuck the harpy with your big clit.");
 				}
 			}
 			
 			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) {
-				addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis, null, null, null, "Use your ovipositor to lay the eggs into harpy.");
+				addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis).hint("Use your ovipositor to lay the eggs into harpy.");
 			}
 			
 			addButton(14, "Leave", combat.cleanupAfterCombat);

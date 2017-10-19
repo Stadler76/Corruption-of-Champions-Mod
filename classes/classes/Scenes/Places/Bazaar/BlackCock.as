@@ -271,7 +271,7 @@ package classes.Scenes.Places.Bazaar
 			//Harry Roswell
 			if (flags[kFLAGS.BLACK_COCK_MET_HARRY] == 0) {
 				outputText("You see the sign saying \"Keep Out\" leading to the back. You assume the cook is back there.\n\n");
-				addButton(2, "Sneak", meetHarryRoswell, null, null, null, "Sneak into the kitchen?");
+				addButton(2, "Sneak", meetHarryRoswell).hint("Sneak into the kitchen?");
 			}
 			else {
 				outputText("You see the sign saying \"Keep Out\" leading to the back portion of the tent. You know that Harry Roswell, the beefy rhino-morph cooking the food, is back there and doesn't mind you ignoring the sign.\n\n");
@@ -309,7 +309,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\n<b>New codex entry unlocked: Harpies!</b>\n\n");
 			}
 			menu();
-			addButton(0, "Song", listenToAnitaSong, null, null, null, "Listen to Anita's performance. This will cost you five gems.");
+			addButton(0, "Song", listenToAnitaSong).hint("Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to do that.");
 			addButton(4, "Nevermind", nevermindToAnita);
@@ -346,7 +346,7 @@ package classes.Scenes.Places.Bazaar
 					outputText("\n\nThe songbird's dirty blond wings spread, each flap sending an undulation through her soft tits and enticing ass as she takes to the air, wings beating hard as she hovers in place while spinning around. The place explodes into applause and wolf whistles as the Anita shows that those sexy wings aren't just for show.");
 					outputText("\n\n\"<i>She'll be squirtin' like a fountain when she cuuuums \nShe'll be squirtin' like a fountain when she cuuuums \nShe'll be squirtin' like a fountain \nShe'll be squirtin' like a fountain \nShe'll be squirtin' like a fountain when she cuuuuuuuuuuuuuuuuuuuuuums.</i>\"");
 					outputText("\n\nExplosive applause rips through the tent and you find yourself clapping and hollering along with the crowd. Despite the repetitive, simplistic nature of the song you have to admit you enjoyed yourself. As the applause dies down you realize that you feel a little riled up now.");
-					dynStats("lus", 10, "resisted", false);
+					dynStats("lus", 10, "scale", false);
 					dynStats("lus", (player.lib / 5) + (player.cor / 10));
 					break;
 				case 1: //Rockin Robin
@@ -361,7 +361,7 @@ package classes.Scenes.Places.Bazaar
 					outputText("\n\nShe rocks in the tree tops all night long \npurty lips wrapped around daddy's big schlong \nAll the little birdies on JayBird street \nLove that lil robin ‘cause she tastes so sweet");
 					outputText("\n\nRockin Robin, tweet tweet tweetleelee \nRockin Robin, tweet tweet tweetleelee \nWith that rockin robin you know ya really gonna rock tonight</i>\"");
 					outputText("\n\nExplosive applause rips through the tent and you find yourself clapping and hollering along with the crowd. Despite the repetitive, simplistic nature of the song you have to admit you enjoyed yourself. As the applause dies down you realize that you feel a little riled up now.");
-					dynStats("lus", 10, "resisted", false);
+					dynStats("lus", 10, "scale", false);
 					dynStats("lus", (player.lib / 5) + (player.cor / 10));
 					break;
 				default:
@@ -387,7 +387,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nOnce the two of you are outside she leads you behind the bar where she uses her arms to push her perky tits together, looking up at you as she unbuttons her little cut-off shorts.");
 			}
 			menu();
-			if (player.canFly() && player.gender > 0) addButton(0, "Eagle Fuck", eagleFuckAnita, null, null, null, "Take a wild trip in the skies with Anita and fuck her!");
+			if (player.canFly() && player.gender > 0) addButton(0, "Eagle Fuck", eagleFuckAnita).hint("Take a wild trip in the skies with Anita and fuck her!");
 			else addButtonDisabled(0, "Eagle Fuck", (!player.canFly() ? "You'll need wings for that." : "You need either a penis or a vagina to do that."));
 			if (player.hasCock()) addButton(1, "Vaginal", vaginalFuckAnita);
 			else addButtonDisabled(1, "Vaginal", "You'll need a penis for that.");
@@ -563,8 +563,8 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\n<b>New codex entry unlocked: Satyrs!</b>\n\n");
 			}
 			menu();
-			addButton(0, "Stash", checkAndyStash, null, null, null, "Go out the back of the tent and check out Andy's stash?");
-			if (player.lust >= 33) addButton(1, "Sex", rompUpWithAndyTheSatyr, null, null, null, "Proposition to have sex with the satyr.");
+			addButton(0, "Stash", checkAndyStash).hint("Go out the back of the tent and check out Andy's stash?");
+			if (player.lust >= 33) addButton(1, "Sex", rompUpWithAndyTheSatyr).hint("Proposition to have sex with the satyr.");
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to consider this.");
 			addButton(4, "Nevermind", nevermindToAndy);
 		}
@@ -618,7 +618,7 @@ package classes.Scenes.Places.Bazaar
 			else {
 				outputText("You hold your hand out for the pipe. Andy scoots closer to you and passes it, leaning back against the barrels. As you take your hit the warm happy heat blooms in your [fullChest] and you hand the pipe back with a giant smile.");
 			}
-			dynStats("lus", 10, "resisted", false);
+			dynStats("lus", 10, "scale", false);
 			dynStats("lus", 10 + (player.lib / 5) + (player.cor / 10));
 			switch(rand(2)) {
 				case 0:
@@ -652,7 +652,7 @@ package classes.Scenes.Places.Bazaar
 			applyAndysSmokeEffect();
 			outputText("\n\nWhat do you want to do?");
 			menu();
-			addButton(0, "Grab It", grabAndysDongAfterSmoking, null, null, null, "That cock looks fun to play with!");
+			addButton(0, "Grab It", grabAndysDongAfterSmoking).hint("That cock looks fun to play with!");
 			addButton(1, "Do Nothing", doNothingAfterSmoking);
 		}
 		
@@ -662,7 +662,7 @@ package classes.Scenes.Places.Bazaar
 			outputText("\n\nThis makes you laugh again. Suddenly everything is funny and the world is beautiful beyond words. Every star in the sky seems to be vying for your attention. Every blade of grass seems to dance beneath your [feet]. You don't feel like a stranger invading some strange land. You don't feel anything but joy for being here in this alien world with a lung full of happy smoke and this friendly satyr sitting next to you.");
 			outputText("\n\n\"<i>In my defense,</i>\" Andy says as he takes the pipe, \"<i>When I wear pants everyone calls me George and I love my dad but I don't like that shit. I'm Andy damnit, Andy fucking Mathis</i>\"");
 			outputText("\n\nYou can't help the guffaws of laughter erupting from your face. The two of you continue to smoke, chat and laugh until the happiness inducing drug is gone. Once the two of you have finished Andy says something about getting back to work and you find yourself feeling a little hungry.");
-			dynStats("lus", 10, "resisted", false);
+			dynStats("lus", 10, "scale", false);
 			dynStats("lus", 10 + (player.lib / 5) + (player.cor / 10));
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -742,13 +742,13 @@ package classes.Scenes.Places.Bazaar
 			}
 			outputText("\n\n\"<i>Asses are nice too. I like knowing how people react to having my tongue pressed against their rear door. It's one of those little pleasures people don't expect to like. There's something about having a nice hot ass grinding into my lips, bouncing on my tongue. Eating ass is an art my dad used to say. It's something that can be easily done with just a swirl of the tongue but only a master can bring someone to orgasm with just a rimjob. I used to practice on this tiger guy somewhere around here. He was pretty rough, shoving and pushing against my tongue. He would talk shit and curse and complain… but he loved it. We only stopped when he started playing poker with these other guys; he's a bit of a bitch nowadays. He doesn't let anyone near those gorgeous globes from what I hear. It's a pity too, that was one nice ass.</i>\"");
 			outputText("\n\nHe looks up at you expectantly and you have to admit you got a little horny listening to his stories and his past. What do you want him to do now?");
-			dynStats("lus", 20, "resisted", false);
+			dynStats("lus", 20, "scale", false);
 			menu();
-			if (player.hasCock()) addButton(0, "Suck my Cock", haveAndySuckYouOff, null, null, null, "Have Andy suck you off.");
+			if (player.hasCock()) addButton(0, "Suck my Cock", haveAndySuckYouOff).hint("Have Andy suck you off.");
 			else addButtonDisabled(0, "Suck my Cock", "You'll need a cock to have Andy do this.");
-			if (player.hasVagina()) addButton(1, "Lick my Pussy", haveAndyLickYouOut, null, null, null, "Have Andy lick your pussy.");
+			if (player.hasVagina()) addButton(1, "Lick my Pussy", haveAndyLickYouOut).hint("Have Andy lick your pussy.");
 			else addButtonDisabled(1, "Lick my Pussy", "You'll need a vagina to have Andy do this.");
-			addButton(2, "Rim my Ass", haveAndyRimYouOmgItsGross, null, null, null, "Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
+			addButton(2, "Rim my Ass", haveAndyRimYouOmgItsGross).hint("Have Andy rim your ass. \n\nNOTE: Contains rimjob! You have been warned.");
 			addButton(4, "Do Nothing", declineAndyOral);
 		}
 		
@@ -887,9 +887,9 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nOnce the two of you sneak past the rhino cook and go out into the fenced in back portion of The Black Cock he pulls off his shirt, revealing his finely toned abs and pierced nipples.");
 			}
 			menu();
-			if (player.hasCock()) addButton(0, "Fuck Him", fuckAndyTheSatyr, null, null, null, "Take Andy from behind and put your cock to good use.");
+			if (player.hasCock()) addButton(0, "Fuck Him", fuckAndyTheSatyr).hint("Take Andy from behind and put your cock to good use.");
 			else addButtonDisabled(0, "Fuck Him", "You will need a penis for that.");
-			addButton(1, "Get Fucked", haveAndyFuckYouPrompt, null, null, null, "Get Andy to fuck you good!");
+			addButton(1, "Get Fucked", haveAndyFuckYouPrompt).hint("Get Andy to fuck you good!");
 		}
 		
 		private function fuckAndyTheSatyr():void {
@@ -1235,7 +1235,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			else {
 				outputText("Frida smiles at you as you take a seat in one of the barstools.");
-				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?<i>\"");
+				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?</i>\"");
 				else outputText("\n\n\"<i>You ready for a piece of cake now, hun?</i>\"");
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] <= 0) {

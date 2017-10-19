@@ -9,7 +9,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
-			if (player.cor >= (10 + player.corruptionTolerance())) return "<b>DISABLED</b> - Corruption too high!";
+			if (!player.isPureEnough(10)) return "<b>DISABLED</b> - Corruption too high!";
 			else return super.desc(params);
 		}
 

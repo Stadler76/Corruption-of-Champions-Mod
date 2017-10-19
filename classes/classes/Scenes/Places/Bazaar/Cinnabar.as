@@ -283,7 +283,7 @@ private function cinnabarGetsFUKKKKED():void {
 	outputText("It barely registers – you're too busy cramming inch after inch into the slowly-widening vice in front of you, enthralled by just how much cock-flesh her body can devour.  She's frothing at the mouth, screaming, squeaking, and pounding on the bed.  You push forward a little harder, tugging on the base of her tail for leverage as huge globs of rat-cum rain from the stretched-out snatch onto the sheets.   Another three inches sink into your new cock-sleeve, and she starts to whimper and squeak, reminding you of an old, worn-out chew-toy that your father's dog used to play with.");
 	//HUger
 	if (player.cockArea(x) >= 200) {
-		if (player.cor >= (75 - player.corruptionTolerance())) doNext(fuckCinnabarHugerAndCorruptedEr);
+		if (player.cor >= 75) doNext(fuckCinnabarHugerAndCorruptedEr);
 		else doNext(cinnabarHuger);
 	}
 	else doNext(cinnabarHuge);
