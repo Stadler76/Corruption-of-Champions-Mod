@@ -214,6 +214,7 @@ import flash.errors.IllegalOperationError;
 				maxes.lib = 100;
 				maxes.sens = 100;
 				maxes.cor = 100;
+				maxes.lust = maxLust();
 			} else {
 				maxes = {
 					str:Infinity,
@@ -222,6 +223,7 @@ import flash.errors.IllegalOperationError;
 					inte:Infinity,
 					lib:Infinity,
 					sens:Infinity,
+					lust:Infinity,
 					cor:100
 				}
 			}
