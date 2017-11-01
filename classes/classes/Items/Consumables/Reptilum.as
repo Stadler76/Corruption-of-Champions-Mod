@@ -223,6 +223,10 @@ package classes.Items.Consumables
 					player.breastRows[temp2].nipplesPerBreast = 1;
 				}
 			}
+			//-Remove extra breast rows 
+			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) { 
+				mutations.removeExtraBreastRow(tfSource); 
+			} 
 			//-VAGs
 			if (player.hasVagina() && rand(5) === 0 && player.lizardScore() > 3) {
 				mutations.updateOvipositionPerk(tfSource); // does all the magic, nuff said!
