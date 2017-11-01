@@ -38,26 +38,26 @@ package classes.Items.Consumables
 			if (player.spe100 < 100 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYou feel fleet and lighter on your toes; you sense you could dodge, dart or skip away from anything.");
 				dynStats("spe", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Strength Loss:
 			else if (player.str100 > 40 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nA sense of helplessness settles upon you as your limbs lose mass, leaving you feeling weaker and punier.");
 				dynStats("str", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Sensitivity Increase:
 			if (player.sens100 < 70 && player.hasCock() && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nA light breeze brushes over you and your skin tingles.  You have become more sensitive to physical sensation.");
 				dynStats("sen", 5);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Libido Increase:
 			if (player.lib100 < 70 && player.hasVagina() && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYou feel your blood quicken and rise, and a desire to... hunt builds within you.");
 				dynStats("lib", 2);
 				if (player.lib100 < 30) dynStats("lib", 2);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Body Mass Loss:
 			if (player.thickness > 40 && rand(3) === 0 && changes < changeLimit) {

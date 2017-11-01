@@ -187,7 +187,10 @@ package classes.Scenes.Monsters
 			spriteSelect(SpriteDb.s_goblinWarrior);
 			clearOutput();
 			outputText("The warrior falls to her feet, smashing her titties against the confines of her breastplate. She looks up at you and sniffles.")
-			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				combat.cleanupAfterCombat();
+				return;
+			}
 			if (player.lust < 33) {
 				outputText("\n\n<b>You aren't horny enough to rape her.</b>");
 			}

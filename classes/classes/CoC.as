@@ -471,9 +471,9 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4.9"; //Version NUMBER
+			ver = "1.0.2_mod_1.4.10b"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
-			version = ver + " (<b>Bug Fixfest</b>)"; //Version TEXT
+			version = ver + " (<b>Bug Fixfest II</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;

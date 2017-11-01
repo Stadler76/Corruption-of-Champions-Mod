@@ -80,6 +80,10 @@ package classes.Items.Consumables
 				player.cocks[select].cockType = CockTypesEnum.DRAGON;
 				player.cocks[select].knotMultiplier = 1.3;
 			}
+			//-Remove extra breast rows
+			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+				mutations.removeExtraBreastRow(tfSource);
+			}
 			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain Dragon Head
 			if (changes < changeLimit && rand(3) == 0 && player.faceType != FACE_DRAGON && flags[kFLAGS.EMBER_ROUNDFACE] == 0) {
@@ -325,13 +329,13 @@ package classes.Items.Consumables
 					output.text("rut");
 					
 					player.goIntoRut(false);
-					changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
+					//[removed:1.4.10]//changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
 				}
 				else {
 					output.text("heat");
 					
 					player.goIntoHeat(false);
-					changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
+					//[removed:1.4.10]//changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
 				}
 				output.text("</b>.");
 			}

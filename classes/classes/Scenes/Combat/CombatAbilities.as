@@ -677,10 +677,11 @@ public class CombatAbilities extends BaseContent
 				monster.spe += monster.statusEffectv1(StatusEffects.Illusion);
 				monster.removeStatusEffect(StatusEffects.Illusion);
 			}
-
-			if (player.hasStatusEffect(StatusEffects.Might)) {
-				outputText("\nYou feel a bit weaker as your strength-enhancing spell wears off.");
-				player.removeStatusEffect(StatusEffects.Might);
+			if (monster.hasStatusEffect(StatusEffects.Might)) {
+				outputText("\n" + monster.a + monster.short + " feels a bit weaker as " + monster.pronoun3 + " strength-enhancing spell wears off.");
+				monster.str -= monster.statusEffectv1(StatusEffects.Might);
+				monster.tou -= monster.statusEffectv2(StatusEffects.Might);
+				monster.removeStatusEffect(StatusEffects.Might);
 			}
 			if (monster.hasStatusEffect(StatusEffects.Shell)) {
 				outputText("\nThe magical shell around " + monster.a + " " + monster.short + " shatters!");
@@ -1433,16 +1434,14 @@ public class CombatAbilities extends BaseContent
 				return;
 			}
 			if (monster.findPerk(PerkLib.BasiliskResistance) >= 0) {
-				output.text("You attempt to apply your paralyzing stare at " + theMonster + ", but you soon realize, that " + monster.pronoun1
-				           +" is immune to your eyes, so you quickly back up.\n\n");
+				output.text("You attempt to apply your paralyzing stare at " + theMonster + ", but you soon realize, that " + monster.pronoun1 + " is immune to your eyes, so you quickly back up.\n\n");
 				player.changeFatigue(10, 1);
 				monster.doAI();
 				return;
 			}
 			player.changeFatigue(20, 1);
 			if (monster.hasStatusEffect(StatusEffects.Shell)) {
-				output.text("As soon as your magic touches the multicolored shell around " + theMonster + ", it sizzles and fades to nothing."
-				           +"  Whatever that thing is, it completely blocks your magic!\n\n");
+				output.text("As soon as your magic touches the multicolored shell around " + theMonster + ", it sizzles and fades to nothing. Whatever that thing is, it completely blocks your magic!\n\n");
 				monster.doAI();
 				return;
 			}
@@ -1486,50 +1485,51 @@ public class CombatAbilities extends BaseContent
 			}
 			menu();
 			var button:int = 0;
+			//Anemone STINGZ!
 			if (player.hairType == 4) {
-				addButton(button++, "AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.", "Anemone Sting");
+				addButton(button++, "AnemoneSting", anemoneSting).hint("Attempt to strike an opponent with the stinging tentacles growing from your scalp. Reduces enemy speed and increases enemy lust. \n\nNo Fatigue Cost", "Anemone Sting");
 			}
 			//Bitez
 			if (player.faceType == FACE_SHARK_TEETH) {
-				addButton(button++, "Bite", bite).hint("Attempt to bite your opponent with your shark-teeth.");
+				addButton(button++, "Bite", bite).hint("Attempt to bite your opponent with your shark-teeth. \n\nFatigue Cost: " + player.physicalCost(25));
 			}
 			else if (player.faceType == FACE_SNAKE_FANGS) {
-				addButton(button++, "Bite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom.");
+				addButton(button++, "Bite", nagaBiteAttack).hint("Attempt to bite your opponent and inject venom. \n\nFatigue Cost: " + player.physicalCost(10));
 			}
 			else if (player.faceType == FACE_SPIDER_FANGS) {
-				addButton(button++, "Bite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom.");
+				addButton(button++, "Bite", spiderBiteAttack).hint("Attempt to bite your opponent and inject venom. \n\nFatigue Cost: " + player.physicalCost(10));
 			}
 			//Bow attack
 			if (player.hasKeyItem("Bow") >= 0 || player.hasKeyItem("Kelt's Bow") >= 0) {
-				addButton(button++, "Bow", fireBow).hint("Use a bow to fire an arrow at your opponent.");
+				addButton(button++, "Bow", fireBow).hint("Use a bow to fire an arrow at your opponent. \n\nFatigue Cost: " + player.physicalCost(25));
 			}
 			//Constrict
 			if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-				addButton(button++, "Constrict", getGame().desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
+				addButton(button++, "Constrict", getGame().desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail. \n\nFatigue Cost: " + player.physicalCost(10));
 			}
 			//Kick attackuuuu
 			else if (player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
-				addButton(button++, "Kick", kick).hint("Attempt to kick an enemy using your powerful lower body.");
+				addButton(button++, "Kick", kick).hint("Attempt to kick an enemy using your powerful lower body. \n\nFatigue Cost: " + player.physicalCost(15));
 			}
 			//Gore if mino horns
 			if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
-				addButton(button++, "Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.");
+				addButton(button++, "Gore", goreAttack).hint("Lower your head and charge your opponent, attempting to gore them on your horns. This attack is stronger and easier to land with large horns. \n\nFatigue Cost: " + player.physicalCost(15));
 			}
 			//Rams Attack - requires rams horns
 			if (player.hornType == HORNS_RAM && player.horns >= 2) {
-				addButton(button++, "Horn Stun", ramsStun).hint("Use a ramming headbutt to try and stun your foe. \n\nFatigue Cost: " + player.physicalCost(10) + "");
+				addButton(button++, "Horn Stun", ramsStun).hint("Use a ramming headbutt to try and stun your foe. \n\nFatigue Cost: " + player.physicalCost(10));
 			}
 			//Upheaval - requires rhino horn
 			if (player.hornType == HORNS_RHINO && player.horns >= 2 && player.faceType == FACE_RHINO) {
-				addButton(button++, "Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + player.physicalCost(15) + "");
+				addButton(button++, "Upheaval", upheavalAttack).hint("Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + player.physicalCost(15));
 			}
 			//Infest if infested
 			if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
-				addButton(button++, "Infest", getGame().mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+				addButton(button++, "Infest", getGame().mountain.wormsScene.playerInfest).hint("The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them. Unless your foe is very aroused they are likely to simply avoid it. Only works on males or herms. \n\nAlso great for reducing your lust. \n\nFatigue Cost: " + player.physicalCost(40));
 			}
 			//Kiss supercedes bite.
 			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
-				addButton(button++, "Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
+				addButton(button++, "Kiss", kissAttack).hint("Attempt to kiss your foe on the lips with drugged lipstick. It has no effect on those without a penis. \n\nNo Fatigue Cost");
 			}
 			switch (player.tailType) {
 				case TAIL_TYPE_BEE_ABDOMEN:
@@ -1539,18 +1539,18 @@ public class CombatAbilities extends BaseContent
 					addButton(button++, "Web", PCWebAttack).hint("Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/100");
 					break;
 				case TAIL_TYPE_SALAMANDER:
-					addButton(button++, "Tail Slap", tailSlapAttack).hint("Set your tail ablaze in red-hot flames to whip your foe with it to hurt and burn them!");
+					addButton(button++, "Tail Slap", tailSlapAttack).hint("Set your tail ablaze in red-hot flames to whip your foe with it to hurt and burn them! \n\nFatigue Cost: " + player.physicalCost(30));
 					//break;
 				case TAIL_TYPE_SHARK:
 				case TAIL_TYPE_LIZARD:
 				case TAIL_TYPE_KANGAROO:
 				case TAIL_TYPE_DRACONIC:
 				case TAIL_TYPE_RACCOON:
-					addButton(button++, "Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
+					addButton(button++, "Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense! \n\nFatigue Cost: " + player.physicalCost(15));
 				default:
 			}
 			if (player.shield != ShieldLib.NOTHING) {
-				addButton(button++, "Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+				addButton(button++, "Shield Bash", shieldBash).hint("Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again. \n\nFatigue Cost: " + player.physicalCost(20));
 			}
 			addButton(14, "Back", combat.combatMenu, false);
 		}
@@ -1844,7 +1844,7 @@ public class CombatAbilities extends BaseContent
 				return;
 			}
 			//[Bow Response]
-			if (monster.short == "Isabella") {
+			if (monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 				if (monster.hasStatusEffect(StatusEffects.Blind))
 					outputText("Isabella hears the shot and turns her shield towards it, completely blocking it with her wall of steel.\n\n");
 				else outputText("You arrow thunks into Isabella's shield, completely blocked by the wall of steel.\n\n");
@@ -2524,7 +2524,7 @@ public class CombatAbilities extends BaseContent
 		//hit
 		public function tailWhipAttack():void {
 			clearOutput();
-			if (player.fatigue + player.physicalCost(15) > player.maxFatigue()) {
+			if (player.fatigue + player.physicalCost(10) > player.maxFatigue()) {
 				outputText("You are too tired to perform a tail whip.");
 				doNext(curry(combat.combatMenu,false));
 				return;

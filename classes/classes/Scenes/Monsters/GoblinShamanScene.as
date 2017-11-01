@@ -186,7 +186,10 @@ package classes.Scenes.Monsters
 			spriteSelect(SpriteDb.s_goblinShaman);
 			clearOutput();
 			outputText("The shaman falls to her feet, smashing her titties against the ground. She looks up at you and sniffles.");
-			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				combat.cleanupAfterCombat();
+				return;
+			}
 			if (player.lust < 33) {
 				outputText("\n\n<b>You aren't horny enough to rape her.</b>");
 			}

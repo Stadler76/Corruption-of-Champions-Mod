@@ -206,14 +206,14 @@ import flash.errors.IllegalOperationError;
 			};
 		}
 		public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+			var oldHP100:Number = hp100;
 			var maxes:Object;
 			if (max) {
 				maxes = getAllMaxStats();
+				// TODO maybe move lib & sens to getAllMaxStats() too?
 				maxes.lib = 100;
 				maxes.sens = 100;
 				maxes.cor = 100;
-				maxes.lust = maxLust();
-				maxes.HP = maxHP();
 			} else {
 				maxes = {
 					str:Infinity,
@@ -222,9 +222,7 @@ import flash.errors.IllegalOperationError;
 					inte:Infinity,
 					lib:Infinity,
 					sens:Infinity,
-					cor:Infinity,
-					lust:Infinity,
-					HP:Infinity
+					cor:100
 				}
 			}
 			str   = boundFloat(1,str+dstr,maxes.str);
@@ -235,7 +233,8 @@ import flash.errors.IllegalOperationError;
 			sens  = boundFloat(minSens(),sens+dsens,maxes.sens);
 			lust  = boundFloat(minLust(),lust+dlust,maxes.lust);
 			cor   = boundFloat(0,cor+dcor,maxes.cor);
-			if (dtou>0) HP = boundFloat(-Infinity,HP+dtou*2,maxes.HP);
+			var newHPmax:Number = maxHP();
+			HP = boundFloat(-Infinity, oldHP100*newHPmax/100, newHPmax);
 		}
 		/**
 		 * Modify Strength by `delta`. If scale = true, apply perk & effect modifiers. Return actual increase applied.
@@ -3358,6 +3357,7 @@ import flash.errors.IllegalOperationError;
 
 		public function breastCup(rowNum:Number):String
 		{
+			if (rowNum == -1) rowNum = this.breastRows.length - 1;
 			return Appearance.breastCup(breastRows[rowNum].breastRating);
 		}
 
@@ -3649,6 +3649,7 @@ import flash.errors.IllegalOperationError;
 		
 		public function nippleDescript(rowIdx:int):String
 		{
+			if (rowIdx == -1) rowIdx = this.breastRows.length - 1;
 			return Appearance.nippleDescription(this, rowIdx);
 		}
 
@@ -3812,7 +3813,9 @@ import flash.errors.IllegalOperationError;
 			return Appearance.sackDescript(this);
 		}
 
-		public function breastDescript(rowNum:int):String {
+		public function breastDescript(rowNum:int):String
+		{
+			if (rowNum == -1) rowNum = breastRows.length - 1;
 			//ERROR PREVENTION
 			if (breastRows.length - 1 < rowNum) {
 				CoC_Settings.error("");

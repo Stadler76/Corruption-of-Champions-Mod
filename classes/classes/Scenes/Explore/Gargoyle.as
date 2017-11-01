@@ -117,7 +117,7 @@ private function breakZeChains():void {
 }
 
 private function nameZeGargoyle():void {
-	if (mainView.nameBox.text == "" || mainView.nameBox.text == "0") {
+	if (mainView.nameBox.text == "" || mainView.nameBox.text == "0" || mainView.nameBox.text == "1") {
 		// Name flag is used to track access into Gargoyles content. Default is "0" so somewhere the "0" string is coalescing to integer 0.
 		// Solution? Fuck you for naming your Gargoyle "0".
 		clearOutput();

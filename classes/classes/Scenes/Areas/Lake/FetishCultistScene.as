@@ -34,6 +34,7 @@ public class FetishCultistScene extends AbstractLakeContent implements Encounter
 		 */
 
 		public function execEncounter():void {
+			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.FetishOn)) {
 				player.createStatusEffect(StatusEffects.FetishOn, 0, 0, 0, 0);
 				outputText("While exploring, you notice something unusual on the lake.  This something is quickly moving towards you at a surprising rate, much faster than anything you've ever seen before.  Wary of meeting new things in this world after your previous experiences, you decide to slip behind a nearby hill and watch it while hidden.  Soon the object comes into view and you can see that it is a boat of some kind.  It looks almost like a large open box on the water with some kind of gazebo on it.  Despite how fast it is moving, you can't see any oars or means of moving the boat.  It slows somewhat when it gets close to the shore, but is still going about as fast as you can run when it hits the shore and extends some kind of gangplank onto the lake shore.  With a close up view, you estimate that it is six feet across, ten feet long, and doesn't actually seem to have very much of it underwater.  You guess that it must be magic in some way.  There are several robe-clad figures on board.\n\n");

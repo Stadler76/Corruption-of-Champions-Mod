@@ -4,6 +4,7 @@
 package coc.view {
 import classes.internals.LoggerFactory;
 import classes.internals.Utils;
+import flash.filters.DropShadowFilter;
 
 import flash.display.DisplayObject;
 import flash.display.Sprite;
@@ -293,6 +294,12 @@ public class Block extends Sprite {
 		if (_dirty) doLayout();
 	}
 
+	public function applyShadow():void {
+		if (this.filters.length > 0) return;
+		var dropShadow:DropShadowFilter = new DropShadowFilter();
+		_container.filters.push(dropShadow);
+	}
+	
 	/////////////////
 	// Helper methods
 	/////////////////

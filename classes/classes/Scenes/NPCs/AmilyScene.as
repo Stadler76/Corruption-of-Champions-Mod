@@ -1595,11 +1595,11 @@ package classes.Scenes.NPCs
 					outputText("\"<i>You managed to get your hands on ultra-pure giant bee honey?</i>\" she asks, sounding impressed.  \"<i>I hear that stuff's so pure it can actually help purge the eater of demonic taint - but it's probably otherwise the same as regular bee honey.</i>\"\n\n");
 				}
 				//Whisker Fruit:
-				if (player.itemSlot1.itype == consumables.W_FRUIT) {
+				else if (player.itemSlot1.itype == consumables.W_FRUIT) {
 					outputText("\"<i>That's a whisker fruit,</i>\" Amily says, \"<i>It might give you cat ears and even tail! It would make you cute-looking!</i>\"\n\n");
 				}
 				//Pigtail or Boar Truffle:
-				if (player.itemSlot1.itype == consumables.PIGTRUF || player.itemSlot1.itype == consumables.BOARTRU) {
+				else if (player.itemSlot1.itype == consumables.PIGTRUF || player.itemSlot1.itype == consumables.BOARTRU) {
 					outputText("\"<i>That's a pigtail truffle,</i>\" Amily says, \"<i>It might give you pig ears and even tail! It would make you plump and cute-looking!</i>\"\n\n");
 				}
 				//Green Glob:
@@ -2679,7 +2679,7 @@ package classes.Scenes.NPCs
 		private function amilyCorruptSexMenu():void {
 			amilySprite();
 			if (player.gender > 0) {
-				outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?");
+				outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?</i>\"");
 				menu();
 				if (player.hasCock()) {
 					addButton(0, "Anal", corruptAmilyBuckFutter).hint("Fuck Amily in the ass!");

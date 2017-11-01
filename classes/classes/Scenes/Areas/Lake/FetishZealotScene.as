@@ -52,6 +52,7 @@ package classes.Scenes.Areas.Lake
 //After the cultists arrive at the Lake, a zealot will be found guarding the player's boat.  Once defeated, there is a 50% chance he will be guarding it the next time the PC goes to the boat, until the swamp is added.  When that happens, repeat encounters will not occur anymore.
 		public function zealotBoat():void
 		{
+			clearOutput();
 			if (player.statusEffectv1(StatusEffects.FetishOn) == 1) {
 				zealotRepeat();
 				return;

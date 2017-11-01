@@ -28,6 +28,7 @@ public class StatBar extends Block {
 			hasGauge   : true,
 			hasBar     : true,
 			hasMinBar  : false,
+			hasShadow  : true,
 			barAlpha   : 0.4,
 			barHeight  : 1.0, // relative to height
 			barColor   : '#0000ff',
@@ -106,6 +107,9 @@ public class StatBar extends Block {
 					stretch    : true,
 					bitmapClass: StatsBarBottom
 				});
+			}
+			if (options.hasShadow) {
+				this.applyShadow();
 			}
 		}
 		_nameLabel  = addTextField({

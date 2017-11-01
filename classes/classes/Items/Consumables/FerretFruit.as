@@ -68,7 +68,7 @@ package classes.Items.Consumables
 			if (player.spe100 < 80 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYour muscles begin to twitch rapidly, but the feeling is not entirely unpleasant.  In fact, you feel like running.");
 				dynStats("spe",1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//- If male with a hip rating >4 or a female/herm with a hip rating >6:
 			if (((!player.hasCock() && player.hipRating > 6) || (player.hasCock() && player.hipRating > 4)) && rand(3) === 0 && changes< changeLimit)

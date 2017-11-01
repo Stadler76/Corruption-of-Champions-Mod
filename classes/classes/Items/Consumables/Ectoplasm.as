@@ -33,14 +33,14 @@ package classes.Items.Consumables
 				outputText("\n\nYou groan softly as your head begins pounding something fierce.  Wincing in pain, you massage your temples as the throbbing continues, and soon, the pain begins to fade; in its place comes a strange sense of sureness and wit.");
 				dynStats("int", 1);
 				if (player.inte100 < 50) dynStats("int", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Effect script 2:  (lower sensitivity)
 			if (player.sens100 >= 20 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nWoah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely lowered your sensitivity.");
 				dynStats("sen", -2);
 				if (player.sens100 >= 75) dynStats("sen", -2);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Effect script 3:  (higher libido)
 			if (player.lib100 < 100 && rand(3) === 0 && changes < changeLimit) {
@@ -50,7 +50,7 @@ package classes.Items.Consumables
 				outputText(" a trace amount of the ghost girl's lust is transferred into you.  How horny IS she, you have to wonder...");
 				dynStats("lib", 1);
 				if (player.lib100 < 50) dynStats("lib", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Effect script a:  (human wang)
 			if (player.hasCock() && changes < changeLimit) {
@@ -106,7 +106,7 @@ package classes.Items.Consumables
 			if (changes === 0) {
 				outputText("You feel strangely refreshed, as if you just gobbled down a bottle of sunshine.  A smile graces your lips as vitality fills you.  ");
 				game.HPChange(player.level * 5 + 10, true);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Incorporeality Perk Text:  You seem to have inherited some of the spiritual powers of the residents of the afterlife!  While you wouldn't consider doing it for long due to its instability, you can temporarily become incorporeal for the sake of taking over enemies and giving them a taste of ghostly libido.
 

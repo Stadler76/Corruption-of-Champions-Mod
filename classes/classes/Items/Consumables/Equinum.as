@@ -110,7 +110,7 @@ package classes.Items.Consumables
 				else {
 					dynStats("str", 1);
 					outputText("\n\nYour muscles clench and surge, making you feel as strong as a horse.");
-					changes++;
+					//[removed:1.4.10]//changes++;
 				}
 			}
 			//TOUGHNESS
@@ -125,7 +125,7 @@ package classes.Items.Consumables
 				else {
 					dynStats("tou", 1.25);
 					outputText("\n\nYour body suddenly feels tougher and more resilient.");
-					changes++;
+					//[removed:1.4.10]//changes++;
 				}
 			}
 			//INTELLECT
@@ -136,27 +136,27 @@ package classes.Items.Consumables
 				if (player.inte100 < 10 && player.inte100 > 5) {
 					dynStats("int", -1);
 					outputText("\n\nYou smile vacantly as you drink the potion, knowing you're just a big dumb animal who loves to fuck.");
-					changes++;
+					//[removed:1.4.10]//changes++;
 				}
 				if (player.inte100 <= 20 && player.inte100 >= 10) {
 					dynStats("int", -2);
 					outputText("\n\nYou find yourself looking down at the empty bottle in your hand and realize you haven't thought ANYTHING since your first sip.");
-					changes++;
+					//[removed:1.4.10]//changes++;
 				}
 				if (player.inte100 <= 30 && player.inte100 > 20) {
 					dynStats("int", -3);
 					outputText("\n\nYou smile broadly as your cares seem to melt away.  A small part of you worries that you're getting dumber.");
-					changes++;
+					//[removed:1.4.10]//changes++;
 				}
 				if (player.inte100 <= 50 && player.inte100 > 30) {
 					dynStats("int", -4);
 					outputText("\n\nIt becomes harder to keep your mind focused as your intellect diminishes.");
-					changes++;
+					//[removed:1.4.10]//changes++;
 				}
 				if (player.inte100 > 50) {
 					dynStats("int", -5);
 					outputText("\n\nYour usually intelligent mind feels much more sluggish.");
-					changes++;
+					//[removed:1.4.10]//changes++;
 				}
 			}
 			//Neck restore

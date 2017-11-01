@@ -64,7 +64,7 @@ package classes.Items.Consumables
 			//lose tough
 			if (player.tou100 > 50 && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nYou feel a bit less sturdy, both physically and mentally.  In fact, you'd prefer to have somewhere to hide for the time being, until your confidence returns.  The next few minutes are passed in a mousey funk - even afterward, you can't quite regain the same sense of invincibility you had before.");
-				changes++;
+				//[removed:1.4.10]//changes++;
 				dynStats("tou", -1);
 				if (player.tou100 >= 75) dynStats("tou", -1);
 				if (player.tou100 >= 90) dynStats("tou", -1);

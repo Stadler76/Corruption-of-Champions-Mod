@@ -57,14 +57,14 @@ package classes.Items.Consumables
 				if (player.lib < 75) dynStats("spe", 1);
 				//+1 if above 75.
 				dynStats("spe", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 
 			if (player.tou > player.ngPlus(80) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou feel yourself become a little more delicate, as though you can’t handle quite so strong hits anymore. Then again,"
 				          +" who needs to withstand a blow when you can just move with the speed of the wind and dodge it?");
 				dynStats("tou", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 
 			}
 
@@ -72,7 +72,7 @@ package classes.Items.Consumables
 			if (player.sens > 20 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nThe sensation of prickly pins and needles moves over your body, leaving your senses a little dulled in its wake.");
 				dynStats("sen", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 
 			//Raises libido greatly to 50, then somewhat to 75, then slowly to 100.
@@ -101,7 +101,7 @@ package classes.Items.Consumables
 				if (player.lib < 75) dynStats("lib", 1);
 				//+1 if above 75.
 				dynStats("lib", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 
 			//Sexual changes
@@ -135,18 +135,9 @@ package classes.Items.Consumables
 				}
 			}
 
-			//Remove additional breasts
-			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0) {
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to"
-				          +" watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down,"
-				          +" disappearing completely into your [if (breastRows >= 3)abdomen|chest]."
-				          +" The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-				if (player.hasFur()) outputText(player.furColor + " " + player.skinDesc);
-				else outputText(player.skinTone + " " + player.skinDesc);
-				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				dynStats("sen", -5);
-				player.removeBreastRow(player.breastRows.length - 1, 1);
-				changes++;
+			//-Remove extra breast rows
+			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+				mutations.removeExtraBreastRow(tfSource);
 			}
 
 			//-Butt > 5 - decrease butt size

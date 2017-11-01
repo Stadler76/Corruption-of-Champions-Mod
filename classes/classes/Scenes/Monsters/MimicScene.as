@@ -107,6 +107,7 @@ package classes.Scenes.Monsters
 				outputText("\n\nYou shake and break free from the tentacles. It's a fight!");
 				//Start the FIGHT!
 				startCombat(new Mimic(mimicAppearance));
+				return;
 			}
 			doNext(camp.returnToCampUseOneHour); //Failsafe
 		}

@@ -2024,7 +2024,7 @@ package classes
 			ANAL_TIGHTNESS_DESCRIPTORS[ANAL_LOOSENESS_GAPING] = "gaping ";
 			
 			//25% tightness description
-			if (forceDesc || rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) 
+			if (forceDesc || rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2) || i_creature.ass.analLooseness == 0) 
 			{
 				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}

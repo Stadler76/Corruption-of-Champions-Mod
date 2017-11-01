@@ -1161,13 +1161,13 @@ private function oswaldTransactBuy(slot:int = 1):void {
 	if (slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
 	else if (slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
 	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
-	if (player.gems < int(buyMod * itype.value)) {
+	if (player.gems < Math.round(buyMod * itype.value)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
 		doNext(oswaldBuyMenu);
 		return;
 	}
 	outputText("After examining what you've picked out with his fingers, Oswald hands it over, names the price and accepts your gems with a curt nod.\n\n");
-	player.gems -= int(buyMod * itype.value);
+	player.gems -= Math.round(buyMod * itype.value);
 	statScreenRefresh();
 	
 	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1 && itype is Consumable) {

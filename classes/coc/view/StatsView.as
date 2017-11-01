@@ -5,6 +5,7 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
 import classes.internals.LoggerFactory;
 import classes.internals.Utils;
+import flash.filters.DropShadowFilter;
 
 import flash.text.TextField;
 import flash.text.TextFormat;
@@ -25,7 +26,7 @@ public class StatsView extends Block {
 	public static var SidebarBgKaizo:Class;
 	public static var SidebarBackgrounds:Array = [SidebarBg1,SidebarBg2,SidebarBg3,SidebarBg4,null,SidebarBgKaizo];
 	public static const ValueFontOld:String    = 'Lucida Sans Typewriter';
-	public static const ValueFont:String       = 'Times New Roman';
+	public static const ValueFont:String       = 'Palatino Linotype';
 
 	private var sideBarBG:BitmapDataSprite;
 	private var nameText:TextField;
@@ -81,7 +82,7 @@ public class StatsView extends Block {
 			}
 		});
 		const LABEL_FORMAT:Object = {
-			font:'Times New Roman',
+			font:'Palatino Linotype',
 			bold:true,
 			size:22
 		};
@@ -127,7 +128,8 @@ public class StatsView extends Block {
 		}));
 		addElement(lustBar = new StatBar({
 			statName   : "Lust:",
-			minBarColor: '#ff0000',
+			barColor   : '#c02020',
+			minBarColor: '#c00000',
 			hasMinBar  : true,
 			showMax    : true
 		}));
@@ -138,7 +140,8 @@ public class StatsView extends Block {
 		}));
 		*/
 		addElement(fatigueBar = new StatBar({
-			statName: "Fatigue:"
+			statName: "Fatigue:",
+			showMax: true
 		}));
 		/* [INTERMOD: xianxia]
 		addElement(manaBar = new StatBar({
@@ -177,7 +180,8 @@ public class StatsView extends Block {
 			hasBar  : false
 		}));
 		addElement(xpBar = new StatBar({
-			statName: "XP:"
+			statName: "XP:",
+			showMax: true
 		}));
 		addElement(gemsBar = new StatBar({
 			statName: "Gems:",
@@ -364,8 +368,8 @@ public class StatsView extends Block {
 			advancementText.htmlText = "<b>Advancement</b>";
 			levelBar.value           = player.level;
 			if (player.level < kGAMECLASS.levelCap) {
-				xpBar.maxValue = player.requiredXP();
-				xpBar.value    = player.XP;
+				xpBar.maxValue  = player.requiredXP();
+				xpBar.value     = player.XP;
 			} else {
 				xpBar.maxValue  = player.XP;
 				xpBar.value     = player.XP;
@@ -412,7 +416,10 @@ public class StatsView extends Block {
 			dtf.color = textColor;
 			e.nameLabel.defaultTextFormat = dtf;
 			e.nameLabel.setTextFormat(dtf);
-			if (e.bar) e.bar.alpha    = barAlpha;
+			if (e.bar) {
+				e.bar.alpha = barAlpha;
+				if (e.bar.filters.length < 1) e.bar.filters = [new DropShadowFilter()];
+			}
 			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
 		}
 		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,advancementText,timeText]) {

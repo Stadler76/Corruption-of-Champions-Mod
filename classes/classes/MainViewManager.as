@@ -2,6 +2,7 @@
 package classes 
 {
 	import classes.GlobalFlags.kFLAGS;
+	import flash.filters.DropShadowFilter;
 
 	import coc.view.BitmapDataSprite;
 	import coc.view.MainView;
@@ -76,6 +77,14 @@ import flash.ui.Keyboard;
 			element.graphics.beginBitmapFill(bmp,null,false,false);
 			element.graphics.drawRect(0, 0, bmp.width, bmp.height);
 			element.graphics.endFill();
+			var shadow:DropShadowFilter = new DropShadowFilter();
+			shadow.strength = 0.4;
+			if (!isDarkTheme()) {
+				if (element.filters.length < 1) element.filters = [shadow];
+			}
+			else {
+				element.filters = [];
+			}
 		}
 		//------------
 		// REFRESH

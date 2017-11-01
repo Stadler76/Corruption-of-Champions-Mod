@@ -23,8 +23,8 @@ package classes.Items
 				PerkLib.SluttySeduction,5,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.",null,0,0,0,0,"", false, false);
 		public const CLSSYCL:Armor = new Armor("ClssyCl", "Suitclothes", "classy suitclothes", "a set of classy suit-clothes", 1, 400, "A set of classy suitclothes.", "Light");
 		public const DBARMOR:Armor = new PureMaraeArmor();
-		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 18, 600, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
-		public const DSCLROB:Armor = new ArmorWithPerk("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 9, 600, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light",
+		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 18, 900, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
+		public const DSCLROB:Armor = new ArmorWithPerk("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 9, 900, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light",
 				PerkLib.WizardsEndurance,20,0,0,0);
 		public const EBNARMR:Armor = new ArmorWithPerk("EWPlate", "EW Plate", "Ebonweave Platemail", "a set of Ebonweave Platemail", 27, 3000, "The armor is made of ebonweave, created using refined Ebonbloom petals. The armor consists of two layers: an outer of ebonweave plating and an inner of arrow-proof ebonweave cloth.", "Heavy",
 				PerkLib.WizardsEndurance,15,0,0,0);

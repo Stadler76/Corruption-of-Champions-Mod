@@ -63,7 +63,7 @@ package classes.Items.Consumables
 			if (rand(3) === 0 && player.spe100 < 50 && changes < changeLimit) {
 				dynStats("spe", 1 + rand(2));
 				outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Neck restore
 			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
@@ -149,16 +149,7 @@ package classes.Items.Consumables
 			}
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.bRows() > 1 && rand(3) === 0) {
-				changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-				if (player.bRows() >= 3) outputText("abdomen");
-				else outputText("chest");
-				outputText(". The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-				if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-				else outputText(player.skinTone + " " + player.skinDesc);
-				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				dynStats("sen", -5);
-				player.removeBreastRow(player.breastRows.length - 1, 1);
+				mutations.removeExtraBreastRow(tfSource);
 			}
 			//Skin/fur
 			if (!player.hasPlainSkin() && changes < changeLimit && rand(4) === 0 && player.faceType === FACE_HUMAN) {

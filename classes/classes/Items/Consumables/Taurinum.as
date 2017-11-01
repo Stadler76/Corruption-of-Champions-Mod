@@ -26,7 +26,7 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You down the potion, grimacing at the strong taste.");
 			if (changes < changeLimit && rand(2) === 0 && player.spe100 < 80) {
-				changes++;
+				//[removed:1.4.10]//changes++;
 				outputText("\n\nAfter drinking the potion, you feel a bit faster.");
 				dynStats("spe", 1);
 			}

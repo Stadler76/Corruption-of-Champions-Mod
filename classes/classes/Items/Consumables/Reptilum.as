@@ -48,13 +48,13 @@ package classes.Items.Consumables
 			if (player.spe > player.ngPlus(50) && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel sluggish and cold.  Lying down to bask in the sun might make you feel better.");
 				dynStats("spe", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//-Reduces sensitivity.
 			if (player.sens100 > 20 && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nThe sensation of prickly pins and needles moves over your body, leaving your senses a little dulled in its wake.");
 				dynStats("sen", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Raises libido greatly to 50, then somewhat to 75, then slowly to 100.
 			if (player.lib100 < 100 && changes < changeLimit && rand(3) === 0) {
@@ -75,7 +75,7 @@ package classes.Items.Consumables
 				if (player.lib100 < 75) dynStats("lib", 1);
 				//+1 if above 75.
 				dynStats("lib", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//-Raises toughness to 70
 			//(+3 to 40, +2 to 55, +1 to 70)
@@ -95,7 +95,7 @@ package classes.Items.Consumables
 					outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your " + player.skinDesc + " getting tough enough to make you feel invincible.");
 					dynStats("tou", 1);
 				}
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 
 			//Sexual Changes:

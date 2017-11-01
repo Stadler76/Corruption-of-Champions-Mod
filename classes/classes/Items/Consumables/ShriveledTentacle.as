@@ -35,12 +35,12 @@ package classes.Items.Consumables
 			if (rand(3) === 0 && player.tou100 < 50 && changes < changeLimit) {
 				outputText("\n\nYour skin feels clammy and a little rubbery.  You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips.  Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
 				dynStats("tou", 1, "sen", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//- speed down
 			if (rand(3) === 0 && player.spe100 > 40 && changes < changeLimit) {
 				outputText("\n\nA pinprick sensation radiates from your stomach down to your knees, as though your legs were falling asleep.  Wobbling slightly, you stand up and take a few stumbling steps to work the blood back into them.  The sensation fades, but your grace fails to return and you stumble again.  You'll have to be a little more careful moving around for a while.");
-				changes++;
+				//[removed:1.4.10]//changes++;
 				dynStats("spe", -1);
 			}
 			//- corruption increases by 1 up to low threshold (~20)

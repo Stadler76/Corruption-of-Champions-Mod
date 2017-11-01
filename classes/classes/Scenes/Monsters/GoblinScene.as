@@ -210,6 +210,10 @@ package classes.Scenes.Monsters
 				outputText("The goblin groans and drops onto her back.  Her legs spread wide, displaying amazing flexibility as one hand dives into her cunt and the other begins twisting her pierced nipples, one at a time.  The display manages to stir your loins.");
 				dynStats("lus", 20);
 			}
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				combat.cleanupAfterCombat();
+				return;
+			}
 			if (player.lust < 33) {
 				outputText("\n\n<b>You aren't horny enough to rape her.</b>");
 			}

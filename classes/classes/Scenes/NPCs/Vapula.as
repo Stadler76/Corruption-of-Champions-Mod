@@ -472,6 +472,7 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			outputText("Who do you invite?");
+			menu();
 			if (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0)) {
 				if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && player.hasCock()) {
 					addButton(0, "Amily", vapulaAndAmilyThreesome);
@@ -489,7 +490,7 @@ package classes.Scenes.NPCs
 					addButton(4, "Izma", vapulaAndIzmaThreeSome);
 				}
 			}
-			addButton(14, "back", callSlaveVapula);
+			addButton(14, "Back", callSlaveVapula);
 		}
 
 //Vapula-Ceraph threesome

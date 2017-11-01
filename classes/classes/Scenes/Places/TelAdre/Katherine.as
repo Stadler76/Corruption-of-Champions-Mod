@@ -1240,7 +1240,7 @@ private function talkClothesBlouse():void {
 }
 
 private function talkClothesBlouseCompliment():void {
-	outputText("\n\nYou close the distance and give her a hug, stroking her ears until you see her tail swishing from side to side under the skirt.  You tell her she ought to give her own tastes a little more credit, she looks like a nice, innocent girl wearing that blouse.");
+	outputText("\n\nYou close the distance and give her a hug, stroking her ears until you see her tail swishing from side to side under the skirt.  You tell her she ought to give her own tastes a little more credit, she looks like a nice, innocent girl wearing that blouse.\n\n");
 	outputText("Kath giggles and says, “<i>I guess it's good camouflage then.</i>”  ");
 	if (hasCock())
 		outputText("The bulge pressing against your " + (player.isNaga() ? "tail" : "leg") + " suggests how much she appreciates your compliments.");
@@ -4656,7 +4656,7 @@ public function giveKatOralPenisWingWang():void {
 			outputText("empty crate"); //Non-centaurs who are 8'6 or shorter
 		else outputText("broad stone wall"); //Centaurs and those 8'6 or taller
 	}
-	outputText(".  Contrary to what she said, she seems pretty eager and, in just a few moments, you have clear vision and access to " + cockMultiple("her cock and", "both her cocks as well as") + "her already-wet vagina" + (ballSize >= 5 ? " although her pendulous testicles obscure your view of it somewhat" : "") + ".\n\n");
+	outputText(".  Contrary to what she said, she seems pretty eager and, in just a few moments, you have clear vision and access to " + cockMultiple("her cock and", "both her cocks as well as") + " her already-wet vagina" + (ballSize >= 5 ? " although her pendulous testicles obscure your view of it somewhat" : "") + ".\n\n");
 
 	if (cockNumber == 1) {
 		outputText("The puss' pussy is your first target, as you approach her sitting position; as your tongue slowly licks " + (hasBalls() ? "her balls you gently pull them upwards and to the side" : "the underside of her cock it rises higher and higher") + ", completely revealing her increasingly moist pussy.  You tease her about getting so excited but work to please nevertheless");

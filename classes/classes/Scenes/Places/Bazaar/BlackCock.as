@@ -1555,7 +1555,7 @@ package classes.Scenes.Places.Bazaar
 			// Stats Changes
 			//------------
 			if (rand(3) == 0 && player.str100 < 100) {
-				changes++;
+				//[removed:1.4.10]//changes++;
 				if (player.str100 < 50) {
 					outputText("\n\nShivering, you feel a feverish sensation that reminds you of the last time you got sick. Thankfully, it passes swiftly, leaving slightly enhanced strength in its wake.");
 					dynStats("str", .5);

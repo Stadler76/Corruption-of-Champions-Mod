@@ -62,7 +62,7 @@ package classes.Items.Consumables
 					outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
 					dynStats("spe", -1);
 				}
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Toughness (chance of - sensitivity)
 			if (rand(3) === 0 && changes < changeLimit) {
@@ -96,7 +96,7 @@ package classes.Items.Consumables
 						dynStats("sen", -3);
 					}
 				}
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//SEXUAL
 			//Boosts ball size MORE than equinum :D:D:D:D:D:D:
@@ -131,7 +131,7 @@ package classes.Items.Consumables
 			//+hooves
 			if (player.lowerBody !== LOWER_BODY_TYPE_HOOFED) {
 				if (changes < changeLimit && rand(3) === 0) {
-					changes++;
+					//[removed:1.4.10]//changes++;
 					if (player.lowerBody === LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
 					else if (player.lowerBody === LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
 					else if (player.lowerBody === LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
@@ -172,16 +172,7 @@ package classes.Items.Consumables
 				}
 				//-Remove extra breast rows
 				if (changes < changeLimit && player.bRows() > 1 && rand(3) === 0) {
-					changes++;
-					outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-					if (player.bRows() >= 3) outputText("abdomen");
-					else outputText("chest");
-					outputText(". The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-					if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-					else outputText(player.skinTone + " " + player.skinDesc);
-					outputText(" remains. <b>You've lost a row of breasts!</b>");
-					dynStats("sen", -5);
-					player.removeBreastRow(player.breastRows.length - 1, 1);
+					mutations.removeExtraBreastRow(tfSource);
 				}
 				//Shrink boobages till they are normal
 				else if (rand(2) === 0 && changes < changeLimit && player.breastRows.length > 0) {

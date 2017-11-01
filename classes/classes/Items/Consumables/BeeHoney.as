@@ -115,7 +115,7 @@ package classes.Items.Consumables
 			if (changes < changeLimit && Utils.rand(2) == 0 && player.inte100 < 80) {
 				getGame().dynStats("int", 0.1 * (80 - player.inte100));
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.");
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Sexual Stuff
 			//No idears
@@ -137,16 +137,7 @@ package classes.Items.Consumables
 			}
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !getGame().flags[kFLAGS.HYPER_HAPPY]) {
-				changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + getGame().player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-				if (player.bRows() >= 3) outputText("abdomen");
-				else outputText("chest");
-				outputText(". The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-				if (player.skinType == CoC.SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc);
-				else outputText(player.skinTone + " " + player.skinDesc);
-				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				getGame().dynStats("sen", -5);
-				player.removeBreastRow(player.breastRows.length - 1, 1);
+				mutations.removeExtraBreastRow(tfSource);
 			}
 			//Antennae
 			if (changes < changeLimit && player.antennae == CoC.ANTENNAE_NONE && player.horns == 0 && Utils.rand(3) == 0) {

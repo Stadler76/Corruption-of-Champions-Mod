@@ -2766,6 +2766,7 @@ use namespace kGAMECLASS;
 				if (findPerk(PerkLib.Sensitive) >= 0 && dsens >= 0) dsens*= 1+ perk(findPerk(PerkLib.Sensitive)).value1;
 			}
 			super.modStats(dstr, dtou, dspe, dinte, dlib, dsens, dlust, dcor, false, max);
+			game.showUpDown();
 			game.statScreenRefresh();
 		}
 

@@ -2216,7 +2216,7 @@ public function wakeFromBadEnd():void {
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
 	if (getGame().inCombat) {
-		player.clearStatuses();
+		combat.clearStatuses();
 		getGame().inCombat = false;
 	}
 	//Restore stats

@@ -26,7 +26,7 @@ package classes.Items
 		public const T_SSILK:SimpleUseable = new SimpleUseable("T.SSilk", "T.SSilk", "a bundle of tough spider-silk", 6,
 			"This bundle of fibrous silk is incredibly tough and strong, though somehow not sticky in the slightest. You have no idea how to work these tough little strands into anything usable.  Perhaps one of this land's natives might have an idea?",
 			"You look over the tough webbing, confusion evident in your expression. There's really nothing practical you can do with these yourself. It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.");
-		public const D_SCALE:SimpleUseable = new SimpleUseable("D.Scale", "Dragonscale", "a freshly-shed dragonscale", 6, 
+		public const D_SCALE:SimpleUseable = new SimpleUseable("D.Scale", "Dragonscale", "a freshly-shed dragonscale", 45, 
 			"This sheet of dragon scale is incredibly strong and flexible.  No dragons were seriously harmed in the acquisition of this item.", 
 			"You look over the sheet of dragon scale. You've seen various legends about how the scales of a dragon can be worked into tough armor or used in alchemy.");
 		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000, 

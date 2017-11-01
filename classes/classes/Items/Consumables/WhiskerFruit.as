@@ -53,14 +53,14 @@ package classes.Items.Consumables
 					outputText("\n\nYou pause mid-step and crouch. Your leg muscles have cramped up like crazy. After a few moments, the pain passes and you feel like you could chase anything down.");
 					dynStats("spe", .5);
 				}
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Strength raises to 40
 			if (player.str100 < 40 && rand(3) === 0 && changes < changeLimit) {
 				if (rand(2) === 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
 				else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
 				dynStats("str", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Strength ALWAYS drops if over 60
 			//Does not add to change total
@@ -94,7 +94,7 @@ package classes.Items.Consumables
 				//High intelligence
 				else outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this fruit may have actually made you dumber.  It would be best not to eat too much of it.");
 				dynStats("int", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Libido gain
 			if (player.lib100 < 80 && changes < changeLimit && rand(4) === 0) {
@@ -113,7 +113,7 @@ package classes.Items.Consumables
 					outputText("turned on.");
 				}
 				dynStats("lib", 1, "sen", .25);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			
 			//Sexual changes would go here if I wasn't a tard.

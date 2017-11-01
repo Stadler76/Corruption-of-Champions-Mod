@@ -132,7 +132,7 @@ package classes.GlobalFlags
 		//Challenge Achievements (105-109)
 		public static const CHALLENGE_ULTIMATE_NOOB:int			= 105; //Defeat Lethice at level 1.
 		public static const CHALLENGE_ULTIMATE_MUNDANE:int		= 106; //Defeat Lethice without spells. NOT USED.
-		public static const UNKNOWN_ACHIEVEMENT_107:int			= 107;
+		public static const CHALLENGE_PACIFIST:int				= 107; //Beat the game without killing anyone. NOT USED.
 		public static const UNKNOWN_ACHIEVEMENT_108:int			= 108;
 		public static const UNKNOWN_ACHIEVEMENT_109:int			= 109;
 
@@ -206,6 +206,9 @@ package classes.GlobalFlags
 		public static const GENERAL_SAVE_SCUMMER:int			= 175; //Save scum. NOT USED.
 		public static const GENERAL_MAKE_MARETH_GREAT_AGAIN:int	= 176; //Make Mareth Great Again indeed!
 		public static const GENERAL_TERRACOTTA_IMPY:int			= 177; //Place 100 Imp Statues around your camp (Shadow achievement)
+		public static const GENERAL_DINING_IN:int				= 178; //Eat at the Black Cock
+		public static const GENERAL_HUNTER_IS_HUNTED:int		= 179; //Turn the tables on Erlking
+		public static const GENERAL_ALLAHU_AKBAL:int			= 180; //Get all the perks
 	}
 
 }

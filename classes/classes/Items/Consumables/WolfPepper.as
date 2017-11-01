@@ -44,20 +44,20 @@ package classes.Items.Consumables
 				dynStats("tou", (1 * crit));
 				if (crit > 1) outputText("\n\nYou roll your shoulders and tense your arms experimentally. You feel more durable, and your blood seems to run through you more clearly. You know you have more endurance.");
 				else outputText("\n\nYour muscles feel denser and more durable. Not so much that feel stronger, but you feel like you can take more hits.");
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			if (player.spe100 > 30 && rand(7) === 0 && changes < changeLimit) {
 				dynStats("spe", (-1 * crit));
 				if (crit > 1) outputText("\n\nThe pepper's strong taste makes you take a couple steps back and lean against the nearest solid object. You don't feel like you'll be moving very fast anymore.");
 				else outputText("\n\nYou stumble forward, but manage to catch yourself. Still, though, you feel somewhat slower.");
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			if (player.inte100 < 60 && rand(7) === 0 && changes < changeLimit) {
 				dynStats("int", (1 * crit));
 				outputText("\n\nThe spiciness makes your head twirl, but you manage to gather yourself. A strange sense of clarity comes over you in the aftermath, and you feel ");
 				if (crit > 1) outputText("a lot ");
 				outputText("smarter somehow.");
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//MUTATIONZZZZZ
 			//PRE-CHANGES: become biped, remove horns, remove wings, give human tongue, remove claws, remove antennea
@@ -252,16 +252,7 @@ package classes.Items.Consumables
 			}
 			//Remove breast rows if over 4
 			if (changes < changeLimit && player.bRows() > 4 && rand(3) === 0) {
-				changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-				if (player.bRows() >= 3) outputText("abdomen");
-				else outputText("chest");
-				outputText(". The " + player.nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-				if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-				else outputText(player.skinTone + " " + player.skinDesc);
-				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				dynStats("sen", -5);
-				player.removeBreastRow(player.breastRows.length - 1, 1);
+				mutations.removeExtraBreastRow(tfSource);
 			}
 			//Grow breasts if has vagina and has no breasts/nips
 			else if (player.hasVagina() && player.bRows() === 0 && player.breastRows[0].breastRating === 0 && player.nippleLength === 0 && rand(2) === 0 && changes < changeLimit) {

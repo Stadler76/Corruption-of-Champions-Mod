@@ -40,13 +40,13 @@ package classes.Items.Consumables
 			if (player.spe100 > 70 && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
 				dynStats("spe", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//-Reduces intelligence down to 60.
 			if (player.inte100 > 60 && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
 				dynStats("int", -1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//-Raises libido up to 90.
 			if (player.lib100 < 90 && changes < changeLimit && rand(3) === 0) {
@@ -62,7 +62,7 @@ package classes.Items.Consumables
 				//(TARDS)
 				else outputText("puddling in your featureless crotch for a split-second before it slides into your " + player.assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
 				dynStats("lib", 2);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//-Raises toughness up to 90.
 			//(+3 to 50, +2 to 70, +1 to 90)
@@ -82,13 +82,13 @@ package classes.Items.Consumables
 					outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your " + player.skinDesc + " getting tough enough to make you feel invincible.");
 					dynStats("tou", 1);
 				}
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//-Raises strength to 80.
 			if (player.str100 < 80 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nWhile heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength than before.");
 				dynStats("str", 1);
-				changes++;
+				//[removed:1.4.10]//changes++;
 			}
 			//Sexual Changes:
 			//-Lizard dick - first one
@@ -179,6 +179,10 @@ package classes.Items.Consumables
 				outputText("\n\nAfter eating it, your chest aches and tingles, and your hands reach up to scratch at it unthinkingly.  Silently, you hope that you aren't allergic to it.  Just as you start to scratch at your " + player.breastDescript(player.smallestTitRow()) + ", your chest pushes out in slight but sudden growth.");
 				player.breastRows[player.smallestTitRow()].breastRating++;
 				changes++;
+			}
+			//-Remove extra breast rows
+			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
+				mutations.removeExtraBreastRow(tfSource);
 			}
 			//Neck restore
 			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
