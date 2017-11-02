@@ -3359,7 +3359,7 @@ import flash.errors.IllegalOperationError;
 
 		public function breastCup(rowNum:Number):String
 		{
-			if (rowNum == -1) rowNum = this.breastRows.length - 1;
+			if (rowNum == -1) rowNum = this.breastRows.length == 0 ? 0 : this.breastRows.length - 1;
 			return Appearance.breastCup(breastRows[rowNum].breastRating);
 		}
 
