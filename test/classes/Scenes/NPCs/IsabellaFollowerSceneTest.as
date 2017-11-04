@@ -14,6 +14,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Player;
 	import classes.CoC;
+	import classes.Cock;
 	import classes.PregnancyStore;
 	import classes.Scenes.NPCs.IsabellaFollowerScene;
 	import classes.PerkLib;
@@ -80,7 +81,7 @@ package classes.Scenes.NPCs
 			isabellaScene.pregnancy.knockUpForce()
 			isabellaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_ISABELLA)
 			
-			player.cocks = []
+			player.cocks = new Vector.<Cock>();
 			assertThat(player.cumQ(), equalTo(0)); // guard assert 
 
 			cut.isaAppearance();

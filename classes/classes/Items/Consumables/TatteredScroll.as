@@ -43,7 +43,7 @@ package classes.Items.Consumables
 					while (temp > 0) {
 						temp--;
 						//If that breast didnt have nipples reset length
-						if (player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nippleLength = .2;
+						if (player.breastRows[0].nipplesPerBreast < 1) player.nippleLength = .2;
 						player.breastRows[0].nipplesPerBreast = 1;
 					}
 					dynStats("sen", 2, "lus", 1);

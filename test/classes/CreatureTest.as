@@ -1,4 +1,6 @@
 package classes{
+	import classes.internals.IRandomNumber;
+	import classes.internals.RandomNumber;
     import org.flexunit.asserts.*;
 	import org.hamcrest.assertThat;
 	import org.hamcrest.core.*;
@@ -25,11 +27,14 @@ package classes{
 		private const VAGINAL_CAPCITY_OFFSET:Number = 2;
 		private const VAGINAL_CAPCITY_TEST_DELTA:Number = 2;
 		private const RECOVERY_COUNT:Number = 5;
+		private const ANAL_LOOSENESS:Number = 1;
+		private const ANAL_CAPACITY:Number = 6;
 		
         private var cut:Creature;
 		private var noVagina:Creature;
 		private var oneVagina:Creature;
 		private var maxVagina:Creature;
+		private var alwaysZero:IRandomNumber;
 		
 		private function createVaginas(numberOfVaginas:Number, instance:Creature):void {
 			var i:Number;
@@ -58,7 +63,13 @@ package classes{
 		}
          
         [Before]
-        public function setUp():void {  
+        public function setUp():void {
+			alwaysZero = new AlwaysZeroRNG();
+			
+			cut = new Creature();
+			cut.rng = alwaysZero;
+			cut.ass.analLooseness = ANAL_LOOSENESS;
+			
 			noVagina = new Creature();
 			
 			oneVagina = new Creature();
@@ -559,5 +570,49 @@ package classes{
 			
 			assertThat(noVagina.gender, equalTo(GENDER_HERM));
 		}
+		
+		[Test]
+		public function setNewRng():void {
+			var rng:IRandomNumber = new RandomNumber();
+			
+			cut.rng = rng;
+			
+			assertThat(cut.rng, strictlyEqualTo(rng))
+		}
+		
+		
+		[Test(expected="ArgumentError")]
+		public function setNullForRng():void {
+			cut.rng = null;
+		}
+		
+		[Test]
+		public function analStretchWithAreaGreaterThanCapacity(): void {
+			assertThat(cut.buttChangeNoDisplay(ANAL_CAPACITY), equalTo(true));
+		}
+		
+		[Test]
+		public function analStretchWithArea80PercentOfCapacity(): void {
+			assertThat(cut.buttChangeNoDisplay(ANAL_CAPACITY * 0.8), equalTo(true));
+		}
+		
+		[Test]
+		public function analStretchWithArea90PercentOfCapacity(): void {
+			assertThat(cut.buttChangeNoDisplay(ANAL_CAPACITY * 0.9), equalTo(true));
+		}
     }
+}
+
+import classes.internals.IRandomNumber;
+
+class AlwaysZeroRNG implements IRandomNumber {
+	public function random(max:int):int 
+	{
+		return 0;
+	}
+	
+	public function randomCorrected(max:int):int 
+	{
+		return 0;
+	}
 }

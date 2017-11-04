@@ -1380,7 +1380,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Okay! But won't you, like, miss me having bigger boobies?</i>\" Joy teases. Then she opens up her robes and applies Reducto all over her breasts and makes a disgusted expression. \"<i>That pasty thing smells, like, awful! And look at my boobies go!</i>\" Joy exclaims.");
 			if (flags[kFLAGS.JOY_BREAST_SIZE] < BREAST_CUP_DD) {
 				outputText("\n\nNothing happens. \"<i>They're the same size? Why would you want me to, like, get rid of these boobies? They're fun and soft! They'll stay with me!</i>\" Joy teases and giggles.");
-				flags[kFLAGS.JOY_BREAST_SIZE] = BREAST_CUP_DD;
+			//	flags[kFLAGS.JOY_BREAST_SIZE] = BREAST_CUP_DD;
 			}
 			else {
 				outputText("\n\nHer breasts begin shrinking until they appear to have lost a couple of breast sizes. \"<i>I feel, like, a bit better! My boobies feel lighter now.</i>\" Joy smiles. Her tail wiggles excitedly.");
@@ -1394,11 +1394,11 @@ package classes.Scenes.NPCs
 			outputText("You tell Joy that she could shrink her cock.");
 			outputText("\n\n\"<i>My funstick is, like, too big for you?</i>\" Joy teases. Then she removes her shorts and applies Reducto all over her cock and makes a disgusted expression. \"<i>That pasty thing smells, like, awful! And look at my funstick go!</i>\"");
 			if (flags[kFLAGS.JOY_COCK_SIZE] < 5.5) {
-				outputText("Nothing seems to happen. \"<i>I'm fine with my funstick. Like, why would you want my funstick to be smaller?</i>\" Joy asks in a teasing manner.");
-				flags[kFLAGS.JOY_COCK_SIZE] = 5.5;
+				outputText("\n\n\Nothing seems to happen. \"<i>I'm fine with my funstick. Like, why would you want my funstick to be smaller?</i>\" Joy asks in a teasing manner.");
+			//	flags[kFLAGS.JOY_COCK_SIZE] = 5.5;
 			}
 			else {
-				outputText("Her cock begins to shrink until it has lost an inch. \"<i>My funstick is, like, smaller! Think you can handle my size better?</i>\" Joy asks in a teasing manner.");
+				outputText("\n\n\Her cock begins to shrink until it has lost an inch. \"<i>My funstick is, like, smaller! Think you can handle my size better?</i>\" Joy asks in a teasing manner.");
 				flags[kFLAGS.JOY_COCK_SIZE]--;
 			}
 			doNext(genericMenu);

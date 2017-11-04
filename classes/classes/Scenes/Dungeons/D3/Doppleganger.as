@@ -262,7 +262,7 @@ package classes.Scenes.Dungeons.D3
 				(this.vaginas[0] as VaginaClass).vaginalWetness = 6;
 				(this.vaginas[0] as VaginaClass).virgin = false;
 			}
-			this.breastRows = [];
+			this.breastRows = new Vector.<BreastRowClass>();
 			
 			for (i = 0; i < player.breastRows.length; i++)
 			{

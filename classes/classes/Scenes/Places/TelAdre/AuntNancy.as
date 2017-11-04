@@ -49,6 +49,7 @@ public function interactWithAuntNancy():void {
 		outputText("Aunt Nancy looks up as you walk over to her, and her eyes light up.  Happily, she greets you with a prim little hand atop yours, a bit of evidence of the intimacy you've shared.\n\n");
 
 		outputText("\"<i>Couldn't stay away, could you friend?</i>\" she asks, quietly, a sexy smile on her lovely face.  \"<i>What'll it be? Do you want a drink...</i>\"  The spider-lady leans her white-haired head next to your ear conspiratorially, and whispers, \"<i>Or, do you want me to get off early and give you a little... massage?</i>\"  You shiver at her words.\n\n");
+		menu();
 		//[Choice: Strong, Light, Agree, Decline]
 		if (pc.gems < 5) {
 			addDisabledButton(0, "Strong", "You can't afford it!");
@@ -68,6 +69,7 @@ public function interactWithAuntNancy():void {
 		outputText("\"<i>Welcome to the Wet Bitch.  My name's Aunt Nancy, and I'll be your server this morning.</i>\"  She smiles.  \"<i>Well, what'll it be, friend?</i>\" the bartender asks, her voice rich and velvety rather than cute as she leans on the bar, giving you a good look at her cleavage.  \"<i>Bit early in the day for the strong stuff, I reckon.</i>\"\n\n");
 		//[If MetNancy < 1, MetNancy += 1]
 		if (flags[kFLAGS.NANCY_MET] < 1) flags[kFLAGS.NANCY_MET] = 1;
+		menu();
 		//[Choice: Strong, Light]
 		if (pc.gems < 5) {
 			addDisabledButton(0, "Strong", "You can't afford it!");
@@ -130,7 +132,7 @@ private function lightStuff():void {
 	if (player.inte >= 20) outputText("  You realize that what look like almost-shoulder-length gloves over her hands must actually be shell-like portions of this exoskeleton.");
 	outputText("\n\n");
 
-	outputText("Once she gives you the drink, you take a tentative sip, and find it very sweet and refreshing, without seeming very strong or alcoholic.  It's very good, and you quickly have another.");
+	outputText("Once she gives you the drink, you take a tentative sip, and find it very sweet and refreshing, without seeming very strong or alcoholic.  It's very good, and you quickly have another.  ");
 	
 	//[If FirstTalkNancy = 0]
 	if (flags[kFLAGS.NANCY_TIMES_TALKED] == 0) {

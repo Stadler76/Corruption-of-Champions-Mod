@@ -36,7 +36,7 @@ package classes.Scenes.Areas.Bog
 					flags[kFLAGS.MET_LIZAN_FIRST_TIME] = 1;
 				}
 				outputText("After a moment of silent consideration he speaks. \n\n\"<i>Hey there,</i>\" he says, his lizard lips pulling into a big grin, \"<i>... and who might you be?</i>\" You answer with the truth, your name. ");
-				outputText("\n\n\"<i>Well the alliance is very welcoming to anyone who isn't corrupt,</i>\" he says before rubbing his now bulging loincloth, \"<i>But If you would like to play I'm game.</i>\" he widens his stance like he's preparing to fight but his face is still light and playful.");
+				outputText("\n\n\"<i>Well the alliance is very welcoming to anyone who isn't corrupt,</i>\" he says before rubbing his now bulging loincloth, \"<i>But if you would like to play I'm game.</i>\" he widens his stance like he's preparing to fight but his face is still light and playful.");
 				outputText("\n\nYou're not sure if the lizan wants to have sex with you or have a quick sparring match. You could just attack him and do whatever you want with him. What will you do?");
 				if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;

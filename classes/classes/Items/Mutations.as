@@ -354,7 +354,6 @@ package classes.Items
 					outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
 					player.createBreastRow();
 					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastsPerRow = 2;
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.breastRows[0].breastRating = 2;
 					outputText("\n");

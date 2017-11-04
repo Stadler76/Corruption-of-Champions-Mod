@@ -18,13 +18,15 @@ package classes.Scenes.Places{
 //Set Up With The Travelling, Tainted Bazaar
 public function Bazaar(){
 }
+		private var rng:IRandomNumber = new RandomNumber();
+
 		public var blackCock:BlackCock = new BlackCock();
 		public var benoit:Benoit = new Benoit();
 		public var cinnabar:Cinnabar = new Cinnabar();
 		public var fapArena:FapArena = new FapArena();
 		public var lilium:Lilium = new Lilium();
-		public var roxanne:Roxanne = new Roxanne();
 		public var chillySmith:ChillySmith = new ChillySmith();
+		public var roxanne:Roxanne = new Roxanne(rng);
 
 //[Find Travelling Bazaar]
 public function findBazaar():void {

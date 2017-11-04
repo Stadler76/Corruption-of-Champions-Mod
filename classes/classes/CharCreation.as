@@ -324,7 +324,7 @@ import fl.controls.ComboBox;
 					trace("1 vagina purged.");
 				}
 				//Clear breasts
-				player.breastRows = [];
+				player.breastRows = new Vector.<BreastRowClass>();
 			}
 			else {
 				var hadOldCock:Boolean = player.hasCock();
@@ -1672,8 +1672,8 @@ import fl.controls.ComboBox;
 				}
 			}
 			outputText("\n\nAfter looking around the room for a while, you look into the mirror and begin to recollect who you are...");
-			player.breastRows = [];
-			player.cocks = [];
+			player.breastRows = new Vector.<BreastRowClass>();
+			player.cocks = new Vector.<Cock>();
 			player.vaginas = new Vector.<VaginaClass>();
 			doNext(routeToGenderChoiceReincarnation);
 		}

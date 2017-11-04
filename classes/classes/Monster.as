@@ -526,7 +526,7 @@
 
 		protected function initGenderless():void
 		{
-			this.cocks = [];
+			this.cocks = new Vector.<Cock>();
 			this.vaginas = new Vector.<VaginaClass>();
 			initedGenitals = true;
 			if (plural) {

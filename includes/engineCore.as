@@ -412,6 +412,9 @@ public function removeButton(arg:*):void {
 
 /**
  * Hides all bottom buttons.
+ * 
+ * <b>Note:</b> Calling this with open formatting tags can result in strange behaviour, 
+ * e.g. all text will be formatted instead of only a section.
  */
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
 	for (var i:int = 0; i <= MAX_BUTTON_INDEX; i++) {

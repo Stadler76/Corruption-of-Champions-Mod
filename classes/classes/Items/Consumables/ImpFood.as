@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Consumable;
@@ -282,7 +283,7 @@ package classes.Items.Consumables
 					player.createCock();
 					player.cocks[0].cockLength = 12;
 					player.cocks[0].cockThickness = 2;
-					player.cocks[0].cockType = 0;
+					player.cocks[0].cockType = CockTypesEnum.HUMAN;
 				}
 				if (player.balls === 0) {
 					outputText("\n\nA strange, unpleasant pressure forms between your thighs. You take off your armor and see that you've grown balls. <b>You've grown balls due to being an imp!</b>");

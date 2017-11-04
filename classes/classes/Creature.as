@@ -16,14 +16,23 @@ import classes.StatusEffects.Combat.CombatStrBuff;
 import classes.StatusEffects.Combat.CombatTouBuff;
 import classes.internals.Profiling;
 import classes.internals.Utils;
-	import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.internals.IRandomNumber;
+import classes.internals.RandomNumber;
+import classes.internals.Utils;
+import classes.VaginaClass;
+import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.internals.profiling.Begin;
 import classes.internals.profiling.End;
 
 import flash.errors.IllegalOperationError;
+import classes.internals.LoggerFactory;
+import flash.display.InteractiveObject;
+import flash.errors.IllegalOperationError;
+import mx.logging.ILogger;
 
 	public class Creature extends Utils
 	{
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(Creature);
 
 		include "../../includes/appearanceDefs.as";
 
@@ -40,6 +49,34 @@ import flash.errors.IllegalOperationError;
 		//"a" refers to how the article "a" should appear in text. 
 		private var _short:String = "You";
 		private var _a:String = "a ";
+		
+		/**
+		 * Normally creatures do not need a unique RNG,
+		 * so to avoid unnecessary memory usage they use the default instance.
+		 */
+		private var _rng:IRandomNumber = Utils.DEFAULT_RNG;
+		
+		/**
+		 * Set the RNG this class uses. Intended for testing.
+		 * @param	rng to use for random numbers
+		 * @return the RNG that was set
+		 */
+		public function set rng(rng:IRandomNumber):void {
+			if (rng === null) {
+				throw new ArgumentError("RNG cannot be null");
+			}
+			
+			this._rng = rng;
+		}
+		
+		/**
+		 * Get the RNG this class uses. Intended for testing.
+		 * @return the RNG used
+		 */
+		public function get rng():IRandomNumber {
+			return this._rng;
+		}
+		
 		public function get short():String { return _short; }
 		public function set short(value:String):void { _short = value; }
 		public function get a():String { return _a; }
@@ -549,7 +586,7 @@ import flash.errors.IllegalOperationError;
 		//MALE STUFF
 		//public var cocks:Array;
 		//TODO: Tuck away into Male genital class?
-		public var cocks:/*Cock*/Array;
+		public var cocks:Vector.<Cock>;
 		//balls
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
@@ -571,7 +608,7 @@ import flash.errors.IllegalOperationError;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
 		public var nippleLength:Number = .25;
-		public var breastRows:/*BreastRowClass*/Array;
+		public var breastRows:Vector.<BreastRowClass>;
 		public var ass:AssClass = new AssClass();
 		
 		/**
@@ -731,9 +768,9 @@ import flash.errors.IllegalOperationError;
 		{
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
-			cocks = [];
+			cocks = new Vector.<Cock>();
 			vaginas = new Vector.<VaginaClass>();
-			breastRows = [];
+			breastRows = new Vector.<BreastRowClass>();
 			_perks = [];
 			statusEffects = [];
 			//keyItems = new Array();
@@ -2733,40 +2770,52 @@ import flash.errors.IllegalOperationError;
 		}
 
 		public function buttChangeNoDisplay(cArea:Number):Boolean {
+			LOGGER.debug("Attempting anal stretch for {0} with anal capacity of {1} vs a cock area of {2}", this, analCapacity(), cArea);
 			var stretched:Boolean = false;
 			//cArea > capacity = autostreeeeetch half the time.
-			if (cArea >= analCapacity() && rand(2) == 0) {
+			if (cArea >= analCapacity() && rng.random(2) === 0) {
 				ass.analLooseness++;
 				stretched = true;
 				//Reset butt stretchin recovery time
-				if (hasStatusEffect(StatusEffects.ButtStretched)) changeStatusValue(StatusEffects.ButtStretched,1,0);
+				if (hasStatusEffect(StatusEffects.ButtStretched)) {
+					changeStatusValue(StatusEffects.ButtStretched,1,0);
+				}
 			}
 			//If within top 10% of capacity, 25% stretch
-			if (cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
+			if (cArea < analCapacity() && cArea >= .9*analCapacity() && rng.random(4) === 0) {
 				ass.analLooseness++;
 				stretched = true;
 			}
 			//if within 75th to 90th percentile, 10% stretch
-			if (cArea < .9 * analCapacity() && cArea >= .75 * analCapacity() && rand(10) == 0) {
+			if (cArea < .9 * analCapacity() && cArea >= .75 * analCapacity() && rng.random(10) === 0) {
 				ass.analLooseness++;
 				stretched = true;
 			}
 			//Anti-virgin
-			if (ass.analLooseness == 0) {
+			if (ass.analLooseness === 0) {
 				ass.analLooseness++;
 				stretched = true;
 			}
-			if (ass.analLooseness > 5) ass.analLooseness = 5;
+			
+			if (ass.analLooseness > 5) {
+				ass.analLooseness = 5;
+			}
 			//Delay un-stretching
 			if (cArea >= .5 * analCapacity()) {
 				//Butt Stretched used to determine how long since last enlargement
-				if (!hasStatusEffect(StatusEffects.ButtStretched)) createStatusEffect(StatusEffects.ButtStretched,0,0,0,0);
+				if (!hasStatusEffect(StatusEffects.ButtStretched)) {
+					createStatusEffect(StatusEffects.ButtStretched,0,0,0,0);
+				}
 				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusEffects.ButtStretched,1,0);
+				else {
+					changeStatusValue(StatusEffects.ButtStretched,1,0);
+				}
 			}
+			
 			if (stretched) {
-				trace("BUTT STRETCHED TO " + (ass.analLooseness) + ".");
+				LOGGER.debug("Butt Stretched to {0}", ass.analLooseness);
 			}
+			
 			return stretched;
 		}
 

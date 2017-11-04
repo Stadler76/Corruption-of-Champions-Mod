@@ -79,6 +79,9 @@ import flash.utils.setTimeout;
 		 *
 		 * This doesn't clear the output buffer, so you can add more text after that and flush it again.
 		 * flush() always ends a method chain, so you need to start a new one.
+		 * 
+		 * <b>Note:</b> Calling this with open formatting tags can result in strange behaviour, 
+		 * e.g. all text will be formatted instead of only a section.
 		 */
 		public function flush():void
 		{

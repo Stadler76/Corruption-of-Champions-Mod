@@ -3,6 +3,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.StatusEffects;
+	import classes.BreastRowClass;
 	
 	/**
 	 * Reset player character.
@@ -102,7 +103,7 @@ package classes.Items.Consumables
 			if (player.ass.analLooseness > 1) player.ass.analLooseness = 1;
 			if (player.ass.analWetness > 1) player.ass.analWetness = 1;
 			//Clear breasts
-			player.breastRows = [];
+			player.breastRows = new Vector.<BreastRowClass>();
 			player.createBreastRow();
 			player.nippleLength = .25;
 			//Girls and herms get bewbs back

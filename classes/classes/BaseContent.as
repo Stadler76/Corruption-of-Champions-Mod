@@ -240,6 +240,12 @@
 			kGAMECLASS.doNext(eventNo);
 		}
 		
+		/**
+		 * Hides all bottom buttons.
+		 * 
+		 * <b>Note:</b> Calling this with open formatting tags can result in strange behaviour, 
+		 * e.g. all text will be formatted instead of only a section.
+		 */
 		protected function menu():void
 		{
 			kGAMECLASS.menu();
