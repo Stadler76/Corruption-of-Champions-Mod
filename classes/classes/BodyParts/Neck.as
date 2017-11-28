@@ -7,9 +7,11 @@ package classes.BodyParts
 	 */
 	public class Neck extends BaseBodyPart
 	{
-		include "../../../includes/appearanceDefs.as";
+		public static const NORMAL:int     =   0; // normal human neck. neckLen = 2 inches
+		public static const DRACONIC:int   =   1; // (western) dragon neck. neckLen = 2-30 inches
+		public static const COCKATRICE:int =   2;
 
-		public var type:Number  = NECK_TYPE_NORMAL;
+		public var type:Number  = NORMAL;
 		public var len:Number   = 2;
 		public var pos:Boolean  = false;
 		public var color:String = "no";
@@ -18,13 +20,13 @@ package classes.BodyParts
 
 		public function Neck()
 		{
-			_nlMax[NECK_TYPE_NORMAL]   =  2;
-			_nlMax[NECK_TYPE_DRACONIC] = 30;
+			_nlMax[NORMAL]   =  2;
+			_nlMax[DRACONIC] = 30;
 		}
 
 		public function restore():void
 		{
-			type  = NECK_TYPE_NORMAL;
+			type  = NORMAL;
 			len   = 2;
 			pos   = false;
 			color = "no";
@@ -66,7 +68,7 @@ package classes.BodyParts
 
 		override public function canDye():Boolean
 		{
-			return type == NECK_TYPE_COCKATRICE;
+			return type == COCKATRICE;
 		}
 
 		override public function hasDyeColor(_color:String):Boolean

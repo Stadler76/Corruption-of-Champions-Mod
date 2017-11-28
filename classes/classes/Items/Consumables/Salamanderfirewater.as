@@ -1,6 +1,7 @@
 package classes.Items.Consumables 
 {
 	import classes.Appearance;
+	import classes.BodyParts.*;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
@@ -69,7 +70,7 @@ package classes.Items.Consumables
 			if (player.tou100 < 90 && changes < changeLimit && rand(3) === 0) {
 				//(+3)
 				if (player.tou100 < 50) {
-					outputText("\n\nYour body and skin both thicken noticeably.  You pinch your " + player.skinDesc + " experimentally and marvel at how much tougher it is now.");
+					outputText("\n\nYour body and skin both thicken noticeably.  You pinch your " + player.skin.desc + " experimentally and marvel at how much tougher it is now.");
 					dynStats("tou", 3);
 				}
 				//(+2)
@@ -79,7 +80,7 @@ package classes.Items.Consumables
 				}
 				//(+1)
 				else {
-					outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your " + player.skinDesc + " getting tough enough to make you feel invincible.");
+					outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your " + player.skin.desc + " getting tough enough to make you feel invincible.");
 					dynStats("tou", 1);
 				}
 				//[removed:1.4.10]//changes++;
@@ -185,94 +186,98 @@ package classes.Items.Consumables
 				mutations.removeExtraBreastRow(tfSource);
 			}
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) === 0) {
+				mutations.restoreNeck(tfSource);
+			}
 			//Rear body restore
-			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
+			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) {
+				mutations.restoreRearBody(tfSource);
+			}
 			//Ovi perk loss
 			if (rand(5) === 0) {
 				mutations.updateOvipositionPerk(tfSource);
 			}
 			//Physical changes:
 			//Tail - 1st gain reptilian tail, 2nd unlocks enhanced with fire tail whip attack
-			if (player.tailType !== TAIL_TYPE_LIZARD && player.tailType !== TAIL_TYPE_SALAMANDER && changes < changeLimit && rand(3) === 0) {
+			if (player.tail.type !== Tail.LIZARD && player.tail.type !== Tail.SALAMANDER && changes < changeLimit && rand(3) === 0) {
 				//No tail
-				if (player.tailType === TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + player.assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  <b>You now have a reptilian tail!</b>");
+				if (player.tail.type === Tail.NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + player.assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  <b>You now have a reptilian tail!</b>");
 				//Yes tail
 				else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  <b>You now have a reptilian tail.</b>");
-				player.tailType = TAIL_TYPE_LIZARD;
+				player.tail.type = Tail.LIZARD;
 				changes++;
 			}
-			if (player.tailType === TAIL_TYPE_LIZARD && changes < changeLimit && rand(3) === 0) {
+			if (player.tail.type === Tail.LIZARD && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nYou feel a strange heating sensation in your tail and when you grab your own tail, you can see that it retains the same shape though the color changes to red. It becomes hotter to the touch and you let go of your tail before it gets too hot. For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>");
-				player.tailType = TAIL_TYPE_SALAMANDER;
+				player.tail.type = Tail.SALAMANDER;
 				changes++;
 			}
 			//Legs
-			if (player.lowerBody !== LOWER_BODY_TYPE_SALAMANDER && player.tailType === TAIL_TYPE_SALAMANDER && changes < changeLimit && rand(3) === 0) {
+			if (player.lowerBody.type !== LowerBody.SALAMANDER && player.tail.type === Tail.SALAMANDER && changes < changeLimit && rand(3) === 0) {
 				//Hooves -
-				if (player.lowerBody === LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
+				if (player.lowerBody.type === LowerBody.HOOFED) outputText("\n\nYou scream in agony as you feel your hooves crack and break apart, beginning to rearrange.  Your legs change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
 				//TAURS -
 				else if (player.isTaur()) outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on digitigrade legs with salamander-like claws.");
 				//feet types -
-				else if (player.lowerBody === LOWER_BODY_TYPE_HUMAN || player.lowerBody === LOWER_BODY_TYPE_DOG || player.lowerBody === LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody === LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody === LOWER_BODY_TYPE_BEE || player.lowerBody === LOWER_BODY_TYPE_CAT || player.lowerBody === LOWER_BODY_TYPE_LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
+				else if (player.lowerBody.type === LowerBody.HUMAN || player.lowerBody.type === LowerBody.DOG || player.lowerBody.type === LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody.type === LowerBody.DEMONIC_CLAWS || player.lowerBody.type === LowerBody.BEE || player.lowerBody.type === LowerBody.CAT || player.lowerBody.type === LowerBody.LIZARD) outputText("\n\nYou scream in agony as you feel the bones in your legs break and begin to rearrange. They change to a digitigrade shape while your feet grow claws and shift to have three toes on the front and a smaller toe on the heel.");
 				//Else –
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.");
 				outputText("  <b>You have salamander legs and claws!</b>");
-				player.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
-				player.legCount = 2;
+				player.lowerBody.type = LowerBody.SALAMANDER;
+				player.lowerBody.legCount = 2;
 				changes++;
 			}
 			//Arms
-			if (player.armType !== ARM_TYPE_SALAMANDER && player.lowerBody === LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) === 0) {
+			if (player.arms.type !== Arms.SALAMANDER && player.lowerBody.type === LowerBody.SALAMANDER && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of a salamander with leathery, red scales and short, fiery-red claws replacing your fingernails.  <b>You now have salamander arms.</b>");
-				player.armType = ARM_TYPE_SALAMANDER;
-				mutations.updateClaws(CLAW_TYPE_SALAMANDER);
+				player.arms.type = Arms.SALAMANDER;
+				mutations.updateClaws(Claws.SALAMANDER);
 				changes++;
 			}
 			//Remove odd eyes
-			if (changes < changeLimit && rand(4) === 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType === EYES_BLACK_EYES_SAND_TRAP) {
+			if (changes < changeLimit && rand(4) === 0 && player.eyes.type > Eyes.HUMAN) {
+				if (player.eyes.type === Eyes.BLACK_EYES_SAND_TRAP) {
 					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
 				}
 				else {
 					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
-					if (player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeType === EYES_SPIDER) outputText(" <b>Your arachnid eyes are gone!</b>");
+					if (player.eyes.type === Eyes.FOUR_SPIDER_EYES || player.eyes.type === Eyes.SPIDER) outputText(" <b>Your arachnid eyes are gone!</b>");
 					outputText(" <b>You have normal, humanoid eyes again.</b>");
 				}
-				player.eyeType = EYES_HUMAN;
-				player.eyeCount = 2;
+				player.eyes.type = Eyes.HUMAN;
+				player.eyes.count = 2;
 				changes++;
 			}
 			//Human face
-			if (player.faceType !== FACE_HUMAN && changes < changeLimit && rand(4) === 0) {
-				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.");
-				player.faceType = FACE_HUMAN;
+			if (player.face.type !== Face.HUMAN && changes < changeLimit && rand(4) === 0) {
+				outputText("\n\nSudden agony sweeps over your " + player.faceDescript() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.");
+				player.face.type = Face.HUMAN;
 				changes++;
 			}
 			//Human ears
-			if (player.faceType === FACE_HUMAN && player.earType !== EARS_HUMAN && changes < changeLimit && rand(4) === 0) {
+			if (player.face.type === Face.HUMAN && player.ears.type !== Ears.HUMAN && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
-				player.earType = EARS_HUMAN;
+				player.ears.type = Ears.HUMAN;
 				changes++;
 			}
 			//-Skin color change
 			var humanSkinColors:Array = ["light", "fair", "tan", "dark"];
-			if (humanSkinColors.indexOf(player.skinTone) < 0 && changes < changeLimit && rand(4) === 0) {
+			if (humanSkinColors.indexOf(player.skin.tone) < 0 && changes < changeLimit && rand(4) === 0) {
 				changes++;
 				outputText("\n\nIt takes a while for you to notice, but <b>");
-				if (player.hasFur()) outputText("the skin under your " + player.furColor + " " + player.skinDesc + " has ");
-				else outputText("your " + player.skinDesc + (player.skinDesc.indexOf("scales") !== -1 ? " have " : " has "));
-				player.skinTone = randomChoice(humanSkinColors);
-				mutations.updateClaws(player.clawType);
-				outputText("changed to become " + player.skinTone + " colored.</b>");
+				if (player.hasFur()) outputText("the skin under your " + player.skin.furColor + " " + player.skin.desc + " has ");
+				else outputText("your " + player.skin.desc + (player.skin.desc.indexOf("scales") !== -1 ? " have " : " has "));
+				player.skin.tone = randomChoice(humanSkinColors);
+				mutations.updateClaws(player.claws.type);
+				outputText("changed to become " + player.skin.tone + " colored.</b>");
 			}
 			//Change skin to normal
-			if (!player.hasPlainSkin() && player.earType === EARS_HUMAN && rand(3) === 0 && changes < changeLimit) {
+			if (!player.hasPlainSkin() && player.ears.type === Ears.HUMAN && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales());
 				outputText(" " + (player.hasScales() ? "are" : "is") + " falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>");
-				player.skinType = SKIN_TYPE_PLAIN;
-				player.skinDesc = "skin";
-				player.skinAdj  = "";
+				player.skin.type = Skin.PLAIN;
+				player.skin.desc = "skin";
+				player.skin.adj  = "";
 				player.underBody.restore();
 				changes++;
 			}

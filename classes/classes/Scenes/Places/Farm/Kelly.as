@@ -53,7 +53,7 @@ Every encounter raises corruption by 5, except the last one that raises corrupti
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			trace("\nKelly time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nKelly time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
 				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) flags[kFLAGS.KELLY_DISOBEYING_COUNTER]++;
@@ -1563,7 +1563,6 @@ private function kellyPreggers():void {
 	if (flags[kFLAGS.KELLY_HEAT_TIME] > 0) x += 15;
 	if (rand(100) + 1 <= 80) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_CENTAUR - 84);
-		trace("Kelly knocked up.");
 	}
 }
 	

@@ -8,6 +8,7 @@ package classes
 		//Pregancy types. Both butt and normal. Each type represents the father of this baby.
 		public static const PREGNANCY_IMP:int                   =   1;
 		public static const PREGNANCY_MINOTAUR:int              =   2;
+		public static const PREGNANCY_COCKATRICE:int            =   3;
 		public static const PREGNANCY_MOUSE:int                 =   4;
 		public static const PREGNANCY_OVIELIXIR_EGGS:int        =   5; //Also caused by Phoenixes apparently
 		public static const PREGNANCY_HELL_HOUND:int            =   6;
@@ -73,6 +74,7 @@ package classes
 		public static const INCUBATION_IZMA:int                 = 300;
 		public static const INCUBATION_SPIDER:int               = 400;
 		public static const INCUBATION_BASILISK:int             = 250;
+		public static const INCUBATION_COCKATRICE:int           = 225;
 		public static const INCUBATION_DRIDER:int               = 400;
 		public static const INCUBATION_GOO_GIRL:int             =  85;
 		public static const INCUBATION_EMBER:int                = 336;
@@ -113,7 +115,7 @@ package classes
 			_pregnancyEventValue = new Vector.< Vector.<int> >();
 			_buttPregnancyEventValue = new Vector.< Vector.<int> >();
 			if (pregType < 0 || pregType > MAX_FLAG_VALUE || pregInc < 0 || pregInc > MAX_FLAG_VALUE || buttPregType < 0 || buttPregType > MAX_FLAG_VALUE || buttPregInc < 0 || buttPregInc > MAX_FLAG_VALUE || pregType == buttPregType || pregInc == buttPregInc) {
-				trace("Error: PregnancyStore created with invalid values for its flags. PregnancyStore(" + pregType + ", " + pregInc + ", " + buttPregType + ", " + buttPregInc + ")");
+				CoC_Settings.error("Error: PregnancyStore created with invalid values for its flags. PregnancyStore(" + pregType + ", " + pregInc + ", " + buttPregType + ", " + buttPregInc + ")");
 			}
 		}
 	

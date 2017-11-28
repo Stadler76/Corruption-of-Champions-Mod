@@ -1,6 +1,9 @@
 ﻿package classes.Scenes.Areas.Desert
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	import classes.internals.*;
 	import classes.display.SpriteDb;
 
@@ -123,14 +126,14 @@
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = rand(8) + 150;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.skinTone = "fair";
-			this.hairColor = "black";
-			this.hairLength = 15;
+			this.hips.rating = Hips.RATING_AMPLE+2;
+			this.butt.rating = Butt.RATING_LARGE;
+			this.skin.tone = "fair";
+			this.hair.color = "black";
+			this.hair.length = 15;
 			initStrTouSpeInte(55, 10, 45, 55);
 			initLibSensCor(60, 45, 50);
 			this.weaponName = "claws";
@@ -145,7 +148,7 @@
 			this.level = 4;
 			this.gems = 2 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tail.type = Tail.DEMONIC;
 			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			checkMonster();
 		}

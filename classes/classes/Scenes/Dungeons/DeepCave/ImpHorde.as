@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.DeepCave
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 
 	public class ImpHorde extends Monster
@@ -190,7 +191,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		public function ImpHorde()
 		{
-			trace("ImpHorde Constructor!");
+			//trace("ImpHorde Constructor!");
 			this.a = "the ";
 			this.short = "imp horde";
 			this.imageName = "impmob";
@@ -203,15 +204,15 @@ package classes.Scenes.Dungeons.DeepCave
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 36;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "red";
-			this.hairColor = "black";
-			this.hairLength = 1;
+			this.hips.rating = Hips.RATING_SLENDER;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.skin.tone = "red";
+			this.hair.color = "black";
+			this.hair.length = 1;
 			initStrTouSpeInte(20, 10, 25, 12);
 			initLibSensCor(45, 45, 100);
 			this.weaponName = "fists";
@@ -225,7 +226,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.gems = 20 + rand(25);
 			this.additionalXP = 50;
 			this.drop = new WeightedDrop(armors.NURSECL, 1);
-			this.wingType = WING_TYPE_IMP;
+			this.theWingType = Wings.IMP;
 			this.wingDesc = "imp wings";
 			checkMonster();
 		}

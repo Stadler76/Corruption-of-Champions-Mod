@@ -67,7 +67,6 @@ package classes.Scenes.NPCs{
 			var needNext:Boolean = false;
 			checkedExgartuan = 0; //Make sure we test just once in timeChangeLarge
 			if (player.hasStatusEffect(StatusEffects.Exgartuan)) { //Update Exgartuan stuff
-				trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));
 				if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
 					outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.  Perhaps you got too small for Exgartuan to handle?</b>\n");
 					awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, false, true);
@@ -341,7 +340,7 @@ public function exgartuanMasturbation():void {
 			else outputText("work the shaft relentlessly, drawing out more and more of the demon's pre-seed until your forearms and upper thighs are coated in the stuff, shining darkly.");
 			outputText("  You pant and moan, forced to feel such wonderfully obscene sensations.\n\n");
 			outputText("\"<i>You should look at yourself, panting and moaning like a rutting animal.  I wonder, are you still a champion  or a slave to the things I'm doing to you?  You look like a sex slave, but are you truly addicted to the feeling of squirting thick demonic jism?  Such a slutty champion you've become, " + player.short + ",</i>\" taunts Exgartuan.  Part of you wants to object, to shout down his suggestions, but every time you open your mouth the only sound to escape is a wanton moan.\n\n");
-			outputText("Your orgasm spreads through the demon like a wave.  You briefly wonder if it's the demon causing this to feel so good, or your own corrupt desires.  The thoughts are scattered by the feeling of a fat gob of spooge splattering over your " + player.face() + ".  You blink your eyes clear in time to see the fat, pulsating tip of your " + player.cockDescript(0) + " hovering in front of your face.  Your urethra spreads wide, launching another spurt and splattering it into your " + player.hairDescript() + ".\n\n");
+			outputText("Your orgasm spreads through the demon like a wave.  You briefly wonder if it's the demon causing this to feel so good, or your own corrupt desires.  The thoughts are scattered by the feeling of a fat gob of spooge splattering over your " + player.faceDescript() + ".  You blink your eyes clear in time to see the fat, pulsating tip of your " + player.cockDescript(0) + " hovering in front of your face.  Your urethra spreads wide, launching another spurt and splattering it into your " + player.hairDescript() + ".\n\n");
 			outputText("\"<i>Oh, if only your elders could see you now, soaking yourself in cum after submitting to a demon's will.  Ooooh, that feels good,</i>\" mutters your possessed prick as it continues to paint you, the hot eruptions tapering off into a steady trickle of whiteness, running down your " + player.allBreastsDescript() + ".  You lie back, humiliated, but smiling happily at how RELIEVED you are after creating such a massive eruption.\n\n");
 			
 			outputText("Temporarily sated, Exgartuan deflates, not even bothering to taunt you while you try to clean up the goop now splattered over your upper body.");
@@ -903,8 +902,8 @@ private function exgartuanSleepSurprise():void {
 			//(no balls)
 			if (player.balls == 0) {
 				outputText("The ");
-				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("puffy");
-				else if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("glistening");
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) outputText("puffy");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but there's no pleasure to be had for your greedy gash.  Cool night air washes over the exposed ");
 				if (player.hasScales()) outputText("scales");
@@ -917,13 +916,13 @@ private function exgartuanSleepSurprise():void {
 			//(Herms + Balls)
 			else {
 				outputText("The ");
-				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("puffy");
-				else if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("glistening");
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) outputText("puffy");
+				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but with your hands so focused on your " + player.cockDescript(0) + ", there's little for your " + player.vaginaDescript(0) + " to feel.  The closest it gets to pleasure is the sensation of your " + player.sackDescript() + " slapping against it with the steady rhythm of your masturbation.  If only you had taken care of yourself earlier!  You might have had enough control over your rebellious tool to let a hand attend to your OTHER needs.\n\n");
 			}
 		}
-		outputText("Spit foams around the tumescent intruder's girth, bubbling from the uncontrollable pistoning of Exgartuan's wrath at your " + player.face() + ".  The taut, bulging flesh of your own member is rammed so deeply into your own throat that you can feel the pre dripping into your stomach, but you want more.  ");
+		outputText("Spit foams around the tumescent intruder's girth, bubbling from the uncontrollable pistoning of Exgartuan's wrath at your " + player.faceDescript() + ".  The taut, bulging flesh of your own member is rammed so deeply into your own throat that you can feel the pre dripping into your stomach, but you want more.  ");
 		if (player.cor < 33) outputText("The desire shocks you with the sheer... wrongness of it, but you cannot deny the pleasure of drilling your own slobbering mouth.");
 		else if (player.cor < 66) outputText("The desire sinks its hooks into the lust-addled flesh of your brain and drags you deeper into lust.  You can't deny the pleasure of drilling your own slobbering mouth.");
 		else outputText("The desire rushes through your blood as you imagine how you must look, sprawled out, eyes rolled back, and cock drilling at your own slobbering mouth.");

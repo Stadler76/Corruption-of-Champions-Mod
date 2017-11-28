@@ -22,7 +22,7 @@ package classes.content
 			
 			outputText("\nsackDescript " + player.sackDescript());
 			outputText("\ncockClit " + player.cockClit());
-//			outputText("\nballs " + balls(0, 0));
+			outputText("\nballs " + player.ballsDescript());
 			outputText("\nsheathDesc " + player.sheathDesc());
 			outputText("\nchestDesc " + player.chestDesc());
 			outputText("\nallChestDesc " + player.allChestDesc());
@@ -106,7 +106,6 @@ package classes.content
 			outputText("\nweapon [weapon]");
 			outputText("\nweaponname [weaponname]");
 			
-			trace("Spammed!");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

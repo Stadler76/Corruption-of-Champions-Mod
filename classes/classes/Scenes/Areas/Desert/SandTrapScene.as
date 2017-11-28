@@ -1,5 +1,6 @@
 package classes.Scenes.Areas.Desert {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.display.SpriteDb;
@@ -24,7 +25,7 @@ package classes.Scenes.Areas.Desert {
 public function encounterASandTarp():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sandtrap);
-	if (flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
+	if (flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP && player.wings.type == Wings.GIANT_DRAGONFLY) {
 		sandTrapBadEnd();
 		return;
 	}
@@ -138,7 +139,7 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 		combat.cleanupAfterCombat();
 		return;
 	}
-	if (flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
+	if (flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP && player.wings.type == Wings.GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;
 	}
@@ -180,7 +181,7 @@ internal function pcBeatsATrap():void {
 	if (player.lust >= 33) {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
 		//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
-		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && !player.isGenderless() && player.faceType == FACE_SNAKE_FANGS) {
+		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && !player.isGenderless() && player.face.type == Face.SNAKE_FANGS) {
 			addButton(0, "Naga3Some", nagaThreesomeWithSandTrap, undefined, undefined, undefined, "Call your friend for a treesome.", "Naga Treesome");
 		}
 		//Requires: Penis and str requirement

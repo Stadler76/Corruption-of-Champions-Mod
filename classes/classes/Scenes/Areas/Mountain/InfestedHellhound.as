@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Mountain
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 
 	/**
@@ -99,7 +100,7 @@ package classes.Scenes.Areas.Mountain
 		public function InfestedHellhound()
 		{
 			super(true);
-			trace("InfestedHellhound Constructor!");
+			//trace("InfestedHellhound Constructor!");
 			this.a = "the ";
 			this.short = "infested hellhound";
 			this.imageName = "infestedhellhound";
@@ -113,16 +114,16 @@ package classes.Scenes.Areas.Mountain
 			this.createBreastRow();
 			this.createBreastRow();
 			this.createBreastRow();
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 47;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE + 1;
-			this.skinTone = "black";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
-			this.hairColor = "red";
-			this.hairLength = 3;
+			this.hips.rating = Hips.RATING_AVERAGE;
+			this.butt.rating = Butt.RATING_AVERAGE + 1;
+			this.skin.tone = "black";
+			this.theSkinType = Skin.FUR;
+			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.FUR];
+			this.hair.color = "red";
+			this.hair.length = 3;
 			initStrTouSpeInte(65, 60, 50, 1);
 			initLibSensCor(95, 20, 100);
 			this.weaponName = "claws";
@@ -146,7 +147,7 @@ package classes.Scenes.Areas.Mountain
 			this.special1 = hellhoundFire;
 			this.special2 = hellhoundScent;
 			this.special3 = hellHoundWormCannon;
-			this.tailType = TAIL_TYPE_DOG;
+			this.tail.type = Tail.DOG;
 			checkMonster();
 		}
 

@@ -7,7 +7,7 @@
 	import classes.Scenes.Combat.Combat;
 	import classes.Scenes.Places.Ingnam;
 	import classes.Scenes.Places.Prison;
-	import classes.Scenes.Dungeons.D3.D3;
+	import classes.Scenes.Dungeons.LethicesKeep.LethicesKeep;
 	import classes.Scenes.Inventory;
 	import classes.internals.Utils;
 
@@ -25,9 +25,6 @@
 	 */
 	public class BaseContent extends Utils
 	{
-		// TODO remove when we have proper enums for this
-		include "../../includes/appearanceDefs.as";
-
 		public function BaseContent()
 		{
 			
@@ -69,8 +66,8 @@
 			return kGAMECLASS.prison;
 		}
 		
-		protected function get d3():D3 {
-			return kGAMECLASS.d3;
+		protected function get lethicesKeep():LethicesKeep {
+			return kGAMECLASS.lethicesKeep;
 		}
 
 		protected function get combat():Combat
@@ -151,6 +148,15 @@
 			kGAMECLASS.inRoomedDungeonResume = v;
 		}
 
+		protected function get inRoomedDungeonName():String
+		{
+			return kGAMECLASS.inRoomedDungeonName;
+		}
+		protected function set inRoomedDungeonName(v:String):void
+		{
+			kGAMECLASS.inRoomedDungeonName = v;
+		}
+		
 		/**
 		 * Displays the sprite on the lower-left corner.
 		 * Can accept frame index or SpriteDb.s_xxx (class extends Bitmap)

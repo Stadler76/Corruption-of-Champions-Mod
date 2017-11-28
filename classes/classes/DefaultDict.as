@@ -7,12 +7,16 @@ package classes
 	import flash.utils.flash_proxy;
 	import flash.utils.Dictionary
 	
+	import mx.logging.ILogger;
+	import classes.internals.LoggerFactory;
+	
 
 	// This is a special class that immitates a array/dictionary, and 
 	// yet has some special behaviour to make it look & act like any arbitrary aray value 
 	// is pre-initialized to 0. 
 	public dynamic class DefaultDict extends Proxy 
 	{
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(DefaultDict);
 		// Actual key<->value pairs are stored in _dict
 		private var _dict:Object;
 
@@ -22,14 +26,14 @@ package classes
 		public function DefaultDict()		// Constructor
 		{
 			_dict = new Object();
-			if (debugPrintDict) trace("Instantiating default dict class");
+			if (debugPrintDict) LOGGER.debug("Instantiating default dict class");
 		}
 
 		// used to determine status of the query 'name in defaultDict'. 
 		// Since we want to *look* like have any arbitrary key, we always return true.
 		override flash_proxy function hasProperty(name:*):Boolean
 		{
-			if (debugPrintDict) trace("hasProperty", name);
+			if (debugPrintDict) LOGGER.debug("hasProperty", name);
 			return true;
 		}
 
@@ -40,22 +44,22 @@ package classes
 		// but this makes it work as a stop-gap measure
 		override flash_proxy function getProperty(name:*):*
 		{
-			if (debugPrintDict) trace("getProperty Called");
+			if (debugPrintDict) LOGGER.debug("getProperty Called");
 			if (name == "length")
 			{
-				if (debugPrintDict) trace("Querying array length. Faking out retVal");
+				if (debugPrintDict) LOGGER.debug("Querying array length. Faking out retVal");
 				return 3000;
 			}
 
 			// If we have name as a key in _dict, return _dict[name]. Else, return 0
 			if (name in _dict)
 			{
-				if (debugPrintDict) trace("Flag " + name + " being accessed. Value = " + _dict[name]);
+				if (debugPrintDict) LOGGER.debug("Flag " + name + " being accessed. Value = " + _dict[name]);
 				return _dict[name];
 			}
 			else
 			{
-				if (debugPrintDict) trace("Unset Flag " + name + " being accessed.");
+				if (debugPrintDict) LOGGER.debug("Unset Flag " + name + " being accessed.");
 				return 0;
 			}
 		}
@@ -66,17 +70,17 @@ package classes
 		{
 			if (value != 0)
 			{
-				if (debugPrintDict) trace("setProperty ", name, value);
+				if (debugPrintDict) LOGGER.debug("setProperty ", name, value);
 				_dict[name] = value;
 			}
 			else
 				if (name in _dict)
 				{
-					if (debugPrintDict) trace("setProperty " + name + " to " + value + " Deleting key");
+					if (debugPrintDict) LOGGER.debug("setProperty " + name + " to " + value + " Deleting key");
 					delete _dict[name];
 				}
 				else
-					if (debugPrintDict) trace("setProperty " + name + " to " + value + " Ignoring");
+					if (debugPrintDict) LOGGER.debug("setProperty " + name + " to " + value + " Ignoring");
 		}
 	
 		// callProperly is called when functions are called on instances of defaultDict, 
@@ -85,10 +89,10 @@ package classes
 		// otherwise, we just apply the called function name to _dict.
 		override flash_proxy function callProperty(methodName:*, ... args):* 
 		{
-			if (debugPrintDict) trace("call Property ", methodName);
+			if (debugPrintDict) LOGGER.debug("call Property ", methodName);
 			if (String(methodName) == "push")
 			{
-				if (debugPrintDict) trace("Doing nothing (this ain't an array anymore!)");
+				if (debugPrintDict) LOGGER.debug("Doing nothing (this ain't an array anymore!)");
 			}
 			else
 			{
@@ -112,30 +116,30 @@ package classes
 
 		override flash_proxy function deleteProperty(name:*):Boolean 
 		{
-			if (debugPrintDict) trace("deleteProperty", name);
+			if (debugPrintDict) LOGGER.debug("deleteProperty", name);
 			return delete _dict[name];
 		}
 
 
 		override flash_proxy function nextName(index:int):String 
 		{
-			if (debugPrintDict) trace("nextName", index);
+			if (debugPrintDict) LOGGER.debug("nextName", index);
 			return String(index - 1);
 		}
 
 		override flash_proxy function nextValue(index:int):* 
 		{
-			if (debugPrintDict) trace("nextValue", index);
+			if (debugPrintDict) LOGGER.debug("nextValue", index);
 			return _dict[index - 1];
 		}
 
 		override flash_proxy function nextNameIndex(index:int):int 
 		{
 
-			if (debugPrintDict) trace("nextNameIndex ", index);
+			if (debugPrintDict) LOGGER.debug("nextNameIndex ", index);
 			if (!(index in _dict))
 			{
-				if (debugPrintDict) trace("Returning 0");
+				if (debugPrintDict) LOGGER.debug("Returning 0");
 				return 0;
 			}
 			return index + 1;

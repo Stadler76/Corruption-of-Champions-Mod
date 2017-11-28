@@ -730,6 +730,7 @@ package classes.Scenes
 						displayedUpdate = true;				
 					}
 					if (player.pregnancyIncubation == 180) {
+						outputText(images.showImage("spidermorph-male-loss-vag"));
 						outputText("\n<b>A hot flush works its way through you, and visions of aroused ");
 						if (player.pregnancyType == PregnancyStore.PREGNANCY_SPIDER) outputText("spider-morphs ");
 						else outputText("driders ");
@@ -955,6 +956,64 @@ package classes.Scenes
 				}
 				//BASILISK Pregnancy!
 				if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK || player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT) {	
+					if (player.pregnancyIncubation == 185) {
+						outputText("\n<b>Your belly grumbles as if empty, even though you ate not long ago.  Perhaps with all the exercise you're getting you just need to eat a little bit more.</b>\n");
+						displayedUpdate = true;
+					}
+					if (player.pregnancyIncubation == 160) {
+						outputText("\n<b>Your belly looks a little pudgy");
+						if (player.thickness > 60 && player.tone < 40) outputText(" even for you");
+						outputText(", maybe you should cut back on all the food you've been consuming lately?</b>\n");
+						displayedUpdate = true;	
+					}
+					if (player.pregnancyIncubation == 140) {
+						outputText("\n<b>Your belly is definitely getting bigger, and no matter what you do, you can't seem to stop yourself from eating at the merest twinge of hunger.  The only explanation you can come up with is that you've gotten pregnant during your travels.  Hopefully it won't inconvenience your adventuring.</b>\n");
+						displayedUpdate = true;				
+					}
+					if (player.pregnancyIncubation == 110) {
+						outputText("\n<b>Your belly has gotten nice and big, perhaps as big as you remember the bellies of the pregnant women back home being.  The elders always did insist on everyone doing their part to keep the population high enough to sustain the loss of a champion every year.  You give yourself a little hug, getting a surge of happiness from your hormone-addled body.  Pregnancy sure is great!</b>\n");
+						displayedUpdate = true;
+					}
+					if (player.pregnancyIncubation == 72) {
+						outputText("\n<b>The huge size of your pregnant belly constantly impedes your movement, but the constant squirming and shaking of your unborn offspring makes you pretty sure you won't have to carry them much longer.  A sense of motherly pride wells up in your breast - you just know you'll have such wonderful babies.");
+						if (player.cor < 50) outputText("  You shudder and shake your head, wondering why you're thinking such unusual things.");
+						outputText("</b>\n");
+						displayedUpdate = true;
+					}
+					if (player.pregnancyIncubation == 32 || player.pregnancyIncubation == 64 || player.pregnancyIncubation == 85 || player.pregnancyIncubation == 150) {
+						//Increase lactation!
+						if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
+							outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
+							player.boostLactation(.5);
+							displayedUpdate = true;
+						}
+						if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
+							outputText("\nDrops of breastmilk escape your nipples as your body prepares for the coming birth.\n");
+							player.boostLactation(.5);
+							displayedUpdate = true;
+						}				
+						//Lactate if large && not lactating
+						if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() == 0) {
+							outputText("\n<b>You realize your breasts feel full, and occasionally lactate</b>.  It must be due to the pregnancy.\n");
+							player.boostLactation(1);
+							displayedUpdate = true;
+						}
+						//Enlarge if too small for lactation
+						if (player.biggestTitSize() == 2 && player.mostBreastsPerRow() > 1) {
+							outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n");
+							player.growTits(1, 1, false, 3);
+							displayedUpdate = true;
+						}
+						//Enlarge if really small!
+						if (player.biggestTitSize() == 1 && player.mostBreastsPerRow() > 1) {
+							outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n");
+							player.growTits(1, 1, false, 3);
+							displayedUpdate = true;
+						}
+					}
+				}
+				//COCKATRICE Pregnancy!
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_COCKATRICE) {	
 					if (player.pregnancyIncubation == 185) {
 						outputText("\n<b>Your belly grumbles as if empty, even though you ate not long ago.  Perhaps with all the exercise you're getting you just need to eat a little bit more.</b>\n");
 						displayedUpdate = true;
@@ -1305,6 +1364,7 @@ package classes.Scenes
 						displayedUpdate = true;
 					}
 					if (player.buttPregnancyIncubation == 180) {
+						outputText(images.showImage("cDrider-loss-butt"));
 						outputText("\n<b>A hot flush works its way through you, and visions of aroused driders quickly come to dominate your thoughts.  You start playing with a nipple while you lose yourself in the fantasy, imagining being tied up in webs and packed completely full of eggs, stuffing your belly completely with burgeoning spheres of love.  You shake free of the fantasy and notice your hands rubbing over your slightly bloated belly.  Perhaps it wouldn't be so bad?</b>\n");
 						dynStats("lib", 1, "sen", 1, "lus", 20);
 						displayedUpdate = true;				
@@ -1417,15 +1477,15 @@ package classes.Scenes
 			if (player.buttPregnancyIncubation == 1 && player.buttPregnancyType == PregnancyStore.PREGNANCY_SANDTRAP_FERTILE) {
 				getGame().desert.sandTrapScene.birfSandTarps();
 				player.buttKnockUpForce(); //Clear Butt Pregnancy
-				if (player.buttRating < 17) {
+				if (player.butt.rating < 17) {
 					//Guaranteed increase up to level 10
-					if (player.buttRating < 13) {
-						player.buttRating++;
+					if (player.butt.rating < 13) {
+						player.butt.rating++;
 						outputText("\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.\n");
 					}
 					//Big butts only increase 50% of the time.
 					else if (rand(2) == 0){
-						player.buttRating++;
+						player.butt.rating++;
 						outputText("\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.\n");				
 					}
 				}
@@ -1451,15 +1511,15 @@ package classes.Scenes
 				player.orgasm('Anal');
 				dynStats("int", 1, "lib", 4, "sen", 3);
 				if (player.buttChange(20, true)) outputText("\n");
-				if (player.buttRating < 17) {
+				if (player.butt.rating < 17) {
 					//Guaranteed increase up to level 10
-					if (player.buttRating < 13) {
-						player.buttRating++;
+					if (player.butt.rating < 13) {
+						player.butt.rating++;
 						outputText("\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");
 					}
 					//Big butts only increase 50% of the time.
 					else if (rand(2) == 0){
-						player.buttRating++;
+						player.butt.rating++;
 						outputText("\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");				
 					}
 				}
@@ -1509,6 +1569,11 @@ package classes.Scenes
 				player.knockUpForce(); //Clear Pregnancy
 				displayedUpdate = true;
 				getGame().highMountains.basiliskScene.basiliskBirth();
+			}
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_COCKATRICE && player.pregnancyIncubation == 1) {
+				player.knockUpForce(); //Clear Pregnancy
+				displayedUpdate = true;
+				getGame().highMountains.cockatriceScene.cockatriceBirth();
 			}
 			//Satyr vag preg
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_SATYR && player.pregnancyIncubation == 1) {
@@ -1631,8 +1696,8 @@ package classes.Scenes
 					//[(dick1 exists)
 					if (player.cockTotal() > 1) outputText(", followed in short order by white squirts from " + player.sMultiCockDesc() + " remaining");
 					outputText(".  Your " + player.vaginaDescript(0) + " quivers and pulses as well, adding ");
-					if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) outputText("a trickle");
-					else if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("a squirt");
+					if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) outputText("a trickle");
+					else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) outputText("a squirt");
 					else outputText("nearly a cupful of fluid");
 					outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n");
 					//(gain 1 nemo-dick, reduce lust to min)]
@@ -1671,9 +1736,9 @@ package classes.Scenes
 				outputText("The pain begins to subside as your delivery continues... replaced with a building sensation of pleasure.  Arousal spikes through you as the contractions intensify, and as you feel something pass you have a tiny orgasm.\n\nYet you feel more within you, and the contractions spike again, pushing you to orgasm as you pass something else.  It repeats, over and over, nearly a dozen times you birth and orgasm.  After an eternity of procreation and pleasure, you sense your ordeal is over and collapse, unconscious.");
 				
 				
-				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness++;
+				if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness++;
 				//50% chance
-				if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_GAPING_WIDE && rand(2) == 0) {
+				if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING_WIDE && rand(2) == 0) {
 					player.vaginas[0].vaginalLooseness++;
 					outputText("\n\n<b>Your cunt is painfully stretched from the ordeal, permanently enlarged.</b>");
 				}
@@ -1700,15 +1765,15 @@ package classes.Scenes
 					outputText("  <b>Your breasts have grown to B-cups!</b>");
 					player.growTits(1, 1, false, 3);
 				}
-				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+				if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 				player.orgasm('Vaginal');
 				dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "cor", 7);
-				if (player.buttRating < 10 && rand(2) == 0) {
-					player.buttRating++;
+				if (player.butt.rating < 10 && rand(2) == 0) {
+					player.butt.rating++;
 					outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");
 				}
-				else if (player.hipRating < 10) {
-					player.hipRating++;
+				else if (player.hips.rating < 10) {
+					player.hips.rating++;
 					outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + player.hipDescript() + ".");
 				}
 				outputText("\n");
@@ -1750,8 +1815,8 @@ package classes.Scenes
 					
 						outputText("The little boy is already starting to look like he is a few years old; he’s trotting around on his little hoofs.");
 						//Increase the size of the PC’s hips, as per normal for pregnancies, increase birth counter
-						if (player.hipRating < 10) {
-							player.hipRating++;
+						if (player.hips.rating < 10) {
+							player.hips.rating++;
 							outputText("After the birth your " + player.armorName + " fits a bit more snugly about your " + player.hipDescript() + ".");
 						}
 						if (flags[kFLAGS.MARBLE_BOYS] == 0)
@@ -1781,8 +1846,8 @@ package classes.Scenes
 						flags[kFLAGS.MARBLE_KIDS]++;
 					}
 					//Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
-					if (player.hipRating < 10) {
-						player.hipRating++;
+					if (player.hips.rating < 10) {
+						player.hips.rating++;
 						outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + player.hipDescript() + ".");
 					}
 				}
@@ -1806,17 +1871,17 @@ package classes.Scenes
 					player.boostLactation(1);
 				}
 				player.cuntChange(120, true,true,false);
-				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+				if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 				displayedUpdate = true;
 				//Hip and butt increase
-				if (player.buttRating < 12 && rand(2) == 0) {
-					player.buttRating++;
+				if (player.butt.rating < 12 && rand(2) == 0) {
+					player.butt.rating++;
 					outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");
 				}
-				else if (player.hipRating < 15) {
-					player.hipRating++;
+				else if (player.hips.rating < 15) {
+					player.hips.rating++;
 					outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + player.hipDescript() + ".");
 				}
 				player.knockUpForce(); //Clear Pregnancy
@@ -1853,7 +1918,7 @@ package classes.Scenes
 				//FUCKING BIRTH SHIT HERE.
 				getGame().amilyScene.pcBirthsAmilysKidsQuestVersion();
 				player.cuntChange(60, true, true, false);
-				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+				if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -1887,19 +1952,19 @@ package classes.Scenes
 					player.boostLactation(.5);
 				}
 				player.cuntChange(60, true,true,false);
-				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+				if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 				displayedUpdate = true;
 				//Butt increase
-				if (player.buttRating < 14 && rand(2) == 0) {
-					if (player.buttRating < 10) {
-						player.buttRating++;
+				if (player.butt.rating < 14 && rand(2) == 0) {
+					if (player.butt.rating < 10) {
+						player.butt.rating++;
 						outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");				
 					}
 					//Big butts grow slower!
-					else if (player.buttRating < 14 && rand(2) == 0) {
-						player.buttRating++;
+					else if (player.butt.rating < 14 && rand(2) == 0) {
+						player.butt.rating++;
 						outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");
 					}
 				}
@@ -1926,19 +1991,19 @@ package classes.Scenes
 				}
 				outputText("  ");
 				player.cuntChange(100, true);
-				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+				if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -4, "spe", 2, "lib", 1, "sen", .5);
 				displayedUpdate = true;
 				//Butt increase
-				if (player.buttRating < 14 && rand(2) == 0) {
-					if (player.buttRating < 10) {
-						player.buttRating++;
+				if (player.butt.rating < 14 && rand(2) == 0) {
+					if (player.butt.rating < 10) {
+						player.butt.rating++;
 						outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");				
 					}
 					//Big butts grow slower!
-					else if (player.buttRating < 14 && rand(2) == 0) {
-						player.buttRating++;
+					else if (player.butt.rating < 14 && rand(2) == 0) {
+						player.butt.rating++;
 						outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");
 					}
 				}
@@ -1963,19 +2028,19 @@ package classes.Scenes
 					player.boostLactation(.5);
 				}
 				player.cuntChange(60, true);
-				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+				if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -1, "spe", 2, "lib", 1, "sen", .5);
 				displayedUpdate = true;
 				//Butt increase
-				if (player.buttRating < 14 && rand(2) == 0) {
-					if (player.buttRating < 10) {
-						player.buttRating++;
+				if (player.butt.rating < 14 && rand(2) == 0) {
+					if (player.butt.rating < 10) {
+						player.butt.rating++;
 						outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");				
 					}
 					//Big butts grow slower!
-					else if (player.buttRating < 14 && rand(2) == 0) {
-						player.buttRating++;
+					else if (player.butt.rating < 14 && rand(2) == 0) {
+						player.butt.rating++;
 						outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");
 					}
 				}
@@ -1989,8 +2054,8 @@ package classes.Scenes
 					player.createVagina();
 				}
 				kGAMECLASS.highMountains.minervaScene.minervaPurification.playerGivesBirth();
-				if (player.hipRating < 10) {
-					player.hipRating++;
+				if (player.hips.rating < 10) {
+					player.hips.rating++;
 					outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + player.hipDescript() + ".");
 				}
 				player.knockUpForce(); //Clear Pregnancy
@@ -2004,8 +2069,8 @@ package classes.Scenes
 					player.createVagina();
 				}
 				kGAMECLASS.volcanicCrag.behemothScene.giveBirthToBehemoth();
-				if (player.hipRating < 10) {
-					player.hipRating++;
+				if (player.hips.rating < 10) {
+					player.hips.rating++;
 					outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + player.hipDescript() + ".");
 				}
 				player.knockUpForce(); //Clear Pregnancy
@@ -2049,9 +2114,9 @@ package classes.Scenes
 					//Large egg scene
 					else {
 						outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your " + player.armorName + " before it can be ruined by what's coming.  A contraction pushes violently through your midsection, ");
-						if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_LOOSE) outputText("stretching your tight cunt painfully, the lips opening wide ");
-						if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_GAPING_WIDE) outputText("temporarily stretching your cunt-lips wide-open ");
-						if (player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_GAPING_WIDE) outputText("parting your already gaping lips wide ");
+						if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE) outputText("stretching your tight cunt painfully, the lips opening wide ");
+						if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING_WIDE) outputText("temporarily stretching your cunt-lips wide-open ");
+						if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_GAPING_WIDE) outputText("parting your already gaping lips wide ");
 						outputText("as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.  The experience definitely turns you on, and you feel your clit growing free of its hood as another big egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably.   You pant and moan as the contractions stretch you tightly around the next, slowly forcing it out between your nether-lips.  The sound of a gasp startles you as it pops free, until you realize it was your own voice responding to the sudden pressure and pleasure.  Aroused beyond reasonable measure, you begin to masturbate ");
 						if (player.getClitLength() > 5) outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, its sensitive surface overloading your fragile mind with pleasure.  ");
 						if (player.getClitLength() > 2 && player.getClitLength() <= 5) outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ");

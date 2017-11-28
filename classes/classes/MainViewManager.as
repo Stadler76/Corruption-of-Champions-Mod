@@ -24,9 +24,9 @@ import flash.ui.Keyboard;
 		//Interface flags
 		public var registeredShiftKey:Boolean = false;
 
-		public const textColorArray:Array = [0, 0, 0, 0xFFFFFF, 0xFFFFFF, 0, 0, 0, 0, 0];
-		public const darkThemes:Array = [false, false, false, false, true, false, false, false, false, false];
-		public const barAlphaArray:Array  = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 1];
+		public static const textColorArray:Array = [0, 0, 0, 0xc0c0c0, 0xc0c0c0, 0, 0, 0, 0, 0];
+		public static const darkThemes:Array = [false, false, false, false, true, false, false, false, false, false];
+		public static const barAlphaArray:Array  = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 1];
 
 		public var statsHidden:Boolean = false;
 		public var buttonsTweened:Boolean = false;
@@ -80,7 +80,9 @@ import flash.ui.Keyboard;
 			var shadow:DropShadowFilter = new DropShadowFilter();
 			shadow.strength = 0.4;
 			if (!isDarkTheme()) {
-				if (element.filters.length < 1) element.filters = [shadow];
+				if (element.filters.length < 1) {
+					element.filters = [shadow];
+				}
 			}
 			else {
 				element.filters = [];
@@ -266,7 +268,7 @@ import flash.ui.Keyboard;
 		public function setText(_currentText:String):void {
 			var fmt:TextFormat = mainView.mainText.defaultTextFormat;
 			if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
-			fmt.color = isDarkText() ? 0xffffff : 0;
+			fmt.color = isDarkText() ? 0xc0c0c0 : 0;
 
 			mainView.mainText.defaultTextFormat = fmt;
 			mainView.setOutputText(_currentText);

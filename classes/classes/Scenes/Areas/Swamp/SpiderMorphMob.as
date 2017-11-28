@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
@@ -110,16 +111,16 @@ package classes.Scenes.Areas.Swamp
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.skinTone = "red";
-			this.hairColor = "black";
-			this.hairLength = 15;
+			this.hips.rating = Hips.RATING_AMPLE+2;
+			this.butt.rating = Butt.RATING_LARGE;
+			this.skin.tone = "red";
+			this.hair.color = "black";
+			this.hair.length = 15;
 			initStrTouSpeInte(60, 50, 99, 99);
 			initLibSensCor(35, 35, 20);
 			this.weaponName = "claws";
@@ -132,7 +133,7 @@ package classes.Scenes.Areas.Swamp
 			this.gems = rand(25) +40;
 			this.special1 = game.combat.packAttack;
 			this.special2 = game.combat.lustAttack;
-			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
+			this.tail.type = Tail.SPIDER_ABDOMEN;
 			this.drop = NO_DROP;
 			checkMonster();
 		}

@@ -1,9 +1,12 @@
-package classes.Scenes.Dungeons.D3
+package classes.Scenes.Dungeons.LethicesKeep
 {
+	import classes.BodyParts.*;
 	import classes.Monster;
 	import classes.StatusEffects;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	
 	public class Lethice extends Monster
 	{
@@ -34,8 +37,8 @@ package classes.Scenes.Dungeons.D3
 			this.createBreastRow(8);
 			this.balls = 2;
 			this.ballSize = 4;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hips.rating = Hips.RATING_SLENDER;
+			this.butt.rating = Butt.RATING_TIGHT;
 			initStrTouSpeInte(110, 110, 110, 110);
 			initLibSensCor(100, 40, 100);
 			this.weaponName = "whip";
@@ -57,7 +60,7 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
-			this.wingType = WING_TYPE_DRACONIC_LARGE;
+			this.theWingType = Wings.DRACONIC_LARGE;
 			this.checkMonster();
 		}
 		
@@ -109,7 +112,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
 			{
-				str += "\n\n<b>A forest of black tentacles sprout from the floor, snaring any demons unlucky enough to venture close - or any champions unlucky enough to be in the center of it all.";
+				str += "\n\n<b>A forest of black tentacles sprout from the floor, snaring any demons unlucky enough to venture close - or any champions unlucky enough to be in the center of it all.</b>";
 				if (player.statusEffectv3(StatusEffects.LethicesRapeTentacles) != 0)
 				{
 					outputText(" Unfortunately, they’ve grabbed you. You need to break free to do anything!");
@@ -152,12 +155,12 @@ package classes.Scenes.Dungeons.D3
 				phase2Ends(hpVictory);
 				return;
 			}
-			game.d3.lethice.defeated(hpVictory);
+			game.lethicesKeep.lethice.defeated(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.lethice.won(hpVictory,pcCameWorms);
+			game.lethicesKeep.lethice.won(hpVictory,pcCameWorms);
 		}
 		
 		public function get fightPhase():int

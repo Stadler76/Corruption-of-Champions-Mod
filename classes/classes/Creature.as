@@ -1,40 +1,50 @@
 ﻿//CoC Creature.as
 package classes
 {
+	import classes.BodyParts.Antennae;
+	import classes.BodyParts.Arms;
+	import classes.BodyParts.Beard;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Claws;
+	import classes.BodyParts.Ears;
+	import classes.BodyParts.Eyes;
+	import classes.BodyParts.Face;
+	import classes.BodyParts.Gills;
+	import classes.BodyParts.Hair;
+	import classes.BodyParts.Hips;
+	import classes.BodyParts.Horns;
+	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Neck;
 	import classes.BodyParts.RearBody;
 	import classes.BodyParts.Skin;
+	import classes.BodyParts.Tail;
+	import classes.BodyParts.Tongue;
 	import classes.BodyParts.UnderBody;
 	import classes.BodyParts.Wings;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.JewelryLib;
-import classes.StatusEffects.Combat.CombatInteBuff;
-import classes.StatusEffects.Combat.CombatSpeBuff;
-import classes.StatusEffects.Combat.CombatStrBuff;
-import classes.StatusEffects.Combat.CombatTouBuff;
-import classes.internals.Profiling;
-import classes.internals.Utils;
-import classes.internals.IRandomNumber;
-import classes.internals.RandomNumber;
-import classes.internals.Utils;
-import classes.VaginaClass;
-import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.internals.profiling.Begin;
-import classes.internals.profiling.End;
+	import classes.Scenes.Places.TelAdre.UmasShop;
+	import classes.StatusEffects.Combat.CombatInteBuff;
+	import classes.StatusEffects.Combat.CombatSpeBuff;
+	import classes.StatusEffects.Combat.CombatStrBuff;
+	import classes.StatusEffects.Combat.CombatTouBuff;
+	import classes.VaginaClass;
+	import classes.internals.IRandomNumber;
+	import classes.internals.LoggerFactory;
+	import classes.internals.Utils;
+	import classes.internals.profiling.Begin;
+	import classes.internals.profiling.End;
+	import classes.lists.BodyPartLists;
+	import classes.lists.BreastCup;
+	import classes.lists.Gender;
+	import flash.errors.IllegalOperationError;
+	import mx.logging.ILogger;
 
-import flash.errors.IllegalOperationError;
-import classes.internals.LoggerFactory;
-import flash.display.InteractiveObject;
-import flash.errors.IllegalOperationError;
-import mx.logging.ILogger;
 
 	public class Creature extends Utils
 	{
 		private static const LOGGER:ILogger = LoggerFactory.getLogger(Creature);
-
-		include "../../includes/appearanceDefs.as";
 
 		public function get game():CoC {
 			return kGAMECLASS;
@@ -347,203 +357,43 @@ import mx.logging.ILogger;
 		public function get gender():int
 		{
 			if (hasCock() && hasVagina()) {
-				return GENDER_HERM;
+				return Gender.HERM;
 			}
 			if (hasCock()) {
-				return GENDER_MALE;
+				return Gender.MALE;
 			}
 			if (hasVagina()) {
-				return GENDER_FEMALE;
+				return Gender.FEMALE;
 			}
-			return GENDER_NONE;
+			return Gender.NONE;
 		}
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
 
-		/*Hairtype
-		0- normal
-		1- feather
-		2- ghost
-		3- goo!
-		4- anemononeoenoeneo!*/
-		public var hairType:Number = HAIR_NORMAL;
-		public var hairColor:String = "no";
-		public var hairLength:Number = 0;
-		
-		public function get furColor():String { return skin.furColor; }
-		public function set furColor(value:String):void { skin.furColor = value; }
-		/*Beardstyle
-		0- normal
-		1- goatee
-		2- clean-cut
-		3- mountain-man*/
-		public var beardStyle:Number = BEARD_NORMAL;
-		public var beardLength:Number = 0;
-				
-		/*Skintype
-		0 - skin
-		1 - furry
-		2 - scaley
-		3 - goopey*/
-		public var skin:Skin = new Skin();
-		public function get skinType():Number { return skin.type; }
-		public function set skinType(value:Number):void { skin.type = value; }
-		public function get skinTone():String { return skin.tone; }
-		public function set skinTone(value:String):void { skin.tone = value; }
-		public function get skinDesc():String { return skin.desc; }
-		public function set skinDesc(value:String):void { skin.desc = value; }
-		public function get skinAdj():String { return skin.adj; }
-		public function set skinAdj(value:String):void { skin.adj = value; }
-		
-/*		Facetype:
-		0 - human
-		1 - horse
-		2 - dogface
-		3 - cowface
-		4 - sharkface-teeth
-		5 - Human w/Naga fangz
-		6 - kittah face
-		7 - lizard face (durned argonians!)
-		8 - bunnah faceahhh bunbun
-		9 - kangaface
-		10 - spidah-face (humanish)
-		11 - foxface!
-		12 - dragon face
-		13 - Halfcoon
-		14 - fullcoon
-		15 - halfmouse
-		16 - fullmouse*/
-		public var faceType:Number = FACE_HUMAN;
-
-		// <mod name="Predator arms" author="Stadler76">
-		public var clawTone:String = "";
-		public var clawType:Number = CLAW_TYPE_NORMAL;
-		// </mod>
-		public var rearBody:RearBody = new RearBody();
+		public var antennae:Antennae = new Antennae();
+		public var arms:Arms = new Arms();
+		public var beard:Beard = new Beard();
+		public var butt:Butt = new Butt();
+		public var claws:Claws = new Claws();
+		public var ears:Ears = new Ears();
+		public var eyes:Eyes = new Eyes();
+		public var face:Face = new Face();
+		public var gills:Gills = new Gills();
+		public var hair:Hair = new Hair();
+		public var hips:Hips = new Hips();
+		public var horns:Horns = new Horns();
+		public var lowerBody:LowerBody = new LowerBody();
 		public var neck:Neck = new Neck();
+		public var rearBody:RearBody = new RearBody();
+		public var skin:Skin = new Skin();
+		public var tail:Tail = new Tail();
+		public var tongue:Tongue = new Tongue();
 		public var underBody:UnderBody = new UnderBody();
-
-		/*EarType
-		-1 - none!
-		0 - human
-		1 - horse
-		2 - dog
-		3 - cow
-		4 - elf
-		5 - catzilla
-		6 - Snakezilla
-		7 - Bunbunz
-		8 - Roo Ears
-		9 - fox ears
-		10 - dragon
-		11 - coon
-		12 - mouse*/
-		public var earType:Number = EARS_HUMAN;
-		public var earValue:Number = 0;
-		
-		/*Horntype
-		1 - demonic
-		2 - minotaur (cowlike)
-		3 - Draconic/Lizard
-		4 - Double draconic
-		5 - Antlers
-		6 - Goat*/
-		public var hornType:Number = HORNS_NONE;
-		public var horns:Number = 0;
-
-		/*Wingtype
-		0 - none
-		1 - bee
-		2 - large bee
-		3 - faerie?
-		4 - avian
-		5 - dragoooon?
-		6 - demon/bat
-		7 - large demon/bat
-		8 - shark wing lolololol
-		9 - harpy
-		10 - small dagron
-		11 - trogdor wings
-		12 - sandtrap wings*/
 		public var wings:Wings = new Wings();
-		public function get wingType():Number { return wings.type; }
-		public function set wingType(value:Number):void { wings.type = value; }
-		public function get wingColor():String { return wings.color; }
-		public function set wingColor(value:String):void { wings.color = value; }
+
 		public var wingDesc:String = "non-existant";
 
-		/* lowerBody:
-		0 - normal
-		1 - hooves
-		2 - paws
-		3 - snakelike body
-		4 - centaur!
-		5 - demonic heels
-		6 - demon foot-claws
-		7 - bee legs
-		8 - goo mound
-		9 - catfeet
-		10 - lizardfeet
-		11 - MLP.
-		12 - DAH BUNNY!
-		13 - Harpah Legz
-		14 - Roo feet!
-		15 - Spider Legz
-		16 - Drider Legs
-		17 - foxpaws
-		18 - dragonfeet
-		19 - raccoonfeet*/
-		public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
-		public var legCount:Number = 2;
-
-		/*tailType:
-		0 - none
-		1 - horse
-		2 - dog
-		3 - demon
-		4 - cow!
-		5 - spider!
-		6 - bee!
-		7 - shark tail!
-		8 - catTAIIIIIL
-		9 - lizard tail
-		10 - bunbuntail
-		11 - harpybutt
-		12 - rootail
-		13 - foxtail
-		14 - dagron tail
-		15 - raccoon tail
-		16 - mousetail*/
-		public var tailType:Number = TAIL_TYPE_NONE;
-		
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		public var tailVenom:Number = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		public var tailRecharge:Number = 5;
-		
-		/*hipRating
-		0 - boyish
-		2 - slender
-		4 - average
-		6 - noticable/ample
-		10 - curvy//flaring
-		15 - child-bearing/fertile
-		20 - inhumanly wide*/
-		public var hipRating:Number = HIP_RATING_BOYISH;
-		
-		/*buttRating
-		0 - buttless
-		2 - tight
-		4 - average
-		6 - noticable
-		8 - large
-		10 - jiggly
-		13 - expansive
-		16 - huge
-		20 - inconceivably large/big/huge etc*/
-		public var buttRating:Number = BUTT_RATING_BUTTLESS;
-		
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
 		public var nipplesPierced:Number = 0;
@@ -564,23 +414,6 @@ import mx.logging.ILogger;
 		public var nosePierced:Number = 0;
 		public var nosePShort:String = "";
 		public var nosePLong:String = "";
-
-		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Number = ANTENNAE_NONE;
-
-		//Eyetype
-		public var eyeType:Number = EYES_HUMAN;
-		public var eyeCount:Number = 2;
-
-		//TongueType
-		public var tongueType:Number = TONGUE_HUMAN;
-
-		//ArmType
-		public var armType:Number = ARM_TYPE_HUMAN;
-
-		//GillType
-		public var gillType:int = GILLS_NONE;
-		public function hasGills():Boolean { return gillType != GILLS_NONE; }
 
 		//Sexual Stuff		
 		//MALE STUFF
@@ -692,22 +525,22 @@ import mx.logging.ILogger;
 			// 2.1. non-negative Number fields
 			error += Utils.validateNonNegativeNumberFields(this,"Monster.validate",[
 				"balls", "ballSize", "cumMultiplier", "hoursSinceCum",
-				"tallness", "hipRating", "buttRating", "lowerBody", "armType",
-				"skinType", "hairLength", "hairType",
-				"faceType", "earType", "tongueType", "eyeType",
+				"tallness", "hips.rating", "butt.rating", "lowerBody.type", "arms.type",
+				"skin.type", "hair.length", "hair.type",
+				"face.type", "ears.type", "tongue.type", "eyes.type",
 				"str", "tou", "spe", "inte", "lib", "sens", "cor",
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
 				"lust", "fatigue",
 				"level", "gems",
-				"tailVenom", "tailRecharge", "horns",
+				"tail.venom", "tail.recharge", "horns.value",
 				"HP", "XP"
 			]);
 			// 2.2. non-empty String fields
 			error += Utils.validateNonEmptyStringFields(this,"Monster.validate",[
 				"short",
-				"skinDesc",
+				"skin.desc",
 				"weaponName", "weaponVerb", "armorName"
 			]);
 			// 3. validate members
@@ -730,18 +563,18 @@ import mx.logging.ILogger;
 				error += "No balls but ballSize = "+ballSize+". ";
 			}
 			// 4.2. hair
-			if (hairLength <= 0) {
-				if (hairType != HAIR_NORMAL) error += "No hair but hairType = " + hairType + ". ";
+			if (hair.length <= 0) {
+				if (hair.type != Hair.NORMAL) error += "No hair but hairType = " + hair.type + ". ";
 			}
 			// 4.3. tail
-			if (tailType == TAIL_TYPE_NONE) {
-				if (tailVenom != 0) error += "No tail but tailVenom = "+tailVenom+". ";
+			if (tail.type == Tail.NONE) {
+				if (tail.venom != 0) error += "No tail but tailVenom = "+tail.venom+". ";
 			}
 			// 4.4. horns
-			if (hornType == HORNS_NONE){
-				if (horns>0) error += "horns > 0 but hornType = HORNS_NONE. ";
+			if (horns.type == Horns.NONE){
+				if (horns.value>0) error += "horns.value > 0 but horns.type = Horns.NONE. ";
 			} else {
-				if (horns==0) error += "Has horns but their number 'horns' = 0. ";
+				if (horns.value==0) error += "Has horns but their number 'horns' = 0. ";
 			}
 			return error;
 		}
@@ -1019,7 +852,7 @@ import mx.logging.ILogger;
 		{
 			var counter:int = findPerk(ptype);
 			if (counter < 0) {
-				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
+				CoC_Settings.error("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
 				return;
 			}
 			if (valueIdx < 1 || valueIdx > 4) {
@@ -1041,7 +874,7 @@ import mx.logging.ILogger;
 			var counter:Number = findPerk(ptype);
 			//Various Errors preventing action
 			if (counter < 0) {
-				trace("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
+				CoC_Settings.error("ERROR? Looking for perk '" + ptype + "' to change value " + valueIdx + ", and player does not have the perk.");
 				return;
 			}
 			if (valueIdx < 1 || valueIdx > 4)
@@ -1086,7 +919,7 @@ import mx.logging.ILogger;
 		var counter:Number = findPerk(ptype);
 		if (counter < 0)
 		{
-			trace("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
+			CoC_Settings.error("ERROR? Looking for perk '" + ptype + "', but player does not have it.");
 			return 0;
 		}
 		return perk(counter).value3;
@@ -1266,7 +1099,7 @@ import mx.logging.ILogger;
 					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteBuff)
 							as CombatInteBuff).applyEffect(buff);
 			}
-			trace("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
+			CoC_Settings.error("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
 			return 0;
 		}
 		/*
@@ -1621,7 +1454,7 @@ import mx.logging.ILogger;
 							}
 						}
 						if (index >= 0 && index == index2)
-							trace("FUCK ERROR COCKTHATFITS2 SHIT IS BROKED!");
+							CoC_Settings.error("FUCK ERROR COCKTHATFITS2 SHIT IS BROKED!");
 					}
 					//Store the index of fitting dick
 					else
@@ -1808,7 +1641,7 @@ import mx.logging.ILogger;
 			if (index < 0) index = biggestCockIndex();
 			var isPierced:Boolean = (cocks.length == 1) && (cocks[index].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (cocks.length == 1) && (cocks[index].sock != "");
-			var isGooey:Boolean = (skinType == SKIN_TYPE_GOO);
+			var isGooey:Boolean = (skin.type == Skin.GOO);
 			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey);
 		}
 		
@@ -1860,7 +1693,7 @@ import mx.logging.ILogger;
 
 			if (isTaur()){
 				bonus += 50;
-			}else if (lowerBody == LOWER_BODY_TYPE_NAGA){
+			}else if (lowerBody.type == LowerBody.NAGA){
 				bonus += 20;
 			}
 
@@ -2414,37 +2247,26 @@ import mx.logging.ILogger;
 			if (p != null) underBody.skin.setProps(p);
 		}
 
-		public static const canFlyWings:Array = [
-			WING_TYPE_BEE_LIKE_LARGE,
-			WING_TYPE_BAT_LIKE_LARGE,
-			WING_TYPE_FEATHERED_LARGE,
-			WING_TYPE_DRACONIC_LARGE,
-			WING_TYPE_GIANT_DRAGONFLY,
-			WING_TYPE_IMP_LARGE,
-			WING_TYPE_HARPY,
-		];
-
 		//PC can fly?
 		public function canFly():Boolean
 		{
 			//web also makes false!
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
-			return canFlyWings.indexOf(wingType) != -1;
-
+			return BodyPartLists.canFlyWings.indexOf(wings.type) !== -1;
 		}
 
 		public function canUseStare():Boolean
 		{
-			return [EYES_BASILISK, EYES_COCKATRICE].indexOf(eyeType) != -1;
+			return [Eyes.BASILISK, Eyes.COCKATRICE].indexOf(eyes.type) != -1;
 		}
 
 		public function isHoofed():Boolean
 		{
 			return [
-				LOWER_BODY_TYPE_HOOFED,
-				LOWER_BODY_TYPE_CLOVEN_HOOFED,
-			].indexOf(lowerBody) != -1;
+				LowerBody.HOOFED,
+				LowerBody.CLOVEN_HOOFED,
+			].indexOf(lowerBody.type) != -1;
 		}
 
 		public function isCentaur():Boolean
@@ -2555,10 +2377,10 @@ import mx.logging.ILogger;
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
 			switch (gender) {
-				case GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
-				case GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > BREAST_CUP_A ? "shemale" : "femboy");
-				case GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
-				case GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
+				case Gender.NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
+				case Gender.MALE:   return caps ? mf("Male", biggestTitSize() > BreastCup.A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > BreastCup.A ? "shemale" : "femboy");
+				case Gender.FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
+				case Gender.HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
 				default: return "<b>Gender error!</b>";
 			}
 		}
@@ -2568,7 +2390,7 @@ import mx.logging.ILogger;
 		 */
 		public function isMale():Boolean
 		{
-			return gender == GENDER_MALE;
+			return gender == Gender.MALE;
 		}
 		
 		/**
@@ -2576,7 +2398,7 @@ import mx.logging.ILogger;
 		 */
 		public function isFemale():Boolean
 		{
-			return gender == GENDER_FEMALE;
+			return gender == Gender.FEMALE;
 		}
 		
 		/**
@@ -2584,7 +2406,7 @@ import mx.logging.ILogger;
 		 */
 		public function isHerm():Boolean
 		{
-			return gender == GENDER_HERM;
+			return gender == Gender.HERM;
 		}
 		
 		/**
@@ -2592,7 +2414,7 @@ import mx.logging.ILogger;
 		 */
 		public function isGenderless():Boolean
 		{
-			return gender == GENDER_NONE;
+			return gender == Gender.NONE;
 		}
 
 		/**
@@ -2600,7 +2422,7 @@ import mx.logging.ILogger;
 		 */
 		public function isMaleOrHerm():Boolean
 		{
-			return (gender & GENDER_MALE) != 0;
+			return (gender & Gender.MALE) != 0;
 		}
 
 		/**
@@ -2608,7 +2430,7 @@ import mx.logging.ILogger;
 		 */
 		public function isFemaleOrHerm():Boolean
 		{
-			return (gender & GENDER_FEMALE) != 0;
+			return (gender & Gender.FEMALE) != 0;
 		}
 		
 		//Create a cock. Default type is HUMAN
@@ -2690,7 +2512,7 @@ import mx.logging.ILogger;
 					}
 					catch (e:Error)
 					{
-						trace("Argument error in Creature[" + this._short + "]: " + e.message);
+						CoC_Settings.error("Argument error in Creature[" + this._short + "]: " + e.message);
 					}
 					//trace("Attempted to remove " + totalRemoved + " cocks.");
 				}
@@ -2869,7 +2691,12 @@ import mx.logging.ILogger;
 
 		public function hasBeak():Boolean
 		{
-			return [FACE_BEAK, FACE_COCKATRICE].indexOf(faceType) != -1;
+			return [Face.BEAK, Face.COCKATRICE].indexOf(face.type) != -1;
+		}
+
+		public function hasGills():Boolean
+		{
+			return gills.type != Gills.NONE;
 		}
 
 		public function hasFeathers():Boolean
@@ -2879,22 +2706,22 @@ import mx.logging.ILogger;
 
 		public function hasScales():Boolean
 		{
-			return [SKIN_TYPE_LIZARD_SCALES, SKIN_TYPE_DRAGON_SCALES, SKIN_TYPE_FISH_SCALES].indexOf(skinType) != -1;
+			return [Skin.LIZARD_SCALES, Skin.DRAGON_SCALES, Skin.FISH_SCALES].indexOf(skin.type) != -1;
 		}
 
 		public function hasReptileScales():Boolean
 		{
-			return [SKIN_TYPE_LIZARD_SCALES, SKIN_TYPE_DRAGON_SCALES].indexOf(skinType) != -1;
+			return [Skin.LIZARD_SCALES, Skin.DRAGON_SCALES].indexOf(skin.type) != -1;
 		}
 
 		public function hasDragonScales():Boolean
 		{
-			return skinType == SKIN_TYPE_DRAGON_SCALES;
+			return skin.type == Skin.DRAGON_SCALES;
 		}
 
 		public function hasLizardScales():Boolean
 		{
-			return skinType == SKIN_TYPE_LIZARD_SCALES;
+			return skin.type == Skin.LIZARD_SCALES;
 		}
 
 		public function hasNonLizardScales():Boolean
@@ -2929,97 +2756,81 @@ import mx.logging.ILogger;
 
 		public function hasGooSkin():Boolean
 		{
-			return skinType == SKIN_TYPE_GOO;
+			return skin.type == Skin.GOO;
 		}
 
 		public function hasPlainSkin():Boolean
 		{
-			return skinType == SKIN_TYPE_PLAIN;
+			return skin.type == Skin.PLAIN;
 		}
 
 		public function get hairOrFurColors():String
 		{
 			if (!isFluffy())
-				return hairColor;
+				return hair.color;
 
-			if (!underBody.skin.isFluffy() || ["no", furColor].indexOf(underBody.skin.furColor) != -1)
-				return furColor;
+			if (!underBody.skin.isFluffy() || ["no", skin.furColor].indexOf(underBody.skin.furColor) != -1)
+				return skin.furColor;
 
 			// Uses formatStringArray in case we add more skin layers
 			// If more layers are added, we'd probably need some remove duplicates function
 			return formatStringArray([
-				furColor,
+				skin.furColor,
 				underBody.skin.furColor,
 			]);
 		}
 
 		public function isBiped():Boolean
 		{
-			return legCount == 2;
+			return lowerBody.legCount == 2;
 		}
 
 		public function isNaga():Boolean
 		{
-			if (lowerBody == LOWER_BODY_TYPE_NAGA)
-				return true;
-			return false;
+			return lowerBody.type == LowerBody.NAGA;
 		}
 
 		public function isTaur():Boolean
 		{
-			if (legCount > 2 && !isDrider()) // driders have genitals on their human part, inlike usual taurs... this is actually bad way to check, but too many places to fix just now
-				return true;
-			return false;
+			return lowerBody.legCount > 2 && !isDrider(); // driders have genitals on their human part, inlike usual taurs... this is actually bad way to check, but too many places to fix just now
 		}
 
 		public function isDrider():Boolean
 		{
-			return (lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
+			return lowerBody.type == LowerBody.DRIDER;
 		}
 
 		public function hasSpiderEyes():Boolean
 		{
-			if (eyeType == EYES_SPIDER && eyeCount == 4)
-				return true;
-			return false;
+			return eyes.type == Eyes.SPIDER && eyes.count == 4;
 		}
 
 		public function isGoo():Boolean
 		{
-			if (lowerBody == LOWER_BODY_TYPE_GOO)
-				return true;
-			return false;
+			return lowerBody.type == LowerBody.GOO;
 		}
 
 		public function legs():String
 		{
 			var select:Number = 0;
-			//lowerBody:
-			//4 legs - centaur!
+
 			if (isDrider())
-				return num2Text(legCount)+" spider legs";
+				return num2Text(lowerBody.legCount)+" spider legs";
 			if (isTaur())
-				return num2Text(legCount)+" legs";
-			//0 - normal
-			if (lowerBody == 0)
+				return num2Text(lowerBody.legCount)+" legs";
+			if (lowerBody.type == LowerBody.HUMAN)
 				return "legs";
-			//1 - hooves
-			if (lowerBody == 1)
+			if (lowerBody.type == LowerBody.HOOFED)
 				return "legs";
-			//2 - paws
-			if (lowerBody == 2)
+			if (lowerBody.type == LowerBody.DOG)
 				return "legs";
-			//3 - snakelike body
-			if (lowerBody == 3)
+			if (lowerBody.type == LowerBody.NAGA)
 				return "snake-like coils";
-			//8 - goo shit
-			if (lowerBody == 8)
+			if (lowerBody.type == LowerBody.GOO)
 				return "mounds of goo";
-			//PONY
-			if (lowerBody == 11)
+			if (lowerBody.type == LowerBody.PONY)
 				return "cute pony-legs";
-			//Bunnah!
-			if (lowerBody == 12) {
+			if (lowerBody.type == LowerBody.BUNNY) {
 				select = Math.floor(Math.random() * (5));
 				if (select == 0)
 					return "fuzzy, bunny legs";
@@ -3030,7 +2841,7 @@ import mx.logging.ILogger;
 				else
 					return "legs";
 			}
-			if (lowerBody == 13) {
+			if (lowerBody.type == LowerBody.HARPY) {
 				select = Math.floor(Math.random() * (5));
 				if (select == 0)
 					return "bird-like legs";
@@ -3039,7 +2850,7 @@ import mx.logging.ILogger;
 				else
 					return "legs";
 			}
-			if (lowerBody == 17) {
+			if (lowerBody.type == LowerBody.FOX) {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "fox-like legs";
@@ -3050,14 +2861,14 @@ import mx.logging.ILogger;
 				else
 					return "vulpine legs";
 			}
-			if (lowerBody == 19) {
+			if (lowerBody.type == LowerBody.RACCOON) {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "raccoon-like legs";
 				else
 					return "legs";
 			}
-			if (lowerBody == 21) {
+			if (lowerBody.type == LowerBody.CLOVEN_HOOFED) {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "pig-like legs";
@@ -3076,15 +2887,15 @@ import mx.logging.ILogger;
 		public function skinFurScales():String { return skin.skinFurScales(); }
 
 		// <mod name="Predator arms" author="Stadler76">
-		public function claws():String
+		public function clawsDescript():String
 		{
-			var toneText:String = clawTone == "" ? " " : (", " + clawTone + " ");
+			var toneText:String = claws.tone == "" ? " " : (", " + claws.tone + " ");
 
-			switch (clawType) {
-				case CLAW_TYPE_NORMAL: return "fingernails";
-				case CLAW_TYPE_LIZARD: return "short curved" + toneText + "claws";
-				case CLAW_TYPE_DRAGON: return "powerful, thick curved" + toneText + "claws";
-				case CLAW_TYPE_IMP:    return "long" + toneText + "claws";
+			switch (claws.type) {
+				case Claws.NORMAL: return "fingernails";
+				case Claws.LIZARD: return "short curved" + toneText + "claws";
+				case Claws.DRAGON: return "powerful, thick curved" + toneText + "claws";
+				case Claws.IMP:    return "long" + toneText + "claws";
 				// Since mander and cockatrice arms are hardcoded and the others are NYI, we're done here for now
 			}
 			return "fingernails";
@@ -3094,30 +2905,22 @@ import mx.logging.ILogger;
 		public function leg():String
 		{
 			var select:Number = 0;
-			//lowerBody:
-			//0 - normal
-			if (lowerBody == 0)
+
+			if (lowerBody.type == LowerBody.HUMAN)
 				return "leg";
-			//1 - hooves
-			if (lowerBody == 1)
+			if (lowerBody.type == LowerBody.HOOFED)
 				return "leg";
-			//2 - paws
-			if (lowerBody == 2)
+			if (lowerBody.type == LowerBody.DOG)
 				return "leg";
-			//3 - snakelike body
-			if (lowerBody == 3)
+			if (lowerBody.type == LowerBody.NAGA)
 				return "snake-tail";
-			//4 - centaur!
-			if (lowerBody == 4)
+			if (lowerBody.type == LowerBody.HOOFED && isTaur())
 				return "equine leg";
-			//8 - goo shit
-			if (lowerBody == 8)
+			if (lowerBody.type == LowerBody.GOO)
 				return "mound of goo";
-			//PONY
-			if (lowerBody == 11)
+			if (lowerBody.type == LowerBody.PONY)
 				return "cartoonish pony-leg";
-			//BUNNAH
-			if (lowerBody == 12) {
+			if (lowerBody.type == LowerBody.BUNNY) {
 				select = Math.random() * (5);
 				if (select == 0)
 					return "fuzzy, bunny leg";
@@ -3128,7 +2931,7 @@ import mx.logging.ILogger;
 				else
 					return "leg";
 			}
-			if (lowerBody == 13) {
+			if (lowerBody.type == LowerBody.HARPY) {
 				select = Math.floor(Math.random() * (5));
 				if (select == 0)
 					return "bird-like leg";
@@ -3137,7 +2940,7 @@ import mx.logging.ILogger;
 				else
 					return "leg";
 			}
-			if (lowerBody == 17) {
+			if (lowerBody.type == LowerBody.FOX) {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "fox-like leg";
@@ -3148,7 +2951,7 @@ import mx.logging.ILogger;
 				else
 					return "vulpine leg";
 			}
-			if (lowerBody == 19) {
+			if (lowerBody.type == LowerBody.RACCOON) {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "raccoon-like leg";
@@ -3161,35 +2964,23 @@ import mx.logging.ILogger;
 		public function feet():String
 		{
 			var select:Number = 0;
-			//lowerBody:
-			//0 - normal
-			if (lowerBody == 0)
+			if (lowerBody.type == LowerBody.HUMAN)
 				return "feet";
-			//1 - hooves
-			if (lowerBody == 1)
+			if (lowerBody.type == LowerBody.HOOFED)
 				return "hooves";
-			//2 - paws
-			if (lowerBody == 2)
+			if (lowerBody.type == LowerBody.DOG)
 				return "paws";
-			//3 - snakelike body
-			if (lowerBody == 3)
+			if (lowerBody.type == LowerBody.NAGA)
 				return "coils";
-			//4 - centaur!
-			if (lowerBody == 4)
-				return "hooves";
-			//5 - demonic heels
-			if (lowerBody == 5)
+			if (lowerBody.type == LowerBody.DEMONIC_HIGH_HEELS)
 				return "demonic high-heels";
-			//6 - demonic claws
-			if (lowerBody == 6)
+			if (lowerBody.type == LowerBody.DEMONIC_CLAWS)
 				return "demonic foot-claws";
-			//8 - goo shit
-			if (lowerBody == 8)
+			if (lowerBody.type == LowerBody.GOO)
 				return "slimey cillia";
-			if (lowerBody == 11)
+			if (lowerBody.type == LowerBody.PONY)
 				return "flat pony-feet";
-			//BUNNAH
-			if (lowerBody == 12) {
+			if (lowerBody.type == LowerBody.BUNNY) {
 				select = rand(5);
 				if (select == 0)
 					return "large bunny feet";
@@ -3200,16 +2991,16 @@ import mx.logging.ILogger;
 				else
 					return "feet";
 			}
-			if (lowerBody == 13) {
+			if (lowerBody.type == LowerBody.HARPY) {
 				select = Math.floor(Math.random() * (5));
 				if (select == 0)
 					return "taloned feet";
 				else
 					return "feet";
 			}
-			if (lowerBody == 14)
+			if (lowerBody.type == LowerBody.KANGAROO)
 				return "foot-paws";
-			if (lowerBody == 17) {
+			if (lowerBody.type == LowerBody.FOX) {
 				select = rand(4);
 				if (select == 0)
 					return "paws";
@@ -3220,7 +3011,7 @@ import mx.logging.ILogger;
 				else
 					return "paws";
 			}
-			if (lowerBody == 19) {
+			if (lowerBody.type == LowerBody.RACCOON) {
 				select = Math.floor(Math.random() * (3));
 				if (select == 0)
 					return "raccoon-like feet";
@@ -3237,30 +3028,19 @@ import mx.logging.ILogger;
 		public function foot():String
 		{
 			var select:Number = 0;
-			//lowerBody:
-			//0 - normal
-			if (lowerBody == 0)
+			if (lowerBody.type == LowerBody.HUMAN)
 				return "foot";
-			//1 - hooves
-			if (lowerBody == 1)
+			if (lowerBody.type == LowerBody.HOOFED)
 				return "hoof";
-			//2 - paws
-			if (lowerBody == 2)
+			if (lowerBody.type == LowerBody.DOG)
 				return "paw";
-			//3 - snakelike body
-			if (lowerBody == 3)
+			if (lowerBody.type == LowerBody.NAGA)
 				return "coiled tail";
-			//4 - centaur!
-			if (lowerBody == 4)
-				return "hoof";
-			//8 - goo shit
-			if (lowerBody == 8)
+			if (lowerBody.type == LowerBody.GOO)
 				return "slimey undercarriage";
-			//PONY
-			if (lowerBody == 11)
+			if (lowerBody.type == LowerBody.PONY)
 				return "flat pony-foot";
-			//BUNNAH
-			if (lowerBody == 12) {
+			if (lowerBody.type == LowerBody.BUNNY) {
 				select = Math.random() * (5);
 				if (select == 0)
 					return "large bunny foot";
@@ -3271,14 +3051,14 @@ import mx.logging.ILogger;
 				else
 					return "foot";
 			}
-			if (lowerBody == 13) {
+			if (lowerBody.type == LowerBody.HARPY) {
 				select = Math.floor(Math.random() * (5));
 				if (select == 0)
 					return "taloned foot";
 				else
 					return "foot";
 			}
-			if (lowerBody == 17) {
+			if (lowerBody.type == LowerBody.FOX) {
 				select = Math.floor(Math.random() * (4));
 				if (select == 0)
 					return "paw";
@@ -3289,9 +3069,9 @@ import mx.logging.ILogger;
 				else
 					return "paw";
 			}
-			if (lowerBody == 14)
+			if (lowerBody.type == LowerBody.KANGAROO)
 				return "foot-paw";
-			if (lowerBody == 19) {
+			if (lowerBody.type == LowerBody.RACCOON) {
 				select = Math.floor(Math.random() * (3));
 				if (select == 0)
 					return "raccoon-like foot";
@@ -3307,14 +3087,14 @@ import mx.logging.ILogger;
 
 		public function canOvipositSpider():Boolean
 		{
-			if (eggs() >= 10 && hasPerk(PerkLib.SpiderOvipositor) && isDrider() && tailType == TAIL_TYPE_SPIDER_ADBOMEN)
+			if (eggs() >= 10 && hasPerk(PerkLib.SpiderOvipositor) && isDrider() && tail.type == Tail.SPIDER_ABDOMEN)
 				return true;
 			return false;
 		}
 
 		public function canOvipositBee():Boolean
 		{
-			if (eggs() >= 10 && hasPerk(PerkLib.BeeOvipositor) && tailType == TAIL_TYPE_BEE_ABDOMEN)
+			if (eggs() >= 10 && hasPerk(PerkLib.BeeOvipositor) && tail.type == Tail.BEE_ABDOMEN)
 				return true;
 			return false;
 		}
@@ -3408,7 +3188,10 @@ import mx.logging.ILogger;
 
 		public function breastCup(rowNum:Number):String
 		{
-			if (rowNum == -1) rowNum = this.breastRows.length == 0 ? 0 : this.breastRows.length - 1;
+			if (rowNum === -1) {
+				rowNum = this.breastRows.length === 0 ? 0 : this.breastRows.length - 1;
+			}
+			
 			return Appearance.breastCup(breastRows[rowNum].breastRating);
 		}
 
@@ -3700,7 +3483,10 @@ import mx.logging.ILogger;
 		
 		public function nippleDescript(rowIdx:int):String
 		{
-			if (rowIdx == -1) rowIdx = this.breastRows.length - 1;
+			if (rowIdx === -1) {
+				rowIdx = this.breastRows.length - 1;
+			}
+			
 			return Appearance.nippleDescription(this, rowIdx);
 		}
 
@@ -3866,31 +3652,34 @@ import mx.logging.ILogger;
 
 		public function breastDescript(rowNum:int):String
 		{
-			if (rowNum == -1) rowNum = breastRows.length - 1;
+			if (rowNum === -1) {
+				rowNum = breastRows.length - 1;
+			}
+			
 			//ERROR PREVENTION
 			if (breastRows.length - 1 < rowNum) {
 				CoC_Settings.error("");
 				return "<b>ERROR, breastDescript() working with invalid breastRow</b>";
 			}
-			if (breastRows.length == 0) {
+			
+			if (breastRows.length === 0) {
 				CoC_Settings.error("");
 				return "<b>ERROR, breastDescript() called when no breasts are present.</b>";
 			}
+			
 			return BreastStore.breastDescript(breastRows[rowNum].breastRating, breastRows[rowNum].lactationMultiplier);
+		}
+
+		public function hasLongTongue():Boolean
+		{
+			return BodyPartLists.longTongues.indexOf(tongue.type) !== -1;
 		}
 
 		private function breastSize(val:Number):String
 		{
 			return Appearance.breastSize(val);
 		}
-		
-		/**
-		 * Echidna 1 ft long (i'd consider it barely qualifying), demonic 2 ft long, draconic 4 ft long
-		 */
-		public function hasLongTongue():Boolean {
-			return tongueType == TONGUE_DEMONIC || tongueType == TONGUE_DRACONIC || tongueType == TONGUE_ECHIDNA;
-		}
-		
+
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
 			//Return 0 if Grimdark
 			if (flags[kFLAGS.GRIMDARK_MODE] > 0) return 0;
@@ -4168,7 +3957,7 @@ import mx.logging.ILogger;
 				case "/":
 					return old / val;
 				default:
-					trace("applyOperator(" + old + ",'" + op + "'," + val + ") unknown op");
+					//trace("applyOperator(" + old + ",'" + op + "'," + val + ") unknown op");
 					return old;
 			}
 		}
@@ -4182,7 +3971,7 @@ import mx.logging.ILogger;
 			// Check num of args, we should have a multiple of 2
 			if ((args.length % 2) != 0)
 			{
-				trace("dynStats aborted. Keys->Arguments could not be matched");
+				//trace("dynStats aborted. Keys->Arguments could not be matched");
 				return {str:0,tou:0,spe:0,inte:0,wis:0,lib:0,sens:0,lust:0,cor:0,scale:true,max:true};
 			}
 			var argDefs:Object = { //[value, operator]
@@ -4220,7 +4009,7 @@ import mx.logging.ILogger;
 					// Make sure the next arg has the POSSIBILITY of being correct
 					if ((typeof(args[i + 1]) != "number") && (typeof(args[i + 1]) != "boolean"))
 					{
-						trace("dynStats aborted. Next argument after argName is invalid! arg is type " + typeof(args[i + 1]));
+						//trace("dynStats aborted. Next argument after argName is invalid! arg is type " + typeof(args[i + 1]));
 						continue;
 					}
 					var argOp:String = "";
@@ -4235,13 +4024,7 @@ import mx.logging.ILogger;
 					if (argsi in argDefs) {
 						argDefs[argsi][0] = args[i + 1];
 						if (argOp) argDefs[argsi][1] = argOp;
-					} else {
-						trace("Couldn't find the arg name " + argsi + " in the index arrays. Welp!");
-					}
-				}
-				else
-				{
-					trace("dynStats aborted. Expected a key and got SHIT");
+					} 
 				}
 			}
 			// Got this far, we have values to statsify

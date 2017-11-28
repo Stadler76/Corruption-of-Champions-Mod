@@ -60,9 +60,11 @@
 	<macrodef name="build-unit-tests">
 		<attribute name="debug-flag"/>
 		<attribute name="release-flag"/>
+		<attribute name="test-runner" default="${test.src.dir}/TestRunner.mxml"/>
+		
 		<sequential>
 			<!-- build the unit test binary -->
-			<mxmlc file="${test.src.dir}/TestRunner.mxml" output="${test.file}" static-rsls="true">
+			<mxmlc file="@{test-runner}" output="${test.file}" static-rsls="true">
 				<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
 				<source-path path-element="${FLEX_HOME}/frameworks"/>
 				<source-path path-element="${main.src.dir}/"/>
@@ -96,6 +98,22 @@
    </target>
    
    <target name="test" depends="test-debug" description="Run the unit tests and create a HTML report">
+   </target>
+   
+   
+   <target name="test-single" depends="init" description="Run a single unit test or suit and create a HTML report. Specify the FQN of the class with -Dtestclass=">
+		<property name="single-runner"  value="${test.src.dir}/SingleRunner.mxml"/>
+		
+		<!-- Copy the original test target for all tests... -->
+		<copy file="${test.src.dir}/TestRunner.mxml" tofile="${single-runner}" overwrite="true"/>
+		
+		<!-- And rewrite the import and class to run to the target test or suite -->
+		<replace file="${single-runner}" token="AllTestsSuit" value="${testclass}"/>
+		
+		<build-unit-tests debug-flag="true" release-flag="false" test-runner="${single-runner}">
+		</build-unit-tests>
+		
+		<run-unit-tests></run-unit-tests>
    </target>
    
    	<macrodef name="run-unit-tests">

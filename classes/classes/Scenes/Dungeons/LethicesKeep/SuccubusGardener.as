@@ -1,11 +1,14 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.Appearance;
+	import classes.AssClass;
 	import classes.Monster;
 	import classes.StatusEffects;
 	import classes.PerkLib;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	
 	/**
 	 * ...
@@ -24,12 +27,12 @@ package classes.Scenes.Dungeons.D3
 			this.createVagina(false, 3, 3);
 			this.createBreastRow(Appearance.breastCupInverse("FF"));
 			
-			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			
 			this.tallness = 8 * 12;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hips.rating = Hips.RATING_AVERAGE;
+			this.butt.rating = Butt.RATING_TIGHT;
 			
 			this.weaponName = "tentacles";
 			this.weaponVerb = "lash";
@@ -63,13 +66,13 @@ package classes.Scenes.Dungeons.D3
 		override public function defeated(hpVictory:Boolean):void
 		{
 			cleanupEffects();
-			game.d3.succubusGardener.fuckUpTheGardener(hpVictory);
+			game.lethicesKeep.succubusGardener.fuckUpTheGardener(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			cleanupEffects();
-			game.d3.succubusGardener.surrenderToTheGardener(hpVictory);
+			game.lethicesKeep.succubusGardener.surrenderToTheGardener(hpVictory);
 		}
 		
 		override protected function performCombatAction():void
@@ -340,7 +343,7 @@ this.HP = this.maxHP();
 			}
 			else if (player.lust100 < 80)
 			{
-				outputText("You whimper as the insidious plant-sperm works on your vulnerable " + player.skinDesc + ", building pernicious desires in tiny, insistent increments. It's getting harder to focus... harder not to think about how good all those tentacles would feel in you and on you, caressing your most intimate places.\n\n");
+				outputText("You whimper as the insidious plant-sperm works on your vulnerable " + player.skin.desc + ", building pernicious desires in tiny, insistent increments. It's getting harder to focus... harder not to think about how good all those tentacles would feel in you and on you, caressing your most intimate places.\n\n");
 			}
 			else if (player.lust100 < 90)
 			{

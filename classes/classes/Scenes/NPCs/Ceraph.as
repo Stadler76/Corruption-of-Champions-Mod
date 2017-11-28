@@ -1,6 +1,8 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Hips;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
@@ -64,7 +66,7 @@ package classes.Scenes.NPCs
 			//[SPECIAL WHILE PC RESTRAINED]
 			else {
 				if (rand(2) == 0) {
-					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your " + player.skinDesc + ", smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your " + player.armorName + " to caress you more intimately while you're at her mercy.");
+					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your " + player.skin.desc + ", smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your " + player.armorName + " to caress you more intimately while you're at her mercy.");
 					player.takeLustDamage(9 + player.sens / 10, true);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
@@ -115,7 +117,7 @@ package classes.Scenes.NPCs
 		public function ceraphBoundWait():void
 		{
 			clearOutput();
-			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.");
+			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skin.desc + ", is intoxicating.");
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.");
 				player.takeLustDamage(5, true);
@@ -290,26 +292,26 @@ package classes.Scenes.NPCs
 
 		public function Ceraph()
 		{
-			trace("Ceraph Constructor!");
+			//trace("Ceraph Constructor!");
 			this.a = "";
 			this.short = "Ceraph";
 			this.imageName = "ceraph";
 			this.long = "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.DEMON);
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,15,0,0,0);
 			this.tallness = 5*12+6;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_NOTICEABLE;
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
-			this.skinTone = "purple";
-			this.hairColor = "black";
-			this.hairLength = 20;
+			this.hips.rating = Hips.RATING_CURVY;
+			this.butt.rating = Butt.RATING_NOTICEABLE;
+			this.lowerBody.type = LowerBody.DEMONIC_HIGH_HEELS;
+			this.skin.tone = "purple";
+			this.hair.color = "black";
+			this.hair.length = 20;
 			initStrTouSpeInte(65, 40, 80, 80);
 			initLibSensCor(75, 15, 100);
 			this.weaponName = "flaming whip";

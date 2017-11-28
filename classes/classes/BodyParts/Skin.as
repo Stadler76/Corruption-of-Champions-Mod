@@ -7,9 +7,17 @@ package classes.BodyParts
 	 */
 	public class Skin 
 	{
-		include "../../../includes/appearanceDefs.as";
+		public static const PLAIN:int         =   0;
+		public static const FUR:int           =   1;
+		public static const LIZARD_SCALES:int =   2;
+		public static const GOO:int           =   3;
+		public static const UNDEFINED:int     =   4; // DEPRECATED, silently discarded upon loading a saved game
+		public static const DRAGON_SCALES:int =   5;
+		public static const FISH_SCALES:int   =   6; // NYI, for future use
+		public static const WOOL:int          =   7;
+		public static const FEATHERED:int     =   8;
 
-		public var type:Number = SKIN_TYPE_PLAIN;
+		public var type:Number = PLAIN;
 		public var tone:String = "albino";
 		public var desc:String = "skin";
 		public var adj:String = "";
@@ -48,32 +56,32 @@ package classes.BodyParts
 
 		public function hasFur():Boolean
 		{
-			return type == SKIN_TYPE_FUR;
+			return type == FUR;
 		}
 
 		public function hasWool():Boolean
 		{
-			return type == SKIN_TYPE_WOOL;
+			return type == WOOL;
 		}
 
 		public function hasFeathers():Boolean
 		{
-			return  type == SKIN_TYPE_FEATHERED;
+			return  type == FEATHERED;
 		}
 
 		public function isFurry():Boolean
 		{
-			return [SKIN_TYPE_FUR, SKIN_TYPE_WOOL].indexOf(type) != -1;
+			return [FUR, WOOL].indexOf(type) != -1;
 		}
 
 		public function isFluffy():Boolean
 		{
-			return [SKIN_TYPE_FUR, SKIN_TYPE_WOOL, SKIN_TYPE_FEATHERED].indexOf(type) != -1;
+			return [FUR, WOOL, FEATHERED].indexOf(type) != -1;
 		}
 
 		public function restore(keepTone:Boolean = true):void
 		{
-			type = SKIN_TYPE_PLAIN;
+			type = PLAIN;
 			if (!keepTone) tone = "albino";
 			desc = "skin";
 			adj  = "";

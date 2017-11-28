@@ -1,25 +1,24 @@
 ﻿package classes
 {
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kGAMECLASS;
-import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.Items.Armor;
-import classes.Items.ArmorLib;
-import classes.Items.Weapon;
-import classes.Items.WeaponLib;
-import classes.Items.Jewelry;
-import classes.Items.JewelryLib;
-import classes.Items.Shield;
-import classes.Items.ShieldLib;
-import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib
-import classes.Scenes.Areas.Forest;
-import classes.Scenes.Areas.Forest.KitsuneScene;
-import classes.Scenes.Places.TelAdre.UmasShop;
+	import classes.BodyParts.*;
+	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Armor;
+	import classes.Items.ArmorLib;
+	import classes.Items.Jewelry;
+	import classes.Items.JewelryLib;
+	import classes.Items.Shield;
+	import classes.Items.ShieldLib;
+	import classes.Items.Undergarment;
+	import classes.Items.UndergarmentLib;
+	import classes.Items.Weapon;
+	import classes.Items.WeaponLib;
+	import classes.Scenes.Areas.Forest.KitsuneScene;
+	import classes.Scenes.Places.TelAdre.UmasShop;
+	import classes.lists.BreastCup;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	/**
 	 * ...
@@ -273,10 +272,10 @@ use namespace kGAMECLASS;
 			if (hasReptileScales()) armorDef += 3;
 			if (hasDragonScales()) armorDef += 3;
 			//'Thick' dermis descriptor adds 1!
-			if (skinAdj == "smooth") armorDef += 1;
+			if (skin.adj == "smooth") armorDef += 1;
 			//Bonus defense
-			if (armType == ARM_TYPE_SPIDER) armorDef += 2;
-			if (lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS || lowerBody == LOWER_BODY_TYPE_BEE) armorDef += 2;
+			if (arms.type == Arms.SPIDER) armorDef += 2;
+			if (lowerBody.type == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody.type == LowerBody.BEE) armorDef += 2;
 			//Bonus when being a samurai
 			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA) {
 				armorDef += 2;
@@ -745,7 +744,7 @@ use namespace kGAMECLASS;
 				else
 				{
 					desc += "a wide, cushiony body";
-					if (gender >= 2 || biggestTitSize() > 3 || hipRating > 7 || buttRating > 7)
+					if (gender >= 2 || biggestTitSize() > 3 || hips.rating > 7 || butt.rating > 7)
 						desc += " and plenty of jiggle on your curves";
 				}
 			}
@@ -761,17 +760,17 @@ use namespace kGAMECLASS;
 				else if (tone > 25)
 				{
 					desc += "a very wide body";
-					if (gender >= 2 || biggestTitSize() > 4 || hipRating > 10 || buttRating > 10)
+					if (gender >= 2 || biggestTitSize() > 4 || hips.rating > 10 || butt.rating > 10)
 						desc += ", lots of curvy jiggles,";
 					desc += " and hints of muscle underneath";
 				}
 				else
 				{
 					desc += "a thick";
-					if (gender >= 2 || biggestTitSize() > 4 || hipRating > 10 || buttRating > 10)
+					if (gender >= 2 || biggestTitSize() > 4 || hips.rating > 10 || butt.rating > 10)
 						desc += ", voluptuous";
 					desc += " body and plush, ";
-					if (gender >= 2 || biggestTitSize() > 4 || hipRating > 10 || buttRating > 10)
+					if (gender >= 2 || biggestTitSize() > 4 || hips.rating > 10 || butt.rating > 10)
 						desc += " jiggly curves";
 					else
 						desc += " soft flesh";
@@ -786,14 +785,14 @@ use namespace kGAMECLASS;
 			var race:String = "human";
 			if (catScore() >= 4) 
 			{
-				if (isTaur() && lowerBody == LOWER_BODY_TYPE_CAT) {
+				if (isTaur() && lowerBody.type == LowerBody.CAT) {
 					race = "cat-taur";
-					if (faceType == 0)
+					if (face.type == 0)
 						race = "sphinx-morph"; // no way to be fully feral anyway
 				}
 				else {
 					race = "cat-morph";
-					if (faceType == 0)
+					if (face.type == 0)
 						race = "cat-" + mf("boy", "girl");
 				}
 			}
@@ -811,7 +810,7 @@ use namespace kGAMECLASS;
 			if (dragonScore() >= 6)
 			{
 				race = "dragon-morph";
-				if (faceType == 0)
+				if (face.type == 0)
 					race = "dragon-" + mf("man", "girl");
 				if (isTaur())
 					race = "dragon-taur";
@@ -821,7 +820,7 @@ use namespace kGAMECLASS;
 				race = "cockatrice-morph";
 				if (cockatriceScore() >= 8)
 					race = "cockatrice";
-				if (faceType == 0)
+				if (face.type == 0)
 					race = "cockatrice-" + mf("boy", "girl");
 				if (isTaur())
 					race = "cockatrice-taur";
@@ -835,13 +834,13 @@ use namespace kGAMECLASS;
 					race = "raccoon-taur";
 			}
 			if (sheepScore() >= 4) {
-				if (legCount == 4 && lowerBody == 21) {
+				if (lowerBody.legCount == 4 && lowerBody.type == 21) {
 					race = "sheep-taur";
 				}
 				else if (gender == 0 || gender == 3) {
 					race = "sheep-morph";
 				}
-				else if (gender == 1 && hornType == 10) {
+				else if (gender == 1 && horns.type == 10) {
 					race = "ram-morph";
 				}
 				else {
@@ -858,17 +857,17 @@ use namespace kGAMECLASS;
 			}
 			if (dogScore() >= 4)
 			{
-				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DOG)
+				if (isTaur() && lowerBody.type == LowerBody.DOG)
 					race = "dog-taur";
 				else {
 					race = "dog-morph";
-					if (faceType == 0)
+					if (face.type == 0)
 						race = "dog-" + mf("man", "girl");
 				}
 			}
 			if (foxScore() >= 4)
 			{
-				if (isTaur() && lowerBody == LOWER_BODY_TYPE_FOX)
+				if (isTaur() && lowerBody.type == LowerBody.FOX)
 					race = "fox-taur";
 				else if (hasFur())
 					race = "fox-morph";
@@ -891,13 +890,13 @@ use namespace kGAMECLASS;
 				if (isTaur())
 					race = "centaur-morph";
 				else
-					if (hornType == HORNS_UNICORN) {
-						if (wingType == WING_TYPE_FEATHERED_LARGE)
+					if (horns.type == Horns.UNICORN) {
+						if (wings.type == Wings.FEATHERED_LARGE)
 							race = "alicorn";
 						else
 							race = "unicorn-morph";
 					} else {
-						if (wingType == WING_TYPE_FEATHERED_LARGE)
+						if (wings.type == Wings.FEATHERED_LARGE)
 							race = "pegasus";
 						else
 							race = "equine-morph";
@@ -945,7 +944,7 @@ use namespace kGAMECLASS;
 				race = "kangaroo-morph";
 			if (mouseScore() >= 3)
 			{
-				if (faceType != 16)
+				if (face.type != 16)
 					race = "mouse-" + mf("boy", "girl");
 				else
 					race = "mouse-morph";
@@ -959,9 +958,9 @@ use namespace kGAMECLASS;
 			if (pigScore() >= 4) 
 			{
 				race = "pig-morph";
-				if (faceType == 0)
+				if (face.type == 0)
 					race = "pig-" + mf("boy", "girl");
-				if (faceType == 20)
+				if (face.type == 20)
 					race = "boar-morph";
 			}
 			if (satyrScore() >= 4)
@@ -971,19 +970,19 @@ use namespace kGAMECLASS;
 			if (rhinoScore() >= 4)
 			{
 				race = "rhino-morph";
-				if (faceType == 0) race = "rhino-" + mf("boy", "girl");
+				if (face.type == 0) race = "rhino-" + mf("boy", "girl");
 			}
 			if (echidnaScore() >= 4)
 			{
 				race = "echidna-morph";
-				if (faceType == 0) race = "echidna-" + mf("boy", "girl");
+				if (face.type == 0) race = "echidna-" + mf("boy", "girl");
 			}
 			if (deerScore() >= 4)
 			{
 				if (isTaur()) race = "deer-taur";
 				else {
 					race = "deer-morph";
-					if (faceType == 0) race = "deer-" + mf("boy", "girl");
+					if (face.type == 0) race = "deer-" + mf("boy", "girl");
 				}
 			}
 			//Special, bizarre races
@@ -992,14 +991,14 @@ use namespace kGAMECLASS;
 				if (isTaur()) race = "dragonne-taur";
 				else {
 					race  = "dragonne-morph";
-					if (faceType == 0)
+					if (face.type == 0)
 						race = "dragonne-" + mf("boy", "girl");
 				}
 			}
 			if (manticoreScore() >= 6)
 			{
 				race = "manticore-morph"
-				if (faceType == 0)
+				if (face.type == 0)
 					race = "manticore-" + mf("boy", "girl");
 			}
 			if (sirenScore() >= 4)
@@ -1007,17 +1006,17 @@ use namespace kGAMECLASS;
 				race = "siren";
 			}
 			//</mod>
-			if (lowerBody == 3)
+			if (lowerBody.type == 3)
 				race = "naga";
 
-			if (lowerBody == LOWER_BODY_TYPE_HOOFED && isTaur()) {
-				if (wingType == WING_TYPE_FEATHERED_LARGE) {
-					if (hornType == HORNS_UNICORN)
+			if (lowerBody.type == LowerBody.HOOFED && isTaur()) {
+				if (wings.type == Wings.FEATHERED_LARGE) {
+					if (horns.type == Horns.UNICORN)
 						race = "alicorn-taur";
 					else
 						race = "pegataur";
 				} else {
-					if (hornType == HORNS_UNICORN)
+					if (horns.type == Horns.UNICORN)
 						race = "unicorn-taur";
 					else {
 						if (horseScore() >= 5)
@@ -1030,7 +1029,7 @@ use namespace kGAMECLASS;
 				}
 			}
 
-			if (lowerBody == LOWER_BODY_TYPE_PONY)
+			if (lowerBody.type == LowerBody.PONY)
 				race = "pony-kin";
 
 			if (gooScore() >= 3)
@@ -1050,30 +1049,30 @@ use namespace kGAMECLASS;
 		public function cockatriceScore():Number
 		{
 			var cockatriceCounter:Number = 0;
-			if (earType == EARS_COCKATRICE)
+			if (ears.type == Ears.COCKATRICE)
 				cockatriceCounter++;
-			if (tailType == TAIL_TYPE_COCKATRICE)
+			if (tail.type == Tail.COCKATRICE)
 				cockatriceCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_COCKATRICE)
+			if (lowerBody.type == LowerBody.COCKATRICE)
 				cockatriceCounter++;
-			if (faceType == FACE_COCKATRICE)
+			if (face.type == Face.COCKATRICE)
 				cockatriceCounter++;
-			if (eyeType == EYES_COCKATRICE)
+			if (eyes.type == Eyes.COCKATRICE)
 				cockatriceCounter++;
-			if (armType == ARM_TYPE_COCKATRICE)
+			if (arms.type == Arms.COCKATRICE)
 				cockatriceCounter++;
-			if (antennae == ANTENNAE_COCKATRICE)
+			if (antennae.type == Antennae.COCKATRICE)
 				cockatriceCounter++;
-			if (neck.type == NECK_TYPE_COCKATRICE)
+			if (neck.type == Neck.COCKATRICE)
 				cockatriceCounter++;
 			if (cockatriceCounter > 2) {
-				if (tongueType == TONGUE_LIZARD)
+				if (tongue.type == Tongue.LIZARD)
 					cockatriceCounter++;
-				if (wingType == WING_TYPE_FEATHERED_LARGE)
+				if (wings.type == Wings.FEATHERED_LARGE)
 					cockatriceCounter++;
-				if (skinType == SKIN_TYPE_LIZARD_SCALES)
+				if (skin.type == Skin.LIZARD_SCALES)
 					cockatriceCounter++;
-				if (underBody.type == UNDER_BODY_TYPE_COCKATRICE)
+				if (underBody.type == UnderBody.COCKATRICE)
 					cockatriceCounter++;
 				if (lizardCocks() > 0)
 					cockatriceCounter++;
@@ -1085,21 +1084,21 @@ use namespace kGAMECLASS;
 		public function impScore():Number
 		{
 			var impCounter:Number = 0;
-			if (earType == EARS_IMP)
+			if (ears.type == Ears.IMP)
 				impCounter++;
-			if (tailType == TAIL_TYPE_IMP)
+			if (tail.type == Tail.IMP)
 				impCounter++;
-			if (wingType == WING_TYPE_IMP)
+			if (wings.type == Wings.IMP)
 				impCounter++;
-			if (wingType == WING_TYPE_IMP_LARGE)
+			if (wings.type == Wings.IMP_LARGE)
 				impCounter += 2;
-			if (lowerBody == LOWER_BODY_TYPE_IMP)
+			if (lowerBody.type == LowerBody.IMP)
 				impCounter++;
-			if (hasPlainSkin() && ["red", "orange"].indexOf(skinTone) != -1)
+			if (hasPlainSkin() && ["red", "orange"].indexOf(skin.tone) != -1)
 				impCounter++;
-			if (hornType == HORNS_IMP)
+			if (horns.type == Horns.IMP)
 				impCounter++;
-			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_IMP)
+			if (arms.type == Arms.PREDATOR && claws.type == Claws.IMP)
 				impCounter++;
 			if (tallness <= 42)
 				impCounter++;
@@ -1120,19 +1119,19 @@ use namespace kGAMECLASS;
 		public function demonScore():Number
 		{
 			var demonCounter:Number = 0;
-			if (hornType == 1 && horns > 0)
+			if (horns.type == Horns.DEMON && horns.value > 0)
 				demonCounter++;
-			if (hornType == 1 && horns > 4)
+			if (horns.type == Horns.DEMON && horns.value > 4)
 				demonCounter++;
-			if (tailType == 3)
+			if (tail.type == Tail.DEMONIC)
 				demonCounter++;
-			if (wingType == 6 || wingType == 7)
+			if (hasBatLikeWings())
 				demonCounter++;
 			if (hasPlainSkin() && cor > 50)
 				demonCounter++;
-			if (faceType == 0 && cor > 50)
+			if (face.type == 0 && cor > 50)
 				demonCounter++;
-			if (lowerBody == 5 || lowerBody == 6)
+			if (lowerBody.type == LowerBody.DEMONIC_HIGH_HEELS || lowerBody.type == LowerBody.DEMONIC_CLAWS)
 				demonCounter++;
 			if (countCocksOfType(CockTypesEnum.DEMON) > 0)
 				demonCounter++;
@@ -1143,21 +1142,21 @@ use namespace kGAMECLASS;
 		public function humanScore():Number
 		{
 			var humanCounter:Number = 0;
-			if (faceType == 0)
+			if (face.type == Face.HUMAN)
 				humanCounter++;
-			if (skinType == 0)
+			if (skin.type == Skin.PLAIN)
 				humanCounter++;
-			if (horns == 0)
+			if (horns.type == Horns.NONE)
 				humanCounter++;
-			if (tailType == 0)
+			if (tail.type == Tail.NONE)
 				humanCounter++;
-			if (wingType == 0)
+			if (wings.type == Wings.NONE)
 				humanCounter++;
-			if (lowerBody == 0)
+			if (lowerBody.type == LowerBody.HUMAN)
 				humanCounter++;
 			if (countCocksOfType(CockTypesEnum.HUMAN) == 1 && cocks.length == 1)
 				humanCounter++;
-			if (breastRows.length == 1 && skinType == 0)
+			if (breastRows.length == 1 && skin.type == Skin.PLAIN)
 				humanCounter++;
 			return humanCounter;
 		}
@@ -1166,15 +1165,15 @@ use namespace kGAMECLASS;
 		public function minoScore():Number
 		{
 			var minoCounter:Number = 0;
-			if (faceType == 3)
+			if (face.type == Face.COW_MINOTAUR)
 				minoCounter++;
-			if (earType == 3)
+			if (ears.type == Ears.COW)
 				minoCounter++;
-			if (tailType == 4)
+			if (tail.type == Tail.COW)
 				minoCounter++;
-			if (hornType == 2)
+			if (horns.type == Horns.COW_MINOTAUR)
 				minoCounter++;
-			if (lowerBody == 1 && minoCounter > 0)
+			if (lowerBody.type == LowerBody.HOOFED && minoCounter > 0)
 				minoCounter++;
 			if (tallness > 80 && minoCounter > 0)
 				minoCounter++;
@@ -1197,17 +1196,17 @@ use namespace kGAMECLASS;
 		public function cowScore():Number
 		{
 			var minoCounter:Number = 0;
-			if (earType == EARS_COW)
+			if (ears.type == Ears.COW)
 				minoCounter++;
-			if (tailType == TAIL_TYPE_COW)
+			if (tail.type == Tail.COW)
 				minoCounter++;
-			if (hornType == HORNS_COW_MINOTAUR)
+			if (horns.type == Horns.COW_MINOTAUR)
 				minoCounter++;
-			if (faceType == FACE_HUMAN && minoCounter > 0)
+			if (face.type == Face.HUMAN && minoCounter > 0)
 				minoCounter++;
-			if (faceType == FACE_COW_MINOTAUR)
+			if (face.type == Face.COW_MINOTAUR)
 				minoCounter--;
-			if (lowerBody == LOWER_BODY_TYPE_HOOFED && minoCounter > 0)
+			if (lowerBody.type == LowerBody.HOOFED && minoCounter > 0)
 				minoCounter++;
 			if (tallness >= 73 && minoCounter > 0)
 				minoCounter++;
@@ -1229,9 +1228,9 @@ use namespace kGAMECLASS;
 				counter++;
 			if (hasVagina() && vaginaType() == 5)
 				counter++;
-			if (eyeType == 2)
+			if (eyes.type == Eyes.BLACK_EYES_SAND_TRAP)
 				counter++;
-			if (wingType == 12)
+			if (wings.type == Wings.GIANT_DRAGONFLY)
 				counter++;
 			if (hasStatusEffect(StatusEffects.Uniball))
 				counter++;
@@ -1242,27 +1241,29 @@ use namespace kGAMECLASS;
 		public function beeScore():Number
 		{
 			var beeCounter:Number = 0;
-			if (hairColor == "shiny black")
+			if (hair.color == "shiny black")
 				beeCounter++;
-			if (hairColor == "black and yellow")
+			if (hair.color == "black and yellow")
 				beeCounter += 2;
-			if (antennae > 0)
+			if (antennae.type == Antennae.BEE)
 			{
 				beeCounter++;
-				if (faceType == 0)
+				if (face.type == Face.HUMAN)
 					beeCounter++;
 			}
-			if (lowerBody == 7)
+			if (arms.type == Arms.BEE)
+				beeCounter++;
+			if (lowerBody.type == LowerBody.BEE)
 			{
 				beeCounter++;
 				if (vaginas.length == 1)
 					beeCounter++;
 			}
-			if (tailType == 6)
+			if (tail.type == Tail.BEE_ABDOMEN)
 				beeCounter++;
-			if (wingType == 1)
+			if (wings.type == Wings.BEE_LIKE_SMALL)
 				beeCounter++;
-			if (wingType == 2)
+			if (wings.type == Wings.BEE_LIKE_LARGE)
 				beeCounter++;
 			return beeCounter;
 		}
@@ -1270,11 +1271,11 @@ use namespace kGAMECLASS;
 		public function ferretScore():Number
 		{
 			var counter:int = 0;
-			if (faceType == FACE_FERRET_MASK) counter++;
-			if (faceType == FACE_FERRET) counter+=2;
-			if (earType == EARS_FERRET) counter++;
-			if (tailType == TAIL_TYPE_FERRET) counter++;
-			if (lowerBody == LOWER_BODY_TYPE_FERRET) counter++;
+			if (face.type == Face.FERRET_MASK) counter++;
+			if (face.type == Face.FERRET) counter+=2;
+			if (ears.type == Ears.FERRET) counter++;
+			if (tail.type == Tail.FERRET) counter++;
+			if (lowerBody.type == LowerBody.FERRET) counter++;
 			if (hasFur() && counter > 0) counter++;
 			return counter;
 		}
@@ -1282,17 +1283,17 @@ use namespace kGAMECLASS;
 		public function wolfScore():Number
 		{
 			var wolfCounter:Number = 0;
-			if (faceType == FACE_WOLF)
+			if (face.type == Face.WOLF)
 				wolfCounter++;
 			if (wolfCocks() > 0)
 				wolfCounter++;
-			if (earType == EARS_WOLF)
+			if (ears.type == Ears.WOLF)
 				wolfCounter++;
-			if (tailType == TAIL_TYPE_WOLF)
+			if (tail.type == Tail.WOLF)
 				wolfCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_WOLF)
+			if (lowerBody.type == LowerBody.WOLF)
 				wolfCounter++;
-			if (eyeType == EYES_WOLF)
+			if (eyes.type == Eyes.WOLF)
 				wolfCounter+=2;
 			if (hasFur() && wolfCounter > 0) //Only counts if we got wolf features
 				wolfCounter++;
@@ -1310,13 +1311,13 @@ use namespace kGAMECLASS;
 		public override function dogScore():Number
 		{
 			var dogCounter:Number = 0;
-			if (faceType == 2)
+			if (face.type == Face.DOG)
 				dogCounter++;
-			if (earType == 2)
+			if (ears.type == Ears.DOG)
 				dogCounter++;
-			if (tailType == 2)
+			if (tail.type == Tail.DOG)
 				dogCounter++;
-			if (lowerBody == 2)
+			if (lowerBody.type == LowerBody.DOG)
 				dogCounter++;
 			if (dogCocks() > 0)
 				dogCounter++;
@@ -1337,14 +1338,14 @@ use namespace kGAMECLASS;
 		public function mouseScore():Number
 		{
 			var coonCounter:Number = 0;
-			if (earType == 12)
+			if (ears.type == Ears.MOUSE)
 				coonCounter++;
-			if (tailType == 16)
+			if (tail.type == Tail.MOUSE)
 				coonCounter++;
 
-			if (faceType == 15)
+			if (face.type == Face.BUCKTEETH)
 				coonCounter++;
-			if (faceType == 16)
+			if (face.type == Face.MOUSE)
 				coonCounter += 2;
 			//Fur only counts if some canine features are present
 			if (hasFur() && coonCounter > 0)
@@ -1360,15 +1361,15 @@ use namespace kGAMECLASS;
 		public function raccoonScore():Number
 		{
 			var coonCounter:Number = 0;
-			if (faceType == 13)
+			if (face.type == Face.RACCOON_MASK)
 				coonCounter++;
-			if (faceType == 14)
+			if (face.type == Face.RACCOON)
 				coonCounter += 2;
-			if (earType == 11)
+			if (ears.type == Ears.RACCOON)
 				coonCounter++;
-			if (tailType == 15)
+			if (tail.type == Tail.RACCOON)
 				coonCounter++;
-			if (lowerBody == 19)
+			if (lowerBody.type == LowerBody.RACCOON)
 				coonCounter++;
 			if (coonCounter > 0 && balls > 0)
 				coonCounter++;
@@ -1382,13 +1383,13 @@ use namespace kGAMECLASS;
 		public override function foxScore():Number
 		{
 			var foxCounter:Number = 0;
-			if (faceType == 11)
+			if (face.type == Face.FOX)
 				foxCounter++;
-			if (earType == 9)
+			if (ears.type == Ears.FOX)
 				foxCounter++;
-			if (tailType == 13)
+			if (tail.type == Tail.FOX)
 				foxCounter++;
-			if (lowerBody == 17)
+			if (lowerBody.type == LowerBody.FOX)
 				foxCounter++;
 			if (dogCocks() > 0 && foxCounter > 0)
 				foxCounter++;
@@ -1408,13 +1409,13 @@ use namespace kGAMECLASS;
 		public function catScore():Number
 		{
 			var catCounter:Number = 0;
-			if (faceType == 6)
+			if (face.type == Face.CAT)
 				catCounter++;
-			if (earType == 5)
+			if (ears.type == Ears.CAT)
 				catCounter++;
-			if (tailType == 8)
+			if (tail.type == Tail.CAT)
 				catCounter++;
-			if (lowerBody == 9)
+			if (lowerBody.type == LowerBody.CAT)
 				catCounter++;
 			if (countCocksOfType(CockTypesEnum.CAT) > 0)
 				catCounter++;
@@ -1434,26 +1435,26 @@ use namespace kGAMECLASS;
 		public function lizardScore():Number
 		{
 			var lizardCounter:Number = 0;
-			if (faceType == FACE_LIZARD)
+			if (face.type == Face.LIZARD)
 				lizardCounter++;
-			if (earType == EARS_LIZARD)
+			if (ears.type == Ears.LIZARD)
 				lizardCounter++;
-			if (tailType == TAIL_TYPE_LIZARD)
+			if (tail.type == Tail.LIZARD)
 				lizardCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_LIZARD)
+			if (lowerBody.type == LowerBody.LIZARD)
 				lizardCounter++;
 			if (hasDragonHorns())
 				lizardCounter++;
-			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+			if (hasDragonHorns(true))
 				lizardCounter++;
-			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
+			if (arms.type == Arms.PREDATOR && claws.type == Claws.LIZARD)
 				lizardCounter++;
 			if (lizardCounter > 2) {
-				if ([TONGUE_LIZARD, TONGUE_SNAKE].indexOf(tongueType) != -1)
+				if ([Tongue.LIZARD, Tongue.SNAKE].indexOf(tongue.type) != -1)
 					lizardCounter++;
 				if (lizardCocks() > 0)
 					lizardCounter++;
-				if ([EYES_LIZARD, EYES_BASILISK].indexOf(eyeType) != -1)
+				if ([Eyes.LIZARD, Eyes.BASILISK].indexOf(eyes.type) != -1)
 					lizardCounter++;
 				if (hasReptileScales())
 					lizardCounter++;
@@ -1464,19 +1465,19 @@ use namespace kGAMECLASS;
 		public function spiderScore():Number
 		{
 			var score:Number = 0;
-			if (eyeType == 7 && eyeCount == 4)
+			if (eyes.type == Eyes.SPIDER && eyes.count == 4)
 				score += 2;
-			else if (eyeType == 7)
+			else if (eyes.type == Eyes.SPIDER)
 				score++;
-			if (faceType == 10)
+			if (face.type == Face.SPIDER_FANGS)
 				score++;
-			if (armType == 2)
+			if (arms.type == Arms.SPIDER)
 				score++;
-			if (lowerBody == 15 || lowerBody == 16)
+			if ([LowerBody.CHITINOUS_SPIDER_LEGS, LowerBody.DRIDER].indexOf(lowerBody.type) != -1)
 				score += 2;
 			else if (score > 0)
 				score--;
-			if (tailType == 5)
+			if (tail.type == Tail.SPIDER_ABDOMEN)
 				score += 2;
 			if (!hasPlainSkin() && score > 0)
 				score--;
@@ -1487,15 +1488,15 @@ use namespace kGAMECLASS;
 		public function horseScore():Number
 		{
 			var horseCounter:Number = 0;
-			if (faceType == 1)
+			if (face.type == Face.HORSE)
 				horseCounter++;
-			if (earType == 1)
+			if (ears.type == Ears.HORSE)
 				horseCounter++;
-			if (tailType == 1)
+			if (tail.type == Tail.HORSE)
 				horseCounter++;
 			if (countCocksOfType(CockTypesEnum.HORSE) > 0)
 				horseCounter++;
-			if (lowerBody == 1 || lowerBody == 4)
+			if (lowerBody.type == LowerBody.HOOFED)
 				horseCounter++;
 			//Fur only counts if some equine features are present
 			if (hasFur() && horseCounter > 0)
@@ -1508,13 +1509,13 @@ use namespace kGAMECLASS;
 		{
 			var kitsuneCounter:int = 0;
 			//If the character has fox ears, +1
-			if (earType == EARS_FOX)
+			if (ears.type == Ears.FOX)
 				kitsuneCounter++;
 			//If the character has a fox tail, +1
-			if (tailType == TAIL_TYPE_FOX)
+			if (tail.type == Tail.FOX)
 				kitsuneCounter++;
 			//If the character has two or more fox tails, +2
-			if (tailType == TAIL_TYPE_FOX && tailVenom >= 2)
+			if (tail.type == Tail.FOX && tail.venom >= 2)
 				kitsuneCounter += 2;
 			//If the character has tattooed skin, +1
 			//9999
@@ -1523,7 +1524,7 @@ use namespace kGAMECLASS;
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 0 and:
 			//If the character has a normal face, +1
-			if (kitsuneCounter > 0 && (faceType == FACE_HUMAN || faceType == FACE_FOX))
+			if (kitsuneCounter > 0 && (face.type == Face.HUMAN || face.type == Face.FOX))
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 1 and:
 			//If the character has "blonde","black","red","white", or "silver" hair, +1
@@ -1540,16 +1541,16 @@ use namespace kGAMECLASS;
 			if (hasGooSkin())
 				kitsuneCounter -= 3;
 			//If the character has abnormal legs, -1
-			if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
+			if (lowerBody.type != LowerBody.HUMAN && lowerBody.type != LowerBody.FOX)
 				kitsuneCounter--;
 			//If the character has a nonhuman face, -1
-			if (faceType != FACE_HUMAN && faceType != FACE_FOX)
+			if (face.type != Face.HUMAN && face.type != Face.FOX)
 				kitsuneCounter--;
 			//If the character has ears other than fox ears, -1
-			if (earType != EARS_FOX)
+			if (ears.type != Ears.FOX)
 				kitsuneCounter--;
 			//If the character has tail(s) other than fox tails, -1
-			if (tailType != TAIL_TYPE_FOX)
+			if (tail.type != Tail.FOX)
 				kitsuneCounter--;
 
 			return kitsuneCounter;
@@ -1560,31 +1561,31 @@ use namespace kGAMECLASS;
 		public function dragonScore():Number
 		{
 			var dragonCounter:Number = 0;
-			if (faceType == FACE_DRAGON)
+			if (face.type == Face.DRAGON)
 				dragonCounter++;
-			if (earType == EARS_DRAGON)
+			if (ears.type == Ears.DRAGON)
 				dragonCounter++;
-			if (tailType == TAIL_TYPE_DRACONIC)
+			if (tail.type == Tail.DRACONIC)
 				dragonCounter++;
-			if (tongueType == TONGUE_DRACONIC)
+			if (tongue.type == Tongue.DRACONIC)
 				dragonCounter++;
 			if (dragonCocks() > 0)
 				dragonCounter++;
 			if (hasDragonWings())
 				dragonCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_DRAGON)
+			if (lowerBody.type == LowerBody.DRAGON)
 				dragonCounter++;
 			if (hasDragonScales() && dragonCounter > 0)
 				dragonCounter++;
 			if (hasDragonHorns())
 				dragonCounter++;
-			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 				dragonCounter++;
 			if (hasDragonfire())
 				dragonCounter++;
-			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
+			if (arms.type == Arms.PREDATOR && claws.type == Claws.DRAGON)
 				dragonCounter++;
-			if (eyeType == EYES_DRAGON)
+			if (eyes.type == Eyes.DRAGON)
 				dragonCounter++;
 			if (hasDragonNeck())
 				dragonCounter++;
@@ -1597,19 +1598,19 @@ use namespace kGAMECLASS;
 		public function goblinScore():Number
 		{
 			var horseCounter:Number = 0;
-			if (earType == 4)
+			if (ears.type == Ears.ELFIN)
 				horseCounter++;
-			if (skinTone == "pale yellow" || skinTone == "grayish-blue" || skinTone == "green" || skinTone == "dark green")
+			if (skin.tone == "pale yellow" || skin.tone == "grayish-blue" || skin.tone == "green" || skin.tone == "dark green")
 				horseCounter++;
 			if (horseCounter > 0)
 			{
-				if (faceType == 0)
+				if (face.type == Face.HUMAN)
 					horseCounter++;
 				if (tallness < 48)
 					horseCounter++;
 				if (hasVagina())
 					horseCounter++;
-				if (lowerBody == 0)
+				if (lowerBody.type == LowerBody.HUMAN)
 					horseCounter++;
 			}
 			return horseCounter;
@@ -1619,11 +1620,11 @@ use namespace kGAMECLASS;
 		public function gooScore():Number
 		{
 			var gooCounter:Number = 0;
-			if (hairType == 3)
+			if (hair.type == Hair.GOO)
 				gooCounter++;
-			if (skinAdj == "slimy")
+			if (skin.adj == "slimy")
 				gooCounter++;
-			if (lowerBody == 8)
+			if (lowerBody.type == LowerBody.GOO)
 				gooCounter++;
 			if (vaginalCapacity() > 9000)
 				gooCounter++;
@@ -1636,13 +1637,13 @@ use namespace kGAMECLASS;
 		public function nagaScore():Number
 		{
 			var nagaCounter:Number = 0;
-			if (faceType == 5)
+			if (face.type == Face.SNAKE_FANGS)
 				nagaCounter++;
-			if (tongueType == 1)
+			if (tongue.type == Tongue.SNAKE)
 				nagaCounter++;
-			if (nagaCounter > 0 && antennae == 0)
+			if (nagaCounter > 0 && antennae.type == Antennae.NONE)
 				nagaCounter++;
-			if (nagaCounter > 0 && wingType == 0)
+			if (nagaCounter > 0 && wings.type == Wings.NONE)
 				nagaCounter++;
 			return nagaCounter;
 		}
@@ -1651,13 +1652,13 @@ use namespace kGAMECLASS;
 		public function bunnyScore():Number
 		{
 			var bunnyCounter:Number = 0;
-			if (faceType == 8)
+			if (face.type == Face.BUNNY)
 				bunnyCounter++;
-			if (tailType == 10)
+			if (tail.type == Tail.RABBIT)
 				bunnyCounter++;
-			if (earType == 7)
+			if (ears.type == Ears.BUNNY)
 				bunnyCounter++;
-			if (lowerBody == 12)
+			if (lowerBody.type == LowerBody.BUNNY)
 				bunnyCounter++;
 			//More than 2 balls reduces bunny score
 			if (balls > 2 && bunnyCounter > 0)
@@ -1666,9 +1667,9 @@ use namespace kGAMECLASS;
 			if (hasPlainSkin() && bunnyCounter > 1)
 				bunnyCounter++;
 			//No wings and antennae a plus
-			if (bunnyCounter > 0 && antennae == 0)
+			if (bunnyCounter > 0 && antennae.type == Antennae.NONE)
 				bunnyCounter++;
-			if (bunnyCounter > 0 && wingType == 0)
+			if (bunnyCounter > 0 && wings.type == Wings.NONE)
 				bunnyCounter++;
 			return bunnyCounter;
 		}
@@ -1677,19 +1678,19 @@ use namespace kGAMECLASS;
 		public function harpyScore():Number
 		{
 			var harpy:Number = 0;
-			if (armType == 1)
+			if (arms.type == Arms.HARPY)
 				harpy++;
-			if (hairType == 1)
+			if (hair.type == Hair.FEATHER)
 				harpy++;
-			if (wingType == 9)
+			if (wings.type == Wings.FEATHERED_LARGE)
 				harpy++;
-			if (tailType == 11)
+			if (tail.type == Tail.HARPY)
 				harpy++;
-			if (lowerBody == 13)
+			if (lowerBody.type == LowerBody.HARPY)
 				harpy++;
-			if (harpy >= 2 && faceType == 0)
+			if (harpy >= 2 && face.type == Face.HUMAN)
 				harpy++;
-			if (harpy >= 2 && (earType == 0 || earType == 4))
+			if (harpy >= 2 && [Ears.HUMAN, Ears.ELFIN].indexOf(ears.type) != -1)
 				harpy++;
 			return harpy;
 		}
@@ -1700,13 +1701,13 @@ use namespace kGAMECLASS;
 			var kanga:Number = 0;
 			if (countCocksOfType(CockTypesEnum.KANGAROO) > 0)
 				kanga++;
-			if (earType == 8)
+			if (ears.type == Ears.KANGAROO)
 				kanga++;
-			if (tailType == 12)
+			if (tail.type == Tail.KANGAROO)
 				kanga++;
-			if (lowerBody == 14)
+			if (lowerBody.type == LowerBody.KANGAROO)
 				kanga++;
-			if (faceType == 9)
+			if (face.type == Face.KANGAROO)
 				kanga++;
 			if (kanga >= 2 && hasFur())
 				kanga++;
@@ -1717,17 +1718,17 @@ use namespace kGAMECLASS;
 		public function sheepScore():Number
 		{
 			var sheepCounter:Number = 0;
-			if (earType == 19)
+			if (ears.type == Ears.SHEEP)
 				sheepCounter++;
-			if (hornType == 9)
+			if (horns.type == Horns.SHEEP)
 				sheepCounter++;
-			if (hornType == 10)
+			if (horns.type == Horns.RAM)
 				sheepCounter++;
-			if (tailType == 27)
+			if (tail.type == Tail.SHEEP)
 				sheepCounter++;
-			if (lowerBody == 21 && legCount == 2)
+			if (lowerBody.type == LowerBody.CLOVEN_HOOFED && lowerBody.legCount == 2)
 				sheepCounter++;
-			if (hairType == 8)
+			if (hair.type == Hair.WOOL)
 				sheepCounter++;
 			if (hasWool())
 				sheepCounter++;
@@ -1738,11 +1739,13 @@ use namespace kGAMECLASS;
 		public function sharkScore():Number
 		{
 			var sharkCounter:Number = 0;
-			if (faceType == FACE_SHARK_TEETH)
+			if (face.type == Face.SHARK_TEETH)
 				sharkCounter++;
-			if (rearBody.type == REAR_BODY_SHARK_FIN)
+			if (gills.type == Gills.FISH)
 				sharkCounter++;
-			if (tailType == TAIL_TYPE_SHARK)
+			if (rearBody.type == RearBody.SHARK_FIN)
+				sharkCounter++;
+			if (tail.type == Tail.SHARK)
 				sharkCounter++;
 			//skin counting only if PC got any other shark traits
 			if (hasPlainSkin() && sharkCounter > 0)
@@ -1754,9 +1757,9 @@ use namespace kGAMECLASS;
 		public function mutantScore():Number
 		{
 			var mutantCounter:Number = 0;
-			if (faceType > 0)
+			if (face.type != Face.HUMAN)
 				mutantCounter++;
-			if (tailType > 0)
+			if (tail.type != Tail.NONE)
 				mutantCounter++;
 			if (cocks.length > 1)
 				mutantCounter++;
@@ -1768,18 +1771,18 @@ use namespace kGAMECLASS;
 				mutantCounter++;
 			if (mutantCounter > 1 && hasPlainSkin())
 				mutantCounter++;
-			if (faceType == 1)
+			if (face.type == Face.HORSE)
 			{
 				if (hasFur())
 					mutantCounter--;
-				if (tailType == 1)
+				if (tail.type == Tail.HORSE)
 					mutantCounter--;
 			}
-			if (faceType == 2)
+			if (face.type == Face.DOG)
 			{
 				if (hasFur())
 					mutantCounter--;
-				if (tailType == 2)
+				if (tail.type == Tail.DOG)
 					mutantCounter--;
 			}
 			return mutantCounter;
@@ -1789,20 +1792,20 @@ use namespace kGAMECLASS;
 		public function salamanderScore():Number
 		{
 			var salamanderCounter:Number = 0;
-			if (armType == ARM_TYPE_SALAMANDER)
+			if (arms.type == Arms.SALAMANDER)
 				salamanderCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_SALAMANDER)
+			if (lowerBody.type == LowerBody.SALAMANDER)
 				salamanderCounter++;
-			if (tailType == TAIL_TYPE_SALAMANDER)
+			if (tail.type == Tail.SALAMANDER)
 				salamanderCounter++;
 			if (hasPerk(PerkLib.Lustzerker))
 				salamanderCounter++;
 			if (salamanderCounter >= 2) {
 				if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
 					salamanderCounter++;
-				if (faceType == 0)
+				if (face.type == 0)
 					salamanderCounter++;
-				if (earType == 0)
+				if (ears.type == 0)
 					salamanderCounter++;
 			}
 			return salamanderCounter;
@@ -1814,7 +1817,7 @@ use namespace kGAMECLASS;
 		public function sirenScore():Number 
 		{
 			var sirenCounter:Number = 0;
-			if (faceType == FACE_SHARK_TEETH && tailType == TAIL_TYPE_SHARK && wingType == WING_TYPE_FEATHERED_LARGE && armType == ARM_TYPE_HARPY)
+			if (face.type == Face.SHARK_TEETH && tail.type == Tail.SHARK && wings.type == Wings.FEATHERED_LARGE && arms.type == Arms.HARPY)
 				sirenCounter+= 4;
 			if (sirenCounter > 0 && hasVagina())
 				sirenCounter++;
@@ -1826,13 +1829,13 @@ use namespace kGAMECLASS;
 		public function pigScore():Number
 		{
 			var pigCounter:Number = 0;
-			if (earType == EARS_PIG)
+			if (ears.type == Ears.PIG)
 				pigCounter++;
-			if (tailType == TAIL_TYPE_PIG)
+			if (tail.type == Tail.PIG)
 				pigCounter++;
-			if ([FACE_PIG, FACE_BOAR].indexOf(faceType) != -1)
+			if ([Face.PIG, Face.BOAR].indexOf(face.type) != -1)
 				pigCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+			if (lowerBody.type == LowerBody.CLOVEN_HOOFED)
 				pigCounter += 2;
 			if (countCocksOfType(CockTypesEnum.PIG) > 0)
 				pigCounter++;
@@ -1842,14 +1845,14 @@ use namespace kGAMECLASS;
 		public function satyrScore():Number
 		{
 			var satyrCounter:Number = 0;
-			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+			if (lowerBody.type == LowerBody.CLOVEN_HOOFED)
 				satyrCounter++;
-			if (tailType == TAIL_TYPE_GOAT)
+			if (tail.type == Tail.GOAT)
 				satyrCounter++;
 			if (satyrCounter >= 2) {
-				if (earType == EARS_ELFIN)
+				if (ears.type == Ears.ELFIN)
 					satyrCounter++;
-				if (faceType == FACE_HUMAN)
+				if (face.type == Face.HUMAN)
 					satyrCounter++;
 				if (countCocksOfType(CockTypesEnum.HUMAN) > 0)
 					satyrCounter++;
@@ -1862,15 +1865,15 @@ use namespace kGAMECLASS;
 		public function rhinoScore():Number
 		{
 			var rhinoCounter:Number = 0;
-			if (earType == EARS_RHINO)
+			if (ears.type == Ears.RHINO)
 				rhinoCounter++;
-			if (tailType == TAIL_TYPE_RHINO)
+			if (tail.type == Tail.RHINO)
 				rhinoCounter++;
-			if (faceType == FACE_RHINO)
+			if (face.type == Face.RHINO)
 				rhinoCounter++;
-			if (hornType == HORNS_RHINO)
+			if (horns.type == Horns.RHINO)
 				rhinoCounter++;
-			if (rhinoCounter >= 2 && skinTone == "gray")
+			if (rhinoCounter >= 2 && skin.tone == "gray")
 				rhinoCounter++;
 			if (rhinoCounter >= 2 && hasCock() && countCocksOfType(CockTypesEnum.RHINO) > 0)
 				rhinoCounter++;
@@ -1880,15 +1883,15 @@ use namespace kGAMECLASS;
 		public function echidnaScore():Number
 		{
 			var echidnaCounter:Number = 0;
-			if (earType == EARS_ECHIDNA)
+			if (ears.type == Ears.ECHIDNA)
 				echidnaCounter++;
-			if (tailType == TAIL_TYPE_ECHIDNA)
+			if (tail.type == Tail.ECHIDNA)
 				echidnaCounter++;
-			if (faceType == FACE_ECHIDNA)
+			if (face.type == Face.ECHIDNA)
 				echidnaCounter++;
-			if (tongueType == TONGUE_ECHIDNA)
+			if (tongue.type == Tongue.ECHIDNA)
 				echidnaCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_ECHIDNA)
+			if (lowerBody.type == LowerBody.ECHIDNA)
 				echidnaCounter++;
 			if (echidnaCounter >= 2 && hasFur())
 				echidnaCounter++;
@@ -1900,15 +1903,15 @@ use namespace kGAMECLASS;
 		public function deerScore():Number
 		{
 			var deerCounter:Number = 0;
-			if (earType == EARS_DEER)
+			if (ears.type == Ears.DEER)
 				deerCounter++;
-			if (tailType == TAIL_TYPE_DEER)
+			if (tail.type == Tail.DEER)
 				deerCounter++;
-			if (faceType == FACE_DEER)
+			if (face.type == Face.DEER)
 				deerCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+			if (lowerBody.type == LowerBody.CLOVEN_HOOFED)
 				deerCounter++;
-			if (hornType == HORNS_ANTLERS && horns >= 4)
+			if (horns.type == Horns.ANTLERS && horns.value >= 4)
 				deerCounter++;
 			if (deerCounter >= 2 && hasFur())
 				deerCounter++;
@@ -1921,17 +1924,17 @@ use namespace kGAMECLASS;
 		public function dragonneScore():Number
 		{
 			var dragonneCounter:Number = 0;
-			if (faceType == FACE_CAT)
+			if (face.type == Face.CAT)
 				dragonneCounter++;
-			if (earType == EARS_CAT)
+			if (ears.type == Ears.CAT)
 				dragonneCounter++;
-			if (tailType == TAIL_TYPE_CAT)
+			if (tail.type == Tail.CAT)
 				dragonneCounter++;
-			if (tongueType == TONGUE_DRACONIC)
+			if (tongue.type == Tongue.DRACONIC)
 				dragonneCounter++;
 			if (hasDragonWings())
 				dragonneCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_CAT)
+			if (lowerBody.type == LowerBody.CAT)
 				dragonneCounter++;
 			if (hasReptileScales() && dragonneCounter > 0)
 				dragonneCounter++;
@@ -1942,16 +1945,16 @@ use namespace kGAMECLASS;
 		public function manticoreScore():Number
 		{
 			var catCounter:Number = 0;
-			if (faceType == FACE_CAT)
+			if (face.type == Face.CAT)
 				catCounter++;
-			if (earType == EARS_CAT)
+			if (ears.type == Ears.CAT)
 				catCounter++;
-			if (tailType == TAIL_TYPE_SCORPION)
+			if (tail.type == Tail.SCORPION)
 				catCounter += 2;
-			if (lowerBody == LOWER_BODY_TYPE_CAT)
+			if (lowerBody.type == LowerBody.CAT)
 				catCounter++;
 			if (catCounter >= 4) {
-				if (hornType == HORNS_DEMON || hasDragonHorns())
+				if (horns.type == Horns.DEMON || hasDragonHorns())
 					catCounter++;
 				if (hasLeatheryWings())
 					catCounter++;
@@ -1969,7 +1972,7 @@ use namespace kGAMECLASS;
 			var bimboCounter:Number = 0;
 			if (hasVagina()) {
 				bimboCounter += 2; 
-				if (vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) 
+				if (vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) 
 					bimboCounter++;
 			}
 			if (hasCock()) 
@@ -1994,15 +1997,15 @@ use namespace kGAMECLASS;
 			else 
 				bimboCounter += biggestTitSize() / 10.0;
 				
-			if (hipRating >= 8) 
+			if (hips.rating >= 8) 
 				bimboCounter++;
 			else 
-				bimboCounter += hipRating / 8.0;
+				bimboCounter += hips.rating / 8.0;
 			
-			if (buttRating > 8)
+			if (butt.rating > 8)
 				bimboCounter++;
 			else 
-				bimboCounter += buttRating / 8.0;
+				bimboCounter += butt.rating / 8.0;
 			
 			if (tone < 15) 
 				bimboCounter++;
@@ -2013,33 +2016,15 @@ use namespace kGAMECLASS;
 			else 
 				bimboCounter += (femininity - 50.0) / 30.0;
 			
-			if (hairColor == "platinum blonde") 
+			if (hair.color == "platinum blonde") 
 				bimboCounter++;
-			if (hairLength > 10) 
+			if (hair.length > 10) 
 				bimboCounter++;
 			if (inte < 20) 
 				bimboCounter++;
 			if (bimboCounter < 0)  bimboCounter = 0;
 			if (bimboCounter > 20) bimboCounter = 20;
 
-			//if (biggestTitSize() > 5) 
-				//bimboCounter++;
-			//if (biggestTitSize() > 10) 
-				//bimboCounter++;
-			//if (hipRating > 8) 
-				//bimboCounter++;
-			//if (buttRating > 8)
-				//bimboCounter++;
-			//if (tone < 15) 
-				//bimboCounter++;
-			//if (hairColor == "platinum blonde") 
-				//bimboCounter++;
-			//if (hairLength > 10) 
-				//bimboCounter++;
-			//if (inte < 20) 
-				//bimboCounter++;
-			//if (bimboCounter < 0) bimboCounter = 0;
-			//
 			return bimboCounter;
 		}
 		
@@ -2096,12 +2081,12 @@ use namespace kGAMECLASS;
 				}
 				//Non virgins as usual
 				else if (spacingsF) outputText("  ");
-				if (vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,0)+ " is stretched painfully wide, large enough to accommodate most beasts and demons.</b>");
-				if (vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched so wide that it gapes continually.</b>");
-				if (vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
-				if (vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now very loose.</b>");
-				if (vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now a little loose.</b>");
-				if (vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched out to a more normal size.</b>");
+				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,0)+ " is stretched painfully wide, large enough to accommodate most beasts and demons.</b>");
+				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched so wide that it gapes continually.</b>");
+				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
+				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now very loose.</b>");
+				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now a little loose.</b>");
+				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched out to a more normal size.</b>");
 				if (spacingsB) outputText("  ");
 			}
 			return stretched;
@@ -2436,7 +2421,7 @@ use namespace kGAMECLASS;
 					}
 					//Temp 3 tracks total amount grown
 					temp3 += amount;
-					trace("Breastrow chosen for growth: " + String(temp2) + ".");
+					//trace("Breastrow chosen for growth: " + String(temp2) + ".");
 					//Reuse temp to store growth amount for diminishing returns.
 					temp = amount;
 					if (!flags[kFLAGS.HYPER_HAPPY])
@@ -2475,7 +2460,7 @@ use namespace kGAMECLASS;
 					}
 
 					//Grow!
-					trace("Growing breasts by ", temp);
+					//trace("Growing breasts by ", temp);
 					breastRows[temp2].breastRating += temp;
 					rowsGrown--;
 				}
@@ -2507,7 +2492,7 @@ use namespace kGAMECLASS;
 				while(rowsGrown > 0) {
 					if (temp+1 > breastRows.length) temp = 0;
 					breastRows[temp].breastRating += amount;
-					trace("Breasts increased by " + amount + " on row " + temp);
+					//trace("Breasts increased by " + amount + " on row " + temp);
 					temp++;
 					temp3 += amount;
 					rowsGrown--;
@@ -2521,7 +2506,7 @@ use namespace kGAMECLASS;
 				}
 			}
 			//Breast Growth Finished...talk about changes.
-			trace("Growth amount = ", amount);
+			//trace("Growth amount = ", amount);
 			if (display) {
 				if (growthType < 3) {
 					if (amount <= 2)
@@ -2810,7 +2795,7 @@ use namespace kGAMECLASS;
 				var lim:int = isTaur() ? 9 : 4;
 				if (ballSize > lim && balls > 0) tempSpeedPenalty += Math.round((ballSize - lim) / 2);
 				//Breasts
-				lim = isTaur() ? BREAST_CUP_I : BREAST_CUP_G;
+				lim = isTaur() ? BreastCup.I : BreastCup.G;
 				if (hasBreasts() && biggestTitSize() > lim) tempSpeedPenalty += ((biggestTitSize() - lim) / 2);
 				//Cocks
 				lim = isTaur() ? 72 : 24;
@@ -2920,18 +2905,18 @@ use namespace kGAMECLASS;
 				maxSpe -= 10;
 			}
 			if (kitsuneScore() >= 4) {
-				if (tailType == 13) {
-					if (tailVenom == 1) {
+				if (tail.type == Tail.FOX) {
+					if (tail.venom == 1) {
 						maxStr -= 2;
 						maxSpe += 2;
 						maxInt += 1;
 					}
-					else if (tailVenom >= 2 && tailVenom < 9) {
-						maxStr -= tailVenom + 1;
-						maxSpe += tailVenom + 1;
-						maxInt += (tailVenom/2) + 0.5;
+					else if (tail.venom >= 2 && tail.venom < 9) {
+						maxStr -= tail.venom + 1;
+						maxSpe += tail.venom + 1;
+						maxInt += (tail.venom/2) + 0.5;
 					}
-					else if (tailVenom >= 9) {
+					else if (tail.venom >= 9) {
 						maxStr -= 10;
 						maxSpe += 10;
 						maxInt += 5;
@@ -3194,7 +3179,7 @@ use namespace kGAMECLASS;
 				if (cocks[0].cockLength >= 16 && cocks[0].cockLength-temp2 < 16) {
 					if (cocks.length == 1) outputText("  <b>Your " + cockDescript(0) + " would look more at home on a large horse than you.</b>");
 					if (cocks.length > 1) outputText("  <b>Your " + multiCockDescriptLight() + " would look more at home on a large horse than on your body.</b>");
-					if (biggestTitSize() >= BREAST_CUP_C) {
+					if (biggestTitSize() >= BreastCup.C) {
 						if (cocks.length == 1) outputText("  You could easily stuff your " + cockDescript(0) + " between your breasts and give yourself the titty-fuck of a lifetime.");
 						if (cocks.length > 1) outputText("  They reach so far up your chest it would be easy to stuff a few cocks between your breasts and give yourself the titty-fuck of a lifetime.");
 					}
@@ -3309,28 +3294,28 @@ use namespace kGAMECLASS;
 		}
 		public function modCumMultiplier(delta:Number):Number
 		{
-			trace("modCumMultiplier called with: " + delta);
+			//trace("modCumMultiplier called with: " + delta);
 		
 			if (delta == 0) {
-				trace( "Whoops! modCumMuliplier called with 0... aborting..." );
+				//trace( "Whoops! modCumMuliplier called with 0... aborting..." );
 				return delta;
 			}
 			else if (delta > 0) {
-				trace("and increasing");
+				//trace("and increasing");
 				if (hasPerk(PerkLib.MessyOrgasms)) {
-					trace("and MessyOrgasms found");
+					//trace("and MessyOrgasms found");
 					delta *= 1.5
 				}
 			}
 			else if (delta < 0) {
-				trace("and decreasing");
+				//trace("and decreasing");
 				if (hasPerk(PerkLib.MessyOrgasms)) {
-					trace("and MessyOrgasms found");
+					//trace("and MessyOrgasms found");
 					delta *= 0.5
 				}
 			}
 
-			trace("and modifying by " + delta);
+			//trace("and modifying by " + delta);
 			cumMultiplier += delta;
 			return delta;
 		}
@@ -3350,7 +3335,7 @@ use namespace kGAMECLASS;
 			var totalGrowth:Number = 0;
 			
 			for (var i:Number = 0; i < cocks.length; i++) {
-				trace( "increaseEachCock at: " + i);
+				//trace( "increaseEachCock at: " + i);
 				totalGrowth += increaseCock(i as Number, lengthDelta);
 			}
 			
@@ -3449,9 +3434,9 @@ use namespace kGAMECLASS;
 				underBody.restore();
 
 			if (what == "fur")
-				furColor = (choice is Array) ? choice[0] : choice;
+				skin.furColor = (choice is Array) ? choice[0] : choice;
 			else
-				skinTone = (choice is Array) ? choice[0] : choice;
+				skin.tone = (choice is Array) ? choice[0] : choice;
 
 			if (doCopySkin)
 				copySkinToUnderBody();

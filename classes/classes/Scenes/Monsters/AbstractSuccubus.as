@@ -155,11 +155,11 @@ package classes.Scenes.Monsters
 			//Butt slap!
 			if (temp == 0) {
 				outputText(capitalA + short + " slaps her " + Appearance.buttDescriptionShort(this));
-				if (buttRating >= 10) {
+				if (butt.rating >= 10) {
 					outputText(", making it jiggle delightfully.");
 					//85% success rate for the jiggly girls
 					if (rand(100) <= 95) {
-						lustDmg = rand(buttRating) + 10;
+						lustDmg = rand(butt.rating) + 10;
 						outputText("\nThe display is quite arousing.");
 					}
 					else outputText("\nYou're unimpressed.\n\n");
@@ -167,8 +167,8 @@ package classes.Scenes.Monsters
 				else {
 					outputText(".");
 					//50%ish chance of success for the tight butted.
-					if (rand(100) <= (70 + buttRating * 2)) {
-						lustDmg = rand(buttRating) + 9;
+					if (rand(100) <= (70 + butt.rating * 2)) {
+						lustDmg = rand(butt.rating) + 9;
 						outputText("\nThe display is quite arousing.");
 					}
 					else outputText("\nYou're unimpressed.\n\n");

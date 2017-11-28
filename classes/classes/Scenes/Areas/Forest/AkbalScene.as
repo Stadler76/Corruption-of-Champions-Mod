@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Forest
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
@@ -157,7 +158,7 @@ public class AkbalScene extends BaseContent implements Encounter
 				primary = 0;
 			clearOutput();
 			//Naga RAPPUUUUUU
-			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
+			if (player.lowerBody.type == LowerBody.NAGA)
 			{
 				outputText("You slither around the demon cat's form, wrapping him up until a scared whimper rises from his chest.  You continue to tighten your coils around Akbal until he's gasping for breath.  You ask him if he's going to be a good little demon for you.  He nods.\n\n");
 
@@ -572,7 +573,7 @@ public class AkbalScene extends BaseContent implements Encounter
 				//({If Bipedal}
 				else
 					outputText("lock your legs around his torso, bouncing upon him with greater force");
-				outputText(".  As your mouth hangs open, the demon lunges forward, pressing his own snout against your " + player.face() + ". You can still taste the traces of his own pre on his lips and tongue, furthering your lust as you use his groin roughly, impaling yourself hard enough to leave bruises on the pair of you, while he uses his tail to ");
+				outputText(".  As your mouth hangs open, the demon lunges forward, pressing his own snout against your " + player.faceDescript() + ". You can still taste the traces of his own pre on his lips and tongue, furthering your lust as you use his groin roughly, impaling yourself hard enough to leave bruises on the pair of you, while he uses his tail to ");
 				//({if herm}
 				if (player.cockTotal() == 1)
 					outputText("wrap around your own straining shaft, the fur enhancing the effects of his pumps");
@@ -827,14 +828,14 @@ public class AkbalScene extends BaseContent implements Encounter
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 2;
 			flags[kFLAGS.AKBAL_BITCH_Q] = -1;
 			//Big booty special
-			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] > 5 && flags[kFLAGS.PLAYER_RESISTED_AKBAL] < 2 && player.buttRating >= 13 && player.tone < 80)
+			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] > 5 && flags[kFLAGS.PLAYER_RESISTED_AKBAL] < 2 && player.butt.rating >= 13 && player.tone < 80)
 			{
 				akbalBigButtSubmit();
 				return;
 			}
 			clearOutput();
 			//Naga variant goez here
-			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
+			if (player.lowerBody.type == LowerBody.NAGA)
 			{
 				outputText(images.showImage("akbal-deepwoods-naga-sumbitanal"));
 				outputText("After a few moments of thinking you nod to Akbal and the masculine voice in your head commands you to disrobe. You take off your " + player.armorName + ", setting it aside moments before the demon is upon you.\n\n");
@@ -886,10 +887,10 @@ public class AkbalScene extends BaseContent implements Encounter
 				dynStats("spe", 1 + rand(2));
 				player.orgasm('Anal');
 				//[Chance of butt growth]
-				if (player.buttRating < 8)
+				if (player.butt.rating < 8)
 				{
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...");
-					player.buttRating++;
+					player.butt.rating++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseEightHours);
@@ -904,7 +905,7 @@ public class AkbalScene extends BaseContent implements Encounter
 				outputText("You watch with fascination as Akbal rises onto his hind legs, his body melting into a more humanoid form.  His long, demonic cat-dick is already rock-hard and jutting out of his sheath.  He walks past your top half, moving around your body while sliding his hand across your haunch.  His hands are oddly warm.");
 
 				//(if centaur player has a tail)
-				if (player.tailType > TAIL_TYPE_NONE)
+				if (player.tail.type > Tail.NONE)
 					outputText("  As he makes his way to your hind quarters he grabs you by the tail, pulling it up and out the way with a feral, jaguar grin.  His free hand slides a finger across your " + player.assholeDescript() + " making you paw the ground with your hooves.");
 
 				//(No tail)
@@ -964,10 +965,10 @@ public class AkbalScene extends BaseContent implements Encounter
 				dynStats("spe", 1 + rand(2));
 				player.orgasm('Anal');
 				//[Chance of butt growth]
-				if (player.buttRating < 8)
+				if (player.butt.rating < 8)
 				{
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...");
-					player.buttRating++;
+					player.butt.rating++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseEightHours);
@@ -1044,10 +1045,10 @@ public class AkbalScene extends BaseContent implements Encounter
 			dynStats("spe", 1 + rand(2));
 			player.orgasm('Anal');
 			//[Chance of butt growth]
-			if (player.buttRating < 8)
+			if (player.butt.rating < 8)
 			{
 				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...");
-				player.buttRating++;
+				player.butt.rating++;
 			}
 			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseEightHours);
@@ -1172,10 +1173,10 @@ public class AkbalScene extends BaseContent implements Encounter
 			if (player.hasCock() && player.cumQ() >= 1000)
 				outputText("dry, ");
 			outputText("comfortable place.  Akbal wraps his arms around you, though one steals a quick squeeze of your [butt].  Invigorated by this, he docks his cat-cock back inside your spunk-oozing asshole to plug it and snuggles up to you.  You fall asleep like that, dreaming of him taking you again and again.");
-			if (player.buttRating < 20)
+			if (player.butt.rating < 20)
 			{
 				outputText("  Tingling in your sleep, your [butt] bulges slightly as it grows bigger, changed by Akbal's saliva to serve him even more capably.");
-				player.buttRating++;
+				player.butt.rating++;
 			}
 			else if (player.tone > 30)
 			{

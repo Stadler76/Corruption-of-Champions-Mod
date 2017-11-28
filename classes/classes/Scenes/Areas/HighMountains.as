@@ -50,7 +50,7 @@ package classes.Scenes.Areas
 						when: function ():Boolean {
 							return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
 						},
-						call: game.d3.discoverD3
+						call: game.lethicesKeep.discoverD3
 					}, {
 						name: "snowangel",
 						when: function ():Boolean {

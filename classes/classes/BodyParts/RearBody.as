@@ -9,16 +9,19 @@ package classes.BodyParts
 	 */
 	public class RearBody extends BaseBodyPart
 	{
-		include "../../../includes/appearanceDefs.as";
+		public static const NONE:int            =   0;
+		public static const DRACONIC_MANE:int   =   1;
+		public static const DRACONIC_SPIKES:int =   2;
+		public static const SHARK_FIN:int       =   3;
 
-		public var type:Number = REAR_BODY_NONE;
+		public var type:Number  = NONE;
 		public var color:String = "no";
 
 		public function RearBody() {}
 
 		public function restore():void
 		{
-			type  = REAR_BODY_NONE;
+			type  = NONE;
 			color = "no";
 		}
 
@@ -36,7 +39,7 @@ package classes.BodyParts
 
 		override public function canDye():Boolean
 		{
-			return type == REAR_BODY_DRACONIC_MANE;
+			return type == DRACONIC_MANE;
 		}
 
 		override public function hasDyeColor(_color:String):Boolean

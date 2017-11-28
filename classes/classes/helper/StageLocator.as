@@ -8,12 +8,13 @@ package classes.helper {
  * https://forums.adobe.com/message/4235833#4235833
  */
 	public class StageLocator {
-		public static var instance:StageLocator;
-		public static var stage:Stage;
-
+		//public static var instance:StageLocator;
+		private static var _stage:Stage;
+		
 		public function StageLocator ($stage:Stage) {
-			instance = this;
-			stage = $stage;
+			//instance = this;
+			_stage = $stage;
 		}
+		public static function get stage():Stage { return _stage; }
 	}
 }

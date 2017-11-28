@@ -1,5 +1,6 @@
 package classes
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	/**
@@ -13,7 +14,7 @@ package classes
 
 		public function hasDifferentUnderBody():Boolean
 		{
-			if ([UNDER_BODY_TYPE_NONE, UNDER_BODY_TYPE_NAGA].indexOf(underBody.type) != -1)
+			if ([UnderBody.NONE, UnderBody.NAGA].indexOf(underBody.type) != -1)
 				return false;
 
 			/* // Example for later use
@@ -28,10 +29,10 @@ package classes
 
 		public function hasUnderBody(noSnakes:Boolean = false):Boolean
 		{
-			var normalUnderBodies:Array = [UNDER_BODY_TYPE_NONE];
+			var normalUnderBodies:Array = [UnderBody.NONE];
 
 			if (noSnakes) {
-				normalUnderBodies.push(UNDER_BODY_TYPE_NAGA);
+				normalUnderBodies.push(UnderBody.NAGA);
 			}
 
 			return normalUnderBodies.indexOf(underBody.type) == -1;
@@ -49,32 +50,32 @@ package classes
 
 		public function hasDragonHorns(fourHorns:Boolean = false):Boolean
 		{
-			return (!fourHorns && horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
+			return (!fourHorns && horns.value > 0 && horns.type == Horns.DRACONIC_X2) || horns.type == Horns.DRACONIC_X4_12_INCH_LONG;
 		}
 
 		public function hasReptileEyes():Boolean
 		{
-			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
+			return [Eyes.LIZARD, Eyes.DRAGON, Eyes.BASILISK].indexOf(eyes.type) != -1;
 		}
 
 		public function hasLizardEyes():Boolean
 		{
-			return [EYES_LIZARD, EYES_BASILISK].indexOf(eyeType) != -1;
+			return [Eyes.LIZARD, Eyes.BASILISK].indexOf(eyes.type) != -1;
 		}
 
 		public function hasReptileFace():Boolean
 		{
-			return [FACE_SNAKE_FANGS, FACE_LIZARD, FACE_DRAGON].indexOf(faceType) != -1;
+			return [Face.SNAKE_FANGS, Face.LIZARD, Face.DRAGON].indexOf(face.type) != -1;
 		}
 
 		public function hasReptileUnderBody(withSnakes:Boolean = false):Boolean
 		{
 			var underBodies:Array = [
-				UNDER_BODY_TYPE_REPTILE,
+				UnderBody.REPTILE,
 			];
 
 			if (withSnakes) {
-				underBodies.push(UNDER_BODY_TYPE_NAGA);
+				underBodies.push(UnderBody.NAGA);
 			}
 
 			return underBodies.indexOf(underBody.type) != -1;
@@ -82,28 +83,28 @@ package classes
 
 		public function hasCockatriceSkin():Boolean
 		{
-			return skinType == SKIN_TYPE_LIZARD_SCALES && underBody.type == UNDER_BODY_TYPE_COCKATRICE;
+			return skin.type == Skin.LIZARD_SCALES && underBody.type == UnderBody.COCKATRICE;
 		}
 
 		public function hasNonCockatriceAntennae():Boolean
 		{
-			return [ANTENNAE_NONE, ANTENNAE_COCKATRICE].indexOf(antennae) == -1
+			return [Antennae.NONE, Antennae.COCKATRICE].indexOf(antennae.type) == -1
 		}
 
 		public function hasDragonWings(large:Boolean = false):Boolean
 		{
 			if (large)
-				return wingType == WING_TYPE_DRACONIC_LARGE;
+				return wings.type == Wings.DRACONIC_LARGE;
 			else
-				return [WING_TYPE_DRACONIC_SMALL, WING_TYPE_DRACONIC_LARGE].indexOf(wingType) != -1;
+				return [Wings.DRACONIC_SMALL, Wings.DRACONIC_LARGE].indexOf(wings.type) != -1;
 		}
 
 		public function hasBatLikeWings(large:Boolean = false):Boolean
 		{
 			if (large)
-				return wingType == WING_TYPE_BAT_LIKE_LARGE;
+				return wings.type == Wings.BAT_LIKE_LARGE;
 			else
-				return [WING_TYPE_BAT_LIKE_TINY, WING_TYPE_BAT_LIKE_LARGE].indexOf(wingType) != -1;
+				return [Wings.BAT_LIKE_TINY, Wings.BAT_LIKE_LARGE].indexOf(wings.type) != -1;
 		}
 
 		public function hasLeatheryWings(large:Boolean = false):Boolean
@@ -134,23 +135,23 @@ package classes
 
 		public function isBasilisk():Boolean
 		{
-			return game.bazaar.benoit.benoitBigFamily() && eyeType == EYES_BASILISK;
+			return game.bazaar.benoit.benoitBigFamily() && eyes.type == Eyes.BASILISK;
 		}
 
 		public function hasReptileTail():Boolean
 		{
-			return [TAIL_TYPE_LIZARD, TAIL_TYPE_DRACONIC, TAIL_TYPE_SALAMANDER].indexOf(tailType) != -1;
+			return [Tail.LIZARD, Tail.DRACONIC, Tail.SALAMANDER].indexOf(tail.type) != -1;
 		}
 
-		// For reptiles with predator arms I recommend to require hasReptileScales() before doing the armType TF to ARM_TYPE_PREDATOR
+		// For reptiles with predator arms I recommend to require hasReptileScales() before doing the armType TF to Arms.PREDATOR
 		public function hasReptileArms():Boolean
 		{
-			return armType == ARM_TYPE_SALAMANDER || (armType == ARM_TYPE_PREDATOR && hasReptileScales());
+			return arms.type == Arms.SALAMANDER || (arms.type == Arms.PREDATOR && hasReptileScales());
 		}
 
 		public function hasReptileLegs():Boolean
 		{
-			return [LOWER_BODY_TYPE_LIZARD, LOWER_BODY_TYPE_DRAGON, LOWER_BODY_TYPE_SALAMANDER].indexOf(lowerBody) != -1;
+			return [LowerBody.LIZARD, LowerBody.DRAGON, LowerBody.SALAMANDER].indexOf(lowerBody.type) != -1;
 		}
 
 		public function hasDraconicBackSide():Boolean
@@ -160,7 +161,7 @@ package classes
 
 		public function hasDragonNeck():Boolean
 		{
-			return neck.type == NECK_TYPE_DRACONIC && neck.isFullyGrown();
+			return neck.type == Neck.DRACONIC && neck.isFullyGrown();
 		}
 
 		public function hasNormalNeck():Boolean
@@ -170,17 +171,17 @@ package classes
 
 		public function hasDragonRearBody():Boolean
 		{
-			return [REAR_BODY_DRACONIC_MANE, REAR_BODY_DRACONIC_SPIKES].indexOf(rearBody.type) != -1;
+			return [RearBody.DRACONIC_MANE, RearBody.DRACONIC_SPIKES].indexOf(rearBody.type) != -1;
 		}
 
 		public function hasNonSharkRearBody():Boolean
 		{
-			return [REAR_BODY_NONE, REAR_BODY_SHARK_FIN].indexOf(rearBody.type) == -1;
+			return [RearBody.NONE, RearBody.SHARK_FIN].indexOf(rearBody.type) == -1;
 		}
 
 		public function fetchEmberRearBody():Number
 		{
-			return flags[kFLAGS.EMBER_HAIR] == 2 ? REAR_BODY_DRACONIC_MANE : REAR_BODY_DRACONIC_SPIKES;
+			return flags[kFLAGS.EMBER_HAIR] == 2 ? RearBody.DRACONIC_MANE : RearBody.DRACONIC_SPIKES;
 		}
 
 		public function featheryHairPinEquipped():Boolean

@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.DeepCave
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 
 	public class Zetaz extends Monster
@@ -65,7 +66,7 @@ package classes.Scenes.Dungeons.DeepCave
 						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {
-						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your " + player.skinDesc + " and leaves a pleasant, residual tingle in its wake.  Oh no...");
+						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your " + player.skin.desc + " and leaves a pleasant, residual tingle in its wake.  Oh no...");
 						//[Applies: "Temporary Heat" status]
 						if (!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
 					}
@@ -106,11 +107,11 @@ package classes.Scenes.Dungeons.DeepCave
 				if (player.lust100 >= 30 && player.lust100 < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
 			}
 			if (player.vaginas.length > 0) {
-				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " dampens perceptibly, feeling very empty.  ");
-				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
-				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
-				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
-				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " dampens perceptibly, feeling very empty.  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
+				if (player.lust100 >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
 			if (player.lust >= player.maxLust()) doNext(game.combat.endLustLoss)
 			else combatRoundOver();
@@ -170,15 +171,15 @@ package classes.Scenes.Dungeons.DeepCave
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 4*12+1;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_KANGAROO;
-			this.skinTone = "red";
-			this.hairColor = "black";
-			this.hairLength = 5;
+			this.hips.rating = Hips.RATING_BOYISH;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.lowerBody.type = LowerBody.KANGAROO;
+			this.skin.tone = "red";
+			this.hair.color = "black";
+			this.hair.length = 5;
 			initStrTouSpeInte(65, 60, 45, 52);
 			initLibSensCor(55, 35, 100);
 			this.weaponName = "claws";
@@ -192,7 +193,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.gems = rand(55) + 150;
 			this.additionalXP = 100;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
-			this.wingType = WING_TYPE_IMP;
+			this.theWingType = Wings.IMP;
 			this.wingDesc = "small";
 			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();

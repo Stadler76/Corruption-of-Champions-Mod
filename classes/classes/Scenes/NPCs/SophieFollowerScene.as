@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
@@ -674,7 +675,7 @@ private function sophieBlowsSixtyNine():void {
 	
 	outputText("\n\nSophie coos, \"<i>Just a few licks on Momma Sophie's twat, [name], and I'll suck you so good that you'll get addicted to having a faceful of harpy cunt.</i>\"");
 	
-	outputText("\n\nYou cock an eyebrow in response, but before you can properly answer, the motherly woman is lifting herself up and spinning about, giving you a perfect view of her bodacious heiny before it dips down towards your " + player.face() + ", the heavy butt-cheeks and thick thighs utterly blotting out the light as the woman's sodden snatch descends towards your mouth.  Her tangy, sweet scent fills your nostrils more potently by the second, until her slippery warmth and feminine odor are dominating your perception.  Her labia spread wide over your nose and mouth as Sophie's supple, curvy thighs clasp over your ears.  You're literally deaf, blind, and mute at this point, yet there's still one way you can communicate at this point - with your tongue.");
+	outputText("\n\nYou cock an eyebrow in response, but before you can properly answer, the motherly woman is lifting herself up and spinning about, giving you a perfect view of her bodacious heiny before it dips down towards your " + player.faceDescript() + ", the heavy butt-cheeks and thick thighs utterly blotting out the light as the woman's sodden snatch descends towards your mouth.  Her tangy, sweet scent fills your nostrils more potently by the second, until her slippery warmth and feminine odor are dominating your perception.  Her labia spread wide over your nose and mouth as Sophie's supple, curvy thighs clasp over your ears.  You're literally deaf, blind, and mute at this point, yet there's still one way you can communicate at this point - with your tongue.");
 	
 	outputText("\n\nSimultaneous to your vaginal ensnarement, Sophie attends to the pressing bulge");
 	if (player.cockTotal() > 1) outputText("s");
@@ -687,7 +688,7 @@ private function sophieBlowsSixtyNine():void {
 	outputText(".  She exhales on it with breath so hot and moist you almost think the blowjob has begun, but when her lips truly meet your " + player.cockHead(x) + ", that notion is shattered by the slippery-sweet embrace.  With your senses so deprived by snatch, smothered in quim, the touch of Sophie's golden cock-pillows on you seems multiplied seven-fold.  Your back arches instinctively, trying to lift your [hips] higher, but the matron's gentle, firm hand pushes you back down.  Her tongue flicks out to dance along the underside of your urethra while her cushiony mouth slips ever-lower.");
 	
 	outputText("\n\nYou put your own oral endowment to work eagerly.  It pushes through Sophie's lubricated inner folds with ease, her channel's copious moisture staining your lips with her lust.  ");
-	if (player.tongueType > TONGUE_HUMAN && player.tongueType <= TONGUE_DRACONIC) outputText("Longer and longer, your tongue continually unspools from your mouth, plunging deeper into the slippery channel with each passing moment.  Her taste saturates your many taste buds, and the velvety folds of her interior feel wonderful as you repeatedly slither your inhuman muscle through that syrupy passage.");
+	if (player.tongue.type > Tongue.HUMAN && player.tongue.type <= Tongue.DRACONIC) outputText("Longer and longer, your tongue continually unspools from your mouth, plunging deeper into the slippery channel with each passing moment.  Her taste saturates your many taste buds, and the velvety folds of her interior feel wonderful as you repeatedly slither your inhuman muscle through that syrupy passage.");
 	else outputText("Your tongue slides right in, the harpy's pussy seeming almost like a second home.  Her taste saturates your taste buds as you plunge in as deeply as possible, gliding over her velvet folds as it goes.");
 	outputText("  Sophie's immense thighs squeeze tighter in response, shutting out any last vestiges of light and pushing you harder into her sopping-wet mound.  You let your lower lip graze her rigid clitty and savor the lubricating fluid that she leaks into your waiting mouth.");
 	

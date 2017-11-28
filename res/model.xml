@@ -171,7 +171,7 @@
             <!--<color name="striped orange">#000000</color>-->
             <color name="white and black">#eff3f6</color>
         </common>
-        <property name="hair" src="hairColor" default="#ffffff">
+        <property name="hair" src="hair.color" default="#ffffff">
             <color name="red">#bf7540</color>
             <color name="flaxen">#a68059</color>
             <color name="brown">#674f42</color>
@@ -189,10 +189,10 @@
         </property>
         <property name="chitin2" src="skin.coat.color" default="#ffffff">
         </property>
-        <property name="skin" src="skinTone" default="#ffffff">
+        <property name="skin" src="skin.tone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="skin2" src="skinTone" default="#ffffff">
+        <property name="skin2" src="skin.tone" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <!-- Not yet in game-->
@@ -496,7 +496,7 @@
         Element <default> item* </default>
 
         -->
-        <switch value="antennae">
+        <switch value="antennae.type">
             <case value="0"><!--NONE--></case>
             <case value="2"><!--BEE-->
                 <show part="antennae/bee"/>
@@ -509,23 +509,23 @@
             </default>
         </switch>
 
-        <switch value="hornType">
+        <switch value="horns.type">
             <case value="0"><!--NONE--></case>
             <case value="1"><!--DEMON-->
                 <show part="horns/2small"/>
             </case>
             <case value="2"><!--COW_MINOTAUR-->
                 <switch>
-                    <case test="horns lt 3"><!--Two tiny horn-like nubs...-->
+                    <case test="horns.value lt 3"><!--Two tiny horn-like nubs...-->
                         <show part="horns/2small"/>
                     </case>
-                    <case test="horns lt 6"><!--Two moderately sized horns...-->
+                    <case test="horns.value lt 6"><!--Two moderately sized horns...-->
                         <show part="horns/2small"/>
                     </case>
-                    <case test="horns lt 12"><!--Two large horns...-->
+                    <case test="horns.value lt 12"><!--Two large horns...-->
                         <show part="horns/2large"/>
                     </case>
-                    <case test="horns lt 20"><!--Two very large and dangerous looking horns...-->
+                    <case test="horns.value lt 20"><!--Two very large and dangerous looking horns...-->
                         <show part="horns/2large"/>
                     </case>
                     <default><!--Two huge horns...-->
@@ -546,7 +546,7 @@
             </default>
         </switch>
 
-        <switch value="earType">
+        <switch value="ears.type">
             <case value="0"><!--HUMAN-->
                 <show part="ears_bg/human"/>
             </case>
@@ -584,7 +584,7 @@
             </default>
         </switch>
 
-        <switch value="eyeType">
+        <switch value="eyes.type">
             <case value="0">
                 <show part="eyes/human"/><!--HUMAN-->
             </case>
@@ -602,17 +602,17 @@
             </default>
         </switch>
 
-        <switch value="hairType">
+        <switch value="hair.type">
             <case values="1,5,7"><!--FEATHER, QUILL, BASILISK_PLUME-->
-                <if test="hairLength &gt; 0">
+                <if test="hair.length &gt; 0">
                     <show part="hair/feather"/>
                     <show part="hair_bg/feather"/>
                 </if>
             </case>
             <default> <!-- covers NORMAL, GHOST, GOO, ANEMONE, BASILISK_SPINES -->
                 <switch>
-                    <case test="hairLength == 0"><!--bald--></case>
-                    <case test="hairLength lt 6">
+                    <case test="hair.length == 0"><!--bald--></case>
+                    <case test="hair.length lt 6">
                         <show part="hair/0"/>
                         <show part="hair_bg/0"/>
                     </case>
@@ -624,14 +624,14 @@
             </default>
         </switch>
 
-        <switch value="skinType">
+        <switch value="skin.type">
             <case values="0,3"><!--PLAIN--><!--TODO GOO-->
                 <show part="head/human"/>
                 <show part="torso/human"/>
                 <show part="arms/human"/>
                 <show part="arms_bg/human"/>
                 <show part="legs/human"/>
-                <if test="skinTone=='white and black'">
+                <if test="skin.tone=='white and black'">
                     <hide part="head/*"/>
                     <hide part="torso/*"/>
                     <show part="head/orca"/>
@@ -660,7 +660,7 @@
                 <show part="legs/human"/>
             </default>
         </switch>
-        <switch value="faceType">
+        <switch value="face.type">
             <case value="0"><!--HUMAN-->
                 <show part="face/human"/>
             </case>
@@ -711,7 +711,7 @@
                     <show part="breasts/B"/>
                 </case>
                 <default>
-                    <switch value="skinType">
+                    <switch value="skin.type">
                         <case values="0,3"><!--PLAIN--><!--TODO GOO-->
                             <show part="breasts/D"/>
                         </case>
@@ -729,9 +729,9 @@
             </switch>
         </if>
 
-        <switch value="armType">
+        <switch value="arms.type">
             <case values="0,4,6"><!--HUMAN,PREDATOR,WOLF-->
-                <!--see switch[value=skinType]-->
+                <!--see switch[value=skin.type]-->
             </case>
             <case values="1,7"><!--HARPY,COCKATRICE-->
                 <hide part="arms/*"/>
@@ -745,7 +745,7 @@
                 <show part="arms/chitin2_p"/>
                 <show part="arms_bg/chitin2_p"/>
             </case>
-            <case value="4"><!--BEE-->
+            <case value="3"><!--BEE-->
                 <hide part="arms/*"/>
                 <hide part="arms_bg/*"/>
                 <show part="arms/bee"/>
@@ -761,14 +761,14 @@
             </default>
         </switch>
 
-        <switch value="lowerBody">
+        <switch value="lowerBody.type">
             <case value="0"><!--HUMAN-->
                 <!--see switch[value=skin.coverage]-->
             </case>
             <case values="1,11,21"><!--HOOFED,PONY,CLOVEN_HOOFED-->
                 <hide part="legs/*"/>
                 <switch>
-                    <case value="legCount==4">
+                    <case value="lowerBody.legCount==4">
                         <show part="legs_bg/centaur"/>
                     </case>
                     <default>
@@ -815,7 +815,7 @@
             </default>
         </switch>
 
-        <switch value="wingType">
+        <switch value="wings.type">
             <case value="0"><!--NONE--></case>
             <case values="1,2"><!--BEE_LIKE_SMALL,BEE_LIKE_LARGE-->
                 <show part="wings/bee"/>
@@ -841,7 +841,7 @@
             </default>
         </switch>
 
-        <switch value="tailType">
+        <switch value="tail.type">
             <case value="0"><!--NONE--></case>
             <case values="1,2,4"><!--TODO HORSE,DOG,COW-->
                 <show part="tail/goat"/>

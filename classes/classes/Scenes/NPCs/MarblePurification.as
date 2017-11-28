@@ -332,7 +332,10 @@ package classes.Scenes.NPCs {
 			//pure Jojo’s response to being asked to have tea
 			if (player.hasStatusEffect(StatusEffects.PureCampJojo))
 			{
-			 	outputText("\n\nWhen you get to Jojo’s meditation spot and ask him if he is interested in coming to the campfire for tea, the murine monk looks surprised, but nods his head. <i>\"Tea would be delightful, thank you. It’s been a long time since I was able to enjoy a civil activity such as that.\"</i>");
+				if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3)
+					outputText("\n\nWhen you get to Joy’s meditation spot and ask her if she is interested in coming to the campfire for tea, the bimbofied mouse agrees immediately. <i>\"Tea would be, like, great! I haven't had a cup in... uh.. lemme think... must have been years.\"</i>");
+				else
+					outputText("\n\nWhen you get to Jojo’s meditation spot and ask him if he is interested in coming to the campfire for tea, the murine monk looks surprised, but nods his head. <i>\"Tea would be delightful, thank you. It’s been a long time since I was able to enjoy a civil activity such as that.\"</i>");
 				//temp follower variable ++
 				teaDrinkers++;
 			}
@@ -659,7 +662,7 @@ package classes.Scenes.NPCs {
 	 	outputText("Her gaze is not a pleasant one, to say the least.  \"<i>Aw, don’t be afraid,</i>\"  She coos in response to your expression.  \"<i>You’ve earned the right to drink my milk.  You should be happy!</i>\"  Still smiling, she reaches up and opens up her shirt.  The sight of her bountiful mammaries brings your need back to the top of your priorities, pushing fear out of the way.  You can’t help but lick your lips.  \"<i>Ooh, I like that face.  You’ll have to show it to me more often.  Now, come and drink your fill.</i>\"");
 	 	outputText("\n\nAs if the floodgates have been opened, you rush forward and latch onto one of her nipples, surprising both you and Clara.  It doesn’t take long for her to recover, and she pulls you into an embrace against her chest.  However, you hardly even care.  All that matters to you right now is the sweet honey that is flowing through your lips and down your throat.  There is nothing more wonderful in the world than the drug you’re gorging yourself on right now.  Not even Marble’s milk compares.");
 	 	outputText("\n\n\"<i>Such enthusiasm!</i>\" a distant voice calls out above you, \"<i>Not even Oophelia talking about the latest adventures of Mighty Moo and Bovine Lass can compare to this!</i>\"  You feel fingers run ");
-		if (player.hairLength > 0) outputText("through your " + player.hairDescript());
+		if (player.hair.length > 0) outputText("through your " + player.hairDescript());
 		else outputText("across your scalp");
 	 	outputText(", then they suddenly grip down tight.  \"<i>Let’s see if you can pick up the pace.  Drink faster, my love slave!</i>\"  You do as the voice asks, and loud moans of pleasure follow.");
 
@@ -766,7 +769,7 @@ package classes.Scenes.NPCs {
 		clearOutput();
 	 	outputText("Clara straddles your head with her legs and looks down at you.  \"<i>Now you’re going to lick me until I’m satisfied.  Also, don’t you dare doo anything unless I tell you to, got it?</i>\"  She doesn’t wait for a response.  \"<i>Goood, now let's get started.</i>\"  The cow-girl promptly drops her snatch onto your face.");
 		//if (PC has a long tongue)
-		if (player.tongueType > 0)
+		if (player.tongue.type > 0)
 		{
 			//PC tentatively probes Clara’s insides, and she is very surprised at just how much tongue they have.  She orders them to stop, and just use the tip to lick her labia and clit.
 		 	outputText("\n\n\"<i>Lick my hole, stick yourself way inside!</i>\" Clara orders.  You tentatively push your " + player.tongueDescript() + " into the entrance of the slit that has been roughly lowered onto your face.  You soon find your goal and begin the process of filling her with your great lengths of inhuman mouth muscle.  Clara gasps in surprise and quickly exclaims, \"<i>What are you dooing?!  What is that?  Stop!</i>\"  You do as requested and remove your appendage from her depths.  The cow-girl pants for a moment then speaks again, \"<i>Okay, that’s a bit much to start with.  Uh, I didn’t think your tongue would be that long!  Now, let’s try again.  Using just the tip of your tongue, lick me.</i>\"");

@@ -7,6 +7,7 @@
 
 package classes.Scenes.Areas.Desert {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 	import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
@@ -502,24 +503,24 @@ package classes.Scenes.Areas.Desert {
 			this.pronoun3 = "its";
 			
 			this.tallness = rand(18) + 59;
-			this.hipRating = rand(19) + 1;
-			this.buttRating = rand(19) + 1;
-			this.lowerBody = rand(25) + 1;
-			this.armType = rand(5) + 1;
+			this.hips.rating = rand(19) + 1;
+			this.butt.rating = rand(19) + 1;
+			this.lowerBody.type = rand(25) + 1;
+			this.arms.type = rand(5) + 1;
 
-			this.skinTone = skinColour[0];
-			this.skinType = rand(5);
-			this.hairLength = rand(25);
-			if (this.hairLength > 0) {
-				this.hairColor = hairColours[0];
-				this.hairType = rand(7) + 1;
+			this.skin.tone = skinColour[0];
+			this.theSkinType = rand(5);
+			this.hair.length = rand(25);
+			if (this.hair.length > 0) {
+				this.hair.color = hairColours[0];
+				this.hair.type = rand(7) + 1;
 			} else {
-				this.hairType = HAIR_NORMAL;
+				this.hair.type = Hair.NORMAL;
 			}
-			this.faceType = rand(23) + 1;
-			this.earType = rand(19) + 1;
-			this.tongueType = rand(4) + 1;
-			this.eyeType = rand(5) + 1;
+			this.face.type = rand(23) + 1;
+			this.ears.type = rand(19) + 1;
+			this.tongue.type = rand(4) + 1;
+			this.eyes.type = rand(5) + 1;
 
 			initStrTouSpeInte(45,30,55,25);
 			initLibSensCor(0,0,50);
@@ -542,19 +543,19 @@ package classes.Scenes.Areas.Desert {
 
 			this.drop = new WeightedDrop(consumables.ECTOPLS, 1);
 
-			this.tailType = rand(26);
-			this.horns = rand(4);
-			if (this.horns > 0) {
-				this.hornType = rand(7) + 1;
+			this.tail.type = rand(26);
+			this.horns.value = rand(4);
+			if (this.horns.value > 0) {
+				this.horns.type = rand(7) + 1;
 			} else {
-				this.hornType = HORNS_NONE;
+				this.horns.type = Horns.NONE;
 			}
-			this.wingType = rand(13);
-			this.antennae = rand(2);
-			if (this.antennae == 2) {
-				this.antennae = ANTENNAE_BEE;
+			this.theWingType = rand(13);
+			this.antennae.type = rand(2);
+			if (this.antennae.type == 2) {
+				this.antennae.type = Antennae.BEE;
 			} else {
-				this.antennae = ANTENNAE_NONE;
+				this.antennae.type = Antennae.NONE;
 			}
 			
 			checkMonster();

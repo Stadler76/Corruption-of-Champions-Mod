@@ -1,12 +1,14 @@
 package classes.Items.Consumables 
 {
 	import classes.Appearance;
+	import classes.BodyParts.*;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.PerkLib;
 	import classes.StatusEffects;
+	import classes.VaginaClass;
 	
 	/**
 	 * Minotaur transformative item.
@@ -117,7 +119,7 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss
@@ -129,18 +131,18 @@ package classes.Items.Consumables
 				mutations.restoreArms(tfSource);
 			}
 			//+hooves
-			if (player.lowerBody !== LOWER_BODY_TYPE_HOOFED) {
+			if (player.lowerBody.type !== LowerBody.HOOFED) {
 				if (changes < changeLimit && rand(3) === 0) {
 					//[removed:1.4.10]//changes++;
-					if (player.lowerBody === LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-					else if (player.lowerBody === LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
-					else if (player.lowerBody === LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
+					if (player.lowerBody.type === LowerBody.HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+					else if (player.lowerBody.type === LowerBody.DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+					else if (player.lowerBody.type === LowerBody.NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
 					//Catch-all
-					else if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
+					else if (player.lowerBody.type > LowerBody.NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
 					else if (!player.hasFur()) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
 					outputText("<b>  You now have hooves in place of your feet!</b>");
-					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
-					player.legCount = 2;
+					player.lowerBody.type = LowerBody.HOOFED;
+					player.lowerBody.legCount = 2;
 					dynStats("spe", 1);
 					changes++;
 				}
@@ -149,7 +151,7 @@ package classes.Items.Consumables
 			{
 				//Kills vagina size (and eventually the whole vagina)
 				if (player.vaginas.length > 0) {
-					if (player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_TIGHT) {
+					if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
 						//tighten that bitch up!
 						outputText("\n\nYour " + player.vaginaDescript(0) + " clenches up painfully as it tightens up, becoming smaller and tighter.");
 						player.vaginas[0].vaginalLooseness--;
@@ -317,24 +319,24 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Face change, requires Ears + Height + Hooves
-			if (player.earType === EARS_COW && player.lowerBody === LOWER_BODY_TYPE_HOOFED && player.tallness >= 90
+			if (player.ears.type === Ears.COW && player.lowerBody.type === LowerBody.HOOFED && player.tallness >= 90
 					&& changes < changeLimit && rand(3) === 0) {
-				if (player.faceType !== FACE_COW_MINOTAUR) {
+				if (player.face.type !== Face.COW_MINOTAUR) {
 					outputText("\n\nBones shift and twist painfully as your visage twists and morphs to resemble that of the beast whose blood you now drink.  <b>You now have a minotaur-like face.</b>");
 					changes++;
-					player.faceType = FACE_COW_MINOTAUR;
+					player.face.type = Face.COW_MINOTAUR;
 				}
 			}
 			//+mino horns require ears/tail
-			if (changes < changeLimit && rand(3) === 0 && player.earType === EARS_COW && player.tailType === TAIL_TYPE_COW) {
+			if (changes < changeLimit && rand(3) === 0 && player.ears.type === Ears.COW && player.tail.type === Tail.COW) {
 				temp = 1;
 				//New horns or expanding mino horns
-				if (player.hornType === HORNS_COW_MINOTAUR || player.hornType === HORNS_NONE) {
+				if (player.horns.type === Horns.COW_MINOTAUR || player.horns.type === Horns.NONE) {
 					//Get bigger if player has horns
-					if (player.hornType === HORNS_COW_MINOTAUR) {
+					if (player.horns.type === Horns.COW_MINOTAUR) {
 						//Fems horns don't get bigger.
 						if (player.vaginas.length > 0) {
-							if (player.horns > 4) {
+							if (player.horns.value > 4) {
 								outputText("\n\nYou feel a pressure in your head around your horns, but they don't grow any larger.  ");
 								outputText("Your headache clears as lust washes through you unnaturally.  You feel as if you haven't cum in months.");
 								player.hoursSinceCum += 200;
@@ -342,23 +344,23 @@ package classes.Items.Consumables
 							}
 							else {
 								outputText("\n\nYour small horns get a bit bigger, stopping as medium sized nubs.");
-								player.horns += 3;
+								player.horns.value += 3;
 							}
 							changes++;
 						}
 						//Males horns get 'uge.
 						else {
 							temp = 1 + rand(3);
-							player.horns += temp;
+							player.horns.value += temp;
 							if (temp === 0) changes--;
 							if (temp === 1) outputText("\n\nAn aching pressure builds in your temples as you feel your horns push another inch of length from your skull.  ");
 							if (temp === 2) outputText("\n\nA powerful headache momentarily doubles you over.  With painful slowness, you feel your horns push another two inches of length out from your brow, gradually thickening as they grow.  ");
 							if (temp === 3) outputText("\n\nAgony overwhelms you as a headache of terrifying intensity sweeps through your skull.  You squeeze your eyes shut from the pain, but it does little to help.  The torture intensifies before finally diminishing as you feel an inch or two of new horn force its way out of your forehead.  The headache remains despite this, and desperate for relief, you grab hold of your horns and tug, pulling another inch of new horn free.  At last the pain fades, leaving you with significantly enhanced head-spikes.  ");
-							if (player.horns < 3) outputText("They are the size of tiny nubs.");
-							if (player.horns >= 3 && player.horns < 6) outputText("They are similar to what you would see on a young bull.");
-							if (player.horns >= 6 && player.horns < 12) outputText("They look like the horns on a grown bull, big enough and dangerous enough to do some damage.");
-							if (player.horns >= 12 && player.horns < 20) outputText("They are large and wicked looking.");
-							if (player.horns >= 20) outputText("They are huge, heavy, and tipped with dangerous points.");
+							if (player.horns.value < 3) outputText("They are the size of tiny nubs.");
+							if (player.horns.value >= 3 && player.horns.value < 6) outputText("They are similar to what you would see on a young bull.");
+							if (player.horns.value >= 6 && player.horns.value < 12) outputText("They look like the horns on a grown bull, big enough and dangerous enough to do some damage.");
+							if (player.horns.value >= 12 && player.horns.value < 20) outputText("They are large and wicked looking.");
+							if (player.horns.value >= 20) outputText("They are huge, heavy, and tipped with dangerous points.");
 							//boys get a cum refill sometimes
 							if (rand(2) === 0 && changes < changeLimit) {
 								outputText("  Your headache clears as lust washes through you unnaturally.  You feel as if you haven't cum in months.");
@@ -371,37 +373,37 @@ package classes.Items.Consumables
 					//If no horns yet..
 					else {
 						outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.");
-						player.hornType = HORNS_COW_MINOTAUR;
-						player.horns = 2;
+						player.horns.type = Horns.COW_MINOTAUR;
+						player.horns.value = 2;
 						changes++;
 					}
 				}
 				//Not mino horns, change to cow-horns
-				if (player.hornType === HORNS_DEMON || player.hornType > HORNS_COW_MINOTAUR) {
+				if (player.horns.type === Horns.DEMON || player.horns.type > Horns.COW_MINOTAUR) {
 					outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into two horns with a bovine-like shape.");
-					player.hornType = HORNS_COW_MINOTAUR;
+					player.horns.type = Horns.COW_MINOTAUR;
 					changes++;
 				}
 			}
 			//+cow ears	- requires tail
-			if (player.earType !== EARS_COW && changes < changeLimit && player.tailType === TAIL_TYPE_COW && rand(2) === 0) {
+			if (player.ears.type !== Ears.COW && changes < changeLimit && player.tail.type === Tail.COW && rand(2) === 0) {
 				outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>");
-				player.earType = EARS_COW;
+				player.ears.type = Ears.COW;
 				changes++;
 			}
 			//+cow tail
-			if (changes < changeLimit && rand(2) === 0 && player.tailType !== TAIL_TYPE_COW) {
-				if (player.tailType === TAIL_TYPE_NONE) outputText("\n\nYou feel the flesh above your " + player.buttDescript() + " knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
+			if (changes < changeLimit && rand(2) === 0 && player.tail.type !== Tail.COW) {
+				if (player.tail.type === Tail.NONE) outputText("\n\nYou feel the flesh above your " + player.buttDescript() + " knotting and growing.  It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
 				else {
-					if (player.tailType < TAIL_TYPE_SPIDER_ADBOMEN || player.tailType > TAIL_TYPE_BEE_ABDOMEN) {
+					if (player.tail.type < Tail.SPIDER_ABDOMEN || player.tail.type > Tail.BEE_ABDOMEN) {
 						outputText("\n\nYour tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form.  You have a <b>cow tail</b>.");
 					}
 					//insect
-					if (player.tailType === TAIL_TYPE_SPIDER_ADBOMEN || player.tailType === TAIL_TYPE_BEE_ABDOMEN) {
+					if (player.tail.type === Tail.SPIDER_ABDOMEN || player.tail.type === Tail.BEE_ABDOMEN) {
 						outputText("\n\nYour insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.");
 					}
 				}
-				player.tailType = TAIL_TYPE_COW;
+				player.tail.type = Tail.COW;
 				changes++;
 			}
 			// Remove gills

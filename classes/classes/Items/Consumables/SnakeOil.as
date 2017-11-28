@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Consumable;
@@ -61,7 +62,7 @@ package classes.Items.Consumables
 				//[removed:1.4.10]//changes++;
 			}
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss
@@ -73,8 +74,8 @@ package classes.Items.Consumables
 				mutations.removeExtraBreastRow(tfSource);
 			}
 			//Removes wings and shark fin
-			if ((player.wingType != WING_TYPE_NONE || player.rearBody.type == REAR_BODY_SHARK_FIN) && rand(3) === 0 && changes < changeLimit) {
-				if (player.rearBody.type == REAR_BODY_SHARK_FIN) {
+			if ((player.wings.type != Wings.NONE || player.rearBody.type === RearBody.SHARK_FIN) && rand(3) === 0 && changes < changeLimit) {
+				if (player.rearBody.type === RearBody.SHARK_FIN) {
 					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine."
 					          +" After a moment the pain passes, though your fin is gone!");
 					player.rearBody.restore();
@@ -82,11 +83,11 @@ package classes.Items.Consumables
 					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your"
 					          +" shoulder-blades.  After a moment the pain passes, though your wings are gone!");
 				}
-				player.wingType = WING_TYPE_NONE;
+				player.wings.type = Wings.NONE;
 				changes++;
 			}
 			//Removes antennae
-			if (player.antennae != ANTENNAE_NONE && rand(3) === 0 && changes < changeLimit) {
+			if (player.antennae.type != Antennae.NONE && rand(3) === 0 && changes < changeLimit) {
 				mutations.removeAntennae();
 			}
 			//9c) II The tongue (sensitivity bonus, stored as a perk?)
@@ -94,17 +95,17 @@ package classes.Items.Consumables
 				mutations.gainSnakeTongue();
 			}
 			//9c) III The fangs
-			if (changes === 0 && player.tongueType === TONGUE_SNAKE && player.faceType !== FACE_SNAKE_FANGS && rand(3) === 0 && changes < changeLimit) {
+			if (changes === 0 && player.tongue.type === Tongue.SNAKE && player.face.type !== Face.SNAKE_FANGS && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nWithout warning, you feel your canine teeth jump almost an inch in size, clashing on your gums, cutting yourself quite badly. As you attempt to find a new way to close your mouth without dislocating your jaw, you notice that they are dripping with a bitter, khaki liquid.  Watch out, and <b>try not to bite your tongue with your poisonous fangs!</b>");
-				if (player.faceType !== FACE_HUMAN && player.faceType !== FACE_SHARK_TEETH && player.faceType !== FACE_BUNNY && player.faceType !== FACE_SPIDER_FANGS) {
-					outputText("  As the change progresses, your " + player.face() + " reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
+				if (player.face.type !== Face.HUMAN && player.face.type !== Face.SHARK_TEETH && player.face.type !== Face.BUNNY && player.face.type !== Face.SPIDER_FANGS) {
+					outputText("  As the change progresses, your " + player.faceDescript() + " reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
 				}
-				player.faceType = FACE_SNAKE_FANGS;
+				player.face.type = Face.SNAKE_FANGS;
 				changes++;
 			}
 			//9c) I The tail ( http://tvtropes.org/pmwiki/pmwiki.php/Main/TransformationIsAFreeAction ) (Shouldn't we try to avert this? -Ace)
 			//Should the enemy "kill" you during the transformation, it skips the scene and immediately goes to tthe rape scene. (Now that I'm thinking about it, we should add some sort of appendix where the player realizes how much he's/she's changed. -Ace)
-			if (changes === 0 && player.faceType === FACE_SNAKE_FANGS && player.lowerBody !== LOWER_BODY_TYPE_NAGA && rand(4) === 0 && changes < changeLimit) {
+			if (changes === 0 && player.face.type === Face.SNAKE_FANGS && player.lowerBody.type !== LowerBody.NAGA && rand(4) === 0 && changes < changeLimit) {
 				outputText("\n\nYou find it increasingly harder to keep standing as your legs start feeling weak.  You swiftly collapse, unable to maintain your own weight.");
 				//(If used in combat, you lose a turn here. Half-corrupted Jojo and the Naga won't attack you during that period, but other monsters will)
 				//FUCK NO
@@ -113,22 +114,22 @@ package classes.Items.Consumables
 				outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.");
 				if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.");
 				outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.");
-				player.lowerBody = LOWER_BODY_TYPE_NAGA;
-				player.legCount = 1;
+				player.lowerBody.type = LowerBody.NAGA;
+				player.lowerBody.legCount = 1;
 
 				// Naga lower body plus a tail may look awkward, so silently discard it (Stadler76)
-				player.tailType = TAIL_TYPE_NONE;
-				player.tailVenom = 0;
-				player.tailRecharge = 0;
+				player.tail.type = Tail.NONE;
+				player.tail.venom = 0;
+				player.tail.recharge = 0;
 
 				if (player.hasReptileUnderBody()) {
 					player.skin.tone = "green";
 					player.underBody.skin.tone = "light green";
 				} else {
 					player.underBody.setProps({
-						type: UNDER_BODY_TYPE_NAGA,
+						type: UnderBody.NAGA,
 						skin: {
-							type: SKIN_TYPE_LIZARD_SCALES,
+							type: Skin.LIZARD_SCALES,
 							tone: "green",
 							adj:  "",
 							desc: "scales"
@@ -136,7 +137,7 @@ package classes.Items.Consumables
 					});
 				}
 				
-				mutations.updateClaws(player.clawType); // Just auto-fix the clawTone
+				mutations.updateClaws(player.claws.type); // Just auto-fix the clawTone
 				changes++;
 			}
 			// Remove gills

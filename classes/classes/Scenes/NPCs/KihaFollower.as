@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Swamp.SpiderMorphMob;
 	import classes.display.SpriteDb;
@@ -22,7 +23,7 @@
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			trace("\Kiha time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\Kiha time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant) {
 				if (kihaPregUpdate()) needNext = true;
 				if (pregnancy.incubation == 0) {
@@ -130,7 +131,6 @@ public function kihaKnockUpAttempt():void {
 	//Roll
 	if (rand(100) <= chance) {
 		if (debug) outputText("\n\n<b>DEBUG: Kiha is impregnated.</b>");
-		trace("Kiha got PREGNANT!");
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_KIHA);
 	}
 }
@@ -1976,11 +1976,11 @@ internal function pcWinsDomFight():void {
 		outputText("[pg]Pinning her arms to the cold ground, you move your head down to her supple breast, gently flicking the little stubs of her nipples with your tongue.");
 
 		//PC has a demon/snake tongue: 
-		if (player.hasLongTongue() || player.tongueType == TONGUE_SNAKE) {
+		if (player.hasLongTongue() || player.tongue.type == Tongue.SNAKE) {
 			outputText("[pg]Kiha initially reacts with titillation, then a sense of perverted violation as you wrap the hardening nub with your mouth muscle, ");
 			//Demon: 
 			if (player.hasLongTongue()) outputText("taking to her pointed mammary like a boa to prey as you lather up each teat separately.  The hot-tempered dragon girl squirms, completely at your mercy while you have your fun."); 
-			else if (player.tongueType == TONGUE_SNAKE) outputText("stimulating the soft, nubby flesh with your forked tongue, hissing for effect as you do it.  Imagine the look on her face if you worked that little bugger over her clit; she'd go berserk!  But she hasn't earned that yet; what you want to hear is her begging for a good dicking first.");
+			else if (player.tongue.type == Tongue.SNAKE) outputText("stimulating the soft, nubby flesh with your forked tongue, hissing for effect as you do it.  Imagine the look on her face if you worked that little bugger over her clit; she'd go berserk!  But she hasn't earned that yet; what you want to hear is her begging for a good dicking first.");
 		}
 		outputText("[pg]Her breathing becoming plagued with arousal and stimulus overload, she finally yields, beseeching you to stop playing with her breasts and to get on with \"<i>more important things.</i>\"");
 

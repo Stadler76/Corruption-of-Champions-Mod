@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
@@ -256,7 +256,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\n“<i>Lethice will set us high in her service for bringing her you, interloper,</i>” he murmurs. “<i>But it is lacking, eh, the personal touch, n’est ce pas?</i>”");
 
-			if (player.skinAdj != "smooth" || player.skinAdj != "latex" || player.skinAdj != "rubber")
+			if (player.skin.adj != "smooth" || player.skin.adj != "latex" || player.skin.adj != "rubber")
 			{
 				outputText("\n\nHe turns, snaps his fingers and raps out some instructions, too fast for you to follow, and a number of basilisks break off to hurry towards the back of the hall. His eyes are away from yours for a moment but it doesn’t matter; your mind is floating in the vast golden sea, your body submerged in its radiance. When an object is pushed into your hands, it takes you a while to focus upon it, a while longer to recognise what it is. An egg- a black egg. You look up in dozy confusion to find Jean-Claude staring back deep into your eyes, amusement curling his long mouth. Why have they given you this? You must have asked for it. Yes- it’s obvious now, what you have to do. You crack the egg’s shell and greedily gulp down its contents.");
 				if (player.hasFur()) outputText("  Your fur drops away in ragged clumps as you drink."); 

@@ -17,7 +17,7 @@ public function exploreShowers():void {
 	}*/
 	hideUpDown();
 	if (flags[kFLAGS.GYM_MACHINE_STATUS] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
-		outputText("Having worked your body to a pleasant soreness as well as coating your " + player.skinDesc + " in a thin sheen of sweat and pheromones, you decide to hit up the showers to wash off and relax in the hot water.  ");
+		outputText("Having worked your body to a pleasant soreness as well as coating your " + player.skin.desc + " in a thin sheen of sweat and pheromones, you decide to hit up the showers to wash off and relax in the hot water.  ");
 		outputText("You walk into the back halls of the gym, quickly realizing you aren't quite sure where you're headed.  You turn a couple corners, walking down the halls looking for someone, and are about to turn back when you see a goblin round the corner up ahead.\n\n");
 	
 		outputText("You shout after the short humanoid, jogging lightly in chase, but only come to a closed iron door.  The door has a small window on it, blocked with a wire mesh to prevent breaking.  Inside you see a relatively plain room with a couple doors to the back sides.  A single light illuminates the strange room, right above the most technological piece of weight equipment you've ever seen.  You open the door, hoping to find the goblin, only to find the back two doors are hopelessly locked.  You turn to look once more at the piece of equipment in the center of the room.\n\n");

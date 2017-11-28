@@ -17,7 +17,7 @@ package classes.Scenes.Explore
 	import classes.Scenes.Areas.VolcanicCrag.*;
 	import classes.Scenes.Dungeons.DeepCave.*;
 	import classes.Scenes.Dungeons.DesertCave.*;
-	import classes.Scenes.Dungeons.D3.*;
+	import classes.Scenes.Dungeons.LethicesKeep.*;
 	import classes.Scenes.Dungeons.Factory.*;
 	import classes.Scenes.Dungeons.HelDungeon.*;
 	import classes.Scenes.Monsters.*;

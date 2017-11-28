@@ -6,25 +6,23 @@ import classes.Player;
 import classes.internals.LoggerFactory;
 import classes.internals.Utils;
 import flash.filters.DropShadowFilter;
-
 import flash.text.TextField;
 import flash.text.TextFormat;
-
 import mx.logging.ILogger;
 
 public class StatsView extends Block {
 	private static const LOGGER:ILogger = LoggerFactory.getLogger(StatsView);
 	[Embed(source = "../../../res/ui/sidebar1.png")]
-	public static var SidebarBg1:Class;
+	public static const SidebarBg1:Class;
 	[Embed(source = "../../../res/ui/sidebar2.png")]
-	public static var SidebarBg2:Class;
+	public static const SidebarBg2:Class;
 	[Embed(source = "../../../res/ui/sidebar3.png")]
-	public static var SidebarBg3:Class;
+	public static const SidebarBg3:Class;
 	[Embed(source = "../../../res/ui/sidebar4.png")]
-	public static var SidebarBg4:Class;
+	public static const SidebarBg4:Class;
 	[Embed(source = "../../../res/ui/sidebarKaizo.png")]
-	public static var SidebarBgKaizo:Class;
-	public static var SidebarBackgrounds:Array = [SidebarBg1,SidebarBg2,SidebarBg3,SidebarBg4,null,SidebarBgKaizo];
+	public static const SidebarBgKaizo:Class;
+	public static const SidebarBackgrounds:Array = [SidebarBg1, SidebarBg2, SidebarBg3, SidebarBg4, null, SidebarBgKaizo];
 	public static const ValueFontOld:String    = 'Lucida Sans Typewriter';
 	public static const ValueFont:String       = 'Palatino Linotype';
 
@@ -122,8 +120,8 @@ public class StatsView extends Block {
 		},{before:1});
 		addElement(hpBar = new StatBar({
 			statName: "HP:",
-			barColor: '#00ff00',
-			bgColor : '#ff0000',
+			barColor: '#00c000',
+			bgColor : '#c00000',
 			showMax : true
 		}));
 		addElement(lustBar = new StatBar({
@@ -402,10 +400,13 @@ public class StatsView extends Block {
 	public function setBackground(bitmapClass:Class):void {
 		sideBarBG.bitmapClass = bitmapClass;
 	}
+	
 	public function setTheme(font:String,
 							 textColor:uint,
 							 barAlpha:Number):void {
 		var dtf:TextFormat;
+		var shadowFilter:DropShadowFilter = new DropShadowFilter();
+		
 		for each(var e:StatBar in allStats) {
 			dtf = e.valueLabel.defaultTextFormat;
 			dtf.color = textColor;
@@ -416,12 +417,20 @@ public class StatsView extends Block {
 			dtf.color = textColor;
 			e.nameLabel.defaultTextFormat = dtf;
 			e.nameLabel.setTextFormat(dtf);
+			
 			if (e.bar) {
 				e.bar.alpha = barAlpha;
-				if (e.bar.filters.length < 1) e.bar.filters = [new DropShadowFilter()];
+				
+				if (e.bar.filters.length < 1) {
+					e.bar.filters = [shadowFilter];
+				}
 			}
-			if (e.minBar) e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
+			
+			if (e.minBar) {
+				e.minBar.alpha = (1 - (1 - barAlpha) / 2); // 2 times less transparent than bar
+			}
 		}
+		
 		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,advancementText,timeText]) {
 			dtf = tf.defaultTextFormat;
 			dtf.color = textColor;

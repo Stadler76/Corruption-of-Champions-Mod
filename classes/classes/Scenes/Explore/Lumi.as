@@ -193,7 +193,6 @@ public function lumiEnhance():void {
 private function lumiEnhanceGo(itype:ItemType):void
 {
 	spriteSelect(SpriteDb.s_lumi);
-	trace("LUMI ENHANCE");
 	//If (player has less than 100 gems)
 	if (player.gems < 100) {
 		outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\nYou shake your head no, and Lumi gives you a disappointed look and says, \"<i>Den Lumi can do no enhancement for you. Anyfing else?</i>\"\n\n");

@@ -1,6 +1,9 @@
 package classes.Scenes.Areas.VolcanicCrag 
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.kFLAGS;
 	
@@ -55,21 +58,21 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.ballSize = 3;
 			this.cumMultiplier = 25;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 9*12;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "purple";
-			this.skinType = SKIN_TYPE_FUR;
-			this.hairColor = "black";
-			this.hairLength = 8;
-			this.earType = EARS_ELFIN;
-			this.faceType = FACE_CAT;
-			this.horns = 7;
-			this.hornType = HORNS_DRACONIC_X2
-			this.lowerBody = LOWER_BODY_TYPE_CAT
-			this.tailType = TAIL_TYPE_BEHEMOTH
+			this.hips.rating = Hips.RATING_BOYISH;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.skin.tone = "purple";
+			this.theSkinType = Skin.FUR;
+			this.hair.color = "black";
+			this.hair.length = 8;
+			this.ears.type = Ears.ELFIN;
+			this.face.type = Face.CAT;
+			this.horns.value = 7;
+			this.horns.type = Horns.DRACONIC_X2
+			this.lowerBody.type = LowerBody.CAT
+			this.tail.type = Tail.BEHEMOTH
 			initStrTouSpeInte(125, 100, 80, 105);
 			initLibSensCor(35, 15, 15);
 			this.weaponName = "claws";

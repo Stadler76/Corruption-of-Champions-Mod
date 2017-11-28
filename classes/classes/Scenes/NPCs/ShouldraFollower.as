@@ -1,5 +1,6 @@
 package classes.Scenes.NPCs{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.display.SpriteDb;
@@ -536,7 +537,7 @@ private function shouldraTongueLicksPCs():void {
 	//if event occurrence == 0
 	if (flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES] == 0) {
 		outputText("\n\n\"<i>Aah, but it's all the same anyways</i>,\" Shouldra sighs, rolling the long phallic objects over each other in your palm.  \"<i>Where's the excitement in going back to the same old thing?</i>\" she laments, suddenly quite sad about the whole situation despite her earlier eagerness.  Sensing your displeasure, she snaps back, \"<i>Hey, I told you my deal already.  How am I supposed to feel when I've seen it all before?</i>\"  Trying to hurry her along, you ask if there's <b>anything </b> new that she might try.  \"<i>Well what else am I gonna play with on you?</i>\" She breaks out into your own voice.  \"<i>You've got tits, an ass and a cunt, just like the rest of 'em! What am I mi-...</i>\"  She cuts herself off.  Shouldra closes one of your eyes and sticks ");
-		if (player.tongueType > TONGUE_HUMAN) outputText("some of ");
+		if (player.tongue.type > Tongue.HUMAN) outputText("some of ");
 		outputText("your tongue out, examining it.  Already, you think you've got a pretty good idea of where she's going to take this.");
 		outputText("\n\n\"<i>I suppose none of my hosts have actually quite been able to reach themselves with a tongue yet... can you, Champ?</i>\"");
 	}
@@ -976,12 +977,12 @@ private function groBallsBiggaGHOSTYSTYLE():void {
 	//ballsize + 2 + rand(4) 20% chance
 	if (rand(5) == 0) {
 		player.ballSize += 2 + rand(4);
-		outputText("\n\nYour testicles rumble greatly, inch after inch of " + player.skinTone + " flesh enveloping their impressive new bulk.  Shouldra gives your enlarged [balls] a little squeeze and leaves you to reacquaint yourself with a new center of balance.");
+		outputText("\n\nYour testicles rumble greatly, inch after inch of " + player.skin.tone + " flesh enveloping their impressive new bulk.  Shouldra gives your enlarged [balls] a little squeeze and leaves you to reacquaint yourself with a new center of balance.");
 	}
 	//ballsize + 1 + rand(2) Else
 	else {
 		player.ballSize += 1 + rand(2);
-		outputText("\n\nA tingling sensation courses through your scrotum, your " + player.skinTone + " going taut as it gains additional mass.  Shouldra rewards your new [balls] with a light massage.");
+		outputText("\n\nA tingling sensation courses through your scrotum, your " + player.skin.tone + " going taut as it gains additional mass.  Shouldra rewards your new [balls] with a light massage.");
 	}
 	//if ballsize > 10
 	if (player.ballSize > 10) outputText("  You second guess your decision when your swinging cum barrels seem to impede walking.  Shouldra reassures you that the enhanced libido and baby batter supply is worth the wider gait.");
@@ -1077,8 +1078,8 @@ private function shouldrasButtBigginator():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Shouldra's haunting laugh works its way out from your mouth.  \"<i>Looking for a little more jiggle in your step, Champ?  I can get BEHIND that.</i>\"  This damnable ghost won't let you roll your eyes!  Is there no end to her torment?  After a quick crack of your knuckles, Shouldra directs your hands back onto your derriere as she transitions into spellcasting.");
-	//this.player.buttRating = this.player.buttRating + 1 + rand(3)); or so
-	player.buttRating += 1 + rand(3);
+	//this.player.butt.rating = this.player.butt.rating + 1 + rand(3)); or so
+	player.butt.rating += 1 + rand(3);
 	outputText("\n\nYour cheeks quake as the magic takes hold, warm ripples greeting the inches of new retail estate on your hind quarters.  Shouldra can't resist herself, giving your [butt] a vigorous slap.");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1119,7 +1120,7 @@ private function shouldraReductoMenu():void {
 	} else {
 		addDisabledButton(4, "Nipples");
 	}
-	if (player.buttRating >= 2) {
+	if (player.butt.rating >= 2) {
 		addButton(5, "Butt", shrinkDatBootyForYoGhost);
 	} else {
 		addDisabledButton(5, "Butt");
@@ -1233,17 +1234,17 @@ private function shrinkDatBootyForYoGhost():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Your hands quickly grasp at your bare [butt].  \"<i>You... you're desecrating a national treasure here!</i>\"  The rather odd declaration gets a chuckle from you, but you remain firm in your request to dull your derriere.  The ghost girl furthers her attempts to change your mind, but without literally changing your mind, you remain steadfast.  Defeated, your hands take one last trip around your posterior before the poltergeist recites her incantation.");
-	if (player.buttRating >= 15) {
-		player.buttRating -= 3 + int(player.buttRating/3);
+	if (player.butt.rating >= 15) {
+		player.butt.rating -= 3 + int(player.butt.rating/3);
 		outputText("\n\nWithin seconds, your cheeks feel noticeably lighter.  You confirm with a glance that your [butt] is much smaller than before.  Shouldra confirms with a pouting sigh that she is much sadder than before.");
 	}
-	else if (player.buttRating >= 10) {
-		player.buttRating -= 3;
+	else if (player.butt.rating >= 10) {
+		player.butt.rating -= 3;
 		outputText("\n\nYour ass jiggles as it recedes into your body.  A few moments later and your [butt] settles into its new, compact form.  The ghost girl recedes deep back into your body with a depressing sigh.");
 	}
 	else {
-		player.buttRating -= 1 + rand(3);
-		if (player.buttRating < 1) player.buttRating = 1;
+		player.butt.rating -= 1 + rand(3);
+		if (player.butt.rating < 1) player.butt.rating = 1;
 		outputText("\n\nIn a few brief seconds, your [butt] relaxes into its new, slightly tinier form.  Shouldra huffs and puffs inside you, not wanting to discuss your bottom any further.");
 	}
 	dynStats("lib", -2, "lus", -10);
@@ -1301,7 +1302,6 @@ public function shouldersWarnings():Boolean {
 	//7 days (168 hours) since last Shouldra scene
 	else if (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] == -168) {
 		spriteSelect(SpriteDb.s_ghostGirl2);
-		trace("LEVEL 2 LUST INCREASE HAPPEN");
 		//increased minimum lust +20 until Shouldra is satisfied
 		if (rand(3) == 0) {
 			outputText("\nYour [if (hasCock = true) dick is beginning to get hard][if (isHerm = true)  while your ][if (hasVagina = true) cunt is getting moist with need]");
@@ -1605,7 +1605,10 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 			break;
 		//(Pure Jojo is a follower)
 		case 15:
-			outputText("The silence bothers you a bit, so you decide to see if Shouldra is awake and ask her what she thinks about Jojo.  \"<i>You're talking about that holy mouse morph back at camp, right?  Not a fan,</i>\" she replies, shrugging your shoulders.  \"<i>Other than just not really being into people that remind me of rodents, I don't think he'd get along well with 'a spirit that has yet to abandon these mortal bonds.'</i>\"  she mocks.");
+			outputText("The silence bothers you a bit, so you decide to see if Shouldra is awake and ask her what she thinks about ");
+			if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) outputText("Joy.  \"<i>You're talking about that bimbofied mouse morph back at camp, right?  Not a big fan,</i>\" she replies, shrugging your shoulders.  \"<i>Other than just not really being into people that remind me of rodents, she's still to much of a monk to");
+			else outputText("Jojo.  \"<i>You're talking about that holy mouse morph back at camp, right?  Not a fan,</i>\" she replies, shrugging your shoulders.  \"<i>Other than just not really being into people that remind me of rodents, I don't think he'd");
+			outputText(" get along well with 'a spirit that has yet to abandon these mortal bonds.'</i>\"  she mocks.");
 			break;
 		//(has any of Marae's gift perks)
 		case 16:
@@ -1998,7 +2001,7 @@ private function goAlongWIthShouldrasEatingSpree():void {
 	}
 	//[(if hasCock = false) 
 	else {
-		outputText("\n\nYou run a hand down your chest, examining the new material.  Silky smooth...  As your hand slides across your stomach, you press in slightly.  You've only made a small dent in the food before you, but there's already a noticeable bulge beneath the hem of your skirt, and a few inches of soft " + player.skinTone + " skin are visible beneath the top.  You rub the modest mound, resulting in a subdued gurgling and a content burp; you've gotten full pretty quickly.  Maybe you should just leave the rest of the food and- \"<i>Not so fast, bucko!</i>\"  Shouldra fumes, causing you to jump in your seat.  \"<i>You might be full, but </i>I've<i> barely started!</i>\"  Your gut churns violently as the ghost girl's inhuman appetite infects your own.  Oh dear...");
+		outputText("\n\nYou run a hand down your chest, examining the new material.  Silky smooth...  As your hand slides across your stomach, you press in slightly.  You've only made a small dent in the food before you, but there's already a noticeable bulge beneath the hem of your skirt, and a few inches of soft " + player.skin.tone + " skin are visible beneath the top.  You rub the modest mound, resulting in a subdued gurgling and a content burp; you've gotten full pretty quickly.  Maybe you should just leave the rest of the food and- \"<i>Not so fast, bucko!</i>\"  Shouldra fumes, causing you to jump in your seat.  \"<i>You might be full, but </i>I've<i> barely started!</i>\"  Your gut churns violently as the ghost girl's inhuman appetite infects your own.  Oh dear...");
 		outputText("\n\nYou quickly grab something, an eclair, from the table in an effort to ease the pain in your stomach.  The taste is incredible; you don't know if it's the hunger or Shouldra's magic, but this is easily the best eclair you've ever eaten.  You moan low in your throat as you savor the eclair, thick sweet cream exploding in your mouth, chilled chocolatey pastry caressing your tongue like a skilled lover.  Sugar and pastry mix and twirl around your mouth, and you can't help but close your eyes and relax, mind and body comforted by a glucose euphoria.");
 		if (silly()) outputText("  This is a <i>fucking good eclair</i>.");
 		outputText("\n\nCream-thick treats continue to be stuffed into your gullet, each equally as rich and blissful as the last.  The pastry payload is now making a sizeable bulge beneath your burgeoning top, and the hem of your skirt is stretching by the second.  Tighter and tighter the garment grows, until a large lump of cake rips the stitching along your thigh.  An ethereal giggle burst out as Shouldra prods your exposed midriff.  \"<i>Whoops, guess I let you get a bit carried away there!</i>\"  Her hand massages the bloated sphere, coaxing a few embarrassing burps from you.  \"<i>Still, if you're this far along, might as well go the whole hog.  Figuratively speaking.</i>\"  Your stomach grumbles in agreement and you resume your pig-out with gusto.");

@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Forest
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kFLAGS;
@@ -101,7 +102,7 @@ package classes.Scenes.Areas.Forest
 
 		public function TentacleBeast()
 		{
-			trace("TentacleBeast Constructor!");
+			//trace("TentacleBeast Constructor!");
 			this.a = "the ";
 			this.short = "tentacle beast";
 			this.imageName = "tentaclebeast";
@@ -119,16 +120,16 @@ package classes.Scenes.Areas.Forest
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_BUTTLESS;
-			this.skinTone = "green";
-			this.skinType = SKIN_TYPE_PLAIN;
-			this.skinDesc = "bark";
-			this.hairColor = "green";
-			this.hairLength = 1;
+			this.hips.rating = Hips.RATING_BOYISH;
+			this.butt.rating = Butt.RATING_BUTTLESS;
+			this.skin.tone = "green";
+			this.theSkinType = Skin.PLAIN;
+			this.skin.desc = "bark";
+			this.hair.color = "green";
+			this.hair.length = 1;
 			initStrTouSpeInte(58, 25, 35, 45);
 			initLibSensCor(90, 20, 100);
 			this.weaponName = "whip-tendril";
@@ -146,7 +147,7 @@ package classes.Scenes.Areas.Forest
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
 			this.special3 = tentaclePhysicalAttack;
-			this.tailType = TAIL_TYPE_DEMONIC;
+			this.tail.type = Tail.DEMONIC;
 			checkMonster();
 		}
 

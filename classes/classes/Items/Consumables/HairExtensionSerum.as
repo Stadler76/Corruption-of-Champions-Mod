@@ -3,6 +3,7 @@
  */
 package classes.Items.Consumables
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
 	import classes.internals.Utils;
@@ -22,9 +23,9 @@ package classes.Items.Consumables
 		
 		override public function useItem():Boolean {
 			outputText("You open the bottle of hair extension serum and follow the directions carefully, massaging it into your scalp and being careful to keep it from getting on any other skin.  You wash off your hands with lakewater just to be sure.");
-			if (game.player.hairType == HAIR_BASILISK_SPINES) {
+			if (game.player.hair.type == Hair.BASILISK_SPINES) {
 				outputText("\n\nYou wait a while, expecting a tingle on your head, but nothing happens. You sigh as you realize, that your "
-				          + game.player.hairColor + " basilisk spines are immune to the serum ...");
+				          + game.player.hair.color + " basilisk spines are immune to the serum ...");
 				return false;
 			}
 			if (game.flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
@@ -40,7 +41,7 @@ package classes.Items.Consumables
 				outputText("\n\nThe tingling on your scalp is intolerable!  It's like your head is a swarm of angry ants, though you could swear your hair is growing so fast that you can feel it weighing you down more and more!");
 				game.flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
 			}
-			if (game.flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && game.player.hairType != HAIR_ANEMONE) {
+			if (game.flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && game.player.hair.type != Hair.ANEMONE) {
 				game.flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 				outputText("\n\n<b>Somehow you know that your " + game.player.hairDescript() + " is growing again.</b>");
 			}

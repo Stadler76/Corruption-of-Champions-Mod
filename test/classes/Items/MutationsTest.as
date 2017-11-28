@@ -39,7 +39,7 @@ package classes.Items {
 			// guard asserts			
 			assertThat(player.hasVagina(), equalTo(false)); 
 			assertThat(player.hasBreasts(), equalTo(false));
-			assertThat(player.skinTone, equalTo("albino"));
+			assertThat(player.skin.tone, equalTo("albino"));
 			
 			assertThat(femalePlayer.hasVagina(), equalTo(true)); 
 			assertThat(femalePlayer.hasBreasts(), equalTo(true));

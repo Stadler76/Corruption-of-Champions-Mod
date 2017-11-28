@@ -343,7 +343,7 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 		}
 		//Egg loot!
 		if (player.hasStatusEffect(StatusEffects.LootEgg)) {
-			trace("EGG LOOT HAS");
+			//trace("EGG LOOT HAS");
 			if (!player.hasStatusEffect(StatusEffects.Eggs)) { //Handling of errors.
 				outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
 				player.removeStatusEffect(StatusEffects.LootEgg);
@@ -359,7 +359,7 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 							consumables.BROWNEG;
 			player.removeStatusEffect(StatusEffects.LootEgg);
 			player.removeStatusEffect(StatusEffects.Eggs);
-			trace("TAKEY NAU");
+			//trace("TAKEY NAU");
 			inventory.takeItem(itype, playerMenu);
 			return true;
 		}
@@ -369,17 +369,7 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	
 	// Hanging the Uma massage update here, I think it should work...
 	telAdre.umasShop.updateBonusDuration(time);
-	if (player.hasStatusEffect(StatusEffects.UmasMassage))
-	{
-		trace("Uma's massage bonus time remaining: " + player.statusEffectv3(StatusEffects.UmasMassage));
-	}
-	
 	highMountains.izumiScenes.updateSmokeDuration(time);
-	if (player.hasStatusEffect(StatusEffects.IzumisPipeSmoke))
-	{
-		trace("Izumis pipe smoke time remaining: " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke));
-	}
-	
 	//Drop axe if too short!
 	if ((player.tallness < 78 && player.str < 90) && player.weapon == weapons.L__AXE) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n");

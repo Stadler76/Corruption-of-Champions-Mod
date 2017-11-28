@@ -202,7 +202,7 @@ package classes.Scenes.Areas.Forest
 			//(proceeds to Fight 1.0, with the plant woman having 290-270 HP instead of 300, depending on the PC having horns and the like).
 			startCombat(monster);// TODO create PlantGirl
 			monster.HP -= 20;
-			if (player.horns > 0 && player.hornType > HORNS_NONE) monster.HP -= 15;
+			if (player.horns.value > 0 && player.horns.type > Horns.NONE) monster.HP -= 15;
 			doNext(playerMenu);
 		}
 
@@ -212,7 +212,7 @@ package classes.Scenes.Areas.Forest
 			outputText("As she goes in for another pseudo kiss you lurch forward and connect with your lips, pressing them hard against her and fiercely returning her intimate gesture. She responds by snaking her tongue in your mouth, slapping hers against yours and twisting them around like a frustrated child with a knotted shoe lace.");
 			//(If PC doesn't have long tongue, skip to Otherwise TsI
 			//(If long tongued: 
-			if (player.tongueType > TONGUE_HUMAN) outputText("\n\nYou respond in kind by twisting your lengthy tongue around her own, sliding and constricting around hers like a boa strangling a mouse. With her wet tongue in your grip, you twitch and work the tip of your tongue back to hers, slapping the two together as your tongue dominates the soft, sensual, and submissive part of her mouth.  Despite being bound in this freak of nature prison, you pull her tongue past her lips and into your own, clamping down on it with your pucker as you lather and caress her tongue.  Judging by the reaction on your partner's face, she seems to feel violated... yet strangely aroused.  She blushes and allows you to take the lead in this Florentine kiss.");
+			if (player.tongue.type > Tongue.HUMAN) outputText("\n\nYou respond in kind by twisting your lengthy tongue around her own, sliding and constricting around hers like a boa strangling a mouse. With her wet tongue in your grip, you twitch and work the tip of your tongue back to hers, slapping the two together as your tongue dominates the soft, sensual, and submissive part of her mouth.  Despite being bound in this freak of nature prison, you pull her tongue past her lips and into your own, clamping down on it with your pucker as you lather and caress her tongue.  Judging by the reaction on your partner's face, she seems to feel violated... yet strangely aroused.  She blushes and allows you to take the lead in this Florentine kiss.");
 			//(leads to Otherwise TsI)
 			//(Otherwise TsI):  
 			outputText("\n\nYou taste something funny in her saliva but can't quite pin-point what exactly it is. Sensing your troubled thoughts, she places her hands on the sides of your forehead, embracing you in her passionate grip. Your body quivers at the intimate nature of this encounter, and the plant girl giggles. She wastes little time raising you a few inches off the ground and ripping your [armor] from your body... It's surprising that she does not damage your gear as she removes it piece by piece.  Completely naked, the plant woman looks intently at your body, lost in deliberation as she clearly tries to make up her mind.");
@@ -338,7 +338,7 @@ package classes.Scenes.Areas.Forest
 			
 			outputText("\n\nCeasing her vocal euphoria, the plant woman turns your head towards her face and presses her lips against yours.");
 			//(if long tongued: 
-			if (player.tongueType > TONGUE_HUMAN) outputText("  In a cute but spiteful way, your tongue is pulled forcefully out of your mouth and into her lips as she pulls her head back; the plant woman doesn't get too far from your face before you run out of tongue to give.  This suits her just fine as she takes to sucking on your incredibly long tongue in a manner similar to fellatio.  Pursed on the bottom of yours, she darts her head back and forth along the length of it, edging further into her mouth as she nears closer and closer to your own.  Her dominance without question, she reaches your lips and slips her tongue in, sealing it in with a firm kiss.");
+			if (player.tongue.type > Tongue.HUMAN) outputText("  In a cute but spiteful way, your tongue is pulled forcefully out of your mouth and into her lips as she pulls her head back; the plant woman doesn't get too far from your face before you run out of tongue to give.  This suits her just fine as she takes to sucking on your incredibly long tongue in a manner similar to fellatio.  Pursed on the bottom of yours, she darts her head back and forth along the length of it, edging further into her mouth as she nears closer and closer to your own.  Her dominance without question, she reaches your lips and slips her tongue in, sealing it in with a firm kiss.");
 			//Not long tongued: 
 			else outputText("  Your tongue is viciously attacked by the sudden intrusion of her own.  However, you are more than happy to return the favor as you counter attack, swapping each other's saliva in the process.");
 			
@@ -350,7 +350,7 @@ package classes.Scenes.Areas.Forest
 			else outputText("[balls]");
 			outputText(", massaging and caressing them gently as she moves to kissing at your neck.  Her thrusts become shorter in length as her breathing becomes frantic, signaling that her orgasmic peak is near. The plant woman ");
 			//PC has hair: (grabs you by the hair)
-			if (player.hairLength > 0) outputText("grabs you by the hair");
+			if (player.hair.length > 0) outputText("grabs you by the hair");
 			//PC doesn't have hair: embraces you)
 			else outputText("embraces you");
 			outputText(" as she cries out in a fierce moan, her cock convulsing as she thrusts wildly against you and planting her hot seed deep into you.  The sensual act finally over, your head droops down as you pant heavily; the plant girl slumps her head down onto your shoulder and uses you to hold herself up.  She's breathing heavily in your ear while regaining some of her energy and composure.");
@@ -826,7 +826,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nNot to be outdone by a cheater, you stick your own finger in her twat and move it in a circular fashion along with your girl jizz-coated tongue.  Howling in uncontainable passion, she arcs her head back and whimpers furiously before diving back against your clit, rubbing her tongue and face with absolute abandon, driving to make you cum before her. Your orgasm is approaching! “No!”, your voice rings out in your head.");
 				
 				//(if long tongued: 
-				if (player.tongueType > TONGUE_HUMAN) outputText("\n\nDeciding that you have had enough, you dart the entire length of your tongue into her, pressing hard against her cervix as you try to cram it all in.  Her moans change from dominant and content pleasure to ones of sheer surprise and violation, causing her to stop abruptly and cry out in denial at your show stopping play.  With a series of fierce groans, the plant woman screams in ecstasy, bringing forth a series of trembling in her vaginal muscles.  Her quivering bounces your tongue around in her nether regions like a leaf in the air.");
+				if (player.tongue.type > Tongue.HUMAN) outputText("\n\nDeciding that you have had enough, you dart the entire length of your tongue into her, pressing hard against her cervix as you try to cram it all in.  Her moans change from dominant and content pleasure to ones of sheer surprise and violation, causing her to stop abruptly and cry out in denial at your show stopping play.  With a series of fierce groans, the plant woman screams in ecstasy, bringing forth a series of trembling in her vaginal muscles.  Her quivering bounces your tongue around in her nether regions like a leaf in the air.");
 				
 				//(otherwise: 
 				else outputText("\n\nTaking your other hand, you desperately grab her clit lip and fumble it around between your fingers.  Both your bodies twitch violently and orgasm simultaneously, producing a chorus of thunderous moaning from both of you as you spray each other with your lady juices.");
@@ -1247,7 +1247,7 @@ package classes.Scenes.Areas.Forest
 			outputText(".  The plant-like creature begins to moan like a cheap whore as you dig your fingers into her sex, and you drop her on your lap again.  She moans out in pleasure and pain as you do this again and again.  Eventually, you're able to break her in and begin to brutally ass-fuck this abomination of fauna.  responds by bucking against you, surrendering herself to your will and your ravaging of her incredibly tight hole.  “And here you were putting up a fight to get your own way you cheap, easy whore,” you vilely taunt the plant woman as she moans uncontrollably.");
 			
 			//(If long tongued:
-			if (player.tongueType > TONGUE_HUMAN) {
+			if (player.tongue.type > Tongue.HUMAN) {
 				outputText("\n\nThe sight of her perky, average breasts entices your tongue to want to fool around with them, and with energetic gusto, your long tongue darts out of your mouth.  Lowering your head under her left arm, you lash your tongue out at her right nipple, seizing it in your wet, humid grip.  Grabbing at your hair, the plant woman presses your head against the side of her body while taking a firm hold of her breast, squeezing it to allow you better access to her perked up teat.  Without hesitation, you lick and lap at her nipple, trapping it in a flurry of frenzied lashes from your tongue.");
 				//(Continue to Orgasm)
 			}

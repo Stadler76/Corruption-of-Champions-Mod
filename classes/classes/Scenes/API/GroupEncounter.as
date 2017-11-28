@@ -41,7 +41,7 @@ public class GroupEncounter implements Encounter {
 	}
 
 	public function execEncounter():void {
-		trace(Encounters.debug_indent+encounterName()+".execEncounter()");
+		//trace(Encounters.debug_indent+encounterName()+".execEncounter()");
 		Encounters.debug_indent += "  ";
 		Encounters.select(components).execEncounter();
 		Encounters.debug_indent = Encounters.debug_indent.slice(2);

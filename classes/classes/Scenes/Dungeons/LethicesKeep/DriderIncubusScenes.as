@@ -1,6 +1,7 @@
-package classes.Scenes.Dungeons.D3
+package classes.Scenes.Dungeons.LethicesKeep
 {
 	import classes.BaseContent;
+	import classes.BodyParts.*;
 	import classes.Items.WeaponLib;
 	import classes.StatusEffects;
 	import classes.GlobalFlags.kFLAGS;
@@ -368,7 +369,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("You laugh at Lethice and the goblin. <i>“This is all the reward I need.”</i> You press your");
-			if (player.lowerBody == 5)
+			if (player.lowerBody.type == 5)
 			{
 				outputText(" heel");
 			}
@@ -802,7 +803,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" slither");
 			}
-			else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED)
+			else if (player.lowerBody.type == LowerBody.HOOFED)
 			{
 				outputText(" clop");
 			}

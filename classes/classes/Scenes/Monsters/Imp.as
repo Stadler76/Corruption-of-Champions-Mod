@@ -1,6 +1,7 @@
 package classes.Scenes.Monsters
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 
@@ -46,19 +47,19 @@ package classes.Scenes.Monsters
 			}
 			if (player.lust100 >= 60 && player.hasVagina()) {
 				switch (player.vaginas[0].vaginalWetness) {
-					case VAGINA_WETNESS_NORMAL:
+					case VaginaClass.WETNESS_NORMAL:
 						outputText("Your " + player.allVaginaDescript() + " dampen" + (player.vaginas.length > 1 ? "" : "s") + " perceptibly.");
 						break;
-					case VAGINA_WETNESS_WET:
+					case VaginaClass.WETNESS_WET:
 						outputText("Your crotch becomes sticky with girl-lust.");
 						break;
-					case VAGINA_WETNESS_SLICK:
+					case VaginaClass.WETNESS_SLICK:
 						outputText("Your " + player.allVaginaDescript() + " become" + (player.vaginas.length > 1 ? "" : "s") + " sloppy and wet.");
 						break;
-					case VAGINA_WETNESS_DROOLING:
+					case VaginaClass.WETNESS_DROOLING:
 						outputText("Thick runners of girl-lube stream down the insides of your thighs.");
 						break;
-					case VAGINA_WETNESS_SLAVERING:
+					case VaginaClass.WETNESS_SLAVERING:
 						outputText("Your " + player.allVaginaDescript() + " instantly soak" + (player.vaginas.length > 1 ? "" : "s") + " your groin.");
 					default: //Dry vaginas are unaffected
 						
@@ -73,7 +74,7 @@ package classes.Scenes.Monsters
 		public function Imp(noInit:Boolean=false)
 		{
 			if (noInit) return;
-			trace("Imp Constructor!");
+			//trace("Imp Constructor!");
 			this.a = "the ";
 			this.short = "imp";
 			this.imageName = "imp";
@@ -83,14 +84,14 @@ package classes.Scenes.Monsters
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(24) + 25;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "red";
-			this.hairColor = "black";
-			this.hairLength = 5;
+			this.hips.rating = Hips.RATING_BOYISH;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.skin.tone = "red";
+			this.hair.color = "black";
+			this.hair.length = 5;
 			initStrTouSpeInte(20, 10, 25, 12);
 			initLibSensCor(45, 45, 100);
 			this.weaponName = "claws";
@@ -105,7 +106,7 @@ package classes.Scenes.Monsters
 					add(consumables.INCUBID,3).
 					add(consumables.IMPFOOD,4);
 			this.special1 = lustMagicAttack;
-			this.wingType = WING_TYPE_IMP;
+			this.theWingType = Wings.IMP;
 			checkMonster();
 		}
 

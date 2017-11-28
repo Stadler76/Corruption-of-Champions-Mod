@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
 	import classes.GlobalFlags.*;
 
 	public class Jojo extends Monster
@@ -58,7 +60,7 @@ if (lust >= maxLust()) {
 		
 		public function Jojo()
 		{
-			trace("Jojo Constructor!");
+			//trace("Jojo Constructor!");
 			this.a = "";
 			this.short = "Jojo";
 			this.imageName = "jojo";
@@ -70,16 +72,16 @@ if (lust >= maxLust()) {
 			this.cumMultiplier = 1;
 			this.hoursSinceCum = 1000;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "white";
-			this.skinType = SKIN_TYPE_FUR;
-			this.skinDesc = "fur";
-			this.hairColor = "white";
-			this.hairLength = 2;
+			this.hips.rating = Hips.RATING_SLENDER;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.skin.tone = "white";
+			this.theSkinType = Skin.FUR;
+			this.skin.desc = "fur";
+			this.hair.color = "white";
+			this.hair.length = 2;
 			initStrTouSpeInte(35, 40, 65, 55);
 			initLibSensCor(15, 40, flags[kFLAGS.JOJO_STATUS] * 15);
 			this.weaponName = "paw";

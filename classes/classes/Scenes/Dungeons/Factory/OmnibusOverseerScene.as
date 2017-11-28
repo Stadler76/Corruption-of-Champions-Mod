@@ -1,12 +1,16 @@
 package classes.Scenes.Dungeons.Factory 
 {
+	import classes.AssClass;
 	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusEffects;
-	import classes.PerkLib;
+	import classes.BodyParts.*;
 	import classes.CockTypesEnum;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.PerkLib;
+	import classes.StatusEffects;
+	import classes.VaginaClass;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
+	import classes.lists.Gender;
 	
 	public class OmnibusOverseerScene extends BaseContent
 	{
@@ -176,24 +180,24 @@ package classes.Scenes.Dungeons.Factory
 		private function normalFace():void {
 			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
-			if (player.horns > 0 || player.antennae > ANTENNAE_NONE) {
+			if (player.horns.value > 0 || player.antennae.type > Antennae.NONE) {
 				outputText("Your forehead itches intensely.  You cannot help but stratch madly at it.  ");
-				if (player.horns > 0) {
+				if (player.horns.value > 0) {
 					outputText("Your horns fall off, landing on the floor with a heavy thud.  ");
-					player.horns = 0;
-					player.hornType = HORNS_NONE;
+					player.horns.value = 0;
+					player.horns.type = Horns.NONE;
 				}
 				mutations.removeAntennae(true);
 			}
 			//EARS
-			if (player.earType != EARS_HUMAN) {
+			if (player.ears.type != Ears.HUMAN) {
 				outputText("Pain erupts from both sides of your head as your ears reform and move, returning to look like your old human ears!  ");
-				player.earType = EARS_HUMAN;
+				player.ears.type = Ears.HUMAN;
 			}
 			//Face
-			if (player.faceType != FACE_HUMAN) {
+			if (player.face.type != Face.HUMAN) {
 				outputText("Your facial structure rearranges itself into a normal human visage, exactly like yours was before you came to this horrid place.");
-				player.faceType = FACE_HUMAN;
+				player.face.type = Face.HUMAN;
 			}
 			postOmnibusBoon();
 		}
@@ -229,9 +233,9 @@ package classes.Scenes.Dungeons.Factory
 				temp++;
 			}
 			if (!player.hasPlainSkin()) {
-				outputText("The skin on your body itches intensely as it sheds it's " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ");
-				player.skinDesc = "skin";
-				player.skinType = SKIN_TYPE_PLAIN;
+				outputText("The skin on your body itches intensely as it sheds it's " + player.skin.desc + ", revealing " + player.skin.tone + " skin.  ");
+				player.skin.desc = "skin";
+				player.skin.type = Skin.PLAIN;
 				player.underBody.restore();
 				temp++;
 			}
@@ -287,14 +291,14 @@ package classes.Scenes.Dungeons.Factory
 			if (temp > 0) outputText("\n\n");
 			//Vajajay
 			if (player.vaginas.length > 0) {
-				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) {
+				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) {
 					outputText("The constant fluids leaking from your " + player.vaginaDescript(0) + " slow down, then stop.  ");
-					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 					temp++;
 				}		
 			}
 			//Being genderless isn't normal too...
-			if (player.gender == GENDER_NONE) {
+			if (player.gender == Gender.NONE) {
 				if (player.balls > 0 || player.femininity < 35 || rand(3) == 0) {
 					player.createCock();
 					player.cocks[0].cockType = CockTypesEnum.DEMON;
@@ -317,9 +321,9 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\n");
 			}
 			//Reduce excessive anal wetness
-			if (player.ass.analWetness >= ANAL_WETNESS_SLIMY) { 
+			if (player.ass.analWetness >= AssClass.WETNESS_SLIMY) { 
 				outputText("The constant fluids leaking from your " + player.assDescript() + " slow down, then stop.  ");
-				player.ass.analWetness = ANAL_WETNESS_MOIST;
+				player.ass.analWetness = AssClass.WETNESS_MOIST;
 				temp++;
 			}
 
@@ -332,15 +336,15 @@ package classes.Scenes.Dungeons.Factory
 		private function normalLegs():void {
 			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
-			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("You feel as if you should slap yourself for stupidy.  Your legs are already normal!  You flush hotly as the corrupt magics wash over you, changing nothing.");
+			if (player.lowerBody.type == LowerBody.HUMAN) outputText("You feel as if you should slap yourself for stupidy.  Your legs are already normal!  You flush hotly as the corrupt magics wash over you, changing nothing.");
 			else outputText("You collapse as your " + player.legs() + " are unable to support you.  The sounds of bones breaking and reshaping fills the room, but oddly you feel no pain, only mild arousal.  You blink your eyes and sigh, and when you look down again <b>you have normal human legs</b>!");
-			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-			player.legCount = 2;
-			if (player.tailType > TAIL_TYPE_NONE) {
+			player.lowerBody.type = LowerBody.HUMAN;
+			player.lowerBody.legCount = 2;
+			if (player.tail.type > Tail.NONE) {
 				outputText("  A moment later, your feel something detach from above your backside.  <b>You no longer have a tail!</b>");
-				player.tailType = TAIL_TYPE_NONE;
-				player.tailVenom = 0;
-				player.tailRecharge = 5;
+				player.tail.type = Tail.NONE;
+				player.tail.venom = 0;
+				player.tail.recharge = 5;
 			}
 			postOmnibusBoon();
 		}
@@ -456,7 +460,7 @@ package classes.Scenes.Dungeons.Factory
 				else outputText(" journeys over your taint before travelling between your butt-cheeks.  ");
 				outputText("The three tendrils join together in the back, forming a seemless tiny purple triangle.  It really rides up high, tickling your " + player.assholeDescript() + " with constant teasing.  You're wearing an organic purple thong!\n\n");
 				outputText("You try to endure, but the humiliation is too much for you to take.  The pleasure and shame push you past your limit.  You let out a squeal of mixed agony and delight as the proof of your pleasure boils out into the creature.  You pant and twitch, helpless to resist the strength of your orgasm as your jism fills the creature, distorting it visibly around your member.  Sighing, you relax as the assault winds down, the squirming tentacles relaxing noticeably as they work to digest their 'meal'.\n\n");
-				outputText("\"<i>Enjoy yourself?  The best part is about to start,</i>\" she says with an evil glint in her eye.  You sit bolt upright as your living thong squirms and shifts, pressing something rigid against the ring of your " + player.assholeDescript() + ".  You reach down, trying to pull the creature off, but its outer covering is surprisingly hard, and seals almost perfectly against your " + player.skinDesc + ".  You look up with terror in your eyes, a pleading look painted across your face.\n\n");
+				outputText("\"<i>Enjoy yourself?  The best part is about to start,</i>\" she says with an evil glint in her eye.  You sit bolt upright as your living thong squirms and shifts, pressing something rigid against the ring of your " + player.assholeDescript() + ".  You reach down, trying to pull the creature off, but its outer covering is surprisingly hard, and seals almost perfectly against your " + player.skin.desc + ".  You look up with terror in your eyes, a pleading look painted across your face.\n\n");
 				outputText("She cocks her head to the side with an inquisitive look and asks, \"<i>So it's found your back door I take it?</i>\"  You nod sheepishly, squealing as the rigid growth pushes through your sphincter, violating you completely.  She continues with a nonchalant tone, though her eyes seem to be drinking in the scene, \"<i>That thing you feel drilling into your ass?  It's a carefully evolved injection appendage.  Don't worry, once it settles in it won't move much.  It's just going to get nice and cozy with your prostate and a few major blood vessels.  Then it's going to reward you for cumming!</i>\"\n\n");
 				outputText("You feel it burrow a little deeper, and then curve up.  It presses against something inside of you in a way that makes your " + player.cockDescript(0) + " twitch uncontrollably.  You're sure that if it weren't for the greedy tentacle-panties around your dick you would've seen a huge dollop of pre-cum squeeze out.  Filled with angst and worry as to what is to come, you ask, \"<i>Ummm, h-h-how is it going to reward me?</i>\"\n\n");
 				outputText("She winks, petting the mottled surface of your purple-cock-prison as you feel a sensation of warm wetness in your backside.  At the same time you nearly jump as you feel a painful pinch in your prostate.  The demoness licks her lips and answers, \"<i>Well, it rewards you in two ways pet.  One:  It empties a specially designed cocktail of drugs directly into your bowels, where they'll be absorbed slowly into the body.</i>\"  As if on cue a gentle warmth spreads through your torso, radiating out into your limbs, and settling like calming mist in your head.  You relax utterly, enjoying the feeling in spite of your worries.\n\n");
@@ -490,8 +494,8 @@ package classes.Scenes.Dungeons.Factory
 				else outputText("The demoness smiles with wicked intent and yanks your " + player.armorName + "'s bottom the rest of the way off.  She leans close, smiling and inhaling the scent of your sex, savoring it like an aroma of a fine wine.  Licking her perfect lips with anticipation, she inverts the panties and holds them up for you to see.\n\n");
 				outputText("They aren't panties at all, but instead some living creature.  The entire inside surface of the living garment is covered with fleshy pink nodules that wriggle constantly, practically dripping with a pungent lubricant that smells not unlike your own juices.  Horrifyingly, there is a large lump of flesh towards the front.  Its surface is ribbed and pulses, constantly swelling and shrinking.  It's clearly designed to enter the passage of anyone who wears it.  Worse yet is a smaller narrower protrusion on the backside.  This... creature... will certainly do its best to plug both your holes.\n\n");
 				outputText("Your captor pulls it back and leans closer, letting the scent of her own fragrant puss fill the air.  It smells tangy and sweet and makes you ");
-				if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_WET) outputText("wet ");
-				else if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("drip on the chair ");
+				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_WET) outputText("wet ");
+				else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING) outputText("drip on the chair ");
 				else outputText("soak the chair ");
 				outputText("from the heady taste that clings to your nostrils.  She speaks with confidence, \"<i>You needn't worry my dear.  I call this little creature my slut-panties.  You see, when you wear them they will stimulate every part of you.  They'll suck on your clit while the two large mounds grow inside you, filling you with wriggling pleasure.  Their slime is a wonderful lubricant and a mild aphrodisiac.  Between the constant touches and its secretions, you'll be horny and on the edge of orgasm in no time.</i>\"\n\n");
 				outputText("You shake your head in desperate denial and start to cry as you realize she intends to keep you locked in some kind of hellish pleasure-prison.  The panties slide up your legs with ease, and with a swift movement, the demon lifts your ass up and slips them into position with a wet 'SQUELCH'.  You moan as it goes to work, wrapping your " + player.clitDescript() + " in slippery tightness.  The two 'lumps' you observed elongate, the ridged surfaces making your " + player.vaginaDescript(0) + " quiver and dance with pleasure.  In mere seconds you're panting hotly and ready to cum.  Your crying devolves into heated moans of pleasure and longing.\n\n");

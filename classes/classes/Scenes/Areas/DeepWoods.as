@@ -58,7 +58,7 @@ package classes.Scenes.Areas
 			if (player.gender > 0) flags[kFLAGS.GENDERLESS_CENTAUR_MADNESS] = 0;
 			//Tentacle avoidance chance due to dangerous plants
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
+				//trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				clearOutput();
 				outputText(images.showImage("item-dPlants"));
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");

@@ -1,4 +1,5 @@
 package classes.Scenes.Places.Bazaar{
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PregnancyStore;
 	import classes.display.SpriteDb;
@@ -177,7 +178,7 @@ private function liliumDickRidah():void {
 
 	outputText("Slowly you begin moving down Lilium's body.  You leave a trail of kisses down her neck before running your tongue along her collar bone.  Further down you go, letting your lips gently slide down the center of the demon herm's chest until you reach her navel.  ");
 	//(if player has long hair)
-	if (player.hairLength >= 15) outputText("You can feel Lilium shudder slightly beneath you as your hair tickles her nipples.  ");
+	if (player.hair.length >= 15) outputText("You can feel Lilium shudder slightly beneath you as your hair tickles her nipples.  ");
 	outputText("First you begin to circle her navel with the tip of your tongue, following up with long licks beginning at the base of her belly and trailing up and into her belly button. Lilium's breathing begins to quicken and her hips start to dart back and forth beneath you as you continue to tongue her navel. As you become more conscious of the hardened cock poking into your own chest you draw your head back, leaving a long shiny strand of saliva that joins your mouth to her smooth tummy.\n\n");
 
 	outputText("You draw yourself up and position yourself above Lilium's twitching cock.  Your fingers part the lips of your " + player.vaginaDescript(0) + " which are slick with your own arousal.  ");
@@ -250,7 +251,7 @@ private function liliumNippleFuck():void {
 		doubleNipFuck = true;
 	}
 	//(else if demon/naga tail)
-	else if (player.tailType == TAIL_TYPE_DEMONIC || player.isNaga()) {
+	else if (player.tail.type == Tail.DEMONIC || player.isNaga()) {
 		outputText("Thinking it unfair that just one of her breasts receives your attention, you draw your tail up and unceremoniously jam it into Lilium's lonely nipple-cunt, causing her to let out a loud squeal from the extra penetration.  The extra purchase on Lilium's body from both your cock and your tail now being inside her breasts causes the demon's body to rock back and forth vigorously with each of your thrusts.  You move yourself backwards slightly, pulling her with you away from the wall to avoid concussing her.  When you resume your thrusts you can hear her moans warble as her body rocks with yours.\n\n");
 	}
 	
@@ -259,7 +260,7 @@ private function liliumNippleFuck():void {
 	outputText(" and the soft sound of her stroking her dick combine with your grunts and her moans to form a sexual chorus in this isolated part of the Bazaar.  Soon you feel the familiar pressure building in your loins and you speed up your thrusts; with one great, final effort you drive as far into Lilium's tit");
 	if (doubleNipFuck) outputText("s");
 	outputText(" as you can.  A wave of ecstasy washes over you from your head to ");
-	if (player.tailType > TAIL_TYPE_NONE) outputText("your tail");
+	if (player.tail.type > Tail.NONE) outputText("your tail");
 	else outputText("your " + player.feet());
 	outputText(" as you cum");
 	if (player.cockTotal() > 2) outputText(", your unused cocks drenching her with seed");

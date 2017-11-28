@@ -1,6 +1,8 @@
 package classes.Scenes.Areas.Lake
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Hips;
 	import classes.internals.*;
 
 	public class GooGirl extends Monster
@@ -102,7 +104,7 @@ package classes.Scenes.Areas.Lake
 //Engulf – 
 		private function gooEngulph():void
 		{
-			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skinTone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!");
+			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skin.tone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!");
 			if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
 			combatRoundOver();
 		}
@@ -139,7 +141,7 @@ package classes.Scenes.Areas.Lake
 				else if (lustDelta < 13) outputText("\nThe curious goo has begun stroking herself openly, trying to understand the meaning of your actions by imitating you.");
 				else outputText("\nThe girl begins to understand your intent. She opens and closes her mouth, as if panting, while she works slimy fingers between her thighs and across her jiggling nipples.");
 			}
-			else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + skinTone + " clit, her desire to investigate you forgotten.");
+			else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + skin.tone + " clit, her desire to investigate you forgotten.");
 			applyTease(lustDelta);
 		}
 
@@ -152,23 +154,23 @@ package classes.Scenes.Areas.Lake
 			this.imageName = "googirl";
 			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + player.chestDesc() + ".") : "");
 			// this.long = false;
-			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 9001, 0, 0, 0);
 			this.createBreastRow(playerHasBigBoobs ? player.biggestTitSize() : 3);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.createStatusEffect(StatusEffects.BonusACapacity,9001,0,0,0);
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_GOO;
+			this.hips.rating = Hips.RATING_AMPLE;
+			this.butt.rating = Butt.RATING_LARGE;
+			this.lowerBody.type = LowerBody.GOO;
 			var tone:String = randomChoice("blue", "purple", "crystal");
-			this.skinTone = tone;
-			this.skinType = SKIN_TYPE_GOO;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_GOO];
-			this.skinAdj = "goopey";
-			this.hairColor = tone;
-			this.hairLength = 12 + rand(10);
+			this.skin.tone = tone;
+			this.theSkinType = Skin.GOO;
+			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.GOO];
+			this.skin.adj = "goopey";
+			this.hair.color = tone;
+			this.hair.length = 12 + rand(10);
 			initStrTouSpeInte(25, 25, 20, 30);
 			initLibSensCor(50, 40, 10);
 			this.weaponName = "hands";
@@ -195,86 +197,86 @@ package classes.Scenes.Areas.Lake
 		public function gooColor():String
 		{
 			//blue, purple, or crystal
-			return skinTone;
+			return skin.tone;
 		}
 
 //[azure/plum/crystalline] 
 		public function gooColor2():String
 		{
-			if (skinTone == "blue") return "azure";
-			else if (skinTone == "purple") return "plum";
+			if (skin.tone == "blue") return "azure";
+			else if (skin.tone == "purple") return "plum";
 			else return "crystalline";
 		}
 
 //[cerulean/violet/clear]
 		public function gooColor3():String
 		{
-			if (skinTone == "blue") return "cerulean";
-			else if (skinTone == "purple") return "violet";
+			if (skin.tone == "blue") return "cerulean";
+			else if (skin.tone == "purple") return "violet";
 			else return "clear";
 		}
 
 //[teal/lavender/glassy] 
 		public function gooColor4():String
 		{
-			if (skinTone == "blue") return "teal";
-			else if (skinTone == "purple") return "lavender";
+			if (skin.tone == "blue") return "teal";
+			else if (skin.tone == "purple") return "lavender";
 			else return "glassy";
 		}
 
 //[sapphire/amethyst/diamond]
 		public function gooColor5():String
 		{
-			if (skinTone == "blue") return "sapphire";
-			else if (skinTone == "purple") return "amethyst";
+			if (skin.tone == "blue") return "sapphire";
+			else if (skin.tone == "purple") return "amethyst";
 			else return "diamond";
 		}
 
 //[lapis/periwinkle/pure]
 		public function gooColor6():String
 		{
-			if (skinTone == "blue") return "sapphire";
-			else if (skinTone == "purple") return "amethyst";
+			if (skin.tone == "blue") return "sapphire";
+			else if (skin.tone == "purple") return "amethyst";
 			else return "diamond";
 		}
 
 //[blue berry/grape/crystal]
 		public function gooColor7():String
 		{
-			if (skinTone == "blue") return "blueberry";
-			else if (skinTone == "purple") return "grape";
+			if (skin.tone == "blue") return "blueberry";
+			else if (skin.tone == "purple") return "grape";
 			else return "crystal";
 		}
 
 //[aquamarine/plum/transparent]
 		public function gooColor8():String
 		{
-			if (skinTone == "blue") return "aquamarine";
-			else if (skinTone == "purple") return "plum";
+			if (skin.tone == "blue") return "aquamarine";
+			else if (skin.tone == "purple") return "plum";
 			else return "transparent";
 		}
 
 //[an aquamarine/a lilac/a translucent]
 		public function gooColor9():String
 		{
-			if (skinTone == "blue") return "an aquamarine";
-			else if (skinTone == "purple") return "a plum";
+			if (skin.tone == "blue") return "an aquamarine";
+			else if (skin.tone == "purple") return "a plum";
 			else return "a translucent";
 		}
 
 //[blueberries/grapes/strawberries]
 		public function gooColor10():String
 		{
-			if (skinTone == "blue") return "blueberries";
-			else if (skinTone == "purple") return "grapes";
+			if (skin.tone == "blue") return "blueberries";
+			else if (skin.tone == "purple") return "grapes";
 			else return "strawberries";
 		}
 
 //[cerulean tint/violet tint/clear body]
 		public function gooColor11():String
 		{
-			if (skinTone == "blue") return "cerulean tint";
-			else if (skinTone == "purple") return "violet tint";
+			if (skin.tone == "blue") return "cerulean tint";
+			else if (skin.tone == "purple") return "violet tint";
 			else return "clear body";
 		}
 	}

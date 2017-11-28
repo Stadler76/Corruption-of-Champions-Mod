@@ -26,7 +26,7 @@ package classes.Scenes.Areas.Desert {
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			trace("\nSand Witch time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nSand Witch time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) pregnancy.knockUpForce(); //Silently clear the Sand Witch's pregnancy if the player has not met her in time
 			return false;
 		}
@@ -59,68 +59,95 @@ package classes.Scenes.Areas.Desert {
 		private function allowSandWitchMagic():void {
 			spriteSelect(SpriteDb.s_sandwich);
 			clearOutput();
-			if (player.hairColor == "sandy blonde") {
+			if (player.hair.color == "sandy blonde") {
 				outputText("She smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
 				if (player.breastRows.length == 0 || player.biggestTitSize() == 0) {
 					outputText("You grow a perfectly rounded pair of C-cup breasts!  ");
-					if (player.breastRows.length == 0) player.createBreastRow();
+					
+					if (player.breastRows.length == 0) {
+						player.createBreastRow();
+					}
+					
 					player.breastRows[0].breasts = 2;
 					player.breastRows[0].breastRating = 3;
-					if (player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
+					
+					if (player.breastRows[0].nipplesPerBreast < 1) {
+						player.breastRows[0].nipplesPerBreast = 1;
+					}
+					
 					player.orgasm('Tits',false);
 					dynStats("sen", 2, "lus", 1);
 				}
+				
 				if (player.biggestTitSize() >= 1 && player.biggestTitSize() <= 2) {
 					outputText("Your breasts suddenly balloon outwards, stopping as they reach a perfectly rounded C-cup.  ");
 					player.breastRows[0].breastRating = 3;
 					player.orgasm('Tits',false);
 					dynStats("sen", 1, "lus", 1);
 				}
+				
 				if (player.breastRows[0].nipplesPerBreast < 1) {
 					outputText("Two dark spots appear on your chest, rapidly forming into sensitive nipples.  ");
 					player.breastRows[0].nipplesPerBreast = 1;
 					player.orgasm('Tits',false);
 					dynStats("sen", 2, "lus", 1);
 				}
+				
 				if (player.biggestLactation() > 0) {
 					outputText("A strong pressure builds in your chest, painful in its intensity.  You yank down your top as ");
-					if (player.biggestLactation() < 2)
+					
+					if (player.biggestLactation() < 2) {
 						outputText("powerful jets of milk spray from your nipples, spraying thick streams over the desert sands.  You moan at the sensation and squeeze your tits, hosing down the tainted earth with an offering of your milk.  You blush as the milk ends, quite embarrassed with your increased milk production.  ");
-					if (player.biggestLactation() >= 2 && player.biggestLactation() <= 2.6)
+					}
+					
+					if (player.biggestLactation() >= 2 && player.biggestLactation() <= 2.6) {
 						outputText("eruptions of milk squirt from your nipples, hosing thick streams everywhere.  The feeling of the constant gush of fluids is very erotic, and you feel yourself getting more and more turned on.  You start squeezing your breasts as the flow diminishes, anxious to continue the pleasure, but eventually all good things come to an end.  ");
-					if (player.biggestLactation() > 2.6 && player.biggestLactation() < 3)
+					}
+					
+					if (player.biggestLactation() > 2.6 && player.biggestLactation() < 3) {
 						outputText("thick hoses of milk erupt from  your aching nipples, forming puddles in the sand.  You smile at how well you're feeding the desert, your milk coating the sand faster than it can be absorbed.  The constant lactation is pleasurable... in a highly erotic way, and you find yourself moaning and pulling on your nipples, totally outside of your control.  In time you realize the milk has stopped, and even had time to soak into the sands.  You wonder at your strange thoughts and pull your hands from your sensitive nipples.  ");
-					if (player.biggestLactation() >= 3)
+					}
+					
+					if (player.biggestLactation() >= 3) {
 						outputText("you drop to your knees and grab your nipples.  With a very sexual moan you begin milking yourself, hosing out huge quantities of milk.  You pant and grunt, offering as much of your milk as you can.  It cascades down the dune in a small stream, and you can't help but blush with pride... and lust.  The erotic pleasures build as you do your best to feed the desert of all your milk.  You ride the edge of orgasm for an eternity, milk everywhere.  When you come to, you realize you're kneeling there, tugging your dry nipples.  Embarrassed, you stop, but your arousal remains.  ");
+					}
+					
 					if (player.biggestLactation() < 3) {
 						player.boostLactation(.75);
 						outputText("Your breasts feel fuller... riper... like your next milking could be even bigger.  ");
 					}
+					
 					dynStats("lib", 1, "sen", 4, "lus", 15);
 					player.orgasm('Tits',false);
 				}
-				if (player.biggestLactation() == 0) {
+				
+				if (player.biggestLactation() === 0) {
 					outputText("A pleasurable release suddenly erupts from your nipples!  Streams of milk are spraying from your breasts, soaking into the sand immediately.  It stops all too soon, though the witch assures you that you can lactate quite often now.  ");
 					player.boostLactation(1);
 					dynStats("lib", .5, "sen", 1, "lus", 10);
 					player.orgasm('Tits',false);
 				}
+				
 				outputText("The sand-witch smiles and thanks you for your offering.  You notice her dress is damp in four spots on the front.  ");
-				if (flags[kFLAGS.SANDWITCH_SERVICED] == 0) {
+				
+				if (flags[kFLAGS.SANDWITCH_SERVICED] === 0) {
 					outputText("You wonder at what her robes conceal as she vanishes into the dunes.");
 				} else {
-					if (player.cor <= 33)
+					if (player.cor <= 33) {
 						outputText("You are glad to avoid servicing her again as she vanishes into the dunes.");
-					else if (player.cor <= 66)
+					} else if (player.cor <= 66) {
 						outputText("You wonder if you should've resisted and tried for some sex as she departs.");
-					else outputText("You wish you had said no, so you could fuck with her and her magnificent quartet of breasts some more.");
+					} else {
+						outputText("You wish you had said no, so you could fuck with her and her magnificent quartet of breasts some more.");
+					}
 				}
 			}
 			else
 			{
 				outputText("She smiles wickedly and intones, \"<i>nuf erutuf rof riah ydnas, nus tresed eht sa ydnas.</i>\"\n\nYou feel a tingling in your scalp, and realize your hair has become a sandy blonde!");
-				player.hairColor = "sandy blonde";
+				player.hair.color = "sandy blonde";
 			}
+			
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -147,7 +174,7 @@ internal function sandwitchRape():void {
 		}
 		clearOutput();
 		outputText("Your wobbly legs give out underneath you as your body's will to fight evaporates.\n\n");
-		if (player.hairColor.indexOf("sandy blonde") != -1) {
+		if (player.hair.color.indexOf("sandy blonde") != -1) {
 			outputText("The Sand Witch smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n"); 
 			if (player.breastRows.length == 0 || player.biggestTitSize() == 0) {
 				outputText("You grow a perfectly rounded pair of C-cup breasts!  ");
@@ -196,7 +223,7 @@ internal function sandwitchRape():void {
 		}
 		else {
 			outputText("The Sand Witch smiles wickedly and intones, \"<i>nuf erutuf rof riah ydnas, nus tresed eht sa ydnas.</i>\"\n\nYou feel a tingling in your scalp, and realize your hair has become a sandy blonde!");
-			player.hairColor = "sandy blonde";
+			player.hair.color = "sandy blonde";
 			outputText("\n\nThe witch whispers into your ear, \"<i>I ALWAYS get what I want, dear...</i>\"");
 		}
 		//RAEP
@@ -324,7 +351,7 @@ private function sandwitchBewbs():void {
 	outputText(images.showImage("sandwitch-male-win-kiss-suckherbreast"));
 	outputText("You move yourself atop the defeated sand witch, and bring your lips to her breasts.  The moment the first drop of milk touches your tongue, you drink, hungrily, needfully, demandingly. You grope and massage her breasts as she leans back and cries out, her eyes wide in surprise. You guzzle and drink her sweet cream, the small seedlings underneath you appearing to rustle and move as you drink the alabaster flow once intended for the desert sands.  ");
 	outputText("Warmth fills your gluttonous belly, and the sand witch places a hand to your stomach, rubbing it lightly as you drink from her breasts, moving on when the one you're drinking from is drained.  ");
-	outputText("You burp, and flush scarlet, but the sand witch lays a hand against your face, leans close, and kisses your lips sweetly. Her tongue snakes out and dives into your mouth. She pulls your face against hers, grinding her breasts against your chest. You can feel fresh milk dribbling against your " + player.skinDesc + " and the scents are driving you wild with lust.  ");
+	outputText("You burp, and flush scarlet, but the sand witch lays a hand against your face, leans close, and kisses your lips sweetly. Her tongue snakes out and dives into your mouth. She pulls your face against hers, grinding her breasts against your chest. You can feel fresh milk dribbling against your " + player.skin.desc + " and the scents are driving you wild with lust.  ");
 	outputText("She breaks the kiss and smiles at you, whispering. Your eyes slowly close as you grow drowsy; you realize too late that she's casting a spell. You fall asleep, the sand witch's milk in your stomach churning, gurgling.  ");
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...");
 	player.slimeFeed();
@@ -341,13 +368,13 @@ private function sandwitchSex():void {
 	if (player.cockTotal() > 1) outputText(num2Text(player.cockTotal()));
 	else outputText("two");
 	outputText(" of them!  The sand witch appears frightened, but as you gently tease her lips with your fingers, she slowly starts to breathe faster, starting to moan as her legs spread themselves against her better judgment. Grinning in satisfaction, you bring your rigid " + player.cockDescript(0) + " against her lips, and push slowly, gently.  ");
-	outputText("The sand witch cries out, her hands grabbing your arms, pressing hard against your " + player.skinDesc + " as you slowly and teasingly ease your " + player.cockDescript(0) + " into her tight depths. You almost feel like a virgin, your " + player.cockDescript(0) + " throbbing, the need to cum almost beyond your ability to control.  ");
+	outputText("The sand witch cries out, her hands grabbing your arms, pressing hard against your " + player.skin.desc + " as you slowly and teasingly ease your " + player.cockDescript(0) + " into her tight depths. You almost feel like a virgin, your " + player.cockDescript(0) + " throbbing, the need to cum almost beyond your ability to control.  ");
 	outputText("You rest against her chest, her large breasts squirting milk against your own chest as your weight appears to excite her enough to make her lactate, if what you're doing already wasn't enough.  ");
 	outputText("You kiss the sand witch, getting accustomed to her unbelievable tightness. You hump backwards and forwards, grinning like a fool with his first girlfriend. Not even a succubus would be able to rival her lush depths.  ");
 	outputText("You finally get serious and ease yourself into fucking the sand witch, slowly gaining speed and depth as your groins slap together with such ferocity that a normal person would be bruised upon their next waking. You pound the sand witch, making her scream in ecstasy, her already tight depths turning vice-like as you grunt your lust, cumming and filling her depths. Your ");
 	if (player.balls >= 2) outputText("balls ache and your ");
 	outputText(player.cockDescript(0) + " throbs with need, even as you empty your lust into the defeated sand witch.");
-	outputText("\n\nWith a satisfied smirk, you lay atop your prize, your " + player.cockDescript(0) + " still twitching within her depths. One of the sand witch's hands rubs at your head, teasing your " + player.skinDesc + ". Like a fresh youth, you fall asleep, " + player.cockDescript(0) + " buried deep in the sand witch.  ");
+	outputText("\n\nWith a satisfied smirk, you lay atop your prize, your " + player.cockDescript(0) + " still twitching within her depths. One of the sand witch's hands rubs at your head, teasing your " + player.skin.desc + ". Like a fresh youth, you fall asleep, " + player.cockDescript(0) + " buried deep in the sand witch.  ");
 	outputText("With a start you wake up, only to find the sand witch still passed out beside you.  Almost thinking it was a dream, you touch your groin tenderly and rub softly. There's a faint trace of soreness, and you remember the ferocity with which you mashed your pelvises together.  You get up and get ready.  ");
 	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
@@ -475,25 +502,40 @@ private function SWCentaurMore(argument:Number):Boolean {
 		return false;
 	}
 	//[SW_2: Split chances of occurrence between % categories as % are available]
-	if (argument == 2) {
+	if (argument === 2) {
 		//[% Player has cock(s)]
-		if (player.cockTotal() > 0 || (player.gender == 3 && rand(2) == 0)) {
+		if (player.cockTotal() > 0 || (player.gender === 3 && rand(2) === 0)) {
 			outputText("Finished with your games, pre-cum starts pooling under your throbbing " + player.cockDescript(0) + ". ");
 			//[largest cock is wide]
 			if (player.cocks[0].cockThickness >= 3) {
-				if (player.hasKnot(0)) outputText("Seeing its sheer size combined with your swollen knot causes her to gasp in terror and try to run again.  ");
-				else outputText("Seeing its sheer size causes her to gasp in fear and turn to run again.  ");
+				if (player.hasKnot(0)) {
+					outputText("Seeing its sheer size combined with your swollen knot causes her to gasp in terror and try to run again.  ");
+				} else {
+					outputText("Seeing its sheer size causes her to gasp in fear and turn to run again.  ");
+				}
 			}
 			outputText(images.showImage("sandwitch-male-taur-win-hardsex"));
 			outputText("You grab the witch and knock her down into the sand, quickly lowering your " + player.cockDescript(0) + " to be against her buttocks. ");
+			
 			//[1 cock, non-tentacle]
-			if (player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) == 0) outputText("With a single thrust, you push deep into one of her cunts, ");
+			if (player.cockTotal() === 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) === 0) {
+				outputText("With a single thrust, you push deep into one of her cunts, ");
+			}
+			
 			//[1 cock, tentacle]
-			if (player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) == 1) outputText("Your " + player.cockDescript(0) + " caresses her anus teasingly, causing her to whimper in a mixture of arousal and denial.  With a single savage thrust, you push past her clenched muscles, ");
+			if (player.cockTotal() === 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) === 1) {
+				outputText("Your " + player.cockDescript(0) + " caresses her anus teasingly, causing her to whimper in a mixture of arousal and denial.  With a single savage thrust, you push past her clenched muscles, ");
+			}
+			
 			//[two cocks] 
-			if (player.cockTotal() == 2) outputText("After aligning your " + player.multiCockDescriptLight() + " to her twin cunts, you push yourself deeply into her, ");
+			if (player.cockTotal() === 2) {
+				outputText("After aligning your " + player.multiCockDescriptLight() + " to her twin cunts, you push yourself deeply into her, ");
+			}
 			//[3+ cocks]
-			if (player.cockTotal() >= 3) outputText("Lining up two of your cocks to her twin cunts and another to her anus, you thrust into her without pre-amble.  Her anal muscles try to keep you out, but they are no match for the strength of your legs.  You tear into her, ");
+			if (player.cockTotal() >= 3) {
+				outputText("Lining up two of your cocks to her twin cunts and another to her anus, you thrust into her without pre-amble.  Her anal muscles try to keep you out, but they are no match for the strength of your legs.  You tear into her, ");
+			}
+			
 			outputText("eliciting a scream as your hind quarters push her forcefully over the sand. ");
 			//[largest cock is wide] 
 			if (player.cocks[0].cockThickness >= 3) {

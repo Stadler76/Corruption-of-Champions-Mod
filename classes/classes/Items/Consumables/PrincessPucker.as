@@ -29,12 +29,12 @@ package classes.Items.Consumables
 				dynStats("lus-", 20, "sen-", 2);
 			}
 			
-			if (player.hairColor !== "pink")
+			if (player.hair.color !== "pink")
 			{
 				if (rand(5) === 0)
 				{
-					outputText("A slight tingle across your scalp draws your attention to your hair.  It seems your " + player.hairColor + " is rapidly gaining a distinctly pink hue, growing in from the roots!\n\n");
-					player.hairColor = "pink";
+					outputText("A slight tingle across your scalp draws your attention to your hair.  It seems your " + player.hair.color + " is rapidly gaining a distinctly pink hue, growing in from the roots!\n\n");
+					player.hair.color = "pink";
 				}
 			}
 			player.refillHunger(15);

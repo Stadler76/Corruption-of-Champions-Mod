@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Forest
 {
 	import classes.*;
+	import classes.BodyParts.*;
 import classes.StatusEffects.Combat.AkbalSpeedDebuff;
 import classes.internals.WeightedDrop;
 
@@ -163,7 +164,7 @@ import classes.internals.WeightedDrop;
 
 		public function Akbal()
 		{
-			trace("Akbal Constructor!");
+			//trace("Akbal Constructor!");
 			this.a = "";
 			this.short = "Akbal";
 			this.imageName = "akbal";
@@ -178,16 +179,16 @@ import classes.internals.WeightedDrop;
 			createBreastRow();
 			createBreastRow();
 			createBreastRow();
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "spotted";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
-			this.hairColor = "black";
-			this.hairLength = 5;
+			this.hips.rating = Hips.RATING_SLENDER;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.skin.tone = "spotted";
+			this.theSkinType = Skin.FUR;
+			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.FUR];
+			this.hair.color = "black";
+			this.hair.length = 5;
 			initStrTouSpeInte(55, 53, 50, 75);
 			initLibSensCor(50, 50, 100);
 			this.weaponName = "claws";
@@ -209,7 +210,7 @@ import classes.internals.WeightedDrop;
 			this.special1 = akbalLustAttack;
 			this.special2 = akbalSpecial;
 			this.special3 = akbalHeal;
-			this.tailType = TAIL_TYPE_DOG;
+			this.tail.type = Tail.DOG;
 			checkMonster();
 		}
 

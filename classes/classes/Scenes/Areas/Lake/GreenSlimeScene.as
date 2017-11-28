@@ -315,8 +315,7 @@ private function maleRapesOoze():void {
 				break;
 		   default: //error text
 				outputText("tip");
-				CoC_Settings.error("");
-				trace("ERROR: Penis type not supported, defaulting to tip.");
+				CoC_Settings.error("ERROR: Penis type not supported, defaulting to tip.");
 				break;
 		}
 		outputText(" on the inside of its mouth and pushing.  You feel the material give and push harder, the membrane material that covers the slime's exterior stubbornly refusing to give.  Finally, after some frustration, you grab the creature by what would be its neck and try to pull it back to your pelvis, thrusting forward at the same time.  It finally gives, and you see your " + player.cockDescript(0) + " surge into its mouth");
@@ -611,7 +610,7 @@ private function oozeRapesYouVaginally():void
 	//shy result
 	if (player.cor <= 20)
 	{
-		outputText("This fear quickly disappears as a large, human cock grows from the creature's trunk, and is replaced by an entirely different fear as you realize what it is planning.  The slime wraps its arms around your " + player.legs() + " and squeezes them around its cock.  It moves back and forth several times, sliding its member over your " + player.skinDesc + " and along your " + player.vaginaDescript(0) + ".  Its skin is soft and velvety, slightly moist, and leaves a thin trace of green fluid behind.\n\n");
+		outputText("This fear quickly disappears as a large, human cock grows from the creature's trunk, and is replaced by an entirely different fear as you realize what it is planning.  The slime wraps its arms around your " + player.legs() + " and squeezes them around its cock.  It moves back and forth several times, sliding its member over your " + player.skin.desc + " and along your " + player.vaginaDescript(0) + ".  Its skin is soft and velvety, slightly moist, and leaves a thin trace of green fluid behind.\n\n");
 		outputText("You begin to feel a tingle in your nethers as your " + player.vaginaDescript(0) + " grows wet.  Without warning the creature pulls your legs apart and draws its member back along your crotch, pausing a moment to rest the tip on your sex.  You watch it with equal parts excitement and anxiety and steel yourself as it holds there for a moment.");
 		//!!NOTE
 		//i was considering, as a twist from the usual pattern with events in CoC and in going with the idea that the lake is a sort of low-corruption zone, that the slime would actually just let virgins be - or possibly divert to the oral/anal events.  regardless, heres the text.

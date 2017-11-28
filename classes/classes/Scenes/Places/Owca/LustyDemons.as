@@ -4,6 +4,8 @@
 package classes.Scenes.Places.Owca
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Hips;
 
 	public class LustyDemons extends Monster
 	{
@@ -59,16 +61,16 @@ package classes.Scenes.Places.Owca
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
-			this.hipRating = HIP_RATING_AMPLE+2;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.skinTone = "red";
-			this.hairColor = "black";
-			this.hairLength = 15;
+			this.hips.rating = Hips.RATING_AMPLE+2;
+			this.butt.rating = Butt.RATING_LARGE;
+			this.skin.tone = "red";
+			this.hair.color = "black";
+			this.hair.length = 15;
 			initStrTouSpeInte(80, 10, 10, 5);
 			initLibSensCor(50, 60, 100);
 			this.weaponName = "claws";
@@ -83,9 +85,9 @@ package classes.Scenes.Places.Owca
 			this.gems = 150 + rand(100);
 			this.special1 = game.combat.packAttack;
 			this.special2 = game.combat.lustAttack;
-			this.tailType = TAIL_TYPE_DEMONIC;
-			this.hornType = HORNS_DEMON;
-			this.horns = 2;
+			this.tail.type = Tail.DEMONIC;
+			this.horns.type = Horns.DEMON;
+			this.horns.value = 2;
 			this.drop = NO_DROP;
 			createStatusEffect(StatusEffects.Vapula,0,0,0,0);
 			checkMonster();

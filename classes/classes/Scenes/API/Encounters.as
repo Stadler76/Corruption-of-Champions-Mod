@@ -82,8 +82,8 @@ public class Encounters {
 			debug_callsite             = "";
 			strace += " " + name + "=" + ch2str(c);
 			if (c >= ALWAYS) {
-				trace(debug_indent + strace);
-				trace(debug_indent + "-> picked encounter " + name + " with chance ALWAYS of total (unknown)");
+				//trace(debug_indent + strace);
+				//trace(debug_indent + "-> picked encounter " + name + " with chance ALWAYS of total (unknown)");
 				return e;
 			}
 			if (c > 0) {
@@ -91,7 +91,7 @@ public class Encounters {
 				items.push([e, c, i]);
 			}
 		}
-		trace(debug_indent+strace);
+		//trace(debug_indent+strace);
 
 		var random:Number = Math.random()*sum;
 		strace = "-> random[0.." + ch2str(sum) + "]=" + ch2str(random);
@@ -106,12 +106,12 @@ public class Encounters {
 			if (random<=0) {
 				//strace += "<0 HIT";
 				//trace(debug_indent + strace);
-				trace(debug_indent + "-> picked encounter " + name + " with chance " + ch2str(c) + " of total " + ch2str(sum));
+				//trace(debug_indent + "-> picked encounter " + name + " with chance " + ch2str(c) + " of total " + ch2str(sum));
 				return e;
 			}
 		}
-		trace(strace);
-		trace("WARNING Encounters.selectOrNull found no encounter");
+		//trace(strace);
+		//trace("WARNING Encounters.selectOrNull found no encounter");
 		return null;
 	}
 	internal static var debug_indent:String = "";
@@ -173,7 +173,7 @@ public class Encounters {
 	public static function convertChance(chance:*):Number {
 		while (!(chance is Number)) {
 			if (chance === undefined || chance === null) {
-				trace("WARNING chance is "+chance+(debug_callsite?" at ":debug_callsite)+"; using 1 as default");
+				//trace("WARNING chance is "+chance+(debug_callsite?" at ":debug_callsite)+"; using 1 as default");
 				return 1;
 			}
 			if (chance is Array) {

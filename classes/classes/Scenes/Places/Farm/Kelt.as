@@ -1,6 +1,7 @@
 package classes.Scenes.Places.Farm
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class Kelt extends Monster
@@ -141,17 +142,17 @@ package classes.Scenes.Places.Farm
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = player.ballSize * 10;
 			this.createBreastRow(Appearance.breastCupInverse(breakLevel2?"B":"A"));
-			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 84;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.legCount = 4;
-			this.skinTone = "tan";
-			this.hairColor = randomChoice("black","brown");
-			this.hairLength = 3;
+			this.hips.rating = Hips.RATING_AVERAGE;
+			this.butt.rating = Butt.RATING_AVERAGE+1;
+			this.lowerBody.type = LowerBody.HOOFED;
+			this.lowerBody.legCount = 4;
+			this.skin.tone = "tan";
+			this.hair.color = randomChoice("black","brown");
+			this.hair.length = 3;
 			initStrTouSpeInte(60, 70, 40, 20);
 			initLibSensCor(40, 25, 55);
 			this.weaponName = "fist";
@@ -165,7 +166,7 @@ package classes.Scenes.Places.Farm
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 6;
 			this.gems = rand(5) + 5;
-			this.tailType = TAIL_TYPE_HORSE;
+			this.tail.type = Tail.HORSE;
 			this.drop = NO_DROP;
 			checkMonster();
 		}

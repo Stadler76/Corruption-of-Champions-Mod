@@ -1,5 +1,6 @@
 package classes.Scenes.Places.Farm
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
@@ -56,23 +57,19 @@ package classes.Scenes.Places.Farm
 			// Cap the values into the appropriate range
 			if (flags[kFLAGS.FARM_CORRUPTION_APPROACHED_WHITNEY] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 30 )
 			{
-				flags[kFLAGS.WHITNEY_CORRUPTION] = 30;
-				trace("Whitney at 30 corruption clamp.");
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 30; // Whitney at 30 corruption clamp.
 			}
 			else if (flags[kFLAGS.WHITNEY_LEAVE_0_60] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 60)
 			{
-				flags[kFLAGS.WHITNEY_CORRUPTION] = 60;
-				trace("Whitney at 60 corruption clamp.");
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 60; // Whitney at 60 corruption clamp.
 			}
 			else if (flags[kFLAGS.WHITNEY_LEAVE_61_90] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 90)
 			{
-				flags[kFLAGS.WHITNEY_CORRUPTION] = 90;
-				trace("Whitney at 90 corruption clamp.");
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 90; // Whitney at 90 corruption clamp.
 			}
 			else if (flags[kFLAGS.WHITNEY_MENU_91_119] == 0 && flags[kFLAGS.WHITNEY_CORRUPTION] > 119)
 			{
-				flags[kFLAGS.WHITNEY_CORRUPTION] = 119;
-				trace("Whitney at 119 corruption clamp");
+				flags[kFLAGS.WHITNEY_CORRUPTION] = 119; // Whitney at 119 corruption clamp.
 			}
 
 			// Clamp values to valid min/max
@@ -82,8 +79,8 @@ package classes.Scenes.Places.Farm
 				flags[kFLAGS.WHITNEY_CORRUPTION] = 120;
 			}
 
-			trace("Whitney corruption changed by " + String(mod));
-			trace("Whitney corruption now at " + String(flags[kFLAGS.WHITNEY_CORRUPTION]));
+			//trace("Whitney corruption changed by " + String(mod));
+			//trace("Whitney corruption now at " + String(flags[kFLAGS.WHITNEY_CORRUPTION]));
 				
 			return flags[kFLAGS.WHITNEY_CORRUPTION];
 		}
@@ -117,7 +114,7 @@ package classes.Scenes.Places.Farm
 
 		public function whitneyCockArea():Number
 		{
-			trace("Update cock area with values from Vapulas dildo.");
+			//trace("Update cock area with values from Vapulas dildo.");
 			return 10 * 2;
 		}
 
@@ -400,7 +397,7 @@ package classes.Scenes.Places.Farm
 			if (flag == kFLAGS.FARM_EGG_STORED) return kGAMECLASS.sophieBimbo.eggTypes[kGAMECLASS.sophieBimbo.eggColors.indexOf(flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE])];
 			if (flag == kFLAGS.FARM_CONTRACEPTIVE_STORED) return consumables.HRBCNT;
 			
-			trace("No valid argument given.");
+			//trace("No valid argument given.");
 			return null;
 		}
 		
@@ -2924,8 +2921,8 @@ package classes.Scenes.Places.Farm
 			outputText(" shining, she sinks down to the next stage.");
 
 			outputText("\n\nYou don’t have to turn as you rise; she slides around herself, her fingers trail longingly down your waist and over your [hips] as she kneels behind you and pushes her hot tongue into the cleavage of your [butt], sliding downwards to tongue at your [asshole].  She first licks your valley quite clean of salt and musk, bathing your rose in lapping attention until it feels sensuously moist and soft, before smoothing her lips and tongue carefully across your ");
-			if (player.buttRating < 4) outputText("firm butt");
-			if (player.buttRating < 8) outputText("supple rump");
+			if (player.butt.rating < 4) outputText("firm butt");
+			if (player.butt.rating < 8) outputText("supple rump");
 			else outputText("soft ass");
 			outputText(", oiling it to a sheen. She makes little gasping, stifled breaths as she goes about it, and a grin comes to your lips.");
 
@@ -3042,7 +3039,7 @@ package classes.Scenes.Places.Farm
 			}
 			else
 			{
-				trace("Missing player body-type, welp.")
+				//trace("Missing player body-type, welp.")
 			}
 
 			outputText("\n\nYou have a moment to see the overriding urge in her eyes before her knees slide past your ears, her slim thighs lock around your neck and your view is taken up entirely by her pussy, her smooth, neat labia puffy and wet with lust. There is no warning, no teasing; she simply shoves her sopping sex against your mouth, your jaw and ears devoured by the hot, tight muscle of her hips, the soft flat of her abdomen pushing into your forehead. You can’t move or see, and can barely breathe; there is only her cunt, demandingly pushing against your face as her lower body thrusts against your head, and there is only one thing you can do. You press your lips onto hers and push your tongue through her wet opening.");
@@ -3146,13 +3143,13 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Glad you’re enjoying the view,</i>” she says, a grin twitching the corners of her mouth. “<i>Now you’re going to return the favor. Turn around. On your knees.</i>” Slowly you do " + ((!player.isBiped()) ? "as close as you can to what" : "") + " she asks, shifting yourself around on your lower body until you are facing the other way. A hand firmly presses into the back of your head, forcing your nose down into the clean-smelling sheets and your ass up. Heat spreads across your face as Whitney’s other hand lands on your [butt] and moves across it with a testing, admiring possessiveness.");
 
-			outputText("\n\n“<i>D’you know how hard it is to control myself when you’re striding around outside, swinging this bit of business around behind you?</i>” she says huskily. The hand on your head has disappeared; there’s a repetitive, slippery sound coming from behind you and you don’t have to guess to know where it’s gone. “<i>D’you bend over so much just to tease me? I swear you do. I swear you do, you secret little slut.</i>” She grasps your rump hard suddenly, making you gasp. “<i>All the other slaves ‘kin look, but only I get to touch it like this. And I ain’t gonna waste that. I’m gonna make you pay for flauntin’ such a nice, " + ((player.buttRating <= 4) ? "tight ass" : "big bottom") + ", I swear... sit still.</i>”");
+			outputText("\n\n“<i>D’you know how hard it is to control myself when you’re striding around outside, swinging this bit of business around behind you?</i>” she says huskily. The hand on your head has disappeared; there’s a repetitive, slippery sound coming from behind you and you don’t have to guess to know where it’s gone. “<i>D’you bend over so much just to tease me? I swear you do. I swear you do, you secret little slut.</i>” She grasps your rump hard suddenly, making you gasp. “<i>All the other slaves ‘kin look, but only I get to touch it like this. And I ain’t gonna waste that. I’m gonna make you pay for flauntin’ such a nice, " + ((player.butt.rating <= 4) ? "tight ass" : "big bottom") + ", I swear... sit still.</i>”");
 
 			outputText("\n\nHer hand withdraws and you listen to her move around the room behind you before returning to the bed, landing a number of objects on it as she returns to your rear with a business-like zeal. Your hands are grabbed and tied firmly behind your back with what feels like silk rope.");
 			if (player.isBiped() || player.isTaur()) outputText(" Next, she pushes your ankles apart, threads a leather strap around each and then pulls them tight with a sharp yank; you carefully test them and find with a cold thrill that there is a metal bar attached between them, forcing you to stay in this position.");
 			else if (player.isDrider()) outputText(" You don’t struggle as she then forces your spindly legs beneath the bed, looping a leather strap attached to the frame around them all, trapping them there.");
 			else if (player.isNaga()) outputText(" She then ties your reptilian coils around the bedposts, securing them with leather straps fitted for the purpose.");
-			else trace("Couldn't determine body type, welp.");
+			else outputText("<b>SOMETHING DERPED UP!</b>");// trace("Couldn't determine body type, welp.");
 
 			outputText("\n\nIn a position of complete supplication, your face and [chest] forced down into the bed, you look up in trepidation as your monstrously skilled slave mistress shifts around to your front end. She’s smiling her fanged smile down at you as she dangles the last two items she retrieved from her dressing table.");
 
@@ -3277,7 +3274,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nOnce she’s done tying you down the dog woman gets off the bed with a spring and disappears from your limited sightline, rummaging around her bedroom with ominous-sounding intent. Is she shifting particularly heavy things about just to torment you? You crane your neck to get a glimpse at what she’s holding as she returns to your side - and then cry out in shock as a black curtain falls down on the world.");
 
-			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyeType == EYES_FOUR_SPIDER_EYES || player.eyeCount > 2) ? " Once she’s finished with that she places another blindfold over your additional eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
+			outputText("\n\n“<i>Stop fussing now, sweetheart,</i>” Whitney croons, adjusting the black, elastic blindfold so it is firmly secured over your eyes." + ((player.eyes.type == Eyes.FOUR_SPIDER_EYES || player.eyes.count > 2) ? " Once she’s finished with that she places another blindfold over your additional eyes. You can only groan with laughter at the sheer level of preparation the dog woman is capable of." : "") + " “<i>Wouldn’t want you to see what’s coming, would we? That’d ruin half the fun.</i>” ");
 
 			outputText("\n\nShe crawls down to your lower body, taking her time now as she slides her hands across your abdomen and [hips] and sits herself down in front of [eachCock]" + ((player.balls > 0) ? ", making you twitch as she momentarily cups your [balls]" : "") + ". She teases you with slow, deliberate movements of her smooth digits, fully aware that all you can do now in your black space is lie there, feeling and listening to what she’s doing to you.");
 
@@ -6323,7 +6320,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\nYou are all but lost to the gliding balm of her hands, but it begins to woozily occur to you, as you respire in time with her, that her breathing isn’t quite level; it occasionally catches, or goes slightly faster. After another few moments of enjoying her touch you begin to notice when this happens: every time her fingers move over one of the many mild scars and lumps you carry from your time adventuring. You grin; it’s pleasing to imagine soothing over the proof of your many hard victories turns her on a bit. ");
 
 			outputText("\n\nThe erotic tension builds as she finishes with your arms and slides her palms down to your [butt]. You don’t think this part of your anatomy needs much work but she goes about it anyway, sighing deeply as she moves her oiled hands in slow, wide circuits across the convex of your ");
-			if (player.buttRating >= 6) outputText("soft");
+			if (player.butt.rating >= 6) outputText("soft");
 			else outputText("brawny");
 			outputText(" rear. After she’s finished making your butt feel red and smooth she dips a heated, greasy hand between your [hips] and");
 			if (player.hasCock()) outputText(" grips your [cock]");
@@ -6336,7 +6333,7 @@ package classes.Scenes.Places.Farm
 			if (player.isBiped())
 			{
 				outputText("\n\nShe spends a short time with your calves before encapsulating a [foot] in her oily hands.");
-				if (!(player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_NAGA || player.lowerBody == LOWER_BODY_TYPE_GOO || player.lowerBody == LOWER_BODY_TYPE_PONY))
+				if (!(player.lowerBody.type == LowerBody.HOOFED || player.lowerBody.type == LowerBody.NAGA || player.lowerBody.type == LowerBody.GOO || player.lowerBody.type == LowerBody.PONY))
 				{
 					outputText(" Your mouth opens as a twinge of pure pleasure veins up your [leg] as she massages the soft arch of the sole, making your");
 					if (player.hasCock()) outputText(" cock thicken");
@@ -6345,7 +6342,7 @@ package classes.Scenes.Places.Farm
 					outputText(".");
 
 					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the rougher pads of your feet, dipping her warm fingers in and around the valleys of your");
-					if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_LIZARD || player.lowerBody == LOWER_BODY_TYPE_HARPY || player.lowerBody == LOWER_BODY_TYPE_DRAGON) outputText(" claws");
+					if (player.lowerBody.type == LowerBody.DEMONIC_CLAWS || player.lowerBody.type == LowerBody.LIZARD || player.lowerBody.type == LowerBody.HARPY || player.lowerBody.type == LowerBody.DRAGON) outputText(" claws");
 					else outputText(" toes")
 					outputText(", before returning deliberately to stroke at your arch, indulging that nervous link until you are deep in the unexpected bliss of it... before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other [foot].")
 				}
@@ -6378,7 +6375,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>It’s just from watching you, [master],</i>” she replies quietly, as relaxing sensation inundates your lower half. “<i>When you sl- move around, you can see where the stress lands and builds. You may not have any hinges down here, but that don’t mean you don’t have the same needs as animals that do.</i>”");
 
 				outputText("\n\n“<i>You watch me a lot, then?</i>” Silence from behind you as the questing, rubbing oil moves down almost to your tip.");
-				if (player.tongueType == TONGUE_SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
+				if (player.tongue.type == Tongue.SNAKE) outputText(" You grin, flicking your forked tongue out to smell her arousal.");
 				outputText(" “<i>I imagine watching your [master] move around is almost a masochistic experience for you. Something so alien and unnerving now linked forever with pleasure and obedience. Is that how it is? You can’t stop staring at my beautiful, deadly form because it’s almost like a slutty punishment for you?</i>”");
 
 				outputText("\n\n“<i>S-something like that,</i>” Whitney whispers, shakily. You smile serenely as a warm, oily hand grasps your reptilian tip, moving up and down in an almost masturbatory rhythm. It took almost as long again for her to rub oil into your coils as she spent on the rest of her body, but it was well worth it.");

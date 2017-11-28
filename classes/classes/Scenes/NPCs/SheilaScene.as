@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Camp.*;
 	import classes.Items.*;
@@ -90,7 +91,7 @@
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.SHEILA_CLOCK] < 0) flags[kFLAGS.SHEILA_CLOCK]++;
 			}
-			trace("\nShiela time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
+			//trace("\nShiela time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
 			return false;
 		}
 	
@@ -177,8 +178,8 @@ internal function sheilaCup():String {
 }
 
 public function sheilaEncounterRouter():void {
-	trace("Sheila Encounter:");
-	trace("Sheila Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " Sheila Preg: " + flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] + " Sheila XP: " + flags[kFLAGS.SHEILA_XP]);
+	//trace("Sheila Encounter:");
+	//trace("Sheila Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " Sheila Preg: " + flags[kFLAGS.SHEILA_PREGNANCY_INCUBATION] + " Sheila XP: " + flags[kFLAGS.SHEILA_XP]);
 	//UNFUCK FLAGS
 	if (flags[kFLAGS.SHEILA_CLOCK] > 0)
 		flags[kFLAGS.SHEILA_CLOCK] = 0
@@ -3071,7 +3072,7 @@ private function sheilaCowgirlRapesYou():void {
 			//[(small cum)]
 			if (player.cumQ() <= 250) {
 				outputText("  Sheila continues moving her hips even as she comes, lost in bliss; on one particularly lofty ascent, your cock flops out, squirting a line of jizz along ");
-				if (player.tailType > TAIL_TYPE_NONE) outputText("your tail");
+				if (player.tail.type > Tail.NONE) outputText("your tail");
 				else outputText("the grass");
 				outputText(", and her eyes go wide.");
 			}
@@ -3134,14 +3135,14 @@ private function sheilaForcedOralGeneric():void {
 	//Picture is here
 	outputText(images.showImage("sheila-lickhergina"));
 	outputText("\n\n\"<i>Lick...</i>\" she whispers, almost apologetically, \"<i>... please.  Or... or I'll have to hit you again.</i>\"  She sets her face and takes a handful of your hair, twisting it");
-	if (player.hairType == 4) outputText(" and flushing as your stingers release their payloads into her palm");
+	if (player.hair.type == 4) outputText(" and flushing as your stingers release their payloads into her palm");
 	outputText(".  You obediently stick out your tongue");
 	if (player.cor > 60) outputText(", motivated more by whimsy than the meager, almost playful pain,");
 	outputText(" and shallowly penetrate Sheila's vagina with it.");
 	
 	outputText("\n\nThe woman jerks a bit as you enter her, but sighs in relaxation.  \"<i>That's good... come on mate, lick me more.</i>\"  She pushes her cunt against your [face], trying to take your tongue deeper.");
 	//[(if d-mon/dragon/naga or other future long tongue)
-	if (player.tongueType > TONGUE_HUMAN) {
+	if (player.tongue.type > Tongue.HUMAN) {
 		outputText("  A sly look crosses your face at her request; she notices it but has no time to dismount before your long tongue shoots into her, stroking the nerves around her entrance as you unspool.  \"<i>Ah-ahhh!</i>\" she moans, \"<i>What the hell... is with your mouth?</i>\"");
 		outputText("\n\nPetulantly you stare at her as you work, unable to speak with your tongue unrolled in her cunt.  She blushes under your gaze, then leans forward and wraps her arms around you, brushing the top of your head with her shirt-clad " + sheilaCup() + " breasts.  \"<i>You're r-right, mate... rude to talk with your mouth f-full... aaah!</i>\"  A little firm spot inside of her provokes this last reaction; you experimentally run your tongue over it again, and the woman shudders violently.");
 		
@@ -3161,7 +3162,7 @@ private function sheilaForcedOralGeneric():void {
 	if (player.cor >= 90 || player.cor > sheilaCorruption()) {
 		outputText("strangling your tongue with muscles attempting to lock onto it, trying to pull it in.");
 		//[(demon/dragon tongue)
-		if (player.tongueType > TONGUE_HUMAN) outputText("  As tired as you are, you simply go along with it, allowing her rippling walls to slowly draw your tip deeper inside until it bumps against her cervix; she shivers and kisses the top of your head as you groggily run your tongue over the entrance to her womb.");
+		if (player.tongue.type > Tongue.HUMAN) outputText("  As tired as you are, you simply go along with it, allowing her rippling walls to slowly draw your tip deeper inside until it bumps against her cervix; she shivers and kisses the top of your head as you groggily run your tongue over the entrance to her womb.");
 		else outputText("  However, it doesn't get very far; you lazily flop it around inside her as she works through her arousal.");
 		outputText("  Sheila groans loudly and your vision fades; through the fog, you can swear you feel her breasts growing larger against your forehead.");
 	}
@@ -3190,7 +3191,7 @@ private function sheilaForcedOralGeneric():void {
 	outputText("\n\nBefore you can ask for her meaning, she backs away and slips on her bottoms.  Studiously avoiding further eye contact, Sheila gathers her things and leaves you behind with her long, bounding run; tired from the struggle, you try to turn her words over in your head, but only muddle them further as you slip into a doze.");
 	
 	//end scene, add fatigue if long tongue, very big lib-based lust gain, gain libido if lust hits 100; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
-	if (player.tongueType > TONGUE_HUMAN) player.changeFatigue(15);
+	if (player.tongue.type > Tongue.HUMAN) player.changeFatigue(15);
 	dynStats("lus", player.lib/3+30, "scale", false);
 	if (player.lust >= player.maxLust()) dynStats("lib", 1);
 	sheilaCorruptionUpdate();
@@ -3530,7 +3531,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void 
 		if (player.sens >= 40) dynStats("lus", player.sens/4, "scale", false);
 	}
 	//(harpy - minimum score for birdlegs at least)
-	else if (player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY) {
+	else if (player.lowerBody.type == LowerBody.HARPY && player.tail.type == Tail.HARPY) {
 		outputText("\n\nShe shifts in your embrace, pushing up and down and giving you fits.  \"<i>Good lord, woman, what is the matter?</i>\" you ask.");
 		
 		outputText("\n\n\"<i>Sorry, mate... your feathers are tickling me,</i>\" Sheila protests.");
@@ -3540,7 +3541,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void 
 		outputText("\n\nShe does so, resting in your downy lap for a moment, but gets up again.  You raise an eyebrow at her, but she just takes off her vest and sets it under her head, then settles, evidently at ease.  This is somewhat irritating; you're basically sitting up straight, with perfect posture.  A bit of an uncomfortable pose to hold for hours on end.");
 	}
 	//(bees with boots)
-	else if (player.lowerBody == LOWER_BODY_TYPE_BEE) {
+	else if (player.lowerBody.type == LowerBody.BEE) {
 		outputText("\n\nNo sooner does she get her head down than it's back up again.  You look a question at her.");
 		outputText("\n\n\"<i>Your legs are so bloody hard and cold, [name],</i>\" she clarifies brutally, tapping on the chitin digging into her back.");
 		outputText("\n\n\"<i>Well, sorry,</i>\" you answer, almost offended.  \"<i>Can't help the way god made me.</i>\"");
@@ -3559,8 +3560,8 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void 
 		
 		outputText("\n\n\"<i>I'm keeping this,</i>\" Sheila whispers.  And so softly you can barely hear it, adds, \"<i>It's the nicest thing someone's given me lately.</i>\"");
 		//(reduce spinneret charge by 1-2 levels)
-		player.tailVenom -= 10;
-		if (player.tailVenom < 0) player.tailVenom = 1;
+		player.tail.venom -= 10;
+		if (player.tail.venom < 0) player.tail.venom = 1;
 	}
 	//(else)
 	else outputText("\n\n\"<i>Sorry it's not as comfortable as it could be, mate,</i>\" she apologizes.  \"<i>And... thanks.</i>\"");
@@ -3708,7 +3709,7 @@ private function sheilaGoesDemon():void {
 	outputText("\n\nThe woman's stubby tail thrashes wildly as she begs, leaving shed fur all over your [chest] and lashing at your hands; you grab the end, trying to restrain it, and can feel it growing a bit longer.  \"<i>My tail... don't pull my tail!</i>\" Sheila pleads, pushing her cunt into you once more.  \"<i>It's driving me starkers!</i>\"  None of it is your doing, however, and the tail continues to grow - until it stops and bulges obscenely.  The end swells in your hand, growing rounded lobes that shift just under the skin as if a creature were inside.  It strains again and Sheila screams in pleasure as the skin tears and her tail splits in two; one half comes away with your hand and the outer skin falls apart, sloughing off with the remainder of the fur.  Tentative exploration reveals two distinct, slender tails.  They sway under her, giving you a glimpse as she resumes pumping at your face; one is the same color as her now-hairless skin but the other is so dark-brown it's almost black - as it peeks at you, the lobes reveal themselves to be a stubby spade.  A little slit on the end drools a dark, oily fluid and it jabs at you, trying to get inside your mouth; you're forced to fend it off with one hand as you lick and suck at the cunt in front of you, trying to turn Sheila to goo in your arms.");
 	
 	outputText("\n\n\"<i>Oh god... yes... stick it out farther, so I can hit all the good spots!  I'm almost there!</i>\" Sheila says encouragingly, squeezing and massaging her breasts, strange changes already forgotten.  You try, ");
-	if (player.tongueType > TONGUE_HUMAN) outputText("extending your oral muscle until it's all the way to the back of her pussy.  ");
+	if (player.tongue.type > Tongue.HUMAN) outputText("extending your oral muscle until it's all the way to the back of her pussy.  ");
 	else outputText("but only manage to scrape her entrance; she shudders and seems satisfied with that, judging by what she says next.  ");
 	outputText("\"<i>G-gonna come!  Finally gonna come!</i>\"  Her thighs clench and her pussy begins to spasm as her groin knocks against your chin.  A viscous, clingy liquid squirts from her pussy and into your mouth, pooling on your tongue; in your surprise, you release the black tail and it forces into the gap and through your lips, releasing something foul-tasting.  You quickly turn your head and push it away; it forces out the rest on your cheek, a black, slimy mess.  Fantasies of riding her face the same way and filling her mouth flit through your mind as Sheila finishes convulsing, then goes limp and releases you, falling to the ground.  You drool the mess in your mouth into your hand; the thick fluid you felt first is a light lavender, but as the black sludge from her tail suffuses it, it darkens to a deep purple.  The mixture clings together, gelling and then solidifying into an irregular, lustrous stone - a crystal.  It heats up in your hand, and you can feel an arousing power leaking into you.");
 	
@@ -5024,7 +5025,7 @@ private function winAgainstDemoNSheilaForVaginas():void {
 	if (!player.isTaur()) {
 		outputText("crawl away on your hands");
 		//[(tail or naga)
-		if (player.tailType > TAIL_TYPE_NONE && player.isNaga()) outputText(" and raise your tail");
+		if (player.tail.type > Tail.NONE && player.isNaga()) outputText(" and raise your tail");
 	}
 	else outputText("clamber to your hooves and bend your forelegs");
 	outputText(" to present your eager [vagina].  Sheila sits up and places her hands on your [hips], then slides her pelvis up, teasing your lower lips with something bulbous and warm.  They sting slightly as it smears its slime along them, a not-entirely-pleasant sensation.");

@@ -37,7 +37,6 @@ package classes.Scenes.Seasonal {
 			menu();
 			addButton(0,"Investigate",investigateCandyCaneBun);
 			addButton(4,"Leave",leaveBeforeMeetingCandyCaneBun);
-			trace("FUNC SETUP LENGTH: " + funcs.length);
 		}
 
 		//LEAVE

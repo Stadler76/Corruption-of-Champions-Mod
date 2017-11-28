@@ -26,3 +26,6 @@ target/
 
 # vagrant generated files
 .vagrant
+
+# Ant generated file for single test targets
+test/SingleRunner.mxml

@@ -32,6 +32,9 @@ package classes.Scenes
 		
 		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
 		
+		//TODO refactor storage into own type?
+		public static const STORAGE_JEWELRY_BOX:String = "Equipment Storage - Jewelry Box";
+		
 		private var itemStorage:Array;
 		private var gearStorage:Array;
 		private var prisonStorage:Array;
@@ -47,7 +50,7 @@ package classes.Scenes
 		}
 		
 		public function showStash():Boolean {
-			return player.hasKeyItem("Equipment Rack - Weapons") >= 0 || player.hasKeyItem("Equipment Rack - Armor") >= 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0 || player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 || flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0;
+			return player.hasKeyItem("Equipment Rack - Weapons") >= 0 || player.hasKeyItem("Equipment Rack - Armor") >= 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0 || player.hasKeyItem(Inventory.STORAGE_JEWELRY_BOX) >= 0 || flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0;
 		}
 		
 		public function itemStorageDirectGet():Array { return itemStorage; }
@@ -180,7 +183,7 @@ package classes.Scenes
 				outputText("\n\n");
 			}
 			//Jewelry box
-			if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
+			if (player.hasKeyItem(Inventory.STORAGE_JEWELRY_BOX) >= 0) {
 				outputText("Your jewelry box is located ");
 				if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED])
 				{

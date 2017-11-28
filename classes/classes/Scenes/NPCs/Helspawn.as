@@ -1,6 +1,9 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	import classes.GlobalFlags.kFLAGS;
 import classes.StatusEffects.Combat.CalledShotDebuff;
 
@@ -147,18 +150,18 @@ private function calledShot():void {
 							}[ weapon] +
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 85, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
-			this.hipRating = HIP_RATING_CURVY+2;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.skinTone = "dusky";
-			this.hairColor = "red";
-			this.hairLength = 13;
+			this.hips.rating = Hips.RATING_CURVY+2;
+			this.butt.rating = Butt.RATING_LARGE+1;
+			this.skin.tone = "dusky";
+			this.hair.color = "red";
+			this.hair.length = 13;
 			initStrTouSpeInte(50, 50, 65, 40);
 			initLibSensCor(35, 55, 20);
 			this.weaponName = weapon;
@@ -177,8 +180,8 @@ private function calledShot():void {
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.gems = 10 + rand(5);
-			this.tailType = TAIL_TYPE_SALAMANDER;
-			this.tailRecharge = 0;
+			this.tail.type = Tail.SALAMANDER;
+			this.tail.recharge = 0;
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			checkMonster();

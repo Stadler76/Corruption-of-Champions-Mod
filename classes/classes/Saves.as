@@ -1,15 +1,21 @@
 ﻿package classes
 {
-
-	import classes.BodyParts.Neck;
-	import classes.BodyParts.UnderBody;
-	import classes.GlobalFlags.kGAMECLASS;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.Inventory;
-	import classes.Scenes.Places.TelAdre.Katherine;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.*;
 	import classes.internals.LoggerFactory;
-	import classes.internals.ISerializable;
 	import classes.internals.SerializationUtils;
+	import classes.lists.BreastCup;
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.net.FileReference;
+	import flash.net.SharedObject;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
+	import flash.utils.ByteArray;
 	import mx.logging.ILogger;
 
 	CONFIG::AIR 
@@ -19,18 +25,6 @@
 		import flash.filesystem.FileStream;
 	}
 	
-	import flash.net.FileFilter;
-	import flash.net.FileReference;
-	import flash.events.Event;
-	import flash.net.URLRequest;
-	import flash.utils.ByteArray;
-	import flash.net.URLLoader;
-	import flash.net.SharedObject;
-	import flash.events.MouseEvent;
-	import flash.events.IOErrorEvent;
-	import classes.Items.*;
-	import classes.GlobalFlags.kFLAGS;
-	import flash.net.URLLoaderDataFormat;
 
 
 public class Saves extends BaseContent {
@@ -198,7 +192,7 @@ public function loadScreenAIR():void
 			{
 				slots[i] = function() : void 		// Anonymous functions FTW
 				{
-					trace("Loading save with name ", fileList[fileCount].url, " at index ", i);
+					//trace("Loading save with name ", fileList[fileCount].url, " at index ", i);
 					clearOutput();
 					loadGameObject(gameObjects[i]);
 					outputText("Slot " + String(i+1) + " Loaded!");
@@ -220,7 +214,7 @@ public function loadScreenAIR():void
 		if (slots[s] != null) addButton(s, "Slot " + (s + 1), selectLoadButton, gameObjects[s], "CoC_" + String(s+1));
 		s++;
 	}
-	addButton(14, "Back", returnToSaveMenu);
+	addButton(14, "Back", saveLoad);
 }
 
 public function getGameObjectFromFile(aFile:File):Object
@@ -262,7 +256,7 @@ public function loadScreen():void
 			{
 				slots[i] = function() : void 		// Anonymous functions FTW
 				{
-					trace("Loading save with name", saveFileNames[i], "at index", i);
+					//trace("Loading save with name", saveFileNames[i], "at index", i);
 					if (loadGame(saveFileNames[i])) 
 					{
 						doNext(playerMenu);
@@ -285,7 +279,7 @@ public function loadScreen():void
 		if (slots[s] != 0) addButton(s, "Slot " + (s+1), slots[s]);
 		s++;
 	}
-	addButton(14, "Back", returnToSaveMenu);
+	addButton(14, "Back", saveLoad);
 }
 
 public function saveScreen():void
@@ -319,13 +313,13 @@ public function saveScreen():void
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
 		outputText(loadSaveDisplay(test, String(i + 1)));
-		trace("Creating function with indice = ", i);
+		//trace("Creating function with indice = ", i);
 		(function(i:int) : void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 		{
 			saveFuncs[i] = function() : void 		// Anonymous functions FTW
 			{
 				clearOutput();
-				trace("Saving game with name", saveFileNames[i], "at index", i);
+				//trace("Saving game with name", saveFileNames[i], "at index", i);
 				saveGame(saveFileNames[i]);
 			}
 		})(i);
@@ -343,10 +337,10 @@ public function saveScreen():void
 		addButton(s, "Slot " + (s+1), saveFuncs[s]);
 		s++;
 	}
-	addButton(14, "Back", returnToSaveMenu);
+	addButton(14, "Back", saveLoad);
 }
 
-public function saveLoad(e:MouseEvent = null):void
+public function saveLoad():void
 {
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
@@ -447,7 +441,7 @@ public function deleteScreen():void
 		{
 			//slots[i] = loadFuncs[i];
 
-			trace("Creating function with indice = ", i);
+			//trace("Creating function with indice = ", i);
 			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 			{
 				delFuncs[i] = function() : void 		// Anonymous functions FTW
@@ -468,7 +462,7 @@ public function deleteScreen():void
 		if (delFuncs[s] != null) addButton(s, "Slot " + (s+1), delFuncs[s]);
 		s++;
 	}
-	addButton(14, "Back", returnToSaveMenu);
+	addButton(14, "Back", saveLoad);
 }
 
 public function confirmDelete():void
@@ -483,10 +477,10 @@ public function confirmDelete():void
 public function purgeTheMutant():void
 {
 	var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
-	trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
+	//trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
 	var blah:Array = ["been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found", "been deleted"];
 	
-	trace(blah.length + " array slots");
+	//trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
 	clearOutput();
 	outputText(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + " has " + blah[select] + ".");
@@ -542,11 +536,11 @@ public function loadGame(slot:String):void
 		sfVer = sfVer as Number;
 	}
 	
-	trace("File version "+(saveFile.data.version || "legacy")+"expects propNum " + sfVer);
+	//trace("File version "+(saveFile.data.version || "legacy")+"expects propNum " + sfVer);
 	
 	if (numProps < sfVer)
 	{
-		trace("Got " + numProps + " file properties -- failed!");
+		//trace("Got " + numProps + " file properties -- failed!");
 		clearOutput();
 		outputText("<b>Aborting load.  The current save file is missing a number of expected properties.</b>\n\n");
 		
@@ -567,7 +561,7 @@ public function loadGame(slot:String):void
 	}
 	else
 	{
-		trace("Got " + numProps + " file properties -- success!");
+		//trace("Got " + numProps + " file properties -- success!");
 		// I want to be able to write some debug stuff to the GUI during the loading process
 		// Therefore, we clear the display *before* calling loadGameObject
 		clearOutput();
@@ -579,7 +573,7 @@ public function loadGame(slot:String):void
 		
 		if (player.slotName == "VOID")
 		{
-			trace("Setting in-use save slot to: " + slot);
+			//trace("Setting in-use save slot to: " + slot);
 			player.slotName = slot;
 		}
 		statScreenRefresh();
@@ -657,9 +651,9 @@ public function savePermObject(isFile:Boolean):void {
 	{
 		processingError = true;
 		dataError = error;
-		trace(error.message);
+		//trace(error.message);
 	}
-	trace("done saving achievements");
+	//trace("done saving achievements");
 }
 
 public function loadPermObject():void {
@@ -764,7 +758,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	//CLEAR OLD ARRAYS
 	
 	//Save sum dataz
-	trace("SAVE DATAZ");
+	//trace("SAVE DATAZ");
 	saveFile.data.short = player.short;
 	saveFile.data.a = player.a;
 	
@@ -874,43 +868,43 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.thickness = player.thickness;
 		saveFile.data.tone = player.tone;
 		saveFile.data.tallness = player.tallness;
-		saveFile.data.furColor = player.furColor;
-		saveFile.data.hairColor = player.hairColor;
-		saveFile.data.hairType = player.hairType;
-		saveFile.data.gillType = player.gillType;
-		saveFile.data.armType = player.armType;
-		saveFile.data.hairLength = player.hairLength;
-		saveFile.data.beardLength = player.beardLength;
-		saveFile.data.eyeType = player.eyeType;
-		saveFile.data.eyeCount = player.eyeCount;
-		saveFile.data.beardStyle = player.beardStyle;
-		saveFile.data.skinType = player.skinType;
-		saveFile.data.skinTone = player.skinTone;
-		saveFile.data.skinDesc = player.skinDesc;
-		saveFile.data.skinAdj = player.skinAdj;
-		saveFile.data.faceType = player.faceType;
-		saveFile.data.tongueType = player.tongueType;
-		saveFile.data.earType = player.earType;
-		saveFile.data.earValue = player.earValue;
-		saveFile.data.antennae = player.antennae;
-		saveFile.data.horns = player.horns;
-		saveFile.data.hornType = player.hornType;
+		saveFile.data.furColor = player.skin.furColor;
+		saveFile.data.hairColor = player.hair.color;
+		saveFile.data.hairType = player.hair.type;
+		saveFile.data.gillType = player.gills.type;
+		saveFile.data.armType = player.arms.type;
+		saveFile.data.hairLength = player.hair.length;
+		saveFile.data.beardLength = player.beard.length;
+		saveFile.data.eyeType = player.eyes.type;
+		saveFile.data.eyeCount = player.eyes.count;
+		saveFile.data.beardStyle = player.beard.style;
+		saveFile.data.skinType = player.skin.type;
+		saveFile.data.skinTone = player.skin.tone;
+		saveFile.data.skinDesc = player.skin.desc;
+		saveFile.data.skinAdj = player.skin.adj;
+		saveFile.data.faceType = player.face.type;
+		saveFile.data.tongueType = player.tongue.type;
+		saveFile.data.earType = player.ears.type;
+		saveFile.data.earValue = player.ears.value;
+		saveFile.data.antennae = player.antennae.type;
+		saveFile.data.horns = player.horns.value;
+		saveFile.data.hornType = player.horns.type;
 		saveFile.data.underBody = player.underBody.toObject();
 		saveFile.data.neck = player.neck.toObject();
 		saveFile.data.rearBody = player.rearBody.toObject();
 		// <mod name="Predator arms" author="Stadler76">
-		saveFile.data.clawTone = player.clawTone;
-		saveFile.data.clawType = player.clawType;
+		saveFile.data.clawTone = player.claws.tone;
+		saveFile.data.clawType = player.claws.type;
 		// </mod>
-		saveFile.data.wingType = player.wingType;
-		saveFile.data.wingColor = player.wingColor;
-		saveFile.data.lowerBody = player.lowerBody;
-		saveFile.data.legCount = player.legCount;
-		saveFile.data.tailType = player.tailType;
-		saveFile.data.tailVenum = player.tailVenom;
-		saveFile.data.tailRecharge = player.tailRecharge;
-		saveFile.data.hipRating = player.hipRating;
-		saveFile.data.buttRating = player.buttRating;
+		saveFile.data.wingType = player.wings.type;
+		saveFile.data.wingColor = player.wings.color;
+		saveFile.data.lowerBody = player.lowerBody.type;
+		saveFile.data.legCount = player.lowerBody.legCount;
+		saveFile.data.tailType = player.tail.type;
+		saveFile.data.tailVenum = player.tail.venom;
+		saveFile.data.tailRecharge = player.tail.recharge;
+		saveFile.data.hipRating = player.hips.rating;
+		saveFile.data.buttRating = player.butt.rating;
 		
 		//Sexual Stuff
 		saveFile.data.balls = player.balls;
@@ -1134,11 +1128,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	{
 		processingError = true;
 		dataError = error;
-		trace(error.message);
+		//trace(error.message);
 	}
 
 
-	trace("done saving");
+	//trace("done saving");
 	// Because actionscript is stupid, there is no easy way to block until file operations are done.
 	// Therefore, I'm hacking around it for the chaos monkey.
 	// Really, something needs to listen for the FileReference.complete event, and re-enable saving/loading then.
@@ -1204,7 +1198,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			outputText("<b>Aborting save.  Your current save file is broken, and needs to be bug-reported.</b>\n\nWithin the save folder for CoC, there should be a pair of files named \"" + slot + ".sol\" and \"" + slot + "_backup.sol\"\n\n<b>We need BOTH of those files, and a quick report of what you've done in the game between when you last saved, and this message.</b>\n\n");
 			outputText("When you've sent us the files, you can copy the _backup file over your old save to continue from your last save.\n\n");
 			outputText("Alternatively, you can just hit the restore button to overwrite the broken save with the backup... but we'd really like the saves first!");
-			trace("Backup Save Aborted! Broken save detected!");
+			//trace("Backup Save Aborted! Broken save detected!");
 			backupAborted = true;
 		}
 		else
@@ -1296,7 +1290,7 @@ public function onFileSelected(evt:Event):void
 public function onFileLoaded(evt:Event):void
 {
 	var tempFileRef:FileReference = FileReference(evt.target);
-	trace("File target = ", evt.target);
+	//trace("File target = ", evt.target);
 	loader = new URLLoader();
 	loader.dataFormat = URLLoaderDataFormat.BINARY;
 	loader.addEventListener(Event.COMPLETE, onDataLoaded);
@@ -1317,12 +1311,7 @@ public function ioErrorHandler(e:IOErrorEvent):void
 {
 	clearOutput();
 	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.");
-	doNext(returnToSaveMenu);
-}
-
-private function returnToSaveMenu():void {
-	var f:MouseEvent;
-	saveLoad(f);
+	doNext(saveLoad);
 }
 
 public function onDataLoaded(evt:Event):void
@@ -1334,9 +1323,9 @@ public function onDataLoaded(evt:Event):void
 		// Therefore, we clear the display *before* calling loadGameObject
 		clearOutput();
 		outputText("Loading save...");
-		trace("OnDataLoaded! - Reading data", loader, loader.data.readObject);
+		//trace("OnDataLoaded! - Reading data", loader, loader.data.readObject);
 		var tmpObj:Object = loader.data.readObject();
-		trace("Read in object = ", tmpObj);
+		//trace("Read in object = ", tmpObj);
 		
 		CONFIG::debug 
 		{
@@ -1352,7 +1341,7 @@ public function onDataLoaded(evt:Event):void
 	{
 		clearOutput();
 		outputText("<b>!</b> File is either corrupted or not a valid save");
-		doNext(returnToSaveMenu);
+		doNext(saveLoad);
 	}
 	catch (error:Error)
 	{
@@ -1361,7 +1350,7 @@ public function onDataLoaded(evt:Event):void
 		outputText("<b>!</b> Unhandled Exception");
 		outputText("[pg]Failed to load save. The file may be corrupt!");
 
-		doNext(returnToSaveMenu);
+		doNext(saveLoad);
 	}
 	loadPermObject();
 	statScreenRefresh();
@@ -1381,7 +1370,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	player.slotName = slot;
 
 	var counter:Number = player.cocks.length;
-	trace("Loading save!")
+	//trace("Loading save!")
 	//Initialize the save file
 	//var saveFile:Object = loader.data.readObject();
 	var saveFile:* = saveData;
@@ -1410,7 +1399,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		if (saveFile.data.versionID != undefined) {
 			game.versionID = saveFile.data.versionID;
-			trace("Found internal versionID:", game.versionID);
+			//trace("Found internal versionID:", game.versionID);
 		}
 
 		//PIERCINGS
@@ -1576,11 +1565,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//Prison storage
 		//Items
 		if (saveFile.data.prisonItems == undefined) {
-			trace("Not found");
+			//trace("Not found");
 			player.prisonItemSlots = [];
 		}
 		else {
-			trace("Items FOUND!");
+			//trace("Items FOUND!");
 			//for (var k:int = 0; k < 10; i++) {
 				player.prisonItemSlots = saveFile.data.prisonItems;
 			//}
@@ -1637,18 +1626,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.femininity = saveFile.data.femininity;
 		//EYES
 		if (saveFile.data.eyeType == undefined)
-			player.eyeType = EYES_HUMAN;
+			player.eyes.type = Eyes.HUMAN;
 		else
-			player.eyeType = saveFile.data.eyeType;
+			player.eyes.type = saveFile.data.eyeType;
 		//BEARS
 		if (saveFile.data.beardLength == undefined)
-			player.beardLength = 0;
+			player.beard.length = 0;
 		else
-			player.beardLength = saveFile.data.beardLength;
+			player.beard.length = saveFile.data.beardLength;
 		if (saveFile.data.beardStyle == undefined)
-			player.beardStyle = 0;
+			player.beard.style = 0;
 		else
-			player.beardStyle = saveFile.data.beardStyle;
+			player.beard.style = saveFile.data.beardStyle;
 		//BODY STYLE
 		if (saveFile.data.tone == undefined)
 			player.tone = 50;
@@ -1661,122 +1650,122 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		player.tallness = saveFile.data.tallness;
 		if (saveFile.data.furColor == undefined || saveFile.data.furColor == "no")
-			player.furColor = saveFile.data.hairColor;
+			player.skin.furColor = saveFile.data.hairColor;
 		else
-			player.furColor = saveFile.data.furColor;
-		player.hairColor = saveFile.data.hairColor;
+			player.skin.furColor = saveFile.data.furColor;
+		player.hair.color = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
-			player.hairType = 0;
+			player.hair.type = 0;
 		else
-			player.hairType = saveFile.data.hairType;
+			player.hair.type = saveFile.data.hairType;
 		if (saveFile.data.gillType != undefined)
-			player.gillType = saveFile.data.gillType;
+			player.gills.type = saveFile.data.gillType;
 		else if (saveFile.data.gills == undefined)
-			player.gillType = GILLS_NONE;
+			player.gills.type = Gills.NONE;
 		else
-			player.gillType = saveFile.data.gills ? GILLS_ANEMONE : GILLS_NONE;
+			player.gills.type = saveFile.data.gills ? Gills.ANEMONE : Gills.NONE;
 		if (saveFile.data.armType == undefined)
-			player.armType = ARM_TYPE_HUMAN;
+			player.arms.type = Arms.HUMAN;
 		else
-			player.armType = saveFile.data.armType;
-		player.hairLength = saveFile.data.hairLength;
-		player.skinType = saveFile.data.skinType;
+			player.arms.type = saveFile.data.armType;
+		player.hair.length = saveFile.data.hairLength;
+		player.skin.type = saveFile.data.skinType;
 		if (saveFile.data.skinAdj == undefined)
-			player.skinAdj = "";
+			player.skin.adj = "";
 		else
-			player.skinAdj = saveFile.data.skinAdj;
-		player.skinTone = saveFile.data.skinTone;
-		player.skinDesc = saveFile.data.skinDesc;
-		//Silently discard SKIN_TYPE_UNDEFINED
-		if (player.skinType == SKIN_TYPE_UNDEFINED)
+			player.skin.adj = saveFile.data.skinAdj;
+		player.skin.tone = saveFile.data.skinTone;
+		player.skin.desc = saveFile.data.skinDesc;
+		//Silently discard Skin.UNDEFINED
+		if (player.skin.type == Skin.UNDEFINED)
 		{
-			player.skinAdj = "";
-			player.skinDesc = "skin";
-			player.skinType = SKIN_TYPE_PLAIN;
+			player.skin.adj = "";
+			player.skin.desc = "skin";
+			player.skin.type = Skin.PLAIN;
 		}
 		//Convert from old skinDesc to new skinAdj + skinDesc!
-		if (player.skinDesc.indexOf("smooth") != -1)
+		if (player.skin.desc.indexOf("smooth") != -1)
 		{
-			player.skinAdj = "smooth";
+			player.skin.adj = "smooth";
 			if (player.hasPlainSkin())
-				player.skinDesc = "skin";
+				player.skin.desc = "skin";
 			if (player.hasFur())
-				player.skinDesc = "fur";
+				player.skin.desc = "fur";
 			if (player.hasScales())
-				player.skinDesc = "scales";
+				player.skin.desc = "scales";
 			if (player.hasGooSkin())
-				player.skinDesc = "goo";
+				player.skin.desc = "goo";
 		}
-		if (player.skinDesc.indexOf("thick") != -1)
+		if (player.skin.desc.indexOf("thick") != -1)
 		{
-			player.skinAdj = "thick";
+			player.skin.adj = "thick";
 			if (player.hasPlainSkin())
-				player.skinDesc = "skin";
+				player.skin.desc = "skin";
 			if (player.hasFur())
-				player.skinDesc = "fur";
+				player.skin.desc = "fur";
 			if (player.hasScales())
-				player.skinDesc = "scales";
+				player.skin.desc = "scales";
 			if (player.hasGooSkin())
-				player.skinDesc = "goo";
+				player.skin.desc = "goo";
 		}
-		if (player.skinDesc.indexOf("rubber") != -1)
+		if (player.skin.desc.indexOf("rubber") != -1)
 		{
-			player.skinAdj = "rubber";
+			player.skin.adj = "rubber";
 			if (player.hasPlainSkin())
-				player.skinDesc = "skin";
+				player.skin.desc = "skin";
 			if (player.hasFur())
-				player.skinDesc = "fur";
+				player.skin.desc = "fur";
 			if (player.hasScales())
-				player.skinDesc = "scales";
+				player.skin.desc = "scales";
 			if (player.hasGooSkin())
-				player.skinDesc = "goo";
+				player.skin.desc = "goo";
 		}
-		if (player.skinDesc.indexOf("latex") != -1)
+		if (player.skin.desc.indexOf("latex") != -1)
 		{
-			player.skinAdj = "latex";
+			player.skin.adj = "latex";
 			if (player.hasPlainSkin())
-				player.skinDesc = "skin";
+				player.skin.desc = "skin";
 			if (player.hasFur())
-				player.skinDesc = "fur";
+				player.skin.desc = "fur";
 			if (player.hasScales())
-				player.skinDesc = "scales";
+				player.skin.desc = "scales";
 			if (player.hasGooSkin())
-				player.skinDesc = "goo";
+				player.skin.desc = "goo";
 		}
-		if (player.skinDesc.indexOf("slimey") != -1)
+		if (player.skin.desc.indexOf("slimey") != -1)
 		{
-			player.skinAdj = "slimey";
+			player.skin.adj = "slimey";
 			if (player.hasPlainSkin())
-				player.skinDesc = "skin";
+				player.skin.desc = "skin";
 			if (player.hasFur())
-				player.skinDesc = "fur";
+				player.skin.desc = "fur";
 			if (player.hasScales())
-				player.skinDesc = "scales";
+				player.skin.desc = "scales";
 			if (player.hasGooSkin())
-				player.skinDesc = "goo";
+				player.skin.desc = "goo";
 		}
-		player.faceType = saveFile.data.faceType;
+		player.face.type = saveFile.data.faceType;
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = TONGUE_HUMAN;
+			player.tongue.type = Tongue.HUMAN;
 		else
-			player.tongueType = saveFile.data.tongueType;
+			player.tongue.type = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
-			player.earType = EARS_HUMAN;
+			player.ears.type = Ears.HUMAN;
 		else
-			player.earType = saveFile.data.earType;
+			player.ears.type = saveFile.data.earType;
 		if (saveFile.data.earValue == undefined)
-			player.earValue = 0;
+			player.ears.value = 0;
 		else
-			player.earValue = saveFile.data.earValue;
+			player.ears.value = saveFile.data.earValue;
 		if (saveFile.data.antennae == undefined)
-			player.antennae = ANTENNAE_NONE;
+			player.antennae.type = Antennae.NONE;
 		else
-			player.antennae = saveFile.data.antennae;
-		player.horns = saveFile.data.horns;
+			player.antennae.type = saveFile.data.antennae;
+		player.horns.value = saveFile.data.horns;
 		if (saveFile.data.hornType == undefined)
-			player.hornType = HORNS_NONE;
+			player.horns.type = Horns.NONE;
 		else
-			player.hornType = saveFile.data.hornType;
+			player.horns.type = saveFile.data.hornType;
 
 		if (isObject(saveFile.data.underBody))
 			player.underBody.setAllProps(saveFile.data.underBody);
@@ -1785,79 +1774,79 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (isObject(saveFile.data.rearBody))
 			player.rearBody.setAllProps(saveFile.data.rearBody);
 		// <mod name="Predator arms" author="Stadler76">
-		player.clawTone = (saveFile.data.clawTone == undefined) ? ""               : saveFile.data.clawTone;
-		player.clawType = (saveFile.data.clawType == undefined) ? CLAW_TYPE_NORMAL : saveFile.data.clawType;
+		player.claws.tone = (saveFile.data.clawTone == undefined) ? ""               : saveFile.data.clawTone;
+		player.claws.type = (saveFile.data.clawType == undefined) ? Claws.NORMAL : saveFile.data.clawType;
 		// </mod>
 
-		player.wingType = saveFile.data.wingType;
-		player.wingColor = saveFile.data.wingColor || "no";
-		player.lowerBody = saveFile.data.lowerBody;
-		player.tailType = saveFile.data.tailType;
-		player.tailVenom = saveFile.data.tailVenum;
-		player.tailRecharge = saveFile.data.tailRecharge;
-		player.hipRating = saveFile.data.hipRating;
-		player.buttRating = saveFile.data.buttRating;
+		player.wings.type = saveFile.data.wingType;
+		player.wings.color = saveFile.data.wingColor || "no";
+		player.lowerBody.type = saveFile.data.lowerBody;
+		player.tail.type = saveFile.data.tailType;
+		player.tail.venom = saveFile.data.tailVenum;
+		player.tail.recharge = saveFile.data.tailRecharge;
+		player.hips.rating = saveFile.data.hipRating;
+		player.butt.rating = saveFile.data.buttRating;
 		
 
-		if (player.wingType == 8) {
+		if (player.wings.type == 8) {
 			player.wings.restore();
-			player.rearBody.setAllProps({type: REAR_BODY_SHARK_FIN});
+			player.rearBody.setAllProps({type: RearBody.SHARK_FIN});
 		}
 
-		if (player.lowerBody === 4) {
-			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			player.legCount = 4;
+		if (player.lowerBody.type === 4) {
+			player.lowerBody.type = LowerBody.HOOFED;
+			player.lowerBody.legCount = 4;
 		}
 		
-		if (player.lowerBody === 24) {
-			player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
-			player.legCount = 4;
+		if (player.lowerBody.type === 24) {
+			player.lowerBody.type = LowerBody.CLOVEN_HOOFED;
+			player.lowerBody.legCount = 4;
 		}
 		
 		if (saveFile.data.legCount == undefined) {
-			if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) {
-				player.legCount = 8;
+			if (player.lowerBody.type == LowerBody.DRIDER) {
+				player.lowerBody.legCount = 8;
 			}
-			else if (player.lowerBody == 4) {
-				player.legCount = 4;
-				player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			else if (player.lowerBody.type == 4) {
+				player.lowerBody.legCount = 4;
+				player.lowerBody.type = LowerBody.HOOFED;
 			}
-			else if (player.lowerBody == LOWER_BODY_TYPE_PONY) {
-				player.legCount = 4;
+			else if (player.lowerBody.type == LowerBody.PONY) {
+				player.lowerBody.legCount = 4;
 			}
-			else if (player.lowerBody == 24) {
-				player.legCount = 4;
-				player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+			else if (player.lowerBody.type == 24) {
+				player.lowerBody.legCount = 4;
+				player.lowerBody.type = LowerBody.CLOVEN_HOOFED;
 			}
-			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-				player.legCount = 1;
+			else if (player.lowerBody.type == LowerBody.NAGA) {
+				player.lowerBody.legCount = 1;
 			}
-			else if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
-				player.legCount = 1;
+			else if (player.lowerBody.type == LowerBody.GOO) {
+				player.lowerBody.legCount = 1;
 			}
-			else player.legCount = 2;
+			else player.lowerBody.legCount = 2;
 		}
 		else
-			player.legCount = saveFile.data.legCount;
+			player.lowerBody.legCount = saveFile.data.legCount;
 			
 		if (saveFile.data.eyeCount == undefined) {
-			if (player.eyeType == EYES_SPIDER) {
-				player.eyeCount = 4;
+			if (player.eyes.type == Eyes.SPIDER) {
+				player.eyes.count = 4;
 			}
-			else if (player.eyeType == EYES_FOUR_SPIDER_EYES) {
-				player.eyeType = EYES_SPIDER;
-				player.eyeCount = 4;
+			else if (player.eyes.type == Eyes.FOUR_SPIDER_EYES) {
+				player.eyes.type = Eyes.SPIDER;
+				player.eyes.count = 4;
 			}
-			else player.eyeCount = 2;
+			else player.eyes.count = 2;
 		}
 		else
-			player.eyeCount = saveFile.data.eyeCount;
+			player.eyes.count = saveFile.data.eyeCount;
 			
 
 		// Fix deprecated and merged underBody-types
 		switch (player.underBody.type) {
-			case UNDER_BODY_TYPE_DRAGON: player.underBody.type = UNDER_BODY_TYPE_REPTILE; break;
-			case UNDER_BODY_TYPE_WOOL:   player.underBody.type = UNDER_BODY_TYPE_FURRY;   break;
+			case UnderBody.DRAGON: player.underBody.type = UnderBody.REPTILE; break;
+			case UnderBody.WOOL:   player.underBody.type = UnderBody.FURRY;   break;
 		}
 
 		//Sexual Stuff
@@ -1991,14 +1980,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			
 			if (ptype == null) 
 			{
-				trace("ERROR: Unknown perk id="+id);
+				//trace("ERROR: Unknown perk id="+id);
 				
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			}
 			else
 			{
-				trace("Creating perk : " + ptype);
+				//trace("Creating perk : " + ptype);
 				player.createPerk(ptype,value1,value2,value3,value4);
 			
 				if (isNaN(player.perk(player.numPerks - 1).value1)) 
@@ -2012,14 +2001,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 						player.perk(player.numPerks).value1 = 0;
 					}
 					
-					trace("NaN byaaaatch: " + player.perk(player.numPerks - 1).value1);
+					//trace("NaN byaaaatch: " + player.perk(player.numPerks - 1).value1);
 				}
 			
 				if (player.perk(player.numPerks - 1).perkName == "Wizard's Focus") 
 				{
 					if (player.perk(player.numPerks - 1).value1 == 0 || player.perk(player.numPerks - 1).value1 < 0.1) 
 					{
-						trace("Wizard's Focus boosted up to par (.5)");
+						//trace("Wizard's Focus boosted up to par (.5)");
 						player.perk(player.numPerks - 1).value1 = .5;
 					}
 				}
@@ -2080,7 +2069,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 1)
 		{
 			flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
-			trace("Force-reverting Marble At Farm flag to 0.");
+			//trace("Force-reverting Marble At Farm flag to 0.");
 		}
 		
 		//Set Status Array
@@ -2311,9 +2300,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 public function unFuckSave():void
 {
 	//Fixing shit!
-	if (player.wings.type == WING_TYPE_FEATHERED_LARGE && player.wings.color == "no") {
+	if (player.wings.type == Wings.FEATHERED_LARGE && player.wings.color == "no") {
 		// Player has harpy wings from an old save, let's fix its color
-		player.wings.color = player.hasFur() ? player.furColor : player.hairColor;
+		player.wings.color = player.hasFur() ? player.skin.furColor : player.hair.color;
 	}
 
 	// Fix duplicate elven bounty perks
@@ -2361,7 +2350,7 @@ public function unFuckSave():void
 	if (!(flags[kFLAGS.RUBI_COCK_TYPE] is CockTypesEnum || flags[kFLAGS.RUBI_COCK_TYPE] is Number))	
 	{ // Valid contents of flags[kFLAGS.RUBI_COCK_TYPE] are either a CockTypesEnum or a number
 
-		trace("Fixing save (goo girl)");
+		//trace("Fixing save (goo girl)");
 		outputText("\n<b>Rubi's cockType is invalid. Defaulting him to human.</b>\n");
 		flags[kFLAGS.RUBI_COCK_TYPE] = 0;
 	}
@@ -2370,7 +2359,7 @@ public function unFuckSave():void
 	if (!(flags[kFLAGS.GOO_DICK_TYPE] is CockTypesEnum || flags[kFLAGS.GOO_DICK_TYPE] is Number))	
 	{ // Valid contents of flags[kFLAGS.GOO_DICK_TYPE] are either a CockTypesEnum or a number
 
-		trace("Fixing save (goo girl)");
+		//trace("Fixing save (goo girl)");
 		outputText("\n<b>Latex Goo-Girls's cockType is invalid. Defaulting him to human.</b>\n");
 		flags[kFLAGS.GOO_DICK_TYPE] = 0;
 	}
@@ -2498,7 +2487,7 @@ public function unFuckSave():void
 		//If dick length zero then player has never met Kath, no need to set flags. If her breast size is zero then set values for flags introduced with the employment expansion
 		if (flags[kFLAGS.KATHERINE_BREAST_SIZE] != 0) return; //Must be a new format save
 		if (flags[kFLAGS.KATHERINE_DICK_LENGTH] != 0) { 
-			flags[kFLAGS.KATHERINE_BREAST_SIZE]		= BREAST_CUP_B;
+			flags[kFLAGS.KATHERINE_BREAST_SIZE]		= BreastCup.B;
 			flags[kFLAGS.KATHERINE_BALL_SIZE]		= 1;
 			flags[kFLAGS.KATHERINE_HAIR_COLOR]		= "neon pink";
 			flags[kFLAGS.KATHERINE_HOURS_SINCE_CUM] = 200; //Give her maxed out cum for that first time

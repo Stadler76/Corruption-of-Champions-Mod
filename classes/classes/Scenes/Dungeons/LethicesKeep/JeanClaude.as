@@ -1,6 +1,8 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
 	import classes.internals.*;
 	import classes.Items.*
 	
@@ -25,12 +27,12 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.jeanClaude.beatDaFuckhugeBasilisk(hpVictory);
+			game.lethicesKeep.jeanClaude.beatDaFuckhugeBasilisk(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
+			game.lethicesKeep.jeanClaude.fuckhugeBasiliskFuckedYouUp(hpVictory);
 		}
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
@@ -95,16 +97,16 @@ package classes.Scenes.Dungeons.D3
 			ass.analLooseness = 0;
 			ass.analWetness = 0;
 			
-			hipRating = HIP_RATING_AVERAGE;
-			buttRating = BUTT_RATING_AVERAGE;
-			lowerBody = LOWER_BODY_TYPE_LIZARD;
-			tailType = TAIL_TYPE_LIZARD;
-			skinDesc = "green-purple mottled hide";
+			hips.rating = Hips.RATING_AVERAGE;
+			butt.rating = Butt.RATING_AVERAGE;
+			lowerBody.type = LowerBody.LIZARD;
+			tail.type = Tail.LIZARD;
+			skin.desc = "green-purple mottled hide";
 			initStrTouSpeInte(80, 100, 80, 60);
 			initLibSensCor(40, 40, 80);
-			faceType = FACE_LIZARD;
-			earType = EARS_LIZARD;
-			eyeType = EYES_BASILISK;
+			face.type = Face.LIZARD;
+			ears.type = Ears.LIZARD;
+			eyes.type = Eyes.BASILISK;
 
 			weaponName = "cutlass";
 			weaponVerb = "slash";

@@ -496,12 +496,12 @@ public function satyrBirth(vag:Boolean):void {
 	//badabingbadaboom
 	flags[kFLAGS.SATYR_KIDS]++;
     //Butt increase
-    if (player.buttRating < 10 && rand(2) == 0) {
-        player.buttRating++;
+    if (player.butt.rating < 10 && rand(2) == 0) {
+        player.butt.rating++;
         outputText("\n\nYou notice your " + player.buttDescript() + " feeling larger and plumper after the ordeal.");
     }
-    else if (player.hipRating < 10) {
-        player.hipRating++;
+    else if (player.hips.rating < 10) {
+        player.hips.rating++;
         outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + player.hipDescript() + ".");
     }
     outputText("\n");

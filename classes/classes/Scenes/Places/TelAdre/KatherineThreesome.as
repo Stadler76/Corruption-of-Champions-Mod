@@ -2,7 +2,11 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
+	import classes.display.SpriteDb;
+	import classes.Scenes.Places.TelAdre.Katherine;
 	import classes.Scenes.NPCs.Urta;
+	import classes.lists.BreastCup;
+	import classes.lists.Gender;
 
 	public class KatherineThreesome extends TelAdreAbstractContent
 	{
@@ -36,6 +40,7 @@
 
 		public function circlejerk():void { //Not available if Kath has no cock
 			clearOutput();
+			katherine.katherineSprite(true);
 			outputText("There’s no reason to not have some fun with the two of them... plus you don’t think you’d be able resist the allure of joining two of your favourite girls in their bonding.  Stripping off your " + player.armorName + " you step behind the two girls and embrace Urta into a hug, hands wandering her body to loosen the straps of her armor.\n\n");
 			outputText("Urta seems to jump at your touch.  “<i>" + player.short + "?  What are you doing, you naughty [boy]?</i>”  She giggles.  Kath looks at you and smirks, “<i>Couldn’t resist getting into this, huh, " + player.short + "?  Well, why not?  After all, we’re technically a </i>ménage à trois</i>, aren’t we?</i>”\n\n");
 			outputText("You give both girls a winning smile and tell them that you’ll be joining in on their fun shortly, but first you have to take care of a problem... Urta here is a bit overdressed... and come to think of it, so is Kath.\n\n");
@@ -126,6 +131,7 @@
 	
 		public function threeSixtyNine():void {
 			clearOutput();
+			katherine.katherineSprite(true);
 			if (katherine.isAt(Katherine.KLOC_BAR) || katherine.isAt(Katherine.KLOC_BAR_DRUNK))
 				outputText("You drag the " + (katherine.hasCock() ? "eager herms" : "lusty pair") + " to one of the backrooms.  Urta locks the door");
 			else outputText("Urta grabs Kath from behind");
@@ -190,6 +196,7 @@
 
 		public function roastYou():void { //Not available if Kath has no cock
 			clearOutput();
+			katherine.katherineSprite(true);
 			if (katherine.isAt(Katherine.KLOC_BAR) || katherine.isAt(Katherine.KLOC_BAR_DRUNK))
 				outputText("You lead the horny herms toward one of the bar’s backrooms.  You get inside and lock the door but as you turn around Urta jumps you from behind, twisting your arm and pulling you to the floor.  Kath laughs and starts helping Urta as she removes your clothes.\n\n“<i>You’re too slow today " + player.short + ".  I’m horny as anything and I can tell from her scent that Katherine is dying for a good fuck too.  Just relax and we’ll take really good care of you.</i>”");
 			else {
@@ -204,7 +211,7 @@
 				outputText(".  May Marae help your innards.</i>”");
 			}
 			outputText("\n\nYou’re not in a position to argue.  Once you’re naked Urta sits on top of you and ");
-			if (player.biggestTitRow() > BREAST_CUP_DD)
+			if (player.biggestTitRow() > BreastCup.DD)
 				outputText("massages the sides of your breasts");
 			else if (player.balls > 0)
 				outputText("massages your nutsack");
@@ -296,6 +303,7 @@
 
 		public function spitroastKath():void { //Works for all except genderless characters
 			clearOutput();
+			katherine.katherineSprite(true);
 			var atBar:Boolean = katherine.isAt(Katherine.KLOC_BAR) || katherine.isAt(Katherine.KLOC_BAR_DRUNK);
 			if (atBar)
 				outputText("You lead the " + (katherine.hasCock() ? "horny herms" : "lusty pair") + " toward one of the bar’s backrooms.  You get inside, lock the door and when you turn around you see that Urta has grabbed Kath from behind to make sure she couldn’t jump you.");
@@ -518,7 +526,7 @@
 			outputText("Urta moans and lifts Kath high enough to plant her cockhead against Kath’s pussy.  “<i>You were asking for this all through our last shift,</i>” she growls in Kath’s ear.  Urta roughly yanks Kath back again, this time impaling her on Urta’s massive shaft.  Urta closes her eyes and starts talking to herself as she lifts Kath’s hips up and down.  “<i>Always flicking your thin black tail at me,</i>” she says, “<i>giving me that big toothy smile when you hand in your paperwork" + (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 20 ? ", then ‘I’ll see you at the bar’, and that cute little wave goodbye" : "") + ".  Admit it - you’ve been gagging for a nice fat cock.</i>”\n\n");
 			outputText("Kath just bites her lip as Urta’s jackhammering forces her hole open wider and wider.  At last the pain in her face eases up and she gives you a grin before saying, “<i>Maybe.</i>”\n\n");
 			outputText("“<i>Not maybe!</i>” bellows Urta.  “<i>You’re the sexiest little kitty in the Watch and you spend all day teasing me.  Don’t give me maybe.</i>”\n\n");
-			outputText("Kath has started to fuck back and she pulls Urta’s hands away from her hips.  With her cat-like flexibility she manages to turn around and face Urta while still grinding atop her cock.  “<i>Okay,</i>” she says, teasingly, “<i>maybe a lot.</i>”  She takes Urta’s hands and places them against " + (katherine.breasts.cupSize > BREAST_CUP_DD ? "the sides of " : "") + "her " + katherine.breasts.adj() + " breasts.\n\n");
+			outputText("Kath has started to fuck back and she pulls Urta’s hands away from her hips.  With her cat-like flexibility she manages to turn around and face Urta while still grinding atop her cock.  “<i>Okay,</i>” she says, teasingly, “<i>maybe a lot.</i>”  She takes Urta’s hands and places them against " + (katherine.breasts.cupSize > BreastCup.DD ? "the sides of " : "") + "her " + katherine.breasts.adj() + " breasts.\n\n");
 			outputText("Urta looks like she’s getting close to blowing her load.  She pants “<i>Does that turn you on?  Getting your captain all hot and bothered?</i>”\n\n");
 			outputText("Kath reaches between her legs and you realize she’s rolling Urta’s balls between her fingers.  “<i>Maybe,</i>” she replies again, infuriating Urta, who bites the back of Kath’s neck.  A few more deep thrusts and Urta’s hands go to Kath’s shoulders so she can pull Kath’s whole body down once more.  Her head tips back and bangs the wall.  At the same time Kath puts a hand against her belly and purrs as you watch it bulge with Urta’s copious seed.\n\n");
 			outputText("Once Urta is finished Kath gives Urta a poke and says, “<i>Aren’t you going to help me?  I still haven’t got off, you know.</i>”\n\n");
@@ -545,7 +553,7 @@
 				outputText("Urta shudders and her hands move back to Kath's hips.  “<i>Oh, fuck!  You're not gonna be able to walk after this.</i>”\n\n");
 				outputText("“<i>Promises, promises,</i>” Kath says in a dreamy voice.  She holds her already filled belly and lets Urta do most of the work.  Then Katherine's legs give out, leaving her totally at Urta's mercy as the fox jackhammers her cunt.  You watch Kath cum half a dozen times in a row, her body held in place only by the rock-hard flagpole inside her belly.  With one last burst of energy Urta rams home and you see her balls shrink and pull upward, driving every last drop into Kath's cum crammed belly.\n\n");
 			}
-			outputText("You " + (player.gender == GENDER_NONE ? "rub your featureless groin unhappily, wishing you could have been part of this.  Then you" : "") + "give each of your tired lovers a kiss and tell them to look after each other.  That earns a guilty look from Urta who says, “<i>We can have any kind of sex you want next time " + player.short + " - or maybe you want to stick around and have your fill?</i>”\n\n");
+			outputText("You " + (player.gender == Gender.NONE ? "rub your featureless groin unhappily, wishing you could have been part of this.  Then you" : "") + "give each of your tired lovers a kiss and tell them to look after each other.  That earns a guilty look from Urta who says, “<i>We can have any kind of sex you want next time " + player.short + " - or maybe you want to stick around and have your fill?</i>”\n\n");
 			outputText("Much as you’d like to you have to check on the portal once more, so you just tell them you’re going to take them up on that offer, probably sooner rather than later.");
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
@@ -812,6 +820,7 @@
 
 		public function doubleStuffKath():void { //Both Kath and Urta are drunk
 			clearOutput();
+			katherine.katherineSprite(true);
 			outputText("You ask your two " + (katherine.hasCock() ? "herms" : "lovers") + " if they want to go somewhere more private.\n\n");
 			var urtaHasHouse:Boolean = player.hasKeyItem("Spare Key to Urta's House") >= 0;
 			outputText("Urta " + katherine.clothesLowerChoice("runs her hand up Kath’s thigh", "slides her hand under Kath’s skirt", "rubs the " + (katherine.hasCock() ? katherine.cockAdj() + "bulge in the " : "") + "crotch of Kath’s bodysuit", "slides her hand under Kath’s dress", "slides her hand between the folds of Kath’s robe") + " and says, “<i>That’s a good idea.  My " + (urtaHasHouse ? "old " : " ") + "apartment’s close enough.</i>”\n\n");
@@ -904,6 +913,7 @@
 		
 		public function doublePenetrateKath():void { //Both Kath and Urta are drunk
 			clearOutput();
+			katherine.katherineSprite(true);
 			outputText("You ask your two " + (katherine.hasCock() ? "herms" : "sluts") + " if it’s time to commandeer one of the back rooms.\n\n");
 			outputText("Urta " + katherine.clothesLowerChoice("runs her hand up Kath’s thigh", "slides her hand under Kath’s skirt", "rubs the " + (katherine.hasCock() ? katherine.cockAdj() + "bulge in the " : "") + "crotch of Kath’s bodysuit", "slides her hand under Kath’s dress", "slides her hand between the folds of Kath’s robe") + " and gives you a wolfish smile.\n\n");
 			outputText("You have to help them both to one of the backrooms and you can feel the eyes of many of the bar’s patrons on your back.  As soon as the door is closed and barred Urta presses Kath against the wall and starts giving her tongue.\n\n");

@@ -1462,7 +1462,7 @@ package classes.Scenes.Places.Prison
 				
 				outputText(" A long whine slips through your lips, an undulating harmonic of fear, shame, and relief, before your body finally overwhelms you and your dainty pose collapses. You immediately follow, plummeting forward, nearly landing your soup, before your owner tilts you to the side and gently sets your head down beside it instead.\n\n");
 				outputText("\"<i>Or am I wrong?</i>\" she whispers in your ear, her voice quieter than the breath that carries it. You have no time to contemplate, your consciousness quickly fading as your ");
-				if (player.tailType > 0)
+				if (player.tail.type > 0)
 				{
 					outputText("tail");
 				}

@@ -1,6 +1,9 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
 
@@ -127,9 +130,9 @@ package classes.Scenes.NPCs
 		}
 		override protected function performCombatAction():void
 		{
-			trace("Hel Perform Combat Action Called");
+			//trace("Hel Perform Combat Action Called");
 			var select:Number = rand(3);
-			trace("Selected: " + select);
+			//trace("Selected: " + select);
 			switch(select) {
 				case 0:
 					helAttack();
@@ -171,20 +174,20 @@ package classes.Scenes.NPCs
 			}
 			this.imageName = "hel";
 			this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
-			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,85,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
-			this.hipRating = HIP_RATING_CURVY+2;
-			this.buttRating = BUTT_RATING_LARGE+1;
-			this.skinTone = "dusky";
-			this.hairColor = "red";
-			this.hairLength = 13;
-			this.tailType = TAIL_TYPE_SALAMANDER;
-			this.tailRecharge = 0;
+			this.hips.rating = Hips.RATING_CURVY+2;
+			this.butt.rating = Butt.RATING_LARGE+1;
+			this.skin.tone = "dusky";
+			this.hair.color = "red";
+			this.hair.length = 13;
+			this.tail.type = Tail.SALAMANDER;
+			this.tail.recharge = 0;
 			initStrTouSpeInte(80, 70, 75, 60);
 			initLibSensCor(65, 25, 30);
 			this.weaponName = "sword";

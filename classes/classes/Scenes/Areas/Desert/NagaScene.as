@@ -1,5 +1,6 @@
 package classes.Scenes.Areas.Desert {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.ArmorLib;
@@ -18,7 +19,7 @@ public function nagaEncounter():void {
 	//Create status if needed
 	if (!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();
-	if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+	if (player.lowerBody.type == LowerBody.NAGA) {
 		//Set 'last fuck as naga'
 		player.changeStatusValue(StatusEffects.Naga,1,1);
 		//Not met as naga before
@@ -43,7 +44,7 @@ public function nagaEncounter():void {
 		}
 		outputText("She lets out a soft moan and leans her head forward, pressing her lips against yours. You squeeze her body even more firmly against yours in response, the tips of your tails wrapping around one another. You open your mouth slightly and press your tongue against her lips. She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke ");
 		//[If player has fangs]
-		if (player.faceType == FACE_SNAKE_FANGS) outputText("your own.");
+		if (player.face.type == Face.SNAKE_FANGS) outputText("your own.");
 		//[player has no fangs]
 		else outputText("the inside of your mouth.");
 		outputText("\n\n");
@@ -98,7 +99,7 @@ public function nagaEncounter():void {
 		else if (player.hasVagina()) {
 			outputText("The kiss continues and you can feel your " + player.breastDescript(0) + " pressing against her own. You kiss her harder, pressing your body as close to her as you can, enjoying the feeling of your two bodies entwined together. You wrap your tail around hers, trying to make every part of your body touch every part of hers.  The feeling of her scaled tail rubbing against your body sends shivers of ecstasy down your spine. You pull away from her mouth and move your head to kiss at her neck, ");
 			//(if player has fangs)
-			if (player.faceType == FACE_SNAKE_FANGS) outputText("carefully nibbling at it so as to not break the skin.  ");
+			if (player.face.type == Face.SNAKE_FANGS) outputText("carefully nibbling at it so as to not break the skin.  ");
 			else outputText("nibbling gently at it.  ");
 			outputText("Traveling down, you pause at her collarbone, letting go of her hips to bring your hands up to her perfectly rounded breasts. A moan escapes the naga's lips as you massage her erect nipples. Your mouth continues its trek down the naga's supple body and you make sure to pause on each breast, circling inward and stopping on each nipple to suck gently on them.\n\n");
  			outputText("Once more your hands move down the naga's body, making their way across her sides as your mouth simultaneously kisses at the smooth flesh of her exposed belly. Goose pimples slowly begin to appear, denoting how much she enjoys it. You pause at her hips, hovering over the slit at her crotch. One of your hands slide down to the slit and you start to stroke at it gently as you kiss at the area around it. Your partner shudders a bit, overcome by the sensations. Slowly you slide a finger into her, hearing a gasp of pleasure as you move it around inside her.  ");
@@ -230,13 +231,13 @@ private function gooNagaRape():void {
 	else if (player.gender == 2) {
 		outputText("You shriek in delight as wave after wave of orgasms rush over you");
 		//(if squirter)
-		if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(", your girlcum gushing out and pooling on the stomach of the naga");
+		if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(", your girlcum gushing out and pooling on the stomach of the naga");
 		outputText(".");
 	}
 	//(if herm)
 	if (player.gender == 3) {
 		outputText("You scream in ecstasy as you hit your peak, your girlcum ");
-		if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("leaking out");
+		if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) outputText("leaking out");
 		else outputText("gushing out to form a pool on the naga's stomach");
 		outputText(" and your " + player.multiCockDescriptLight());
 		//(normal)
@@ -427,7 +428,7 @@ private function nagaVictoryGenderless():void {
   		outputText("But you can't give up now. You've gotten this far, now you need to finish the deed. At the end of this, there WILL be sex.\n\n");
         outputText("You thrust yourself on top of her and roughly open the scaly covering at her crotch, revealing her awaiting pussy. You bring your mouth over her opening and thrust your tongue deep inside. A mix between a whimper and a moan escapes the naga's lips as you twist your tongue deeper inside her, as though trying to taste every part of her.\n\n");
         //(If player has no fangs)
-		if (player.faceType != FACE_SNAKE_FANGS) {
+		if (player.face.type != Face.SNAKE_FANGS) {
 			outputText("You feel her start to thrust her hips into your face to try to gain more pleasure, but you won't be having ANY of that. You quickly take your tongue out of her and move your way up to her breasts, groping at them and biting at her nipples. The naga cries out in pain and tries to push your head away. You give her one last bite, hard enough to draw blood from her before getting up.\n\n");
 	        outputText("The naga quickly slithers out from under you with an angry hiss, a hand pressed to her now bleeding breast. You chuckle at this and the naga turns to glare at you. There is a sudden pain on the back of your legs and your view shifts to looking at the sky above you. It takes a moment for you to realize that the scaly bitch has just tripped you with her tail before slithering away.\n\n");
 		}
@@ -637,7 +638,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		}
 		//(If lactating)
 		if (player.biggestLactation() > 1) { 
-			outputText("  Your warm milk is leaking from your " + player.nippleDescript(0) + " the entire time, coating your " + player.skinDesc + " and soaking her hands. At one point, she withdraws a hand and licks the milk from it. You can only assume that she liked it, as she begins to focus even more on your breasts.");
+			outputText("  Your warm milk is leaking from your " + player.nippleDescript(0) + " the entire time, coating your " + player.skin.desc + " and soaking her hands. At one point, she withdraws a hand and licks the milk from it. You can only assume that she liked it, as she begins to focus even more on your breasts.");
 		}
 		outputText("\n\n");
 		
@@ -726,7 +727,7 @@ internal function nagaRapeChoice():void {
 			addButton(1, "Female Rape", nagaVictoryFemale);
 		if (player.isGenderless())
 			addButton(2, "Genderless", nagaVictoryGenderless);
-		if (player.lowerBody == LOWER_BODY_TYPE_GOO)
+		if (player.lowerBody.type == LowerBody.GOO)
 			addButton(3, "Gooey Rape", gooNagaRape);
 	}
 	
@@ -994,7 +995,7 @@ private function beePositANagaPlease():void {
 	outputText("\n\nGingerly, you caress her sinuous, scaled body, exploring the curvy flow of muscle as scales down to the slight, almost imperceptible flare of her humanoid waist.  She squirms against you, her tail lashing in the sands to either side, thumping anxiously.  Soon, your curious fingers find her soft opening, hidden amongst the scales, and as you press inside, you find a second set of wet lips along with a harder, pill-shaped organ that can only be a clit.  The woman's fanged mouth parts in a wordless expression of pleasure, and as you have her distracted, you let your stinger slide through the scales on her underbelly.");
 	outputText("\n\nThe naga winces, giving you a look of extreme betrayal while your venom pours through her defenses unhindered.  You study her face while your stinger works its magic.  The furrows in her eyebrows slowly relax and the naga's lips part, allowing her to pant.  Gradually, her skin flushes red with unrepentant lust, and as you empty the last of your stinger's reservoir into her vulnerable form, you take great pleasure in fingering her increasingly lubricated pussy.  The scales around her crotch-slit are so wet that they appear to be polished with oil, a shining stain of lust that spreads with each passing moment.  She's ready.");
 	//{empty venom}
-	player.tailVenom = 0;
+	player.tail.venom = 0;
 	outputText("\n\nYou press your fingers in to get a feel for your future incubator's readiness, and to your satisfaction, she's practically gushing.  Her sizable box squishes with wetness as you tease the lips, then stuff four fingers inside.  The sloppy hole easily takes most of your hand, and encouraged by the progress, you push deeper, burrowing your arm to the elbow.  Clutching feebly around your shoulder, the snake woman hangs on to you for dear life, her pussy gushing and weakly squirting around your elbow as you plumb her depths.  Her serpentine cunt seems to go on forever, which is perfect for your purposes.  You unceremoniously remove your arm and smile at the naga's fresh contortions of pleasure.");
 	outputText("\n\nWavering back and forth like a leaf in a storm, the naga seems besieged by her own lust, barely able to support herself.  Your ovipositor slides out of its internal compartment, drooling sweet amber slime behind you at the sight.  Utterly beholden to your lusts, you pounce on the naga and bear her to the ground with gentleness reminiscent of a drunken moose. She goes over like a house of cards, flat on her back with you atop her.  For all your lack of grace, you positioned her such that your egg-filled prong is hovering just above her entrance, soaking the snake-woman's exterior entrance with a thick flow of honey.");
 	outputText("\n\nYou gently lower your insectoid abdomen until your egg-tube parts the naga's lips, then with a gentle push, you begin to slide it in.  Her entrance is surprisingly snug for something that could handle your whole arm, and you take your time pushing inside of it, not nestling your bug-butt's exoskeleton against her until you've taken the time to fully enjoy the penetration.  Once your organ has been sent home, your drugged-up partner surprises you by grabbing your head and pulling you into a kiss, her fangs pressing dangerously against your lips.");

@@ -1,5 +1,6 @@
 package classes.Scenes.Places.Bazaar{
 	import classes.Appearance;
+	import classes.BodyParts.Butt;
 	import classes.helper.FireButtonEvent;
 	import classes.internals.IRandomNumber;
     import org.flexunit.asserts.*;
@@ -114,7 +115,7 @@ package classes.Scenes.Places.Bazaar{
 		[Test] 
         public function roxanneRepeatedStretchingWithBigBooty():void {
 			setRoxanneLargeSize();
-			player.buttRating = Appearance.BUTT_RATING_EXPANSIVE;
+			player.butt.rating = Butt.RATING_EXPANSIVE;
 
 			var testFunction:Function = function():void {
 				cut.roxanneDrinkingContestTest();
@@ -132,7 +133,7 @@ package classes.Scenes.Places.Bazaar{
 		[Test] 
         public function roxanneCounterResetWithBigBooty():void {
 			setRoxanneLargeSize();
-			player.buttRating = Appearance.BUTT_RATING_EXPANSIVE;
+			player.butt.rating = Butt.RATING_EXPANSIVE;
 
 			var testFunction:Function = function():void {
 				cut.roxanneDrinkingContestTest();

@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.HighMountains
 {
 	import classes.*;
+	import classes.BodyParts.*;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.ChainedAction;
 	import classes.internals.ChainedDrop;
@@ -106,21 +107,21 @@ import classes.internals.ChainedAction;
 			this.balls = 2;
 			this.ballSize = 2;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 6*12+2;
-			this.hipRating = HIP_RATING_SLENDER+1;
-			this.buttRating = BUTT_RATING_AVERAGE;
-			this.lowerBody = LOWER_BODY_TYPE_LIZARD;
-			this.faceType = FACE_LIZARD;
-			this.earType = EARS_LIZARD;
-			this.eyeType = EYES_BASILISK;
-			this.hairType = HAIR_BASILISK_SPINES;
-			this.skinTone = "grey-green";
-			this.skinType = SKIN_TYPE_LIZARD_SCALES;
-			this.hairColor = "grey-green";
-			this.hairLength = 2;
+			this.hips.rating = Hips.RATING_SLENDER+1;
+			this.butt.rating = Butt.RATING_AVERAGE;
+			this.lowerBody.type = LowerBody.LIZARD;
+			this.face.type = Face.LIZARD;
+			this.ears.type = Ears.LIZARD;
+			this.eyes.type = Eyes.BASILISK;
+			this.hair.type = Hair.BASILISK_SPINES;
+			this.skin.tone = "grey-green";
+			this.theSkinType = Skin.LIZARD_SCALES;
+			this.hair.color = "grey-green";
+			this.hair.length = 2;
 			initStrTouSpeInte(85, 70, 35, 70);
 			initLibSensCor(50, 35, 60);
 			this.weaponName = "claws";
@@ -138,8 +139,8 @@ import classes.internals.ChainedAction;
 			this.gems = rand(10) + 10;
 			this.drop = new ChainedDrop().add(consumables.REPTLUM, 0.9)
 					.elseDrop(useables.EBNFLWR);
-			this.tailType = TAIL_TYPE_LIZARD;
-			this.tailRecharge = 0;
+			this.tail.type = Tail.LIZARD;
+			this.tail.recharge = 0;
 			this.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
 			checkMonster();
 		}

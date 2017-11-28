@@ -66,21 +66,21 @@ package classes
 		{
 			
 			if (lengthDelta == 0) {
-				trace("Whoops! growCock called with 0, aborting...");
+				//trace("Whoops! growCock called with 0, aborting...");
 				return lengthDelta;
 			}
 			
 			var threshhold:int = 0;
 			
-			trace("growcock starting at:" +lengthDelta);
+			//trace("growcock starting at:" +lengthDelta);
 
 
 			if (lengthDelta > 0) { // growing
-				trace("and growing...");
+				//trace("and growing...");
 				threshhold = 24;
 				// BigCock Perk increases incoming change by 50% and adds 12 to the length before diminishing returns set in
 				if (bigCock) {
-					trace("growCock found BigCock Perk");
+					//trace("growCock found BigCock Perk");
 					lengthDelta *= 1.5;
 					threshhold += 12;
 				}
@@ -89,11 +89,11 @@ package classes
 					threshhold *= 2;
 				// Modify growth for cock socks
 				if (sock == "scarlet") {
-					trace("growCock found Scarlet sock");
+					//trace("growCock found Scarlet sock");
 					lengthDelta *= 1.5;
 				}
 				else if (sock == "cobalt") {
-					trace("growCock found Cobalt sock");
+					//trace("growCock found Cobalt sock");
 					lengthDelta *= .5;
 				}
 				// Do diminishing returns
@@ -103,12 +103,12 @@ package classes
 					lengthDelta /= 2;
 			}
 			else {
-				trace("and shrinking...");
+				//trace("and shrinking...");
 				
 				threshhold = 0;
 				// BigCock Perk doubles the incoming change value and adds 12 to the length before diminishing returns set in
 				if (bigCock) {
-					trace("growCock found BigCock Perk");
+					//trace("growCock found BigCock Perk");
 					lengthDelta *= 0.5;
 					threshhold += 12;
 				}
@@ -117,11 +117,11 @@ package classes
 					threshhold += 12;
 				// Modify growth for cock socks
 				if (sock == "scarlet") {
-					trace("growCock found Scarlet sock");
+					//trace("growCock found Scarlet sock");
 					lengthDelta *= 0.5;
 				}
 				else if (sock == "cobalt") {
-					trace("growCock found Cobalt sock");
+					//trace("growCock found Cobalt sock");
 					lengthDelta *= 1.5;
 				}
 				// Do diminishing returns
@@ -131,7 +131,7 @@ package classes
 					lengthDelta /= 2;
 			}
 
-			trace("then changing by: " + lengthDelta);
+			//trace("then changing by: " + lengthDelta);
 
 			cockLength += lengthDelta;
 			
@@ -216,7 +216,7 @@ package classes
 					increase++;
 				}
 			}
-			trace("thickenCock called and thickened by: " + amountGrown);
+			//trace("thickenCock called and thickened by: " + amountGrown);
 			return amountGrown;
 		}	
 		

@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
@@ -67,16 +68,16 @@ package classes.Items.Consumables
 			}
 
 			//Thigh Loss: (towards “girly”)
-			if (player.hipRating >= 10 && rand(4) === 0 && changes < changeLimit) {
+			if (player.hips.rating >= 10 && rand(4) === 0 && changes < changeLimit) {
 				outputText("\n\nYou touch your thighs speculatively.  It's not just your imagination; you've lost a bit of weight around your waist.");
-				player.hipRating--;
-				if (player.hipRating > 15) player.hipRating -= 2 + rand(3);
+				player.hips.rating--;
+				if (player.hips.rating > 15) player.hips.rating -= 2 + rand(3);
 				changes++;
 			}
 			//Thigh Gain: (towards “girly”)
-			if (player.hipRating < 6 && rand(4) === 0 && changes < changeLimit) {
+			if (player.hips.rating < 6 && rand(4) === 0 && changes < changeLimit) {
 				outputText("\n\nYou touch your thighs speculatively.  You think you may have gained a little weight around your waist.");
-				player.hipRating++;
+				player.hips.rating++;
 				changes++;
 			}
 			//Breast Loss: (towards A cup)
@@ -243,7 +244,7 @@ package classes.Items.Consumables
 				}
 			}
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss
@@ -257,15 +258,15 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Remove odd eyes
-			if ((player.eyeType === EYES_FOUR_SPIDER_EYES || player.eyeType == EYES_SPIDER) && rand(2) === 0 && changes < changeLimit) {
+			if ((player.eyes.type === Eyes.FOUR_SPIDER_EYES || player.eyes.type == Eyes.SPIDER) && rand(2) === 0 && changes < changeLimit) {
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow. <b>Your arachnid eyes are gone! You have normal, humanoid eyes again.</b>");
-				player.eyeType = EYES_HUMAN;
-				player.eyeCount = 2;
+				player.eyes.type = Eyes.HUMAN;
+				player.eyes.count = 2;
 				changes++;
 			}
 			//PC Trap Effects
-			if (player.eyeType !== EYES_BLACK_EYES_SAND_TRAP && rand(4) === 0 && changes < changeLimit) {
-				player.eyeType = EYES_BLACK_EYES_SAND_TRAP;
+			if (player.eyes.type !== Eyes.BLACK_EYES_SAND_TRAP && rand(4) === 0 && changes < changeLimit) {
+				player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
 				//Eyes Turn Black:
 				outputText("\n\nYou blink, and then blink again.  It feels like something is irritating your eyes.  Panic sets in as black suddenly blooms in the corner of your left eye and then your right, as if drops of ink were falling into them.  You calm yourself down with the thought that rubbing at your eyes will certainly make whatever is happening to them worse; through force of will you hold your hands behind your back and wait for the strange affliction to run its course.  The strange inky substance pools over your entire vision before slowly fading, thankfully taking the irritation with it.  As soon as it goes you stride quickly over to the stream and stare at your reflection.  <b>Your pupils, your irises, your entire eye has turned a liquid black</b>, leaving you looking vaguely like the many half insect creatures which inhabit these lands.  You find you are merely grateful the change apparently hasn't affected your vision.");
 				changes++;
@@ -284,11 +285,11 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Dragonfly Wings:
-			if (player.wingType !== WING_TYPE_GIANT_DRAGONFLY && rand(4) === 0 && changes < changeLimit) {
+			if (player.wings.type !== Wings.GIANT_DRAGONFLY && rand(4) === 0 && changes < changeLimit) {
 				outputText("\n\nYou scream and fall to your knees as incredible pain snags at your shoulders, as if needle like hooks were being sunk into your flesh just below your shoulder blades.  After about five seconds of white hot, keening agony it is with almost sexual relief that something splits out of your upper back.  You clench the dirt as you slide what feel like giant leaves of paper into the open air.  Eventually the sensation passes and you groggily get to your feet.  You can barely believe what you can see by craning your neck behind you - <b>you've grown a set of four giant dragonfly wings</b>, thinner, longer and more pointed than the ones you've seen upon the forest bee girls, but no less diaphanous and beautiful.  You cautiously flex the new muscle groups in your shoulder blades and gasp as your new wings whirr and lift you several inches off the ground.  What fun this is going to be!");
 				//Wings Fall Out: You feel a sharp pinching sensation in your shoulders and you cringe slightly.  Your former dragonfly wings make soft, papery sounds as they fall into the dirt behind you.
 				changes++;
-				player.wingType = WING_TYPE_GIANT_DRAGONFLY;
+				player.wings.type = Wings.GIANT_DRAGONFLY;
 			}
 			if (changes === 0) {
 				outputText("\n\nWell... that didn't amount to much.");

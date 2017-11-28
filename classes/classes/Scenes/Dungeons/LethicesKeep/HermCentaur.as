@@ -1,10 +1,12 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.Monster;
 	import classes.Appearance;
 	import classes.StatusEffects;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.CockTypesEnum;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	
 	/**
 	 * ...
@@ -32,8 +34,8 @@ package classes.Scenes.Dungeons.D3
 			this.balls = 2;
 			this.ballSize = 3;
 			
-			this.hipRating = HIP_RATING_FERTILE;
-			this.buttRating = BUTT_RATING_EXPANSIVE;
+			this.hips.rating = Hips.RATING_FERTILE;
+			this.butt.rating = Butt.RATING_EXPANSIVE;
 			
 			initStrTouSpeInte(100, 100, 65, 65);
 			initLibSensCor(85, 40, 100);
@@ -57,12 +59,12 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.d3.hermCentaur.beatThePony(hpVictory);
+			game.lethicesKeep.hermCentaur.beatThePony(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.hermCentaur.inSovietCoCPonyRidesYou(hpVictory, pcCameWorms);
+			game.lethicesKeep.hermCentaur.inSovietCoCPonyRidesYou(hpVictory, pcCameWorms);
 		}
 		
 		// Gonna handle this a little differently than usual.

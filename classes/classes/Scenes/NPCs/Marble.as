@@ -1,6 +1,8 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 
@@ -80,23 +82,23 @@ package classes.Scenes.NPCs
 
 		public function Marble()
 		{
-			trace("Marble Constructor!");
+			//trace("Marble Constructor!");
 			this.a = "";
 			this.short = "Marble";
 			this.imageName = "marble";
 			this.long = "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger than she may appear to be.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 6*12+4;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.skinTone = "pale";
-			this.hairColor = "brown";
-			this.hairLength = 13;
+			this.hips.rating = Hips.RATING_CURVY;
+			this.butt.rating = Butt.RATING_LARGE;
+			this.lowerBody.type = LowerBody.HOOFED;
+			this.skin.tone = "pale";
+			this.hair.color = "brown";
+			this.hair.length = 13;
 			initStrTouSpeInte(75, 70, 35, 40);
 			initLibSensCor(25, 45, 40);
 			this.weaponName = "large hammer";
@@ -108,7 +110,7 @@ package classes.Scenes.NPCs
 			this.level = 7;
 			this.gems = rand(5) + 25;
 			this.drop = new WeightedDrop(weapons.L_HAMMR, 1);
-			this.tailType = TAIL_TYPE_COW;
+			this.tail.type = Tail.COW;
 			this.special1 = marbleSpecialAttackOne;
 			this.special2 = marbleSpecialAttackTwo;
 			checkMonster();

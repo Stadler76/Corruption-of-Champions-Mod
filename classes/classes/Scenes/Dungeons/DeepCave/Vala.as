@@ -1,6 +1,7 @@
 package classes.Scenes.Dungeons.DeepCave
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.WeightedDrop;
 
@@ -34,7 +35,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 			if (hasStatusEffect(StatusEffects.Milk)) {
 				addStatusValue(StatusEffects.Milk,1,5);
-				outputText("Your " + player.skinDesc + " tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!");
+				outputText("Your " + player.skin.desc + " tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!");
 			}
 			else {
 				createStatusEffect(StatusEffects.Milk,5,0,0,0);
@@ -104,18 +105,18 @@ package classes.Scenes.Dungeons.DeepCave
 			this.imageName = "vala";
 			this.long = "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_GAPING_WIDE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 25, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 4*12;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.skinTone = "fair";
-			this.hairColor = "purple";
-			this.hairLength = 22;
+			this.hips.rating = Hips.RATING_CURVY;
+			this.butt.rating = Butt.RATING_LARGE;
+			this.skin.tone = "fair";
+			this.hair.color = "purple";
+			this.hair.length = 22;
 			initStrTouSpeInte(40, 50, 50, 60);
 			initLibSensCor(55, 35, 50);
 			this.weaponName = "fists";
@@ -141,7 +142,7 @@ package classes.Scenes.Dungeons.DeepCave
 			var wingDesc:String = "shimmering wings";
 			if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) this.drop = new WeightedDrop(consumables.NUMBROX);
 			else this.drop = NO_DROP;
-			this.wingType = WING_TYPE_BEE_LIKE_LARGE;
+			this.theWingType = Wings.BEE_LIKE_LARGE;
 			this.wingDesc = wingDesc;
 			checkMonster();
 		}

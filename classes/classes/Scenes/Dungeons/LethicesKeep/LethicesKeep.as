@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.BaseContent;
 	import classes.Items.Consumables.SimpleConsumable;
@@ -19,9 +19,9 @@ package classes.Scenes.Dungeons.D3
 	 * ...
 	 * @author Gedan
 	 */
-	public class D3 extends BaseContent
+	public class LethicesKeep extends BaseContent
 	{
-		private static const LOGGER:ILogger = LoggerFactory.getLogger(D3);
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(LethicesKeep);
 		
 		public var jeanClaude:JeanClaudeScenes = new JeanClaudeScenes();
 		public var doppleganger:DopplegangerScenes = new DopplegangerScenes();
@@ -33,7 +33,7 @@ package classes.Scenes.Dungeons.D3
 		public var minotaurKing:MinotaurKingScenes = new MinotaurKingScenes();
 		public var lethice:LethiceScenes = new LethiceScenes();
 		
-		public function D3() {
+		public function LethicesKeep() {
 			
 		}
 		
@@ -269,6 +269,7 @@ package classes.Scenes.Dungeons.D3
 			menu(); //Clear bottom buttons
 			inRoomedDungeon = true;
 			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
+			inRoomedDungeonName = "BasiliskCave";
 			getGame().dungeons.move("entrance");
 		}
 		
@@ -276,8 +277,10 @@ package classes.Scenes.Dungeons.D3
 		{
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
+			inRoomedDungeonName = "";
 			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				inRoomedDungeonResume = getGame().exploration.highmountainZoneFunc;
+				inRoomedDungeonName = "GrimdarkMareth";
 			}
 			camp.returnToCampUseOneHour();
 		}
@@ -485,6 +488,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function tunnel2RoomFunc():Boolean
 		{
+			inRoomedDungeonName = "BasiliskCave";
 			outputText("<b><u>Tunnel 2</u></b>\n");
 			outputText(images.showImage("stronghold-tunnel"));
 			outputText("Light trickles in from the east. After all the trekking through these subterranean holes, you’ve got to be close to the mountain’s summit. You know that down the steeply sloped passage will take you back through the basilisks’ chamber if you want to leave the way you came, but a second trip through that crowded hall might be ill-advised. It’d be best to move forward into the sun.");
@@ -493,6 +497,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function edgeofkeepRoomFunc():Boolean
 		{
+			inRoomedDungeonName = "LethicesKeep";
 			outputText("<b><u>Edge of Keep</u></b>\n");
 			outputText(images.showImage("stronghold-edge"));
 			outputText("Standing on the edge of the mountain's summit, you can see Mareth for miles in all direction. It's fairly disconcerting to focus on long with the constant shifting and twisting of the wasted areas, but here and there you can pick out islands of stability in the ephemeral terrain. You blink your eyes to clear the nauseating landscape from your view and turn back to the way ahead. Lethice's fortress lies a short distance to the north, its walls tall and stout. The gates themselves hang open. Likely she didn't expect anyone to make it this far.");

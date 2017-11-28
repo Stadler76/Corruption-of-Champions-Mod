@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class UrtaHeatRut extends NPCAwareContent {
@@ -134,12 +135,12 @@ private function notInterestedInUburDrunkUrtaRuts():void {
 	clearOutput();
 	urta.urtaSprite();
 	outputText("You say it's her who seems to be different today, and gently push her away, before apologizing and making your leave.  ");
-	if (player.faceType == 2) outputText("Your nose does seem to pick up that Urta was and still is getting unusually aroused behind you.  ");
+	if (player.face.type == 2) outputText("Your nose does seem to pick up that Urta was and still is getting unusually aroused behind you.  ");
 	if (player.inRut && player.hasCock()) outputText("[EachCock] twitches in protest at you leaving a willing lay behind.  ");
 	//[Medium lust increase] 
 
 	//[If the PC has a snake tongue]
-	if (player.tongueType == TONGUE_SNAKE) outputText("You instinctively taste the air, and Urta suddenly seems utterly delicious. ");
+	if (player.tongue.type == Tongue.SNAKE) outputText("You instinctively taste the air, and Urta suddenly seems utterly delicious. ");
 	//Rut: 
 	if (player.inRut && player.hasCock()) outputText("Your " + player.multiCockDescriptLight() + " hardens in your pants as you still force yourself to leave.");
 	//[Medium lust increase]

@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.BodyParts.*;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
@@ -61,7 +62,7 @@ package classes.Items.Consumables
 				}
 			}
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss
@@ -70,33 +71,33 @@ package classes.Items.Consumables
 			}
 			//Appearnace Change
 			//Hair
-			if (rand(4) === 0 && changes < changeLimit && player.hairType !== 2) {
+			if (rand(4) === 0 && changes < changeLimit && player.hair.type !== 2) {
 				outputText("\n\nA sensation of weightlessness assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming lighter in your grasp, before you can hardly tell you're holding anything.  Plucking a strand, you hold it up before you, surprised to see... it's completely transparent!  You have transparent hair!");
-				player.hairType = 2;
+				player.hair.type = 2;
 				changes++;
 			}
 			//Skin
-			if (rand(4) === 0 && changes < changeLimit && (player.skinTone !== "sable" && player.skinTone !== "white")) {
+			if (rand(4) === 0 && changes < changeLimit && (player.skin.tone !== "sable" && player.skin.tone !== "white")) {
 				if (rand(2) === 0) {
 					outputText("\n\nA warmth begins in your belly, slowly spreading through your torso and appendages. The heat builds, becoming uncomfortable, then painful, then nearly unbearable. Your eyes unfocus from the pain, and by the time the burning sensation fades, you can already tell something's changed. You raise a hand, staring at the milky-white flesh. Your eyes are drawn to the veins in the back of your hand, darkening to a jet black as you watch. <b>You have white skin, with black veins!</b>");
-					player.skinTone = "white";
-					player.skinAdj = "milky";
-					player.skinDesc = "skin";
-					player.skinType = SKIN_TYPE_PLAIN;
+					player.skin.tone = "white";
+					player.skin.adj = "milky";
+					player.skin.desc = "skin";
+					player.skin.type = Skin.PLAIN;
 				}
 				else {
 					outputText("\n\nA warmth begins in your belly, slowly spreading through your torso and appendages. The heat builds, becoming uncomfortable, then painful, then nearly unbearable. Your eyes unfocus from the pain, and by the time the burning sensation fades, you can already tell something's changed. You raise a hand, staring at the sable flesh. Your eyes are drawn to the veins in the back of your hand, brightening to an ashen tone as you watch.  <b>You have black skin, with white veins!</b>");
-					player.skinTone = "sable";
-					player.skinAdj = "ashen";
-					player.skinDesc = "skin";
-					player.skinType = SKIN_TYPE_PLAIN;
+					player.skin.tone = "sable";
+					player.skin.adj = "ashen";
+					player.skin.desc = "skin";
+					player.skin.type = Skin.PLAIN;
 				}
 				player.underBody.restore();
-				mutations.updateClaws(player.clawType);
+				mutations.updateClaws(player.claws.type);
 				changes++;
 			}
 			//Legs
-			if (changes < changeLimit && player.findPerk(PerkLib.Incorporeality) < 0 && (player.skinTone === "white" || player.skinTone === "sable") && player.hairType === 2) {
+			if (changes < changeLimit && player.findPerk(PerkLib.Incorporeality) < 0 && (player.skin.tone === "white" || player.skin.tone === "sable") && player.hair.type === 2) {
 				//(ghost-legs!  Absolutely no problem with regular encounters, though! [if you somehow got this with a centaur it'd probably do nothing cuz you're not supposed to be a centaur with ectoplasm ya dingus])
 				outputText("\n\nAn otherworldly sensation begins in your belly, working its way to your " + player.hipDescript() + ". Before you can react, your " + player.legs() + " begin to tingle, and you fall on your rump as a large shudder runs through them. As you watch, your lower body shimmers, becoming ethereal, wisps rising from the newly ghost-like " + player.legs() + ". You manage to rise, surprised to find your new, ghostly form to be as sturdy as its former corporeal version. Suddenly, like a dam breaking, fleeting visions and images flow into your head, never lasting long enough for you to concentrate on one. You don't even realize it, but your arms fly up to your head, grasping your temples as you groan in pain. As fast as the mental bombardment came, it disappears, leaving you with a surprising sense of spiritual superiority.  <b>You have ghost legs!</b>\n\n");
 				outputText("<b>(Gained Perk:  Incorporeality</b>)");

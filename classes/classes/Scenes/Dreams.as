@@ -78,7 +78,7 @@ package classes.Scenes {
 				choices[choices.length] = 9;
 			}
 			//Latexy Skinz
-			if (player.skinAdj == "latex" || player.skinAdj == "rubber") {
+			if (player.skin.adj == "latex" || player.skin.adj == "rubber") {
 				choices[choices.length] = 10;
 				choices[choices.length] = 10;
 				choices[choices.length] = 11;
@@ -653,7 +653,7 @@ package classes.Scenes {
 					
 				}
 				else {
-					outputText(" celebrating your victory. You pour glittering liquid in your glass, and drink, enjoying a spiced scent that paints visions of a slutty slave-girl's slightly-spread folds. You take bottle from the table, open wide and guzzle it down, feeling the fire of alcohol burning a path to your belly.  The burning quickly fades to a pleasant warmth that makes you light-headed and giggly. Everyone stares at you, as you grab a lock of the silken strands and watch open-mouthed while streaks so blonde they're almost white flow down the " + player.hairColor + " hair. It goes faster and faster until your hair has changed into perfectly bimbo-blonde, flowing locks.\n\n");
+					outputText(" celebrating your victory. You pour glittering liquid in your glass, and drink, enjoying a spiced scent that paints visions of a slutty slave-girl's slightly-spread folds. You take bottle from the table, open wide and guzzle it down, feeling the fire of alcohol burning a path to your belly.  The burning quickly fades to a pleasant warmth that makes you light-headed and giggly. Everyone stares at you, as you grab a lock of the silken strands and watch open-mouthed while streaks so blonde they're almost white flow down the " + player.hair.color + " hair. It goes faster and faster until your hair has changed into perfectly bimbo-blonde, flowing locks.\n\n");
 					outputText("You raise, and begin to sway your hips from side to side, putting on a show for everyone here. You just feel so... sexy.  Too sexy to hide it. Your body aches to show itself and feel the gaze of strangers.  Mmmm, it makes you so wet!  Wait!?  Wet?  You touch yourself between the " + player.legs() + " and groan when your fingers sink into a sloppy, wet cunt. You sigh and run one hand over your " + player.nippleDescript(0) + "s, admiring how sensitive they're getting.  The big breasts start getting bigger and bigger, soft chest-flesh practically oozing out between your fingers as the squishy mammaries sprout like weeds, expanding well beyond any hand's ability to contain them.  The supple boobs still manage to sit high on your chest, almost gravity defying in their ability to generate cleavage.  You pinch a nipple with one hand while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after your worries, you just need to relax. Sex is so easy and natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your wet vagina like no tomorrow. Your clit is throbbing, and you give it an experimental caress that makes your " + player.legs() + " give out as you cum, splattering female fluids as you convulse nervelessly on the ground. You wake up in sweat, you hand on your groins.");
 				}
 				getGame().dynStats("lus", rand(10) + rand(player.sens / 4));

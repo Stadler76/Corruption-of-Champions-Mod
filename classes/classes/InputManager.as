@@ -1,22 +1,12 @@
 ﻿package classes 
 {
 	import classes.display.BindingPane;
+	import classes.internals.LoggerFactory;
 	import coc.view.MainView;
-	import fl.controls.UIScrollBar;
-	import fl.containers.ScrollPane;
 	import flash.display.Stage;
-	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
-	import flash.utils.ByteArray;
-	import flash.utils.Dictionary;
-	import flash.display.MovieClip;
-	import flash.utils.describeType;
-	import flash.ui.Keyboard;
-	import flash.utils.describeType;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-	
+	import mx.logging.ILogger;
 	/**
 	 * Generic input manager
 	 * I feel sick writing some of these control functors; rather than having some form of queryable game state
@@ -26,6 +16,7 @@
 	 */
 	public class InputManager 
 	{
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(InputManager);
 		// Declaring some consts for clarity when using some of the InputManager methods
 		public static const PRIMARYKEY:Boolean = true;
 		public static const SECONDARYKEY:Boolean = false;
@@ -112,7 +103,7 @@
 					slot = "Secondary";
 				}
 				
-				trace("Listening for a new " + slot + " bind for " + funcName);
+				LOGGER.debug("Listening for a new " + slot + " bind for " + funcName);
 			}
 			
 			_bindingMode = true;
@@ -208,7 +199,7 @@
 				}
 			}
 			
-			if (_debug) trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
+			if (_debug) LOGGER.debug("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
 		}
 		
 		/**
@@ -238,7 +229,7 @@
 		 */
 		public function KeyHandler(e:KeyboardEvent):void
 		{
-			if (_debug) trace("Got key input " + e.keyCode);
+			if (_debug) LOGGER.debug("Got key input " + e.keyCode);
 			
 			// Ignore key input during certain phases of gamestate
 			if (_mainView.eventTestInput.x == 207.5)
@@ -273,7 +264,7 @@
 		{
 			if (_keysToControlMethods[keyCode] != null)
 			{
-				if (_debug) trace("Attempting to exec func [" + _controlMethods[_keysToControlMethods[keyCode]].Name + "]");
+				if (_debug) LOGGER.debug("Attempting to exec func [" + _controlMethods[_keysToControlMethods[keyCode]].Name + "]");
 				
 				_controlMethods[_keysToControlMethods[keyCode]].ExecFunc();
 			}
@@ -371,7 +362,7 @@
 			
 			for (var key:String in _controlMethods)
 			{
-				if (_debug) trace(key);
+				if (_debug) LOGGER.debug(key);
 				funcs.push(_controlMethods[key]);
 			}
 			funcs.sortOn( ["Index"], [Array.NUMERIC] );
@@ -444,7 +435,7 @@
 			
 			for (var key:String in _controlMethods)
 			{
-				if (_debug) trace(key);
+				if (_debug) LOGGER.debug(key);
 				var ctrlObj:* = new Object();
 				ctrlObj.PrimaryKey = _controlMethods[key].PrimaryKey;
 				ctrlObj.SecondaryKey = _controlMethods[key].SecondaryKey;

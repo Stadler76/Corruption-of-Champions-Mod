@@ -1374,7 +1374,7 @@ private function chocoRubiMassage():void {
 		outputText(".");
 	}
 
-	outputText("\n\nRubi politely holds a towel between you as you climb into the bed face down, your head coming to rest on a down-filled pillow.  The fluffy fabric barrier is draped across your [butt], though your feminine boyfriend is sure to fold it so that your [legs] are fully exposed.  The box is placed in front of your " + player.face() + " and opened.  Inside is a candied, fruity treasure - chocolate covered strawberries.  Rubi's slender fingers pluck up one of the delectable treats and press it into your yielding lips, the sweet treat gliding onto your tongue whereupon it goes to work releasing starbursts of flavor.  You hum contently as you devour the confectionary gift, already feeling much more relaxed than you had been.  The rest are within easy reach, and you languidly set to snacking on them.");
+	outputText("\n\nRubi politely holds a towel between you as you climb into the bed face down, your head coming to rest on a down-filled pillow.  The fluffy fabric barrier is draped across your [butt], though your feminine boyfriend is sure to fold it so that your [legs] are fully exposed.  The box is placed in front of your " + player.faceDescript() + " and opened.  Inside is a candied, fruity treasure - chocolate covered strawberries.  Rubi's slender fingers pluck up one of the delectable treats and press it into your yielding lips, the sweet treat gliding onto your tongue whereupon it goes to work releasing starbursts of flavor.  You hum contently as you devour the confectionary gift, already feeling much more relaxed than you had been.  The rest are within easy reach, and you languidly set to snacking on them.");
 
 	outputText("\n\nMeanwhile, you hear Rubi's clothing falling by the wayside.  You aren't sure what else you expected from the sexy little trap.  When you turn to look at [rubi em], you're treated to the sight of [rubi em] all dolled up for you.  [rubi Ey] has a crotchless set of panties clinging to [rubi eir] ");
 	if (flags[kFLAGS.RUBI_BLU_BALLS] < 3) outputText("small");
@@ -1611,8 +1611,6 @@ private function playDressUp():void {
 	}
 	var button:int = 0;
 	while(button < 14 && button < buttonNames.length) {
-		trace("BUTTONNAMES: " + buttonNames[button]);
-		trace("CLOSET: " + closet[button]);
 		if (button < 13 || closet.length < 14) addButton(button,buttonNames[button],dressUpRouter,closet[button]);
 		else addButton(13,"More",playDressUp2);
 		button++;

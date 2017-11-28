@@ -25,9 +25,9 @@ public class SimpleEncounter implements Encounter {
 
 	public function execEncounter():void {
 		var rslt:* = _body();
-		if (rslt !== null && rslt !== undefined) {
+		/*if (rslt !== null && rslt !== undefined) {
 			trace("WARNING SimpleEncounter returned "+rslt+" ("+(typeof rslt)+"), value ignored")
-		}
+		}*/
 	}
 
 	public function encounterName():String {

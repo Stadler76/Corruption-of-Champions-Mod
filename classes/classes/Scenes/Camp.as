@@ -1,66 +1,55 @@
-﻿package classes.Scenes{
+﻿package classes.Scenes {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Camp.*;
-	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Dungeons.*;
+	import classes.Scenes.NPCs.*;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
-
+	import classes.lists.Gender;
 	import coc.view.MainView;
 
-	public class Camp extends NPCAwareContent{
 
-		protected function set timeQ(value:Number):void
-		{
+	public class Camp extends NPCAwareContent {
+
+		protected function set timeQ(value:Number):void {
 			kGAMECLASS.timeQ = value;
 		}
-
-		private function get campQ():Boolean
-		{
+		private function get campQ():Boolean {
 			return kGAMECLASS.campQ;
 		}
-		private function set campQ(value:Boolean):void
-		{
+		private function set campQ(value:Boolean):void {
 			kGAMECLASS.campQ = value;
 		}
-
-		protected function hasItemInStorage(itype:ItemType):Boolean
-		{
+		protected function hasItemInStorage(itype:ItemType):Boolean {
 			return kGAMECLASS.inventory.hasItemInStorage(itype);
 		}
-
 		public function Camp(campInitialize:Function) {
 			campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
 		}
-		
+
 		public var cabinProgress:CabinProgress = new CabinProgress();
 		public var codex:Codex = new Codex();
-		
+
 		public function returnToCamp(timeUsed:int):void {
 			clearOutput();
-			if (timeUsed == 1)
-				outputText("An hour passes...\n");
+			if (timeUsed == 1) outputText("An hour passes...\n");
 			else outputText(Num2Text(timeUsed) + " hours pass...\n");
 			if (!getGame().inCombat) spriteSelect(null);
 			hideMenus();
 			timeQ = timeUsed;
 			goNext(timeUsed, false);
 		}
-		
-		public function returnToCampUseOneHour():void { returnToCamp(1); } //Replacement for event number 13;
-		
-		public function returnToCampUseTwoHours():void { returnToCamp(2); } //Replacement for event number 14;
-		
-		public function returnToCampUseFourHours():void { returnToCamp(4); } //Replacement for event number 15;
-		
-		public function returnToCampUseEightHours():void { returnToCamp(8); } //Replacement for event number 16;
-		
-//  SLEEP_WITH:int = 701;
 
+		public function returnToCampUseOneHour():void { returnToCamp(1); } //Replacement for event number 13;
+		public function returnToCampUseTwoHours():void { returnToCamp(2); } //Replacement for event number 14;
+		public function returnToCampUseFourHours():void { returnToCamp(4); } //Replacement for event number 15;
+		public function returnToCampUseEightHours():void { returnToCamp(8); } //Replacement for event number 16;
+
+	//SLEEP_WITH:int = 701;
 	//Used to determine scenes if you choose to play joke on them. Should the variables be moved to flags?
 	protected var izmaJoinsStream:Boolean;
 	protected var marbleJoinsStream:Boolean;
@@ -69,19 +58,12 @@
 
 private function doCamp():void { //Only called by playerMenu
 	//Force autosave on HARDCORE MODE! And level-up.
-	if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
-	{
-		trace("Autosaving to slot: " + player.slotName);
-		
-		getGame().saves.saveGame(player.slotName);
-	}
+	if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) getGame().saves.saveGame(player.slotName);
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
-	
 	//There were some problems with buttons not being overwritten and bleeding into other scenes
 	//No scenes should involve a button from a previous scene with a camp scene in the middle
 	mainView.clearBottomButtons();
-	
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	//Prioritize clearing before setting room
 	if (player.hasStatusEffect(StatusEffects.PostAkbalSubmission)) {
@@ -99,7 +81,7 @@ private function doCamp():void { //Only called by playerMenu
 		flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 		hideMenus();
 		getGame().charCreation.chooseHistory();
-//		fixHistory();
+		//fixHistory();
 		return;
 	}
 	fixFlags();
@@ -133,51 +115,38 @@ private function doCamp():void { //Only called by playerMenu
 		getGame().dungeons.move(getGame().dungeons._currentRoom);
 		return;
 	}
-	if (!marbleScene.marbleFollower())
-	{
-		if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.isPureEnough(40))
-		{
+	if (!marbleScene.marbleFollower()) {
+		if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.isPureEnough(40)) {
 			hideMenus();
 			marblePurification.pureMarbleDecidesToBeLessOfABitch();
 			return;
 		}
 	}
-	if (marbleScene.marbleFollower())
-	{
-		//Cor < 50
-		//No corrupt: Jojo, Amily, or Vapula
-		//Purifying Murble
-		if (player.isPureEnough(50) && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave()
-			&& flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && flags[kFLAGS.MARBLE_COUNTUP_TO_PURIFYING] >= 200
-			&& player.findPerk(PerkLib.MarblesMilk) < 0)
-		{
+	if (marbleScene.marbleFollower()) {
+		//Cor < 50 / No corrupt: Jojo, Amily, or Vapula / Purifying Murble
+		if (player.isPureEnough(50) && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && flags[kFLAGS.MARBLE_COUNTUP_TO_PURIFYING] >= 200 && player.findPerk(PerkLib.MarblesMilk) < 0) {
 			hideMenus();
 			marblePurification.BLUHBLUH();
 			return;
 		}
-		if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5)
-		{
-			if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && !player.isPureEnough(50))
-			{
+		if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) {
+			if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && !player.isPureEnough(50)) {
 				hideMenus();
 				marblePurification.marbleWarnsPCAboutCorruption();
 				return;
 			}
-			if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && !player.isPureEnough(60))
-			{
+			if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && !player.isPureEnough(60)) {
 				hideMenus();
 				marblePurification.marbleLeavesThePCOverCorruption();
 				return;
 			}
 		}
-		if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7))
-		{
+		if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7)) {
 			hideMenus();
 			marblePurification.rathazulsMurbelReport();
 			return;
 		}
-		if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] == 1)
-		{
+		if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] == 1) {
 			hideMenus();
 			marblePurification.claraShowsUpInCampBECAUSESHESACUNT();
 			return;
@@ -218,8 +187,7 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	if (kGAMECLASS.xmas.xmasMisc.nieveHoliday() && model.time.hours == 6) {
-		if (player.hasKeyItem("Nieve's Tear") >= 0 && flags[kFLAGS.NIEVE_STAGE] != 5)
-		{
+		if (player.hasKeyItem("Nieve's Tear") >= 0 && flags[kFLAGS.NIEVE_STAGE] != 5) {
 			kGAMECLASS.xmas.xmasMisc.returnOfNieve();
 			hideMenus();
 			return;
@@ -271,8 +239,7 @@ private function doCamp():void { //Only called by playerMenu
 		helSpawnScene.maiVisitsHerKids();
 		return;
 	}
-	if (model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && helSpawnScene.helspawnFollower())
-	{
+	if (model.time.hours == 6 && flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.days % 30 == 0 && flags[kFLAGS.SPIDER_BRO_GIFT] == 0 && helSpawnScene.helspawnFollower()) {
 		hideMenus();
 		helSpawnScene.spiderBrosGift();
 		return;
@@ -303,8 +270,7 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Bimbo Sophie Move In Request!
-	if (bimboSophie() && flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 0 && sophieScene.pregnancy.event >= 2)
-	{
+	if (bimboSophie() && flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 0 && sophieScene.pregnancy.event >= 2) {
 		hideMenus();
 		sophieBimbo.sophieMoveInAttempt();
 		return;
@@ -323,16 +289,12 @@ private function doCamp():void { //Only called by playerMenu
 		if (!campQ) {
 			clearOutput();
 			outputText("More time passes...\n");
-			goNext(timeQ, false);
+			doNext(superLoop);
 			return;
 		}
 		else {
-			if (model.time.hours < 6 || model.time.hours > 20) {
-				doSleep();
-			}
-			else {
-				rest();
-			}
+			if (model.time.hours < 6 || model.time.hours > 20) doSleep();
+			else rest();
 			return;
 		}
 	}
@@ -479,15 +441,11 @@ private function doCamp():void { //Only called by playerMenu
 	//Amily and/or Jojo freakout about Vapula!!
 	if (vapulaSlave() && ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] <= 0) || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] <= 0))) {
 		//Jojo but not Amily (Must not be bimbo!)
-		if ((player.hasStatusEffect(StatusEffects.PureCampJojo)) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
-			vapula.mouseWaifuFreakout(false, true);
+		if ((player.hasStatusEffect(StatusEffects.PureCampJojo)) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0) vapula.mouseWaifuFreakout(false, true);
 		//Amily but not Jojo
-		else if ((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && !player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] == 0) {
-			vapula.mouseWaifuFreakout(true, false);
-		}
+		else if ((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && !player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] == 0) vapula.mouseWaifuFreakout(true, false);
 		//Both
-		else
-			vapula.mouseWaifuFreakout(true, true);
+		else vapula.mouseWaifuFreakout(true, true);
 		hideMenus();
 		return;
 	}
@@ -505,7 +463,7 @@ private function doCamp():void { //Only called by playerMenu
 	if (flags[kFLAGS.HEL_INTROS_LEVEL] > 9000 && kGAMECLASS.helScene.followerHel() && isabellaFollower() && flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
 		helFollower.angryHelAndIzzyCampHelHereFirst();
 		hideMenus();
-		return;		
+		return;
 	}
 	//Reset.
 	flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
@@ -532,21 +490,15 @@ private function doCamp():void { //Only called by playerMenu
 	var placesEvent:Function = (placesKnown() ? places : null);
 	clearOutput();
 	updateAchievements();
-	
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(images.showImage("camp-cabin"));
 	else outputText(images.showImage("camp-tent"));
+
 	//Isabella upgrades camp level!
-
-
-	if (isabellaFollower()) {
-		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  ");
-	}
-	//Live in-ness
-	else {
+	if (isabellaFollower()) outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.  ");
+	else { //Live in-ness
 		if (model.time.days < 10) outputText("Your campsite is fairly simple at the moment.  Your tent and bedroll are set in front of the rocks that lead to the portal.  You have a small fire pit as well.  ");
 		if (model.time.days >= 10 && model.time.days < 20) outputText("Your campsite is starting to get a very 'lived-in' look.  The fire-pit is well defined with some rocks you've arranged around it, and your bedroll and tent have been set up in the area most sheltered by rocks.  ");
-		if (model.time.days >= 20) 
-		{
+		if (model.time.days >= 20) {
 			if (!isabellaFollower()) outputText("Your new home is as comfy as a camp site can be.  ");
 			outputText("The fire-pit ");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) outputText("is ");
@@ -554,15 +506,13 @@ private function doCamp():void { //Only called by playerMenu
 			outputText("set up perfectly, and in good repair.  ");
 		}
 	}
+
 	if (model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the camp's perimeter.\n\n");
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n")
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n")
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n")
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of camp.\n\n")
-	if (flags[kFLAGS.CLARA_IMPRISONED] > 0) 
-	{
-		marblePurification.claraCampAddition();
-	}
+	if (flags[kFLAGS.CLARA_IMPRISONED] > 0) marblePurification.claraCampAddition();
 	//Nursery
 	if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ");
@@ -575,41 +525,24 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//HARPY ROOKERY
 	if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) {
-		//Rookery Descriptions (Short)
 		//Small (1 mature daughter)
-		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) {
-			outputText("There's a smallish harpy nest that your daughter has built up with rocks piled high near the fringes of your camp.  It's kind of pathetic, but she seems proud of her accomplishment.  ");
-		}
+		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) outputText("There's a smallish harpy nest that your daughter has built up with rocks piled high near the fringes of your camp.  It's kind of pathetic, but she seems proud of her accomplishment.  ");
 		//Medium (2-3 mature daughters)
-		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 3) {
-			outputText("There's a growing pile of stones built up at the fringes of your camp.  It's big enough to be considered a small hill by this point, dotted with a couple small harpy nests just barely big enough for two.  ");
-		}
+		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 3) outputText("There's a growing pile of stones built up at the fringes of your camp.  It's big enough to be considered a small hill by this point, dotted with a couple small harpy nests just barely big enough for two.  ");
 		//Big (4 mature daughters)
-		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 4) {
-			outputText("The harpy rookery at the edge of camp has gotten pretty big.  It's taller than most of the standing stones that surround the portal, and there's more nests than harpies at this point.  Every now and then you see the four of them managing a boulder they dragged in from somewhere to add to it.  ");
-		}
+		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 4) outputText("The harpy rookery at the edge of camp has gotten pretty big.  It's taller than most of the standing stones that surround the portal, and there's more nests than harpies at this point.  Every now and then you see the four of them managing a boulder they dragged in from somewhere to add to it.  ");
 		//Large (5-10 mature daughters)
-		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 10) {
-			outputText("The rookery has gotten quite large.  It stands nearly two stories tall at this point, dotted with nests and hollowed out places in the center.  It's surrounded by the many feathers the assembled harpies leave behind.  ");
-		}
+		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 10) outputText("The rookery has gotten quite large.  It stands nearly two stories tall at this point, dotted with nests and hollowed out places in the center.  It's surrounded by the many feathers the assembled harpies leave behind.  ");
 		//Giant (11-20 mature daughters)
-		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 20) {
-			outputText("A towering harpy rookery has risen up at the fringes of your camp, filled with all of your harpy brood.  It's at least three stories tall at this point, and it has actually begun to resemble a secure structure.  These harpies are always rebuilding and adding onto it.  ");
-		}
+		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 20) outputText("A towering harpy rookery has risen up at the fringes of your camp, filled with all of your harpy brood.  It's at least three stories tall at this point, and it has actually begun to resemble a secure structure.  These harpies are always rebuilding and adding onto it.  ");
 		//Massive (21-50 mature daughters)
-		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 50) {
-			outputText("A massive harpy rookery towers over the edges of your camp.  It's almost entirely built out of stones that are fit seamlessly into each other, with many ledges and overhangs for nests.  There's a constant hum of activity over there day or night.  ");
-		}
+		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 50) outputText("A massive harpy rookery towers over the edges of your camp.  It's almost entirely built out of stones that are fit seamlessly into each other, with many ledges and overhangs for nests.  There's a constant hum of activity over there day or night.  ");
 		//Immense (51+ Mature daughters)
-		else {
-			outputText("An immense harpy rookery dominates the edge of your camp, towering over the rest of it.  Innumerable harpies flit around it, always working on it, assisted from below by the few sisters unlucky enough to be flightless.  ");
-		}
+		else outputText("An immense harpy rookery dominates the edge of your camp, towering over the rest of it.  Innumerable harpies flit around it, always working on it, assisted from below by the few sisters unlucky enough to be flightless.  ");
 		outputText("\n\n");
 	}
 	//Traps
-	if (player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
-		outputText("A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.  ");
-	}
+	if (player.hasStatusEffect(StatusEffects.DefenseCanopy)) outputText("A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.  ");
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 20 == 0) outputText("A thick wooden wall has been erected to provide a small amount of defense.  ");
 		else outputText("Thick wooden walls have been erected to provide some defense.  ");
@@ -627,11 +560,8 @@ private function doCamp():void { //Only called by playerMenu
 			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
 		}
 		if (flags[kFLAGS.CAMP_WALL_STATUES] > 0) {
-			if (flags[kFLAGS.CAMP_WALL_STATUES] == 1)
-				output.text("Looking around the perimeter of your camp you spy a single marble imp statue.  ");
-			else
-				output.text("Dotted around and on the wall that surrounds your camp you spy "
-				            + num2Text(flags[kFLAGS.CAMP_WALL_STATUES]) + " marble imp statues.  ");
+			if (flags[kFLAGS.CAMP_WALL_STATUES] == 1) output.text("Looking around the perimeter of your camp you spy a single marble imp statue.  ");
+			else output.text("Dotted around and on the wall that surrounds your camp you spy " + num2Text(flags[kFLAGS.CAMP_WALL_STATUES]) + " marble imp statues.  ");
 		}
 		outputText("\n\n");
 	}
@@ -646,44 +576,27 @@ private function doCamp():void { //Only called by playerMenu
 		outputText("Since Ember began " + emberMF("his","her") + " 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his","her") + " den.  There're quite a lot of them.\n\n");
 	}
 	//Dat tree!
-	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
-		outputText("On the outer edges, half-hidden behind a rock, is a large, very healthy tree.  It grew fairly fast, but seems to be fully developed now.  Holli, Marae's corrupt spawn, lives within.\n\n");
-	}
-	
-	//Display NPCs
-	campFollowers(true);
-	
-	//MOUSEBITCH
-	if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) outputText("On the outer edges, half-hidden behind a rock, is a large, very healthy tree.  It grew fairly fast, but seems to be fully developed now.  Holli, Marae's corrupt spawn, lives within.\n\n");
+
+	campFollowers(true); //Display NPCs
+
+	if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) { //MOUSEBITCH
 		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) outputText("Amily has relocated her grass bedding to the opposite side of the camp from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.\n\n");
 		else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your " + (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "cabin": "bedroll") + ". A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n");
 	}
-	
+
 	campLoversMenu(true);
-	
 	campSlavesMenu(true);
 
-	//Hunger check!
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
-	{
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25) { //Hunger check!
 		outputText("<b>You have to eat something; your stomach is growling " + (player.hunger < 1 ? "painfully": "loudly") + ". </b>");
-		if (player.hunger < 10) {
-			outputText("<b>You are getting thinner and you're losing muscles. </b>");
-		}
-		if (player.hunger <= 0) {
-			outputText("<b>You are getting weaker due to starvation. </b>");
-		}
+		if (player.hunger < 10) outputText("<b>You are getting thinner and you're losing muscles. </b>");
+		if (player.hunger <= 0) outputText("<b>You are getting weaker due to starvation. </b>");
 		outputText("\n\n");
 	}
-	
-	//The uber horny
-	if (player.lust >= player.maxLust()) {
-		if (player.hasStatusEffect(StatusEffects.Dysfunction)) {
-			outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n");
-		}
-		else if (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
-			outputText("<b>You are delibitatingly aroused, but your sex organs are so difficult to reach that masturbation isn't at the forefront of your mind.</b>\n\n");
-		}
+	if (player.lust >= player.maxLust()) { //The uber horny
+		if (player.hasStatusEffect(StatusEffects.Dysfunction)) outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n");
+		else if (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) outputText("<b>You are delibitatingly aroused, but your sex organs are so difficult to reach that masturbation isn't at the forefront of your mind.</b>\n\n");
 		else {
 			outputText("<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>\n\n");
 			exploreEvent = null;
@@ -692,28 +605,16 @@ private function doCamp():void { //Only called by playerMenu
 		}
 	}
 	//Set up rest stuff
-	//Night
-	if (model.time.hours < 6 || model.time.hours > 20) {
-		if (flags[kFLAGS.GAME_END] == 0) { //Lethice not defeated
-			outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
-		}
+	if (model.time.hours < 6 || model.time.hours > 20) { //Night
+		if (flags[kFLAGS.GAME_END] == 0) outputText("It is dark out, made worse by the lack of stars in the sky.  A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n"); //Lethice not defeated
 		else { //Lethice defeated, proceed with weather
 			switch(flags[kFLAGS.CURRENT_WEATHER]) {
 				case 0:
-				case 1:
-					outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
-					break;
-				case 2:
-					outputText("It is dark out. The sky is covered by clouds and you could faintly make out the red spot in the clouds which is presumed to be the moon. It's far too dark to leave camp.\n\n");
-					break;
-				case 3:
-					outputText("It is dark out. The sky is covered by clouds raining water upon the ground. It's far too dark to leave camp.\n\n");
-					break;
-				case 4:
-					outputText("It is dark out. The sky is covered by clouds raining water upon the ground and occasionally the sky flashes with lightning. It's far too dark to leave camp.\n\n");
-					break;
-				default:
-					outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
+				case 1: outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n"); break;
+				case 2: outputText("It is dark out. The sky is covered by clouds and you could faintly make out the red spot in the clouds which is presumed to be the moon. It's far too dark to leave camp.\n\n"); break;
+				case 3: outputText("It is dark out. The sky is covered by clouds raining water upon the ground. It's far too dark to leave camp.\n\n"); break;
+				case 4: outputText("It is dark out. The sky is covered by clouds raining water upon the ground and occasionally the sky flashes with lightning. It's far too dark to leave camp.\n\n"); break;
+				default:outputText("It is dark out. Stars dot the night sky. A blood-red moon hangs in the sky, seeming to watch you, but providing little light. It's far too dark to leave camp.\n\n");
 			}
 		}
 		if (companionsCount() > 0 && !(model.time.hours > 4 && model.time.hours < 23)) {
@@ -722,48 +623,30 @@ private function doCamp():void { //Only called by playerMenu
 		exploreEvent = null;
 		placesEvent = null;
 	}
-	//Day Time!
-	else {
+	else { //Day Time!
 		if (flags[kFLAGS.GAME_END] > 0) { //Lethice defeated
 			switch(flags[kFLAGS.CURRENT_WEATHER]) {
-				case 0:
-					outputText("The sun shines brightly, illuminating the now-blue sky. ");
-					break;
-				case 1:
-					outputText("The sun shines brightly, illuminating the now-blue sky. Occasional clouds dot the sky, appearing to form different shapes. ");
-					break;
-				case 2:
-					outputText("The sky is light gray as it's covered by the clouds. ");
-					break;
-				case 3:
-					outputText("The sky is fairly dark as it's covered by the clouds that rain water upon the lands. ");
-					break;
-				case 4:
-					outputText("The sky is dark as it's thick with dark grey clouds that rain and occasionally the sky flashes with lightning. ");
-					break;
+				case 0: outputText("The sun shines brightly, illuminating the now-blue sky. "); break;
+				case 1: outputText("The sun shines brightly, illuminating the now-blue sky. Occasional clouds dot the sky, appearing to form different shapes. "); break;
+				case 2: outputText("The sky is light gray as it's covered by the clouds. "); break;
+				case 3: outputText("The sky is fairly dark as it's covered by the clouds that rain water upon the lands. "); break;
+				case 4: outputText("The sky is dark as it's thick with dark grey clouds that rain and occasionally the sky flashes with lightning. "); break;
 			}
 		}
 		if (model.time.hours == 19) {
-			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
-				outputText("The sun is close to the horizon, getting ready to set. ");
-			else
-				outputText("Though you cannot see the sun, the sky near the horizon began to glow orange. ");
+			if (flags[kFLAGS.CURRENT_WEATHER] < 2) outputText("The sun is close to the horizon, getting ready to set. ");
+			else outputText("Though you cannot see the sun, the sky near the horizon began to glow orange. ");
 		}
 		if (model.time.hours == 20) {
-			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
-				outputText("The sun has already set below the horizon. The sky glows orange. ");
-			else
-				outputText("Even with the clouds, the sky near the horizon is glowing bright orange. The sun may have already set at this point. ");
+			if (flags[kFLAGS.CURRENT_WEATHER] < 2) outputText("The sun has already set below the horizon. The sky glows orange. ");
+			else outputText("Even with the clouds, the sky near the horizon is glowing bright orange. The sun may have already set at this point. ");
 		}
 		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n");
-
 	}
 	//Weather!
 
-	
 	//Unlock cabin.
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 14)
-	{
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 14) {
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
 		clearOutput();
 		outputText(images.showImage("camp-dream"));
@@ -772,18 +655,16 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Unlock something in character creation.
-	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 0)
-	{
-		if (player.gender == GENDER_HERM)
-		{
+	if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] == 0) {
+		if (player.gender == Gender.HERM) {
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = 1;
 			outputText("\n\n<b>Congratulations! You have unlocked hermaphrodite option on character creation, accessible from New Game Plus!</b>");
 			kGAMECLASS.saves.savePermObject(false);
 		}
 	}
-	
+
 	dynStats(); // workaround for #484 'statbars do not fit in their place'
-	
+
 	//Menu
 	menu();
 	addButton(0, "Explore", exploreEvent).hint("Explore to find new regions and visit any discovered regions.");
@@ -797,25 +678,13 @@ private function doCamp():void { //Only called by playerMenu
 	var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
 		addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-		if (
-				(
-						player.hasPerk(PerkLib.HistoryReligious) && player.isPureEnough(66)
-						||
-						player.hasPerk(PerkLib.Enlightened) && player.isPureEnough(10)
-				) && (
-						!player.hasStatusEffect(StatusEffects.Exgartuan)
-						||
-						player.statusEffectv2(StatusEffects.Exgartuan) != 0
-				)
-				|| flags[kFLAGS.SFW_MODE] >= 1
-		) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
+		if ((player.hasPerk(PerkLib.HistoryReligious) && player.isPureEnough(66)||player.hasPerk(PerkLib.Enlightened) && player.isPureEnough(10)) && (!player.hasStatusEffect(StatusEffects.Exgartuan)||player.statusEffectv2(StatusEffects.Exgartuan) != 0)|| flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 	}
 	addButton(9, "Wait", doWait).hint("Wait for four hours.\n\nShift-click to wait until the night comes.");
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", rest).hint("Rest for four hours.\n\nShift-click to rest until fully healed or night comes.");
 	if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", doSleep).hint("Turn yourself in for the night.");
 
 	if (isAprilFools()) addButton(12, "Cash Shop", getGame().aprilFools.pay2WinSelection).hint("Need more gems? Want to buy special items to give you the edge? Purchase with real money!");
-	
 	//Remove buttons according to conditions.
 	if (model.time.hours >= 21 || model.time.hours < 6) {
 		removeButton(0); //Explore
@@ -837,23 +706,20 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Hunger Bad End
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0)
-	{
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) {
 		//Bad end at 0 HP!
-		if (player.HP <= 0 && (player.str + player.tou) < 30)
-		{
+		if (player.HP <= 0 && (player.str + player.tou) < 30) {
 			badEndHunger();
 			return;
 		}
 	}
 	//Min Lust Bad End (Must not have any removable/temporary min lust.)
-	if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.hasStatusEffect(StatusEffects.BimboChampagne) && !player.hasStatusEffect(StatusEffects.Luststick) && player.jewelryEffectId != 1)
-	{
+	if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.hasStatusEffect(StatusEffects.BimboChampagne) && !player.hasStatusEffect(StatusEffects.Luststick) && player.jewelryEffectId != 1) {
 		badEndMinLust();
 		return;
 	}
 }
-	
+
 public function hasCompanions():Boolean {
 	return companionsCount() > 0;
 }
@@ -914,6 +780,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		menu();
 	}
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
+		outputText(images.showImage("event-dlc"));
 		getGame().aprilFools.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
 		return;
 	}
@@ -934,9 +801,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		addButton(0, "Amily", amilyScene.amilyFollowerEncounter);
 	}
 	//Amily out freaking Urta?
-	else if (flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) {
-		outputText("Amily's bed of grass and herbs lies empty, the mouse-woman still absent from her sojourn to meet your other lover.\n\n");
-	}
+	else if (flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) outputText("Amily's bed of grass and herbs lies empty, the mouse-woman still absent from her sojourn to meet your other lover.\n\n");
 	//Arian
 	if (arianScene.arianFollower()) {
 		outputText("Arian's tent is here, if you'd like to go inside.\n\n");
@@ -946,22 +811,18 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	if (kGAMECLASS.helScene.followerHel()) {
 		if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) {
 			//Hel @ Camp: Follower Menu
-			//(6-7) 
+			//(6-7)
 			if (model.time.hours <= 7) outputText("Hel is currently sitting at the edge of camp, surrounded by her scraps of armor, sword, and a few half-empty bottles of vodka.  By the way she's grunting and growling, it looks like she's getting ready to flip her shit and go running off into the plains in her berserker state.\n\n");
-			//(8a-5p) 
+			//(8a-5p)
 			else if (model.time.hours <= 17) outputText("Hel's out of camp at the moment, adventuring on the plains.  You're sure she'd be on hand in moments if you needed her, though.\n\n");
-			//5-7) 
+			//5-7)
 			else if (model.time.hours <= 19) outputText("Hel's out visiting her family in Tel'Adre right now, though you're sure she's only moments away if you need her.\n\n");
 			//(7+)
 			else outputText("Hel is fussing around her hammock, checking her gear and sharpening her collection of blades.  Each time you glance her way, though, the salamander puts a little extra sway in her hips and her tail wags happily.\n\n");
 		}
 		else if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1) {
-			if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) {
-				outputText("Hel has returned to camp, though for now she looks a bit bored.  Perhaps she is waiting on something.\n\n");
-			}
-			else {
-				outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
-			}
+			if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) outputText("Hel has returned to camp, though for now she looks a bit bored.  Perhaps she is waiting on something.\n\n");
+			else outputText("<b>You see the salamander Helia pacing around camp, anxiously awaiting your departure to the harpy roost. Seeing you looking her way, she perks up, obviously ready to get underway.</b>\n\n");
 		}
 		addButton(2, "Helia", helFollower.heliaFollowerMenu);
 	}
@@ -979,21 +840,16 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			outputText("Isabella ");
 			var izzyCreeps:Array = [];
 			//Build array of choices for izzy to talk to
-			if (player.hasStatusEffect(StatusEffects.CampRathazul))
-				izzyCreeps[izzyCreeps.length] = 0;
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo))
-				izzyCreeps[izzyCreeps.length] = 1;
-			if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
-				izzyCreeps[izzyCreeps.length] = 2;
-			if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0)
-				izzyCreeps[izzyCreeps.length] = 3;
-			if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
-				izzyCreeps[izzyCreeps.length] = 4;
+			if (player.hasStatusEffect(StatusEffects.CampRathazul)) izzyCreeps[izzyCreeps.length] = 0;
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) izzyCreeps[izzyCreeps.length] = 1;
+			if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) izzyCreeps[izzyCreeps.length] = 2;
+			if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) izzyCreeps[izzyCreeps.length] = 3;
+			if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) izzyCreeps[izzyCreeps.length] = 4;
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
 			//Select!
 			var choice:int = rand(izzyCreeps.length);
-				
+
 			if (izzyCreeps[choice] == 0) outputText("is sitting down with Rathazul, chatting amiably about the weather.");
 			else if (izzyCreeps[choice] == 1) outputText("is sitting down with Jojo, smiling knowingly as the mouse struggles to keep his eyes on her face.");
 			else if (izzyCreeps[choice] == 2) outputText("is talking with Amily, sharing stories of the fights she's been in and the enemies she's faced down.  Amily seems interested but unimpressed.");
@@ -1015,21 +871,11 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else outputText("Isabella looks incredibly bored right now.");
 		if (isabellaScene.totalIsabellaChildren() > 0) {
 			var babiesList:Array = [];
-			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0) {
-				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS))) + " human son" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) == 1 ? "" : "s"));
-			}
-			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0) {
-				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS))) + " human daughter" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) == 1 ? "" : "s"));
-			}
-			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0) {
-				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "" : "s"));
-			}
-			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0) {
-				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS))) + " cow girl" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "" : "s"));
-			}
-			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0) {
-				babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS))) + " cow herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "" : "s"));
-			}
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0) babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS))) + " human son" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) == 1 ? "" : "s"));
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) > 0) babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS))) + " human daughter" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_GIRLS) == 1 ? "" : "s"));
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) > 0) babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS))) + " human herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_HERMS) == 1 ? "" : "s"));
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) > 0) babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS))) + " cow girl" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWGIRLS) == 1 ? "" : "s"));
+			if (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) > 0) babiesList.push((isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "a" : num2Text(isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS))) + " cow herm" + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_COWFUTAS) == 1 ? "" : "s"));
 			outputText("  Isabella has set up a small part of her \"corner\" in the camp as a nursery. She has sawn a " + (Math.ceil(isabellaScene.totalIsabellaChildren() / 2) == 1 ? "barrel" : "number of barrels") + " in half and lined " + (Math.ceil(isabellaScene.totalIsabellaChildren() / 2) == 1 ? "it" : "them") + " with blankets and pillows to serve as rocking cribs. "); 
 			outputText("You have " + formatStringArray(babiesList) + " with her, all living here; unlike native Marethians, they will need years and years of care before they can go out into the world on their own.");
 		}
@@ -1058,11 +904,10 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			outputText("\n\n");
 			addButton(4, "Izma", izmaScene.izmaFollowerMenu);
 		}
-
 	}
 	//Kiha!
 	if (followerKiha()) {
-		//(6-7) 
+		//(6-7)
 		if (model.time.hours < 7) outputText("Kiha is sitting near the fire, her axe laying across her knees as she polishes it.\n\n");
 		else if (model.time.hours < 19) {
 			if (kihaFollower.totalKihaChildren() > 0 && flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 160 && (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] % 3 == 0 || model.time.hours == 17)) outputText("Kiha is breastfeeding her offspring right now.\n\n");
@@ -1086,20 +931,20 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		addButton(5, "Kiha", kihaScene.encounterKiha);
 	}
 	//MARBLE
-	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
+	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] === 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
 		//Normal Murbles
-		if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
+		if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] === 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
 		//requires at least 1 kid, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
-		else if (flags[kFLAGS.MARBLE_KIDS] >= 1 && (model.time.hours == 19 || model.time.hours == 20)) {
+		else if (flags[kFLAGS.MARBLE_KIDS] >= 1 && (model.time.hours === 19 || model.time.hours === 20)) {
 			outputText("Marble herself is currently in the nursery, putting your ");
 			if (flags[kFLAGS.MARBLE_KIDS] == 1) outputText("child");
 			else outputText("children");
 			outputText(" to bed.");
 		}
 		//at 6-7 in the morning, scene always displays at this time
-		else if (model.time.hours == 6 || model.time.hours == 7) outputText("Marble is off in an open area to the side of your camp right now.  She is practicing with her large hammer, going through her daily training.");
+		else if (model.time.hours === 6 || model.time.hours === 7) outputText("Marble is off in an open area to the side of your camp right now.  She is practicing with her large hammer, going through her daily training.");
 		//after nightfall, scene always displays at this time unless PC is wormed
 		else if (model.time.hours >= 21 && !player.hasStatusEffect(StatusEffects.Infested)) {
 			outputText("Marble is hanging around her bedroll waiting for you to come to bed.  However, sometimes she lies down for a bit, and sometimes she paces next to it.");
@@ -1107,28 +952,22 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		}
 		else if (flags[kFLAGS.MARBLE_KIDS] > 0 && model.time.hours < 19 && model.time.hours > 7) {
 			//requires at least 6 kids, and no other parental characters in camp
-			if (rand(2) == 0 && flags[kFLAGS.MARBLE_KIDS] > 5) outputText("Marble is currently tending to your kids, but she looks a bit stressed out right now.  It looks like " + num2Text(flags[kFLAGS.MARBLE_KIDS]) + " might just be too many for her to handle on her own...");
+			if (rand(2) === 0 && flags[kFLAGS.MARBLE_KIDS] > 5) outputText("Marble is currently tending to your kids, but she looks a bit stressed out right now.  It looks like " + num2Text(flags[kFLAGS.MARBLE_KIDS]) + " might just be too many for her to handle on her own...");
 			//requires at least 4 kids
-			else if (rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] > 3) outputText("Marble herself is in the camp right now, telling a story about her travels around the world to her kids as they gather around her.  The children are completely enthralled by her words.  You can't help but smile.");
+			else if (rand(3) === 0 && flags[kFLAGS.MARBLE_KIDS] > 3) outputText("Marble herself is in the camp right now, telling a story about her travels around the world to her kids as they gather around her.  The children are completely enthralled by her words.  You can't help but smile.");
 			//Requires 2 boys
-			else if (rand(3) == 0 && flags[kFLAGS.MARBLE_BOYS] > 1)
-			{
-				outputText("Marble herself is currently refereeing a wrestling match between two of your sons.  It seems like it's a contest to see which one of them gets to go for a ride between her breasts in a game of <i>Bull Blasters</i>, while the loser has to sit on her shoulders.");
-			}
+			else if (rand(3) === 0 && flags[kFLAGS.MARBLE_BOYS] > 1) outputText("Marble herself is currently refereeing a wrestling match between two of your sons.  It seems like it's a contest to see which one of them gets to go for a ride between her breasts in a game of <i>Bull Blasters</i>, while the loser has to sit on her shoulders.");
 			//requires at least 2 kids
-			else if (rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] - flags[kFLAGS.MARBLE_BOYS] > 1) outputText("Marble herself is involved in a play fight with two of your kids brandishing small sticks.  It seems that the <i>mommy monster</i> is terrorising the camp and needs to be stopped by the <i>Mighty Moo and her sidekick Bovine Lass</i>.");
-			else if (rand(3) == 0 && flags[kFLAGS.MARBLE_KIDS] > 1) outputText("Marble herself is out right now; she's taken her kids to go visit Whitney.  You're sure though that she'll be back within the hour, so you could just wait if you needed her.");
-			else {
-				//requires at least 1 kid
-				if (rand(2) == 0) 
-				{
+			else if (rand(3) === 0 && flags[kFLAGS.MARBLE_KIDS] - flags[kFLAGS.MARBLE_BOYS] > 1) outputText("Marble herself is involved in a play fight with two of your kids brandishing small sticks.  It seems that the <i>mommy monster</i> is terrorising the camp and needs to be stopped by the <i>Mighty Moo and her sidekick Bovine Lass</i>.");
+			else if (rand(3) === 0 && flags[kFLAGS.MARBLE_KIDS] > 1) outputText("Marble herself is out right now; she's taken her kids to go visit Whitney.  You're sure though that she'll be back within the hour, so you could just wait if you needed her.");
+			else { //requires at least 1 kid
+				if (rand(2) === 0) {
 					outputText("Marble herself is nursing ");
 					if (flags[kFLAGS.MARBLE_KIDS] > 1) outputText("one of your cow-girl children");
 					else outputText("your cow-girl child");
 					outputText(" with a content look on her face.");
 				}
-				else 
-				{
+				else {
 					outputText("Marble herself is watching your kid");
 					if (flags[kFLAGS.MARBLE_KIDS] > 0) outputText("s");
 					outputText(" playing around the camp right now.");
@@ -1139,19 +978,14 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		else if (temp == 0) outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
 		else if (temp == 1) outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
 		else if (temp == 2) outputText("Marble herself isn't at the camp right now; she is probably off getting supplies, though she'll be back soon enough.");
-		else if (temp == 3) {
-			outputText("Marble herself is resting on her bedroll right now.");
-		}
-		else if (temp == 4) {
-			outputText("Marble herself is wandering around the camp right now.");
-		}
-		if (temp < 3) {
-			outputText("  You're sure she'd be back in moments if you needed her.");
-		}
+		else if (temp == 3) outputText("Marble herself is resting on her bedroll right now.");
+		else if (temp == 4) outputText("Marble herself is wandering around the camp right now.");
+
+		if (temp < 3) outputText("  You're sure she'd be back in moments if you needed her.");
 		//Out getting family
 		//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 		outputText("\n\n");
-		if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) addButton(6, "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
+		if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] !== 4) addButton(6, "Marble", marbleScene.interactWithMarbleAtCamp).hint("Go to Marble the cowgirl for talk and companionship.");
 	}
 	//Nieve
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) {
@@ -1182,6 +1016,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 		menu();
 	}
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0 && !descOnly) {
+		outputText(images.showImage("event-dlc"));
 		getGame().aprilFools.DLCPrompt("Slaves DLC", "Get the Slaves DLC to be able to interact with them. Show them that you're dominating!", "$4.99", doCamp);
 		return;
 	}
@@ -1194,9 +1029,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 		addButton(1, flags[kFLAGS.MILK_NAME], milkWaifu.milkyMenu);
 	}
 	//Ceraph
-	if (ceraphIsFollower()) {
-		addButton(5, "Ceraph", ceraphFollowerScene.ceraphFollowerEncounter);
-	}
+	if (ceraphIsFollower()) addButton(5, "Ceraph", ceraphFollowerScene.ceraphFollowerEncounter);
 	//Vapula
 	if (vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 		vapula.vapulaSlaveFlavorText();
@@ -1209,8 +1042,7 @@ public function campSlavesMenu(descOnly:Boolean = false):void {
 		addButton(10, "Amily", amilyScene.amilyFollowerEncounter);
 	}
 	//JOJO
-	//If Jojo is corrupted, add him to the masturbate menu.
-	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) {
+	if (campCorruptJojo() && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) { //if Jojo is corrupted, add him to the masturbate menu.
 		outputText("From time to time you can hear movement from around your camp, and you routinely find thick puddles of mouse semen.  You are sure Jojo is here if you ever need to sate yourself.\n\n");
 		addButton(11, "Jojo", jojoScene.corruptCampJojo).hint("Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.");
 	}
@@ -1277,12 +1109,9 @@ public function campFollowers(descOnly:Boolean = false):void {
 		}
 	}
 	//Helspawn
-	if (helspawnFollower()) {
-		addButton(3, flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
-	}
+	if (helspawnFollower()) addButton(3, flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 	//RATHAZUL
-	//if rathazul has joined the camp
-	if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) { //if rathazul has joined the camp
 		if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] <= 1) {
 			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  ");
 			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText("The alchemist is absent from his usual work location. He must be sleeping right now.");
@@ -1293,46 +1122,28 @@ public function campFollowers(descOnly:Boolean = false):void {
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n");
 		addButton(4, "Rathazul", kGAMECLASS.rathazul.returnToRathazulMenu).hint("Visit with Rathazul to see what alchemical supplies and services he has available at the moment.");
 	}
-	else
-	{
-		if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1)
-		{
+	else {
+		if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1) {
 			outputText("There is a note on your ");
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
 			else outputText("bedroll");
 			outputText(". It reads: \"<i>Come see me at the lake. I've finished your spider-silk ");
 			switch(flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE]) {
-				case 1: 
-					outputText("armor");
-					break;
-				case 2: 
-					outputText("robes");
-					break;
-				case 3: 
-					outputText("bra");
-					break;
-				case 4: 
-					outputText("panties");
-					break;
-				case 5: 
-					outputText("loincloth");
-					break;
-				default: outputText("robes");
+				case 1: outputText("armor"); break;
+				case 2: outputText("robes"); break;
+				case 3: outputText("bra"); break;
+				case 4: outputText("panties"); break;
+				case 5: outputText("loincloth"); break;
+				default:outputText("robes");
 			}
 			outputText(". -Rathazul</i>\".\n\n");
 		}
 	}
 	//Shouldra
-	if (followerShouldra()) {
-		addButton(5, "Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
-	}
+	if (followerShouldra()) addButton(5, "Shouldra", shouldraFollower.shouldraFollowerScreen).hint("Talk to Shouldra. She is currently residing in your body.");
 	//Valeria
-	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
-		addButton(6, "Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
-	}
-	if (player.armor == armors.GOOARMR) {
-		addButtonDisabled(6, "Valeria", "You are currently wearing Valeria. Unequip from your Inventory menu if you want to interact with her.");
-	}
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) addButton(6, "Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
+	if (player.armor == armors.GOOARMR) addButtonDisabled(6, "Valeria", "You are currently wearing Valeria. Unequip from your Inventory menu if you want to interact with her.");
 	addButton(14,"Back",playerMenu);
 }
 
@@ -1343,19 +1154,14 @@ private function campActions():void {
 	hideMenus();
 	menu();
 	clearOutput();
-	outputText(images.showImage("camp-doings"));
+	outputText(images.showImage("campfire"));
 	outputText("What would you like to do?")
 	addButton(0, "SwimInStream", swimInStream).hint("Swim in stream and relax to pass time.", "Swim In Stream");
 	addButton(1, "ExaminePortal", examinePortal).hint("Examine the portal. This scene is placeholder.", "Examine Portal"); //Examine portal.
-	if (model.time.hours == 19) {
-		addButton(2, "Watch Sunset", watchSunset).hint("Watch the sunset and relax."); //Relax and watch at the sunset.
-	}
-	else if (model.time.hours >= 20 && flags[kFLAGS.LETHICE_DEFEATED] > 0) {
-		addButton(2, "Stargaze", watchStars).hint("Look at the starry night sky."); //Stargaze. Only available after Lethice is defeated.
-	}
-	else {
-		addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
-	}
+	if (model.time.hours == 19) addButton(2, "Watch Sunset", watchSunset).hint("Watch the sunset and relax."); //Relax and watch at the sunset.
+	else if (model.time.hours >= 20 && flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(2, "Stargaze", watchStars).hint("Look at the starry night sky."); //Stargaze. Only available after Lethice is defeated.
+	else addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
+
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(3, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
 	addButton(4, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
@@ -1375,14 +1181,14 @@ private function swimInStream():void {
 	var amilyJoinsStream:Boolean = false;
 	var emberJoinsStream:Boolean = false;
 	var rathazulJoinsStream:Boolean = false; //Rare, 10% chance.
-	
+
 	var prankChooser:Number = rand(3);
 	clearOutput();
 	outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ");
 	if (player.armorName == "slutty swimwear") outputText("you are going to swim while wearing just your swimwear. ");
 	else outputText("you strip off your [armor] until you are completely naked. ");
-		if (player.gender == 3) outputText(images.showImage("camp-stream-herm"));
-		else if (player.gender == 2) outputText(images.showImage("camp-stream-female"));
+		if (player.hasCock() && player.hasVagina()) outputText(images.showImage("camp-stream-herm"));
+		else if (player.hasVagina()) outputText(images.showImage("camp-stream-female"));
 		else outputText(images.showImage("camp-stream-male"));
 	outputText("You step into the flowing waters. You shiver at first but you step in deeper. Incredibly, it's not too deep. ");
 	if (player.tallness < 60) outputText("Your feet aren't even touching the riverbed. ");
@@ -1390,47 +1196,40 @@ private function swimInStream():void {
 	if (player.tallness >= 72) outputText("Your feet are touching touching the riverbed and your head is above water. You bend down a bit so you're at the right height. ");
 	outputText("\n\nYou begin to swim around and relax. ");
 	//Izma!
-	if (rand(2) == 0 && camp.izmaFollower())
-	{
+	if (rand(2) == 0 && camp.izmaFollower()) {
 		outputText("\n\nYour tiger-shark beta, Izma, joins you. You are frightened at first when you saw the fin protruding from the water and the fin approaches you! ");
 		outputText("As the fin approaches you, the familiar figure comes up. \"<i>I was going to enjoy my daily swim, alpha,</i>\" she says.");
 		izmaJoinsStream = true;
 	}
 	//Helia!
-	if (rand(2) == 0 && camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM])
-	{
+	if (rand(2) == 0 && camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) {
 		outputText("\n\nHelia, your salamander lover, joins in for a swim. \"<i>Hey, lover mine!</i>\" she says. As she enters the waters, the water seems to become warmer until it begins to steam like a sauna.");
 		heliaJoinsStream = true;
 	}
 	//Marble!
-	if (rand(2) == 0 && camp.marbleFollower() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4)
-	{
+	if (rand(2) == 0 && camp.marbleFollower() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4) {
 		outputText("\n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.");
 		marbleJoinsStream = true;
 	}
 	//Amily! (Must not be corrupted and must have given Slutty Swimwear.)
-	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)
-	{
+	if (rand(2) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0) {
 		outputText("\n\nYour mouse-girl lover Amily is standing at the riverbank. She looks flattering in her bikini")
 		if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", especially when her penis is exposed")
 		outputText(". She walks into the waters and swims.  ")
 		amilyJoinsStream = true;
 	}
 	//Ember 
-	if (rand(4) == 0 && camp.followerEmber())
-	{
+	if (rand(4) == 0 && camp.followerEmber()) {
 		outputText("\n\nYou catch a glimpse of Ember taking a daily bath.")
 		emberJoinsStream = true;
 	}
 	//Rathazul (RARE)
-	if (rand(10) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul))
-	{
+	if (rand(10) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.")
 		rathazulJoinsStream = true;
 	}
 	//Pranks!
-	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) )
-	{
+	if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0)) ) {
 		outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?")
 		doYesNo(swimInStreamPrank1, swimInStreamFinish);
 		return;
@@ -1446,7 +1245,6 @@ private function swimInStream():void {
 		return;
 	}*/
 	else doNext(swimInStreamFinish);
-	
 }
 
 private function swimInStreamPrank1():void {
@@ -1461,23 +1259,19 @@ private function swimInStreamPrank1():void {
 	//Play joke on them!
 	clearOutput();
 	outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ")
-	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false && izmaJoinsStream == true)
-	{
+	if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false && izmaJoinsStream == true) {
 		outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.");
 		pranked = true;
 	}
-	if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false && heliaJoinsStream == true)
-	{
+	if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false && heliaJoinsStream == true) {
 		outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says.");
 		pranked = true;
 	}
-	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false && marbleJoinsStream == true)
-	{
+	if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false && marbleJoinsStream == true) {
 		outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She says, \"<i>You're naughty, you know, sweetie!</i>\"");
 		pranked = true;
 	}
-	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)
-	{
+	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)  {
 		outputText("");
 		pranked = true;
 	}*/
@@ -1495,8 +1289,7 @@ private function swimInStreamFap():void {
 private function swimInStreamFinish():void {
 	clearOutput();
 	//Blown up factory? Corruption gains.
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && player.cor < 50) 
-	{
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && player.cor < 50) {
 		outputText("You feel a bit dirtier after swimming in the tainted waters. \n\n");
 		dynStats("cor", 0.5);
 		dynStats("lust", 15, "scale", true);
@@ -1516,9 +1309,7 @@ private function examinePortal():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	else {
-		outputText("You walk over to the portal, reminded by how and why you came. You let out a sigh, knowing you can't return to Ingnam.");
-	}
+	else outputText("You walk over to the portal, reminded by how and why you came. You let out a sigh, knowing you can't return to Ingnam.");
 	doNext(playerMenu);
 }
 
@@ -1528,46 +1319,37 @@ private function watchSunset():void {
 	outputText("You pick a location where the sun is clearly visible from that particular spot and sit down. The sun is just above the horizon, ready to set. It's such a beautiful view. \n\n");
 	var randText:Number = rand(3);
 	//Childhood nostalgia GO!
-	if (randText == 0)
-	{
-		if (player.cor < 33) 
-		{
+	if (randText == 0) {
+		if (player.cor < 33) {
 			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood.");
 			dynStats("cor", -1, "lib", -1, "lust", -30, "scale", false);
 		}
-		if (player.cor >= 33 && player.cor < 66) 
-		{
+		if (player.cor >= 33 && player.cor < 66) {
 			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories are somewhat twisted from some of the perverted moments. You shake your head and just relax.");
 			dynStats("cor", -0.5, "lib", -1, "lust", -20, "scale", false);
 		}
-		if (player.cor >= 66) 
-		{
+		if (player.cor >= 66) {
 			outputText("A wave of nostalgia washes over you as you remember your greatest moments from your childhood. Suddenly, your memories twist into some of the dark and perverted moments. You chuckle at that moment but you shake your head and focus on relaxing.");
 			dynStats("cor", 0, "lib", -1, "lust", -10, "scale", false);
 		}
 	}
 	//Greatest moments GO!
-	if (randText == 1)
-	{
-		if (player.cor < 33) 
-		{
+	if (randText == 1) {
+		if (player.cor < 33) {
 			outputText("You reflect back on your greatest adventures and how curiosity got the best of you. You remember some of the greatest places you discovered.");
 			dynStats("lust", -30, "scale", false);
 		}
-		if (player.cor >= 33 && player.cor < 66) 
-		{
+		if (player.cor >= 33 && player.cor < 66) {
 			outputText("You reflect back on your greatest adventures. Of course, some of them involved fucking and getting fucked by the denizens of Mareth. You suddenly open your eyes from the memory and just relax, wondering why you thought of that in the first place.");
 			dynStats("lust", -20, "scale", false);
 		}
-		if (player.cor >= 66) 
-		{
+		if (player.cor >= 66) {
 			outputText("You reflect back on your greatest adventures. You chuckle at the moments you were dominating and the moments you were submitting. You suddenly open your eyes from the memory and just relax.");
 			dynStats("lust", -10, "scale", false);
 		}
 	}
 	//Greatest moments GO!
-	if (randText >= 2)
-	{
+	if (randText >= 2) {
 		outputText("You think of what you'd like to ");
 		if (rand(2) == 0) outputText("do");
 		else outputText("accomplish");
@@ -1587,26 +1369,16 @@ private function watchStars():void {
 	outputText("\n\nYou relax and point at various constellations.");
 	var consellationChoice:int = rand(4);
 	switch(consellationChoice) {
-		case 0:
-			outputText("\n\nOne of them even appears to be phallic. You blush at the arrangement.");
-			break;
-		case 1:
-			outputText("\n\nOne of them even appears to be arranged like breasts. You blush at the arrangement.");
-			break;
-		case 2:
-			outputText("\n\nOne of the constellations have the stars arranged to form the shape of a centaur. Interesting.");
-			break;
-		case 3:
-			outputText("\n\nAh, the familiar Big Dipper. Wait a minute... you remember that constellation back in Ingnam. You swear the star arrangements are nearly the same.");
-			break;
-		default:
-			outputText("\n\nSomehow, one of them spells out \"ERROR\". Maybe you should let Kitteh6660 know?");
+		case 0: outputText("\n\nOne of them even appears to be phallic. You blush at the arrangement."); break;
+		case 1: outputText("\n\nOne of them even appears to be arranged like breasts. You blush at the arrangement."); break;
+		case 2: outputText("\n\nOne of the constellations have the stars arranged to form the shape of a centaur. Interesting."); break;
+		case 3: outputText("\n\nAh, the familiar Big Dipper. Wait a minute... you remember that constellation back in Ingnam. You swear the star arrangements are nearly the same."); break;
+		default:outputText("\n\nSomehow, one of them spells out \"ERROR\". Maybe you should let Kitteh6660 know?");
 	}
 	outputText("\n\nYou let your mind wander and relax.");
 	dynStats("lus", -15, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
-
 
 //-----------------
 //-- REST
@@ -1618,18 +1390,14 @@ public function rest():void {
 	var multiplier:Number = 1.0;
 	var fatRecovery:Number = 4;
 	var hpRecovery:Number = 10;
-	
+
 	if (player.findPerk(PerkLib.Medicine) >= 0) hpRecovery *= 1.5;
-	
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
-		multiplier += 0.5;
+
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam) multiplier += 0.5;
 	//Marble withdrawal
-	if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl))
-		multiplier /= 2;
+	if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) multiplier /= 2;
 	//Hungry
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
-		multiplier /= 2;
-		
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25) multiplier /= 2;
 	if (timeQ == 0) {
 		var hpBefore:int = player.HP;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) { //Rest until fully healed, midnight or hunger wake.
@@ -1637,25 +1405,22 @@ public function rest():void {
 				timeQ += 1;
 				HPChange(hpRecovery * multiplier, false); // no display since it is meant to be full rest anyway
 				player.changeFatigue( -fatRecovery * multiplier); 
-				if (timeQ + model.time.hours == 24 || flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 5)
-					break;
-			}	
+				if (timeQ + model.time.hours == 24 || flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 5) break;
+			}
 			if (timeQ == 0) timeQ = 1;
 			if (timeQ > 21 - model.time.hours) timeQ = 21 - model.time.hours;
-		} else {
+		}
+		else {
 			timeQ = Math.min(4, 21 - model.time.hours);
 			HPChange(timeQ * hpRecovery * multiplier, false);
 			player.changeFatigue(timeQ * -fatRecovery * multiplier); 
 		}
-		
-		
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
-		{
+
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam) {
 			if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You head into your cabin to rest. You lie down on your bed to rest for an hour.\n");
 		}
-		else 
-		{
+		else {
 			if (timeQ != 1) outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down to rest for an hour.\n");
 		}
@@ -1665,19 +1430,11 @@ public function rest():void {
 			dynStats("tou", -.1, "int", -.1);
 		}
 		//Bee cock
-		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
-		}
+		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
 		//Starved goo armor
-		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0 && valeria.valeriaFluidsEnabled()) {
-			outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
-		}
+		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0 && valeria.valeriaFluidsEnabled()) outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 		//Hungry
-		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
-		{
-			outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n");
-		}
-		
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25) outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n");
 		kGAMECLASS.HPChangeNotify(player.HP - hpBefore);
 	}
 	else {
@@ -1686,7 +1443,7 @@ public function rest():void {
 		if (timeQ != 1) outputText("You continue to rest for " + num2Text(timeQ) + " more hours.\n");
 		else outputText("You continue to rest for another hour.\n");
 	}
-	goNext(timeQ,true);
+	doNext(superLoop);
 }
 
 //-----------------
@@ -1712,25 +1469,19 @@ public function doWait():void {
 			player.changeFatigue(-fatRecovery * timeQ);
 		}
 		//Bee cock
-		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
-		}
+		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
 		//Starved goo armor
-		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
-			outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
-		}
+		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 		//REGULAR HP/FATIGUE RECOVERY
-		else {
-			//fatigue
-			player.changeFatigue(-fatRecovery * timeQ); 
-		}
+		else player.changeFatigue(-fatRecovery * timeQ); //fatigue
 	}
 	else {
 		if (timeQ != 1) outputText("You continue to wait for " + num2Text(timeQ) + " more hours.\n");
 		else outputText("You continue to wait for another hour.\n");
 	}
-	goNext(timeQ,true);
+	doNext(superLoop);
 }
+
 //-----------------
 //-- SLEEP
 //-----------------
@@ -1751,16 +1502,9 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if (model.time.hours == 3) timeQ = 3;
 		if (model.time.hours == 4) timeQ = 2;
 		if (model.time.hours == 5) timeQ = 1;
-		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && flags[kFLAGS.IN_PRISON] == 0) {
-			timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
-		}
-		//Autosave stuff		
-		if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") 
-		{
-			trace("Autosaving to slot: " + player.slotName);
-			
-			getGame().saves.saveGame(player.slotName);
-		}
+		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && flags[kFLAGS.IN_PRISON] == 0) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
+		//Autosave stuff
+		if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") getGame().saves.saveGame(player.slotName);
 		//Clear screen
 		if (clrScreen) clearOutput();
 		if (prison.inPrison) {
@@ -1768,7 +1512,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			if (timeQ > 1) outputText("s");
 			outputText(". ");
 			sleepRecovery(true);
-			goNext(timeQ, true);
+			doNext(superLoop);
 			return;
 		}
 		/******************************************************************/
@@ -1801,10 +1545,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		/******************************************************************/
 		/*       SLEEP WITH SYSTEM GOOOO                                  */
 		/******************************************************************/
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
-		{
-			outputText("You enter your cabin to turn yourself in for the night. ")
-		}
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) outputText("You enter your cabin to turn yourself in for the night. ")
 		//Marble Sleepies
 		if (marbleScene.marbleAtCamp() && player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.SLEEP_WITH] == "Marble" && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
 			outputText(images.showImage("camp-sleep-marble"));
@@ -1820,7 +1561,8 @@ public function doSleep(clrScreen:Boolean = true):void {
 		}
 		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 			if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
-				outputText(images.showImage("camp-sleep-ember"));
+				if (flags[kFLAGS.EMBER_GENDER] == 2) outputText(images.showImage("camp-sleep-ember-female"));
+				else outputText(images.showImage("camp-sleep-ember-male"));
 				outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour. Ember drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm. ");
 			}
 			else {
@@ -1878,7 +1620,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
 	}
-	goNext(timeQ, true);
+	doNext(superLoop);
 }
 //For shit that breaks normal sleep processing.
 public function sleepWrapper():void {
@@ -1901,25 +1643,32 @@ public function sleepWrapper():void {
 	if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 	else outputText("You lie down to resume sleeping for the remaining hour.\n");
 	sleepRecovery(true);
+	menu();
+	doNext(superLoop);
+}
+
+public function superLoop():void {
+	clearOutput();
+	if (player.cor >= 95) outputText ("You can constantly enjoy pleasant smell of the sulfur in the air. It's so sweet!");
+	else if (player.cor >= 75) outputText ("You didn't happen to smell any sulfur, by chance?");
+	else if (player.cor >= 50) outputText ("You can smell the impure air. You don't like it...");
+	else if (player.cor >= 25) outputText ("There is some muggy in the air and you worried about it.");
+	else outputText ("You can constantly enjoy pleasant freshness in the air. And it's wonderful!");
 	goNext(timeQ, true);
+	return
 }
 
 public function sleepRecovery(display:Boolean = false):void {
 	var multiplier:Number = 1.0;
 	var fatRecovery:Number = 20;
 	var hpRecovery:Number = 20;
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble"))
-	{
-		multiplier += 0.5;
-	}
-	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
-	{
-		if (player.hunger < 25)
-		{
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) multiplier += 0.5;
+	if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
+		if (player.hunger < 25) {
 			outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n");
 			multiplier *= 0.5;
 		}
-	}	
+	}
 	//Marble withdrawl
 	if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 		if (display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
@@ -1932,13 +1681,9 @@ public function sleepRecovery(display:Boolean = false):void {
 		multiplier *= 0.75;
 	}
 	//Bee cock
-	if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-		outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
-	}
+	if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
 	//Starved goo armor
-	if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
-		outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
-	}
+	if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
 	//REGULAR HP/FATIGUE RECOVERY
 	HPChange(timeQ * hpRecovery * multiplier, display);
 	//fatigue
@@ -1993,7 +1738,6 @@ private function callRathazulAndEscapeBadEnd():void {
 	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto,</i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n")
 	doNext(camp.returnToCampUseOneHour);
 }
-
 //Bad End if you starved to death.
 public function badEndHunger():void {
 	clearOutput();
@@ -2002,12 +1746,8 @@ public function badEndHunger():void {
 	outputText("Too weak to be able to stand up, you collapse onto the ground. Your vision blurs as the world around you finally fades to black. ");
 	if (companionsCount() > 0) {
 		outputText("\n\n");
-		if (companionsCount() > 1) {
-			outputText("Your companions gather to mourn over your passing.");
-		}
-		else {
-			outputText("Your fellow companion mourns over your passing.");
-		}
+		if (companionsCount() > 1) outputText("Your companions gather to mourn over your passing.");
+		else outputText("Your fellow companion mourns over your passing.");
 	}
 	player.HP = 0;
 	getGame().gameOver();
@@ -2109,21 +1849,18 @@ public function places():Boolean {
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(0, "Bazaar", kGAMECLASS.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
 	if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(1, "Boat", kGAMECLASS.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 4");
 	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) {
-		if (flags[kFLAGS.GAR_NAME] == 0) addButton(2, "Cathedral", kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork).hint("Visit the ruined cathedral you've recently discovered.");
+		if (flags[kFLAGS.GAR_NAME] === 0) addButton(2, "Cathedral", kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork).hint("Visit the ruined cathedral you've recently discovered.");
 		else addButton(2, "Cathedral", kGAMECLASS.gargoyle.returnToCathedral).hint("Visit the ruined cathedral where " + flags[kFLAGS.GAR_NAME] + " resides.");
 	}
 	if (dungeonFound()) addButton(3, "Dungeons", dungeons).hint("Delve into dungeons.");
-	
 	if (farmFound()) addButton(5, "Farm", kGAMECLASS.farm.farmExploreEncounter).hint("Visit Whitney's farm.");
-	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(6, "Owca", kGAMECLASS.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
+	if (flags[kFLAGS.OWCA_UNLOCKED] === 1) addButton(6, "Owca", kGAMECLASS.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(7, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(8, "Salon", kGAMECLASS.mountain.salon.salonGreeting).hint("Visit the salon for hair services.");
-	
 	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(10, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(11, "Town Ruins", kGAMECLASS.townRuins.exploreVillageRuin).hint("Visit the village ruins.");
 	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", kGAMECLASS.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 	if (debug) addButton(13, "Ingnam", kGAMECLASS.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
-	
 	//addButton(4, "Next", placesPage2);
 	addButton(14, "Back", playerMenu);
 	return true;
@@ -2148,7 +1885,7 @@ private function dungeons():void {
 	//Turn on dungeon 2
 	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", getGame().dungeons.deepcave.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (kGAMECLASS.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
 	//Turn on dungeon 3
-	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", kGAMECLASS.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + (flags[kFLAGS.LETHICE_DEFEATED] > 0 ? "\n\nYou have defeated Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (kGAMECLASS.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
+	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", kGAMECLASS.lethicesKeep.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + (flags[kFLAGS.LETHICE_DEFEATED] > 0 ? "\n\nYou have defeated Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (kGAMECLASS.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 	//Side dungeons
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", getGame().dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (kGAMECLASS.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", getGame().dungeons.heltower.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (kGAMECLASS.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
@@ -2161,12 +1898,9 @@ private function dungeons():void {
 
 private function exgartuanCampUpdate():void {
 	//Update Exgartuan stuff
-	if (player.hasStatusEffect(StatusEffects.Exgartuan))
-	{
-		trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));
+	if (player.hasStatusEffect(StatusEffects.Exgartuan)) {
 		//if too small dick, remove him
-		if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0))
-		{
+		if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
 			clearOutput();
 			outputText(images.showImage("camp-exgartuan-urine"));
 			outputText("<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.");
@@ -2176,13 +1910,12 @@ private function exgartuanCampUpdate():void {
 			awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true);
 		}
 		//Tit removal
-		else if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
-		{
+		else if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12) {
 			clearOutput();
 			outputText(images.showImage("camp-exgartuan-milk"));
 			outputText("<b>Black milk dribbles from your " + player.nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>");
 			player.removeStatusEffect(StatusEffects.Exgartuan);
-		}		
+		}
 	}
 	doNext(playerMenu);
 }
@@ -2191,22 +1924,17 @@ private function exgartuanCampUpdate():void {
 public function wakeFromBadEnd():void {
 	clearOutput();
 	outputText(images.showImage("camp-nightmare"));
-	trace("Escaping bad end!");
 	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
 	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
-	if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) { //FOURTH WALL BREAKER
-		outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end.</i>\"");
-	}
+	if (flags[kFLAGS.TIMES_BAD_ENDED] >= 2) outputText("\n\nYou mumble to yourself \"<i>Another goddamn bad-end.</i>\""); //FOURTH WALL BREAKER
 	if (marbleFollower()) outputText("\n\n\"<i>Are you okay, sweetie?</i>\" Marble asks.  You assure her that you're fine; you've just had a nightmare.");
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0) player.hunger = 40;
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 		outputText("\n\nYou realize the consequences of having oversized balls and you NEED to shrink it right away. Reducto will do.");
 		player.ballSize = (14 + (player.str / 2) + (player.tallness / 4));
 	}
-	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] > 0 || debug)
-		outputText("\n\nYou get up, still feeling confused from the nightmares.");
-	else
-		outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] > 0 || debug) outputText("\n\nYou get up, still feeling confused from the nightmares.");
+	else outputText("\n\nYou get up, still feeling traumatized from the nightmares.");
 	//Skip time forward
 	model.time.days++;
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
@@ -2250,21 +1978,19 @@ private function buildCampWallPrompt():void {
 		return;
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] == 0) {
-		outputText(images.showImage("camp-wall-part0"));
+		outputText(images.showImage("camp-wall-partI"));
 		outputText("A feeling of unrest grows within you as the population of your camp is growing. Maybe it's time you build a wall to secure the perimeter?\n\n");
 		flags[kFLAGS.CAMP_WALL_PROGRESS] = 1;
 	}
 	else {
-		if (flags[kFLAGS.CAMP_WALL_PROGRESS] <= 20) outputText(images.showImage("camp-wall-part1"));
-		else outputText(images.showImage("camp-wall-part2"));
+		if (flags[kFLAGS.CAMP_WALL_PROGRESS] <= 20) outputText(images.showImage("camp-wall-partII"));
+		outputText(images.showImage("camp-wall-partIII"));
 		outputText("You can continue work on building the wall that surrounds your camp.\n\n");
 		outputText("Segments complete: " + Math.floor(flags[kFLAGS.CAMP_WALL_PROGRESS] / 20) + "/5\n\n");
 	}
 	kGAMECLASS.camp.cabinProgress.checkMaterials();
 	outputText("\n\nIt will cost 50 nails, 50 stones and 100 wood to work on a segment of the wall.\n\n");
-	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 50 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) {
-		doYesNo(buildCampWall, doCamp);
-	}
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && player.keyItemv1("Carpenter's Toolbox") >= 50 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 50) doYesNo(buildCampWall, doCamp);
 	else {
 		outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
 		doNext(doCamp);
@@ -2326,7 +2052,7 @@ private function buildCampWall():void {
 		doNext(camp.returnToCampUseFourHours);
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-		outputText(images.showImage("camp-wall-part3"));
+		outputText(images.showImage("camp-wall-partIV"));
 		outputText("\n\n<b>Well done! You have finished the wall! You can build a gate and decorate wall with imp skulls to further deter whoever might try to come and rape you.</b>");
 		output.flush();
 	}
@@ -2350,7 +2076,6 @@ private function buildCampGatePrompt():void {
 		outputText("\n<b>Unfortunately, you do not have sufficient resources.</b>");
 		doNext(doCamp);
 	}
-
 }
 
 private function buildCampGate():void {
@@ -2372,14 +2097,14 @@ private function buildCampGate():void {
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
 	player.addKeyValue("Carpenter's Toolbox", 1, -100);
 	clearOutput();
-	outputText(images.showImage("camp-wall-part4"));
 	outputText("You pull out a book titled \"Carpenter's Guide\" and flip pages until you come across instructions on how to build a gate that can be opened and closed. You spend minutes looking at the instructions and memorize the procedures.");
 	flags[kFLAGS.CAMP_WALL_GATE] = 1;
 	outputText("\n\nYou take the wood from supplies, saw the wood and cut them into planks before nailing them together. ");
 	if (helpers > 0) {
 		outputText("\n\n" + formatStringArray(helperArray));
-		outputText(" " + (helpers == 1 ? "assists" : "assist") + " you with building the gate, helping to speed up the process and make construction less fatiguing.");
+		outputText(" " + (helpers == 1 ? "assists" : "assist") + " you with building the gate, helping to speed up the process and make construction less fatiguing. ");
 	}
+	outputText(images.showImage("camp-wall-partV"));
 	outputText("\n\nYou eventually finish building the gate.");
 	//Gain fatigue.
 	var fatigueAmount:int = 100;
@@ -2417,23 +2142,15 @@ private function hangImpSkull():void {
 
 public function homeDesc():String {
 	var textToChoose:String;
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
-		textToChoose = "cabin";
-	}
-	else {
-		textToChoose = "tent";
-	}
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) textToChoose = "cabin";
+	else textToChoose = "tent";
 	return textToChoose;
 }
 
 public function bedDesc():String {
 	var textToChoose:String;
-	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
-		textToChoose = "bed";
-	}
-	else {
-		textToChoose = "bedroll";
-	}
+	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) textToChoose = "bed";
+	else textToChoose = "bedroll";
 	return textToChoose;
 }
 
@@ -2508,8 +2225,7 @@ private function ascendForReal():void {
 
 public function setLevelButton():Boolean {
 	if ((player.XP >= player.requiredXP() && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
-		if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)
-		{
+		if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap) {
 			if (player.statPoints > 0) {
 				mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 				mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
@@ -2526,13 +2242,10 @@ public function setLevelButton():Boolean {
 				kGAMECLASS.playerInfo.levelUpGo();
 				return true; //True indicates that you should be routed to level-up.
 			}
-			
 		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
-		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.playerInfo.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) {
-			mainView.statsView.hideLevelUp();
-		}
+		if (player.str >= player.getMaxStats("str") && player.tou >= player.getMaxStats("tou") && player.inte >= player.getMaxStats("int") && player.spe >= player.getMaxStats("spe") && (player.perkPoints <= 0 || kGAMECLASS.playerInfo.buildPerkList().length <= 0) && (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap)) mainView.statsView.hideLevelUp();
 	}
 	else {
 		mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -2562,7 +2275,7 @@ public function getCampPopulation():int {
 		if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
 		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT]) pop += flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
 	}
-	
+
 	//Lovers
 	//Amily's offsprings don't stay in your camp.
 	//Helia can only have 1 child: Helspawn. She's included in companions count.
@@ -2685,7 +2398,6 @@ private function promptSaveUpdate():void {
 			if (player.armorName == "comfortable underclothes") player.setArmor(ArmorLib.NOTHING);
 			if (player.armorName == "revealing fur loincloths") inventory.takeItem(player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES), promptSaveUpdate);
 			if (player.weaponName == "dragon-shell shield") inventory.takeItem(player.setWeapon(WeaponLib.FISTS), promptSaveUpdate);
-			
 			doNext(doCamp);
 			return;
 		}
@@ -2767,7 +2479,7 @@ private function furColorSelection1():void {
 	addButton(1, "Chocolate", chooseFurColorSaveUpdate, "chocolate");
 	addButton(2, "Auburn", chooseFurColorSaveUpdate, "auburn");
 	addButton(3, "Orange", chooseFurColorSaveUpdate, "orange");
-	
+
 	addButton(5, "Caramel", chooseFurColorSaveUpdate, "caramel");
 	addButton(6, "Peach", chooseFurColorSaveUpdate, "peach");
 	addButton(7, "Sandy Brown", chooseFurColorSaveUpdate, "sandy brown");
@@ -2781,23 +2493,23 @@ private function furColorSelection2():void {
 	addButton(1, "Black", chooseFurColorSaveUpdate, "black");
 	addButton(2, "Dark gray", chooseFurColorSaveUpdate, "dark gray");
 	addButton(3, "Gray", chooseFurColorSaveUpdate, "gray");
-	
+
 	addButton(5, "Light gray", chooseFurColorSaveUpdate, "light gray");
 	addButton(6, "Silver", chooseFurColorSaveUpdate, "silver");
 	addButton(7, "White", chooseFurColorSaveUpdate, "white");
-	
+
 	addButton(10, "Orange&White", chooseFurColorSaveUpdate, "orange and white");
 	addButton(11, "Brown&White", chooseFurColorSaveUpdate, "brown and white");
 	addButton(12, "Black&White", chooseFurColorSaveUpdate, "black and white");
 	addButton(13, "Gray&White", chooseFurColorSaveUpdate, "gray and white");
-	
+
 	addButton(9, "Previous", furColorSelection1);
 }
 
 private function chooseFurColorSaveUpdate(color:String):void {
 	clearOutput();
 	outputText("You now have " + color + " fur. You will be returned to your camp now and you can continue your usual gameplay.");
-	player.furColor = color;
+	player.skin.furColor = color;
 	doNext(doCamp);
 }
 
@@ -2809,13 +2521,12 @@ private function updateSaveFlags():void {
 	var current:int = 0;
 	var target:int = 65;
 	while (current < target) {
-		trace(flags[startOldIds + current])
+		//trace(flags[startOldIds + current])
 		if (flags[startOldIds + current] != 0) {
 			flags[startNewIds + current] = flags[startOldIds + current];
-			trace(flags[startNewIds + current])
+			//trace(flags[startNewIds + current])
 			flags[startOldIds + current] = 0;
 		}
-		else trace("Skipped")
 		current++;
 	}
 	if (player.ass.analLooseness > 0 && flags[kFLAGS.TIMES_ORGASMED] <= 0) flags[kFLAGS.TIMES_ORGASMED] = 1;
@@ -2826,9 +2537,7 @@ private function updateSaveFlags():void {
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) {
 		outputText("As a compensation, here's 50 wood and 150 nails to re-construct your furniture.\n\n")
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 50;
-		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
-			player.addKeyValue("Carpenter's Toolbox", 1, 150);
-		}
+		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) player.addKeyValue("Carpenter's Toolbox", 1, 150);
 	}
 	//flags[kFLAGS.SHIFT_KEY_DOWN] = 0; //Moved to unFuckSave().
 	outputText("Don't worry. Just save the game and you're good to go. I, Kitteh6660, will work out the bugs from time to time, while also bringing in cool new stuff!")
@@ -2841,7 +2550,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0) awardAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR);
 	if (player.hasKeyItem("Zetaz's Map") >= 0) awardAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE);
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS);
-	
+
 	//Zones
 	if (flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0 && flags[kFLAGS.TIMES_EXPLORED_LAKE] > 0 && flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0 && flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
 	if (placesCount() >= 10) awardAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER);
@@ -2857,7 +2566,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.BOG_EXPLORED] >= 100) awardAchievement("All murky", kACHIEVEMENTS.ZONE_ALL_MURKY);
 	if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100) awardAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN);
 	if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] >= 100) awardAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED);
-	
+
 	if (player.statusEffectv1(StatusEffects.BoatDiscovery) >= 15) awardAchievement("Sea Legs", kACHIEVEMENTS.ZONE_SEA_LEGS);
 	if (player.statusEffectv1(StatusEffects.MetWhitney) >= 30) awardAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER);
 	if (flags[kFLAGS.AMILY_VILLAGE_EXPLORED] >= 15) awardAchievement("Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST);
@@ -2885,7 +2594,7 @@ private function updateAchievements():void {
 	if (getCampPopulation() >= 1000) awardAchievement("City-State", kACHIEVEMENTS.POPULATION_CITY_STATE);
 	if (getCampPopulation() >= 2500) awardAchievement("Kingdom", kACHIEVEMENTS.POPULATION_KINGDOM);
 	if (getCampPopulation() >= 5000) awardAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE);
-	
+
 	//Time
 	if (model.time.days >= 30) awardAchievement("It's been a month", kACHIEVEMENTS.TIME_MONTH);
 	if (model.time.days >= 180) awardAchievement("Half-year", kACHIEVEMENTS.TIME_HALF_YEAR);
@@ -2895,7 +2604,7 @@ private function updateAchievements():void {
 	if (model.time.days >= 1825) awardAchievement("In for the long haul", kACHIEVEMENTS.TIME_LONG_HAUL);
 	if (model.time.days >= 3650) awardAchievement("Decade", kACHIEVEMENTS.TIME_DECADE);
 	if (model.time.days >= 36500) awardAchievement("Century", kACHIEVEMENTS.TIME_CENTURY);
-	
+
 	//Dungeon
 	var dungeonsCleared:int = 0;
 	if (kGAMECLASS.dungeons.checkFactoryClear()) {
@@ -2922,34 +2631,31 @@ private function updateAchievements():void {
 	if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
 	if (dungeonsCleared >= 3) awardAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE);
 	if (dungeonsCleared >= 5) awardAchievement("Delver Master", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
-	
+
 	//Fashion
 	if (player.armor == armors.W_ROBES && player.weapon == weapons.W_STAFF) awardAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD);
 	if (player.previouslyWornClothes.length >= 10) awardAchievement("Cosplayer", kACHIEVEMENTS.FASHION_COSPLAYER);
 	if ((player.armor == armors.RBBRCLT || player.armor == armors.BONSTRP || player.armor == armors.NURSECL) && (player.weapon == weapons.RIDINGC || player.weapon == weapons.WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.L_WHIP)) awardAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX);
 	if (player.armor != ArmorLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING) awardAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO);
 	if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
-	
+
 	//Wealth
 	if (player.gems >= 1000) awardAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH);
 	if (player.gems >= 10000) awardAchievement("Hoarder", kACHIEVEMENTS.WEALTH_HOARDER);
 	if (player.gems >= 100000) awardAchievement("Gem Vault", kACHIEVEMENTS.WEALTH_GEM_VAULT);
 	if (player.gems >= 1000000) awardAchievement("Millionaire", kACHIEVEMENTS.WEALTH_MILLIONAIRE);
-	
+
 	//Combat
 	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) ) awardAchievement("Wizard", kACHIEVEMENTS.COMBAT_WIZARD);
-	
 	//Realistic
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_FASTING] >= 168 && flags[kFLAGS.HUNGER_ENABLED] > 0) awardAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING)
-
 	//Holiday
 	if (flags[kFLAGS.NIEVE_STAGE] == 5) awardAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III);
 	if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_EGG_HUNTER] >= 10) awardAchievement("Egg Hunter", kACHIEVEMENTS.HOLIDAY_EGG_HUNTER);
-
 	//General
 	if (flags[kFLAGS.DEMONS_DEFEATED] >= 25 && model.time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
 	if (flags[kFLAGS.LETHICE_KILLED] == 2) awardAchievement("Off With Her Head!", kACHIEVEMENTS.GENERAL_OFF_WITH_HER_HEAD);
-	
+
 	var NPCsBadEnds:int = 0; //Check how many NPCs got bad-ended.
 	if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) NPCsBadEnds++;
@@ -2965,7 +2671,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.DRIDERINCUBUS_KILLED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.MINOTAURKING_KILLED] > 0) NPCsBadEnds++;
 	if (flags[kFLAGS.LETHICE_KILLED] > 0) NPCsBadEnds++;
-	
+
 	if (NPCsBadEnds >= 3) awardAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER);
 
 	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 1) awardAchievement("What's Happening to Me?", kACHIEVEMENTS.GENERAL_WHATS_HAPPENING_TO_ME);
@@ -2974,7 +2680,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 1) awardAchievement("Fapfapfap", kACHIEVEMENTS.GENERAL_FAPFAPFAP);
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 10) awardAchievement("Faptastic", kACHIEVEMENTS.GENERAL_FAPTASTIC);
 	if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER);
-	
+
 	if (player.armorName == "goo armor") awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 	if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
 	if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);
@@ -3000,7 +2706,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] >= 1) awardAchievement("Home Sweet Home", kACHIEVEMENTS.GENERAL_HOME_SWEET_HOME);
 	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) awardAchievement("Make Mareth Great Again", kACHIEVEMENTS.GENERAL_MAKE_MARETH_GREAT_AGAIN);
 	if (player.tallness >= 132) awardAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11);
-	
+
 	var NPCsDedicked:int = 0; //Check how many NPCs are dedicked.
 	if (flags[kFLAGS.IZMA_NO_COCK] > 0) NPCsDedicked++;
 	if (flags[kFLAGS.CERAPH_HIDING_DICK] > 0) NPCsDedicked++;

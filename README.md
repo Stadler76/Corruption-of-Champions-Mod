@@ -1,7 +1,7 @@
 Corruption-of-Champions-Mod
 ===========================
 [![Build Status](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod.svg?branch=master)](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod)
-[Sonarqube code analysis](https://sonarqube.com/dashboard?id=org.github.Kitteh6660%3ACorruption-of-Champions-Mod)
+[![Sonarcloud code analysis](https://sonarcloud.io/api/badges/gate?key=org.github.Kitteh6660%3ACorruption-of-Champions-Mod)](https://sonarcloud.io/dashboard?id=org.github.Kitteh6660%3ACorruption-of-Champions-Mod)
 
 NOTE: CONTAINS MATURE CONTENT. ADULTS ONLY
 
@@ -32,3 +32,22 @@ To build run:
 If you want to skip the tests (not recommended):
 
 `ant release` or `ant debug`
+
+To list the ant targets:
+
+`ant -p`
+
+## Testing
+To run all tests:
+
+`ant test`
+
+To run a single test case or suite:
+
+`ant test-single -Dtestclass=fqn.of.class`
+
+example:
+
+`ant test-single -Dtestclass=classes.Items.MutationsTest`
+
+This allows for quick testing or debugging of classes without running all tests.

@@ -1746,18 +1746,18 @@ package classes.Scenes.Places.Prison
 				outputText("\"<i>No, slave. Say, 'Yes Mistress, I understand.' </i>\"[if (esteem < 65)  She tilts your head back so that you are once again looking into her eyes.] One glance at her face is enough to tell you that she will accept nothing less that total submission on this matter.\n\n");
 				outputText("\"<i>Yesth... Misth... treth... I undahh... thtand.</i>\" The sloppy sound of your voice sounding out the syllables brings color to your cheeks all over again[if (esteem < 20) , but now the unclean warmth is less distressing -- almost soothing][if (esteem > 60) , and you hope that this will placate her desire to degrade you for the time being].\n\n");
 				outputText("\"<i>Much better. Always remember your manners, slave, especially when your mouth is full. Now, feel free to relax and enjoy this, but do pay attention: I expect you to learn your lesson well.</i>\" She reaches down");
-				if (player.hornType > 0 && player.horns > 1)
+				if (player.horns.type > 0 && player.horns.value > 1)
 				{
 					outputText(" and grabs you firmly by your horns");
 				}
-				else if (player.hairLength >= 10)
+				else if (player.hair.length >= 10)
 				{
 					outputText(", gathers your [hair] up into pigtails, and grips them firmly");
 				}
 				else
 				{
 					outputText(" and gets a firm grip on your ");
-					switch(player.earType)
+					switch(player.ears.type)
 					{
 						case 1:
 							outputText("horse-like ears");
@@ -2192,7 +2192,7 @@ package classes.Scenes.Places.Prison
 				}
 				outputText(" You bow your head deferentially as you crawl, but fix her with doe eyes so you can furtively watch her face as you go. Her approval is plainly growing by the time you are halfway to her feet, so you redouble your efforts as you continue. She beams you a knowing smile, then leans forward cheerfully and claps her hands against her thighs.\n\n");
 				outputText("\"<i>Oh, what a good [boy] you are!</i>\" she calls out, as though she was congratulating a well behaved puppy. \"<i>That's it, just little further and you can enjoy your treat.</i>\" You blush [if (esteem < 60) wildly ][if (esteem >= 60) angrily ] at the appalling implication, but only after a[if (esteem < 60) n unexpected] shiver of pride rushes down your spine in response to her demeaning praise. ");
-				if (player.tailType > 0 && player.esteem < 60)
+				if (player.tail.type > 0 && player.esteem < 60)
 				{
 					outputText("Worse still, you find that your tail has begun to wag energetically of its own accord. ");
 				}
@@ -2243,7 +2243,7 @@ package classes.Scenes.Places.Prison
 					if (player.cor < 25)
 					{
 						outputText("You then let your tongue hang from your mouth");
-						if (player.tailType > 0)
+						if (player.tail.type > 0)
 						{
 							outputText(", begin to wag your tail energetically, ");
 						}
@@ -2252,7 +2252,7 @@ package classes.Scenes.Places.Prison
 					else
 					{
 						outputText("You then make a show of widening your stance and curling your [ass] into the air as though presenting yourself for breeding, ");
-						if (player.tailType > 0)
+						if (player.tail.type > 0)
 						{
 							outputText("begin to wag your tail energetically, ");
 						}
@@ -3132,7 +3132,7 @@ package classes.Scenes.Places.Prison
 				}
 				outputText("\"<i>You're a good slave for asking, but you know that you would be a better slave if you were already acting.</i>\" She crosses her arms, shifts her weight to her other foot, and you hear a note of impatience lace her voice. \"<i>If you want to eat, you need to learn to please me even before I give you instructions. So:</i>\"\n\n");
 				outputText("\"<i>First, crawl across the room. Be sure to arch your back so that you present your [ass] like a bitch in heat");
-				if (player.tailType > 0)
+				if (player.tail.type > 0)
 				{
 					outputText(" -- and wag that cute little tail while you're at it.</i>\"");
 				}
@@ -3913,16 +3913,9 @@ package classes.Scenes.Places.Prison
 			}
 			switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest))
 			{
-				case 1:
-					trace("CHECKING FUCK QUEST " + player.statusEffectv3(StatusEffects.PrisonCaptorEllyQuest) + "");
-					if (player.statusEffectv3(StatusEffects.PrisonCaptorEllyQuest) >= 5)
-					{
-						trace("\nQUEST COMPLETE\n");
-						return true;
-					}
-					trace("\nQUEST INCOMPLETE\n");
-					return false;
-				default:
+				case 1: //The quest to get raped.
+					return (player.statusEffectv3(StatusEffects.PrisonCaptorEllyQuest) >= 5)
+				default: //No quest.
 					return false;
 			}
 		}

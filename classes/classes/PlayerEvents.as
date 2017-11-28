@@ -1,6 +1,7 @@
 package classes {
 	
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
 	
@@ -170,13 +171,13 @@ package classes {
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 100) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
 			//Recharge tail
-			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_SCORPION) { //Spider and Bee Sting Recharge
-				if (player.tailRecharge < 5) player.tailRecharge = 5;
-				player.tailVenom += player.tailRecharge;
-				if (player.tailVenom > 100) player.tailVenom = 100;
+			if (player.tail.type == Tail.BEE_ABDOMEN || player.tail.type == Tail.SPIDER_ABDOMEN || player.tail.type == Tail.SCORPION) { //Spider and Bee Sting Recharge
+				if (player.tail.recharge < 5) player.tail.recharge = 5;
+				player.tail.venom += player.tail.recharge;
+				if (player.tail.venom > 100) player.tail.venom = 100;
 			}
 			//Flexibility perk
-			if (player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
+			if (player.tail.type == Tail.CAT && player.lowerBody.type == LowerBody.CAT && player.ears.type == Ears.CAT) { //Check for gain of cat agility - requires legs, tail, and ears
 				if (player.findPerk(PerkLib.Flexibility) < 0) {
 					outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n");
 					player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
@@ -189,7 +190,7 @@ package classes {
 				needNext = true;
 			}
 			//Lustzerker perk
-			if (player.tailType == TAIL_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && player.armType == ARM_TYPE_SALAMANDER) { //Check for gain of lustzerker - requires legs, arms and tail
+			if (player.tail.type == Tail.SALAMANDER && player.lowerBody.type == LowerBody.SALAMANDER && player.arms.type == Arms.SALAMANDER) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
 					outputText("\nAfter finishing another hip flask of firewater, you start to feel a weird, slightly unpleasant feeling inside your body-- like many tiny flames are coursing through your veins. You ponder just what's happening to you when you remember that salamanders have natural talent for entering a berserk-like state. You guess that this feeling is what it is.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
@@ -216,12 +217,12 @@ package classes {
 			}
 			//Reset bad end warning
 			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
-				if (player.faceType != FACE_FOX || player.tailType != TAIL_TYPE_FOX || player.earType != EARS_FOX || player.lowerBody != LOWER_BODY_TYPE_FOX || !player.hasFur()) {
+				if (player.face.type != Face.FOX || player.tail.type != Tail.FOX || player.ears.type != Ears.FOX || player.lowerBody.type != LowerBody.FOX || !player.hasFur()) {
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
 				}
 			}
 			/*if (flags[kFLAGS.PIG_BAD_END_WARNING] == 1) {
-				if (player.faceType != FACE_PIG || player.tailType != TAIL_TYPE_PIG || player.earType != EARS_PIG || player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
+				if (player.face.type != Face.PIG || player.tail.type != Tail.PIG || player.ears.type != Ears.PIG || player.lowerBodyPart.type != LowerBody.CLOVEN_HOOFED) {
 					flags[kFLAGS.PIG_BAD_END_WARNING] = 0;
 				}
 			}*/
@@ -236,14 +237,14 @@ package classes {
 				needNext = true;
 			}
 			if ((player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) == 0) || (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) == 0)) { //Check ninetails perks!
-				if (player.tailType != TAIL_TYPE_FOX || player.tailVenom < 9) {
+				if (player.tail.type != Tail.FOX || player.tail.venom < 9) {
 					outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 					if (player.perkv4(PerkLib.EnlightenedNinetails) == 0) player.removePerk(PerkLib.EnlightenedNinetails);
 					if (player.perkv4(PerkLib.CorruptedNinetails) == 0) player.removePerk(PerkLib.CorruptedNinetails);
 					needNext = true;
 				}
 			}
-			if (player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
+			if (player.lowerBody.type == LowerBody.HARPY && player.tail.type == Tail.HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
 					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
 					outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n");
@@ -273,17 +274,17 @@ package classes {
 				player.removePerk(PerkLib.Diapause);
 				needNext = true;
 			}
-			if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-				if (player.tailType > TAIL_TYPE_NONE) {
+			if (player.lowerBody.type == LowerBody.NAGA) {
+				if (player.tail.type > Tail.NONE) {
 					outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n");
-					player.tailType = TAIL_TYPE_NONE;
+					player.tail.type = Tail.NONE;
 					needNext = true;
 				}
 			}
 			if (player.findPerk(PerkLib.WetPussy) >= 0 && player.hasVagina()) {
-				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) {
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) {
 					outputText("\n<b>Your " + player.vaginaDescript(0) + " returns to its normal, wet state.</b>\n");
-					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 					needNext = true;
 				}
 			}
@@ -340,7 +341,7 @@ package classes {
 			}
 			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
 				flags[kFLAGS.DICK_EGG_INCUBATION]--;
-				trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
+				//trace("DICK BIRTH TIMER: " + flags[kFLAGS.DICK_EGG_INCUBATION]);
 				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
 					getGame().masturbation.birthBeeEggsOutYourWang();
 					needNext = true;
@@ -357,12 +358,12 @@ package classes {
 				}
 			}
 			if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0) { //Spider and Bee ovipositor updates
-				if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)) { //Remove dat shit!
+				if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 && (!player.isDrider() || player.tail.type != Tail.SPIDER_ABDOMEN)) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
 					player.removePerk(PerkLib.SpiderOvipositor);
 					needNext = true;
 				}
-				else if (player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tailType != TAIL_TYPE_BEE_ABDOMEN) { //Remove dat shit!
+				else if (player.findPerk(PerkLib.BeeOvipositor) >= 0 && player.tail.type != Tail.BEE_ABDOMEN) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
 					player.removePerk(PerkLib.BeeOvipositor);
 					needNext = true;
@@ -441,7 +442,7 @@ package classes {
 			}
 			
 			if (player.inRut) { //Rut v1 is bonus cum, v2 is bonus libido, v3 is hours till it's gone
-				trace("RUT:" + player.statusEffectv3(StatusEffects.Rut));
+				//trace("RUT:" + player.statusEffectv3(StatusEffects.Rut));
 				if (player.statusEffectv3(StatusEffects.Rut) <= 1 || player.totalCocks() == 0) { //Remove bonus libido from rut
 					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Rut), "scale", false);
 					player.removeStatusEffect(StatusEffects.Rut); //remove heat
@@ -548,20 +549,20 @@ package classes {
 					else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your " + player.legs() + " fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n");
 					needNext = true;
 				}
-				if (player.hipRating < 12) {
+				if (player.hips.rating < 12) {
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)
 						outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
 					else outputText("\nOh, no!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate for a bimbo.  Once you realize that you can't walk any other way, you sigh heavily, your only consolation the fact that your widened hips can be used to tease more effectively.\n");
 					getGame().dynStats("int", -1);
-					player.hipRating = 12;
+					player.hips.rating = 12;
 					needNext = true;
 				}
-				if (player.buttRating < 12) {
+				if (player.butt.rating < 12) {
 					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)
 						outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  You smile to yourself, imagining how much you wish you had a nice, plump, bimbo-butt again, your hands finding their way to the flesh on their own.  Like, how did they get down there?  You bite your lip when you realize how good your tush feels in your hands, particularly when it starts to get bigger.  Are butts supposed to do that?  Happy pink thoughts wash that concern away - it feels good, and you want a big, sexy butt!  The growth stops eventually, and you pout disconsolately when the lusty warmth's last lingering touches dissipate.  Still, you smile when you move and feel your new booty jiggling along behind you.  This will be fun!\n");
 					else outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  Oh, no!  You thought that having a big, bloated bimbo-butt was a thing of the past, but with how it's tingling under your groping fingertips, you have no doubt that you're about to see the second coming of your sexy ass.  Wait, how did your fingers get down there?  You pull your hands away somewhat guiltily as you feel your buttcheeks expanding.  Each time you bounce and shake your new derriere, you moan softly in enjoyment.  Damnit!  You force yourself to stop just as your ass does, but when you set off again, you can feel it bouncing behind you with every step.  At least it'll help you tease your foes a little more effectively...\n");
 					getGame().dynStats("int", -1, "lus", 10);
-					player.buttRating = 12;
+					player.butt.rating = 12;
 					needNext = true;
 				}
 			}
@@ -708,26 +709,26 @@ package classes {
 				var recoveryProgress:int = player.vaginas[0].recoveryProgress;
 				
 				if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
-					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_LOOSE) {
+					if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_LOOSE) {
 						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.vaginas[0].resetRecoveryProgress();
 						needNext = true;
 					}
-					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING) {
+					if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING) {
 						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.vaginas[0].resetRecoveryProgress();
 						needNext = true;
 					}
-					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING_WIDE) {
+					if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING_WIDE) {
 						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.vaginas[0].resetRecoveryProgress();
 						needNext = true;
 					}
 				}
-				if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_CLOWN_CAR) {
+				if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_CLOWN_CAR) {
 					outputText("\nYour " + player.vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
 					player.vaginas[0].vaginalLooseness--;
 					player.vaginas[0].resetRecoveryProgress();
@@ -763,7 +764,7 @@ package classes {
 				}
 			}
 			if (player.findPerk(PerkLib.SlimeCore) >= 0) { //Lose slime core perk
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
+				if (player.vaginalCapacity() < 9000 || player.skin.adj != "slimy" || player.skin.desc != "skin" || player.lowerBody.type != LowerBody.GOO) {
 					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + player.buttDescript() + ".  A delicious pressure pulses in your abdomen and you loosen your " + player.armorName + " as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
 	
 					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
@@ -773,7 +774,7 @@ package classes {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skin.adj == "slimy" && player.skin.desc == "skin" && player.lowerBody.type == LowerBody.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
@@ -785,7 +786,7 @@ package classes {
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
+				if (player.vaginalCapacity() < 9000 || player.skin.adj != "slimy" || player.skin.desc != "skin" || player.lowerBody.type != LowerBody.GOO) {
 					outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n");
 					player.removeStatusEffect(StatusEffects.SlimeCraving);
 					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
@@ -948,7 +949,7 @@ package classes {
 				if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 					if (!needNext) needNext = player.growHair(0.1);
 					else player.growHair(0.1);
-					if (player.beardLength > 0 && player.beardLength < 12) player.growBeard(0.02);
+					if (player.beard.length > 0 && player.beard.length < 12) player.growBeard(0.02);
 				}
 				//Clear dragon breath cooldown!
 				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);

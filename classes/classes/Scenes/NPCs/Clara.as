@@ -1,6 +1,8 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
 	import classes.internals.*;
 
 	public class Clara extends Monster
@@ -105,7 +107,7 @@ package classes.Scenes.NPCs
 			{
 				var actions:Array = [eAttack,claraDrugAttack,claraTeaseAttack,claraCastsBlind];
 				var action:int = rand(actions.length);
-				trace("ACTION SELECTED: " + action);
+				//trace("ACTION SELECTED: " + action);
 				actions[action]();
 			}
 			if (!player.hasStatusEffect(StatusEffects.ClaraCombatRounds)) player.createStatusEffect(StatusEffects.ClaraCombatRounds,1,0,0,0);
@@ -134,23 +136,23 @@ package classes.Scenes.NPCs
 
 		public function Clara()
 		{
-			trace("Clara Constructor!");
+			//trace("Clara Constructor!");
 			this.a = "";
 			this.short = "Clara";
 			this.imageName = "marble";
 			this.long = "You are fighting Marble’s little sister Clara!  The cow-girl looks spitting mad, determined to steal you from her sister and make you into her milk slave, with her breasts hanging out for all to see.  Fortunately, she doesn’t look as big or strong as her sister, and you don’t think she’s been trained to fight like Marble has either.  Still, there is no telling what tricks she has up her sleeves, and she is holding a very angry looking heavy mace.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 6*12+4;
-			this.hipRating = HIP_RATING_CURVY;
-			this.buttRating = BUTT_RATING_LARGE;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.skinTone = "pale";
-			this.hairColor = "brown";
-			this.hairLength = 13;
+			this.hips.rating = Hips.RATING_CURVY;
+			this.butt.rating = Butt.RATING_LARGE;
+			this.lowerBody.type = LowerBody.HOOFED;
+			this.skin.tone = "pale";
+			this.hair.color = "brown";
+			this.hair.length = 13;
 			initStrTouSpeInte(37, 55, 35, 60);
 			initLibSensCor(25, 45, 40);
 			this.weaponName = "mace";
@@ -163,7 +165,7 @@ package classes.Scenes.NPCs
 			this.bonusHP = 30;
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
-			this.tailType = TAIL_TYPE_COW;
+			this.tail.type = Tail.COW;
 			//this.special1 = marbleSpecialAttackOne;
 			//this.special2 = marbleSpecialAttackTwo;
 			checkMonster();

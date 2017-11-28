@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Dungeons.D3 
+﻿package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.BaseContent;
 	import classes.StatusEffects;
@@ -421,17 +421,17 @@
 			if (!player.isTaur()) outputText(" You scrabble over, unused to having to move in such a way,");
 			else outputText(" You gallop over and drop down on your forelegs");
 			outputText(" and plant your [face] right into the succubus' milk. It's a little thicker than milk normally is and stickier too, like honey, but it's also sweeter. The ambrosial fluid fills your mouth with scintillating, indescribable flavor that sets");
-			if (player.tailType != 0)
+			if (player.tail.type != 0)
 			{
 				outputText(" your tail");
-				if (player.tailType == 13 && player.tailVenom > 1) outputText("s");
+				if (player.tail.type == 13 && player.tail.venom > 1) outputText("s");
 			}
 			else outputText(" your stubby, new tail");
 			outputText(" wagging.");
-			if (player.tailType != 2) outputText(" Never mind that it gets longer and fuzzier with every gulp or that your");
+			if (player.tail.type != 2) outputText(" Never mind that it gets longer and fuzzier with every gulp or that your");
 			else outputText(" Never mind that your");
 			outputText(" tongue is swelling up, wide, flat, and perfect for panting, licking, and lapping up a drink.");
-			player.tailType = 2;
+			player.tail.type = 2;
 			
 			outputText("\n\nPerhaps best, and worst, of all, you aren't going soft in spite of the lack of attention to your bone. It merely hangs under your");
 			if (player.isPregnant()) outputText(" pregnant");
@@ -627,7 +627,7 @@
 			outputText(". It's like every single nerve has its own skilled masseuse giving it a rubdown, coaxing more pleasure from every square inch of skin than you thought it capable of producing. You cry out, totally overwhelmed, only to be silenced by a familiar presence in your mouth.");
 
 			outputText("\n\nThis new tentacle is already cumming, though. Using its own sappy spooge for lube, it slithers past your unresisting tonsils to provide its life-giving moisture directly. It can't quite compete with the huge, stalk-distending blobs of jism you're pouring out, at least not alone. A second tendril winds its way");
-			if (player.tailType != 0) outputText(" past your tail to slither");
+			if (player.tail.type != 0) outputText(" past your tail to slither");
 			outputText(" between your cheeks.");
 			if (player.ass.analLooseness == 0) outputText(" The virginal tightness of your pucker holds the tentacle at bay at first. Still, it's no match for the combination of slippery plant fluid and constant pressure.");
 			else if (player.ass.analLooseness <= 3) outputText(" The tentacle has little problem slipping through your tight backdoor, slick as it is with fluid and backed by constant pressure.");

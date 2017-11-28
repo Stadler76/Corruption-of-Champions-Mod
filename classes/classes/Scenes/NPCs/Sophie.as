@@ -1,6 +1,9 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	import classes.Scenes.Areas.HighMountains.Harpy;
 	import classes.internals.*;
 
@@ -162,7 +165,7 @@ package classes.Scenes.NPCs
 				outputText("'s attack.\n");
 				return;
 			}
-			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your " + player.skinDesc + " with her razor-sharp talons! ");
+			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your " + player.skin.desc + " with her razor-sharp talons! ");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			if (damage < 0) damage = 0;
@@ -261,27 +264,27 @@ package classes.Scenes.NPCs
 		public function Sophie()
 		{
 			super(true);
-			trace("Sophie Constructor!");
+			//trace("Sophie Constructor!");
 		
 			this.a = "";
 			this.short = "Sophie";
 			this.imageName = "sophie";
 			this.long = "Sophie is approximately the size of a normal human woman, not counting the large feathery wings that sprout from her back.  Her face is gorgeous, with large rounded eyes and glimmering amber lip-gloss painted on her lush, kissable lips.  In spite of her beauty, it's clear from the barely discernible laugh lines around her mouth that she's been around long to enough to have quite a few children.  Her feathers are light pink, though the downy plumage that comprises her 'hair' is brighter than the rest.  She moves with practiced grace despite the large, jiggling breasts that hang from her chest.  Judging from her confident movements, she's an experienced fighter.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_GAPING_WIDE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 5*12+5;
-			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
-			this.buttRating = BUTT_RATING_EXPANSIVE;
-			this.skinTone = "pink";
-			this.skinType = SKIN_TYPE_PLAIN;
-			this.skinDesc = "feathers";
-			this.hairColor = "pink";
-			this.hairLength = 16;
+			this.hips.rating = Hips.RATING_INHUMANLY_WIDE;
+			this.butt.rating = Butt.RATING_EXPANSIVE;
+			this.skin.tone = "pink";
+			this.theSkinType = Skin.PLAIN;
+			this.skin.desc = "feathers";
+			this.hair.color = "pink";
+			this.hair.length = 16;
 			initStrTouSpeInte(55, 40, 110, 60);
 			initLibSensCor(60, 50, 60);
 			this.weaponName = "talons";
@@ -297,7 +300,7 @@ package classes.Scenes.NPCs
 			this.gems = 20 + rand(25);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
-			this.wingType = WING_TYPE_HARPY;
+			this.theWingType = Wings.HARPY;
 			this.wingDesc = "large feathery";
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;

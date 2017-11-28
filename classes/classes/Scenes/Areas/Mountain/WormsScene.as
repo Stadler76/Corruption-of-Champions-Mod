@@ -134,9 +134,8 @@ package classes.Scenes.Areas.Mountain
 				dynStats("cor", 1);
 				player.cor = 25;
 			}
-			trace("GET INFESTED HERE");
-			if (player.hasStatusEffect(StatusEffects.Infested)) {trace("BWUH?");}
-			else {
+			//trace("GET INFESTED HERE");
+			if (!player.hasStatusEffect(StatusEffects.Infested)) {
 				if (flags[kFLAGS.EVER_INFESTED] == 0) flags[kFLAGS.EVER_INFESTED] = 1;
 				player.createStatusEffect(StatusEffects.Infested,0,0,0,0);
 				dynStats("cor", 0);
@@ -287,8 +286,7 @@ package classes.Scenes.Areas.Mountain
 			outputText("\n\nYou relax in the afterglow, pondering just how you'll handle living with the constant desire, barely noticing the colony slinking off, freshly lubricated by your sexual fluids.  You drink into a lusty slumber, absently fingering [oneCock].");
 			outputText("\n\n<b>You are infested, again!</b>");
 			//Reinfest
-			if (player.hasStatusEffect(StatusEffects.Infested)) {trace("BWUH?");}
-			else {
+			if (!player.hasStatusEffect(StatusEffects.Infested)) {
 				player.createStatusEffect(StatusEffects.Infested,0,0,0,0);
 				dynStats("cor", 0);
 			}

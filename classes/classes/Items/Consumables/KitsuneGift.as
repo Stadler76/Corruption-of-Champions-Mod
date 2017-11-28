@@ -119,7 +119,7 @@ package classes.Items.Consumables
 				game.inventory.takeItem(game.useables.B_CHITN, game.inventory.inventoryMenu);
 				return(true);
 
-				default: trace("Kitsune's gift roll foobar...");
+				default: // trace("Kitsune's gift roll foobar...");
 			}
 			return(false); //Any other case does not have a sub-menu.
 		}

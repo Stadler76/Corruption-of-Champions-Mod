@@ -4,6 +4,7 @@
 package classes.internals
 {
 	import classes.*;
+	import coc.script.Eval;
 	public class Utils extends Object
 	{
 		private static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
@@ -171,7 +172,7 @@ package classes.internals
 							dkey = pd[1];
 							skey = pd[0];
 						}
-					} else trace("WARNING: incorrect copyObject property descriptor "+pd);
+					} 
 				} else if (pd is Object) {
 					if ("key" in pd) {
 						skey = dkey = pd.key;
@@ -179,7 +180,7 @@ package classes.internals
 						skey = pd.skey;
 						dkey = pd.dkey;
 					} else {
-						trace("WARNING: missing 'key' or 'skey'+'dkey' in property descriptor "+pd);
+						//trace("WARNING: missing 'key' or 'skey'+'dkey' in property descriptor "+pd);
 						continue;
 					}
 					if (!forward) {
@@ -201,9 +202,8 @@ package classes.internals
 				} else continue;
 				try {
 					dest[dkey] = v;
-				} catch (e:*) {
+				} catch (e:Error) {
 					if (!ignoreErrors) throw e;
-					trace(e);
 				}
 			}
 			return dest;
@@ -366,10 +366,17 @@ package classes.internals
 		public static function validateNonNegativeNumberFields(o:Object, func:String, nnf:Array):String
 		{
 			var error:String = "";
+			var propExists:Boolean;
+			var fieldRef:*;
 			for each (var field:String in nnf) {
-				if (!o.hasOwnProperty(field) || !(o[field] is Number) && o[field] != null) error += "Misspelling in "+func+".nnf: '"+field+"'. ";
-				else if (o[field] == null) error += "Null '"+field+"'. ";
-				else if (o[field] < 0) error += "Negative '"+field+"'. ";
+				try {
+					var value:* = Eval.eval(o, field);
+					if (value === undefined || !(value is Number)) error += "Misspelling in "+func+".nnf: '"+field+"'. ";
+					else if (value === null) error += "Null '"+field+"'. ";
+					else if (value < 0) error += "Negative '"+field+"'. ";
+				} catch (e:Error) {
+					error += "Error calling eval on '"+func+"': "+e.message+". ";
+				}
 			}
 			return error;
 		}
@@ -377,10 +384,17 @@ package classes.internals
 		public static function validateNonEmptyStringFields(o:Object, func:String, nef:Array):String
 		{
 			var error:String = "";
+			var propExists:Boolean;
+			var fieldRef:*;
 			for each (var field:String in nef) {
-				if (!o.hasOwnProperty(field) || !(o[field] is String) && o[field] != null) error += "Misspelling in "+func+".nef: '"+field+"'. ";
-				else if (o[field] == null) error += "Null '"+field+"'. ";
-				else if (o[field] == "") error += "Empty '"+field+"'. ";
+				try {
+					var value:* = Eval.eval(o, field);
+					if (value === undefined || !(value is String)) error += "Misspelling in " + func + ".nef: '" + field + "'. ";
+					else if (value == null) error += "Null '" + field + "'. ";
+					else if (value == "") error += "Empty '" + field + "'. ";
+				} catch (e:Error) {
+					error += "Error calling eval on '"+func+"': "+e.message+". ";
+				}
 			}
 			return error;
 		}

@@ -244,7 +244,6 @@ private function fertilizeHolli(cock:Boolean = true):void {
 	}
 	if (odds >= rand(101)) {
 		flags[kFLAGS.HOLLI_FRUIT] += 1 + rand(Math.floor(odds/10));
-		trace("Holli pregged!");
 	}
 }
 
@@ -445,7 +444,7 @@ private function fuckTheFlower():void {
 	if (player.hasVagina()) outputText("  Wetness builds in your [vagina] as well, but you're focusing on your maleness just now.  Your neglected twat will have to wait its turn.");
 	outputText("  A feverish sweat breaks out on your brow, though whether from your own arousal, the plant's heat, or some chemical in its juices, you cannot tell.");
 	
-	outputText("\n\nBefore you can pull back, the hiss of something cutting through the air with lightning speed hits your eardrums.  Almost at the same time, tentacles (stamen?) snap around your neck, head, and ears, going taut in an instant.  Your " + player.face() + " is pulled roughly into the glossy hole, the soft folds of the petals smearing your nose and mouth with their saccharine sweetness.  You cannot help but breathe in more deeply as you struggle for your freedom, and with every struggle, every struggling gasp, [eachCock] grows hotter and harder, pulsating with tactile hunger.  With each moment that passes the motivation for your struggles shifts from freedom to fucking.  You don't care about getting away so much as getting your dick in this aromatic fuck-pot.");
+	outputText("\n\nBefore you can pull back, the hiss of something cutting through the air with lightning speed hits your eardrums.  Almost at the same time, tentacles (stamen?) snap around your neck, head, and ears, going taut in an instant.  Your " + player.faceDescript() + " is pulled roughly into the glossy hole, the soft folds of the petals smearing your nose and mouth with their saccharine sweetness.  You cannot help but breathe in more deeply as you struggle for your freedom, and with every struggle, every struggling gasp, [eachCock] grows hotter and harder, pulsating with tactile hunger.  With each moment that passes the motivation for your struggles shifts from freedom to fucking.  You don't care about getting away so much as getting your dick in this aromatic fuck-pot.");
 	
 	outputText("\n\nYou claw the whip-like vines from your face in a frenzy and fall back, tumbling end over when the tension suddenly gives way.  Landing flat on your back and gasping, you immediately try to rise, spurred on by the white-hot desire burning in your groin.  Tentacles drop down as you climb to your [feet], and they loop under your arms, around your shoulders, and even over your [chest].  They hoist you up before you can get your [feet], another vine twisting your wrists together behind you, immobile.  You foolishly pump your hips forwards, struggling to reach the plant's puckered opening, but the attempt bears no fruit.");
 	
@@ -521,7 +520,7 @@ private function rideTheWalrusP3():void {
 	outputText("\n\nYou hang in the tree for what seems like forever, somehow able to breathe with a dick down your throat to your belly, your pussy completely violated and your hands tending to the unsatisfied cocks seemingly of their own volition.  Or perhaps you just enjoy being surrounded by so much male flesh, pleasuring it all while you're used as a cum-hungry fuck-dump.  Your head is hazy from something in the cum or the frequent orgasms you're enduring, and when the first tentacle to take your cunt thickens and releases its load, you black out momentarily.");
 	outputText("\n\nWith your vision hazy and swimming, you open your eyes to a world upside-down.  You're still suspended in the tentacles, and your body is absolutely covered in alabaster spunk.  Rivulets of it drip from you, and you idly squeeze a tentacle, giggling around the cock in your throat when it pours out a fresh sample to further soak you.  Your belly is full of spooge and wiggling tendrils, visible to anyone lucky enough to catch a glimpse of it through your bindings.  Coming from the other side, at least two cocks are twined into an anal double-helix, their passage lubricated by the copious cum running down your [butt].  You tremble again with barely any strength in your limbs and cum.  The orgasm, like you, is worn out and weak, nearly worthless in comparison to how good it felt when this all started.");
 	outputText("\n\nYou endure it all with wordless pleasure, your eyes vacant and spacy.  Your brain shuts down, and you simply go weak.  The tentacles, for their part, continue to take you with unhealthy levels of ardor, your body growing more and more cum-plastered until it's hard to make out your shape beneath all the dripping jizz and undulated, snake-like shapes.  The orgasms that follow are pitiful, pathetic punctuations of pleasure  that can't even spur your laconic muscles into movement.");
-	outputText("\n\nAt some point, you are set back down on the ground and sprayed with a fresh batch of seed.  You rest there for a while, until you can catch your breath and move without pain.  When you start trying to clean up, you realize the puddle of cum is completely gone, likely swallowed back up the tree's hungry roots, and the only mess left is your sodden " + player.skinDesc + ".  You get dressed and stumble away a little drunkenly, your [vagina] raw and oozing.");
+	outputText("\n\nAt some point, you are set back down on the ground and sprayed with a fresh batch of seed.  You rest there for a while, until you can catch your breath and move without pain.  When you start trying to clean up, you realize the puddle of cum is completely gone, likely swallowed back up the tree's hungry roots, and the only mess left is your sodden " + player.skin.desc + ".  You get dressed and stumble away a little drunkenly, your [vagina] raw and oozing.");
 	//{- big sensitivity loss, big libido gain, minus lust}
 	player.orgasm('Vaginal');
 	dynStats("lib", 1, "sen", -5);
@@ -891,7 +890,7 @@ private function domUpSomeHolli():void {
 	outputText("\n\nSlapping your palm down on the other side, you look her right in her oddly gold and black eyes and tell her in no uncertain terms that she is going to serve and service you at your slightest whim.  Any choice she thinks she has is nothing more than an illusion.");
 	var domPowah:Number = player.level;
 	domPowah += player.tallness/12;
-	if (player.horns > 0) domPowah += 3;
+	if (player.horns.value > 0) domPowah += 3;
 	if (player.cor > 66) domPowah += 2;
 	//{fail} 
 	if (domPowah < 20) {
@@ -1536,7 +1535,7 @@ private function holliAndGenderlessSittingInATree():void {
 	outputText("The tall, fit traveler steps through the portal, and its swirling colors dissolve to empty air behind him.  The blasted red landscape that welcomes him does so grudgingly, filling his face with a cloud of blown dust that sets him to coughing and sputtering.  Peering through a teary squint, the man looks around for a place that might provide some shelter from the wind and allow him to get his bearings, and a pair of scraggly trees nearby would seem to fill the bill.");
 	
 	outputText("\n\nAs he draws closer, though, it becomes evident that he's not the only one with the idea: two figures are already leaning on the trees.  Both nude, one is a gorgeous woman, albeit green-skinned and with horns, while the other appears to be ");
-	if (!player.isFurryOrScaley()) outputText(player.skinTone + "-colored");
+	if (!player.isFurryOrScaley()) outputText(player.skin.tone + "-colored");
 	else outputText("covered in " + player.skinFurScales());
 	outputText(" and wrapping its body around the tree in a way that makes determining its sex impossible.  No... it's not wrapping around the tree, but embedded in it up to the hips!");
 	

@@ -1,5 +1,6 @@
 ﻿package classes
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.ArmorLib;
@@ -281,7 +282,7 @@
 			///*OPTIONAL*/ //this.cumMultiplier = ; // default 1
 			///*OPTIONAL*/ //this.hoursSinceCum = ; // default 0
 			//// 2.2. Female
-			///*REQUIRED*/ this.createVagina(virgin=true|false,VAGINA_WETNESS_,VAGINA_LOOSENESS_); // default true,normal,tight
+			///*REQUIRED*/ this.createVagina(virgin=true|false,VaginaClass.WETNESS_,VaginaClass.LOOSENESS_); // default true,normal,tight
 			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusVCapacity, bonus, 0, 0, 0);
 			//// 2.3. Hermaphrodite
 			//// Just create cocks and vaginas. Last call determines pronouns.
@@ -308,32 +309,32 @@
 			//// Note useful method: this.createBreastRow(Appearance.breastCupInverse("C")); // "C" -> 3
 
 			//// 4. Ass
-			///*OPTIONAL*/ //this.ass.analLooseness = ANAL_LOOSENESS_; // default TIGHT
-			///*OPTIONAL*/ //this.ass.analWetness = ANAL_WETNESS_; // default DRY
+			///*OPTIONAL*/ //this.ass.analLooseness = AssClass.LOOSENESS_; // default TIGHT
+			///*OPTIONAL*/ //this.ass.analWetness = AssClass.WETNESS_; // default DRY
 			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusACapacity, bonus, 0, 0, 0);
 			//// 5. Body
 			///*REQUIRED*/ this.tallness = ;
-			///*OPTIONAL*/ //this.hipRating = HIP_RATING_; // default boyish
-			///*OPTIONAL*/ //this.buttRating = BUTT_RATING_; // default buttless
-			///*OPTIONAL*/ //this.lowerBody = LOWER_BODY_; //default human
-			///*OPTIONAL*/ //this.armType = ARM_TYPE_; // default human
+			///*OPTIONAL*/ //this.hips.rating = Hips.RATING_; // default boyish
+			///*OPTIONAL*/ //this.butt.rating = Butt.RATING_; // default buttless
+			///*OPTIONAL*/ //this.lowerBodyPart.type = LOWER_BODY_; //default human
+			///*OPTIONAL*/ //this.arms.type = Arms.; // default human
 
 			//// 6. Skin
-			///*OPTIONAL*/ //this.skinTone = "skinTone"; // default "albino"
-			///*OPTIONAL*/ //this.skinType = SKIN_TYPE_; // default PLAIN
-			///*OPTIONAL*/ //this.skinDesc = "skinDesc"; // default "skin" if this.skinType is not set, else Appearance.DEFAULT_SKIN_DESCS[skinType]
-			///*OPTIONAL*/ //this.skinAdj = "skinAdj"; // default ""
+			///*OPTIONAL*/ //this.skin.tone = "skinTone"; // default "albino"
+			///*OPTIONAL*/ //this.skin.type = Skin.; // default PLAIN
+			///*OPTIONAL*/ //this.skin.desc = "skinDesc"; // default "skin" if this.skin.type is not set, else Appearance.DEFAULT_SKIN_DESCS[skinType]
+			///*OPTIONAL*/ //this.skin.adj = "skinAdj"; // default ""
 
 			//// 7. Hair
-			///*OPTIONAL*/ //this.hairColor = ; // default "no"
-			///*OPTIONAL*/ //this.hairLength = ; // default 0
-			///*OPTIONAL*/ //this.hairType = HAIR_; // default NORMAL
+			///*OPTIONAL*/ //this.hair.color = ; // default "no"
+			///*OPTIONAL*/ //this.hair.length = ; // default 0
+			///*OPTIONAL*/ //this.hair.type = Hair.; // default NORMAL
 
 			//// 8. Face
-			///*OPTIONAL*/ //this.faceType = FACE_; // default HUMAN
-			///*OPTIONAL*/ //this.earType = EARS_; // default HUMAN
-			///*OPTIONAL*/ //this.tongueType = TONGUE_; // default HUMAN
-			///*OPTIONAL*/ //this.eyeType = EYES_; // default HUMAN
+			///*OPTIONAL*/ //this.face.type = Face.; // default HUMAN
+			///*OPTIONAL*/ //this.ears.type = Ears.; // default HUMAN
+			///*OPTIONAL*/ //this.tongue.type = Tongue.; // default HUMAN
+			///*OPTIONAL*/ //this.eyes.type = Eyes.; // default HUMAN
 
 			//// 9. Primary stats.
 			///*REQUIRED*/ initStrTouSpeInte(,,,);
@@ -409,20 +410,20 @@
 			///*OPTIONAL*/ //this.special3 = ; //default 0
 
 			//// 16. Tail
-			///*OPTIONAL*/ //this.tailType = TAIL_TYPE_; // default NONE
-			///*OPTIONAL*/ //this.tailVenom = ; // default 0
-			///*OPTIONAL*/ //this.tailRecharge = ; // default 5
+			///*OPTIONAL*/ //this.tail.type = Tail.; // default NONE
+			///*OPTIONAL*/ //this.tail.venom = ; // default 0
+			///*OPTIONAL*/ //this.tail.recharge = ; // default 5
 
 			//// 17. Horns
-			///*OPTIONAL*/ //this.hornType = HORNS_; // default NONE
-			///*OPTIONAL*/ //this.horns = numberOfHorns; // default 0
+			///*OPTIONAL*/ //this.hornsPart.type = Horns.; // default NONE
+			///*OPTIONAL*/ //this.hornsPart.value = numberOfHorns; // default 0
 
 			//// 18. Wings
-			///*OPTIONAL*/ //this.wingType = WING_TYPE_; // default NONE
+			///*OPTIONAL*/ //this.wings.type = Wings.; // default NONE
 			///*OPTIONAL*/ //this.wingDesc = ; // default Appearance.DEFAULT_WING_DESCS[wingType]
 
 			//// 19. Antennae
-			///*OPTIONAL*/ //this.antennae = ANTENNAE_; // default NONE
+			///*OPTIONAL*/ //this.antennaePart.type = Antennae.; // default NONE
 
 			//// REQUIRED !!!
 			//// In debug mode will throw an error for uninitialized monster
@@ -552,10 +553,10 @@
 			super.tallness = value;
 		}
 
-		override public function set skinType(value:Number):void
+		public function set theSkinType(value:Number):void
 		{
-			if (!_checkCalled) { this.skinDesc = Appearance.DEFAULT_SKIN_DESCS[value];}
-			super.skinType = value;
+			if (!_checkCalled) { this.skin.desc = Appearance.DEFAULT_SKIN_DESCS[value];}
+			super.skin.type = value;
 		}
 
 		protected function initStrTouSpeInte(str:Number, tou:Number, spe:Number, inte:Number):void
@@ -576,10 +577,10 @@
 		}
 
 
-		override public function set wingType(value:Number):void
+		public function set theWingType(value:Number):void
 		{
 			if (!_checkCalled) this.wingDesc = Appearance.DEFAULT_WING_DESCS[value];
-			super.wingType = value;
+			super.wings.type = value;
 		}
 
 		override public function validate():String
@@ -1020,37 +1021,37 @@
 					" and "+numberOfThings(breastRows.length,"breast row")+".\n\n";
 			// APPEARANCE
 			result +=Heis+Appearance.inchesAndFeetsAndInches(tallness)+" tall with "+
-					Appearance.describeByScale(hipRating,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than")+" hips and "+
-					Appearance.describeByScale(buttRating,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than")+" butt.\n";
-			result +=Pronoun3+" lower body is "+(Appearance.DEFAULT_LOWER_BODY_NAMES[lowerBody]||("lowerBody#"+lowerBody));
-			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[armType]||("armType#"+armType));
-			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+" (type "+(Appearance.DEFAULT_SKIN_NAMES[skinType]||("skinType#"+skinType))+").\n";
+					Appearance.describeByScale(hips.rating,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than")+" hips and "+
+					Appearance.describeByScale(butt.rating,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than")+" butt.\n";
+			result +=Pronoun3+" lower body is "+(Appearance.DEFAULT_LOWER_BODY_NAMES[lowerBody.type]||("lowerBody#"+lowerBody.type));
+			result += ", "+pronoun3+" arms are "+(Appearance.DEFAULT_ARM_NAMES[arms.type]||("armType#"+arms.type));
+			result += ", "+pronoun1+" "+have+" "+skin.tone+" "+skin.adj+" "+skin.desc+" (type "+(Appearance.DEFAULT_SKIN_NAMES[skin.type]||("skinType#"+skin.type))+").\n";
 			result += Hehas;
-			if (hairLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+(Appearance.DEFAULT_HAIR_NAMES[hairType]||("hairType#"+hairType))+" hair.\n";
+			if (hair.length>0){
+				result += hair.color+" "+Appearance.inchesAndFeetsAndInches(hair.length)+" long "+(Appearance.DEFAULT_HAIR_NAMES[hair.type]||("hair.type#"+hair.type))+" hair.\n";
 			} else {
 				result += "no hair.\n";
 			}
 			result += Hehas;
-			if (beardLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+(Appearance.DEFAULT_BEARD_NAMES[beardStyle]||("beardType#"+beardStyle))+".\n";
+			if (beard.length>0){
+				result += hair.color+" "+Appearance.inchesAndFeetsAndInches(beard.length)+" long "+(Appearance.DEFAULT_BEARD_NAMES[beard.style]||("beardType#"+beard.style))+".\n";
 			} else {
 				result += "no beard.\n";
 			}
 			result += Hehas
-					+(Appearance.DEFAULT_FACE_NAMES[faceType]||("faceType#"+faceType))+" face, "
-					+(Appearance.DEFAULT_EARS_NAMES[earType]||("earType#"+earType))+" ears, "
-					+(Appearance.DEFAULT_TONGUE_NAMES[tongueType]||("tongueType#"+tongueType))+" tongue and "
-					+(Appearance.DEFAULT_EYES_NAMES[eyeType]||("eyeType#"+eyeType))+" eyes.\n";
+					+(Appearance.DEFAULT_FACE_NAMES[face.type]||("face.type#"+face.type))+" face, "
+					+(Appearance.DEFAULT_EARS_NAMES[ears.type]||("ears.type#"+ears.type))+" ears, "
+					+(Appearance.DEFAULT_TONGUE_NAMES[tongue.type]||("tongueType#"+tongue.type))+" tongue and "
+					+(Appearance.DEFAULT_EYES_NAMES[eyes.type]||("eyes.type#"+eyes.type))+" eyes.\n";
 			result += Hehas;
-			if (tailType == TAIL_TYPE_NONE) result += "no tail, ";
-			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" tail with venom="+tailVenom+" and recharge="+tailRecharge+", ";
-			if (hornType == HORNS_NONE) result += "no horns, ";
-			else result += horns+" "+(Appearance.DEFAULT_HORNS_NAMES[hornType]||("hornType#"+hornType))+" horns, ";
-			if (wingType == WING_TYPE_NONE) result += "no wings, ";
-			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wingType]||("wingType#"+wingType))+"), ";
-			if (antennae == ANTENNAE_NONE) result += "no antennae.\n\n";
-			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae]||("antennaeType#"+antennae))+" antennae.\n\n";
+			if (tail.type == Tail.NONE) result += "no tail, ";
+			else result+=(Appearance.DEFAULT_TAIL_NAMES[tail.type]||("tailType#"+tail.type))+" tail with venom="+tail.venom+" and recharge="+tail.recharge+", ";
+			if (horns.type == Horns.NONE) result += "no horns, ";
+			else result += horns.value+" "+(Appearance.DEFAULT_HORNS_NAMES[horns.type]||("hornsPart.type#"+horns.type))+" horns, ";
+			if (wings.type == Wings.NONE) result += "no wings, ";
+			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wings.type]||("wingType#"+wings.type))+"), ";
+			if (antennae.type == Antennae.NONE) result += "no antennae.\n\n";
+			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae.type]||("antennaeType#"+antennae.type))+" antennae.\n\n";
 
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){
@@ -1318,7 +1319,7 @@
 			if (!inDungeon) {
 				if (game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
 					if (short == "goblin" || short == "goblin assassin" || short == "goblin warrior" || short == "goblin shaman" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "imp overlord" || //Generic encounter
-						short == "tentacle beast" || (short == "kitsune" && hairColor == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
+						short == "tentacle beast" || (short == "kitsune" && hair.color == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
 						short == "goo-girl" || short == "green slime" || short == "fetish cultist" || short == "fetish zealot" || //Lake
 						short == "sandtrap" || short == "sand tarp" || short == "naga" || short == "demons" || short == "Cum Witch" || //Desert
 						short == "hellhound" || short == "infested hellhound" || short == "minotaur" || short == "minotaur lord" || short == "minotaur gang" || short == "minotaur tribe" || short == "basilisk" || short == "phoenix" || //Mountain, high mountains

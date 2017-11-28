@@ -1,6 +1,7 @@
 package classes.Scenes.Monsters 
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
@@ -77,13 +78,13 @@ package classes.Scenes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
-			this.hipRating = HIP_RATING_BOYISH;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.skinTone = "red";
+			this.hips.rating = Hips.RATING_BOYISH;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.lowerBody.type = LowerBody.HOOFED;
+			this.skin.tone = "red";
 			initStrTouSpeInte(80, 65, 85, 56);
 			initLibSensCor(55, 35, 100);
 			this.weaponName = "sword";
@@ -103,7 +104,7 @@ package classes.Scenes.Monsters
 					add(consumables.INCUBID,12).
 					add(consumables.SUCMILK,12).
 					add(jewelries.POWRRN1,1);
-			this.wingType = WING_TYPE_IMP_LARGE;
+			this.theWingType = Wings.IMP_LARGE;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;
 			checkMonster();

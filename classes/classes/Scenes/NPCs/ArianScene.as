@@ -1,5 +1,6 @@
 package classes.Scenes.NPCs{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.display.SpriteDb;
@@ -2058,7 +2059,7 @@ private function getButtWreckedByArian():void {
 	outputText("\n\n\"<i>Argh!  T-this is too much!</i>\"  With a groan of pleasure Arian shoots [Arian eir] cum into your bowels, lubricating it enough to allow you to easily slide down onto [Arian eir] shaft.");
 	if (flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) {
 		outputText("  [Arian Eir] other shaft twiches and sprays your ");
-		if (player.tailType == TAIL_TYPE_NONE) outputText("back");
+		if (player.tail.type == Tail.NONE) outputText("back");
 		else outputText("tail");
 		outputText(".");
 	}

@@ -8,11 +8,11 @@ import flash.text.TextField;
 
 public class StatBar extends Block {
 	[Embed(source="../../../res/ui/StatsBarBottom.png")]
-	public static var StatsBarBottom:Class;
+	public static const StatsBarBottom:Class;
 	[Embed(source = "../../../res/ui/arrow-up.png")]
-	public static var ArrowUp:Class;
+	public static const ArrowUp:Class;
 	[Embed(source = "../../../res/ui/arrow-down.png")]
-	public static var ArrowDown:Class;
+	public static const ArrowDown:Class;
 
 	private static function factoryReset():Object {
 		return {
@@ -117,8 +117,9 @@ public class StatBar extends Block {
 			width: barWidth,
 			height           : myHeight - 4,
 			defaultTextFormat: {
-				font: 'Georgia',
-				size: 15
+				font: 'Palatino Linotype',
+				size: 15,
+				bold: true
 			}
 		});
 		_valueLabel = addTextField({
@@ -126,9 +127,10 @@ public class StatBar extends Block {
 			width: barWidth,
 			height           : 30,
 			defaultTextFormat: {
-				font : 'Georgia',
+				font : 'Palatino Linotype',
 				size : 22,
-				align: 'right'
+				align: 'right',
+				bold : true
 			}
 		});
 		_arrowUp = addBitmapDataSprite({

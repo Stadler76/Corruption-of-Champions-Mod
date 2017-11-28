@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Mountain
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
@@ -21,7 +22,7 @@ package classes.Scenes.Areas.Mountain
 			clearOutput();
 			outputText(images.showImage("monster-infestedhellhound"));
 			outputText("A low snarl vibrates through your body, ");
-			if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle");
+			if (player.lowerBody.type == LowerBody.GOO) outputText("making your jello-like body jiggle");
 			else outputText("rattling your teeth");
 			outputText(".  Peeking fearfully over your shoulder, you see the black-furred form of a hell-hound emerging from behind a rock.  Its eyes narrow as its gaze locks onto your " + player.assholeOrPussy() + ", a pair of black, shiny dog-cocks emerge underneath him, dangling freely.  His balls look bloated and distended, the skin around them crawling and wriggling.  A few worms drip from its over-sized peckers, crawling on the ground under the infested beast.\n\n");
 			outputText("Somehow you know this thing isn't going to let you just walk away.");
@@ -53,7 +54,7 @@ package classes.Scenes.Areas.Mountain
 					outputText("you remove your " + player.armorName + " and roll onto your back, exposing your vulnerable groin to the beast.\n\n");
 				}
 				//(HP) 
-				else outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-sharp teeth easily sink into your " + player.armorName + " before tearing away the offending armor, exposing your " + player.assDescript() + " and " + player.multiCockDescriptLight() + ".  A cold mountain breeze blows across your now-exposed " + player.skinDesc + ", reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity. With a brutal lunge it knocks you off your " + player.feet() + " and onto your back.\n\n");
+				else outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-sharp teeth easily sink into your " + player.armorName + " before tearing away the offending armor, exposing your " + player.assDescript() + " and " + player.multiCockDescriptLight() + ".  A cold mountain breeze blows across your now-exposed " + player.skin.desc + ", reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity. With a brutal lunge it knocks you off your " + player.feet() + " and onto your back.\n\n");
 				outputText(images.showImage("hellhound-wormix"));
 				outputText("The beast takes a sniff at your groin, then backs away, looking confused.  You glance down and realize just how hard you've become.  A few of your worms are hanging from the " + player.cockHead() + " of your " + player.cockDescript(0) + ", starting to flow out in a steady stream.  It feels better than it has any right to.   A shadow falls across you as the hellhound moves over you, its imposing twin members hard and pulsating above you.  Hot splatters of jism drip onto your chest as the beast's worms begin escaping, forcing thick globules of dog-semen out along with them.\n\n");
 				outputText("Overcome by the worms, both you and the beast begin orgasming, without external stimulation of any kind.  Worms and cum mix together on top of you, slowly building into a large mound that covers the better part of your torso.  Exhausted and drained, you both squirt weakly, emptying the last of your smallest worms into the pile.   Your eyes close as the beast lies down with you, and together the two of you lose consciousness as your newly birthed worm colony squirms away.");
@@ -74,7 +75,7 @@ package classes.Scenes.Areas.Mountain
 				}
 				//(HP)
 				else {
-					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + player.assDescript() + " and " + player.multiCockDescriptLight() + ".  A cold mountain breeze blows across your now exposed " + player.skinDesc + ", reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity.  With a brutal lunge it knocks you off your " + player.feet() + " and onto your back.\n\n");
+					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + player.assDescript() + " and " + player.multiCockDescriptLight() + ".  A cold mountain breeze blows across your now exposed " + player.skin.desc + ", reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity.  With a brutal lunge it knocks you off your " + player.feet() + " and onto your back.\n\n");
 				}
 				outputText(images.showImage("hellhound-infestation"));
 				if (player.totalCocks() > 1) {
@@ -115,7 +116,7 @@ package classes.Scenes.Areas.Mountain
 				combat.cleanupAfterCombat();
 			}
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
-			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
+			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody.type != LowerBody.NAGA) {
 				//(LUST) 
 				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
@@ -126,7 +127,7 @@ package classes.Scenes.Areas.Mountain
 				}
 				//(HP) 
 				else {
-					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + player.assDescript() + " and " + player.vaginaDescript(0) + ".  A cold mountain breeze blows across your now exposed " + player.skinDesc + ", reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
+					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + player.assDescript() + " and " + player.vaginaDescript(0) + ".  A cold mountain breeze blows across your now exposed " + player.skin.desc + ", reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
 				}
 				outputText("The hell-hound rises up, looking nearly humanoid in shape for a moment before it drops down, planting its paws on your shoulders.  ");
 				if (player.cor < 66) outputText("You beg, \"<i>Please, no, no!  I don't want them... in me!</i>\"\n\n");
@@ -167,7 +168,7 @@ package classes.Scenes.Areas.Mountain
 				}
 				//(HP) 
 				else {
-					outputText("Too wounded to stand, you drop down to on your elbows in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + player.assDescript() + ".  A cold mountain breeze blows across your now exposed " + player.skinDesc + ", reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
+					outputText("Too wounded to stand, you drop down to on your elbows in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + player.assDescript() + ".  A cold mountain breeze blows across your now exposed " + player.skin.desc + ", reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
 				}
 				outputText("The hell-hound rises up, looking nearly humanoid in shape for a moment before it drops down, planting its paws on your shoulders.  ");
 				if (player.cor < 80) outputText("You beg, \"<i>Please, no, no!  I don't want it... in me!</i>\"\n\n");

@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3 
+package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.Items.WeaponLib;
 	import classes.Monster;
@@ -16,12 +16,12 @@ package classes.Scenes.Dungeons.D3
 		override public function defeated(hpVictory:Boolean):void
 		{
 			flags[kFLAGS.D3_STATUE_DEFEATED] = 1;
-			game.d3.livingStatue.beatUpDaStatue(hpVictory);
+			game.lethicesKeep.livingStatue.beatUpDaStatue(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.livingStatue.fuckinMarbleOP(hpVictory, pcCameWorms);
+			game.lethicesKeep.livingStatue.fuckinMarbleOP(hpVictory, pcCameWorms);
 		}
 		
 		public function LivingStatue() 

@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Mountain
 {
 
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.internals.*;
 
 	/**
@@ -41,7 +42,7 @@ package classes.Scenes.Areas.Mountain
 
 		override public function get long():String
 		{
-			return "An angry-looking minotaur looms over you.  Covered in shaggy " + hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. "+
+			return "An angry-looking minotaur looms over you.  Covered in shaggy " + hair.color + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. "+
 					(ballSize > 4?("  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need."):"") +
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
@@ -50,10 +51,8 @@ package classes.Scenes.Areas.Mountain
 		{
 			//Most times they dont have an axe
 			hasAxe = axe || rand(3)==0;
-			this.furColor = randomChoice("black","brown");
-
-			trace("Minotaur Constructor!");
-			trace(game.flags);
+			this.skin.furColor = randomChoice("black","brown");
+			//trace("Minotaur Constructor!");
 			this.a = "the ";
 			this.short = "minotaur";
 			this.imageName = "minotaur";
@@ -65,21 +64,21 @@ package classes.Scenes.Areas.Mountain
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = this.ballSize * 10;
 			createBreastRow(0);
-			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
-			this.ass.analWetness = ANAL_WETNESS_NORMAL;
+			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = rand(37) + 84;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_AVERAGE;
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.skinTone = furColor;
-			this.skinType = SKIN_TYPE_FUR;
-			this.skinDesc = "shaggy fur";
-			this.hairColor = furColor;
-			this.hairLength = 3;
+			this.hips.rating = Hips.RATING_AVERAGE;
+			this.butt.rating = Butt.RATING_AVERAGE;
+			this.lowerBody.type = LowerBody.HOOFED;
+			this.skin.tone = skin.furColor;
+			this.theSkinType = Skin.FUR;
+			this.skin.desc = "shaggy fur";
+			this.hair.color = skin.furColor;
+			this.hair.length = 3;
 			initStrTouSpeInte(hasAxe ? 75 : 50, 60, 30, 20);
 			initLibSensCor(40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
-			this.faceType = FACE_COW_MINOTAUR;
+			this.face.type = Face.COW_MINOTAUR;
 			this.weaponName = hasAxe?"axe":"fist";
 			this.weaponVerb = hasAxe?"cleave":"punch";
 			this.armorName = "thick fur";
@@ -97,7 +96,7 @@ package classes.Scenes.Areas.Mountain
 						.elseDrop(null);
 			}
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
-			this.tailType = TAIL_TYPE_COW;
+			this.tail.type = Tail.COW;
 			checkMonster();
 		}
 

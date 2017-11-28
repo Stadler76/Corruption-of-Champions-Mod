@@ -1,5 +1,6 @@
 package classes.Scenes.Places.TelAdre {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.display.SpriteDb;
@@ -25,7 +26,7 @@ package classes.Scenes.Places.TelAdre {
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			trace("\nEdryn time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nEdryn time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && flags[kFLAGS.EDRYN_PREGNANT_AND_NOT_TOLD_PC_YET] == 0 && pregnancy.type != PregnancyStore.PREGNANCY_TAOTH) {
 				flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION]++; //Pregnancy on hold until the PC discovers it
 			}
@@ -416,7 +417,7 @@ private function fuckEdrynTaur():void {
 	outputText("\n\nShe twists around to look you in the eye as you work her drooling horse-cunt over.  You can hear her copious fluids splattering the floor and feel them dripping down your hind legs as she moans, leaning back into you and planting a sloppy kiss on your lips.  One of her hands ");
 	if (player.biggestTitSize() <= 1) outputText("strokes your chest");
 	else outputText("caresses a breast");
-	outputText(" while she caresses the side of your " + player.face() + " with the other.  Your body pumps away while your tongues entwine, tracing saliva over each other's lips.  She pulls back and moans out again, trailing off into a whinny as she orgasms underneath you.\n\n");
+	outputText(" while she caresses the side of your " + player.faceDescript() + " with the other.  Your body pumps away while your tongues entwine, tracing saliva over each other's lips.  She pulls back and moans out again, trailing off into a whinny as she orgasms underneath you.\n\n");
 
 	outputText("Her cunt locks tightly around you once again, clamping down in a series of rings from the base all the way to your " + player.cockHead(x) + ".  At once, they start sliding from the base towards the tip, new ones forming along the bottom of the shaft as her pussy milks your " + player.cockDescript(x) + " hard.  Trapped inside her, all you can do is groan and cum in response to her climax.  You throw back your head as you feel the warmth of your release building in your ");
 	if (player.balls > 0) outputText(player.ballsDescriptLight());
@@ -454,7 +455,7 @@ private function fuckEdrynNonTaur():void {
 	else outputText("body");
 	outputText(".  She looks over her shoulder and says, \"<i>If you don't want your gear to smell like a horny centaur, you ought to shed it and get me warmed up with your tongue.</i>\"  You hastily remove it");
 	if (player.tallness > 72) outputText(" and drop down to your knees to better level yourself with her");
-	outputText(", pressing your " + player.face() + " into her slick folds and tasting her flavor.  Your nose easily slips into her gash as your tongue explores it, testing and tasting thick, liquid centaur lust.  It's tangy and sweet, surprisingly unlike the scent it gives off.  You easily find her large clit and suckle on it, listening to the wet squelches and whinnies of pleasure.\n\n");
+	outputText(", pressing your " + player.faceDescript() + " into her slick folds and tasting her flavor.  Your nose easily slips into her gash as your tongue explores it, testing and tasting thick, liquid centaur lust.  It's tangy and sweet, surprisingly unlike the scent it gives off.  You easily find her large clit and suckle on it, listening to the wet squelches and whinnies of pleasure.\n\n");
 
 	outputText("With a gasp you pull back, a thin coating of female slime clinging wetly to your face.  She leans over her hindquarters, her human-half rosy with the heat of her arousal as she hands you a towel.  You wipe off, and listen to the 'splat-splat-splat' of her animalistic pussy-juice as it drips to the floor.  She's completely soaked in a way that you doubt even a succubus could replicate.  She crooks a finger and waggles back and forth, making her puffy, black cunt-lips jiggle ever-so-slightly.  You don't need any more encouragement.\n\n")
 	if (player.tallness < 60) outputText("You grab a stool so you'll be tall enough to fuck her properly and climb onto it.  ");
@@ -545,7 +546,7 @@ public function approachHelAtZeBitch():void {
 	outputText(images.showImage("hel-chat-at-bar"));
 
 	menu();
-	addDisabledButton(0, "Edryn3Some");
+
 	if ((edrynBar() && player.cockThatFits(300) >= 0 && player.statusEffectv1(StatusEffects.Edryn) >= 4) && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way.  \"<i>Well, fancy meeting you here, ");
 		if (player.femininity < 49) outputText("handsome");
@@ -559,7 +560,7 @@ public function approachHelAtZeBitch():void {
 		outputText("\"<i>Yeah!  That's the one!  Oh man, I'd pay a pretty gem to stick my tail up her flanks!</i>\" she laughs, snaking her tail under the table to tickle your thighs.  You give her prehensile extremity a little slap until it comes to rest in your lap, snuggling up around your " + player.hipDescript() + " as Hel nonchalantly chugs down the rest of her ale.\n\n");
 
 		outputText("Sitting with the salamander, you notice across the crowded bar that Edryn is sitting at her table, sipping a little glass of wine.  Catching your eye, the centauress gives you a sultry wink.  An idea forms in your mind: you could easily introduce the two girls.  Do you?");
-		flags[kFLAGS.HEL_EDRYN_OFFER]++;
+		flags[kFLAGS.HEL_EDRYN_OFFER] = 1;
 		addButton(0, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
 	}
 	else {
@@ -569,8 +570,15 @@ public function approachHelAtZeBitch():void {
 		outputText(".  In town for business... or pleasure?</i>\" she purrs with a little wink.\n\n");
 
 		outputText("You spend a few minutes talking with the salamander, joking and laughing with your inebriated lover.  ");
-		//Eventually, though, Hel gives a nod toward Edryn, sitting a ways away from you, and asks if you'd be up for a little threesome time.  Are you?\n\n");
-		outputText("  Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n");
+		
+		if (edrynBar() && flags[kFLAGS.HEL_EDRYN_OFFER] == 1) {
+			outputText("Eventually, though, Hel gives a nod toward Edryn, sitting a ways away from you, and asks if you'd be up for a little threesome time.  Are you?\n\n");
+			addButton(0, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
+		}
+		else {
+			outputText("Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n");
+			addDisabledButton(0, "Edryn3Some");
+		}
 	}
 	//(Display Options: [Threesome] [Leave]
 	
@@ -581,7 +589,7 @@ public function approachHelAtZeBitch():void {
 //First Time - Leave
 private function leaveHelInZeBitch():void {
 	clearOutput();
-	if (flags[kFLAGS.HEL_EDRYN_OFFER] == 1) {
+	if (edrynBar() && flags[kFLAGS.HEL_EDRYN_OFFER] == 1) {
 		outputText("You decide against trying to set something up between the girls -- you like your lovers separate for now.  You spend the rest of the hour quietly chatting with Helia before giving her a friendly kiss goodbye and stepping away.");
 	}
 	else {
@@ -983,7 +991,7 @@ private function jizzFromEatingPregdrynOut():void {
 	outputText("Startled from your sexual fog, you jerk back and gasp.  The smell – it's like sex distilled into orgasm and fired straight into your brain.  Your " + player.hipDescript() + " shake uncontrollably, spasming wildly as your scent-addled mind sets off a full-body orgasm.  ");
 	if (player.hasVagina()) {
 		outputText("Your " + player.vaginaDescript(0) + " contracts and spasms with the rest of you, ");
-		if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("squirting");
+		if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("squirting");
 		else outputText("leaking");
 		outputText(" in a pale imitation of Edryn's box.  ");
 	}
@@ -1027,13 +1035,9 @@ private function edrynPregChance():void {
 	temp = player.cumQ()/500;
 	if (temp > 5) temp = 5;
 	temp += player.virilityQ() * 200;
-
-	trace("Edryn Preg Check Virility Score: " + temp);
 	if (player.cumQ() > 250 && temp >= rand(100)) {
 		preg = true;
-		trace("Edryn knocked up!");
 	}
-	else trace("Edryn not knocked up!");
 	if (preg) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_CENTAUR + 80);
 		flags[kFLAGS.EDRYN_PREGNANT_AND_NOT_TOLD_PC_YET] = 0;
@@ -1122,7 +1126,7 @@ public function eatEdrynPussyLikeABawss():void {
 	outputText("\n\nEdryn trots closer and says, \"<i>Then you'd best eat up hon, 'cause I got you a four course meal.</i>\"  Her swollen pussy is just inches away from you now.  The black lips part slightly before you, winking slowly as moisture begins to run from the bestial entrance, visibly fogging the air before you.  A web of girlish goo hangs across the slightly-spread entrance, and after one last inhalation of her almost sweet scent, you dive on in.  Your nose is the first casualty of your aggressive war on centaur-cunt, slurped down by the hungry folds as soon as you're pushing up against them.  You keep pushing until your mouth has slipped through the moist, sticky veil that hangs across her vagina, kissing her fat-lipped horse-pussy with gusto while you let your tongue slither out to play.");
 
 	outputText("\n\nAt the first lick, Edryn gets palpably wetter.  Sloppy juice washes out from inside her, covering your cheeks and chin before dripping off onto your [chest], leaving you marked with her feminine odor.  ");
-	if (player.tongueType > TONGUE_HUMAN) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
+	if (player.tongue.type > Tongue.HUMAN) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
 	outputText("The busty, animalistic woman moans unashamedly, hands going to her breasts to squeeze them, her clit filling up to its full size.  You can feel the sensitive nodule plump up against the top of your mouth, so you open wide enough to give it a quick suck before returning to polishing her innards.  After that the equine pleasure-buzzer gets rock-hard and continues to bulge meaningfully against you, pulsing hotly in your mouth.");
 	outputText("\n\nYou sway dizzily on your [feet] as you try to focus on just basking in her pussy's delicious... potent... sexy aroma.  [EachCock] is lifting needily with every passing second.  ");
 	if (player.cockTotal() == 1) outputText("It's");

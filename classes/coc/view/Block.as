@@ -295,7 +295,10 @@ public class Block extends Sprite {
 	}
 
 	public function applyShadow():void {
-		if (this.filters.length > 0) return;
+		if (this.filters.length > 0) {
+			return;
+		}
+		
 		var dropShadow:DropShadowFilter = new DropShadowFilter();
 		_container.filters.push(dropShadow);
 	}

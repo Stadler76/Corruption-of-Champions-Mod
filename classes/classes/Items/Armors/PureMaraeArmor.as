@@ -27,7 +27,7 @@ package classes.Items.Armors
 			outputText("\n\nFirst, you clamber into the breastplate. ");
 			if (getGame().player.isBiped()) //Some variants.
 			{
-				if (getGame().player.lowerBody == 0) outputText("Then you put your feet into your boots. With the boots fully equipped, you move on to the next piece. ");
+				if (getGame().player.lowerBody.type == 0) outputText("Then you put your feet into your boots. With the boots fully equipped, you move on to the next piece. ");
 				else outputText("Then you attempt to put your feet into your boots. You realize that the boots are designed for someone with normal feet. You have to modify the boots to fit and when you do put on your boots, your feet are exposed. ");
 			}
 			outputText("Next, you put on your reinforced bark bracers to protect your arms.\n\n")

@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.D3
+package classes.Scenes.Dungeons.LethicesKeep
 {
 	import classes.Monster;
 	import classes.StatusEffects;
@@ -6,6 +6,8 @@ package classes.Scenes.Dungeons.D3
 	import classes.PerkLib;
 	import classes.CockTypesEnum;
 	import classes.internals.WeightedDrop;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	
 	public class MinotaurKing extends Monster
 	{
@@ -32,8 +34,8 @@ package classes.Scenes.Dungeons.D3
 			this.balls = 2;
 			this.ballSize = 4;
 			this.hoursSinceCum = 9999;
-			this.hipRating = HIP_RATING_SLENDER;
-			this.buttRating = BUTT_RATING_TIGHT;
+			this.hips.rating = Hips.RATING_SLENDER;
+			this.butt.rating = Butt.RATING_TIGHT;
 			initStrTouSpeInte(100,100,50,60);
 			initLibSensCor(66,10,100);
 			this.weaponName = "axe";
@@ -106,12 +108,12 @@ package classes.Scenes.Dungeons.D3
 				combatRoundOver();
 				return;
 			}
-			game.d3.minotaurKing.theKingIsDeadLongLiveTheKing(hpVictory);
+			game.lethicesKeep.minotaurKing.theKingIsDeadLongLiveTheKing(hpVictory);
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.minotaurKing.hailToTheKingBaby(hpVictory,pcCameWorms);
+			game.lethicesKeep.minotaurKing.hailToTheKingBaby(hpVictory,pcCameWorms);
 		}
 		
 		public function get orgasms():int
@@ -149,15 +151,16 @@ package classes.Scenes.Dungeons.D3
 			outputText("Feinting with his axe, the Minotaur King flings a powerful backhand in your direction.");
 			var damage:Number = str + weaponAttack - rand(player.tou);
 			var evade:String = player.getEvasionReason();
-			if (damage <= 0 || evade == EVASION_SPEED || evade == EVASION_FLEXIBILITY || evade == EVASION_UNHINDERED)
+			
+			if (damage <= 0 || evade === EVASION_SPEED || evade === EVASION_FLEXIBILITY || evade === EVASION_UNHINDERED)
 			{
 				outputText(" Luckily, you dodge aside.");
 			}
-			else if (evade == EVASION_EVADE)
+			else if (evade === EVASION_EVADE)
 			{
 				outputText(" Luckily, you evade.");
 			}
-			else if (evade == EVASION_MISDIRECTION)
+			else if (evade === EVASION_MISDIRECTION)
 			{
 				outputText(" Luckily, you misdirect his attack.");
 			}

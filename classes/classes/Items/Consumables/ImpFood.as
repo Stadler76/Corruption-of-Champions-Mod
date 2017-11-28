@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.BodyParts.*;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -42,13 +43,13 @@ package classes.Items.Consumables
 				game.HPChange(30 + player.tou / 3, true);
 				dynStats("lus", 3, "cor", 1);
 				//Red or orange skin!
-				if (rand(30) === 0 && ["red", "orange"].indexOf(player.skinTone) === -1) {
+				if (rand(30) === 0 && ["red", "orange"].indexOf(player.skin.tone) === -1) {
 					if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
-					else outputText("\n\nYour " + player.skinDesc + " ");
-					if (rand(2) === 0) player.skinTone = "red";
-					else player.skinTone = "orange";
-					outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
-					mutations.updateClaws(player.clawType);
+					else outputText("\n\nYour " + player.skin.desc + " ");
+					if (rand(2) === 0) player.skin.tone = "red";
+					else player.skin.tone = "orange";
+					outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skin.tone + ".");
+					mutations.updateClaws(player.claws.type);
 					kGAMECLASS.rathazul.addMixologyXP(20);
 				}
 			}
@@ -59,14 +60,14 @@ package classes.Items.Consumables
 				dynStats("lus", 3, "cor", 1);
 			}
 			//Red or orange skin!
-			if (rand(5) === 0 && ["red", "orange"].indexOf(player.skinTone) === -1 && changes < changeLimit) {
+			if (rand(5) === 0 && ["red", "orange"].indexOf(player.skin.tone) === -1 && changes < changeLimit) {
 				if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
-				else outputText("\n\nYour " + player.skinDesc + " ");
-				if (rand(2) === 0) player.skinTone = "red";
-				else player.skinTone = "orange";
-				outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+				else outputText("\n\nYour " + player.skin.desc + " ");
+				if (rand(2) === 0) player.skin.tone = "red";
+				else player.skin.tone = "orange";
+				outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skin.tone + ".");
 				dynStats("cor", 2);
-				player.skinType = SKIN_TYPE_PLAIN;
+				player.skin.type = Skin.PLAIN;
 				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
@@ -79,36 +80,36 @@ package classes.Items.Consumables
 			}
 			
 			//Imp wings - I just kinda robbed this from demon changes ~Foxwells
-			if (rand(3) == 0 && changes < changeLimit && player.wingType != WING_TYPE_IMP_LARGE && player.isCorruptEnough(25)) {
+			if (rand(3) == 0 && changes < changeLimit && player.wings.type != Wings.IMP_LARGE && player.isCorruptEnough(25)) {
 				//grow smalls to large
-				if (player.wingType === WING_TYPE_IMP && player.isCorruptEnough(50)) {
+				if (player.wings.type === Wings.IMP && player.isCorruptEnough(50)) {
 					outputText("\n\n");
 					outputText("Your small imp wings stretch and grow, tingling with the pleasure of being attached to such a tainted body. You stretch over your shoulder to stroke them as they unfurl, turning into large imp-wings. <b>Your imp wings have grown!</b>");
-					player.wingType = WING_TYPE_IMP_LARGE;
+					player.wings.type = Wings.IMP_LARGE;
 				}
-				else if (player.rearBody.type === REAR_BODY_SHARK_FIN) {
+				else if (player.rearBody.type === RearBody.SHARK_FIN) {
 					outputText("\n\n");
 					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support the new bat-like wings growing from your back. You twist your head as far as you can for a look and realize your fin has changed into imp-wings!");
 					player.rearBody.restore();
-					player.wingType = WING_TYPE_IMP;
+					player.wings.type = Wings.IMP;
 				}
 				//No wings
-				else if (player.wingType === WING_TYPE_NONE) {
+				else if (player.wings.type === Wings.NONE) {
 					outputText("\n\n");
 					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small imp wings sprout from your back, ripping a pair of holes in the back of your " + player.armorName + ".  <b>You now have imp wings.</b>");
-					player.wingType = WING_TYPE_IMP;
+					player.wings.type = Wings.IMP;
 				}
 				//Other wing types
 				else {
 					outputText("\n\n");
 					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into ");
-					if ([WING_TYPE_BEE_LIKE_SMALL, WING_TYPE_HARPY, WING_TYPE_DRACONIC_SMALL, WING_TYPE_IMP].indexOf(player.wingType) !== -1) {
+					if ([Wings.BEE_LIKE_SMALL, Wings.HARPY, Wings.DRACONIC_SMALL, Wings.IMP].indexOf(player.wings.type) !== -1) {
 						outputText("small ");
-						player.wingType = WING_TYPE_IMP;
+						player.wings.type = Wings.IMP;
 					}
 					else {
 						outputText("large ");
-						player.wingType = WING_TYPE_IMP_LARGE;
+						player.wings.type = Wings.IMP_LARGE;
 					}
 					outputText("<b>imp-wings!</b>");
 				}
@@ -117,10 +118,10 @@ package classes.Items.Consumables
 			}
 			
 			//Imp tail, because that's a unique thing from what I see?
-			if (player.tailType !== TAIL_TYPE_IMP && changes < changeLimit && rand(3) === 0) {
-				if (player.tailType !== TAIL_TYPE_NONE) {
+			if (player.tail.type !== Tail.IMP && changes < changeLimit && rand(3) === 0) {
+				if (player.tail.type !== Tail.NONE) {
 					outputText("\n\n");
-					if (player.tailType === TAIL_TYPE_SPIDER_ADBOMEN || player.tailType === TAIL_TYPE_BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into an imp's tail, complete with a round fluffed end. ");
+					if (player.tail.type === Tail.SPIDER_ABDOMEN || player.tail.type === Tail.BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into an imp's tail, complete with a round fluffed end. ");
 					else outputText("You feel a tingling in your tail. You are amazed to discover it has shifted into an imp tail, complete with a fluffy end. ");
 					outputText("<b>Your tail is an imp tail!</b>");
 				}
@@ -128,74 +129,74 @@ package classes.Items.Consumables
 					outputText("\n\nA pain builds in your backside, growing more and more pronounced. The pressure suddenly disappears with a loud ripping and tearing noise. <b>You realize you now have an imp tail</b>... complete with fluffed end.");
 				}
 				dynStats("cor", 2);
-				player.tailType = TAIL_TYPE_IMP;
+				player.tail.type = Tail.IMP;
 				changes++;
 			}
 			
 			//Feets, needs red/orange skin and tail
-			if (["red", "orange"].indexOf(player.skinTone) !== -1 && player.tailType === TAIL_TYPE_IMP && player.lowerBody !== LOWER_BODY_TYPE_IMP && rand(3) === 0 && changes < changeLimit) {
+			if (["red", "orange"].indexOf(player.skin.tone) !== -1 && player.tail.type === Tail.IMP && player.lowerBody.type !== LowerBody.IMP && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nEvery muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out as your " + player.feet() + " splinter and curve cruelly. The pain slowly diminishes and your eyes look along a skinny, human leg that splinters at the foot into three long claw with a smaller back one for balance. When you relax, your feet grip the ground easily. <b>Your lower body is now that of an imp.</b>");
-				player.lowerBody = LOWER_BODY_TYPE_IMP;
-				player.legCount = 2;
+				player.lowerBody.type = LowerBody.IMP;
+				player.lowerBody.legCount = 2;
 				dynStats("cor", 2);
 				changes++;
 		}
 			
 			//Imp ears, needs red/orange skin and horns
-			if (player.hornType === HORNS_IMP && ["red", "orange"].indexOf(player.skinTone) !== -1 && player.earType !== EARS_IMP && rand(3) === 0 && changes < changeLimit) {
+			if (player.horns.type === Horns.IMP && ["red", "orange"].indexOf(player.skin.tone) !== -1 && player.ears.type !== Ears.IMP && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYour head suddenly pulses in pain, causing you to double over and grip at it. You feel your ears elongate and curl in slightly, ending at points not much unlike elves. These, however, jut out of the side of your head and are coned, focusing on every sound around you. A realization strikes you. <b>Your ears are now that of an imp!</b>");
-				player.earType = EARS_IMP;
+				player.ears.type = Ears.IMP;
 				dynStats("cor", 2);
 				changes++;
 		}
 			
 			//Horns, because why not?
-			if ((player.horns === 0 || player.hornType !== HORNS_IMP) && changes < changeLimit && rand(2) === 0) {
-				if (player.horns === 0) {
+			if ((player.horns.value === 0 || player.horns.type !== Horns.IMP) && changes < changeLimit && rand(2) === 0) {
+				if (player.horns.value === 0) {
 					outputText("\n\nA small pair of pointed imp horns erupt from your forehead. They look kind of cute. <b>You have horns!</b>");
 				}
 				else {
 					outputText("\n\n");
 					outputText("Your horns shift, turning into two pointed imp horns.");
 				}
-				player.horns = 2;
-				player.hornType = HORNS_IMP;
+				player.horns.value = 2;
+				player.horns.type = Horns.IMP;
 				dynStats("cor", 2);
 				changes++;
 			}
 			
 			//Imp claws, needs orange/red skin. Also your hands turn human.
-			if (["red", "orange"].indexOf(player.skinTone) !== -1 && player.clawType !== CLAW_TYPE_IMP && rand(3) === 0 && changes < changeLimit) {
-				if (player.armType !== ARM_TYPE_HUMAN) {
+			if (["red", "orange"].indexOf(player.skin.tone) !== -1 && player.claws.type !== Claws.IMP && rand(3) === 0 && changes < changeLimit) {
+				if (player.arms.type !== Arms.HUMAN) {
 					outputText("\n\nYour arms twist and mangle, warping back into human-like arms. But that, you realize, is just the beginning.");
 				}
-				if (player.clawType === CLAW_TYPE_NORMAL) {
+				if (player.claws.type === Claws.NORMAL) {
 					outputText("\n\nYour hands suddenly ache in pain, and all you can do is curl them up to you. Against your body, you feel them form into three long claws, with a smaller one replacing your thumb but just as versatile. <b>You have imp claws!</b>");
 				} else { //has claws
 					outputText("\n\nYour claws suddenly begin to shift and change, starting to turn back into normal hands. But just before they do, they stretch out into three long claws, with a smaller one coming to form a pointed thumb. <b>You have imp claws!</b>");
 				}
-				player.armType = ARM_TYPE_PREDATOR;
-				player.clawType = CLAW_TYPE_IMP;
-				player.clawTone = player.skinTone;
+				player.arms.type = Arms.PREDATOR;
+				player.claws.type = Claws.IMP;
+				player.claws.tone = player.skin.tone;
 				dynStats("cor", 2);
 				changes++;
 			}
 			
 			//Changes hair to red/dark red, shortens it, sets it normal
-			if (["red", "dark red"].indexOf(player.hairColor) === -1 && rand(3) === 0 && changes < changeLimit) {
+			if (["red", "dark red"].indexOf(player.hair.color) === -1 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nYour hair suddenly begins to shed, rapidly falling down around you before it's all completely gone. Just when you think things are over, more hair sprouts from your head, slightly curled and color different.");
 				if (rand(2) !== 0) {
-					player.hairColor = "red";
+					player.hair.color = "red";
 				} else {
-					player.hairColor = "dark red";
+					player.hair.color = "dark red";
 				}
-				outputText(" <b>You now have " + player.hairColor + "</b>");
-				if (player.hairType !== HAIR_NORMAL) {
+				outputText(" <b>You now have " + player.hair.color + "</b>");
+				if (player.hair.type !== Hair.NORMAL) {
 					outputText("<b> human</b>");
 				}
 				outputText("<b> hair!</b>");
-				player.hairType = HAIR_NORMAL;
-				player.hairLength = 1;
+				player.hair.type = Hair.NORMAL;
+				player.hair.length = 1;
 				changes++;
 			}
 			
@@ -243,7 +244,7 @@ package classes.Items.Consumables
 			}
 			
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss

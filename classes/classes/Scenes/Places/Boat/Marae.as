@@ -125,24 +125,24 @@ package classes.Scenes.Places.Boat
 			this.imageName = "marae";
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion."
-				this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
+				this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
 			}
 			else {
 				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized."
-				this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_NORMAL);
+				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 			}
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
 			this.tallness = 10*12;
-			this.hipRating = 10;
-			this.buttRating = 8;
-			this.skinTone = "white";
-			this.skinType = 0;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
-			this.hairColor = "green";
-			this.hairLength = 36;
+			this.hips.rating = 10;
+			this.butt.rating = 8;
+			this.skin.tone = "white";
+			this.theSkinType = 0;
+			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.FUR];
+			this.hair.color = "green";
+			this.hair.length = 36;
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				initStrTouSpeInte(150, 150, 70, 110);
 				initLibSensCor(60, 25, 100);

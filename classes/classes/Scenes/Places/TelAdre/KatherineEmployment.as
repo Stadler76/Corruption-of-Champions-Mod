@@ -1,6 +1,9 @@
 package classes.Scenes.Places.TelAdre{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
+	import classes.display.SpriteDb;
+	import classes.Scenes.Places.TelAdre.Katherine;
 	import classes.Scenes.NPCs.Urta;
 
 	public class KatherineEmployment extends TelAdreAbstractContent {
@@ -120,7 +123,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("You smile and thank the centauress for her help.  “<i>It was nothing,</i>” she replies, looking quite pleased at your thanks all the same.\n\n");
 			flags[kFLAGS.KATHERINE_TRAINING] |= KBIT_TRAINING_TALK_EDRYN; //Using a mask so it doesn’t matter what order you talk to Edryn and Urta in
 			var cockFitIndex:int = player.cockThatFits(300);
-			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.countCocksOfType(CockTypesEnum.HORSE) > 0 || player.isCorruptEnough(50) || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
+			if ((cockFitIndex >= 0 && player.cockArea(cockFitIndex) >= 24) && (player.lowerBody.type == LowerBody.HOOFED || player.countCocksOfType(CockTypesEnum.HORSE) > 0 || player.isCorruptEnough(50) || player.statusEffectv1(StatusEffects.Edryn) > 0)) {
 				outputText("“<i>So... I don’t suppose there’s anything else you might have on your mind...?</i>”  She gives you a coy look and fiddles with a nipple through her shirt.");
 				doYesNo((edryn.pregnancy.isPregnant ? pregnantEdrynSexSelector : edryn.edrynSexSelecter), telAdre.barTelAdre);
 			}
@@ -759,6 +762,7 @@ package classes.Scenes.Places.TelAdre{
 
 		public function katherineTrainingWithUrta():void {
 			clearOutput();
+			katherine.katherineSprite();
 			outputText("From Oswald's pawnshop you retrace your steps to the safehouse where Urta is getting Kath into shape and rap your knuckles against the door.\n\n");
 			if (flags[kFLAGS.KATHERINE_TRAINING] >= 100)
 				katherineTrainingWithUrtaComplete();
@@ -1202,6 +1206,7 @@ package classes.Scenes.Places.TelAdre{
 		public function postTrainingAlleyDescription():void
 		{
 			clearOutput();
+			spriteSelect(null);
 			outputText("You go into the alleyway behind Oswald's shop.  It seems empty without a happy cat-morph to greet you.\n\n");
 			outputText("Looking closely you notice a few of the secret hiding spots among the crates have been emptied.  Kath must have been here to collect some of her more sentimental possessions.\n\n");
 			if (!katherine.isAt(Katherine.KLOC_KATHS_APT)) { //Only possible if she's already been seen on guard duty at the gate and you've slept once since

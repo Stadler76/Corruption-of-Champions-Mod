@@ -15,9 +15,7 @@ package classes{
 	import classes.Player;
 	
     public class PlayerEventsTest {
-		include "../../includes/appearanceDefs.as";
-		
-		private const LOOSENESS:Number = VAGINA_LOOSENESS_LOOSE;
+		private const LOOSENESS:Number = VaginaClass.LOOSENESS_LOOSE;
 		
         private var cut:PlayerEvents;
 		private var player:Player;

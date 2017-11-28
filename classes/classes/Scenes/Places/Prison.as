@@ -121,7 +121,6 @@ package classes.Scenes.Places
 		 * @param	amount How much to add or deduct.
 		 */
 		public function changeEsteem(amount:int = 0, display:Boolean = false):void {
-			trace("Changing esteem");
 			var oldEsteem:Number = player.esteem;
 			player.esteem += amount;
 			if (player.esteem > 100) player.esteem = 100;
@@ -1220,12 +1219,10 @@ package classes.Scenes.Places
 			//Random events
 			if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] == 0 && model.time.hours >= 8) {
 				flags[kFLAGS.PRISON_EVENT_TIMEOUT] = 2;
-				trace("Firing prison event");
 				var petPlayRarity:int = 10;
 				petPlayRarity -= (trainingPet.prisonCaptorPetScore() - 25) / 5;
 				if (petPlayRarity < 2) petPlayRarity = 2;
 				var chooser:int = rand(8);
-				trace(chooser);
 				switch(chooser)
 				{
 					case 1:
@@ -2437,7 +2434,6 @@ package classes.Scenes.Places
 				//Wild Dildo Rack appears!
 				if (rand(2) == 1 && !prisonCanMasturbate(false) && flags[kFLAGS.PRISON_DILDO_RACK] == 0)
 				{
-					trace("Dildo rack");
 					outputText(prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room to find you writhing on the floor with unmanageable lust and is clearly amused by your pathetic state of affairs. After a moment's thought " + prisonCaptor.captorPronoun1 + " comes to a decision and says, \"<i>Even naughty " + player.mf("boy", "girl") + "s deserve to have a special friend at times like this, and I happen to have a friend that should help you learn the value of good behavior while solving your current dilemma.</i>\" A wry smirk crosses " + prisonCaptor.captorPronoun3 + " face as " + prisonCaptor.captorPronoun1 + " leaves the room. A few minutes later an imp guard drags a strange object into the room, sets it beside you, then leaves you to ponder it alone.\n\n");
 					outputText("Your new \"friend\" appears to be a four foot tall round post with a wide variety of dildos sticking out at every imaginable height and angle. While the tower and its appendages are made of some sort of slick black latex-like material, the entire construction radiates a strange energy, almost as though it could come alive at any moment. It occurs to you that in an odd way it resembles a pine tree, since the dildos become progressively larger the closer they are to the ground. You are puzzled for a second, then suddenly you understand.\n\n");
 					outputText("A horny slave who was able to move about freely could reach the most pleasant and appealing looking dongs near the top: modestly sized, generally human looking phalluses with mild ribs, bumps and other features designed to give extra pleasure to the user. You notice that there are even several metal rings hanging from the ceiling above the post which could facilitate more creative positions for using the highest of the dildos.\n\n");
@@ -2462,13 +2458,11 @@ package classes.Scenes.Places
 				//Wild Billie appears!
 				if (billieScene.prisonCaptorBillieMet() > 0 && rand(5) < billieScene.prisonCaptorBillieEvent())
 				{
-					trace("Billie");
 					billieScene.prisonCaptorBillieEventSet(1);
 					billieScene.prisonCaptorBilliePityFuck();
 					return true;
 				}
 				billieScene.prisonCaptorBillieEventChange(1);
-				trace("Elly");
 				outputText(images.showImage("prison-elly"));
 				outputText(prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room to find you writhing on the floor with unmanageable lust and is clearly amused by your pathetic state of affairs. After a moment's thought " + prisonCaptor.captorPronoun1 + " comes to a decision and says, \"<i>Beg me to fuck you, and I might take pity on you.</i>\"\n\n");
 				outputText("Do you give in to your lust and beg your " + prisonCaptor.captorTitle + " to fuck you, or do you try to resist? " + prisonWillCostDescript(15));

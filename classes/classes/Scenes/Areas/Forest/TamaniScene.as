@@ -64,7 +64,7 @@ Males:
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			trace("\nTamani time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nTamani time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) tamaniGivesBirth(); //Silently clear Tamani's pregnancy if the player doesn't encounter her in time
 			return false;
 		}
@@ -205,7 +205,7 @@ private function tamaniFirstTimeConsentual():void {
 	}
 	//(TOO BIG)
 	else {
-		outputText("Tamani breaks your sloppy kiss and shimmies down your body, clutching tightly to your " + player.cockDescript(0) + " and " + player.skinDesc + " as she settles down lower on your groin.  The goblin somehow manages to turn herself around so that is she is hanging upside-down, with her legs and arms clutching tightly to your member while her tongue ");
+		outputText("Tamani breaks your sloppy kiss and shimmies down your body, clutching tightly to your " + player.cockDescript(0) + " and " + player.skin.desc + " as she settles down lower on your groin.  The goblin somehow manages to turn herself around so that is she is hanging upside-down, with her legs and arms clutching tightly to your member while her tongue ");
 		if (player.hasSheath()) {
 			outputText("licks the edges of your sheath");
 			if (player.balls > 0) outputText(" and balls");
@@ -213,7 +213,7 @@ private function tamaniFirstTimeConsentual():void {
 		else {
 			if (player.balls > 0) outputText("licks all over your balls");
 			else if (player.hasVagina()) outputText("sneaks between your folds to tease your now-hardening clit");
-			else outputText("licks the sensitive " + player.skinTone + " " + player.skinDesc + " of your inner thighs");
+			else outputText("licks the sensitive " + player.skin.tone + " " + player.skin.desc + " of your inner thighs");
 		}
 		outputText("\n\n");
 		outputText("Her cunt grinds on your crown, smearing it with a mixture of the drooling cunt-lubricant and your own drizzles of pre-cum.  As your dick becomes slick and wet, the feeling of her arms and legs wrapped around you feels better and better.   She even squeezes her arms tight around you like a cock-ring, making your dick pulse and swell with blood for a few seconds before she releases.  Your inner abdominal muscles begin clenching and squeezing, sending a wave of heat through your groin as your baby-batter begins its journey to freedom.\n\n");
@@ -792,7 +792,7 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 		outputText("Taking that as an opportunity, you pick up the pace, plunging yourself in and out of her with a renewed, almost vicious vigor.  The wet slaps of your juice-");
 		if (player.hasFur()) outputText("matted");
 		else outputText("slicked");
-		outputText(" " + player.skinDesc + " impacting her ass fill the air.  You fuck your wife harder and faster with every stroke, knowing you won't last more than a few more thrusts before you're painting her womb white.  Your wife is too cummed out to care or respond, ");
+		outputText(" " + player.skin.desc + " impacting her ass fill the air.  You fuck your wife harder and faster with every stroke, knowing you won't last more than a few more thrusts before you're painting her womb white.  Your wife is too cummed out to care or respond, ");
 		if (cocks == 1) outputText("her tongue hanging out as she pants nonsensical pleasure-noises.");
 		else outputText("and her mouth is too full of " + player.cockDescript(secondary) + " to do anything but gurgle out nonsensical pleasure-noises.");
 		outputText("  Swelling wider inside the wet hole, your " + player.cockDescript(primary) + " tingles and clenches, about to unload.\n\n");

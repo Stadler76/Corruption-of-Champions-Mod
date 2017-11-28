@@ -1,10 +1,13 @@
 package coc.test {
-	import flash.display.MovieClip;
+	import classes.DefaultDict;
+	import classes.internals.LoggerFactory;
 	import coc.model.GameModel;
 	import coc.view.MainView;
-	import classes.DefaultDict;
+	import flash.display.MovieClip;
+	import mx.logging.ILogger;
 
 	public class TestMainView extends MovieClip {
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(TestMainView);
 		public var mainView :MainView;
 		public var gameModel :GameModel;
 
@@ -19,7 +22,7 @@ package coc.test {
 
 			this.gameModel.flags = new DefaultDict();
 
-			trace( "MainView:", this.mainView );
+			LOGGER.debug( "MainView:", this.mainView );
 
 			this.gameModel.flags[kFLAGS. 273 ] = 0;
 			this.mainView.selectSprite( 2 );
@@ -31,34 +34,34 @@ package coc.test {
 			this.mainView.setButton( 9, 'Clear Buttons' );
 			this.mainView.setButton( 8, '' );
 
-			trace( "test: hasButton( 'Lol' )?\n\t",
+			LOGGER.debug( "test: hasButton( 'Lol' )?\n\t",
 				this.mainView.hasButton( 'Lol' ), "(Should be 'true')" );
 
-			trace( "test: indexOfButtonWithLabel( 'Poop' )?\n\t",
+			LOGGER.debug( "test: indexOfButtonWithLabel( 'Poop' )?\n\t",
 				this.mainView.indexOfButtonWithLabel( 'Poop' ), "(Should be '4')" );
 
-			trace( "test: getButtonText( 6 ) =>\n\t",
+			LOGGER.debug( "test: getButtonText( 6 ) =>\n\t",
 				this.mainView.getButtonText( 6 ), "(Should be 'Penis')" );
 
-			trace( "test: buttonTextIsOneOf( 6, [ 'Peepee', 'Dingaling', 'Penis', 'Cock', 'Doodle', 'Dick', 'Sausage' ] )\n\t",
+			LOGGER.debug( "test: buttonTextIsOneOf( 6, [ 'Peepee', 'Dingaling', 'Penis', 'Cock', 'Doodle', 'Dick', 'Sausage' ] )\n\t",
 				this.mainView.buttonTextIsOneOf( 6, [ 'Peepee', 'Dingaling', 'Penis', 'Cock', 'Doodle', 'Dick', 'Sausage' ] ),
 				"(Should be 'true')" );
 
-			trace( "test: buttonIsVisible( 0 ) =>\n\t",
+			LOGGER.debug( "test: buttonIsVisible( 0 ) =>\n\t",
 				this.mainView.buttonIsVisible( 0 ),
 				"(Should be 'true')" );
 
-			trace( "test: buttonIsVisible( 8 ) =>\n\t",
+			LOGGER.debug( "test: buttonIsVisible( 8 ) =>\n\t",
 				this.mainView.buttonIsVisible( 8 ),
 				"(Should be 'false')" );
 
-			trace( "test: menuButtonHasLabel( 'newGame', 'New Game' )?\n\t",
+			LOGGER.debug( "test: menuButtonHasLabel( 'newGame', 'New Game' )?\n\t",
 				this.mainView.menuButtonHasLabel( 'newGame', 'New Game' ),
 				"(Should be 'true')" );
 
 			function makeButtonTracer( name :String ) :Function {
 				return function( event ) {
-					trace( "You pressed the", name, "button!" );
+					LOGGER.debug( "You pressed the", name, "button!" );
 				};
 			}
 

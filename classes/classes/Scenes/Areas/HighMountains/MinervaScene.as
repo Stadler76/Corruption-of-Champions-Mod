@@ -1,5 +1,6 @@
 package classes.Scenes.Areas.HighMountains {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
@@ -67,7 +68,7 @@ package classes.Scenes.Areas.HighMountains {
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			trace("\nMinerva time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nMinerva time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 				minervaPurification.minervaGivesBirth();
 				needNext = true;
@@ -91,7 +92,6 @@ package classes.Scenes.Areas.HighMountains {
 			if (chance < 10) chance = 10;
 			if (chance > 80) chance = 80;
 			if (rand(100) < chance && !pregnancy.isPregnant) {
-				trace("Minerva got PREGNANT!");
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
 			}
 		}
@@ -455,7 +455,7 @@ private function minervaTalkSelect(bath:Boolean = true):void {
 		choices[choices.length] = talkingToMinervaAboutBackstory;
 	}
 	//Force start if the flag is right.
-	trace(flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS]);
+	//trace(flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS]);
 	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] == 1) {
 		minervaPurification.startPurification();
 		return;
@@ -1080,7 +1080,7 @@ private function goDownOnAHermAndLoveItYouDirtySlutYou():void {
 	
 	outputText("\n\nNow ready to give her your full attention, you dive in, your lips pressing against her nethers as your tongue slides in, giving her a perverted tongue filled kiss.  Your teasing tongue slides in deep and pleasures her inner walls, licking and lapping at every sensitive surface it can reach.  As you lick, you can clearly feel the squirming cilia that cover the quivering depths of her cunt, the little squirming things tickling your tongue as you lick.  ");
 	//Dragon/Demon tongue
-	if (player.tongueType == TONGUE_DEMONIC || player.tongueType == TONGUE_DRACONIC) outputText("Your deliciously long tongue slithers deeper and deeper, reaching sensitive walls and nerves that only the deepest penetrations would reach.  The deep licking makes Minerva shudder and let out a long drawn out moan, \"<i>O-oh!  Your tongue is so... licking me so deep...</i>\"");
+	if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.DRACONIC) outputText("Your deliciously long tongue slithers deeper and deeper, reaching sensitive walls and nerves that only the deepest penetrations would reach.  The deep licking makes Minerva shudder and let out a long drawn out moan, \"<i>O-oh!  Your tongue is so... licking me so deep...</i>\"");
 	outputText("  The intimate vaginal kiss is working wonders for the siren.  Her sweet, slick juices leak over your tongue, giving you plenty of the peachy flavor that you crave.  As you tongue your lover's pussy and tease her clit, your hands work her thick, pulsating cock, pre-cum slowly coating your hands and making it easy for you to squeeze tighter and stroke her faster.");
 	
 	outputText("\n\nNot wanting her to cum too soon, you pull your mouth back from her tight, cilia-filled snatch, drawing a disappointed moan from Minerva, clearly missing having your tongue inside her.  Licking your lips, you can still taste her delightful juices.  With your face so close to her genitals and her so close to orgasm, you have a few options to push her over.  Dig back into her creamy cunt, or give her needy, swollen balls some attention.");

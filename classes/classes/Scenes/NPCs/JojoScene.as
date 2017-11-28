@@ -1,4 +1,5 @@
 ﻿package classes.Scenes.NPCs{
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 	import classes.*;
 	import classes.Scenes.API.Encounter;
@@ -59,8 +60,8 @@
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) trace("\nJoy time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
-			else trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
+			//if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) trace("\nJoy time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
+			//else trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
 			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
 			if (player.hasStatusEffect(StatusEffects.NoJojo)) player.removeStatusEffect(StatusEffects.NoJojo);
 			if (pregnancy.isButtPregnant && pregnancy.buttIncubation == 0) {
@@ -518,9 +519,9 @@ public function useTentacleJojo():void {
 	else {
 		//With cunt
 		if (player.hasVagina()) {
-			if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING_WIDE) outputText(" practically falling into your oversized cum-receptacles");
+			if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING_WIDE) outputText(" practically falling into your oversized cum-receptacles");
 			else {
-				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText(" sliding inside easily thanks to your copious lubrication");
+				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText(" sliding inside easily thanks to your copious lubrication");
 				else outputText("forcing their way inside your " + player.vaginaDescript(0) + " and " + player.assholeDescript());
 			}
 		}
@@ -588,8 +589,8 @@ public function useTentacleJojo():void {
 		if (player.pregnancyIncubation == 0) outputText("mildly pregnant");
 		else outputText("even more pregnant");
 		outputText(".  Your body spasms around them, locked in the throes of orgasm");
-		if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(", and soaks him with a wave of puss juice.  ");
-		else if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText(", as your drooling cunt forms a slick puddle.  ");
+		if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(", and soaks him with a wave of puss juice.  ");
+		else if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText(", as your drooling cunt forms a slick puddle.  ");
 		else outputText(".  ");
 		//(If big clit being sucked – 
 		if (player.cockTotal() <= 2 && player.balls == 0) {
@@ -655,7 +656,7 @@ public function useTentacleJojo():void {
 	if (titFucking) {
 		outputText("The titfucking tentacles squeeze tighter against your " + player.allBreastsDescript() + " before they cum again, much harder than before.  Each time it pops free of your flesh, a wave of spunk flows out with it, rolling off your chest to drip into your already soaked face and mouth.  ");
 		if (player.cor >= 80 && player.lib >= 70) outputText("You lick your lips and swallow as much of it as possible, wallowing in the mouse-cream.  ");
-		if (player.hairLength > 0) outputText("He keeps unloading it until you feel it in your " + player.hairDescript());
+		if (player.hair.length > 0) outputText("He keeps unloading it until you feel it in your " + player.hairDescript());
 		else outputText("He keeps unloading it until you feel it on your head");
 		outputText(", then both tentacles abruptly release, going flaccid.\n\n");
 	}
@@ -1163,7 +1164,7 @@ public function jojoFollowerMeditate():void {
 		}
 
 		public function jojoRape(postCombat:Boolean = false):void {
-			trace("jojoRape called");
+			//trace("jojoRape called");
 			
 			jojoSprite();
 			player.slimeFeed();
@@ -1262,8 +1263,6 @@ public function jojoFollowerMeditate():void {
 			}
 			else if (player.gender == 3) 
 			{
-				trace("gender3");
-				
 				outputText("You push him hard, following through to pin his small frame.  He struggles but you twist his arm expertly and hold him down with your larger bodyweight.  He squirms as you tear off the bottom of his outfit, protesting mightily as you force him into the dirt and expose his toned bottom.\n\n");
 				if (player.cockTotal() == 1) 
 				{
@@ -1346,7 +1345,7 @@ public function jojoFollowerMeditate():void {
 		
 		private function jojosThirdRape():void {
 			clearOutput();
-			trace("Monk(3) rape");
+			//trace("Monk(3) rape");
 			outputText("It's no wonder the monk's body has betrayed him so thoroughly, his " + monster.cockDescriptShort(0) + " is nearly ten inches long, pulsing with hot need.\n\n");
 			if (player.gender == 1) {
 				outputText("You yank Jojo up from the ground and onto his knees, ");
@@ -1387,8 +1386,8 @@ public function jojoFollowerMeditate():void {
 				}
 				if (player.biggestLactation() >= 1.5 && player.biggestTitSize() > 2 && player.mostBreastsPerRow() >= 2 && player.breastRows.length >= 1) outputText("Every sensual peak within you is mirrored with small spurts of milk from your nipples.  It eventually trickles down to Jojo's tongue, spurring his efforts on.  ");
 				outputText("The mousey gets more and more in to eating your box, making it harder and harder to stave off an orgasm.  You wrap ");
-				if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("your coils ");
-				else if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("your jiggling goo ");
+				if (player.lowerBody.type == LowerBody.NAGA) outputText("your coils ");
+				else if (player.lowerBody.type == LowerBody.GOO) outputText("your jiggling goo ");
 				else outputText("your thighs ");
 				outputText("around his head and quiver with passion, ");
 				if (player.averageVaginalWetness() <= 1) outputText("squeezing him tightly into your " + player.vaginaDescript(0) + ".");
@@ -1505,7 +1504,7 @@ public function jojoFollowerMeditate():void {
 				if (player.isBiped()) outputText(" brushes against your calf");
 				else outputText(" brushes against your [leg]");
 				outputText(".  You get a devilish idea, ");
-				if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("and push his " + monster.cockDescriptShort(0) + " in between folds of slime, sandwiching it in a mass of slippery, gooey tightness.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + player.vaginaDescript(0) + ", tongue swirling over your folds and around your " + player.clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your goo, doing your best to impart a fetish for being masturbated with someone's lower body on his slowly warping mind.  You feel a hot wetness in your slime, and it grows slicker and wetter every second. Jojo's cum drips out of you, glazing your jello-like form white.  ");
+				if (player.lowerBody.type == LowerBody.GOO) outputText("and push his " + monster.cockDescriptShort(0) + " in between folds of slime, sandwiching it in a mass of slippery, gooey tightness.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + player.vaginaDescript(0) + ", tongue swirling over your folds and around your " + player.clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your goo, doing your best to impart a fetish for being masturbated with someone's lower body on his slowly warping mind.  You feel a hot wetness in your slime, and it grows slicker and wetter every second. Jojo's cum drips out of you, glazing your jello-like form white.  ");
 				else outputText("and push his " + monster.cockDescriptShort(0) + " with your " + player.foot() + ", sandwiching it under one " + player.foot() + " and on top of the other.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + player.vaginaDescript(0) + ", tongue swirling over your folds and around your " + player.clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your " + player.feet() + ", doing your best to impart a " + player.foot() + " fetish on his slowly warping mind.  You feel a hot wetness on your " + player.feet() + ", and they grow slicker and wetter every second. Jojo's cum drips out from between them, glazing them white.  ");
 				if (player.averageVaginalWetness() <= 1) outputText("You clamp down on his muzzle as you writhe in orgasm.  ");
 				if (player.averageVaginalWetness() > 1 && player.averageVaginalWetness() <= 3) outputText("Your legs trap his muzzle in your " + player.vaginaDescript(0) + " as orgasm wracks your body.  ");
@@ -3049,7 +3048,7 @@ public function apparantlyJojoDOESlift():void
 	}
 
 	flags[kFLAGS.TIMES_TRAINED_WITH_JOJO]++;
-	trace(flags[kFLAGS.TIMES_TRAINED_WITH_JOJO]);
+	//trace(flags[kFLAGS.TIMES_TRAINED_WITH_JOJO]);
 
 	// {If everything is cool}
 	if (player.findPerk(PerkLib.ControlledBreath) < 0 && player.findPerk(PerkLib.CleansingPalm) < 0 && player.findPerk(PerkLib.Enlightened) < 0)
@@ -3064,7 +3063,7 @@ public function apparantlyJojoDOESlift():void
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 5)
 		{
-			trace("ADDING FIRST PERK");
+			//trace("ADDING FIRST PERK");
 			outputText("“<i>Breathing is key.</i>”\n\n");
 			outputText("Jojo’s constantly repeated words resonate within you as you realize you’ve learned to control your breathing. It takes you less time to rest than normal and you feel as though you are bursting with energy because of it.  Your [fullChest]");
 			if (player.biggestTitSize() == 0) outputText(" rises and falls");
@@ -3086,7 +3085,7 @@ public function apparantlyJojoDOESlift():void
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 10)
 		{
-			trace("ADDING SECOND PERK");
+			//trace("ADDING SECOND PERK");
 			outputText("The repeated movements are slowly starting to sink in, your muscles becoming accustomed to Jojo’s training.\n\n");
 			outputText("By the end of the training session with the mouse, you think that you may have picked up something that might help against the denizens of this world.\n\n");
 
@@ -3106,7 +3105,7 @@ public function apparantlyJojoDOESlift():void
 
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 16 && player.inte >= 70)
 		{
-			trace("ADDING THIRD PERK");
+			//trace("ADDING THIRD PERK");
 			//{text shows after generic 16th technique training session}
 			outputText("As you finish training you decide to meditate alone; returning to your " + camp.bedDesc() + ", you close your eyes and begin to breathe.  Then the world around you begins to sing.\n\n");
 			outputText("The camp is alive with the sounds of voices on the wind, of the ominous sizzling of the great scar between worlds that is the portal that brought you here.  You feel open to the universe as if it were a lady in a dress sitting next to you, that you could easily reach out and touch.  You feel liberated and free despite the fact that you are not moving a muscle.  You are ready for anything but expecting nothing.  You are neither thinking nor dreaming, you simply are.\n\n");

@@ -1,6 +1,6 @@
 #!/bin/sh
 VERSION='4.16.0'
-PLAYER_VERSION='23.0'
+PLAYER_VERSION='27.0'
 GLOBAL_PLAYER_DIR="frameworks/libs/player/$PLAYER_VERSION"
 GLOBAL_PLAYER_PATH="$GLOBAL_PLAYER_DIR/playerglobal.swc"
 
@@ -14,7 +14,7 @@ echo "Creating $GLOBAL_PLAYER_DIR"
 mkdir -vp $GLOBAL_PLAYER_DIR
 
 # TODO generate link with version number with sed or awk?
-wget -nc http://download.macromedia.com/get/flashplayer/updaters/23/playerglobal23_0.swc -O"$GLOBAL_PLAYER_PATH"
+wget -nc http://download.macromedia.com/get/flashplayer/updaters/27/playerglobal27_0.swc -O"$GLOBAL_PLAYER_PATH"
 
 # Setup flash player. You read that right! Flash player for linux is back!
 wget -N https://fpdownload.macromedia.com/pub/labs/flashruntimes/flashplayer/linux64/flash_player_sa_linux.x86_64.tar.gz

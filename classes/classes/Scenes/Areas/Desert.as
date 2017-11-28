@@ -4,6 +4,7 @@
 package classes.Scenes.Areas
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.API.Encounter;
@@ -33,10 +34,10 @@ package classes.Scenes.Areas
 			flags[kFLAGS.TIMES_EXPLORED_DESERT] = 1;
 			outputText(images.showImage("area-desert"));
 			outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
-			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
-			else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
-			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws");
-			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales");
+			if (player.lowerBody.type == LowerBody.HUMAN) outputText("inside your footwear, between your toes");
+			else if (player.lowerBody.type == LowerBody.HOOFED) outputText("in your hooves");
+			else if (player.lowerBody.type == LowerBody.DOG) outputText("in your paws");
+			else if (player.lowerBody.type == LowerBody.NAGA) outputText("in your scales");
 			outputText(".\n\n<b>You've discovered the Desert!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}

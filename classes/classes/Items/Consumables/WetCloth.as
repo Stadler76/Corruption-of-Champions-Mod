@@ -1,9 +1,11 @@
 package classes.Items.Consumables 
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.StatusEffects;
+	import classes.VaginaClass;
 	
 	/**
 	 * Goo transformative item.
@@ -19,7 +21,7 @@ package classes.Items.Consumables
 		{
 			clearOutput();
 			var tfSource:String = "gooGasmic";
-			outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your " + player.skinDesc + " slowly.");
+			outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your " + player.skin.desc + " slowly.");
 			//Stat changes
 			//libido up to 80
 			if (player.lib100 < 80) {
@@ -28,17 +30,17 @@ package classes.Items.Consumables
 			}
 			//sensitivity moves towards 50
 			if (player.sens100 < 50) {
-				outputText("\n\nThe slippery slime soaks into your " + player.skinDesc + ", making it tingle with warmth, sensitive to every touch.");
+				outputText("\n\nThe slippery slime soaks into your " + player.skin.desc + ", making it tingle with warmth, sensitive to every touch.");
 				dynStats("sen", 1);
 			}
 			else if (player.sens100 > 50) {
-				outputText("\n\nThe slippery slime numbs your " + player.skinDesc + " slightly, leaving behind only gentle warmth.");
+				outputText("\n\nThe slippery slime numbs your " + player.skin.desc + " slightly, leaving behind only gentle warmth.");
 				dynStats("sen", -1);
 			}
 
 			//Cosmetic changes based on 'goopyness'
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss
@@ -46,8 +48,8 @@ package classes.Items.Consumables
 				mutations.updateOvipositionPerk(tfSource);
 			}
 			//Remove wings and shark fin
-			if (player.wingType != WING_TYPE_NONE || player.rearBody.type == REAR_BODY_SHARK_FIN) {
-				if (player.rearBody.type == REAR_BODY_SHARK_FIN) {
+			if (player.wings.type != Wings.NONE || player.rearBody.type == RearBody.SHARK_FIN) {
+				if (player.rearBody.type == RearBody.SHARK_FIN) {
 					outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your fin slowly turn to"
 					          +" sludge, dripping to the ground as your body becomes more goo-like.");
 					player.rearBody.restore();
@@ -59,16 +61,16 @@ package classes.Items.Consumables
 				return false;
 			}
 			//Goopy hair
-			if (player.hairType !== 3) {
-				player.hairType = 3;
+			if (player.hair.type !== 3) {
+				player.hair.type = 3;
 				//if bald
-				if (player.hairLength <= 0) {
+				if (player.hair.length <= 0) {
 					outputText("\n\nYour head buzzes pleasantly, feeling suddenly hot and wet.  You instinctively reach up to feel the source of your wetness, and discover you've grown some kind of gooey hair.  From time to time it drips, running down your back to the crack of your " + player.buttDescript() + ".");
-					player.hairLength = 5;
+					player.hair.length = 5;
 				}
 				else {
 					//if hair isnt rubbery or latexy
-					if (player.hairColor.indexOf("rubbery") === -1 && player.hairColor.indexOf("latex-textured") === -1) {
+					if (player.hair.color.indexOf("rubbery") === -1 && player.hair.color.indexOf("latex-textured") === -1) {
 						outputText("\n\nYour head buzzes pleasantly, feeling suddenly hot and wet.  You instinctively reach up to feel the source of your wetness, and discover your hair has become a slippery, gooey mess.  From time to time it drips, running down your back to the crack of your " + player.buttDescript() + ".");
 					}
 					//Latexy stuff
@@ -76,38 +78,38 @@ package classes.Items.Consumables
 						outputText("\n\nYour oddly inorganic hair shifts, becoming partly molten as rivulets of liquid material roll down your back.  How strange.");
 					}
 				}
-				if (player.hairColor !== "green" && player.hairColor !== "purple" && player.hairColor !== "blue" && player.hairColor !== "cerulean" && player.hairColor !== "emerald") {
+				if (player.hair.color !== "green" && player.hair.color !== "purple" && player.hair.color !== "blue" && player.hair.color !== "cerulean" && player.hair.color !== "emerald") {
 					outputText("  Stranger still, the hue of your semi-liquid hair changes to ");
 					var blah:int = rand(10);
-					if (blah <= 2) player.hairColor = "green";
-					else if (blah <= 4) player.hairColor = "purple";
-					else if (blah <= 6) player.hairColor = "blue";
-					else if (blah <= 8) player.hairColor = "cerulean";
-					else player.hairColor = "emerald";
-					outputText(player.hairColor + ".");
+					if (blah <= 2) player.hair.color = "green";
+					else if (blah <= 4) player.hair.color = "purple";
+					else if (blah <= 6) player.hair.color = "blue";
+					else if (blah <= 8) player.hair.color = "cerulean";
+					else player.hair.color = "emerald";
+					outputText(player.hair.color + ".");
 				}
 				dynStats("lus", 10);
 				return false;
 			}
 			//1.Goopy skin
-			if (player.hairType === 3 && (player.skinDesc !== "skin" || player.skinAdj !== "slimy")) {
+			if (player.hair.type === 3 && (player.skin.desc !== "skin" || player.skin.adj !== "slimy")) {
 				if (player.hasPlainSkin()) outputText("\n\nYou sigh, feeling your " + player.armorName + " sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
 				else if (player.hasFur()) outputText("\n\nYou sigh, suddenly feeling your fur become hot and wet.  You look down as your " + player.armorName + " sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
 				else if (player.hasScales()) outputText("\n\nYou sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your " + player.armorName + " has even sunk partway into you.");
-				player.skinType = SKIN_TYPE_GOO;
-				player.skinDesc = "skin";
-				player.skinAdj = "slimy";
+				player.skin.type = Skin.GOO;
+				player.skin.desc = "skin";
+				player.skin.adj = "slimy";
 				player.underBody.restore();
-				if (player.skinTone !== "green" && player.skinTone !== "purple" && player.skinTone !== "blue" && player.skinTone !== "cerulean" && player.skinTone !== "emerald") {
+				if (player.skin.tone !== "green" && player.skin.tone !== "purple" && player.skin.tone !== "blue" && player.skin.tone !== "cerulean" && player.skin.tone !== "emerald") {
 					outputText("  Stranger still, your skintone changes to ");
 					var blaht:int = rand(10);
-					if (blaht <= 2) player.skinTone = "green";
-					else if (blaht <= 4) player.skinTone = "purple";
-					else if (blaht <= 6) player.skinTone = "blue";
-					else if (blaht <= 8) player.skinTone = "cerulean";
-					else player.skinTone = "emerald";
-					outputText(player.skinTone + "!");
-					if (player.armType !== ARM_TYPE_HUMAN || player.clawType !== CLAW_TYPE_NORMAL) {
+					if (blaht <= 2) player.skin.tone = "green";
+					else if (blaht <= 4) player.skin.tone = "purple";
+					else if (blaht <= 6) player.skin.tone = "blue";
+					else if (blaht <= 8) player.skin.tone = "cerulean";
+					else player.skin.tone = "emerald";
+					outputText(player.skin.tone + "!");
+					if (player.arms.type !== Arms.HUMAN || player.claws.type !== Claws.NORMAL) {
 						mutations.restoreArms(tfSource);
 					}
 				}
@@ -116,23 +118,23 @@ package classes.Items.Consumables
 			////1a.Make alterations to dick/vaginal/nippular descriptors to match
 			//DONE EXCEPT FOR TITS & MULTIDICKS (UNFINISHED KINDA)
 			//2.Goo legs
-			if (player.skinAdj === "slimy" && player.skinDesc === "skin" && player.lowerBody !== LOWER_BODY_TYPE_GOO) {
+			if (player.skin.adj === "slimy" && player.skin.desc === "skin" && player.lowerBody.type !== LowerBody.GOO) {
 				outputText("\n\nYour viewpoint rapidly drops as everything below your " + player.buttDescript() + " and groin melts together into an amorphous blob.  Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.");
 				player.tallness -= 3 + rand(2);
 				if (player.tallness < 36) {
 					player.tallness = 36;
 					outputText("  The goo firms up and you return to your previous height.  It would truly be hard to get any shorter than you already are!");
 				}
-				player.lowerBody = LOWER_BODY_TYPE_GOO;
-				player.legCount = 1;
+				player.lowerBody.type = LowerBody.GOO;
+				player.lowerBody.legCount = 1;
 				return false;
 			}
 			//3a. Grow vagina if none
 			if (!player.hasVagina()) {
 				outputText("\n\nA wet warmth spreads through your slimey groin as a narrow gash appears on the surface of your groin.  <b>You have grown a vagina.</b>");
 				player.createVagina();
-				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
+				player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
+				player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 				player.setClitLength(.4);
 				return false;
 			}

@@ -1,6 +1,7 @@
 package classes.Scenes.Places.Prison 
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 	
 	public class Punishments extends BaseContent
@@ -511,7 +512,7 @@ package classes.Scenes.Places.Prison
 			prison.changeWill(-prison.prisonWillCost(10));
 			var successChance:int = 5;
 			successChance += (player.str / 4);
-			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) successChance += 10;
+			if (player.lowerBody.type == LowerBody.HOOFED || player.lowerBody.type == LowerBody.BUNNY || player.lowerBody.type == LowerBody.KANGAROO) successChance += 10;
 			if (rand(100) < successChance) {
 				outputText("You struggle as hard as you can. With all of your strength, you manage to snap the belts attaching you to vertical metal bars. You kick the panel as hard as you can and with a loud THUD, the panel breaks off!");
 				outputText("\n\n" + prison.prisonCaptor.captorTitle + prison.prisonCaptor.captorName + " hears the sound and rushes over to your cell to find out that you've broken the confinement box. \"<i>No! You BROKE the confinement box! You know this thing costs 1,000 gems to order and you've ruined it. I'll have to send it to get it repaired. Very well, I'll lift your punishment.</i>\" She looks angry.");

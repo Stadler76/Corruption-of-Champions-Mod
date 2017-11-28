@@ -125,7 +125,7 @@ import classes.Scenes.API.FnHelpers;
 			//Oh noes, tentacles!
 			//Tentacle avoidance chance due to dangerous plants
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
+				//trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				outputText(images.showImage("item-dPlants"));
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");
 				menu();

@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Seasonal {
 	
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 import classes.Scenes.API.Encounter;
 
@@ -509,9 +510,9 @@ import classes.Scenes.API.Encounter;
 			outputText("Fera smiles as you announce your choice.  \"<i>I thought you might say that, little champion.  Now, you simply relax and enjoy the pleasure that only my normal weak-willed prey are allowed to experience.  You will be the first to taste it and be allowed free.  How wonderful!</i>\"  She pets your forehead.");
 			outputText("\n\nMeanwhile, you hear a squelching, slithering sound down below as Fera pulls away, kneeling down beside you so that her lips are at your ear, washing her hot breath across it and occasionally letting her soft, pillow-like mouth press against your aural opening.  \"<i>Relllaaaax,</i>\" she commands, and you do.  Your body sags bonelessly into its organic cradle as a writhing mass of tentacle-like stamen contort just shy of your mons, their squirming shapes dripping almost as eagerly as you.");
 			outputText("\n\nThe mass of tendrils does not delay. It lurches forward as one unified column of hole-fucking power, plowing straight into your [vagina]");
-			if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText(", spreading its well-widened lips as wide as they've ever been");
-			else if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING) outputText(", spreading your lips well beyond the widest they've ever been and still farther.");
-			else if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LOOSE) outputText(", meeting a bit of token resistance at your unprepared entryway and slithering stamen after stamen inside, the forerunners widening you until the entirety of the column can pass inside, gaping you almost inhumanly wide.");
+			if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText(", spreading its well-widened lips as wide as they've ever been");
+			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText(", spreading your lips well beyond the widest they've ever been and still farther.");
+			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE) outputText(", meeting a bit of token resistance at your unprepared entryway and slithering stamen after stamen inside, the forerunners widening you until the entirety of the column can pass inside, gaping you almost inhumanly wide.");
 			else outputText(", meeting more than a little resistant at your unstretched entry and finding a way in anyhow. First one tentacle slithers in, then a second, then a fourth, and so on. One after another, they spread you wider and wider, opening you until the entire wiggling column is buried deep, pulling your lips ridiculously wide.");
 			outputText("\n\nYou do not feel an ounce of pain from the extreme insertion. You don't even feel a whiff of discomfort. All you can feel is a sense of delicious, twat-stuffing fullness, filling and expanding you all while flooding you with more of that heavenly, brain-deadening slime. Your crotch quickly overflows. There simply isn't room for all the nectar they're leaking inside. The excess is painting you with a glossy coat of nectar and girl-honey, spraying over your [legs] around the impaling members.");
 			//STEAL VIRGINITY!
@@ -520,8 +521,8 @@ import classes.Scenes.API.Encounter;
 			outputText("\n\nFera's voice whispers with a voice that has as much heat as the crackling coals of a long-burning bonfire, \"<i>Feel the pleasure of being filled, my servant.  Feel the bliss of stuffing yourself so full, so very full.  Only the biggest, strongest, most well-hung of mates will ever come close to filling you like this, and you will seek them out.  Your twat will hunger for huge cocks.  It will </i>thirst<i> for the cum that's lurking in those big, meaty balls.  Your womb will ache for impregnation, and you will seek it, won't you?  Answer me, my pet champion.</i>\"");
 			outputText("\n\nYour lips mouth, exhaling your answer in a barely audible, \"<i>yessss....</i>\"");
 			outputText("\n\nThe sap-oozing tendrils respond by pulling back and thrusting in, scraping your tightly-stretched walls, rubbing over every sensitive place. Your lips, your clit, your g-spot - they're all caressed by slick heat, forced to accept the hip-stretching insertion with nothing short of incredible excitement.  Your body shudders from head to ");
-			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("toe");
-			else if (player.tailType > TAIL_TYPE_NONE) outputText("tail");
+			if (player.lowerBody.type == LowerBody.HUMAN) outputText("toe");
+			else if (player.tail.type > Tail.NONE) outputText("tail");
 			else outputText("[foot]");
 			outputText(" as you climax, arching your back and making guttural, beast-like sounds of pleasure.  Your eyelids hang low, lazily obscuring some of those wonderful colors from your view as the pleasure and plant-sap work on you.  Shuddering, you gush girlcum harder than ever, spraying a thick wave of lady-spunk across the tentacles, shining them with your juices");
 			if (player.wetness() < 4) outputText(" even though you're not a squirter");
@@ -539,8 +540,8 @@ import classes.Scenes.API.Encounter;
 			player.fertility += 20;
 			if (player.fertility > 50) player.fertility = 50;
 			//Raise wetness to at least 3.
-			if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-			if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
+			if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
+			if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 			//Add five corruption.
 			player.orgasm('Vaginal');
 			dynStats("cor", 3);
@@ -568,8 +569,8 @@ import classes.Scenes.API.Encounter;
 			outputText("\n\nMeanwhile, one of the tentacles that had been holding you decides to disentangle itself from its brethren, swaying over towards Fera like a snake to a snake-charmer.  The goddess grabs the tentacle in her hands and smiles, tickling it just behind its exoticly-shaped glans in a way that makes it drip sweet-goo everywhere.  She stops before it can cum and changes posture, gripping the stalk tightly in her hand and curling her fingers inward until the tips of her nails pierce the plant-beast's skin.  It stiffens as if in pain and then goes limp, pinpricks of inky blackness spreading from where it's been punctured.  The inky coloration doesn't appear to be decay but rather an almost latex-like sheen.");
 			outputText("\n\nThe tentacle's inky spots expand to big, black blotches before combining together to turn the first foot of the thing into a rubbery onyx dong.  The corrupted, sextoy-like texture spreads like wildfire down the stalk and beyond your view, though you're sure it must stop somewhere, because the other tentacles never change color.  That succulent syrup that leaks from the tip changes to the same color, every bit the same tone but still completely liquid, dripping down off of it to splatter wetly on the floor as Fera strokes it once more.");
 			outputText("\n\n\"<i>Don't mind the exotic tone, dear.  It won't change how your pussy looks one iota");
-			if (player.skinAdj == "latex" || player.skinAdj == "rubber") {
-				outputText(", not that a " + player.skinAdj + " honey like you would notice");
+			if (player.skin.adj == "latex" || player.skin.adj == "rubber") {
+				outputText(", not that a " + player.skin.adj + " honey like you would notice");
 			}
 			outputText(", but it will change how quickly your pussy recovers from a nice gape.  It will definitely change how your pussy feels about getting fucked, no doubt about that,</i>\"  Fera promises as she continues to stroke her pet rubber-plant, leaning low to kiss you once she finishes.  Though you lack the capacity to kiss back by this point, your mouth is pliant and unresisting, and you are able to feel the intensely erotic sensation of a goddess' tongue in your mouth.  More importantly, you can taste her, and while her flavor is different than the nectary plant-sap you were instantly addicted to, it is even more divine, like cinnamon mixed with the essence of lust and sex.");
 			outputText("\n\nBreaking away at last, she smiles once more and releases her tendril.  \"<i>Go on,</i>\" she says to it, \"<i>Do what I created you to do. Do what you were meant to do.</i>\"");
@@ -580,9 +581,9 @@ import classes.Scenes.API.Encounter;
 			outputText("\n\nTouching against the pliant, slippery vulva that girds your entrance, the tendril rubs its rounded head against you in a surprisingly gentle way, teasing your exterior until you're aching to buck back against it, but you can't, Fera told you to relax.  Disobedience is a concept your poor, addled psyche won't remember for some time.  You hang there, mewling like a cat in heat, pussy splayed and being touched but not penetrated.  Breathily, you repeatedly make pathetic little begging noises, and turn your slow-to-respond eyes towards Fera's face questioningly, begging the goddess with your moans.");
 			
 			outputText("\n\nShe smiles, and the tentacle finally pushes forward");
-			if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText(", slipping past your capacitive entrance with ease");
-			else if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING) outputText(", sliding into your welcoming entrance fairly easily");
-			else if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LOOSE) outputText(", slowly working its way into your decently unstretched entrance");
+			if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText(", slipping past your capacitive entrance with ease");
+			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText(", sliding into your welcoming entrance fairly easily");
+			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE) outputText(", slowly working its way into your decently unstretched entrance");
 			else outputText(", slowly burrowing past your tight, restrictive entrance");
 			outputText(" and leaving a trail of slick, black corruption in its wake.  The tendril pushes the whole way up to your cervix, gently butting up against your womb's portal before dragging back out, sputtering more inky cum all the way.  When it pops out, the head catches the tip of your [clit], causing your [vagina] to spasm and contract, squeezing down on the foreign fluid with such strength that a geyser of sable spunk erupts from your quivering quim.");
 			player.cuntChange(1,true,true,false);
@@ -594,12 +595,12 @@ import classes.Scenes.API.Encounter;
 			dynStats("lib", 5, "sen", 20, "cor", 3);
 			//Maximum size to 2
 			player.createPerk(PerkLib.FerasBoonMilkingTwat,0,0,0,0);
-			if (player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
+			if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_LOOSE;
 			//Boost fertility a little
 			player.fertility += 10;
 			if (player.fertility >= 50) player.fertility = 50;
 			//Raise wetness to at least 3.
-			if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) player.vaginas[0].vaginalWetness =VAGINA_WETNESS_SLICK;
+			if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) player.vaginas[0].vaginalWetness =VaginaClass.WETNESS_SLICK;
 			
 			//[Next]
 			menu();
@@ -621,7 +622,7 @@ import classes.Scenes.API.Encounter;
 			outputText("\n\nA juicy-sounding 'schluck' sounds from below your [butt] when she finishes her proclamation, and a tendril far different from its flowery brethren rises up above your [legs], angling down towards your groin with an unflinching, almost robotic attention.  The tip is clearly hollow and lined with thousands of tiny, wiggling cilia, all slick and slimy with some kind of clear ooze, but that isn't what catches your eye.  No, there is something far more menacing protruding from the stalk's opening - a needle-like spike at least four inches long, though only an inch sticks past the lips of the cup-like tendril.");
 			outputText("\n\nFera crouches down next to your ear, planting her puffy, ruby kissers up against the lobe of your ear.  \"<i>It won't hurt, my pet champion. It won't hurt at all.  You've far too much of my sap inside you to feel pain by this point.  Instead, the only thing you'll experience is the erotic pleasure of allowing my voice to guide your thoughts and shape your mind, making you hotter, wetter, and more eager for a huge, throbbing cock.</i>\"  She purrs an indecipherable sound of pleasure.  \"<i>Get ready to feel so very good, [name]....</i>\"");
 			outputText("\n\nAs soon as Fera trails off, the exotic vine begins to lower itself down, carefully positioning itself squarely above your mons, perhaps an inch above your [clit].  It holds steady there, making minute adjustments this way and that, jerking with each slight change in aim to track your less-than-stationary, suspended form.  There is a moment of complete silence and breathless anticipation, and then, it scythes downwards, slamming into you with sufficient force to rock you down in your organic harness");
-			if (player.tailType > TAIL_TYPE_NONE) outputText(" and press your tail to the ground");
+			if (player.tail.type > Tail.NONE) outputText(" and press your tail to the ground");
 			outputText(".  You feel the wetness of the hollow tube as it presses against you along with a lance of pure desire and heat in the very center, undoubtedly caused by the tainted needle as it slips through your unprotected flesh.  The thing is compressed so tightly against you that it looks like the entire injector was able to bury itself in your body.");
 			outputText("\n\nYour whole body shudders in surprise before Fera soothes you back into stillness, and then, it begins, not with pain but with a whimper of bliss. You feel that heat grow into a fiery knot before blossoming into a molton-hot ball of tight, aching need. That part of your body feels so... so compressed, almost crushed into place by the flesh around. You shudder and thrust your hips, crying out in eagerness and ecstasy, tears streaming from your empty, dilated eyes as you hump the tentacle in accordance with the drives you can't understand, only obey. The tightness increases until it feels like that spot is about to be crushed by the rest of you, yet you drip hot ladyspunk all over the organic 'floor,' loving every second of it.");
 			outputText("\n\nPulling back, the tentacle's cup-like tip stretches away from your body a few inches, its base still sealed tight to your " + player.skinFurScales() + ", tugging and pulling with gentle suction.  There's a moment of insistent, tremendous pressure, upwelling like a long-dormant volcano, and suddenly, the pressure is gone, and gods, it's so fucking hot and good and sensitive and you start to cum, nearly throwing your back out as you scream out in pleasure for your goddess to hear.  There's more of you that feels pleasure than ever and it's so hot, full, and just... twitching with bliss that you can barely stop moaning long enough to breathe.");

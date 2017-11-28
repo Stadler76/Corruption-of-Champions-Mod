@@ -4,7 +4,7 @@ package classes.Scenes.Dungeons
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Dungeons.D3.D3;
+	import classes.Scenes.Dungeons.LethicesKeep.LethicesKeep;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	
@@ -88,7 +88,7 @@ package classes.Scenes.Dungeons
 		public var palace:AnzuPalace = new AnzuPalace;
 		public var cabin:YourCabin = new YourCabin;
 		
-		public var map:DungeonMap = new DungeonMap;
+		public var map:DungeonMap;
 		
 		public function checkRoom():void
 		{
@@ -298,7 +298,7 @@ package classes.Scenes.Dungeons
 		
 		public function move(roomName:String, timeToPass:Number = 0):void
 		{
-			trace("Entering room", roomName);
+			//trace("Entering room", roomName);
 			cheatTime(timeToPass);
 			clearOutput();
 			

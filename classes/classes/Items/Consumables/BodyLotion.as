@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
@@ -55,11 +56,11 @@ package classes.Items.Consumables
 				game.HPChange(10, true);
 			}
 			else {
-				if ([SKIN_TYPE_GOO, SKIN_TYPE_DRAGON_SCALES].indexOf(game.player.skin.type) == -1) { //If skin is goo or dragon scales, don't change.
+				if ([Skin.GOO, Skin.DRAGON_SCALES].indexOf(game.player.skin.type) == -1) { //If skin is goo or dragon scales, don't change.
 					game.player.skin.adj = _adj != "clear" ? _adj : "";
 				}
 				switch (game.player.skin.type) {
-					case SKIN_TYPE_PLAIN: //Plain
+					case Skin.PLAIN: //Plain
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly. ");
 						switch(_adj) {
 							case "smooth":
@@ -78,7 +79,7 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_FUR: //Fur
+					case Skin.FUR: //Fur
 						outputText("" + game.player.clothedOrNaked("Once you’ve disrobed you take the lotion and", "You take the lotion and") + " begin massaging it into your skin despite yourself being covered with fur. It takes little effort but once you’ve finished... nothing happens. A few moments pass and then your skin begins to tingle. ");
 						switch(_adj) {
 							case "smooth":
@@ -97,8 +98,8 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_LIZARD_SCALES: //Scales
-					case SKIN_TYPE_FISH_SCALES: //Scales
+					case Skin.LIZARD_SCALES: //Scales
+					case Skin.FISH_SCALES: //Scales
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
 						switch(_adj) {
 							case "smooth":
@@ -117,11 +118,11 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_GOO: //Goo
+					case Skin.GOO: //Goo
 						outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to gooey skin.
 						break;
-					case SKIN_TYPE_DRAGON_SCALES: //Dragon scales
+					case Skin.DRAGON_SCALES: //Dragon scales
 						outputText("You take the lotion and pour the " + liquidDesc() + " on your scales. The concoction dissolves, leaving your dragon scales unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to dragon scales.
 						break;
@@ -138,11 +139,11 @@ package classes.Items.Consumables
 				game.HPChange(10, true);
 			}
 			else {
-				if (game.player.underBody.skin.type != SKIN_TYPE_GOO) { //If skin is goo, don't change.
+				if (game.player.underBody.skin.type != Skin.GOO) { //If skin is goo, don't change.
 					game.player.underBody.skin.adj = _adj != "clear" ? _adj : "";
 				}
 				switch (game.player.underBody.skin.type) {
-					case SKIN_TYPE_PLAIN: //Plain
+					case Skin.PLAIN: //Plain
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your underbody. As you rub the mixture onto your [chest], it begins to tingle pleasantly. ");
 						switch(_adj) {
 							case "smooth":
@@ -161,7 +162,7 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_FUR: //Fur
+					case Skin.FUR: //Fur
 						outputText("" + game.player.clothedOrNaked("Once you’ve disrobed you take the lotion and", "You take the lotion and") + " begin massaging it into your skin despite yourself being covered with fur. It takes little effort but once you’ve finished... nothing happens. A few moments pass and then your skin begins to tingle. ");
 						switch(_adj) {
 							case "smooth":
@@ -180,9 +181,9 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_LIZARD_SCALES: //Scales
-					case SKIN_TYPE_DRAGON_SCALES: //Dragon scales
-					case SKIN_TYPE_FISH_SCALES: //Scales
+					case Skin.LIZARD_SCALES: //Scales
+					case Skin.DRAGON_SCALES: //Dragon scales
+					case Skin.FISH_SCALES: //Scales
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your underbody. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
 						switch(_adj) {
 							case "smooth":
@@ -201,7 +202,7 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_GOO: //Goo
+					case Skin.GOO: //Goo
 						outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to gooey skin.
 						break;

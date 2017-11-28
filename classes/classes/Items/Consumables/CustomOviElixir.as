@@ -73,7 +73,7 @@ public class CustomOviElixir extends Consumable {
 			var newIncubation:int = doSpeedUp(incubation);
 			if (newIncubation < 2) newIncubation = 2;
 			game.player.knockUpForce(game.player.pregnancyType, newIncubation);
-			trace("Pregger Count New total:" + incubation);
+			//trace("Pregger Count New total:" + incubation);
 		}
 			return(false);
 	}

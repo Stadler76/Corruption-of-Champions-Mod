@@ -28,7 +28,7 @@ package classes.Scenes.NPCs{
 			var needNext:Boolean = false;
 			checkedSophie = 0;
 			pregnancy.pregnancyAdvance();
-			trace("\nSophie time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nSophie time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER]--;
 			if (flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 				sophieFollowerScene.sophieDaughterDebimboUpdate();
@@ -652,7 +652,7 @@ private function consensualHotSophieDickings():void {
 	outputText("With her spread thighs beckoning you so invitingly, there's no way you could resist.  You tear off your " + player.armorName + " and jump into her nest with her, hardening delightfully from your close proximity to the well-endowed woman.  Sophie places a hand ");
 	if (player.biggestTitSize() < 1) outputText("on your chest");
 	else outputText("between your " + player.allBreastsDescript());
-	outputText(", tracing up and down your " + player.skinDesc + " with slow, measured strokes.  She boasts, \"<i>The last time a willing mate found his way up to my nest, it only took a few moments for him to fertilize me.  He just couldn't handle all this.</i>\"  She pulls you into her breasts for emphasis and squeezes them around your head.\n\n");
+	outputText(", tracing up and down your " + player.skin.desc + " with slow, measured strokes.  She boasts, \"<i>The last time a willing mate found his way up to my nest, it only took a few moments for him to fertilize me.  He just couldn't handle all this.</i>\"  She pulls you into her breasts for emphasis and squeezes them around your head.\n\n");
 	
 	outputText("Sophie releases you from her bountiful bosom, but you take your time coming back out; you even stop to lick one of her pert nipples.  The harpy takes you by the hips and pulls you on top of her, squeezing your " + player.assDescript() + " for good measure.   With ");
 	if (player.biggestTitSize() >= 1) outputText("her breasts rubbing against your own");
@@ -812,7 +812,7 @@ private function consensualSophieSexNoFit():void {
 	outputText("With her spread thighs beckoning you so invitingly, there's no way you could resist.  You tear off your " + player.armorName + " and jump into her nest with her, hardening delightfully from your close proximity to the well-endowed woman.  Sophie places a hand ");
 	if (player.biggestTitSize() < 1) outputText("on your chest");
 	else outputText("between your " + player.allBreastsDescript());
-	outputText(", tracing up and down your " + player.skinDesc + " with slow, measured strokes.  She boasts, \"<i>The last time a willing mate found his way up to my nest, it only took a few moments for him to fertilize me.  He just couldn't handle all this.</i>\"  She pulls you into her breasts for emphasis and squeezes them around your head.\n\n");
+	outputText(", tracing up and down your " + player.skin.desc + " with slow, measured strokes.  She boasts, \"<i>The last time a willing mate found his way up to my nest, it only took a few moments for him to fertilize me.  He just couldn't handle all this.</i>\"  She pulls you into her breasts for emphasis and squeezes them around your head.\n\n");
 	
 	outputText("Sophie releases you from her bountiful bosom, but you take your time coming back out; you even stop to lick one of her pert nipples.  The harpy takes you by the hips and pulls you on top of her, squeezing your " + player.assDescript() + " for good measure.   With ");
 	if (player.tallness <= 48) outputText("her breasts pressed into your face");
@@ -1121,9 +1121,9 @@ private function sophieVictoryPussyGrind():void {
 		else outputText("  Jism rains everywhere until she's thoroughly glazed with spooge and the nest is brimming with your spunk-puddle.");
 	}
 	outputText("  Sophie grunts and moans as your measured grinding turns into a seizure-like spasm.   The frenzy of friction pushes her over the edge, making her thighs convulse and her legs splay wide.  ");
-	if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("Juices squirt from the joined pussies");
-	else if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("Juices soak the nesting material");
-	else if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("Juice trickles from the paired pussies");
+	if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING) outputText("Juices squirt from the joined pussies");
+	else if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText("Juices soak the nesting material");
+	else if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET) outputText("Juice trickles from the paired pussies");
 	else outputText("Sophie's pussy soaks your own with her juices");
 	outputText(" until you fall away from each other, spent and rubbing your tender cunts.  The older bird-woman reluctantly admits, \"<i>");
 	if (flags[kFLAGS.TIMES_FUCKED_SOPHIE_LESBIAN] == 0) outputText("Cutey, you sure know your way around a pussy, but I just don't like to do this kind of thing.  Don't expect me to be some lesbo bird-slut who'll lick your slit at the drop of a hat.");
@@ -1171,7 +1171,7 @@ private function fuckDatClit():void {
 	outputText("She's breathing hard but hardly close to getting off, and she purrs, \"<i>I'm not done with you yet, cutey.  Just keep that clitty hard inside me and let me squeeze until I cum.  You can pass out if it's too much for you.</i>\"\n\n");
 	
 	outputText("She's not... not done yet?  You try to pull out, but with the compulsion and the exhaustion of your orgasm, it's impossible.  Ah!  She squeezes again and your eyes cross for a moment.  Everything is still so sensitive!  You can't stand this for long.  ");
-	if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("Juice dribbles down your " + player.legs() + " as your body enjoys the treatment.  ");
+	if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("Juice dribbles down your " + player.legs() + " as your body enjoys the treatment.  ");
 	outputText("Sophie's managed to take control of the situation, and your helplessness only compounds the pleasure you're forced to endure.  The harpy wiggles her hips and curves her wings over-top of you, holding you tightly as she forces another climax upon you.  Your eyes roll back into your head and you start to drool, knocked out by the harpy.\n\n");
 	
 	outputText("It's several hours later when you wake up at the base of the mountain.   Your " + player.armorName + " is back on, and your gem-pouch feels a little lighter.  Maybe you'll think twice about jamming something as sensitive as your " + player.clitDescript() + " into a slick vice next time?  Then again, you might have to go visit her again.  You're still tingling from the aftereffects of those orgasms.");
@@ -1192,7 +1192,7 @@ private function tinyDickSupremeSophieLoss():void {
 	outputText("Sophie looks down at your ");
 	if (player.HP < 1) outputText("defeated");
 	else outputText("masturbating");
-	outputText(" form and chirps, \"<i>Hmmm, that was easy.  Are you sure you didn't want this?</i>\"  Her talons hook into your " + player.armorName + " and deftly tear it off, exposing your " + player.skinDesc + " to the crisp, mountain air.   The sight actually stuns her for a brief moment.  The harpy-matron asks incredulously, \"<i>Ummm, is that it?  I thought I could smell your maleness, but you might as well be a girl.  I mean, I won't even notice that inside me.  Fucking you would be less satisfying than screwing a dwarf.</i>\"\n\n");
+	outputText(" form and chirps, \"<i>Hmmm, that was easy.  Are you sure you didn't want this?</i>\"  Her talons hook into your " + player.armorName + " and deftly tear it off, exposing your " + player.skin.desc + " to the crisp, mountain air.   The sight actually stuns her for a brief moment.  The harpy-matron asks incredulously, \"<i>Ummm, is that it?  I thought I could smell your maleness, but you might as well be a girl.  I mean, I won't even notice that inside me.  Fucking you would be less satisfying than screwing a dwarf.</i>\"\n\n");
 	
 	outputText("Her words sting, making your " + player.cockDescript(0) + " wilt to an even smaller size, egging Sophie on to greater taunts.  She announces, \"<i>I'm still going to use your cum for fertilizer since any egg will be a girl anyway.  Isn't that nice?  " + player.mf("Maybe she'll have no tits and be teased for the rest of her life, just like her trap of a father.","Maybe she'll have nice big tits like her trap of a father.") + "  You're going to cum just as soon as the heat from my pussy hits you, I know it.  There's no way a little dick like that stands a chance at enduring real sex.</i>\"\n\n");
 	
@@ -1262,7 +1262,7 @@ private function normalLossRapuuuuSophie():void {
 	
 	outputText("Sophie's hips grind down, smothering your " + player.cockDescript(x) + " in her over-sized pussy.   It doesn't feel all that great until her legs lock around your back and the squeezing starts.  Her muscular thighs nearly immobilize you in a tight, feathery embrace.  The tension translates down to her drippy cunt, and it feels as if her massive fuck-hole is trying to strangle the cum from your " + player.cockDescript(x) + ". The older harpy's breath washes over your ");
 	if (player.tallness >= 72) outputText("neck");
-	else if (player.tallness > 48) outputText(player.face());
+	else if (player.tallness > 48) outputText(player.faceDescript());
 	else outputText("head");
 	outputText(" as she really starts to get into it.  Her gold-painted mouth glimmers in the light as she presses her supple lips against your own.  The sweet taste of her makes your head swim while she roughly tongue-fucks your mouth.  It's brutal, savage, and so hot that your " + player.cockDescript(x) + " is already tingling dangerously.\n\n");
 	

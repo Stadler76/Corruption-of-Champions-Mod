@@ -6,6 +6,7 @@ package classes.Scenes.Dungeons
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonCore;
+	import classes.Scenes.Inventory;
 	
 	public class YourCabin extends DungeonAbstractContent
 	{
@@ -39,13 +40,21 @@ package classes.Scenes.Dungeons
 			{
 				outputText("A nightstand is situated next to your bed. ");
 				if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) outputText("An alarm clock rests on your nightstand. It's currently set to go off at " + flags[kFLAGS.BENOIT_CLOCK_ALARM] + "am. ");
-				if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] <= 0) outputText("A jewelry box sits on your nightstand.");
+				
+				if (player.hasKeyItem(Inventory.STORAGE_JEWELRY_BOX) >= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] <= 0) {
+					outputText("A jewelry box sits on your nightstand.");
+				}
+				
 				outputText("\n\n")
 			}
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] > 0)
 			{
 				outputText("Your dresser is located at side opposite from your bed. ");
-				if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) outputText("A jewelry box sits on your dresser.");
+				
+				if (player.hasKeyItem(Inventory.STORAGE_JEWELRY_BOX) >= 0) {
+					outputText("A jewelry box sits on your dresser.");
+				}
+				
 				outputText("\n\n")
 			}
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] > 0)

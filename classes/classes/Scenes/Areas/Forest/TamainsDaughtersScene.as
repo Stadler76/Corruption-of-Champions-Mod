@@ -61,7 +61,7 @@ package classes.Scenes.Areas.Forest{
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance(); //Preg should be 7*24, ends at 0 to -48 --> 9*24, ends at 0
-			trace("\nTamani's Daughters time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nTamani's Daughters time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] += flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT];
 				flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 0;
@@ -243,7 +243,7 @@ private function fuckYoDaughtersHomie():void {
 		if (player.cor < 33) outputText("You were supposed to save the village from corruption, not breed tiny sluts to overrun it... y");
 		else if (player.cor < 66) outputText("You came here to make things better for everyone... well, at least you're helping these girls. Y");
 		else outputText("You came here to make things better, but you know you'll keep knocking up Tamani every chance you get.  It's too much fun to resist adding to the sea of green girls. Y");
-		outputText("ou moan as a drooling green cunt is pressed into your " + player.face() + ", smothering away any protests you might have offered.  Your tongue laps away, servicing another one of your many goblin offspring as best it can.  It plunges deep to harvest her nectar, making her soak you with juice, performing oral as if it were possessed.  Your eyes cross and you feel your release building, cresting in a wave as it prepares to dump into your ");
+		outputText("ou moan as a drooling green cunt is pressed into your " + player.faceDescript() + ", smothering away any protests you might have offered.  Your tongue laps away, servicing another one of your many goblin offspring as best it can.  It plunges deep to harvest her nectar, making her soak you with juice, performing oral as if it were possessed.  Your eyes cross and you feel your release building, cresting in a wave as it prepares to dump into your ");
 		if (!tamaniPresent) outputText("daughter");
 		else outputText("favorite goblin MILF");
 		outputText(".\n\n");
@@ -261,7 +261,7 @@ private function fuckYoDaughtersHomie():void {
 			outputText("\n\n");
 		
 			if (tamaniPresent) {
-				outputText("Tamani pushes the slut on your face off and plants herself there, smearing your " + player.face() + " with a mixture of cum and vaginal wetness.  ");
+				outputText("Tamani pushes the slut on your face off and plants herself there, smearing your " + player.faceDescript() + " with a mixture of cum and vaginal wetness.  ");
 				if (kGAMECLASS.forest.tamaniScene.pregnancy.isPregnant) {
 					outputText("She rubs her pregnancy swollen belly");
 				}
@@ -270,7 +270,7 @@ private function fuckYoDaughtersHomie():void {
 			}
 			//Else:  
 			else {
-				outputText("The first daughter to take your seed climbs onto your face and plants herself there, smearing your " + player.face() + " with a mixture of cum and vaginal wetness.  She pinches her budding chest and grinds on top of you, asking, \"<i>You realize I'm going to be pregnant don't you?  I can already feel your little swimmers tickling all my eggs.  Can you imagine what I'll look like in a few days?  With bigger tits leaking milk and my belly stuffed with offspring?  Just let your dick do the thinking and keep cumming until we're all stuffed, ok?  Don't hold back now, we're just aching for more!</i>\"\n\n");
+				outputText("The first daughter to take your seed climbs onto your face and plants herself there, smearing your " + player.faceDescript() + " with a mixture of cum and vaginal wetness.  She pinches her budding chest and grinds on top of you, asking, \"<i>You realize I'm going to be pregnant don't you?  I can already feel your little swimmers tickling all my eggs.  Can you imagine what I'll look like in a few days?  With bigger tits leaking milk and my belly stuffed with offspring?  Just let your dick do the thinking and keep cumming until we're all stuffed, ok?  Don't hold back now, we're just aching for more!</i>\"\n\n");
 			}
 
 			outputText("The perverse thoughts get to you, worming their way inside you until they reach your " + player.cockDescript(primary) + ".  It clenches and explodes, packing the slut's womb with cream.  She's lifted off by her sisters, and your next blast fires into the air, splattering over the assembled goblins with a wet plop.  Many gather it up, licking and slurping it, or shoveling it directly into their waiting cunts.  Another pussy is placed on you, and the sensation of new flesh taking you makes the contraction feel even longer.  She staggers off a few moments later, looking pregnant already.  The cycle repeats until");
@@ -387,7 +387,7 @@ private function legTamanisDaughtersRAEPYou():void {
 	if (cocks > 1) outputText("one of ");
 	outputText(" your " + player.multiCockDescriptLight() + ", teasing you as it near-instantly rises, \"<i>Mommy never told me you were such an easy " + player.mf("man-","") + "slut.</i>\"\n\n");
 	
-	outputText("A slippery gash mounts your " + player.face() + ", blocking your view of anything but a cute navel as pungent pussy slobbers over your lips.  With a resigned sigh, you open your mouth and bury your tongue into one of your many daughters' snatches.  It's tangy and sweet, and juicier than fresh fruit.   The girlish moans you hear let you know how successful your tongue is, and you work harder than ever to kiss and lick her slippery lips, pausing only to suck the tiny bud of her clit into your mouth.\n\n");
+	outputText("A slippery gash mounts your " + player.faceDescript() + ", blocking your view of anything but a cute navel as pungent pussy slobbers over your lips.  With a resigned sigh, you open your mouth and bury your tongue into one of your many daughters' snatches.  It's tangy and sweet, and juicier than fresh fruit.   The girlish moans you hear let you know how successful your tongue is, and you work harder than ever to kiss and lick her slippery lips, pausing only to suck the tiny bud of her clit into your mouth.\n\n");
 	
 	outputText("Through it all the other girls stay busy, Tamani's eldest daughter gets most of your attention while she continues  to stroke you off.  She squeezes and caresses it until your member is trembling in her hand, ready to explode.\n\n");
 	//(FORK BETWEEN TOO BIG AND FITS)
@@ -399,7 +399,7 @@ private function legTamanisDaughtersRAEPYou():void {
 		else outputText("You stiffen as a tongue suddenly presses against your " + player.assholeOrPussy() + " sliding inside and intensifying the feelings radiating down your fuck-pole until you're unable to hold on.");
 		outputText("\n\n");
 		
-		outputText("A sudden flow of fluids soaks your " + player.face() + " and dribbles from your chin.  The face-riding goblin bucks like a bronco, nearly breaking your nose before the strength drains from her body and she slides off into the dirt, panting weakly.   Confronted with the sight of ");
+		outputText("A sudden flow of fluids soaks your " + player.faceDescript() + " and dribbles from your chin.  The face-riding goblin bucks like a bronco, nearly breaking your nose before the strength drains from her body and she slides off into the dirt, panting weakly.   Confronted with the sight of ");
 		if (cocks > 2) outputText("so many girls impaled on your flesh");
 		else if (cocks == 2) outputText("your daughters' whorish expressions of pleasure");
 		else outputText("the sultry gaze of Tamani's oldest daughter as she rides your " + player.cockDescript(primary));
@@ -519,9 +519,9 @@ private function legTamanisDaughtersRAEPYou():void {
 		if (!tamaniPresent) {
 			outputText("Effortlessly, Tamani's daughter launches herself onto you, straddling your body as she tries to work your " + player.cockDescript(0) + " into her tight gash.  No matter how hard she tries, she just can't get it in.  She looks up at you in confusion and asks, \"<i>How in Marae's cunt can my Mom take this beast?</i>\"\n\n");
 			
-			outputText("Frowning in consternation, she presses it down onto your belly and sits on top, spreading her cunt as wide as she can around the bulge your urethra makes on the underside of your " + player.cockDescript(0) + ".  Though you can't see her, the feeling of her starting to slide along your length is wonderfully pleasurable.  After a few moments you can feel her getting into it, leaning over and pressing her taut body and heavy breasts against you as well.  Incredibly turned on by the mental picture you're forced to form, you attack the cunt riding your " + player.face() + ", licking it with feverish intensity.\n\n");
+			outputText("Frowning in consternation, she presses it down onto your belly and sits on top, spreading her cunt as wide as she can around the bulge your urethra makes on the underside of your " + player.cockDescript(0) + ".  Though you can't see her, the feeling of her starting to slide along your length is wonderfully pleasurable.  After a few moments you can feel her getting into it, leaning over and pressing her taut body and heavy breasts against you as well.  Incredibly turned on by the mental picture you're forced to form, you attack the cunt riding your " + player.faceDescript() + ", licking it with feverish intensity.\n\n");
 			
-			outputText("A sudden flow of fluids soaks your " + player.face() + " and dribbles from your chin.  The face-riding goblin bucks like a bronco, nearly breaking your nose before the strength drains from her body and she slides off into the dirt, panting weakly.  Now freed from your juicy prison, you can see the oldest daughter as she's squeezing on your " + player.cockDescript(0) + ", sliding her gash and ");
+			outputText("A sudden flow of fluids soaks your " + player.faceDescript() + " and dribbles from your chin.  The face-riding goblin bucks like a bronco, nearly breaking your nose before the strength drains from her body and she slides off into the dirt, panting weakly.  Now freed from your juicy prison, you can see the oldest daughter as she's squeezing on your " + player.cockDescript(0) + ", sliding her gash and ");
 			if (daughters < 20) outputText("pert ");
 			else if (daughters > 40) outputText("heavy "); 
 			outputText("breasts over every part of it.");
@@ -544,7 +544,7 @@ private function legTamanisDaughtersRAEPYou():void {
 			outputText(", massaging your ");
 			if (player.hasSheath()) outputText("sheath");
 			else outputText("crotch");
-			outputText(", and the sensitive " + player.skinDesc + " around your crotch.   The busty girl on your " + player.cockDescript(0) + " teases, \"<i>Go ahead and let it out " + player.mf("stud","sexy") + ".  I'm tired of getting your cream second-hand, so squirt it right into my hot little cunt.</i>\"\n\n");
+			outputText(", and the sensitive " + player.skin.desc + " around your crotch.   The busty girl on your " + player.cockDescript(0) + " teases, \"<i>Go ahead and let it out " + player.mf("stud","sexy") + ".  I'm tired of getting your cream second-hand, so squirt it right into my hot little cunt.</i>\"\n\n");
 			
 			if (cocks == 2) outputText("Her sister agrees, \"<i>Yeah, I want to feel the hot cum squirting into my cunt.  Fill me full of so many babies that you make Mom jealous!</i>\"\n\n");
 			else if (cocks > 2) outputText("Her sisters agree, \"<i>Yeah, we want to feel the hot cum squirting into our cunts!  Fill us up with so many babies that Mom gets jealous!</i>\"\n\n");
@@ -955,7 +955,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	else outputText("It has a familiar taste that you can't quite place");
 	outputText(" and nearly makes you gag, but Tamani makes sure you drink down every drop.  An immediate numbness spreads through your body, starting at your fingertips.  It slowly crawls up your arms and then starts at your " + player.feet() + " as well.  In no time it's hard to move, and it becomes hard to think.  Your mind feels almost like its full of cotton-candy, with fuzzy pink stuff constantly getting in the way of your thoughts.\n\n");
 	
-	outputText("Tamani rubs your temples soothingly as your " + player.face() + " creases with worry and reassures you, \"<i>Don't worry, this will wear off soon.  This drug just shuts down your mind so it'll be nice and open to suggestion.  You can feel how hard it is to think, can't you?  Every time you muster up a thought it gets caught up in the little pink clouds and whisked away.  Don't bother, just relax and listen to Tamani's voice.</i>\"\n\n");
+	outputText("Tamani rubs your temples soothingly as your " + player.faceDescript() + " creases with worry and reassures you, \"<i>Don't worry, this will wear off soon.  This drug just shuts down your mind so it'll be nice and open to suggestion.  You can feel how hard it is to think, can't you?  Every time you muster up a thought it gets caught up in the little pink clouds and whisked away.  Don't bother, just relax and listen to Tamani's voice.</i>\"\n\n");
 	
 	outputText("She reaches into your " + player.armorName + " to rub ");
 	if (player.totalCocks() > 1) outputText("one of ");
@@ -967,7 +967,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	outputText("Of course she's right – you can feel her wetness on your chest and you want to bury your face in it while she strokes you.  Tamani watches your eyes and turns to give you a better view, presenting her snatch while she leans back to stroke you.  She titters, \"<i>Yes, get a good look at your wife's cunt.  It looks so delicious, so warm, so inviting.  You want nothing more than to bury your cock or face into it, don't you?  That's because it's your wife's cunt, and you're a good husband.</i>\"\n\n");
 	
 	outputText("Her hand starts stroking you faster and her juices start to drip down the sides of your torso");
-	if (player.hasFur()) outputText(", matting your " + player.furColor + " fur");
+	if (player.hasFur()) outputText(", matting your " + player.skin.furColor + " fur");
 	outputText(" as she continues ");
 	if (flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) outputText("filling your mind with truths");
 	else outputText("reinforcing your image of yourself as an obedient husband");

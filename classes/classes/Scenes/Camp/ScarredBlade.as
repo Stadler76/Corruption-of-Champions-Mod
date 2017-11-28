@@ -25,7 +25,7 @@ package classes.Scenes.Camp
 			this.balls = 0;
 			this.ballSize = 0;
 			this.tallness = 36;
-			this.skinTone = "metallic";
+			this.skin.tone = "metallic";
 			this.long = "The sword you're fighting is a no ordinary sword. It's a lethicite-infused metal curved saber etched with scars. It seems to eagerly seek flesh."
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";

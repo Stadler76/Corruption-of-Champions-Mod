@@ -220,7 +220,7 @@ private var funcLookups:Dictionary = null;
 private function buildFuncLookupDict(object:*=null,prefix:String=""):void
 {
 	import flash.utils.*;
-	trace("Building function <-> function name mapping table for "+((object==null)?"CoC.":prefix));
+	//trace("Building function <-> function name mapping table for "+((object==null)?"CoC.":prefix));
 	// get all methods contained
 	if (object == null) object = this;
 	var typeDesc:XML = describeType(object);
@@ -254,7 +254,7 @@ public function getFunctionName(f:Function):String
 	//var t:Object = flash.sampler.getSavedThis(f); 
 	if (this.funcLookups == null)
 	{
-		trace("Rebuilding lookup object");
+		//trace("Rebuilding lookup object");
 		this.funcLookups = new Dictionary();
 		this.buildFuncLookupDict();
 	}
@@ -280,8 +280,8 @@ private function logFunctionInfo(func:Function, arg:* = null, arg2:* = null, arg
 	{
 		logStr += "Calling = " + getFunctionName(func) + " Param = " +  arg;
 	}
-	CoC_Settings.appendButtonEvent(logStr);
-	trace(logStr)
+	//CoC_Settings.appendButtonEvent(logStr);
+	//trace(logStr); 9999
 }
 
 
@@ -365,7 +365,7 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
-			trace("Button removed due to SFW mode.");
+			//trace("Button removed due to SFW mode.");
 			return btn.hide();
 		}
 	}
@@ -381,7 +381,7 @@ public function addButtonDisabled(pos:int, text:String = "", toolTipText:String 
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
-			trace("Button removed due to SFW mode.");
+			//trace("Button removed due to SFW mode.");
 			return btn.hide();
 		}
 	}
@@ -441,7 +441,7 @@ public function doYesNo(eventYes:Function, eventNo:Function):void { //New typesa
 public function doNext(event:Function):void { //Now typesafe
 	//Prevent new events in combat from automatically overwriting a game over. 
 	if (mainView.getButtonText(0).indexOf("Game Over") != -1) {
-		trace("Do next setup cancelled by game over");
+		//trace("Do next setup cancelled by game over");
 		return;
 	}
 	menu();

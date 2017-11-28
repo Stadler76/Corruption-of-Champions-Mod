@@ -3,12 +3,12 @@
 		import classes.Items.ArmorLib;
 		import classes.Items.UndergarmentLib;
 
-
-
-		// Possible text arguments in the conditional of a if statement
-		// First, there is an attempt to cast the argument to a Number. If that fails,
-		// a dictionary lookup is performed to see if the argument is in the conditionalOptions[]
-		// object. If that fails, we just fall back to returning 0
+		/**
+		 * Possible text arguments in the conditional of a if statement
+		 * First, there is an attempt to cast the argument to a Number. If that fails,
+		 * a dictionary lookup is performed to see if the argument is in the conditionalOptions[]
+		 * object. If that fails, we just fall back to returning 0
+		 */
 		public var conditionalOptions:Object =
 		{
 				"strength"			: function(thisPtr:*):* {return  kGAMECLASS.player.str;},
@@ -27,7 +27,7 @@
 				"hasarmor"			: function(thisPtr:*):* {return  kGAMECLASS.player.armor != ArmorLib.NOTHING;},
 				"haslowergarment"	: function(thisPtr:*):* {return  kGAMECLASS.player.lowerGarment != UndergarmentLib.NOTHING;},
 				"tallness"			: function(thisPtr:*):* {return  kGAMECLASS.player.tallness;},
-				"hairlength"		: function(thisPtr:*):* {return  kGAMECLASS.player.hairLength;},
+				"hairlength"		: function(thisPtr:*):* {return  kGAMECLASS.player.hair.length;},
 				"femininity"		: function(thisPtr:*):* {return  kGAMECLASS.player.femininity;},
 				"masculinity"		: function(thisPtr:*):* {return  100 - kGAMECLASS.player.femininity;},
 				"cocks"				: function(thisPtr:*):* {return  kGAMECLASS.player.cockTotal();},
@@ -71,7 +71,7 @@
 				"issquirter"		: function(thisPtr:*):* {return  (kGAMECLASS.player.wetness() >= 4);},
 				"vaginalwetness"	: function(thisPtr:*):* {return  kGAMECLASS.player.wetness();},
 				"anallooseness"		: function(thisPtr:*):* {return  kGAMECLASS.player.ass.analLooseness;},
-				"buttrating"		: function(thisPtr:*):* {return  kGAMECLASS.player.buttRating;},
+				"buttrating"		: function(thisPtr:*):* {return  kGAMECLASS.player.butt.rating;},
 				"ispregnant"		: function(thisPtr:*):* {return  (kGAMECLASS.player.pregnancyIncubation > 0);},
 				"isbuttpregnant"	: function(thisPtr:*):* {return  (kGAMECLASS.player.buttPregnancyIncubation > 0);},
 				"hasnipplecunts"	: function(thisPtr:*):* {return  kGAMECLASS.player.hasFuckableNipples();},

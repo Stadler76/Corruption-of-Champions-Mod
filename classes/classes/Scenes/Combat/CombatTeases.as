@@ -1,11 +1,12 @@
 package classes.Scenes.Combat 
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
 	import classes.Scenes.Areas.GlacialRift.FrostGiant;
-	import classes.Scenes.Dungeons.D3.*;
 	import classes.Scenes.Dungeons.HelDungeon.*;
+	import classes.Scenes.Dungeons.LethicesKeep.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	
@@ -176,11 +177,11 @@ package classes.Scenes.Combat
 				//Once chance of butt.
 				choices[choices.length] = 4;
 				//Big butts get more butt
-				if (player.buttRating >= 7) choices[choices.length] = 4;
-				if (player.buttRating >= 10) choices[choices.length] = 4;
-				if (player.buttRating >= 14) choices[choices.length] = 4;
-				if (player.buttRating >= 20) choices[choices.length] = 4;
-				if (player.buttRating >= 25) choices[choices.length] = 4;
+				if (player.butt.rating >= 7) choices[choices.length] = 4;
+				if (player.butt.rating >= 10) choices[choices.length] = 4;
+				if (player.butt.rating >= 14) choices[choices.length] = 4;
+				if (player.butt.rating >= 20) choices[choices.length] = 4;
+				if (player.butt.rating >= 25) choices[choices.length] = 4;
 				//Breast jiggle!
 				if (player.biggestTitSize() >= 2) choices[choices.length] = 5;
 				if (player.biggestTitSize() >= 4) choices[choices.length] = 5;
@@ -200,7 +201,7 @@ package classes.Scenes.Combat
 					if (player.vaginalCapacity() >= 75) choices[choices.length] = 6;
 				}
 				//Adj special!
-				if (player.hasVagina() && player.buttRating >= 8 && player.hipRating >= 6 && player.biggestTitSize() >= 4) {
+				if (player.hasVagina() && player.butt.rating >= 8 && player.hips.rating >= 6 && player.biggestTitSize() >= 4) {
 					choices[choices.length] = 7;
 					choices[choices.length] = 7;
 					choices[choices.length] = 7;
@@ -256,11 +257,11 @@ package classes.Scenes.Combat
 				//Once chance of butt.
 				choices[choices.length] = 0;
 				//Big butts get more butt
-				if (player.buttRating >= 7) choices[choices.length] = 0;
-				if (player.buttRating >= 10) choices[choices.length] = 0;
-				if (player.buttRating >= 14) choices[choices.length] = 0;
-				if (player.buttRating >= 20) choices[choices.length] = 0;
-				if (player.buttRating >= 25) choices[choices.length] = 0;
+				if (player.butt.rating >= 7) choices[choices.length] = 0;
+				if (player.butt.rating >= 10) choices[choices.length] = 0;
+				if (player.butt.rating >= 14) choices[choices.length] = 0;
+				if (player.butt.rating >= 20) choices[choices.length] = 0;
+				if (player.butt.rating >= 25) choices[choices.length] = 0;
 				//Breast jiggle!
 				if (player.biggestTitSize() >= 2) choices[choices.length] = 1;
 				if (player.biggestTitSize() >= 4) choices[choices.length] = 1;
@@ -345,7 +346,7 @@ package classes.Scenes.Combat
 				if (player.ass.analLooseness >= 5) choices[choices.length] = 16;
 			}		
 			//17 Bee abdomen tease
-			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
+			if (player.tail.type == Tail.BEE_ABDOMEN) {
 				choices[choices.length] = 17;
 				choices[choices.length] = 17;
 			}
@@ -373,7 +374,7 @@ package classes.Scenes.Combat
 				choices[choices.length] = 21;
 			}
 			//22 SPOIDAH SILK
-			if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
+			if (player.tail.type == Tail.SPIDER_ABDOMEN) {
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;
@@ -492,7 +493,7 @@ package classes.Scenes.Combat
 			//38 Kitsune Tease
 			//39 Kitsune Tease
 			//40 Kitsune Tease
-			if (player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
+			if (player.kitsuneScore() >= 2 && player.tail.type == Tail.FOX) {
 				choices[choices.length] = 37;
 				choices[choices.length] = 37;
 				choices[choices.length] = 37;
@@ -511,7 +512,7 @@ package classes.Scenes.Combat
 				choices[choices.length] = 40;
 			}
 			//41 Kitsune Gendered Tease
-			if (player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
+			if (player.kitsuneScore() >= 2 && player.tail.type == Tail.FOX) {
 				choices[choices.length] = 41;
 				choices[choices.length] = 41;
 				choices[choices.length] = 41;
@@ -530,7 +531,7 @@ package classes.Scenes.Combat
 				choices[choices.length] = 42;
 			}
 			//43 - special mino + cowgirls
-			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW) {
+			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tail.type == Tail.COW) {
 				choices[choices.length] = 43;
 				choices[choices.length] = 43;
 				choices[choices.length] = 43;
@@ -574,7 +575,7 @@ package classes.Scenes.Combat
 			select = choices[rand(choices.length)];
 			if (monster.short.indexOf("minotaur") != -1) 
 			{
-				if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW)
+				if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tail.type == Tail.COW)
 					select = 43;
 			}
 			//Lets do zis!
@@ -583,7 +584,7 @@ package classes.Scenes.Combat
 				case 0:
 					//Display
 					outputText("You slap your " + player.buttDescript());
-					if (player.buttRating >= 10 && player.tone < 60) outputText(", making it jiggle delightfully.");
+					if (player.butt.rating >= 10 && player.tone < 60) outputText(", making it jiggle delightfully.");
 					else outputText(".");
 					//Mod success
 					ass = true;
@@ -660,7 +661,7 @@ package classes.Scenes.Combat
 				case 4:
 					outputText("You turn away and bounce your " + player.buttDescript() + " up and down hypnotically");
 					//Big butts = extra text + higher success
-					if (player.buttRating >= 10) {
+					if (player.butt.rating >= 10) {
 						outputText(", making it jiggle delightfully.  " + monster.capitalA + monster.short + " even gets a few glimpses of the " + player.assholeDescript() + " between your cheeks.");
 						chance += 3;
 					}
@@ -963,7 +964,7 @@ package classes.Scenes.Combat
 					outputText("You shimmy and shake sensually. (An error occurred.)");
 					break;
 				case 37:
-					outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to " + monster.a + monster.short + " with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tailVenom > 1) ? "one of your tails" : "your tail") + " up and down " + monster.pronoun3 + " body sensually.");
+					outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to " + monster.a + monster.short + " with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tail.venom > 1) ? "one of your tails" : "your tail") + " up and down " + monster.pronoun3 + " body sensually.");
 					chance+= 6;
 					damage+= 3;
 					break;
@@ -975,7 +976,7 @@ package classes.Scenes.Combat
 					break;
 				case 39:
 					outputText( "Leaning forward, you bow down low, raising a hand up to your lips and blowing " + monster.a + monster.short + " a kiss.  You stand straight, wiggling your " + player.hipDescript() + " back and forth seductively while trailing your fingers down your front slowly, pouting demurely.  The tip of ");
-					if (player.tailVenom == 1) outputText("your");
+					if (player.tail.venom == 1) outputText("your");
 					else outputText("a");
 					outputText(" bushy tail curls up around your " + player.leg() + ", uncoiling with a whipping motion that makes an audible crack in the air.");
 					ass = true;
@@ -984,9 +985,9 @@ package classes.Scenes.Combat
 					break;
 				case 40:
 					outputText("Turning around, you stare demurely over your shoulder at " + monster.a + monster.short + ", batting your eyelashes amorously.");
-					if (player.tailVenom == 1) outputText("  Your tail twists and whips about, sliding around your " + player.hipDescript() + " in a slow arc and framing your rear nicely as you slowly lift your " + player.armorName + ".");
+					if (player.tail.venom == 1) outputText("  Your tail twists and whips about, sliding around your " + player.hipDescript() + " in a slow arc and framing your rear nicely as you slowly lift your " + player.armorName + ".");
 					else outputText("  Your tails fan out, twisting and whipping sensually, sliding up and down your " + player.legs() + " and framing your rear nicely as you slowly lift your " + player.armorName + ".");
-					outputText("  As your [butt] comes into view, you brush your tail" + ((player.tailVenom > 1) ? "s" : "" ) + " across it, partially obscuring the view in a tantalizingly teasing display.");
+					outputText("  As your [butt] comes into view, you brush your tail" + ((player.tail.venom > 1) ? "s" : "" ) + " across it, partially obscuring the view in a tantalizingly teasing display.");
 					ass = true;
 					anus = true;
 					chance++;
@@ -997,7 +998,7 @@ package classes.Scenes.Combat
 					if (player.cockTotal() > 0) outputText(player.sMultiCockDesc());
 					if (player.gender == 3) outputText(" and ");
 					if (player.gender >= 2) outputText("your " + player.vaginaDescript(0));
-					outputText(".  Your bushy tail" + ((player.tailVenom > 1) ? "s" : "" ) + " cross" + ((player.tailVenom > 1) ? "": "es") + " in front, wrapping around your genitals and obscuring the view teasingly.");
+					outputText(".  Your bushy tail" + ((player.tail.venom > 1) ? "s" : "" ) + " cross" + ((player.tail.venom > 1) ? "": "es") + " in front, wrapping around your genitals and obscuring the view teasingly.");
 					vagina = true;
 					penis = true;
 					damage += 2;
@@ -1317,43 +1318,43 @@ package classes.Scenes.Combat
 					}
 				}
 				if (ass) {
-					if (player.buttRating >= 6) {
+					if (player.butt.rating >= 6) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.buttRating >= 10) {
+					if (player.butt.rating >= 10) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.buttRating >= 13) {
+					if (player.butt.rating >= 13) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.buttRating >= 16) {
+					if (player.butt.rating >= 16) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.buttRating >= 20) {
+					if (player.butt.rating >= 20) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.hipRating >= 6) {
+					if (player.hips.rating >= 6) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.hipRating >= 10) {
+					if (player.hips.rating >= 10) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.hipRating >= 13) {
+					if (player.hips.rating >= 13) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.hipRating >= 16) {
+					if (player.hips.rating >= 16) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.hipRating >= 20) {
+					if (player.hips.rating >= 20) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}

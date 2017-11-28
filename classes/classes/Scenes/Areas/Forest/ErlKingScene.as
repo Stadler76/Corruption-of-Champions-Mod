@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Forest
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Mutations;
@@ -46,10 +47,10 @@ public class ErlKingScene extends BaseContent implements Encounter
 
 		public function playerHuntScore():int
 		{
-			trace("Calculating Wild Hunt score.");
-			trace("Int + Spd = " + String(player.inte + player.spe));
+			//trace("Calculating Wild Hunt score.");
+			//trace("Int + Spd = " + String(player.inte + player.spe));
 			var baseVal:int = (player.inte + player.spe) - (player.fatigue - player.maxFatigue() + 100) * 2;
-			trace("Base = " + baseVal);
+			//trace("Base = " + baseVal);
 
 			/*
 			Conditional modifiers: +20 for Evade
@@ -70,92 +71,92 @@ public class ErlKingScene extends BaseContent implements Encounter
 			if (player.findPerk(PerkLib.Evade) >= 0)
 			{
 				baseVal += 20;
-				trace("+20 for Evade");
+				//trace("+20 for Evade");
 			}
 			if (player.findPerk(PerkLib.Runner) >= 0)
 			{
 				baseVal += 20;
-				trace("+20 for Runner");
+				//trace("+20 for Runner");
 			}
 			if (player.hasPerk(PerkLib.Unhindered) && (player.armor == classes.Items.ArmorLib.NOTHING || player.armor.perk == "Adornment"))
 			{
 				baseVal += 20;
-				trace("+20 for Unhindered");
+				//trace("+20 for Unhindered");
 			}
 			if (player.isDrider())
 			{
 				baseVal += 20;
-				trace("+20 for Drider");
+				//trace("+20 for Drider");
 			}
 			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0)
 			{
 				baseVal += 30;
-				trace("+30 For Ninetails");
+				//trace("+30 For Ninetails");
 			}
 			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0)
 			{
 				baseVal += 30;
-				trace("+30 for Ninetails");
+				//trace("+30 for Ninetails");
 			}
 
 			// Akbal Blessings
 			if (player.findPerk(PerkLib.FireLord) >= 0)
 			{
 				baseVal += 10;
-				trace("+10 for Firelord");
+				//trace("+10 for Firelord");
 			}
 			if (player.findPerk(PerkLib.Whispered) >= 0)
 			{
 				baseVal += 10;
-				trace("+10 for Whispered");
+				//trace("+10 for Whispered");
 			}
 
 			if (player.findPerk(PerkLib.Fast) >= 0)
 			{
 				baseVal += 10;
-				trace("+10 for Fast");
+				//trace("+10 for Fast");
 			}
 			if (player.findPerk(PerkLib.Incorporeality) >= 0)
 			{
 				baseVal += 10;
-				trace("+10 for Incorporeal");
+				//trace("+10 for Incorporeal");
 			}
 			if (player.canFly())
 			{
 				baseVal += 10;
-				trace("+10 for Flight");
+				//trace("+10 for Flight");
 			}
 
 			// Heavy penalty for prey features. The penalty is applied PER FEATURE.
 			if (player.kitsuneScore() > 0)
 			{
 				baseVal -= (player.kitsuneScore() * 20);
-				trace("-20 for each Kitsune part (-" + String(player.kitsuneScore() * 20) + ")");
+				//trace("-20 for each Kitsune part (-" + String(player.kitsuneScore() * 20) + ")");
 			}
 			if (player.bunnyScore() > 0) 							
 			{
 				baseVal -= (player.bunnyScore() * 20);
-				trace("-20 for each Bunny part (-" + String(player.bunnyScore() * 20) + ")");
+				//trace("-20 for each Bunny part (-" + String(player.bunnyScore() * 20) + ")");
 			}
 			if (player.harpyScore() > 0)
 			{
 				baseVal -= (player.harpyScore() * 20);
-				trace("-20 for each Harpy part (-" + String(player.harpyScore() * 20) + ")");
+				//trace("-20 for each Harpy part (-" + String(player.harpyScore() * 20) + ")");
 			}
 			if (player.gooScore() > 0)
 			{
 				baseVal -= (player.gooScore() * 10);
-				trace("-10 for each Goo part (-" + String(player.gooScore() * 10) + ")");
+				//trace("-10 for each Goo part (-" + String(player.gooScore() * 10) + ")");
 			}
 
 			if (player.isTaur())
 			{
 				baseVal -= 10
-				trace("-10 for Taur");
+				//trace("-10 for Taur");
 			}
 
 			if (baseVal < 0) baseVal = 0;
-			trace("Wild Hunt Points = " + baseVal);
+			//if (debug) outputText("DEBUG: Wild Hunt Points = " + baseVal);
 			
 			return baseVal;
 		}
@@ -261,7 +262,7 @@ public class ErlKingScene extends BaseContent implements Encounter
 			outputText(images.showImage("wildhunt-encounter"));
 			outputText("The Erlking is coming for you!\n\n");
 
-			if (player.wingType != WING_TYPE_NONE) outputText("You quickly glance from side to side, realizing that the trees here grow too close together for your to spread your [wings].\n\n");
+			if (player.wings.type != Wings.NONE) outputText("You quickly glance from side to side, realizing that the trees here grow too close together for your to spread your [wings].\n\n");
 
 			outputText("Do you make a run for it or stand your ground?\n\n");
 
@@ -413,7 +414,7 @@ public class ErlKingScene extends BaseContent implements Encounter
 			if (player.gender == 2) outputText(images.showImage("wildhunt-catched-female"));
 			else outputText(images.showImage("wildhunt-catched-male"));
 			outputText("It doesn’t take the two dog men long.  They rock back and forth, shoving their thick cocks in and out of your submissive, helpless body.  The one in front grabs your head, burying your [face] into his crotch, so deep that your tongue licks against the throbbing bulge of his knot, your nose buried in the thick fur above his shaft.");
-			if (player.tailType != TAIL_TYPE_NONE) outputText("  The Hound behind grabs you by [onetail], using it as a handhold as he thrusts over and over into your [asshole].");
+			if (player.tail.type != Tail.NONE) outputText("  The Hound behind grabs you by [onetail], using it as a handhold as he thrusts over and over into your [asshole].");
 			else outputText("  The Hound behind grabs you by your [ass], thrusting into you again and again.");
 			outputText("  You tremble, completely dominated by the two powerful males as they make you their prey-bitch.\n\n");
 			outputText("They cum within moments of each other, the one in front driving his huge knot into your mouth, leaving your jaw aching.  You groan in protest as his cock shoots hot seed down your throat.  Nearly gagging on the canine dick already, there’s little you can do but swallow the Hound’s cum.  As you gurgle it down, you feel the Hound behind you painfully shove his thick knot into your ass.  You try to scream, but with a mouth full of cock and cum, there’s little you can do but take it like prey.  Your body quakes, belly swelling as you’re filled with cum at both ends leaving you warm, bloated, and strangely satisfied.\n\n");
@@ -536,7 +537,7 @@ public class ErlKingScene extends BaseContent implements Encounter
 			if (player.hasBreasts()) outputText("  Your chest first flattens out, then swells, as");
 			else outputText("  T");
 			outputText(" taut muscles fill in your entire frame.");
-			if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("  Your doggie paws tingle as muscles build there, rebuilding them as stocky, athletic hound legs.");
+			if (player.lowerBody.type == LowerBody.DOG) outputText("  Your doggie paws tingle as muscles build there, rebuilding them as stocky, athletic hound legs.");
 			else outputText("  Your [legs] bend and crack, making you howl in pain as they rebuild themselves as onyx-clawed canine paws.");
 			outputText("\n\n");
 
@@ -583,13 +584,13 @@ public class ErlKingScene extends BaseContent implements Encounter
 			outputText("The black fur covers your");
 			if (player.balls == 0) outputText(" new");
 			outputText(" balls and runs halfway up your shiny red pecker, forming a sheath.");
-			if (player.wingType != 0) outputText("  You whine, rolling on your back and with a start, realize that your wings must have fallen off while you were distracted with your cock.");
+			if (player.wings.type != 0) outputText("  You whine, rolling on your back and with a start, realize that your wings must have fallen off while you were distracted with your cock.");
 			outputText("  You smile an open-mouthed doggie smile, feeling the warm churning of cum building in your throbbing balls.  You ache for release, wanting nothing more than to stroke yourself.  You raise your black-nailed hands to your cock, but stop short, knowing instinctively that masturbating is forbidden.\n\n");
 
 			outputText("Instead, you curl your stomach, trying to reach your cock with your mouth.");
-			if (player.faceType != FACE_DOG) outputText("  The world bends alarmingly as your nose pushes out, creating a black-furred muzzle where your mouth once was.");
+			if (player.face.type != Face.DOG) outputText("  The world bends alarmingly as your nose pushes out, creating a black-furred muzzle where your mouth once was.");
 			outputText("  You whine, looking directly at your pointed dog cock, and the trickle of pre running from its tip, but even your");
-			if (player.faceType != FACE_DOG) outputText(" new");
+			if (player.face.type != Face.DOG) outputText(" new");
 			outputText(" muzzle and broad, flat tongue can’t reach it.\n\n");
 
 			outputText("The Erlking... The Master, your mind corrects itself.  The Master murmurs softly to you.  “<i>Patience, Hound,</i>” he commands, pressing a strong, gloved hand against your chest, holding you down on the ground.  You go still, submissive to the Master as he kneels next to your prone form.  His other hand grasps your dick slowly, and your mind melts.\n\n");
@@ -1018,82 +1019,82 @@ public class ErlKingScene extends BaseContent implements Encounter
 			// Main TFs
 			//------------
 			//Neck restore
-			if (player.neck.type != NECK_TYPE_NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
+			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss
 			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain deer ears
-			if (rand(3) == 0 && changes < changeLimit && player.earType != EARS_DEER) {
-				if (player.earType == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
-				if (player.earType == EARS_HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into an upright animalistic ears.  ");
-				if (player.earType == EARS_DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into deer-like ears!  ");
-				if (player.earType > EARS_DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped deer ears!  ");
+			if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.DEER) {
+				if (player.ears.type == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
+				if (player.ears.type == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into an upright animalistic ears.  ");
+				if (player.ears.type == Ears.DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into deer-like ears!  ");
+				if (player.ears.type > Ears.DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped deer ears!  ");
 				outputText("<b>You now have deer ears.</b>");
-				player.earType = EARS_DEER;
+				player.ears.type = Ears.DEER;
 				changes++;
 			}
 			//Gain deer tail
-			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType != TAIL_TYPE_DEER) {
+			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tail.type != Tail.DEER) {
 				outputText("\n\nYou feel a tightening just above your ass, as if a massive hand was pinching you.  It releases with a curious “pomf”-ing noise.  You turn this way and that, finally managing to crane your neck to see your <b>fluffy, flicking deer tail.</b>");
-				player.tailType = TAIL_TYPE_DEER;
+				player.tail.type = Tail.DEER;
 				changes++;
 			}
 			//Gain deer horns AKA antlers
-			if (rand(3) == 0 && changes < changeLimit && player.hornType == HORNS_NONE) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.NONE) {
 				outputText("\n\nYou feel an immense pressure from your forehead, and you reach up, feeling the nubs of two new horns.");
-				player.hornType = HORNS_ANTLERS;
-				player.horns = 1;
+				player.horns.type = Horns.ANTLERS;
+				player.horns.value = 1;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.horns > 0 && player.hornType != HORNS_ANTLERS) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.value > 0 && player.horns.type != Horns.ANTLERS) {
 				outputText("\n\nYou feel a strange twisting sensation from your horns as they extend outwards.  You reach up to feel them and realize that you’ve now got <b>pronged, stag-like horns.</b>");
-				player.hornType = HORNS_ANTLERS;
-				player.horns = 4;
+				player.horns.type = Horns.ANTLERS;
+				player.horns.value = 4;
 				changes++;
 			}
 			//Increase points on deer antlers
-			if (rand(3) == 0 && changes < changeLimit && player.hornType == HORNS_ANTLERS && player.horns < 30) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.ANTLERS && player.horns.value < 30) {
 				outputText("\n\nYou feel a strange twisting sensation from your antlers as they extend and split outwards.  You reach up to feel them and realize that your antlers are now even more branched out.");
-				if (player.horns < 20 && rand(2) == 0) player.horns += (1 + rand(4));
-				player.horns++;
-				outputText("  After counting the number of points you have on your antlers, <b>you have " + player.horns + " points.</b>");
-				if (player.horns >= 30) outputText("<b>  It seems that your antlers can't get any more pointier.</b>");
+				if (player.horns.value < 20 && rand(2) == 0) player.horns.value += (1 + rand(4));
+				player.horns.value++;
+				outputText("  After counting the number of points you have on your antlers, <b>you have " + player.horns.value + " points.</b>");
+				if (player.horns.value >= 30) outputText("<b>  It seems that your antlers can't get any more pointier.</b>");
 				changes++;
 			}
 			//Gain fur
-			if (rand(4) == 0 && changes < changeLimit && player.horns > 0 && !player.hasFur()) {
+			if (rand(4) == 0 && changes < changeLimit && player.horns.value > 0 && !player.hasFur()) {
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinAdj = "";
-				player.skinDesc = "fur";
-				player.furColor = "brown";
-				player.underBody.type = UNDER_BODY_TYPE_FURRY;
+				player.skin.type = Skin.FUR;
+				player.skin.adj = "";
+				player.skin.desc = "fur";
+				player.skin.furColor = "brown";
+				player.underBody.type = UnderBody.FURRY;
 				player.copySkinToUnderBody({furColor: "white"});
 				changes++;
 			}
 			//Change face to normal
-			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_DEER && (player.faceType != FACE_HUMAN && player.faceType != FACE_DEER)) {
+			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && (player.face.type != Face.HUMAN && player.face.type != Face.DEER)) {
 				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
-				player.faceType = FACE_HUMAN;
+				player.face.type = Face.HUMAN;
 				changes++;
 			}
 			//Gain deer face
-			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.faceType != FACE_DEER) {
+			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.DEER && player.tail.type == Tail.DEER && player.face.type != Face.DEER) {
 				outputText("\n\nYou feel a grinding noise from your jaw, and a massive pressure in your sinuses, as your cheeks pinch in, followed immediately by a pointing of the lower half of your face.  You frantically (and gently) feel your face, discovering, to your surprise, that you’ve <b>gained the delicate facial features of a deer.</b>");
-				player.faceType = FACE_DEER;
+				player.face.type = Face.DEER;
 				changes++;
 			}
 			//Change legs to cloven hooves
-			if (rand(4) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.hasFur() && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED) {
-				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tail.type == Tail.DEER && player.hasFur() && player.lowerBody.type != LowerBody.CLOVEN_HOOFED) {
+				if (player.lowerBody.type == LowerBody.HOOFED) {
 					outputText("\n\nYou feel a sharp stinging sensation from your hooves, accompanied by a loud CRACK.  You look down in alarm, prancing from one hooved foot to another, realizing that your solid, heavy hooves have been replaced with delicate, cloven hooves.  You squint, also noting a subtle thinness across your legs in general--if you had to guess, you’d hazard that you’re looking <b>more deer-like than horse-like</b>.");
 				}
 				else {
 					outputText("\n\nYou feel a strange tightness from your feet and nearly topple over as your balance shifts.  You’re balancing on your toes for some reason.  You look down in amazement as your legs slim and lengthen, your feet elongating and darkening at the ends until you’re balancing on <b>two, graceful deer legs</b>.");
 				}
-				player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
-				if (!player.isTaur() && !player.isBiped()) player.legCount = 2;
+				player.lowerBody.type = LowerBody.CLOVEN_HOOFED;
+				if (!player.isTaur() && !player.isBiped()) player.lowerBody.legCount = 2;
 				changes++;
 			}
 			// Genital Changes

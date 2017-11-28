@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.display.SpriteDb;
@@ -85,7 +86,6 @@ public function isabellaKnockUpAttempt():void {
 		if (chance > 90) chance = 90;
 		//Attempt to knock up!
 		if (rand(100) < chance) isabellaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ISABELLA);
-		trace("Isabella got PREGNANT!");
 	}
 }
 
@@ -395,7 +395,7 @@ private function isabellasAccentCoaching():void {
 	clearOutput();
 	//Cooldown rejection
 	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] > 1) {
-		outputText("Isabella shakes her head and says, \"<i>Nein.  I do not vish to spend time on zis now.</b>\"");
+		outputText("Isabella shakes her head and says, \"<i>Nein.  I do not vish to spend time on zis now.</i>\"");
 		//Back to follower menu!
 		doNext(callForFollowerIsabella);
 		return;
@@ -625,7 +625,7 @@ private function repeatGermanBratwurstInCamp():void {
 	if (isabellaAccent()) outputText("\"<i>So hot... Am I making you hot, " + player.short + "?  Is your cock twitching for me yet?  Aching and leaking and dribbling a mess all over itself, ja?</i>\"\n\n");
 	else outputText("\"<i>So hot... Am I making you hot, " + player.short + "?  Is your cock twitching for me yet?  Aching and leaking and dribbling a mess all over itself?</i>\"\n\n");
 	
-	outputText("You nod, catching a whiff of her musky pussy's aroma without meaning to.  It's not like you could avoid it, with her body mere inches in front of your " + player.face() + ", shaking so perfectly and so closely that an occasional droplet catches on your nose.  Your hands clamp around the chair with an iron grip as you fight not to rise and rape her tender, teasing asshole on the spot.  " + player.SMultiCockDesc() + " is trickling and dribbling, bouncing with your heartbeats as your " + player.legs() + " shiver and shake with denied lusts.  You NEED to do something... to fuck, thrust, or just fap... anything - your " + player.multiCockDescriptLight() + " can't take it anymore!\n\n");
+	outputText("You nod, catching a whiff of her musky pussy's aroma without meaning to.  It's not like you could avoid it, with her body mere inches in front of your " + player.faceDescript() + ", shaking so perfectly and so closely that an occasional droplet catches on your nose.  Your hands clamp around the chair with an iron grip as you fight not to rise and rape her tender, teasing asshole on the spot.  " + player.SMultiCockDesc() + " is trickling and dribbling, bouncing with your heartbeats as your " + player.legs() + " shiver and shake with denied lusts.  You NEED to do something... to fuck, thrust, or just fap... anything - your " + player.multiCockDescriptLight() + " can't take it anymore!\n\n");
 	
 	outputText("Drawn up by your dick, you let go of your grip on the cow-crafted chair and start to rise into Isabella.  She expertly drops her bouncy butt into your " + player.chestDesc() + ".  It knocks you back down into place while she scolds, ");
 	if (isabellaAccent()) outputText("\"<i>I said not yet.  Do you vant me to help you cum or not?</i>\"");
@@ -790,7 +790,7 @@ private function tentacleBoneFollowerIzzy():void {
 	outputText("After toying with her for a while, you decide to bring your other tentacle dicks into the game; with expert precision, you move your " + player.cockDescript(t3) + " to her face.  Moaning under your gentle ministrations, she doesn't even notice the protruding mammoth about to lodge inside her drooling mouth. With a ferocious thrust you slam it all the way between her pulpy lips. Her sighs of pleasure are abruptly muffled as you block her windpipe with vegetal dickflesh. You start ramming your meat up and down her throat, its raw musk making her dizzy.  She tries to accommodate the monster stretching her mouth by moving her tongue around your erect " + player.cockDescript(t3) + ", squeezing it there and there, fondling your veins and milking your urethra of your pre-cum. You groan from the tongue-teasing and start filling her stomach with oozing fluid; the intimate contact makes her squirm a little more under the almost unbearable arousal. She's doing an expert job with her mouth, and her throat feels so good, so tender...  You try to stuff more of your " + player.cockDescript(t3) + " inside her, always wanting more pleasure; the additional pressure almost sends her over the edge as she eagerly gobbles your vegetal rod.\n\n");
 	
 	//[if demon tongue]
-	if (player.tongueType == TONGUE_DEMONIC || player.tongueType == TONGUE_SNAKE || player.tongueType == TONGUE_DRACONIC) {
+	if (player.tongue.type == Tongue.DEMONIC || player.tongue.type == Tongue.SNAKE || player.tongue.type == Tongue.DRACONIC) {
 		outputText("Using your long, extensible tongue, you decide to take a lick at her body.  Your tongue darts forward and gently locates her supple tits; you bring Isabelle closer with your vigorous tentacle dicks and start suckling at her breasts, drinking drops of her tasty milk one at a time.  Your constant stimulations arouse her more and more, and soon her nipples are releasing a regular trickle of her essence. You mercilessly drink her, probing your tongue around either of her udders as if to dig deeper to the source of this wonderful ambrosia. You keep gulping milk until you reach satiation, and then you drink some more. It's sweet, savory and invigorating; you could feed off her breasts for days.  You suckle her until her body shakes from the steady tactile provocation, before darting your tongue back.\n\n");
 		//end d-tongue inset
 	}
@@ -1172,30 +1172,30 @@ private function getIzzyBurped():void {
 		
 		var changed:Boolean = false;
 		//no new paragraph, but this obviously shouldn't happen with characters who already have hooves, cow/bull horns, lactating breasts, or a penis smaller than 8 inches. If you want to simply disable the following for those with the first two while simply adding a 'more' to the lactation or an 'even smaller' to the wang growing, I don't blame you, but if you could go in and 'if cow feet don't look at this shit' and whatever with each individual part, it'd probably read the best. Your call, you probably want to get done with this sooner than later. tl;dr it would be cool if you could make it fit as many of the criteria that apply at once.
-		if (player.lowerBody != LOWER_BODY_TYPE_HOOFED || player.horns <= 0 || player.hornType != HORNS_COW_MINOTAUR) {
+		if (player.lowerBody.type != LowerBody.HOOFED || player.horns.value <= 0 || player.horns.type != Horns.COW_MINOTAUR) {
 			outputText("  With that whole affair over with, you go to stand... and find yourself falling once more.");
 		}
-		if (player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
+		if (player.lowerBody.type != LowerBody.HOOFED) {
 			//[if no hooves present already]
 			if (player.isTaur()) outputText("  Confused, you quickly inspect yourself before your gaze settles on your hooves – or should you say, your SINGLE PAIR of hooves.  Triggered by what you surmise are the Pro Bova's fumes, your centaur body has vanished, leaving you with a single pair of cow-like hooves.");
 			else outputText("  Confused, you quickly inspect yourself before your gaze settles on your " + player.feet() + " – or should you say, former " + player.feet() + ".  Triggered by what you surmise are the Pro Bova's fumes, your " + player.feet() + " have quickly and painlessly refashioned themselves into cloven hooves – not unlike those Isabella is currently sporting.");
 			changed = true;
 		}
 		//[if no cow horns present]
-		if (player.horns <= 0 || player.hornType != HORNS_COW_MINOTAUR) {
-			if (player.horns > 0 && player.hornType > HORNS_NONE) outputText("  Your existing horns quiver, then reform into those of a " + player.mf("bull","cow"));
+		if (player.horns.value <= 0 || player.horns.type != Horns.COW_MINOTAUR) {
+			if (player.horns.value > 0 && player.horns.type > Horns.NONE) outputText("  Your existing horns quiver, then reform into those of a " + player.mf("bull","cow"));
 			else outputText("  Two nubs sprout from your forehead, swiftly thickening and growing into a large pair of curved bovine horns");
 			outputText(", throwing your center of balance off and aborting yet another attempt to right yourself.");
 			changed = true;
 		}
 		//[if no cow ears]
-		if (player.earType != EARS_COW) {
+		if (player.ears.type != Ears.COW) {
 			outputText("  Your ears wiggle a bit, then simply migrate higher up your head, lengthening and widening as they go.  Before you know it, you have cow ears.");
 			changed = true;
 		}
 		//[if no cow tail]
-		if (player.tailType != TAIL_TYPE_COW) {
-			if (player.tailType > TAIL_TYPE_NONE) outputText("  The tip of your tail reshapes into a burst of fur, the entire length changing to match.");
+		if (player.tail.type != Tail.COW) {
+			if (player.tail.type > Tail.NONE) outputText("  The tip of your tail reshapes into a burst of fur, the entire length changing to match.");
 			else outputText("  A tail creeps out of your " + player.armorName + ", perking up and growing rapidly.  A flare of fur bursts from the tip, the rest of the length changing to match.");
 			changed = true;
 		}
@@ -1269,7 +1269,7 @@ private function getIzzyBurped():void {
 		outputText("She rewards you by freeing one of her arms and wrapping it around your head, pulling you in between her gleaming ebony melons.  Shaking about and wrapping your head in a marshmallowy shroud of comfort, Isabella continues to force burps out, not content until all of the gas is gone.  She pulls you out of your fleshy prison after the oral venting subsides, dragging you down to the ground with her as her gassy magic begins to take hold.\n\n");
 		
 		//if meets any requirements for cow-y TF
-		if (player.lowerBody != LOWER_BODY_TYPE_HOOFED || player.horns <= 0 || player.hornType != HORNS_COW_MINOTAUR || player.earType != EARS_COW || player.tailType != TAIL_TYPE_COW || (player.hasCock() && player.longestCockLength() < 18)) {
+		if (player.lowerBody.type != LowerBody.HOOFED || player.horns.value <= 0 || player.horns.type != Horns.COW_MINOTAUR || player.ears.type != Ears.COW || player.tail.type != Tail.COW || (player.hasCock() && player.longestCockLength() < 18)) {
 			outputText("You're not surprised when you take the now-familiar cow-" + player.mf("boy","girl") + " form, ");
 			if ((!player.hasCock() || rand(2) == 0) && player.hasVagina()) outputText("Isabella beaming with eagerness at your sloshing and swelling bosom.\n\n");
 			else if (player.hasCock()) outputText("Isabella not able to keep a little frustration from her face as your dick grows to enviable size.\n\n");
@@ -1745,12 +1745,12 @@ public function isabellaGivesBirth():void {
 	outputText("\n\nThere, as you expected, you find the bovine braud leaning against a convenient boulder, stripped naked and with one hand wrapped around her distended midriff.  She sees you and manages to give you a weak smile, but doesn’t bother trying to speak.  Instead, she lets out a very bovine bellow as another contraction hits.  You promptly move to support her, standing behind her and reaching around her as best you can to cuddle and rub and support her overstuffed womb and the frantically wriggling baby doing its level best to leave it.");
 	outputText("\n\nFinally, several hours later, Isabella lets out one final bellow of pain and her newborn child slips its way free of her womb and into your waiting arms.");
 	if (flags[kFLAGS.ISABELLA_COWMOTHER] < 1) { //Not cowmother
-		outputText("\n\nThe wriggling infant you hold in your hands is a beautiful, perfectly formed little human child; a quick look between its legs confirms it is a " + (babyGender == 1 ? "boy" : babyGender == 2 ? "girl" : "hermaphrodite") + ". [He] has your " + player.hairColor + " hair, and you think maybe your eyes, but " + babyMF("his", "her", babyGender) + " skin is " + (rand(2) == 0 ? "warm chocolate brown" : "milky white") + ", like a single-toned version of " + babyMF("his", "her", babyGender) + " mother.  With a paternal smile of adoration, you announce the baby’s gender to Isabella and hand " + babyMF("him", "her", babyGender) + " over.");
+		outputText("\n\nThe wriggling infant you hold in your hands is a beautiful, perfectly formed little human child; a quick look between its legs confirms it is a " + (babyGender == 1 ? "boy" : babyGender == 2 ? "girl" : "hermaphrodite") + ". [He] has your " + player.hair.color + " hair, and you think maybe your eyes, but " + babyMF("his", "her", babyGender) + " skin is " + (rand(2) == 0 ? "warm chocolate brown" : "milky white") + ", like a single-toned version of " + babyMF("his", "her", babyGender) + " mother.  With a paternal smile of adoration, you announce the baby’s gender to Isabella and hand " + babyMF("him", "her", babyGender) + " over.");
 		outputText("\n\nIsabella takes " + babyMF("him", "her", babyGender) + " with a smile of motherly delight, already forgetting about the strain of birth now that she can hold her " + babyMF("son", "daughter", babyGender) + ".  \"<i>Isn’t " + babyMF("he", "she", babyGender) + " just beautiful, [name]?</i>\" She asks.  You agree that " + babyMF("he", "she", babyGender) + " is, watching as the delighted new mother puts her new baby to her ever-seeping quad-nipples; the smell of the bountiful milk helps guide the infant to her breast and " + babyMF("he", "she", babyGender) + " is soon sucking away with the greedy enthusiasm of the newborn.  With a soft groan of effort, Isabella sinks to the ground, seating herself against the boulder to nurse her new " + babyMF("son", "daughter", babyGender) + ".");
 	}
 	else { //COW MOTHER!
 		if (babyGender == 1) { //Perfectly normal human baby, always male.
-			outputText("\n\nTo your " + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0 ? "continued" : "") + " surprise, the baby is not a bovine like Isabella, but a perfectly formed and completely human boy.  His skin is pale white, and he seems to take more after you than her, even having your eyes and " + player.hairColor + " hair.  Still you doubt Isabella would ever care; he’s her son, after all.");
+			outputText("\n\nTo your " + (isabellaScene.getIsabellaChildType(IsabellaScene.OFFSPRING_HUMAN_BOYS) > 0 ? "continued" : "") + " surprise, the baby is not a bovine like Isabella, but a perfectly formed and completely human boy.  His skin is pale white, and he seems to take more after you than her, even having your eyes and " + player.hair.color + " hair.  Still you doubt Isabella would ever care; he’s her son, after all.");
 		}
 		else {
 			outputText("The baby is, unsurprisingly, a little cowgirl, just like her mother, with " + (rand(2) == 0 ? "her mom’s milk-white-spotted chocolate skin" : "a strange reversal of her mother’s skin tone, being white with spots of chocolate brown") + ". She doesn’t have horns yet, but you’re certain she’ll grow into them in time, and she already has the bovine ears, tail, and hooved legs of her mother, not to mention the eight tiny little nipples, in two patches of four, that you know will grow into spectacular milky breasts like her mother has. ");

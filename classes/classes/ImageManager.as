@@ -17,12 +17,16 @@
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 
+	import mx.logging.ILogger;
+	import classes.internals.LoggerFactory;
+	
 	/**
 	 * ...
 	 * @author Yoffy, Fake-Name
 	 */
 	public final class ImageManager
 	{
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(ImageManager);
 		//Hashmap of all images
 		private static var _imageTable:Object = new Object();
 
@@ -144,7 +148,7 @@
 					{
 						// Programmatic extension concatenation! Woot.
 						var newPath:String = prefix+num+"."+_imgListXML.ExtensionList.ExtensionType[k];
-						trace("Trying to load sequential image at URL =", newPath, "Previous base URL = ", imPath);
+						if (logErrors) LOGGER.debug("Trying to load sequential image at URL =", newPath, "Previous base URL = ", imPath);
 						_allImagePaths[newPath] = imId;
 						loadImageAtPath(newPath);
 
@@ -155,7 +159,7 @@
 			}
 			else
 			{
-				trace("Error in image loading. Tried to load image that was not tried to load? Wat.")
+				if (logErrors) LOGGER.error("Error in image loading. Tried to load image that was not tried to load? Wat.")
 			}
 
 			//trace("Loaded file", e)
@@ -211,7 +215,7 @@
 				return "";
 			}
 			
-			if (logErrors) trace("showing imageID - ", imageID);
+			if (logErrors) LOGGER.error("showing imageID - ", imageID);
 			var imageIndex:int = 0;
 			var image:Image = null;
 			if (_imageTable[imageID] != undefined)
@@ -220,7 +224,7 @@
 				if (_imageTable[imageID].length > 0)
 				{
 					imageIndex = Math.floor( Math.random() * _imageTable[imageID].length );
-					if (logErrors) trace("Have multiple image possibilities. Displaying image", imageIndex, "selected randomly.");
+					if (logErrors) LOGGER.debug("Have multiple image possibilities. Displaying image", imageIndex, "selected randomly.");
 					image = _imageTable[imageID][imageIndex];
 				}
 			}

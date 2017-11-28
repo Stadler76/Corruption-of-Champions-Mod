@@ -1,6 +1,8 @@
 package classes.Scenes.Areas.HighMountains 
 {
 	import classes.*;
+	import classes.BodyParts.Butt;
+	import classes.BodyParts.Hips;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class Izumi extends Monster
@@ -15,16 +17,16 @@ package classes.Scenes.Areas.HighMountains
 			this.imageName = "izumi";
 			this.long = "You're fighting the immense Oni, Izumi.  Standing around 9 feet tall and wielding little more than her fists, she is the picture of strength and power.  She is clad in a scandalous blue and white Kimono, the garment drawing your eyes to her humongous breasts, and her perfectly sculpted thighs.  A curious horn juts from her head, the texture of it almost lost amongst the rock lining the inside of the cave.\n\nA distinctly cocky grin is painted across her face, her undivided attention focused upon you.";
 			// this.plural = false;
-			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL);
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("FF")); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
-			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
-			this.ass.analWetness = ANAL_WETNESS_DRY;
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.tallness = 9*12+0;
-			this.hipRating = HIP_RATING_AVERAGE;
-			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "creamy-white";
-			this.hairColor = "golden";
-			this.hairLength = 25;
+			this.hips.rating = Hips.RATING_AVERAGE;
+			this.butt.rating = Butt.RATING_TIGHT;
+			this.skin.tone = "creamy-white";
+			this.hair.color = "golden";
+			this.hair.length = 25;
 			initStrTouSpeInte(110, 90, 90, 80);
 			initLibSensCor(30, 25, 15);
 			this.weaponName = "fist";
@@ -72,7 +74,7 @@ package classes.Scenes.Areas.HighMountains
 			// Handle chokeslam mechanics
 			if (player.hasStatusEffect(StatusEffects.Chokeslam))
 			{
-				if (combatDebug) trace("ChokeSlam Rounds to Damage: " + player.statusEffectv1(StatusEffects.Chokeslam));
+				//if (combatDebug) trace("ChokeSlam Rounds to Damage: " + player.statusEffectv1(StatusEffects.Chokeslam));
 				
 				player.addStatusValue(StatusEffects.Chokeslam,1,-1);
 				
@@ -105,17 +107,9 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			// Titsmother toggle; gonna need to play with this, it should only be used once per fight
-			if (this.HPRatio() <= 0.25)
-			{
-				if (!hasStatusEffect(StatusEffects.UsedTitsmother))
-				{
-					trace("Could use titsmother...");
-				}
-			}
-			
 			if ((this.HPRatio() <= 0.25) && (hasStatusEffect(StatusEffects.UsedTitsmother)))
 			{
-				if (combatDebug) trace("Using Titsmother!");
+				//if (combatDebug) trace("Using Titsmother!");
 				titSmother();
 				this.createStatusEffect(StatusEffects.UsedTitsmother, 0, 0, 0, 0);
 				return;
@@ -137,7 +131,7 @@ package classes.Scenes.Areas.HighMountains
 		// Remove any lingering effects from the player once combat is over
 		public function cleanup():void
 		{
-			if (combatDebug) trace("Cleaning up lingering effects...");
+			//if (combatDebug) trace("Cleaning up lingering effects...");
 			
 			cleanupChokeslam();
 			cleanupGroundpound();
@@ -206,7 +200,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("Izumi surges towards you, smashing aside your guard and seizing you by the throat in the blink of an eye.  Lifting you above her head, you can only struggle to breathe as the enormous Oni grins at you like some sort of prize.");
 				player.createStatusEffect(StatusEffects.Chokeslam, 3, 0, 0, 0);
 				
-				if (combatDebug) trace("Applied Chokeslam effect");
+				//if (combatDebug) trace("Applied Chokeslam effect");
 			}
 			combatRoundOver();
 		}
@@ -225,7 +219,7 @@ package classes.Scenes.Areas.HighMountains
 			
 			if (brokeFree)
 			{
-				if (combatDebug) trace("Escaped from Chokeslam grapple");
+				//if (combatDebug) trace("Escaped from Chokeslam grapple");
 				
 				chokeSlamEscape();
 				combatRoundOver();
@@ -279,7 +273,7 @@ package classes.Scenes.Areas.HighMountains
 		public function chokeSlamEscape():void
 		{
 			var damage:Number = 50 + rand(player.str);
-			if (combatDebug) trace("Escaping from Chokeslam!");
+			//if (combatDebug) trace("Escaping from Chokeslam!");
 			
 			outputText("Scrabbling desperately against her wrist, you narrow your eyes at the Oni woman’s superior expression,");
 			if (player.isBiped()) outputText(" raise a [leg] and kick her roundly");
@@ -301,7 +295,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			if (player.hasStatusEffect(StatusEffects.Chokeslam))
 			{
-				trace("Removing chokeslam");
+				//trace("Removing chokeslam");
 				
 				player.removeStatusEffect(StatusEffects.Chokeslam);
 			}
@@ -324,7 +318,7 @@ package classes.Scenes.Areas.HighMountains
 				player.createStatusEffect(StatusEffects.Groundpound, 3, spdReducedBy, 0, 0);
 				game.dynStats("spe-", spdReducedBy);
 				
-				if (combatDebug) trace("Applying Groundslam slow");
+				//if (combatDebug) trace("Applying Groundslam slow");
 			}
 			
 			combatRoundOver();
@@ -341,7 +335,7 @@ package classes.Scenes.Areas.HighMountains
 				
 				player.removeStatusEffect(StatusEffects.Groundpound);
 				
-				trace("Removing Groundpound slow effect");
+				//trace("Removing Groundpound slow effect");
 			}
 		}
 		
@@ -349,7 +343,7 @@ package classes.Scenes.Areas.HighMountains
 		// Attack will be used ONCE, when Izumi reaches ~25% hp.
 		public function titSmother():void
 		{
-			if (combatDebug) trace("Titsmother attack!");
+			//if (combatDebug) trace("Titsmother attack!");
 			
 			// Attack will ALWAYS hit, but be relatively easy to break out of
 			outputText("With a sudden burst of speed, the Oni woman bullrushes you, slapping aside your hasty defence.  You brace yourself for a powerful impact, but rather than strike you she instead thrusts her arm straight past your head.  Bemused, you turn your head to follow her fist, just in time to see her crook her elbow and yank you back towards her - hard.  Pulled right off your [feet] by the sudden strike, you slam");
@@ -368,14 +362,14 @@ package classes.Scenes.Areas.HighMountains
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
 			{
 				player.removeStatusEffect(StatusEffects.Titsmother);
-				if (combatDebug) trace("Removing Titsmother");
+				//if (combatDebug) trace("Removing Titsmother");
 			}
 		}
 		
 		// Struggle handler for titsmother attack
 		public function titSmotherStruggle():void
 		{
-			if (combatDebug) trace("Titsmother Struggle");
+			//if (combatDebug) trace("Titsmother Struggle");
 			
 			var brokeFree:Boolean;
 			
@@ -386,7 +380,7 @@ package classes.Scenes.Areas.HighMountains
 			
 			if (brokeFree)
 			{
-				if (combatDebug) trace("Broke free of Titsmother!");
+				//if (combatDebug) trace("Broke free of Titsmother!");
 				
 				titSmotherEscape();
 				combatRoundOver();
@@ -429,7 +423,7 @@ package classes.Scenes.Areas.HighMountains
 		// Player breaks free of tiSmother and applies damage to Izumi
 		public function titSmotherEscape():void
 		{
-			if (combatDebug) trace("Escaping TitSmother!");
+			//if (combatDebug) trace("Escaping TitSmother!");
 			clearOutput();
 			
 			if (player.str < 90)
@@ -463,7 +457,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			clearOutput();
 			
-			if (combatDebug) trace("Waiting during TitSmother");
+			//if (combatDebug) trace("Waiting during TitSmother");
 			
 			outputText("With your face crushed into the Oni's cleavage, you can't help but wonder; why bother resisting?  She's just so <i>strong</i>, and her breasts feel so lushious against your [face]...");
 			

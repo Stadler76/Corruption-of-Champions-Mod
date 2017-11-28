@@ -1,5 +1,6 @@
 package classes.Scenes.Places.Bazaar{
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.IRandomNumber;
 	import classes.internals.RandomNumber;
@@ -325,7 +326,7 @@ protected function roxanneDrinkingContest():void {
 		outputText("  A scaled hand slaps your " + player.buttDescript() + " spinning you around to fall drunkenly into the pirate's soft, cushy chest.  \"<i>Don't worry, I'll be gentle,</i>\" she whispers, hooking an arm around your sagging frame.");
 		//CHOOSE SEX SCENE
 		//Chance of big booty butt loss!
-		if (player.buttRating > 12 && player.tone <= 50 && flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] > 1 && randomNumber.random(2) === 0){
+		if (player.butt.rating > 12 && player.tone <= 50 && flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] > 1 && randomNumber.random(2) === 0){
 			LOGGER.debug("Starting loss scene: Big booty");
 			doNext(bigBootyRoxanneContestLoss);
 		} else if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 200) {
@@ -396,7 +397,7 @@ private function roxanneGivesABlowjob():void {
 	
 	outputText("A few demons start to approach, but the lizan crew interposes themselves between their captain and the interlopers, shooing them off before they can start something.  You barely notice, so focused are you on the feel of saliva running down your " + player.cockDescript(x) + " and the soft, pliant mouth flesh trying to wring the jism from your shaft.   The warmth of orgasm starts to build in your loins, and you begin to pump at the tongue instinctively, hips rising up off the chair in spite of the sharp fingernail's warning.\n\n");
 	
-	outputText("SMACK!  Roxanne's tail slaps into your " + player.buttDescript() + ", stinging the exposed " + player.skinDesc + ".  Her eyebrows narrow in irritation while she wraps her arms around your waistline, steadying her off-balance body while she spanks and pumps you in a drunken frenzy.  You hump her face, pressing your " + player.cockHead(x) + " against her lips to smear them with a glaze of leaky pre-cum.  Grabbing her horns, you cry out and pleasure and try to pull her down, but she spanks you, HARD.  You yelp in pain, dropping her horns and submitting completely to her tongue and the pleasure it brings.\n\n");
+	outputText("SMACK!  Roxanne's tail slaps into your " + player.buttDescript() + ", stinging the exposed " + player.skin.desc + ".  Her eyebrows narrow in irritation while she wraps her arms around your waistline, steadying her off-balance body while she spanks and pumps you in a drunken frenzy.  You hump her face, pressing your " + player.cockHead(x) + " against her lips to smear them with a glaze of leaky pre-cum.  Grabbing her horns, you cry out and pleasure and try to pull her down, but she spanks you, HARD.  You yelp in pain, dropping her horns and submitting completely to her tongue and the pleasure it brings.\n\n");
 	
 	outputText("The wiggling, flexible tongue-tip presses down on your urethra, bottling the cum up inside you.  Tiny rivulets of white goo squirt and leak around the pink blockage, rolling over the many rings of tongue while your urethra bloats wide.  The lizan looks up, her dull, glazed eyes locking on to yours as she uncovers your cum-slit, then shivering as a ");
 	if (player.cumQ() >= 1500) outputText("huge torrent utterly drenches her face, horns, neck, and tight top");
@@ -531,7 +532,7 @@ private function roxanneReamsYouNormal():void {
 	outputText(".\n\n");
 	
 	outputText("There's nothing to do but lie there and accept it.  You're too drunk to run even if you did get the aggressive shemale out of your rectum.  Worse still, her 'crew' of male lizans are standing guard in a ring around the pair of you.  Even though they seem focused on protecting against external threats, you know you'd never get past them without tripping over a tail or being snatched by a strong, sober arm. You belch and relax, your face sliding over the booze-slicked table while Roxanne starts to pound away at your stretched ");
-	if (player.tailType > TAIL_TYPE_NONE) outputText("tail-hole");
+	if (player.tail.type > Tail.NONE) outputText("tail-hole");
 	else outputText("anus");
 	outputText(".  It begins to feel good");
 	if (player.hasCock()) outputText(", very good,");
@@ -565,7 +566,7 @@ private function roxanneReamsYouNormal():void {
 	
 	if (player.tallness <= 50) outputText("Roxanne shifts forward, placing her tits around your head, letting the smooth scales of her mammoth breasts envelop you in their soft embrace.");
 	else outputText("Roxanne shifts forward slightly, heaving the smooth scales of her mammoth breasts a little further up your back.");
-	outputText("  She doubles her pace suddenly, balls slapping loudly into you while she moans and howls lustily.  You feel the telltale bulging of an impending orgasm in your gut, and her balls drag up your " + player.skinDesc + ", preparing to disgorge their steamy cargo.  The lizan grabs your hair and twists her fingers through it while she hilts you, screaming out her pleasure for all to hear.\n\n");
+	outputText("  She doubles her pace suddenly, balls slapping loudly into you while she moans and howls lustily.  You feel the telltale bulging of an impending orgasm in your gut, and her balls drag up your " + player.skin.desc + ", preparing to disgorge their steamy cargo.  The lizan grabs your hair and twists her fingers through it while she hilts you, screaming out her pleasure for all to hear.\n\n");
 	
 	outputText("Your insides froth and churn while they're filled with pent-up lizan cum.  The shemale's balls bounce against you, violently relaxing and contracting in time with the bursts of cream filling your intestines.  Wetness fills you completely, but the spurts go on relentlessly.  Suddenly, small squirts of hot cum escape your tender " + player.assholeDescript() + ", running down Roxanne's still-pulsing balls.  The action smears the cummy lather everywhere, and while the discomfort of being so completely filled rises, the pleasure grows in equal measure until you're twitching and moaning with whorish delight.\n\n");
 	
@@ -609,7 +610,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	outputText("The nude newhalf pounces, her thigh-sized monster-cock gushing pre-cum over your belly and twitching in anticipation of the violation to come.  Her need is so cute... endearing even, but it isn't until your gear is being removed that you remember Roxanne intends to hilt that thing inside you.  Your eyes go wide, your mouth stammering and blubbering about how it will never fit.  She places a scaled finger on your boozy lips and whispers, \"<i>Shhhh, don't struggle.  You knew what you were getting into, " + player.mf("my dear","sexy girl") + ".  You wouldn't welch out on a wager, would you?  Besides, it's much too late for you to do anything... my nude, drunken cock-holster.</i>\"\n\n");
 	
 	outputText("Oh gods, Roxanne's right.  She finished getting you naked while she was talking, and you're completely exposed.  Her hands grab your arm and pull, rolling you onto your front and letting your " + player.legs() + " hang off the side of her bed toward the floor.  It's such a silly pose that you nearly forget how perfect a target it makes your " + player.buttDescript() + "!  The now-confident lizan gives your butt-cheek a slap, giggling when you start in surprise.  ");
-	if (player.tailType > TAIL_TYPE_NONE) outputText("She lifts your tail ");
+	if (player.tail.type > Tail.NONE) outputText("She lifts your tail ");
 	else outputText("She spreads your cheeks ");
 	outputText("to examine your " + player.assholeDescript() + ", licking the ring before she prods it with a gentle finger-tip.  The excited pirate exclaims, \"<i>");
 	if (player.analCapacity() < 150) outputText("Oh, poor " + player.mf("boy","girl") + "!  I don't think you can handle me like this.  Let me get the ointment... after all, I want you to come back for more.");
@@ -637,7 +638,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	else outputText("an irritated, red 'X' on your skin");
 	outputText(".  You whimper from the pain and the awkward fullness, but she asks, \"<i>Should we get that tattooed on there?  A nice red 'X' to claim Roxanne Poisontail's favorite treasure... wouldn't that be nice?</i>\"  A submissive mewl escapes your lips while you try to focus on her words, but the alcohol and complete body distention keep your frazzled consciousness from digesting anything but more cock.\n\n");
 	
-	outputText("The pressure inside you kicks up a notch once the penetration resumes, sending fireworks of pleasure and pain into your dazed cerebrum.  You cross your eyes, puling and crying while your organs shift to accommodate the bulge that's pushed up past your belly button.  Hands caress your belly, squeezing the mass through your " + player.skinDesc + ", your dazed subconscious taking control to try and cope with the complete reaming of your ass.  Roxanne smirks and looks down, her reptilian gaze wavering between a veneer of complete confidence and lust-mad fire.  Huge globules of pre-cum bubble out every few seconds, soaking your stretched-out innards moments before they're filled with the lizan's encroaching cock.\n\n");
+	outputText("The pressure inside you kicks up a notch once the penetration resumes, sending fireworks of pleasure and pain into your dazed cerebrum.  You cross your eyes, puling and crying while your organs shift to accommodate the bulge that's pushed up past your belly button.  Hands caress your belly, squeezing the mass through your " + player.skin.desc + ", your dazed subconscious taking control to try and cope with the complete reaming of your ass.  Roxanne smirks and looks down, her reptilian gaze wavering between a veneer of complete confidence and lust-mad fire.  Huge globules of pre-cum bubble out every few seconds, soaking your stretched-out innards moments before they're filled with the lizan's encroaching cock.\n\n");
 	
 	outputText("You breathe in shallow breaths, trying to see just how much more remains; thankfully it looks like there's only a few more inches left to sink up your butt-hole.  Roxanne rubs her palms against the small of your back, pushing hard enough to squish you into the cushions and tighten your prick-packed body around her needy, pulsing shaft.  At last she bottoms out, her heavy, swollen testes bouncing against your ");
 	if (player.balls > 0) outputText("own");

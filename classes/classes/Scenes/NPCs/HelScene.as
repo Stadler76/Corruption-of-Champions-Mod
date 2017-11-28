@@ -33,7 +33,7 @@ package classes.Scenes.NPCs{
 		{
 			checkedHeliaIsabellaThreesome = 0; //Make sure we test just once in timeChangeLarge
 			pregnancy.pregnancyAdvance();
-			trace("\nHelia time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event, false);
+			//trace("\nHelia time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event, false);
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] > 0) flags[kFLAGS.HELSPAWN_GROWUP_COUNTER]++;
 				if (flags[kFLAGS.HEL_RAPED_TODAY] == 1) flags[kFLAGS.HEL_RAPED_TODAY] = 0;
@@ -71,7 +71,6 @@ package classes.Scenes.NPCs{
 			}
 			//Chance of threesomes!
 			if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && getGame().isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-				trace("ISABELLA/HELL TEST");
 				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) { //Hell/Izzy threesome intro
 					spriteSelect(SpriteDb.s_isabella);
 					followrIzzyxSallyThreesomePretext();
@@ -208,7 +207,6 @@ internal function loseToSalamander():void {
 	else outputText(".\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a glistening cunt.  \"<i>You're a worthy opponent, you know that?  C'mon, there's no shame in losing,</i>\" she says, offering a hand up.  Shakily, you take it – and she pulls you right into a rough kiss.\n\n\"<i>But, to the victor go the spoils,</i>\" she says, pushing her chest into you.  Well, you might as well enjoy yourself...");
 	var x:Number = 0;
 	if (rand(4) == 0 && player.gender > 0) {
-		trace("Peg scene GO!")
 		menu();
 		addButton(0, "Next", helTailPegging, true);
 		return;
@@ -1944,10 +1942,6 @@ public function helSexualAmbush():void {
 	if (player.lust < 33) player.lust = 33;
 	flags[kFLAGS.HEL_RAPED_TODAY] = 1;
 	//(Raise PC lust; Display sex options)
-
-	// TODO Fix this?
-	// Why is this the only place in the whole game where buttonEvents is directly written to?
-//Got rid of this, now handled by passing true:	kGAMECLASS.buttonEvents[9] = pussyOutOfHelSexAmbush;
 	helFuckMenu(true);
 }
 

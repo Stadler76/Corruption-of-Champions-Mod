@@ -373,16 +373,16 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("<b><u>Furnace Room</u></b>\n")
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
-				outputText("The air inside this room is hot enough to coat your " + player.skinTone + " " + player.skinDesc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some kind of pink crystalline fuel being burned by purple-white fire.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ");
+				outputText("The air inside this room is hot enough to coat your " + player.skin.tone + " " + player.skin.desc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some kind of pink crystalline fuel being burned by purple-white fire.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ");
 			}
 			else {
-				outputText("Despite the machinery being shut down, the air in this room is still hot enough to coat your " + player.skinTone + " " + player.skinDesc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some the ashes of a previous fuel source.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ");			
+				outputText("Despite the machinery being shut down, the air in this room is still hot enough to coat your " + player.skin.tone + " " + player.skin.desc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some the ashes of a previous fuel source.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ");			
 			}
 			dungeons.setDungeonButtons(null, null, roomPumpRoom, null);	
 			
 			//Incubus is ALLLLIVE
 			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] <= 0) {
-				getGame().d3.incubusMechanic.encounterIncubusFactory();
+				getGame().lethicesKeep.incubusMechanic.encounterIncubusFactory();
 			}
 		}
 		

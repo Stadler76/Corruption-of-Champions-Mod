@@ -7,7 +7,24 @@
 
 	public class VaginaClass implements ISerializable
 	{
-		include "../../includes/appearanceDefs.as";
+		public static const HUMAN:int                     =   0;
+		public static const EQUINE:int                    =   1;
+		public static const BLACK_SAND_TRAP:int           =   5;
+
+		public static const WETNESS_DRY:int               =   0;
+		public static const WETNESS_NORMAL:int            =   1;
+		public static const WETNESS_WET:int               =   2;
+		public static const WETNESS_SLICK:int             =   3;
+		public static const WETNESS_DROOLING:int          =   4;
+		public static const WETNESS_SLAVERING:int         =   5;
+
+		public static const LOOSENESS_TIGHT:int           =   0;
+		public static const LOOSENESS_NORMAL:int          =   1;
+		public static const LOOSENESS_LOOSE:int           =   2;
+		public static const LOOSENESS_GAPING:int          =   3;
+		public static const LOOSENESS_GAPING_WIDE:int     =   4;
+		public static const LOOSENESS_LEVEL_CLOWN_CAR:int =   5;
+
 		public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		private static const LOGGER:ILogger = LoggerFactory.getLogger(VaginaClass);
 		
@@ -112,7 +129,7 @@
 		 */
 		public function stretch(cArea:Number, bonusCapacity:Number = 0, hasFeraMilkingTwat:Boolean = false):Boolean {
 			var stretched:Boolean = false;
-			if (!hasFeraMilkingTwat || vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			if (!hasFeraMilkingTwat || vaginalLooseness <= VaginaClass.LOOSENESS_NORMAL) {
 				//cArea > capacity = autostreeeeetch.
 				if (cArea >= capacity(bonusCapacity)) {
 					vaginalLooseness++;
@@ -129,15 +146,11 @@
 					stretched = true;
 				}
 			}
-			if (vaginalLooseness > VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) vaginalLooseness = VAGINA_LOOSENESS_LEVEL_CLOWN_CAR;
-			if (hasFeraMilkingTwat && vaginalLooseness > VAGINA_LOOSENESS_LOOSE) vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
+			if (vaginalLooseness > VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) vaginalLooseness = VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR;
+			if (hasFeraMilkingTwat && vaginalLooseness > VaginaClass.LOOSENESS_LOOSE) vaginalLooseness = VaginaClass.LOOSENESS_LOOSE;
 
 			if (virgin) {
 				virgin = false;
-			}
-			
-			if (stretched) {
-				trace("CUNT STRETCHED TO " + (vaginalLooseness) + ".");
 			}
 			
 			return stretched;

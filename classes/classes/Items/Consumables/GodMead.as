@@ -37,10 +37,10 @@ package classes.Items.Consumables
 				dynStats("tou", 1);
 			}
 			//Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
-			if (rand(6) === 0 && player.beardLength < 4) {
-				if (player.beardLength <= 0) outputText("A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. <b>You now sport a fine " + player.hairColor + " beard!</b>");
+			if (rand(6) === 0 && player.beard.length < 4) {
+				if (player.beard.length <= 0) outputText("A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. <b>You now sport a fine " + player.hair.color + " beard!</b>");
 				else outputText("\n\nA sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.");
-				player.beardLength += 0.5;
+				player.beard.length += 0.5;
 			}
 			//Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 			player.refillHunger(20);

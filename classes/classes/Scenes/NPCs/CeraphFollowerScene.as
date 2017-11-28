@@ -4,6 +4,7 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
@@ -378,7 +379,7 @@ package classes.Scenes.NPCs
 				//(NOT PIERCED) 
 				if (player.earsPierced == 0) outputText("The demon places a hand on your forehead and rubs your temples.  Numbness spreads through your body with every touch, until you can barely feel a thing.  She snaps an earring into your left ear, and dizziness washes over you.  A moment later she's piercing the other side, and the now-familiar vertigo that accompanies it seems to come and go quicker than before.  ");
 				//(PIERCED) 
-				else outputText("The demon rubs your ears in her hands, numbing them slightly.  A gradual buzz builds behind your eyes, accompanied by a wave of dizziness.  You blink and try to shake your head, but as numb as you are, it's quite difficult.  After a few moments, the odd sensations pass, returning normal feeling to your ears and " + player.face() + ", much to your relief.  ");
+				else outputText("The demon rubs your ears in her hands, numbing them slightly.  A gradual buzz builds behind your eyes, accompanied by a wave of dizziness.  You blink and try to shake your head, but as numb as you are, it's quite difficult.  After a few moments, the odd sensations pass, returning normal feeling to your ears and " + player.faceDescript() + ", much to your relief.  ");
 				outputText("You hope she doesn't take your " + player.armorName + " while you're paralyzed, leaving you to roam the realm totally exposed.  Confusion and waves of new desire battle in your mind as you try to come to grips with the odd thought.\n\n");
 
 				outputText("Ceraph watches your ");
@@ -870,7 +871,6 @@ package classes.Scenes.NPCs
 			//Preggers chance!
 			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0) {
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
-				trace("PC KNOCKED UP WITH CERAPH IMPS");
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -887,7 +887,7 @@ package classes.Scenes.NPCs
 			outputText("The herm, at last restored to a pure woman, rubs the healed expanse of her abdomen, unbelieving, before leaping to her feet and excitedly seizing both of your hands. \"<i>I'm normal! No longer a freak! Oh, " + player.short + ", I can never repay you for this. You've given me a new life! Please... won't you,</i>\" she gazes at you with a flush of anticipation, \"<i>won't you make love to me?</i>\" Pulling your hands to her hips, she steps close enough to kiss, but merely presses her forehead against your own, viridian eyes no longer clouded with coarse lust. Instead, they practically glow with the girl's ardor, her smile authentic and honest. Unblinking, you gaze into her eyes for a moment that stretches into an eternity, cupping a hand around her cheek. She reads your acceptance as clearly as if you'd been yelling it from the mountaintops and she returns your gentle smile, nuzzling her nose against yours.\n\n");
 
 			outputText("Drawing you back to your cot, Urta sits on the cushioned bedding, knees spread as she leans back and braces herself on her elbows. You sink between her muscled thighs, rubbing your palms up the dusky fur of her hips as you bring your head toward her leaking pussy. The delicate folds of her labia are as dark as her nose, but there is a certain elegance in their plush depths, like the petals of a black rose guarding the nectar of the flower. You trace your tongue around the edge of her vulva, warm skin tingling with the faintest trace of the athletic guardswoman's perfumed sweat, exciting the tip of your tongue and making you draw it back into your mouth to savor the untainted taste of the girl's body. Placing small kisses on the puffy lips of her sex, you draw the girl's skin into your mouth with a gentle sucking, nibbling at the fox's flesh with only your lips as you gradually, achingly work your way up to the polished nub of her clitoris, engorged from your teasing oral stimulation. You stroke the sensitive flesh with the tip of your nose, brushing the swell of your lower lip across Urta's joy-buzzer. She moans, her hips swaying back and forth in time to your movements.");
-			if (player.horns > 0) outputText("  Unable to keep her hands at her sides, but unwilling to stand between your mouth and her slit, the fox-girl takes hold of your horns, pulling your face tightly against her mound, her chest tight with a barely audible squeak of delight. Stroking the tip of your tongue at the curtain of her sex, you allow her the barest trace of penetration before drawing back and placing a wet kiss on her clit. Enough foreplay.");
+			if (player.horns.value > 0) outputText("  Unable to keep her hands at her sides, but unwilling to stand between your mouth and her slit, the fox-girl takes hold of your horns, pulling your face tightly against her mound, her chest tight with a barely audible squeak of delight. Stroking the tip of your tongue at the curtain of her sex, you allow her the barest trace of penetration before drawing back and placing a wet kiss on her clit. Enough foreplay.");
 			dynStats("lus", 200);
 			//[Next]
 			doNext(ceraphUrtaRoleplaySober2);
@@ -1613,7 +1613,7 @@ package classes.Scenes.NPCs
 			spriteSelect(SpriteDb.s_ceraphClothed);
 			clearOutput();
 			outputText("You undress, just enough to point at your [vagina].  Ceraph smiles happily and muses, \"<i>I have just the troublesome slut that could learn a thing or two by having her mouth replaced by a pussy.  Face-fucking is such an effective discipline technique, thank you dear.</i>\"");
-			outputText("\n\nCeraph's fingernails stab at your " + player.skinDesc + " painfully, dragging them in a circular motion around your vulva.  The pain of the action fades to a gentle, throbbing heat while her fingers go deeper, corkscrewing through your flesh.  A second later she pulls back, a featureless pillar of flesh wrapped in skin and sitting in her hand, topped with your " + player.vaginaDescript() + ".  The other end is capped with a strange, arcane mark, seemingly tattooed into the skin.  You glance down, expecting to find your groin ruined, but the spot your vagina once occupied is replaced with bare, unmarked skin.");
+			outputText("\n\nCeraph's fingernails stab at your " + player.skin.desc + " painfully, dragging them in a circular motion around your vulva.  The pain of the action fades to a gentle, throbbing heat while her fingers go deeper, corkscrewing through your flesh.  A second later she pulls back, a featureless pillar of flesh wrapped in skin and sitting in her hand, topped with your " + player.vaginaDescript() + ".  The other end is capped with a strange, arcane mark, seemingly tattooed into the skin.  You glance down, expecting to find your groin ruined, but the spot your vagina once occupied is replaced with bare, unmarked skin.");
 			outputText("\n\nThe demon slips a finger into her hand-held pussy, and you inexplicably moan, still feeling every sensation with perfect clarity.  She plays with it for a few more seconds, the gentle 'schlick-schlick-schlick' of her fingers carrying through the air before she seems to tire of teasing you.");
 			outputText("\n\n\"<i>Oh don't mind the feelings, they'll fade once I get farther away and get this stuffed into one of my pets.  Thank you again, [Master] for supporting your pet's ever-growing harem.  I'll be sure and put the new pocket-pussy to use right away so that you'll have some good dreams soon.  I'll miss seeing it on you though, so if you would, please replace it. </i>\" instructs Ceraph with an air of feigned meekness.");
 			outputText("\n\nYou work your jaw in consternation, trying to stay upright as Ceraph starts to fly away, amusing herself by masturbating your old cunt as she flies.  The lewd squishes seem to hang in the air, and you're helpless to do naught but writhe in the dirt and moan as you're brought to orgasm from a nonexistent vagina.  It seems as soon as she leaves camp she forgets she's supposed to be YOUR subservient bitch.");
@@ -1884,7 +1884,7 @@ package classes.Scenes.NPCs
 			if (dog) outputText("Arf!</i>\" you bark");
 			else outputText("Meowwwww!</i>\" you mew");
 			outputText(", loud and almost proudly");
-			if (player.tailType > TAIL_TYPE_NONE) outputText(", wagging your tail excitedly");
+			if (player.tail.type > Tail.NONE) outputText(", wagging your tail excitedly");
 			outputText(".");
 			outputText("\n\nCeraph casually pulls her panties a bit lower to ");
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText("ease the pressure on her tightly-contained phallus");
@@ -2019,7 +2019,7 @@ package classes.Scenes.NPCs
 			if (dog) outputText("Arf! Arf!</i>\" you bark");
 			else outputText("Meow!  Meowwwww!</i>\" you mew");
 			outputText(", wiggling your ");
-			if (player.tailType > TAIL_TYPE_NONE) outputText("tail");
+			if (player.tail.type > Tail.NONE) outputText("tail");
 			else outputText("[butt]");
 			outputText(" happily.  For some reason, the idea of denying yourself release in exchange for more humiliation is appealing to you.");
 

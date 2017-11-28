@@ -8,6 +8,7 @@ package classes.Scenes.Dungeons.Factory
 	import classes.CockTypesEnum;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
+	import classes.VaginaClass;
 
 	public class SecretarialSuccubusScene extends BaseContent
 	{
@@ -122,7 +123,7 @@ package classes.Scenes.Dungeons.Factory
 				else {
 					outputText("gushing with fluids as it shapes itself into a hungry demonic cunt.");  
 					player.createVagina();
-					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
 				}
 				outputText("\n\n\"<i>Much better,</i>\" the demon coos, licking her lips as your ");
 			}
@@ -195,7 +196,7 @@ package classes.Scenes.Dungeons.Factory
 				else outputText("You gasp as it curls around each of your " + player.nippleDescript(0) + "s in turn, tugging them lewdly.\n\n");  
 				outputText("She fucks you like that for hours, until the table collapses under the pair of you and dumps you both on the floor. More than anything you find yourself craving release, and over time you cave in further and further to the need.  You start to feel the block weakening, melting, and eroding.  Your life has been distilled down into this one moment, this one desire, and this need for release.  The block shatters, melting away under the force of your need as you explosively orgasm.\n\n"); 
 				outputText("Sparkling pink fluid splatters between the two of you as you cum, squirting hard");
-				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText(" for the first time");
+				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) outputText(" for the first time");
 				outputText(".  The succubus throws back her head and lets loose a moan of ecstasy, her entire body shivering with your own as both of your heads fill with fireworks of pleasure.  Nervelessly, she rolls off of you, her tail contracting hard around your leg while the two of you share the moment.\n\n");
 				outputText("The succubus interrupts your delight by recovering far faster than you, rolling up to a standing position and watching something between your legs.  You prop yourself up on your elbows to see what the fuss is about.  Between your legs something curious is happening – a trickle of pinkish fluid is still escaping your nethers, rolling towards a rapidly expanding pool, along with every other drop of the pink goop.  Before your very eyes the pool grows until every drop of pink fluid has collected together, and it grows upwards, solidifying into a sparkling crystalline shape.\n\n");
 				outputText("Before you can react, she grasps the newly-formed lethicite and noisily begins eating it, her eyes glowing with newfound power.  Watching her makes you more than a little jealous and angry with yourself.  You should've taken the lethicite and gained its power!  No use fretting about it, you can still fuck this succubus for a few hours before you go out in search of your own victims...\n\n");
@@ -264,9 +265,9 @@ package classes.Scenes.Dungeons.Factory
 				else outputText("The succubus collapses on the floor, groaning in pain.  Most of her clothes have been destroyed by the combat and her blue skin is marked with deep purple bruises and bloody lacerations.  You undress, straddling your conquest and gazing down on her helpless, curvaceous form.  She looks up at you and forces a smile, licking the blood from a cracked lip and beginning to masturbate for you.\n\n");
 				//START ZE RAEP CANNONZ
 				outputText("While pondering the best way to take your horny prize, her complexion begins to change, the marks of combat disappearing from her toned body.  The demonic horns crowning her perfect visage begin withdrawing into her head, and her hair ");
-				if (player.hairLength > monster.hairLength) outputText("lengthens");
+				if (player.hair.length > monster.hair.length) outputText("lengthens");
 				else outputText("shortens");
-				outputText(", shifting to " + player.hairColor + ".  The bone structures of her cheeks, nose, and face shift ever so slightly, and you suddenly realize you are looking down at a slutty version of yourself!  You aren't sure if it's the growing pool of succubus fluid below you or how hot your female twin is, but your " + player.cockDescript(0) + " is as hard as a rock.\n\n");
+				outputText(", shifting to " + player.hair.color + ".  The bone structures of her cheeks, nose, and face shift ever so slightly, and you suddenly realize you are looking down at a slutty version of yourself!  You aren't sure if it's the growing pool of succubus fluid below you or how hot your female twin is, but your " + player.cockDescript(0) + " is as hard as a rock.\n\n");
 				outputText("Well, you DID decide to rape her, and now you know that you ARE smoking hot.  You shrug and shove your fem-double's legs apart, exposing her glistening fuck-target.  You bend down and bite her nipple as you position yourself at her entrance, allowing her to grasp your " + player.cockDescript(0) + " and coat it with her slick dark fluids.  It tingles as the tainted cunt-juices wick up into your dick like the oil from a lantern back home. At first it burns painfully, as if badly sunburned, but you adjust to the discomfort and marvel as your skin turns blackish-purple. Midnight-colored nodules sprout along the upper and lower portions of your " + player.cockDescript(0) + ", perfectly shaped to tease clits.  Just under its head, a ring of larger growths emerge, somewhat pointy, but flexible, rubbery and incredibly sensitive.  Your " + player.cockDescript(0) + " gets harder and harder as it grows slightly beyond its normal size.  It tugs your groin forwards, practically leaping towards its demonic mate on its own volition.  You cave in and press forwards, parting her folds and submerging your crown in corruptive bliss.\n\n"); 
 				//((TOO BIG))
 				if (player.cockArea(0) > monster.vaginalCapacity()) {
@@ -355,14 +356,14 @@ package classes.Scenes.Dungeons.Factory
 				else outputText("tit.\n\n");
 			}
 			if (player.biggestLactation() >= 3 && player.biggestLactation() < 4) {
-				outputText("Her flexible tongue wraps around a milk-swollen nipple, immediately squeezing out a jet of thick breast-milk.  The tongue squeezes and tugs while the succubus ramps up the suction between her thick bee-stung lips.  Your body rewards her with fountains of milk, forcing her to visibly gulp and struggle to keep up with the heavy flow.  Milk runs freely down the " + player.skinDesc + " on your chest, pooling around the succubus' groin and your own as the unattended nipple");
+				outputText("Her flexible tongue wraps around a milk-swollen nipple, immediately squeezing out a jet of thick breast-milk.  The tongue squeezes and tugs while the succubus ramps up the suction between her thick bee-stung lips.  Your body rewards her with fountains of milk, forcing her to visibly gulp and struggle to keep up with the heavy flow.  Milk runs freely down the " + player.skin.desc + " on your chest, pooling around the succubus' groin and your own as the unattended nipple");
 				if (player.totalBreasts() > 2) outputText("s");
 				outputText(" can't help but dribble in sympathy.\n\n");
 			}
 			if (player.biggestLactation() >= 4) {
 				outputText("Her flexible tongue wraps around a milk-bloated nipple, immediately releasing a massive spray of cream that pours into her gullet, nearly choking her.  You stifle a giggle and pull her closer.  Thankfully, her determined tongue manages to stay in place and start tugging your nipple about, releasing even more of your over-large milk production.  She struggles, her throat and cheeks bulging from your explosive output of milk, until it overwhelms her and begin to pour out of her nose.  More milk pours from your unoccupied nipple");
 				if (player.totalBreasts() > 2) outputText("s");
-				outputText(" in sympathy, drenching your " + player.skinDesc + " with creamy goodness until it puddles on your captive demon.\n\n");
+				outputText(" in sympathy, drenching your " + player.skin.desc + " with creamy goodness until it puddles on your captive demon.\n\n");
 			}
 			if (player.totalNipples() == 2) outputText("As your first nipple drains, you move her to your other breast, being sure to motivate her cunt by grinding it with your " + player.foot() + ".  She squeals and sucks harder, emptying the last of your milk with a cute burp.  ");
 			if (player.totalNipples() > 2 && player.totalNipples() < 6) outputText("As your first " + player.nippleDescript(0) + " drains, you forcibly move her to the next, unleashing a fresh batch of milk for her to feast upon.  Eventually, it too dries up, so you migrate her onwards to your next " + player.nippleDescript(0) + ".  After she drains each of your " + num2Text(player.totalNipples()) + ", you smile happily at your now emptied breasts.  ");
@@ -375,9 +376,9 @@ package classes.Scenes.Dungeons.Factory
 			outputText("You shove your crotch into your milk-dazed foe's white-stained visage, grinding your " + player.vaginaDescript(0) + " into her mouth until you cum all over her");
 			if (player.cocks.length == 0) {
 				temp = rand(3);
-				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText(", soaking her with girl-cum.");
+				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLAVERING) outputText(", soaking her with girl-cum.");
 				else {
-					if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_WET) outputText(", slicking her face with girlish cum.");
+					if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_WET) outputText(", slicking her face with girlish cum.");
 					else outputText(", drenching her with a deluge of girlcum.");
 				}
 			}
@@ -502,7 +503,7 @@ package classes.Scenes.Dungeons.Factory
 				//big clit
 				if (player.getClitLength() > 1 && player.getClitLength() < 4.5) outputText("A wave of pleasure erupts from between your legs as your " + player.clitDescript() + " pops free.    You squeeze your legs tightly together, hungry for the additional sensations.  ");
 				//slick
-				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("Squishing wetly, your bottoms become soggy with the flood of fluids leaking from your " + player.vaginaDescript(0) + ".   Your legs spread apart on their own, begging for any kind of intrusion.  ");
+				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText("Squishing wetly, your bottoms become soggy with the flood of fluids leaking from your " + player.vaginaDescript(0) + ".   Your legs spread apart on their own, begging for any kind of intrusion.  ");
 				//normal
 				else outputText("Groaning softly, you feel yourself getting wetter and wetter with arousal.  You wish your sticky bottoms were off so you could let something into your " + player.vaginaDescript(0) + ".  "); 
 			}

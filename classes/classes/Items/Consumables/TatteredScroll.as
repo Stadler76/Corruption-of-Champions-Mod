@@ -22,7 +22,7 @@ package classes.Items.Consumables
 			
 			clearOutput();
 			outputText("Your wobbly " + player.legs() + " give out underneath you as your body's willpower seems to evaporate, your mouth reading the words on the scroll with a backwards sounding sing-song voice.\n\n");
-			if (player.hairColor === "sandy blonde") {
+			if (player.hair.color === "sandy blonde") {
 				outputText("Your mouth forms a smile of its own volition, reading, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
 				if (player.breastRows.length === 0 || player.biggestTitSize() === 0) {
 					outputText("You grow a perfectly rounded pair of C-cup breasts!  ");
@@ -43,8 +43,8 @@ package classes.Items.Consumables
 					while (temp > 0) {
 						temp--;
 						//If that breast didnt have nipples reset length
-						if (player.breastRows[0].nipplesPerBreast < 1) player.nippleLength = .2;
-						player.breastRows[0].nipplesPerBreast = 1;
+						if (player.breastRows[temp].nipplesPerBreast < 1) player.nippleLength = .2;
+						player.breastRows[temp].nipplesPerBreast = 1;
 					}
 					dynStats("sen", 2, "lus", 1);
 				}
@@ -71,7 +71,7 @@ package classes.Items.Consumables
 			}
 			else {
 				outputText("Your mouth forms a smile of its own volition, reading, \"<i>nuf erutuf rof riah ydnas, nus tresed eht sa ydnas.</i>\"\n\nYou feel a tingling in your scalp, and realize your hair has become a sandy blonde!");
-				player.hairColor = "sandy blonde";
+				player.hair.color = "sandy blonde";
 				outputText("\n\nYour mouth curls with a sick smile, speaking with a voice that isn't your own, \"<i>I ALWAYS get what I want, dear...</i>\"");
 				doNext(camp.returnToCampUseOneHour);
 			}

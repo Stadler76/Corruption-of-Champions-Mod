@@ -23,9 +23,7 @@ package classes{
 	
     [RunWith("org.flexunit.runners.Parameterized")]
     public class PlayerEventsVaginaLoosenessRecoveryTest {
-		include "../../includes/appearanceDefs.as";
-		
-		private const LOOSENESS:Number = VAGINA_LOOSENESS_LOOSE;
+		private const LOOSENESS:Number = VaginaClass.LOOSENESS_LOOSE;
 		
         private var cut:PlayerEvents;
 		private var player:Player;
@@ -58,10 +56,10 @@ package classes{
 	 
           [Parameters]
           public static var testData:Array = [    
-		  	[VAGINA_LOOSENESS_LOOSE, PlayerEvents.VAGINA_RECOVER_THRESHOLD_LOOSE, 0],
-			[VAGINA_LOOSENESS_GAPING, PlayerEvents.VAGINA_RECOVER_THRESHOLD_GAPING, 0],
-			[VAGINA_LOOSENESS_GAPING_WIDE, PlayerEvents.VAGINA_RECOVER_THRESHOLD_GAPING_WIDE, 0],
-			[VAGINA_LOOSENESS_LEVEL_CLOWN_CAR, PlayerEvents.VAGINA_RECOVER_THRESHOLD_CLOWN_CAR, 1]
+		  	[VaginaClass.LOOSENESS_LOOSE, PlayerEvents.VAGINA_RECOVER_THRESHOLD_LOOSE, 0],
+			[VaginaClass.LOOSENESS_GAPING, PlayerEvents.VAGINA_RECOVER_THRESHOLD_GAPING, 0],
+			[VaginaClass.LOOSENESS_GAPING_WIDE, PlayerEvents.VAGINA_RECOVER_THRESHOLD_GAPING_WIDE, 0],
+			[VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR, PlayerEvents.VAGINA_RECOVER_THRESHOLD_CLOWN_CAR, 1]
 			];
            
           private var looseness:Number;

@@ -18,11 +18,6 @@ package classes
 		{
 			kGAMECLASS.stage.focus = kGAMECLASS.mainView.mainText;
 
-			if (CONFIG::debug)
-				CoC_Settings.debugBuild = true;
-			else
-				CoC_Settings.debugBuild = false;
-
 			/*if (mainView.aCb.parent != null)
 			{
 				mainView.removeChild(mainView.aCb);

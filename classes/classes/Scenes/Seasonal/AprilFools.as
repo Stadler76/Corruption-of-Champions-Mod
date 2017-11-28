@@ -1,6 +1,7 @@
 package classes.Scenes.Seasonal {
 	
 	import classes.*;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
@@ -16,7 +17,7 @@ import classes.Scenes.API.Encounters;
 		name  : "ponies",
 		call  : poniesFn,
 		when  : function ():Boolean {
-			return player.lowerBody == LOWER_BODY_TYPE_HOOFED
+			return player.lowerBody.type == LowerBody.HOOFED
 				   && player.isTaur()
 				   && date.date == 1 && date.month == 3
 				   && flags[kFLAGS.SILLY_MODE_PONIES] == 0
@@ -89,8 +90,8 @@ import classes.Scenes.API.Encounters;
 			outputText("Time passed, and the rest of the day was a blur, mostly caused by, you assume, the large quantity of Pony Punch you drank.  As you shakily attempt to get up, snippets of the evening's events flash through your mind: a funny joke told by the pink one; the yellow one coming out of hiding to orchestrate an impromptu concerto sung by a choir of songbirds; losing a race to the blue one, (flying is definitely cheating): a derpy looking grey one who was knocking over everything in a two meter radius around her.  Your mind slowly returns to the present and as it does you take a look at yourself.  A first glance at your attire shows the magical 'improvements' the white one made are already fading away, crumbling into a cloud of pink dust that blows away, leaving you back in your " + player.armorName + ".  Watching your clothes change was rather distracting, but now that you are up, and ooh what a headache THAT caused, you see your clothes weren't the only thing that changed!!\n\n"); 
 
 			outputText("Your strong lower body has shrunk, the firm musculature replaced by an oddly cartoonish looking form.  In fact, from the waist down you look just like one of the ponies!  Everything looks to still be in the same general place, and a quick test of your new lower body proves it still functions somewhat the same. The new shape of your hooves takes a little while to get used to, but other than that you get used to your new lower body almost with no effort\n\n(<i>*Note:You should really check the character viewer</i>)");
-			player.lowerBody = LOWER_BODY_TYPE_PONY;
-			player.legCount = 4;
+			player.lowerBody.type = LowerBody.PONY;
+			player.lowerBody.legCount = 4;
 			doNext(camp.returnToCampUseEightHours);
 		}
 

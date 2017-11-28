@@ -1,5 +1,6 @@
 package classes.Items.Consumables 
 {
+	import classes.BodyParts.*;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.StatusEffects;
@@ -35,42 +36,41 @@ package classes.Items.Consumables
 			player.lib = 25;
 			player.cor = 5;
 			player.lust = 10;
-			player.hairType = HAIR_NORMAL;
+			player.hair.type = Hair.NORMAL;
 			if (player.humanScore() > 4) {
 				outputText("\n\nYou blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
 			}
 			else {
 				outputText("\n\nYou cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?");
 			}
-			player.armType = ARM_TYPE_HUMAN;
+			player.arms.type = Arms.HUMAN;
 			mutations.updateClaws();
-			player.eyeType = EYES_HUMAN;
-			player.antennae = ANTENNAE_NONE;
-			player.faceType = FACE_HUMAN;
-			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-			player.legCount = 2;
-			player.wingType = WING_TYPE_NONE;
-			player.tailType = TAIL_TYPE_NONE;
-			player.tongueType = TONGUE_HUMAN;
-			player.tailRecharge = 0;
-			player.horns = 0;
-			player.hornType = HORNS_NONE;
-			player.earType = EARS_HUMAN;
-			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinDesc = "skin";
-			player.skinAdj = "";
+			player.eyes.type = Eyes.HUMAN;
+			player.antennae.type = Antennae.NONE;
+			player.face.type = Face.HUMAN;
+			player.lowerBody.type = LowerBody.HUMAN;
+			player.lowerBody.legCount = 2;
+			player.wings.type = Wings.NONE;
+			player.tail.type = Tail.NONE;
+			player.tongue.type = Tongue.HUMAN;
+			player.tail.recharge = 0;
+			player.horns.value = 0;
+			player.horns.type = Horns.NONE;
+			player.ears.type = Ears.HUMAN;
+			player.skin.type = Skin.PLAIN;
+			player.skin.desc = "skin";
+			player.skin.adj = "";
 			player.underBody.restore();
 			player.neck.restore();
 			player.rearBody.restore();
-			player.tongueType = TONGUE_HUMAN;
-			player.eyeType = EYES_HUMAN;
+			player.tongue.type = Tongue.HUMAN;
+			player.eyes.type = Eyes.HUMAN;
 			if (player.fertility > 15) player.fertility = 15;
 			if (player.cumMultiplier > 50) player.cumMultiplier = 50;
 			var virgin:Boolean = false;
 			//Clear cocks
 			while (player.cocks.length > 0) {
 				player.removeCock(0, 1);
-				trace("1 cock purged.");
 			}
 			//Reset dongs!
 			if (player.gender === 1 || player.gender === 3) {
@@ -89,7 +89,6 @@ package classes.Items.Consumables
 			while (player.vaginas.length > 0) {
 				virgin = player.vaginas[0].virgin;
 				player.removeVagina(0, 1);
-				trace("1 vagina purged.");
 			}
 			//Reset vaginal virginity to correct state
 			if (player.gender >= 2) {
@@ -98,8 +97,8 @@ package classes.Items.Consumables
 			}
 			player.setClitLength(.25);
 			//Tighten butt!
-			player.buttRating = 2;
-			player.hipRating = 2;
+			player.butt.rating = 2;
+			player.hips.rating = 2;
 			if (player.ass.analLooseness > 1) player.ass.analLooseness = 1;
 			if (player.ass.analWetness > 1) player.ass.analWetness = 1;
 			//Clear breasts
@@ -112,7 +111,7 @@ package classes.Items.Consumables
 				player.breastRows[0].breastRating = 2;
 			}
 			else player.breastRows[0].breastRating = 0;
-			player.gillType = GILLS_NONE;
+			player.gills.type = Gills.NONE;
 			player.removeStatusEffect(StatusEffects.Uniball);
 			player.removeStatusEffect(StatusEffects.BlackNipples);
 			player.vaginaType(0);
