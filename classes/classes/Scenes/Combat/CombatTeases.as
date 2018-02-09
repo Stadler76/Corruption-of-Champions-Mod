@@ -960,9 +960,6 @@ package classes.Scenes.Combat
 					damage+= 2;
 					chance++;
 					break;
-				default:
-					outputText("You shimmy and shake sensually. (An error occurred.)");
-					break;
 				case 37:
 					outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to " + monster.a + monster.short + " with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tail.venom > 1) ? "one of your tails" : "your tail") + " up and down " + monster.pronoun3 + " body sensually.");
 					chance+= 6;
@@ -1141,7 +1138,9 @@ package classes.Scenes.Combat
 						default:
 							outputText("Whoops, something derped! Please let Kitteh6660 know! Anyways, you put on a tease show.");
 					}
-					
+					break;
+				default:
+					outputText("You shimmy and shake sensually. (An error occurred.)");
 					break;
 			}
 			//===========================

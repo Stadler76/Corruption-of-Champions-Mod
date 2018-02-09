@@ -234,7 +234,6 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const Platoon:StatusEffectType = mk("platoon");
 		public static const QueenBind:StatusEffectType = mk("QueenBind");
 		// @aimozg HA HA HA
-		public static const GiantBoulder:StatusEffectType = mk("Giant Boulder");
 		public static const Round:StatusEffectType = mk("Round");
 		public static const round:StatusEffectType = mk("round");
 		public static const RunDisabled:StatusEffectType = mk("Run Disabled");
@@ -283,6 +282,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		public static const Disarmed:StatusEffectType        = mk("Disarmed", CombatStatusEffect);
 		public static const DriderKiss:StatusEffectType      = mk("Drider Kiss", CombatStatusEffect);
 		public static const FirstAttack:StatusEffectType     = mk("FirstAttack", CombatStatusEffect);
+		public static const GiantBoulder:StatusEffectType    = mk("Giant Boulder", CombatStatusEffect);
 		public static const GiantGrabbed:StatusEffectType    = mk("Giant Grabbed", CombatStatusEffect);
 		public static const GiantStrLoss:StatusEffectType    = GiantStrLossDebuff.TYPE;
 		public static const GnollSpear:StatusEffectType      = GnollSpearDebuff.TYPE;

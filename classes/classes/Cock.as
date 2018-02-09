@@ -1,10 +1,20 @@
 package classes
 {
 	import classes.CockTypesEnum;
+	import classes.internals.ISerializable;
 	import classes.internals.Utils;
+	import mx.logging.ILogger;
+	import classes.internals.LoggerFactory;
 
-	public class Cock
-	{		
+	public class Cock implements ISerializable
+	{
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(Cock);
+		
+		private static const SERIALIZATION_VERSION:int = 1;
+		
+		public static const MAX_LENGTH:Number = 9999.9;
+		public static const MAX_THICKNESS:Number = 999.9;
+		
 		private var _cockLength:Number;
 		private var _cockThickness:Number;		
 		private var _cockType:CockTypesEnum;	//See CockTypesEnum.as for all cock types
@@ -15,8 +25,6 @@ package classes
 		//Piercing info
 		private var _isPierced:Boolean;
 		private var _pierced:Number;
-		//Not yet, sweet prince. PiercedType current has no uses. But it will, one day.
-		// private var _pierceType:PiercingTypesEnum;
 		private var _pShortDesc:String;
 		private var _pLongDesc:String;
 		
@@ -43,14 +51,13 @@ package classes
 		//constructor. Default type is HUMAN
 		public function Cock(i_cockLength:Number = 5.5, i_cockThickness:Number = 1, i_cockType:CockTypesEnum=null)
 		{
-			if (i_cockType == null) i_cockType = CockTypesEnum.HUMAN;
+			if (i_cockType === null) i_cockType = CockTypesEnum.HUMAN;
 			_cockLength = i_cockLength;
 			_cockThickness = i_cockThickness;
 			_cockType = i_cockType;
 			_pierced = 0;
 			_knotMultiplier = 1;
 			_isPierced = false;
-			//_pierceType = PiercingTypesEnum.NONE;
 			_pShortDesc = "";
 			_pLongDesc = "";
 			_sock = "";
@@ -65,35 +72,33 @@ package classes
 		public function growCock(lengthDelta:Number, bigCock:Boolean):Number
 		{
 			
-			if (lengthDelta == 0) {
-				//trace("Whoops! growCock called with 0, aborting...");
+			if (lengthDelta === 0) {
+				LOGGER.error("growCock called with 0, aborting...")
 				return lengthDelta;
 			}
 			
 			var threshhold:int = 0;
-			
-			//trace("growcock starting at:" +lengthDelta);
-
+			LOGGER.debug("growcock starting at: {0}", lengthDelta);
 
 			if (lengthDelta > 0) { // growing
-				//trace("and growing...");
+				LOGGER.debug("and growing...");
 				threshhold = 24;
 				// BigCock Perk increases incoming change by 50% and adds 12 to the length before diminishing returns set in
 				if (bigCock) {
-					//trace("growCock found BigCock Perk");
+					LOGGER.debug("growCock found BigCock Perk");
 					lengthDelta *= 1.5;
 					threshhold += 12;
 				}
 				// Not a human cock? Multiple the length before dimishing returns set in by 3
-				if (cockType != CockTypesEnum.HUMAN)
+				if (cockType !== CockTypesEnum.HUMAN)
 					threshhold *= 2;
 				// Modify growth for cock socks
-				if (sock == "scarlet") {
-					//trace("growCock found Scarlet sock");
+				if (sock === "scarlet") {
+					LOGGER.debug("growCock found Scarlet sock");
 					lengthDelta *= 1.5;
 				}
-				else if (sock == "cobalt") {
-					//trace("growCock found Cobalt sock");
+				else if (sock === "cobalt") {
+					LOGGER.debug("growCock found Cobalt sock");
 					lengthDelta *= .5;
 				}
 				// Do diminishing returns
@@ -103,25 +108,25 @@ package classes
 					lengthDelta /= 2;
 			}
 			else {
-				//trace("and shrinking...");
+				LOGGER.debug("and shrinking...");
 				
 				threshhold = 0;
 				// BigCock Perk doubles the incoming change value and adds 12 to the length before diminishing returns set in
 				if (bigCock) {
-					//trace("growCock found BigCock Perk");
+					LOGGER.debug("growCock found BigCock Perk");
 					lengthDelta *= 0.5;
 					threshhold += 12;
 				}
 				// Not a human cock? Add 12 to the length before dimishing returns set in
-				if (cockType != CockTypesEnum.HUMAN)
+				if (cockType !== CockTypesEnum.HUMAN)
 					threshhold += 12;
 				// Modify growth for cock socks
-				if (sock == "scarlet") {
-					//trace("growCock found Scarlet sock");
+				if (sock === "scarlet") {
+					LOGGER.debug("growCock found Scarlet sock");
 					lengthDelta *= 0.5;
 				}
-				else if (sock == "cobalt") {
-					//trace("growCock found Cobalt sock");
+				else if (sock === "cobalt") {
+					LOGGER.debug("growCock found Cobalt sock");
 					lengthDelta *= 1.5;
 				}
 				// Do diminishing returns
@@ -131,7 +136,7 @@ package classes
 					lengthDelta /= 2;
 			}
 
-			//trace("then changing by: " + lengthDelta);
+			LOGGER.debug("then changing by: {0}", lengthDelta);
 
 			cockLength += lengthDelta;
 			
@@ -216,7 +221,7 @@ package classes
 					increase++;
 				}
 			}
-			//trace("thickenCock called and thickened by: " + amountGrown);
+			LOGGER.debug("thickenCock called and thickened by: {0}", amountGrown);
 			return amountGrown;
 		}	
 		
@@ -275,19 +280,6 @@ package classes
 			_isPierced = value;
 		}
 		
-		/*
-		public function get pierceType():PiercingTypesEnum 
-		{
-			return _pierceType;
-		}
-		
-		public function set pierceType(value:PiercingTypesEnum):void 
-		{
-			_pierceType = value;
-		}
-		*/
-
-		//{ region Getter/Setters
 		public function get pShortDesc():String 
 		{
 			return _pShortDesc;
@@ -327,7 +319,74 @@ package classes
 		{
 			_pierced = value;
 		}
-		//} endregion
-
+		
+		public function serialize(relativeRootObject:*):void 
+		{
+			relativeRootObject.cockThickness = this.cockThickness;
+			relativeRootObject.cockLength = this.cockLength;
+			relativeRootObject.cockType = this.cockType.Index;
+			relativeRootObject.knotMultiplier = this.knotMultiplier;
+			relativeRootObject.pierced = this.pierced;
+			relativeRootObject.pShortDesc = this.pShortDesc;
+			relativeRootObject.pLongDesc = this.pLongDesc;
+			relativeRootObject.sock = this.sock;
+		}
+		
+		public function deserialize(relativeRootObject:*):void 
+		{
+			this.cockThickness = relativeRootObject.cockThickness;
+			this.cockLength = relativeRootObject.cockLength;
+			this.cockType = CockTypesEnum.ParseConstantByIndex(relativeRootObject.cockType);
+			this.knotMultiplier = relativeRootObject.knotMultiplier;
+			this.sock = relativeRootObject.sock;
+			
+			this.pierced = relativeRootObject.pierced;
+			this.pShortDesc = relativeRootObject.pShortDesc;
+			this.pLongDesc = relativeRootObject.pLongDesc;
+			
+			enforceCockSizeCaps();
+		}
+		
+		private function enforceCockSizeCaps():void 
+		{
+			if (this.cockLength > MAX_LENGTH) {
+				this.cockLength = MAX_LENGTH;
+			}
+			
+			if (this.cockThickness > MAX_THICKNESS) {
+				this.cockThickness = MAX_THICKNESS;
+			}
+		}
+		
+		public function upgradeSerializationVersion(relativeRootObject:*, serializedDataVersion:int):void 
+		{
+			switch(serializedDataVersion) {
+				case 0:
+					LOGGER.info("Upgrading legacy save format...");
+					
+					if (relativeRootObject.sock === undefined) {
+						relativeRootObject.sock = "";
+						LOGGER.warn("Cock was missing sock field, setting to {0}", relativeRootObject.sock);
+					}
+					
+					if (relativeRootObject.pShortDesc === "null" || relativeRootObject.pLongDesc === "null")
+					{
+						relativeRootObject.pShortDesc = "";
+						relativeRootObject.pLongDesc = "";
+						LOGGER.warn("Cock piercing description was null, setting to blank");
+					}
+					
+					if (relativeRootObject.pierced === undefined)
+					{
+						relativeRootObject.pierced = 0;
+						LOGGER.warn("Cock piercing was undefined, set to {0}", relativeRootObject.pierced);
+					}
+			}
+		}
+		
+		public function currentSerializationVerison():int 
+		{
+			return SERIALIZATION_VERSION;
+		}
 	}
 }

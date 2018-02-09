@@ -28,7 +28,7 @@ package classes.Scenes.NPCs{
 			var needNext:Boolean = false;
 			checkedSophie = 0;
 			pregnancy.pregnancyAdvance();
-			//trace("\nSophie time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nSophie time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER]--;
 			if (flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 				sophieFollowerScene.sophieDaughterDebimboUpdate();
@@ -59,6 +59,7 @@ package classes.Scenes.NPCs{
 							case 200:
 							case 325: sophiesDaughterDescript(); //At these three times we need to output a message about her daughters
 									needNext = true;
+									break;
 							default:
 						}
 					}
@@ -104,7 +105,7 @@ package classes.Scenes.NPCs{
 							else sophieFollowerScene.sophieFertilityExpired();
 							needNext = true;
 						}
-						if (model.time.hours == 10 && (player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && !prison.inPrison) {
+						if (getGame().time.hours == 10 && (player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && !prison.inPrison) {
 							sophieBimbo.bimboSophieLustStickSurprise();
 							needNext = true;
 						}
@@ -115,7 +116,7 @@ package classes.Scenes.NPCs{
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (checkedSophie++ == 0 && model.time.hours == 6) {
+			if (checkedSophie++ == 0 && getGame().time.hours == 6) {
 				if (flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] >= 5 && !pregnancy.isPregnant && player.hasCock() && !sophieAtCamp()) {
 					sophieFollowerScene.sophieFollowerIntro();
 					return true;

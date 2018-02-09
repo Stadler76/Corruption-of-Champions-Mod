@@ -21,8 +21,6 @@ package classes.BodyParts
 		public var color:String  = "no";
 		public var length:Number = 0;
 
-		public function Hair() {}
-
 		public function restore():void
 		{
 			type   = NORMAL;

@@ -9,6 +9,8 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Items.Weapon;
+	import classes.Items.WeaponLib;
+	import classes.Items.Weapons.*;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
@@ -67,11 +69,11 @@ package classes.Scenes.NPCs
 			var needNext:Boolean = false;
 			if (flags[kFLAGS.ANEMONE_KID] > 0) {
 				//if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
-				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
+				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && getGame().time.hours > 10 && getGame().time.hours < 18 && rand(4) == 0) {
 					kidABabysitsCows();
 					needNext = true;
 				}
-				if (flags[kFLAGS.KID_SITTER] == 1 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
+				if (flags[kFLAGS.KID_SITTER] == 1 && getGame().time.hours > 10 && getGame().time.hours < 18 && rand(4) == 0) {
 					flags[kFLAGS.KID_SITTER] = 2;
 				}
 				else if (flags[kFLAGS.KID_SITTER] == 2) flags[kFLAGS.KID_SITTER] = 1;
@@ -1135,15 +1137,15 @@ package classes.Scenes.NPCs
 
 //KID A FOLLOWER STUFF
 		public function anemoneBarrelDescription():void {
-			if (model.time.hours < 6) //(morning)
+			if (getGame().time.hours < 6) //(morning)
 				outputText("Kid A is sleeping in her barrel right now.");
-			else if (model.time.hours <= 10)
+			else if (getGame().time.hours <= 10)
 				outputText("Kid A stands next to her barrel, refilling it from one of your waterskins.  A second full skin is slung over her shoulder.  She gives you a grin.\n\n");
 			else if (flags[kFLAGS.KID_SITTER] > 1)
 				outputText("Kid A is absent from her barrel right now, dragooned into babysitting again.\n\n");
-			else if (model.time.hours < 16) //(midday)
+			else if (getGame().time.hours < 16) //(midday)
 				outputText("Kid A is deep in her barrel with the lid on top, hiding from the midday sun.\n\n");
-			else if (model.time.hours < 22) //(night hours)
+			else if (getGame().time.hours < 22) //(night hours)
 				outputText("Kid A is peeking out of her barrel.  Whenever you make eye contact she breaks into a smile; otherwise she just stares off into the distance, relaxing.\n\n");
 			else outputText("Kid A is here, seated demurely on the rim of her barrel and looking somewhat more purple under the red moon.  She glances slyly at you from time to time.\n\n");
 		}
@@ -1156,7 +1158,7 @@ package classes.Scenes.NPCs
 			spriteSelect(SpriteDb.s_kida);
 			outputText("You walk over to the barrel.  ");
 			//[(display if hourssinceKiditem >= 16)
-			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != model.time.days) {
+			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != getGame().time.days) {
 				outputText("An item sits next to it, left there by the anemone as a present to you.  Or 'rent', if you choose to think of it that way.  ");
 			}
 			//[(if Kid A has been given a weapon)
@@ -1174,7 +1176,7 @@ package classes.Scenes.NPCs
 
 			//Tutor, N.Watch, and Evict require the anemone to be present
 			menu();
-			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != model.time.days) addButton(0, "Item", getAnemoneItem, undefined, undefined, undefined, "Take her gift.");
+			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != getGame().time.days) addButton(0, "Item", getAnemoneItem, undefined, undefined, undefined, "Take her gift.");
 			else addButtonDisabled(0, "Item", "She has nothing to give you now.");
 			
 			if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0) addButton(1, "Take Weapon", takeOutOfAnemone, undefined, undefined, undefined, "Take away her weapon.");
@@ -1221,7 +1223,7 @@ package classes.Scenes.NPCs
 			}
 			else if (kidAXP() < 100) {
 				//Mino Blood/Large Axe/Comfortable Clothes/Lust Draft/Lust Dagger/Bro Brew(same odds as player drop)
-				itype = randomChoice(consumables.MINOBLO, weapons.L__AXE, armors.C_CLOTH, consumables.L_DRAFT, weapons.L_DAGGR);
+				itype = randomChoice(consumables.MINOBLO, weapons.L__AXE0, armors.C_CLOTH, consumables.L_DRAFT, weapons.L_DAGR0);
 				if (rand(100) == 0) itype = consumables.BROBREW;
 			}
 			else {
@@ -1233,11 +1235,11 @@ package classes.Scenes.NPCs
 					itype = randomChoice(consumables.TSTOOTH, consumables.S_GOSSR,consumables.B_GOSSR,useables.T_SSILK,consumables.REPTLUM);
 			}
 			outputText(itype.longName + ".");
-			if (itype == weapons.L__AXE) outputText("  Holy... how did she drag this thing home!?");
+			if (itype == weapons.L__AXE0) outputText("  Holy... how did she drag this thing home!?");
 			outputText("\n\n");
 			inventory.takeItem(itype, playerMenu);
 			//(set hourssinceKiditem = 0)
-			flags[kFLAGS.KID_ITEM_FIND_HOURS] = model.time.days;
+			flags[kFLAGS.KID_ITEM_FIND_HOURS] = getGame().time.days;
 		}
 
 //[Give Weapon]
@@ -1251,14 +1253,14 @@ package classes.Scenes.NPCs
 			menu();
 			kGAMECLASS.hideUpDown();
 			var foundItem:Boolean = false;
-			for (var x:int = 0; x < 10; x++) {
+			for (var x:int = 0; x < inventory.getMaxSlots(); x++) {
 				if (player.itemSlots[x].quantity > 0 && giveableToAnemone(player.itemSlots[x].itype)) {
-					addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x);
+					addButton(x, player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity, placeInAnemone, x).hint(player.itemSlots[x].itype.description, capitalizeFirstLetter(player.itemSlots[x].itype.longName));
 					foundItem = true;
 				}
 			}
 			if (!foundItem) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>");
-			addButton(9, "Back", inventory.stash);
+			addButton(14, "Back", inventory.stash);
 		}
 
 		private function placeInAnemone(slot:int):void {
@@ -1328,201 +1330,223 @@ package classes.Scenes.NPCs
 			else outputText("taking up an attentive stance with " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " in her hands.");
 
 			outputText("  You spend some time instructing Kid A in the finer points of the equipment you've provided her with, and then finish up with a practice duel.");
-
+			var dodgeScore:int = player.spe + rand(40); //For ranged weapons
 			//duel effects by weapon, output in new PG
-			//[Pipe] or [Wizard Staff] or [Eldritch Staff]
-			if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.W_STAFF.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.E_STAFF.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_STAFF.id) {
-				outputText("\n\nThough she acts like she's not serious and pulls her swings more often than not, the heft of the ");
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id) outputText("pipe");
-				else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id) outputText("mace");
-				else outputText("stick");
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != weapons.MACE.id) outputText(" is still enough to bruise you a bit.");
-				else outputText(" manages to bruise you a lot.");
-				HPChange(-5, false);
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id) HPChange(-15, false);
-				kidAXP(6);
-			}
-			//(HP - 5, KidXP + 1)
-			//[Riding Crop]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.RIDINGC.id) {
-				outputText("\n\nShe seems to enjoy smacking you with the riding crop, making sultry eyes at you and pursing her lips whenever she lands a crack on your [butt] or [chest].  So much so, in fact, that her own penis is betraying her arousal, bobbing in time as she swishes the weapon around.  The humiliation ");
-				if (player.lib < 50) outputText("is");
-				else outputText("isn't");
-				outputText(" enough to keep you from thinking dirty thoughts about grabbing her naughty, teasing face and mashing it into your crotch.");
-				//(HP - 5, lust +5 if lib>=50, KidXP + 2)
-				HPChange(-5, false);
-				if (player.lib >= 50) dynStats("lus", 5, "scale", false);
-				kidAXP(6);
-			}
-			//[Lust Dagger]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_DAGGR.id) {
-				outputText("\n\nThe enchanted dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
-				//(HP -5, lust +10, KidXP + 3)
-				HPChange(-5, false);
-				dynStats("lus", 10, "scale", false);
-				kidAXP(5);
-			}
-			//[Dagger]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.DAGGER.id) {
-				outputText("\n\nThe dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
-				//(HP -5, lust +5, KidXP + 3)
-				HPChange(-5, false);
-				dynStats("lus", 5, "scale", false);
-				kidAXP(5);
-			}
-			//[Beautiful Sword]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.B_SWORD.id) {
-				outputText("\n\nThe sword seems to dance in the air, as though it were the perfect weight and balance for your daughter.  She delivers several playful thrusts at you and though you deflect all but the last, that one slips by your guard.  The girl's eyes widen as the point lunges at your breast, but it delivers barely a scratch before twisting away.");
-				outputText("\n\nPerhaps anemones are a bit too corrupt to use the sword effectively?");
-				//(HP -1, KidXP - 2)
-				HPChange(-1, false);
-				kidAXP(-2);
-			}
-			//[Jeweled Rapier] or [Raphael's Rapier]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.RRAPIER.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.JRAPIER.id) {
-				outputText("\n\nThe rapier is light enough for the girl, but it takes a multitude of reminders before she handles the slender blade with the care and style it deserves.  She seems to regard it as little more than a tool for thwacking you in the butt that, coincidentally, has a pointy end.");
-				//(no effect, señorita)
-			}
-			//[Large Axe], [Large Hammer], [Large Claymore], or [Huge Warhammer]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L__AXE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_HAMMR.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.WARHAMR.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L__AXE.id) {
-				outputText("\n\nShe can barely lift the weapon you've given her, although for a while she does manage to support one end with the ground and tilt it by the haft to ward off your blows with cleverness.  Distracting her by way of a feint, you part her from it and advance with a smile full of playful menace... whereupon she shrieks and pushes you backwards, causing you to trip over the weapon and fall with a crash.");
-				//(HP - 5, KidXP - 4)
-				kidAXP(-4);
-				HPChange(-5, false);
-			}
-			//[Katana] or [Spellsword]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.KATANA.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_BLADE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SCIMITR.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.B_SCARB.id ) {
-				outputText("\n\nThe light sword and the light anemone seem to be a good match, and she actually manages to make several deft moves with it after your instruction.  One is a bit too deft, as she fails to rein in her swing and delivers a long, drawing cut that connects with your [leg].");
-				//(HP - 20, KidXP + 2)
-				kidAXP(4);
-				HPChange(-20, false);
-			}
-			//[Spear]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SPEAR.id) {
-				outputText("\n\nThe natural length of the spear and the anemone racial mindset to get close and communicate by touch don't mesh well; she chokes up well past halfway on the haft despite your repeated instruction and pokes at you from close range with very little force, the idle end of the weapon waggling through the air behind her.");
-				//(HP -5, KidXP - 1)
-				kidAXP(-1);
-				HPChange(-5, false);
-			}
-			//[Whip] or [Succubi's Whip]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.WHIP.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id) {
-				outputText("\n\nThe whip seems almost like an extension of her hand once she decides its purpose is to tangle things up as opposed to lashing and lacerating flesh.  One of her overzealous swings finds you <i>both</i> tied in its coils; her petite body presses against yours as she colors in embarrassment.  Her distracted struggles to loosen the bonds accomplish little except to rub her sensitive parts along yours.");
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id) outputText("  The demonic enchantment chooses then to activate, and her color deepens as her lust peaks, as does your own.");
-				outputText("  You feel a point digging into your groin as her prick hardens and her struggles cease; she begins to moan openly in arousal.  As she relaxes, the coils of the whip finally loosen enough for you to extricate yourself.");
-				//(HP -0, lust +10 if normal whip or +20 if succubus, KidXP + 3)
-				dynStats("lus", 10, "scale", false);
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id) dynStats("lus", 10, "scale", false);
-				kidAXP(6);
-			}
-			//[Spiked Gauntlets] or [Hooked Gauntlets]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_GAUNT.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.H_GAUNT.id) {
-				outputText("\n\nThe anemone wears the gauntlets easily and comfortably, but doesn't seem to understand that to attack she needs to ball up her fists and swing them, no matter how many times you tell her.  The most she manages is to deflect a few of your mock lunges by batting them aside with the metal atop her knuckles.");
-				//(no tigereffect)
-			}
-			//[Wingstick]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == consumables.W_STICK.id) {
-				outputText("\n\nThe girl stares at the stick, still uncomprehending how you intend her to use it.  One last time, you take the weapon from her and make a throwing motion, then return it.  She looks from it back to you once more, then tosses it at your head.  As it impacts with a clunk and your vision jars, she clutches her stomach in laughter.");
-				//(HP - 10, set Kidweapon to empty, KidXP + 1)
-				HPChange(-10, false);
-				flags[kFLAGS.ANEMONE_WEAPON_ID] = 0;
-				kidAXP(5);
-			}
-			//[Dragonshell Shield]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == shields.DRGNSHL.id) {
-				outputText("\n\nYour protégé takes to the shield quite well, hiding behind it like... well, like a portable water barrel.  Even the way she peeks over the top is reminiscent.  She makes effective use of her cover, pushing forward relentlessly and delivering soft headbutts to spread venom to unprotected areas.");
-				//(lust + 5, temp str/spd down, KidXP + 5)
-				//str/spd loss reverts after clicking Next button
-				kidAXP(5);
-				dynStats("lus", 10, "scale", false);
-			}
-			//[White Book]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == consumables.W__BOOK.id) {
-				outputText("\n\nPart literacy training and part magic instruction, your progress through the book is painstakingly slow.  After almost an hour of trying to get the anemone to concentrate on the words, she finally manages to cause a small flash of white light on the page in front of her - whereupon she shrieks and drops the book, covering her head with her arms and backing away.");
-				//(KidXP - 5)
-				kidAXP(-5);
-			}
-			//[Black Book]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == consumables.B__BOOK.id) {
-				outputText("\n\nThe girl sits attentively with you, resting her head against your arm, as you teach her the words needed to evoke the formulae in the book.  When you suggest she try one out, however, she shakes her head with wide eyes.  Insisting, you stand apart from her and fold your arms.  Blushing a deep blue, the anemone resigns herself to focusing on your crotch as she mouths quiet syllables.  After a few moments, you actually feel a small glow of lust where she's staring.  The girl giggles nervously and looks away as you flush and your garments ");
-				if (player.hasCock()) outputText("tighten");
-				else if (player.hasVagina()) outputText("dampen");
-				else outputText("become a hindrance");
-				outputText("... though the part between her own legs is still pointed at you.");
-				//(lust + 10, KidXP + 2)
-				dynStats("lus", 20);
-				kidAXP(4);
-			}
-			//[Scarred Blade]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_BLADE.id) {
-				outputText("\n\nThe anemone attempts to draw the bloodthirsty saber at your insistence, but as she pulls it free of the scabbard, it jerks from her hands, lashing across her thigh before clattering noisily to the ground and spinning away.  Her shock grows as thick, clear fluid seeps from the cut, and she covers her mouth with her hands, looking up at you with piteous, wet eyes.");
-				//[(if corr <=70)
-				//if (player.cor <= 70) outputText("  The blade's edge flashes toward you as well, when you try to pick it up.  After a few frustrated attempts, it becomes clear that you'll have to abandon it for now.");
-				//empty Kidweapon, KidXP - 5; if corr <=70, set sheilacite = 5, else add Scarred Blade to inventory)
-				flags[kFLAGS.ANEMONE_WEAPON_ID] = 0;
-				kidAXP(-5);
-				/*if (player.cor <= 70) {
-					//9999
-					//9999
-				}*/
-				inventory.takeItem(weapons.SCARBLD, camp.returnToCampUseOneHour);
-				kidAXP(-5);
-				return;
-			}
-			//[Flintlock Pistol] (Because guns are awesome.)
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.FLINTLK.id) {
-				outputText("\n\nAs if the anemone girl already knows how to use a gun, she easily pulls the trigger and fires rounds of ammunition towards you!  ");
-				if (silly()) outputText("Pew pew pew!  ");
-				if (player.spe >= 70) {
-					outputText("You easily dodge the bullets thanks to your speed!");
-				}
-				else if (player.spe >= 40 && player.spe < 70) {
-					outputText("You try to dodge the bullets that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You see yourself bleeding.  You tell her to stop and she obeys.");
+			switch(flags[kFLAGS.ANEMONE_WEAPON_ID]) {
+				case weapons.PIPE.id: //[Pipe] or [Wizard Staff] or [Eldritch Staff]
+				case weapons.MACE__0.id:
+				case weapons.MACE__1.id:
+				case weapons.MACE__2.id:
+				case weapons.W_STAFF.id:
+				case weapons.E_STAFF.id:
+				case weapons.L_STAFF.id:
+					outputText("\n\nThough she acts like she's not serious and pulls her swings more often than not, the heft of the ");
+					if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id) outputText("pipe");
+					else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE__0.id) outputText("mace");
+					else outputText("stick");
+					if (flags[kFLAGS.ANEMONE_WEAPON_ID] != weapons.MACE__0.id) outputText(" is still enough to bruise you a bit.");
+					else outputText(" manages to bruise you a lot.");
+					HPChange(-5, false);
+					if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE__0.id) HPChange(-15, false);
+					kidAXP(6);
+					break;
+				case weapons.RIDING0.id: //[Riding Crop]
+				case weapons.RIDING1.id:
+				case weapons.RIDING2.id:
+					outputText("\n\nShe seems to enjoy smacking you with the riding crop, making sultry eyes at you and pursing her lips whenever she lands a crack on your [butt] or [chest].  So much so, in fact, that her own penis is betraying her arousal, bobbing in time as she swishes the weapon around.  The humiliation ");
+					if (player.lib < 50) outputText("is");
+					else outputText("isn't");
+					outputText(" enough to keep you from thinking dirty thoughts about grabbing her naughty, teasing face and mashing it into your crotch.");
+					//(HP - 5, lust +5 if lib>=50, KidXP + 2)
+					HPChange(-5, false);
+					if (player.lib >= 50) dynStats("lus", 5, "scale", false);
+					kidAXP(6);
+					break;
+				case weapons.L_DAGR0.id: //[Lust Dagger]
+				case weapons.L_DAGR1.id:
+				case weapons.L_DAGR2.id:
+					outputText("\n\nThe enchanted dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
+					//(HP -5, lust +10, KidXP + 3)
+					HPChange(-5, false);
+					dynStats("lus", 10, "scale", false);
+					kidAXP(5);
+					break;
+				case weapons.DAGGER0.id: //[Dagger]
+				case weapons.DAGGER1.id:
+				case weapons.DAGGER2.id:
+					outputText("\n\nThe dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
+					//(HP -5, lust +5, KidXP + 3)
+					HPChange(-5, false);
+					dynStats("lus", 5, "scale", false);
+					kidAXP(5);
+					break;
+				case weapons.B_SWORD.id: //[Beautiful Sword] or [Divine Pearl Sword]
+				case weapons.DPSWORD.id:
+					outputText("\n\nThe sword seems to dance in the air, as though it were the perfect weight and balance for your daughter.  She delivers several playful thrusts at you and though you deflect all but the last, that one slips by your guard.  The girl's eyes widen as the point lunges at your breast, but it delivers barely a scratch before twisting away.");
+					outputText("\n\nPerhaps anemones are a bit too corrupt to use the sword effectively?");
+					//(HP -1, KidXP - 2)
+					HPChange(-1, false);
+					kidAXP(-2);
+					break;
+				case weapons.RRAPIER.id: //[Jeweled Rapier] or [Raphael's Rapier] or [Midnight Rapier]
+				case weapons.JRAPIER.id:
+				case weapons.MRAPIER.id:
+					outputText("\n\nThe rapier is light enough for the girl, but it takes a multitude of reminders before she handles the slender blade with the care and style it deserves.  She seems to regard it as little more than a tool for thwacking you in the butt that, coincidentally, has a pointy end.");
+					//(no effect, señorita)
+					break;
+				case weapons.L__AXE0.id: //[Large Axe], [Large Hammer], [Large Claymore], or [Huge Warhammer]
+				case weapons.L__AXE1.id: //All tiers work
+				case weapons.L__AXE2.id:
+				case weapons.L_HAMR0.id:
+				case weapons.L_HAMR1.id:
+				case weapons.L_HAMR2.id:
+				case weapons.WARHAM0.id:
+				case weapons.WARHAM1.id:
+				case weapons.WARHAM2.id:
+				case weapons.KIHAAXE.id:
+					outputText("\n\nShe can barely lift the weapon you've given her, although for a while she does manage to support one end with the ground and tilt it by the haft to ward off your blows with cleverness.  Distracting her by way of a feint, you part her from it and advance with a smile full of playful menace... whereupon she shrieks and pushes you backwards, causing you to trip over the weapon and fall with a crash.");
+					//(HP - 5, KidXP - 4)
+					kidAXP(-4);
+					HPChange(-5, false);
+					break;
+				case weapons.KATANA0.id: //[Katana], [Scimitar], or [Spellsword]
+				case weapons.KATANA1.id:
+				case weapons.KATANA2.id:
+				case weapons.SCIMTR0.id:
+				case weapons.SCIMTR1.id:
+				case weapons.SCIMTR2.id:
+				case weapons.S_BLADE.id:
+				case weapons.RSBLADE.id:
+				case weapons.B_SCARB.id:
+					outputText("\n\nThe light sword and the light anemone seem to be a good match, and she actually manages to make several deft moves with it after your instruction.  One is a bit too deft, as she fails to rein in her swing and delivers a long, drawing cut that connects with your [leg].");
+					//(HP - 20, KidXP + 2)
+					kidAXP(4);
+					HPChange(-20, false);
+					break;
+				case weapons.SPEAR_0.id: //[Spear] or [Dragoon Spear]
+				case weapons.SPEAR_1.id:
+				case weapons.SPEAR_2.id:
+				case weapons.D_SPEAR.id:
+					outputText("\n\nThe natural length of the spear and the anemone racial mindset to get close and communicate by touch don't mesh well; she chokes up well past halfway on the haft despite your repeated instruction and pokes at you from close range with very little force, the idle end of the weapon waggling through the air behind her.");
+					//(HP -5, KidXP - 1)
+					kidAXP(-1);
+					HPChange(-5, false);
+					break;
+				case weapons.WHIP__0.id: //[Whip] or [Succubi's Whip]
+				case weapons.WHIP__1.id:
+				case weapons.WHIP__2.id:
+				case weapons.SUCWHIP.id:
+				case weapons.L_WHIP.id:
+					outputText("\n\nThe whip seems almost like an extension of her hand once she decides its purpose is to tangle things up as opposed to lashing and lacerating flesh.  One of her overzealous swings finds you <i>both</i> tied in its coils; her petite body presses against yours as she colors in embarrassment.  Her distracted struggles to loosen the bonds accomplish little except to rub her sensitive parts along yours.");
+					if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id || flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_WHIP.id) outputText("  The demonic enchantment chooses then to activate, and her color deepens as her lust peaks, as does your own.");
+					if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_WHIP.id) {
+						outputText(" At the same time, the arousing flames from the whip lick the surface of your skin, causing further arousal to your body as well.");
+						dynStats("lus", 8, "scale", false);
+					}
+					outputText("  You feel a point digging into your groin as her prick hardens and her struggles cease; she begins to moan openly in arousal.  As she relaxes, the coils of the whip finally loosen enough for you to extricate yourself.");
+					//(HP -0, lust +10 if normal whip or +20 if succubus, KidXP + 3)
+					dynStats("lus", 10, "scale", false);
+					if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SUCWHIP.id) dynStats("lus", 10, "scale", false);
+					kidAXP(6);
+					break;
+				case weapons.S_GAUNT.id: //[Spiked Gauntlets] or [Hooked Gauntlets]
+				case weapons.H_GAUNT.id:
+					outputText("\n\nThe anemone wears the gauntlets easily and comfortably, but doesn't seem to understand that to attack she needs to ball up her fists and swing them, no matter how many times you tell her.  The most she manages is to deflect a few of your mock lunges by batting them aside with the metal atop her knuckles.");
+					//(no tigereffect)
+					break;
+				case consumables.W_STICK.id: //[Wingstick]
+					outputText("\n\nThe girl stares at the stick, still uncomprehending how you intend her to use it.  One last time, you take the weapon from her and make a throwing motion, then return it.  She looks from it back to you once more, then tosses it at your head.  As it impacts with a clunk and your vision jars, she clutches her stomach in laughter.");
+					//(HP - 10, set Kidweapon to empty, KidXP + 1)
 					HPChange(-10, false);
-				}
-				else {
-					outputText("You try your best to avoid but you're unable to at all.  Anemone stops firing when she sees that you're bleeding and gives you a sheepish grin.");
-					HPChange(-40, false);
-				}
-				kidAXP(5);
-			}
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.CROSSBW.id) {
-				outputText("\n\nAs if the anemone girl already knows how to use a crossbow, she easily pulls the lever mechanism and fires a bolt towards you!  She reloads the crossbow and fires again.  ");
-				if (player.spe >= 60) {
-					outputText("You easily dodge the incoming bolts thanks to your speed!");
-				}
-				else if (player.spe >= 30 && player.spe < 60) {
-					outputText("You try to dodge the bolts that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You see yourself bleeding.  You tell her to stop and she obeys.");
+					flags[kFLAGS.ANEMONE_WEAPON_ID] = 0;
+					kidAXP(5);
+					break;
+				case shields.DRGNSHL.id: //[Dragonshell Shield] or its runed upgrade
+				case shields.RUNESHL.id:
+					outputText("\n\nYour protégé takes to the shield quite well, hiding behind it like... well, like a portable water barrel.  Even the way she peeks over the top is reminiscent.  She makes effective use of her cover, pushing forward relentlessly and delivering soft headbutts to spread venom to unprotected areas.");
+					//(lust + 5, temp str/spd down, KidXP + 5)
+					//str/spd loss reverts after clicking Next button
+					kidAXP(5);
+					dynStats("lus", 10, "scale", false);
+					break;
+				case consumables.W__BOOK.id: //[White Book]
+					outputText("\n\nPart literacy training and part magic instruction, your progress through the book is painstakingly slow.  After almost an hour of trying to get the anemone to concentrate on the words, she finally manages to cause a small flash of white light on the page in front of her - whereupon she shrieks and drops the book, covering her head with her arms and backing away.");
+					//(KidXP - 5)
+					kidAXP(-5);
+					break;
+				case consumables.B__BOOK.id: //[Black Book]
+					outputText("\n\nThe girl sits attentively with you, resting her head against your arm, as you teach her the words needed to evoke the formulae in the book.  When you suggest she try one out, however, she shakes her head with wide eyes.  Insisting, you stand apart from her and fold your arms.  Blushing a deep blue, the anemone resigns herself to focusing on your crotch as she mouths quiet syllables.  After a few moments, you actually feel a small glow of lust where she's staring.  The girl giggles nervously and looks away as you flush and your garments ");
+					if (player.hasCock()) outputText("tighten");
+					else if (player.hasVagina()) outputText("dampen");
+					else outputText("become a hindrance");
+					outputText("... though the part between her own legs is still pointed at you.");
+					//(lust + 10, KidXP + 2)
+					dynStats("lus", 20);
+					kidAXP(4);
+					break;
+				case weapons.SCARBLD.id: //[Scarred Blade]
+					outputText("\n\nThe anemone attempts to draw the bloodthirsty saber at your insistence, but as she pulls it free of the scabbard, it jerks from her hands, lashing across her thigh before clattering noisily to the ground and spinning away.  Her shock grows as thick, clear fluid seeps from the cut, and she covers her mouth with her hands, looking up at you with piteous, wet eyes.");
+					//[(if corr <=70)
+					//if (player.cor <= 70) 
+					//empty Kidweapon, KidXP - 5; if corr <=70, set sheilacite = 5, else add Scarred Blade to inventory)
+					flags[kFLAGS.ANEMONE_WEAPON_ID] = 0;
+					kidAXP(-5);
+					if (!player.isCorruptEnough(70)) {
+						outputText(" The blade's edge flashes toward you as well, when you try to pick it up.  After a few frustrated attempts, it becomes clear that you'll have to abandon it for now.");
+						player.setWeapon(WeaponLib.FISTS);
+						flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
+					}
+					else {
+						inventory.takeItem(weapons.SCARBLD, camp.returnToCampUseOneHour);
+					}
+					kidAXP(-5);
+					return;
+				case weapons.FLNTLK0.id: //[Flintlock Pistol] (Because guns are awesome.)
+				case weapons.FLNTLK1.id:
+				case weapons.FLNTLK2.id:
+					
+					outputText("\n\nAs if the anemone girl already knows how to use a gun, she easily pulls the trigger and fires rounds of ammunition towards you!  ");
+					if (silly()) outputText("Pew pew pew!  ");
+					if (dodgeScore >= 70) {
+						outputText("You easily dodge the bullets thanks to your speed!");
+					}
+					else if (dodgeScore >= 40 && dodgeScore < 70) {
+						outputText("You try to dodge the bullets that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You see yourself bleeding.  You tell her to stop and she obeys.");
+						HPChange(-10, false);
+					}
+					else {
+						outputText("You try your best to avoid but you're unable to at all.  Anemone stops firing when she sees that you're bleeding and gives you a sheepish grin.");
+						HPChange(-40, false);
+					}
+					kidAXP(5);
+					break;
+				case weapons.CRSBOW0.id: //[Crossbow]
+				case weapons.CRSBOW1.id:
+				case weapons.CRSBOW2.id:
+					outputText("\n\nAs if the anemone girl already knows how to use a crossbow, she easily pulls the lever mechanism and fires a bolt towards you!  She reloads the crossbow and fires again.  ");
+					if (dodgeScore >= 60) {
+						outputText("You easily dodge the incoming bolts thanks to your speed!");
+					}
+					else if (dodgeScore >= 30 && dodgeScore < 60) {
+						outputText("You try to dodge the bolts that are coming towards you.  You manage to dodge some but unfortunately, you've got hit.  You see yourself bleeding.  You tell her to stop and she obeys.");
+						HPChange(-10, false);
+					}
+					else {
+						outputText("You try your best to avoid but you're unable to at all.  Anemone stops firing when she sees that you're bleeding and gives you a sheepish grin.");
+						HPChange(-40, false);
+					}
+					kidAXP(5);
+					break;
+				case weapons.FLAIL_0.id: //Epic [Flail]
+				case weapons.FLAIL_1.id:
+				case weapons.FLAIL_2.id:
+					outputText("\n\nThe girl holds up the flail with no problem and you teach her how to use the weapon.  However, after dozens of swings, she accidentally hits herself with the spiked ball and looks at you with a whimper.  You tell her to stop; maybe this isn't the right weapon for her?");
 					HPChange(-10, false);
-				}
-				else {
-					outputText("You try your best to avoid but you're unable to at all.  Anemone stops firing when she sees that you're bleeding and gives you a sheepish grin.");
-					HPChange(-40, false);
-				}
-				kidAXP(5);
-			}
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.FLAIL.id) {
-				outputText("\n\nThe girl holds up the flail with no problem and you teach her how to use the weapon.  However, after dozens of swings, she accidentally hits herself with the spiked ball and looks at you with a whimper.  You tell her to stop; maybe this isn't the right weapon for her?");
-				HPChange(-10, false);
-				kidAXP( -2);
-				return;
-			}
-			//[Any new weapon added without text written for it, or any custom item name set by a save editor]
-			else {
-				outputText("\n\nFor the life of her, Kid A can't seem to grasp how to use the " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " you've provided her with.  You have to interrupt the practice for explanations so many times that you don't actually get to do any sparring.");
-				//(no effect, but you can just save edit the values you want anyway)
+					kidAXP(-2);
+					return;
+				default:
+					outputText("\n\nFor the life of her, Kid A can't seem to grasp how to use the " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " you've provided her with.  You have to interrupt the practice for explanations so many times that you don't actually get to do any sparring.");
+					//(no effect, but you can just save edit the values you want anyway)
 			}
 			//if hp = 0 after tutor, override any other result and output new PG:
 			if (player.HP < 1) {

@@ -237,15 +237,15 @@ package classes.Scenes.Areas.VolcanicCrag
 			flags[kFLAGS.BEHEMOTH_CHILDREN]++;
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) {
 				outputText("\"<i>I can't believe I finally have a family.  Thank you so much.,</i>\"");
-				flags[kFLAGS.BEHEMOTH_CHILD_1_BIRTH_DAY] = model.time.days;
+				flags[kFLAGS.BEHEMOTH_CHILD_1_BIRTH_DAY] = getGame().time.days;
 			}
 			else if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 2) {
 				outputText("\"<i>Two kids! Thank you for making sure my son wouldn't be lonely.</i>\"");
-				flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = model.time.days;
+				flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = getGame().time.days;
 			}
 			else if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 3) {
 				outputText("\n\n\"<i>Three kids is a good number,</i>\" he says drowsily, and he gives you a kiss as you all rest for a while together.");
-				flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
+				flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = getGame().time.days;
 			}
 			outputText("\n\nEventually, you know you should return to your camp. \"<i>I'll take good care of him, I promise,</i>\" he says as you make your goodbyes, and you walk back to your camp with a goofy smile on your face.");
 			player.knockUpForce(); //Clear!

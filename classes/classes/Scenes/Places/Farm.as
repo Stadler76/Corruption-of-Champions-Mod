@@ -37,7 +37,7 @@ public function farmExploreEncounter():void {
 	
 	if (farmCorruption.takeoverPrompt() == true) return;
 	
-	if (flags[kFLAGS.FARM_DISABLED] == 1)
+	if (flags[kFLAGS.FARM_DISABLED] == 1 && flags[kFLAGS.WHITNEY_GONE] < 1)
 	{
 		outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.");
 		outputText("\n\n\"<i>What the fuck do you think you're doing here [name]? After what you did to Marble you still think you're welcome here? Leave. <b>Now</b>.</i>\"");
@@ -45,7 +45,7 @@ public function farmExploreEncounter():void {
 		//addButton(1, "FIGHT!", fightWhitney);
 		return;
 	}
-	if (flags[kFLAGS.FARM_DISABLED] == 2)
+	if (flags[kFLAGS.FARM_DISABLED] == 2 && flags[kFLAGS.WHITNEY_GONE] < 1)
 	{
 		clearOutput();
 		outputText("Whitney marches up to you as soon as you approach the farm, a stoic expression plastered across her face.");
@@ -109,28 +109,24 @@ public function farmExploreEncounter():void {
 		var cockMilk:Number = 0;
 		var marble:Number = 0;
 		if (player.hasStatusEffect(StatusEffects.Kelt) && !player.hasStatusEffect(StatusEffects.KeltOff) && flags[kFLAGS.KELT_KILLED] <= 0) {
-			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",kelly.breakingKeltOptions);
+			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) {
+				if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 1) addButton(0,"Kelly",kelly.breakingKeltOptions);
+				else addButton(3,"Kelly",kelly.breakingKeltOptions);
+			}
 			else addButton(3,"Kelt",kelly.breakingKeltOptions);
 		}
-		if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
-			addButton(0,"Explore",exploreFarm);
-			addButton(1,"Talk",talkWhitney);
-			if (player.fatigueLeft() >= 20)
-				addButton(2, "Work", workFarm, undefined, undefined, undefined, "Ask Whitney if she could use a hand.");
-			else
-				addButtonDisabled(2, "Work", "You are too tired.");
-			if (!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted) && !player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) {
-				addButton(4,"Marble", meetMarble);
+		if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] != 1 || flags[kFLAGS.WHITNEY_GONE] > 0) {
+			addButton(0, "Explore", exploreFarm).hint("Take a good hike around the extensive farm. Maybe you'll find anything of interest around here.");
+			addButton(1, "Talk", talkWhitney).hint("Strike up a conversation with Whitney the dog farmer.").disableIf(flags[kFLAGS.WHITNEY_GONE] > 0, "Whitney is dead so you cannot talk to her.");
+			addButton(2, "Work", workFarm).hint("Ask Whitney if she could use a hand. She would probably be grateful for that.").disableIf(player.fatigueLeft() < 20, "You are too tired to lend a helping hand.").disableIf(flags[kFLAGS.WHITNEY_GONE] > 0, "Whitney is dead so you cannot offer to help her.");
+			if (player.hasStatusEffect(StatusEffects.Marble)) {
+				addButton(4, "Marble", meetMarble).hint("Pay Marble the cowgirl a visit.").disableIf(flags[kFLAGS.MARBLE_WARNING] > 0, "You have resolved not to see Marble. There is still hope if you want to meet her again though.").disableIf(player.hasStatusEffect(StatusEffects.MarbleRapeAttempted), "Marble isn't too pleased that you tried to rape her. Best not to seek her at the moment.").disableIf(player.hasStatusEffect(StatusEffects.NoMoreMarble), "Unfortunately, Marble is gone so you won't be able to find her.");
 			}
 			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
-				if (player.hasStatusEffect(StatusEffects.Milked)) {
-					outputText("\n\n<b>Your " + player.nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>");
-				}
-				else addButton(5,"Get Milked",getMilked);
-				
+				addButton(5, "Get Milked", getMilked).hint("Use the milker to drain your " + player.breastDescript(0) + ". Try not to use the milker too frequently.").disableIf(player.hasStatusEffect(StatusEffects.Milked), "Your " + player.nippleDescript(0) + "s are currently too sore to be milked. You'll have to wait a while.");
 			}
 			if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0) {
-				addButton(6,"Milk Cock",cockPumping);
+				addButton(6, "Milk Cock", cockPumping).hint("Use the cock milker to release your tension. Try not to overuse the milker though!");
 			}
 		}
 		addButton(14,"Leave",camp.returnToCampUseOneHour);		

@@ -42,7 +42,7 @@ package classes.Scenes.Places.Ingnam
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 1;
 			this.gems = 5+rand(10);
-			this.drop = new WeightedDrop().add(weapons.DAGGER,1)
+			this.drop = new WeightedDrop().add(weapons.DAGGER0,1)
 					.add(armors.LEATHRA,1)
 					.add(null,8);
 			checkMonster();

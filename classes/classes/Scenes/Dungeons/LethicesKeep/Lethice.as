@@ -60,7 +60,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
-			this.theWingType = Wings.DRACONIC_LARGE;
+			this.wings.type = Wings.DRACONIC_LARGE;
 			this.checkMonster();
 		}
 		

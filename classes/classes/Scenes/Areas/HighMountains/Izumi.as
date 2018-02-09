@@ -107,7 +107,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			// Titsmother toggle; gonna need to play with this, it should only be used once per fight
-			if ((this.HPRatio() <= 0.25) && (hasStatusEffect(StatusEffects.UsedTitsmother)))
+			if ((this.HPRatio() <= 0.25) && !(hasStatusEffect(StatusEffects.UsedTitsmother)))
 			{
 				//if (combatDebug) trace("Using Titsmother!");
 				titSmother();

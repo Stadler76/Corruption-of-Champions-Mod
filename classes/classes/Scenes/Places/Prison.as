@@ -84,7 +84,7 @@ package classes.Scenes.Places
 					needNext = true;
 					return needNext;
 				}
-				if ((flags[kFLAGS.PRISON_DIRT_ENABLED] > 0 && model.time.hours == 16 && randomCooldownRoomCheck <= 0) || (player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) >= 50 && flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)) {
+				if ((flags[kFLAGS.PRISON_DIRT_ENABLED] > 0 && getGame().time.hours == 16 && randomCooldownRoomCheck <= 0) || (player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) >= 50 && flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)) {
 					randomCooldownRoomCheck = 6 + rand(18);
 					prisonCaptorRandomEventCleaningCheck();
 					needNext = true;
@@ -1157,7 +1157,7 @@ package classes.Scenes.Places
 				default:
 					outputText("You are in a dimly lit but spacious cell. However, the size of the room is little comfort to you as it is filled with all manner of restraints and torture devices. Eyelets, metal rings, bars and hooks are scattered around the ceiling, floor and walls providing a near endless variety of ways to restrain a person. A wooden stockade is installed in the center of the room, a whipping post and a rack stand in one corner, and in another there is a large and ominous floor to ceiling stone box. \n\n");
 			}
-			if (model.time.hours >= 6 && model.time.hours <= 20) outputText("Mercifully, fresh air and sunlight can enter the room through narrow slit windows opposite the door.");
+			if (getGame().time.hours >= 6 && getGame().time.hours <= 20) outputText("Mercifully, fresh air and sunlight can enter the room through narrow slit windows opposite the door.");
 			else outputText("You can see the blood-red moon contrasting against black sky through the narrow slit windows.");
 			prisonRestraintText();
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) {
@@ -1188,7 +1188,7 @@ package classes.Scenes.Places
 					goNext(kGAMECLASS.timeQ);
 					return;
 				}*/
-				if (model.time.hours < 6 || model.time.hours > 20)
+				if (getGame().time.hours < 6 || getGame().time.hours > 20)
 				{
 					camp.doSleep();
 					return;
@@ -1217,7 +1217,7 @@ package classes.Scenes.Places
 			}
 				
 			//Random events
-			if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] == 0 && model.time.hours >= 8) {
+			if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] == 0 && getGame().time.hours >= 8) {
 				flags[kFLAGS.PRISON_EVENT_TIMEOUT] = 2;
 				var petPlayRarity:int = 10;
 				petPlayRarity -= (trainingPet.prisonCaptorPetScore() - 25) / 5;
@@ -1246,6 +1246,7 @@ package classes.Scenes.Places
 							trainingFeed.prisonCaptorFeedingEvent();
 							return;
 						}
+						break;
 					case 5:
 					case 6:
 						if (randomCooldownPet <= 0 && rand(petPlayRarity) == 0 && !trainingPet.prisonCaptorPetOptedOut()) {
@@ -1296,7 +1297,7 @@ package classes.Scenes.Places
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
+				getGame().masturbation.setMasturbateButton();
 				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
 			}
 			//Alter menu depending on punishment.
@@ -1311,7 +1312,7 @@ package classes.Scenes.Places
 				addButton(5, "Stand Up", punishments.prisonCaptorPunishmentConfinementStandup).hint("Try to stand up while inside the box.");
 				addButton(6, "Rest Legs", punishments.prisonCaptorPunishmentConfinementRestlegs).hint("Try to rest your legs while inside the box.");
 				addButton(7, "Break Box", punishments.prisonCaptorPunishmentConfinementBreak).hint("Attempt to break the box.\n\n" + prisonWillCostDescript(10));
-				if (player.lust >= 30) addButton(8, "Masturbate", punishments.prisonCaptorPunishmentConfinementMasturbate);
+				if (player.lust >= 30) addButton(8, "Masturbate", punishments.prisonCaptorPunishmentConfinementMasturbate).hint("Attempt to masturbate inside the box.");
 			}
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 3) {
 				outputText("\n\n");
@@ -1324,12 +1325,12 @@ package classes.Scenes.Places
 				addButton(2, "Call Out", trainingPet.prisonCaptorPetTrainingCrateCallOut);
 				addButton(3, "Leash", trainingPet.prisonCaptorPetTrainingCrateLeash);
 				//addButton(7, "Break Cage", trainingPet.prisonCaptorPetTrainingCrateBreak).hint("Attempt to break the cage?\n\n" + prisonWillCostDescript(10));
-				if (player.lust >= 70) addButton(8, "Masturbate", trainingPet.prisonCaptorPetTrainingCrateMasturbate);
+				if (player.lust >= 70) addButton(8, "Masturbate", trainingPet.prisonCaptorPetTrainingCrateMasturbate).hint("Attempt to masturbate inside the cage.");
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", camp.doWait);
 			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
-			if (model.time.hours >= 21 || model.time.hours < 6) {
+			if (getGame().time.hours >= 21 || getGame().time.hours < 6) {
 				removeButton(0);
 				removeButton(1);
 				removeButton(2);
@@ -2361,7 +2362,7 @@ package classes.Scenes.Places
 			{
 				if (rand(8) == 0)
 				{
-					prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
+					prisonCaptor.updateNextWaitRandomEvent(getGame().time.hours, getGame().time.days);
 					punishments.prisonCaptorPunishmentStockadesVisitor();
 					return true;
 				}
@@ -2370,7 +2371,7 @@ package classes.Scenes.Places
 			{
 				if (rand(100) + player.fatigue * 0.5 + player.lust * 0.5 - (player.str + player.tou) * 0.2 > 50)
 				{
-					prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
+					prisonCaptor.updateNextWaitRandomEvent(getGame().time.hours, getGame().time.days);
 					outputText("\n\nYour [legs] give in to lust and fatigue and you impale yourself a bit further on the dildos below you. ");
 					punishments.prisonCaptorPunishmentConfinementRestlegs();
 					return true;
@@ -2381,7 +2382,7 @@ package classes.Scenes.Places
 				eventOccurred = trainingPet.prisonCaptorPetDreamStart();
 				if (eventOccurred)
 				{
-					prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
+					prisonCaptor.updateNextWaitRandomEvent(getGame().time.hours, getGame().time.days);
 				}
 			}
 			return eventOccurred;
@@ -2430,7 +2431,7 @@ package classes.Scenes.Places
 			var eventOccurred:Boolean = false;
 			if ((flags[kFLAGS.PRISON_PUNISHMENT] == 0 || flags[kFLAGS.PRISON_PUNISHMENT] == 3) && player.lust >= player.maxLust() && rand(3) == 0)
 			{
-				//prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
+				//prisonCaptor.updateNextRoomRandomEvent(getGame().time.hours, getGame().time.days);
 				//Wild Dildo Rack appears!
 				if (rand(2) == 1 && !prisonCanMasturbate(false) && flags[kFLAGS.PRISON_DILDO_RACK] == 0)
 				{
@@ -2663,80 +2664,29 @@ package classes.Scenes.Places
 					selector = 6;
 				}
 			}
+			if (player.gender == 3) outputText(images.showImage("prison-elly-herm"));
+			else if (player.gender == 2) outputText(images.showImage("prison-elly-female"));
+			else outputText(images.showImage("prison-elly-male"));
 			switch(selector)
 			{
 				case 0:
 				case 1:
 				case 2:
-					if (player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) < 3)
-					{
-						outputText("(Placeholder) \"<i>You haven't yet earned the privilege of getting fucked by my cock.");
-					}
-					else
-					{
-						outputText("(Placeholder) \"<i>Being fucked by my cock would be too much of a reward given your recent behavior.");
-					}
-					outputText(" Perhaps you will be worthy of it next time. But don't worry, we'll still have plenty of fun.</i>\" She directs you to grab hold of a ring hanging above your head, and expertly teases your erogenous zones with her skillful hands until you become weak in the knees, lose your grip, and collapse to the floor. She then makes you lie on your back and hold your ankles, and she works the fingers on one hand into your [asshole] while teasing your genitals with the other. \n\n");
-					outputText("Eventually she squeezes her entire hand inside and allows you to orgasm.");
-					if (player.hasCock())
-					{
-						outputText("Thanks to her stimulation of your prostate you cum buckets, painting your [fullChest] and [face] with your sticky goo.");
-					}
-					if ((player.hasVagina()) && player.wetness() >= 4)
-					{
-						if (player.hasCock())
-						{
-							outputText("At the same time, your");
-						}
-						else
-						{
-							outputText("Your");
-						}
-						outputText(" abdomen is wracked with spasms of pleasure as a fountain of clear, viscous fluid erupts from your [cunt] and coats your Mistress' head and torso. She allows herself to indulge in a moment of ecstasy, rubbing your juices into her firm, shapely tits with her left hand while using them to massage her dick with her right. Despite being lost in your own pleasure, you cannot help but feel gratified watching her face, eyes closed, head tilted back, mouth agape, fiery red bangs haphazardly scattered across her face in sticky strands. Then the moment passes, and she speaks.");
-					}
-					outputText("\"<i>Do you understand now, slave? Your body craves my abuse. Embrace it -- once you do, your life will become an unending river of pleasure</i>\"");
-					player.orgasm('Generic');
-					//buttChange(12,true,true,false); //Doesn't count as it would be a waste of virginity.
+					ellyScene.getFistedWREKT();
 					break;
 				case 3:
 				case 4:
 				case 5:
 					billieScene.prisonCaptorBilliePunishmentFuck("choose");
-					return;
+					break;
 				case 6:
-					if (player.gender == 3) outputText(images.showImage("prison-elly-herm"));
-					else if (player.gender == 2) outputText(images.showImage("prison-elly-female"));
-					else outputText(images.showImage("prison-elly-male"));
-					
-					if (player.hasVagina())
-					{
-						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" After a brief hesitation, you do so. She makes you present yourself like a bitch in heat while continuing to beg. Finally she gives you want you want, and fills your womb with her potent seed.\n\n");
-						player.knockUp(PregnancyStore.PREGNANCY_IMP, 350, 50);
-						player.cuntChange(32,true,true,false);
-						player.orgasm('Vaginal');
-						break;
-					}
+					ellyScene.getBredByElly();
+					break;
 				case 7:
 				case 8:
 				case 9:
 				default:
-					outputText("(Placeholder) You assume a submissive position and your " + prisonCaptor.captorTitle + " has " + prisonCaptor.captorPronoun3 + " way with you, pounding your [asshole] mercilessly until you orgasm from the shameful stimulation. \"<i>Do you understand now, slave? I don't even have to touch your ");
-					if (player.hasCock())
-					{
-						outputText("pathetic [cock]");
-					}
-					else if (player.hasVagina())
-					{
-						outputText("dirty [cunt]");
-					}
-					else
-					{
-						outputText("silly little mound");
-					}
-					
-					outputText(" to make you spurt. Your body wants to be used by my dick and filled with my seed. You are a cocksucking, anal loving, cum-slut. Accept it.</i>\"");
-					player.buttChange(32,true,true,false);
-					player.orgasm('Anal');
+					ellyScene.getAnallyStuffedByElly();
 			}
 			player.slimeFeed();
 			changeObey(1,inPrison);
@@ -2745,6 +2695,9 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorResistFuck():void
 		{
+			if (player.gender == 3) outputText(images.showImage("prison-elly-herm"));
+			else if (player.gender == 2) outputText(images.showImage("prison-elly-female"));
+			else outputText(images.showImage("prison-elly-male"));
 			var selector:* = undefined;
 			selector = 0;
 			if (player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) < 3)
@@ -2808,10 +2761,6 @@ package classes.Scenes.Places
 				case 4:
 				case 5:
 				case 6:
-					if (player.gender == 3) outputText(images.showImage("prison-elly-herm"));
-					else if (player.gender == 2) outputText(images.showImage("prison-elly-female"));
-					else outputText(images.showImage("prison-elly-male"));
-					
 					if (player.hasVagina())
 					{
 						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" You petulantly refuse, ");
@@ -2828,6 +2777,7 @@ package classes.Scenes.Places
 						player.orgasm('Vaginal');
 						break;
 					}
+					break;
 				case 7:
 				case 8:
 				case 9:
@@ -3020,7 +2970,6 @@ package classes.Scenes.Places
 			{
 				case 0:
 				case 1:
-					break;
 				case 2:
 					if (player.obey < 10)
 					{
@@ -3091,6 +3040,7 @@ package classes.Scenes.Places
 						}
 					}
 					break;
+				default:
 			}
 		}
 		

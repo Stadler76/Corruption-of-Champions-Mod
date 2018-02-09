@@ -11,6 +11,7 @@ package classes.Scenes.Areas.Desert
 	import classes.Scenes.Areas.Forest.TentacleBeast;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Plains.Gnoll;
+	import classes.display.SpriteDb;
 
 	public class AntsScene extends BaseContent implements TimeAwareInterface
 	{
@@ -65,9 +66,9 @@ package classes.Scenes.Areas.Desert
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			//trace("\nPhylla time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nPhylla time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0 && rand(5) == 0 && flags[kFLAGS.ANT_KIDS] < 5000) flags[kFLAGS.ANT_KIDS]++;
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				//The pregnancyStore doesn't handle Phylla's ant eggs because they are continuous. The regular egg production is all handled here.
 				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
 				if (flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 0;
@@ -117,6 +118,7 @@ package classes.Scenes.Areas.Desert
 		private function firstAntColonyEncounter():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_phylla);
 			outputText("While traversing an unfamiliar part of this desert wasteland, ");
 			if (player.cor > 75 && player.lust100 > 50) outputText(" looking for something to slake your unquenchable lusts, ");
 			outputText("you come across an abandoned merchant's cart.  The cart looks eerily disheveled, with a majority of its contents strewn about the sand.  Whoever or whatever deserted this thing did so in a hurry, and for seemingly no reason. Curious, you decide to inspect it for anything worthwhile.");
@@ -144,6 +146,7 @@ package classes.Scenes.Areas.Desert
 			//If Male/[Use Dick - Herm] and Corruption & Libido Over 41 Leads to - If Over 41 - Male
 			//If Female/[Use Vagina - Herm] and Corruption & Libido Over 41 Leads to - If  Over 41 - Female
 			clearOutput();
+			spriteSelect(SpriteDb.s_oasis_demons);
 			//If Under 40
 			if ((player.lib100 < 41 && player.lust100 < 50) || !player.isCorruptEnough(66) || player.gender == 0) {
 				outputText("After seeing the large pack of demons you decide it's best not to act.  You yourself are in no condition to help the poor creature, and knowing full well what comes after demons 'subdue' their prey, you don't want to stick around either.  You glance over and realize the skirmish has already started.  It's too late to really help her anyway, you argue to yourself, plus she's covered in muscle.");
@@ -227,6 +230,7 @@ package classes.Scenes.Areas.Desert
 		private function playHero():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_oasis_demons);
 			//►Introduction to Combat
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");
@@ -240,6 +244,8 @@ package classes.Scenes.Areas.Desert
 		internal function consolePhylla():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_phylla);
+			outputText(images.showImage("ant-desesrt-console-phylla"));
 			outputText("As the demons flee over the dunes, you gather your thoughts and survey the chaotic scene.  The woman you saved has taken refuge under the ruined cart, trying to conceal herself.  Her upper torso, at least, is 'hidden' inside it, but her large abdomen and black legs jut outward, giving away her poor attempts at stealth.  ");
 			if (player.lib >= 50) outputText("After taking an eyeful of her smooth, enticing pussy, revealed in her current position by the inadequacies of her loincloth, y");
 			else outputText("Y");
@@ -260,6 +266,8 @@ package classes.Scenes.Areas.Desert
 		private function enterTheColony():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
+			outputText(images.showImage("ant-desert-colony"));
 			outputText("Wandering in the desert with your new, strangely eidetic memory, it's not long until you come across the large anthill.  If it hadn't been for the visions that were projected into your mind, you'd never have guessed anything like it could be hidden in such a harsh environment.  As you approach the hill, you get the familiar feeling you're being watched.");
 			outputText("\n\nNearing the crest, you're taken by surprise as three large ants burst out of the sand via a cleverly-concealed trapdoor.  They're much bigger than the girl you saved but seem just as muscular and, except for their large almond shaped eyes and smaller noses, appear roughly human.  They have narrow jaw lines and much sharper cheek structures, making for very masculine faces.  Where the female's abdomen was skin-toned and seemed to have large angular plates, these ants have completely smooth black abdomens.  Two of them hold makeshift spears with obsidian tips in all four hands, while the other is using a very old and very blunt short sword.  These two quickly surround you, holding you at spear-point. The one with the short sword steps forward, almost pressing his face into yours as he sniffs you.  Over his shoulder, the spear-carrying ant in front of you makes a series of clicking noises to the others.  They appear annoyed, but lower their weapons.  All three walk over to the trapdoor and the two spear-bearing ants lift it.  The one with the short sword beckons you to follow him as he descends.");
 			outputText("\n\nAs you climb down into the crepuscular cave system after your escort, the only light seems to be emitted from some kind of bioluminescent fungus that coats the walls. Your journey into the vast caverns and twisted caves of the colony leaves you very disoriented.  Luckily for you, your guide seems to know exactly where he's going; as you turn a sharp corner, you enter a massive excavated cave.  What you see therein is a complex network of tunnels in almost every direction and ants of all shapes and sizes going about their daily routine.  You would guess this is the central hub of this colony.");
@@ -287,6 +295,8 @@ package classes.Scenes.Areas.Desert
 		private function antColonyChallenge():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
+			outputText(images.showImage("ant-desert-colony"));
 			//(Random Encounter in the Desert)
 			//Leads to - Introduction First Time
 			//Leads to - Introduction Subsequent Times
@@ -327,9 +337,11 @@ package classes.Scenes.Areas.Desert
 		private function antColiseumFight():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-coliseum"));
 			//►[Fight #1]
 			if (flags[kFLAGS.ANT_ARENA_WINS] + flags[kFLAGS.ANT_ARENA_LOSSES] == 0) {
 				//(Tentacle Beast - Intro)
+				spriteSelect(SpriteDb.s_tentacleMonster);
 				outputText("You tell the fight manager you're ready.  He nods and leads you down into one of the two staging areas of the arena.  You watch through the bars as the stadium fills quickly.  Although pretty much every ant face looks identical to you, the larger ones who are clearly warriors stand in stark contrast with the smaller ones that must be the workers - or maybe they're just younger; you can't tell.  Watching them gather for the impending fight, you confirm the suspicion you formed when you first saw the queen's chamber: every ant-morph except the princess and the queen is male!  Gazing out into the crowd you spot the two royal personages sitting in a special area that appears to be reserved for them.  The shy princess's gaze nervously drifts toward your room and for a moment your eyes meet.");
 				outputText("\n\nAs you raise a hand to wave, you're stopped as you hear the sounds of a shambling and banging from across the arena.  A large silhouetted beast is poked and prodded into the staging area across from you. You narrow your eyes, trying to get a glimpse of your opponent. As you do, the gates of the staging areas drop and a very angry and enraged tentacle beast thrashes out into the center of the arena.");
 				outputText("\n\nYou're fighting a tentacle beast!");
@@ -339,6 +351,7 @@ package classes.Scenes.Areas.Desert
 			//►[Fight #2]
 			else if (flags[kFLAGS.ANT_ARENA_WINS] + flags[kFLAGS.ANT_ARENA_LOSSES] == 1) {
 				//►(Minotaur - Intro)
+				spriteSelect(SpriteDb.s_minotaur);
 				outputText("When you arrive in the colosseum, you tell the fight manager you're ready; he nods and leads you down into one of the two staging areas for the arena.  You watch through the bars as the stadium fills almost to capacity, still resistant to the idea of so many ants living right under the sands; there must be hundreds.  Gazing out into the cheering crowd, you spot the royal family sitting in their reserved area.  The princess waves at you excitedly with two of her arms, but her mother grabs them and lowers them.  Chylla herself looks as regal and reserved as ever.  You catch the queen smiling at you, but there's something wicked behind the smile.  Before you can contemplate what it might be, the gates raise on both sides of the colosseum and you are pushed out.");
 				outputText("\n\nYou're now fighting a minotaur and it's wielding a Giant Axe!  You quickly put two and two together and realize Chylla has set you up by arming the minotaur!  You brace yourself as the beastman charges you, roaring wildly.");
 				startCombat(new Minotaur(true));
@@ -347,6 +360,7 @@ package classes.Scenes.Areas.Desert
 			//►[Fight #3]
 			else {
 				//(Gnoll - Intro)
+				spriteSelect(SpriteDb.s_club_gnoll);
 				if (flags[kFLAGS.MET_ANT_ARENA_GNOLL] == 0) outputText("With due ceremony, the manager leads you down to one of the staging areas for the arena.  You watch through the bars as the stadium fills far past capacity.  There must be a thousand ants here... maybe even the whole colony.  Gazing out into the crowd, you pick out the royal seating and in it, Princess Phylla.  The princess is in much finer attire than you're used to seeing - her chest is actually covered by a fine red and blue dress and her hair is combed, framing her face nicely.  Her mother is nowhere to be seen, and you can tell that Phylla is taking full advantage.  She waves and cheers for you just like the crowd is and, perhaps by her orchestration, you hear the crowd pick up a chant in your name.  Seeing Phylla chant with them makes you feel invigorated.  As the gates raise, you charge out into the center of the arena, roaring your finest battle cry; your opponent is taken somewhat aback but finds resolve and braces for your charge.");
 				//►(Gnoll - Intro Repeat - for people that lost once)
 				else outputText("You move through the network of tunnels and caves and come to the colosseum once more.  You are greeted by the event manager and he ushers you down to one of the staging areas for the arena.  The noise intensifies as the colosseum fills to the brim with spectators; Phylla herself is up in her box waving to you.  You look across the arena floor and the gnoll at the other side of the arena seems just as excited to fight as you are.  The gates open and you charge each other!");
@@ -362,6 +376,8 @@ package classes.Scenes.Areas.Desert
 //(Tentacle Beast - Win) Standard Tentacle Beast Win Scene. (Again we're going to need to adapt the ending so the PC does not go back to camp.)
 		public function phyllaTentacleDefeat():void
 		{
+			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("\n\nAs you leave the arena, you are met by Princess Phylla and a large group of warrior ants; the princess is looking at the ground and twiddling her lower set of thumbs.  As you clear your throat to announce yourself she jumps and makes a strange noise that sounds like a mix between a click and 'EEP!'.  She blushes and looks at the ground again, searching for something to say.");
 			outputText("\n\n\"<i>I'm happy you won,</i>\" she finally manages, more to the rocky earth than to you.  \"<i>Let me help you recover, I mean, if you want...</i>\"");
 			outputText("\n\nYou give her a nod and she sets to work. She nervously dresses your wounds by using some strange paste and strips of cloth.  You try to make small talk but find it awkward under heavy guard.  Clearly you're still not welcome here.  Once Phylla's done, all but one of the guards disappear with her into the tunnels.");
@@ -377,6 +393,7 @@ package classes.Scenes.Areas.Desert
 		public function phyllaTentaclePCLoss():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("After your defeat in the arena, you set off to leave but are stopped.  Princess Phylla is standing with a troupe of armed guards by the exit, holding a vial of clear liquid.  She doesn't look like she wants to give it to you but she extends it to you all the same.");
 			outputText("\n\n\"<i>You lost... so you have to drink this.  I mean... I'm sorry.</i>\"");
 			outputText("\n\nYou look at the vial inquisitively but the warriors don't look like they're going to budge until you consume the liquid.  You uncork the bottle and drink the whole thing, like a shot.  Remarkably it doesn't taste like anything.  The clear liquid is a little more viscous than water, but doesn't have much else in the way of texture.  Though you were expecting something awful to happen to you, you don't even feel any different.  As you hand back the empty bottle, the guards part to let you leave.  Although, oddly, you find yourself not really wanting to, you shake your head and return to camp.");
@@ -392,6 +409,8 @@ package classes.Scenes.Areas.Desert
 //►(Minotaur- Win)
 		public function phyllaBeatAMino():void
 		{
+			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("As you exit the arena, amidst the cheers and roars of the crowd, you are met by Princess Phylla and slightly fewer guards than the last time.  She sees you coming and her face lights up, then runs over to you and starts doting over you. You smile and let her do her thing.  Once she's done, she looks deep into your eyes.");
 			outputText("\n\n\"<i>I... I w-was wondering... I mean...</i>\"  She raises her head to yours and just as you assume she's about to kiss you, one of the guards grunts loudly, interrupting the moment.  He then motions her to follow him into the tunnels.");
 			outputText("\n\nYou hear someone else clear their throat behind you, and turn to see your guide, his trusty rusty blade at his side.  He simply shows you to the exit of the arena before turning and walking away.  Apparently he trusts you enough to see yourself out?  You follow the lit tunnel back to the surface.");
@@ -405,6 +424,8 @@ package classes.Scenes.Areas.Desert
 //►(Minotaur- Loss)
 		public function phyllaPCLostToMino():void
 		{
+			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("After your staggering defeat and subsequent humiliation in the arena two guards approach you as you try to leave.  One of them holds out a small vial.  Princess Phylla is off in the corner of the room crying, and you try to move closer to her but one of the guards steps in front of you.  \"<i>Drink!</i>\" he commands, uncorking the vial.");
 			outputText("\n\nIt's strange... you don't care for the idea of being commanded by an ant, but you find yourself indifferent now that you smell the liquid.  You drink the whole thing in one go; it has no taste or texture and afterwards you don't feel any different.  The guards tell you to leave again, though you don't really want to.  Looking around you, you muse that you would be completely contented with staying underground here for a while... maybe forever, if you had to!  One of the guards, however, pushes you towards the exit, causing you to stumble a bit until you catch yourself.  Before you leave, you glance at where Princess Phylla was watching you, but she's already been removed by the other dutiful guards.  You head up the path to the surface, and from there back to camp.");
 			//(+1 Loss Score)
@@ -419,6 +440,7 @@ package classes.Scenes.Areas.Desert
 		public function phyllaPCBeatsGnoll():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			//►(Gnoll - Win First Time)
 			if (flags[kFLAGS.ANTS_PC_BEAT_GNOLL] == 0) {
 				outputText("As you stand over your defeated opponent and the red mist of combat fades, you finally become conscious of the crowd.  Everyone is cheering, and some are even throwing gems into the arena at your feet.  You hold your [weapon] up to the sky proudly, only making them erupt in greater roars and whistles.  As you make your way out, Phylla greets you, doting over every cut and scrape, as maternal as always.  You smile and let her do her thing.  The usual guards don't seem to be around, but you suppose they're lurking just out of sight.");
@@ -443,6 +465,8 @@ package classes.Scenes.Areas.Desert
 
 		public function phyllaGnollBeatsPC():void
 		{
+			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			//►(Gnoll - Loss First Time) Standard Gnoll Loss Scene. +
 			if (flags[kFLAGS.ANTS_PC_LOST_TO_GNOLL] == 0) {
 				flags[kFLAGS.ANTS_PC_LOST_TO_GNOLL]++;
@@ -466,6 +490,7 @@ package classes.Scenes.Areas.Desert
 		private function antastrophyBadEnd():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("As you go to leave the arena queen Chylla and four bodyguards approach you.");
 			outputText("\n\n\"<i>Come with me, it's time you join our colony.</i>\" Chylla states dismissively.  You want to leave but at the same time, the idea of being underground helping the colony grow is something you never considered to be an option.");
 
@@ -489,6 +514,8 @@ package classes.Scenes.Areas.Desert
 		private function antGirlGoodEnd():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-kissing"));
+			spriteSelect(SpriteDb.s_phylla);
 			flags[kFLAGS.PHYLLA_CAPACITY] = 50;
 			outputText("As you turn to leave, something is different; the crowd seems unusually silent. Phylla swiftly climbs down from her seat and jumps into the arena.  You glance warily at the gnoll but it's already being dragged out.  Phylla runs to you, and gives you a massive hug, wrapping all four of her arms around you and squeezing as hard as she can.  Her open display of affection leaves you more than a little shocked, given the creaking and soft cracking of bone in your body.  Interlocking her fingers with yours, she turns and raises your hands in the air, proclaiming your victory to every ant in the colony.  The awed crowd suddenly erupts, filling the stadium with cheers for your victory.  She turns towards the exit and tugs on your sleeve.");
 			outputText("\n\nPhylla drags you blindly through myriads of unlit tunnels until you reach the Queen's chamber, where Chylla seems to be awaiting you. Though, something is different than the last time you saw her; she's dressed just as regally as Phylla is, but it appears more...  formal.");
@@ -600,6 +627,7 @@ package classes.Scenes.Areas.Desert
 		private function malePhyllaContinuation(x:int):void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-first-male-vagsex"));
 			outputText("Phylla stares down at your " + player.multiCockDescriptLight() + " and starts nervously rubbing her hands together.  \"<i>It's my first time... I mean, I hope it isn't going to be bad for you...</i>\" she says, before trailing off; uncertain of her sexual prowess.");
 			//Corruption less than 75:
 			if (player.isPureEnough(75)) outputText("\n\nYou assure her that she shouldn't worry so much about her first time.");
@@ -653,6 +681,7 @@ package classes.Scenes.Areas.Desert
 		private function phyllaFirstTimePureBabiesFuckEnding():void
 		{
 			clearOutput();
+			if (!player.canOvipositSpider()) outputText(images.showImage("ant-desert-male-first-pure-vagsex"));
 			var x:int = player.cockThatFits(phyllaCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			outputText("For a while, you allow Phylla to slowly adapt to your presence inside of her and the stretching of her vaginal walls; something she reacts to with soft moans of pleasurable appreciation.  She wears her obvious discomfort at being forcefully stretched by your " + player.cockDescript(x) + ", but you see she can hardly complain as her body cradles yours in an attempt to keep you where you are.  Once you feel she's comfortable you start slowly pumping away at her, gradually building your own rut.");
@@ -718,6 +747,7 @@ package classes.Scenes.Areas.Desert
 		private function phyllaCorruptMascEnding():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-male-first-corrupt-vagsex"));
 			outputText("For a few moments longer, you pump yourself hard against her rump in an attempt to \"break\" your new fucktoy in.  Once you're satisfied that she will be able to handle what is to come, you take to sliding yourself along against her fuckhole as you grab her by the hair.  The backside of her abdomen grinds along your ");
 			if (player.tallness >= 72) outputText("chest");
 			else outputText("belly");
@@ -778,6 +808,7 @@ package classes.Scenes.Areas.Desert
 		private function cuntmuffinLingusPhyllaDickBig():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-male-first-cunning"));
 			outputText("Sadly, as you gaze down at your " + player.multiCockDescriptLight() + ", you realize that trying to penetrate Phylla with your freakishly large prick");
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" isn't going to work.  Phylla's eyes begin to tear up as she also comes to the realization that her first time is a non-starter.");
@@ -843,6 +874,7 @@ package classes.Scenes.Areas.Desert
 		private function femalePhyllaFirstFuckGooooo():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-female-first-boobsucking"));
 			outputText("Eager to get to some good old fashion fun, you direct your thoughts to Phylla, telling her to 'remove her clothing'.  After all of the pieces of her royal attire are removed, she closes in and rubs her naked body against yours.  Her fingers move fluidly as she slowly traces her ever hardening nipples along your chest and along the ridges of your back, sending a sensual chill up and down your spine.  Your " + player.nippleDescript(0) + "s harden in response, and with surprising speed she shifts her body downward and locks her mouth around your nipple, firmly suckling at your hardened areola.");
 			//If PC Lactating:
 			if (player.lactationQ() > 250) outputText("\n\nYou can feel her suck some of the milk from your breasts, slating her weak thirst in the process as she becomes immensely aroused at the sensation of \"nursing\" from her lover's " + player.breastDescript(0) + ".  Weird... you can taste the nutritious warmth of your nectar as it flows down her throat and into her stomach.  Drinking and tasting one's own breast milk could definitely weird someone out, but the foreignness of the act is an odd turn-on for you, and you let her continue to suckle.");
@@ -864,6 +896,7 @@ package classes.Scenes.Areas.Desert
 		private function girlFiller():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-female-first-scissoring"));
 			//Scissoring Continuation - No Dicks!
 			outputText("You coo at the prospect of finally allowing your tongue to go to town on her, but right as you're considering what to do you feel something enter you, causing you to let out a surprised moan.  Looking down, you expect to see her mouth still firmly planted on your clit; instead, your lover's chitinous fingers have begun to penetrate your pussy.");
 			outputText("\n\nYour body begins moving on its own as you writhe in pleasure, Phylla continuing her loving, unending assault on your nethers.  In a moment of clarity your mind snaps into focus.  Your move!");
@@ -886,9 +919,10 @@ package classes.Scenes.Areas.Desert
 		private function femalePhyllaFirstTimePlusCock():void
 		{
 			clearOutput();
+			if (player.smallestCockArea() > phyllaCapacity()) outputText(images.showImage("ant-desert-female-first-scissoring-with-bigcock"));
+			else outputText(images.showImage("ant-desert-female-first-scissoring-with-cock"));
 			outputText("You coo at the prospect of finally allowing your tongue to go to town on her, but right as you're considering what to do you feel something enter you, causing you to let out a surprised moan.  Looking down, you expect to see her mouth still firmly planted on your clit; instead, the chitinous lover's fingers has begun to penetrate your pussy, while her other free arm");
-			outputText(" has taken");
-			outputText(" hold of ");
+			outputText(" has taken hold of ");
 			//One dick only:
 			if (player.cockTotal() == 1) outputText("your " + player.cockDescript(0) + ".");
 			else outputText("your " + player.cockDescript(0) + " leaving the lucky member to bask in affectionate glory as the rest of your manhood laments being left out.  \"<i>Don't worry, I have four hands...</i>\" Phylla coos as she works your shaft.");
@@ -1015,6 +1049,7 @@ package classes.Scenes.Areas.Desert
 		private function bumpIntoTheAntColonyAfterStayHomePhylla():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_phylla);
 			outputText("You make your way down a strangely familiar path that leads to Phylla's room.  Her head quickly snaps around upon seeing your shadow in her doorway.");
 			outputText("\n\n\"<i>Eeep!</i>\" she clicks - clearly you startled her out of some daydream.");
 
@@ -1030,11 +1065,21 @@ package classes.Scenes.Areas.Desert
 			addButton(1, "Stay Here", tellPhyllaToStayTheFuckAtHomeThatCunt);
 		}
 
+		// Only used after she becomes a follower
+		public function phyllaSprite(nude:Boolean = false):void {
+			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
+				if (nude) spriteSelect(SpriteDb.s_phylla_nude);
+				else spriteSelect(SpriteDb.s_phylla);
+			}
+			else spriteSelect(SpriteDb.s_phylla_preg);
+		}
 
 		public function introductionToPhyllaFollower():void
 		{
 			if (flags[kFLAGS.PHYLLA_CAPACITY] < 50) flags[kFLAGS.PHYLLA_CAPACITY] = 50;
 			clearOutput();
+			outputText(images.showImage("ant-camp-follower-intro"));
+			phyllaSprite();
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				phyllaLaysSomeDriderEggs();
 				return;
@@ -1112,6 +1157,7 @@ package classes.Scenes.Areas.Desert
 		private function phyllaSexMenu():void
 		{
 			menu();
+			phyllaSprite(true);
 			addDisabledButton(0, "Get BJ", "This scene requires you to have cock.");
 			addDisabledButton(1, "Fuck Her", "This scene requires you to have cock.");
 			addDisabledButton(2, "Lesbian Sex", "This scene requires you to have vagina.");
@@ -1306,7 +1352,7 @@ package classes.Scenes.Areas.Desert
 					outputText("\n\nThough you tried to count over such a long period of watching her masturbate, you lost track at around 15.");
 					outputText("\n\nShe's tried to stop a few times, pleading to you that it's too much but you just kept forcing her to continue.  After what you can only guess would be a few hours of watching her cum again and again in an almost heroic display of fortitude, she breaks.  Phylla falls over, completely spent. Sprawled out in front of you, her whole body from head to foot is covered in her own juices.");
 					outputText("\n\nYou don't say a word to her as she lies in the pool of her own secretions, her blank eyes gazing into nothingness.  Maybe you broke her, only time will tell, she'll need to recover first.  You set out back to camp, knowing full well she's now just another plaything for you.");
-					model.time.hours++;
+					getGame().time.hours++;
 					dynStats("lus", 25);
 				}
 				else {
@@ -1415,6 +1461,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			flags[kFLAGS.PHYLLA_BLOWJOBS]++;
+			outputText(images.showImage("ant-camp-give-bj"));
 			if (flags[kFLAGS.PHYLLA_BLOWJOBS] == 1) {
 				outputText("Turning to Phylla, you can't help but smile as you flash her a seductive look, making sure you have her undivided attention before glancing down at the bulge in your pants.  Raising a hand to her mouth in sultry intrigue, Phylla giggles and shoots you a devilish look back.  Turning towards the bed, Phylla presumptuously begins to disrobe...  close!  But not what you had in mind.");
 				outputText("\n\nCrossing your arms, you let out a loud cough in order to redirect the confused ant morph's attention back to you.  She turns around slowly, obviously uncertain of what you have in mind for intimacy.");
@@ -1515,6 +1562,7 @@ package classes.Scenes.Areas.Desert
 		private function purePhyllaBJOver():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-camp-give-pure-bj-cum"));
 			var x:int = player.smallestCockIndex();
 			outputText("You quickly and softly tell her to calm down, she needn't worry; you'll be more than happy to help her learn how as surely as she would help you if your situations were reversed.  At the mention of counter positions she nods cheerfully.");
 			outputText("\n\n\"<i>You... know I'd d-do anything for you... I'll get good, I will!</i>\"");
@@ -1570,7 +1618,7 @@ package classes.Scenes.Areas.Desert
 			pureBJEnding(true);
 		}
 
-//[Nope]
+//[Nope][w
 		private function nopeNotOnMouthOrWhateverFuckThisNoise():void
 		{
 			clearOutput();
@@ -1587,7 +1635,8 @@ package classes.Scenes.Areas.Desert
 
 //Pure BJ Ending
 		private function pureBJEnding(linked:Boolean = true):void
-		{
+		{			
+			outputText(images.showImage("ant-camp-give-pure-bj-cum"));
 			outputText("\n\nTo your surprise, Phylla has fully embraced this new talent you've helped 'teach' her");
 			if (!linked) outputText(".");
 			else if (flags[kFLAGS.TIMES_LINKED_BJ_SUCK] == 0) {
@@ -1650,6 +1699,7 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			var x:int = player.smallestCockIndex();
+			outputText(images.showImage("ant-camp-give-corrupt-bj-cum"));
 			outputText("\"<i>A slut that can't suck a dick... how can this get any worse?</i>\"  You ponder to yourself while rubbing your nasal bridge. You tell the innocent little ant that she'll learn how to suck a mean cock, even if it kills her.  You're knee deep at this point - might as well turn her into something salvageable.  Commanding her attention, you lift her face up and hover your " + player.cockDescript(x) + " close to her lips, smothering her lips with your precum.  She attempts to turn away but you react before she can.  Holding her head in place you comment on how this is what you want from her.");
 			outputText("\n\n\"<i>Open wide!</i>\"  You forcefully tell her.  Phylla does it immediately, seeing that you're using your 'serious voice.'  You slide your cock in and smash into her tongue.  Smirking, you instruct your fuck toy to close up her mouth and form a tight seal around your rod; you have no intention of fucking an orifice that resembles a goblin brood mother's twat.  Phylla complies, but pulls away to hesitatingly ask if she's ");
 			//If first time:
@@ -1689,7 +1739,6 @@ package classes.Scenes.Areas.Desert
 			//Silly Mode, cum multiplier huge  (Red Letter Media reference)]:
 			if (silly()) {
 				outputText("\n\nYet, your constant stream does not stop.  It gets worse - much worse!  The flow of cum simply cannot be controlled as your loins release their fury into Phylla's face.  \"<i>OH, GOD! I CAN'T STOP CUMMING! OH, FUCK!</i>\" You howl out.");
-
 				outputText("\n\nPhylla certainly doesn't mind though, bathing her body in your torrent of cum as you continue your painful and torturous ejaculation.  The pain causes your deranged howls to become deeper and longer, echoing throughout the colony as your body squeezes your loins like a package of soy, emptying you out all over your horny slut until there's no sperm left in your ");
 				if (player.balls > 0) outputText("[balls]");
 				else outputText(player.cockDescript(x));
@@ -1717,6 +1766,7 @@ package classes.Scenes.Areas.Desert
 		{
 			var x:int = player.biggestCockIndex();
 			clearOutput();
+			outputText(images.showImage("ant-camp-vagsex"));
 			outputText("You give Phylla a devious look that denotes you didn't come here to just talk.  She looks a little surprised and embarrassed for you as you start removing your [armor].  Noticing her watching, you pull each article of clothing off a little slower, letting her lust build.  You seductively drop your armor, completely revealing yourself to her.  You can see her eyes widen as she visibly feasts on your features.");
 			//(NO BJ experience)
 			if (flags[kFLAGS.PHYLLA_BLOWJOBS] == 0) {
@@ -1835,6 +1885,7 @@ package classes.Scenes.Areas.Desert
 		private function lesbianFisting():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-camp-female-fisting"));
 			outputText("You give Phylla a seductive smile as you start to remove your armor; you came here for something all right, but the surprised look on your lover's face shows she hasn't quite caught on yet.  Her eyes dart back and forth between watching you disrobe and staring at the stony ground in a confused manner, as if torn between modesty and desire.  Flirtatiously, you toss your underwear on the ground in front of where Phylla's eyes seem locked.  Her head snaps up in surprise; you're not sure what she was expecting, but clearly seeing you in your birthday suit wasn't it.  You strut over to her, putting on your best version of a succubus's sway in your step.  Once you reach Phylla, you take a seat on the edge of her raised stone bed and slowly cross your legs.");
 			outputText("\n\nYou ask Phylla to look at you.  As she does, you tantalizingly uncross your legs, spreading them open so Phylla can glimpse your exposed body.  You even decide to go as far as to grab one of your breasts and caress your nipple playfully.");
 			outputText("\n\n\"<i>Do you... want me to... I mean, you know...</i>\" she says shyly as she blushes.");
@@ -1876,6 +1927,7 @@ package classes.Scenes.Areas.Desert
 		private function dudesFuckEggLayingBitches():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-desert-male-preg-vagsex"));
 			outputText("Phylla looks completely taken aback when you suggest you want to have sex with her.  Obviously self conscious about how she looks right now, she covers her enlarged breasts with all four of her hands as she sits back in her seat.");
 			outputText("\n\n\"<i>Are you sure... I mean I could change... to be smaller.  It won't take long...</i>\"  She glances behind her at her engorged abdomen.  \"<i>Ummm... yeah, it won't ta-AHH!</i>\"");
 
@@ -1975,6 +2027,7 @@ package classes.Scenes.Areas.Desert
 		private function birfingSexWithAntsForDasLadies():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-camp-female-preg-"));
 			outputText("Phylla looks completely taken aback when you suggest that you want to have sex with her.  You can tell she is self conscious about the way she looks right now by the way she covers her enlarged breasts with all four of her hands as she sits back in her seat.");
 			outputText("\n\n\"<i>I... look, we could wait until I've given birth... Wouldn't you want that?</i>\"  She glances behind her at her engorged abdomen.  \"<i>I... It won't ta-AHH!</i>\"");
 			outputText("\n\nShe stops mid-sentence as a contraction shoots through her body, making the entirety of it tense up.  Then with an almost sexual moan she shudders as all her muscles relax and the contraction pushes a cyclentrial egg out from the birthing slit at the tip of her abdomen. As if on cue, one of your many children quickly runs in from the shadows and scoops up the egg to remove it and take it somewhere deeper into the colony.  Clearly there's some kind of greater system going on here.");
@@ -2154,6 +2207,7 @@ package classes.Scenes.Areas.Desert
 		{
 			flags[kFLAGS.TIMES_CORRUPT_MALE_ANT_ORGY]++;
 			clearOutput();
+			outputText(images.showImage("ant-camp-mle-orgy"));	
 
 			outputText("You tell Phylla to call in your strongest and most virile children for 'inspection.'");
 
@@ -2277,6 +2331,7 @@ package classes.Scenes.Areas.Desert
 		private function antColonyOrgy4Ladies():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-camp=female-orgy"));
 			flags[kFLAGS.TIMES_CORRUPT_FEMALE_ANT_ORGY]++;
 			//(First Time)
 			if (flags[kFLAGS.TIMES_CORRUPT_FEMALE_ANT_ORGY] == 1) {
@@ -2430,6 +2485,8 @@ package classes.Scenes.Areas.Desert
 		private function lickThatAntButt():void
 		{
 			clearOutput();
+			phyllaSprite();
+			outputText(images.showImage("ant-camp-lay-egg-licked"));
 			outputText("You tilt your head slightly.  You thought she said she could start to lay any time after the first time you had sex with her.");
 			outputText("\n\n\"<i>It is... faster... to kickstart it... if you help... please...</i>\"");
 
@@ -2468,6 +2525,8 @@ package classes.Scenes.Areas.Desert
 		private function dontLickAntButt():void
 		{
 			clearOutput();
+			phyllaSprite();
+			outputText(images.showImage("ant-camp-lay-egg-not-licked"));
 			outputText("Hesitantly, you tell Phylla that you aren't exactly comfortable with licking her privates... while they are leaking birthing fluids.  Acting quickly though, you reassure your lover and tell her that you're willing to massage her intimate parts.  A warm smile spreads across her face; she's pleased that despite your reservations, you're willing to help her in a way that works for both of you.");
 			outputText("\n\n\"<i>T-thank you...</i>\"  She whispers, breathing in a mix of anticipation and need as you work your way behind her.  As you touch her slit she gasps, your soft touch causing her to shudder.  The contractions of birth start not long after, no longer held back by Phylla's will.  \"<i>More...  Oh gods, more...</i>\"  She whimpers, groaning with each convulsion of muscle.  Plying your thumbs, you begin to massage the outer opening in a circular fashion, doing your best to gently aid Phylla in bringing your children into the world.");
 
@@ -2489,7 +2548,9 @@ package classes.Scenes.Areas.Desert
 		private function phyllaLaysSomeDriderEggs():void
 		{
 			clearOutput();
+			phyllaSprite();
 			pregnancy.knockUpForce(); //Clear Pregnancy
+			outputText(images.showImage("ant-desert-lay-drideregg"));
 			outputText("As you near Phylla's bedchamber you can hear an 'Eeep!' of surprise and worry. Thinking she might be in trouble you burst into the room.  Glancing around for any immediate danger you only see Phylla's vagina drooling a green, slimy mucus.  The way she holds her very pregnant stomach and splays her legs out on the bedspread suggests that your recently laid spawn are ready to hatch.  \"<i>[name], it's time!  UGH!  I don't... have to words to express how weird this feels!</i>\"  Phylla cries out, somewhat scared at the green ooze that trickled out of her.");
 
 			//PC has less than 75 corruption:
@@ -2547,6 +2608,7 @@ package classes.Scenes.Areas.Desert
 		private function driderDoublePhllaMount():void
 		{
 			clearOutput();
+			outputText(images.showImage("ant-camp-ant-mounted-by-drider"));
 			outputText("No longer able to control yourself, you rip free of your [armor] and charge up to Phylla's bed, catching her by surprise as she looks up at you.  With a seductive smile, you pin her down and slather your ovipositor against her fuck hole.");
 			outputText("\n\nYour voice whispers through her being and ignites her sexual desire as you tell her that you feel she'd benefit from having more eggs inside of her.  Bending her rump so that you have the perfect angle, Phylla whimpers in uncontrollable anticipation.");
 
@@ -2728,7 +2790,11 @@ package classes.Scenes.Areas.Desert
 		{
 			clearOutput();
 			//PC is a Female/Herm Drider:
-			if (player.canOvipositSpider()) outputText("While Phylla appears to be sexually sated, the heaviness in your spider abdomen begs for release.\n\n");
+			if (player.canOvipositSpider()) 
+			{
+				outputText(images.showImage("ant-camp-ant-mounted-by-drider"));
+				outputText("While Phylla appears to be sexually sated, the heaviness in your spider abdomen begs for release.\n\n");				
+			}
 			//First Time:
 			if (flags[kFLAGS.TIMES_EGG_IMPREGNATING_PHYLLA] == 0) {
 				outputText("Turning to Phylla, you tell her that you can help to make her wishes of being a brood-mother come true.  She looks at you a bit taken back, as if what you already did wasn't enough already.");

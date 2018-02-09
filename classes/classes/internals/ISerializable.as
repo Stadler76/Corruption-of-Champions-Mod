@@ -32,5 +32,20 @@ package classes.internals
 		 * @param	relativeRootObject the object this class should read from
 		 */
 		function deserialize(relativeRootObject:*):void;
+		
+		/**
+		 * Upgrade from an earlier version of the serialized data.
+		 * This modifies the loaded object so it can be processed by the
+		 * deserialization code.
+		 * @param	relativeRootObject the loaded serialized data
+		 * @param	serializedDataVersion a non-negative integer indicating the version of the loaded data
+		 */
+		function upgradeSerializationVersion(relativeRootObject:*, serializedDataVersion:int):void;
+		
+		/**
+		 * Get the current serialization version for this class.
+		 * @return the current serialization version
+		 */
+		function currentSerializationVerison():int;
 	}
 }

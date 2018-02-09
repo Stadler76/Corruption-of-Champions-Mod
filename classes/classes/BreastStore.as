@@ -66,7 +66,7 @@ package classes
 
 		public static function breastDescript(size:int, lactation:Number = 0):String {
 			if (size < 1) return "flat breasts";
-			var descript:String = (rand(2) == 0 ? Appearance.breastSize(size) : ""); //Add a description of the breast size 50% of the time
+			var descript:String = (rand(2) === 0 ? Appearance.breastSize(size) : ""); //Add a description of the breast size 50% of the time
 			switch (rand(10)) {
 				case 1:
 					if (lactation > 2) return descript + "milk-udders";
@@ -88,6 +88,7 @@ package classes
 					return descript + "boobs";
 				case 9:
 					if (size > 6) return descript + "tits";
+					break;
 				default:
 			}
 			return descript + "breasts";
@@ -122,7 +123,7 @@ package classes
 				if (_timesMilked >= 5) {
 					_timesMilked -= 5; //If enough milkings have occured then don't reduce lactation level right away
 				}
-				else if (preventLactationDecrease != _lactation) {
+				else if (preventLactationDecrease !== _lactation) {
 					_lactation--;
 				}
 			}
@@ -185,7 +186,7 @@ package classes
 		public function cup():String { return Appearance.breastCup(_cupSize); } //The cup size alone
 
 		public function description(useAdj:Boolean = false, isMale:Boolean = false):String {
-			if (_cupSize == BreastCup.FLAT) return "flat" + (isMale ? " manly," : "") + " chest";
+			if (_cupSize === BreastCup.FLAT) return "flat" + (isMale ? " manly," : "") + " chest";
 			return (useAdj ? adj() + " " : "") + cup() + " breasts";
 		}
 
@@ -193,14 +194,14 @@ package classes
 			return breastDescript(cupSize, 0.5 * lactationLevel);
 		}
 
-		public function hasBreasts():Boolean { return _cupSize != BreastCup.FLAT; }
+		public function hasBreasts():Boolean { return _cupSize !== BreastCup.FLAT; }
 
 		public function lactating():Boolean { return _lactation >= LACTATION_LIGHT; }
 
 		public function milked():Boolean { //Returns true if this milking increased the NPC's lactationLevel
 			_fullness = 0;
 			_timesMilked++;
-			if (preventLactationIncrease == _lactation) return false;
+			if (preventLactationIncrease === _lactation) return false;
 			switch (_lactation) { //With enough milking the lactation level increases
 				case LACTATION_NONE: //If you suckle enough times the NPC will eventually start producing milk if they're set to LACTATION_NONE
 					if (_timesMilked < 12) return false;

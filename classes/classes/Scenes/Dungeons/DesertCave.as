@@ -1,21 +1,17 @@
-//Side Dungeon: Desert Cave (Refactored, may have bugs)
+//Side Dungeon: Desert Cave
 package classes.Scenes.Dungeons 
 {
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.BaseContent;
+	import classes.Scenes.Areas.Desert.CumWitch;
+	import classes.Scenes.Dungeons.DesertCave.*;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonCore;
-	import classes.Scenes.Dungeons.DesertCave.*;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	
-	import classes.Scenes.Areas.Desert.CumWitch;
-	
-	import coc.model.GameModel;
-
 	public class DesertCave extends DungeonAbstractContent
 	{
 		/*
@@ -1785,10 +1781,21 @@ package classes.Scenes.Dungeons
 				addButton(0,"North Door",openZeDoorToParadize);
 				addButton(1,"Fuck Her",fuckDatSphinx).hint("Use Sanura to get off.");
 				addButton(4,"Leave",exitDungeon);
-				
 			}
 		}
 
+		internal function sphinxAppearance():void {
+			clearOutput();
+			credits.authorText = "Stygs";
+			outputText("Standing before you is Sanura.  This daunting sphinx has the torso of a woman and the body of a lioness.");
+			outputText("\nShe has two feline ears on top of her otherwise humanoid head and shoulder length black hair, framing her face on each side and drawing your attention to her dark blue eyes.  Two large feathered wings sprout from her back below her shoulders.");
+			outputText("\nA blue bra and a similar loincloth cover her human body while golden bracelets and rings adorn her arms and fingers.  The colors of her attire create a nice contrast with her tan skin and the brown fur on her leonine half.");
+			outputText("\nEach of her four legs ends in paws, their claws hidden until she might need them.  A leonine tail swings back and forth behind her.");
+			outputText("\n\nSanura has a pair of soft, round C-cup breasts, each with a 0.5 inch nipple at their tip.");
+			outputText("\n\nBeneath her tail she has tight butthole and a moist pussy, right where they belong.");
+			menu();
+			addButton(0,"Next",roomEntrance);
+		}
 
 		//THE SPHINX BEAT YOU AT HER OWN -- WAIT A SECOND
 		public function answerWrong():void {
@@ -4154,6 +4161,7 @@ package classes.Scenes.Dungeons
 				//(Display Options: [Riddle Game] [Fight] [Leave])
 				addButton(0, "Riddle Game", riddleGameGo).hint("Start the riddle game.");
 				addButton(1, "Uh, FIGHT!", fuckItAttack).hint("Screw the riddles, fight her instead!");
+				addButton(10,"Appearance",sphinxAppearance).hint("Examine Sanura's appearance.");
 			}
 			else {
 				if (flags[kFLAGS.TIMES_SUBMITTED_TO_SANURA] + flags[kFLAGS.TIMES_WINFUCKED_SANURA] > 0) {
@@ -4174,6 +4182,7 @@ package classes.Scenes.Dungeons
 						addButton(1, "Fuck", fuckDatSphinx).hint("Use Sanura to get off.");
 					}
 				}
+				addButton(5,"Appearance",sphinxAppearance).hint("Examine Sanura's appearance.");
 			}
 			if (flags[kFLAGS.BEATEN_SANURA_COUNT] + flags[kFLAGS.SANURA_DISABLED] == 0) removeButton(6); //Locks north.
 			addButton(11, "Leave", exitDungeon);
@@ -4185,6 +4194,7 @@ package classes.Scenes.Dungeons
 			outputText("Dancing lights swirl around the roof of the cavern, twirling around each other in patterns too intricate to follow.  Whatever they are, they're clearly magical, and they lend this place an otherworldly ambience unmatched by anything you've seen.  This huge room reminds you of your village commons in a way - it's clearly a communal area.  There's a water-pump in the northwest corner and a blazing purple bonfire in the center of the chamber, heating the cool underground air.  The ground is dirt, rather than sand, and hard-packed as any road.  Various chairs and benches are set up for witches to relax in.  ");
 			dungeons.setDungeonButtons(null, checkExit, roomWestHall1, roomEastHall1)
 			if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED] == 0) {
+				spriteSelect(SpriteDb.s_sandwich);
 				outputText("Worst of all, a huge assortment of spellcasters is assembling into a mob, obviously hostile.");
 				outputText("\n\n<b>A magical barrier appears at the exit, preventing your escape!</b>");
 				startCombat(new SandWitchMob(),true);
@@ -4226,6 +4236,7 @@ package classes.Scenes.Dungeons
 			outputText("This room is surprisingly large - big enough to hold the " + num2Text(rand(6) + 5) + " heavily pregnant women inside plus perhaps a dozen more.  Like the outer tunnel, this room is lit by magic, though its contents are equally mundane, if a great deal more... interesting.  There's female sex-toys of every variety on almost every surface.  They sit in piles on the floor, they hang from the walls, and there are even some mounted on the wall, to be fucked in place.  Many such toys have multiple shafts and come in shapes from standard to canine to obscenely equine.  All of the witches are presently engaged in coitus with each other or their 'marital aids', but once you enter, they glance at you with hungry, lust-filled eyes.");
 			if (silly()) outputText("  Clearly, if you wanted to, you could put some extra meat in a sand witch.");
 			dungeons.setDungeonButtons(roomWestHall1, null, null, null);
+			spriteSelect(SpriteDb.s_sandwich);
 			addDisabledButton(0, "Fuck Witches", "This scene requires you to have cock and sufficient arousal.");
 			if (player.hasCock() && player.lust >= 33) {
 				addButton(0, "Fuck Witches", knockUpSomeDoubleStuffedSandWitches).hint("Use the sand witches to get off.");
@@ -4292,6 +4303,7 @@ package classes.Scenes.Dungeons
 			dungeons.setDungeonButtons(null, null, roomSleepingChamber, null);
 			flags[kFLAGS.MET_MILK_SLAVE] = 1;
 			if (flags[kFLAGS.MILK_NAME] is Number) {
+				spriteSelect(SpriteDb.s_milkgirl);
 				outputText("  There are no faucets or water sources that you can see, but your unasked questions are answered when a heavy, liquid sloshing sound emanates from the corner.  The source of the noise reveals itself to be a tit-encumbered, black-skinned human girl.  She drags her milk-swollen mammaries up to the edge of the tub and asks in a breathy, excited voice, \"<i>Bath time?</i>\"  Whoever she was, the witches seem to have broken her utterly - she's interested in nothing but being milked or lounging in her corner.  The way out lies west.");
 				addButton(0, "Bath Time", milkBathsAhoy).hint("Have a milk bath.");
 			}
@@ -4315,6 +4327,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("<b><u>Eastern Warrens, West Portion, South Side (Cum Witch's Office)</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, roomCumWitchBedroom);
+			spriteSelect(SpriteDb.s_cumWitch);
 			if (flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
 				//{SAND WITCHES NOW FRIENDLY}
 				outputText("The cum witch is here, pounding away at one of her sister's cunts, like usual.  She seems to CONSTANTLY excrete her jism into her partner's many cunt-folds, but as her passion and speed rises, the flow thickens, eventually filling the poor milk-witch's wombs entirely.  They go at it like animals for a few seconds more, then separate after a climactic orgasm that leaves a puddle of spooge inches deep on part of the uneven floor.  The cum-witch moves her insensate sister to rest on a nearby bench before putting on her hat and robes.  She winks at you and offers, \"<i>Well, I hope you enjoyed the show, interloper.  Did you come here for some of my gift, or something else?</i>\"");

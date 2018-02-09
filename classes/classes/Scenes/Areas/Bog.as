@@ -1,8 +1,5 @@
-/**
- * Created by aimozg on 06.01.14.
- */
-package classes.Scenes.Areas
-{
+/* Created by aimozg on 06.01.14 */
+package classes.Scenes.Areas {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -18,8 +15,7 @@ package classes.Scenes.Areas
 
 	use namespace kGAMECLASS;
 
-	public class Bog extends BaseContent implements IExplorable
-	{
+	public class Bog extends BaseContent implements IExplorable {
 		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
 		public var phoukaScene:PhoukaScene = new PhoukaScene();
@@ -28,12 +24,8 @@ package classes.Scenes.Areas
 		public var parasiteScene:ParasiteScene = new ParasiteScene();
 		public var infestedChameleonGirlScene:InfestedChameleonGirlScene = new InfestedChameleonGirlScene();
 		*/
-		public function Bog()
-		{
-		}
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.BOG_EXPLORED] > 0;
-		}
+		public function Bog() {}
+		public function isDiscovered():Boolean { return flags[kFLAGS.BOG_EXPLORED] > 0; }
 		public function discover():void {
 			clearOutput();
 			outputText(images.showImage("area-bog"));
@@ -44,7 +36,7 @@ package classes.Scenes.Areas
 
 		private var _explorationEncounter:Encounter = null;
 		public function get explorationEncounter():Encounter {
-			const game:CoC     = kGAMECLASS;
+			const game:CoC = kGAMECLASS;
 			const fn:FnHelpers = Encounters.fn;
 			if (_explorationEncounter == null) _explorationEncounter =
 					Encounters.group(game.commonEncounters, {
@@ -107,8 +99,7 @@ package classes.Scenes.Areas
 					});
 			return _explorationEncounter;
 		}
-		public function explore():void
-		{
+		public function explore():void {
 			explorationEncounter.execEncounter();
 			flags[kFLAGS.BOG_EXPLORED]++;
 		}
@@ -123,11 +114,9 @@ package classes.Scenes.Areas
 		public function findMurkyChest():void {
 			var gemsFound:int = 200 + rand(300);
 			outputText(images.showImage("item-chest"));
-			outputText("While you're minding your own business, you spot a waterlogged chest. You wade in the murky waters until you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It would make a good storage once you clean the inside of the chest.");
+			outputText("While you're minding your own business, you spot a waterlogged chest. You wade in the murky waters until you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It would make a good storage once you clean the inside of the chest.  ");
 			player.createKeyItem("Camp - Murky Chest", 0, 0, 0, 0);
-			for (var i:int = 0; i < 4; i++) {
-				inventory.createStorage();
-			}
+			for (var i:int = 0; i < 4; i++) inventory.createStorage();
 			player.gems += gemsFound;
 			statScreenRefresh();
 			outputText("\n\n<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");

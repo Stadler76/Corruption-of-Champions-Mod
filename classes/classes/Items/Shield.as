@@ -14,9 +14,17 @@ package classes.Items
 	
 public class Shield extends Useable //Equipable
 	{
+		public static const WEIGHT_LIGHT:String = "Light";
+		public static const WEIGHT_MEDIUM:String = "Medium";
+		public static const WEIGHT_HEAVY:String = "Heavy";
+		
+		public static const PERK_ABSORPTION:String = "Absorption";
+		
 		private var _block:Number;
 		private var _perk:String;
 		private var _name:String;
+		private var _weight:String = WEIGHT_MEDIUM; //Defaults to medium
+		private var _tier:int = 0;
 		
 		public function Shield(id:String, shortName:String, name:String, longName:String, block:Number, value:Number = 0, description:String = null, perk:String = "") {
 			super(id, shortName, longName, value, description);
@@ -25,7 +33,7 @@ public class Shield extends Useable //Equipable
 			this._perk = perk;
 		}
 		
-		public function get block():Number { return _block; }
+		public function get block():Number { return _block + (_tier * 2); }
 		
 		public function get perk():String { return _perk; }
 		
@@ -33,6 +41,16 @@ public class Shield extends Useable //Equipable
 		
 		override public function get description():String {
 			var desc:String = _description;
+			switch(_tier) {
+				case 1:
+					desc += " This shield has been upgraded to be of fine quality.";
+					break;
+				case 2:
+					desc += " This shield has been upgraded to be of masterwork quality.";
+					break;
+				default:
+					desc += "";
+			}
 			//Type
 			desc += "\n\nType: Shield";
 			//Block Rating
@@ -64,5 +82,22 @@ public class Shield extends Useable //Equipable
 		
 		public function removeText():void {} //Produces any text seen when removing the armor normally
 		
+		override public function getMaxStackSize():int {
+			return 1;
+		}
+		
+		public function set tier(num:int):void {
+			this._tier = num;
+		}
+		public function get tier():int {
+			return this._tier;
+		}
+		
+		public function set weightCategory(newWeight:String):void {
+			this._weight = newWeight;
+		}
+		public function get weightCategory():String {
+			return this._weight;
+		}
 	}
 }

@@ -109,22 +109,23 @@ package classes.Scenes.Places.TelAdre {
 		
 		//Answers the simpler question 'Is Vala at the bar right now' rather than 'can Vala have sex with you right now'
 		public function isValaAtBar():Boolean {
-			return (flags[kFLAGS.FREED_VALA] != 0 && model.time.hours >= 12 && model.time.hours <= 21); 
+			return (flags[kFLAGS.FREED_VALA] != 0 && getGame().time.hours >= 12 && getGame().time.hours <= 21); 
 		}
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
 			if (breasts.lactationLevel <= breasts.preventLactationIncrease) {
-				switch (model.time.hours) { //Suckling by all NPCs handled here. The player doesn't see this, but they meet up with Kath at different times of the day.
-					case  8:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS) || (milkOption(KBIT_MILK_SHARE_WITH_OLD_GANG) && model.time.days % 2 == 0)) breasts.milked();
+				switch (getGame().time.hours) { //Suckling by all NPCs handled here. The player doesn't see this, but they meet up with Kath at different times of the day.
+					case  8:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS) || (milkOption(KBIT_MILK_SHARE_WITH_OLD_GANG) && getGame().time.days % 2 == 0)) breasts.milked();
 								break; //She shares with friends every day, or shares with the old gang once every two days
-					case 11:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_URTA) && model.time.days % 5 == 0) breasts.milked();
+					case 11:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_URTA) && getGame().time.days % 5 == 0) breasts.milked();
 								break;
-					case 14:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS) && model.time.days % 4 == 0) breasts.milked();
+					case 14:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS) && getGame().time.days % 4 == 0) breasts.milked();
 								break;
-					case 16:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_OLD_GANG | KBIT_MILK_SHARE_WITH_HELENA) && model.time.days % 3 == 0) breasts.milked();
+					case 16:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_OLD_GANG | KBIT_MILK_SHARE_WITH_HELENA) && getGame().time.days % 3 == 0) breasts.milked();
 								break;
-					case 17:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_VALA) && model.time.days % 5 == 2) breasts.milked();
+					case 17:	if (milkOption(KBIT_MILK_SHARE_WITH_FRIENDS | KBIT_MILK_SHARE_WITH_VALA) && getGame().time.days % 5 == 2) breasts.milked();
+								break;
 					default:
 				}
 			}
@@ -134,19 +135,19 @@ package classes.Scenes.Places.TelAdre {
 				flags[kFLAGS.KATHERINE_LOCATION] = KLOC_STREETS;
 				return false; //She only has tattered clothes, so no need to deal with clothing either.
 			}
-			if (model.time.hours == 6) {
+			if (getGame().time.hours == 6) {
 				flags[kFLAGS.KATHERINE_LOCATION] = KLOC_STREETS; //On duty
 				flags[kFLAGS.KATHERINE_CLOTHES_WORN] = KBIT_CLOTHES_UNIFORM;
 				if (flags[kFLAGS.KATHERINE_URTA_DATE] == KDATE_WHENEVER) {
-					if (model.time.days % 4 == 0) katherineAndUrtaHadSex(false); //Roughly twice a week
+					if (getGame().time.days % 4 == 0) katherineAndUrtaHadSex(false); //Roughly twice a week
 				}
 				else if (flags[kFLAGS.KATHERINE_URTA_DATE] == KDATE_LOTS) katherineAndUrtaHadSex(false); //They fuck at least once a day
 				if (flags[kFLAGS.KATHERINE_VALA_DATE] == KDATE_WHENEVER) {
-					if (model.time.days % 4 == 0) katherineAndValaHadSex(); //Roughly twice a week
+					if (getGame().time.days % 4 == 0) katherineAndValaHadSex(); //Roughly twice a week
 				}
 				else if (flags[kFLAGS.KATHERINE_VALA_DATE] == KDATE_LOTS) katherineAndValaHadSex(); //They fuck at least once a day
 			}
-			else if (model.time.hours == 10) { //Must select her civilian clothes for the day once her shift is over
+			else if (getGame().time.hours == 10) { //Must select her civilian clothes for the day once her shift is over
 				var clothesPref:Number = flags[kFLAGS.KATHERINE_CLOTHES_PREF];
 				
 				if (clothesPref < 0) { //She’s been told what to wear by the PC
@@ -168,7 +169,7 @@ package classes.Scenes.Places.TelAdre {
 					flags[kFLAGS.KATHERINE_CLOTHES_WORN] = clothesArray[rand(clothesArray.length)];
 				}
 			}
-			if (model.time.hours >= 14) {
+			if (getGame().time.hours >= 14) {
 				//Once employed Kath goes home from any encounter after 14:00 hours, unless they happened at either Urta’s apartment or Urta’s house.
 				switch (flags[kFLAGS.KATHERINE_LOCATION]) {
 					case KLOC_KATHS_APT:
@@ -189,7 +190,7 @@ package classes.Scenes.Places.TelAdre {
 					default: flags[kFLAGS.KATHERINE_LOCATION] = KLOC_KATHS_APT;
 				}
 			}
-			else if (model.time.hours >= 10) {
+			else if (getGame().time.hours >= 10) {
 				//Any time after 10:00 but before 14:00 Kath returns to the bar after encounters, though she will stay at her home if the encounter happened there.
 				switch (flags[kFLAGS.KATHERINE_LOCATION]) {
 					case KLOC_BAR:
@@ -549,7 +550,7 @@ package classes.Scenes.Places.TelAdre {
 		}
 
 		public function needIntroductionFromScylla():Boolean {
-			return model.time.hours > 8 && model.time.hours < 18 && player.hasKeyItem("Silver Kitty-Bell") >= 0;
+			return getGame().time.hours > 8 && getGame().time.hours < 18 && player.hasKeyItem("Silver Kitty-Bell") >= 0;
 		}
 		
 		public function katherineSprite(naked:Boolean = false):void {
@@ -677,7 +678,7 @@ public function visitAtHome():void { //You go to Kath's place alone - she may or
 			katherineMenu();
 		}
 	}
-	else if (model.time.hours < 10) {
+	else if (getGame().time.hours < 10) {
 		outputText("Kath's apartment is empty.  That shouldn't be surprising to you, at this time of the morning she's got to be out patrolling the market.\n\n");
 		katherineApartmentEmptyLeave();
 	}
@@ -1948,10 +1949,8 @@ private function talkMilkLimitation():void {
 												break;
 		case BreastStore.LACTATION_HEAVY:		outputText("to keep her breasts in check.  She won't allow more than heavy");
 												break;
-		case BreastStore.LACTATION_MODERATE:	if (doneHighLactation) {
-													outputText("to keep her breasts in check.  She won't allow more than moderate");
-													break;
-												}
+		case BreastStore.LACTATION_MODERATE:	outputText("to keep her breasts in check.  She won't allow more than moderate");
+												break;
 		default:
 												outputText("not to keep her breasts in check.  There's no limit on her");
 	}
@@ -2089,7 +2088,7 @@ private function katherinesAppearance(clear:Boolean = true):void {
     if (flags[kFLAGS.KATHERINE_UNLOCKED] < 4) { //Still unemployed
 		outputText("Katherine stands before you, nervously watching as you scrutinize her form.  “<i>Um... do you like what you see?</i>”  Nervously trying to break the ice and amateurishly trying to flaunt her body, she strikes what might be a sexy pose... in her mind.\n\n");
 	}
-	else if (model.time.hours >= 10) { //She’s off duty (on duty doesn’t need intro text)
+	else if (getGame().time.hours >= 10) { //She’s off duty (on duty doesn’t need intro text)
 		//She’s at home (appearance function doesn’t get used at the bar)
 		outputText("Katherine stands before you, beaming with pride.  She moves her fingers across her body, hoping to give you ideas.  “<i>Is there anything you’d like to do?</i>” she purrs.\n\n");
 	}
@@ -2142,7 +2141,7 @@ private function katherinesAppearance(clear:Boolean = true):void {
 		outputText("When you're finished looking at her she quickly redresses herself, flaunting her rear at you as if by accident and waiting to see what else you want, reassured by your lack of comments.");
 		katherineMenu(); //Display default Katherine options
 	}
-	else if (model.time.hours >= 10) { //She’s at home (appearance function is never called at the bar). If time < 10 then she is on duty. See katherineOnDuty() for end of conversation & menu
+	else if (getGame().time.hours >= 10) { //She’s at home (appearance function is never called at the bar). If time < 10 then she is on duty. See katherineOnDuty() for end of conversation & menu
 		outputText("Totally naked, tail waving with pleasure, Katherine stretches, giving you a very good show of all her most private parts.  “<i>Like what you see, dearest?</i>” she purrs.\n\n");
 		outputText("Oh yes, you tell her.  The clothes look good on her and what they hid is even better.  “<i>I do like the sound of that,</i>” she replies, “<i>but it is a bit chilly in here.</i>”  Her tail twitches with pent up energy and she slides her hands down her sides, " + catGirl("stroking her milky white skin", "smoothing her shiny fur coat") + " before asking, “<i>Can you think of a way to keep me warm?</i>”\n\n");
 		outputText("She starts to collect her clothes, putting them back on almost as seductively as she removed them.\n\n");
@@ -2161,7 +2160,7 @@ private function giveKatherineAnItem(page:int = 0):void {
 	addButton(14, "Back", giveKatherineAnItem);
 	// list pages
 	if (page == 0) {
-		addButton(button++, "Transformatives", giveKatherineAnItem, 1);
+		addButton(button++, "TFs", giveKatherineAnItem, 1);
 		
 		if (hasJob) addButton(button++, "Clothes", giveKatherineAnItem, 2);
 		else addDisabledButton(button++, "Clothes", "She has no place to store her clothes.");
@@ -2247,23 +2246,37 @@ private function giveKatherineAnItem(page:int = 0):void {
 		else addDisabledButton(button++, "Tube Top", "You think she can use a tube top.");
 	}
 	//Dyes
-	if (page == 3) {
-		var dyeButton:Function = function(color:String, item:ItemType, func:Function):void {
-			if (hairColor == color) addDisabledButton(button++,  item.shortName, "Her hair is already " + color + ".");
-			else if (!player.hasItem(item)) addDisabledButton(button++,  item.shortName, "You think she would look good with " + color + " hair if you could find a dye.");
-			else addButton(button++, item.shortName, func, undefined, undefined, undefined, "Offer her " + item.longName + ".");
+	if (page == 3 || page == 4) {
+		var dyeButton:Function = function(color:String, buttonID:int, item:ItemType, func:Function):void {
+			if (hairColor == color) addDisabledButton(buttonID,  item.shortName, "Her hair is already " + color + ".");
+			else if (!player.hasItem(item)) addDisabledButton(buttonID,  item.shortName, "You think she would look good with " + color + " hair if you could find a dye.");
+			else addButton(buttonID, item.shortName, func, undefined, undefined, undefined, "Offer her " + item.longName + ".");
 		};
-		
-		dyeButton("rich auburn", consumables.AUBURND, giveKatDyeAuburn);
-		dyeButton("jet black", consumables.BLACK_D, giveKatDyeBlack);
-		dyeButton("light blonde", consumables.BLOND_D, giveKatDyeBlonde);
-		dyeButton("bright blue", consumables.BLUEDYE, giveKatDyeBlue);
-		dyeButton("lime green", consumables.GREEN_D, giveKatDyeGreen);
-		dyeButton("vibrant orange", consumables.ORANGDY, giveKatDyeOrange);
-		dyeButton("neon pink", consumables.PINKDYE, giveKatDyePink);
-		dyeButton("deep purple", consumables.PURPDYE, giveKatDyePurple);
-		dyeButton("flaming red", consumables.RED_DYE, giveKatDyeRed);
-		dyeButton("snow white", consumables.WHITEDY, giveKatDyeWhite);
+		if (page == 3) {
+			dyeButton("rich auburn", 0, consumables.AUBURND, giveKatDyeAuburn);
+			dyeButton("jet black", 1, consumables.BLACK_D, giveKatDyeBlack);
+			dyeButton("light blonde", 2, consumables.BLOND_D, giveKatDyeBlonde);
+			dyeButton("bright blue", 3, consumables.BLUEDYE, giveKatDyeBlue);
+			dyeButton("chestnut brown", 5, consumables.BROWN_D, giveKatDyeBrown);
+			dyeButton("cloud gray", 6, consumables.GRAYDYE, giveKatDyeGray);
+			dyeButton("lime green", 7, consumables.GREEN_D, giveKatDyeGreen);
+			dyeButton("vibrant orange", 8, consumables.ORANGDY, giveKatDyeOrange);
+			dyeButton("neon pink", 10, consumables.PINKDYE, giveKatDyePink);
+			dyeButton("deep purple", 11, consumables.PURPDYE, giveKatDyePurple);
+			dyeButton("rainbow colored", 12, consumables.RAINDYE, giveKatDyeRainbow);
+			dyeButton("flaming red", 13, consumables.RED_DYE, giveKatDyeRed);
+
+			addButton(4, "Next", giveKatherineAnItem, 4);
+			addDisabledButton(9, "Previous");
+		}
+		else {
+			dyeButton("russet red", 0, consumables.RUSSDYE, giveKatDyeRusset);
+			dyeButton("sunflower yellow", 1, consumables.YELLODY, giveKatDyeYellow);
+			dyeButton("snow white", 2, consumables.WHITEDY, giveKatDyeWhite);
+
+			addDisabledButton(4, "Next");
+			addButton(9, "Previous" , giveKatherineAnItem, 3);
+		}
 	}
 }
 
@@ -3048,6 +3061,7 @@ private function giveKatTheGiftOFMilk():void {
 			case BreastStore.LACTATION_STRONG:		if (breasts.preventLactationIncrease == BreastStore.LACTATION_STRONG) breasts.preventLactationIncrease = 0;
 													break;
 			case BreastStore.LACTATION_HEAVY:		if (breasts.preventLactationIncrease == BreastStore.LACTATION_HEAVY) breasts.preventLactationIncrease = 0;
+													break;
 			default:
 		}
 		breasts.lactationLevel++;
@@ -3476,6 +3490,29 @@ private function giveKatDyeBlue():void {
 	giveKatDyeEnd();
 }
 
+// Stygs - new 02/04/18
+private function giveKatDyeBrown():void {
+	giveKatDyeBegin("chestnut brown");
+	player.consumeItem(consumables.BROWN_D);
+	outputText(".\n\nKath takes a look in the mirror and tries combing her hair several different ways.  “<i>Well, it’s not that flashy, but I think it fits me.  There’s a nice contrast with my " + catGirl("skin", "fur") + ".</i>”\n\n");
+	giveKatDyeEnd();
+}
+
+// Stygs - new 02/04/18
+private function giveKatDyeGray():void {
+	giveKatDyeBegin("cloud gray");
+	player.consumeItem(consumables.GRAYDYE);
+	outputText(".\n\nKath takes a look in the mirror and tries combing her hair several different ways.  “<i>I was afraid it would be a bit to dull and make me look like a wallflower... but I am starting to like it.  There’s a nice contrast with my " + catGirl("skin", "fur") + ".</i>”\n\n");
+	giveKatDyeEnd();
+}
+
+private function giveKatDyeGreen():void {
+	giveKatDyeBegin("lime green");
+	player.consumeItem(consumables.GREEN_D);
+	outputText(".\n\nKath takes a look in the mirror and runs her fingers through her hair.  “<i>That's something unique! There are no other cat" + catGirl("-girl", "") + " with green hair in whole Tel'Adre, and it looks great with my green eyes!</i>”\n\n");
+	giveKatDyeEnd();
+}
+
 private function giveKatDyeOrange():void {
 	giveKatDyeBegin("vibrant orange");
 	player.consumeItem(consumables.ORANGDY);
@@ -3497,6 +3534,14 @@ private function giveKatDyePurple():void {
 	giveKatDyeEnd();
 }
 
+// Stygs - new 02/04/18
+private function giveKatDyeRainbow():void {
+	giveKatDyeBegin("rainbow colored");
+	player.consumeItem(consumables.RAINDYE);
+	outputText(".\n\nKath takes a look in the mirror and tries combing her hair several different ways.  “<i>Reminds me of an old fairy tale about a flying horse that controlls the weather. Takes some getting used to the colors, but it’s certainly a unique style that makes me stand out. I love it!</i>”\n\n");
+	giveKatDyeEnd();
+}
+
 private function giveKatDyeRed():void {
 	giveKatDyeBegin("flaming red");
 	player.consumeItem(consumables.RED_DYE);
@@ -3504,17 +3549,26 @@ private function giveKatDyeRed():void {
 	giveKatDyeEnd();
 }
 
+// Stygs - new 02/04/18
+private function giveKatDyeRusset():void {
+	giveKatDyeBegin("russet red");
+	player.consumeItem(consumables.RUSSDYE);
+	outputText(".\n\nKath takes a look in the mirror and tries combing her hair several different ways.  “<i>Say what you want, but I always felt like this color has a bit of a criminal vibe to it.</i>”  She giggles a bit and says, “<i>I always wanted to try it for myself and I think it looks great!</i>”\n\n");
+	giveKatDyeEnd();
+}
+
+// Stygs - new 02/04/18
+private function giveKatDyeYellow():void {
+	giveKatDyeBegin("sunflower yellow");
+	player.consumeItem(consumables.YELLODY);
+	outputText(".\n\nKath takes a look in the mirror and runs her fingers through her hair.  “<i>Talk about a signal color. With hair like this, I don’t think anyone is ever going to overlook me again.</i>”  She giggles a bit and says, “<i>Really appropriate for an officer of the city watch!</i>”\n\n");
+	giveKatDyeEnd();
+}
+
 private function giveKatDyeWhite():void {
 	giveKatDyeBegin("snow white");
 	player.consumeItem(consumables.WHITEDY);
 	outputText(".\n\nKath takes a look in the mirror and tries combing her hair several different ways.  “<i>When I was a little kitty I was always jealous of felines with lighter colored fur.  " + catGirl("Now I’ve got snow white hair and only a little bit of black fur on my ears and tail.  They’re the ones who ought to be jealous now.  In this desert heat I win!", "I think it looks good on me but the contrast is something else.  It almost hurts my eyes looking at my shoulders and it’s going to be even worse in sunlight.  No one is going to walk into me now.") + "</i>”\n\n");
-	giveKatDyeEnd();
-}
-
-private function giveKatDyeGreen():void {
-	giveKatDyeBegin("lime green");
-	player.consumeItem(consumables.GREEN_D);
-	outputText(".\n\nKath takes a look in the mirror and runs her fingers through her hair.  “<i>That's something unique! There are no other cat" + catGirl("-girl", "") + " with green hair in whole Tel'Adre, and it looks great with my green eyes!</i>”\n\n");
 	giveKatDyeEnd();
 }
 
@@ -3910,9 +3964,9 @@ public function pcPenetratesKatDoubly():void {
 	if (isAt(KLOC_KATHS_APT))
 		outputText(".  You toss your clothes on the floor and lift an eager Katherine onto her bed");
 	else {
-		if (model.time.hours < 12)
+		if (getGame().time.hours < 12)
 			outputText("to the morning breeze");
-		else if (model.time.hours < 18)
+		else if (getGame().time.hours < 18)
 			outputText("to the warm afternoon air");
 		else
 			outputText("to the cool evening air");
@@ -5244,7 +5298,7 @@ private function suckleFromKath():void {
 	}
 	
 	if (isAt(KLOC_BAR) || isAt(KLOC_BAR_DRUNK) || isAt(KLOC_BAR_URTA_REFUSED)) {
-		if (model.time.hours >= 8 && model.time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0)
+		if (getGame().time.hours >= 8 && getGame().time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0)
 			outputText("You notice " + (flags[kFLAGS.MET_NIAMH] == 0 ? "the huge breasted cat girl" : "Niamh") + " rubbing her own mammaries enviously.  ");
 		outputText("Unfortunately you have places to be, portals to check on.  You give Katherine a kiss and her tail a little stroke before heading back to camp.");
 	}
@@ -5298,7 +5352,7 @@ private function suckleTacularKats():void {
 		outputText("alley walls");
 	else { //At the bar
 		outputText("walls of the bar");
-		if (model.time.hours >= 8 && model.time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0)
+		if (getGame().time.hours >= 8 && getGame().time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0)
 			outputText(".  You notice " + (flags[kFLAGS.MET_NIAMH] == 0 ? "the huge breasted cat girl" : "Niamh") + " rubbing her own mammaries enviously");
 	}
 	outputText(".  “<i>I feel great,</i>” Katherine tells you, totally unabashed.  “<i>I must say, I've drunk from people before... but nobody makes milk as wonderful as yours");
@@ -5699,7 +5753,7 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText(" at the " + (isAt(KLOC_DESERT) ? "ground" : "wall") + ".  You pull your fingers from her pussy and rub her wetness over " + (hasBalls() ? "her fuzzy balls" : "her growing knot") + ".  Pulling your head back you tell Kath to cum for you.  She gasps and you feel " + (hasBalls() ? "that " + ballAdj() + " ballsack contract" : "her cock" + cockMultiple("", "s") + " twitch and harden") + " as Kath lets loose with who knows how much pent up cum.");
 		outputText("\n\nYou’re not done with her yet.  As the first shot splatters against the ");
 		if (isAt(KLOC_DESERT))
-			outputText((model.time.hours <= 18 ? "hot" : "cool") + " sand");
+			outputText((getGame().time.hours <= 18 ? "hot" : "cool") + " sand");
 		else outputText(isAt(KLOC_KATHS_APT) ? "plaster" : "brickwork");
 		outputText(" you slip your fingers back to her cunt and attack her clit.  Despite already being in the midst of one orgasm, Kath’s body tenses up even more.  It feels like a cup of water gushes from her pussy and the next blast from her cock" + cockMultiple("", "s") + " is even stronger, " + (isAt(KLOC_DESERT) ? "arcing a good six inches further " : "hitting the wall a good six inches higher") + " than the first.");
 	}

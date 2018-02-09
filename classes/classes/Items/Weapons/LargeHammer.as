@@ -3,20 +3,23 @@
  */
 package classes.Items.Weapons
 {
-	import classes.CoC_Settings;
-	import classes.Creature;
 	import classes.Items.Weapon;
-	import classes.Player;
 
-	public class LargeHammer extends Weapon {
-		
-		public function LargeHammer() {
-			super("L.Hammr", "L.Hammr", "large hammer", "Marble's large hammer", "smash", 16, 90, "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.", "Large");
+	public class LargeHammer extends Weapon 
+	{
+		public function LargeHammer(tier:int) 
+		{
+			var ids:Array = ["L.Hammr", "L.Hamr1", "L.Hamr2"];
+			var eqptNames:Array = ["large hammer", "fine large hammer", "masterwork large hammer"];
+			var longNames:Array = ["Marble's large hammer", "a fine, large hammer", "a masterwork, large hammer"];
+			this.weightCategory = Weapon.WEIGHT_HEAVY;
+			this.tier = tier;
+			super(ids[tier], "L.Hammer", eqptNames[tier], longNames[tier], "smash", 16, 90, "This two-handed warhammer looks pretty devastating. You took it from Marble after she refused your advances.", Weapon.PERK_LARGE); 
 		}
 		
 		override public function canUse():Boolean {
 			if (game.player.tallness >= 60) return true;
-			outputText("This hammer is too large for you to wield effectively.  ");
+			outputText("This hammer is too large for you to wield effectively. ");
 			return false;
 		}
 		

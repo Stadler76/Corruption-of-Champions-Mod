@@ -1,7 +1,5 @@
 package coc.test {
-	import classes.DefaultDict;
 	import classes.internals.LoggerFactory;
-	import coc.model.GameModel;
 	import coc.view.MainView;
 	import flash.display.MovieClip;
 	import mx.logging.ILogger;
@@ -9,22 +7,17 @@ package coc.test {
 	public class TestMainView extends MovieClip {
 		private static const LOGGER:ILogger = LoggerFactory.getLogger(TestMainView);
 		public var mainView :MainView;
-		public var gameModel :GameModel;
 
 		public function TestMainView() :void {
 			// This variable is used to maintain a reference to the Test's
 			// this in unbound functions.
 			var testThis :TestMainView = this;
 
-			this.gameModel = new GameModel();
-			this.mainView = new MainView( this.gameModel );
+			this.mainView = new MainView();
 			this.stage.addChild( this.mainView );
-
-			this.gameModel.flags = new DefaultDict();
 
 			LOGGER.debug( "MainView:", this.mainView );
 
-			this.gameModel.flags[kFLAGS. 273 ] = 0;
 			this.mainView.selectSprite( 2 );
 
 			// TODO: put in actual callbacks here because that be how we do, now.

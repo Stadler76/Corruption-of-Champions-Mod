@@ -19,7 +19,7 @@ public function visitZeMagesTower():void {
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
 	else towerFollowUpVisits();
 	menu();
-	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || getGame().time.hours <= 17)  {
 		addButton(1,"You Okay?",youOkayBuddy);
 		if (flags[kFLAGS.DOMINIKA_DRAMA] > 0) addButton(2,"Mali",talkToMali);
 	}
@@ -39,7 +39,7 @@ private function firstTowerVisit():void {
 	
 	outputText("\n\nA single room takes up the entirety of the space on the first floor.  Staircases up and down can be seen on opposing ends, but the majority of the room is furnished with simple seats and tables.  Scrolls and books litter the surfaces, likely pulled from a series of shelves set under the curving staircase.  There does not seem to be a connection between this library and the actual core of the tower.");
 	
-	if (model.time.hours <= 17) { //Don't want to meet Quinn if he's not supposed to be there
+	if (getGame().time.hours <= 17) { //Don't want to meet Quinn if he's not supposed to be there
 		outputText("  A single man carefully turns through the pages of one book");
 		commonQuinnTroduction();
 	}
@@ -52,7 +52,7 @@ private function firstTowerVisit():void {
 private function towerFollowUpVisits():void {
 	clearOutput();
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == -1) { //Return visits before you meet Quinn. Either you meet him or you continue to go to the library at night like some bibliophile vampire
-		if (model.time.hours <= 17) {
+		if (getGame().time.hours <= 17) {
 			outputText("You return to the mage's tower.  Entering the main room, you're surprised to see a man carefully turning the pages of one of the tomes");
 			commonQuinnTroduction();
 		}
@@ -64,7 +64,7 @@ private function towerFollowUpVisits():void {
 	}
 	
 	//(follow-up visits, 6:00 – 17:00)
-	if (model.time.hours <= 17) {
+	if (getGame().time.hours <= 17) {
 		outputText("You return to the mage's tower.  Entering the main room, Quinn is carefully inspecting the pages of a book.  The room looks slightly more organized from when you last saw it, but it looks as though Quinn will be working on it for some time.");
 		outputText("\n\nHe notices you've arrived and quirks an eyebrow.  \"<i>Yes?</i>\" he asks wearily, \"<i>Is there something I can assist you with?</i>\"");
 		//If the player has encountered Asa Mali they may ask for Mali.  Otherwise they can either leave, ask to study, or ask Quinn if he is okay.
@@ -98,7 +98,7 @@ private function commonQuinnTroduction():void {
 private function studyInTA():void {
 	clearOutput();
 	//[Study, 6:00-17:00]
-	if (model.time.hours <= 17) {
+	if (getGame().time.hours <= 17) {
 		outputText("You ask Quinn if you can use the library to study and learn.");
 		outputText("\n\n\"<i>I'm afraid that I may have not made myself clear earlier, the library is not presently open,</i>\" Quinn sighs, rubbing his forehead.  \"<i>This means that it is closed, which is the opposite state of open.  While it is in this state its services are unavailable to the general public.  The general public in this particular instance are also the ones directly responsible for the necessity of it closing, leading to further hesitation in the Covenant's willingness to hasten the opening.  Your interest is noted, filed, and considered, but will be regarded as a data point and not the quote unquote voice of the people.</i>\"");
 		outputText("\n\nQuinn pauses for a few more moments, looking you in the eye thoughtfully before finishing with \"<i>That means no, in case we're unclear.</i>\"");

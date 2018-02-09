@@ -40,7 +40,7 @@ public class IzmaScene extends NPCAwareContent implements TimeAwareInterface, En
 			checkedIzmaLatexy = 0;
 			checkedIzmaSophie = 0;
 			pregnancy.pregnancyAdvance();
-			//trace("\nIzma time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nIzma time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] > 0) flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE]--; //BOOKURYUUUU COUNTAH For IZMA
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY] > 0 && latexGirl.latexGooFollower() && flags[kFLAGS.IZMA_X_LATEXY_DISABLED] == 0) {
 				flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
@@ -48,7 +48,7 @@ public class IzmaScene extends NPCAwareContent implements TimeAwareInterface, En
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1 && flags[kFLAGS.VALARIA_AT_CAMP] > 0) {
 				flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
-			if (model.time.hours > 23 && flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] > 0) flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] = 0;
+			if (getGame().time.hours > 23 && flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] > 0) flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] = 0;
 			return false;
 		}
 	
@@ -2713,7 +2713,7 @@ public function izmaKidsPlaytime():void {
 	choices[choices.length] = 5;
 	//Select correct scene!
 	var choice:Number = choices[rand(choices.length)];
-	if (model.time.hours < 10 && flags[kFLAGS.ANEMONE_KID] > 0 && rand(2) == 0) {
+	if (getGame().time.hours < 10 && flags[kFLAGS.ANEMONE_KID] > 0 && rand(2) == 0) {
 		anemoneScene.kidAWatchesSharks();
 		return;
 	}

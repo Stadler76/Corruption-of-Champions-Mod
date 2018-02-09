@@ -7,6 +7,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.PerkLib;
+	import classes.lists.ColorLists;
 	
 	/**
 	 * Salamander transformative item.
@@ -230,8 +231,7 @@ package classes.Items.Consumables
 			//Arms
 			if (player.arms.type !== Arms.SALAMANDER && player.lowerBody.type === LowerBody.SALAMANDER && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of a salamander with leathery, red scales and short, fiery-red claws replacing your fingernails.  <b>You now have salamander arms.</b>");
-				player.arms.type = Arms.SALAMANDER;
-				mutations.updateClaws(Claws.SALAMANDER);
+				player.arms.setType(Arms.SALAMANDER, Claws.SALAMANDER);
 				changes++;
 			}
 			//Remove odd eyes
@@ -261,14 +261,13 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//-Skin color change
-			var humanSkinColors:Array = ["light", "fair", "tan", "dark"];
-			if (humanSkinColors.indexOf(player.skin.tone) < 0 && changes < changeLimit && rand(4) === 0) {
+			if (ColorLists.SALAMANDER_SKIN.indexOf(player.skin.tone) < 0 && changes < changeLimit && rand(4) === 0) {
 				changes++;
 				outputText("\n\nIt takes a while for you to notice, but <b>");
 				if (player.hasFur()) outputText("the skin under your " + player.skin.furColor + " " + player.skin.desc + " has ");
 				else outputText("your " + player.skin.desc + (player.skin.desc.indexOf("scales") !== -1 ? " have " : " has "));
-				player.skin.tone = randomChoice(humanSkinColors);
-				mutations.updateClaws(player.claws.type);
+				player.skin.tone = randomChoice(ColorLists.SALAMANDER_SKIN);
+				player.arms.updateClaws(player.arms.claws.type);
 				outputText("changed to become " + player.skin.tone + " colored.</b>");
 			}
 			//Change skin to normal

@@ -1615,6 +1615,8 @@ package classes.Scenes.NPCs {
 					case 3:
 						outputText("Clara is currently loudly whining about the conditions of her confinement to anyone who is willing to listen, which is no one.");
 						break;
+					default:
+						//Nothing here, move along!
 				}
 			}
 		}

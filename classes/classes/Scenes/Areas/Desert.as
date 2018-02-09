@@ -1,8 +1,5 @@
-/**
- * Created by aimozg on 06.01.14.
- */
-package classes.Scenes.Areas
-{
+/* Created by aimozg on 06.01.14 */
+package classes.Scenes.Areas {
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -15,8 +12,7 @@ package classes.Scenes.Areas
 
 	use namespace kGAMECLASS;
 
-	public class Desert extends BaseContent implements IExplorable
-	{
+	public class Desert extends BaseContent implements IExplorable {
 		public var antsScene:AntsScene = new AntsScene();
 		public var nagaScene:NagaScene = new NagaScene();
 		public var oasis:Oasis = new Oasis();
@@ -24,12 +20,10 @@ package classes.Scenes.Areas
 		public var sandWitchScene:SandWitchScene = new SandWitchScene();
 		public var ghoulScene:GhoulScene = new GhoulScene();
 		public var wanderer:Wanderer = new Wanderer();
-		public function Desert()
-		{
-		}
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0;
-		}
+
+		public function Desert() {}
+
+		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0; }
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_DESERT] = 1;
 			outputText(images.showImage("area-desert"));
@@ -43,8 +37,8 @@ package classes.Scenes.Areas
 		}
 
 		private var _desertEncounter:Encounter = null;
-		public function get desertEncounter():Encounter { // lateinit because it references getGame()
-			const game:CoC     = getGame();
+		public function get desertEncounter():Encounter { //late init because it references getGame()
+			const game:CoC = getGame();
 			const fn:FnHelpers = Encounters.fn;
 			if (_desertEncounter == null) _desertEncounter =
 					Encounters.group(game.commonEncounters, {
@@ -99,8 +93,7 @@ package classes.Scenes.Areas
 					}, {
 						name: "dungeon",
 						when: function ():Boolean {
-							return (player.level >= 4 || flags[kFLAGS.TIMES_EXPLORED_DESERT] > 45)
-								   && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
+							return (player.level >= 4 || flags[kFLAGS.TIMES_EXPLORED_DESERT] > 45) && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0;
 						},
 						call: game.dungeons.desertcave.enterDungeon
 					}, {
@@ -157,14 +150,11 @@ package classes.Scenes.Areas
 			else sandWitchScene.witchBirfsSomeBees();
 		}
 
-
 		public function chestEncounter():void {
 			clearOutput();
 			outputText(images.showImage("item-chest"));
 			outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.  You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.  Overcome with curiosity, you dig it out, only to discover that it's empty.  It would make a nice addition to your campsite.\n\nYou decide to bring it back to your campsite.  ");
-			for (var i:int = 0; i < 6; i++) {
-				inventory.createStorage();
-			}
+			for (var i:int = 0; i < 6; i++) inventory.createStorage();
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
 			outputText("<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
 			doNext(camp.returnToCampUseOneHour);
@@ -195,8 +185,7 @@ package classes.Scenes.Areas
 			inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
 		}
 
-		private function mirageDesert():void
-		{
+		private function mirageDesert():void {
 			clearOutput();
 			outputText(images.showImage("dungeon-entrance-phoenixtower"));
 			outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.");
@@ -204,27 +193,22 @@ package classes.Scenes.Areas
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		private function walkingDesertStatBoost():void
-		{
+		private function walkingDesertStatBoost():void {
 			clearOutput();
 			outputText(images.showImage("area-desert"));
 			outputText("You walk through the shifting sands for an hour, finding nothing.\n\n");
 			//Chance of boost == 50%
 			if (rand(2) == 0) {
-				//50/50 strength/toughness
-				if (rand(2) == 0 && player.str100 < 50) {
+				if (rand(2) == 0 && player.str100 < 50) { //50/50 strength/toughness
 					outputText("The effort of struggling with the uncertain footing has made you stronger.");
 					dynStats("str", .5);
 				}
-				//Toughness
-				else if (player.tou100 < 50) {
+				else if (player.tou100 < 50) { //Toughness
 					outputText("The effort of struggling with the uncertain footing has made you tougher.");
 					dynStats("tou", .5);
 				}
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-
-
 	}
 }

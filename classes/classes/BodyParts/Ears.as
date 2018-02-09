@@ -29,11 +29,10 @@ package classes.BodyParts
 		public static const SHEEP:int      =  19;
 		public static const IMP:int        =  20;
 		public static const COCKATRICE:int =  21;
+		public static const RED_PANDA:int  =  22;
 
 		public var type:Number  = HUMAN;
 		public var value:Number = 0;
-
-		public function Ears() {}
 
 		public function restore():void
 		{

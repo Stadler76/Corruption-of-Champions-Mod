@@ -3994,7 +3994,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingQuestTrainingResolve():void
 		{
 			outputText("(Placeholder) You\'ve returned to your cell and now it is time to evaluate how you did on your quest. \n\n");
-			//prison.prisonCaptor.updateNextFeedingEvent(model.time.hours, model.time.days);
+			//prison.prisonCaptor.updateNextFeedingEvent(getGame().time.hours, getGame().time.days);
 			if (prisonCaptorFeedingQuestTrainingIsComplete())
 			{
 				switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest))

@@ -7,6 +7,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.PerkLib;
 	import classes.StatusEffects;
+	import classes.lists.ColorLists;
 	
 	/**
 	 * Human transformative item.
@@ -70,23 +71,16 @@ package classes.Items.Consumables
 			//Rear body restore
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) == 0) mutations.restoreRearBody(tfSource);
 			//-Skin color change – light, fair, olive, dark, ebony, mahogany, russet
-			if ((player.skin.tone !== "light" && player.skin.tone !== "fair" && player.skin.tone !== "olive" && player.skin.tone !== "dark" && player.skin.tone !== "ebony" && player.skin.tone !== "mahogany" && player.skin.tone !== "russet") && changes < changeLimit && rand(5) === 0) {
+			if (ColorLists.HUMAN_SKIN.indexOf(player.skin.tone) === -1 && changes < changeLimit && rand(5) === 0) {
 				changes++;
 				outputText("\n\nIt takes a while for you to notice, but <b>");
 				if (player.hasFur()) outputText("the skin under your " + player.skin.furColor + " " + player.skin.desc);
 				else outputText("your " + player.skin.desc);
 				outputText(" has changed to become ");
-				temp = rand(7);
-				if (temp === 0) player.skin.tone = "light";
-				else if (temp === 1) player.skin.tone = "fair";
-				else if (temp === 2) player.skin.tone = "olive";
-				else if (temp === 3) player.skin.tone = "dark";
-				else if (temp === 4) player.skin.tone = "ebony";
-				else if (temp === 5) player.skin.tone = "mahogany";
-				else player.skin.tone = "russet";
+				player.skin.tone = randomChoice(ColorLists.HUMAN_SKIN);
 				outputText(player.skin.tone + " colored.</b>");
 				player.underBody.skin.tone = player.skin.tone;
-				mutations.updateClaws(player.claws.type);
+				player.arms.updateClaws(player.arms.claws.type);
 			}
 			//Change skin to normal
 			if (!player.hasPlainSkin() && (player.ears.type === Ears.HUMAN || player.ears.type === Ears.ELFIN) && rand(4) === 0 && changes < changeLimit) {

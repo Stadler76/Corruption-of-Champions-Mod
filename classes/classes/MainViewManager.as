@@ -56,6 +56,7 @@ import flash.ui.Keyboard;
 			//Set background
 			mainView.background.bitmapClass = MainView.Backgrounds[flags[kFLAGS.BACKGROUND_STYLE]];
 			mainView.statsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
+			mainView.monsterStatsView.setBackground(StatsView.SidebarBackgrounds[flags[kFLAGS.BACKGROUND_STYLE]]);
 			//Set font
 			mainView.statsView.setTheme((flags[kFLAGS.USE_OLD_FONT] > 0) ? StatsView.ValueFontOld : StatsView.ValueFont,
 					textColorArray[flags[kFLAGS.BACKGROUND_STYLE]],
@@ -97,6 +98,7 @@ import flash.ui.Keyboard;
 			} else {
 				mainView.statsView.toggleHungerBar(false);
 			}
+			mainView.monsterStatsView.refreshStats(getGame());
 			mainView.statsView.refreshStats(getGame());
 			//Set theme!
 			setTheme();

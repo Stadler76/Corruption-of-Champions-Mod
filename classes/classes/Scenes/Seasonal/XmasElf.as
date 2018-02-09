@@ -244,7 +244,7 @@ package classes.Scenes.Seasonal {
 			outputText("You awaken in the morning, sore and exhausted, but more satisfied than you've ever felt before.  Your body feels INCREDIBLY sensitive from head to toe, but particularly on your well-used " + player.cockDescript(0) + ".  In spite of the traumatic lovemaking, you feel remarkably clear-headed.\n\n");
 			outputText("Did you enjoy being able to cum so much");
 			if (player.findPerk(PerkLib.ElvenBounty) >= 0) outputText(" <b>again</b>");
-			outputText("?");
+			outputText("?\n\n");
 			//[Yes][No] – yes awards (+250 mls cum volume), no awards +15 intellect
 			doYesNo(xmasPerkM,xmasSmart);
 			//(-5 corruption)
@@ -263,7 +263,7 @@ package classes.Scenes.Seasonal {
 			
 			outputText("Do you think it might have done anything to you");
 			if (player.findPerk(PerkLib.ElvenBounty) >= 0) outputText(" <b>again</b>");
-			outputText("?");
+			outputText("?\n\n");
 			//[Yes][No] – yes awards (+15 fertility!), no awards +15 intellect
 			doYesNo(xmasPerkM,xmasSmart);
 			//(-5 corruption)

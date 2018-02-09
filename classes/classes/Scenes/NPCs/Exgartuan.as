@@ -129,7 +129,7 @@ package classes.Scenes.NPCs{
 							else dynStats("lus", 1 + rand(2));
 						}
 						if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() >= 12) { //Chick stuff
-							if (model.time.hours % 9 == 0) { //Only once every 9 hours or so.
+							if (getGame().time.hours % 9 == 0) { //Only once every 9 hours or so.
 								if (rand(3) == 0) { //lactation messing with!
 									outputText("\n<b>");
 									exgartuanLactationAdjustment();
@@ -159,7 +159,7 @@ package classes.Scenes.NPCs{
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedExgartuan++ == 0 && player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && model.time.hours == 4) {
+			if (checkedExgartuan++ == 0 && player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && getGame().time.hours == 4) {
 				//Exgartuan must be present, must be awake and it must be night time
 				if (player.hasCock() && player.statusEffectv1(StatusEffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) { //Exgartuan night time surprise!
 					outputText("\n");
@@ -468,6 +468,8 @@ public function exgartuanBored():void {
 			case 7:
 				outputText("A menacing jiggle emanates from your bosom as they begin to speak, \"<i>Someone out there must be looking for a home to nestle their cock or some sweet milk to quench their gullet, champion.  Stop wasting their time and get on it.</i>\"");
 				break;
+			default:
+				//Nothing here.
 		}
 	}
 }
@@ -500,6 +502,8 @@ public function exgartuanCombatUpdate():Boolean {
 				case 2:
 					outputText("The fetish cultist seems fixated by the twitching lump that resides in your groin, following it back and forth as you tease her, swiveling your hips.  Damnit why is this bitch even wasting time fighting?  She definitely wants to play with Exgartuan...");
 					break;
+				default:
+					//Nothing here.
 			}
 			monster.lust += 10;
 			return true;
@@ -541,6 +545,8 @@ public function exgartuanCombatUpdate():Boolean {
 				case 9:
 					outputText("It's becoming increasingly difficult to see this battle to its end when your mutinous mushroom is increasingly stiffening with each passing moment.  Exgartuan's weight is bad enough to your poise without extending it away from you.  What a jerk.");
 					break;
+				default:
+					//Nothing here.
 			}
 			dynStats("lus", 4+rand(5));
 			return true;
@@ -573,6 +579,8 @@ public function exgartuanCombatUpdate():Boolean {
 				case 7:
 					outputText("All of a sudden, your " + player.armorName + " splays open, your " + player.cockDescript(0) + " quickly slithering up and around your back, stopping uncomfortably close to your face while pointing at your opponent, \"<i>Look at this pitiful cretin, " + player.short + ".  We could be out spreading hot dickings to the wanting cunts of the land.  But, no!  This " + monster.a + monster.short + " desires eradication.  Well, champion...oblige him.</i>\"");
 					break;
+				default:
+					//Nothing here.
 			}
 			monster.lust -= 5 + rand(10);
 			return true;
@@ -604,6 +612,8 @@ public function exgartuanCombatUpdate():Boolean {
 				case 6:
 					outputText("You feel a moistness forming on your chest as a womanly voice takes shape, \"<i>Come now, " + monster.short + ".  Surely this fight has made you thirsty.  I wouldn't want to let all of this delicious breastmilk go to waste after all...</i>\"  Oh, gods...");
 					break;
+				default:
+					//Nothing here.
 			}
 			//+Enemy lust
 			monster.lust += monster.lib/10 + 5;
@@ -624,6 +634,8 @@ public function exgartuanCombatUpdate():Boolean {
 				case 3:
 					outputText("Your battle stance is interrupted as your fingers decide they would rather begin groping your tits.  Your bewitched bosom is getting to be a nuisance.  You retract your hands with a huff, anxious to end this battle.");
 					break;
+				default:
+					//Nothing here.
 			}
 			//(+lust! Possible + enemy lust)
 			dynStats("lus", 2+player.sens/10);

@@ -101,7 +101,7 @@ Corruption Path (Arian's body is drastically altered, but [Arian eir] personalit
 		public function timeChange():Boolean
 		{
 			if (flags[kFLAGS.ARIAN_EGG_COUNTER] > 0) flags[kFLAGS.ARIAN_EGG_COUNTER]++;
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0) flags[kFLAGS.ARIAN_EGG_EVENT]++;
 				flags[kFLAGS.ARIAN_LESSONS] = 0;
 				flags[kFLAGS.ARIAN_TREATMENT] = 0;
@@ -418,7 +418,7 @@ public function visitAriansHouse():void {
 			outputText(images.showImage("arianmale-tent"));
 		if (flags[kFLAGS.ARIAN_PARK] == 4) {
 			flags[kFLAGS.ARIAN_PARK]++;
-			outputText("Deciding to visit the sickly, Lizan mage, Arian, you promptly start walking.  The house is fairly large, at least two stories tall, but it looks pretty ordinary; there's nothing about it to make it really stand out from the other buildings in the neighborhood.  It's only the small brass plate on the door that says \"<i>Arian, Magus</i>\" that provides any clue that a wizard lives here.  There is a knocker on the front door, solid brass, carved in the shape of a leering grotesque, and you take hold of the handle and loudly bang it against the door to announce your presence.");
+			outputText("Deciding to visit the sickly Lizan mage, Arian, you promptly start walking.  The house is fairly large, at least two stories tall, but it looks pretty ordinary; there's nothing about it to make it really stand out from the other buildings in the neighborhood.  It's only the small brass plate on the door that says \"<i>Arian, Magus</i>\" that provides any clue that a wizard lives here.  There's a solid brass knocker on the front door, leering and grotesque in shape, so you take hold of the handle and loudly bang it against the door to announce your presence.");
 			
 			outputText("\n\n\"<i>One minute!</i>\"  You hear a feminine voice yell from inside.  After hearing the clicking of a latch the door slowly opens to reveal what looks like a tan-furred female ferret looking at you with bespectacled brown eyes; she is not very tall, and her body is clad in loose comfortable robes that hide her curves well.  She adjusts her glasses and asks, \"<i>How may I help you, " + player.mf("sir","ma'am") + "?</i>\"");
 			
@@ -593,7 +593,7 @@ private function arianHomeMenu():void {
 		if (player.hasKeyItem("Arian's Talisman") >= 0 || player.hasKeyItem("Arian's Charged Talisman") >= 0)
 			addButton(2,"Talisman",imbueTalisman);
 		if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 5) addButton(4,"Treat Corr.",treatCorruption);
-		if (model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
+		if (getGame().time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if (flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
 		if (!arianFollower()) addButton(14,"Back",telAdre.telAdreMenu);
 		else addButton(14,"Back",camp.campLoversMenu);

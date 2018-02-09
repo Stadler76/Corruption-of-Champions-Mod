@@ -136,7 +136,7 @@ package classes.Scenes.Areas.Mountain
 			}
 			//trace("GET INFESTED HERE");
 			if (!player.hasStatusEffect(StatusEffects.Infested)) {
-				if (flags[kFLAGS.EVER_INFESTED] == 0) flags[kFLAGS.EVER_INFESTED] = 1;
+				if (flags[kFLAGS.EVER_INFESTED] < 1) flags[kFLAGS.EVER_INFESTED] = 1;
 				player.createStatusEffect(StatusEffects.Infested,0,0,0,0);
 				dynStats("cor", 0);
 			}
@@ -239,6 +239,17 @@ package classes.Scenes.Areas.Mountain
 			monster.doAI();
 		}
 
+		public function eligibleForWormInfestation():Boolean {
+			var isEligible:Boolean = true;
+			//Those conditions would invalidate worms.
+			if (!player.hasCock()) isEligible = false;
+			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "") isEligible = false;
+			if (flags[kFLAGS.ARIAN_MORNING] > 0 || flags[kFLAGS.EMBER_MORNING] > 0) isEligible = false;
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && player.hasStatusEffect(StatusEffects.JojoNightWatch)) isEligible = false;
+			if (getGame().helFollower.followerHel() && flags[kFLAGS.HEL_GUARDING] > 0) isEligible = false;
+			if (flags[kFLAGS.ANEMONE_WATCH] > 0) isEligible = false;
+			return isEligible;
+		}
 
 		public function nightTimeInfestation():void {
 			outputText("\n<b><u>Something odd happens that night...</u></b>\n");

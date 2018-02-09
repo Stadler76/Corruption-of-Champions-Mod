@@ -12,7 +12,7 @@ package classes
 
 		public function Measurements()
 		{
-			if (_instance != null)
+			if (_instance !== null)
 			{
 				throw new Error("Measurements can only be accessed through Measurements.init()");
 			}
@@ -36,13 +36,13 @@ package classes
 
 			if (flags[kFLAGS.USE_METRICS]) {
 				value = Math.round(inches * 2.54);
-				return num2Text(value) + (value == 1 ? " centimetre" : " centimetres");
+				return num2Text(value) + (value === 1 ? " centimetre" : " centimetres");
 			}
 
-			if (inches % 12 == 0)
-				return (inches == 12 ? "a foot" : num2Text(inches / 12) + " feet");
+			if (inches % 12 === 0)
+				return (inches === 12 ? "a foot" : num2Text(inches / 12) + " feet");
 
-			return num2Text(value) + (value == 1 ? " inch" : " inches");
+			return num2Text(value) + (value === 1 ? " inch" : " inches");
 		}
 
 		public function inchesOrCentimetres(inches:Number, precision:int = 1):String
@@ -50,7 +50,7 @@ package classes
 			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
 			var text:String = value + (flags[kFLAGS.USE_METRICS] ? " centimetre" : " inch");
 
-			if (value == 1) return text;
+			if (value === 1) return text;
 
 			return text + (flags[kFLAGS.USE_METRICS] ? "s" : "es");
 		}

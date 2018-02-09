@@ -22,7 +22,7 @@ public class Cinnabar extends BazaarAbstractContent {
 //Appearnace
 public function cinnabarAppearance(output:Boolean = true):Function {
 	//Send back 0 for 'closed'.
-	if (model.time.hours < 15 || model.time.hours > 20) return null;
+	if (getGame().time.hours < 15 || getGame().time.hours > 20) return null;
 	if (output) {
 		//Not yet introduced
 		if (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] == 0) outputText("\n\nThere's a generously proportioned woman lurking near a tavern.  Looking closer, you can see she has a ruby-red dress over her ruddy fur, and as she turns you make out an unmistakable, rat-like muzzle.");

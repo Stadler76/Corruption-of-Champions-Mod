@@ -61,7 +61,7 @@ package classes.Scenes.Areas.Forest{
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance(); //Preg should be 7*24, ends at 0 to -48 --> 9*24, ends at 0
-			//trace("\nTamani's Daughters time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nTamani's Daughters time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] += flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT];
 				flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 0;
@@ -72,7 +72,7 @@ package classes.Scenes.Areas.Forest{
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = 30;
 			}
 			//Lower daughter population by 1 every fourth day once population gets high
-			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 40 && model.time.hours > 23 && model.time.days % 4 == 0) {
+			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 40 && getGame().time.hours > 23 && getGame().time.days % 4 == 0) {
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS]--;
 			}
 			return false;

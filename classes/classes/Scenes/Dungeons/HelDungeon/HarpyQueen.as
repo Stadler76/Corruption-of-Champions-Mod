@@ -84,7 +84,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.butt.rating = Butt.RATING_LARGE;
 			this.lowerBody.type = LowerBody.HARPY;
 			this.skin.tone = "red";
-			this.theSkinType = Skin.PLAIN;
+			this.skin.type = Skin.PLAIN;
 			this.skin.desc = "feathers";
 			this.hair.color = "black";
 			this.hair.length = 15;
@@ -103,7 +103,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.gems = rand(25) +160;
 			this.additionalXP = 50;
 			this.tail.type = Tail.HARPY;
-			this.theWingType = Wings.FEATHERED_LARGE;
+			this.wings.type = Wings.FEATHERED_LARGE;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			checkMonster();

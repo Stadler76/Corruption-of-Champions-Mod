@@ -20,6 +20,7 @@ package classes.Scenes.Areas.GlacialRift
 		public function amarokChowTime():void {
 		//He's not actually going to eat you. Unless you fuck up 5 times.
 			clearOutput();
+			credits.authorText = "Foxwells";
 			spriteSelect(SpriteDb.s_amarok);
 			flags[kFLAGS.AMAROK_LOSSES]++;
 			if (player.HP <= 0) {
@@ -46,6 +47,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		private function amarokNoEat():void { //He doesn't want to eat worms
 			clearOutput();
+			credits.authorText = "Foxwells";
 			spriteSelect(SpriteDb.s_amarok);
 			outputText("\n\nMuch to your surprise, however, the Amarok suddenly backs away with a low growl. It resumes sniffing you at a distance, eventually coming over to your lower half. The worms inside you wriggle about, and you let out a low groan of discomfort. As though on cue, the Amarok take a sniff of your crotch, then promptly backs off with another snarl. It must be able to detect your worm infestation, and more importantly, not like it! It turns away and kicks snow on you with one of its back back, letting out a huff of irritation. You watch it walk off as blackness washes over your vision.");
 			combat.cleanupAfterCombat();
@@ -53,6 +55,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		private function amarokChompo():void {
 			clearOutput();
+			credits.authorText = "Foxwells";
 			outputText(images.showImage("amarok-chompo"));
 			spriteSelect(SpriteDb.s_amarok);
 			outputText("It lets out a soft bark as you close your eyes and skips to the other side of you. You remain still in fear of what it plans to do. It picks you by your neck. Its grip isn't hard enough to even break your skin, but firm enough that it won't drop you. It then begins to drag you somewhere. Something in your mind tells you to struggle, but you can't seem to muster the will to try. It'd just bite through your neck and kill you anyway. The feeling of its hot breath running down your back is oddly soothing. You open your eyes long enough to make sense of your surroundings, then pass out.");
@@ -63,6 +66,7 @@ package classes.Scenes.Areas.GlacialRift
 
 		public function amarokBadEnd():void { //Hungry Hungry Hipp-- err, Wolves
 			clearOutput();
+			credits.authorText = "Foxwells";
 			spriteSelect(SpriteDb.s_amarok);
 			outputText(images.showImage("badend-amarok"));
 			outputText("You've been here before. The Amarok will carry you to its den, let its pups deal with you as they will, and it'll vanish off somewhere. You'll wake up later and flee before it returns or its pups get hungry. You close your eyes and wait for it to pick you up. You just want to get this over with.");
@@ -78,6 +82,7 @@ package classes.Scenes.Areas.GlacialRift
 			if (flags[kFLAGS.AMAROK_LOSSES] < 0)
 				flags[kFLAGS.AMAROK_LOSSES] = 0;
 			clearOutput();
+			credits.authorText = "Foxwells";
 			outputText("The Amarok collapses, unable to withstand any more.");
 			combat.cleanupAfterCombat();
 		}

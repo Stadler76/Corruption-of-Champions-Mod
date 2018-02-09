@@ -100,7 +100,7 @@ package classes.Items.Consumables
 			if (rand(5) === 0 && changes < changeLimit && player.skin.tone !== "aphotic blue-black") {
 				outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>");
 				player.skin.tone = "aphotic blue-black";
-				mutations.updateClaws(player.claws.type);
+				player.arms.updateClaws(player.arms.claws.type);
 				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}

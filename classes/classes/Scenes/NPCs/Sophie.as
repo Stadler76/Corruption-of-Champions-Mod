@@ -281,7 +281,7 @@ package classes.Scenes.NPCs
 			this.hips.rating = Hips.RATING_INHUMANLY_WIDE;
 			this.butt.rating = Butt.RATING_EXPANSIVE;
 			this.skin.tone = "pink";
-			this.theSkinType = Skin.PLAIN;
+			this.skin.type = Skin.PLAIN;
 			this.skin.desc = "feathers";
 			this.hair.color = "pink";
 			this.hair.length = 16;
@@ -300,8 +300,7 @@ package classes.Scenes.NPCs
 			this.gems = 20 + rand(25);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
-			this.theWingType = Wings.HARPY;
-			this.wingDesc = "large feathery";
+			this.wings.type = Wings.FEATHERED_LARGE;
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			checkMonster();

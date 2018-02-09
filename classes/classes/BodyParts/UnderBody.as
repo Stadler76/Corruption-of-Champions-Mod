@@ -18,8 +18,6 @@ package classes.BodyParts
 		public var type:Number = NONE;
 		public var skin:Skin = new Skin();
 
-		public function UnderBody() {}
-
 		public function skinDescription(...args):String { return skin.description.apply(null, args); }
 		public function skinFurScales(...args):String { return skin.skinFurScales.apply(null, args); }
 

@@ -891,8 +891,8 @@ private function dominikaBlowjobs2():void {
 	player.changeFatigue(-20);
 	flags[kFLAGS.DOMINIKA_LAST_HYPNO_SUCK_COUNT] = timesFellatrixSucked();
 	flags[kFLAGS.DOMINIKA_TIMES_HYPNO_BJ]++;
-	model.time.days++;
-	model.time.hours = 7;
+	getGame().time.days++;
+	getGame().time.hours = 7;
 	statScreenRefresh();
 	doNext(camp.returnToCampUseOneHour);
 }

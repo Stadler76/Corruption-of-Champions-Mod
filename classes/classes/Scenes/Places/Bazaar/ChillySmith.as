@@ -105,12 +105,12 @@ package classes.Scenes.Places.Bazaar {
 			outputText("You decide to take a look at the weapons that the shop stocks.\n");
 			menu();
 			addShopItem(0, weapons.PTCHFRK, 200, 1); //Listen, I just really want this released.
-			addShopItem(1, weapons.L_DAGGR, 150, 1);
-			addShopItem(2, weapons.RIDINGC, 50, 1);
+			addShopItem(1, weapons.L_DAGR0, 150, 1);
+			addShopItem(2, weapons.RIDING0, 50, 1);
 			addShopItem(3, weapons.SUCWHIP, 400, 1);
 			
-			addShopItem(5, weapons.SCIMITR, 500, 1);
-			addShopItem(6, weapons.SPEAR  , 450, 1);
+			addShopItem(5, weapons.SCIMTR0, 500, 1);
+			addShopItem(6, weapons.SPEAR_0  , 450, 1);
 			addShopItem(7, weapons.U_SWORD, 800, 1);
 			if (flags[kFLAGS.MRAPIER_BOUGHT] == 0 && !player.hasItem(weapons.MRAPIER, 1) && !inventory.hasItemInStorage(weapons.MRAPIER)) {
 				addShopItem(8, weapons.MRAPIER, 25000, 1); //One-buy and one-own only given its power.

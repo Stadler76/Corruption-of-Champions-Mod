@@ -27,7 +27,7 @@ public function Lottie(){
 public function lottieAppearance(display:Boolean = true):Function {
 	if (!player.hasCock()) return null;
 	if (flags[kFLAGS.MET_MARAE] <= 0) return null;
-	if (model.time.hours >= 15 && model.time.hours <= 23) {
+	if (getGame().time.hours >= 15 && getGame().time.hours <= 23) {
 		if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] == 0) {
 			if (display) outputText("\n\nA pale-skinned pig lady emerges from the pool nearby. Her small ears flop aimlessly on top of her pink-gray curls as she shakes any remaining water off of her pale, bikini-clad body - unintentionally jiggling her E-cup breasts and chubby ass in the process.");
 			return encounterLottieCharge;

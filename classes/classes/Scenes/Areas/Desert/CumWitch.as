@@ -3,6 +3,7 @@ package classes.Scenes.Areas.Desert
 	import classes.*;
 	import classes.BodyParts.Butt;
 	import classes.BodyParts.Hips;
+	import classes.Items.Shields.DragonShellShield;
 	import classes.internals.WeightedDrop;
 
 	public class CumWitch extends Monster
@@ -54,7 +55,7 @@ package classes.Scenes.Areas.Desert
 					else outputText("\nSome of the Cum Witch's cum nearly hits you, but you manage to step aside.");
 				}
 				//Dragon-shell shield
-				else if (player.shield == game.shields.DRGNSHL && rand(2) == 0) outputText("\nYou ready your dragon-shell shield, letting the futa-cum hit your shield. Within a short span of time, the cum is absorbed into your shield.");
+				else if (player.shield is DragonShellShield && rand(2) == 0) outputText("\nYou ready your dragon-shell shield, letting the futa-cum hit your shield. Within a short span of time, the cum is absorbed into your shield.");
 				else {
 					var temp:Number = rand(5);
 					//Hit1

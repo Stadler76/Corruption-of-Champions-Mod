@@ -15,6 +15,7 @@ import classes.Scenes.Dungeons.LethicesKeep.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.display.SpriteDb;
 
 import coc.view.MainView;
 
@@ -65,6 +66,7 @@ public class Combat extends BaseContent
 		//Combat is over. Clear shit out and go to main. Also given different name to avoid conflicts with BaseContent.
 		public function cleanupAfterCombat(nextFunc:Function = null):void {
 			combatAbilities.fireMagicLastTurn = -100;
+			mainView.endCombatView();
 			if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
 			if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
 			if (inCombat) {
@@ -263,7 +265,8 @@ public class Combat extends BaseContent
 			addButton(7, "Wait", wait).hint("Take no action for this round.  Why would you do this?  This is a terrible idea.");
 			if (monster.hasStatusEffect(StatusEffects.Level)) addButton(7, "Climb", wait).hint("Climb the sand to move away from the sand trap.");
 			addButton(8, "Fantasize", fantasize).hint("Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
-			if (CoC_Settings.debugBuild && !debug) addButton(9, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
+			//addButton(9, "Defend", defend).hint("Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.");
+			if (CoC_Settings.debugBuild && !debug) addButton(14, "Inspect", debugInspect).hint("Use your debug powers to inspect your enemy.");
 			//Modify menus.
 			if (monster.hasStatusEffect(StatusEffects.AttackDisabled)) {
 				if (monster.short == "minotaur lord") {
@@ -789,7 +792,11 @@ public class Combat extends BaseContent
 			
 			var damage:Number = 0;
 			//Determine if dodged!
-			if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+			var dodgeChanceFactor:Number = 80;
+			//Handle War Dance dodge chance loss for enemys
+			if (player.weapon === WeaponLib.FISTS && player.hasPerk(PerkLib.WarDance))
+				dodgeChanceFactor /= 0.8; // -20% less chance for monsters to dodge you
+			if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > dodgeChanceFactor)) {
 				//Akbal dodges special education
 				if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
 				else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + player.weaponName + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + player.weaponName + " as if betrayed.\n");
@@ -853,6 +860,9 @@ public class Combat extends BaseContent
 			if (damage < 10) damage = 10;
 			//Bonus sand trap damage!
 			if (monster.hasStatusEffect(StatusEffects.Level)) damage = Math.round(damage * 1.75);
+			// Handle War Dance extra damage
+			if (player.weapon === WeaponLib.FISTS && player.hasPerk(PerkLib.WarDance))
+				damage *= 1.15;
 			//Determine if critical hit!
 			var crit:Boolean = combatCritical();
 			if (crit)
@@ -873,6 +883,7 @@ public class Combat extends BaseContent
 			
 			//GHOUL REVEAL, HOPEFULLY
 			if (!ghoulReveal && monster is Ghoul) {
+				spriteSelect(SpriteDb.s_ghoul);
 				outputText("Your " + kGAMECLASS.player.weaponName + " strikes the hyena, causing it to recoil and vanish in a cloud of sandy dust. You stumble back in surprise and look up to see a snarling, ghostly creature in the air. Your enemy wasn't a hyena. <b>It was a ghoul!</b>\n\n");
 				if (silly()) outputText("<b>The wild Ghoul's illusion wore off!</b>\n\n");
 				this.ghoulReveal = true;
@@ -1102,7 +1113,7 @@ public class Combat extends BaseContent
 			if (player.findPerk(PerkLib.ShieldMastery) >= 0 && player.tou >= 50) blockChance += (player.tou - 50) / 5;
 			if (blockChance < 10) blockChance = 10;
 			//Fatigue limit
-			var fatigueLimit:int = player.maxFatigue() - player.physicalCost(10);;
+			var fatigueLimit:int = player.maxFatigue() - player.physicalCost(10);
 			if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {
 				if (doFatigue) player.changeFatigue(10, 2);
 				return true;
@@ -1197,7 +1208,7 @@ public class Combat extends BaseContent
 					if (rand(2) == 0) {
 						//50% breakage!
 						if (rand(2) == 0) {
-							itype = weapons.L__AXE;
+							itype = weapons.L__AXE0;
 							if (player.tallness < 78 && player.str < 90) {
 								outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ");
 								if (rand(2) == 0) itype = null;
@@ -1475,7 +1486,7 @@ public class Combat extends BaseContent
 					var bleed:Number = (2 + rand(4))/100;
 					bleed *= player.HP;
 					bleed = takeDamage(bleed);
-					outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"" + mainViewManager.colorHpMinus() + "\">" + temp + "</font>)</b>\n\n");
+					outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. " + getDamageText(bleed) + "</b>\n\n");
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.AcidSlap)) {
@@ -1733,16 +1744,19 @@ public class Combat extends BaseContent
 		public function beginCombat(monster_:Monster, plotFight_:Boolean = false):void {
 			combatRound = 0;
 			plotFight = plotFight_;
+			mainView.monsterStatsView.refreshStats(getGame());
 			mainView.hideMenuButton( MainView.MENU_DATA );
 			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 			mainView.hideMenuButton( MainView.MENU_LEVEL );
 			mainView.hideMenuButton( MainView.MENU_PERKS );
 			mainView.hideMenuButton( MainView.MENU_STATS );
+			mainView.updateCombatView();
 			showStats();
 			//Flag the game as being "in combat"
 			inCombat = true;
 			monster = monster_;
-			
+			mainView.monsterStatsView.show();
+			mainView.updateCombatView();
 			//Set image once, at the beginning of combat
 			if (monster.imageName != "")
 			{
@@ -1810,7 +1824,6 @@ public class Combat extends BaseContent
 			//hpDisplay = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
 			hpDisplay   = Math.floor(monster.HP) + " / " + monster.maxHP() + " (" + floor(math*100,1) + "%)";
 			lustDisplay = Math.floor(monster.lust) + " / " + monster.maxLust();
-			;
 			//imageText set in beginCombat()
 			outputText(imageText);
 			

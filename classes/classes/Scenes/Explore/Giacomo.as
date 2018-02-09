@@ -42,14 +42,14 @@ package classes.Scenes.Explore {
 		public function timeChange():Boolean
 		{
 			checkedSuccubi = 0; //Make sure we test just once in timeChangeLarge
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				if (flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 0) flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] -= 0.5; //Reduce bad-end for cerulean herms number
 			}
 			return false;
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.hasStatusEffect(StatusEffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
+			if (checkedSuccubi++ == 0 && getGame().time.hours == 4 && player.hasStatusEffect(StatusEffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
 				if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) {
 					if (getGame().vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
 						getGame().vapula.vapulaAssistsCeruleanSuccubus();

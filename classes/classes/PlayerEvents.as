@@ -13,7 +13,7 @@ package classes {
 		public static const VAGINA_RECOVER_THRESHOLD_GAPING_WIDE:Number = 70;
 		public static const VAGINA_RECOVER_THRESHOLD_CLOWN_CAR:Number = 50;
 		
-		public function PlayerEvents():void
+		public function PlayerEvents()
 		{
 			CoC.timeAwareClassAdd(this);
 		}
@@ -114,7 +114,7 @@ package classes {
 							dynStats("str", -0.5);
 							dynStats("tou", -0.5);
 						}
-						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
+						else if ((getGame().time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
 							player.modThickness(1, 1);
 							player.modTone(1, 1);
 						}
@@ -126,7 +126,7 @@ package classes {
 						kGAMECLASS.prison.changeWill((player.esteem / 50) + 1);
 					}
 				}
-				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
+				if (player.hunger < 10 && getGame().time.hours % 4 == 0 && !prison.inPrison) {
 					player.modThickness(1, 1);
 					player.modTone(1, 1);
 				}
@@ -187,6 +187,20 @@ package classes {
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && player.perkv4(PerkLib.Flexibility) == 0) { //Remove flexibility perk if not meeting requirements
 				outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.\n\n(<b>Lost Perk: Flexibility</b>)\n");
 				player.removePerk(PerkLib.Flexibility);
+				needNext = true;
+			}
+			//War Dance perk
+			if (player.ferretScore() >= 6) {
+				if (!player.hasPerk(PerkLib.WarDance)) {
+					outputText("\n\nDue how strong and agile the muscles on your legs and arms are, you’re able to hit your enemies with ease,"
+					          +" making your melee attacks stronger and harder to avoid.\n(<b>Gained Perk: War Dance</b>)\n");
+					player.createPerk(PerkLib.WarDance, 0, 0, 0, 0);
+					needNext = true;
+				}
+			} else if (player.hasPerk(PerkLib.WarDance)) {
+				outputText("\nYou notice that you aren't as strong and agile as you were when you had a more ferret-like body."
+				          +" Hand to hand combat would probably be harder for you now.\n\n(<b>Lost Perk: War Dance</b>)\n");
+				player.removePerk(PerkLib.WarDance);
 				needNext = true;
 			}
 			//Lustzerker perk
@@ -373,10 +387,10 @@ package classes {
 					if (prevEggs < 10) {
 						player.addEggs(2);
 					}
-					else if (prevEggs < 20 && getGame().model.time.hours % 2 == 0) {
+					else if (prevEggs < 20 && getGame().time.hours % 2 == 0) {
 						player.addEggs(1);
 					}
-					else if (getGame().model.time.hours % 4 == 0) {
+					else if (getGame().time.hours % 4 == 0) {
 						player.addEggs(1);
 					}
 					if (prevEggs < 10 && player.eggs() >= 10) { //Stage 1 egg message
@@ -419,8 +433,8 @@ package classes {
 				needNext = true;
 			}
 			if (player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BunnyEggs) >= 0) { //Oviposition perk for lizard and bunny folks
-				if (player.pregnancyIncubation < 1 && player.hasVagina() && getGame().model.time.hours == 1) { //Otherwise pregger check, once every morning
-					if ((player.totalFertility() > 50 && getGame().model.time.days % 15 == 0) || getGame().model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
+				if (player.pregnancyIncubation < 1 && player.hasVagina() && getGame().time.hours == 1) { //Otherwise pregger check, once every morning
+					if ((player.totalFertility() > 50 && getGame().time.days % 15 == 0) || getGame().time.days % 30 == 0) { //every 15 days if high fertility get egg preg
 						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 						player.createStatusEffect(StatusEffects.Eggs, rand(6), rand(2), (5 + rand(3)), 0); //v1 is type, v2 is size (1 == large) and v3 is quantity
@@ -479,7 +493,7 @@ package classes {
 			if (getGame().mountain.minotaurScene.minoCumUpdate()) {
 				needNext = true;
 			}
-			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && getGame().model.time.hours % 13 == 0 && flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN] == 0) { //Repeated warnings!
+			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && getGame().time.hours % 13 == 0 && flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN] == 0) { //Repeated warnings!
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
 					outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
@@ -614,7 +628,7 @@ package classes {
 					player.addStatusValue(StatusEffects.Feeder, 2, 1); //Increase 'time since breastfed'
 					//trace("Feeder status: " + player.statusEffectv2(StatusEffects.Feeder) + " (modded " + ((player.statusEffectv2(StatusEffects.Feeder)) - 70) + ")");
 					//After 3 days without feeding someone sensitivity jumps.
-					if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && getGame().model.time.hours == 14) {
+					if (player.statusEffectv2(StatusEffects.Feeder) >= 72 && getGame().time.hours == 14) {
 						outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n");
 						getGame().dynStats("sen", 2 + (((player.statusEffectv2(StatusEffects.Feeder)) - 70) / 20));
 						needNext = true;
@@ -833,7 +847,7 @@ package classes {
 			}
 			if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
 				if (player.armorName == "lusty maiden's armor") {
-					if (getGame().model.time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
+					if (getGame().time.hours == 0) flags[kFLAGS.BIKINI_ARMOR_BONUS]--; //Adjust for inflation
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] < 0) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0; //Keep in bounds.
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 				}
@@ -862,7 +876,7 @@ package classes {
 				}
 				
 				// Normal tits growth if not wearing bra
-				if (getGame().model.time.hours == 6 && rand(10) == 0 && player.biggestTitSize() < 12 && !wornUpper && !getGame().bimboProgress.ableToProgress()) {
+				if (getGame().time.hours == 6 && rand(10) == 0 && player.biggestTitSize() < 12 && !wornUpper && !getGame().bimboProgress.ableToProgress()) {
 					outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 					player.growTits(1, player.bRows(), false, 2);
 					getGame().dynStats("lus", 10);
@@ -870,9 +884,9 @@ package classes {
 				}
 			}
 			
-			if (getGame().model.time.hours > 23) { //Once per day
+			if (getGame().time.hours > 23) { //Once per day
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
-				if (getGame().model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
+				if (getGame().time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
 					flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 					if (flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 				}
@@ -897,7 +911,7 @@ package classes {
 					flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
 					if (flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] < 0) flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 0;
 				}
-				if (getGame().model.time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
+				if (getGame().time.days % 7 == 0) flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0; //Clear Whitney's Weekly limit
 				if (flags[kFLAGS.USED_MILKER_TODAY] > 0) flags[kFLAGS.USED_MILKER_TODAY] = 0; //Clear 'has fucked milker today'
 				if (getGame().latexGirl.latexGooFollower()) { //Latex goo follower daily updates
 					getGame().latexGirl.gooFluid(-2, false);
@@ -927,6 +941,7 @@ package classes {
 						case 3:
 							if (!needNext) needNext = player.growHair(1.1);
 							else player.growHair(1.1);
+							break;
 						default:
 					}
 					flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING]--;
@@ -961,20 +976,20 @@ package classes {
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (rand(4) == 0 && isHolidays() && player.gender > 0 && getGame().model.time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < getGame().date.fullYear) {
+			if (rand(4) == 0 && isHolidays() && player.gender > 0 && getGame().time.hours == 6 && flags[kFLAGS.XMAS_CHICKEN_YEAR] < getGame().date.fullYear) {
 				getGame().xmas.xmasMisc.getAChristmasChicken();
 				return true;
 			}
-			if (getGame().model.time.hours == 1 && isHolidays() && getGame().date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+			if (getGame().time.hours == 1 && isHolidays() && getGame().date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
 				getGame().xmas.xmasElf.xmasBitchEncounter(); //Set it to remember the last year encountered
 				return true;
 			}
-			if (checkedTurkey++ == 0 && (rand(5) == 0 && (getGame().model.time.hours == 18 || getGame().model.time.hours == 19)) && (getGame().date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+			if (checkedTurkey++ == 0 && (rand(5) == 0 && (getGame().time.hours == 18 || getGame().time.hours == 19)) && (getGame().date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
 				getGame().thanksgiving.datTurkeyRumpMeeting(); //TURKEY SURPRISE
 				return true;
 			}
-			if (checkedDream++ == 0 && getGame().model.time.hours == 3) { //You can only have one dream each night
-				if (player.gender > 0 && getGame().model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
+			if (checkedDream++ == 0 && getGame().time.hours == 3) { //You can only have one dream each night
+				if (player.gender > 0 && getGame().time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
 					getGame().dreams.dayTenDreams();
 					return true;
 				}
@@ -1029,7 +1044,7 @@ package classes {
 					case  4: ceraph =  4; break;
 					default: ceraph =  3;
 				}
-				if (ceraph > 0 && getGame().model.time.days % ceraph == 0) {
+				if (ceraph > 0 && getGame().time.days % ceraph == 0) {
 					getGame().ceraphScene.ceraphBodyPartDreams();
 					return true;
 				}

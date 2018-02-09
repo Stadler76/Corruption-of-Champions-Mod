@@ -33,6 +33,7 @@ public class PerkTree extends BaseContent {
 						var ps:Array = c.perks;
 						for each(p2 in ps) pdata[p2.id].unlocks.push(perk);
 						break;
+					default: //Move along
 				}
 			}
 		}

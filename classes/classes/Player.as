@@ -17,6 +17,7 @@
 	import classes.Scenes.Areas.Forest.KitsuneScene;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import classes.lists.BreastCup;
+	import classes.lists.ColorLists;
 
 	use namespace kGAMECLASS;
 
@@ -277,7 +278,7 @@
 			if (arms.type == Arms.SPIDER) armorDef += 2;
 			if (lowerBody.type == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody.type == LowerBody.BEE) armorDef += 2;
 			//Bonus when being a samurai
-			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA) {
+			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA0) {
 				armorDef += 2;
 			}
 			//Agility boosts armor ratings!
@@ -339,7 +340,7 @@
 			if (hasPerk(PerkLib.IronFists3) && str >= 80 && weaponName == "fists")
 				attack += 3;
 			//Bonus for being samurai!
-			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA)
+			if (armor == game.armors.SAMUARM && weapon == game.weapons.KATANA0)
 				attack += 2;
 			//Berserking bonus!
 			if (hasStatusEffect(StatusEffects.Berzerking)) attack += 30;
@@ -825,6 +826,14 @@
 				if (isTaur())
 					race = "cockatrice-taur";
 			}
+			if (redPandaScore() >= 4)
+			{
+				race = "red-panda-morph";
+				if (face.type === Face.HUMAN)
+					race = "red-panda-" + mf("boy", "girl");
+				if (isTaur())
+					race = "red-panda-taur";
+			}
 			if (raccoonScore() >= 4)
 			{
 				race = "raccoon-morph";
@@ -921,8 +930,10 @@
 				race = "demon-morph";
 			if (sharkScore() >= 3)
 				race = "shark-morph";
-			if (bunnyScore() >= 4)
+			if (bunnyScore() >= 4) {
 				race = "bunny-" + mf("boy", "girl");
+				if (horns.type == Horns.ANTLERS && horns.value > 0) race = "jackalope-" + mf("boy", "girl");
+			}
 			if (harpyScore() >= 4)
 			{
 				if (gender >= 2)
@@ -1045,6 +1056,29 @@
 			return race;
 		}
 
+		//red-panda rating
+		public function redPandaScore():Number
+		{
+			var redPandaCounter:Number = 0;
+			if (ears.type === Ears.RED_PANDA)
+				redPandaCounter++;
+			if (tail.type === Tail.RED_PANDA)
+				redPandaCounter++;
+			if (arms.type === Arms.RED_PANDA)
+				redPandaCounter++;
+			if (face.type === Face.RED_PANDA)
+				redPandaCounter += 2;
+			if (lowerBody.type === LowerBody.RED_PANDA)
+				redPandaCounter++;
+			if (redPandaCounter >= 2) {
+				if (hasFur())
+					redPandaCounter++;
+				if (hasFurryUnderBody())
+					redPandaCounter++;
+			}
+			return redPandaCounter;
+		}
+
 		//cockatrice rating
 		public function cockatriceScore():Number
 		{
@@ -1098,7 +1132,7 @@
 				impCounter++;
 			if (horns.type == Horns.IMP)
 				impCounter++;
-			if (arms.type == Arms.PREDATOR && claws.type == Claws.IMP)
+			if (arms.type == Arms.PREDATOR && arms.claws.type == Claws.IMP)
 				impCounter++;
 			if (tallness <= 42)
 				impCounter++;
@@ -1270,14 +1304,22 @@
 		//Determine Ferret Rating!
 		public function ferretScore():Number
 		{
-			var counter:int = 0;
-			if (face.type == Face.FERRET_MASK) counter++;
-			if (face.type == Face.FERRET) counter+=2;
-			if (ears.type == Ears.FERRET) counter++;
-			if (tail.type == Tail.FERRET) counter++;
-			if (lowerBody.type == LowerBody.FERRET) counter++;
-			if (hasFur() && counter > 0) counter++;
-			return counter;
+			var ferretCounter:int = 0;
+			if (face.type === Face.FERRET_MASK)
+				ferretCounter++;
+			if (face.type === Face.FERRET)
+				ferretCounter += 2;
+			if (ears.type === Ears.FERRET)
+				ferretCounter++;
+			if (tail.type === Tail.FERRET)
+				ferretCounter++;
+			if (lowerBody.type === LowerBody.FERRET)
+				ferretCounter++;
+			if (arms.type === Arms.FERRET)
+				ferretCounter++;
+			if (ferretCounter >= 2 && hasFur())
+				ferretCounter += 2;
+			return ferretCounter;
 		}
 		//Wolf Score
 		public function wolfScore():Number
@@ -1447,7 +1489,7 @@
 				lizardCounter++;
 			if (hasDragonHorns(true))
 				lizardCounter++;
-			if (arms.type == Arms.PREDATOR && claws.type == Claws.LIZARD)
+			if (arms.type == Arms.PREDATOR && arms.claws.type == Claws.LIZARD)
 				lizardCounter++;
 			if (lizardCounter > 2) {
 				if ([Tongue.LIZARD, Tongue.SNAKE].indexOf(tongue.type) != -1)
@@ -1528,13 +1570,13 @@
 				kitsuneCounter++;
 			//If the character's kitsune score is greater than 1 and:
 			//If the character has "blonde","black","red","white", or "silver" hair, +1
-			if (kitsuneCounter > 0 && (InCollection(hairOrFurColors, convertMixedToStringArray(KitsuneScene.basicKitsuneHair)) || InCollection(hairOrFurColors, KitsuneScene.elderKitsuneColors)))
+			if (kitsuneCounter > 0 && (InCollection(hairOrFurColors, convertMixedToStringArray(ColorLists.BASIC_KITSUNE_HAIR)) || InCollection(hairOrFurColors, ColorLists.ELDER_KITSUNE)))
 				kitsuneCounter++;
 			//If the character's femininity is 40 or higher, +1
 			if (kitsuneCounter > 0 && femininity >= 40)
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
-			if (hasFur() && !InCollection(hairOrFurColors, convertMixedToStringArray(KitsuneScene.basicKitsuneFur)) && !InCollection(hairOrFurColors, KitsuneScene.elderKitsuneColors))
+			if (hasFur() && !InCollection(hairOrFurColors, convertMixedToStringArray(ColorLists.BASIC_KITSUNE_FUR)) && !InCollection(hairOrFurColors, ColorLists.ELDER_KITSUNE))
 				kitsuneCounter--;
 			if (hasScales())
 				kitsuneCounter -= 2;
@@ -1583,7 +1625,7 @@
 				dragonCounter++;
 			if (hasDragonfire())
 				dragonCounter++;
-			if (arms.type == Arms.PREDATOR && claws.type == Claws.DRAGON)
+			if (arms.type == Arms.PREDATOR && arms.claws.type == Claws.DRAGON)
 				dragonCounter++;
 			if (eyes.type == Eyes.DRAGON)
 				dragonCounter++;
@@ -1600,7 +1642,7 @@
 			var horseCounter:Number = 0;
 			if (ears.type == Ears.ELFIN)
 				horseCounter++;
-			if (skin.tone == "pale yellow" || skin.tone == "grayish-blue" || skin.tone == "green" || skin.tone == "dark green")
+			if (ColorLists.GOBLIN_SKIN.indexOf(skin.tone) !== -1)
 				horseCounter++;
 			if (horseCounter > 0)
 			{
@@ -3099,7 +3141,7 @@
 		// 0..5 or -1 if no
 		public function roomInExistingStack(itype:ItemType):Number {
 			for (var i:int = 0; i<itemSlots.length; i++){
-				if (itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < 5)
+				if (itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < itype.getMaxStackSize())
 					return i;
 			}
 			return -1;

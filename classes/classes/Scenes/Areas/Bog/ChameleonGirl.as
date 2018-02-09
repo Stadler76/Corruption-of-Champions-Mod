@@ -138,7 +138,7 @@ package classes.Scenes.Areas.Bog
 			this.hips.rating = Hips.RATING_AMPLE + 2;
 			this.butt.rating = Butt.RATING_LARGE;
 			this.skin.tone = skinToneAdj[0];
-			this.theSkinType = Skin.PLAIN;
+			this.skin.type = Skin.PLAIN;
 			this.skin.desc = "skin";
 			this.skin.adj = skinToneAdj[1];
 			this.hair.color = "black";

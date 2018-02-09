@@ -184,6 +184,7 @@ package classes.Scenes.Places.Prison
 				case 3:
 				case 4:
 					break;
+				default:
 			}
 		}
 		
@@ -412,6 +413,8 @@ package classes.Scenes.Places.Prison
 					case 2:
 						outputText("(Placeholder) (Lazy dream) Variation 2. \n\n");
 						break;
+					default:
+						outputText("You shouldn't see this text.");
 				}
 				outputText("How do you react to this unexpected reverie?\n\n");
 				outputText("\n\n");
@@ -482,6 +485,8 @@ package classes.Scenes.Places.Prison
 					case 2:
 						outputText("(Placeholder) (Modest dream) Variation 2. \n\n");
 						break;
+					default:
+						outputText("You shouldn't see this text.");
 				}
 				outputText("How do you react to this unexpected reverie?\n\n");
 				outputText("\n\n");
@@ -555,6 +560,8 @@ package classes.Scenes.Places.Prison
 					case 2:
 						outputText("(Placeholder) (Excited dream) Variation 2. \n\n");
 						break;
+					default:
+						outputText("You shouldn't see this text.");
 				}
 				outputText("How do you react to this unexpected reverie?\n\n");
 				outputText("\n\n");
@@ -1262,8 +1269,8 @@ package classes.Scenes.Places.Prison
 					corChange = -2;
 					dynStats("cor", corChange);
 					prisonCaptorPetScratchSet(0);
-					prison.prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
-					prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
+					prison.prisonCaptor.updateNextWaitRandomEvent(getGame().time.hours, getGame().time.days);
+					prison.prisonCaptor.updateNextRoomRandomEvent(getGame().time.hours, getGame().time.days);
 					player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
 					player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
 					player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
@@ -1304,6 +1311,8 @@ package classes.Scenes.Places.Prison
 				case 3:
 					outputText("Crate broken variation\n\n");
 					break;
+				default:
+					outputText("You shouldn't see this text.");
 			}
 			flags[kFLAGS.PRISON_TRAIN_PUPPY_TRICKS_UNLOCKED] = 1;
 			doNext(playerMenu);
@@ -1317,7 +1326,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPetCrateRest():void
 		{
 			menu();
-			if (model.time.hours < 6 || model.time.hours > 20)
+			if (getGame().time.hours < 6 || getGame().time.hours > 20)
 			{
 				outputText("You crawl into your training crate, curl up on your bedding, and go to sleep for the night.");
 				addButton(0, "Sleep", camp.doSleep);

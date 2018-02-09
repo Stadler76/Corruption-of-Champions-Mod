@@ -525,7 +525,7 @@ private function rideTheWalrusP3():void {
 	player.orgasm('Vaginal');
 	dynStats("lib", 1, "sen", -5);
 	if (flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
-	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;;
+	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1158,10 +1158,10 @@ internal function defeatHolli():void {
 		temp = 7;
 		while(temp > 0) {
 			temp--;
-			model.time.hours++;
-			if (model.time.hours > 23) {
-				model.time.days++;
-				model.time.hours = 0;
+			getGame().time.hours++;
+			if (getGame().time.hours > 23) {
+				getGame().time.days++;
+				getGame().time.hours = 0;
 			}
 		}
 		statScreenRefresh();
@@ -1173,10 +1173,10 @@ internal function defeatHolli():void {
 		temp = 3;
 		while(temp > 0) {
 			temp--;
-			model.time.hours++;
-			if (model.time.hours > 23) {
-				model.time.days++;
-				model.time.hours = 0;
+			getGame().time.hours++;
+			if (getGame().time.hours > 23) {
+				getGame().time.days++;
+				getGame().time.hours = 0;
 			}
 		}
 		statScreenRefresh();

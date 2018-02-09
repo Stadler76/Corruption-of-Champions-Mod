@@ -69,8 +69,8 @@
 			var needNext:Boolean = false;
 			drainedByKath = false; //This var will only be set true after Kath licks Urta out - it stops you from going back immediately for more Urta sex
 			pregnancy.pregnancyAdvance();
-			//trace("\nUrta time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
-			if (flags[kFLAGS.NEED_URTA_LETTER] == 1 && model.time.hours == 6) urtaPregs.getUrtaLetter(); //Urta Letters
+			//trace("\nUrta time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (flags[kFLAGS.NEED_URTA_LETTER] == 1 && getGame().time.hours == 6) urtaPregs.getUrtaLetter(); //Urta Letters
 			if (pregnancy.incubation == 0 && (pregnancy.type == PregnancyStore.PREGNANCY_BEE_EGGS || PregnancyStore.PREGNANCY_DRIDER_EGGS)) {
 				pregnancy.knockUpForce(); //Silently clear Urta's egg pregnancy
 				flags[kFLAGS.URTA_EGGS] = 0;
@@ -79,7 +79,7 @@
 			if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] > 0) flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME]--; //Count down timer for urta's lust
 			if (flags[kFLAGS.URTA_EGG_FORCE_EVENT] > 0) flags[kFLAGS.URTA_EGG_FORCE_EVENT]--; //Countdown to urta freakout
 			//Urta egg freak out
-			if (flags[kFLAGS.URTA_EGG_FORCE_EVENT] > 0 && model.time.hours > 6 && model.time.hours < 18 && flags[kFLAGS.URTA_EGG_FORCE_EVENT] < 12) {
+			if (flags[kFLAGS.URTA_EGG_FORCE_EVENT] > 0 && getGame().time.hours > 6 && getGame().time.hours < 18 && flags[kFLAGS.URTA_EGG_FORCE_EVENT] < 12) {
 				outputText("\n<b>You feel like you ought to see how Urta is dealing with your little 'donation', and head in to Tel'Adra for a quick checkup on her...</b>\n");
 				urtaChewsOutPC(false);
 				needNext = true;
@@ -88,7 +88,7 @@
 				flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN]--;
 				if (flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1) flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] = 1;
 			}
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
 				else flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
 				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0) {
@@ -147,15 +147,15 @@ public function urtaFuckbuddy():Boolean { //Returns true if Urta is either the p
 public function urtaJustFriends():Boolean { return flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == 0 && flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1; }
 
 public function urtaAtBar():Boolean { //Is Urta physically at the Wet Bitch?
-	return (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15 && flags[kFLAGS.KATHERINE_UNLOCKED] != 3);
+	return (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && getGame().time.hours < 15 && flags[kFLAGS.KATHERINE_UNLOCKED] != 3);
 }
 
 public function urtaDrunk():Boolean {
 	//Preg = no drinking!
 	if (pregnancy.isPregnant) return false;
 	if (flags[kFLAGS.URTA_DRINK_FREQUENCY] == -1) return false;
-	if (model.time.hours > 12 && flags[kFLAGS.URTA_DRINK_FREQUENCY] < 1) return true;
-	if (model.time.hours > 8 && flags[kFLAGS.URTA_DRINK_FREQUENCY] >= 1) return true;
+	if (getGame().time.hours > 12 && flags[kFLAGS.URTA_DRINK_FREQUENCY] < 1) return true;
+	if (getGame().time.hours > 8 && flags[kFLAGS.URTA_DRINK_FREQUENCY] >= 1) return true;
 	else return false;
 }
 
@@ -4774,7 +4774,7 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 	if (player.skin.tone != "milky white") {
 		outputText("\n\nThen you catch sight of your body...  You hold up a hand in surprise.  Your skin has changed color!  Your time inside Urta's balls has taken its toll, it seems.  <b>You now have milky white skin!</b>");
 		player.skin.tone = "milky white";
-		mutations.updateClaws(player.claws.type);
+		player.arms.updateClaws(player.arms.claws.type);
 		player.cumMultiplier += 10;
 	}
 	outputText("\n\nUrta and ");
@@ -4783,8 +4783,8 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 	outputText(" collapse onto the couch, exhausted.  \"<i>Gimme ten minutes, then we'll go on patrol,</i>\"  Urta says waving a hand tiredly.  You grin and take your leave, slipping out the front door and heading back to camp.  The sun blazes high in the sky, around noon, so you've lost about a day stuck inside one person or another.");
 	player.orgasm('Generic');
 	dynStats("sen", 2);
-	model.time.days++;
-	model.time.hours = 11;
+	getGame().time.days++;
+	getGame().time.hours = 11;
 
 	statScreenRefresh();
 	doNext(camp.returnToCampUseOneHour);
@@ -4998,7 +4998,7 @@ private function doggyStyle():void {
 
 private function partTwoOfDoggieStyle():void {
 	clearOutput();
-	model.time.hours+=2;
+	getGame().time.hours+=2;
 	statScreenRefresh();
 	outputText("<b><u>Several hours later</u></b>\nYou awake in Urta's arms, tucked under the sheets of her bed.  You're free of your collar, which you can see now lays on a dresser nearby, but you're a little happy to see you still have a small, almost pregnant bulge in your belly where you know a large reservoir of cum now resides.  Urta gives you a shy smooch, saying, \"<i>Mm, I had so much fun, [name].  I... I don't know what got into me there, but I kinda liked it.  And I just adore you for going along with it.</i>\"");
 
@@ -5108,7 +5108,7 @@ private function getAPetReward():void {
 
 private function feedTheBeastPartII():void {
 	clearOutput();
-	model.time.hours+=2;
+	getGame().time.hours+=2;
 	statScreenRefresh();
 	outputText("<b><u>Several hours later...</u></b>\nYou awake in Urta's arms, tucked under the sheets of her bed.  You're free of your collar, which you can see now lays on a dresser nearby.  Urta gives you a shy smooch, saying, \"<i>Mm, I had so much fun, [name].  I... I don't know what got into me there, but I kinda liked it.  And I just adore you for going along with it.</i>\"");
 

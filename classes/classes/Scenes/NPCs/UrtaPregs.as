@@ -117,6 +117,7 @@ internal function urtaPregAppearance():void {
 				break;
 		case 8:
 		case 9: outputText("Urta's pregnancy has caused her to outgrow the stall; she's moved herself to an entirely new position in a quiet, out of the way part of the bar.  Looking at the sheer size of her, she's doubtlessly going to pop any day now.");
+				break;
 		default:
 	}
 }
@@ -195,6 +196,7 @@ internal function urtaPreggoApproached():void {
 				break;
 		case 9: 
 				goVisitUrtaBirfs(true);
+				break;
 		default:
 	}
 }
@@ -393,7 +395,7 @@ private function goVisitUrtaBirfs(withUrta:Boolean = false):void {
 private function goAfterUrtaBirf():void {
 	clearOutput();
 	outputText("You apologize, but there are pressing matters you need to attend to today... but you'll make it up to her somehow, you promise.  Urta looks disappointed, but sighs sadly and nods her head.  \"<i>Of course.  You're still a busy adventurer and all that.  Well, don't worry; I'll make sure this little one gets home and settled in safely.</i>\"");
-	model.time.hours++;
+	getGame().time.hours++;
 	doNext(playerMenu);
 }
 
@@ -419,8 +421,8 @@ private function stayAfterUrtaBirf():void {
 //(PC spends the day with Urta, so fast forward to PC waking up by Urta's side.)
 private function wakeUpWithUrtaAfterStaying():void {
 	clearOutput();
-	model.time.days++;
-	model.time.hours = 6;
+	getGame().time.days++;
+	getGame().time.hours = 6;
 	statScreenRefresh();
 	player.orgasm('Generic');
 	camp.sleepRecovery(false);
@@ -672,8 +674,8 @@ private function acceptUrtaLevelSixPreggoHelps():void {
 	outputText("\n\nUrta smiles and throws her arms around you in a loving embrace.  \"<i>All right, [name], now let's get you back to your " + camp.homeDesc() + " to lie down; you're getting too big to be up and about at all hours of the day now...</i>\"");
 	outputText("\n\nThere's no need for her to be so worried, you're feeling fine... but you go along with what she's planning anyway.  The day is quite a blissful one for you; you get to spend it doing nothing but lounging around and enjoying yourself while Urta waits on you hand and foot, cooks meals, does the laundry, and otherwise handles everything that needs to be done.  When night comes, she insistently parks her furry butt right in your " + camp.bedDesc() + " alongside you and won't be budged, so you have little choice but to cuddle with her for the night.  The next morning, you wake to a cooked breakfast, with Urta hand-feeding you more than half of it before she kisses you, says her goodbyes, and heads off again.");
 	camp.sleepRecovery(false);
-	model.time.days++;
-	model.time.hours = 6;
+	getGame().time.days++;
+	getGame().time.hours = 6;
 	doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -1750,7 +1752,7 @@ private function pickKidSceneHere():void {
 	}
 	//Only possible between 12-14 hours.
 	//Lianna can cook, its hard to make a mess when you have someone who knows what they're doing around. Then again Lianna is a mad scientist, so...
-	else if (model.time.hours >= 12 && model.time.hours <= 14) {
+	else if (getGame().time.hours >= 12 && getGame().time.hours <= 14) {
 		hugAttackScene();
 	}
 	//Take the kids for a walk - Special thanks to Belin

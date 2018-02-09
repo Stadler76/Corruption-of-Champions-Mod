@@ -3,6 +3,7 @@ package classes.Scenes.Areas.HighMountains
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
 
 	public class PhoenixScene extends BaseContent
 	{
@@ -11,6 +12,11 @@ package classes.Scenes.Areas.HighMountains
 		{
 		}
 		
+		public function phoenixSprite(nude:Boolean = false):void {
+			if (nude) spriteSelect(SpriteDb.s_phoenix_nude);
+			else spriteSelect(SpriteDb.s_phoenix);
+		}
+
 		public function encounterPhoenix():void {
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime();
 			else encounterPhoenixRepeat();
@@ -18,6 +24,7 @@ package classes.Scenes.Areas.HighMountains
 		
 		public function encounterPhoenixFirstTime():void {
 			clearOutput();
+			phoenixSprite();
 			outputText("Strolling along the mountain path, you realise that you are quite close to the tower where you and Hel fought the Harpy Queen and her little army of hybrids. Pausing for a moment, you are relieved to hear a distinct lack of noise, which hopefully means that no-one's tried to move back into the stronghold after ");
 			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("her Highness became an ex-harpy.");
 			else outputText("you evicted her Majesty from her seat of power.");
@@ -33,6 +40,8 @@ package classes.Scenes.Areas.HighMountains
 		}
 		
 		public function encounterPhoenixRepeat():void {
+			clearOutput();
+			phoenixSprite();
 			outputText("Strolling along the mountain path, you spot the familiar Phoenix. You ready your " + player.weaponName + ".");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
@@ -43,9 +52,10 @@ package classes.Scenes.Areas.HighMountains
 		//VICTORY!
 		public function winAgainstPhoenix():void {
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
-	
+			clearOutput();
+			phoenixSprite(true);
+
 			if (flags[kFLAGS.SFW_MODE] > 0) {
-				clearOutput();
 				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
 				combat.cleanupAfterCombat();
 				return;
@@ -192,6 +202,7 @@ outputText("With one final grunt, the phoenix collapses against a nearby rock, b
 		//LOSS! GET RAPED!
 		public function loseToPhoenix():void {
 			clearOutput();
+			phoenixSprite(true);
 			if (player.HP < 1) {
 				flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER]++;
 				if (flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] >= 4) {
@@ -292,6 +303,7 @@ outputText("With one final grunt, the phoenix collapses against a nearby rock, b
 		//Non-sexy bad end, loss by HP 4 times in a row.
 		public function phoenixBadEnd():void {
 			clearOutput();
+			phoenixSprite();
 			outputText("\"<i>Seriously? I've beaten you several times in a row? I guess... I've made a final decision; you must die. I'm sorry but I have to,</i>\" the phoenix says.");
 			outputText("\n\n\"<i>The harpy queen will be avenged,</i>\" she says with a glare on your face. She raises her scimitar. You look up at the sharp blade. You clearly know where it's going.");
 			outputText("\n\n\"<i>Hasta la vista, baby!</i>\" These are the last words you hear as the speeding scimitar finally makes contact with your neck.");

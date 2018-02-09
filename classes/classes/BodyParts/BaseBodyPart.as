@@ -7,8 +7,6 @@ package classes.BodyParts
 	 */
 	public class BaseBodyPart 
 	{
-		public function BaseBodyPart() {}
-
 		public function canDye():Boolean
 		{
 			return false;

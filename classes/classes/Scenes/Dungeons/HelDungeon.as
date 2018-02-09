@@ -2,20 +2,16 @@
 package classes.Scenes.Dungeons 
 {
 	import classes.*;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Items.Armor;
-	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Scenes.Dungeons.HelDungeon.*;
+	import classes.Scenes.NPCs.*;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
-	
-	import classes.Scenes.NPCs.*;
-	
-	import coc.model.GameModel;
 	
 	use namespace kGAMECLASS;
 	
@@ -247,7 +243,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] = 1;
 		}
 		public function takeDagger():void {
-			inventory.takeItem(weapons.L_DAGGR, roomDungeon);
+			inventory.takeItem(weapons.L_DAGR0, roomDungeon);
 			flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] = 1;
 		}
 		//[Armor]:

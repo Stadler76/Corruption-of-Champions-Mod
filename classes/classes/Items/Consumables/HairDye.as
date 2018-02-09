@@ -52,11 +52,11 @@ package classes.Items.Consumables
 
 			if (game.player.hasFurryUnderBody()) {
 				outputText("\n\nYou have " + game.player.underBody.skin.furColor + " fur on your underbody.");
-				if (game.player.skin.furColor != _color) game.addButton(2, "Under Fur", dyeUnderBodyFur);
+				if (game.player.underBody.skin.furColor != _color) game.addButton(2, "Under Fur", dyeUnderBodyFur);
 				else game.addButtonDisabled(2, "Under Fur", "Your already have " + _color + " fur on your underbody!");
 			} else if (game.player.hasFeatheredUnderBody()) {
 				outputText("\n\nYou have " + game.player.underBody.skin.furColor + " feathers on your underbody.");
-				if (game.player.skin.furColor != _color) game.addButton(2, "Under Feathers", dyeUnderBodyFeathers);
+				if (game.player.underBody.skin.furColor != _color) game.addButton(2, "Under Feathers", dyeUnderBodyFeathers);
 				else game.addButtonDisabled(2, "Under Feathers", "Your already have " + _color + " feathers on your underbody!");
 			} else {
 				outputText("\n\nYou have no special or furry underbody.");

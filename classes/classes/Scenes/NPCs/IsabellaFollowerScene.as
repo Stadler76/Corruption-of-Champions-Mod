@@ -1627,7 +1627,7 @@ private function isabellaTalkMenu():void {
 		outputText("\n\n<b><u>DEBUG:</u></b>");
 		if (isabellaScene.isabellaOffspringData.length > 0) {
 			for (var i:int = 0; i < isabellaScene.isabellaOffspringData.length; i += 2) {
-				outputText("\nType: " + isabellaScene.isabellaOffspringData[i] + "; Age: " + (model.time.days - isabellaScene.isabellaOffspringData[i+1]) + " day" + (model.time.days - isabellaScene.isabellaOffspringData[i+1] == 1 ? "" : "s"));
+				outputText("\nType: " + isabellaScene.isabellaOffspringData[i] + "; Age: " + (getGame().time.days - isabellaScene.isabellaOffspringData[i+1]) + " day" + (getGame().time.days - isabellaScene.isabellaOffspringData[i+1] == 1 ? "" : "s"));
 			}
 		}
 	}
@@ -1763,7 +1763,7 @@ public function isabellaGivesBirth():void {
 	//Increment children count
 	var offspringType:int = babyGender;
 	if (flags[kFLAGS.ISABELLA_COWMOTHER] >= 1 && babyGender >= 2) offspringType += 2;
-	isabellaScene.isabellaOffspringData.push(offspringType, model.time.days);
+	isabellaScene.isabellaOffspringData.push(offspringType, getGame().time.days);
 	flags[kFLAGS.ISABELLA_PREGNANCY_BOOSTED] = 0;
 	isabellaScene.pregnancy.knockUpForce(); //CLEAR!
 }

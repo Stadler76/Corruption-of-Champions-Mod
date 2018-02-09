@@ -4,7 +4,7 @@ import flash.errors.IllegalOperationError;
 
 public class Shop extends TelAdreAbstractContent {
 	//TODO rename Shop to AbstractShop? Because thats what it is.
-	protected var sprite:int = -1;
+	protected var sprite:Object = -1;
 
 	public function enter():void {
 		clearOutput();
@@ -22,6 +22,17 @@ public class Shop extends TelAdreAbstractContent {
 		throw new IllegalOperationError("Method not implemented!");
 	}
 
+	public function addItemBuyButton(item:ItemType):void {
+		var firstEmptyButtonIndex:int = 0;
+		for (var i:int = 0; i < 14; i++) {
+			if (!mainView.bottomButtons[i].visible) {
+				firstEmptyButtonIndex = i;
+				break;
+			}
+		}
+		addButton(firstEmptyButtonIndex, item.shortName, confirmBuy, item).hint(item.description, capitalizeFirstLetter(item.longName));
+	}
+	
 	protected function debit(itype:ItemType = null, priceOverride:int = -1, keyItem:String = ""):void {
 		player.gems -= priceOverride >= 0 ? priceOverride : itype.value;
 		statScreenRefresh();
@@ -35,7 +46,7 @@ public class Shop extends TelAdreAbstractContent {
 	}
 
 	protected function confirmBuy(itype:ItemType = null, priceOverride:int = -1, keyItem:String = ""):void {
-		if (player.gems < priceOverride || player.gems < itype.value) {
+		if (player.gems < priceOverride || (itype && player.gems < itype.value)) {
 			outputText("\n\nYou count out your gems and realize it's beyond your price range.");
 			//Goto shop main menu
 			doNext(inside);

@@ -1,19 +1,10 @@
 package classes.display 
 {
-import coc.view.BitmapDataSprite;
-import coc.view.Block;
-import coc.view.MainView;
-
-import flash.display.Bitmap;
-import flash.display.MovieClip;
-	import flash.text.Font;
-	import flash.text.TextField;
+	import coc.view.Block;
 	import coc.view.CoCButton;
-	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
-	import flash.text.AntiAliasType;
+	import coc.view.MainView;
+	import flash.text.TextField;
 	
-
 	/**
 	 * Defines a composite display object of all the seperate components required to display a 
 	 * single BoundControlMethod, its associated primary and secondary bindings with the buttons
@@ -24,90 +15,60 @@ import flash.display.MovieClip;
 	{
 		// Object components and settings
 		private var _nameLabel:TextField;
-		private var _button1:CoCButton;
-		private var _button2:CoCButton;
-
+		private var _buttons:Array = [];
+		
 		/**
 		 * Create a new composite object, initilizing the label to be used for display, as well as the two
 		 * buttons used for user interface.
 		 * 
 		 * @param	maxWidth	Defines the maximum available width that the control can consume for positining math
+		 * @param	buttons		Defines the number of buttons to be generated
 		 */
-		public function BindDisplay(maxWidth:int) 
+		public function BindDisplay(maxWidth:int, maxHeight:int = 40, buttons:int = 2) 
 		{
 			layoutConfig = {
-				type: Block.LAYOUT_GRID,
-				cols: 3,
+				type: Block.LAYOUT_FLOW,
+				cols: 1 + buttons,
 				setWidth: true
 			};
 			width = maxWidth;
-			_nameLabel = addTextField({
+			height = maxHeight;
+			_nameLabel = addTextField( {
 				text:"THIS IS SOME KINDA CRAZY LABEL",
+				width: 290,
 				defaultTextFormat: {
 					font: 'Times New Roman',
 					size: 20,
-					align: 'right'
+					align: 'left'
 				}
 			});
-			addElement(_button1 = new CoCButton({
-				labelText: 'Unbound',
-				bitmapClass: MainView.ButtonBackground0
-			}));
-			addElement(_button2 = new CoCButton({
-				labelText: 'Unbound',
-				bitmapClass: MainView.ButtonBackground0
-			}));
+			for (var i:int = 0; i < buttons; i++) {
+				var button:CoCButton = new CoCButton({
+					labelText: 'Unbound',
+					bitmapClass: MainView.ButtonBackground0,
+					callback: null
+				})
+				_buttons.push(button);
+				addElement(button);
+			}
 		}
 		
-		public function get text():String
-		{
-			return _nameLabel.text;
+		public function addButton(label:String, cb:Function):CoCButton {
+			var button:CoCButton = new CoCButton({
+				labelText: label,
+				bitmapClass: MainView.ButtonBackground0,
+				callback: cb
+			})
+			_buttons.push(button);
+			addElement(button);
+			return button;
 		}
 		
-		public function set text(value:String):void
-		{
-			_nameLabel.text = value;
-		}
+		public function get htmlText():String { return _nameLabel.htmlText; }
+		public function set htmlText(value:String):void { _nameLabel.htmlText = value; }
 		
-		public function get htmlText():String
-		{
-			return _nameLabel.htmlText;
-		}
-		
-		public function set htmlText(value:String):void
-		{
-			_nameLabel.htmlText = value;
-		}
-		
-		public function get button1Text():String
-		{
-			return _button1.labelText;
-		}
-		
-		public function get button2Text():String
-		{
-			return _button2.labelText;
-		}
-		
-		public function set button1Text(value:String):void
-		{
-			_button1.labelText = value;
-		}
-		
-		public function set button2Text(value:String):void
-		{
-			_button2.labelText = value;
-		}
-		
-		public function set button1Callback(callback:Function):void
-		{
-			_button1.callback = callback;
-		}
-		
-		public function set button2Callback(callback:Function):void
-		{
-			_button2.callback = callback;
-		}
+		public function get buttons():Array { return _buttons; }
+		public function get label():TextField { return _nameLabel; }
 	}
 
 }

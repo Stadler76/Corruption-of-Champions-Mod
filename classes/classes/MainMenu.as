@@ -1,98 +1,187 @@
 package classes
 {
-
 	import classes.GlobalFlags.*;
-	import classes.Scenes.Achievements;
-	import coc.view.MainView;
+	import coc.view.*;
+	import flash.display.*;
+	import flash.text.*;
 
 	public class MainMenu extends BaseContent
 	{
-
 		public function MainMenu() {}
 
+		private var _mainMenu:Block;
+		
 		//------------
 		// MAIN MENU
 		//------------
 		//MainMenu - kicks player out to the main menu
 		public function mainMenu():void
 		{
-			kGAMECLASS.stage.focus = kGAMECLASS.mainView.mainText;
-
-			/*if (mainView.aCb.parent != null)
-			{
-				mainView.removeChild(mainView.aCb);
-			}*/
-			kGAMECLASS.mainViewManager.registerShiftKeys();
-			kGAMECLASS.mainView.eventTestInput.x = -10207.5;
-			kGAMECLASS.mainView.eventTestInput.y = -1055.1;
 			hideStats();
-			kGAMECLASS.mainViewManager.startUpButtons();
-			kGAMECLASS.saves.loadPermObject();
-			kGAMECLASS.mainViewManager.setTheme();
-			//Reset newgame buttons
-			mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", kGAMECLASS.charCreation.newGameFromScratch);
-			mainView.hideAllMenuButtons();
-			mainView.showMenuButton(MainView.MENU_NEW_MAIN);
-			mainView.showMenuButton(MainView.MENU_DATA);
-
-			mainView.newGameButton.hint("Start a new game.","New Game");
-			mainView.dataButton.hint("Save or load your files.","Data");
-			mainView.statsButton.hint("View your stats.","Stats");
-			mainView.perksButton.hint("View your perks.","Perks");
-			mainView.appearanceButton.hint("View your appearance.","Appearance");
-			//Sets game state to 3, used for determining back functionality of save/load menu.
-			kGAMECLASS.gameStateDirectSet(3);
-			clearOutput();
-			//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
-			outputText("<b>Corruption of Champions (" + kGAMECLASS.version + ")</b>");
-
-			if (CoC_Settings.debugBuild)
-				outputText(" Debug Build");
-			else
-				outputText(" Release Build");
-
-			startupScreenBody();
-
-			// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
-			// that if you check if any images were found immediately when this screen is shown, you get 0
-			// since the images haven't loaded yet.
-			// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
-
+			hideMenus();
 			menu();
-			if (player.str > 0) addButton(0, "Resume", playerMenu).hint("Get back to gameplay?");
-			else addButtonDisabled(0, "Resume", "Please start or load a game first.");
-			addButton(1, "Settings", kGAMECLASS.gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
-			addButton(2, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
-			addButton(3, "Achievements", kGAMECLASS.achievementList.achievementsScreen).hint("View all achievements you have unlocked so far.");
-			addButton(4, "Mod Thread", openURL, "https://forum.fenoxo.com/threads/coc-revamp-mod.3/", null, null, "Check the official mod thread on Fenoxo's forum.");
-
-			addButton(5, "Credits", creditsScreen).hint("See a list of all the cool people who have contributed to content for this game!");
-			addButton(6, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
-			addButton(7, "Debug Info", kGAMECLASS.debugPane).hint("View debug information. You can also input to access any scenes, if you know the function names!");
+			//Sets game state to 3, used for determining back functionality of save/load menu.
+			getGame().gameStateDirectSet(3);
+			mainView.hideMainText();
+			mainView.creditsBox.visible = false;
+			if (_mainMenu == null) {
+				configureMainMenu();
+			}
+			else {
+				var button:CoCButton = _mainMenu.getElementByName("mainmenu_button_0") as CoCButton;
+				if (button != null) {
+					button.disableIf(player.str <= 0, "Please start a new game or load an existing save file."); //Dirty checking, WHYYYYY?
+					if (player.str > 0) button.hint("Get back to gameplay?");
+				}
+				updateMainMenuTextColours();
+				_mainMenu.visible = true;
+			}
 		}
 
+		private function configureMainMenu():void {
+			//Set up the buttons array
+			var mainMenuButtons:Array = new Array(
+				["Continue", playerMenu, "Get back to gameplay?"],
+				["New Game", getGame().charCreation.newGameFromScratch, "Start a new game."],
+				["Data", getGame().saves.saveLoad, "Load or manage saved games."],
+				["Options", getGame().gameSettings.enterSettings, "Configure game settings and enable cheats."],
+				["Achievements", getGame().achievementList.achievementsScreen, "View all achievements you have earned so far."],
+				["Instructions", howToPlay, "How to play. Starting tips. And hotkeys for easy left-handed play..."],
+				["Credits", creditsScreen, "See a list of all the cool people who have contributed to content for this game!"],
+				["Mod Thread", createCallBackFunction(openURL, "https://forum.fenoxo.com/threads/coc-revamp-mod.3/"), "Check the official mod thread on Fenoxo's forum."]
+			);
+			//Now set up the main menu.
+			var mainMenuContent:Block = new Block( {
+				name: "MainMenu",
+				x: 0,
+				y: 0,
+				height: MainView.SCREEN_H,
+				width: MainView.SCREEN_W
+			});
+			var cocLogo:BitmapDataSprite = new BitmapDataSprite({
+				bitmapClass: MainView.GameLogo,
+				stretch: true,
+				x: Math.floor(MainView.SCREEN_W / 2) - 300,
+				y: 1,
+				height: 400,
+				width: 600
+			});
+			var disclaimerBackground:BitmapDataSprite = new BitmapDataSprite({
+				bitmapClass: MainView.DisclaimerBG,
+				stretch: true,
+				x: Math.floor(MainView.SCREEN_W / 2) - 310,
+				y: Math.floor(MainView.SCREEN_H / 2) + 80,
+				height: 90,
+				width: 620
+			});
+			var disclaimerIcon:BitmapDataSprite = new BitmapDataSprite( {
+				bitmapClass: MainView.Warning,
+				stretch: true,
+				x: disclaimerBackground.x + 10,
+				y: disclaimerBackground.y + 15,
+				height: 60,
+				width: 60
+			});
+			var revampLogo:TextField = new TextField();
+			revampLogo.name = "revampLogo";
+			revampLogo.height = 40;
+			revampLogo.width = 210;
+			revampLogo.x = Math.floor(MainView.SCREEN_W / 2) + 145;
+			revampLogo.y = Math.floor(MainView.SCREEN_H / 2) - 25;
+			revampLogo.selectable = false;
+			revampLogo.embedFonts = true;
+			revampLogo.defaultTextFormat = new TextFormat(CoCButton.ButtonLabelFontName, 20, mainViewManager.isDarkText() ? 0xc0c0c0 : 0, null, null, null, null, null, "center");
+			revampLogo.htmlText = "With Revamp Mod!";
+			var miniCredit:TextField = new TextField();
+			miniCredit.name = "miniCredit";
+			miniCredit.multiline = true;
+			miniCredit.wordWrap = true;
+			miniCredit.height = 80;
+			miniCredit.width = 1000;
+			miniCredit.x = Math.floor(MainView.SCREEN_W / 2) - (miniCredit.width / 2);
+			miniCredit.y = Math.floor(MainView.SCREEN_H / 2) + 10;
+			miniCredit.defaultTextFormat = new TextFormat("Palatino Linotype, serif", 16, mainViewManager.isDarkText() ? 0xc0c0c0 : 0, null, null, null, null, null, "center", null, null, null, -2);
+			miniCredit.htmlText = "Created by Fenoxo, Game Mod by Kitteh6660\n";
+			miniCredit.htmlText += "<b>Edited by:</b> Ashi, SoS, Prisoner416, Zeikfried, et al";
+			miniCredit.htmlText += "<b>Open-source contributions by:</b> aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al";
+			var disclaimerInfo:TextField = new TextField();
+			disclaimerInfo.name = "disclaimerInfo";
+			disclaimerInfo.multiline = true;
+			disclaimerInfo.wordWrap = true;
+			disclaimerInfo.height = disclaimerBackground.height;
+			disclaimerInfo.width = 540;
+			disclaimerInfo.x = disclaimerBackground.x + 80;
+			disclaimerInfo.y = disclaimerBackground.y + 0;
+			disclaimerInfo.selectable = false;
+			disclaimerInfo.defaultTextFormat = new TextFormat("Palatino Linotype, serif", 16, null, null, null, null, null, null, "left", null, null, null, -2);
+			disclaimerInfo.htmlText = "This is an adult game meant to be played by adults.\n";
+			disclaimerInfo.htmlText += "Please don't play this game if you're under the age of 18 and certainly don't play if strange and exotic fetishes disgust you.\n";
+			disclaimerInfo.htmlText += "<font color=\"dark red\"><b>You have been warned!</b></font>"
+			var versionInfo:TextField = new TextField();
+			versionInfo.name = "versionInfo";
+			versionInfo.multiline = true;
+			versionInfo.height = 80;
+			versionInfo.width = 600;
+			versionInfo.x = MainView.SCREEN_W - versionInfo.width;
+			versionInfo.y = MainView.SCREEN_H - 80;
+			versionInfo.selectable = false;
+			versionInfo.defaultTextFormat = new TextFormat("Palatino Linotype, serif", 16, mainViewManager.isDarkText() ? 0xc0c0c0 : 0, true, null, null, null, null, "right");
+			versionInfo.htmlText = kGAMECLASS.version + ", " + (CoC_Settings.debugBuild ? "Debug" : "Release") + " Build";
+			versionInfo.htmlText += "Original Game by Fenoxo\nGame Mod by Kitteh6660";
+			var websiteInfo:TextField = new TextField();
+			websiteInfo.name = "websiteInfo";
+			websiteInfo.height = 40;
+			websiteInfo.width = 200;
+			websiteInfo.x = Math.floor(MainView.SCREEN_W / 2) - (websiteInfo.width / 2);
+			websiteInfo.y = Math.floor(MainView.SCREEN_H / 2) + 260;
+			websiteInfo.selectable = false;
+			websiteInfo.defaultTextFormat = new TextFormat("Palatino Linotype, serif", 20, mainViewManager.isDarkText() ? 0xc0c0c0 : 0, true, null, null, "www.fenoxo.com", null, "center");
+			websiteInfo.htmlText = "<a href=\"http://www.fenoxo.com/\">www.fenoxo.com</a>";
+			for (var i:int = 0; i < mainMenuButtons.length; i++) {
+				var button:CoCButton = new CoCButton();
+				button.name = "mainmenu_button_" + i;
+				button.bitmapClass = MainView.ButtonBackground0;
+				button.x = Math.floor(MainView.SCREEN_W / 2) - 310 + ((i % 4) * 155);
+				button.y = Math.floor(MainView.SCREEN_H / 2) + 175 + (Math.floor(i / 4) * 45);
+				button.labelText = mainMenuButtons[i][0];
+				button.callback = mainMenuButtons[i][1];
+				button.hint(mainMenuButtons[i][2]);
+				mainView.hookButton(button as Sprite);
+				mainMenuContent.addElement(button);
+				if (i == 0) button.disableIf(player.str <= 0, "Please start a new game or load an existing save file.");
+			}
+			mainMenuContent.addElement(cocLogo);
+			mainMenuContent.addElement(revampLogo);
+			mainMenuContent.addElement(disclaimerBackground);
+			mainMenuContent.addElement(disclaimerIcon);
+			mainMenuContent.addElement(disclaimerInfo);
+			mainMenuContent.addElement(miniCredit);
+			mainMenuContent.addElement(websiteInfo);
+			mainMenuContent.addElement(versionInfo);
+			_mainMenu = mainMenuContent;
+			mainView.addElementAt(_mainMenu, 2);
+		}
+		private function updateMainMenuTextColours():void {
+			var elements:Array = ["revampLogo", "miniCredit", "websiteInfo", "versionInfo"];
+			for (var i:int = 0; i < elements.length; i++) {
+				var fmt:TextFormat = new TextFormat();
+				fmt.color = mainViewManager.isDarkText() ? 0xc0c0c0 : 0;
+				var tf:TextField = _mainMenu.getElementByName(elements[i]) as TextField;
+				tf.setTextFormat(fmt);
+			}
+			
+		}
+		public function hideMainMenu():void {
+			if (_mainMenu !== null)
+				_mainMenu.visible = false;
+			mainView.showMainText();
+			mainView.setTextBackground(flags[kFLAGS.TEXT_BACKGROUND_STYLE]);
+			mainView.creditsBox.visible = true;
+		}
+		
 		public function startupScreenBody():void {
 			// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 			// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
-			// Fixed. No more markdown. :)
-			outputText("\n(Formerly Unnamed Text Game)");
-			//Brief credits
-			outputText("\n\n<b>Created by:</b> Fenoxo"); //The Original Creator
-			outputText("\n\n<b>Edited by:</b> "); //Edited By
-			outputText("\n\tAshi, SoS, Prisoner416, Zeikfried, et al");
-			outputText("\n\n<b>Open-source contributions by:</b> "); //Contributions
-			outputText("\n\taimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al");
-			outputText("\n\n<b>Game Mod by:</b> Kitteh6660"); //Mod Creator
-			//Github for Original
-			outputText("\n\n<b><u>Original Game Github</u></b>");
-			outputText("\n<b>Source Code:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>");
-			outputText("\n<b>Bug Tracker:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
-			outputText("\n(requires an account, unfortunately)");
-			//Github for Mod
-			outputText("\n\n<b><u>Modded Game Github</u></b>");
-			outputText("\n<b>Source Code:</b> <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions'>https://github.com/Kitteh6660/Corruption-of-Champions</a></u>");
-			outputText("\n<b>Bug Tracker:</b> <u><a href='https://github.com/Kitteh6660/Corruption-of-Champions/issues'>https://github.com/Kitteh6660/Corruption-of-Champions/issues</a></u>");
-			outputText("\n(requires an account too, unfortunately)");
 			//Disclaimer
 			outputText("\n\n<b><u>DISCLAIMER</u></b>");
 			outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
@@ -106,7 +195,7 @@ package classes
 			if (debug)
 				outputText("\n\n<b>DEBUG MODE ENABLED: ITEMS WILL NOT BE CONSUMED BY USE.</b>");
 			if (flags[kFLAGS.SHOW_SPRITES_FLAG])
-				outputText("\n\n<b>Sprites disabled.</b>");
+				outputText("\n\n<b>Sprites enabled. You like to see pretty pictures.</b>");
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
 				outputText("\n\n<b>Easy Mode On: Bad-ends can be ignored.</b>");
 			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
@@ -128,6 +217,7 @@ package classes
 		// INSTRUCTIONS
 		//------------
 		public function howToPlay():void {
+			hideMainMenu();
 			clearOutput();
 			displayHeader("Instructions");
 			outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n");
@@ -142,6 +232,7 @@ package classes
 		// CREDITS
 		//------------
 		public function creditsScreen():void {
+			hideMainMenu();
 			clearOutput();
 			displayHeader("Credits");
 			outputText("<b>Coding and Main Events:</b>\n");
@@ -202,8 +293,8 @@ package classes
 			outputText("<li> Prisoner416</li>");
 			outputText("<li> Chibodee</li>");
 			outputText("</ul>");
-			outputText("<b>Graphical Prettiness:</b>")
-			outputText("<ul>");;
+			outputText("<b>Graphical Prettiness:</b>");
+			outputText("<ul>");
 			outputText("<li> Dasutin (Background Images)</li>");
 			outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 			outputText("</ul>");
@@ -319,6 +410,7 @@ package classes
 			outputText("</ul>");
 			outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
 			doNext(mainMenu);
+			addButton(1, "Image Credits", imageCreditsScreen).hint("Check out who contributed to the image pack.");
 		}
 
 		//------------
@@ -326,6 +418,7 @@ package classes
 		//------------
 		public function imageCreditsScreen():void
 		{
+			hideMainMenu();
 			clearOutput();
 			displayHeader("Image Credits");
 			if (images.getLoadedImageCount() > 0)

@@ -10,6 +10,7 @@ package classes.Items.Weapons
 	public class RaphaelsRapier extends Weapon {
 		
 		public function RaphaelsRapier() {
+			this.weightCategory = Weapon.WEIGHT_LIGHT;
 			super("RRapier", "RRapier", "vulpine rapier", "Raphael's vulpine rapier", "slash", 8, 1000, "He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.");
 		}
 		

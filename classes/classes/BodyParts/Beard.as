@@ -15,8 +15,6 @@ package classes.BodyParts
 		public var style:Number  = NORMAL;
 		public var length:Number = 0;
 
-		public function Beard() {}
-
 		public function restore():void
 		{
 			style  = NORMAL;

@@ -271,6 +271,8 @@ package classes.Scenes.NPCs
 				case 3:
 					ceraphSpecial3();
 					break;
+				default:
+					eAttack();
 			}
 		}
 

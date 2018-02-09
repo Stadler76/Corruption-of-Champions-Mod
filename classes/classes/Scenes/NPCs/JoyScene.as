@@ -495,7 +495,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nHer weapon of choice is an unremarkable wooden staff, although you only see her use it to pose and tease you; running it between her breasts or between her legs and even licking it sometimes... Whenever she gets a reaction from you, she giggles girlishly.");
 			if (joyHasCock() && joySexCounter() > 0) outputText("\n\nFrom previous experience you can estimate she has a " + joyCockLength() + " inches long and " + joyCockGirth() + " inches thick dick. It looks surprisingly human, right underneath that, she has a pair of gonads that are about " + joyBallSize() + " " + (joyBallSize() == 1 ? "inch" : "inches") + " in diameter each.");
 			outputText("\n\nBetween her legs sits a " + joyPussyDescript() + ". Beads of lubricant occasionally form on her pink nether lips.");
-			outputText("\n\nBetween her squeezable jiggly bums she has " + joyAssDescript() + ", where it belong.");
+			outputText("\n\nBetween her squeezable jiggly bums she has " + joyAssDescript() + ", where it belongs.");
 			doNext(genericMenu);
 		}
 		
@@ -818,7 +818,7 @@ package classes.Scenes.NPCs
 				}
 				outputText("\n\nYou lose track of time while meditating, until you hear what is unmistakably a soft snore from Joy. You gently poke her belly and she hugs you and say sleepily, \"<i>Five more minutes " + player.mf("daddy", "mommy") + ".</i>\"");
 				outputText("\n\nYou gently shake her a bit and tell her to wake up; when it does not work you blow inside her ear softly and she jolts up. \"<i>Huh! What... Oh, I guess I must have, like, fallen asleep or something...</i>\" she says. Then she gets up and stretches.");
-				if (flags[kFLAGS.JOJO_LAST_MEDITATION] == model.time.days) {
+				if (flags[kFLAGS.JOJO_LAST_MEDITATION] == getGame().time.days) {
 					outputText("\n\nIt's too soon since you last meditated, so you don't get much benefit from it. Still you feel your urges have calmed down a little, despite Joy's antics.");
 					dynStats("lus", -30);
 				}
@@ -838,7 +838,7 @@ package classes.Scenes.NPCs
 					if (player.spe100 < 75) dynStats("spe", 1); //Speed boost to 75
 					if (player.inte100 < 80) dynStats("int", 1); //Int boost to 80
 					if (player.lib100 > 0) dynStats("lib", -1); //Libido lower to 15
-					flags[kFLAGS.JOJO_LAST_MEDITATION] = model.time.days;
+					flags[kFLAGS.JOJO_LAST_MEDITATION] = getGame().time.days;
 					if (flags[kFLAGS.JOY_INTELLIGENCE] < 50) flags[kFLAGS.JOY_INTELLIGENCE]++;
 				}
 				outputText("\n\nYou thank Joy for her help. She yawns, \"<i>Oh... Uh... Like... Anytime [name]...</i>\" she replies groggily, then begins walking towards the nearby stream, perhaps to spray some water on her face... You get up and go about your business.");

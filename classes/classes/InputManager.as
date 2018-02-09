@@ -77,7 +77,7 @@
 			
 			_mainText = _mainView.mainText as TextField;
 
-			_bindingPane = new BindingPane(this, _mainText.x+2, _mainText.y+2, _mainText.width+2, _mainText.height+3);
+			_bindingPane = new BindingPane(this, _mainText.x, _mainText.y, _mainText.width + 16, _mainText.height);
 		}
 		
 		/**

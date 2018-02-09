@@ -109,7 +109,7 @@ package classes.Scenes.NPCs
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 7;
 			this.gems = rand(5) + 25;
-			this.drop = new WeightedDrop(weapons.L_HAMMR, 1);
+			this.drop = new WeightedDrop(weapons.L_HAMR0, 1);
 			this.tail.type = Tail.COW;
 			this.special1 = marbleSpecialAttackOne;
 			this.special2 = marbleSpecialAttackTwo;

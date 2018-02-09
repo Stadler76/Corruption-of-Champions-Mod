@@ -7,6 +7,8 @@
 
 	public class VaginaClass implements ISerializable
 	{
+		private static const SERIALIZATION_VERSION:int = 1;
+		
 		public static const HUMAN:int                     =   0;
 		public static const EQUINE:int                    =   1;
 		public static const BLACK_SAND_TRAP:int           =   5;
@@ -176,51 +178,59 @@
 		
 		public function deserialize(relativeRootObject:*):void 
 		{
-			LOGGER.debug("Deserializing vagina...");
 			this.vaginalWetness = relativeRootObject.vaginalWetness;
 			this.vaginalLooseness = relativeRootObject.vaginalLooseness;
 			this.fullness = relativeRootObject.fullness;
 			this.virgin = relativeRootObject.virgin;
+			this.type = relativeRootObject.type;
 			
-			if (relativeRootObject.type === undefined) {
-				this.type = 0;
-				LOGGER.warn("Vagina type not set, setting to {0}", this.type);
-			}else{
-				this.type = relativeRootObject.type;
-			}
+			this.labiaPierced = relativeRootObject.labiaPierced;
+			this.labiaPShort = relativeRootObject.labiaPShort;
+			this.labiaPLong = relativeRootObject.labiaPLong;
+			this.clitPierced = relativeRootObject.clitPierced;
+			this.clitPShort = relativeRootObject.clitPShort;
+			this.clitPLong = relativeRootObject.clitPLong;
+			this.clitLength = relativeRootObject.clitLength;
 			
-			if (relativeRootObject.labiaPierced === undefined) {
-				LOGGER.warn("Labia pierced not set, resetting labia and clit data");
-				this.labiaPierced = 0;
-				this.labiaPShort = "";
-				this.labiaPLong = "";
-				this.clitPierced = 0;
-				this.clitPShort = "";
-				this.clitPLong = "";
-				this.clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
-				this.recoveryProgress = 0;
+			this.recoveryProgress = relativeRootObject.recoveryProgress;
+		}
+		
+		public function upgradeSerializationVersion(relativeRootObject:*, serializedDataVersion:int):void 
+		{
+			switch(serializedDataVersion) {
+				case 0:
+					LOGGER.info("Loaded legacy save format for {0}, upgrading...", this);
+					
+					if (relativeRootObject.type === undefined) {
+						relativeRootObject.type = 0;
+						LOGGER.warn("Vagina type not set, setting to {0}", relativeRootObject.type);
+					}
+					
+					if (relativeRootObject.labiaPierced === undefined) {
+						LOGGER.warn("Labia pierced not set, resetting labia and clit data");
+						relativeRootObject.labiaPierced = 0;
+						relativeRootObject.labiaPShort = "";
+						relativeRootObject.labiaPLong = "";
+						relativeRootObject.clitPierced = 0;
+						relativeRootObject.clitPShort = "";
+						relativeRootObject.clitPLong = "";
+					}
+					
+					if(relativeRootObject.clitLength === undefined) {
+						relativeRootObject.clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
+						LOGGER.warn("Clit length was not loaded, setting to default({0})", relativeRootObject.clitLength);
+					}
+					
+					if(relativeRootObject.recoveryProgress === undefined) {
+						relativeRootObject.recoveryProgress = 0;
+						LOGGER.warn("Stretch counter was not loaded, setting to {0}", relativeRootObject.recoveryProgress);
+					}
 			}
-			else
-			{
-				this.labiaPierced = relativeRootObject.labiaPierced;
-				this.labiaPShort = relativeRootObject.labiaPShort;
-				this.labiaPLong = relativeRootObject.labiaPLong;
-				this.clitPierced = relativeRootObject.clitPierced;
-				this.clitPShort = relativeRootObject.clitPShort;
-				this.clitPLong = relativeRootObject.clitPLong;
-				this.clitLength = relativeRootObject.clitLength;
-				this.recoveryProgress = relativeRootObject.recoveryProgress;
-			}
-			
-			if(relativeRootObject.clitLength === undefined) {
-				this.clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
-				LOGGER.warn("Clit length was not loaded, setting to default({0})", this.clitLength);
-			}
-			
-			if(relativeRootObject.recoveryProgress === undefined) {
-				this.recoveryProgress = 0;
-				LOGGER.warn("Stretch counter was not loaded, setting to {0}", this.recoveryProgress);
-			}
+		}
+		
+		public function currentSerializationVerison():int 
+		{
+			return SERIALIZATION_VERSION;
 		}
 	}
 }

@@ -58,7 +58,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 			var needNext:Boolean = false;
 			checkedMarbleMilk = 0;
 			pregnancy.pregnancyAdvance();
-			//trace("\nMarble time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nMarble time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (player.hasStatusEffect(StatusEffects.CampMarble)) {
 				//Marble stuff pt I
 				if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] > 0) {
@@ -191,7 +191,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				player.addStatusValue(StatusEffects.BottledMilk,1,-1);
 				if (player.statusEffectv1(StatusEffects.BottledMilk) <= 0) player.removeStatusEffect(StatusEffects.BottledMilk);
 			}
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] = 0;
 				if (player.hasStatusEffect(StatusEffects.Marble) && player.statusEffectv2(StatusEffects.Marble) > 0) marbleStatusChange(0,-1);
 			}
@@ -205,7 +205,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				return true;
 			}
 			//End addiction (occurs after the player wakes up when their addiction is under 25 && is not permanently addicted)
-			if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) < 25 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
+			if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) < 25 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && getGame().time.hours == 6) {
 				spriteSelect(SpriteDb.s_marble);
 				outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n");
 				outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n");
@@ -293,7 +293,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				return true;
 			}
 			//Become permanently addicted (occurs when the player goes to sleep with addiction 100, before it is reduced by the standard 1):
-			if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) >= 100 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && model.time.hours == 6) {
+			if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.statusEffectv2(StatusEffects.Marble) >= 100 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && getGame().time.hours == 6) {
 				spriteSelect(SpriteDb.s_marble);
 				outputText("\nYou wake up feeling like something has changed.  With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die.  There is nothing that can be done to change that at this point.  You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n");
 				outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n");
@@ -396,7 +396,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				doNext(playerMenu);
 				return true;
 			}
-			if (checkedMarbleMilk++ == 0 && model.time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
+			if (checkedMarbleMilk++ == 0 && getGame().time.hours == 6 && player.findPerk(PerkLib.MarblesMilk) >= 0) {
 				//In prison
 				if (prison.inPrison) {
 					outputText("\nYou get up and complain about not getting your daily dose of Marble's milk. ");
@@ -3122,9 +3122,10 @@ public function marblePoopsBaybees():void {
 					case 9:
 						outputText("Nicky");
 						break;
+					default:
+						outputText("Glitchy");
 				}
 				outputText(", yes, that's a good name for her.</i>\"");
-
 			}
 			else {
 				outputText("...hmm, well Sweetie, I can't think of a good name right now, I'll figure one out tomorrow.</i>\"");
@@ -3193,6 +3194,7 @@ public function marbleNightSleepFlavor():Boolean {
 		case 5: outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n"); //18 days in
 				break;
 		case 6: outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n"); //24 days in
+				break;
 		default:
 	}
 	//Both under 30 - no sex
@@ -3854,6 +3856,7 @@ private function marbleAppearance():void {
 		case 5: outputText("Her belly is very swollen; she is very pregnant.\n\n"); //18 to 24 days in
 				break;
 		case 6: outputText("Her belly is extremely swollen and occasionally quivers when whatever she is pregnant with moves around.\n\n"); //24+ days in
+				break;
 		default:
 	}
 	
@@ -4327,7 +4330,7 @@ private function milkMarbleBarCunnilingling():void
 	var pLust:int = int( 10 + player.lib / 10 );
 	dynStats( "lus", pLust );
 	dynStats( "sen", 1 );
-	model.time.hours++;
+	getGame().time.hours++;
 	doNext(camp.returnToCampUseOneHour);
 }
 

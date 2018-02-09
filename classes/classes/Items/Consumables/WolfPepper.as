@@ -33,6 +33,8 @@ package classes.Items.Consumables
 			if (rand(2) === 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			clearOutput();
+			credits.authorText = "Foxwells";
 			outputText("The pepper has an uncomfortable texture to it, being covered in soft fuzz like it's a peach but somewhat crunchy like any other pepper. Its spiciness makes you nearly spit it out, and you're left sniffling after.");
 			if (rand(100) < 15) {
 				crit = int(Math.random() * 20) / 10 + 2;
@@ -64,7 +66,7 @@ package classes.Items.Consumables
 			//PRE-CHANGES: become biped, remove horns, remove wings, give human tongue, remove claws, remove antennea
 			//no claws
 			if (rand(4) === 0) {
-				mutations.updateClaws();
+				player.arms.claws.restore();
 			}
 			//remove antennae
 			if (player.antennae.type !== Antennae.NONE && rand(3) === 0 && changes < changeLimit) {

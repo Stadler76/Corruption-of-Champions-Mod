@@ -16,8 +16,6 @@ package classes.BodyParts
 
 		public var type:Number = HUMAN;
 
-		public function Tongue() {}
-
 		public function restore():void
 		{
 			type = HUMAN;

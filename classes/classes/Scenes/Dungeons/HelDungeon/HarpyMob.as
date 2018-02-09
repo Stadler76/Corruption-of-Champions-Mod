@@ -94,7 +94,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.butt.rating = Butt.RATING_LARGE;
 			this.lowerBody.type = LowerBody.HARPY;
 			this.skin.tone = "red";
-			this.theSkinType = Skin.PLAIN;
+			this.skin.type = Skin.PLAIN;
 			this.skin.desc = "feathers";
 			this.hair.color = "black";
 			this.hair.length = 15;

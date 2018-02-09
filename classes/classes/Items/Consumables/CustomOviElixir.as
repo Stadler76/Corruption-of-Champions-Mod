@@ -2,7 +2,9 @@
  * Created by aimozg on 01.04.2017.
  */
 package classes.Items.Consumables {
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
+import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.StatusEffects;
 //Oviposition Elixer!
@@ -49,6 +51,18 @@ public class CustomOviElixir extends Consumable {
 		}
 		var changeOccurred:Boolean = false;
 		if (game.player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //If player already has eggs, chance of size increase!
+			if (this is OvipositionMax && !player.hasPerk(PerkLib.Oviposition) && !canSpeedUp()) {
+				outputText("\n\nYou start to feel a bit of a rumble. You look down at your belly, and it seems to have started a slight twitch,"
+				          +" and then stops. You take a look at the empty ovimax bottle for information when suddenly your womb lurches forward"
+				          +" and your stomach starts to slightly expand. Dropping the ovimax bottle to the ground, you moan as your bury your face"
+				          +" in the parched earth, a silent scream leaving your mouth as the rumbling in your tummy is turning more violent,"
+				          +" and more painful...and then it stops completely. You shudder in the fetal position,"
+				          +" waiting for another seizure that didn't come. Maybe you should stop drinking these things.");
+
+				// raises chance to gain the Oviposition perk due to overdosing. 1/3 per overdose.
+				// Would happen, when actually laying those eggs.
+				flags[kFLAGS.OVIMAX_OVERDOSE]++;
+			}
 			if (game.player.hasStatusEffect(StatusEffects.Eggs)) {
 				//If eggs are small, chance of increase!
 				if (game.player.statusEffectv2(StatusEffects.Eggs) == 0) {

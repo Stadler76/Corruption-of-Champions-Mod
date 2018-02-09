@@ -34,9 +34,9 @@ package classes.Scenes.Places.Prison
 				outputText("\n\n<b>Some time passes...</b>");
 				letterFromMinervaAfterGivingBirth();
 				flags[kFLAGS.BEHEMOTH_CHILDREN]++;
-				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) flags[kFLAGS.BEHEMOTH_CHILD_1_BIRTH_DAY] = model.time.days;
-				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 2) flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = model.time.days;
-				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 3) flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
+				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) flags[kFLAGS.BEHEMOTH_CHILD_1_BIRTH_DAY] = getGame().time.days;
+				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 2) flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = getGame().time.days;
+				if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 3) flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = getGame().time.days;
 			}
 			//Post-birthing
 			if (player.hips.rating < 10) {

@@ -122,14 +122,11 @@ package classes.Scenes.Dungeons.DeepCave
 			this.weaponName = "fists";
 			this.weaponVerb="caresses";
 			this.armorName = "skin";
-			var lustVuln:Number = .5;
-			if (game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) lustVuln += .25;
-			if (game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) lustVuln += .5;
-			var lust:Number = 30 + game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10;
-			if (lust > 80) lust = 80;
+			this.lustVuln = .5;
+			if (game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) this.lustVuln += .25;
+			if (game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) this.lustVuln += .5;
+			this.lust = Math.min(80, 30 + game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10);
 			this.bonusHP = 350;
-			this.lust = lust;
-			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 11;
 			this.gems = 1;
@@ -139,11 +136,9 @@ package classes.Scenes.Dungeons.DeepCave
 			this.special1 = special1;
 			this.special2 = special2;
 			this.special3 = special3;
-			var wingDesc:String = "shimmering wings";
 			if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) this.drop = new WeightedDrop(consumables.NUMBROX);
 			else this.drop = NO_DROP;
-			this.theWingType = Wings.BEE_LIKE_LARGE;
-			this.wingDesc = wingDesc;
+			this.wings.type = Wings.FAERIE_LARGE;
 			checkMonster();
 		}
 		

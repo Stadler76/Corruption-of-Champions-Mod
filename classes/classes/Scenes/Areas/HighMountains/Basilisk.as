@@ -119,7 +119,7 @@ import classes.internals.ChainedAction;
 			this.eyes.type = Eyes.BASILISK;
 			this.hair.type = Hair.BASILISK_SPINES;
 			this.skin.tone = "grey-green";
-			this.theSkinType = Skin.LIZARD_SCALES;
+			this.skin.setType(Skin.LIZARD_SCALES);
 			this.hair.color = "grey-green";
 			this.hair.length = 2;
 			initStrTouSpeInte(85, 70, 35, 70);

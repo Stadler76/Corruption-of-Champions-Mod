@@ -16,7 +16,5 @@ package classes.BodyParts
 		public static const RATING_INHUMANLY_WIDE:int =  20;
 
 		public var rating:Number = RATING_BOYISH;
-
-		public function Hips() {}
 	}
 }

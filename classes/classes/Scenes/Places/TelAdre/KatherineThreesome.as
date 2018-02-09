@@ -124,7 +124,7 @@
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3) {
-				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+				if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 				doNext(camp.returnToCampUseOneHour); //An additional scene plays afterward if Kath is still being trained by Urta
 			}
 		}
@@ -190,7 +190,7 @@
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
-				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+				if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -297,7 +297,7 @@
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
-				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+				if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -362,7 +362,7 @@
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
-				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+				if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -452,7 +452,7 @@
 			player.orgasm('Vaginal');
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 8 + rand(2);
-			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+			if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -499,7 +499,7 @@
 
 			outputText("You lock the door on the way out, " + (flags[kFLAGS.KATHERINE_URTA_AFFECTION] >= 31 ? "knowing that with those two the sex option will eventually win out." : "hoping your sated girlfriends will bond over this."));
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
-			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+			if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -560,7 +560,7 @@
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			dynStats("lus", 20 + player.lib / 20);
-			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+			if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -621,7 +621,7 @@
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
-			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+			if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -755,7 +755,7 @@
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
-			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+			if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -771,7 +771,7 @@
 			outputText("Kath lets out a sigh and wraps her tail around your leg.  “<i>Yeah, lets give ‘em something to talk about.</i>”\n\n");
 			outputText("Urta lifts her head, looks around and realizes how many people are staring at the developing threesome.  For a moment it looks like she’s going to bolt, but then Kath lets out a seductive growl and starts stroking Urta’s shaft once again.  Urta closes her eyes and gives in to this public display of lust and drunkenness.\n\n");
 			outputText("All around you there’s the sound of buckles being loosened, laces being undone and fabric sliding off flesh, fur and scale.  There were quite a few patrons around when this started and all but a few are keen to watch - at least.\n\n");
-			var valaHere:Boolean = flags[kFLAGS.FREED_VALA] > 0 && model.time.hours >= 12 && model.time.hours <= 21;
+			var valaHere:Boolean = flags[kFLAGS.FREED_VALA] > 0 && getGame().time.hours >= 12 && getGame().time.hours <= 21;
 			if (valaHere) {
 				outputText("You spot Vala, still carrying a tray of drinks from before this started.  Normally she’s fast enough to keep out of this sort of thing, but when she sees you, Kath and Urta together her jaw drops.  Someone bumps into her and she flitters closer, placing the tray on the table. ");
 				if (flags[kFLAGS.KATHERINE_VALA_TIMES_SEX] > 0)
@@ -813,7 +813,7 @@
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 10 + rand(2);
 			urta.urtaLove(1);
-			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+			if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseTwoHours);
 		}
 
@@ -1007,7 +1007,7 @@
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 			urta.urtaLove(1);
-			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
+			if (getGame().time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
 

@@ -1,8 +1,5 @@
-/**
- * Created by aimozg on 06.01.14.
- */
-package classes.Scenes.Areas
-{
+/* Created by aimozg on 06.01.14 */
+package classes.Scenes.Areas {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -15,18 +12,15 @@ import classes.Scenes.Areas.Swamp.*;
 
 	use namespace kGAMECLASS;
 
-	public class Swamp extends BaseContent implements IExplorable
-	{
+	public class Swamp extends BaseContent implements IExplorable {
 		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
 		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
 		public var rogar:Rogar = new Rogar();
-		public function Swamp()
-		{
-		}
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0;
-		}
+
+		public function Swamp() {}
+
+		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0; }
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
 			outputText(images.showImage("area-swamp"));
@@ -38,21 +32,20 @@ import classes.Scenes.Areas.Swamp.*;
 
 		private var _explorationEncounter:Encounter = null;
 		public function get explorationEncounter():Encounter {
-			const game:CoC     = kGAMECLASS;
+			const game:CoC = kGAMECLASS;
 			const fn:FnHelpers = Encounters.fn;
 			if (_explorationEncounter == null) _explorationEncounter =
 					Encounters.group(game.commonEncounters, {
 						name: "bog",
 						when: function ():Boolean {
-							return (flags[kFLAGS.TIMES_EXPLORED_SWAMP] >= 25)
-								   && !game.bog.isDiscovered();
+							return (flags[kFLAGS.TIMES_EXPLORED_SWAMP] >= 25) && !game.bog.isDiscovered();
 						},
 						call: game.bog.discover
 					}, {
 						name: "kihaxhel",
 						when: function ():Boolean {
 							return !kGAMECLASS.kihaFollower.followerKiha()
-									/* && flags[kFLAGS.KIHA_KILLED] == 0 */ // [INTERMOD:8chan]
+							// 		&& flags[kFLAGS.KIHA_KILLED] == 0 //[INTERMOD:8chan]
 									&& player.cor < 60
 									&& flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1
 									&& flags[kFLAGS.HEL_FUCKBUDDY] > 0
@@ -88,17 +81,37 @@ import classes.Scenes.Areas.Swamp.*;
 						name: "kiha",
 						call: function ():void {
 							if (game.kihaFollower.followerKiha()
-								/*|| flags[kFLAGS.KIHA_KILLED]*/ // [INTERMOD:8chan]
+							//	|| flags[kFLAGS.KIHA_KILLED] //[INTERMOD:8chan]
 								|| flags[kFLAGS.KIHA_TOLL_DURATION] > 1) game.kihaScene.kihaExplore();
 							else game.kihaScene.encounterKiha();
 						}
+					}, {
+						name: "walk",
+						call: walkingSwampStatBoost
 					});
 			return _explorationEncounter;
 		}
-		public function explore():void
-		{
+		public function explore():void {
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			return explorationEncounter.execEncounter();
+		}
+
+		private function walkingSwampStatBoost():void {
+			clearOutput();
+			outputText(images.showImage("area-swamp"));
+			outputText("You walk through the swamp lands for an hour, finding nothing.\n\n");
+			//Chance of boost == 50%
+			if (rand(2) == 0) {
+				if (rand(2) == 0 && player.spe100 < 50) { //50/50 speed/toughness
+					outputText("The effort of struggling with the uncertain footing has made you quicker.");
+					dynStats("spe", .5);
+				}
+				else if (player.tou100 < 50) { //Toughness
+					outputText("The effort of struggling with the uncertain footing has made you tougher.");
+					dynStats("tou", .5);
+				}
+			}
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

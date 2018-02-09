@@ -38,8 +38,8 @@ private function scyllaSprite():void {
 public function scyllaBarSelectAction():void {
 	//This allows Scylla's activity at the bar to be determined before any description of what Kath and Urta be doing.
 	//Required because Scylla's behaviour in the bar is partly random, so you can't just check flags to see what she's up to.
-	if (model.time.totalTime == scyllaLastActionSelectionTime) return; //Only choose action once per visit to the bar
-	scyllaLastActionSelectionTime = model.time.totalTime;
+	if (getGame().time.totalTime == scyllaLastActionSelectionTime) return; //Only choose action once per visit to the bar
+	scyllaLastActionSelectionTime = getGame().time.totalTime;
 	scyllaAction = SCYLLA_NOT_PRESENT;
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) return; //Factory still running? NoScylla4U
 	if ((!player.hasCock() || player.longestCockLength() < 12) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 0)
@@ -69,11 +69,11 @@ public function scyllaBarSelectAction():void {
 				scyllaAction = SCYLLA_ACTION_MEET_CATS;
 				return;
 			}
-			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (getGame().time.hours == 18 || getGame().time.hours == 19)) {
 				scyllaAction = SCYLLA_ACTION_ADICTS_ANON;
 				return;
 			}
-			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[kFLAGS.FED_SCYLLA_TODAY] == 0 && getGame().time.hours >= 7 && getGame().time.hours <= 11) {
 				scyllaAction = SCYLLA_ACTION_FLYING_SOLO;
 				return;
 			}
@@ -251,8 +251,8 @@ private function scyllaRoundIIPartIII():void {
 	player.orgasm('Dick');
 	dynStats("lib", 4, "sen", 3, "cor", 2);
 	player.cumMultiplier += 2;
-	if (model.time.hours > 5) model.time.days++;
-	model.time.hours = 5;
+	if (getGame().time.hours > 5) getGame().time.days++;
+	getGame().time.hours = 5;
 	doNext(camp.returnToCampUseOneHour);
 }
 

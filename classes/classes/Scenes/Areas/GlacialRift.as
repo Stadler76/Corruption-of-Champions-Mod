@@ -195,6 +195,7 @@ package classes.Scenes.Areas
 		private function amarokEncounter():void {
 			spriteSelect(SpriteDb.s_amarok);
 			clearOutput();
+			credits.authorText = "Foxwells";
 			outputText("As your feet carry you through the barren tundra, you can't shake the feeling of being watched. Your paranoia gets the better of you, and you come to a stop to listen for anything nearby. You hear nothing. You turn around just to be sure, and see nothing. You laugh at your silliness and continue walking, now with a hand on your " + player.weaponName + ". As though on cue, you hear a snarl from behind you. You whip around and strike with your " + player.weaponName + ", barely keeping an enormous wolf from tackling you. Between its black fur and golden eyes, you aren't quite sure how you managed to miss it. It hardly matters, though-- the wolf, most definitely an Amarok, has already recovered and is preparing another attack. It's time for a fight!");
 			startCombat(new Amarok());
 		}

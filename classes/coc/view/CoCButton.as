@@ -11,16 +11,11 @@ package coc.view {
 		keyboard events.
 	****/
 
-import classes.ItemType;
-import classes.internals.Utils;
-
-	import flash.display.MovieClip;
-import flash.display.Sprite;
-import flash.text.Font;
-import flash.text.TextField;
-	import flash.text.TextFormat;
-
+	import classes.ItemType;
+	import classes.internals.Utils;
 	import flash.events.MouseEvent;
+	import flash.text.Font;
+	import flash.text.TextField;
 
 	public class CoCButton extends Block {
 
@@ -44,7 +39,7 @@ import flash.text.TextField;
 		/**
 		 * @param options  enabled, labelText, bitmapClass, callback
 		 */
-		public function CoCButton(options:Object = null):void {
+		public function CoCButton(options:Object = null) {
 			super();
 			_backgroundGraphic = addBitmapDataSprite({
 				stretch: true,
@@ -191,7 +186,7 @@ import flash.text.TextField;
 		 */
 		public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
 			enabled = !condition;
-			if (toolTipText!==null) this.toolTipText = condition?toolTipText:"";
+			if (toolTipText !== null) this.toolTipText = condition?toolTipText:this.toolTipText;
 			return this;
 		}
 		/**
@@ -230,14 +225,9 @@ import flash.text.TextField;
 			}
 
 			//Get items
-			var itype:ItemType = ItemType.lookupItem(buttonText);
+			var itype:ItemType = ItemType.lookupItem(buttonText) || ItemType.lookupItemByShort(buttonText);
 			var temp:String = "";
 			
-			if (itype !== null) {
-				temp = itype.longName;
-			}
-			
-			itype = ItemType.lookupItemByShort(buttonText);
 			if (itype !== null) {
 				temp = itype.longName;
 			}
@@ -262,88 +252,16 @@ import flash.text.TextField;
 
 			buttonText = buttonText || '';
 
-			//Items
-			//if (/^....... x\d+$/.test(buttonText)){
-			//	buttonText = buttonText.substring(0,7);
-			//}
-
-			// Fuck your regex
+			// TODO: Remove those code eventually.
 			if (buttonText.indexOf(" x") !== -1)
 			{
 				buttonText = buttonText.split(" x")[0];
 			}
 
-			var itype:ItemType = ItemType.lookupItem(buttonText);
+			var itype:ItemType = ItemType.lookupItem(buttonText) || ItemType.lookupItemByShort(buttonText);
 			
 			if (itype != null) {
 				toolTipText = itype.description;
-			}
-			
-			itype = ItemType.lookupItemByShort(buttonText);
-			
-			if (itype != null) {
-				toolTipText = itype.description;
-			}
-
-			//------------
-			// COMBAT
-			//------------
-			if (buttonText.indexOf("Defend") !== -1) { //Not used at the moment.
-				toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
-			}
-			//Urta's specials - MOVED
-			//P. Special attacks - MOVED
-			//M. Special attacks - MOVED
-
-			//------------
-			// MASTURBATION
-			//------------
-			//Masturbation Toys
-			if (buttonText === "Masturbate") {
-				toolTipText = "Selecting this option will make you attempt to manually masturbate in order to relieve your lust buildup.";
-			}
-			
-			if (buttonText === "Meditate") {
-				toolTipText = "Selecting this option will make you attempt to meditate in order to reduce lust and corruption.";
-			}
-			
-			if (buttonText.indexOf("AN Stim-Belt") !== -1) {
-				toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
-			}
-			
-			if (buttonText.indexOf("Stim-Belt") !== -1) {
-				toolTipText = "This is a self-stimulation belt.  Commonly referred to as stim-belts, these are clockwork devices designed to pleasure the female anatomy.";
-			}
-			
-			if (buttonText.indexOf("AN Onahole") !== -1) {
-				toolTipText = "An all-natural onahole, this device looks more like a bulbous creature than a sex-toy.  Nevertheless, the slick orifice it presents looks very inviting.";
-			}
-			
-			if (buttonText.indexOf("D Onahole") !== -1) {
-				toolTipText = "This is a deluxe onahole, made of exceptional materials and with the finest craftsmanship in order to bring its user to the height of pleasure.";
-			}
-			
-			if (buttonText.indexOf("Onahole") !== -1) {
-				toolTipText = "This is what is called an 'onahole'.  This device is a simple textured sleeve designed to fit around the male anatomy in a pleasurable way.";
-			}
-			
-			if (buttonText.indexOf("Dual Belt") !== -1) {
-				toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
-			}
-			
-			if (buttonText.indexOf("C. Pole") !== -1) {
-				toolTipText = "This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion.  Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.";
-			}
-			
-			if (buttonText.indexOf("Fake Mare") !== -1) {
-				toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
-			}
-			//Books - MOVED
-			//------------
-			// TITLE SCREEN
-			//------------
-			if (buttonText.indexOf("ASPLODE") !== -1) {
-				toolTipText = "MAKE SHIT ASPLODE";
 			}
 			
 			return toolTipText;

@@ -12,12 +12,12 @@ package classes.Scenes.Places.TelAdre
 		public function PabloScene() {}
 		
 		public function pabloIntro(textOutput:Boolean = true):Boolean {
-			if (model.time.hours > 14 && model.time.hours <= 20) {
+			if (getGame().time.hours > 14 && getGame().time.hours <= 20) {
 				if (textOutput) {
 					if (flags[kFLAGS.PABLO_MET] == 0) 
-						outputText("Over in the back, there is a short, no, -really- short figure doing chin-ups. He couldn’t possibly stand more than three and a half feet tall. He is shirtless, wearing only a pair of shorts. His skin is a bright peach color with a hint of blush on his nose and cheeks. He is lithe, but still noticeably muscular. Behind him swings a tail that nearly matches his body height in length, tipped with a tiny, arrowhead-like shape. A pair of small, bat-like wings grow out from his shoulderblades. His toes end in sharp claws, as well as his fingers. Your attention then turns to his face. It is slightly effeminate, though still visibly masculine. Atop his head is a mop of shaggy, curly, unkempt hair, sandy blonde hair. Squinting, you can make out a pair of tiny horns under the mop on his head, as well as a pair of cute, pointed ears. His eyes are almost completely black, save for his vermillon irises. Come to think of it, he kind of looks like… an imp? No, not in Tel’Adre. There’s no way he can be an imp. Or is there?");
+						outputText("\n\nOver in the back, there is a short, no, -really- short figure doing chin-ups. He couldn’t possibly stand more than three and a half feet tall. He is shirtless, wearing only a pair of shorts. His skin is a bright peach color with a hint of blush on his nose and cheeks. He is lithe, but still noticeably muscular. Behind him swings a tail that nearly matches his body height in length, tipped with a tiny, arrowhead-like shape. A pair of small, bat-like wings grow out from his shoulderblades. His toes end in sharp claws, as well as his fingers. Your attention then turns to his face. It is slightly effeminate, though still visibly masculine. Atop his head is a mop of shaggy, curly, unkempt hair, sandy blonde hair. Squinting, you can make out a pair of tiny horns under the mop on his head, as well as a pair of cute, pointed ears. His eyes are almost completely black, save for his vermillon irises. Come to think of it, he kind of looks like… an imp? No, not in Tel’Adre. There’s no way he can be an imp. Or is there?");
 					else
-						outputText("As usual, Pablo is in the back doing his usual chin-up workout.");
+						outputText("\n\nAs usual, Pablo is in the back doing his usual chin-up workout.");
 				}
 				return true;
 			}

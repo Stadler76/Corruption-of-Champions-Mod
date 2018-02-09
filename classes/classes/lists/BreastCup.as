@@ -107,7 +107,7 @@ package classes.lists
 		public static const ZZ_LARGE:int        =  97;
 		public static const ZZZ:int             =  98;
 		public static const ZZZ_LARGE:int       =  99; 
-		public static const HYPER_A:int         = 100; // <-- HYPER
+		public static const HYPER_A:int         = 100;
 		public static const HYPER_B:int         = 101;
 		public static const HYPER_C:int         = 102;
 		public static const HYPER_D:int         = 103;
@@ -206,8 +206,6 @@ package classes.lists
 		public static const HYPER_ZZ_LARGE:int  = 196;
 		public static const HYPER_ZZZ:int       = 197;
 		public static const HYPER_ZZZ_LARGE:int = 198;
-		public static const JACQUES00:int       = 199; // <-- Jacques00-cup
-
-		public function BreastCup() {}
+		public static const JACQUES00:int       = 199;
 	}
 }

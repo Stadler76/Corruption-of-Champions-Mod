@@ -13,8 +13,6 @@ package classes.BodyParts
 
 		public var type:Number = NONE;
 
-		public function Gills() {}
-
 		public function restore():void
 		{
 			type = NONE;

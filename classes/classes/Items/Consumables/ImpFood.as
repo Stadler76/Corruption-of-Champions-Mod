@@ -7,6 +7,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.PerkLib;
+	import classes.lists.ColorLists;
 	
 	/**
 	 * Imp transformative item
@@ -43,13 +44,12 @@ package classes.Items.Consumables
 				game.HPChange(30 + player.tou / 3, true);
 				dynStats("lus", 3, "cor", 1);
 				//Red or orange skin!
-				if (rand(30) === 0 && ["red", "orange"].indexOf(player.skin.tone) === -1) {
+				if (rand(30) === 0 && ColorLists.IMP_SKIN.indexOf(player.skin.tone) === -1) {
 					if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
 					else outputText("\n\nYour " + player.skin.desc + " ");
-					if (rand(2) === 0) player.skin.tone = "red";
-					else player.skin.tone = "orange";
+					player.skin.tone = randomChoice(ColorLists.IMP_SKIN);
 					outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skin.tone + ".");
-					mutations.updateClaws(player.claws.type);
+					player.arms.updateClaws(player.arms.claws.type);
 					kGAMECLASS.rathazul.addMixologyXP(20);
 				}
 			}
@@ -60,14 +60,14 @@ package classes.Items.Consumables
 				dynStats("lus", 3, "cor", 1);
 			}
 			//Red or orange skin!
-			if (rand(5) === 0 && ["red", "orange"].indexOf(player.skin.tone) === -1 && changes < changeLimit) {
+			if (rand(5) === 0 && ColorLists.IMP_SKIN.indexOf(player.skin.tone) === -1 && changes < changeLimit) {
 				if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ");
 				else outputText("\n\nYour " + player.skin.desc + " ");
-				if (rand(2) === 0) player.skin.tone = "red";
-				else player.skin.tone = "orange";
+				player.skin.tone = randomChoice(ColorLists.IMP_SKIN);
 				outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skin.tone + ".");
 				dynStats("cor", 2);
 				player.skin.type = Skin.PLAIN;
+				player.arms.updateClaws(player.arms.claws.type);
 				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
@@ -166,18 +166,16 @@ package classes.Items.Consumables
 			}
 			
 			//Imp claws, needs orange/red skin. Also your hands turn human.
-			if (["red", "orange"].indexOf(player.skin.tone) !== -1 && player.claws.type !== Claws.IMP && rand(3) === 0 && changes < changeLimit) {
+			if (["red", "orange"].indexOf(player.skin.tone) !== -1 && player.arms.claws.type !== Claws.IMP && rand(3) === 0 && changes < changeLimit) {
 				if (player.arms.type !== Arms.HUMAN) {
 					outputText("\n\nYour arms twist and mangle, warping back into human-like arms. But that, you realize, is just the beginning.");
 				}
-				if (player.claws.type === Claws.NORMAL) {
+				if (player.arms.claws.type === Claws.NORMAL) {
 					outputText("\n\nYour hands suddenly ache in pain, and all you can do is curl them up to you. Against your body, you feel them form into three long claws, with a smaller one replacing your thumb but just as versatile. <b>You have imp claws!</b>");
 				} else { //has claws
 					outputText("\n\nYour claws suddenly begin to shift and change, starting to turn back into normal hands. But just before they do, they stretch out into three long claws, with a smaller one coming to form a pointed thumb. <b>You have imp claws!</b>");
 				}
-				player.arms.type = Arms.PREDATOR;
-				player.claws.type = Claws.IMP;
-				player.claws.tone = player.skin.tone;
+				player.arms.setType(Arms.PREDATOR, Claws.IMP);
 				dynStats("cor", 2);
 				changes++;
 			}

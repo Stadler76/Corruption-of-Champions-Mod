@@ -170,8 +170,7 @@ package classes.Scenes.Areas.Swamp
 			this.butt.rating = Butt.RATING_LARGE+1;
 			this.lowerBody.type = LowerBody.DRIDER;
 			this.skin.tone = skinTone;
-			this.theSkinType = Skin.PLAIN;
-			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.PLAIN];
+			this.skin.setType(Skin.PLAIN);
 			this.hair.color = hairColor;
 			this.hair.length = 24;
 			initStrTouSpeInte(100, 50, 70, 100);

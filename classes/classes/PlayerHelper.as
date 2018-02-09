@@ -88,7 +88,12 @@ package classes
 
 		public function hasNonCockatriceAntennae():Boolean
 		{
-			return [Antennae.NONE, Antennae.COCKATRICE].indexOf(antennae.type) == -1
+			return [Antennae.NONE, Antennae.COCKATRICE].indexOf(antennae.type) === -1;
+		}
+
+		public function hasInsectAntennae():Boolean
+		{
+			return antennae.type === Antennae.BEE;
 		}
 
 		public function hasDragonWings(large:Boolean = false):Boolean
@@ -141,6 +146,11 @@ package classes
 		public function hasReptileTail():Boolean
 		{
 			return [Tail.LIZARD, Tail.DRACONIC, Tail.SALAMANDER].indexOf(tail.type) != -1;
+		}
+
+		public function hasMultiTails():Boolean
+		{
+			return (tail.type === Tail.FOX && tail.venom > 1);
 		}
 
 		// For reptiles with predator arms I recommend to require hasReptileScales() before doing the armType TF to Arms.PREDATOR

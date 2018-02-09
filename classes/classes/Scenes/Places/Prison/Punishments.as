@@ -103,6 +103,8 @@ package classes.Scenes.Places.Prison
 					outputText("(Placeholder) A guard enters, but rather than helping you or taking advantage of your helplessness he adjusts the chain attached to the hook in your ass, shortening it by several inches leaving you barely able to reach the ground. He then looks on, chuckling with amusement as you wear yourself out trying to avoid the mortifying situation of being left hanging helplessly by your asshole.");
 					player.changeFatigue(20);
 					break;
+				default:
+					outputText("You shouldn't really see this text at all.");
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -202,8 +204,8 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			
 			//Reset random event timers
-			prison.prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
-			prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
+			prison.prisonCaptor.updateNextWaitRandomEvent(getGame().time.hours, getGame().time.days);
+			prison.prisonCaptor.updateNextRoomRandomEvent(getGame().time.hours, getGame().time.days);
 			
 			//Remove Restraints 
 			player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
@@ -492,8 +494,8 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentConfinementFreedomRelease():void
 		{
 			outputText("\n\n(Placeholder) In exchange, you are released from the confinement box. Apology or not, you are left bound and gagged, but for the time being you are just happy to be free of the darkness and unending physical stress of the box.");
-			prison.prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
-			prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
+			prison.prisonCaptor.updateNextWaitRandomEvent(getGame().time.hours, getGame().time.days);
+			prison.prisonCaptor.updateNextRoomRandomEvent(getGame().time.hours, getGame().time.days);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
 			player.changeStatusValue(StatusEffects.PrisonRestraints,3,2);

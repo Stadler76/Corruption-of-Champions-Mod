@@ -8,6 +8,7 @@ package classes{
 	
 	
 	import classes.VaginaClass;
+	import classes.internals.SerializationUtils;
 	
     public class VaginaClassTest {
 		private static const LABIA_PIERCED:int = 1;
@@ -95,7 +96,7 @@ package classes{
 		
 		[Test]
 		public function deserializeWithoutLabiaPierced():void {
-			cut.deserialize(serializedClass);
+			SerializationUtils.deserialize(serializedClass, cut);
 			
 			assertThat(cut.labiaPierced, equalTo(0));
 		}
@@ -117,65 +118,81 @@ package classes{
 			assertThat(cut.labiaPierced, equalTo(LABIA_PIERCED));
 		}
 		
+		private function setRecoveryProgress():void {
+			serializedClass.recoveryProgress = RECOVERY_PROGRESS;
+		}
+		
 		[Test]
-		public function deserializeClitLengthWithLabiaPierced():void {
+		public function deserializeNoVaginaType():void {
+			SerializationUtils.deserialize(serializedClass, cut);
+			
+			assertThat(cut.type, equalTo(0));
+		}
+		
+		[Test]
+		public function deserializeHumanVaginaType():void {
+			serializedClass.type = 0;
+			
+			SerializationUtils.deserialize(serializedClass, cut);
+			
+			assertThat(cut.type, equalTo(0));
+		}
+		
+		[Test]
+		public function deserializeEquineVaginaType():void {
+			serializedClass.type = 5;
+			
+			SerializationUtils.deserialize(serializedClass, cut);
+			
+			assertThat(cut.type, equalTo(5));
+		}
+		
+		[Test]
+		public function deserializeLabiaPiercedUndefined():void {
+			SerializationUtils.deserialize(serializedClass, cut);
+			
+			assertThat(cut.labiaPierced, equalTo(0));
+		}
+		
+		[Test]
+		public function deserializeLabiaPierced():void {
 			setLabiaPierced();
+			
+			SerializationUtils.deserialize(serializedClass, cut);
+			
+			assertThat(cut.labiaPierced, equalTo(LABIA_PIERCED));
+		}
+
+		[Test]
+		public function deserializeClitLengthUndefined():void {
+			SerializationUtils.deserialize(serializedClass, cut);
+			
+			assertThat(cut.clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+		}
+
+		[Test]
+		public function deserializeClitLength():void {
 			setClitLength();
 			
-			cut.deserialize(serializedClass);
+			SerializationUtils.deserialize(serializedClass, cut);
 			
 			assertThat(cut.clitLength, equalTo(CLIT_LENGTH));
 		}
 		
 		[Test]
-		public function deserializeClitLengthWithoutLabiaPierced():void {
-			setClitLength();
+		public function deserializeRecoveryProgressUndefined():void {
+			SerializationUtils.deserialize(serializedClass, cut);
 			
-			cut.deserialize(serializedClass);
-			
-			assertThat(cut.clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+			assertThat(cut.recoveryProgress, equalTo(0));
 		}
 		
 		[Test]
-		public function deserializeClitLengthWithtLabiaPiercedAndNotDefined():void {
-			setLabiaPierced();
-			
-			cut.deserialize(serializedClass);
-			
-			assertThat(cut.clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
-		}
-		
-		private function setRecoveryProgress():void {
-			serializedClass.recoveryProgress = RECOVERY_PROGRESS;
-		}
-		
-				
-		[Test]
-		public function deserializeRecoveryProgressWithLabiaPierced():void {
-			setLabiaPierced();
+		public function deserializeRecoveryProgress():void {
 			setRecoveryProgress();
 			
-			cut.deserialize(serializedClass);
+			SerializationUtils.deserialize(serializedClass, cut);
 			
 			assertThat(cut.recoveryProgress, equalTo(RECOVERY_PROGRESS));
-		}
-		
-		[Test]
-		public function deserializeRecoveryProgressWithoutLabiaPierced():void {
-			setRecoveryProgress();
-			
-			cut.deserialize(serializedClass);
-			
-			assertThat(cut.recoveryProgress, equalTo(0));
-		}
-		
-		[Test]
-		public function deserializeRecoveryProgressWithtLabiaPiercedAndNotDefined():void {
-			setLabiaPierced();
-			
-			cut.deserialize(serializedClass);
-			
-			assertThat(cut.recoveryProgress, equalTo(0));
 		}
 	}
 }

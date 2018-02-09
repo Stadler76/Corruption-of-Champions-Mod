@@ -9,7 +9,9 @@ package classes.Items.Weapons
 	{
 		
 		public function HuntsmansCane() {
-			super("H. Cane", "H. Cane", "huntsman's cane", "a cane that once belonged to Erlking", "thwack", 0, 400, "This ebony black cane is made of polished wood and topped with a golden cap in the shape of a deer's head. This lightweight staff once belonged to the Erlking, but seems too light and delicate to be an effective weapon.");
+			this.weightCategory = Weapon.WEIGHT_LIGHT;
+			this.tier = 0;
+			super("H. Cane", "H. Cane", "huntsman's cane", "a cane that once belonged to Erlking", "thwack", 0, 400, "This ebony black cane is made of polished wood and topped with a golden cap in the shape of a deer's head. This lightweight staff once belonged to the Erlking, but seems too light and delicate to be an effective weapon. You could but you might risk breaking this.");
 		}
 		
 		override public function useText():void {

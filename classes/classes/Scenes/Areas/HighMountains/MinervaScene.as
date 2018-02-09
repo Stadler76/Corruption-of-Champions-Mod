@@ -68,7 +68,7 @@ package classes.Scenes.Areas.HighMountains {
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			//trace("\nMinerva time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nMinerva time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 				minervaPurification.minervaGivesBirth();
 				needNext = true;
@@ -419,7 +419,7 @@ private function genericMenu(display:Boolean = false):void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5, "Spar", fightMinerva);
-	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
+	if (minervaRomanced() && getGame().time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 	else addDisabledButton(6, "Sleep With", "Available at evenings with high enough affection.");
 	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul)
 	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae)

@@ -10,6 +10,7 @@ package classes.Items.Consumables
 	import classes.PerkLib;
 	import classes.StatusEffects;
 	import classes.VaginaClass;
+	import classes.lists.ColorLists;
 	
 	/**
 	 * Equine transformative item.
@@ -40,9 +41,7 @@ package classes.Items.Consumables
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Used for random chances
-			// Maybe we should implement new Enums for furcolors and probably other colors and tones?
-			// For example: FurColorsEnum.HORSE, ScaleColorsEnum.LIZARD, SkinTonesEnum.HUMAN, SkinTonesEnum:SALAMANDER, HairColorsEnum.HUMAN and so on (Stadler76)
-			var horseFurColors:Array = ["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"];
+
 			//Set up output
 			clearOutput();
 			outputText("You down the potion, grimacing at the strong taste.");
@@ -449,7 +448,7 @@ package classes.Items.Consumables
 			}
 			//Fur - if has horse tail && ears and not at changelimit
 			if (!player.hasFur() && changes < changeLimit && rand(4) === 0 && player.tail.type === Tail.HORSE) {
-				player.setFurColor(horseFurColors);
+				player.setFurColor(ColorLists.HORSE_FUR);
 				if (player.hasPlainSkin()) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.skin.furColor + "-colored fur.</b>");
 				if (player.hasScales()) {
 					player.skin.desc = "fur";

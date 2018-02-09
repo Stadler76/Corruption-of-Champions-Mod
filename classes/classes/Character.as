@@ -296,7 +296,7 @@ package classes
 
 		public function hasMuzzle():Boolean
 		{
-			return BodyPartLists.muzzles.indexOf(face.type) !== -1;
+			return BodyPartLists.MUZZLES.indexOf(face.type) !== -1;
 		}
 		
 		public function faceDescript():String
@@ -358,7 +358,7 @@ package classes
 		{
 			if (isNaga()) return true;
 
-			return BodyPartLists.longTails.indexOf(tail.type) !== -1;
+			return BodyPartLists.LONG_TAILS.indexOf(tail.type) !== -1;
 		}
 
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
@@ -819,6 +819,11 @@ package classes
 			return Appearance.hairOrFur(this);
 		}
 		
+		public function hairOrFurColor():String
+		{
+			return Appearance.hairOrFurColor(this);
+		}
+		
 		public function hairDescript():String
 		{
 			return Appearance.hairDescription(this);
@@ -897,6 +902,11 @@ package classes
 		public function nagaLowerBodyColor2():String
 		{
 			return Appearance.nagaLowerBodyColor2(this);
+		}
+
+		public function redPandaTailColor2():String
+		{
+			return Appearance.redPandaTailColor2(this);
 		}
 	}
 

@@ -915,7 +915,7 @@ flagReplacements =  [
 ["KAIJU_BAD_END_COUNTER",                                           "KAIJU_BAD_END_COUNTER"],                          # 914;
 ["BROOKE_AFFECTION",                                                "BROOKE_AFFECTION"],                               # 915;
 ["BROOKE_SHOWERED_WITH",                                            "BROOKE_SHOWERED_WITH"],                           # 916;
-["BROOKE_AND_HELIA_3SOME",                                          "BROOKE_AND_HELIA_3SOME"],                         # 917;
+["BROOKE_AND_HECKEL_3SOME",                                          "BROOKE_AND_HECKEL_3SOME"],                       # 917;
 ["TIMES_IN_BROOKES_BUTT",                                           "TIMES_IN_BROOKES_BUTT"],                          # 918;
 ["BROOKE_MEDIUM_SCENE",                                             "BROOKE_MEDIUM_SCENE"],                            # 919;  # BROOKE_MEDIUM_SCENE" Description="Brooke fucked ya.
 ["BROOKE_MET",                                                      "BROOKE_MET"],                                     # 920;

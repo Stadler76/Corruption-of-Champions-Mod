@@ -38,6 +38,7 @@ package classes
 	import classes.lists.BodyPartLists;
 	import classes.lists.BreastCup;
 	import classes.lists.Gender;
+	import classes.lists.PerkLists;
 	import flash.errors.IllegalOperationError;
 	import mx.logging.ILogger;
 
@@ -204,6 +205,8 @@ package classes
 		public function get hp100():Number { return 100*HP/maxHP(); }
 		public function get lust100():Number { return 100*lust/maxLust(); }
 
+		public function HPRatio():Number { return HP / maxHP(); }
+		
 		/**
 		 * @return keys: str, tou, spe, inte
 		 */
@@ -372,10 +375,9 @@ package classes
 		public function set tallness(value:Number):void { _tallness = value; }
 
 		public var antennae:Antennae = new Antennae();
-		public var arms:Arms = new Arms();
+		public var arms:Arms; // Set in the constructor ...
 		public var beard:Beard = new Beard();
 		public var butt:Butt = new Butt();
-		public var claws:Claws = new Claws();
 		public var ears:Ears = new Ears();
 		public var eyes:Eyes = new Eyes();
 		public var face:Face = new Face();
@@ -391,8 +393,6 @@ package classes
 		public var tongue:Tongue = new Tongue();
 		public var underBody:UnderBody = new UnderBody();
 		public var wings:Wings = new Wings();
-
-		public var wingDesc:String = "non-existant";
 
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
@@ -606,6 +606,7 @@ package classes
 			breastRows = new Vector.<BreastRowClass>();
 			_perks = [];
 			statusEffects = [];
+			arms = new Arms(this);
 			//keyItems = new Array();
 		}
 
@@ -1098,15 +1099,13 @@ package classes
 				case 'inte':
 					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteBuff)
 							as CombatInteBuff).applyEffect(buff);
+				default:
+					CoC_Settings.error("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
+					return 0;
 			}
-			CoC_Settings.error("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
-			return 0;
 		}
-		/*
 		
-		[    ? ? ?    ]
-		
-		*/
+		/* [    ? ? ?    ] */
 		public function biggestTitSize():Number
 		{
 			if (breastRows.length == 0)
@@ -1696,7 +1695,6 @@ package classes
 			}else if (lowerBody.type == LowerBody.NAGA){
 				bonus += 20;
 			}
-
 			if (hasPerk(PerkLib.WetPussy))
 				bonus += 20;
 			if (hasPerk(PerkLib.HistorySlut))
@@ -2253,7 +2251,7 @@ package classes
 			//web also makes false!
 			if (hasStatusEffect(StatusEffects.Web))
 				return false;
-			return BodyPartLists.canFlyWings.indexOf(wings.type) !== -1;
+			return BodyPartLists.CAN_FLY_WINGS.indexOf(wings.type) !== -1;
 		}
 
 		public function canUseStare():Boolean
@@ -2276,10 +2274,8 @@ package classes
 
 		public function isBimbo():Boolean
 		{
-			if (hasPerk(PerkLib.BimboBody)) return true;
-			if (hasPerk(PerkLib.BimboBrains)) return true;
-			if (hasPerk(PerkLib.FutaForm)) return true;
-			if (hasPerk(PerkLib.FutaFaculties)) return true;
+			for each (var perk:PerkType in PerkLists.BIMBO)
+				if (hasPerk(perk)) return true;
 
 			return false;
 		}
@@ -2469,7 +2465,11 @@ package classes
 			return true;
 		}
 		
-		//Remove cocks
+		/**
+		 * Remove cocks from the creature. 
+		 * @param	arraySpot position of the cock in the array
+		 * @param	totalRemoved the number of cocks to remove, 0 means no cocks removed
+		 */
 		public function removeCock(arraySpot:int, totalRemoved:int):void
 		{
 			//Various Errors preventing action
@@ -2733,12 +2733,10 @@ package classes
 		{
 			return skin.hasFur();
 		}
-
 		public function hasWool():Boolean
 		{
 			return skin.hasWool();
 		}
-
 		public function isFurry():Boolean
 		{
 			return skin.isFurry();
@@ -2889,14 +2887,14 @@ package classes
 		// <mod name="Predator arms" author="Stadler76">
 		public function clawsDescript():String
 		{
-			var toneText:String = claws.tone == "" ? " " : (", " + claws.tone + " ");
+			var toneText:String = arms.claws.tone == "" ? " " : (", " + arms.claws.tone + " ");
 
-			switch (claws.type) {
+			switch (arms.claws.type) {
 				case Claws.NORMAL: return "fingernails";
 				case Claws.LIZARD: return "short curved" + toneText + "claws";
 				case Claws.DRAGON: return "powerful, thick curved" + toneText + "claws";
 				case Claws.IMP:    return "long" + toneText + "claws";
-				// Since mander and cockatrice arms are hardcoded and the others are NYI, we're done here for now
+				default: // Since mander and cockatrice arms are hardcoded and the others are NYI, we're done here for now
 			}
 			return "fingernails";
 		}
@@ -3097,6 +3095,11 @@ package classes
 			if (eggs() >= 10 && hasPerk(PerkLib.BeeOvipositor) && tail.type == Tail.BEE_ABDOMEN)
 				return true;
 			return false;
+		}
+
+		public function hasOvipositor():Boolean
+		{
+			return hasPerk(PerkLib.SpiderOvipositor) || hasPerk(PerkLib.BeeOvipositor);
 		}
 
 		public function canOviposit():Boolean
@@ -3427,11 +3430,14 @@ package classes
 				case CockTypesEnum.LIZARD:
 				case CockTypesEnum.PIG:
 				case CockTypesEnum.TENTACLE:
+				case CockTypesEnum.RED_PANDA:
+				case CockTypesEnum.FERRET:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
 				case CockTypesEnum.DOG:
 				case CockTypesEnum.FOX:
 					if (dogCocks() == cocks.length) return Appearance.cockNoun(CockTypesEnum.DOG) + "s";
+					break;
 				default:
 			}
 			return Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
@@ -3450,6 +3456,8 @@ package classes
 					case CockTypesEnum.KANGAROO:
 					case CockTypesEnum.AVIAN:
 					case CockTypesEnum.ECHIDNA:
+					case CockTypesEnum.RED_PANDA:
+					case CockTypesEnum.FERRET:
 						return true; //If there's even one cock of any of these types then return true
 					default:
 				}
@@ -3604,7 +3612,12 @@ package classes
 
 			return description;
 		}
-		
+
+		public function handsDescript(plural:Boolean = true):String
+		{
+			return Appearance.handsDescript(this, plural);
+		}
+
 		public function assholeDescript():String
 		{
 			return Appearance.assholeDescript(this);
@@ -3672,7 +3685,7 @@ package classes
 
 		public function hasLongTongue():Boolean
 		{
-			return BodyPartLists.longTongues.indexOf(tongue.type) !== -1;
+			return BodyPartLists.LONG_TONGUES.indexOf(tongue.type) !== -1;
 		}
 
 		private function breastSize(val:Number):String
@@ -3706,8 +3719,8 @@ package classes
 			}
 			//Modify armor rating based on weapons.
 			if (applyModifiers) {
-				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR || game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling)) armorMod = 0;
-				if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
+				if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.SPEAR_0 || game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling)) armorMod = 0;
+				if (game.player.weapon == game.weapons.KATANA0) armorMod -= 5;
 				if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod /= 2;
 				if (armorMod < 0) armorMod = 0;
 			}
@@ -3896,7 +3909,7 @@ package classes
 			return 10;
 		}
 		public function minLust():Number {
-			return 100;
+			return 0;
 		}
 
 		public function maxLust():Number
@@ -3919,6 +3932,24 @@ package classes
 			lust = boundFloat(minLust(),lust+Math.round(lustDmg),maxLust());
 			return (lustDmg > 0 && lustDmg < 1) ? 1 : lustDmg;
 		}
+		
+		public function generateTooltip():String{
+			var retv:String = "<b>Corruption:</b>" +  cor + "\n<b>Armor:</b>" + armorDef +"\n";
+			if (hasStatusEffect(StatusEffects.IzmaBleed)) retv += "<b>Bleeding:</b> Target is bleeding and takes damage each turn.\n";
+			if (hasStatusEffect(StatusEffects.Stunned)) retv += "<b>Stunned</b> Target is stunned, and may not act for " + (statusEffectv1(StatusEffects.Stunned)+1) + " turns.\n";
+			//if (hasPerk(PerkLib.Invincible)) retv += "<b>INVINCIBLE:</b> Target is invincible, and will take no damage from any attack.\n";
+			//if (hasPerk(PerkLib.BleedImmune)) retv += "<b>Bleed Immune:</b> Target is immune to bleeding effects.\n";
+			if (hasStatusEffect(StatusEffects.Blind))  retv += "<b>Blinded:</b> Target is blinded and will miss much more often.\n";
+			if (hasStatusEffect(StatusEffects.Fear))  retv += "<b>Frightened </b> Target is frozen by fear, and cannot attack.\n";
+			if (hasStatusEffect(StatusEffects.NagaVenom))  retv += "<b>Poisoned(Naga):</b> Target is continuously losing speed and strength.\n";
+			if (hasStatusEffect(StatusEffects.Whispered))  retv += "<b>Whispered:</b> Target is addled by dark whisperings, and cannot attack.\n";
+			if (hasStatusEffect(StatusEffects.OnFire))  retv += "<b>Burning:</b> Target is burning, and takes damage every turn for " + statusEffectv1(StatusEffects.OnFire) +" turns.\n";
+			if (hasStatusEffect(StatusEffects.Shell))  retv += "<b>Shell:</b> Target is protected by a magical shell for " + statusEffectv1(StatusEffects.Shell) +" turns, and will absorb some magical attacks.\n";
+			//if (hasStatusEffect(StatusEffects.GuardAB))  retv += "<b>Guarded:</b> Target is guarded, and cannot be attacked directly.\n";
+			//if(hasPerk(PerkLib.PoisonImmune)) retv += "<b>Poison Immune:</b> Target is immune to poison effects.\n";
+			return retv;
+		}
+		
 		/**
 		 *Get the remaining fatigue of the Creature.
 		 *@return maximum amount of fatigue that still can be used

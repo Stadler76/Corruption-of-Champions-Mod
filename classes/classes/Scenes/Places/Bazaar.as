@@ -66,7 +66,7 @@ private function approachBazaarGuard():void {
 }
 
 public function enterTheBazaar():void {
-	if (model.time.hours == 19 || model.time.hours == 20) {
+	if (getGame().time.hours == 19 || getGame().time.hours == 20) {
 		flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
 		if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && (player.gender == 1 || (player.gender == 3 && player.mf("m", "f") == "m"))) {
 			nightBazaarButtfuck();
@@ -114,7 +114,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 		addButton(4, "Back Alley", investigateBackAlleyNoPrison).hint("That back alley looks suspicious. Do you dare investigate?");
 	}
 	//Cinnabar
-	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
+	if (getGame().time.hours >= 15 && getGame().time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
 	//Griping Demons
 	if (flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 0 && rand(4) == 0 && demons) {
 		overHearDemonsAboutSyrena();
@@ -1265,8 +1265,8 @@ private function finalGayFinallee(road:int = 0):void {
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: a lust draft potion with an orange ribbon tied to it.  A note at the end reads: \"<i>Thanks for bailing me out of buying booze.  Your ass was amazing even after that orc had it.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn tiger paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
 		player.orgasm('Anal');
 		dynStats("sen", 5);
-		model.time.days++;
-		model.time.hours = 6;
+		getGame().time.days++;
+		getGame().time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		inventory.takeItem(consumables.L_DRAFT, camp.returnToCampUseOneHour);
@@ -1297,8 +1297,8 @@ private function finalGayFinallee(road:int = 0):void {
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: A lust draft potion with a brown ribbon tied to it.  A note at the end reads: \"<i>I'll always remember the face you made trying to wrap your cute lips around my giant dick.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn bear paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
 		player.orgasm('Anal');
 		dynStats("sen", 5);
-		model.time.days++;
-		model.time.hours = 6;
+		getGame().time.days++;
+		getGame().time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		inventory.takeItem(consumables.L_DRAFT, camp.returnToCampUseOneHour);
@@ -1328,9 +1328,9 @@ private function finalGayFinallee(road:int = 0):void {
 		//Time set to morning
 		player.orgasm('Generic');
 		dynStats("sen", 5);
-		model.time.days++;
+		getGame().time.days++;
 		
-		model.time.hours = 6;
+		getGame().time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		inventory.takeItem(consumables.BIMBOLQ, camp.returnToCampUseOneHour);

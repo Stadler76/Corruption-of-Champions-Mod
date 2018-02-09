@@ -137,7 +137,7 @@ package classes.Items.Consumables
 					});
 				}
 				
-				mutations.updateClaws(player.claws.type); // Just auto-fix the clawTone
+				player.arms.updateClaws(player.arms.claws.type); // Just auto-fix the clawTone
 				changes++;
 			}
 			// Remove gills

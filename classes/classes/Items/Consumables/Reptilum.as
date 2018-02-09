@@ -273,16 +273,15 @@ package classes.Items.Consumables
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain predator arms
 			if (player.arms.type !== Arms.PREDATOR && player.hasReptileScales() && player.lowerBody.type === LowerBody.LIZARD && changes < changeLimit && rand(3) === 0) {
-				player.arms.type = Arms.PREDATOR;
-				mutations.updateClaws(Claws.LIZARD);
-				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short " + player.claws.tone + " claws replacing your fingernails.");
+				player.arms.setType(Arms.PREDATOR, Claws.LIZARD);
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short " + player.arms.claws.tone + " claws replacing your fingernails.");
 				outputText("\n<b>You now have reptilian arms.</b>");
 				changes++
 			}
 			//Claw transition
-			if (player.arms.type === Arms.PREDATOR && player.hasLizardScales() && player.claws.type !== Claws.LIZARD && changes < changeLimit && rand(3) === 0) {
+			if (player.arms.type === Arms.PREDATOR && player.hasLizardScales() && player.arms.claws.type !== Claws.LIZARD && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nYour [claws] change a little to become reptilian.");
-				mutations.updateClaws(Claws.LIZARD);
+				player.arms.updateClaws(Claws.LIZARD);
 				outputText(" <b>You now have [claws].</b>");
 				changes++
 			}
@@ -322,7 +321,7 @@ package classes.Items.Consumables
 				var newSkinTones:Array = mutations.newLizardSkinTone();
 				if (player.hasFur()) {
 					player.skin.tone = newSkinTones[0];
-					mutations.updateClaws(player.claws.type);
+					player.arms.updateClaws(player.arms.claws.type);
 					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.skin.furColor + " fur.  Panicked, you look down"
 					          +" and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body"
 					          +" relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly"
@@ -336,7 +335,7 @@ package classes.Items.Consumables
 					          +" scratch yourself, and when you're finally done, you look yourself over. New scales have grown to replace your"
 					          +" peeled off [skinFurScales].");
 					player.skin.tone = newSkinTones[0];
-					mutations.updateClaws(player.claws.type);
+					player.arms.updateClaws(player.arms.claws.type);
 				}
 				//(no fur)
 				else {
@@ -346,7 +345,7 @@ package classes.Items.Consumables
 					          +" well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has"
 					          +" already finished on the rest of your body.");
 					player.skin.tone = newSkinTones[0];
-					mutations.updateClaws(player.claws.type);
+					player.arms.updateClaws(player.arms.claws.type);
 				}
 				player.skin.setProps({
 					type: Skin.LIZARD_SCALES,

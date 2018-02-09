@@ -131,7 +131,7 @@ private function comeToCampHeliaIWantTailInButt():void {
 	outputText("\n\nFinally, she breaks the kiss long enough to say, <i>\"Oh, I am going to enjoy living with you...\"</i>");
 	menu();
 	//place holder
-	model.time.hours++;
+	getGame().time.hours++;
 	addButton(0,"Next",afterMoveInBoningAnalFireTail);
 }
 
@@ -550,7 +550,7 @@ private function heliaOptions():void {
 	}
 	menu();
 	addButton(0,"Discuss",talkToHel).hint("Talk to her about random topics.");
-	if (model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail).hint("Cuddle with Helia and sleep with her.");
+	if (getGame().time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail).hint("Cuddle with Helia and sleep with her.");
 	else {
 		if (flags[kFLAGS.SLEEP_WITH] == "Helia") addButton(1, "NoSleepWith", dontSleepWithHelia).hint("Stop sleeping with Helia, for now.", "No Sleep With");
 		addButton(2,"Hug",hugASmokeyTail).hint("Give that salamander bitch a hug. Bitches love hugs.");
@@ -930,7 +930,7 @@ private function listenToHelTalkAboutGnolls():void {
 private function hugASmokeyTail():void {
 	clearOutput();
 	//Cuddle with Hel (Replaces Hug @ 21:00+)
-	if (model.time.hours >= 21) {
+	if (getGame().time.hours >= 21) {
 		outputText("As the sun sets over the camp, you see Helia standing over her hammock, stretching and yawning, ready to turn in for the night.  You approach her, sliding your arms around her supple waist and burying your face in her soft crimson locks, holding your lover close.  Hel giggles girlishly as you give her a long hug, nuzzling into the nape of her neck.");
 		outputText("\n\nWith a bit of effort, Hel turns around in your embrace and starts to fiddle with your [armor], slowly pulling it off, leaving your bare flesh pressed against her own.  You breathe in the woodsmoke scent of her hair; rub your " + player.skinFurScales() + " along her smooth flesh; gasp lightly as her long tail wraps lovingly around your [legs], drawing you even closer, letting your face rest against her yielding chest.");
 		outputText("\n\nKissing and nipping along your arm and neck, Hel gently pulls you into the hammock, leaving you resting atop the salamander, your limbs and tail");

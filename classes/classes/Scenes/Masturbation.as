@@ -12,6 +12,18 @@ package classes.Scenes {
 		
 		public function Masturbation() {}
 		
+		public function setMasturbateButton(inDungeon:Boolean = false, index:int = 8):void {
+			if (player.lust >= 30) {
+				addButton(index, "Masturbate", inDungeon ? masturbateGo : masturbateMenu).hint("Selecting this option will make you attempt to manually masturbate in order to relieve your lust buildup.");
+				if ((player.hasPerk(PerkLib.HistoryReligious) && player.isPureEnough(66) || player.hasPerk(PerkLib.Enlightened) && player.isPureEnough(10)) && (!player.hasStatusEffect(StatusEffects.Exgartuan) || player.statusEffectv2(StatusEffects.Exgartuan) != 0) || flags[kFLAGS.SFW_MODE] >= 1) {
+					addButton(index, "Meditate", masturbateMenu).hint("Selecting this option will make you attempt to meditate in order to reduce lust and corruption.");
+				}
+			}
+			else {
+				addButtonDisabled(index, "Masturbate", "You are not horny enough to consider doing that.");
+			}
+		}
+		
 		public function masturbateMenu():void {
 			menu();
 			if (flags[kFLAGS.SFW_MODE] > 0) {
@@ -28,7 +40,7 @@ package classes.Scenes {
 			}
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !fappingItems(false)) {
 				clearOutput();
-				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own. When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				addButton(0, "Next", playerMenu);
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\n\nFortunately, you could smear honey all over your " + player.cockDescript() + " and relieve yourself if you want to.");
@@ -101,35 +113,35 @@ package classes.Scenes {
 				button++;
 			}
 			if (player.hasKeyItem("All-Natural Onahole") >= 0 && canReachCock) {
-				if (menus) addButton(button, "AN Onahole", allNaturalOnaholeUse);
+				if (menus) addButton(button, "AN Onahole", allNaturalOnaholeUse).hint("An all-natural onahole, this device looks more like a bulbous creature than a sex-toy. Nevertheless, the slick orifice it presents looks very inviting.", "All-Natural Onahole");
 				button++;
 			}
 			if (player.hasKeyItem("Deluxe Onahole") >= 0 && canReachCock) {
-				if (menus) addButton(button, "D Onahole", deluxeOnaholeUse);
+				if (menus) addButton(button, "D Onahole", deluxeOnaholeUse).hint("This is a deluxe onahole, made of exceptional materials and with the finest craftsmanship in order to bring its user to the height of pleasure.", "Deluxe Onahole");
 				button++;
 			}
 			if (player.hasKeyItem("Plain Onahole") >= 0 && canReachCock) {
-				if (menus) addButton(button, "Onahole", onaholeUse);
+				if (menus) addButton(button, "Onahole", onaholeUse).hint("This is what is called an 'onahole'. This device is a simple textured sleeve designed to fit around the male anatomy in a pleasurable way.", "Onahole");
 				button++;
 			}
 			if (player.hasKeyItem("Self-Stimulation Belt") >= 0 && player.vaginas.length > 0 && !player.isTaur()) {
-				if (menus) addButton(button, "Stim-Belt", stimBeltUse);
+				if (menus) addButton(button, "Stim-Belt", stimBeltUse).hint("This is a self-stimulation belt. Commonly referred to as stim-belts, these are clockwork devices designed to pleasure the female anatomy.", "Self-Stimulation Belt");
 				button++;
 			}
 			if (player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0 && player.vaginas.length > 0 && !player.isTaur()) {
-				if (menus) addButton(button, "AN Stim-Belt", allNaturalStimBeltUse);
+				if (menus) addButton(button, "AN Stim-Belt", allNaturalStimBeltUse).hint("This is an all-natural self-stimulation belt. The methods used to create such a pleasure device are unknown. It seems to be organic in nature.", "All-Natural Stimulation Belt");
 				button++;
 			}
 			if (player.hasKeyItem("Dual Belt") >= 0 && player.gender == 3 && !player.isTaur()) {
-				if (menus) addButton(button, "Dual Belt", dualBeltMasturbation);
+				if (menus) addButton(button, "Dual Belt", dualBeltMasturbation).hint("This is a strange masturbation device, meant to work every available avenue of stimulation.", "Dual Belt");
 				button++;
 			}
 			if (player.hasKeyItem("Fake Mare") >= 0 && player.hasCock() && player.isTaur()) {
-				if (menus) addButton(button, "Fake Mare", centaurDudesGetHorseAids);
+				if (menus) addButton(button, "Fake Mare", centaurDudesGetHorseAids).hint("This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.", "Fake Mare");
 				button++;
 			}
 			if (player.hasKeyItem("Centaur Pole") >= 0 && player.hasVagina() && player.isTaur()) {
-				if (menus) addButton(button, "C. Pole", centaurGirlsGetHorseAids);
+				if (menus) addButton(button, "C. Pole", centaurGirlsGetHorseAids).hint("This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion. Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.", "Centaur Pole");
 				button++;
 			}
 			if (player.hasKeyItem("Dildo") >= 0) {
@@ -268,17 +280,17 @@ package classes.Scenes {
 		public function masturbateGo():void {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.Dysfunction)) {
-				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.");
+				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible. You'll have to find something to fuck to relieve your lust.");
 				doNext(playerMenu);
 				return;
 			}
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !(player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) && !inDungeon) {
-				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
+				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own. When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				doNext(playerMenu);
 				return;
 			}
 			if (inDungeon && kGAMECLASS.dungeonLoc != -10) {
-				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
+				outputText("There is no way you could get away with masturbating in a place like this! You'd better find your way back to camp if you want to take care of that.");
 				doNext(playerMenu);
 				return;		
 			}
@@ -346,18 +358,18 @@ package classes.Scenes {
 				if (player.cocks.length == 1) {
 					outputText("You stroke your " + player.cockDescript());
 					if (player.lib100 < 45)
-						outputText(" eagerly, quickly bringing yourself to a full, throbbing state.  ");
+						outputText(" eagerly, quickly bringing yourself to a full, throbbing state. ");
 					else if (player.lib100 < 70)
-						outputText(" languidly, reveling at its near-constant hardness.  ");
-					else outputText(" teasingly, pre-cum running down your length from your constant state of arousal.  ");
+						outputText(" languidly, reveling at its near-constant hardness. ");
+					else outputText(" teasingly, pre-cum running down your length from your constant state of arousal. ");
 				}
 				else {
 					outputText("You stroke your " + player.cockDescript());
 					if (player.lib100 < 45)
-						outputText(" eagerly, quickly bringing your cocks to a full, throbbing state.  ");
+						outputText(" eagerly, quickly bringing your cocks to a full, throbbing state. ");
 					else if (player.lib100 < 70)
-						outputText(" languidly, reveling at their near-constant hardness.  ");
-					else outputText(" teasingly, pre-cum running down your cocks from your constant state of arousal, pooling around you.  ");
+						outputText(" languidly, reveling at their near-constant hardness. ");
+					else outputText(" teasingly, pre-cum running down your cocks from your constant state of arousal, pooling around you. ");
 				}
 			}
 				if (player.gender == 3) outputText(images.showImage("masti-herm"));
@@ -374,15 +386,15 @@ package classes.Scenes {
 					else outputText("You touch your enflamed and aroused " + player.vaginaDescript() + ", ");
 					switch (player.vaginas[0].vaginalWetness) {
 						case VaginaClass.WETNESS_DRY:
-							outputText("expertly arousing your female parts.  "); break;
+							outputText("expertly arousing your female parts. "); break;
 						case VaginaClass.WETNESS_NORMAL:
-							outputText("sighing as it quickly becomes moist.  "); break;
+							outputText("sighing as it quickly becomes moist. "); break;
 						case VaginaClass.WETNESS_WET:
-							outputText("giggling as your fingers get a little wet.  "); break;
+							outputText("giggling as your fingers get a little wet. "); break;
 						case VaginaClass.WETNESS_SLICK:
-							outputText("smiling as your fingers become coated in your slick fluids.  "); break;
+							outputText("smiling as your fingers become coated in your slick fluids. "); break;
 						case VaginaClass.WETNESS_DROOLING:
-							outputText("slicking your fingers in the juices that constantly dribble from " + player.vaginaDescript() + "  "); break;
+							outputText("slicking your fingers in the juices that constantly dribble from " + player.vaginaDescript() + " "); break;
 						default:
 							outputText("licking your lips as a small spurt of fluid squirts from your nethers.");
 					}
@@ -395,15 +407,15 @@ package classes.Scenes {
 					else outputText("Touch your enflamed and aroused " + player.vaginaDescript() + "s, ");
 					switch (player.vaginas[0].vaginalWetness) {
 						case VaginaClass.WETNESS_DRY:
-							outputText("expertly arousing your female parts.  "); break;
+							outputText("expertly arousing your female parts. "); break;
 						case VaginaClass.WETNESS_NORMAL:
-							outputText("sighing as they quickly becomes moist.  "); break;
+							outputText("sighing as they quickly becomes moist. "); break;
 						case VaginaClass.WETNESS_WET:
-							outputText("giggling as your fingers get a little wet.  "); break;
+							outputText("giggling as your fingers get a little wet. "); break;
 						case VaginaClass.WETNESS_SLICK:
-							outputText("smiling as your fingers become coated in your slick fluids.  "); break;
+							outputText("smiling as your fingers become coated in your slick fluids. "); break;
 						case VaginaClass.WETNESS_DROOLING:
-							outputText("slicking your fingers in the juices that constantly dribble from " + player.vaginaDescript() + "s  "); break;
+							outputText("slicking your fingers in the juices that constantly dribble from " + player.vaginaDescript() + "s "); break;
 						default:
 							outputText("licking your lips as small spurts of fluid squirt from your nethers.");
 					}
@@ -421,7 +433,7 @@ package classes.Scenes {
 				//3 hard time fucking women
 				//5 lucky to find demon/animal
 				if (player.cocks[0].cockThickness < 1.8)
-					outputText("You easily wrap a hand around your " + player.cockDescript() + " and start masturbating.  ");
+					outputText("You easily wrap a hand around your " + player.cockDescript() + " and start masturbating. ");
 				else if (player.cocks[0].cockThickness < 3) {
 					outputText("You have some difficulty fitting your hand around your " + player.cockDescript() + ", relishing the feelings of your ");
 					if (player.cocks[0].cockType == CockTypesEnum.HORSE)
@@ -429,77 +441,77 @@ package classes.Scenes {
 					else if (player.hasKnot())
 						outputText("bulbous beast");
 					else outputText("large");
-					outputText(" endowment as you begin masturbating.  ");
+					outputText(" endowment as you begin masturbating. ");
 				}
 				else if (player.cocks[0].cockThickness < 5) {
-					outputText("You use both hands to grip your " + player.cockDescript() + ", feeling the throbbing of your " + (player.hasKnot() ? "knot" : "member") + " as you begin to masturbate.  ");
+					outputText("You use both hands to grip your " + player.cockDescript() + ", feeling the throbbing of your " + (player.hasKnot() ? "knot" : "member") + " as you begin to masturbate. ");
 				}
-				else outputText("You grasp onto your " + player.cockDescript() + " with both hands, but fail to encircle it fully as you begin to masturbate.  ");
+				else outputText("You grasp onto your " + player.cockDescript() + " with both hands, but fail to encircle it fully as you begin to masturbate. ");
 				//If length > 12 proud
 				//if length > 16 looong strokes (maybe tittyfucK?)
 				//if length > 20 selfsuck
 				if (player.cocks[0].cockLength < 12) {
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) >= 1)
-						outputText("You stroke quickly, pleasuring your sensitive dick, darting down to fondle the base of your cock.  ");
+						outputText("You stroke quickly, pleasuring your sensitive dick, darting down to fondle the base of your cock. ");
 					else if (player.countCocksOfType(CockTypesEnum.HORSE) >= 1)
-						outputText("You stroke quickly, reveling in your sensitive horseflesh, darting down to fondle your sensitive sheath.  ");
+						outputText("You stroke quickly, reveling in your sensitive horseflesh, darting down to fondle your sensitive sheath. ");
 					else if (player.dogCocks() >= 1)
-						outputText("You stroke quickly, pleasuring your sensitive, canine erection, darting down to fondle the sensitive sheath at the base of your cock.  ");
+						outputText("You stroke quickly, pleasuring your sensitive, canine erection, darting down to fondle the sensitive sheath at the base of your cock. ");
 					else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 1)
-						outputText("You stroke quickly, pleasuring the supple length of your tentacular endowment, fondling every inhuman nodule as you slide along every inch of twisting length.  ");
+						outputText("You stroke quickly, pleasuring the supple length of your tentacular endowment, fondling every inhuman nodule as you slide along every inch of twisting length. ");
 					else if (player.countCocksOfType(CockTypesEnum.DEMON) >= 1)
-						outputText("You stroke quickly, pleasuring the bumpy ridges of your demonic tool, fondling every inhuman nodule as you slide along the entire twitching length.  ");
+						outputText("You stroke quickly, pleasuring the bumpy ridges of your demonic tool, fondling every inhuman nodule as you slide along the entire twitching length. ");
 					else if (player.countCocksOfType(CockTypesEnum.CAT) >= 1)
-						outputText("You stroke quickly, feeling the tiny 'barbs' of your " + player.cockDescript() + " sliding through your fingers, even darting down to circle the sensitive skin around your sheath.  ");
+						outputText("You stroke quickly, feeling the tiny 'barbs' of your " + player.cockDescript() + " sliding through your fingers, even darting down to circle the sensitive skin around your sheath. ");
 					else if (player.countCocksOfType(CockTypesEnum.LIZARD) >= 1)
-						outputText("You stroke quickly, pleasuring your sensitive " + player.cockDescript() + ", sliding fingers over each ridge and bump that covers its knotty length.  ");
+						outputText("You stroke quickly, pleasuring your sensitive " + player.cockDescript() + ", sliding fingers over each ridge and bump that covers its knotty length. ");
 					else if (player.countCocksOfType(CockTypesEnum.ANEMONE) >= 1)
-						outputText("You stroke quickly, gasping as your fingers are stung repeatedly with the aphrodisiac-laced tentacles around the base of your " + player.cockDescript() + " and under its crown.  ");
+						outputText("You stroke quickly, gasping as your fingers are stung repeatedly with the aphrodisiac-laced tentacles around the base of your " + player.cockDescript() + " and under its crown. ");
 					else if (player.countCocksOfType(CockTypesEnum.DISPLACER) >= 1)
-						outputText("You stroke quickly, pleasuring your sensitive, alien endowment, darting down to fondle the sensitive sheath as your pointed tip opens into a wiggling, starfish-like shape.  ");
-					else outputText("You stroke quickly, pleasuring your sensitive dick, darting down to fondle the base of your cock.  ");
+						outputText("You stroke quickly, pleasuring your sensitive, alien endowment, darting down to fondle the sensitive sheath as your pointed tip opens into a wiggling, starfish-like shape. ");
+					else outputText("You stroke quickly, pleasuring your sensitive dick, darting down to fondle the base of your cock. ");
 				}
 				else if (player.cocks[0].cockLength < 20) {
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) >= 1)
-						outputText("You delight in teasing the crown of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with.  It seems to pulse and twitch with each stroke, responding to every touch.  ");
+						outputText("You delight in teasing the crown of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with. It seems to pulse and twitch with each stroke, responding to every touch. ");
 					else if (player.countCocksOfType(CockTypesEnum.HORSE) >= 1)
-						outputText("You delight in teasing the sensitive flared tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with.  It seems to pulse and ripple with each stroke, responding to every touch.  ");
+						outputText("You delight in teasing the sensitive flared tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with. It seems to pulse and ripple with each stroke, responding to every touch. ");
 					else if (player.dogCocks() >= 1)
-						outputText("You delight in teasing the pointed tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with.  Your knot seems to pulse and twitch with each stroke, reacting to every touch.  ");
+						outputText("You delight in teasing the pointed tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with. Your knot seems to pulse and twitch with each stroke, reacting to every touch. ");
 					else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 1)
-						outputText("You delight in teasing the over-sized mushroom-like tip of your " + player.cockDescript() + ", caressing it after every stroke as you squeeze out dollops of pre to smear along its slimy length.  It writhes and twists in your hands of it's own volition, lengthening and shortening with each set of strokes.  ");
+						outputText("You delight in teasing the over-sized mushroom-like tip of your " + player.cockDescript() + ", caressing it after every stroke as you squeeze out dollops of pre to smear along its slimy length. It writhes and twists in your hands of it's own volition, lengthening and shortening with each set of strokes. ");
 					else if (player.countCocksOfType(CockTypesEnum.DEMON) >= 1)
-						outputText("You delight in teasing the larger bumps that form a ring around the crown of your " + player.cockDescript() + ", watching as they twitch and spasm in time with the dollops of pre you're squeezing out and smearing over the entire length.  ");
+						outputText("You delight in teasing the larger bumps that form a ring around the crown of your " + player.cockDescript() + ", watching as they twitch and spasm in time with the dollops of pre you're squeezing out and smearing over the entire length. ");
 					else if (player.countCocksOfType(CockTypesEnum.CAT) >= 1)
-						outputText("You delight in teasing the sensitive nubs all along your " + player.cockDescript() + ", circling the cock-tip at the end of each stroke to gather pre and slather it over your entire length.  Each of the tiny 'barbs' provides bursts of pleasure with each stroke, driving you on.  ");
+						outputText("You delight in teasing the sensitive nubs all along your " + player.cockDescript() + ", circling the cock-tip at the end of each stroke to gather pre and slather it over your entire length. Each of the tiny 'barbs' provides bursts of pleasure with each stroke, driving you on. ");
 					else if (player.countCocksOfType(CockTypesEnum.LIZARD) >= 1)
-						outputText("You delight in teasing the rounded bulbs that cover your " + player.cockDescript() + ", circling them with your fingertips before sliding up to the urethra and gathering a drop of pre.  You smear it over your sensitive reptile skin and revel in the pleasure radiating through you.  ");
+						outputText("You delight in teasing the rounded bulbs that cover your " + player.cockDescript() + ", circling them with your fingertips before sliding up to the urethra and gathering a drop of pre. You smear it over your sensitive reptile skin and revel in the pleasure radiating through you. ");
 					else if (player.countCocksOfType(CockTypesEnum.ANEMONE) >= 1)
-						outputText("You delight in grabbing hold of the tiny, stinging tentacles around the base and squeezing them between your " + player.cockDescript() + " and hand.  Aphrodisiac pours into your blood as you release them and stroke along the length, gathering dollops of pre to coat yourself with and 'accidentally' bumping the other tentacles at the crown.  "); 
+						outputText("You delight in grabbing hold of the tiny, stinging tentacles around the base and squeezing them between your " + player.cockDescript() + " and hand. Aphrodisiac pours into your blood as you release them and stroke along the length, gathering dollops of pre to coat yourself with and 'accidentally' bumping the other tentacles at the crown. "); 
 					else if (player.countCocksOfType(CockTypesEnum.DISPLACER) >= 1)
-						outputText("You delight in teasing the opened tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, watching it squeeze out dollops of pre that you smear over it to tease yourself with.  Your knot seems to pulse and twitch with each stroke, reacting to every touch.  ");
-					else outputText("You delight in teasing the crown of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with.  It seems to pulse and twitch with each stroke, responding to every touch.  ");
+						outputText("You delight in teasing the opened tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, watching it squeeze out dollops of pre that you smear over it to tease yourself with. Your knot seems to pulse and twitch with each stroke, reacting to every touch. ");
+					else outputText("You delight in teasing the crown of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with. It seems to pulse and twitch with each stroke, responding to every touch. ");
 				}
 				else if (player.cocks[0].cockLength < 26) {			
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) >= 1)
-						outputText("The head of your " + player.cockDescript() + " wobbles towards your face as you masturbate, a dollop of pre slowly growing atop it.  ");
+						outputText("The head of your " + player.cockDescript() + " wobbles towards your face as you masturbate, a dollop of pre slowly growing atop it. ");
 					else if (player.countCocksOfType(CockTypesEnum.HORSE) >= 1)
-						outputText("The flared tip of your " + player.cockDescript() + " wobbles towards your face as you masturbate, a dollop of pre slowly growing atop it.  ");
+						outputText("The flared tip of your " + player.cockDescript() + " wobbles towards your face as you masturbate, a dollop of pre slowly growing atop it. ");
 					else if (player.dogCocks() >= 1)
-						outputText("The pointed tip of your " + player.cockDescript() + " angles towards your face as you masturbate, a dollop of pre slowly leaking from it.  ");
+						outputText("The pointed tip of your " + player.cockDescript() + " angles towards your face as you masturbate, a dollop of pre slowly leaking from it. ");
 					else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 1)
-						outputText("The overly wide head of your " + player.cockDescript() + " bumps against your lips as you masturbate, waving back and forth like a snake as it searches for an orifice.  ");
+						outputText("The overly wide head of your " + player.cockDescript() + " bumps against your lips as you masturbate, waving back and forth like a snake as it searches for an orifice. ");
 					else if (player.countCocksOfType(CockTypesEnum.DEMON) >= 1)
-						outputText("The purplish head of your " + player.cockDescript() + " bumps against your lips as you masturbate, flushing darkly with every beat of your heart.  ");
+						outputText("The purplish head of your " + player.cockDescript() + " bumps against your lips as you masturbate, flushing darkly with every beat of your heart. ");
 					else if (player.countCocksOfType(CockTypesEnum.CAT) >= 1)
-						outputText("The slightly pointed tip of your " + player.cockDescript() + " bumps against your lips as you masturbate, flushing with blood as your spines grow thicker in your hand.  ");
+						outputText("The slightly pointed tip of your " + player.cockDescript() + " bumps against your lips as you masturbate, flushing with blood as your spines grow thicker in your hand. ");
 					else if (player.countCocksOfType(CockTypesEnum.LIZARD) >= 1)
-						outputText("The pointed, purple tip of your " + player.cockDescript() + " bumps against your lips while its knotted surface flushes near-purple and seems to grow thicker.  ");
+						outputText("The pointed, purple tip of your " + player.cockDescript() + " bumps against your lips while its knotted surface flushes near-purple and seems to grow thicker. ");
 					else if (player.countCocksOfType(CockTypesEnum.ANEMONE) >= 1)
-						outputText("The tentacle-ringed tip of your " + player.cockDescript() + " brushes against your lips, making them tingle with artificial heat while you stroke it.  ");
+						outputText("The tentacle-ringed tip of your " + player.cockDescript() + " brushes against your lips, making them tingle with artificial heat while you stroke it. ");
 					else if (player.countCocksOfType(CockTypesEnum.DISPLACER) >= 1)
-						outputText("The blooming tip of your " + player.cockDescript() + " angles towards your face as you masturbate, a dollop of pre slowly leaking out of the outstretched top.  ");
-					else outputText("The head of your " + player.cockDescript() + " wobbles towards your face as you masturbate, a dollop of pre slowly growing atop it.  ");
+						outputText("The blooming tip of your " + player.cockDescript() + " angles towards your face as you masturbate, a dollop of pre slowly leaking out of the outstretched top. ");
+					else outputText("The head of your " + player.cockDescript() + " wobbles towards your face as you masturbate, a dollop of pre slowly growing atop it. ");
 					//try to stick it in a titty!
 					if (player.hasFuckableNipples() && player.biggestTitSize() >= 3) {
 						//UNFINISHED - TWEAK PENETRATION VALUES
@@ -508,34 +520,34 @@ package classes.Scenes {
 					}
 					else {
 						//autofellatio doesnt get to be true unless you keep it in your mouth instead of sticking it in your boob.
-						outputText("You give in to temptation and swallow the tip, slurping greedily as you milk your " + player.cockDescript() + " of its pre-cum.  ");
+						outputText("You give in to temptation and swallow the tip, slurping greedily as you milk your " + player.cockDescript() + " of its pre-cum. ");
 						autofellatio = true;
 					}
 					if (player.canTitFuck() && player.biggestTitSize() > 3 && !nippleFuck) {
-						outputText("Your hands migrate to your breasts of their own accord, wrapping your titflesh around your " + player.cockDescript() + ", jacking it up and down in your pillowy tits.  ");
+						outputText("Your hands migrate to your breasts of their own accord, wrapping your titflesh around your " + player.cockDescript() + ", jacking it up and down in your pillowy tits. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 				}
 				else {
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) >= 1)
-						outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum.  You are unable to resist opening your mouth and sucking it down, filling your mouth with your cock.  ");
+						outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum. You are unable to resist opening your mouth and sucking it down, filling your mouth with your cock. ");
 					else if (player.countCocksOfType(CockTypesEnum.HORSE) >= 1)
-						outputText("The flared tip of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum.  You are unable to resist opening your mouth and sucking it down, filling your mouth with horsemeat.  ");
+						outputText("The flared tip of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum. You are unable to resist opening your mouth and sucking it down, filling your mouth with horsemeat. ");
 					else if (player.dogCocks() >= 1)
-						outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum.  You are unable to resist opening your mouth and sucking it down, filling your mouth with your " + player.cockDescript() + ".  ");
+						outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum. You are unable to resist opening your mouth and sucking it down, filling your mouth with your " + player.cockDescript() + ". ");
 					else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 1)
-						outputText("The bulbous, mushroom-like head of your " + player.cockDescript() + " pushes against your face eagerly, smearing pre-cum over your lips as it seeks entrance to the nearest orifice.  You're unable to resist opening your mouth to suck it down, filling your mouth with slick rubbery cock-tentacle.  ");
+						outputText("The bulbous, mushroom-like head of your " + player.cockDescript() + " pushes against your face eagerly, smearing pre-cum over your lips as it seeks entrance to the nearest orifice. You're unable to resist opening your mouth to suck it down, filling your mouth with slick rubbery cock-tentacle. ");
 					else if (player.countCocksOfType(CockTypesEnum.DEMON) >= 1)
-						outputText("The tainted swollen head of your " + player.cockDescript() + " pushes against your face, smearing sweet pre-cum over your lips.  You're unable to resist opening wide and taking in the demonic member, submitting wholly to the desire to pleasure your corrupted body-parts.  ");
+						outputText("The tainted swollen head of your " + player.cockDescript() + " pushes against your face, smearing sweet pre-cum over your lips. You're unable to resist opening wide and taking in the demonic member, submitting wholly to the desire to pleasure your corrupted body-parts. ");
 					else if (player.countCocksOfType(CockTypesEnum.CAT) >= 1)
-						outputText("The pointed tip of your " + player.cockDescript() + " pushes against your face, smearing pre-cum over your lips and tickling you with the many barbs.  You're unable to resist opening wide and taking in the " + player.cockDescript() + ", half-humming half-purring in contentment.  ");
+						outputText("The pointed tip of your " + player.cockDescript() + " pushes against your face, smearing pre-cum over your lips and tickling you with the many barbs. You're unable to resist opening wide and taking in the " + player.cockDescript() + ", half-humming half-purring in contentment. ");
 					else if (player.countCocksOfType(CockTypesEnum.LIZARD) >= 1)
-						outputText("The slightly-pointed tip of your " + player.cockDescript() + " pushes against your face, smearing pre-cum over your eager lips.   You can't resist opening wide and slipping it inside as your hands caress the reptilian bulges along your length.  ");
+						outputText("The slightly-pointed tip of your " + player.cockDescript() + " pushes against your face, smearing pre-cum over your eager lips.  You can't resist opening wide and slipping it inside as your hands caress the reptilian bulges along your length. ");
 					else if (player.countCocksOfType(CockTypesEnum.ANEMONE) >= 1)
-						outputText("The rounded, tentacle-ringed tip of your " + player.cockDescript() + " slides against your face, smearing pre-cum over your lips and stinging them with aphrodisiacs that make you pant with lust.  You can't resist opening wide to greedily slurp it down, and in seconds tiny, tingling stings are erupting through your oral cavity, filling you with lust and pleasure.  ");
+						outputText("The rounded, tentacle-ringed tip of your " + player.cockDescript() + " slides against your face, smearing pre-cum over your lips and stinging them with aphrodisiacs that make you pant with lust. You can't resist opening wide to greedily slurp it down, and in seconds tiny, tingling stings are erupting through your oral cavity, filling you with lust and pleasure. ");
 					else if (player.countCocksOfType(CockTypesEnum.DISPLACER) >= 1)
-						outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum.  Wiggling against your lips, the various protrusions of the 'star' at the tip smear you with your heady emissions.   You are unable to resist opening your mouth and sucking it down, filling your mouth with your " + player.cockDescript() + ".  ");
-					else outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum.  You are unable to resist opening your mouth and sucking it down, filling your mouth with your cock.  ");
+						outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum. Wiggling against your lips, the various protrusions of the 'star' at the tip smear you with your heady emissions.  You are unable to resist opening your mouth and sucking it down, filling your mouth with your " + player.cockDescript() + ". ");
+					else outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum. You are unable to resist opening your mouth and sucking it down, filling your mouth with your cock. ");
 					//try to stick it in a titty!
 					if (player.hasFuckableNipples() && player.biggestTitSize() >= 3) {
 						//In-between text
@@ -549,24 +561,24 @@ package classes.Scenes {
 						//autofellatio doesnt get to be true unless you keep it in your mouth instead of sticking it in your boob.
 						if (player.cor > 60) {
 							if (player.countCocksOfType(CockTypesEnum.HUMAN) >= 1)
-								outputText("The heady aroma of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can.  ");
+								outputText("The heady aroma of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can. ");
 							else if (player.countCocksOfType(CockTypesEnum.HORSE) >= 1)
-								outputText("The thick animalistic scent fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can.  ");
+								outputText("The thick animalistic scent fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can. ");
 							else if (player.dogCocks() >= 1)
-								outputText("The strong animal scent of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can.  ");
+								outputText("The strong animal scent of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can. ");
 							else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 1)
-								outputText("The sweet scent of your " + player.cockDescript() + " fills your nostrils as inch after inch of tentacle forces its way down your throat.  You struggle briefly with it, wrestling to keep it from pushing the whole way into your gut, swooning with the pleasure that fighting with your own cock induces.  ");
+								outputText("The sweet scent of your " + player.cockDescript() + " fills your nostrils as inch after inch of tentacle forces its way down your throat. You struggle briefly with it, wrestling to keep it from pushing the whole way into your gut, swooning with the pleasure that fighting with your own cock induces. ");
 							else if (player.countCocksOfType(CockTypesEnum.DEMON) >= 1)
-								outputText("The spicy demonic odor your " + player.cockDescript() + " radiates fills your nostrils as you force inch after inch of tainted meat down your throat.  You struggle briefly, but your " + player.cockDescript() + " quickly overwhelms your resistance and your gag reflex momentarily seems to disappear.  ");
+								outputText("The spicy demonic odor your " + player.cockDescript() + " radiates fills your nostrils as you force inch after inch of tainted meat down your throat. You struggle briefly, but your " + player.cockDescript() + " quickly overwhelms your resistance and your gag reflex momentarily seems to disappear. ");
 							else if (player.countCocksOfType(CockTypesEnum.CAT) >= 1)
-								outputText("The sweet, slightly tangy scent of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of the prickly shaft as you can.  The soft spines that coat its surface actually feel quite pleasant as you force it deeper, denying your gag reflex.  ");
+								outputText("The sweet, slightly tangy scent of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of the prickly shaft as you can. The soft spines that coat its surface actually feel quite pleasant as you force it deeper, denying your gag reflex. ");
 							else if (player.countCocksOfType(CockTypesEnum.LIZARD) >= 1)
-								outputText("The salty, dry odor of your " + player.cockDescript() + " fills your nostrils as you force inch after inch into your mouth, swallowing as much of the bulgy shaft as you can.  ");
+								outputText("The salty, dry odor of your " + player.cockDescript() + " fills your nostrils as you force inch after inch into your mouth, swallowing as much of the bulgy shaft as you can. ");
 							else if (player.countCocksOfType(CockTypesEnum.ANEMONE) >= 1)
-								outputText("The stinging, aphrodisiac-laced " + player.cockDescript() + " slowly works its way down your throat as you swallow it deeper and deeper, gurgling happily as your throat grows more sensitive.  ");
+								outputText("The stinging, aphrodisiac-laced " + player.cockDescript() + " slowly works its way down your throat as you swallow it deeper and deeper, gurgling happily as your throat grows more sensitive. ");
 							else if (player.countCocksOfType(CockTypesEnum.DISPLACER) >= 1)
-								outputText("The strong animal scent of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can.  ");
-							else outputText("The heady aroma of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can.  ");
+								outputText("The strong animal scent of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can. ");
+							else outputText("The heady aroma of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can. ");
 						}
 						autofellatio = true;
 					}
@@ -580,21 +592,21 @@ package classes.Scenes {
 				//Grab it
 				//Play with sheath if has one
 				if (player.hasSheath()) {
-					outputText("Your fingers trace around your sheath, drawing involuntary spasms from your twin members.  ");
+					outputText("Your fingers trace around your sheath, drawing involuntary spasms from your twin members. ");
 				}
 				//Prep bit + variance based on thickness
 				outputText("You grasp one of your " + player.multiCockDescriptLight() + " in each hand, ");
 				if (player.averageCockThickness() <= 1.8)
-					outputText("wrapping your fingers around each tool and just holding yourself, the feelings of two cocks almost too much to bear.  ");
-				else outputText("squeezing as many of your tools as your fingers can encircle.  The feeling of squeezing your thick twin cocks is amazing and overwhelming at the same time.  ");
+					outputText("wrapping your fingers around each tool and just holding yourself, the feelings of two cocks almost too much to bear. ");
+				else outputText("squeezing as many of your tools as your fingers can encircle. The feeling of squeezing your thick twin cocks is amazing and overwhelming at the same time. ");
 				//Get into it
 				//Play with it if <= 10"
 				if (player.averageCockLength() <= 10)
-					outputText("Your hips twitch of their own volition, force-fucking your hands.  In moments you're fiercely masturbating,  pumping each shaft in turn, pleasure mounting at the base and growing more urgent with each pump.  You squeal softly, and increase the tempo of your masturbation, desperate for release.  ");
+					outputText("Your hips twitch of their own volition, force-fucking your hands. In moments you're fiercely masturbating, pumping each shaft in turn, pleasure mounting at the base and growing more urgent with each pump. You squeal softly, and increase the tempo of your masturbation, desperate for release. ");
 				//Tittyfuck if D cup+
 				else if (player.averageCockLength() < 20) {
 					//autofellatio only gets to be true if you have any dicks left to suck on after sticking them in your boobs
-					outputText("You look down at your trembling members, mere inches away, and tentatively lick at a cocktip.  Both dicks begin oozing pre in response.  ");
+					outputText("You look down at your trembling members, mere inches away, and tentatively lick at a cocktip. Both dicks begin oozing pre in response. ");
 					//Try to stick it in a titty!
 					if (player.hasFuckableNipples()) {
 						//check for dogcocks
@@ -618,23 +630,23 @@ package classes.Scenes {
 					}
 					//Titfuck (squeeze em both in between 2!
 					if (player.canTitFuck() && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds.  With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, tongue running figure eights across the tips. ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds. With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, tongue running figure eights across the tips. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//Titfuck (enough breasts for both!)
 					if (player.canTitFuck() && player.mostBreastsPerRow() > 2 && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts.  With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively lick and suck at the tips.  ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts. With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively lick and suck at the tips. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your many nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//No tits, jerk and lick!
 					if (player.biggestTitSize() <= 3 && !nippleFuck) {
-						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself.  As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure.  ");
+						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself. As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure. ");
 					}
 				}
 				//Deepthroat yourself, maybe titfuck if equipped.
 				else {
 					//autofellatio only gets to be true if you have any dicks left to suck on after sticking them in your boobs
-					outputText("Your " + player.multiCockDescriptLight() + " brush against your face, throbbing with need.   You open your mouth and suck one of your pricks into your mouth, taking as much of it as possible, running your tongue along the underside.  You smile and pop it free, then take a different shaft into your maw.  ");
+					outputText("Your " + player.multiCockDescriptLight() + " brush against your face, throbbing with need.  You open your mouth and suck one of your pricks into your mouth, taking as much of it as possible, running your tongue along the underside. You smile and pop it free, then take a different shaft into your maw. ");
 					//Try to stick it in a titty!
 					if (player.hasFuckableNipples()) {
 						//check for dogcocks
@@ -657,17 +669,17 @@ package classes.Scenes {
 					}
 					//Titfuck (squeeze em both in between 2!
 					if (player.canTitFuck() && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds.  With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, mouthfucking yourself with each of your cocks in turn. ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds. With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, mouthfucking yourself with each of your cocks in turn. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//Titfuck (enough breasts for both!)
 					if (player.mostBreastsPerRow() > 2 && player.biggestTitSize() > 3 && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts.  With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively mouthfuck each of your cocks. ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts. With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively mouthfuck each of your cocks. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your many nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//No tits, jerk and lick!
 					if (player.biggestTitSize() <= 3 && !nippleFuck) {
-						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself.  As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure.  ");
+						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself. As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure. ");
 					}
 				}			
 			}
@@ -675,21 +687,21 @@ package classes.Scenes {
 				//Grab it
 				//Play with sheath if has one
 				if (player.hasSheath()) {
-					outputText("Your fingers trace around your sheath, drawing involuntary spasms from your cocks.  ");
+					outputText("Your fingers trace around your sheath, drawing involuntary spasms from your cocks. ");
 				}
 				//Prep bit + variance based on thickness
 				outputText("You grasp one of your " + player.multiCockDescriptLight() + " in each hand, ");
 				if (player.averageCockThickness() <= 1.8)
-					outputText("wrapping your fingers around each tool and just holding yourself, the feelings of your " + num2Text(player.cocks.length) + " cocks making you feel giddy.  ");
-				else outputText("squeezing as many of your tools as your fingers can encircle.  The feeling of rubbing your bundle of cocks together is indescribable.  Your eyes roll back in uncontrollable pleasure.  ");
+					outputText("wrapping your fingers around each tool and just holding yourself, the feelings of your " + num2Text(player.cocks.length) + " cocks making you feel giddy. ");
+				else outputText("squeezing as many of your tools as your fingers can encircle. The feeling of rubbing your bundle of cocks together is indescribable. Your eyes roll back in uncontrollable pleasure. ");
 				//Get into it
 				//Play with it if <= 10"
 				if (player.averageCockLength() <= 10)
-					outputText("Your hips twitch of their own volition, forcing you to fuck your hands.  In moments you're fiercely masturbating,  pumping each shaft in turn, pleasure mounting in your loins and growing more urgent with each pump.  You squeal softly, and increase the tempo of your masturbation, desperate for release.  ");
+					outputText("Your hips twitch of their own volition, forcing you to fuck your hands. In moments you're fiercely masturbating, pumping each shaft in turn, pleasure mounting in your loins and growing more urgent with each pump. You squeal softly, and increase the tempo of your masturbation, desperate for release. ");
 				//Tittyfuck if D cup+
 				else if (player.averageCockLength() < 20) {
 					//autofellatio only gets to be true if you have any dicks left to suck on after sticking them in your boobs
-					outputText("You look down at your trembling members, mere inches away, and tentatively lick at a cocktip.  Your dicks begin oozing pre in response.  ");
+					outputText("You look down at your trembling members, mere inches away, and tentatively lick at a cocktip. Your dicks begin oozing pre in response. ");
 					//Try to stick it in a titty!
 					if (player.hasFuckableNipples()) {
 						//check for dogcocks
@@ -713,23 +725,23 @@ package classes.Scenes {
 					}
 					//Titfuck (squeeze em both in between 2!
 					if (player.canTitFuck() && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds.  With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, your tongue running figure eights across the tips. ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds. With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, your tongue running figure eights across the tips. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//Titfuck (enough breasts for both!)
 					if (player.mostBreastsPerRow() > 2 && player.biggestTitSize() > 3 && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts.  With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively lick and suck at the tips.  ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts. With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively lick and suck at the tips. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your many nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//No tits, jerk and lick!
 					if (player.biggestTitSize() <= 3 && !nippleFuck) {
-						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself.  As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure.  ");
+						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself. As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure. ");
 					}
 				}
 				//Deepthroat yourself, maybe titfuck if equipped.
 				if (player.averageCockLength() >= 20) {
 					//autofellatio only gets to be true if you have any dicks left to suck on after sticking them in your boobs
-					outputText("Your " + player.multiCockDescriptLight() + " brush against your face, throbbing with need.   You open your mouth and suck one of your pricks into your mouth, taking as much of it in as possible, running your tongue along the underside.  You smile and pop it free, then take a different shaft into your maw.  ");
+					outputText("Your " + player.multiCockDescriptLight() + " brush against your face, throbbing with need.  You open your mouth and suck one of your pricks into your mouth, taking as much of it in as possible, running your tongue along the underside. You smile and pop it free, then take a different shaft into your maw. ");
 					//Try to stick it in a titty!
 					if (player.hasFuckableNipples()) {
 						//check for dogcocks
@@ -753,17 +765,17 @@ package classes.Scenes {
 					}
 					//Titfuck (squeeze em both in between 2!
 					if (player.canTitFuck() && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds.  With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, mouthfucking yourself with each of your cocks in turn. ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", sandwiching them inside your pillowy mounds. With delicious slowness you begin jacking yourself off with your tits, your shafts rubbing together between your luxurious breasts, mouthfucking yourself with each of your cocks in turn. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//Titfuck (enough breasts for both!)
 					if (player.mostBreastsPerRow() > 2 && player.biggestTitSize() > 3 && !nippleFuck) {
-						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts.  With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively mouthfuck each of your cocks. ");
+						outputText("You wrap your " + player.breastCup(0) + " tits around your " + player.multiCockDescriptLight() + ", squeezing them between your " + player.totalBreasts() + " breasts. With delicious slowness you begin jacking yourself off with your tits, smooth breastflesh massaging your members as you aggressively mouthfuck each of your cocks. ");
 						if (player.biggestLactation() > 0) outputText("Jets of milk squirt out of your many nipples with each thrust of your hips, adding to the already copious amounts of fluids coating your body. ");
 					}
 					//No tits, jerk and lick!
 					if (player.biggestTitSize() <= 3 && !nippleFuck) {
-						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself.  As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure.  ");
+						outputText("You slowly stroke yourself, pausing every few strokes to smear the streaks of pre that leak from your " + player.multiCockDescriptLight() + " over yourself. As you become more and more lubed and horny, you increase the tempo, until at last you are pumping yourself hard and fast, squeezing your cocks together in pleasure. ");
 					}
 				}						
 			}
@@ -772,34 +784,34 @@ package classes.Scenes {
 				outputText("\n\n");
 				//Single cunt
 				if (player.vaginas.length == 1) {
-					outputText("You let your hand roam over your pussy-lips, slowly teasing yourself, diving deeper into your folds to arouse and expose your clit.  ");
+					outputText("You let your hand roam over your pussy-lips, slowly teasing yourself, diving deeper into your folds to arouse and expose your clit. ");
 					//Smaller clits
 					if (player.getClitLength() < 1.5) {
-						outputText("You stroke and tease around the sensitive little pleasure bud, letting your fingers plumb the depths below.  ");
+						outputText("You stroke and tease around the sensitive little pleasure bud, letting your fingers plumb the depths below. ");
 					}
 					//Big clits
 					else if (player.getClitLength() < 4.5) {
 						outputText("Your large clit is already poking out from your ");
 						if (player.vaginas[0].vaginalWetness > VaginaClass.WETNESS_DRY) outputText("glistening ");
-						outputText("lips.  You gently stroke and touch it until it grows as large as a tiny cock.  ");
+						outputText("lips. You gently stroke and touch it until it grows as large as a tiny cock. ");
 					}
 					//Cock-sized clits 
 					else {
-						outputText("Your cock-sized clit is already fully engorged and deliciously sensitive.  You touch it softly, eliciting a quiet moan from your throat.  ");
+						outputText("Your cock-sized clit is already fully engorged and deliciously sensitive. You touch it softly, eliciting a quiet moan from your throat. ");
 					}
 					switch (player.vaginas[0].vaginalWetness) {
 						case VaginaClass.WETNESS_DRY:
-							outputText("You have some difficulty with your relatively dry pussy, but you manage to gently and pleasurably masturbate by taking it slowly.  "); break;
+							outputText("You have some difficulty with your relatively dry pussy, but you manage to gently and pleasurably masturbate by taking it slowly. "); break;
 						case VaginaClass.WETNESS_NORMAL:
-							outputText("Your horny puss is aching for attention and you oblige it, dipping your fingers into the moist honeypot, and jilling yourself vigorously.  "); break;
+							outputText("Your horny puss is aching for attention and you oblige it, dipping your fingers into the moist honeypot, and jilling yourself vigorously. "); break;
 						case VaginaClass.WETNESS_WET:
-							outputText("The moistened cleft on your groin demands your full attention, drawing your fingers deep inside to explore the wet passage.  "); break;
+							outputText("The moistened cleft on your groin demands your full attention, drawing your fingers deep inside to explore the wet passage. "); break;
 						case VaginaClass.WETNESS_SLICK:
-							outputText("The sweltering heat of your slick cunt aches for something to fill it, and you oblige, dipping your fingers into your slippery cunt.  "); break;
+							outputText("The sweltering heat of your slick cunt aches for something to fill it, and you oblige, dipping your fingers into your slippery cunt. "); break;
 						case VaginaClass.WETNESS_DROOLING:
-							outputText("Warm wetness runs down your legs in thick streams, pouring from your " + player.vaginaDescript() + ".  You smile sheepishly and stroke up your now slickened legs to your pussy-lips, parting them and letting your fingers dive inside the wet channel.  "); break;
+							outputText("Warm wetness runs down your legs in thick streams, pouring from your " + player.vaginaDescript() + ". You smile sheepishly and stroke up your now slickened legs to your pussy-lips, parting them and letting your fingers dive inside the wet channel. "); break;
 						default:
-							outputText("The heavy scent of female arousal fills the air as your steamy sexpot drizzles girl-lube everywhere.  You gasp in surprise as your fingers find their way inside, vigorously fingerfucking your passage, spurts of girlcum squirting out with each penetration.  ");
+							outputText("The heavy scent of female arousal fills the air as your steamy sexpot drizzles girl-lube everywhere. You gasp in surprise as your fingers find their way inside, vigorously fingerfucking your passage, spurts of girlcum squirting out with each penetration. ");
 					}
 				}
 			}
@@ -860,7 +872,7 @@ package classes.Scenes {
 			}
 			//All times as a genderless person (possibly written for all genders perhaps not herm (not enough hands)) - 
 			outputText("Your " + player.assholeDescript() + " begins to twitch. It's practically crying out for attention.\n\n");
-			outputText("You lay down on your side and reach gingerly behind yourself.  The palm of your hand comes to rest on your " + player.buttDescript() + ".  You slide your finger into your crack and find your " + player.assholeDescript() + ".  You run your finger slowly around the sensitive ring of your hole and feel a tingle emanating from it. A smile creeps across your lips as you begin to imagine what is about to happen.\n\n");
+			outputText("You lay down on your side and reach gingerly behind yourself. The palm of your hand comes to rest on your " + player.buttDescript() + ". You slide your finger into your crack and find your " + player.assholeDescript() + ". You run your finger slowly around the sensitive ring of your hole and feel a tingle emanating from it. A smile creeps across your lips as you begin to imagine what is about to happen.\n\n");
 			//For all parts of scene penetration type changes based on anus size '''any (if you do not want to do more than one variable) or virgin pucker or tight/normal/loose/gaping'''-
 			//If no BioLube perk - 
 			if (player.ass.analWetness < 2) {
@@ -902,7 +914,7 @@ package classes.Scenes {
 			outputText(" as your toes curl and an orgasm wracks your body.");
 			//If BioLube perk - 
 			if (player.ass.analWetness >= 2) {
-				outputText("  You withdraw your ");
+				outputText(" You withdraw your ");
 				if (player.ass.analLooseness <= 2)
 					outputText("finger");
 				else if (player.ass.analLooseness < 5)
@@ -916,7 +928,7 @@ package classes.Scenes {
 			}
 			//No BioLube perk -
 			else {
-				outputText("  You withdraw your ");
+				outputText(" You withdraw your ");
 				if (player.ass.analLooseness <= 2)
 					outputText("finger");
 				else if (player.ass.analLooseness < 5)
@@ -931,8 +943,8 @@ package classes.Scenes {
 				outputText(" off.");
 				//Still Horny - 
 				if (player.lib100 > 75)
-					outputText("  Satisfied, you roll over and drift off to sleep. Your hole remains warm, ready for another round.");
-				else outputText("  Satisfied, you roll over and drift off to sleep.");
+					outputText(" Satisfied, you roll over and drift off to sleep. Your hole remains warm, ready for another round.");
+				else outputText(" Satisfied, you roll over and drift off to sleep.");
 			}
 		}
 		
@@ -956,7 +968,7 @@ package classes.Scenes {
 					outputText("You blink back tears of shame as you experience the tactile proof of your abnormal endowments, unable to resist mashing your " + player.allBreastsDescript() + " together");
 				else if (player.cor < 75)
 					outputText("Though a small part of you is horrified by your abnormal endowments, it doesn't stop you from mashing your " + player.allBreastsDescript() + " together");
-				else outputText("The tactile reminder of your abnormal endowments gives you a delicious thrill.  You sigh and mash your tits together");
+				else outputText("The tactile reminder of your abnormal endowments gives you a delicious thrill. You sigh and mash your tits together");
 			}
 			//If nips are fuckable
 			if (player.hasFuckableNipples() && player.biggestTitSize() > 3) {
@@ -1018,13 +1030,13 @@ package classes.Scenes {
 						outputText("fat, puckered nipples. ");
 					else outputText("erect nipples. ");
 				}
-				else outputText("nipples.  ");
+				else outputText("nipples. ");
 				//Special extras if lactating
 				if (player.biggestLactation() > 1 && player.biggestLactation() < 2)
-					outputText("Droplets of milk dribble from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
+					outputText("Droplets of milk dribble from each nipple, spattering milk onto your " + player.legs() + " and crotch. ");
 				else if (player.biggestLactation() >= 2 && player.biggestLactation() < 3)
-					outputText("Thin squirts of milk spray from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
-				else if (player.biggestLactation() >= 3) outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch.  ");
+					outputText("Thin squirts of milk spray from each nipple, spattering milk onto your " + player.legs() + " and crotch. ");
+				else if (player.biggestLactation() >= 3) outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch. ");
 			}
 		}
 		
@@ -1069,6 +1081,7 @@ package classes.Scenes {
 						break;
 					case CockTypesEnum.TENTACLE:
 						outputText("bulbous ");
+						break;
 					default:
 				}
 				outputText("tip of your " + player.cockDescript() + " against the opening of ");
@@ -1230,35 +1243,35 @@ package classes.Scenes {
 					outputText("Milky girlcum squirts out from around your " + player.cockDescript() + ", staining ");
 					switch (player.cocks[0].cockType) { //Different way of choosing cock to use, results in consistent description of cock[0]
 						case CockTypesEnum.ANEMONE:
-							outputText("the odd aquatic shaft white.  Y");
+							outputText("the odd aquatic shaft white. Y");
 							break;
 						case CockTypesEnum.CAT:
-							outputText("the pink kitty-skin white.  Y");
+							outputText("the pink kitty-skin white. Y");
 							break;
 						case CockTypesEnum.DEMON:
-							outputText("its purplish-skin white.  Y");
+							outputText("its purplish-skin white. Y");
 							break;
 						case CockTypesEnum.DISPLACER:
-							outputText("purple, knotty flesh white.  Y");
+							outputText("purple, knotty flesh white. Y");
 							break;
 						case CockTypesEnum.DOG:
 						case CockTypesEnum.FOX:
-							outputText("its shiny skin white.  Y");
+							outputText("its shiny skin white. Y");
 							break;
 						case CockTypesEnum.HORSE:
-							outputText("its mottled skin white.  Y");
+							outputText("its mottled skin white. Y");
 							break;
 						case CockTypesEnum.HUMAN:
-							outputText("it white.  Y");
+							outputText("it white. Y");
 							break;
 						case CockTypesEnum.LIZARD:
-							outputText("purple, bumpy flesh white.  Y");
+							outputText("purple, bumpy flesh white. Y");
 							break;
 						case CockTypesEnum.TENTACLE:
-							outputText("its rubbery skin white.  Y");
+							outputText("its rubbery skin white. Y");
 							break;
 						default:
-							outputText("its length white.  Y");
+							outputText("its length white. Y");
 					}
 		/* Old method
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) > 0) outputText("Milky girlcum squirts out from around your " + player.cockDescript(0) + ", staining it white.  Y");
@@ -1297,35 +1310,35 @@ package classes.Scenes {
 					else {
 						switch (player.cocks[0].cockType) { //Different way of choosing cock to use, results in consistent description of cock[0]
 						case CockTypesEnum.ANEMONE:
-							outputText("The swollen tips of your bloated nipple wrap around the stinging tentacles that surround your " + player.cockDescript() + "'s tip, convulsing with wet squishing sounds as they become red and enflamed with artificial lust.  ");
+							outputText("The swollen tips of your bloated nipple wrap around the stinging tentacles that surround your " + player.cockDescript() + "'s tip, convulsing with wet squishing sounds as they become red and enflamed with artificial lust. ");
 							break;
 						case CockTypesEnum.CAT:
-							outputText("The swollen tips of your bloated nipples stretch around the barbed tip of your " + player.cockDescript() + ", swallowing it like an enormous mouth.  ");
+							outputText("The swollen tips of your bloated nipples stretch around the barbed tip of your " + player.cockDescript() + ", swallowing it like an enormous mouth. ");
 							break;
 						case CockTypesEnum.DEMON:
-							outputText("The swollen lips of your bloated nipple stretch around the nodule-ringed tip of your " + player.cockDescript() + ", swallowing it like an enormous mouth.  ");
+							outputText("The swollen lips of your bloated nipple stretch around the nodule-ringed tip of your " + player.cockDescript() + ", swallowing it like an enormous mouth. ");
 							break;
 						case CockTypesEnum.DISPLACER:
-							outputText("The swollen tips of your bloated nipple wrap around the outstretched head of your " + player.cockDescript() + ", convulsing with wet, squishing sounds as it wriggles inside you.  ");
+							outputText("The swollen tips of your bloated nipple wrap around the outstretched head of your " + player.cockDescript() + ", convulsing with wet, squishing sounds as it wriggles inside you. ");
 							break;
 						case CockTypesEnum.DOG:
 						case CockTypesEnum.FOX:
-							outputText("The swollen lips of your bloated nipple stretch around the pointed tip of your " + player.cockDescript() + " swallowing it like an enormous mouth.  ");
+							outputText("The swollen lips of your bloated nipple stretch around the pointed tip of your " + player.cockDescript() + " swallowing it like an enormous mouth. ");
 							break;
 						case CockTypesEnum.HORSE:
-							outputText("The swollen lips of your bloated nipple stretch around the flared tip of your " + player.cockDescript() + " swallowing it like an enormous mouth.  ");
+							outputText("The swollen lips of your bloated nipple stretch around the flared tip of your " + player.cockDescript() + " swallowing it like an enormous mouth. ");
 							break;
 						case CockTypesEnum.HUMAN:
-							outputText("The swollen lips of your bloated nipple stretch around the tip of your " + player.cockDescript() + " swallowing it like an enormous mouth.  ");
+							outputText("The swollen lips of your bloated nipple stretch around the tip of your " + player.cockDescript() + " swallowing it like an enormous mouth. ");
 							break;
 						case CockTypesEnum.LIZARD:
-							outputText("The swollen tips of your bloated nipple wrap around the pointed tip of your " + player.cockDescript() + ", stretching oddly as it swallows the knot-covered appendage.  ");
+							outputText("The swollen tips of your bloated nipple wrap around the pointed tip of your " + player.cockDescript() + ", stretching oddly as it swallows the knot-covered appendage. ");
 							break;
 						case CockTypesEnum.TENTACLE:
-							outputText("The swollen lips of your bloated nipple stretch around the rounded tip of your " + player.cockDescript() + ", swallowing it like an enormous mouth.  ");
+							outputText("The swollen lips of your bloated nipple stretch around the rounded tip of your " + player.cockDescript() + ", swallowing it like an enormous mouth. ");
 							break;
 							default:
-								outputText("tips of your bloated nipples wrap around the " + player.cockHead() + " of your " + player.cockDescript() + ", swallowing it like an enormous mouth.  ");
+								outputText("tips of your bloated nipples wrap around the " + player.cockHead() + " of your " + player.cockDescript() + ", swallowing it like an enormous mouth. ");
 						}
 					}
 					outputText("With each thrust, you bury your " + player.cockDescript() + " deeper into your greedy tit. Overwhelmed by the combined sensations, your mind is barely able to cope with the intense feeling of fullness where no such feeling should be possible.");
@@ -1339,35 +1352,35 @@ package classes.Scenes {
 					else {
 						switch (player.cocks[0].cockType) { //Different way of choosing cock to use, results in consistent description of cock[0]
 						case CockTypesEnum.ANEMONE:
-							outputText("The swollen lips of your bloated nipple gape wide, but the stinging tip of your " + player.cockDescript() + " spreads them wider and fills them with artificial lust.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the stinging tip of your " + player.cockDescript() + " spreads them wider and fills them with artificial lust. ");
 							break;
 						case CockTypesEnum.CAT:
-							outputText("The swollen lips of your bloated nipple gape wide, but the barbed tip of your " + player.cockDescript() + " spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the barbed tip of your " + player.cockDescript() + " spreads them even wider. ");
 							break;
 						case CockTypesEnum.DEMON:
-							outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + player.cockDescript() + " spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + player.cockDescript() + " spreads them even wider. ");
 							break;
 						case CockTypesEnum.DISPLACER:
-							outputText("The swollen lips of your bloated nipple gape wide, but the wide head of your " + player.cockDescript() + " spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the wide head of your " + player.cockDescript() + " spreads them even wider. ");
 							break;
 						case CockTypesEnum.DOG:
 						case CockTypesEnum.FOX:
-							outputText("The swollen lips of your bloated nipple gape wide, but the massive girth of your " + player.cockDescript() + " spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the massive girth of your " + player.cockDescript() + " spreads them even wider. ");
 							break;
 						case CockTypesEnum.HORSE:
-							outputText("The swollen lips of your bloated nipple gape wide, but the flared tip of your " + player.cockDescript() + " spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the flared tip of your " + player.cockDescript() + " spreads them even wider. ");
 							break;
 						case CockTypesEnum.HUMAN:
-							outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + player.cockDescript() + " spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + player.cockDescript() + " spreads them even wider. ");
 							break;
 						case CockTypesEnum.LIZARD:
-							outputText("The swollen lips of your bloated nipple gape wide, but the pointed tip of your " + player.cockDescript() + " slowly spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the pointed tip of your " + player.cockDescript() + " slowly spreads them even wider. ");
 							break;
 						case CockTypesEnum.TENTACLE:
-							outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + player.cockDescript() + " spreads them even wider.  ");
+							outputText("The swollen lips of your bloated nipple gape wide, but the tip of your " + player.cockDescript() + " spreads them even wider. ");
 							break;
 							default:
-								outputText("The swollen lips of your bloated nipple gape wide, but the " + player.cockHead() + " of your " + player.cockDescript() + " spreads them even wider.  ");
+								outputText("The swollen lips of your bloated nipple gape wide, but the " + player.cockHead() + " of your " + player.cockDescript() + " spreads them even wider. ");
 						}
 					}
 					outputText("Grunting and sweating with effort, you stuff as much of your " + player.cockDescript() + " into your overstretched nipple as you can fit. The feeling of incredible tightness around your " + player.cockDescript() + " combines with the pain of your distended nipple to form a mindbending sensation that makes your head spin. ");
@@ -1380,30 +1393,30 @@ package classes.Scenes {
 					outputText("girl-lube drizzles down the length of your " + player.cockDescript() + " in thick streams, ");
 					switch (player.cocks[0].cockType) { //Different way of choosing cock to use, results in consistent description of cock[0]
 						case CockTypesEnum.ANEMONE:
-							outputText("pooling around the wriggling tentacles near your base.  ");
+							outputText("pooling around the wriggling tentacles near your base. ");
 							break;
 						case CockTypesEnum.CAT:
-							outputText("pooling around the spines near your base.  ");
+							outputText("pooling around the spines near your base. ");
 							break;
 						case CockTypesEnum.DEMON:
-							outputText("pooling around the base of your member.  ");
+							outputText("pooling around the base of your member. ");
 							break;
 						case CockTypesEnum.DISPLACER:
 						case CockTypesEnum.DOG:
 						case CockTypesEnum.FOX:
-							outputText("pooling around the bulb near your base.  ");
+							outputText("pooling around the bulb near your base. ");
 							break;
 						case CockTypesEnum.HORSE:
-							outputText("pooling in and around your sheath.  ");
+							outputText("pooling in and around your sheath. ");
 							break;
 						case CockTypesEnum.LIZARD:
-							outputText("pooling around the bulbs near your base.  ");
+							outputText("pooling around the bulbs near your base. ");
 							break;
 						case CockTypesEnum.TENTACLE:
-							outputText("mixing with the tentacles own lubricants.  ");
+							outputText("mixing with the tentacles own lubricants. ");
 							break;
 						default:
-							outputText("pooling at your crotch.  ");
+							outputText("pooling at your crotch. ");
 					}
 				}
 				else outputText("girl-lube spurts out of your tortured nipple with each thrust of your " + player.cockDescript() + ", spattering your arms and face with your secretions. ");
@@ -1422,32 +1435,32 @@ package classes.Scenes {
 				else if (player.averageVaginalLooseness() < 4)
 					outputText("the engorged and distended opening of your fat, swollen nipple. Your " + player.cockDescript() + " plunges deeply into your freakishly engorged nipple, penetrating it easily. ");
 				else {
-					outputText("the gaping fuck-mouth of your inhuman nipple-cunt.  The swollen lips of your bloated nipple engulf the ");
+					outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the ");
 					if (player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("flared ");
 					outputText("tip of your " + player.cockDescript() + " and begin to slide down its length, ");
 					switch (player.cocks[0].cockType) { //Different way of choosing cock to use, results in consistent description of cock[0]
 						case CockTypesEnum.ANEMONE:
-							outputText("swallowing it completely and leaving a searing trail of desire in its wake.  ");
+							outputText("swallowing it completely and leaving a searing trail of desire in its wake. ");
 							break;
 						case CockTypesEnum.CAT:
-							outputText("swallowing it completely as each springy barb makes you quiver with pleasure.  ");
+							outputText("swallowing it completely as each springy barb makes you quiver with pleasure. ");
 							break;
 						case CockTypesEnum.DEMON:
-							outputText("swallowing it completely as each bump and nodule makes you quiver with unholy pleasures.  ");
+							outputText("swallowing it completely as each bump and nodule makes you quiver with unholy pleasures. ");
 							break;
 						case CockTypesEnum.DISPLACER:
 						case CockTypesEnum.DOG:
 						case CockTypesEnum.FOX:
-							outputText("even swallowing your bulging knot without difficulty.  ");
+							outputText("even swallowing your bulging knot without difficulty. ");
 							break;
 						case CockTypesEnum.LIZARD:
-							outputText("swallowing it completely as each of the bulgy knots along its length stretch the orifice further.  ");
+							outputText("swallowing it completely as each of the bulgy knots along its length stretch the orifice further. ");
 							break;
 						case CockTypesEnum.TENTACLE:
-							outputText("swallowing it completely as it twists and pulses on its own, fucking your nipple.  ");
+							outputText("swallowing it completely as it twists and pulses on its own, fucking your nipple. ");
 							break;
 						default:
-							outputText("swallowing it completely.  ");
+							outputText("swallowing it completely. ");
 					}
 		/* Old method
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) > 0) outputText("the gaping fuck-mouth of your inhuman nipple-cunt. The swollen lips of your bloated nipple engulf the tip of your " + player.cockDescript(0) + " and begin to slide down its length, swallowing it completely. ");
@@ -1511,7 +1524,7 @@ package classes.Scenes {
 				//can you fit more than one in each?
 				if (player.vaginalCapacity() >= 2 * player.cockArea(randomCock)) {
 					doubleUp = true;//WTF IS MULTIDIVISICATION?  SERIOUSLY?
-					outputText("The words \"multiple insertions\" drifts through your lust-fogged brain, and you begin to position two dicks against a poor, unsuspecting nipple, preparing to double-penetrate.  ");
+					outputText("The words \"multiple insertions\" drifts through your lust-fogged brain, and you begin to position two dicks against a poor, unsuspecting nipple, preparing to double-penetrate. ");
 					//does this give enough space?
 					if (2 * holeTotal >= fittableCocks)
 						outputText("You giggle with glee as you realize that you will be able to jam every single one of your " + player.multiCockDescriptLight() + " into your abused nipples, thanks to double-penetration! ");
@@ -1711,37 +1724,37 @@ package classes.Scenes {
 				if (player.cocks.length == 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your ");
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) == 1)
-						outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ");
+						outputText("twitching manhood, growing rapidly. You stroke furiously, feeling the pressure of your cum as it nears release. ");
 					else if (player.hasKnot())
-						outputText("swelling, bulbous knot.  You feel it growing tighter and tighter until it's nearly twice the width of your " + player.cockDescript() + ".  The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm.  ");
+						outputText("swelling, bulbous knot. You feel it growing tighter and tighter until it's nearly twice the width of your " + player.cockDescript() + ". The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm. ");
 					else if (player.countCocksOfType(CockTypesEnum.HORSE) == 1)
-						outputText("swollen equine sheath, slowly beginning to work its way up your shaft.  Pre-cum begins pouring from your " + player.cockDescript() + ", slicking your " + player.cockDescript() + " as you get ready to blow.  ");
+						outputText("swollen equine sheath, slowly beginning to work its way up your shaft. Pre-cum begins pouring from your " + player.cockDescript() + ", slicking your " + player.cockDescript() + " as you get ready to blow. ");
 					else if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 1)
-						outputText("wiggling vine-like cock, growing rapidly.  You feel the rubbery surface of your tentacle prick contracting as it nears release.  Thick bulges of fluids collect and travel along the length of your " + player.cockDescript() + ", the first of which is almost to your oversized tip.  ");
+						outputText("wiggling vine-like cock, growing rapidly. You feel the rubbery surface of your tentacle prick contracting as it nears release. Thick bulges of fluids collect and travel along the length of your " + player.cockDescript() + ", the first of which is almost to your oversized tip. ");
 					else if (player.countCocksOfType(CockTypesEnum.DEMON) == 1)
-						outputText("tainted man-meat, growing rapidly.  You feel the nodules close to the base swell and pulse, starting a rippling wave of pleasure that migrates upwards.  The ring of bumps around your crown double in size, flaring out as your " + player.cockDescript() + " prepares to unload.  ");
+						outputText("tainted man-meat, growing rapidly. You feel the nodules close to the base swell and pulse, starting a rippling wave of pleasure that migrates upwards. The ring of bumps around your crown double in size, flaring out as your " + player.cockDescript() + " prepares to unload. ");
 					else if (player.countCocksOfType(CockTypesEnum.CAT) == 1)
-						outputText("full, cat-like sheath.  You feel it tingling and throbbing as the spines pulsate with arousal.  You feel the barbs at the bottom thickening as bulges of fluid migrate through your " + player.cockDescript() + " towards the tip.  ");
+						outputText("full, cat-like sheath. You feel it tingling and throbbing as the spines pulsate with arousal. You feel the barbs at the bottom thickening as bulges of fluid migrate through your " + player.cockDescript() + " towards the tip. ");
 					else if (player.countCocksOfType(CockTypesEnum.LIZARD) == 1)
-						outputText("swollen member.  You can feel it tingling and bulging strangely as it begins to contract and pulse.  Pre-cum leaks from your " + player.cockDescript() + " in a steady stream as each 'bulb' nearly doubles in size, and then one at a time, they deflate while your urethra dilates wide.  ");
+						outputText("swollen member. You can feel it tingling and bulging strangely as it begins to contract and pulse. Pre-cum leaks from your " + player.cockDescript() + " in a steady stream as each 'bulb' nearly doubles in size, and then one at a time, they deflate while your urethra dilates wide. ");
 					else if (player.countCocksOfType(CockTypesEnum.ANEMONE) == 1)
-						outputText("base.  The tentacles surrounding your " + player.cockDescript() + " go nuts, constricting around it, inadvertently firing aphrodisiacs into the orgasmic flesh as they wring a potent, hip-jerking climax from you.  ");
-					else outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ");
+						outputText("base. The tentacles surrounding your " + player.cockDescript() + " go nuts, constricting around it, inadvertently firing aphrodisiacs into the orgasmic flesh as they wring a potent, hip-jerking climax from you. ");
+					else outputText("twitching manhood, growing rapidly. You stroke furiously, feeling the pressure of your cum as it nears release. ");
 					outputText("Pleasurable spasms overwhelm you as cum erupts from your " + player.cockDescript());
-					outputText(".  Your hips jerk in the air in time with your eruptions, spraying cum ");
-					if (selfSucking) outputText("into your eager mouth.  ");
+					outputText(". Your hips jerk in the air in time with your eruptions, spraying cum ");
+					if (selfSucking) outputText("into your eager mouth. ");
 					if (nippleFuck)
 						outputText("deep inside your unnatural breast. ");
 					else if (!selfSucking)
-						outputText("in the air.  ");
+						outputText("in the air. ");
 					if (selfSucking) {
 						if (player.cumQ() < 25)
-							outputText("You manage to gulp down most of your cum as it bursts from your loins, the pleasure of orgasm goading you into compulsively swallowing.  ");
+							outputText("You manage to gulp down most of your cum as it bursts from your loins, the pleasure of orgasm goading you into compulsively swallowing. ");
 						else if (player.cumQ() < 250)
-							outputText("You sputter jism from your mouth as your orgasm becomes too much to keep up with, cum filling your mouth to capacity as you swallow and dribble in equal measure.  ");
+							outputText("You sputter jism from your mouth as your orgasm becomes too much to keep up with, cum filling your mouth to capacity as you swallow and dribble in equal measure. ");
 						else if (player.cumQ() < 500)
-							outputText("Pulse after pulse of cum erupts from your " + player.cockDescript() + " into your mouth.  You swallow what you can but it's too much for you.  Cum runs down your cock to pool on you as your orgasm drags on.  ");
-						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  ");
+							outputText("Pulse after pulse of cum erupts from your " + player.cockDescript() + " into your mouth. You swallow what you can but it's too much for you. Cum runs down your cock to pool on you as your orgasm drags on. ");
+						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your mouth. You nearly gag, cum overflowing to spray out in a river, pooling around you. ");
 						//Refill hunger!
 						if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
 						else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
@@ -1753,40 +1766,40 @@ package classes.Scenes {
 						else if (player.cumQ() < 250)
 							outputText("Cum dribbles down the length of your shaft as your abused tit is filled to overflowing by spurt after spurt of gooey sperm. ");
 						else if (player.cumQ() < 500)
-							outputText("Pulse after pulse of cum splash deep within your breast, causing it to swell with pressure. Cum runs down your cock in a torrent to pool on you as your orgasm drags on.  ");
-						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your abused tit.  With a *pop*, your cock is forced free by the pressure. It continues to squirt semen everywhere, while a river of cum pours out of your dilated nipple, pooling around you.  ");
+							outputText("Pulse after pulse of cum splash deep within your breast, causing it to swell with pressure. Cum runs down your cock in a torrent to pool on you as your orgasm drags on. ");
+						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your abused tit. With a *pop*, your cock is forced free by the pressure. It continues to squirt semen everywhere, while a river of cum pours out of your dilated nipple, pooling around you. ");
 					}
 					else {
 						if (player.cumQ() < 25)
-							outputText("A few thick spurts of cum burst from your loins, splattering you liberally.  ");
+							outputText("A few thick spurts of cum burst from your loins, splattering you liberally. ");
 						else if (player.cumQ() < 250)
-							outputText("The orgasm drags on and on, spurt after spurt of jism coating you.  ");
+							outputText("The orgasm drags on and on, spurt after spurt of jism coating you. ");
 						else if (player.cumQ() < 500)
-							outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down.  ");
-						else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of each jet of cum erupting from your cock.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ");
+							outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last. Rope after rope of jizz rains down. ");
+						else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of each jet of cum erupting from your cock. Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling. ");
 					}
-					if (player.armor == armors.GOOARMR) outputText("Your seed gets absorbed into your gooey covering.  ");
+					if (player.armor == armors.GOOARMR) outputText("Your seed gets absorbed into your gooey covering. ");
 				}
 				//MULTICOCK
 				if (player.cocks.length > 1) {
-					outputText("The sensations prove too much for you, and you feel the tightness building in your loins.  ");
+					outputText("The sensations prove too much for you, and you feel the tightness building in your loins. ");
 					
 					if (player.dogCocks() > player.countCocksOfType(CockTypesEnum.HUMAN) && player.dogCocks() > player.countCocksOfType(CockTypesEnum.HORSE)) { //Primary Dog
 						var dogIndex:int;
 						for (dogIndex = 0; dogIndex < player.cocks.length; dogIndex++) {
 							if (player.cocks[dogIndex].hasKnot()) break;
 						}
-						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(dogIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
+						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(dogIndex) + ". The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm. ");
 					}
 					else if (player.countCocksOfType(CockTypesEnum.HORSE) > player.countCocksOfType(CockTypesEnum.HUMAN)) { //Primary Horse
 						var horseIndex:int;
 						for (horseIndex = 0; horseIndex < player.cocks.length; horseIndex++) {
 							if (player.cocks[horseIndex].cockType == CockTypesEnum.HORSE) break;
 						}
-						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(horseIndex) + "s.  Pre-cum pours from your " + player.cockDescript(horseIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
+						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(horseIndex) + "s. Pre-cum pours from your " + player.cockDescript(horseIndex) + "s, slicking the wobbly equine shafts as they get ready to blow. ");
 					}
 					else { //Primary Normal
-						outputText("Your manhoods twitch, growing to their full size.  You stroke them furiously, feeling the pressure of your cum as it nears release.  ");
+						outputText("Your manhoods twitch, growing to their full size. You stroke them furiously, feeling the pressure of your cum as it nears release. ");
 					}
 					//check if all dicks are stuck in tits.
 					if (nippleFuck) {
@@ -1795,20 +1808,20 @@ package classes.Scenes {
 						else if (player.cumQ() < 250)
 							outputText("Cum dribbles down your shafts as your abused tits are filled to overflowing by spurt after spurt of gooey sperm. As you buck and thrust with orgasm, your cocks begin to pop free of your abused tits. ");
 						else if (player.cumQ() < 500)
-							outputText("Pulse after pulse of cum splash deep within your breasts, causing them to swell with pressure. Torrents of cum run down your cocks to pool around you. As you buck and thrust with orgasm, your cocks begin to pop free of your abused tits.  ");
-						else outputText("With an explosive release, you finally cum.  Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.multiCockDescriptLight() + " as they erupt jet after jet of cum into your abused tits.  With a series of wet *pops*, your cocks are forced free by the pressure. They continue to squirt semen everywhere, while rivers of cum pour out of your dilated nipples, pooling around you.  ");
+							outputText("Pulse after pulse of cum splash deep within your breasts, causing them to swell with pressure. Torrents of cum run down your cocks to pool around you. As you buck and thrust with orgasm, your cocks begin to pop free of your abused tits. ");
+						else outputText("With an explosive release, you finally cum. Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.multiCockDescriptLight() + " as they erupt jet after jet of cum into your abused tits. With a series of wet *pops*, your cocks are forced free by the pressure. They continue to squirt semen everywhere, while rivers of cum pour out of your dilated nipples, pooling around you. ");
 					}
 		
 					//Doing the perverted sprinkler after dicks have popped out.
-					outputText("Pleasure overwhelms your fragile mind as cum erupts from your " + player.multiCockDescriptLight() + ".  Your hips jerk in the air in time with your eruptions, cum spraying from you as your body does its best impression of a perverted sprinkler.  ");
+					outputText("Pleasure overwhelms your fragile mind as cum erupts from your " + player.multiCockDescriptLight() + ". Your hips jerk in the air in time with your eruptions, cum spraying from you as your body does its best impression of a perverted sprinkler. ");
 					if (selfSucking) {
 						if (player.cumQ() < 25)
-							outputText("You manage to swallow most of your cum as it bursts from your loins, the pleasure of orgasm goading you into compulsively swallowing.  ");
+							outputText("You manage to swallow most of your cum as it bursts from your loins, the pleasure of orgasm goading you into compulsively swallowing. ");
 						else if (player.cumQ() < 250)
-							outputText("You sputter jism from your mouth as your orgasm becomes too much to keep up with, cum filling your mouth to capacity as you swallow and dribble in equal measure.  Cum splatters on you from the rest of your equipment, making you a slimy mess.");
+							outputText("You sputter jism from your mouth as your orgasm becomes too much to keep up with, cum filling your mouth to capacity as you swallow and dribble in equal measure. Cum splatters on you from the rest of your equipment, making you a slimy mess.");
 						else if (player.cumQ() < 500)
-							outputText("Pulse after pulse of cum erupts from your " + player.cockDescript() + " into your mouth.  You swallow what you can but it's too much for you.  Cum runs down your " + player.cockDescript() + " to pool on you as your orgasm drags on.  Jizz rains over you the entire time from the rest of your \"equipment\".");
-						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  Your other 'equipment' rains jizz upon you the whole while, soaking you in a cum-puddle.");
+							outputText("Pulse after pulse of cum erupts from your " + player.cockDescript() + " into your mouth. You swallow what you can but it's too much for you. Cum runs down your " + player.cockDescript() + " to pool on you as your orgasm drags on. Jizz rains over you the entire time from the rest of your \"equipment\".");
+						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your mouth. You nearly gag, cum overflowing to spray out in a river, pooling around you. Your other 'equipment' rains jizz upon you the whole while, soaking you in a cum-puddle.");
 						//Refill hunger!
 						if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
 						else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
@@ -1816,12 +1829,12 @@ package classes.Scenes {
 					}
 					//These seem like they should always be displayed regardless of other factors.		
 					if (player.cumQ() < 25)
-						outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ");
+						outputText("A few thick spurts of cum burst from your cocks, splattering you liberally. ");
 					else if (player.cumQ() < 250)
-						outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock.  ");
+						outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock. ");
 					else if (player.cumQ() < 500)
-						outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ");
-					else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ");
+						outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last. Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap. Your nearly black out in pleasure. ");
+					else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks. Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling. ");
 				}
 				
 			}
@@ -1833,14 +1846,14 @@ package classes.Scenes {
 					outputText("Your ");
 					//Specify which sex for herms :3
 					if (player.gender == 3) outputText("fem");
-					outputText("sex quivers as the pleasure overwhelms you, robbing you of muscle control, your passage rippling and contracting around your fingers.  ");
+					outputText("sex quivers as the pleasure overwhelms you, robbing you of muscle control, your passage rippling and contracting around your fingers. ");
 					//Big clitty bonus!
 					if (player.getClitLength() >= 4.5)
-						outputText("A hand finds your cock-like clit, squeezing and caressing it as the cunt-wrenching orgasm wracks your body, the over-sized joy-buzzer nearly making you black out from the sensations it generates.  ");
+						outputText("A hand finds your cock-like clit, squeezing and caressing it as the cunt-wrenching orgasm wracks your body, the over-sized joy-buzzer nearly making you black out from the sensations it generates. ");
 					else if (player.getClitLength() > 1.5)
-						outputText("Every muscle-twitch seems to stretch your big oversensitive clitty larger, causing you to squeal with delight at every bump and touch against it.  ");
+						outputText("Every muscle-twitch seems to stretch your big oversensitive clitty larger, causing you to squeal with delight at every bump and touch against it. ");
 					//Wet orgasms
-					if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + player.vaginaDescript() + ".  ");
+					if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + player.vaginaDescript() + ". ");
 				}
 				//MultiCunt UNFINISHED
 				else {
@@ -1868,7 +1881,7 @@ package classes.Scenes {
 				}
 				valeriaFluids += Math.sqrt(player.lactationQ());
 				kGAMECLASS.valeria.feedValeria(valeriaFluids);
-				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
+				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says. ");
 			}
 			//DONE!
 			if 	(cumType == 1) {
@@ -1899,13 +1912,13 @@ package classes.Scenes {
 				if (player.averageNippleLength() > 1 && player.averageNippleLength() < 4) outputText("fat, puckered nipples, ");
 				if (player.averageNippleLength() >= 4) outputText("huge, swollen teats, ");
 				if (player.armor == armors.GOOARMR) {
-					if (player.averageLactation() < 2.6) outputText("spattering milk into the goo.  ");
-					if (player.averageLactation() >= 2.6) outputText("stuffing the goo with your milk.  ");
+					if (player.averageLactation() < 2.6) outputText("spattering milk into the goo. ");
+					if (player.averageLactation() >= 2.6) outputText("stuffing the goo with your milk. ");
 				}
 				else {
-					if (player.averageLactation() <= 2.6) outputText("spattering milk everywhere.  ");
-					if (player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby.  ");
-					if (player.averageLactation() >= 3) outputText("drenching the entire area.  ");
+					if (player.averageLactation() <= 2.6) outputText("spattering milk everywhere. ");
+					if (player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby. ");
+					if (player.averageLactation() >= 3) outputText("drenching the entire area. ");
 				}
 			}
 			//Cumming with Nipplecunts!
@@ -1921,8 +1934,8 @@ package classes.Scenes {
 				//Lactating?
 				if (player.averageLactation() > 0) outputText("milk and ");
 				outputText("pussy juice ");
-				if (player.armor == armors.GOOARMR) outputText("into the blue goo covering your body.  ");
-				else outputText("everywhere.  ");
+				if (player.armor == armors.GOOARMR) outputText("into the blue goo covering your body. ");
+				else outputText("everywhere. ");
 			}
 			
 		}
@@ -1936,7 +1949,7 @@ package classes.Scenes {
 					player.milked();
 				}
 				else if (player.biggestLactation() > 2) {
-					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and drink deeply of your bounty.  It floods your cheeks with its creamy flavor, and you greedily gulp it down.\n");
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and drink deeply of your bounty. It floods your cheeks with its creamy flavor, and you greedily gulp it down.\n");
 					player.refillHunger( (player.biggestLactation() - 2) * 30 + 20);
 					player.boostLactation(.05);
 					player.milked();
@@ -1963,16 +1976,16 @@ package classes.Scenes {
 					outputText("You retrieve the floppy pink dildo from your possessions and strip down in the middle of your camp, shivering with the sexual thrill of your exhibitionism.");
 				//(medcor)
 				else if (player.cor > 33)
-					outputText("You retrieve your floppy dildo and sigh happily as you squeeze it, feeling the spongy surface give a little bit.  Glancing around furtively, you find a secluded spot and strip down.");
+					outputText("You retrieve your floppy dildo and sigh happily as you squeeze it, feeling the spongy surface give a little bit. Glancing around furtively, you find a secluded spot and strip down.");
 				//(lowcor)
-				else outputText("You blush feverishly as you grab your pink dildo.  It flops about lewdly as you run off behind some rocks and strip down to use it.  You feel like such a pervert.");
+				else outputText("You blush feverishly as you grab your pink dildo. It flops about lewdly as you run off behind some rocks and strip down to use it. You feel like such a pervert.");
 				outputText("\n\n");
 				//(low cor)
 				if (player.cor < 50)
 					outputText("You hold the fake dong away from you, aroused but still somewhat disgusted by its lewd shape.");
 				//high cor
-				else outputText("You hold the fake dong, squeezing it and giggling at the realistic texture.  You can't wait to try it out.");
-				outputText("  A drop of pink aphrodisiac leaks from the tip, offering you a hint of the pleasure you're in for.   You make sure to catch it on your crotch, letting the fluid seep into your " + player.vaginaDescript() + ".  Warmth radiates outwards, spreading to your thighs as your " + player.clitDescript());
+				else outputText("You hold the fake dong, squeezing it and giggling at the realistic texture. You can't wait to try it out.");
+				outputText(" A drop of pink aphrodisiac leaks from the tip, offering you a hint of the pleasure you're in for.  You make sure to catch it on your crotch, letting the fluid seep into your " + player.vaginaDescript() + ". Warmth radiates outwards, spreading to your thighs as your " + player.clitDescript());
 				if (player.getClitLength() < .5)
 					outputText(" becomes hard and sensitive");
 				else if (player.getClitLength() < 3)
@@ -1980,42 +1993,42 @@ package classes.Scenes {
 				else if (player.getClitLength() < 6)
 					outputText(" fills with blood, growing erect like a tiny cock");
 				else outputText(" fills with blood, twitching and pulsating like a man's cock");
-				outputText(".  You ");
+				outputText(". You ");
 				if (player.cor > 50) outputText("don't ");
 				outputText("hesitate ");
 				if (player.cor < 50)
 					outputText("before slowly working it inside you, gasping at the enhanced sensitivity of your " + player.vaginaDescript() + ".");
 				else outputText("ramming it deep inside you, moaning as it rubs your now over-sensitive walls.");
-				outputText("  You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your wetness, becoming more and more turned on by the second.\n\n");
+				outputText(" You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your wetness, becoming more and more turned on by the second.\n\n");
 			
 				//(Kinda dry)
 				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK)
-					outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your bodily fluids.  You grab it two-handed and start slamming it into your " + player.vaginaDescript() + ", vigorously fucking yourself with the swelling dong.  The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.  Even your " + player.clitDescript() + " and cunt-lips tingle with need.  You answer that need by picking up the pace, pistoning faster and faster.\n\n"); 
+					outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your bodily fluids. You grab it two-handed and start slamming it into your " + player.vaginaDescript() + ", vigorously fucking yourself with the swelling dong. The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you. Even your " + player.clitDescript() + " and cunt-lips tingle with need. You answer that need by picking up the pace, pistoning faster and faster.\n\n"); 
 				//(Pretty wet)
 				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) {
-					outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your natural wetness and grows larger.  You grab it in a two-handed grip and begin working it in and out of your " + player.vaginaDescript() + ", gasping and twitching as every ridge and feature of the dildo rubs you just right.  Every inch of your nethers tingles with a desire to be touched, rubbed, and squeezed. ");
+					outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your natural wetness and grows larger. You grab it in a two-handed grip and begin working it in and out of your " + player.vaginaDescript() + ", gasping and twitching as every ridge and feature of the dildo rubs you just right. Every inch of your nethers tingles with a desire to be touched, rubbed, and squeezed. ");
 					if (player.cocks.length > 0) {
 						outputText("Even your " + player.multiCockDescript() + " ache");
 						if (player.totalCocks() == 1) outputText("s");
 						outputText(" and pulse");
 						if (player.totalCocks() == 1) outputText("s");
-						outputText(", bouncing on your belly.  ");
+						outputText(", bouncing on your belly. ");
 					}
 					outputText("You answer that need by pistoning the fat juicy dick even harder into your tightly stretched box, cooing as tiny squirts of fluid erupt with every thrust.\n\n");
 				}
 				//(Soaked)
-				else outputText("You can feel the dildo growing inside you, reacting to gushing feminine fluids by stretching your " + player.vaginaDescript() + " wide.  It doesn't seem to stop when you start fucking yourself with it.  If anything, it only seems to get thicker and thicker until there is barely room for your juices to squirt around it and your hips feel sore.  However, the tingling hotness of the dildo's aphrodisiac cum overwhelms the discomfort of the fattening fuck-tool, and you work it harder and harder, reveling in being stretched beyond your normal capacity.\n\n");
+				else outputText("You can feel the dildo growing inside you, reacting to gushing feminine fluids by stretching your " + player.vaginaDescript() + " wide. It doesn't seem to stop when you start fucking yourself with it. If anything, it only seems to get thicker and thicker until there is barely room for your juices to squirt around it and your hips feel sore. However, the tingling hotness of the dildo's aphrodisiac cum overwhelms the discomfort of the fattening fuck-tool, and you work it harder and harder, reveling in being stretched beyond your normal capacity.\n\n");
 				
 				//Sensitivity based orgasms.
 				//(Low sensitivity) 
 				if (player.sens100 < 80) {
-					outputText("Practically brutalizing your cunt with the swollen puss-plug, you bring yourself to orgasm.  Your " + player.hipDescript() + " leap off the ground, quivering in the air against your hands as you ram the toy into yourself as far as it will go.  You can feel it spurting inside you, just like a real man.  You wiggle and moan as the muscle spasms work their way through your " + player.legs() + ", leaving you drained and exhausted.  The pink dildo suddenly shrinks back to its original size and flops free, leaving your " + player.vaginaDescript() + " stretched open to drool a puddle of pink cum.");
+					outputText("Practically brutalizing your cunt with the swollen puss-plug, you bring yourself to orgasm. Your " + player.hipDescript() + " leap off the ground, quivering in the air against your hands as you ram the toy into yourself as far as it will go. You can feel it spurting inside you, just like a real man. You wiggle and moan as the muscle spasms work their way through your " + player.legs() + ", leaving you drained and exhausted. The pink dildo suddenly shrinks back to its original size and flops free, leaving your " + player.vaginaDescript() + " stretched open to drool a puddle of pink cum.");
 					//(+sensitivity by 5)
 					dynStats("sen", 5);
 				}
 				//High sensitivity (80+)
 				else {
-					outputText("Brutalizing your stretched fuck-hole with the bloated toy, you manage to get yourself off.   Your body quakes and spasms while your " + player.hipDescript() + " buck into the air, fucking an imaginary lover.  The dildo sinks into your core, your arms instinctively fulfilling your desire for complete penetration.  A warm wetness suddenly soaks your womb as the fuck-stick erupts, filling you.  Just like that the orgasm you had seems like foreplay.  Your eyes roll back into your head and you begin convulsing, practically having a pleasure-seizure from the drugs and your already oversensitive twat.   You sprawl there, wiggling and cumming your brains out for what feels like an eternity, but it does eventually end, and when it does the dildo is back to its normal size, lying in a puddle of aphrodisiacs and girlcum.");
+					outputText("Brutalizing your stretched fuck-hole with the bloated toy, you manage to get yourself off.  Your body quakes and spasms while your " + player.hipDescript() + " buck into the air, fucking an imaginary lover. The dildo sinks into your core, your arms instinctively fulfilling your desire for complete penetration. A warm wetness suddenly soaks your womb as the fuck-stick erupts, filling you. Just like that the orgasm you had seems like foreplay. Your eyes roll back into your head and you begin convulsing, practically having a pleasure-seizure from the drugs and your already oversensitive twat.  You sprawl there, wiggling and cumming your brains out for what feels like an eternity, but it does eventually end, and when it does the dildo is back to its normal size, lying in a puddle of aphrodisiacs and girlcum.");
 					//(+sensitivity by 3 & intellect -2 & libido +1	)
 				}
 				//Option Jojo veyeurism?
@@ -2023,7 +2036,7 @@ package classes.Scenes {
 					outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
 					if (player.hasStatusEffect(StatusEffects.TentacleJojo))
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");
-					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
+					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show. He runs off before you have a chance to react.");
 				}
 				player.orgasm('Vaginal');
 				flags[kFLAGS.TIMES_MASTURBATED]++;
@@ -2042,53 +2055,53 @@ package classes.Scenes {
 				outputText("You retrieve the floppy pink dildo from your possessions and strip down in the middle of your camp, shivering with the sexual thrill of your exhibitionism.");
 			//(medcor)
 			else if (player.cor > 33)
-				outputText("You retrieve your floppy dildo and sigh happily as you squeeze it, feeling the spongy surface give a little bit.  Glancing around furtively, you find a secluded spot and strip down.");
+				outputText("You retrieve your floppy dildo and sigh happily as you squeeze it, feeling the spongy surface give a little bit. Glancing around furtively, you find a secluded spot and strip down.");
 			//(lowcor)
-			else outputText("You blush feverishly as you grab your pink dildo.  It flops about lewdly as you run off behind some rocks and strip down to use it.  You feel like such a pervert.");
+			else outputText("You blush feverishly as you grab your pink dildo. It flops about lewdly as you run off behind some rocks and strip down to use it. You feel like such a pervert.");
 			outputText("\n\n");
 			
 			//(low cor)
 			if (player.cor < 50)
 				outputText("You hold the fake dong away from you, aroused but still somewhat disgusted by its lewd shape.");
 			//high cor
-			else outputText("You hold the fake dong, squeezing it and giggling at the realistic texture.  You can't wait to try it out.");
-			outputText("  A drop of pink aphrodisiac leaks from the tip, offering you a hint of the pleasure you're in for.   You make sure to catch it on your crotch, letting the fluid seep into your [ass].  Warmth radiates outwards, spreading to your thighs.");
-			outputText(".  You ");
+			else outputText("You hold the fake dong, squeezing it and giggling at the realistic texture. You can't wait to try it out.");
+			outputText(" A drop of pink aphrodisiac leaks from the tip, offering you a hint of the pleasure you're in for.  You make sure to catch it on your crotch, letting the fluid seep into your [ass]. Warmth radiates outwards, spreading to your thighs.");
+			outputText(". You ");
 			if (player.cor > 50) outputText("don't ");
 			outputText("hesitate ");
 			if (player.cor < 50)
 				outputText("before slowly working it inside you, gasping at the enhanced sensitivity of your " + player.buttDescript() + ".");
 			else outputText("ramming it deep inside you, moaning as it rubs your now over-sensitive walls.");
-			outputText("  You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your arousal, becoming more and more turned on by the second.\n\n");
+			outputText(" You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your arousal, becoming more and more turned on by the second.\n\n");
 		
 			//(Kinda dry)
 			if (player.ass.analWetness < AssClass.WETNESS_SLIMY)
-				outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your heat.  You grab it two-handed and start slamming it into your [asshole], vigorously fucking yourself with the swelling dong.  The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.\n\n"); 
+				outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your heat. You grab it two-handed and start slamming it into your [asshole], vigorously fucking yourself with the swelling dong. The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.\n\n"); 
 			//(Pretty wet)
 			else if (player.ass.analWetness < AssClass.WETNESS_SLIME_DROOLING) {
-				outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your unnatural wetness and grows larger.  You grab it in a two-handed grip and begin working it in and out of your [asshole], gasping and twitching as every ridge and feature of the dildo rubs you just right.  Every inch of your [ass] tingles with a desire to be touched, rubbed, and squeezed. ");
+				outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your unnatural wetness and grows larger. You grab it in a two-handed grip and begin working it in and out of your [asshole], gasping and twitching as every ridge and feature of the dildo rubs you just right. Every inch of your [ass] tingles with a desire to be touched, rubbed, and squeezed. ");
 				if (player.cocks.length > 0) {
 					outputText("Even your " + player.multiCockDescript() + " ache");
 					if (player.totalCocks() == 1) outputText("s");
 					outputText(" and pulse");
 					if (player.totalCocks() == 1) outputText("s");
-					outputText(", bouncing on your belly.  ");
+					outputText(", bouncing on your belly. ");
 				}
 				outputText("You answer that need by pistoning the fat juicy dick even harder into your tightly stretched box, cooing as tiny squirts of fluid erupt with every thrust.\n\n");
 			}
 			//(Soaked)
-			else outputText("You can feel the dildo growing inside you, reacting to gushing anal fluids by stretching your [ass] wide.  It doesn't seem to stop when you start fucking yourself with it.  If anything, it only seems to get thicker and thicker until there is barely room for your juices to squirt around it and your hips feel sore.  However, the tingling hotness of the dildo's aphrodisiac cum overwhelms the discomfort of the fattening fuck-tool, and you work it harder and harder, reveling in being stretched beyond your normal capacity.\n\n");
+			else outputText("You can feel the dildo growing inside you, reacting to gushing anal fluids by stretching your [ass] wide. It doesn't seem to stop when you start fucking yourself with it. If anything, it only seems to get thicker and thicker until there is barely room for your juices to squirt around it and your hips feel sore. However, the tingling hotness of the dildo's aphrodisiac cum overwhelms the discomfort of the fattening fuck-tool, and you work it harder and harder, reveling in being stretched beyond your normal capacity.\n\n");
 			
 			//Sensitivity based orgasms.
 			//(Low sensitivity) 
 			if (player.sens100 < 80) {
-				outputText("Practically brutalizing your [ass] with the swollen puss-plug, you bring yourself to orgasm.  Your " + player.hipDescript() + " leap off the ground, quivering in the air against your hands as you ram the toy into yourself as far as it will go.  You can feel it spurting inside you, just like a real man.  You wiggle and moan as the muscle spasms work their way through your " + player.legs() + ", leaving you drained and exhausted.  The pink dildo suddenly shrinks back to its original size and flops free, leaving your [asshole] stretched open to drool a puddle of pink cum.");
+				outputText("Practically brutalizing your [ass] with the swollen puss-plug, you bring yourself to orgasm. Your " + player.hipDescript() + " leap off the ground, quivering in the air against your hands as you ram the toy into yourself as far as it will go. You can feel it spurting inside you, just like a real man. You wiggle and moan as the muscle spasms work their way through your " + player.legs() + ", leaving you drained and exhausted. The pink dildo suddenly shrinks back to its original size and flops free, leaving your [asshole] stretched open to drool a puddle of pink cum.");
 				//(+sensitivity by 5)
 				dynStats("sen", 5);
 			}
 			//High sensitivity (80+)
 			else {
-				outputText("Brutalizing your stretched [asshole] the bloated toy, you manage to get yourself off.   Your body quakes and spasms while your " + player.hipDescript() + " buck into the air, fucking an imaginary lover.  The dildo sinks into your core, your arms instinctively fulfilling your desire for complete penetration.  A warm wetness suddenly soaks your belly as the fuck-stick erupts, filling you.  Just like that the orgasm you had seems like foreplay.  Your eyes roll back into your head and you begin convulsing, practically having a pleasure-seizure from the drugs and your already oversensitive butt.   You sprawl there, wiggling and cumming your brains out for what feels like an eternity, but it does eventually end, and when it does the dildo is back to its normal size, lying in a puddle of aphrodisiacs and cum.");
+				outputText("Brutalizing your stretched [asshole] the bloated toy, you manage to get yourself off.  Your body quakes and spasms while your " + player.hipDescript() + " buck into the air, fucking an imaginary lover. The dildo sinks into your core, your arms instinctively fulfilling your desire for complete penetration. A warm wetness suddenly soaks your belly as the fuck-stick erupts, filling you. Just like that the orgasm you had seems like foreplay. Your eyes roll back into your head and you begin convulsing, practically having a pleasure-seizure from the drugs and your already oversensitive butt.  You sprawl there, wiggling and cumming your brains out for what feels like an eternity, but it does eventually end, and when it does the dildo is back to its normal size, lying in a puddle of aphrodisiacs and cum.");
 				//(+sensitivity by 3 & intellect -2 & libido +1	)
 			}
 			//Option Jojo veyeurism?
@@ -2110,7 +2123,7 @@ package classes.Scenes {
 				player.createStatusEffect(StatusEffects.PlainOnaholeUsed, 0, 0, 0, 0);
 				outputText("You get naked and settle down with your new toy. The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure. ");
 				if (player.cocks.length > 1)
-					outputText("With your free hand, you slap your " + player.multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks.  ");
+					outputText("With your free hand, you slap your " + player.multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks. ");
 				else outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock.");
 				outputText("\n\nMuch to your surprise, Giacomo failed to point out that the ugly rubber sheath was open-ended on the inside and is providing an impressive grip around your shaft. Without hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches and swells with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper.");
 				outputText("\n\nYour body is quick to respond to your demands and you pump impressive amounts of your seed into your toy. Savoring each shot, you relish the sensation of feeling the warmth of your cum radiate throughout and warm your cock even more.");
@@ -2131,7 +2144,7 @@ package classes.Scenes {
 				player.createStatusEffect(StatusEffects.DeluxeOnaholeUsed, 0, 0, 0, 0);
 				outputText("You get naked and settle down with your new toy. You are amazed at the level of care and detail in the craftsmanship of this toy. You wonder if it feels as good as it looks.\n\n");
 				if (player.cocks.length > 1)
-					outputText("With your free hand, you slap your " + player.multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks.  ");
+					outputText("With your free hand, you slap your " + player.multiCockDescriptLight() + " to 'attention' and ease the onahole over your cocks. ");
 				else outputText("With your free hand, you slap your cock to 'attention' and ease the onahole over your cock. ");
 				outputText("As you 'deflower' the toy, you are floored by how realistic it REALLY does feel. Giacomo must use one of these himself, as it does feel damn close to a real twat. You especially enjoy how it manages to squeeze with just the right amount of pressure.");
 				outputText("\n\nWithout hesitation, you begin working your cock as if the world would die tomorrow. Stroke upon stroke, you demand your body to break itself in half with massive orgasmic pulses. Inside the toy, your member clenches with pleasure, triggering floods of pre-cum into the tube, making it feel even sharper. As your pre-cum fills the nooks and crannies of the toy pussy, it begins warming up and feels like an actual lubricated cunt! Amazing!");
@@ -2161,7 +2174,7 @@ package classes.Scenes {
 		}
 		
 		private function onaholeMulticockContinuation():void {
-			outputText("You pull the sloppy toy from your dribbling dick and smile, shoving its slippery surface down on another of your " + player.multiCockDescriptLight() + ".  You rapidly work it around your cocks, orgasming until ");
+			outputText("You pull the sloppy toy from your dribbling dick and smile, shoving its slippery surface down on another of your " + player.multiCockDescriptLight() + ". You rapidly work it around your cocks, orgasming until ");
 			if (player.balls > 0)
 				outputText("you pass out with aching, empty balls.");
 			else outputText("you pass out with " + player.multiCockDescriptLight() + " sore from exertion.");
@@ -2191,7 +2204,7 @@ package classes.Scenes {
 				outputText("\n\nWithout warning, you feel immense pressure clamp down upon your cock. Shocked, you instinctively try to pull out. Your efforts only succeed in pulling the toy up your shaft for a moment before it crawls back down. Whatever went wrong, your cock is stuck. You feel a pulse from the two cushions inside the onahole. The thing lurches forward on your cock and it is now embedded deeper. Frustrated, you start thumping your trapped pecker against the ground, trying to shake the thing loose, to no avail. The thing lurches down on your cock. You now feel the annoying impression against the head of your cock as you bottom out.");
 				outputText("\n\nBefore you can react, you feel the impression move. It shifts... adjusts. Utterly confused and revolted, you pause to figure out what is going on. You then feel the unmistakable sensation of something prodding at the opening in the head of your dick. The horrid reality crashes down upon you like a falling wall; this \"toy\" is a living creature!");
 				outputText("\n\nAs the true reality of your plight buffets against your mind, you feel a slender tendril push past your opening and into your urethra! Unaccustomed to this kind of \"penetration\", your body convulses and bucks as you try to shake the thing off. You grab the creature and begin to pull it off, only to see needle-like growths come from the holes around the main opening. They push against the base of your pubic mound and you feel the needles prickling against your skin. As you try to pull, the needles react by trying to pierce your skin. When you stop, the needles retract. You come to the realization that you will not get this thing off your dick without tearing yourself apart.");
-				outputText("\n\nThe tendril continues exploring your urethra until it settles inside your prostate. The tendril begins flicking its end around your inner sex as the muscular body begins humping and pumping your cock. Within minutes, the pace of the little creature is frenetic. Scream upon scream thunders from your lungs as the creature plunders your insides.  Pain and pleasure become the same sensation as you get the cock-milking of your life.");
+				outputText("\n\nThe tendril continues exploring your urethra until it settles inside your prostate. The tendril begins flicking its end around your inner sex as the muscular body begins humping and pumping your cock. Within minutes, the pace of the little creature is frenetic. Scream upon scream thunders from your lungs as the creature plunders your insides. Pain and pleasure become the same sensation as you get the cock-milking of your life.");
 				outputText("\n\nAs you feel your cum build, you feel a sharp suction inside you. The suction immediately triggers your orgasm and your muscles cramp and push to cum. Instead of shooting a load, you feel the sucking of the tendril vacuum up your cum! As it swells to feed, you feel your inner tube match its growth. The uncoordinated sensation of your urethra dilating against your own orgasm forces you to cum again, prompting the creature to suck the cum right out of you again.");
 				outputText("\n\nThe more semen you produce, the harder the accursed thing sucks. Eventually, the pain subsides and only the unholy pleasure of such deep penetration and stimulation remains. THIS is what that crazy merchant was talking about. You have never cum so hard or as much as now. Your mind is polluted with lust and all you want is for this thing to keep milking you and leave you intoxicated with pleasure. The shock of this treatment sends you in and out of consciousness. You wake up only long enough to pump another load down its endless pipe. Each time you wake up to cum, you see the thing get fatter and fatter.");
 				outputText("\n\nAwake... out... awake, out. The next minutes, hours or whatever, are a blur. You sense the need to cum. You feel your muscles squeeze to force your seed out. You feel the animal, or whatever it is, suck the very life-milk from you. It grows fatter. You want to feel your muscles squeeze again! You want to feel the semen surge again! You want the thing to work your shaft some more! Endless pleasure. Endless orgasm. You faint.");
@@ -2261,7 +2274,7 @@ package classes.Scenes {
 					//Low corruption variant
 					if (player.cor < 50) {
 						outputText("Shamed by the depths of your sexual needs, you don the abominable stimulation belt and brace for its eventual ravaging of your needy womanhood. Without waiting for you to touch the activator, the organic portion of the device, sensing your needs, engorges and buries itself in your vagina, beginning to pump with furious speed. The shock of the sudden stimulation convulses you backwards, leaving you writhing on the ground as the horrid symbiote undulates in a luridly sordid manner. You distinctly feel a nodule growing about your clitoris, shifting and changing into a sucker. The suction begins furiously working your clitoris as if it were a miniature penis, slurping, sucking and jerking away, prompting another painfully pleasurable wave of multiple orgasms.\n\n");
-						outputText("You cry in shock as the creature pushes past your cervix and begins injecting your womb with hot, thick cum... or whatever it is that it shoots inside you.  Unlike before, the very sensation of the fluid acts upon your brain and body strangely. The pain dulls and eventually filters from your mind and only the pleasure of the experience remains. The fluid continues pumping in until it overflows. The flooding of your insides leaves you paradoxically ecstatic and revolted. After an unknown amount of time, the thing stops fucking you and it releases its grip of your pelvis, leaving you a sticky, exhausted mess. A part of you wants to try the belt again, but you are too tired to bother cleaning yourself up.");
+						outputText("You cry in shock as the creature pushes past your cervix and begins injecting your womb with hot, thick cum... or whatever it is that it shoots inside you. Unlike before, the very sensation of the fluid acts upon your brain and body strangely. The pain dulls and eventually filters from your mind and only the pleasure of the experience remains. The fluid continues pumping in until it overflows. The flooding of your insides leaves you paradoxically ecstatic and revolted. After an unknown amount of time, the thing stops fucking you and it releases its grip of your pelvis, leaving you a sticky, exhausted mess. A part of you wants to try the belt again, but you are too tired to bother cleaning yourself up.");
 						player.orgasm('Vaginal');
 						dynStats("lib", -1, "sen", .75, "cor", 1);
 						doNext(camp.returnToCampUseOneHour);
@@ -2301,13 +2314,13 @@ package classes.Scenes {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText(images.showImage("badend-stimBelt"));
-			outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
-			outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");
-			outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor woman is a total slave to the beast!</i>\"\n\n");
-			outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him.  His sharp features brighten as an idea strikes him.\n\n");
-			outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
-			outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n");
-			outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
+			outputText("Whatever the belt is, whatever it does, it no longer matters to you. The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night. You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box. An endless wave of orgasms take you. All you now know is the endless bliss of an eternal orgasm.\n\n");
+			outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form. It is the very person who sold you this infernal toy. The merchant, Giacomo.\n\n");
+			outputText("\"<i>Well, well,</i>\" Giacomo says. \"<i>The Libertines are right. The creature's fluids are addictive. This poor woman is a total slave to the beast!</i>\"\n\n");
+			outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him. His sharp features brighten as an idea strikes him.\n\n");
+			outputText("\"<i>AHA!</i>\" the hawkish purveyor cries. \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
+			outputText("Giacomo cackles smugly at his idea. \"<i>Who knows how much someone will pay me for a live woman who can't stop cumming!</i>\"\n\n");
+			outputText("Giacomo loads you up onto his cart and sets off for his next sale. You do not care. You do not realize what has happened. All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
 			getGame().gameOver();
 		}
 		
@@ -2323,18 +2336,18 @@ package classes.Scenes {
 			//[1st time doing this]
 			if (flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] == 0) {
 				flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY]++;
-				outputText("You take off your " + player.armorName + " and take a seat on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea flashes through your brain, putting a smile on your face. You lay on your side and spread your legs again, giving you a perfect view of your " + player.vaginaDescript() + ". You lean your head down with your tongue sticking out; closer and closer you come to your own cunt, feeling the heat from your puss flowing against your face as your own hot breath returns the warmth. You're only a small distance away from tasting it before you can't bend any farther.  Your cunny can almost feel your tongue wriggling its slimy warm wetness only a few centimeters away. You pull your head back and let out a frustrated sigh before you remember how the cats in your village got to those hard to reach places: they stretched one of their legs straight up. Following their example, you point one leg straight to the sky and close your eyes as you plunge your head down. You slowly open one eye to see that you're face to face with your " + player.vaginaDescript() + "; you're amazed that you are actually able to do it. You begin lapping your tongue up and down the slutty snatch.\n\n");
+				outputText("You take off your " + player.armorName + " and take a seat on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea flashes through your brain, putting a smile on your face. You lay on your side and spread your legs again, giving you a perfect view of your " + player.vaginaDescript() + ". You lean your head down with your tongue sticking out; closer and closer you come to your own cunt, feeling the heat from your puss flowing against your face as your own hot breath returns the warmth. You're only a small distance away from tasting it before you can't bend any farther. Your cunny can almost feel your tongue wriggling its slimy warm wetness only a few centimeters away. You pull your head back and let out a frustrated sigh before you remember how the cats in your village got to those hard to reach places: they stretched one of their legs straight up. Following their example, you point one leg straight to the sky and close your eyes as you plunge your head down. You slowly open one eye to see that you're face to face with your " + player.vaginaDescript() + "; you're amazed that you are actually able to do it. You begin lapping your tongue up and down the slutty snatch.\n\n");
 					
-				outputText("The feeling is amazing, as you flick your tongue across your swollen " + player.clitDescript() + ". Juices leak from your moist hole, filling your mouth with the sweet taste of girlcum. You can feel your entire sex pulsing and throbbing around your tongue as you plumb the depths of your " + player.vaginaDescript() + ".  The vibrations from your moans and screams of pleasure cause the intense feelings to increase, making you a slave to your own needs. Your juices flow down your chin as you try to swallow every last drop. You crane your neck, giving you deeper access to your wanting honey pot. You can feel yourself tightening around your tongue as it rams into your pussy, soaking up the juices as you slowly reach your peak.  You lick and suck hard around your " + player.clitDescript() + ", using both your hands to spread your cunt farther open. You move your head in an up and down motion just like a cat when they groom themselves. Your lapping and tongue play continues until you can feel your body tense up, ready to cum.\n\n");
+				outputText("The feeling is amazing, as you flick your tongue across your swollen " + player.clitDescript() + ". Juices leak from your moist hole, filling your mouth with the sweet taste of girlcum. You can feel your entire sex pulsing and throbbing around your tongue as you plumb the depths of your " + player.vaginaDescript() + ". The vibrations from your moans and screams of pleasure cause the intense feelings to increase, making you a slave to your own needs. Your juices flow down your chin as you try to swallow every last drop. You crane your neck, giving you deeper access to your wanting honey pot. You can feel yourself tightening around your tongue as it rams into your pussy, soaking up the juices as you slowly reach your peak. You lick and suck hard around your " + player.clitDescript() + ", using both your hands to spread your cunt farther open. You move your head in an up and down motion just like a cat when they groom themselves. Your lapping and tongue play continues until you can feel your body tense up, ready to cum.\n\n");
 			   
 				outputText("You cover your entire pussy with your mouth and send a wave of hot air into it; suddenly, a powerful and erotic feeling washes over your entire body. Your pussy clenches hard around your tongue, as your juices release all over your face. You try as hard as you can to catch it all in your mouth, but you find it difficult; your entire body is shaking uncontrollably from the amazing orgasm you gave yourself, making it hard to catch your girlcum. Finally, the orgasm comes to a close as you swallow your juices with pride, giving a relaxed sigh. Still lying on the ground, you savor your own unique flavor with a lick across your lips and sigh of achievement. You feel like taking a cat nap right about now.");
 			}
 			//[Repeatable]
 			else {
 				flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY]++;
-				outputText("You quickly undress from your " + player.armorName + ", both of your mouths drooling in anticipation for one another. You're going to do some stretches so you can be more nimble with your tongue work. You stand straight and spread your leg apart before leaning back and sticking your " + player.vaginaDescript() + " out in front of you. After holding for a moment, you change positions, leaning your " + player.allBreastsDescript() + " forward and sticking your " + player.assDescript() + " out for all to see.  You alternate leaning back and forth; it looks like you're teasingly thrusting at some unknown creature in the wilds, letting them know you're ready to get fucked. Soon, your spine is nice and limber - working on your legs is next. You stand up straight again, then lift and hold one knee up to your chest, pressing it against your " + player.allBreastsDescript() + ". This loosens it up a bit, but you know you can be more flexible than that. You support the underside of the leg with your hands and then lift the rest of your leg up, pointing your toes at the sky. You slowly take your hands off your leg, and are astonished that you're able to hold it up by itself.  Being naked in this position has allowed your funhole to be exposed to the elements, and you feel a cool breeze blow past your dripping wet sex.  It shakes and quivers, causing you to coo and moan at the sensation. Your leg feels as limber as your spine, so you switch to the other leg.  You immediately launch the other leg up next to your head, not needing the support of your hands to get your ankle behind your ear. You hold the pose for a few minutes, your cunt now drooling with pussy juice and eagerly waiting for you to kiss it. You soon put the leg down; now your back, legs and even your aching sluthole is stretched. You do some quick jaw stretches as you lay down on your bedroll.  Throwing one leg over your head, you easily bend your head down to your other pair of lips.\n\n");
+				outputText("You quickly undress from your " + player.armorName + ", both of your mouths drooling in anticipation for one another. You're going to do some stretches so you can be more nimble with your tongue work. You stand straight and spread your leg apart before leaning back and sticking your " + player.vaginaDescript() + " out in front of you. After holding for a moment, you change positions, leaning your " + player.allBreastsDescript() + " forward and sticking your " + player.assDescript() + " out for all to see.  You alternate leaning back and forth; it looks like you're teasingly thrusting at some unknown creature in the wilds, letting them know you're ready to get fucked. Soon, your spine is nice and limber - working on your legs is next. You stand up straight again, then lift and hold one knee up to your chest, pressing it against your " + player.allBreastsDescript() + ". This loosens it up a bit, but you know you can be more flexible than that. You support the underside of the leg with your hands and then lift the rest of your leg up, pointing your toes at the sky. You slowly take your hands off your leg, and are astonished that you're able to hold it up by itself.  Being naked in this position has allowed your funhole to be exposed to the elements, and you feel a cool breeze blow past your dripping wet sex. It shakes and quivers, causing you to coo and moan at the sensation. Your leg feels as limber as your spine, so you switch to the other leg. You immediately launch the other leg up next to your head, not needing the support of your hands to get your ankle behind your ear. You hold the pose for a few minutes, your cunt now drooling with pussy juice and eagerly waiting for you to kiss it. You soon put the leg down; now your back, legs and even your aching sluthole is stretched. You do some quick jaw stretches as you lay down on your bedroll. Throwing one leg over your head, you easily bend your head down to your other pair of lips.\n\n");
 				
-				outputText("Your " + player.vaginaDescript() + " is now right in front of your face, and you can't help but give it a lick with your tongue. The feeling is amazing as you flick your tongue across your swollen " + player.clitDescript() + ". Juices leak from your moist hole, filling your mouth with the sweet taste of girlcum. You can feel you entire sex pulsing and throbbing around your tongue as you plumb the depths of your " + player.vaginaDescript() + ".  The vibrations from your moans and screams of pleasure cause the intense feelings to increase, making you a slave to your own needs. Your juices flow down your chin as you try to swallow every last drop. You crane your neck, giving you deeper access to your wanting honey pot. You can feel yourself tightening around your tongue as it rams into your pussy and soaking up all the juices as you slowly reach your peak. You lick and suck hard around your " + player.clitDescript() + ", using both your hands to spread your cunt farther open. You move your head in an up and down motion just like a cat when they groom themselves. Your lapping and tongue play continues until you can feel your body tense up, ready to cum.\n\n");
+				outputText("Your " + player.vaginaDescript() + " is now right in front of your face, and you can't help but give it a lick with your tongue. The feeling is amazing as you flick your tongue across your swollen " + player.clitDescript() + ". Juices leak from your moist hole, filling your mouth with the sweet taste of girlcum. You can feel you entire sex pulsing and throbbing around your tongue as you plumb the depths of your " + player.vaginaDescript() + ". The vibrations from your moans and screams of pleasure cause the intense feelings to increase, making you a slave to your own needs. Your juices flow down your chin as you try to swallow every last drop. You crane your neck, giving you deeper access to your wanting honey pot. You can feel yourself tightening around your tongue as it rams into your pussy and soaking up all the juices as you slowly reach your peak. You lick and suck hard around your " + player.clitDescript() + ", using both your hands to spread your cunt farther open. You move your head in an up and down motion just like a cat when they groom themselves. Your lapping and tongue play continues until you can feel your body tense up, ready to cum.\n\n");
 			
 				outputText("You lap harder and faster with each second, coming closer and closer to tasting the girlcum about to squirt out of you. You feel your eager sex tighten one more time around your tongue before it releases its sweet nectar into your craving mouth. You guzzle as much as you can, but some leaks onto your " + player.faceDescript() + ".  You stick your tongue into your slick cunt to tease out the last few drops of cum. You tongue explores the depths once more, feeling its way around your " + player.vaginaDescript() + " walls and gathering up everything that may not have come out. You wriggle it around for a while until you're satisfied that you got most of the girlcum. You pull away from your sex and spread out relaxed on your bedroll, letting out a sigh like you just drank a whole pitcher of ale in one chug. You stretch out your arms and legs and curl up, ready to take a catnap.");
 			}
@@ -2395,11 +2408,11 @@ package classes.Scenes {
 			else {
 				flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY]++;
 				
-				outputText("You quickly undress from your " + player.armorName + ", your cock drooling with pre-cum in anticipation of your tongue's magic. You're going to do some stretches so you can be more nimble with your tongue work. You stand straight and spread your leg apart, before leaning back and sticking your erect " + player.cockDescript() + " forward. After holding for a moment, you switch positions, leaning your chest forward and sticking your " + player.assDescript() + " out for all to see – if anyone was around. You alternate leaning back and forth; it looks like you're fucking some invisible bitch. Soon, your spine is nice and limber – working on your legs is next. You stand up straight again, then lift and hold one knee up to your chest, pressing it against your " + player.allBreastsDescript() + ". This loosens it up a bit, but you know you can be more flexible than that. You support the underside of the leg with your hands and then lift the rest of your leg up, pointing your toes at the sky. You slowly take your hands off your leg, and are astonished that you're able to hold it up by itself. Being naked in this position has allowed your man-meat to be exposed to the elements, and you feel a cool breeze brushing against your cock.  It throbs harder, causing you to coo and moan at the sensation. Your leg feels as limber as your spine, so you switch to the other leg. You immediately launch the other leg up next to your head, not needing the support of your hands to get your ankle behind your ear. You hold the pose for a few minutes, your cock throbbing and leaking pre-cum, eagerly waiting for you to lick and suck it. You soon put the leg down, hornier then you've ever been. You do some quick jaw stretches as you lay down on your bed roll. Throwing one leg over your head, you easily bend your head down to your member.\n\n");
+				outputText("You quickly undress from your " + player.armorName + ", your cock drooling with pre-cum in anticipation of your tongue's magic. You're going to do some stretches so you can be more nimble with your tongue work. You stand straight and spread your leg apart, before leaning back and sticking your erect " + player.cockDescript() + " forward. After holding for a moment, you switch positions, leaning your chest forward and sticking your " + player.assDescript() + " out for all to see – if anyone was around. You alternate leaning back and forth; it looks like you're fucking some invisible bitch. Soon, your spine is nice and limber – working on your legs is next. You stand up straight again, then lift and hold one knee up to your chest, pressing it against your " + player.allBreastsDescript() + ". This loosens it up a bit, but you know you can be more flexible than that. You support the underside of the leg with your hands and then lift the rest of your leg up, pointing your toes at the sky. You slowly take your hands off your leg, and are astonished that you're able to hold it up by itself. Being naked in this position has allowed your man-meat to be exposed to the elements, and you feel a cool breeze brushing against your cock. It throbs harder, causing you to coo and moan at the sensation. Your leg feels as limber as your spine, so you switch to the other leg. You immediately launch the other leg up next to your head, not needing the support of your hands to get your ankle behind your ear. You hold the pose for a few minutes, your cock throbbing and leaking pre-cum, eagerly waiting for you to lick and suck it. You soon put the leg down, hornier then you've ever been. You do some quick jaw stretches as you lay down on your bed roll. Throwing one leg over your head, you easily bend your head down to your member.\n\n");
 				
 				outputText("Your " + player.cockDescript() + " is now poking at the left cheek of your " + player.faceDescript() + "; you miscalculated how much flexibility you needed. You use your tongue to guide the eager meat-rod into your dripping wet mouth. Your lips latch around the tip, sucking on it while your tongue rolls around the head. You begin leaning your head forward, bringing the " + player.cockDescript() + " further into your mouth. Your tongue massages the underside as you stick it out to cover as much cock as you can. Small bits of pre-cum shoot out, sending its salty taste down your throat. You lift your head off and your tongue follows close behind, leaving a trail of saliva and resulting in a slurp as you continue to lick the throbbing head. You take the cock down your throat once more, bobbing your head up and down the shaft while flicking your tongue from left to right. You begin moving your head faster and harder, making you let out lewd gagging sounds, but it feels too good to stop now. Your entire cock is soaked in saliva, dripping down your shaft and onto the ground. Soon you're moving your hips as much as you can; you are no longer giving yourself a blowjob – you're throat-fucking yourself. The lewd, gagging sound grows louder and more aggressive; anyone passing by would think you were choking a chicken.\n\n");
 				
-				outputText("Another shot of pre-cum is sent down your throat, followed by the building pressure of your release. You force your head down to the base of your " + player.cockDescript() + ", sending it deeply down your throat, feeling the warm and smooth inside as it tightens around the invading member. Thank goodness you're holding your breath, or you would be suffocating right now. You hurry up before you choke on your cock,  moving your head back and forth while your hand caresses the base of your cock. ");
+				outputText("Another shot of pre-cum is sent down your throat, followed by the building pressure of your release. You force your head down to the base of your " + player.cockDescript() + ", sending it deeply down your throat, feeling the warm and smooth inside as it tightens around the invading member. Thank goodness you're holding your breath, or you would be suffocating right now. You hurry up before you choke on your cock, moving your head back and forth while your hand caresses the base of your cock. ");
 				
 				if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 			
@@ -2457,7 +2470,7 @@ package classes.Scenes {
 			clearOutput();
 			if (player.gender == 2) outputText(images.showImage("masti-meditate-female"));
 			else outputText(images.showImage("masti-meditate-male"));
-			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.");
+			outputText("You find a flat, comfortable " + description + " to sit down on and meditate. As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.");
 			
 			dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.isPureEnough(10)) HPChange(50, true);
@@ -2473,11 +2486,11 @@ package classes.Scenes {
 			outputText("The belt whirs to life, shaking on your waist, sending jolts of pleasure through your clit as the small inside nub hits it. \"<i>Ohh...</i>\" Suddenly, the ring around your cock vibrates and then tightens hard around your cock, the belt sinking onto your body and locking in place. Worry sets in instantly as you try to wiggle and take it off, but it is no use. You see something black bubble from the edges of the metal, worried even more that it might be some sort of acid. It begins to creep across your skin at a disturbing rate, going down your " + player.legs() + " and encasing them in the blackness, wrapping your cock, ");
 			if (player.tail.type > Tail.NONE) outputText("covering up your tail, ");
 			outputText("and then going up your body, covering your " + player.allBreastsDescript() + " and neck. The only part of your body unclad by the suit is your head. The blackness feels slick and smooth, almost cold, a strange type of feeling washes over you until you realize that it is a rubber suit.\n\n");
-			outputText("Before you can do anything else, the belt activates again and the latex covering of your " + player.cockDescript() + " begins to tighten and pulse around the meat, warming up to feel like a virgin cunt. A moan is dragged from your lips as it begins to ripple and pulse, simulating the feeling of fucking a tight hole as the entire suit molds itself to your body. Before you can get too used to the feeling of the suit milking your cock, the nub that had been teasing your clit suddenly expands and pushes out, the slick feeling of the latex pushing into your pussy.  The hardened black latex splits your tunnel and spreads you wide as it goes in deep. Your eyes widen for a moment as both stop, and then your world explodes in a flash of pleasure. The hardened lump begins to piston in and out of your " + player.vaginaDescript() + ", vibrating wildly as a lump grows in on top in precisely the right spot to rub back and forth on your g-spot.\n\n");
+			outputText("Before you can do anything else, the belt activates again and the latex covering of your " + player.cockDescript() + " begins to tighten and pulse around the meat, warming up to feel like a virgin cunt. A moan is dragged from your lips as it begins to ripple and pulse, simulating the feeling of fucking a tight hole as the entire suit molds itself to your body. Before you can get too used to the feeling of the suit milking your cock, the nub that had been teasing your clit suddenly expands and pushes out, the slick feeling of the latex pushing into your pussy. The hardened black latex splits your tunnel and spreads you wide as it goes in deep. Your eyes widen for a moment as both stop, and then your world explodes in a flash of pleasure. The hardened lump begins to piston in and out of your " + player.vaginaDescript() + ", vibrating wildly as a lump grows in on top in precisely the right spot to rub back and forth on your g-spot.\n\n");
 			outputText("Meanwhile the latex around your " + player.cockDescript() + " begins to pulse and ripple faster than ever before. You quake and quiver, " + player.legs() + " giving out as it teases and pulses around your " + player.allBreastsDescript() + ". Your hands go down your body helplessly and start stroking at your encased cock, rubbing up and down your length. Unfortunately, all things must come to an end as the pleasure gets to be way too much and you feel yourself cum. Your hips buck wildly as you feel cum spurt into the latex, the end swelling up and filling like a ");
 			if (player.cumQ() > 200) outputText("massive ");
 			outputText("balloon. ");
-			if (player.cumQ() >= 1000) outputText("It grows larger and larger until you are sure it will pop, but it doesn't.  It just sloshes around - a huge bubble, nearly waist high. ");
+			if (player.cumQ() >= 1000) outputText("It grows larger and larger until you are sure it will pop, but it doesn't. It just sloshes around - a huge bubble, nearly waist high. ");
 			outputText("Your eyes close in shivered ecstasy as your cunt spasms and clutches down around the hardened section deep inside of you. ");
 			//([If high lactation]
 			if (player.biggestLactation() >= 2) outputText("Milk gushes out from your " + player.breastDescript(0) + " as you orgasm, filling the inside of the suit with a slick layer of milk and forming milk bubbles that hang lewdly off your chest. ");
@@ -2527,22 +2540,22 @@ package classes.Scenes {
 			else if (player.cor < 66)
 				outputText("shivering as the air hits your exposed " + player.nippleDescript(0) + "s.");
 			else outputText("smiling to yourself as you blatantly oogle your " + player.nippleDescript(0) + "s.");
-			outputText("  The openings are soft, sensitive, and slick as you ease a fingertip into ");
+			outputText(" The openings are soft, sensitive, and slick as you ease a fingertip into ");
 			if (player.totalNipples() > 2) outputText("two of ");
 			outputText("them.");
 			if (player.biggestTitSize() > 2)
-				outputText("  The sudden displacement makes your " + player.breastDescript(0) + " jiggle enticingly, and the sudden movement fires arcs of pleasure deep into your body.");
-			else outputText("  They're shallow enough that you don't get much more than a fingertip inside them, but the flesh is extraordinarily sensitive, shooting arcs of pleasure deep into your body.");
-			outputText("  Your free fingers slowly stroke around the outer edges of your " + player.nippleDescript(0) + "s' lips, pausing when you feel a tiny sensitive clit-like nub just inside the top of the opening.\n\n");
+				outputText(" The sudden displacement makes your " + player.breastDescript(0) + " jiggle enticingly, and the sudden movement fires arcs of pleasure deep into your body.");
+			else outputText(" They're shallow enough that you don't get much more than a fingertip inside them, but the flesh is extraordinarily sensitive, shooting arcs of pleasure deep into your body.");
+			outputText(" Your free fingers slowly stroke around the outer edges of your " + player.nippleDescript(0) + "s' lips, pausing when you feel a tiny sensitive clit-like nub just inside the top of the opening.\n\n");
 			
 			outputText(images.showImage("masti-centaur-nipple"));
-			outputText("Shivering with pleasure, you kneel down to prevent your legs from going out from underneath you.   Your " + player.faceDescript() + " flushes hotter as you toy with the slippery nipple-cunts, feeling them growing hard and puffy as you turn yourself on more and more.  ");
+			outputText("Shivering with pleasure, you kneel down to prevent your legs from going out from underneath you.  Your " + player.faceDescript() + " flushes hotter as you toy with the slippery nipple-cunts, feeling them growing hard and puffy as you turn yourself on more and more. ");
 			if (player.biggestLactation() > 1)
 				outputText("Thick, milky lubricant races down the curvature of your breasts as your self-pleasure inadvertently lets your milk down.");
 			else if (player.wetness() >= 3)
 				outputText("Rivulets of lubricant race down the curvature of your breasts as your chest-pussies clench around your intruding fingers.");
 			else outputText("Slick lubricant squishes around your fingers as you finger-fuck your chest-pussies.");
-			outputText("  You moan and lean over, shoving a second finger inside each of them and rubbing your thumbs over the miniature clits as you near orgasm.\n\n");
+			outputText(" You moan and lean over, shoving a second finger inside each of them and rubbing your thumbs over the miniature clits as you near orgasm.\n\n");
 
 			if (player.hasVagina() || player.hasCock()) {
 				var plural:Boolean = false;
@@ -2559,14 +2572,14 @@ package classes.Scenes {
 					outputText(" leak their own fluid, quivering with ache and need that you can't reach to satisfy.");
 				else outputText(" leaks its own fluids, quivering with ache and need that you can't reach to satisfy.");
 				if (player.totalCocks() > 1)
-					outputText("  You feel each of your " + player.multiCockDescriptLight() + " tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowments.");
+					outputText(" You feel each of your " + player.multiCockDescriptLight() + " tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowments.");
 				else if (player.totalCocks() == 1)
-					outputText("  You feel your " + player.multiCockDescriptLight() + " tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowment.");
-				if (player.balls > 0) outputText("  Rocking slightly inside your sack, your " + player.ballsDescriptLight() + " repeatedly clench up against your body, ready to release.");
+					outputText(" You feel your " + player.multiCockDescriptLight() + " tapping against your belly as your muscles clench, getting as much pleasure as possible from your male endowment.");
+				if (player.balls > 0) outputText(" Rocking slightly inside your sack, your " + player.ballsDescriptLight() + " repeatedly clench up against your body, ready to release.");
 				outputText("\n\n");
 			}
 			//(ORGAZMO)
-			outputText("A slow wave of contractions starts deep inside each of your " + player.nippleDescript(0) + "s.  It intensifies as it rises towards the surface of your " + player.breastDescript(0) + ", reaching a crescendo that brings you to the peak of pleasure.  Your eyes roll back as you slump down in orgasmic bliss, fingers pumping relentlessly at you slippery nipple-holes.  Noisy wet squelches and incessant moaning rouse you from your pleasure-induced coma, eventually waking you back to reality.\n\n");
+			outputText("A slow wave of contractions starts deep inside each of your " + player.nippleDescript(0) + "s. It intensifies as it rises towards the surface of your " + player.breastDescript(0) + ", reaching a crescendo that brings you to the peak of pleasure. Your eyes roll back as you slump down in orgasmic bliss, fingers pumping relentlessly at you slippery nipple-holes. Noisy wet squelches and incessant moaning rouse you from your pleasure-induced coma, eventually waking you back to reality.\n\n");
 
 			//Optional post orgasm bits for dicks/pussies
 			if (player.hasCock()) {
@@ -2576,21 +2589,21 @@ package classes.Scenes {
 				else if (player.cumQ() < 2000) outputText("A frothing puddle of thick cum has formed below you, soaking your legs and underbelly, ");
 				else outputText("A small lake of semen surrounds you, ");
 				outputText("released from your " + player.multiCockDescriptLight() + " by the intense climax.");
-				if (player.hasVagina()) outputText("  ");
+				if (player.hasVagina()) outputText(" ");
 			}
 			if (player.hasVagina()) {
 				if (player.wetness() < 2)
 					outputText("The scent of pussy hangs in the air, clinging to your moist, puffy cunt-lips.");
 				else if (player.wetness() < 4)
-					outputText("The air is full of the scent of horny horse-pussy.  If the moist feeling between your hind-legs is any indication, your back-half probably looks and smells like a mare in heat.");
+					outputText("The air is full of the scent of horny horse-pussy. If the moist feeling between your hind-legs is any indication, your back-half probably looks and smells like a mare in heat.");
 				else if (player.wetness() < 5)
 					outputText("The air is saturated with the heady scent of aroused horse-pussy, and if the wetness between your hind-legs is any indication, your hind-quarters would be a slip 'n slide of pleasure for any daring enough to penetrate you.");
-				else outputText("The air is filled with the thick musk of your bestial horse-pussy.  If the rivulets of moisture dripping down to your hooves are any indication, you might need to get used to the smell.");
+				else outputText("The air is filled with the thick musk of your bestial horse-pussy. If the rivulets of moisture dripping down to your hooves are any indication, you might need to get used to the smell.");
 			}
 			if (player.hasCock() || player.hasVagina()) outputText("\n\n");
 
 			//Real aftermath
-			outputText("Judging by the sky, at least an hour has passed.  You sigh and pry your cramped fingers from your aching " + player.nippleDescript(0) + "s, rubbing the sore entrances with your palm before you climb back up onto your " + player.feet() + ".  As you get dressed, you're very conscious of how much better you feel from the wonderful finger-fuck.  ");
+			outputText("Judging by the sky, at least an hour has passed. You sigh and pry your cramped fingers from your aching " + player.nippleDescript(0) + "s, rubbing the sore entrances with your palm before you climb back up onto your " + player.feet() + ". As you get dressed, you're very conscious of how much better you feel from the wonderful finger-fuck. ");
 			if (player.cor > 66)
 				outputText("You can't wait to do it again.");
 			else if (player.cor > 33)
@@ -2605,7 +2618,7 @@ package classes.Scenes {
 			//Set plurality and primary cock.
 			var primary:int = player.longestCock();
 			var plural:Boolean = (player.cocks.length > 1);
-			outputText("You shrug out of your " + player.armorName + ", not that it does much to impede your " + player.multiCockDescriptLight() + " as a centaur.   ");
+			outputText("You shrug out of your " + player.armorName + ", not that it does much to impede your " + player.multiCockDescriptLight() + " as a centaur.  ");
 			if (player.cor < 33)
 				outputText("Sighing in disappointment and shame, ");
 			else if (player.cor < 66)
@@ -2617,9 +2630,9 @@ package classes.Scenes {
 			if (!plural) outputText("it grows full and hard.");
 			else outputText("they grow full and hard.");
 			if (plural)
-				outputText("  After a moment they peek out from under your forelegs, proudly displaying your " + player.multiCockDescriptLight() + ".");
+				outputText(" After a moment they peek out from under your forelegs, proudly displaying your " + player.multiCockDescriptLight() + ".");
 			else {
-				outputText("  After a moment it peeks out from under your forelegs, proudly displaying your ");
+				outputText(" After a moment it peeks out from under your forelegs, proudly displaying your ");
 				if (player.cocks[primary].cockType == CockTypesEnum.HORSE) outputText("flared tip");
 				else if (player.cocks[primary].cockType == CockTypesEnum.DEMON) outputText("nodule-ringed head");
 				else if (player.cocks[primary].cockType == CockTypesEnum.DOG) outputText("pointed erection");
@@ -2631,7 +2644,7 @@ package classes.Scenes {
 				outputText(".");
 			}
 			if (player.tallness * 1.5 < player.cocks[player.longestCock()].cockLength) {
-				outputText("  In no time flat you're rendered virtually immobile by the length of ");
+				outputText(" In no time flat you're rendered virtually immobile by the length of ");
 				if (plural) outputText("all ");
 				outputText("your " + player.multiCockDescriptLight() + ".");
 			}
@@ -2643,23 +2656,23 @@ package classes.Scenes {
 				if (plural)
 					outputText("a ");
 				else outputText("your ");
-				outputText(player.cockDescript(primary) + " and lift up, pressing it tightly against your belly as you begin to stroke along the sensitive underside.  ");
+				outputText(player.cockDescript(primary) + " and lift up, pressing it tightly against your belly as you begin to stroke along the sensitive underside. ");
 				if (player.cumQ() > 500)
 					outputText("Thick streams of pre-cum start to drizzle from your tip, forced out due to your prodigious production of sexual fluid.");
 				else if (player.cumQ() > 100)
 					outputText("A dribble of pre-cum starts to leak from the tip as you get more into the act.");
 				else outputText("A tiny dollop of pre-cum slowly builds on your tip as you get into the act.");
-				if (player.hasVagina()) outputText("  Your neglected " + player.vaginaDescript() + " aches for penetration, but there's no way you'll be able to reach it in your current state.");
-				outputText("  You sigh, delighted that you're able to caress at least one of your sexual organs with this body");
+				if (player.hasVagina()) outputText(" Your neglected " + player.vaginaDescript() + " aches for penetration, but there's no way you'll be able to reach it in your current state.");
+				outputText(" You sigh, delighted that you're able to caress at least one of your sexual organs with this body");
 				if (player.cor < 40) outputText(", but you're also worried that you're falling into the perversion that lurks in this strange world");
-				outputText(".  It feels so good that you close your eyes and whinny with delight.\n\n");
+				outputText(". It feels so good that you close your eyes and whinny with delight.\n\n");
 
-				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand.  Meanwhile your other hand is busy fondling the underside, stroking what little of your length you can reach.  Even with the limited access, you can feel your " + player.cockDescript(primary) + " pulsing in your grip, growing harder with every touch and caress.");
+				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand. Meanwhile your other hand is busy fondling the underside, stroking what little of your length you can reach. Even with the limited access, you can feel your " + player.cockDescript(primary) + " pulsing in your grip, growing harder with every touch and caress.");
 				if (player.totalCocks() == 2)
-					outputText("  Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
+					outputText(" Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
 				else if (player.totalCocks() > 2)
-					outputText("  Your other " + player.multiCockDescriptLight() + " mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
-				outputText("  You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
+					outputText(" Your other " + player.multiCockDescriptLight() + " mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
+				outputText(" You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
 			}	
 			//Get started (long)
 			else {
@@ -2667,24 +2680,24 @@ package classes.Scenes {
 				if (plural)
 					outputText("a ");
 				else outputText("your ");
-				outputText(player.cockDescript(primary) + " and lift it up, curving it slightly as you begin to stroke the underside with long, fluid caresses.  You even manage to bend down and give it a lick, forcing you into a pleasurable shudder.");
+				outputText(player.cockDescript(primary) + " and lift it up, curving it slightly as you begin to stroke the underside with long, fluid caresses. You even manage to bend down and give it a lick, forcing you into a pleasurable shudder.");
 				if (player.cumQ() > 500)
-					outputText("  Thick streams of pre-cum start to drizzle from your tip, forced out due to your prodigious production of sexual fluid.");
+					outputText(" Thick streams of pre-cum start to drizzle from your tip, forced out due to your prodigious production of sexual fluid.");
 				else if (player.cumQ() > 100)
-					outputText("  A dribble of pre-cum starts to leak from the tip as you get more into the act.");
-				else outputText("  A tiny dollop of pre-cum slowly builds on your tip as you get into the act.");
-				if (player.hasVagina()) outputText("  Your neglected " + player.vaginaDescript() + " aches for penetration, but there's no way you'll be able to reach it in your current state.");
-				outputText("  You sigh, delighted that you're able to caress your sexual organs with this body");
+					outputText(" A dribble of pre-cum starts to leak from the tip as you get more into the act.");
+				else outputText(" A tiny dollop of pre-cum slowly builds on your tip as you get into the act.");
+				if (player.hasVagina()) outputText(" Your neglected " + player.vaginaDescript() + " aches for penetration, but there's no way you'll be able to reach it in your current state.");
+				outputText(" You sigh, delighted that you're able to caress your sexual organs with this body");
 				if (player.cor < 33) outputText(", but you're also worried that you're falling into the perversion that lurks in this strange world");
-				outputText(".  It feels so good that you close your eyes and whinny with delight as your hands fondle your massive length.\n\n");
+				outputText(". It feels so good that you close your eyes and whinny with delight as your hands fondle your massive length.\n\n");
 				
 				//STROKE (long)
-				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand.  Meanwhile your other hand is making great use of your incredible length, jacking you off with long fluid strokes.  In no time flat, you can feel your " + player.cockDescript() + " pulsing in your grip, growing harder in time with your fevered stroking.");
+				outputText("You smear your pre-cum over the tip, rolling your palm across the sensitive tip in a way that makes it hard to stand. Meanwhile your other hand is making great use of your incredible length, jacking you off with long fluid strokes. In no time flat, you can feel your " + player.cockDescript() + " pulsing in your grip, growing harder in time with your fevered stroking.");
 				if (player.totalCocks() == 2)
-					outputText("  Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
+					outputText(" Your other dick mimics its lucky brother's pleasure, even though it's been ignored in order for you to focus on your current 'toy'.");
 				else if (player.totalCocks() > 2)
-					outputText("  Your other " + player.multiCockDescriptLight() + " mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
-				outputText("  You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
+					outputText(" Your other " + player.multiCockDescriptLight() + " mimic their lucky brother's pleasure, even though they've been ignored in order for you to focus on your current 'toy'.");
+				outputText(" You let your hind legs give out and slump down, locking your forelegs while you tremble with what can only be the approach of an orgasm.\n\n");
 			}
 			//Cumjaculation
 			if (player.tallness * 1.5 >= player.cocks[player.longestCock()].cockLength) 
@@ -2694,20 +2707,20 @@ package classes.Scenes {
 			if (player.balls > 0)
 				outputText("your " + player.ballsDescriptLight());
 			else outputText("release");
-			outputText(".  You arch your back as you blast out your seed, shuddering and spraying it into the air.  It splatters wetly against a rock, oozing down the now-slimy surface ");
+			outputText(". You arch your back as you blast out your seed, shuddering and spraying it into the air. It splatters wetly against a rock, oozing down the now-slimy surface ");
 			if (player.cumQ() < 50)
 				outputText("as you finish unloading against it.");
 			else if (player.cumQ() < 200)
 				outputText("as you continue to pump more and more seed onto it.");
 			else if (player.cumQ() < 500)
-				outputText("as you continue to fountain more and more spooge over it.  By the time you finish there's a small puddle at the base and you've thoroughly glazed the rock in question.");
+				outputText("as you continue to fountain more and more spooge over it. By the time you finish there's a small puddle at the base and you've thoroughly glazed the rock in question.");
 			else if (player.cumQ() < 1500)
-				outputText("as you continue to blast it with cum.  Spooge puddles underneath it, slowly spreading while it soaks into the barren ground.");
+				outputText("as you continue to blast it with cum. Spooge puddles underneath it, slowly spreading while it soaks into the barren ground.");
 			else {
-				outputText("as you continue to erupt cum all over it.  The thick spooge forms a thick puddle at the base, spreading until your hooves are coated in it.");
-				if (player.cumQ() > 3000) outputText("  As you finish cumming, the puddle deepens.  It's inches thick and splattering everywhere whenever you take a step.");
+				outputText("as you continue to erupt cum all over it. The thick spooge forms a thick puddle at the base, spreading until your hooves are coated in it.");
+				if (player.cumQ() > 3000) outputText(" As you finish cumming, the puddle deepens. It's inches thick and splattering everywhere whenever you take a step.");
 			}
-			outputText("  You slump back, still shuddering from the pleasure as you feel your ");
+			outputText(" You slump back, still shuddering from the pleasure as you feel your ");
 			if (!plural)
 				outputText("member");
 			else outputText("members");
@@ -2718,8 +2731,8 @@ package classes.Scenes {
 			}
 			else if (player.minLust() > 40 || player.lib100 > 50) {
 				if (plural)
-					outputText(" grow slightly less hard.  As much as you seem to need sex, that doesn't surprise you.");
-				else outputText(" growing slightly less hard.  As much as you seem to need sex, that doesn't surprise you.");
+					outputText(" grow slightly less hard. As much as you seem to need sex, that doesn't surprise you.");
+				else outputText(" growing slightly less hard. As much as you seem to need sex, that doesn't surprise you.");
 			}
 			else {
 				if (plural)
@@ -2737,7 +2750,7 @@ package classes.Scenes {
 					outputText("Thick, clear fluid soaks your thighs, filling the air with the scent of liquid centaur sex as you orgasm.");
 				else if (player.wetness() == 4)
 					outputText("Thick fluid coats your thighs and drips into a puddle on the ground, filling the air with the pungent aroma of liquid centaur sex as you orgasm.");
-				else outputText("Spatters of fluids gush out from between your thighs, coating your upper legs in a thick coat of clear feminine lubricant as you orgasm.  The air is filled from the scent of your liquid centaur lust as more and more drips into a rapidly expanding puddle between your rear legs.");
+				else outputText("Spatters of fluids gush out from between your thighs, coating your upper legs in a thick coat of clear feminine lubricant as you orgasm. The air is filled from the scent of your liquid centaur lust as more and more drips into a rapidly expanding puddle between your rear legs.");
 				if (player.hasFuckableNipples()) {
 					if (player.totalNipples() > 2)
 						outputText("All");
@@ -2752,7 +2765,7 @@ package classes.Scenes {
 					if (player.biggestLactation() < 1)
 						outputText("clear");
 					else outputText("milk-laced");
-					outputText(" lubricant.  You pause to finger their entrances, shivering unconsciously as you slowly come down.");
+					outputText(" lubricant. You pause to finger their entrances, shivering unconsciously as you slowly come down.");
 				}
 				outputText("\n\n");
 			}
@@ -2769,15 +2782,15 @@ package classes.Scenes {
 				if (player.hasCock() || player.hasVagina())
 					outputText("genitalia");
 				else outputText("anything remotely sexual");
-				outputText("!  It seems that being a centaur has a rather crippling downside – you can't reach around to get yourself off and sate your lusts!\n\n");
+				outputText("! It seems that being a centaur has a rather crippling downside – you can't reach around to get yourself off and sate your lusts!\n\n");
 				flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR]++;
 			}
 			else {
-				outputText("You still can't reach around to masturbate yourself.  Being half-horse sure is inconvenient!\n\n");
+				outputText("You still can't reach around to masturbate yourself. Being half-horse sure is inconvenient!\n\n");
 			}
 			//(If Milker)
 			if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cocks.length > 0)
-				outputText("Perhaps you could visit the cock-milker you have set up at Whitney's farm and drain off the arousal?  Or maybe you'll just have to find a willing partner somewhere.");
+				outputText("Perhaps you could visit the cock-milker you have set up at Whitney's farm and drain off the arousal? Or maybe you'll just have to find a willing partner somewhere.");
 			else outputText("It looks like you'll have to find a partner to relieve your pent up need, but in your current state you'll probably be on the receiving end of whatever you can get!");
 		}
 		
@@ -2787,25 +2800,25 @@ package classes.Scenes {
 			clearOutput();
 			if (player.keyItemv1("Fake Mare") == 0) {
 				if (player.cor < 50)
-					outputText("Deciding to give the mare-like cocksleeve you got from Whitney a try, you spend a few awkward minutes dragging the lump of metal off to someplace secluded and setting it up.  When you're done, you stand behind a wood-and-iron replica of a mare, adjusted to the perfect height for you.  Looking \"<i>her</i>\" over, your eyes are drawn to the slick black lips of the Onahole between her legs, craftily shaped like a horsecunt, and what looks like a second, smaller one above it simulating an anus.\n\n");
+					outputText("Deciding to give the mare-like cocksleeve you got from Whitney a try, you spend a few awkward minutes dragging the lump of metal off to someplace secluded and setting it up. When you're done, you stand behind a wood-and-iron replica of a mare, adjusted to the perfect height for you. Looking \"<i>her</i>\" over, your eyes are drawn to the slick black lips of the Onahole between her legs, craftily shaped like a horsecunt, and what looks like a second, smaller one above it simulating an anus.\n\n");
 				//[If Med-High Corruption:] 
-				else outputText("You decide to play with the mare-shaped cocksleeve Whitney gave you.  You pull it out of your stash and spend a few minutes setting it up in the heart of camp.  Once done, you stand behind a wood-and-iron replica of a mare, adjusted to the perfect height for you.  Looking \"<i>her</i>\" over, your eyes are drawn to the slick black lips of the Onahole between her legs, craftily shaped like a horsecunt, and what looks like a second, smaller one above it simulating an anus.\n\n");
+				else outputText("You decide to play with the mare-shaped cocksleeve Whitney gave you. You pull it out of your stash and spend a few minutes setting it up in the heart of camp. Once done, you stand behind a wood-and-iron replica of a mare, adjusted to the perfect height for you. Looking \"<i>her</i>\" over, your eyes are drawn to the slick black lips of the Onahole between her legs, craftily shaped like a horsecunt, and what looks like a second, smaller one above it simulating an anus.\n\n");
 			}
-			outputText("Seeing the toy's exposed, gaping genitals, you feel a stirring in your " + player.multiCockDescriptLight() + ".  You yearn to touch yourself, but your centaur lower body prevents you, as usual.  Grunting with annoyance, you trot up to the toy and give its wide cunt an experimental fisting.  ");
+			outputText("Seeing the toy's exposed, gaping genitals, you feel a stirring in your " + player.multiCockDescriptLight() + ". You yearn to touch yourself, but your centaur lower body prevents you, as usual. Grunting with annoyance, you trot up to the toy and give its wide cunt an experimental fisting. ");
 			//[If small cock: 
 			if (player.cockArea(x) < 30)
-				outputText("Your hand slips in easily... since it's made for real horsecocks, it's a bit too big to give you any satisfaction.  Your gaze shifts upwards to the toy's fake anus, which seems a bit more your size.</i>\"");
+				outputText("Your hand slips in easily... since it's made for real horsecocks, it's a bit too big to give you any satisfaction. Your gaze shifts upwards to the toy's fake anus, which seems a bit more your size.</i>\"");
 			else outputText("Your fist slips in easily, and you give the toy a few preparatory thrusts to make sure it's nice and ready for your hefty cock.");
 			outputText("\n\n");
 
-			outputText("Satisfied the toy is ready for you, you clop back a few paces and surge forward.  You mount the toy easily, your belly running across its smooth, warm back until your chest bumps against the mare's head.  You grip her shoulders for support and start to buck your hips, your " + player.cockDescript(x) + " poking around in search of entrance.  Finally, you feel the tip of your prick ");
+			outputText("Satisfied the toy is ready for you, you clop back a few paces and surge forward. You mount the toy easily, your belly running across its smooth, warm back until your chest bumps against the mare's head. You grip her shoulders for support and start to buck your hips, your " + player.cockDescript(x) + " poking around in search of entrance. Finally, you feel the tip of your prick ");
 			if (player.cockArea(x) < 30)
 				outputText("pressing against the tight ring of the toy's anus");
 			else outputText("lining up with the toy's gaping cunt");
-			outputText(".  You rear your " + player.hipDescript() + " and slam yourself into the mare's waiting hole.\n\n");
+			outputText(". You rear your " + player.hipDescript() + " and slam yourself into the mare's waiting hole.\n\n");
 
 			outputText(images.showImage("masti-centaur-cPole-male"));
-			outputText("The toy's passage seems to shift and contract around your " + player.cockDescript(x) + ", molding itself to perfectly sheathe you.  What a marvelous little toy!  You slide on up until you hilt yourself, your crotch pressed against the mare's wide ass as your " + player.chestDesc() + " squeezes against her back.  Now fully mounted, you begin to rut on the mare toy, slapping your hips");
+			outputText("The toy's passage seems to shift and contract around your " + player.cockDescript(x) + ", molding itself to perfectly sheathe you. What a marvelous little toy! You slide on up until you hilt yourself, your crotch pressed against the mare's wide ass as your " + player.chestDesc() + " squeezes against her back. Now fully mounted, you begin to rut on the mare toy, slapping your hips");
 			if (player.balls > 0)
 				outputText(" and " + player.ballsDescriptLight());
 			outputText(" hard against her rump as you pound into her tight, slick ");
@@ -2814,11 +2827,11 @@ package classes.Scenes {
 			else outputText("asshole");
 			outputText(".\n\n");
 
-			outputText("Finally able to get the release you weren't able to give yourself, you feel an orgasm mounting deep within you.  You let out a loud, equine whinny as you hump the toy faster and faster, pounding her with your " + player.cockDescript(x) + " until the pleasure overwhelms you.  You cry out as you cum, squirting your centaur-cum as far into the toy as you can shoot it");
+			outputText("Finally able to get the release you weren't able to give yourself, you feel an orgasm mounting deep within you. You let out a loud, equine whinny as you hump the toy faster and faster, pounding her with your " + player.cockDescript(x) + " until the pleasure overwhelms you. You cry out as you cum, squirting your centaur-cum as far into the toy as you can shoot it");
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
 				flags[kFLAGS.GILDED_JERKED]++
 				var gems:int = midasCockJackingGemsRoll();
-				outputText( ".\n\nSated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + player.cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  <b>You are startled to see glittering gems pouring from her ");
+				outputText( ".\n\nSated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + player.cockDescript(x) + " is soft inside it. You scamper off of her, dropping back to your four equine feet. <b>You are startled to see glittering gems pouring from her ");
 				if (player.cockArea(x) >= 30)
 					outputText("horsecunt");
 				else outputText("asshole");
@@ -2827,7 +2840,7 @@ package classes.Scenes {
 			}
 			else {
 				outputText(", until she's full up and leaking onto the ground.\n\n");
-				outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + player.cockDescript(x) + " is soft inside it.  You scamper off of her, dropping back to your four equine feet.  With a contented yawn, you disassemble the toy and haul it off back to your stash, leaking your cum the entire way.");
+				outputText("Sated, you spend a few blissful minutes enjoying the warmth and tightness of the mare-like onahole until your " + player.cockDescript(x) + " is soft inside it. You scamper off of her, dropping back to your four equine feet. With a contented yawn, you disassemble the toy and haul it off back to your stash, leaking your cum the entire way.");
 			}
 			player.orgasm('Dick');
 			dynStats("sen", -2);
@@ -2841,21 +2854,21 @@ package classes.Scenes {
 			if (player.keyItemv1("Centaur Pole") == 0) {
 				//[If low Corruption:] 
 				if (player.cor < 50)
-					outputText("Feeling a bit antsy, you decide to give Whitney's so-called \"<i>Centaur Pole</i>\" a try.  You dig it out of your stash and spend a few awkward minutes dragging it off someplace secluded and setting it up.\n\n");
+					outputText("Feeling a bit antsy, you decide to give Whitney's so-called \"<i>Centaur Pole</i>\" a try. You dig it out of your stash and spend a few awkward minutes dragging it off someplace secluded and setting it up.\n\n");
 				//[If Med-High Corruption:]
-				else outputText("Unable to sate your own lusts due to your centaur configuration, you decide to put one of Whitney's centaur toys to use.  You dig the Centaur Pole out of your stash and drag it to the middle of camp.\n\n");
+				else outputText("Unable to sate your own lusts due to your centaur configuration, you decide to put one of Whitney's centaur toys to use. You dig the Centaur Pole out of your stash and drag it to the middle of camp.\n\n");
 			}
-			outputText("When you've got it ready, the \"<i>Pole</i>\" is actually quite impressive.  It's a large metallic statue of what seems to be a particularly well-endowed imp, equipped with a huge, flared horsecock displayed proudly between his muscular legs.  You give the tremendous purple cock a few experimental strokes, and to your delight it inflates just like a real boner, becoming rock-hard in your grasp.  You lick your lips and, unable to resist, take the cock into your mouth.\n\n");
-			outputText("Though it tastes rubbery, the heft and size of the prick feels... right... inside you.  You spend a few blissful minutes sucking off the horse dildo, getting it nice and wet and ready for you.  When you're satisfied the imp-statue's wang is sufficiently lubed up, you let it pop out of your mouth and, making sure it's still standing straight out of the statue, you turn around.\n\n");
-			outputText("Your " + player.hipDescript() + " wiggle in anticipation as you work to get your ready " + player.vaginaDescript() + " lined up with the horse dildo.  Unable to see the toy past your equine rump, it's a long, desperate minute until finally you feel its flared head against your horsecunt.  You shimmy back, gasping in delight as the meaty horsecock pushes into you.  It seems to inflate and expand inside you as you take it, until you're completely and utterly full of purple rubber -- and then some.  You grunt as the cock continues to grow, stretching your " + player.vaginaDescript() + " until you let out a pained whimper.");
+			outputText("When you've got it ready, the \"<i>Pole</i>\" is actually quite impressive. It's a large metallic statue of what seems to be a particularly well-endowed imp, equipped with a huge, flared horsecock displayed proudly between his muscular legs. You give the tremendous purple cock a few experimental strokes, and to your delight it inflates just like a real boner, becoming rock-hard in your grasp. You lick your lips and, unable to resist, take the cock into your mouth.\n\n");
+			outputText("Though it tastes rubbery, the heft and size of the prick feels... right... inside you. You spend a few blissful minutes sucking off the horse dildo, getting it nice and wet and ready for you. When you're satisfied the imp-statue's wang is sufficiently lubed up, you let it pop out of your mouth and, making sure it's still standing straight out of the statue, you turn around.\n\n");
+			outputText("Your " + player.hipDescript() + " wiggle in anticipation as you work to get your ready " + player.vaginaDescript() + " lined up with the horse dildo. Unable to see the toy past your equine rump, it's a long, desperate minute until finally you feel its flared head against your horsecunt. You shimmy back, gasping in delight as the meaty horsecock pushes into you. It seems to inflate and expand inside you as you take it, until you're completely and utterly full of purple rubber -- and then some. You grunt as the cock continues to grow, stretching your " + player.vaginaDescript() + " until you let out a pained whimper.");
 			player.cuntChange(player.vaginalCapacity() - 3, true, true, false);
 			outputText("\n\n");
 		
 			outputText(images.showImage("masti-centaur-cPole-female"));
-			outputText("Just then, though, the cock seems to stop.  You grunt and groan as it settles inside you, finally letting out a relieved sigh when it's only giving you a modest, pleasant stretching.  Now that you're stuffed full of fake horsecock, though, you're not sure what to do... \"<i>EEP!</i>\" you yelp as the imp-statue's hands suddenly reach out and grasp your " + player.hipDescript() + ".  Your eyes go wide as you feel the thick dildo withdraw from your cunt, the imp's hips pulling back.\n\n");
-			outputText("You have time only to let out a desperate curse before the toy rams itself back into you.  You try to leap forward from the massive, yet mind-numbingly pleasurable, impact, but its strong hands hold you fast.  You yelp and scream as the statue begins to fuck you roughly, making forceful thrusts deep into your " + player.vaginaDescript() + " until the dildo is battering your cervix.  Something inside the cock begins to contract and expand, altering the thickness and heft of the rod inside you, stretching the walls of your cunt even further until your tongue hangs out and your eyes roll back, overwhelmed with pleasure.\n\n");
-			outputText("You sense your own orgasm coming as a hot, sticky fluid rushes into you.  You scream your pleasure as the statue unloads a load of hot faux-spunk into your womb, flooding your cunt with its strange seed.  So utterly and completely filled, you cannot hold back your orgasm.  You cum, your " + player.vaginaDescript() + " clamping down hard on the fake cock buried inside you, milking it for more and more of its thick, creamy spooge.\n\n");
-			outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your " + player.buttDescript() + ".  You stagger to your legs and begin to disassemble the pole.  You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.");
+			outputText("Just then, though, the cock seems to stop. You grunt and groan as it settles inside you, finally letting out a relieved sigh when it's only giving you a modest, pleasant stretching. Now that you're stuffed full of fake horsecock, though, you're not sure what to do... \"<i>EEP!</i>\" you yelp as the imp-statue's hands suddenly reach out and grasp your " + player.hipDescript() + ". Your eyes go wide as you feel the thick dildo withdraw from your cunt, the imp's hips pulling back.\n\n");
+			outputText("You have time only to let out a desperate curse before the toy rams itself back into you. You try to leap forward from the massive, yet mind-numbingly pleasurable, impact, but its strong hands hold you fast. You yelp and scream as the statue begins to fuck you roughly, making forceful thrusts deep into your " + player.vaginaDescript() + " until the dildo is battering your cervix. Something inside the cock begins to contract and expand, altering the thickness and heft of the rod inside you, stretching the walls of your cunt even further until your tongue hangs out and your eyes roll back, overwhelmed with pleasure.\n\n");
+			outputText("You sense your own orgasm coming as a hot, sticky fluid rushes into you. You scream your pleasure as the statue unloads a load of hot faux-spunk into your womb, flooding your cunt with its strange seed. So utterly and completely filled, you cannot hold back your orgasm. You cum, your " + player.vaginaDescript() + " clamping down hard on the fake cock buried inside you, milking it for more and more of its thick, creamy spooge.\n\n");
+			outputText("When your climax finally passes, you've collapsed on all fours, swaying light-headed as the statue continues to leak a steady trickle of spooge onto your " + player.buttDescript() + ". You stagger to your legs and begin to disassemble the pole. You drag it back to your stash, your hips making a lewd squishing noise with every step as globs of fake cum leak out of your horsecunt.");
 			player.orgasm('Vaginal');
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
@@ -2881,23 +2894,23 @@ package classes.Scenes {
 				else outputText("in the wastes just outside of camp to be out of sight and mind");
 				outputText(" while you take care of your endowments.");
 
-				outputText("\n\nReaching up as you lay on your back, you take hold of your [cock biggest], beginning to stroke the length of it with both hands, marveling at the size.  You can feel Exgartuan stirring within, ready and eager for some action at last.  At the same time, you can feel the eggs shifting within your bee half, awakening your lust even further, and an amusing idea springs forth in your mind.  You flex muscles you can still barely control, and though it is difficult, you manage to curl your abdomen up, stinger pointing toward your own cock.  It is at this point that Exgartuan seems to realize that something's going on.");
-				outputText("\n\n\"<i>Uh?  Champion... get that thing away from me.</i>\"");
-				outputText("\n\nYou grin, flexing your muscles, and the slit next to your stinger opens; your ovipositor slides out freely, the flaccid tube hardening as your lust rises even further thanks to the visions of debauchery flowing through your mind.  You take your [cockHead 1] in hand and bend it toward your ovipositor, intending to bring the two together and see if it's really possible for you to lay your eggs down your own massive length.");
-				outputText("\n\nThe demon within you, realizing just what's going on and wanting no part in it, begins to fight back.  Thus begins a struggle for your own body, as he attempts to both tug your [cock 1] away from your bee-half, and stimulate your length with his own magic and your hand so that you orgasm and feel no need to continue anyway.  You");
+				outputText("\n\nReaching up as you lay on your back, you take hold of your [cock biggest], beginning to stroke the length of it with both hands, marveling at the size. You can feel Exgartuan stirring within, ready and eager for some action at last. At the same time, you can feel the eggs shifting within your bee half, awakening your lust even further, and an amusing idea springs forth in your mind. You flex muscles you can still barely control, and though it is difficult, you manage to curl your abdomen up, stinger pointing toward your own cock. It is at this point that Exgartuan seems to realize that something's going on.");
+				outputText("\n\n\"<i>Uh? Champion... get that thing away from me.</i>\"");
+				outputText("\n\nYou grin, flexing your muscles, and the slit next to your stinger opens; your ovipositor slides out freely, the flaccid tube hardening as your lust rises even further thanks to the visions of debauchery flowing through your mind. You take your [cockHead 1] in hand and bend it toward your ovipositor, intending to bring the two together and see if it's really possible for you to lay your eggs down your own massive length.");
+				outputText("\n\nThe demon within you, realizing just what's going on and wanting no part in it, begins to fight back. Thus begins a struggle for your own body, as he attempts to both tug your [cock 1] away from your bee-half, and stimulate your length with his own magic and your hand so that you orgasm and feel no need to continue anyway. You");
 				if (getGame().shouldraFollower.followerShouldra()) outputText(", with Shouldra's assistance,");
-				outputText(" manage to fight him, keeping your cock in place.  With his attention distracted, you're able to lower your ovipositor directly to the tip of your cock, and with a flex and a shove, you manage to force it in.");
-				outputText("\n\nYou feel your slit stretching with a feeling unlike anything you've ever experienced, being both the penetrated and the penetrating at the same time.  A lewd moan rolls from your lungs, and your back arches from the sheer pleasure of the sensation; unbidden, an egg attempts to push down into your cock, spreading the slit further.");
+				outputText(" manage to fight him, keeping your cock in place. With his attention distracted, you're able to lower your ovipositor directly to the tip of your cock, and with a flex and a shove, you manage to force it in.");
+				outputText("\n\nYou feel your slit stretching with a feeling unlike anything you've ever experienced, being both the penetrated and the penetrating at the same time. A lewd moan rolls from your lungs, and your back arches from the sheer pleasure of the sensation; unbidden, an egg attempts to push down into your cock, spreading the slit further.");
 				outputText("\n\n\"<i>This isn't happening!</i>\"");
 				
-				outputText("\n\nAgainst your will, you can feel the demon within your [cock biggest] beginning to push... something up through your urethra, as if to block the passage of the egg.  Creamy white leaks from your tip as the pressure builds within you, and you realize that he's using your own cum against you!  You haven't orgasmed, but the crafty demon seems to have more control over your body than you realized.  Fighting back, you thrust your ovipositor deeper, and with a mighty shove you actually force the next few inches within, egg and all.");
-				outputText("\n\nThe sensation nearly causes you to black out, your girth stretching more than you can ever remember to accept this invader within you, and you curl up even further atop yourself, the anticipation goading you on.  You shove more of your egg-laying tube down your length, and now stimulating honey begins to seep from the hole of your bloated and bulging cock along with the remnants of the cum that Exgartuan was trying to use against you.  Perhaps now resigned to his 'fate', the demon seems to have gone silent - though knowing him he's merely planning something else.");
-				outputText("\n\nMore eggs begin to rise up from your abdomen, one after the other beginning to shove its way down your poor stretched length.  The first is nearly halfway down your " + num2Text(player.cocks[player.biggestCockIndex()].cockLength) + " inches, and you feel another entering your slit.  Then you feel something else deep within, something that drops your jaw.  Your cock begins to lurch, as if beginning to orgasm, and you realize what Exgartuan is doing. He's trying to make you climax to force the eggs out!");
+				outputText("\n\nAgainst your will, you can feel the demon within your [cock biggest] beginning to push... something up through your urethra, as if to block the passage of the egg. Creamy white leaks from your tip as the pressure builds within you, and you realize that he's using your own cum against you! You haven't orgasmed, but the crafty demon seems to have more control over your body than you realized. Fighting back, you thrust your ovipositor deeper, and with a mighty shove you actually force the next few inches within, egg and all.");
+				outputText("\n\nThe sensation nearly causes you to black out, your girth stretching more than you can ever remember to accept this invader within you, and you curl up even further atop yourself, the anticipation goading you on. You shove more of your egg-laying tube down your length, and now stimulating honey begins to seep from the hole of your bloated and bulging cock along with the remnants of the cum that Exgartuan was trying to use against you. Perhaps now resigned to his 'fate', the demon seems to have gone silent - though knowing him he's merely planning something else.");
+				outputText("\n\nMore eggs begin to rise up from your abdomen, one after the other beginning to shove its way down your poor stretched length. The first is nearly halfway down your " + num2Text(player.cocks[player.biggestCockIndex()].cockLength) + " inches, and you feel another entering your slit. Then you feel something else deep within, something that drops your jaw. Your cock begins to lurch, as if beginning to orgasm, and you realize what Exgartuan is doing. He's trying to make you climax to force the eggs out!");
 				outputText("\n\nYou struggle, ");
 				if (getGame().shouldraFollower.followerShouldra()) outputText("ghost-assisted ");
-				outputText("will versus demon-induced orgasm, eggs versus cum, and you actually appear to be losing.  The base of your cock bulges out as you moan, rapidly filling and bloating with gathering seed, and you can feel orgasmic pressure rising as the demon turns the tide, so to speak.  Your eyes roll back up into your head, lids beginning to close, when you see your salvation.  Your stinger!  It hangs just above the tip of your cock, and though you dread what you're about to do, you hope that it will be able to give you the edge over your demon companion.  You steel yourself for what must be done.");
-				outputText("\n\nFlexing and clenching up as you anticipate what's to come, you drive your stinger toward your own [cockHead].  You nearly cry out from the pain as your venomous needle stabs into your length, piercing it, but your bee parts autonomously drive their lust-and-pleasure-inducing venom directly into your cock.  The combined pleasure and pain draw a fog over your eyes, but within moments the pleasure begins to mask everything else, and you find yourself a panting heap, tongue hanging from your [face] as you pour all the venom you can manage directly into your poor abused cock.");
-				outputText("\n\nThis sends your ovipositor into overdrive, and one after the other eggs are forced down your bulging length, pushing your cum further back down within you, and clinching your victory against the demon.  Barely coherent, you can feel egg after egg sliding down your length, and you watch as egg-shaped bulges slowly sink down your urethra, heading toward your ");
+				outputText("will versus demon-induced orgasm, eggs versus cum, and you actually appear to be losing. The base of your cock bulges out as you moan, rapidly filling and bloating with gathering seed, and you can feel orgasmic pressure rising as the demon turns the tide, so to speak. Your eyes roll back up into your head, lids beginning to close, when you see your salvation. Your stinger! It hangs just above the tip of your cock, and though you dread what you're about to do, you hope that it will be able to give you the edge over your demon companion. You steel yourself for what must be done.");
+				outputText("\n\nFlexing and clenching up as you anticipate what's to come, you drive your stinger toward your own [cockHead]. You nearly cry out from the pain as your venomous needle stabs into your length, piercing it, but your bee parts autonomously drive their lust-and-pleasure-inducing venom directly into your cock. The combined pleasure and pain draw a fog over your eyes, but within moments the pleasure begins to mask everything else, and you find yourself a panting heap, tongue hanging from your [face] as you pour all the venom you can manage directly into your poor abused cock.");
+				outputText("\n\nThis sends your ovipositor into overdrive, and one after the other eggs are forced down your bulging length, pushing your cum further back down within you, and clinching your victory against the demon. Barely coherent, you can feel egg after egg sliding down your length, and you watch as egg-shaped bulges slowly sink down your urethra, heading toward your ");
 				if (player.balls > 0)
 					outputText("[balls]");
 				else outputText("[hips]");
@@ -2905,19 +2918,19 @@ package classes.Scenes {
 				
 				//[If balls:] 
 				if (player.balls > 0) {
-					outputText("\n\nThe eggs push toward your testicles; you begin to anticipate once again just what's going to happen when they reach those overfull orbs resting against the ground.  You feel one egg pushing against some kind of entrance and squint your eyes as pressure builds within your cock; the eggs are beginning to back up against one another.  You strain and push, and finally feel something give way.  The sensations are an exquisite mix of pleasure and sickness as one egg after another forces its way into your heavy sack");
+					outputText("\n\nThe eggs push toward your testicles; you begin to anticipate once again just what's going to happen when they reach those overfull orbs resting against the ground. You feel one egg pushing against some kind of entrance and squint your eyes as pressure builds within your cock; the eggs are beginning to back up against one another. You strain and push, and finally feel something give way. The sensations are an exquisite mix of pleasure and sickness as one egg after another forces its way into your heavy sack");
 					if (player.fertilizedEggs() > 0) outputText(", and you know beyond a doubt that they'll be fertilized before much longer and you'll be able to lay your own eggs");
 					outputText(".");
 				}
 				//[If no balls:] 
 				else {
-					outputText("\n\nAs the eggs push within you, you can feel pressure building somewhere within your abdomen as they meet some sort of blockage.  It feels incredibly strange, yet deliciously delightful at the same time, and you flex and strain to force them past whatever's keeping them in place.  You feel the blockage give way, and glorious, warm, sticky bliss fills you as egg after egg rubs past your prostate and drops down into whatever space inside you that they can find.");
+					outputText("\n\nAs the eggs push within you, you can feel pressure building somewhere within your abdomen as they meet some sort of blockage. It feels incredibly strange, yet deliciously delightful at the same time, and you flex and strain to force them past whatever's keeping them in place. You feel the blockage give way, and glorious, warm, sticky bliss fills you as egg after egg rubs past your prostate and drops down into whatever space inside you that they can find.");
 				}
 				if (player.balls > 0)
 					outputText("\n\nYour sack begins to bulge with its knobbly load");
 				else outputText("\n\nYour belly begins to bulge with an obvious, though strange, pregnancy");
-				outputText(", egg after egg forcing its way into you until you have nothing left to give from your ovipositor, and it begins to withdraw from your length.  You finally pull it free with a loud 'schlick' sound, and go limp against the ground as you recover from your ordeals.");
-				outputText("\n\nAs you begin to drop off into a brief nap, you can hear Exgartuan's voice in your head.  \"<i>That wasn't as bad as I thought...</i>\"");
+				outputText(", egg after egg forcing its way into you until you have nothing left to give from your ovipositor, and it begins to withdraw from your length. You finally pull it free with a loud 'schlick' sound, and go limp against the ground as you recover from your ordeals.");
+				outputText("\n\nAs you begin to drop off into a brief nap, you can hear Exgartuan's voice in your head. \"<i>That wasn't as bad as I thought...</i>\"");
 				outputText("\n\nYou manage to laugh once or twice before your fatigue overtakes you and you drift off into sleep.");
 			}
 			else {
@@ -2927,31 +2940,31 @@ package classes.Scenes {
 				else if (player.cor < 66)
 					outputText("off behind a rock");
 				else outputText("into the trees outside of camp");
-				outputText(" and  strip yourself out of your [armor].  You can feel  your abdomen swaying heavily behind you, reminding you that it's been some time since you laid any eggs.  This presents you with a problem. You'll continue to feel full of eggs until you get rid of them, but you want to masturbate right now; there are no able receptors anywhere nearby.");
-				outputText("\n\nYou get yourself comfortable and begin to stroke your cock, eyes closing as you lose yourself to the pleasure.  Your length hardens further, feeling full in your hand, and an errant thought sparks through your mind.  What if you were the receptacle?  Your eyes open, and you look down at yourself.  Unbidden, your ovipositor has already extended from your bee-half, and is dripping golden-colored, sweet-smelling honey on the ground.  You begin examining yourself, pondering just where it might be possible to lay eggs within your own body to relieve your burden.");
+				outputText(" and strip yourself out of your [armor]. You can feel your abdomen swaying heavily behind you, reminding you that it's been some time since you laid any eggs. This presents you with a problem. You'll continue to feel full of eggs until you get rid of them, but you want to masturbate right now; there are no able receptors anywhere nearby.");
+				outputText("\n\nYou get yourself comfortable and begin to stroke your cock, eyes closing as you lose yourself to the pleasure. Your length hardens further, feeling full in your hand, and an errant thought sparks through your mind. What if you were the receptacle? Your eyes open, and you look down at yourself. Unbidden, your ovipositor has already extended from your bee-half, and is dripping golden-colored, sweet-smelling honey on the ground. You begin examining yourself, pondering just where it might be possible to lay eggs within your own body to relieve your burden.");
 				
 				//[If herm:] 
 				if (player.gender == 3) {
 					outputText("\n\nYou examine your cock");
 					if (player.cocks.length > 1) outputText("s");
-					outputText(" as well as your pussy, and decide to try the latter first.  You flex your still-unfamiliar muscles and curl your abdomen back across yourself, straining to pull it into place, but it just isn't flexible enough to curl that far. Even using your arms, ");
+					outputText(" as well as your pussy, and decide to try the latter first. You flex your still-unfamiliar muscles and curl your abdomen back across yourself, straining to pull it into place, but it just isn't flexible enough to curl that far. Even using your arms, ");
 					if (player.str > 50) outputText("even with your considerable strength, ");
-					outputText("you cannot manage to bend it far enough to get there.  You actually start to feel a pain where your abdomen connects to the rest of your body, and you disregard this as a bad idea.");
+					outputText("you cannot manage to bend it far enough to get there. You actually start to feel a pain where your abdomen connects to the rest of your body, and you disregard this as a bad idea.");
 				}
 				//[If male:] 
 				else outputText("\n\nYou look down at yourself, and suppose that you could try the one hole that you do have. You begin to flex your abdomen to curl it in upon your anus, but you quickly realize that without removing your abdomen from your body, a prospect you don't really want to entertain, that this will be impossible.");
-				outputText("\n\nLeft with only the possibility of your cock, you look down at it curiously.  If you weren't as big as you are now, you'd dismiss this entirely out of hand.  However... you take your [cock biggest] into hand, and give it a few strokes to get it back to throbbing hardness.  Your abdomen is curled up over yourself, and one hand rests thoughtfully on your chin as you ponder the possibilities.  You suppose it couldn't hurt, and you are committed by now to at least trying to lay eggs within yourself.");
-				outputText("\n\nYou curl your ovipositor inward just a bit farther, and you find that - yes, you actually can reach.  Overtaken with curiosity as well as lust, you extend the tubular organ toward yourself, and using your hands, help your cock and the honey-dripping thing to meet.  You're stymied with a momentary impasse as you realize that the ovipositor alone doesn't quite fit, much less the eggs you feel cramping your abdomen.  But desperation makes you think - looking at the hole, it's almost large enough.");
-				outputText("\n\nDeciding to go for broke, you try it.  A push, a shove, a little straining, and... you groan out loud as your ovipositor neatly stretches your slit wide and slides on in, your own pre-cum and leaking honey doing wonders to lubricate the opening.  You rest for a moment to bask in the sensations of penetrating yourself with your own body, an act that you wouldn't have even been able to consider, much less perpetrate, before coming to this land.");
-				outputText("\n\nYou rest for a moment to simply bask in the pleasure, but the insistent throbbing as well as the weight of eggs you're currently holding aloft in your abdomen quickly bring you back down to earth... in a manner of speaking.  You waste little time in beginning to thrust, made awkward by your positioning, but in no time flat you manage to create a rhythm that you're able to maintain without hurting several parts of your body.");
-				outputText("\n\nPre flows freely up your cock; when it manages to burble up around your ovipositor, you can feel your lust growing as your warm fluid coats the black organ and the arousal-inducing honey from your bee-half begins to seep into the vacuum left and take hold.  You speed up your thrusts as much as you can, beginning to pant and moan in equal measure from the debaucherous machinations of your ");
+				outputText("\n\nLeft with only the possibility of your cock, you look down at it curiously. If you weren't as big as you are now, you'd dismiss this entirely out of hand. However... you take your [cock biggest] into hand, and give it a few strokes to get it back to throbbing hardness. Your abdomen is curled up over yourself, and one hand rests thoughtfully on your chin as you ponder the possibilities. You suppose it couldn't hurt, and you are committed by now to at least trying to lay eggs within yourself.");
+				outputText("\n\nYou curl your ovipositor inward just a bit farther, and you find that - yes, you actually can reach. Overtaken with curiosity as well as lust, you extend the tubular organ toward yourself, and using your hands, help your cock and the honey-dripping thing to meet. You're stymied with a momentary impasse as you realize that the ovipositor alone doesn't quite fit, much less the eggs you feel cramping your abdomen. But desperation makes you think - looking at the hole, it's almost large enough.");
+				outputText("\n\nDeciding to go for broke, you try it. A push, a shove, a little straining, and... you groan out loud as your ovipositor neatly stretches your slit wide and slides on in, your own pre-cum and leaking honey doing wonders to lubricate the opening. You rest for a moment to bask in the sensations of penetrating yourself with your own body, an act that you wouldn't have even been able to consider, much less perpetrate, before coming to this land.");
+				outputText("\n\nYou rest for a moment to simply bask in the pleasure, but the insistent throbbing as well as the weight of eggs you're currently holding aloft in your abdomen quickly bring you back down to earth... in a manner of speaking. You waste little time in beginning to thrust, made awkward by your positioning, but in no time flat you manage to create a rhythm that you're able to maintain without hurting several parts of your body.");
+				outputText("\n\nPre flows freely up your cock; when it manages to burble up around your ovipositor, you can feel your lust growing as your warm fluid coats the black organ and the arousal-inducing honey from your bee-half begins to seep into the vacuum left and take hold. You speed up your thrusts as much as you can, beginning to pant and moan in equal measure from the debaucherous machinations of your ");
 				if (player.cor >= 75)
 					outputText("corrupted ");
 				else outputText("transformed ");
-				outputText("body.  You thrust deeper, feeling an egg beginning to slide through your ovipositor, and by now you're aching to feel it push itself down your cock.");
-				outputText("\n\nAs you thrust, you begin to feel something prick against your [cockHead], but you quickly dismiss it in favor of continuing to drive yourself further toward what you know is going to be one of the strangest, and best, orgasms you've ever felt.  This is a dubious move as within a moment, you feel something stab into your cockhead and your world nearly goes white with pain.");
-				outputText("\n\nYour stinger!  You've forgotten all about it in your lust-addled state of mind, and now you've managed to sting yourself, directly in your cock.  Venom is already flowing into your prick, and you do nothing to stop it once you realize just how good things are going to feel in a moment. Sure enough, within a few seconds a haze of lust seems to settle down around you as your stinger withdraws, and you can feel several more eggs pushing their way toward your cock, the first nearly at your stretched cockhead.");
-				outputText("\n\nAll it takes is a little more pushing, and you relax to enjoy what's coming.  An egg butts up against your tight slit, and for a moment you worry that it isn't going to fit.  Then, you feel yourself stretching further, drawing a long moan from between your lips as the orb forces through the opening and slides in.  Several more follow, nearly backed up within you at this point, and you lose yourself to the contractions as egg after egg is forced down your bulging cock, to the point that you can actually see them travelling down your distended urethra, sojourning toward your ");
+				outputText("body. You thrust deeper, feeling an egg beginning to slide through your ovipositor, and by now you're aching to feel it push itself down your cock.");
+				outputText("\n\nAs you thrust, you begin to feel something prick against your [cockHead], but you quickly dismiss it in favor of continuing to drive yourself further toward what you know is going to be one of the strangest, and best, orgasms you've ever felt. This is a dubious move as within a moment, you feel something stab into your cockhead and your world nearly goes white with pain.");
+				outputText("\n\nYour stinger! You've forgotten all about it in your lust-addled state of mind, and now you've managed to sting yourself, directly in your cock. Venom is already flowing into your prick, and you do nothing to stop it once you realize just how good things are going to feel in a moment. Sure enough, within a few seconds a haze of lust seems to settle down around you as your stinger withdraws, and you can feel several more eggs pushing their way toward your cock, the first nearly at your stretched cockhead.");
+				outputText("\n\nAll it takes is a little more pushing, and you relax to enjoy what's coming. An egg butts up against your tight slit, and for a moment you worry that it isn't going to fit. Then, you feel yourself stretching further, drawing a long moan from between your lips as the orb forces through the opening and slides in. Several more follow, nearly backed up within you at this point, and you lose yourself to the contractions as egg after egg is forced down your bulging cock, to the point that you can actually see them travelling down your distended urethra, sojourning toward your ");
 				if (player.balls > 0)
 					outputText("[balls]");
 				else outputText("[hips]");
@@ -2959,18 +2972,18 @@ package classes.Scenes {
 				
 				//[If balls and unfertilized eggs:] 
 				if (player.balls > 0) {
-					outputText("\n\nYou begin to anticipate the ending of their journey, wanting to see your sack fill with your own eggs, knowing that they'll be immediately fertilized by your own cum.  You idly wonder if this would be considered masturbation, incest, or cloning, but those thoughts are lost as the first egg reaches the base of your cock and the end of its journey.  It disappears within you, and for a moment you wonder if it's gone the wrong way.  However, immediately after you feel it pressing against some sort of resistance within you that tightens your stomach, and you're forced to strain muscles to attempt to help it along.");
-					outputText("\n\nSucceeding, you manage to force the egg deeper into your body, where after stroking your prostate, it deposits itself neatly into your sack.  ");
-					if (!player.isTaur()) outputText("More begin to follow, and you massage your quickly-bloating balls as they fill with egg after egg after egg.  ");
+					outputText("\n\nYou begin to anticipate the ending of their journey, wanting to see your sack fill with your own eggs, knowing that they'll be immediately fertilized by your own cum. You idly wonder if this would be considered masturbation, incest, or cloning, but those thoughts are lost as the first egg reaches the base of your cock and the end of its journey. It disappears within you, and for a moment you wonder if it's gone the wrong way. However, immediately after you feel it pressing against some sort of resistance within you that tightens your stomach, and you're forced to strain muscles to attempt to help it along.");
+					outputText("\n\nSucceeding, you manage to force the egg deeper into your body, where after stroking your prostate, it deposits itself neatly into your sack. ");
+					if (!player.isTaur()) outputText("More begin to follow, and you massage your quickly-bloating balls as they fill with egg after egg after egg. ");
 					outputText("Your gut protests slightly, but with the tranquilizing effects of the honey and venom, the discomfort is nearly nonexistent.");
 					//[endballs]
 				}
 				//[If no balls and unfertilized:]
 				else {
-					outputText("\n\nYou begin to anticipate the ending of their journey, wondering just where your eggs are going to end up; you can only imagine it'll be the same place your cum comes from, which means they'll be instantly fertilized by you.  Pondering briefly if this is some odd form of cloning, those thoughts are driven from your mind as the first egg pushes its way through the base of your cock and deeper into your body.  A groan escapes as you feel it push up against some kind of blockage within you, and you strain to force it deeper inside.");
+					outputText("\n\nYou begin to anticipate the ending of their journey, wondering just where your eggs are going to end up; you can only imagine it'll be the same place your cum comes from, which means they'll be instantly fertilized by you. Pondering briefly if this is some odd form of cloning, those thoughts are driven from your mind as the first egg pushes its way through the base of your cock and deeper into your body. A groan escapes as you feel it push up against some kind of blockage within you, and you strain to force it deeper inside.");
 					outputText("\n\nYour efforts pay off as the egg slips past the resistance and settles somewhere within you, triggering a small involuntary orgasm as it pushes by your prostate, and several more orbs quickly follow suit, fording the flow of semen that tries to push them the other way.");
 				}
-				outputText("\n\nYou bask in the sensations of filling yourself with eggs and narcotic honey for several more minutes as the pleasurable contractions continue, but as always seems to happen, the good times end as you run out of spheres to push within.  Withdrawing your ovipositor, you lie limp upon the ground, relaxing as you bask in the sensations of a job well done.  A quick nap claims you");
+				outputText("\n\nYou bask in the sensations of filling yourself with eggs and narcotic honey for several more minutes as the pleasurable contractions continue, but as always seems to happen, the good times end as you run out of spheres to push within. Withdrawing your ovipositor, you lie limp upon the ground, relaxing as you bask in the sensations of a job well done. A quick nap claims you");
 				if (!player.isTaur()) {
 					outputText(" as you idly fondle your ");
 					if (player.balls == 0)
@@ -2990,8 +3003,8 @@ package classes.Scenes {
 
 		//Birth Bee Eggs Out Your Wang: Finished (Slywyn)(edited)
 		public function birthBeeEggsOutYourWang():void {
-			outputText("\nYou feel more lusty and aroused than usual.  As you notice the feeling, it gets worse and worse; though you try to continue on with whatever it is that you're doing, by now you're far too distracted to continue.  All you can do is plop right down on the ground and prepare to masturbate, as it seems to be the only thing your body's going to allow you to do at this point.");
-			outputText("\n\nQuickly shedding your [armor] and plopping down on your [ass], you make sure not to smash your abdomen in the process.  Your ");
+			outputText("\nYou feel more lusty and aroused than usual. As you notice the feeling, it gets worse and worse; though you try to continue on with whatever it is that you're doing, by now you're far too distracted to continue. All you can do is plop right down on the ground and prepare to masturbate, as it seems to be the only thing your body's going to allow you to do at this point.");
+			outputText("\n\nQuickly shedding your [armor] and plopping down on your [ass], you make sure not to smash your abdomen in the process. Your ");
 			if (player.balls > 0)
 				outputText("balls feel");
 			else outputText("stomach feels");
@@ -3003,33 +3016,33 @@ package classes.Scenes {
 				if (player.balls > 0)
 					outputText("them");
 				else outputText("it");
-				outputText(" with the hand not already actively stroking your [cock biggest].  Y");
+				outputText(" with the hand not already actively stroking your [cock biggest]. Y");
 			}
 			outputText("ou feel something within you shifting; it's time to lay your eggs!");			
 			outputText("\n\nYou lie back on the ground and groan as your [cock biggest] quickly grows to full hardness in your hand, feeling your ");
 			if (player.balls == 0)
 				outputText("stomach");
 			else outputText("balls");
-			outputText(" shift as your eggs begin to attempt their journey outward.  Your strokes speed up; your lust only rises while the eggs move, and before much longer you're arching your back and thrusting your hips, practically fucking your hand, losing yourself to the pleasure of the act.\n\n");
+			outputText(" shift as your eggs begin to attempt their journey outward. Your strokes speed up; your lust only rises while the eggs move, and before much longer you're arching your back and thrusting your hips, practically fucking your hand, losing yourself to the pleasure of the act.\n\n");
 			
 			outputText(images.showImage("birth-cock-eggs"));
-			outputText("You begin to feel something pushing at the base of your cock, and all pre-flow from within you ceases as the first egg plugs up your length.  Redoubling your stroking to attempt to force the damn thing out fails... it seems stuck fast!  You begin to regret your decision to start this without some kind of prior stretching, but it's not like you had much of a choice in the matter in the first place.");
-			outputText("\n\nNow panting with the effort of keeping up the furious pace you've been setting, you're struggling just to continue.  You rub as fast as you can, hoping that the pressure you can feel building within yourself will be enough to force the eggs out before you get too tired to continue, but to make matters worse you can feel yet more eggs descending within you. As the blockage slowly exacerbates, eggs pile up at the base of your cock; you can see the first one, the stuck one, slowly forced up your length by the pressure.");			
-			outputText("\n\nIt starts as a single bulge at the base of your cock, but it quickly begins to bloat further as all the pre, cum, and other eggs trapped inside you only add to the pileup.  This quickly makes the base of your cock look like the world's most perverted traffic jam.  You keep pulling, hoping that the pressure will continue to aid you, and you can feel an actual orgasm beginning to pile up on you as well, driving you to distraction and making your strokes more frantic and erratic.");			
-			outputText("\n\nAll these things seem to be ganging up on you, the building climax, the cum, the eggs, and the pre all stuck within your quickly bloating member.  Eventually it just all proves to be far too much,  and you cum, the pleasure driving you crazy.");
+			outputText("You begin to feel something pushing at the base of your cock, and all pre-flow from within you ceases as the first egg plugs up your length. Redoubling your stroking to attempt to force the damn thing out fails... it seems stuck fast! You begin to regret your decision to start this without some kind of prior stretching, but it's not like you had much of a choice in the matter in the first place.");
+			outputText("\n\nNow panting with the effort of keeping up the furious pace you've been setting, you're struggling just to continue. You rub as fast as you can, hoping that the pressure you can feel building within yourself will be enough to force the eggs out before you get too tired to continue, but to make matters worse you can feel yet more eggs descending within you. As the blockage slowly exacerbates, eggs pile up at the base of your cock; you can see the first one, the stuck one, slowly forced up your length by the pressure.");			
+			outputText("\n\nIt starts as a single bulge at the base of your cock, but it quickly begins to bloat further as all the pre, cum, and other eggs trapped inside you only add to the pileup. This quickly makes the base of your cock look like the world's most perverted traffic jam. You keep pulling, hoping that the pressure will continue to aid you, and you can feel an actual orgasm beginning to pile up on you as well, driving you to distraction and making your strokes more frantic and erratic.");			
+			outputText("\n\nAll these things seem to be ganging up on you, the building climax, the cum, the eggs, and the pre all stuck within your quickly bloating member. Eventually it just all proves to be far too much, and you cum, the pleasure driving you crazy.");
 			
 			outputText("\n\nThe base of your cock gets even worse for a moment, bloating out in a way that you're sure shouldn't be possible, and you can actually see multiple eggs stuck within your urethra, each one trying to barge past the others as the pressure quickly reaches the breaking point.");
-			outputText("\n\nYou spasm, hard, and curl in on yourself as everything seems to come crashing down around you. Your cock flops over, leaning against your head, the heft of it far too much to keep aloft with the added weight of everything stuck within.  The pressure mounts until it's painful, and then suddenly it's released.");
-			outputText("\n\nAn explosion of pleasure threatens to knock you out on the spot, as your body quickly pushes everything up and out of your sensitive slit with a force that you simply couldn't have managed on your own.  Eggs, cum, and honey all come spurting out of your length like bats out of hell, splattering and bumping across the ground.  You're thankful that insectile eggs seem to be rather pliant and resilient, as you're almost certain that any other kind might have broken with the force of your ejaculation.");			
-			outputText("\n\nYou lose count of how many eggs pass through your stretched and abused urethra, as well as how many times you cum from the amazing feeling of them leaving your body.  As the last few eggs slowly travel up your length, you pass out, your orgasmic contractions continuing long after they normally would have stopped.");
-			outputText("\n\nA few minutes later you awaken, covered in cum, honey, and whatever might have been left of your pre, and feeling much lighter than you did before.  You look 'up' at the ground in front of you; a loose pile of bee eggs rests on the ground, covered in cum and even more honey.");
+			outputText("\n\nYou spasm, hard, and curl in on yourself as everything seems to come crashing down around you. Your cock flops over, leaning against your head, the heft of it far too much to keep aloft with the added weight of everything stuck within. The pressure mounts until it's painful, and then suddenly it's released.");
+			outputText("\n\nAn explosion of pleasure threatens to knock you out on the spot, as your body quickly pushes everything up and out of your sensitive slit with a force that you simply couldn't have managed on your own. Eggs, cum, and honey all come spurting out of your length like bats out of hell, splattering and bumping across the ground. You're thankful that insectile eggs seem to be rather pliant and resilient, as you're almost certain that any other kind might have broken with the force of your ejaculation.");			
+			outputText("\n\nYou lose count of how many eggs pass through your stretched and abused urethra, as well as how many times you cum from the amazing feeling of them leaving your body. As the last few eggs slowly travel up your length, you pass out, your orgasmic contractions continuing long after they normally would have stopped.");
+			outputText("\n\nA few minutes later you awaken, covered in cum, honey, and whatever might have been left of your pre, and feeling much lighter than you did before. You look 'up' at the ground in front of you; a loose pile of bee eggs rests on the ground, covered in cum and even more honey.");
 			
-			outputText("\n\nYou smile a bit at your self-created children, and you can already hear a quiet buzzing starting from the eggs.  It seems you managed to fertilize them after all, and they must have attached within you somewhere so that they wouldn't come out until they'd completely gestated.");
-			outputText("\n\nTurning over, you watch the little things hatch, and you don't have to wait long. The buzzing grows louder, and the first of the eggs burst open, revealing a very small, very wet, and very fuzzy, little bee.  You smile as your child takes its first tentative flight, and are ");
+			outputText("\n\nYou smile a bit at your self-created children, and you can already hear a quiet buzzing starting from the eggs. It seems you managed to fertilize them after all, and they must have attached within you somewhere so that they wouldn't come out until they'd completely gestated.");
+			outputText("\n\nTurning over, you watch the little things hatch, and you don't have to wait long. The buzzing grows louder, and the first of the eggs burst open, revealing a very small, very wet, and very fuzzy, little bee. You smile as your child takes its first tentative flight, and are ");
 			if (player.cor < 50)
 				outputText("amused");
 			else outputText("somewhat annoyed");
-			outputText(" as it manages to land directly on your nose.  When you helpfully pluck it off and place it on the ground, it looks up at you with a wave and a smile.");
+			outputText(" as it manages to land directly on your nose. When you helpfully pluck it off and place it on the ground, it looks up at you with a wave and a smile.");
 			outputText("\n\nBy this time the others are beginning to hatch, and one by one they find their wings and take to the air, often waving or buzzing around you for a moment before they head off toward the forest to do bee things.");
 			outputText("\n\nFeeling lighter and a bit happier than you have in a while, you pick yourself up and redress, quickly heading back to camp.\n");
 			flags[kFLAGS.DICK_EGG_INCUBATION] = 0;
@@ -3045,87 +3058,87 @@ package classes.Scenes {
 			if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 				//Exgartuan; breasts should be HH or larger, fuckable nipples, only if Exgartuan is awake
 				outputText("Smiling mischievously to yourself, you look down to your possessed [chest] and tell Exgartuan that you have something you very much would like to do for her.");
-				outputText("\n\n\"<i>Oi bitch, I know what you're on about.  You think you can just lay eggs inside me?  Well... I'm proud of you, that's the sort of attention these magnificent cans deserve.</i>\"");
-				outputText("\n\nYour mischievous grin turns confused as you get the distinct impression that if Exgartuan had knuckles to crack and joints to pop, she would be.  Certainly, the uncanny jiggling of your [chest] implies some sort of activity.");
-				outputText("\n\n\"<i>Alright.  You sure you want to do this?  Nah, I'm just fucking with you, you have to now.</i>\"");
-				outputText("\n\nExgartuan's enthusiasm is boundless, and her arousal magnetic.  You find your hands groping your bosom without your control, and Exgartuan clearly revels in it.  In short order, Exgartuan's primed you enough that the ovipositor has exited its sheath, and now hangs beneath you.  Recognizing that the following procedure would be problematic at best, Exgartuan hurls her entire weight to the side, and you topple over instantly.  You begin to wonder how Exgartuan took control of your taking advantage of her, but suddenly find yourself in control of your arms.");
-				outputText("\n\nYou know what to do, so you prop yourself up on an elbow without ceasing to caress and please your possessed knockers; teasing the [nipple] causes Exgartuan to tremble slightly.  Your other hand roams down between your [legs] as you snap your abdomen as close into you as you can.  You take hold of the ovipositor and begin to pull it up to meet your [chest][if (cocks > 0) , past your ][if (cocks > 2) forest of ][if (cocks > 0) cock][if (cocks > 1) s].");
+				outputText("\n\n\"<i>Oi bitch, I know what you're on about. You think you can just lay eggs inside me? Well... I'm proud of you, that's the sort of attention these magnificent cans deserve.</i>\"");
+				outputText("\n\nYour mischievous grin turns confused as you get the distinct impression that if Exgartuan had knuckles to crack and joints to pop, she would be. Certainly, the uncanny jiggling of your [chest] implies some sort of activity.");
+				outputText("\n\n\"<i>Alright. You sure you want to do this? Nah, I'm just fucking with you, you have to now.</i>\"");
+				outputText("\n\nExgartuan's enthusiasm is boundless, and her arousal magnetic. You find your hands groping your bosom without your control, and Exgartuan clearly revels in it. In short order, Exgartuan's primed you enough that the ovipositor has exited its sheath, and now hangs beneath you. Recognizing that the following procedure would be problematic at best, Exgartuan hurls her entire weight to the side, and you topple over instantly. You begin to wonder how Exgartuan took control of your taking advantage of her, but suddenly find yourself in control of your arms.");
+				outputText("\n\nYou know what to do, so you prop yourself up on an elbow without ceasing to caress and please your possessed knockers; teasing the [nipple] causes Exgartuan to tremble slightly. Your other hand roams down between your [legs] as you snap your abdomen as close into you as you can. You take hold of the ovipositor and begin to pull it up to meet your [chest][if (cocks > 0) , past your ][if (cocks > 2) forest of ][if (cocks > 0) cock][if (cocks > 1) s].");
 				outputText("\n\nSuddenly, Exgartuan pipes up out of the [nipple] that isn't being squeezed, \"<i>Hold it champ, that one tube isn't going to be enough.</i>\"");
-				outputText("\n\nYour hand draws your ovipositor between your [chest] unbidden. Exgartuan begins a weird chant that, while not actually audible, you can feel in your [chest], causing them to quake[if (isLactating = true)  and milk to spurt forth].  Then the pain starts.");
-				outputText("\n\nYou next notice things when you feel your hands free again, and you pull the ovipositor out from its hiding place.  You mentally correct yourself, ovipositors.  Well, more precisely, near the base of your egg tube it's split into two columns from one trunk.  Exgartuan's purpose is made exceedingly clear, and you place one tip to each [nipple].");
-				outputText("\n\n\"<i>Alright bitch, I've cleared out space for these bad boys, and now you're gonna make me a momma.  Treat me right, I may even let you keep the double tube one of these days.</i>\"");
-				outputText("\n\nMight Exgartuan actually relish the idea of being pregnant?  You're not entirely sure how the demon works, beyond that she resides immovably in your [chest].  Exgartuan begins holding your... her - whatever - [nipples] open, and you plunge your ovipositor's tips in, pulling your knees up tight toward your chest to push your ovipositor into your [fullChest]... her.");
-				outputText("\n\nNot only does it feel amazing to push your ovipositor into yourself for so many reasons, but Exgartuan is practically blissed out.  Quickly, on the heels of the lube[if (isLactating = true)  that is forcing milk out around the edges of your tubes], your eggs begin down your ovipositor.  Exgartuan's concentration snaps back, you guess, on the basis that your [chest] becomes slightly more pert and gravity-defying.\n\n");
-				outputText("The first egg goes down one tube, and the one that follows goes down the other.  You initially marvel at this, but then you realize Exgartuan is forcing this symmetry herself.  Later, you'll speculate to yourself that if Exgartuan put the sort of effort into other aspects of life that she's putting into this, the both of you would be a lot further ahead than you are, but that time is not now.  Now is the moment when the first egg reaches your [nipple].");
-				outputText("\n\nYou exert for a moment, and it begins to make headway into the [nipple], the feeling of the stretch causing you to moan in pleasure as your [chest] quakes in its own particular pleasure.  You delay its entry for a moment to match it with the egg that has begun pressing insistently into the other side of your [chest], before letting them both in simultaneously.");
-				outputText("\n\nYou are rewarded with a keening, intense orgasm shared between yourself and Exgartuan, that falls off into waves as the eggs continue to inexorably push into your [chest].  You can see the shapes of the eggs begin to deform the pillowy expanse of your chest, and if it weren't that Exgartuan knows what's going on in your breasts better than you, you'd worry.");
-				outputText("\n\nAs it is, Exgartuan is stifling all movement and protest you might be able to muster to be beholden to her moment.  You realize that you feel little to nothing outside of the euphoric release of depositing your eggs and the dual-persona'd orgasm going on in your [chest].");
+				outputText("\n\nYour hand draws your ovipositor between your [chest] unbidden. Exgartuan begins a weird chant that, while not actually audible, you can feel in your [chest], causing them to quake[if (isLactating = true) and milk to spurt forth]. Then the pain starts.");
+				outputText("\n\nYou next notice things when you feel your hands free again, and you pull the ovipositor out from its hiding place. You mentally correct yourself, ovipositors. Well, more precisely, near the base of your egg tube it's split into two columns from one trunk. Exgartuan's purpose is made exceedingly clear, and you place one tip to each [nipple].");
+				outputText("\n\n\"<i>Alright bitch, I've cleared out space for these bad boys, and now you're gonna make me a momma. Treat me right, I may even let you keep the double tube one of these days.</i>\"");
+				outputText("\n\nMight Exgartuan actually relish the idea of being pregnant? You're not entirely sure how the demon works, beyond that she resides immovably in your [chest]. Exgartuan begins holding your... her - whatever - [nipples] open, and you plunge your ovipositor's tips in, pulling your knees up tight toward your chest to push your ovipositor into your [fullChest]... her.");
+				outputText("\n\nNot only does it feel amazing to push your ovipositor into yourself for so many reasons, but Exgartuan is practically blissed out. Quickly, on the heels of the lube[if (isLactating = true) that is forcing milk out around the edges of your tubes], your eggs begin down your ovipositor. Exgartuan's concentration snaps back, you guess, on the basis that your [chest] becomes slightly more pert and gravity-defying.\n\n");
+				outputText("The first egg goes down one tube, and the one that follows goes down the other. You initially marvel at this, but then you realize Exgartuan is forcing this symmetry herself. Later, you'll speculate to yourself that if Exgartuan put the sort of effort into other aspects of life that she's putting into this, the both of you would be a lot further ahead than you are, but that time is not now. Now is the moment when the first egg reaches your [nipple].");
+				outputText("\n\nYou exert for a moment, and it begins to make headway into the [nipple], the feeling of the stretch causing you to moan in pleasure as your [chest] quakes in its own particular pleasure. You delay its entry for a moment to match it with the egg that has begun pressing insistently into the other side of your [chest], before letting them both in simultaneously.");
+				outputText("\n\nYou are rewarded with a keening, intense orgasm shared between yourself and Exgartuan, that falls off into waves as the eggs continue to inexorably push into your [chest]. You can see the shapes of the eggs begin to deform the pillowy expanse of your chest, and if it weren't that Exgartuan knows what's going on in your breasts better than you, you'd worry.");
+				outputText("\n\nAs it is, Exgartuan is stifling all movement and protest you might be able to muster to be beholden to her moment. You realize that you feel little to nothing outside of the euphoric release of depositing your eggs and the dual-persona'd orgasm going on in your [chest].");
 				//[if (cocks > 1) 
 				if (player.cocks.length > 1)
-					outputText("  Your cocks, while still erect, are doing little more than dribbling cum over your breasts and tubes, devoid of the force and power they usually have.");
+					outputText(" Your cocks, while still erect, are doing little more than dribbling cum over your breasts and tubes, devoid of the force and power they usually have.");
 				//[if (cocks = 1)]
 				else if (player.cocks.length == 1)
-					outputText("  Your [cock], while still erect, does little more than dribble cum over your breasts and tubes, devoid of the force and power that usually comes with orgasm.");
+					outputText(" Your [cock], while still erect, does little more than dribble cum over your breasts and tubes, devoid of the force and power that usually comes with orgasm.");
 				//[if (hasVagina = true)]
-				if (player.hasVagina()) outputText("  Your [vagina] lets sticky fluids out slowly around your thighs; you are only able to tell by the damp feel of your [legs].  It feels fantastic!");
-				outputText("\n\nAll too soon, the eggs come to a stop, with your breasts feeling as if they've gained numerous cup sizes, at least in weight, from the orbs of your children.  You remove the ovipositors from your [nipples] with a gentle awe, both to the euphoria and to Exgartuan.");
-				outputText("\n\nSeeming much more subdued, and slightly muffled, Exgartuan says \"<i>That was an interesting experience, even by my standards.  I'm not going to make the double ovipositor thing work for you whenever, so I'll just be taking that back.</i>\"");
-				outputText("\n\nYour hands automatically pull your ovipositors between your mammaries, and the experience of it fusing back into itself is far less painful than the split.  You relax as your ovipositor withdraws back into your abdomen.");
-				outputText("\n\n\"<i>You know, I think you and I could really get along, you keep treating me nice like this.</i>\" The thought crosses your mind that \"like this\" is essentially worshipful submission to her whim.  \"<i>Now go to sleep, I need some time to adjust.</i>\"");
+				if (player.hasVagina()) outputText(" Your [vagina] lets sticky fluids out slowly around your thighs; you are only able to tell by the damp feel of your [legs]. It feels fantastic!");
+				outputText("\n\nAll too soon, the eggs come to a stop, with your breasts feeling as if they've gained numerous cup sizes, at least in weight, from the orbs of your children. You remove the ovipositors from your [nipples] with a gentle awe, both to the euphoria and to Exgartuan.");
+				outputText("\n\nSeeming much more subdued, and slightly muffled, Exgartuan says \"<i>That was an interesting experience, even by my standards. I'm not going to make the double ovipositor thing work for you whenever, so I'll just be taking that back.</i>\"");
+				outputText("\n\nYour hands automatically pull your ovipositors between your mammaries, and the experience of it fusing back into itself is far less painful than the split. You relax as your ovipositor withdraws back into your abdomen.");
+				outputText("\n\n\"<i>You know, I think you and I could really get along, you keep treating me nice like this.</i>\" The thought crosses your mind that \"like this\" is essentially worshipful submission to her whim. \"<i>Now go to sleep, I need some time to adjust.</i>\"");
 				outputText("\n\nYou agree with that suggestion, too exhausted from the ordeal to do much else anyway. You pass out in a puddle of your own fluids, to wake up most of an hour later.");
 			}
 			else {
-				outputText("Having decided to give in to your baser urges, you see no reason not to solve all your problems and lay the orbs that have been burdening you at the same time.  You look around a moment before beginning, [if (corruption < 50) concerned that you may be observed.][if (corruption > 50) hopeful for a target on which to unburden yourself instead.]");
-				outputText("\n\nCertain that you will not be interrupted, you quickly remove your [armor] and lie on your side against a comfortable rock, having sorted out that being on your back will involve twisting your ovipositor uncomfortably and on all fours will risk your eggs.  Your [chest] squash softly down on the loam next to you, and you begin to tease and stretch your [nipples] in preparation for your insane plan.");
+				outputText("Having decided to give in to your baser urges, you see no reason not to solve all your problems and lay the orbs that have been burdening you at the same time. You look around a moment before beginning, [if (corruption < 50) concerned that you may be observed.][if (corruption > 50) hopeful for a target on which to unburden yourself instead.]");
+				outputText("\n\nCertain that you will not be interrupted, you quickly remove your [armor] and lie on your side against a comfortable rock, having sorted out that being on your back will involve twisting your ovipositor uncomfortably and on all fours will risk your eggs. Your [chest] squash softly down on the loam next to you, and you begin to tease and stretch your [nipples] in preparation for your insane plan.");
 				outputText("\n\nWith mounting anticipation for the main event, your twisted body quickly reacts to your ministrations. [if (cocks > 1) Your cocks begin ][if (cocks = 1) Your cock begins ][if (cocks > 0) to harden and rise toward your [chest], a veritable promised land for male organs, but that is not your concern today.]");
 				if (player.hasVagina()) {
 					if (player.balls > 0)
-						outputText("  Behind your [balls], y");
+						outputText(" Behind your [balls], y");
 					else outputText("Y");
 					outputText("our [vagina] begins to quietly drip and pull open slightly, and you wish for the flexibility to plant your eggs in it.");
 				}
 				outputText("\n\nFinally, your ovipositor begins to peek out from its hiding place, and you seize it with one hand, rapidly stroking it and encouraging it to elongate further, and then, tucking your abdomen tight against you, you pull it through your [legs] and up [if (cocks > 0) past your maleness] to your [chest].");
-				outputText("\n\nWith your free hand, you pull your [nipple] open wide, painfully wide, and squeeze the tip of your ovipositor into it, simultaneously stretching your ovipositor to its maximum.  With a frustrated sigh, you attempt to coax more length out of it while doubling over, inadvertently pushing the ovipositor into your [nipple].  You spasm a moment, and [if (isLactating = true) a mixture of milk and ] ");
+				outputText("\n\nWith your free hand, you pull your [nipple] open wide, painfully wide, and squeeze the tip of your ovipositor into it, simultaneously stretching your ovipositor to its maximum. With a frustrated sigh, you attempt to coax more length out of it while doubling over, inadvertently pushing the ovipositor into your [nipple]. You spasm a moment, and [if (isLactating = true) a mixture of milk and ] ");
 				if (player.canOvipositBee())
 					outputText("honey ");
 				else outputText("green fluid ");
 				outputText("squirts out of you under the sudden pressure from your penetration.");
-				outputText("\n\nOverwhelmed with a sexual glee, you begin to jackknife, driving your ovipositor from the tip to deep inside your breast.  Holding everything in place with one hand, your other begins to toy with a spare [nipple].  [if (cocks > 0)   [EachCock] hardens to the full extent, forcing you to take a moment to rearrange yourself, and leaving you jacking off [oneCock] with your spare hand instead.]");
+				outputText("\n\nOverwhelmed with a sexual glee, you begin to jackknife, driving your ovipositor from the tip to deep inside your breast. Holding everything in place with one hand, your other begins to toy with a spare [nipple]. [if (cocks > 0)  [EachCock] hardens to the full extent, forcing you to take a moment to rearrange yourself, and leaving you jacking off [oneCock] with your spare hand instead.]");
 				if (player.hasVagina()) {
-					outputText("  Meanwhile, your [vagina] has fully parted and begun to drool ");
+					outputText(" Meanwhile, your [vagina] has fully parted and begun to drool ");
 					if (player.wetness() >= 4) outputText("liberally ");
 					outputText("onto your [legs] and abdomen.");
 				}
-				outputText("\n\nYour ovipositor has already begun its task.  You can see rounded distortions making their way up the tube.  As the leader of the pack begins nearing the end of its journey, you double over tightly, driving the ovipositor as deep into your chest as you can.  Your [nipple] aches delightfully as it is spread yet further open by the bulging intrusion, and just as the egg pops from the tip of the ovipositor, a low, gentle orgasm spreads through you, radiating out from your [chest].");
+				outputText("\n\nYour ovipositor has already begun its task. You can see rounded distortions making their way up the tube. As the leader of the pack begins nearing the end of its journey, you double over tightly, driving the ovipositor as deep into your chest as you can. Your [nipple] aches delightfully as it is spread yet further open by the bulging intrusion, and just as the egg pops from the tip of the ovipositor, a low, gentle orgasm spreads through you, radiating out from your [chest].");
 				
 				//Stage 1 - low/no chance of pregnancy
 				if (player.eggs() < 20) {
-					outputText("\n\nWith a contented glow, you let your eggs go in, each time crashing into your consciousness like waves slowly eating away your mind, until you start to feel some discomfort in your breast. You let one more egg pass, and then you pull your ovipositor out, causing a small explosion of[if (isLactating = true)  milk and]");
+					outputText("\n\nWith a contented glow, you let your eggs go in, each time crashing into your consciousness like waves slowly eating away your mind, until you start to feel some discomfort in your breast. You let one more egg pass, and then you pull your ovipositor out, causing a small explosion of[if (isLactating = true) milk and]");
 					if (player.canOvipositBee())
 						outputText("honey");
 					else outputText("goo");
-					outputText(".  Quickly, you thrust it into your other breast and let the egging continue.  Suddenly conscious of your situation, you hold your previous [nipple] closed.");
-					if (player.hasCock()) outputText("  Your [chest] and ovipositor meanwhile are slowly being coated in white from your languid pleasure.");
+					outputText(". Quickly, you thrust it into your other breast and let the egging continue. Suddenly conscious of your situation, you hold your previous [nipple] closed.");
+					if (player.hasCock()) outputText(" Your [chest] and ovipositor meanwhile are slowly being coated in white from your languid pleasure.");
 					outputText("\n\nEventually, no more eggs come down the tube, and with a contented sigh, you release your ovipositor and, clutching your [chest] tightly to prevent the eggs' escape, pass out for the remainder of the hour.");
 				}
 				//Stage 2 no/moderate chance of pregnancy
 				else if (player.eggs() < 40) {
-					outputText("\n\nYour [chest] begins to tingle and your heart begins to race as the eggs continue to bring orgasmic waves with each transfer. Your breast rapidly begins to feel full, and your abdomen has only just begun to deflate. With a mixture of concern and desperation for every last egg, you hold the ovipositor until no more eggs could possibly fit. Your egg-laden tit has ballooned considerably in size, and you have to squeeze your [nipple] shut to keep the eggs in after you remove your ovipositor.[if (isLactating = true)   Under the sheer pressure, milk constantly streams out of your [nipple].]");
-					outputText("\n\nDraping your arm tight over the newly egged tit, you use that hand to hold open your other [nipple] so that you can insert your egg tube.  You begin to giggle under the assault of the constant euphoria[if (cocks > 0) , and your tits and ovipositor have long since had their natural color obscured by your constant streams of cum, which has begun to pool underneath you].  Soon, even the second breast begins to feel uncomfortably full, and not for the first time you start to worry about the wisdom of this course of action.");
-					outputText("\n\nAt long last, your egg sac has nothing more to feed into your [chest]. You pop out the shriveling organ and try to watch it shrivel back up, but your newly plumped [chest][if (cocks > 0)  and your diminishing erection][if (cocks > 1) s] make it impossible to see.  You spend several long moments caressing your swollen [chest], now dimpled slightly by the orbs inside them, and those long moments stretch into eternity as you pass out.");
+					outputText("\n\nYour [chest] begins to tingle and your heart begins to race as the eggs continue to bring orgasmic waves with each transfer. Your breast rapidly begins to feel full, and your abdomen has only just begun to deflate. With a mixture of concern and desperation for every last egg, you hold the ovipositor until no more eggs could possibly fit. Your egg-laden tit has ballooned considerably in size, and you have to squeeze your [nipple] shut to keep the eggs in after you remove your ovipositor.[if (isLactating = true)  Under the sheer pressure, milk constantly streams out of your [nipple].]");
+					outputText("\n\nDraping your arm tight over the newly egged tit, you use that hand to hold open your other [nipple] so that you can insert your egg tube. You begin to giggle under the assault of the constant euphoria[if (cocks > 0) , and your tits and ovipositor have long since had their natural color obscured by your constant streams of cum, which has begun to pool underneath you]. Soon, even the second breast begins to feel uncomfortably full, and not for the first time you start to worry about the wisdom of this course of action.");
+					outputText("\n\nAt long last, your egg sac has nothing more to feed into your [chest]. You pop out the shriveling organ and try to watch it shrivel back up, but your newly plumped [chest][if (cocks > 0) and your diminishing erection][if (cocks > 1) s] make it impossible to see. You spend several long moments caressing your swollen [chest], now dimpled slightly by the orbs inside them, and those long moments stretch into eternity as you pass out.");
 				}
 				//Stage Three no/high chance
 				else {
-					outputText("\n\nYour [chest] begins to tingle and your heart begins to race as the eggs continue to bring orgasmic waves with each transfer. Your breast rapidly begins to feel full, and your abdomen hasn't even begun to deflate.  With a mixture of concern and desperation for every last egg, you hold the ovipositor until no more eggs could possibly fit. Your egg-laden tit has ballooned considerably in size, and you have to squeeze your [nipple] shut to keep the eggs in after you remove your ovipositor.[if (isLactating = true)   Under the sheer pressure, milk constantly streams out of your [nipple].]");
+					outputText("\n\nYour [chest] begins to tingle and your heart begins to race as the eggs continue to bring orgasmic waves with each transfer. Your breast rapidly begins to feel full, and your abdomen hasn't even begun to deflate. With a mixture of concern and desperation for every last egg, you hold the ovipositor until no more eggs could possibly fit. Your egg-laden tit has ballooned considerably in size, and you have to squeeze your [nipple] shut to keep the eggs in after you remove your ovipositor.[if (isLactating = true)  Under the sheer pressure, milk constantly streams out of your [nipple].]");
 					outputText("\n\nDraping your arm tight over the newly egged tit, you use that hand to hold open your other [nipple] so that you can insert your egg tube. You begin to giggle under the assault of the constant euphoria[if (cocks > 0) , and your tits and ovipositor have long since had their natural color obscured by your constant streams of cum, which has begun to pool underneath you]. Soon, even the second breast is absolutely egg-stuffed, and not for the first time you start to worry about the wisdom of this course of action.");
 					//[if (breastRows > 1) 
 					if (player.bRows() > 1)
-						outputText("\n\nQuickly you switch to another [nipple] and then another, until at long last, your egg sac has nothing more to feed into your [chest].  You pop out the shriveling organ and try to watch it shrivel back up, but your newly plumped [chest] make it impossible to see.  You spend several long moments caressing your swollen [chest], now dimpled slightly by the orbs inside them, and those long moments stretch into eternity as you pass out.");
-					else outputText("\n\nYou realize that there is no way to finish laying your eggs, and release a moan that is half orgasm and half frustration. The glorious sensation of egg-laying is cut off as there's nowhere to lay your eggs.  Then you realize what you must do.");
+						outputText("\n\nQuickly you switch to another [nipple] and then another, until at long last, your egg sac has nothing more to feed into your [chest]. You pop out the shriveling organ and try to watch it shrivel back up, but your newly plumped [chest] make it impossible to see. You spend several long moments caressing your swollen [chest], now dimpled slightly by the orbs inside them, and those long moments stretch into eternity as you pass out.");
+					else outputText("\n\nYou realize that there is no way to finish laying your eggs, and release a moan that is half orgasm and half frustration. The glorious sensation of egg-laying is cut off as there's nowhere to lay your eggs. Then you realize what you must do.");
 					if (player.bRows() < 2) {
-						outputText("\n\nHaving popped your ovipositor out, you spend a few moments contemplating the pulsating organ, which isn't even moving the eggs without the surety of a nice warm hole.  You feel stuck, trapped on the edge of orgasm with an egg half down the tube.  Finally, your arousal and desperation overcomes your better judgment again, and you open your mouth wide for your egg tube.  Immediately, you feel the until-then backed up lubricant of your ovipositor flowing down your gullet, and your mouth and throat begin to feel strange.");
-						outputText("\n\nThe eggs quickly resume their advance, now aimed down your throat. All too soon, the egg reaches your teeth, and a new problem arises.  It's too big. Tears of frustration begin to sprout, and then suddenly you feel a massive convulsion in your ovipositor, and the egg is forced past your teeth with a horrible click of your jaw, which then proceeds to hang in its newly gaping state.  You then start to panic when you realize if the egg couldn't get into your jaw then there's no way to swallow it, when you feel it slip into your throat all the same, and realize that the entire structure has been numbed and widened to accommodate your needs.");
-						outputText("\n\nEven your stomach is beginning to feel uncomfortably full when the final egg enters the ovipositor to begin its journey.  Once it pops into your gullet, you feel a great sense of relief wash over you accompanied by the last orgasm.  You pass out cradling your swollen stomach and [chest].");
+						outputText("\n\nHaving popped your ovipositor out, you spend a few moments contemplating the pulsating organ, which isn't even moving the eggs without the surety of a nice warm hole. You feel stuck, trapped on the edge of orgasm with an egg half down the tube. Finally, your arousal and desperation overcomes your better judgment again, and you open your mouth wide for your egg tube. Immediately, you feel the until-then backed up lubricant of your ovipositor flowing down your gullet, and your mouth and throat begin to feel strange.");
+						outputText("\n\nThe eggs quickly resume their advance, now aimed down your throat. All too soon, the egg reaches your teeth, and a new problem arises. It's too big. Tears of frustration begin to sprout, and then suddenly you feel a massive convulsion in your ovipositor, and the egg is forced past your teeth with a horrible click of your jaw, which then proceeds to hang in its newly gaping state. You then start to panic when you realize if the egg couldn't get into your jaw then there's no way to swallow it, when you feel it slip into your throat all the same, and realize that the entire structure has been numbed and widened to accommodate your needs.");
+						outputText("\n\nEven your stomach is beginning to feel uncomfortably full when the final egg enters the ovipositor to begin its journey. Once it pops into your gullet, you feel a great sense of relief wash over you accompanied by the last orgasm. You pass out cradling your swollen stomach and [chest].");
 					}
 				}
 			}
@@ -3167,7 +3180,7 @@ package classes.Scenes {
 			}
 			clearOutput();
 			doStripCheck();
-			outputText("Almost immediately, your " + player.cockDescript(x) + " perks up like a pet expecting to be fed, and you have to admit that you plan to give that squirming tentacle exactly what it desires - a hot, slippery slit to nestle inside of.  Already, your [vagina] has grown ");
+			outputText("Almost immediately, your " + player.cockDescript(x) + " perks up like a pet expecting to be fed, and you have to admit that you plan to give that squirming tentacle exactly what it desires - a hot, slippery slit to nestle inside of. Already, your [vagina] has grown ");
 			if (player.wetness() <= 2)
 				outputText("moist");
 			else if (player.wetness() <= 3)
@@ -3175,7 +3188,7 @@ package classes.Scenes {
 			else if (player.wetness() <= 4)
 				outputText("sloppy and wet");
 			else outputText("beyond soaked");
-			outputText(".  The slick slit is slowly parting as you reach to wrangle the wiggly cock");
+			outputText(". The slick slit is slowly parting as you reach to wrangle the wiggly cock");
 			if (player.cocks.length > 1) {
 				outputText(", brushing your hand against your other ");
 				if (player.lust100 <= 70)
@@ -3185,24 +3198,24 @@ package classes.Scenes {
 				if (player.cocks.length > 2) outputText("es");
 				outputText(" on the way");
 			}
-			outputText(".  Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from a human penis.  It's almost like you're compelled to thrust it inside of some orifice, any orifice, so long as it's somewhere warm and tight.\n\n");
-			if (y >= 0) outputText("  It loops around your " + player.cockDescript(y) + " while you fight with it, strangling the other phallus in tight coils of squeezing, floral friction.");
+			outputText(". Moaning out loud, you try your best to handle the flood of alien sensations, but the pleasure-sparking tendril in your grip feels so different from a human penis. It's almost like you're compelled to thrust it inside of some orifice, any orifice, so long as it's somewhere warm and tight.\n\n");
+			if (y >= 0) outputText(" It loops around your " + player.cockDescript(y) + " while you fight with it, strangling the other phallus in tight coils of squeezing, floral friction.");
 			outputText("\n\n");
 			
 			outputText(images.showImage("masti-tentacle-vag"));
-			outputText("You arch your back as you try to contain the unexpected waves of desire that flood your groin, but it's no use.  In the span of a few seconds, you decide to accept that you need to fuck something now.  Foreplay is no longer an option.");
+			outputText("You arch your back as you try to contain the unexpected waves of desire that flood your groin, but it's no use. In the span of a few seconds, you decide to accept that you need to fuck something now. Foreplay is no longer an option.");
 			if (player.balls > 0)
-				outputText("  You lift you [balls] out of the way and");
-			else outputText("  You");
-			outputText(" twist your wrist down.  That change in direction comes far easier than trying to stroke it.  Releasing sets of alien muscles that you had held instinctively, you let your " + player.cockDescript(x) + " do what it was made to do.  It slithers down sinuously, the purplish head pressing heavy and hot against your juicy mound just hard enough to encourage you to press back against it.  It slowly spreads your clinging tunnel around its obscene girth one fold at a time.");
+				outputText(" You lift you [balls] out of the way and");
+			else outputText(" You");
+			outputText(" twist your wrist down. That change in direction comes far easier than trying to stroke it. Releasing sets of alien muscles that you had held instinctively, you let your " + player.cockDescript(x) + " do what it was made to do. It slithers down sinuously, the purplish head pressing heavy and hot against your juicy mound just hard enough to encourage you to press back against it. It slowly spreads your clinging tunnel around its obscene girth one fold at a time.");
 			//Cunt change!
 			player.cuntChange(player.cockArea(x), true, true, false);
 			
-			outputText("\n\nRipples of delight radiate along your " + player.cockDescript(x) + " as it buries itself as deeply into your velvet tunnel as possible.  The fat, purplish head stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat.  Tugging on the exposed portion, you find yourself pumping wildly on your length, squeezing it while paroxysms of ecstasy render your fine muscle control useless.  The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you.");
+			outputText("\n\nRipples of delight radiate along your " + player.cockDescript(x) + " as it buries itself as deeply into your velvet tunnel as possible. The fat, purplish head stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat. Tugging on the exposed portion, you find yourself pumping wildly on your length, squeezing it while paroxysms of ecstasy render your fine muscle control useless. The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you.");
 			if (y >= 0) {
-				outputText("  Your " + player.cockDescript(y) + " is getting jacked off by the engorged cock-coil's motions and slowly leaks creamy pre over the jerking length.");
+				outputText(" Your " + player.cockDescript(y) + " is getting jacked off by the engorged cock-coil's motions and slowly leaks creamy pre over the jerking length.");
 				if (player.cocks[y].cockType == CockTypesEnum.TENTACLE) {
-					outputText("  In no time flat the second tendril has gotten the idea, and it elongates to reach for your unoccupied asshole.  There's a moment of token resistance before it violates your [asshole], but then, there's only the warm heat of a torrid butt-fuck.");
+					outputText(" In no time flat the second tendril has gotten the idea, and it elongates to reach for your unoccupied asshole. There's a moment of token resistance before it violates your [asshole], but then, there's only the warm heat of a torrid butt-fuck.");
 					//BUTTCHANGE IF APPROPRIATE
 					player.buttChange(player.cockArea(y), true, true, false);
 				}
@@ -3212,30 +3225,30 @@ package classes.Scenes {
 			outputText(" and twisting your [nipple] as your body goes white-hot with pleasure");
 			if (player.hasFuckableNipples()) outputText(", even stuffing a finger inside a sloppy, dripping nipplecunt");
 			outputText(".");
-			if (player.lactationQ() >= 250) outputText("  Milk squirts from your engorged teat almost immediately to fall in a moist, creamy rain across your writhing form.");
+			if (player.lactationQ() >= 250) outputText(" Milk squirts from your engorged teat almost immediately to fall in a moist, creamy rain across your writhing form.");
 			//{no new PG}  Three + Tentalce fork - one in mouth
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3) {
-				outputText("  The pleasured noises that have been issuing forth from your 'O'-gaped lips are cut off by a sudden intrusion from another of your arboreal phalluses.   This one punches straight into your throat without pause, sliding so smoothly across your tongue that you barely care about gagging when it feels so good.  Trickles of your sweet pre-cum are dribbling out from [eachCock] into your holes");
+				outputText(" The pleasured noises that have been issuing forth from your 'O'-gaped lips are cut off by a sudden intrusion from another of your arboreal phalluses.  This one punches straight into your throat without pause, sliding so smoothly across your tongue that you barely care about gagging when it feels so good. Trickles of your sweet pre-cum are dribbling out from [eachCock] into your holes");
 				if (player.countCocksOfType(CockTypesEnum.TENTACLE) < player.cocks.length) outputText(" and the open air");
 				outputText(".");
-				if (player.biggestTitSize() >= 4) outputText("  Laying right between your boobs, it doesn't take long for the shaft to extend far enough to loop around each tit, sliding slowly encircling each curvy mound as it presses them together around itself, getting a titfuck while it plows your unresisting mouth.");
+				if (player.biggestTitSize() >= 4) outputText(" Laying right between your boobs, it doesn't take long for the shaft to extend far enough to loop around each tit, sliding slowly encircling each curvy mound as it presses them together around itself, getting a titfuck while it plows your unresisting mouth.");
 			}
 			//No bonus cawks!
 			else {
-				outputText("  The pleasured noises issuing forth from your 'O'-gaped lips get higher and higher pitched with each passing second, and for a split second, you find yourself wishing you had a third tentacle so you could suck it while you fuck yourself.");
+				outputText(" The pleasured noises issuing forth from your 'O'-gaped lips get higher and higher pitched with each passing second, and for a split second, you find yourself wishing you had a third tentacle so you could suck it while you fuck yourself.");
 				if (y >= 0 && player.cocks[y].cockType == CockTypesEnum.TENTACLE && player.cocks[y].cockLength >= 20) {
-					outputText("  Luckily, you're so big down there that a juicy cock-head is right there within reach, and you bend to slurp it up without thought, busily self-sucking with reckless abandon.");
+					outputText(" Luckily, you're so big down there that a juicy cock-head is right there within reach, and you bend to slurp it up without thought, busily self-sucking with reckless abandon.");
 				}
 			}
 			//MORE
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 6) {
-				outputText("\n\nThe excess green tools rise up above you.  They survey the view before them in a crude approximation of a sentient surveyor, seeming to take in the shifting, squiggling view of your ardent masturbation.  In truth, you're just trying to think of where to stick them.  A few droplets of liquid lust leak from their tips in sympathetic pleasure, and it gives you an idea for just what to do with them.  They stretch out towards your torso, veering to the sides at the last second.  Dripping onto your shoulders, the pulsating plant-pricks slowly push into your armpit, lubricating your " + player.skinFurScales() + " with their amorous liquid.");
-				if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 7) outputText("  They pile in there, really squirming against each other as much as you, frotting against your sweat-slick flesh.  ");
-				outputText("  You're fucking your armpits, and it feels divine, so good that your pits are swampy pits of sex within moments.");
+				outputText("\n\nThe excess green tools rise up above you. They survey the view before them in a crude approximation of a sentient surveyor, seeming to take in the shifting, squiggling view of your ardent masturbation. In truth, you're just trying to think of where to stick them. A few droplets of liquid lust leak from their tips in sympathetic pleasure, and it gives you an idea for just what to do with them. They stretch out towards your torso, veering to the sides at the last second. Dripping onto your shoulders, the pulsating plant-pricks slowly push into your armpit, lubricating your " + player.skinFurScales() + " with their amorous liquid.");
+				if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 7) outputText(" They pile in there, really squirming against each other as much as you, frotting against your sweat-slick flesh. ");
+				outputText(" You're fucking your armpits, and it feels divine, so good that your pits are swampy pits of sex within moments.");
 			}
 			//One more:
 			else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 4) {
-				outputText("\n\nThe last green tool rises up above you.  It surveys the view before it in a crude approximation of a sentient surveyor, seeming to take in the shifting, squiggling view of your ardent masturbation.  In truth, you're just trying to think of where to stick it.  A droplet of liquid lust leaks from the tip in sympathetic pleasure, and it gives you an idea for just what to do with it.  It stretches out towards your torso but veers left at the last second.  Dripping onto your shoulder, the pulsating plant-prick slowly pushes into your armpit, lubricating your " + player.skinFurScales() + " with its amorous liquid.  You're fucking your armpit and it feels divine, so good that you quickly slick your pit and twist the spare cock around yourself so that it can double-fuck both sides.");
+				outputText("\n\nThe last green tool rises up above you. It surveys the view before it in a crude approximation of a sentient surveyor, seeming to take in the shifting, squiggling view of your ardent masturbation. In truth, you're just trying to think of where to stick it. A droplet of liquid lust leaks from the tip in sympathetic pleasure, and it gives you an idea for just what to do with it. It stretches out towards your torso but veers left at the last second. Dripping onto your shoulder, the pulsating plant-prick slowly pushes into your armpit, lubricating your " + player.skinFurScales() + " with its amorous liquid. You're fucking your armpit and it feels divine, so good that you quickly slick your pit and twist the spare cock around yourself so that it can double-fuck both sides.");
 			}
 			
 			//JIZZBOMB
@@ -3243,11 +3256,11 @@ package classes.Scenes {
 			if (player.balls > 0)
 				outputText("balls");
 			else outputText("groin");
-			outputText(".  Orgasm is rapidly closing in, and there's no slowing your frenzied flora at this point.  You ");
+			outputText(". Orgasm is rapidly closing in, and there's no slowing your frenzied flora at this point. You ");
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3)
 				outputText("gurgle");
 			else outputText("moan");
-			outputText(" as your inner muscles begin to contract into tight knots, the pressure building to a turgid, throbbing peak.  Then, as you");
+			outputText(" as your inner muscles begin to contract into tight knots, the pressure building to a turgid, throbbing peak. Then, as you");
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3)
 				outputText("r multitude of penises");
 			outputText(" thrust deep inside yourself, a volcano of pleasure erupts, pumping thick flows of white goo straight into your snatch");
@@ -3257,20 +3270,20 @@ package classes.Scenes {
 				outputText(", ass, and mouth");
 			outputText(".");
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3) {
-				outputText("  You gulp the salty flow down as best you are able");
+				outputText(" You gulp the salty flow down as best you are able");
 				if (player.cumQ() >= 500) {
-					outputText(".  That doesn't really count for much with how heavy your load is, ");
+					outputText(". That doesn't really count for much with how heavy your load is, ");
 					if (player.cumQ() < 1000)
 						outputText("and your cheeks bulge with the size of each squirt");
 					else outputText("and the cum is soon squirting out the corners of your mouth while your cheeks bulge cartoonishly");
 				}
 				outputText(".");
 			}
-			outputText("  Your birth canal is quickly flooded with white spooge");
+			outputText(" Your birth canal is quickly flooded with white spooge");
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 2) outputText(", while your [ass]'s interior is painted bright white");
 			outputText(".");
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 2) {
-				outputText("  Your untended " + player.cockDescript(y) + " blows spunk over you ");
+				outputText(" Your untended " + player.cockDescript(y) + " blows spunk over you ");
 				if (player.cumQ() < 50)
 					outputText("in small spurts");
 				else if (player.cumQ() < 200)
@@ -3280,7 +3293,7 @@ package classes.Scenes {
 				else outputText("like a virile sprinkler");
 				outputText(".");
 				if (player.cocks.length > 2) {
-					outputText("  The other one");
+					outputText(" The other one");
 					if (player.cocks.length > 3)
 						outputText("s match");
 					else outputText(" matches");
@@ -3288,11 +3301,11 @@ package classes.Scenes {
 					if (player.cocks.length == 3)
 						outputText("it");
 					else outputText("them");
-					outputText(".  The sensations coming from your prehensile penises are just so overwhelming that it's like a whole-body-gasm.");
+					outputText(". The sensations coming from your prehensile penises are just so overwhelming that it's like a whole-body-gasm.");
 				}
 			}
 			else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 4) {
-				outputText("  Meanwhile, the purple tip");
+				outputText(" Meanwhile, the purple tip");
 				if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 4)
 					outputText("s swell");
 				else outputText(" swells");
@@ -3301,7 +3314,7 @@ package classes.Scenes {
 				outputText(", engorging immensely as they press right into the soft, concave flesh within, the semen squirting out in pressured, arm-soaking jets.");
 			}
 			
-			outputText("\n\nAt once, your whole body sags back, limp and drained.  The elongated tentacle");
+			outputText("\n\nAt once, your whole body sags back, limp and drained. The elongated tentacle");
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1)
 				outputText("s retract");
 			else outputText(" retracts");
@@ -3315,7 +3328,7 @@ package classes.Scenes {
 			else if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 2) outputText(", ass, and mouth");
 			outputText(", leaving your orifice");
 			if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("s");
-			outputText(" to dribble the spent passion on the ground.  Damn, that was satisfying.");
+			outputText(" to dribble the spent passion on the ground. Damn, that was satisfying.");
 			//(-2 sens + 1 per tentacle dick, -100 lust)
 			player.orgasm('Vaginal');
 			dynStats("sen", (-1*(1 + player.countCocksOfType(CockTypesEnum.TENTACLE))));
@@ -3336,50 +3349,50 @@ package classes.Scenes {
 			//[Standard text for stripping off goes here]
 			doStripCheck();
 			outputText(images.showImage("masti-tentacle-butt"));
-			outputText("You eagerly reveal your flora pecker as it squirms and wriggles on its own, gently caressing the green surface here and there, its coloration changing as you tease yourself.  After toying with your tentacle dick for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your ever-writhing " + player.cockDescript(tentacle) + " to your back, pointing it toward your buttocks.  You grind the tip against your [butt], making pre-cum flow from your mushroom-like head and smearing it against your " + player.skinFurScales() + ".  Using your own seminal fluid as a natural lube, you press the tip of your " + player.cockDescript(tentacle) + " in front of your own backdoor, stretching your anal opening little by little, careful not to tear your own insides.  This goes on for a while, until you suddenly lose all patience and roughly stuff your own " + player.cockDescript(tentacle) + " at full force inside your colon.");
+			outputText("You eagerly reveal your flora pecker as it squirms and wriggles on its own, gently caressing the green surface here and there, its coloration changing as you tease yourself. After toying with your tentacle dick for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your ever-writhing " + player.cockDescript(tentacle) + " to your back, pointing it toward your buttocks. You grind the tip against your [butt], making pre-cum flow from your mushroom-like head and smearing it against your " + player.skinFurScales() + ". Using your own seminal fluid as a natural lube, you press the tip of your " + player.cockDescript(tentacle) + " in front of your own backdoor, stretching your anal opening little by little, careful not to tear your own insides. This goes on for a while, until you suddenly lose all patience and roughly stuff your own " + player.cockDescript(tentacle) + " at full force inside your colon.");
 			//[anal tightness check]
 			player.buttChange(player.cockArea(tentacle), true, true, false);
-			outputText("\n\nThe impetuousness of the act makes you cry in a mixture of pleasure and pain, your [asshole] being overloaded with intense sensations.  Fortunately the tender and rubbery texture of your " + player.cockDescript(tentacle) + " allows for more sensitivity, the subtle friction sending tingles from your crotch all the way up your spine.  You shiver from the sheer cocktail of raw pleasure you're inflicting on your own body.  Your " + player.cockDescript(tentacle) + " keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position.  You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
+			outputText("\n\nThe impetuousness of the act makes you cry in a mixture of pleasure and pain, your [asshole] being overloaded with intense sensations. Fortunately the tender and rubbery texture of your " + player.cockDescript(tentacle) + " allows for more sensitivity, the subtle friction sending tingles from your crotch all the way up your spine. You shiver from the sheer cocktail of raw pleasure you're inflicting on your own body. Your " + player.cockDescript(tentacle) + " keeps squirming against your insides, making you quiver and giggle like a whore, until it lodges all the way inside your colon, adopting a more comfortable position. You then proceed to ferociously fuck your own [asshole], stretching it a bit more at every thrust.");
 
 			//[Standard text for stroking other cocks/vagina goes here; text between ()s should be removed if the PC doesn't have multicocks]			
-			outputText("\n\nThe conjugated friction of your " + player.cockDescript(tentacle) + " writhing inside your devastated interior (as well as the rough handjob you're giving yourself) eventually proves too much for your horny body, and [eachCock] releases a massive load, squirting sexual juices everywhere inside (and outside) your body.  Pressure builds in your ass (and your hands) as cum flows out of you");
+			outputText("\n\nThe conjugated friction of your " + player.cockDescript(tentacle) + " writhing inside your devastated interior (as well as the rough handjob you're giving yourself) eventually proves too much for your horny body, and [eachCock] releases a massive load, squirting sexual juices everywhere inside (and outside) your body. Pressure builds in your ass (and your hands) as cum flows out of you");
 			//[if cum production is massive]
-			if (player.cumQ() >= 1000) outputText(", making [eachCock] bulge.  The extra feeling sends you over the edge and you quickly reach your climax as you cum and cum");
+			if (player.cumQ() >= 1000) outputText(", making [eachCock] bulge. The extra feeling sends you over the edge and you quickly reach your climax as you cum and cum");
 			outputText(".");
 			//[if cum production is moderate]
-			if (player.cumQ() >= 500) outputText("  Your belly swells a bit from all the semen being packed inside you.");
+			if (player.cumQ() >= 500) outputText(" Your belly swells a bit from all the semen being packed inside you.");
 			//[if cum production is massive] 
-			if (player.cumQ() >= 1500) outputText("  Your poor insides cannot handle the enormous cumshot being unloaded in your [asshole] and a significant volume of spunk dribbles outside, carelessly polluting the floor.");
+			if (player.cumQ() >= 1500) outputText(" Your poor insides cannot handle the enormous cumshot being unloaded in your [asshole] and a significant volume of spunk dribbles outside, carelessly polluting the floor.");
 			//[Standard text for other cocks cumming goes here.]
-			outputText("  You groan and lazily remove your " + player.cockDescript(tentacle) + " from your anus as you give in to your pleasure-induced drowsiness.");
+			outputText(" You groan and lazily remove your " + player.cockDescript(tentacle) + " from your anus as you give in to your pleasure-induced drowsiness.");
 			if (player.cocks.length > 0) {
 				//Single Cock
 				if (player.cocks.length == 1) {
 					if (player.lib100 < 30)
-						outputText("  You quickly fall asleep, spent. ");
+						outputText(" You quickly fall asleep, spent. ");
 					else if (player.lib100 < 55)
-						outputText("  You roll and begin to doze, your semi-erect " + player.cockDescript() + " flopping against you. ");
+						outputText(" You roll and begin to doze, your semi-erect " + player.cockDescript() + " flopping against you. ");
 					else if (player.lib100 <= 80) {
-						outputText("  As you close your eyes and relax, your " + player.cockDescript() + " surges back to erectness, ensuring ");
+						outputText(" As you close your eyes and relax, your " + player.cockDescript() + " surges back to erectness, ensuring ");
 						if (player.cor < 50)
 							outputText("your dreams will be filled with sex.");
 						else outputText("you dream in a depraved kinky fantasia.");
 					}
-					else outputText("  You groan and drift to sleep, your rigid " + player.cockDescript() + " pulsing and throbbing with continual lust.");
+					else outputText(" You groan and drift to sleep, your rigid " + player.cockDescript() + " pulsing and throbbing with continual lust.");
 				}
 				//Multi Cock
 				if (player.cocks.length > 1) {
 					if (player.lib100 < 30)
-						outputText("  You quickly fall asleep, spent. ");
+						outputText(" You quickly fall asleep, spent. ");
 					else if (player.lib100 < 55)
-						outputText("  You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ");
+						outputText(" You roll and begin to doze for an hour, your semi-erect cocks flopping against you. ");
 					else if (player.lib100 <= 80) {
-						outputText("  As you close your eyes and relax, your dicks surge back to erectness, ensuring ");
+						outputText(" As you close your eyes and relax, your dicks surge back to erectness, ensuring ");
 						if (player.cor < 50)
 							outputText("your dreams will be filled with sex.");
 						else outputText("you dream in a depraved kinky fantasia.");
 					}
-					else outputText("  You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
+					else outputText(" You groan and drift into a brief catnap, your rigid erections pulsing and throbbing with continual lust.");
 				}
 			}
 			player.orgasm('Anal');
@@ -3398,20 +3411,20 @@ package classes.Scenes {
 			for (var x:int = gildedCock + 1; x < player.cocks.length; x++) { //Find the biggest gilded cock you've got
 				if (player.cocks[x].sock == "gilded" && player.cocks[x].cArea() > player.cocks[gildedCock].cArea()) gildedCock = x;
 			}
-			outputText("You disrobe, shivering softly.  Biting your lip, you look down, realizing that though the day is warm the gleaming metallic sleeve on your cock is cool, almost chill.");
-			outputText("\n\nThe light catches the golden cock-sock, scattering light through the area.  You grin as you grasp it, rubbing your thumb against the smooth top of the sheath, with your fingers rubbing against the tight leather cords beneath.  Your cock swells against the metallic walls of the cocksock, and though you're clearly growing warmer, the gleaming sheath stays cool to the touch.\n\n");
+			outputText("You disrobe, shivering softly. Biting your lip, you look down, realizing that though the day is warm the gleaming metallic sleeve on your cock is cool, almost chill.");
+			outputText("\n\nThe light catches the golden cock-sock, scattering light through the area. You grin as you grasp it, rubbing your thumb against the smooth top of the sheath, with your fingers rubbing against the tight leather cords beneath. Your cock swells against the metallic walls of the cocksock, and though you're clearly growing warmer, the gleaming sheath stays cool to the touch.\n\n");
 			
 			outputText(images.showImage("masti-cocksock"));
-			outputText("Your fingers slide easily over the smooth metallic fabric and you begin masturbating.  The gold sheath shifts up and down against your shaft as you stroke faster and faster.  The gold casing blocks the familiar feel of your hand, instead feeling like the hand of some eager stranger on your dick.");
+			outputText("Your fingers slide easily over the smooth metallic fabric and you begin masturbating. The gold sheath shifts up and down against your shaft as you stroke faster and faster. The gold casing blocks the familiar feel of your hand, instead feeling like the hand of some eager stranger on your dick.");
 			if (player.cocks[gildedCock].cArea() < 6)
-				outputText("  Enveloped in the cocksock, you can barely see the tip of your tiny dick as your head peeks out on every downstroke.  The rounded edge of the metallic sleeve rubs maddeningly against the head of your cock, cool and smooth.");
+				outputText(" Enveloped in the cocksock, you can barely see the tip of your tiny dick as your head peeks out on every downstroke. The rounded edge of the metallic sleeve rubs maddeningly against the head of your cock, cool and smooth.");
 			//[medium dicks] 
 			else if (player.cocks[gildedCock].cArea() < 20)
-				outputText("  The head of your cock abuts against the edge of the cocksock, bumping against it with every stroke.  With your thickness, the cocksock is a perfect fit, tugging on your cock with every upstroke, stretching your dick lightly as you jack yourself.");
+				outputText(" The head of your cock abuts against the edge of the cocksock, bumping against it with every stroke. With your thickness, the cocksock is a perfect fit, tugging on your cock with every upstroke, stretching your dick lightly as you jack yourself.");
 			//[large dicks]
-			else outputText("  Clamped around your dick, the metal casing looks more like a gigantic cock ring. The golden sheath actually allows you a better grip on your massive member, a ring of coolness around your hot meat.");
-			outputText("\n\nPressure builds, and tremors of pleasure run through your body as you stroke faster and faster.  You let out a small moan, as you pump the cocksleeve up and down your " + player.cockDescript(gildedCock) + ".  Your cock swells within the confines of the sleeve, throbbing against the metallic confines of the sheath.  You shudder, arching your back, as you climax, your " + Math.round(player.cumQ()) + "mLs of cum arcing up high into the air overhead.");
-			outputText("\n\nPanting, you watch the jet of cum glittering in the air, caught in the light of the golden cocksock.  It beads and twists in the light, crystallizing.  In a glittering shower, ");
+			else outputText(" Clamped around your dick, the metal casing looks more like a gigantic cock ring. The golden sheath actually allows you a better grip on your massive member, a ring of coolness around your hot meat.");
+			outputText("\n\nPressure builds, and tremors of pleasure run through your body as you stroke faster and faster. You let out a small moan, as you pump the cocksleeve up and down your " + player.cockDescript(gildedCock) + ". Your cock swells within the confines of the sleeve, throbbing against the metallic confines of the sheath. You shudder, arching your back, as you climax, your " + Math.round(player.cumQ()) + "mLs of cum arcing up high into the air overhead.");
+			outputText("\n\nPanting, you watch the jet of cum glittering in the air, caught in the light of the golden cocksock. It beads and twists in the light, crystallizing. In a glittering shower, ");
 			if (player.cumQ() < 25)
 				outputText("a sprinkle of");
 			else if (player.cumQ() < 250)
@@ -3433,7 +3446,7 @@ package classes.Scenes {
 			if (player.hasVirginVagina()) { //LOW CORRUPTION DEFLOWER
 				if (player.cor <= 50) {
 					outputText("You blush nervously as you grasp your phallic toy. The firm dildo bends slightly as you hold it in your hand. You feel perverse to consider doing this, and shakingly undo the bottom of your [armor].");
-					outputText("\n\nSitting on your [butt], you begin to rub the length of the slender tube against your [vagina], the gentle stimulation calming your nerves and helping to relax the tension.  As you pick up the pace, moans begin to escape your lips.  Your [clit] fills with blood and twitches as the faux cock slides against it.  You tenderly caress your [chest] with your other hand, becoming more breathy as you do so. ");
+					outputText("\n\nSitting on your [butt], you begin to rub the length of the slender tube against your [vagina], the gentle stimulation calming your nerves and helping to relax the tension. As you pick up the pace, moans begin to escape your lips. Your [clit] fills with blood and twitches as the faux cock slides against it. You tenderly caress your [chest] with your other hand, becoming more breathy as you do so. ");
 					if (player.wetness() <= 2)
 						outputText("The toy slides easier as your juices cover it.\n\n");
 					else outputText("The toy slides effortlessly thanks to your copious, almost inhuman lubrication.\n\n");
@@ -3551,7 +3564,7 @@ package classes.Scenes {
 				if (gemsCreated > 0) {
 					outputText(". You pop the toy from your rod and let your reflexes hump the sky.");
 					
-					outputText("\n\nPanting and humping hard, you watch the jet of cum shimmers through the air. Caught in the light of the golden cocksock, it beads and twists into small crystals.  In a glittering shower, a ");
+					outputText("\n\nPanting and humping hard, you watch the jet of cum shimmers through the air. Caught in the light of the golden cocksock, it beads and twists into small crystals. In a glittering shower, a ");
 					if (player.cumQ() < 25)
 						outputText("sprinkle");
 					else if (player.cumQ() < 250)
@@ -3569,7 +3582,7 @@ package classes.Scenes {
 			outputText(images.showImage("masti-genderless-fuck"));
 			//All times as a genderless person (possibly written for all genders perhaps not herm (not enough hands)) - 
 			outputText("Your " + player.assholeDescript() + " begins to twitch. It's practically crying out for attention.\n\n");
-			outputText("You lay down on your side and reach gingerly behind yourself.  The palm of your hand comes to rest on your " + player.buttDescript() + ".  You slide your finger into your crack and find your " + player.assholeDescript() + ".  You run your finger slowly around the sensitive ring of your hole and feel a tingle emanating from it. A smile creeps across your lips as you begin to imagine what is about to happen.\n\n");
+			outputText("You lay down on your side and reach gingerly behind yourself. The palm of your hand comes to rest on your " + player.buttDescript() + ". You slide your finger into your crack and find your " + player.assholeDescript() + ". You run your finger slowly around the sensitive ring of your hole and feel a tingle emanating from it. A smile creeps across your lips as you begin to imagine what is about to happen.\n\n");
 			//For all parts of scene penetration type changes based on anus size '''any (if you do not want to do more than one variable) or virgin pucker or tight/normal/loose/gaping'''-
 			//If no BioLube perk - 
 			if (player.ass.analWetness < 2) {
@@ -3611,7 +3624,7 @@ package classes.Scenes {
 			outputText(" as your toes curl and an orgasm wracks your body.");
 			//If BioLube perk - 
 			if (player.ass.analWetness >= 2) {
-				outputText("  You withdraw your ");
+				outputText(" You withdraw your ");
 				if (player.ass.analLooseness <= 2)
 					outputText("finger");
 				else if (player.ass.analLooseness < 5)
@@ -3625,7 +3638,7 @@ package classes.Scenes {
 			}
 			//No BioLube perk -
 			else {
-				outputText("  You withdraw your ");
+				outputText(" You withdraw your ");
 				if (player.ass.analLooseness <= 2)
 					outputText("finger");
 				else if (player.ass.analLooseness < 5)
@@ -3640,8 +3653,8 @@ package classes.Scenes {
 				outputText(" off.");
 				//Still Horny - 
 				if (player.lib100 > 75)
-					outputText("  Satisfied, you roll over and drift off to sleep. Your hole remains warm, ready for another round.");
-				else outputText("  Satisfied, you roll over and drift off to sleep.");
+					outputText(" Satisfied, you roll over and drift off to sleep. Your hole remains warm, ready for another round.");
+				else outputText(" Satisfied, you roll over and drift off to sleep.");
 			}
 			player.buttChange(4 + player.ass.analLooseness * 2, true);
 		}

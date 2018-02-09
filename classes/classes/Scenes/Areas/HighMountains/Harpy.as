@@ -112,7 +112,7 @@ package classes.Scenes.Areas.HighMountains
 			this.butt.rating = Butt.RATING_EXPANSIVE;
 			this.lowerBody.type = LowerBody.HARPY;
 			this.skin.tone = "pink";
-			this.theSkinType = Skin.PLAIN;
+			this.skin.type = Skin.PLAIN;
 			this.skin.desc = "feathers";
 			this.hair.color = "blue";
 			this.hair.length = 16;
@@ -131,7 +131,7 @@ package classes.Scenes.Areas.HighMountains
 			this.gems = 10 + rand(4);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
-			this.theWingType = Wings.HARPY;
+			this.wings.type = Wings.HARPY;
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			checkMonster();

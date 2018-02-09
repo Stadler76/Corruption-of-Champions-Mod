@@ -47,5 +47,9 @@ package classes.Items.Consumables
 			
 			return false;
 		}
+		
+		override public function getMaxStackSize():int {
+			return 5;
+		}
 	}
 }

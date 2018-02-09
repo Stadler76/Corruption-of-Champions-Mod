@@ -49,8 +49,8 @@ package classes.Scenes.Places.Prison
 					break;
 				case "default":
 			}
-			prisonCaptor.updateNextRestraintCheckEvent(model.time.hours, model.time.days,rand(24));
-			prisonCaptor.updateNextFeedingEvent(model.time.hours, model.time.days,rand(8));
+			prisonCaptor.updateNextRestraintCheckEvent(getGame().time.hours, getGame().time.days,rand(24));
+			prisonCaptor.updateNextFeedingEvent(getGame().time.hours, getGame().time.days,rand(8));
 		}*/
 		
 		public function prisonCaptorScratch(valueNum:Number) : Number
@@ -140,7 +140,7 @@ package classes.Scenes.Places.Prison
 		}
 		
 		public function timeForWaitRandomEvent(hours:int, days:int, goal:int):Boolean {
-			var timesPassed:int = model.time.totalTime;
+			var timesPassed:int = getGame().time.totalTime;
 			if (timesPassed % goal == 0) return true;
 			else return false;
 		}

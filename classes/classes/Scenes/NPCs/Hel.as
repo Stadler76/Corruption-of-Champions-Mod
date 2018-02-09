@@ -205,7 +205,7 @@ package classes.Scenes.NPCs
 			this.gems = 10 + rand(5);
 			this.drop = new ChainedDrop().
 					add(armors.CHBIKNI,1/20).
-					add(weapons.SCIMITR,1/20).
+					add(weapons.SCIMTR0,1/20).
 					add(consumables.SALAMFW,0.7);
 			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			if (game.helScene.heliaSparIntensity() < 100) {

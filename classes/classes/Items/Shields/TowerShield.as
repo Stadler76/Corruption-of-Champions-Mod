@@ -1,16 +1,16 @@
 package classes.Items.Shields 
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Shield;
-	import classes.Player;
 	
 	public class TowerShield extends Shield
 	{
-		
-		public function TowerShield() 
+		public function TowerShield(tier:int)
 		{
-			super("TowerSh", "TowerShld", "tower shield", "a tower shield", 16, 500, "A towering metal shield. It looks heavy!");
+			var ids:Array = ["TowerSh", "TowerS1", "TowerS2"];
+			var eqptNames:Array = ["tower shield", "fine tower shield", "masterwork tower shield"];
+			var longNames:Array = ["a tower shield", "a fine tower shield", "a masterwork tower shield"];
+			this.weightCategory = Shield.WEIGHT_HEAVY;
+			super(ids[tier], "TowerShld", eqptNames[tier], longNames[tier], 16, 500, "A towering metal shield. It looks heavy! The weight of this shield might incite some penalties to accuracy.");
 		}
 		
 		override public function canUse():Boolean {

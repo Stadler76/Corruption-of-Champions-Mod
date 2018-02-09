@@ -127,8 +127,7 @@ package classes.Scenes.Areas.Mountain
 			this.butt.rating = Butt.RATING_AVERAGE+1;
 			this.lowerBody.type = LowerBody.DOG;
 			this.skin.tone = "black";
-			this.theSkinType = Skin.FUR;
-			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.FUR];
+			this.skin.setType(Skin.FUR);
 			this.hair.color = "red";
 			this.hair.length = 3;
 			initStrTouSpeInte(55, 60, 40, 1);

@@ -47,6 +47,7 @@ package classes.Items.Consumables
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 
 			clearOutput();
+			credits.authorText = "MissBlackthorne";
 			outputText("You drink the slimy concoction, grimacing as it reaches your tongue. At first you’re shocked you don’t gag but once you taste"
 			          +" the mixture you realise it's not so bad, almost having a hint of almond behind that thick texture.");
 
@@ -54,9 +55,9 @@ package classes.Items.Consumables
 				outputText("\n\nYou stumble as you shift position, surprised by how quickly you move. After a moment or two of disorientation,"
 				          +" you adjust. You’re certain that you can run faster now.");
 				//+3 spe if less than 50
-				if (player.lib < 50) dynStats("spe", 1);
+				if (player.spe < player.ngPlus(50)) dynStats("spe", 1);
 				//+2 spe if less than 75
-				if (player.lib < 75) dynStats("spe", 1);
+				if (player.spe < player.ngPlus(75)) dynStats("spe", 1);
 				//+1 if above 75.
 				dynStats("spe", 1);
 				//[removed:1.4.10]//changes++;
@@ -487,8 +488,7 @@ package classes.Items.Consumables
 				          +" scales and dangerous looking talons tip your fingers. As suddenly as the itching came it fades, leaving you to marvel"
 				          +" over your new arms.");
 				outputText("\n<b>You now have cockatrice arms!</b>");
-				player.arms.type = Arms.COCKATRICE;
-				mutations.updateClaws(Claws.COCKATRICE);
+				player.arms.setType(Arms.COCKATRICE, Claws.COCKATRICE);
 				changes++;
 			}
 			//Neck loss, if not cockatrice neck

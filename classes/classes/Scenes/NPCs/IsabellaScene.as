@@ -68,7 +68,7 @@ package classes.Scenes.NPCs{
 					return true;
 				}
 			}
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				if (flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 1) flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] = 0;
 				if (kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.ISABELLA_MILKED_YET] >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) {
 					flags[kFLAGS.ISABELLA_MILKED_YET]++;
@@ -78,7 +78,7 @@ package classes.Scenes.NPCs{
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9 && !prison.inPrison) {
+			if (checkedIsabella++ == 0 && getGame().time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (getGame().time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9 && !prison.inPrison) {
 				spriteSelect(SpriteDb.s_isabella);
 				isabellaFollowerScene.isabellaMorningWakeupCall();
 				return true;
@@ -443,8 +443,8 @@ public function nomOnMommaIzzysTits():void {
 			}
 			else {
 				outputText("She sleep-fucked you again!  You sigh and wipe your hand off on your " + player.leg() + ", bemused by the cow-girl who seems too shy to sleep with someone who's awake.  Still, you feel completely sated in every way.  It's going to be a good ");
-			   if (model.time.hours < 12) outputText("day");
-				else if (model.time.hours < 4) outputText("afternoon");
+			   if (getGame().time.hours < 12) outputText("day");
+				else if (getGame().time.hours < 4) outputText("afternoon");
 				else outputText("evening");
 				outputText(".");
 			}

@@ -36,7 +36,7 @@ public function debugPane():void {
 	menu();
 	addButton(0, "Test Input", eventTester);
 	addButton(1, "Parser Tests", doThatTestingThang);
-	addButton(4, "Back", mainMenu.mainMenu);
+	addButton(4, "Back", gameSettings.exitSettings);
 }
 
 public function doThatTestingThang():void
@@ -101,6 +101,8 @@ public function doThatTestingThang():void
 * \[cockhead\] - [cockhead]
 * \[vagorass\] - [vagorass]
 * \[hairorfur\] - [hairorfur]
+* \[hand\] - [hand]
+* \[hands\] - [hands]
 * \[pg\] - [pg] (This is a shortcut to two newlines. This should be two lines below the \[pg\])
 
 
@@ -202,6 +204,8 @@ public function doThatTestingThang():void
 * 30 [if (tallness >= 100)tall|not very tall]
 * 31 you feel your \[if (tallness >= 120)frame|\[if (tallness >= 80)smaller frame|much smaller frame\]\] surrounded 
 * 31 you feel your [if (tallness >= 120)frame|[if (tallness >= 80)smaller frame|much smaller frame]] surrounded 
+* 32 \[if (bakeryTalkedRoot)talked about root|didn't talk about root\]
+* 32 [if (bakeryTalkedRoot)talked about root|didn't talk about root]
 
 
 

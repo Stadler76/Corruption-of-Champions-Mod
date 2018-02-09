@@ -17,11 +17,11 @@ package classes.BodyParts
 		public static const MANTIS:int     =   7; // NYI! Placeholder for Xianxia mod
 		public static const IMP:int        =   8;
 		public static const COCKATRICE:int =   9;
+		public static const RED_PANDA:int  =  10;
+		public static const FERRET:int     =  11;
 
 		public var type:Number = NORMAL;
 		public var tone:String = "";
-
-		public function Claws() {}
 
 		public function restore():void
 		{

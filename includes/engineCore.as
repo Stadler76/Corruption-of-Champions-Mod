@@ -92,77 +92,6 @@ public function clone(source:Object):* {
 	return(copier.readObject());
 }
 
-/**
- * Clear the text on screen.
- */
-public function clearOutput():void {
-	forceUpdate();
-	output.clear();
-	mainView.clearOutputText();
-	if (_gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
-	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-	mainView.hideMenuButton( MainView.MENU_LEVEL );
-	mainView.hideMenuButton( MainView.MENU_PERKS );
-	mainView.hideMenuButton( MainView.MENU_STATS );
-}
-
-/**
- * Basically the same as outputText() but without the parser tags. Great for displaying square brackets on text.
- * @param	output The text to show. It can be formatted such as bold, italics, and underline tags.
- * @param	purgeText Clear the old text.
- */
-public function rawOutputText(output:String, purgeText:Boolean = false):void
-{
-	
-	//OUTPUT!
-	if (purgeText) {
-		//if (!debug) mainText.htmlText = output;
-		//trace("Purging and writing Text", output);
-		clearOutput();
-		this.output.raw(output);
-		//mainView.setOutputText( output );
-		// mainText.htmlText = output;
-	}
-	else
-	{
-		//trace("Adding Text");
-		this.output.raw(output);
-		//mainView.appendOutputText( output );
-		// mainText.htmlText += output;
-	}
-	// trace(getCurrentStackTrace())
-	// scrollBar.update();
-
-}
-
-/**
- * Output the text on main text interface.
- * @param	output The text to show. It can be formatted such as bold, italics, and underline tags.
- * @param	purgeText Clear the old text.
- */
-public function outputText(output:String):void
-{
-	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
-	// the parsed text, parseText() will write directly to the output
-
-
-	// This is cleaup in case someone hits the Data or new-game button when the event-test window is shown. 
-	// It's needed since those buttons are available even when in the event-tester
-	mainView.hideTestInputPanel();
-
-	this.output.text(output);
-		//if (!debug) mainText.htmlText = currentText;
-	/*if (debug)
-	{
-		mainView.setOutputText( currentText );
-	}*/
-
-}
-
-public function displayHeader(string:String):void {
-	outputText("<font size=\"36\" face=\"Georgia\"><u>" + string + "</u></font>\n");
-}
-
 public function buttonIsVisible(index:int):Boolean {
 	if ( index < 0 || index > MAX_BUTTON_INDEX ) {
 		return undefined;
@@ -170,7 +99,7 @@ public function buttonIsVisible(index:int):Boolean {
 	else {
 		return button(index).visible;
 	}
-};
+}
 
 public function buttonText(buttonName:String):String {
 	var matches:*,
@@ -514,12 +443,12 @@ public function openURL(url:String):void
  * @param	nl Inserts a new line before the achievement text.
  * @param	nl2 Inserts a new line after the achievement text.
  */
-public function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void {
+public function awardAchievement(title:String, achievement:int, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void {
 	if (achievements[achievement] != null) {
 		if (achievements[achievement] <= 0) {
 			achievements[achievement] = 1;
 			if (nl && display) outputText("\n");
-			if (display) outputText("<b><font color=\"#000080\">Achievement unlocked: " + title + "</font></b>");
+			if (display) outputText("<font color=\"#000080\"><b>Achievement unlocked: " + title + "</b></font>");
 			if (nl2 && display) outputText("\n");
 			kGAMECLASS.saves.savePermObject(false); //Only save if the achievement hasn't been previously awarded.
 		}

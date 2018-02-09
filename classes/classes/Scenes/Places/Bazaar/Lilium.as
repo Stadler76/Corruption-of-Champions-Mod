@@ -31,7 +31,7 @@ public function LiliumText(output:Boolean = false):Function {
 		//After paying:
 		else outputText("\n\nYou can see Lilium standing in her usual spot.");
 	}
-	if (model.time.hours >= 17) return approachLilium;
+	if (getGame().time.hours >= 17) return approachLilium;
 	return null;
 }
 

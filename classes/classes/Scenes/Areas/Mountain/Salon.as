@@ -16,7 +16,7 @@
 		public function timeChange():Boolean
 		{
 			flags[kFLAGS.SALON_PAID] = 0;
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				if (flags[kFLAGS.LYNNETTE_CARRYING_COUNT] == 0 || flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] != 4)
 				{
 					flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE]++;

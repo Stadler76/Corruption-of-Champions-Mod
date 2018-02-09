@@ -99,12 +99,12 @@ package classes.Scenes.Dungeons
 			addButton(4, "Furniture", menuFurniture);
 			addButton(9, "Wait", camp.doWait); //You can wait/rest/sleep in cabin.
 			if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(9, "Rest", getGame().camp.rest);
-			if (model.time.hours >= 21 || model.time.hours < 6) addButton(9, "Sleep", getGame().camp.doSleep);
+			if (getGame().time.hours >= 21 || getGame().time.hours < 6) addButton(9, "Sleep", getGame().camp.doSleep);
 			addButton(11, "South (Exit)", exitCabin);
 			addButton(14, "Codex", camp.codex.accessCodexMenu);
 			removeButton(7);
 			if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DRESSER] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_TABLE] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR1] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_CHAIR2] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BOOKSHELF] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESK] >= 1 && flags[kFLAGS.CAMP_CABIN_FURNITURE_DESKCHAIR] >= 1) removeButton(2);
-			if (model.time.hours >= 23 || model.time.hours < 6) {
+			if (getGame().time.hours >= 23 || getGame().time.hours < 6) {
 				removeButton(0);
 			}
 		}

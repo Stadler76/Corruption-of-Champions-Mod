@@ -36,11 +36,10 @@ package classes.BodyParts
 		public static const WOLF:int                  =  26;
 		public static const IMP:int                   =  27;
 		public static const COCKATRICE:int            =  28;
+		public static const RED_PANDA:int             =  29;
 
 		public var type:Number     = HUMAN;
 		public var legCount:Number = 2;
-
-		public function LowerBody() {}
 
 		public function restore():void
 		{

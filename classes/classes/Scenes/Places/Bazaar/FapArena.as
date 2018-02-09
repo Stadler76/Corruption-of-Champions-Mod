@@ -28,7 +28,7 @@ public function fapArenaGOOOO():void {
 
 	outputText("The waiting line advances and you finally end up in front of the tent's entrance guarded by a surprisingly tall goblin.  She looks at you with assessing eyes, suddenly grabs your crotch with her left hand, rubs it for a second, and says, ");
 	//[if dick size < 8 inches] 
-	if (player.longestCockLength() < 8) {
+	if (player.longestCockLength() < 8 && (flags[kFLAGS.LOW_STANDARDS_FOR_ALL] === 0 && !player.hasCock())) {
 		outputText("\"<i>I'm afraid you aren't well-endowed enough to take part in our sessions.  Please come back when ");
 		if (!player.hasCock()) outputText("you have a cock.");
 		else outputText("your cock is sufficiently long.");
@@ -405,6 +405,8 @@ private function fapResults(place:Number = 3):void {
 			case 2:
 				itype = consumables.L_BLUEG;
 				break;
+			default:
+				itype = consumables.GROPLUS;
 		}
 		flags[kFLAGS.FAP_ARENA_VICTORIES]++;
 		player.orgasm('Dick');

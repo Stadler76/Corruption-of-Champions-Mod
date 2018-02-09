@@ -16,6 +16,7 @@ package classes.Scenes.Areas.Desert {
 		
 		public function ghoulEncounter():void {
 			clearOutput();
+			credits.authorText = "Foxwells";
 			outputText(images.showImage("event-hyena"));
 			outputText("As you wander the desert, your eyes catch something moving. You look in its direction. It's a hyena. Not a hyena-morph, but a literal hyena. If that wasn't weird enough, you're pretty certain anything hyena would be found ");
 				if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) {
@@ -30,6 +31,7 @@ package classes.Scenes.Areas.Desert {
 		public function ghoulWon():void {
 			combat.cleanupAfterCombat();
 			clearOutput();
+			credits.authorText = "Foxwells";
 			outputText(images.showImage("monster-ghoul"));
 			if (player.HP <= 0) {
 				outputText("You fall into the sand, your wounds too great. ");

@@ -10,12 +10,24 @@ package classes.Items.Shields
 
 	public class DragonShellShield extends Shield {
 		
-		public function DragonShellShield() {
-			super("DrgnShl", "DrgnShl", "dragon-shell shield", "a dragon-shell shield", 14, 1500, "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.  Absorbs any fluid attacks you can catch, rendering them useless.");
+		public function DragonShellShield(upgraded:Boolean) {
+			var id:String = upgraded ? "RDgnShl" : "DrgnShl";
+			var sname:String = upgraded ? "RDgnShl" : "DrgnShl";
+			var ename:String = upgraded ? "runed dragon-shell shield" : "dragon-shell shield";
+			var lname:String = upgraded ? "a dragon-shell shield with rune markings" : "a dragon-shell shield";
+			var tier:int = upgraded ? 1 : 0;
+			this.weightCategory = Shield.WEIGHT_MEDIUM;
+			super(id, sname, ename, lname, 14, 1500, "", Shield.PERK_ABSORPTION);
+		}
+		
+		override public function get shortName():String { //Don't display +1 for runed shield.
+			return _shortName;
 		}
 		
 		override public function get description():String {
 			var desc:String = game.flags[kFLAGS.EMBER_HATCHED] > 0 ? "A durable shield that has been forged from the dragon eggshell Ember gave you for maxing out " + game.emberScene.emberMF("his", "her") + " affection." : "A durable shield that has been forged from the remains of the dragon egg you found in the swamp.";
+			desc += " Absorbs any fluid attacks you can catch, rendering them useless.";
+			if (tier > 0) desc += " This shield has since been enhanced and now intricate glowing runes surround the edges in addition to more imposing spiky appearance.";
 			//Type
 			desc += "\n\nType: Shield";
 			//Block Rating

@@ -4,6 +4,7 @@ package classes.Scenes.Dungeons.Factory
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Items.Shields.DragonShellShield;
 	import classes.Scenes.Dungeons.Factory;
 	import classes.internals.*;
 	import flash.display.InteractiveObject;
@@ -115,7 +116,7 @@ package classes.Scenes.Dungeons.Factory
 				return;
 			}
 			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
-			if (player.shield == game.shields.DRGNSHL && rand(2) == 0)
+			if (player.shield is DragonShellShield && rand(2) == 0)
 			{
 				outputText("Your shield managed to absorb the attack!")
 				combatRoundOver();
@@ -211,8 +212,7 @@ package classes.Scenes.Dungeons.Factory
 			this.special1 = cockTripAttack;
 			this.special2 = spoogeAttack;
 			this.tail.type = Tail.DEMONIC;
-			this.theWingType = Wings.BAT_LIKE_TINY;
-			this.wingDesc = "tiny hidden";
+			this.wings.type = Wings.BAT_LIKE_TINY;
 			checkMonster();
 		}
 	}

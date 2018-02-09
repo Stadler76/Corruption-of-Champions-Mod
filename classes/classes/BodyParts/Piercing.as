@@ -13,7 +13,5 @@ package classes.BodyParts
 		public static const LADDER:int =   3;
 		public static const HOOP:int   =   4;
 		public static const CHAIN:int  =   5;
-
-		public function Piercing() {}
 	}
 }

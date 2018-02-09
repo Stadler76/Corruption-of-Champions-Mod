@@ -201,10 +201,10 @@ package classes.Scenes.Areas.Forest
 						"blonde": "long flaxen",
 						"black": "lustrous, ass-length black",
 						"red": "unkempt, shoulder-length reddish"
-					}[hair.color]) +
+					}[hairColor]) +
 							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
 			// this.plural = false;
-			if (hair.color=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
+			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
 				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN);
 				this.balls = 2;
 				this.ballSize = 2 + rand(13);
@@ -221,7 +221,7 @@ package classes.Scenes.Areas.Forest
 			this.hips.rating = Hips.RATING_AMPLE;
 			this.butt.rating = Butt.RATING_AVERAGE+1;
 			this.skin.tone = "pale";
-			this.hair.color = hair.color;
+			this.hair.color = hairColor;
 			this.hair.length = 13 + rand(20);
 			initStrTouSpeInte(35, 45, 90, 95);
 			initLibSensCor(60, 65, 45);

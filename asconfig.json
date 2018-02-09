@@ -1,0 +1,35 @@
+{
+    "type": "app",
+    "config": "flex",
+    "compilerOptions": {
+        "library-path": [
+            "lib/bin"
+        ],
+        "source-path": [
+            "classes"
+        ],
+        "output": "target/Main.swf",
+        "define": [
+            {
+                "name": "CONFIG::release",
+                "value": "true"
+            },
+            {
+                "name": "CONFIG::debug",
+                "value": "false"
+            },
+            {
+                "name": "CONFIG::AIR",
+                "value": "false"
+            },
+            {
+                "name": "CONFIG::STANDALONE",
+                "value": "true"
+            }
+        ],
+        "static-link-runtime-shared-libraries": true
+    },
+    "files": [
+        "classes/classes/CoC.as"
+    ]
+}

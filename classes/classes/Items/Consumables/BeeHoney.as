@@ -175,8 +175,7 @@ package classes.Items.Consumables
 					          +" pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from"
 					          +" the upper arm down, and downy yellow fuzz along your upper arm.");
 				}
-				player.arms.type = Arms.BEE;
-				mutations.updateClaws();
+				player.arms.setType(Arms.BEE);
 				changes++;
 			}
 			//-Nipples reduction to 1 per tit.

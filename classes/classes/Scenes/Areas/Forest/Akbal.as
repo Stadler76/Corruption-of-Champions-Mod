@@ -145,7 +145,6 @@ import classes.internals.WeightedDrop;
 					return;
 				}
 				outputText("You are burned badly by the flames! ("+player.takeDamage(40) +")");
-				;
 			}
 			game.combat.combatRoundOver();
 		}
@@ -185,8 +184,7 @@ import classes.internals.WeightedDrop;
 			this.hips.rating = Hips.RATING_SLENDER;
 			this.butt.rating = Butt.RATING_TIGHT;
 			this.skin.tone = "spotted";
-			this.theSkinType = Skin.FUR;
-			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.FUR];
+			this.skin.setType(Skin.FUR);
 			this.hair.color = "black";
 			this.hair.length = 5;
 			initStrTouSpeInte(55, 53, 50, 75);

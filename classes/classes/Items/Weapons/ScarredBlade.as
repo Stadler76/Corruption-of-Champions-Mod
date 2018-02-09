@@ -10,6 +10,7 @@ package classes.Items.Weapons
 		
 		public function ScarredBlade() 
 		{
+			this.weightCategory = Weapon.WEIGHT_MEDIUM;
 			super("ScarBld", "ScarBlade", "scarred blade", "a scarred blade", "slash", 10, 1000, "This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others. It only cooperates with the corrupt.");
 		}
 		

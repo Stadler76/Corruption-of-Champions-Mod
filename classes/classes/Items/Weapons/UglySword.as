@@ -9,6 +9,7 @@ package classes.Items.Weapons
 	public class UglySword extends Weapon {
 		
 		public function UglySword() {
+			this.weightCategory = Weapon.WEIGHT_MEDIUM;
 			super("U.Sword", "U.Sword", "ugly sword", "an ugly sword", "slash", 7, 400, "This ugly sword is jagged and chipped, yet somehow perfectly balanced and unnaturally sharp. Its blade is black, and its material is of dubious origin.", "uglySword");
 		}
 		

@@ -478,6 +478,8 @@ package classes
 				"Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.", null, true);
 		public static const SensualLover:PerkType = mk("Sensual Lover", "Sensual Lover",
 				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.", null, true);
+		public static const WarDance:PerkType = mk("War Dance", "War Dance",
+				"+15% Damage against enemies in hand to hand combat and -20% Evasion change for the enemy.");
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
 				

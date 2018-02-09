@@ -1,8 +1,8 @@
 package classes 
 {
-import flash.utils.setTimeout;
+	import flash.utils.setTimeout;
 
-/**
+	/**
 	 * Class to replace the old and somewhat outdated output-system, which mostly uses the include-file includes/engineCore.as
 	 * @since  08.08.2016
 	 * @author Stadler76
@@ -47,7 +47,7 @@ import flash.utils.setTimeout;
 		 * @param   text    The text to be added
 		 * @return  The instance of the class to support the 'Fluent interface' aka method-chaining
 		 */
-		protected function _addText(text:String):Output
+		public function text(text:String):Output
 		{
 			// This is cleaup in case someone hits the Data or new-game button when the event-test window is shown. 
 			// It's needed since those buttons are available even when in the event-tester
@@ -62,19 +62,6 @@ import flash.utils.setTimeout;
 		}
 
 		/**
-		 * Add text to the output-buffer
-		 *
-		 * Actually this is a wrapper around _addText(text)
-		 *
-		 * @param   text    The text to be added
-		 * @return  The instance of the class to support the 'Fluent interface' aka method-chaining
-		 */
-		public function text(text:String):Output
-		{
-			return _addText(text);
-		}
-
-		/**
 		 * Flushes the buffered output to the GUI aka displaying it
 		 *
 		 * This doesn't clear the output buffer, so you can add more text after that and flush it again.
@@ -86,6 +73,7 @@ import flash.utils.setTimeout;
 		public function flush():void
 		{
 			mainViewManager.setText(_currentText);
+			credits.show();
 		}
 
 		/**
@@ -96,7 +84,18 @@ import flash.utils.setTimeout;
 		 */
 		public function header(headLine:String):Output
 		{
-			return text("<font size=\"36\" face=\"Georgia\"><u>" + headLine + "</u></font>\n");
+			return text(formatHeader(headLine));
+		}
+
+		/**
+		 * Returns the formatted headline
+		 *
+		 * @param	headLine    The headline to be formatted
+		 * @return  The formatted headline
+		 */
+		public function formatHeader(headLine:String):String
+		{
+			return "<font size=\"36\" face=\"Georgia\"><u>" + headLine + "</u></font>\n";
 		}
 
 		/**
@@ -118,6 +117,7 @@ import flash.utils.setTimeout;
 			nextEntry();
 			_currentText = "";
 			mainView.clearOutputText();
+			credits.clear();
 			return this;
 		}
 
@@ -202,7 +202,7 @@ import flash.utils.setTimeout;
 			clearCurrentEntry();
 			// On the next animation frame
 			setTimeout(function():void {
-				mainView.scrollBar.scrollPosition = mainView.scrollBar.maxScrollPosition;
+				mainView.scrollBar.value = mainView.scrollBar.maximum;
 			},0);
 			return this;
 		}

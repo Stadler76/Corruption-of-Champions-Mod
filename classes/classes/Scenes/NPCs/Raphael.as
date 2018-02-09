@@ -3,6 +3,7 @@ package classes.Scenes.NPCs{
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.display.SpriteDb;
 
 	public class Raphael extends NPCAwareContent implements TimeAwareInterface {
 
@@ -32,7 +33,7 @@ package classes.Scenes.NPCs{
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+			if (checkedRussetRogue++ == 0 && getGame().time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]);
 				trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
 				trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
@@ -60,7 +61,7 @@ package classes.Scenes.NPCs{
 						}
 					}
 					else { //If the PC does not currently meet his criteria
-						if (flags[kFLAGS.RAPHAEL_MET] == 0 && rand(10) == 0 && model.time.days >= 15) {
+						if (flags[kFLAGS.RAPHAEL_MET] == 0 && rand(10) == 0 && getGame().time.days >= 15) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n");
 							doNext(meetRaphael);
 							return true;
@@ -127,6 +128,7 @@ override public function RaphaelLikes():Boolean {
 //{First encounter}
 private function meetRaphael():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_raphael);
 	outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n");
 	
 	outputText("Suddenly, you sit up straight and something occurs to you. If you're sleeping, then who's opening the chest?\n\n");
@@ -307,6 +309,7 @@ private function rapeRaphaelII():void {
 //Again at bedtime
 private function RaphaelDress():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_raphael);
 	outputText("A small pebble hits the ground near you, waking you up. When a second one hits, you're sure someone is trying to draw your attention.\n\n");
 
 	outputText("Rubbing your eyes, you pull yourself out of bed, wondering what's going on. Sticking your head through the front wall of your " + camp.homeDesc() + ", you take a curious peek outside, but find no one around.\n\n");
@@ -363,7 +366,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 	//Clear dress countdown.  Its over and done with.
 	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
-	
+	spriteSelect(SpriteDb.s_raphael);
 	outputText("You awake to the soft patter of footsteps moving away from you. For a second you think nothing of it, but soon awake to the realization you might have been robbed again. When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n");
 
 	outputText("You rush out of your " + camp.homeDesc() + ", but when you look around and spot something red lying on the small ruined wall on the outskirts of your camp, you realize that the situation isn't as urgent as you had feared. You begin to understand what the wily fox meant to imply with uncertain ownership of the pendant.\n\n");
@@ -1211,6 +1214,7 @@ private function RaphaelThieverySmexPtII():void {
 //[Quicksilver scene]
 private function quiksilverFawkesEndGame():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_raphael);
 	outputText("You wake up to the sound of an ominous cry in the distance, like that of a howling wolf.  It can only mean trouble and you jump out of bed.\n\n");
 
 	outputText("It is an eerily misty morning outside, with banks of fog covering your campsite.  It only makes the second howl more haunting as the danger appears to draw closer to camp.  You stand still and prepare yourself to face this menace, peering into the fog.  When a shadow creeps closer, you prime for combat.  However, its posture suggests it is weary and tired, slumping against a tree. When it struggles forward, it almost comes falling out of the curtaining mist.  It is only then that you notice the redness of its fur and the fineness of its clothes.  It is the fox and russet rogue, Raphael!\n\n");
@@ -1369,6 +1373,7 @@ private function betrayRaphael():void {
 //Intro
 public function orphanageIntro():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_raphael);
 	if (RaphaelLikes()) {
 		if (flags[kFLAGS.TIMES_ORPHANAGED_WITH_RAPHAEL] == 0) {
 			outputText("You spend some time around Tel'Adre looking for the orphanage Raphael mentioned, but you can't seem to find a building that looks like one.  Instead you resort to asking the locals, but their reactions are weird. Upstanding citizens, friendly and polite, turn away from you at the merest notion of it.  Young men get excited but dare not speak of it, women blush and turn away like you've just solicited them and, strangest of all, most children have never even heard of it.");
@@ -1406,7 +1411,7 @@ public function orphanageIntro():void {
 			addButton(0,"Next",raphaelIntroPageTwo);
 			flags[kFLAGS.TIMES_ORPHANAGED_WITH_RAPHAEL]++
 		}
-		else if (model.time.hours >= 19 && model.time.hours <= 21) {
+		else if (getGame().time.hours >= 19 && getGame().time.hours <= 21) {
 			//Repeat Approaches
 			//Repeat encounter: When the Orphanage is selected between 19:00 and 21:00
 			outputText("You walk into the alley to the side of the orphanage and look up expectantly, brushing by shady looking teens who enjoy patting you down, but leaving you and your possessions alone otherwise.  They seem to make a game out of it.  The little staging room is lit and you begin to search for the one rope out of many that will hoist you up there by pulling it.  You stay clear of the other ones, not quite sure what they'd do, but half expecting them to fire a crossbow bolt or drop an anvil on your head.  Anxious, you grab the right one and hold on tight as it pulls you up into the air and swings you towards the correct window.");

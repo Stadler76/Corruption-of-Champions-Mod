@@ -13,7 +13,7 @@ public class AuntNancy extends TelAdreAbstractContent{
 //[Introduction Blurb:
 //(appears in the Wet Bitch between 6:00 and 14:00)]
 public function auntNancy(display:Boolean = true):Boolean {
-	if (model.time.hours >= 6 && model.time.hours <= 14) {
+	if (getGame().time.hours >= 6 && getGame().time.hours <= 14) {
 		if (display) {
 			outputText("\n\nYou see a rather buxom woman with short, white hair in a neck- and sleeve-less black dress cleaning glasses with her bar towel.  She makes the task look simple, moreso because she has two pairs of arms, wrapped in what look like shiny black gloves.");
 			//[If MetNancy = 0]
@@ -33,7 +33,7 @@ public function interactWithAuntNancy():void {
 	clearOutput();
 	//[Interaction 2]
 	//[If Time = 1400, Relationship with Aunt Nancy >= 30, and PillowTalk= 0]
-	if (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] >= 30 && model.time.hours == 14 && flags[kFLAGS.NANCY_TIMES_BONED] == 0) {
+	if (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] >= 30 && getGame().time.hours == 14 && flags[kFLAGS.NANCY_TIMES_BONED] == 0) {
 		outputText("As you enter the bar, looking forward to spending some time with Aunt Nancy, you see that she is cleaning up and getting ready to leave.  She spots you with one of her eyes and smiles, waving you closer with a single hand as the other three set glasses under the bar.\n\n");
 
 		outputText("\"<i>Afternoon, friend!</i>\" she says, cheerily.  \"<i>You've certainly been coming in a lot, and I can't say I don't appreciate your company.</i>\"  Aunt Nancy looks you over a little, smiling a little more wistfully and melancholically now.  \"<i>You remind me a little of my husband,</i>\" she admits, finishing up and skittering out from behind the bar on her many legs as the afternoon shift bartender takes her place.  \"<i>It's... nothing I can put my finger on.  Just, you have a certain... <b>quality</b> to you.</i>\"\n\n");
@@ -46,7 +46,7 @@ public function interactWithAuntNancy():void {
 		addButton(1, "Decline", declineAuntNancyMassage);
 	}
 	//[If Time >= 1400 - (100*(Relationship with Aunt Nancy/30), Relationship with Aunt Nancy >= 30, and PillowTalk= 1]
-	else if (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] >= 30 && model.time.hours >= (14 - (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL]/30)) && flags[kFLAGS.NANCY_TIMES_BONED] > 0) {
+	else if (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] >= 30 && getGame().time.hours >= (14 - (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL]/30)) && flags[kFLAGS.NANCY_TIMES_BONED] > 0) {
 		outputText("Aunt Nancy looks up as you walk over to her, and her eyes light up.  Happily, she greets you with a prim little hand atop yours, a bit of evidence of the intimacy you've shared.\n\n");
 
 		outputText("\"<i>Couldn't stay away, could you friend?</i>\" she asks, quietly, a sexy smile on her lovely face.  \"<i>What'll it be? Do you want a drink...</i>\"  The spider-lady leans her white-haired head next to your ear conspiratorially, and whispers, \"<i>Or, do you want me to get off early and give you a little... massage?</i>\"  You shiver at her words.\n\n");

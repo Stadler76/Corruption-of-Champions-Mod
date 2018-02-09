@@ -1,12 +1,7 @@
-/**
- * Created by Kitteh6660. Volcanic Crag is a new endgame area with level 25 encounters.
- * Currently a Work in Progress.
- * 
- * This zone was mentioned in Glacial Rift doc.
- */
-
-package classes.Scenes.Areas 
-{
+/* Created by Kitteh6660. Volcanic Crag is a new endgame area with level 25 encounters
+ * Currently a Work in Progress
+ * This zone was mentioned in Glacial Rift doc */
+package classes.Scenes.Areas {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -15,24 +10,18 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.VolcanicCrag.*;
-	
+
 	use namespace kGAMECLASS;
-	
-	public class VolcanicCrag extends BaseContent implements IExplorable
-	{
+
+	public class VolcanicCrag extends BaseContent implements IExplorable {
 		public var behemothScene:BehemothScene = new BehemothScene();
 		/* [INTERMOD:8chan]
 		 public var volcanicGolemScene:VolcanicGolemScene           = new VolcanicGolemScene();
 		 public var corruptedSandWitchScene:CorruptedSandWitchScene = new CorruptedSandWitchScene();
 		 */
-		
-		public function VolcanicCrag() 
-		{
-		}
+		public function VolcanicCrag() {}
 
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0;
-		}
+		public function isDiscovered():Boolean { return flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0; }
 
 		public function discover():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
@@ -74,7 +63,6 @@ package classes.Scenes.Areas
 			call: walk
 		});
 	}
-
 		public function explore():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
 			doNext(playerMenu);
@@ -90,8 +78,9 @@ package classes.Scenes.Areas
 
 		private function walk():void {
 			clearOutput();
-			outputText(images.showImage("area-vulcaniccrag"));
+			outputText(images.showImage("area-volcaniccrag"));
 			outputText("You spend one hour exploring the infernal landscape but you don't manage to find anything interesting.");
+			dynStats("sen", .5);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -99,7 +88,5 @@ package classes.Scenes.Areas
 			outputText(images.showImage("event-dlc"));
 			getGame().aprilFools.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
 		}
-		
 	}
-
 }

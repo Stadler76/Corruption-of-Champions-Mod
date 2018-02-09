@@ -20,8 +20,6 @@ package classes.BodyParts
 		public var type:Number  = HUMAN;
 		public var count:Number = 2;
 
-		public function Eyes() {}
-
 		public function restore():void
 		{
 			type  = HUMAN;

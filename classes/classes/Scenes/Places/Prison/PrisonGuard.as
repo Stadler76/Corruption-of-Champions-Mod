@@ -165,7 +165,7 @@ package classes.Scenes.Places.Prison
 			doNext(playerMenu);
 		}
 		
-		public function prisonCaptorLoadGuard(randomGuard:Boolean, guardID:String = "default"):void
+		public function prisonCaptorLoadGuard(randomGuard:Boolean, guardID:String = ""):void
 		{
 			if (randomGuard)
 			{
@@ -232,6 +232,7 @@ package classes.Scenes.Places.Prison
 					guardEscapeSeduceBonus = 20;
 					guardEscapeBribeBonus = 10;
 					guardEscapeSneakBonus = 15;
+					break;
 				case "satyr":
 					guardType = guardID;
 					guardPronoun1 = "he";
@@ -243,7 +244,7 @@ package classes.Scenes.Places.Prison
 					guardEscapeSeduceBonus = 20;
 					guardEscapeBribeBonus = 10;
 					guardEscapeSneakBonus = 15;
-				case "default":
+					break;
 				default:
 					guardType = guardID;
 					guardPronoun1 = "he";

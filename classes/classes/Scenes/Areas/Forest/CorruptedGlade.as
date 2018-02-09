@@ -33,7 +33,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 1 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
 				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0 && rand(6) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
 				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0 && rand(4) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
-				if (model.time.days % (3 + Math.floor(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] / 15)) == 0 && model.time.hours > 23) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]--; //Decrement by 1 every 3 days.
+				if (getGame().time.days % (3 + Math.floor(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] / 15)) == 0 && getGame().time.hours > 23) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]--; //Decrement by 1 every 3 days.
 			}
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 100) { //Extinct state
 				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] = 0;
@@ -324,7 +324,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsBlackfire)) {
 				addButton(button++, "Fire", destroyTheCorruptedGlades, 2);
 			}
-			if (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE) {
+			if (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE0) {
 				addButton(button++, "Axe", destroyTheCorruptedGlades, 3);
 			}
 			if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut") {

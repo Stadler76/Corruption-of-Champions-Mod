@@ -3,17 +3,20 @@
  */
 package classes.Items
 {
-	import classes.ItemType;
 	import classes.PerkLib;
-	import classes.Player;
 
 	public class Armor extends Useable //Equipable
 	{
+		public static const WEIGHT_LIGHT:String = "Light";
+		public static const WEIGHT_MEDIUM:String = "Medium";
+		public static const WEIGHT_HEAVY:String = "Heavy";
+		
 		private var _def:Number;
 		private var _perk:String;
 		private var _name:String;
 		private var _supportsBulge:Boolean;
 		private var _supportsUndergarment:Boolean;
+		private var _tier:int = 0; //Defaults to 0.
 		
 		public function Armor(id:String, shortName:String, name:String, longName:String, def:Number, value:Number = 0, description:String = null, perk:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
 			super(id, shortName, longName, value, description);
@@ -24,7 +27,7 @@ package classes.Items
 			_supportsUndergarment = supportsUndergarment;
 		}
 		
-		public function get def():Number { return _def; }
+		public function get def():Number { return _def + _tier; }
 		
 		public function get perk():String { return _perk; }
 		
@@ -93,35 +96,8 @@ package classes.Items
 		
 		public function removeText():void {} //Produces any text seen when removing the armor normally
 		
-/*
-		override protected function equip(player:Player, returnOldItem:Boolean,output:Boolean):void
-		{
-			if (output) clearOutput();
-			if (canUse(player, true)) {
-				if (output) outputText("You equip your " + _name + ".  ");
-				var oldArmor:Armor = player.armor;
-				oldArmor.unequip(player, returnOldItem, output);
-				player.setArmorHiddenField(this);
-				equipped(player,output);
-			}
+		override public function getMaxStackSize():int {
+			return 1;
 		}
-
-		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean = false):void
-		{
-			while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
-			if (returnToInventory) {
-				var itype:ItemType = unequipReturnItem(player, output);
-				if (itype != null) {
-					game.itemSwapping = true;
-					if (output && itype == this)
-						outputText("You have your old set of " + longName + " left over.  ");
-					game.inventory.takeItem(this, false);
-				}
-			}
-			player.setArmorHiddenField(ArmorLib.COMFORTABLE_UNDERCLOTHES);
-			if (player.modArmorName.length > 0) player.modArmorName = "";
-			unequipped(player,output);
-		}
-*/
 	}
 }

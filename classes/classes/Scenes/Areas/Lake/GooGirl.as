@@ -166,8 +166,7 @@ package classes.Scenes.Areas.Lake
 			this.lowerBody.type = LowerBody.GOO;
 			var tone:String = randomChoice("blue", "purple", "crystal");
 			this.skin.tone = tone;
-			this.theSkinType = Skin.GOO;
-			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.GOO];
+			this.skin.setType(Skin.GOO);
 			this.skin.adj = "goopey";
 			this.hair.color = tone;
 			this.hair.length = 12 + rand(10);

@@ -1,5 +1,6 @@
 package classes.Scenes 
 {
+	import classes.Scenes.Areas.BogSuit;
 	import classes.Scenes.Areas.ForestSuit;
 	import classes.Scenes.Areas.MountainSuit;
 	
@@ -9,5 +10,6 @@ package classes.Scenes
 	{
 		public var mountainSuit:MountainSuit;
 		public var forestSuit:ForestSuit;
+		public var bogSuit:BogSuit;
 	}
 }

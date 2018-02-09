@@ -91,7 +91,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.level = 19;
 			this.gems = rand(25) +140;
 			this.additionalXP = 50;
-			this.theWingType = Wings.FEATHERED_LARGE;
+			this.wings.type = Wings.FEATHERED_LARGE;
 			this.tail.type = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
 			this.horns.value = 2;

@@ -105,7 +105,7 @@ public function benoitInClutch():Boolean
 	
 	// Benoit enters "clutch" every 21 days, for 7 days
 	var startDay:int = flags[kFLAGS.FEMOIT_NEXTDAY_EVENT];
-	var currDay:int = this.getGame().model.time.days;
+	var currDay:int = getGame().time.days;
 	var diffDays:int = (currDay - startDay) % 28;
 
 	if (diffDays >= 21) return true;
@@ -163,7 +163,7 @@ public function clearBenoitPreggers():void
 		flags[kFLAGS.FEMOIT_EGGS_LAID] += flags[kFLAGS.FEMOIT_EGGS];
 		flags[kFLAGS.FEMOIT_EGGS] = 0;
 		flags[kFLAGS.FEMOIT_INCUBATION] = 0;
-		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = this.getGame().model.time.days; // Cycle "resets" based off birth day.
+		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = getGame().time.days; // Cycle "resets" based off birth day.
 	}
 }
 
@@ -187,8 +187,8 @@ public function benoitBigFamily():Boolean
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
-	if (model.time.hours >= 9 && model.time.hours <= 17) {
-		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && this.getGame().model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
+	if (getGame().time.hours >= 9 && getGame().time.hours <= 17) {
+		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && getGame().time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
 		{
 			if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) 
 			{
@@ -225,7 +225,7 @@ public function benoitIntro():void {
 		suggest = eggySuggest;
 		suggestText = "Suggest";
 	}
-	else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= this.getGame().model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0)
+	else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= getGame().time.days && flags[kFLAGS.BENOIT_STATUS] == 0)
 	{
 		femoitNextDayEvent();
 	}
@@ -261,7 +261,7 @@ public function benoitIntro():void {
 			return;
 		}
 	}
-	else if (!benoitInClutch() && !benoitPreggers() && (this.getGame().model.time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30) && (flags[kFLAGS.BENOIT_STATUS] > 0))
+	else if (!benoitInClutch() && !benoitPreggers() && (getGame().time.days - flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] >= 30) && (flags[kFLAGS.BENOIT_STATUS] > 0))
 	{
 		if (flags[kFLAGS.FEMOIT_FIRST_CLUTCH_MISSED] == 0)
 		{
@@ -562,7 +562,7 @@ private function buyFlintlockConfirmation():void {
 	flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 	player.gems -= 200;
 	statScreenRefresh();
-	inventory.takeItem(weapons.FLINTLK, benoitsBuyMenu);
+	inventory.takeItem(weapons.FLNTLK0, benoitsBuyMenu);
 }
 
 private function buyAlarmClock():void {
@@ -638,7 +638,7 @@ private function talkToBenoit():void {
 	}
 	if (flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED] > 0 && player.hasKeyItem("Feathery hair-pin") < 0) {
 		var hasSolidHair:Boolean = (player.hair.type != Hair.GOO && player.hair.length > 0);
-		// Talk scene written by MissBlackthorne
+		credits.authorText = "MissBlackthorne";
 		outputText("\"<i>Ah [name]! I 'ad been 'oping to speak wiz you.</i>\" your basilisk lover says with a toothy smile. \"<i>I 'ave a gift for "
 		          +"you... For all you 'ave done.</i>\" You notice the scales on " + benoitMF("Benoit", "Benoite") + "'s face turn a deeper green,"
 		          +" evidently blushing as " + benoitMF("he", "she") + " thrusts out a closed palm, gaze averted like a kid on Valentines Day."
@@ -668,7 +668,7 @@ private function talkToBenoit():void {
 		return;
 	}
 	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
-		// Talk scene written by MissBlackthorne
+		credits.authorText = "MissBlackthorne";
 		outputText("You ask " + benoitMF("Benoit", "Benoite") + " how the petrifying effect of " + benoitMF("his", "her") + " brethrens gaze works,"
 		          +" is it something their eyes naturally do or type of sight? " + benoitMF("He","She") + " stiffens for a moment before letting out a frustrated sigh.");
 
@@ -742,7 +742,7 @@ private function talkToBenoit():void {
 
 		return;
 	}
-	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
+	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
 	{
 		femoitInitialTalk();
 		doNext(camp.returnToCampUseOneHour);
@@ -932,6 +932,7 @@ private function benoitHairPinTalk():void
 {
 	// On a new page, since it may trigger the hair TF.
 	clearOutput();
+	credits.authorText = "MissBlackthorne";
 	outputText("You ask " + benoitMF("Benoit", "Benoite") + " about the feathery hair-pin he gave to you.");
 	outputText("\n\n\"<i>Ah, ze pin? It iz a 'eirloom from my mozzers side. I suspect it 'as simply been thrown down through generations, none"
 	          +" wanting sumsing zat was more complex zan a shiny object. I think it 'as escaped ze taint, simply because of zis. I kept it to sell,"
@@ -1328,6 +1329,7 @@ public function equipUnequipHairPin():void
 	if (keyItemNum < 0) return;
 
 	clearOutput();
+	credits.authorText = "MissBlackthorne";
 	if (player.keyItemv1("Feathery hair-pin") > 0) {
 		// unequip it
 		if (player.hair.length > 0)
@@ -1369,6 +1371,7 @@ private function convertToBassyEyes():void
 {
 	var eyesGranted:int = flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED] + 1;
 	clearOutput();
+	credits.authorText = "MissBlackthorne";
 	if (eyesGranted <= 1) { // First time
 		outputText("You tell [benoit name] that you've weighed up the pros and cons and that you want to become more of a basilisk. [benoit Ey]"
 		          +" nods as [benoit ey] feels [benoit eir] way across the counter before rummaging about underneath.");
@@ -1417,6 +1420,7 @@ private function convertToBassyEyes():void
 private function convertToBassyEyesPageTwo():void
 {
 	clearOutput();
+	credits.authorText = "MissBlackthorne";
 	outputText("When you wake, you open your eyes and cry out, quickly closing them again. Gods it's bright! [benoit name] rushes over to you and places a hand on your shoulder.");
 	outputText("\n\n\"<i>What iz it? Did somesing 'appen? You're not 'urt are you?</i>\" [benoit ey] says in an increasing worry. You put your hand to "
 	          +"[benoit eirs] and say that you're fine, everything was just a little bright. You open your eyes again, this time slowly, letting your eyes adjust."
@@ -1683,7 +1687,7 @@ public function benoitFeminise():void
 
 		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says " + benoitMF("Benoit","Benoite") + " unevenly.  \"<i>Zis is... I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
 
-		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = this.getGame().model.time.days + 1;
+		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = getGame().time.days + 1;
 		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
 
 		menu();

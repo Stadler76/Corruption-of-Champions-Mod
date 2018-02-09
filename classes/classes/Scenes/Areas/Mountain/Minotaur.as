@@ -72,7 +72,7 @@ package classes.Scenes.Areas.Mountain
 			this.butt.rating = Butt.RATING_AVERAGE;
 			this.lowerBody.type = LowerBody.HOOFED;
 			this.skin.tone = skin.furColor;
-			this.theSkinType = Skin.FUR;
+			this.skin.type = Skin.FUR;
 			this.skin.desc = "shaggy fur";
 			this.hair.color = skin.furColor;
 			this.hair.length = 3;

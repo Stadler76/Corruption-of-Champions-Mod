@@ -4,6 +4,7 @@ package classes.Scenes.NPCs
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
 
 	public class Vapula extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -15,7 +16,7 @@ package classes.Scenes.NPCs
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				if (vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 					if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) flags[kFLAGS.VAPULA_DAYS_SINCE_FED]++;
 					else flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
@@ -32,11 +33,11 @@ package classes.Scenes.NPCs
 	
 		public function timeChangeLarge():Boolean {
 			if (prison.inPrison || flags[kFLAGS.IN_INGNAM] > 0) return false;
-			if (flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
+			if (flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && getGame().time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 				femaleVapulaRecruitmentPartII();
 				return true;
 			}
-			if (model.time.hours == 2 && vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
+			if (getGame().time.hours == 2 && vapulaSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
 				vapulaForceFeeds();
 				return true;
 			}
@@ -52,6 +53,7 @@ package classes.Scenes.NPCs
 //Two nights after "vagina enslave", if PC still meets initial requirements (else defer until she does)(Z)
 		public function femaleVapulaRecruitmentPartII():void
 		{
+			spriteSelect(SpriteDb.s_vapula);
 			outputText("\nYou are awoken by long fingers inching up your inner thighs, testing and caressing your soft flesh. You sigh, open your eyes, and are confronted by an excited, purple face looming over you.");
 			outputText("\n\n\"<i>I have found you, mistress,</i>\" Vapula whispers.  \"<i>And I have done what I promised!  Look.</i>\"  She proudly produces an obscene-looking device, replete with rounded nodules and hanging straps.");
 			outputText("\n\nYou rub your eyes, accept the thing off the succubus and examine it.  It's a double dildo fitted with a harness: a strap-on that is evidently designed to fuck the user whilst they themselves are fucking. One end is relatively small, pink and fleshy-looking, the other is an eight inch purple monster covered in ludicrous orange leopard spots.  Vapula draws in close to you and eagerly points out its features as you turn it around in your hands.");
@@ -68,6 +70,7 @@ package classes.Scenes.NPCs
 
 		public function vapulaGivesPCAPresent():void
 		{
+			spriteSelect(SpriteDb.s_vapula);
 			outputText("\nVapula walks up to you and frowns, clearly disappointed.  \"<i>Since you got rid of the only way you could properly feed me, I got you this.</i>\"\n\nShe drops a strap-on into your hand as she explains, \"<i>It can convert the lust of a woman into something that will be palatable to my... appetites.  You're welcome.</i>\"");
 			outputText("\n\nShe walks away without another word.  It might be time for some discipline.");
 			player.createKeyItem("Demonic Strap-On", 0, 0, 0, 0);
@@ -227,6 +230,7 @@ package classes.Scenes.NPCs
 		{
 			if (output) {
 				clearOutput();
+				spriteSelect(SpriteDb.s_vapula);
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0)
 				{
 					outputText("You gently tap Vapula on her shoulder and tell her you intend to put her goddess-like body to use.  She grunts at first but quickly smiles at you kinkily, letting you see her fangs as she voraciously stares at your crotch. You tear open the rags she's stitched together and cup her bouncy breasts. She swiftly responds with a passionate kiss, moaning in lust and quickly undressing you as you literally tongue-fuck each other. One of her hands darts at your crotch, slowly massaging it as she presses her body against your own, letting you feel the warmth of her jiggly bosom against your chest. You decide to return the favor; moving your own hands down, you slap her firm-yet-ample ass, getting a good grope of her purple flesh; your other hand starts exploring the depth of her vaginal recesses. She pulls back and openly cries in pleasure, her whole body shaking between your arms, a trickle of delicious succubus-saliva hanging between your lips.  After a few minutes of playful teasing, you release her; she stares at you with longing and flirtatious eyes.");

@@ -43,8 +43,7 @@ package classes.Items.Consumables
 			else {
 				outputText("\n\nYou cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?");
 			}
-			player.arms.type = Arms.HUMAN;
-			mutations.updateClaws();
+			player.arms.restore();
 			player.eyes.type = Eyes.HUMAN;
 			player.antennae.type = Antennae.NONE;
 			player.face.type = Face.HUMAN;

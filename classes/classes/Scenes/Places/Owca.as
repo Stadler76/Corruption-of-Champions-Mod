@@ -5,6 +5,7 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.WeaponLib;
 	import classes.Scenes.Places.Owca.*;
+	import classes.display.SpriteDb;
 
 	public class Owca extends BaseContent{
 
@@ -186,11 +187,12 @@ private function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean
 }
 private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_vapula);
 	//N is the number of hours left before night
-	if (model.time.hours < 21) {
-		var passed:int = 21 - model.time.hours;
+	if (getGame().time.hours < 21) {
+		var passed:int = 21 - getGame().time.hours;
 		outputText("<b>" + Num2Text(passed) + " " + (passed > 1 ? "hours pass" : "hour passes") + "...</b>\n");
-		model.time.hours = 21;
+		getGame().time.hours = 21;
 		statScreenRefresh();
 	}
 	outputText("You are awakened by a sudden cackling, and open your eyes; you are almost entirely surrounded by darkness, and the dim light provided by the menacing red moon only makes the landscape bleaker.");
@@ -343,8 +345,8 @@ public function loseOrSubmitToVapula():void {
 
 private function wakeUpAfterDemonGangBangs():void {
 	clearOutput();
-	model.time.hours = 7;
-	model.time.days++;
+	getGame().time.hours = 7;
+	getGame().time.days++;
 	outputText("When you wake up, you are alone, and your restraints are broken.  You are sloshing in a pool of stinky juices; your mouth and ears are still full of it.  Your whole body is covered with a thin white layer that must certainly be dried spooge.  Underneath, you're nothing but bruises and every movement seems to hurt.  A few meters away, outside the pit, you notice your items and your gear.  The village itself appears to be empty... your best assumption is that the residents are hiding, either from shame at having sacrificed you or from awkwardness at the prospect of talking to a sloshing, crusty cumdumpster.  Wearily, you head back to your camp.");
 	//+med-high corruption, - libido, - toughness, - strength, +20 fatigue, high imp preg chance, slimefeed
 	player.changeFatigue(20);
@@ -522,8 +524,8 @@ private function rapeZeVapula():void {
 		player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 	}
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
-	model.time.hours = 7;
-	model.time.days++;
+	getGame().time.hours = 7;
+	getGame().time.days++;
 	combat.cleanupAfterCombat();
 }
 
@@ -575,7 +577,7 @@ private function owcaMainScreenOn():void {
 	//Option: 
 	//[Pit][Herds][Rebecc][Tavern]
 	menu();
-	if (model.time.hours >= 16 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
+	if (getGame().time.hours >= 16 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
 		//Pit. Requires 16:00 or later. Leads to the night gangbang (with possible fight) scene, this time fully equipped and clothed. Attitude is raised by 3.
 		addButton(0, "Pit", zePit);
 	} else {

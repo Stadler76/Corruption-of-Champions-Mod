@@ -47,6 +47,8 @@ package classes
 		public static const RHINO:CockTypesEnum = new CockTypesEnum("mammal");
 		public static const ECHIDNA:CockTypesEnum = new CockTypesEnum("mammal");
 		public static const WOLF:CockTypesEnum = new CockTypesEnum("mammal");
+		public static const RED_PANDA:CockTypesEnum = new CockTypesEnum("mammal");
+		public static const FERRET:CockTypesEnum = new CockTypesEnum("mammal");
 		public static const UNDEFINED:CockTypesEnum = new CockTypesEnum("");
 		
 		function CockTypesEnum(i_group:String = "") { _group = i_group; }

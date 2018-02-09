@@ -35,13 +35,13 @@ package classes.Scenes.Places.TelAdre {
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			if (flags[kFLAGS.COTTON_KID_COUNT] > 0 && model.time.hours == 23) flags[kFLAGS.COTTON_OLDEST_KID_AGE]++;
-			//trace("\nCotton time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			if (flags[kFLAGS.COTTON_KID_COUNT] > 0 && getGame().time.hours == 23) flags[kFLAGS.COTTON_OLDEST_KID_AGE]++;
+			//trace("\nCotton time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			return false;
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (model.time.hours == 6 && flags[kFLAGS.COTTON_BREAKFAST_CLUB] == 1 && player.biggestLactation() >= 2) {
+			if (getGame().time.hours == 6 && flags[kFLAGS.COTTON_BREAKFAST_CLUB] == 1 && player.biggestLactation() >= 2) {
 				flags[kFLAGS.COTTON_BREAKFAST_CLUB] = 0;
 				nomSomeTitMilkCereal();
 				return true;
@@ -95,7 +95,7 @@ private function cottonPregPCChance():void {
 //Been told of naga book quest?
 
 public function cottonsIntro():Boolean {
-	if (model.time.hours >= 12 && model.time.hours <= 18) {
+	if (getGame().time.hours >= 12 && getGame().time.hours <= 18) {
 		//Gym intro scene (haven't met):
 		if (flags[kFLAGS.COTTON_MET_FUCKED] == 0) outputText("\n\nYou see a tall, busty horse-girl doing some stretches over on a nearby mat.  Even from this far away, you can tell from the bulge in her pants that she's no ordinary 'girl'.");
 		//Gym intro scene (met, haven't had sex):

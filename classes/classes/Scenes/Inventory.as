@@ -89,7 +89,7 @@ package classes.Scenes
 			menu();
 			for (x = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x);
+					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x).hint(player.itemSlots[x].itype.description, capitalizeFirstLetter(player.itemSlots[x].itype.longName));
 					foundItem = true;
 				}
 			}
@@ -147,7 +147,7 @@ package classes.Scenes
 			menu();
 			if (flags[kFLAGS.ANEMONE_KID] > 0) {
 				kGAMECLASS.anemoneScene.anemoneBarrelDescription();
-				if (model.time.hours >= 6) addButton(4, "Anemone", kGAMECLASS.anemoneScene.approachAnemoneBarrel);
+				if (getGame().time.hours >= 6) addButton(4, "Anemone", kGAMECLASS.anemoneScene.approachAnemoneBarrel);
 			}
 			if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Camp - Murky Chest") >= 0 || player.hasKeyItem("Camp - Ornate Chest") >= 0) {
 				var chestArray:Array = [];
@@ -851,8 +851,8 @@ package classes.Scenes
 			var orig:int = qty;
 			player.itemSlots[slotNum].emptySlot();
 			for (x = startSlot; x < endSlot && qty > 0; x++) { //Find any slots which already hold the item that is being stored
-				if (storage[x].itype == itype && storage[x].quantity < 5) {
-					temp = 5 - storage[x].quantity;
+				if (storage[x].itype == itype && storage[x].quantity < itype.getMaxStackSize()) {
+					temp = itype.getMaxStackSize() - storage[x].quantity;
 					if (qty < temp) temp = qty;
 					outputText("You add " + temp + "x " + itype.shortName + " into storage slot " + num2Text(x + 1 - startSlot) + ".\n");
 					storage[x].quantity += temp;

@@ -8,12 +8,12 @@
 		}
 		
 		//data
-		private var _quantity:Number = 0;
+		private var _quantity:int = 0;
 		private var _itype:ItemType = ItemType.NOTHING;
 		private var _unlocked:Boolean = false;
 
 		
-		public function setItemAndQty(itype:ItemType, quant:Number):void
+		public function setItemAndQty(itype:ItemType, quant:int):void
 		{
 			if (itype == null) itype = ItemType.NOTHING;
 			if (quant == 0 && itype == ItemType.NOTHING) {
@@ -47,36 +47,29 @@
 				this._itype = ItemType.NOTHING;
 		}
 
-		public function get quantity():Number
-		{
+		public function get quantity():int {
 			return _quantity;
 		}
-
-		public function set quantity(value:Number):void
-		{
+		public function set quantity(value:int):void {
 			if (value > 0 && _itype == null) CoC_Settings.error("ItemSlotClass.quantity set with no item; use setItemAndQty instead!");
 			if (value == 0) _itype = ItemType.NOTHING;
 			_quantity = value;
 		}
 
-		public function get itype():ItemType
-		{
+		public function get itype():ItemType {
 			return _itype;
 		}
 
-		public function get unlocked():Boolean
-		{
+		public function get unlocked():Boolean {
 			return _unlocked;
 		}
-
-		public function set unlocked(value:Boolean):void
-		{
+		public function set unlocked(value:Boolean):void {
 			if (_unlocked != value){
 				emptySlot();
 			}
 			_unlocked = value;
 		}
-
+		
 		public function isEmpty():Boolean
 		{
 			return _quantity<=0;

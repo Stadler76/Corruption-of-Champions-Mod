@@ -26,7 +26,7 @@ package classes.Scenes.Areas.Desert {
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			//trace("\nSand Witch time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nSand Witch time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) pregnancy.knockUpForce(); //Silently clear the Sand Witch's pregnancy if the player has not met her in time
 			return false;
 		}

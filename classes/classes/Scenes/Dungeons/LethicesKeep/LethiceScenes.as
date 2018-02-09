@@ -1271,7 +1271,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			player.lust = player.minLust();
 			player.fatigue = 0;
 			player.hunger = 100;
-			model.time.hours = 23;
+			getGame().time.hours = 23;
 			outputText(images.showImage("item-lWhip"));
 			inventory.takeItem(weapons.L_WHIP, camp.returnToCampUseEightHours);
 		}

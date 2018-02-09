@@ -190,7 +190,6 @@ private function resetToPC():void {
 	player.itemSlot8 = urtaQItems8;
 	player.itemSlot9 = urtaQItems9;
 	player.itemSlot10 = urtaQItems10;
-	model.player = player;
 
 	// See called method comment.
 	player.fixFuckingCockTypesEnum();
@@ -226,7 +225,6 @@ public function startUrtaQuest():void {
 	player2 = player;
 
 	player = new Player();
-	model.player = player;
 	player.short = "Urta";
 	player.tallness = 71;
 	player.hair.color = "gray";
@@ -302,10 +300,22 @@ public function startUrtaQuest():void {
 	player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 
 	//GEAR!
-	player.setWeapon(weapons.URTAHLB);
+	switch(player.newGamePlusMod()) {
+		case 0:
+			player.setWeapon(weapons.HALBRD0);
+			break;
+		case 1:
+			player.setWeapon(weapons.HALBRD1);
+			break;
+		case 2:
+		case 3:
+		case 4:
+			player.setWeapon(weapons.HALBRD2);
+			break;
+		default:
+			player.setWeapon(weapons.HALBRD0);
+	}
 	player.setArmor(armors.URTALTA);
-//	player.weapon = weapons.URTAHLB;
-//	player.armor = armors.URTALTA;
 	
 	//DISPLAY SOME SHIT YO
 	clearOutput();
@@ -508,7 +518,7 @@ private function fuckHelAndKitsunesAsUrta():void {
 	outputText("\n\nYou wake alone, and as the sun rises, you realize it's time to leave the city on your quest...");
 	flags[kFLAGS.URTA_FUCKED_HEL] = 1;
 	player.orgasm('Generic');
-	model.time.days++;
+	getGame().time.days++;
 	//Advance to next day, jump to leaving text
 	//{Resume UrtaQUEST!}
 	menu();
@@ -889,7 +899,7 @@ private function snuggleWithUrta(truth:Boolean):void {
 //Embark(C)*
 private function morningAfterCampVisitEmbark(truth:Boolean):void {
 	clearOutput();
-	model.time.days++;
+	getGame().time.days++;
 	statScreenRefresh();
 	outputText("Sadly, morning comes, and your time with " + player2.short + " comes to an end.  You push " + player2.mf("his", "her") + " shoulder gently to rouse " + player2.mf("him", "her") + ", smiling at " + player2.mf("him", "her") + " when " + player2.mf("he", "she") + " wakes.  You kiss " + player2.mf("him", "her") + " on the lips before rolling out from under the blanket.  The two of you eat a quiet breakfast together, simply enjoying each other's company.  ");
 
@@ -1075,9 +1085,9 @@ private function urtaGameOver():void {
 	outputText("<b>Urta has been lost to her fate...  Meanwhile, back at camp...</b>");
 	getGame().inCombat = false;
 	flags[kFLAGS.URTA_QUEST_STATUS] = -1;
-	model.time.days++;
+	getGame().time.days++;
 	resetToPC();
-	model.time.hours = 6;
+	getGame().time.hours = 6;
 	statScreenRefresh();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2082,7 +2092,7 @@ public function urtaNightSleep():void {
 //Armor Sleep*
 private function urtaSleepsArmored():void {
 	clearOutput();
-	model.time.days++;
+	getGame().time.days++;
 	outputText("You go to sleep wearing your armor.  It turns out to have been a good idea when you're woken by tentacles probing at your chest-plate, seeking to undo the numerous straps holding it in place.  You roll to the side and easily squeeze out of the slippery tendrils.  Your hand falls on your halberd with practiced ease, hefting its reassuring weight in your hands as you spring up off your paws.");
 	outputText("\n\nThe tentacles wave about wildly, and the shambling mound begins to retreat.  \"<i>Fuck this!</i>\" it shouts, \"<i>I just wanted a snack!</i>\"");
 	outputText("\n\nWhat?!  That gigantic tentacle beast didn't try to fight you?  You suppose it's used to easier prey at this time of night and didn't want to expend the effort on a fight.  How fortunate for you.");
@@ -2482,7 +2492,7 @@ public function beatMinoLordOnToSuccubi():void {
 
 	outputText("\n\n<b>It's a fight!</b>");
 	kGAMECLASS.combat.clearStatuses();
-	player.setWeapon(weapons.URTAHLB);
+	player.setWeapon(weapons.HALBRD0);
 	//player.weapon = weapons.URTAHLB;
 	startCombat(new MilkySuccubus(),true);
 }
@@ -2811,8 +2821,8 @@ private function postFuckUrtaUp():void {
 	outputText("\n\nBefore you know it, the two of you are being waved through the gates.  Edryn boggles at the sight of her friend swollen up with pregnancy, but doesn't protest as you assist Urta in clambering up onto the centauress' back. Together, the two of you manage to haul the unnaturally gravid fox to the Covenant's tower.  Countless guards have to be addressed at each step of the journey, but eventually, you're both brought to a comfortable chamber and allowed to rest... when the mages aren't busily probing Urta with magic, that is.  Urta has you stay by her side the entire time, and you do your best to continue supporting her, not leaving even when she falls asleep on your shoulder, completely tuckered out.  You snuggle up against her once the mages finally agree to let you snooze with her, under the vigilant eyes of your guards.  Rest comes surprisingly easy, despite the tensions of your present situation, and you drift off wondering how long it will take Urta to give birth.");
 	menu();
 	addButton(0,"Next",preggedUrtaWithGodChildEpilogue);
-	model.time.days++;
-	model.time.hours = 7;
+	getGame().time.days++;
+	getGame().time.hours = 7;
 }
 
 //Pregged Urta With God-child epilogue:*
@@ -2979,8 +2989,8 @@ private function getKnockedUpUrtaEpilogue():void {
 	//[Next]
 	menu();
 	addButton(0,"Next",getKnockedUpByUrtaEpilogueII);
-	model.time.days++;
-	model.time.hours = 7;
+	getGame().time.days++;
+	getGame().time.hours = 7;
 }
 //Urta & Pregged PC  With God-child epilogue:
 private function getKnockedUpByUrtaEpilogueII():void {

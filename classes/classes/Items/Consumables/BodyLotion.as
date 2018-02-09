@@ -25,13 +25,15 @@ package classes.Items.Consumables
 		}
 		
 		private function liquidDesc():String {
+			var phrase:String = "";
 			switch(_adj) {
-				case "smooth": return randomChoice(["smooth liquid", "thick cream"]);
-				case "rough":  return randomChoice(["abrasive goop", "rough textured goop"]);
-				case "sexy":   return randomChoice(["smooth liquid", "attractive cream", "beautiful cream"]);
-				case "clear":  return randomChoice(["smooth liquid", "thick cream"]);
+				case "smooth": phrase = randomChoice(["smooth liquid", "thick cream"]); break;
+				case "rough":  phrase = randomChoice(["abrasive goop", "rough textured goop"]); break;
+				case "sexy":   phrase = randomChoice(["smooth liquid", "attractive cream", "beautiful cream"]); break;
+				case "clear":  phrase = randomChoice(["smooth liquid", "thick cream"]); break;
+				default:       phrase = "cream"; //Failsafe
 			}
-			return "cream"; //Failsafe
+			return phrase; 
 		}
 		
 		override public function useItem():Boolean {

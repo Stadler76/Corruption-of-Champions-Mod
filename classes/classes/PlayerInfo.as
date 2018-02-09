@@ -1,15 +1,12 @@
 package classes 
 {
-import classes.GlobalFlags.kGAMECLASS;
-
-import flash.events.Event;
-	import fl.controls.ComboBox;;
-	import fl.data.DataProvider;
 	import classes.*;
-	import classes.Scenes.NPCs.IsabellaScene;
 	import classes.GlobalFlags.*;
-	import classes.display.SpriteDb;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.NPCs.IsabellaScene;
 	import classes.internals.*;
+	import com.bit101.components.ComboBox;
+	import flash.events.Event;
 	
 	/**
 	 * The new home of Stats and Perks
@@ -385,6 +382,9 @@ import flash.events.Event;
 			}
 			if (player.cockatriceScore() > 0) {
 				raceScores += "<b>Cockatrice Score:</b> " + player.cockatriceScore() + "\n";
+			}
+			if (player.redPandaScore() > 0) {
+				raceScores += "<b>Red-Panda Score:</b> " + player.redPandaScore() + "\n";
 			}
 			
 			if (raceScores != "")
@@ -921,26 +921,24 @@ import flash.events.Event;
 			else
 				doNext(playerMenu);
 		}
-		
 		//Perk menu
 		private function perkBuyMenu():void {
 			clearOutput();
 			var perkList:Array = buildPerkList();
-			mainView.aCb.dataProvider = new DataProvider(perkList);
+			mainView.aCb.items = perkList;
 			if (perkList.length == 0) {
+				outputText(images.showImage("event-cross"));
 				outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 				if (player.perkPoints > 1) outputText("s");
 				outputText(".");
 				doNext(playerMenu);
 				return;
 			}
+			outputText(images.showImage("event-arrow-up"));
 			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n\n");
 			mainView.aCb.x = 210;
 			mainView.aCb.y = 112;
-			
-			if (mainView.aCb.parent == null) {
-				mainView.addChild(mainView.aCb);
-			}
+			if (mainView.aCb.parent == null) mainView.addChild(mainView.aCb);
 			mainView.aCb.visible = true;
 			menu();
 			addButton(1, "Skip", perkSkip);

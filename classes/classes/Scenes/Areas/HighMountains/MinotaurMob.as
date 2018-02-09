@@ -8,32 +8,27 @@ package classes.Scenes.Areas.HighMountains
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
-	/**
-	 * ...
-	 * @author ...
-	 */
-	public class MinotaurMob extends Monster 
+	public class MinotaurMob extends Monster
 	{
 		private function precumTease():void {
 			var teased:Boolean = false;
 			var damage:Number = 0;
 			var oldLust:Number = player.lust;
 			game.spriteSelect(SpriteDb.s_minotaurSons);
-			//(Big taur pre-cum tease)
 			if (rand(2) == 0) {
+				//(Big taur pre-cum tease)
 				teased = true;
 				if (rand(5) > 0) {
 					outputText("The biggest lifts his loincloth, giving you a perfect view of his veiny hardness.  Pre-cum visibly bubbles from his flared tip, splattering wetly on the rocks and filling the air with his bestial musk.  He says, \"<i>See how much I need you?</i>\"\n");
 					damage = 7 + player.lib/20;
-				}
-				//crit)
-				else {
+				} else {
+					//crit
 					outputText("The largest bull in the crowd flaps his cum-soaked loincloth up and wraps a massive, muscled hand around his incredible erection.  Shaking it back and forth, he flicks his bubbling pre-cum in your direction, letting it spatter noisily against the rocks around you.  A few droplets even land on your skin, fogging the air with minotaur pheromones.\n");
 					damage = 13 + player.lib/20;
 				}
 			}
-			//(Middle Taur pre-cum tease)
 			if (rand(2) == 0) {
+				//(Middle Taur pre-cum tease)
 				teased = true;
 				if (rand(5) > 0) {
 					outputText("\"<i>Hey, slut, look at this!</i>\" taunts one of the beast-men.  He shakes his hips lewdly, spinning his thick horse-cock in wide circles and sending his potent pre flying through the air.  Droplets rain down around you, filling the air with even more of that delicious smell.\n");
@@ -52,30 +47,28 @@ package classes.Scenes.Areas.HighMountains
 				}
 				outputText("\n");
 			}
-			//(Minitaur pre-cum tease)
 			if (!teased || rand(3) == 0) {
+				//(Minitaur pre-cum tease)
 				outputText("The smallest of the beastmen, the minitaur, moans and begs, \"<i>Please Mom, can we please fuck you?  I... I need it so bad.</i>\"  He raises the edge of his loincloth to show exactly what he's talking about.  His member is limp but leaking.  What really catches your eyes sits behind that drizzling shaft - a pair of balls looking swollen and pent up beyond belief.  A sticky web of his leavings hangs between his genitals and his loincloth, showing you just how much he's been leaking at the thought of fucking you.  Fanning the sopping garment, he inadvertently blows a wave of his pheromones your way.\n");
 				damage = 9 + player.lib/20;
 			}
 			game.dynStats("lus", damage);
 			damage = player.lust - oldLust;
 			//UNIVERSAL pre-cum RESULT:
-			//(Low damage taken)
 			if (damage <= 8) {
+				//(Low damage taken)
 				outputText("Though your body is tingling from the show the horny beasts are giving you, it doesn't effect you as much as it could have.");
 				if (player.lust >= player.maxLust()) outputText("  Still, you're too horny to fight any longer.");
-			}
-			//(Medium damage taken)
-			else if (damage <= 14) {
+			} else if (damage <= 14) {
+				//(Medium damage taken)
 				outputText("The powerful pheromones and scents hanging in the air around you make your body flush hotly.  Your " + player.nippleDescript(0) + "s grow harder");
 				if (player.lust100 > 70) outputText(", though you didn't think such a thing was possible");
 				else outputText(", feeling like two bullets scraping along the inside of your " + player.armorName);
 				outputText(", but it... it could have been worse.  You shudder as a little fantasy of letting them dribble it all over your body works through your mind.");
 				if (player.lust >= player.maxLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.");
 				else outputText("  A growing part of you wants to experience that.");
-			}
-			//(high damage taken)
-			else {
+			} else {
+				//(high damage taken)
 				outputText("All that potent pre-ejaculate makes your cunny ");
 				if (player.wetness() <= 1) outputText("moisten");
 				else if (player.wetness() <= 2) outputText("drip");
@@ -85,8 +78,7 @@ package classes.Scenes.Areas.HighMountains
 				if (player.minotaurNeed()) {
 					outputText("  You need a fix so bad!");
 					player.takeLustDamage(5, true);
-				}
-				else {
+				} else {
 					outputText("  You can understand firsthand just how potent and addictive that fluid is...");
 				}
 				if (player.hasCock()) outputText("  " + player.SMultiCockDesc() + " twitches and dribbles its own pre-seed, but it doesn't smell anywhere near as good!");
@@ -96,7 +88,6 @@ package classes.Scenes.Areas.HighMountains
 			}
 			combatRoundOver();
 		}
-
 		//Grope
 		private function minotaurGangGropeAttack():void {
 			game.spriteSelect(SpriteDb.s_minotaurSons);
@@ -113,7 +104,7 @@ package classes.Scenes.Areas.HighMountains
 			player.takeLustDamage((15 + player.sens/10), true);
 			combatRoundOver();
 		}
-		//Waste  a turn
+		//Waste a turn
 		private function minotaurGangWaste():void {
 			flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 1;
 			game.spriteSelect(SpriteDb.s_minotaurSons);
@@ -131,7 +122,6 @@ package classes.Scenes.Areas.HighMountains
 			else if (select == 5) minotaurGangGangGropeAttack();
 			else minotaurGangWaste();
 		}
-
 
 		override public function defeated(hpVictory:Boolean):void
 		{
@@ -175,7 +165,7 @@ package classes.Scenes.Areas.HighMountains
 			this.butt.rating = Butt.RATING_AVERAGE+1;
 			this.lowerBody.type = LowerBody.HOOFED;
 			this.skin.tone = "red";
-			this.theSkinType = Skin.FUR;
+			this.skin.type = Skin.FUR;
 			this.skin.desc = "shaggy fur";
 			this.hair.color = randomChoice("black","brown");
 			this.hair.length = 3;
@@ -203,5 +193,4 @@ package classes.Scenes.Areas.HighMountains
 			checkMonster();
 		}
 	}
-
 }

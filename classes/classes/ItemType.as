@@ -104,5 +104,9 @@ package classes
 		{
 			return "\""+_id+"\"";
 		}
+		
+		public function getMaxStackSize():int {
+			return 5;
+		}
 	}
 }

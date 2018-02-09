@@ -1,25 +1,20 @@
 package classes.display 
 {
-	import classes.BoundControlMethod;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.InputManager;
-
-import coc.view.Block;
-
-import mx.core.ScrollControlBase;
-
-	import fl.containers.ScrollPane;
-	import flash.display.DisplayObject;
+	import classes.display.BindDisplay;
+	import coc.view.Block;
+	import com.bit101.components.ScrollPane;
 	import flash.display.MovieClip;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
-	import flash.text.TextFormat;
-	import flash.utils.Dictionary;
-	import flash.ui.Keyboard;
-	import flash.utils.describeType;
-	import classes.display.BindDisplay;
 	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	import flash.ui.Keyboard;
+	import flash.utils.Dictionary;
+	import flash.utils.describeType;
 	
 	/**
 	 * Defines a new UI element, providing a scrollable container to be used for display of bound
@@ -57,8 +52,6 @@ import mx.core.ScrollControlBase;
 			setSize(width,height);
 			
 			// Cheap hack to remove the stupid styling elements of the stock ScrollPane
-			var blank:MovieClip = new MovieClip();
-			this.setStyle("upSkin", blank);
 			
 			// Build the keyCode->string lookup object
 			this.PopulateKeyboardDict();
@@ -71,7 +64,7 @@ import mx.core.ScrollControlBase;
 			}});
 			_content.name = "controlContent";
 			_content.addEventListener(Block.ON_LAYOUT,function(e:Event):void{
-				if (source) {
+				if (content) {
 					update();
 				}
 			});
@@ -105,7 +98,8 @@ import mx.core.ScrollControlBase;
 		
 		private function MouseScrollEvent(e:MouseEvent):void
 		{
-			this.verticalScrollPosition += -( e.delta * 8 );
+            this._vScrollbar.value += -( e.delta * 8 );
+            update();
 		}
 		
 		public function ListBindingOptions():void
@@ -119,7 +113,7 @@ import mx.core.ScrollControlBase;
 				UpdateContentObjects();
 			}
 
-			this.source = _content;
+			this.content.addChild(_content);
 			update();
 		}
 		
@@ -145,7 +139,7 @@ import mx.core.ScrollControlBase;
 			helpLabel.multiline = true;
 			helpLabel.wordWrap = true;
 			helpLabel.autoSize = TextFieldAutoSize.LEFT; // With multiline enabled, this SHOULD force the textfield to resize itself vertically dependent on content.
-			helpLabel.htmlText = "<b>Keyboard Control Bindings:</b>\n\n";
+			helpLabel.htmlText = kGAMECLASS.formatHeader("Keyboard Control Bindings");
 			helpLabel.htmlText += "Click a button next to the action you wish to bind to a new key, then hit the key you want to bind the selected action to.\n\n"
 			helpLabel.htmlText += "Custom bindings are stored inside your save game files.\n\n";
 			helpLabel.htmlText += "Duplicate keys are automatically unbound from their old control action.\n\n";
@@ -164,8 +158,8 @@ import mx.core.ScrollControlBase;
 				var newLabel:BindDisplay = new BindDisplay(this.width-20);
 				newLabel.name = _functions[i].Name;
 				newLabel.htmlText = "<b>" + _functions[i].Name + ":</b>";
-				newLabel.button1Text = _keyDict[_functions[i].PrimaryKey];
-				newLabel.button2Text = _keyDict[_functions[i].SecondaryKey];
+				newLabel.buttons[0].labelText = _keyDict[_functions[i].PrimaryKey];
+				newLabel.buttons[1].labelText = _keyDict[_functions[i].SecondaryKey];
 				
 				// This is going to look crazy...
 				var genPrimaryCallback:Function = function(funcName:String, inMan:InputManager):Function
@@ -187,8 +181,8 @@ import mx.core.ScrollControlBase;
 				};
 				// ... Warned you.
 
-				newLabel.button1Callback = genPrimaryCallback(_functions[i].Name, _inputManager);
-				newLabel.button2Callback = genSecondaryCallback(_functions[i].Name, _inputManager);
+				newLabel.buttons[0].callback = genPrimaryCallback(_functions[i].Name, _inputManager);
+				newLabel.buttons[1].callback = genSecondaryCallback(_functions[i].Name, _inputManager);
 				
 				_content.addElement(newLabel);
 			}
@@ -205,8 +199,8 @@ import mx.core.ScrollControlBase;
 			{
 				var currLabel:BindDisplay = _content.getElementByName(_functions[i].Name) as BindDisplay;
 				
-				currLabel.button1Text = _keyDict[_functions[i].PrimaryKey];
-				currLabel.button2Text = _keyDict[_functions[i].SecondaryKey];
+				currLabel.buttons[0].labelText = _keyDict[_functions[i].PrimaryKey];
+				currLabel.buttons[1].labelText = _keyDict[_functions[i].SecondaryKey];
 			}
 		}
 		

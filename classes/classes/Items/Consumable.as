@@ -3,6 +3,7 @@
  */
 package classes.Items
 {
+	import classes.Credits;
 	import classes.GlobalFlags.*;
 	import classes.CoC_Settings;
 	import classes.Scenes.Camp;
@@ -24,6 +25,7 @@ package classes.Items
 		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
 		protected function get output():Output { return kGAMECLASS.output; }
+		protected function get credits():Credits { return kGAMECLASS.credits; }
 		protected function get player():Player { return kGAMECLASS.player; }
 		protected function get prison():Prison { return kGAMECLASS.prison; }
 		protected function get flags():DefaultDict { return kGAMECLASS.flags; }
@@ -57,34 +59,8 @@ package classes.Items
 			game.dynStats.apply(null, args);
 		}
 		
-/*
-		public function canUse(player:Player,output:Boolean):Boolean
-		{
-			return true;
+		override public function getMaxStackSize():int {
+			return 10;
 		}
-*/
-		
-		/**
-		 * Perform effect on player WITHOUT requiring item being in player's inventory and removing it
-		 */
-/*
-		public function doEffect(player:Player,output:Boolean):void
-		{
-			CoC_Settings.errorAMC("Consumable","doEffect",id);
-		}
-*/
-		
-		/**
-		 * Removes item from player and does effect
-		 */
-/*
-		override public function useItem(player:Player, output:Boolean, external:Boolean):void
-		{
-			if (canUse(player,output)){
-				if (!external && !game.debug) player.consumeItem(this,1);
-				doEffect(player,output);
-			}
-		}
-*/
 	}
 }

@@ -5,17 +5,14 @@ package classes.Scenes.Dungeons
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.BaseContent;
+	import classes.Scenes.Dungeons.DeepCave.*;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonCore;
-	import classes.Scenes.Dungeons.DeepCave.*;
+	import classes.Scenes.NPCs.ShouldraFollower;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
-	
 	import classes.internals.Utils;
-	import classes.Scenes.NPCs.ShouldraFollower;
-	import coc.model.GameModel;
-	
+		
 	use namespace kGAMECLASS;
 	
 	public class DeepCave extends DungeonAbstractContent
@@ -498,6 +495,7 @@ package classes.Scenes.Dungeons
 		//[IMP GANGBANG VOL 2]
 		public function loseToImpMobII():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz);
 			outputText("You wake up, sore from the previous activity and a bit groggy.  You try to move, but find yourself incapable.  Struggling futilely, you thrash around until you realize your arms and legs are strapped down with heavy iron restraints.  You gasp out loud when you look down and discover your ");
 			if (player.biggestTitSize() < 1) outputText("new");
 			else outputText("much larger");
@@ -1098,6 +1096,7 @@ package classes.Scenes.Dungeons
 			outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.");
 			//[Imp Mob Fight]
 			if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] == 0) {
+				spriteSelect(SpriteDb.s_impMob);
 				outputText("\n\nThe place is swarming with two dozen imps, and none of them look happy to see you.  A number of them take flight while the rest form a ring around you, trapping you!  It looks like you'll have to fight your way out!");
 				menu();
 				addButton(0, "FIGHT!", fightImpHorde);
@@ -1188,6 +1187,7 @@ package classes.Scenes.Dungeons
 		public function roomZetazChamber():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_ZETAZ_CHAMBER;
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz);
 			outputText(images.showImage("deepCave-zChambers"));
 			outputText("<b><u>Zetaz's Chambers</u></b>\n");
 			outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.");

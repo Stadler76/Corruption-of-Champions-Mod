@@ -28,7 +28,7 @@ package classes
 					game.outputText("Game saved to " + slotX + "!");
 					game.doNext(game.playerMenu);
 				};
-				if (flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] != 0) {
+				if (flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] !== 0) {
 					doQuickSave();
 					return;
 				}
@@ -43,7 +43,7 @@ package classes
 		public function execQuickLoad(slot:uint):void
 		{
 			if (game.mainView.menuButtonIsVisible(MainView.MENU_DATA)) {
-				var saveFile:* = SharedObject.getLocal("CoC_" + slot, "/");
+				var saveFile:SharedObject = SharedObject.getLocal("CoC_" + slot, "/");
 				var doQuickLoad:Function = function():void {
 					if (game.saves.loadGame("CoC_" + slot)) {
 						game.showStats();
@@ -54,7 +54,7 @@ package classes
 					}
 				};
 				if (saveFile.data.exists) {
-					if (game.player.str == 0 || flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] != 0) {
+					if (game.player.str === 0 || flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] !== 0) {
 						doQuickLoad();
 						return;
 					}

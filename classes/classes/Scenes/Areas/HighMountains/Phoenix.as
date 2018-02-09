@@ -128,7 +128,7 @@ package classes.Scenes.Areas.HighMountains
 			this.butt.rating = Butt.RATING_JIGGLY;
 			this.lowerBody.type = LowerBody.HARPY;
 			this.skin.tone = "light";
-			this.theSkinType = Skin.LIZARD_SCALES;
+			this.skin.type = Skin.LIZARD_SCALES;
 			this.skin.desc = "crimson";
 			this.hair.color = "red";
 			this.hair.length = 16;
@@ -145,10 +145,10 @@ package classes.Scenes.Areas.HighMountains
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 23;
 			this.gems = 30 + rand(25);
-			this.drop = new ChainedDrop().add(weapons.SCIMITR,1/20)
+			this.drop = new ChainedDrop().add(weapons.SCIMTR0,1/20)
 					.add(useables.EBNFLWR, 1/10)
 					.elseDrop(NO_DROP);
-			this.theWingType = Wings.HARPY;
+			this.wings.type = Wings.HARPY;
 			this.special1 = doubleSlash;
 			this.special2 = phoenixFireBreath;
 			this.special3 = lustBang;

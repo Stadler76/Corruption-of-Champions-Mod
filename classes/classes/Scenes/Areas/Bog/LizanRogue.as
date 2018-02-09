@@ -80,7 +80,7 @@ import classes.internals.*;
 		{
 			var skinToneAdj:String = randomChoice(SKIN_VARIATIONS);
 			this.skin.tone = skinToneAdj;
-			this.theSkinType = Skin.LIZARD_SCALES;
+			this.skin.setType(Skin.LIZARD_SCALES);
 			this.a = "the ";
 			this.short = "lizan rogue";
 			this.imageName = "lizanrogue";

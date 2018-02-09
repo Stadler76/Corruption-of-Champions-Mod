@@ -313,8 +313,7 @@ package classes.Scenes.Dungeons.DeepCave
 		public function tryToHealValaWHoney2():void {
 			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
-			outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");;
-
+			outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");
 			outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.\n\n");
 			//(Vala unlocked in The Wet Bitch)
 			flags[kFLAGS.FREED_VALA] = 1;
@@ -580,7 +579,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//(Entering the Wet Bitch for the first time after Healing her)
 			//[Entering the bar description]
 			//(Works from 12:00 to 21:00)
-			if (model.time.hours >= 12 && model.time.hours <= 21) {
+			if (getGame().time.hours >= 12 && getGame().time.hours <= 21) {
 				//[Vala] (After sex encounter for the day)
 				if (flags[kFLAGS.FUCKED_VALA_AT_BAR_TODAY] > 0) {
 					outputText("\n\nThe fluttering fairy drops a complimentary drink off at your table with a sly wink. You can't help but notice that she's leaving a clear trail of girl cum as she flies past, the cummy trail leaking from between her legs. Lingering testimony of the break you took with her, no doubt. She seems a bit busy right now, but maybe if you checked back tomorrow, she'd be able to take the time to thank you again, tomorrow.");
@@ -623,7 +622,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("\n\n\"<i>Now, what did you want today?</i>\"");
 				//"Big You" added to menu
 			}
-			else if (model.time.hours == 20 && rand(2) == 0 && player.hasCock()) {
+			else if (getGame().time.hours == 20 && rand(2) == 0 && player.hasCock()) {
 				kinathisValaStuff();
 				return;
 			}
@@ -1264,8 +1263,8 @@ package classes.Scenes.Dungeons.DeepCave
 		//[next]
 		public function valaPartIIWaifuLove():void {
 			clearOutput();
-			model.time.hours = 6;
-			model.time.days++;
+			getGame().time.hours = 6;
+			getGame().time.days++;
 			camp.sleepRecovery(false);
 			statScreenRefresh();
 			outputText("Letting out a yawn, you curl up in the warm covers of the bed.  You sigh and smile as the smell of food wafts over you; it reminds you of your time back home.  The scent of frying meat and eggs soon becomes too much for your sleeping mind and rouses you from your slumber.  Stretching your body out, you look around and remember your night with Vala; you must have fallen asleep in her bed.  Unable to help yourself, you follow the mouth watering aroma to the kitchen and find the loving fairy-girl there.  Her gossamer wings flutter as she hovers at the stove, naked save for the apron she wears.  The sound of grease popping and crackling fills the air along with the smell of a savory, home cooked breakfast.");

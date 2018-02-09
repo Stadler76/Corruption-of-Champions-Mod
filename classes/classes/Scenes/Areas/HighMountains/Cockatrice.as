@@ -19,8 +19,7 @@ package classes.Scenes.Areas.HighMountains
 
 		public function wingify():void
 		{
-			theWingType = Wings.FEATHERED_LARGE;
-			wingDesc = "large, feathered";
+			wings.type = Wings.FEATHERED_LARGE;
 			spe += 10;
 			imageName += "withwings";
 		}
@@ -192,8 +191,7 @@ package classes.Scenes.Areas.HighMountains
 			this.eyes.type = Eyes.COCKATRICE;
 			this.hair.type = Hair.FEATHER;
 			this.skin.tone = "midnight blue";
-			this.theSkinType = Skin.LIZARD_SCALES;
-			//this.skin.desc = Appearance.Appearance.DEFAULT_SKIN_DESCS[Skin.LIZARD_SCALES];
+			this.skin.setType(Skin.LIZARD_SCALES);
 			this.hair.color = "blue";
 			this.hair.length = 2;
 			/*

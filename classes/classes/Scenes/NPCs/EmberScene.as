@@ -73,7 +73,7 @@ package classes.Scenes.NPCs
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			//trace("\nEmber time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nEmber time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant) {
 				if (emberPregUpdate()) needNext = true;
 				if (pregnancy.incubation == 0) {
@@ -114,7 +114,7 @@ package classes.Scenes.NPCs
 				//Reset lust counter if not max lust'ed
 				else flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] = 0;
 			}
-			if (model.time.hours > 23) {
+			if (getGame().time.hours > 23) {
 				if (!player.isPregnant()) flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] = 0;
 				flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] = 0;
 			}
@@ -218,6 +218,11 @@ package classes.Scenes.NPCs
 			return (flags[kFLAGS.EMBER_ROUNDFACE] == 0 || flags[kFLAGS.EMBER_INTERNAL_DICK] > 0);
 		}
 
+		public function emberSprite():void {
+			spriteSelect(null);
+			// placeholder for now
+		}
+
 //Approaching Ember (Z)
 		public function emberCampMenu():void
 		{
@@ -238,7 +243,7 @@ package classes.Scenes.NPCs
 			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || (player.hasItem(consumables.OVIELIX, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) addButton(4, "Get Egg", emberIsAnEggFactory).hint("Ask Ember if " + emberMF("he", "she") + "'s willing to lay an unfertilized egg for you." + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "": "\n\nThis will cost you 1 Ovi Elixir each time you want " + emberMF("him", "her") + " to lay an unfertilized egg.") + "");
 			addButton(5, "Sex", emberSexMenu).hint("Get into a sex session with Ember.");
 			addButton(6, "Spar", decideToSparEmbra).hint("Do a quick battle with Ember! \n\nCurrent Intensity: " + emberSparIntensity());
-			if (model.time.hours >= 21 || model.time.hours < 5) {
+			if (getGame().time.hours >= 21 || getGame().time.hours < 5) {
 				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber).hint("Try to spend the night with Ember.");
 				else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");
 			}
@@ -4418,7 +4423,7 @@ package classes.Scenes.NPCs
 		//Sleep with Ember!
 		public function sleepWithEmber():void {
 			//Set timeQ
-			if (model.time.hours >= 21) kGAMECLASS.timeQ = 24 - model.time.hours;
+			if (getGame().time.hours >= 21) kGAMECLASS.timeQ = 24 - getGame().time.hours;
 			else kGAMECLASS.timeQ = 0;
 			kGAMECLASS.timeQ += 6;
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) kGAMECLASS.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);

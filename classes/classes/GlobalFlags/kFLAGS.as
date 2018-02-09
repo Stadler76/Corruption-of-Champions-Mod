@@ -922,7 +922,7 @@ public static const KAIJU_COCK:int                                              
 public static const KAIJU_BAD_END_COUNTER:int                                       =  914; // 
 public static const BROOKE_AFFECTION:int                                            =  915; // 
 public static const BROOKE_SHOWERED_WITH:int                                        =  916; // 
-public static const BROOKE_AND_HELIA_3SOME:int                                      =  917; // 
+public static const BROOKE_AND_HECKEL_3SOME:int                                     =  917; // 
 public static const TIMES_IN_BROOKES_BUTT:int                                       =  918; // 
 public static const BROOKE_MEDIUM_SCENE:int                                         =  919; // BROOKE_MEDIUM_SCENE" Description="Brooke fucked ya.
 public static const BROOKE_MET:int                                                  =  920; // 
@@ -1300,8 +1300,8 @@ public static const UNKNOWN_FLAG_NUMBER_01291:int                               
 public static const UNKNOWN_FLAG_NUMBER_01292:int                                   = 1292;
 public static const UNKNOWN_FLAG_NUMBER_01293:int                                   = 1293;
 public static const UNKNOWN_FLAG_NUMBER_01294:int                                   = 1294;
-public static const UNKNOWN_FLAG_NUMBER_01295:int                                   = 1295;
-public static const UNKNOWN_FLAG_NUMBER_01296:int                                   = 1296;
+public static const OVIMAX_OVERDOSE:int                                             = 1295;
+public static const MINO_CHEF_TALKED_RED_RIVER_ROOT:int                             = 1296;
 public static const RATHAZUL_MIXOLOGY_XP:int                                        = 1297; // 0-200, currently for selling new skin oils only
 public static const DISABLE_QUICKLOAD_CONFIRM:int                                   = 1298; // Disable the confirmation-dialog on quickload
 public static const DISABLE_QUICKSAVE_CONFIRM:int                                   = 1299; // Disable the confirmation-dialog on quicksave
@@ -2036,7 +2036,7 @@ public static const FACTORY_TAKEN_GROPLUS:int                                   
 public static const FACTORY_MILKER_BUILT:int                                        = 2028;
 public static const KELT_KILL_PLAN:int                                              = 2029;
 public static const KELT_KILLED:int                                                 = 2030;
-public static const WHITNEY_GONE:int                                                = 2031;
+public static const WHITNEY_GONE:int                                                = 2031; //If you murdered Whitney. You monster. Not yet implemented.
 public static const CODEX_CURRENT_ENTRY:int                                         = 2032;
 public static const CODEX_CURRENT_PAGE:int                                          = 2033;
 public static const CODEX_UNUSED_FLAG_1:int                                         = 2034;
@@ -2352,12 +2352,12 @@ public static const GOBLIN_ELDER_FOREPLAY_COUNTER:int                           
 public static const GOBLIN_ELDER_RELATION_COUNTER:int                               = 2344;
 public static const GOBLIN_ELDER_WRESTLE_COUNTER:int                                = 2345;
 public static const GOBLIN_ELDER_BEAST_COUNTER:int                                  = 2346;
-public static const UNKNOWN_FLAG_NUMBER_02347:int                                   = 2347;
-public static const UNKNOWN_FLAG_NUMBER_02348:int                                   = 2348;
-public static const UNKNOWN_FLAG_NUMBER_02349:int                                   = 2349;
-public static const UNKNOWN_FLAG_NUMBER_02350:int                                   = 2350;
-public static const UNKNOWN_FLAG_NUMBER_02351:int                                   = 2351;
-public static const UNKNOWN_FLAG_NUMBER_02352:int                                   = 2352;
+public static const WEAPON_SHOP_UPGRADE_ITEM:int                                    = 2347;
+public static const WEAPON_SHOP_UPGRADE_TIME:int                                    = 2348;
+public static const ARMOUR_SHOP_UPGRADE_ITEM:int                                    = 2349;
+public static const ARMOUR_SHOP_UPGRADE_TIME:int                                    = 2350;
+public static const CHILL_SMITH_UPGRADE_ITEM:int                                    = 2351;
+public static const CHILL_SMITH_UPGRADE_TIME:int                                    = 2352;
 public static const UNKNOWN_FLAG_NUMBER_02353:int                                   = 2353;
 public static const UNKNOWN_FLAG_NUMBER_02354:int                                   = 2354;
 public static const UNKNOWN_FLAG_NUMBER_02355:int                                   = 2355;
@@ -2981,14 +2981,14 @@ public static const UNKNOWN_FLAG_NUMBER_02972:int                               
 public static const UNKNOWN_FLAG_NUMBER_02973:int                                   = 2973;
 public static const UNKNOWN_FLAG_NUMBER_02974:int                                   = 2974;
 public static const UNKNOWN_FLAG_NUMBER_02975:int                                   = 2975;
-public static const UNKNOWN_FLAG_NUMBER_02976:int                                   = 2976;
+public static const ANIMATE_STATS_BARS:int                                          = 2976;
 public static const DELETE_ITEMS:int                                                = 2977; // Inventory deletion toggle, 0=no, 1=one at a time, 2=stacks
 public static const PRISON_ENABLED:int                                              = 2978; // Is the prison enabled? true/false value, should be false by default
 public static const NEW_GAME_PLUS_LEVEL:int                                         = 2979; // Current intensity of New Game+. Each ascension increments this counter by 1.
 public static const NEW_GAME_PLUS_BONUS_UNLOCKED_HERM:int                           = 2980; // Unlocked hermaphrodite.
 public static const USE_OLD_INTERFACE:int                                           = 2981; // 1 if old interface is used, currently disabled until I can re-implement something that mimics the old interface.
-public static const IMAGEPACK_OFF:int                                               = 2982; // 1 if imagepack is disabled.
-public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
+public static const IMAGEPACK_ENABLED:int                                           = 2982; // 1 if imagepack is disabled.
+public static const TEXT_BACKGROUND_STYLE:int                                       = 2983; // 0 for semi-transparent, 1 for white, 2 for tan.
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
 public static const SFW_MODE:int                                                    = 2985; // 1 if SFW is enabled.
 public static const WATERSPORTS_ENABLED:int                                         = 2986; // 1 if watersport scenes are enabled.

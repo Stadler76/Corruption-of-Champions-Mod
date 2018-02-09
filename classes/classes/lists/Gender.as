@@ -11,7 +11,5 @@ package classes.lists
 		public static const MALE:int   = 1;
 		public static const FEMALE:int = 2;
 		public static const HERM:int   = 3;
-
-		public function Gender() {}
 	}
 }

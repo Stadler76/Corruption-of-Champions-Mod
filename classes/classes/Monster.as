@@ -168,13 +168,13 @@
 			if (findPerk(PerkLib.Tank) >= 0) temp += 50;
 			if (findPerk(PerkLib.Tank2) >= 0) temp += this.tou;
 			//Apply NG+, NG++, NG+++, etc.
-			if (short == "doppleganger" || short == "pod" || short == "sand trap" || short == "sand tarp") {
+			if (short === "doppleganger" || short === "pod" || short === "sand trap" || short === "sand tarp") {
 				temp += 200 * player.newGamePlusMod();
 			}
-			else if (short == "Lethice") {
+			else if (short === "Lethice") {
 				temp += 1200 * player.newGamePlusMod();
 			}
-			else if (short == "Marae") {
+			else if (short === "Marae") {
 				temp += 2500 * player.newGamePlusMod();
 			}
 			else {
@@ -182,8 +182,8 @@
 			}
 			//Apply difficulty
 			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) temp *= 1.0;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp *= 1.25;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 1.5;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] === 1) temp *= 1.25;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] === 2) temp *= 1.5;
 			else temp *= 2.0;
 			temp = Math.round(temp);
 			return temp;
@@ -199,13 +199,6 @@
 			this.HP += hp;
 			if (this.HP<0) this.HP = 0;
 			else if (this.HP > maxHP()) this.HP = maxHP();
-		}
-
-		/**
-		 * @return HP/eMaxHP()
-		 */
-		public function HPRatio():Number {
-			return HP / maxHP();
 		}
 
 		/**
@@ -226,7 +219,7 @@
 		{
 			var multiplier:Number = 1;
 			multiplier += game.player.perkv1(PerkLib.AscensionWisdom) * 0.1;
-			if (playerLevel == -1) playerLevel = game.player.level;
+			if (playerLevel === -1) playerLevel = game.player.level;
 			//
 			// 1) Nerf xp gains by 20% per level after first two level difference
 			// 2) No bonuses for underlevel!
@@ -464,15 +457,15 @@
 
 		public function isFullyInit():Boolean {
 			for each (var phase:Object in initsCalled) {
-				if (phase is Boolean && phase == false) return false;
+				if (phase is Boolean && phase === false) return false;
 			}
 			return true;
 		}
 		public function missingInits():String{
 			var result:String = "";
 			for (var phase:String in initsCalled){
-				if (initsCalled[phase] is Boolean && initsCalled[phase] == false){
-					if (result == "") result = phase;
+				if (initsCalled[phase] is Boolean && initsCalled[phase] === false){
+					if (result === "") result = phase;
 					else result+=", "+phase;
 				}
 			}
@@ -553,12 +546,6 @@
 			super.tallness = value;
 		}
 
-		public function set theSkinType(value:Number):void
-		{
-			if (!_checkCalled) { this.skin.desc = Appearance.DEFAULT_SKIN_DESCS[value];}
-			super.skin.type = value;
-		}
-
 		protected function initStrTouSpeInte(str:Number, tou:Number, spe:Number, inte:Number):void
 		{
 			this.str = str;
@@ -574,13 +561,6 @@
 			this.sens = sens;
 			this.cor = cor;
 			initedLibSensCor = true;
-		}
-
-
-		public function set theWingType(value:Number):void
-		{
-			if (!_checkCalled) this.wingDesc = Appearance.DEFAULT_WING_DESCS[value];
-			super.wings.type = value;
 		}
 
 		override public function validate():String
@@ -604,7 +584,7 @@
 			_checkCalled = true;
 			checkError = validate();
 			if (checkError.length>0) CoC_Settings.error("Monster not initialized:"+checkError);
-			return checkError.length == 0;
+			return checkError.length === 0;
 		}
 
 		/**
@@ -636,7 +616,7 @@
 
 		public function eAttack():void {
 			var attacks:int = statusEffectv1(StatusEffects.Attacks);
-			if (attacks == 0) attacks = 1;
+			if (attacks === 0) attacks = 1;
 			while (attacks>0){
 				if (attackSucceeded()){
 				    var damage:int = eOneAttack();
@@ -661,7 +641,7 @@
 		protected function postAttack(damage:int):void
 		{
 			if (damage > 0) {
-				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
+				if (lustVuln > 0 && player.armorName === "barely-decent bondage straps") {
 					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
 					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.");
 					lust += 5 * lustVuln;
@@ -673,7 +653,7 @@
 		{
 			if (damage <= 0) {
 				//Due to toughness or amor...
-				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor != ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".");
+				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor !== ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".");
 				else {
 					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you. ");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you. ");
@@ -708,7 +688,7 @@
 		protected function handleBlind():Boolean
 		{
 			if (rand(3) < 2) {
-				if (weaponVerb == "tongue-slap") outputText(capitalA + short + " completely misses you with a thrust from "+pronoun3+" tongue!\n");
+				if (weaponVerb === "tongue-slap") outputText(capitalA + short + " completely misses you with a thrust from "+pronoun3+" tongue!\n");
 				else outputText(capitalA + short + " completely misses you with a blind attack!\n");
 				return false;
 			}
@@ -740,25 +720,25 @@
 			}
 			var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
 			//Determine if evaded
-			if (evasionResult == EVASION_EVADE) {
+			if (evasionResult === EVASION_EVADE) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
 				if (!plural) outputText("s");
 				outputText(" attack.\n");
 				return true;
 			}
 			//("Misdirection"
-			if (evasionResult == EVASION_MISDIRECTION) {
+			if (evasionResult === EVASION_MISDIRECTION) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
 				return true;
 			}
 			//Determine if cat'ed
-			if (evasionResult == EVASION_FLEXIBILITY) {
+			if (evasionResult === EVASION_FLEXIBILITY) {
 				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 				if (plural) outputText("' attacks.\n");
 				else outputText("'s attack.\n");
 				return true;
 			}
-			if (evasionResult != null) { // Failsafe fur unhandled
+			if (evasionResult !== null) { // Failsafe fur unhandled
 				outputText("Using your superior combat skills you manage to avoid attack completely.\n");
 				return true;
 			}
@@ -787,7 +767,7 @@
 				if (!handleFear()) return;
 			}
 			//Exgartuan gets to do stuff!
-			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
+			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) === 0 && rand(3) === 0) {
 				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Constricted)) {
@@ -836,7 +816,7 @@
 		 */
 		protected function handleFear():Boolean
 		{
-			if (statusEffectv1(StatusEffects.Fear) == 0) {
+			if (statusEffectv1(StatusEffects.Fear) === 0) {
 				if (plural) {
 					removeStatusEffect(StatusEffects.Fear);
 					game.outputText("Your foes shake free of their fear and ready themselves for battle.");
@@ -876,7 +856,7 @@
 		{
 			var actions:Array = [eAttack,special1,special2,special3].filter(
 					function(special:Function, idx:int, array:Array):Boolean {
-						return special != null;
+						return special !== null;
 					}
 			);
 			var rando:int = int(Math.random() * (actions.length));
@@ -936,7 +916,7 @@
 		 */
 		public final function defeated_(hpVictory:Boolean):void
 		{
-			if (onDefeated != null) onDefeated(hpVictory);
+			if (onDefeated !== null) onDefeated(hpVictory);
 			else defeated(hpVictory);
 		}
 
@@ -945,7 +925,7 @@
 		 */
 		public final function won_(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (onWon != null) onWon(hpVictory,pcCameWorms);
+			if (onWon !== null) onWon(hpVictory,pcCameWorms);
 			else won(hpVictory,pcCameWorms);
 		}
 
@@ -973,7 +953,7 @@
 		protected function outputDefaultTeaseReaction(lustDelta:Number):void
 		{
 			if (plural) {
-				if (lustDelta == 0) outputText("\n\n" + capitalA + short + " seem unimpressed.");
+				if (lustDelta === 0) outputText("\n\n" + capitalA + short + " seem unimpressed.");
 				if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " look intrigued by what " + pronoun1 + " see.");
 				if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seem to be enjoying the show.");
 				if (lustDelta >= 10 && lustDelta < 15) outputText("\n" + capitalA + short + " openly stroke " + pronoun2 + "selves as " + pronoun1 + " watch you.");
@@ -981,7 +961,7 @@
 				if (lustDelta >= 20) outputText("\n" + capitalA + short + " lick " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " bodies.");
 			}
 			else {
-				if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
+				if (lustDelta === 0) outputText("\n" + capitalA + short + " seems unimpressed.");
 				if (lustDelta > 0 && lustDelta < 4) {
 					if (plural) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " see.");
 					else outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.");
@@ -1044,13 +1024,13 @@
 					+(Appearance.DEFAULT_TONGUE_NAMES[tongue.type]||("tongueType#"+tongue.type))+" tongue and "
 					+(Appearance.DEFAULT_EYES_NAMES[eyes.type]||("eyes.type#"+eyes.type))+" eyes.\n";
 			result += Hehas;
-			if (tail.type == Tail.NONE) result += "no tail, ";
+			if (tail.type === Tail.NONE) result += "no tail, ";
 			else result+=(Appearance.DEFAULT_TAIL_NAMES[tail.type]||("tailType#"+tail.type))+" tail with venom="+tail.venom+" and recharge="+tail.recharge+", ";
-			if (horns.type == Horns.NONE) result += "no horns, ";
+			if (horns.type === Horns.NONE) result += "no horns, ";
 			else result += horns.value+" "+(Appearance.DEFAULT_HORNS_NAMES[horns.type]||("hornsPart.type#"+horns.type))+" horns, ";
-			if (wings.type == Wings.NONE) result += "no wings, ";
-			else result += wingDesc+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wings.type]||("wingType#"+wings.type))+"), ";
-			if (antennae.type == Antennae.NONE) result += "no antennae.\n\n";
+			if (wings.type === Wings.NONE) result += "no wings, ";
+			else result += Appearance.DEFAULT_WING_DESCS[wings.type]+" wings (type "+(Appearance.DEFAULT_WING_NAMES[wings.type]||("wingType#"+wings.type))+"), ";
+			if (antennae.type === Antennae.NONE) result += "no antennae.\n\n";
 			else result += (Appearance.DEFAULT_ANTENNAE_NAMES[antennae.type]||("antennaeType#"+antennae.type))+" antennae.\n\n";
 
 			// GENITALS AND BREASTS
@@ -1059,11 +1039,11 @@
 				result += Pronoun3+(i>0?(" #"+(i+1)):"")+" "+cock.cockType.toString().toLowerCase()+" cock is ";
 				result += Appearance.inchesAndFeetsAndInches(cock.cockLength)+" long and "+cock.cockThickness+"\" thick";
 				if (cock.isPierced) result += ", pierced with " + cock.pLongDesc;
-				if (cock.knotMultiplier != 1) result += ", with knot of size " + cock.knotMultiplier;
+				if (cock.knotMultiplier !== 1) result += ", with knot of size " + cock.knotMultiplier;
 				result+=".\n";
 			}
 			if (balls > 0 || ballSize > 0) result += Hehas + numberOfThings(balls, "ball") + " of size " + ballSize+".\n";
-			if (cumMultiplier != 1 || cocks.length > 0) result += Pronoun1 + " " + have+" cum multiplier " + cumMultiplier + ". ";
+			if (cumMultiplier !== 1 || cocks.length > 0) result += Pronoun1 + " " + have+" cum multiplier " + cumMultiplier + ". ";
 			if (hoursSinceCum > 0 || cocks.length > 0) result += "It were " + hoursSinceCum + " hours since " + pronoun1 + " came.\n\n";
 			for (i = 0; i < vaginas.length; i++) {	
 				var vagina:VaginaClass = (vaginas[i] as VaginaClass);
@@ -1100,7 +1080,7 @@
 			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/100 fatigue. " + Pronoun3 + " bonus HP=" + bonusHP + ", and lust vulnerability=" + lustVuln + ".\n";
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
 			
-			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
+			var numSpec:int = (special1 !== null ? 1 : 0) + (special2 !== null ? 1 : 0) + (special3 !== null ? 1 : 0);
 			if (numSpec > 0) {
 				result += Hehas + numSpec + " special attack" + (numSpec > 1 ? "s" : "") + ".\n";
 			}
@@ -1167,7 +1147,7 @@
 					player.removeStatusEffect(StatusEffects.Blind);
 				}
 				else {
-					if (statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) {
+					if (statusEffectv1(StatusEffects.Sandstorm) === 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 === 0) {
 						player.createStatusEffect(StatusEffects.Blind,0,0,0,0);
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}
@@ -1287,10 +1267,10 @@
 		  		if (player.lust100 >= 66) {
 					outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ");
 					temp = rand(4);
-					if (temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n");
-					if (temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n");
-					if (temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n");
-					if (temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n");
+					if (temp === 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n");
+					if (temp === 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n");
+					if (temp === 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n");
+					if (temp === 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n");
 				}
 				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 			}
@@ -1298,15 +1278,15 @@
 		
 		public function handleAwardItemText(itype:ItemType):void
 		{ //New Function, override this function in child classes if you want a monster to output special item drop text
-			if (itype != null) outputText("\nThere is " + itype.longName + " on your defeated opponent.  ");
+			if (itype !== null) outputText("\nThere is " + itype.longName + " on your defeated opponent.  ");
 		}
 
 		public function handleAwardText():void
 		{ //New Function, override this function in child classes if you want a monster to output special gem and XP text
 			//This function doesn’t add the gems or XP to the player, it just provides the output text
-			if (this.gems == 1) outputText("\n\nYou snag a single gem and " + this.XP + " XP as you walk away from your victory.");
+			if (this.gems === 1) outputText("\n\nYou snag a single gem and " + this.XP + " XP as you walk away from your victory.");
 			else if (this.gems > 1) outputText("\n\nYou grab " + this.gems + " gems and " + this.XP + " XP from your victory.");
-			else if (this.gems == 0) outputText("\n\nYou gain " + this.XP + " XP from the battle.");
+			else if (this.gems === 0) outputText("\n\nYou gain " + this.XP + " XP from the battle.");
 		}
 		
 		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
@@ -1318,20 +1298,20 @@
 			}
 			if (!inDungeon) {
 				if (game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
-					if (short == "goblin" || short == "goblin assassin" || short == "goblin warrior" || short == "goblin shaman" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "imp overlord" || //Generic encounter
-						short == "tentacle beast" || (short == "kitsune" && hair.color == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
-						short == "goo-girl" || short == "green slime" || short == "fetish cultist" || short == "fetish zealot" || //Lake
-						short == "sandtrap" || short == "sand tarp" || short == "naga" || short == "demons" || short == "Cum Witch" || //Desert
-						short == "hellhound" || short == "infested hellhound" || short == "minotaur" || short == "minotaur lord" || short == "minotaur gang" || short == "minotaur tribe" || short == "basilisk" || short == "phoenix" || //Mountain, high mountains
-						short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || //Plains, swamp, bog
-						short == "yeti" || short == "behemoth") { //Glacial rift, volcanic crag
+					if (short === "goblin" || short === "goblin assassin" || short === "goblin warrior" || short === "goblin shaman" || short === "imp" || short === "imp lord" || short === "imp warlord" || short === "imp overlord" || //Generic encounter
+						short === "tentacle beast" || (short === "kitsune" && hair.color === "red") || short === "Akbal" || short === "Tamani" || //Forest, deepwoods
+						short === "goo-girl" || short === "green slime" || short === "fetish cultist" || short === "fetish zealot" || //Lake
+						short === "sandtrap" || short === "sand tarp" || short === "naga" || short === "demons" || short === "Cum Witch" || //Desert
+						short === "hellhound" || short === "infested hellhound" || short === "minotaur" || short === "minotaur lord" || short === "minotaur gang" || short === "minotaur tribe" || short === "basilisk" || short === "phoenix" || //Mountain, high mountains
+						short === "satyr" || short === "gnoll" || short === "gnoll spear-thrower" || short === "female spider-morph" || short === "male spider-morph" || short === "corrupted drider" || //Plains, swamp, bog
+						short === "yeti" || short === "behemoth") { //Glacial rift, volcanic crag
 						game.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
 					}
 				}
 				outputText("\n\nYou'll probably come to your senses in eight hours or so");
 				if (player.gems > 1)
 					outputText(", missing " + gemsLost + " gems.");
-				else if (player.gems == 1)
+				else if (player.gems === 1)
 					outputText(", missing your only gem.");
 				else outputText(".");
 			}
@@ -1339,7 +1319,7 @@
 				outputText("\n\nSomehow you came out of that alive");
 				if (player.gems > 1)
 					outputText(", but after checking your gem pouch, you realize you're missing " + gemsLost + " gems.");
-				else if (player.gems == 1)
+				else if (player.gems === 1)
 					outputText(", but after checking your gem pouch, you realize you're missing your only gem.");
 				else outputText(".");
 			}

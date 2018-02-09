@@ -191,7 +191,7 @@ package classes.Scenes.NPCs
 			this.butt.rating = Butt.RATING_AVERAGE+1;
 			this.lowerBody.type = LowerBody.HOOFED;
 			this.skin.tone = "dark";
-			this.theSkinType = Skin.DRAGON_SCALES;
+			this.skin.type = Skin.DRAGON_SCALES;
 			this.skin.desc = "skin and scales";
 			this.hair.color = "red";
 			this.hair.length = 3;
@@ -211,8 +211,7 @@ package classes.Scenes.NPCs
 			this.level = 16;
 			this.gems = rand(15) + 95;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
-			this.theWingType = Wings.DRACONIC_LARGE;
-			this.wingDesc = "huge";
+			this.wings.type = Wings.DRACONIC_LARGE;
 			this.tail.type = Tail.LIZARD;
 			checkMonster();
 		}

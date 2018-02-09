@@ -109,7 +109,7 @@ package classes.Scenes.NPCs
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			//trace("\nAmily time change: Time is " + model.time.hours + ", type: " + pregnancy.type + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nAmily time change: Time is " + getGame().time.hours + ", type: " + pregnancy.type + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			//trace("\nAmily time change: butt type: " + pregnancy.buttType + ", butt incubation: " + pregnancy.buttIncubation + ", butt event: " + pregnancy.buttEvent);
 			if (flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] > 0) flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO]--;
 			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] > 0 && flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] < 30 * 24) flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
@@ -127,7 +127,7 @@ package classes.Scenes.NPCs
 					needNext = true;
 				}
 			}
-			if (model.time.hours == 6) {
+			if (getGame().time.hours == 6) {
 				//Pure amily flips her shit and moves out!
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && !player.isPureEnough(66) && flags[kFLAGS.AMILY_CAMP_CORRUPTION_FREAKED] > 0) {
 					amilyScene.farewellNote();
@@ -139,18 +139,18 @@ package classes.Scenes.NPCs
 					needNext = true;
 				}
 			}
-			else if (model.time.hours > 23) {
+			else if (getGame().time.hours > 23) {
 				if (flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] > 0) flags[kFLAGS.AMILY_X_JOJO_COOLDOWN]--;
 			}
 			return needNext;
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
+			if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && getGame().time.hours == 6) {
 				kGAMECLASS.followerInteractions.amilyUrtaMorningAfter();
 				return true;
 			}
-			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && model.time.hours == 6 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] < 100 && rand(3) == 0) {
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && getGame().time.hours == 6 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] < 100 && rand(3) == 0) {
 				flags[kFLAGS.CAMP_WALL_SKULLS]++;
 			}
 			return false;
@@ -2531,7 +2531,7 @@ package classes.Scenes.NPCs
 				amilyEggStuff();
 				return;
 			}
-			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] == 30 * 24 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && (model.time.hours >= 11 && model.time.hours <= 13)) {
+			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] == 30 * 24 && flags[kFLAGS.AMILY_FOLLOWER] == 2 && (getGame().time.hours >= 11 && getGame().time.hours <= 13)) {
 				amilyIncest();
 				return;
 			}
@@ -2617,6 +2617,7 @@ package classes.Scenes.NPCs
 						}
 						break;
 				case 8: outputText("Amily's bulge frequently wriggles and squirms, though this doesn't seem to bother her. " + (flags[kFLAGS.AMILY_FOLLOWER] == 1 ? "T" : "She smiles with glee, t") + "he children mustn't have too much longer until they are born.\n\n");
+						break;
 				default:
 			}
 			amilyMenu(true);
@@ -7182,9 +7183,9 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Oh, " + player.mf("his","her") + "... mate...</i>\"  Urta mumbles, looking a little crestfallen at the admission.  Her emerald eyes light up with an idea while a mischievous grin spreads over her vulpine muzzle.  Before she can act on it, you request her to allow the two of you through the gates, interrupting whatever tricks the clever fox has planned.  She retrieves the corruption-detecting gem she once used on you and gives Amily a quick sweep.  When the gem emits a white glow, Urta gives an authoritative nod and calls for the gates to be opened.\n\n");
 
 			outputText("You and Amily step onto the streets of Tel'Adre.  The city's narrow roads are crowded");
-			if (model.time.hours >= 18) outputText("despite the late hour, bustling with centaurs and canine-morphs going about their business, heading home after a long day's work or making their way to the Wet Bitch for a relaxing drink.\n\n");
-			else if (model.time.hours < 6) outputText("despite the early time, bustling with centaur and canine-morphs on their way to their pre-dawn activities.");
-			else if (model.time.hours < 12) outputText("despite the morning hours, busy with centaur and canine-morphs hurrying to their own personal tasks.");
+			if (getGame().time.hours >= 18) outputText("despite the late hour, bustling with centaurs and canine-morphs going about their business, heading home after a long day's work or making their way to the Wet Bitch for a relaxing drink.\n\n");
+			else if (getGame().time.hours < 6) outputText("despite the early time, bustling with centaur and canine-morphs on their way to their pre-dawn activities.");
+			else if (getGame().time.hours < 12) outputText("despite the morning hours, busy with centaur and canine-morphs hurrying to their own personal tasks.");
 			else outputText(" with centaur and canine-morphs busy with their own tasks.");
 
 			outputText("Amily seems enthralled by the sights of the city before you've even passed the gate.  Wide-eyed, she follows your guiding hand down the main street, watching with awe as folk of all descriptions pass her by.  More than once, you're forced to pull her back from trying to jump an unsuspecting mouse-morph, mistaking the poor soul for someone she knew many years ago.\n\n");

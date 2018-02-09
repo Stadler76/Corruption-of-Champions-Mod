@@ -257,6 +257,8 @@ package classes.Scenes.Areas.Bog
 					break;
 				case 3: //Child is a faerie, hates phouka whiskey
 					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.");
+					break;
+				default: //Nothing here, move along.
 			}
 			flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			consumables.P_WHSKY.phoukaWhiskeyAddStatus(player);
@@ -816,7 +818,6 @@ package classes.Scenes.Areas.Bog
 		
 		protected function phoukaSexPregnate(postCombat:Boolean):void
 		{ //Whether by horse, bunny or (male) faerie sex it all ends up here if the PC has a vagina
-			clearOutput();
 			if (player.isPregnant()) {
 				if (phoukaForm == PHOUKA_FORM_HORSE)
 					outputText("\n\nYou just feel constant pressure against your sealed cervix.  The " + phoukaName() + "’s balls shows no signs of slowing down and the pressure continues to build.  Finally your vagina expands enough to allow an ocean of cum to jet out of you.");

@@ -1,8 +1,5 @@
-/**
- * Created by aimozg on 06.01.14.
- */
-package classes.Scenes.Areas
-{
+/* Created by aimozg on 06.01.14 */
+package classes.Scenes.Areas {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -14,29 +11,25 @@ package classes.Scenes.Areas
 
 	use namespace kGAMECLASS;
 
-	public class Plains extends BaseContent implements IExplorable
-	{
+	public class Plains extends BaseContent implements IExplorable {
 		public var bunnyGirl:BunnyGirl = new BunnyGirl();
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var satyrScene:SatyrScene = new SatyrScene();
 
-		public function Plains()
-		{
-		}
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0;
-		}
+		public function Plains() {}
+
+		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0; }
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
-			outputText(images.showImage("area-plain"));
+			outputText(images.showImage("area-plains"));
 			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private var _explorationEncounter:Encounter = null;
 		public function get explorationEncounter():Encounter {
-			const game:CoC     = kGAMECLASS;
+			const game:CoC = kGAMECLASS;
 			const fn:FnHelpers = Encounters.fn;
 			return _explorationEncounter ||= Encounters.group(game.commonEncounters, {
 				name  : "sheila_xp3",
@@ -44,7 +37,7 @@ package classes.Scenes.Areas
 				when  : function ():Boolean {
 					return flags[kFLAGS.SHEILA_DEMON] == 0
 						   && flags[kFLAGS.SHEILA_XP] == 3
-						   && model.time.hours == 20
+						   && getGame().time.hours == 20
 						   && flags[kFLAGS.SHEILA_CLOCK] >= 0;
 				},
 				call  : game.sheilaScene.sheilaXPThreeSexyTime
@@ -137,21 +130,17 @@ package classes.Scenes.Areas
 				call: game.sheilaScene.sheilaEncounterRouter
 			});
 		}
-		public function explore():void
-		{
+		public function explore():void {
 			clearOutput();
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
 			explorationEncounter.execEncounter();
 		}
 
 		private function helXIzzy():void {
-			if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
-				//Hell/Izzy threesome intro
-				kGAMECLASS.helScene.salamanderXIsabellaPlainsIntro();
-			} else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
-				//Propah threesomes here!
-				kGAMECLASS.helScene.isabellaXHelThreeSomePlainsStart();
-			}
+			if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0)
+				kGAMECLASS.helScene.salamanderXIsabellaPlainsIntro(); //Hell/Izzy threesome intro
+			else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1)
+				kGAMECLASS.helScene.isabellaXHelThreeSomePlainsStart(); //Propah threesomes here!
 		}
 
 		private function findKangaFruit():void {
@@ -164,6 +153,24 @@ package classes.Scenes.Areas
 			outputText(images.showImage("item-oElixir"));
 			outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ");
 			inventory.takeItem(consumables.OVIELIX, camp.returnToCampUseOneHour);
+		}
+
+		private function walkingPlainsStatBoost():void {
+			clearOutput();
+			outputText(images.showImage("area-plains"));
+			outputText("You run through the endless plains for an hour, finding nothing.\n\n");
+			//Chance of boost == 50%
+			if (rand(2) == 0) {
+				if (rand(2) == 0 && player.tou100 < 50) { //50/50 toughness/speed
+					outputText("The long run has made you tougher.");
+					dynStats("tou", .5, "lib", -1);
+				}
+				else if (player.spe100 < 50) { //Speed
+					outputText("The long run has made you quicker.");
+					dynStats("spe", .5, "lib", -1);
+				}
+			}
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

@@ -18,7 +18,5 @@ package classes.BodyParts
 		public static const RATING_INCONCEIVABLY_BIG:int =  20;
 
 		public var rating:Number = RATING_BUTTLESS;
-
-		public function Butt() {}
 	}
 }

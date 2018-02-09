@@ -60,7 +60,7 @@ WIN:
 			//Increase Roxanne's growing dick size...
 			flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX]++;
 			//Reset if she finds someone to take it (random at high values)
-			if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 300 && model.time.hours === 1 && randomNumber.random(5) === 0) {
+			if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 300 && getGame().time.hours === 1 && randomNumber.random(5) === 0) {
 				flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] = 1;
 			}
 			
@@ -82,7 +82,7 @@ WIN:
 				}
 			}
 			
-			if (model.time.hours > 23 && flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE] > 0) {
+			if (getGame().time.hours > 23 && flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE] > 0) {
 				flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE]--; //Reduce drinking contest bonus
 			}
 			
@@ -97,7 +97,7 @@ WIN:
 //[Drinking Table Appearance]
 public function RoxanneAppearance():void {
 	//When she there?
-	if (model.time.hours > 12 && model.time.hours < 19) {
+	if (getGame().time.hours > 12 && getGame().time.hours < 19) {
 		//(Not Met) 
 		if (flags[kFLAGS.ROXANNE_MET] == 0) outputText("\n\nThere's a table with a half-dozen oddly-dressed lizans not too far from the fire.  A keg is set up a few feet away and they seem to be having a good time.");
 		//Met) 
@@ -182,7 +182,7 @@ public function RoxanneChooseApproachOrRepeat():void {
 }
 
 private function roxanneDrinkingContestNo():void {
-	if (model.time.hours == 19 || model.time.hours == 20) {
+	if (getGame().time.hours == 19 || getGame().time.hours == 20) {
 		flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
 		if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1) {
 			bazaar.nightBazaarButtfuck();

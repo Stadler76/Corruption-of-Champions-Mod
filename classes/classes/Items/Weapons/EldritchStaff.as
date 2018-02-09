@@ -10,6 +10,7 @@ package classes.Items.Weapons
 	public class EldritchStaff extends WeaponWithPerk {
 		
 		public function EldritchStaff() {
+			this.weightCategory = Weapon.WEIGHT_MEDIUM;
 			super("E.Staff", "E.Staff", "eldritch staff", "an eldritch staff", "thwack", 10, 1000, "This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power.", "Wizard's Focus", PerkLib.WizardsFocus, 0.6, 0, 0, 0);
 		}
 		

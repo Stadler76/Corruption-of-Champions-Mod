@@ -2,6 +2,7 @@ package classes.Scenes.Explore{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
 
 	public class Gargoyle extends BaseContent{
 
@@ -43,12 +44,13 @@ public function gargoylesTheShowNowOnWBNetwork():void {
 	//[Next]
 	menu();
 	addButton(0,"Next",gargoyleMeeting2);
-	model.time.hours++;
+	getGame().time.hours++;
 }
 
 //(Advance time by 1 hour) 
 private function gargoyleMeeting2():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_gargoyle);
 	outputText("You finally close the distance between yourself and the strange structure, which begins to take shape ahead.  Though it's half-buried under what must be years of built-up sand and debris, you can clearly make out high stone walls supported by vaulted arches, broken every so often by the shattered remains of stained-glass windows and a pair of utterly destroyed oaken doors nearly hidden behind a row of tall marble pillars, many of which have long since crumbled.  High above the ground, you can see a pair of tall, slender towers reaching up to the heavens, one of which has been nearly obliterated by some unimaginably powerful impact, leaving it a stump compared to its twin.  From the rooftops, strange shapes look down upon you – stone statues made in the image of demons, dragons, and other monsters.");
 	
 	//[b]You have discovered The Cathedral[/b] (If Fen wants to make this a Place; otherwise it can be encountered in the future via the Explore –> Explore function. Whichever works better. )
@@ -122,14 +124,10 @@ private function nameZeGargoyle():void {
 		// Solution? Fuck you for naming your Gargoyle "0".
 		clearOutput();
 		outputText("<b>You must name her.</b>");
-		mainView.nameBox.text = "";
-		mainView.nameBox.visible = true;
-		mainView.nameBox.width = 165;
-		menu();
+		mainView.promptCharacterName();
 		mainView.nameBox.x = mainView.mainText.x + 5;
-		
 		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-		
+		menu();
 		addButton(0,"Next",nameZeGargoyle);
 		return;
 	}
@@ -233,6 +231,7 @@ private function reassureTheGargoyle():void {
 //[b]Player Returns to the Cathedral A[/b]
 public function returnToCathedral(woken:Boolean = false):void {
 	flags[kFLAGS.FOUND_CATHEDRAL] = 1;
+	spriteSelect(SpriteDb.s_gargoyle);
 	if (!woken) {
 		clearOutput();
 		if (rand(3) == 0) outputText("You make your way back to the ruined Cathedral in the wastelands.  You notice some of the debris has been cleared away from the courtyard, and some of the windows have been boarded up.  " + flags[kFLAGS.GAR_NAME] + "'s obviously been working since you last left, trying to make the building more habitable.  With your path less obstructed than before, you enter.");
@@ -243,11 +242,11 @@ public function returnToCathedral(woken:Boolean = false):void {
 	}
 	menu();
 	//[b]Cathedral Interior – 06:00 –> 09:00 & 18:00 –> 21:00[/b]
-	if (model.time.hours <= 9 || model.time.hours >= 18 || woken) {
+	if (getGame().time.hours <= 9 || getGame().time.hours >= 18 || woken) {
 		if (!woken) {
 			outputText(images.showImage("gargoyle-cathedral"));
 			outputText("\n\nIn the dim ");
-			if (model.time.hours <= 9) outputText("early morning");
+			if (getGame().time.hours <= 9) outputText("early morning");
 			else outputText("late evening");
 			outputText(" light streaming in from the broken windows, you see " + flags[kFLAGS.GAR_NAME] + " poking around some of the rubble, slowly but surely making efforts to repair the damage done to the Cathedral.  Seeing you, however, she immediately drops what she was doing and ");
 			if (gargoyleConfidence() < 70) outputText("kneels before you, head bowed low.");

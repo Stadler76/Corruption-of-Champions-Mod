@@ -2,6 +2,7 @@
 import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
 import classes.Items.Consumable;
+import classes.Items.Weapons.*;
 import classes.Scenes.Areas.Lake;
 import classes.Scenes.Camp.ScarredBlade;
 import classes.internals.profiling.Begin;
@@ -99,7 +100,8 @@ public function getCurrentStackTrace():String		// Fuck, stack-traces only work i
 
 public function errorPrint(details:* = null):void
 {
-	rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
+	clearOutput();
+	rawOutputText("<b>Congratulations, you've found a bug!</b>");
 	rawOutputText("\nError: Unknown event!");
 	rawOutputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ");
 	rawOutputText("\nGame version: \"" + ver + "\" (<b>THIS IS IMPORTANT! Please be sure you include it!</b>) ");
@@ -121,13 +123,13 @@ public function errorPrint(details:* = null):void
 
 //Argument is time passed.  Pass to event parser if nothing happens.
 // The time argument is never actually used atm, everything is done with timeQ instead...
-public function goNext(time:Number, needNext:Boolean):Boolean  {
-	Begin("eventParser","goNext",time);
-	var rslt:Boolean = goNextWrapped(time,needNext);
+public function goNext(timeAmt:Number, needNext:Boolean):Boolean  {
+	Begin("eventParser","goNext",timeAmt);
+	var rslt:Boolean = goNextWrapped(timeAmt,needNext);
 	End("eventParser","goNext");
 	return rslt;
 }
-private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
+private function goNextWrapped(timeAmt:Number, needNext:Boolean):Boolean  {
 	//Update system time
 	//date = new Date();
 	//trace ("MONTH: " + date.month + " DATE: " + date.date + " MINUTES: " + date.minutes);
@@ -140,21 +142,21 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	}
 	while (timeQ > 0) {
 		timeQ--;
-		model.time.hours++;
+		time.hours++;
 
 		kGAMECLASS.combat.regeneration(false);
 		//Inform all time aware classes that a new hour has arrived
 		for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) if (_timeAwareClassList[tac].timeChange()) needNext = true;
-		if (model.time.hours > 23) {
-			model.time.hours = 0;
-			model.time.days++;
+		if (time.hours > 23) {
+			time.hours = 0;
+			time.days++;
 		}
-		else if (model.time.hours == 21) {
+		else if (time.hours == 21) {
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
 			else outputText("\nThe sky darkens as a starry night falls.  The blood-red moon slowly rises up over the horizon.\n");
 			needNext = true;
 		}
-		else if (model.time.hours == 6) {
+		else if (time.hours == 6) {
 			outputText("\nThe sky begins to grow brighter as the moon descends over distant mountains, casting a few last ominous shadows before they burn away in the light.\n");
 			needNext = true;
 		}
@@ -185,8 +187,8 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) temp /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
 		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) temp /= 2;
 		temp *= 1 - (scarePercent / 100);
-		if (model.time.hours == 2) {
-			if (model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
+		if (time.hours == 2) {
+			if (time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
 				anemoneScene.goblinNightAnemone();
 				needNext = true;
 			}
@@ -222,17 +224,17 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 				}
 			}
 			//wormgasms
-			else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && !player.hasStatusEffect(StatusEffects.Infested)) {
-				if (player.hasCock() && !(player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
+			else if (flags[kFLAGS.EVER_INFESTED] > 0 && rand(100) < 5 && !player.hasStatusEffect(StatusEffects.Infested)) {
+				if (kGAMECLASS.mountain.wormsScene.eligibleForWormInfestation()) {
 					kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
 					return true;
 				}
 				else if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "") {
-					outputText("\n<b>You hear the sound of a horde of worms banging against the door. Good thing you locked it before you went to sleep!</b>\n");
-					needNext
+					outputText("\n<b>You hear the sounds of a horde of frustrated worms banging against the door. Good thing you locked your door before you went to sleep!</b>\n");
+					needNext = true;
 				}
 				else if (flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
-					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
+					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste. She shudders after at the memory.</b>\n");
 					needNext = true;
 				}
 				else if (player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
@@ -368,25 +370,25 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	}
 	
 	// Hanging the Uma massage update here, I think it should work...
-	telAdre.umasShop.updateBonusDuration(time);
-	highMountains.izumiScenes.updateSmokeDuration(time);
+	telAdre.umasShop.updateBonusDuration(timeAmt);
+	highMountains.izumiScenes.updateSmokeDuration(timeAmt);
 	//Drop axe if too short!
-	if ((player.tallness < 78 && player.str < 90) && player.weapon == weapons.L__AXE) {
+	if (player.weapon is LargeAxe && (player.tallness < 78 && player.str < 90)) {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n");
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
-	if ((player.tallness < 60 && player.str < 70) && player.weapon == weapons.L_HAMMR) {
+	if (player.weapon is LargeHammer && (player.tallness < 60 && player.str < 70)) {
 		outputText("<b>\nYou've become too short to use this hammer anymore.  You can still keep it in your inventory, but you'll need to be taller to effectively wield it.</b>\n");
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}		
-	if (player.weapon == weapons.CLAYMOR && player.str < 40) {
+	if (player.weapon is LargeClaymore && player.str < 40) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n");
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
-	if (player.weapon == weapons.WARHAMR && player.str < 80) {
+	if (player.weapon is HugeWarhammer && player.str < 80) {
 		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n");
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
@@ -399,12 +401,6 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	}
 	//Drop ugly sword if uncorrupt
 	if (player.weaponPerk == "uglySword" && !player.isCorruptEnough(70)) {
-		outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it. Whatever power inhabits this blade appears to be disgusted with your purity. Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
-		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
-		return true;
-	}
-	//Drop midnight rapier if uncorrupt
-	if (player.weaponPerk == "midnightRapier" && !player.isCorruptEnough(90)) {
 		outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it. Whatever power inhabits this blade appears to be disgusted with your purity. Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
@@ -511,24 +507,24 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	return false;
 }
 
-public function cheatTime(time:Number, needNext:Boolean = false):void {
+public function cheatTime(timeAmt:Number, needNext:Boolean = false):void {
 	//Advance minutes
-	var minutesToPass:Number = (time -= Math.floor(time)) * 60;
+	var minutesToPass:Number = (timeAmt -= Math.floor(timeAmt)) * 60;
 	minutesToPass = Math.round(minutesToPass)
-	model.time.minutes += minutesToPass;
-	if (model.time.minutes > 59) {
+	time.minutes += minutesToPass;
+	if (time.minutes > 59) {
 		timeQ++;
-		model.time.minutes -= 60;
+		time.minutes -= 60;
 		if (!buttonIsVisible(0)) goNext(timeQ, needNext);
 	}
-	time = Math.floor(time);
+	timeAmt = Math.floor(timeAmt);
 	//Advance hours
-	while(time > 0) {
-		time--;
-		model.time.hours++;
-		if (model.time.hours > 23) {
-			model.time.days++;
-			model.time.hours = 0;
+	while(timeAmt > 0) {
+		timeAmt--;
+		time.hours++;
+		if (time.hours > 23) {
+			time.days++;
+			time.hours = 0;
 		}
 	}
 	statScreenRefresh();

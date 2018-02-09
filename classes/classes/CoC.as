@@ -56,10 +56,8 @@ package classes
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.internals.Utils;
-	import coc.model.GameModel;
-	import coc.model.TimeModel;
+	import classes.Time;
 	import coc.view.MainView;
-	import fl.data.DataProvider;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -125,7 +123,6 @@ package classes
 		}
 		
 		// Include the functions. ALL THE FUNCTIONS
-		include "../../includes/input.as";
 		include "../../includes/debug.as";
 		include "../../includes/eventParser.as";
 		include "../../includes/engineCore.as";
@@ -194,6 +191,7 @@ package classes
 		public var camp:Camp = new Camp(campInitialize);
 		public var dreams:Dreams = new Dreams();
 		public var dungeons:DungeonCore = new DungeonCore();
+		public var equipmentUpgrade:ItemUpgrade = new ItemUpgrade();
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		public var inventory:Inventory = new Inventory(saves);
 		public var masturbation:Masturbation = new Masturbation();
@@ -301,6 +299,7 @@ package classes
 		
 		public var bindings:Bindings = new Bindings();
 		public var output:Output = Output.init();
+		public var credits:Credits = Credits.init();
 		public var measurements:Measurements = Measurements.init();
 		/****
 		   This is used purely for bodges while we get things cleaned up.
@@ -311,8 +310,6 @@ package classes
 		 ****/
 		
 		public var mainView:MainView;
-		
-		public var model:GameModel;
 		
 		public var parser:Parser;
 		
@@ -337,7 +334,7 @@ package classes
 		{
 			return _gameState;
 		}
-		public var time:TimeModel;
+		public var time:Time;
 		
 		public var temp:int;
 		public var args:Array;
@@ -347,7 +344,32 @@ package classes
 		
 		public var kFLAGS_REF:*;
 		public var kACHIEVEMENTS_REF:*;
-		
+
+		public function clearOutput():void
+		{
+			output.clear(true);
+		}
+
+		public function rawOutputText(text:String):void
+		{
+			output.raw(text);
+		}
+
+		public function outputText(text:String):void
+		{
+			output.text(text);
+		}
+
+		public function displayHeader(string:String):void
+		{
+			output.text(output.formatHeader(string));
+		}
+
+		public function formatHeader(string:String):String
+		{
+			return output.formatHeader(string);
+		}
+
 		public function get inCombat():Boolean
 		{
 			return _gameState == 1;
@@ -446,7 +468,6 @@ package classes
 			
 			this.parser = new Parser(this, CoC_Settings);
 			
-			this.model = new GameModel();
 			try
 			{
 				this.mainView = new MainView( /*this.model*/);
@@ -458,7 +479,7 @@ package classes
 				throw Error(e.getStackTrace());
 			}
 			this.mainView.name = "mainView";
-			this.mainView.addEventListener("addedToStage", Utils.curry(_postInit, stageToUse));
+			this.mainView.addEventListener(Event.ADDED_TO_STAGE, Utils.curry(_postInit, stageToUse));
 			stageToUse.addChild(this.mainView);
 		}
 		
@@ -481,8 +502,7 @@ package classes
 			// ******************************************************************************************
 			
 			var mainView:MainView = this.mainView;
-			var model:GameModel = this.model;
-			
+
 			/**
 			 * Global Variables used across the whole game. I hope to whittle it down slowly.
 			 */
@@ -492,12 +512,12 @@ package classes
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4.11"; //Version NUMBER
+			ver = "1.0.2_mod_1.4.12b"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
-			version = ver + " (<b>Refactorfest</b>)"; //Version TEXT
+			version = ver + " (<b>Interface Prettiness!</b>)"; //Version TEXT
+			
 			//Indicates if building for mobile?
 			mobile = false;
-			model.mobile = mobile;
 			
 			this.images = new ImageManager(stageToUse.stage, mainView);
 			this.inputManager = new InputManager(stageToUse.stage, mainView, false);
@@ -513,7 +533,6 @@ package classes
 			
 			//The Player object, used everywhere
 			player = new Player();
-			model.player = player;
 			player2 = new Player();
 			playerEvent = new PlayerEvents();
 			
@@ -553,18 +572,19 @@ package classes
 			//{ region DisplayVariables
 			
 			//Holds the date and time display in the bottom left
-			time = new TimeModel();
-			model.time = time;
+			time = new Time();
 			
 			//The string holds all the "story" text, mainly used in engineCore
 			//}endregion
 			
 			// These are toggled between by the [home] key.
+			mainView.textBGTranslucent.visible = true;
 			mainView.textBGWhite.visible = false;
 			mainView.textBGTan.visible = false;
 			
 			// *************************************************************************************
 			//Workaround.
+			mainViewManager.registerShiftKeys();
 			exploration.configureRooms();
 			lethicesKeep.configureRooms();
 			dungeons.map = new DungeonMap();
@@ -577,7 +597,6 @@ package classes
 			
 			//Used for stat tracking to keep up/down arrows correct.
 			oldStats = {};
-			model.oldStats = oldStats;
 			oldStats.oldStr = 0;
 			oldStats.oldTou = 0;
 			oldStats.oldSpe = 0;
@@ -594,8 +613,8 @@ package classes
 			
 			// ******************************************************************************************
 			
-			mainView.aCb.dataProvider = new DataProvider([{label: "TEMP", perk: new PerkClass(PerkLib.Acclimation)}]);
-			mainView.aCb.addEventListener(Event.CHANGE, playerInfo.changeHandler);
+			mainView.aCb.items = [{label: "TEMP", perk: new PerkClass(PerkLib.Acclimation)}];
+			mainView.aCb.addEventListener(Event.SELECT, playerInfo.changeHandler);
 			
 			//Register the classes we need to be able to serialize and reconstitute so
 			// they'll get reconstituted into the correct class when deserialized
@@ -622,7 +641,17 @@ package classes
 		
 		public function run():void
 		{
+			//Set up stage
+			stage.focus = kGAMECLASS.mainView.mainText;
+			mainView.eventTestInput.x = -10207.5;
+			mainView.eventTestInput.y = -1055.1;
+			mainViewManager.startUpButtons();
+			saves.loadPermObject();
+			mainViewManager.setTheme();
+			mainView.setTextBackground(flags[kFLAGS.TEXT_BACKGROUND_STYLE]);
+			//Now enter the main menu.
 			mainMenu.mainMenu();
+			
 			this.stop();
 			
 			if (_updateHack)
@@ -659,7 +688,7 @@ package classes
 		{
 			// Inlined call from lib/src/coc/view/MainView.as
 			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-			if (choice <= 0 || choice == null || flags[kFLAGS.SHOW_SPRITES_FLAG] == 1)
+			if (choice <= 0 || choice == null || flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
 			{
 				mainViewManager.hideSprite();
 			}

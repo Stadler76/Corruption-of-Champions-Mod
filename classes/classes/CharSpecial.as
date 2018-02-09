@@ -379,7 +379,7 @@ package classes
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
 			player.str = 41;
-			player.setWeapon(weapons.CLAYMOR);
+			player.setWeapon(weapons.CLAYMR0);
 		}
 		
 		private function customGalatea():void {
@@ -407,7 +407,7 @@ package classes
 	
 			//Equipment: 
 			//Weapon: Warhammer
-			player.setWeapon(weapons.WARHAMR);
+			player.setWeapon(weapons.WARHAM0);
 			//Armor: Lusty shit
 			player.setArmor(armors.LMARMOR);
 			//player.createPerk(PerkLib.SluttySeduction, 10 + flags[kFLAGS.BIKINI_ARMOR_BONUS], 0, 0, 0);
@@ -513,7 +513,7 @@ package classes
 			//equipment;
 			//- katana (don't suppose you could rename the katana 'Zon'ith' could you? ~.^)
 			//Items: Katana, Leather Armor
-			player.setWeapon(weapons.KATANA);
+			player.setWeapon(weapons.KATANA0);
 			//- robes
 			player.setArmor(armors.M_ROBES);
 		}
@@ -899,7 +899,7 @@ package classes
 			//-Chainmail armor
 			player.setArmor(armors.FULLPLT);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
-			player.setWeapon(weapons.CLAYMOR);
+			player.setWeapon(weapons.CLAYMR0);
 	
 			player.str = 41;
 			//femininity: 95
@@ -1067,7 +1067,7 @@ package classes
 			player.ears.type = Ears.DOG;
 			////"	"I'm picturing a tall, feminine German-Shepherd morph, solid white and gorgeous. She has both sets of genitals, with no balls, and a large set of breasts. She wields a large claymore and is dressed in a full chain vest and pants. 
 			//large claymore (and the strength to use it)
-			player.setWeapon(weapons.CLAYMOR);
+			player.setWeapon(weapons.CLAYMR0);
 			player.str = 40;
 			//full chain
 			player.setArmor(armors.FULLCHN);
@@ -1179,7 +1179,7 @@ package classes
 			player.ears.type = Ears.CAT;
 			player.wings.type = Wings.BAT_LIKE_LARGE;
 			//Items: Katana, Leather Armor
-			player.setWeapon(weapons.KATANA);
+			player.setWeapon(weapons.KATANA0);
 			player.setArmor(armors.URTALTA);
 			//Key Item: Deluxe Dildo
 			player.createKeyItem("Deluxe Dildo",0,0,0,0);
@@ -1623,8 +1623,8 @@ package classes
 			
 			player.face.type = Face.FOX;
 			player.ears.type = Ears.FOX;
-			player.claws.type = Claws.DOG;
-			player.claws.tone = "ivory";
+			player.arms.claws.type = Claws.DOG;
+			player.arms.claws.tone = "ivory";
 			player.eyes.type = Eyes.DRAGON;
 			player.lowerBody.type = LowerBody.FOX;
 			player.tail.type = Tail.FOX; // soft fur feels so lovely...
@@ -1674,7 +1674,7 @@ package classes
 			// Metamorph, Magic Metabolism and Puppeteer suggested perks would be also nice addition to character, but they are not implemented yet
 			
 			if (player.armor == ArmorLib.NOTHING || player.armor == armors.C_CLOTH) player.setArmor(armors.KIMONO);
-			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.KATANA);
+			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.KATANA0);
 			
 			// you still aren't sure about gender preferences, but have some stashed eggs just in case... [why almost all inventory functions are private?]
 			if (player.itemSlot1.isEmpty())  player.itemSlot1.setItemAndQty(consumables.L_PNKEG, 1); // if you want to get rid of tentacles, but still maintain dragon one you'll have to find Ceraph

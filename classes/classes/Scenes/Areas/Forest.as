@@ -1,8 +1,5 @@
-/**
- * Created by aimozg on 06.01.14.
- */
-package classes.Scenes.Areas
-{
+/* Created by aimozg on 06.01.14 */
+package classes.Scenes.Areas {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -11,11 +8,10 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Forest.*;
-	
+
 	use namespace kGAMECLASS;
 
-	public class Forest extends BaseContent implements IExplorable
-	{
+	public class Forest extends BaseContent implements IExplorable {
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
 		public var corruptedGlade:CorruptedGlade = new CorruptedGlade();
@@ -25,13 +21,11 @@ import classes.Scenes.API.FnHelpers;
 		public var tamaniScene:TamaniScene = new TamaniScene();
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
-		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
+//		public var dullahanScene:DullahanScene = new DullahanScene(); //[INTERMOD:8chan]
 
-		public function Forest() { }
+		public function Forest() {}
 
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0;
-		}
+		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0; }
 		public function discover():void {
 			clearOutput();
 			outputText(images.showImage("area-forest"));
@@ -40,13 +34,10 @@ import classes.Scenes.API.FnHelpers;
 			flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
-
-		//==============================
-		//EVENTS GO HERE!
-		//==============================
+		//==============EVENTS GO HERE!==============
 		private var _forestEncounter:Encounter = null;
-		public function get forestEncounter():Encounter { // lateinit because it references getGame()
-			const game:CoC     = getGame();
+		public function get forestEncounter():Encounter { //late init because it references getGame()
+			const game:CoC = getGame();
 			const fn:FnHelpers = Encounters.fn;
 			if (_forestEncounter == null) _forestEncounter =
 					Encounters.group(game.commonEncounters.withImpGob, {
@@ -120,30 +111,26 @@ import classes.Scenes.API.FnHelpers;
 			return _forestEncounter;
 		}
 
-		public function tentacleBeastEncounterFn():void {
+		public function tentacleBeastEncounterFn():void { //Oh noes, tentacles!
 			clearOutput();
-			//Oh noes, tentacles!
 			//Tentacle avoidance chance due to dangerous plants
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
-				//trace("TENTACLE'S AVOIDED DUE TO BOOK!");
+//				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				outputText(images.showImage("item-dPlants"));
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");
 				menu();
 				addButton(0, "Continue", tentacleBeastScene.encounter);
 				addButton(4, "Leave", camp.returnToCampUseOneHour);
-			} else {
-				tentacleBeastScene.encounter();
 			}
-
+			else tentacleBeastScene.encounter();
 		}
 
 		public function tripOnARoot():void {
-			outputText(images.showImage("minomob-falling"));
+			outputText(images.showImage("area-forest"));
 			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.");
 			player.takeDamage(10);
 			doNext(camp.returnToCampUseOneHour);
 		}
-
 		public function findTruffle():void {
 			outputText(images.showImage("item-pigTruffle"));
 			outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
@@ -160,6 +147,7 @@ import classes.Scenes.API.FnHelpers;
 			if (player.statusEffectv2(StatusEffects.MetRathazul) == 0) outputText("It feels strong and flexible - maybe someone can make something of it. ");
 			inventory.takeItem(useables.B_CHITN, camp.returnToCampUseOneHour);
 		}
+
 		public function forestWalkFn():void {
 			outputText(images.showImage("area-forest"));
 			if (player.cor < 80) {
@@ -178,23 +166,19 @@ import classes.Scenes.API.FnHelpers;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-
 		public function marbleVsImp():void {
 			clearOutput();
-			outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
+			outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.\n");
 			outputText(images.showImage("monster-marble"));
-			outputText("\n\nShe goes up to the imp, and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large pile of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
+			outputText("She goes up to the imp, and kicks it once.  Satisfied that the creature isn't moving, she turns around to face you and gives you a smile.  \"<i>Sorry about that, but I prefer to take care of these buggers quickly.  If they get the chance to call on their friends, they can actually become a nuisance.</i>\"  She disappears back into the foliage briefly before reappearing holding two large pile of logs under her arms, with a fire axe and her hammer strapped to her back.  \"<i>I'm gathering firewood for the farm, as you can see; what brings you to the forest, sweetie?</i>\"  You inform her that you're just exploring.");
 			outputText("\n\nShe gives a wistful sigh. \"<i>I haven't really explored much since getting to the farm.  Between the jobs Whitney gives me, keeping in practice with my hammer, milking to make sure I don't get too full, cooking, and beauty sleep, I don't get a lot of free time to do much else.</i>\"  She sighs again.  \"<i>Well, I need to get this back, so I'll see you later!</i>\"");
-			//end event
 			doNext(camp.returnToCampUseOneHour);
 		}
-		public function explore():void
-		{
+		public function explore():void {
 			clearOutput();
-			//Increment forest exploration counter.
+			//Increment forest exploration counter
 			flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
 			forestEncounter.execEncounter();
 		}
-
 	}
 }

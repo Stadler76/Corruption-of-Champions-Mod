@@ -10,6 +10,7 @@ package classes.Items.Weapons
 	public class Fists extends Weapon {
 		
 		public function Fists() {
+			this.weightCategory = Weapon.WEIGHT_LIGHT;
 			super("Fists  ", "Fists", "fists", "fists \n\nType: Weapon (Unarmed) \nAttack: 0 \nBase value: N/A", "punch", 0);
 		}
 		

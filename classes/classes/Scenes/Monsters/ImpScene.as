@@ -2144,7 +2144,8 @@ package classes.Scenes.Monsters
 					case 3: // str 40-69 --> 3 hours, 10 fatigue
 					case 4: // str < 40  --> 4 hours, 20 fatigue
 						outputText("You try to lift the statue, but are simply unable to. You huff angrily as you pace around it, trying to figure out how you can get it back to camp. You look through your belongings and around the area for something to help you move the damned thing. After 20 minutes of searching you manage to find enough resources to make a small sled that you can pull along with some rope. You position it behind the statue and kick the statue over, smiling a little as you let out some of that anger. With the statue soon secured in place you begin the long trek home, dragging the statue behind you. By the time you reach the camp you are exhausted, your arms and " + player.legs() + " burning in protest of the excessive labour transporting this thing took. Panting, you untie the statue and drag it up to lean against the camp wall, hoping the damned thing was worth dragging here.");
-					// default: // there is no default. All possible cases are handled ...
+						break;
+					default: // there is no default. All possible cases are handled ... Except for when Sonarcloud complains about this code smell.
 				}
 			} else {
 				outputText("In the " + timeText + " it takes to [if (strength >= 70) carry|drag] the statue back to camp, you don't encounter any further trouble, though you're sure the sight of the statue, which you now place around your wall, helped with that. Maybe it'll help here too.");

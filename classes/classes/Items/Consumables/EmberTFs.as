@@ -13,7 +13,7 @@ package classes.Items.Consumables
 	 */
 	public class EmberTFs extends Consumable 
 	{
-		public function EmberTFs(type:int = 0):void 
+		public function EmberTFs(type:int = 0) 
 		{
 			var id:String;
 			var shortName:String;
@@ -29,7 +29,6 @@ package classes.Items.Consumables
 					description = "A rare, beautiful flower.  It could make an exquisite perfume.  According to a legend, dragons give this flower to the ones they intend to court.";
 					value = 50;
 					break;
-
 				default:
 					id = "EmberBl";
 					shortName = "EmberBlood";
@@ -171,11 +170,20 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Gain Dragon Tail
-			if (player.tail.type != Tail.DRACONIC && changes < changeLimit && rand(3) == 0) {
+			if (player.tail.type !== Tail.DRACONIC && changes < changeLimit && rand(3) === 0) {
 				//(If no tail)
-				if (player.tail.type == Tail.NONE) output.text("\n\nA sudden dull, throbbing pain in your " + player.buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
+				if (player.tail.type === Tail.NONE) {
+					output.text("\n\nA sudden dull, throbbing pain in your [butt] forces your hands to it; you can feel an ominous lump over your"
+					           +" tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode,"
+					           +" jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly."
+					           +"  <b>You have grown a dragon tail; long, thick and muscular, yet flexible.</b>");
 				//(If tail)
-				else output.text("\n\nAn icy sensation fills your behind as your tail suddenly goes curiously numb.  Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible, its tip adorned with wicked spikes.  <b>You now have a dragon tail.</b>");
+				} else {
+					output.text("\n\nAn icy sensation fills your behind as your tail suddenly goes curiously numb.  Twisting your head around,"
+					           +" you watch as it melts and transforms into a reptilian appendage, one thick and muscular, long and flexible,"
+					           +" tapering to a tip adorned with wicked spikes."
+					           +"  <b>You now have a dragon tail.</b>");
+				}
 				player.tail.type = Tail.DRACONIC;
 				changes++
 			}
@@ -283,14 +291,13 @@ package classes.Items.Consumables
 			if (player.arms.type != Arms.PREDATOR && player.hasDragonScales() && player.lowerBody.type == LowerBody.DRAGON && changes < changeLimit && rand(3) == 0) {
 				output.text("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skin.tone + " scales and powerful, thick, curved steel-gray claws replacing your fingernails.");
 				output.text("\n<b>You now have dragon arms.</b>");
-				player.arms.type = Arms.PREDATOR;
-				mutations.updateClaws(Claws.DRAGON);
+				player.arms.setType(Arms.PREDATOR, Claws.DRAGON);
 				changes++
 			}
 			//Claw transition
-			if (player.arms.type == Arms.PREDATOR && player.hasDragonScales() && player.claws.type != Claws.DRAGON && changes < changeLimit && rand(3) == 0) {
+			if (player.arms.type == Arms.PREDATOR && player.hasDragonScales() && player.arms.claws.type != Claws.DRAGON && changes < changeLimit && rand(3) == 0) {
 				output.text("\n\nYour [claws] change  a little to become more dragon-like.");
-				mutations.updateClaws(Claws.DRAGON);
+				player.arms.updateClaws(Claws.DRAGON);
 				output.text(" <b>You now have [claws].</b>");
 				changes++
 			}

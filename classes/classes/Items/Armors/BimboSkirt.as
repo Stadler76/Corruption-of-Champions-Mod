@@ -92,6 +92,7 @@ package classes.Items.Armors
 							outputText("Your [pussy] becomes all tingly and wet under your slutty skirt. ");
 							game.dynStats("lus", 5);
 							break;
+						default: //Move along
 					}
 				}
 				if (game.player.gender == 0) {

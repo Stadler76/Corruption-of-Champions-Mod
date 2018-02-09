@@ -24,8 +24,6 @@ package classes.BodyParts
 		/** horns length or number depending on the type */
 		public var value:Number = 0;
 
-		public function Horns() {}
-
 		public function restore():void
 		{
 			type  = NONE;

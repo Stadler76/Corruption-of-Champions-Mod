@@ -33,12 +33,12 @@ package classes.Scenes.NPCs{
 		{
 			checkedHeliaIsabellaThreesome = 0; //Make sure we test just once in timeChangeLarge
 			pregnancy.pregnancyAdvance();
-			//trace("\nHelia time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event, false);
-			if (model.time.hours > 23) {
+			//trace("\nHelia time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event, false);
+			if (getGame().time.hours > 23) {
 				if (flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] > 0) flags[kFLAGS.HELSPAWN_GROWUP_COUNTER]++;
 				if (flags[kFLAGS.HEL_RAPED_TODAY] == 1) flags[kFLAGS.HEL_RAPED_TODAY] = 0;
 			}
-			if (model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+			if (getGame().time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				kGAMECLASS.helFollower.sleepyNightMareHel();
 				return true;
 			}
@@ -47,30 +47,30 @@ package classes.Scenes.NPCs{
 	
 		public function timeChangeLarge():Boolean {
 			//Helia's morning surprise!
-			if (getGame().model.time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
+			if (getGame().time.hours == 23 && helFollower.followerHel() && flags[kFLAGS.HEL_BONUS_POINTS] >= 150 && flags[kFLAGS.HELIA_KIDS_CHAT] == 0) {
 				helSpawnScene.heliaBonusPointsAward();
 				return true;
 			}
-			if (model.time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+			if (getGame().time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				helSpawnScene.helGotKnockedUp();
 				return true;
 			}
 			if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0 && helFollower.helAffection() >= 100 &&
-				flags[kFLAGS.HELIA_FOLLOWER_DISABLED] == 0 && model.time.hours == 2 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+				flags[kFLAGS.HELIA_FOLLOWER_DISABLED] == 0 && getGame().time.hours == 2 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				helFollower.heliaFollowerIntro();
 				return true;   
 			}
-			if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+			if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && getGame().time.hours == 6 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				kGAMECLASS.dungeons.heltower.morningAfterHeliaDungeonAgreements();
 				return true;
 			}
 			//Helspawn night smex!
-			if (flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 2 || model.time.hours == 3 || model.time.hours == 4) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 0) {
+			if (flags[kFLAGS.HELSPAWN_AGE] == 2 && (getGame().time.hours == 2 || getGame().time.hours == 3 || getGame().time.hours == 4) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 0) {
 				helSpawnScene.helspawnIsASlut();
 				return true;
 			}
 			//Chance of threesomes!
-			if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && getGame().isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+			if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && getGame().isabellaFollowerScene.isabellaFollower() && getGame().time.hours == 2 && getGame().time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) { //Hell/Izzy threesome intro
 					spriteSelect(SpriteDb.s_isabella);
 					followrIzzyxSallyThreesomePretext();
@@ -1487,7 +1487,7 @@ private function leaveIsabellaSallyBehind():void {
 	spriteChooser();
 	clearOutput();
 	outputText("You decline the cow-girl's offer, but tell the redheads to have fun without you.  Though a bit disappointed, they both wave as you make your way back to camp.");
-	if (model.time.hours < 6) doNext(playerMenu);
+	if (getGame().time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1551,7 +1551,7 @@ private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	outputText("With a chuckle, you head on back to camp with a full belly");
 	if (player.balls > 0) outputText(" and balls bluer than the lake");
 	outputText(".");
-	if (model.time.hours < 6) doNext(playerMenu);
+	if (getGame().time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1682,7 +1682,7 @@ private function izzySallyThreeSomeFollowup():void {
 
 	outputText("\"<i>Yeah.  Resting is... resting is good,</i>\" Hel says, trying and failing to suppress a yawn of her own.  Smiling, you wrap your arms around your two beautiful, busty redheads and let sleep overcome you.");
 	//(Either return PC to camp or advance to the next day, if in plains or camp, respectively)
-	if (model.time.hours < 6) doNext(playerMenu);
+	if (getGame().time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseFourHours);
 }
 //VAGINA (edited)
@@ -1726,7 +1726,7 @@ private function izzySallyThreeSomeVagoozlaz():void {
 	//Bump up follower tracking affection too
 	isabellaFollowerScene.isabellaAffection(4);
 	helFollower.helAffection(5);
-	if (model.time.hours < 6) doNext(playerMenu);
+	if (getGame().time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseFourHours);
 }
 //Fox Girls -- First Time Intro

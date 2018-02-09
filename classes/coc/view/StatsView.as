@@ -5,9 +5,11 @@ import classes.GlobalFlags.kGAMECLASS;
 import classes.Player;
 import classes.internals.LoggerFactory;
 import classes.internals.Utils;
+import flash.events.TimerEvent;
 import flash.filters.DropShadowFilter;
 import flash.text.TextField;
 import flash.text.TextFormat;
+import flash.utils.Timer;
 import mx.logging.ILogger;
 
 public class StatsView extends Block {
@@ -65,9 +67,7 @@ public class StatsView extends Block {
 
 	private var allStats:Array;
 
-
-
-	public function StatsView(mainView:MainView/*, model:GameModel*/) {
+	public function StatsView(mainView:MainView) {
 		super({
 			width: MainView.STATBAR_W,
 			height: MainView.STATBAR_H,
@@ -121,7 +121,6 @@ public class StatsView extends Block {
 		addElement(hpBar = new StatBar({
 			statName: "HP:",
 			barColor: '#00c000',
-			bgColor : '#c00000',
 			showMax : true
 		}));
 		addElement(lustBar = new StatBar({
@@ -286,8 +285,9 @@ public class StatsView extends Block {
 			case 'spiritstones':
 				return spiritstonesBar;
 			*/
+			default:
+				return null;
 		}
-		return null;
 	}
 	public function showStatUp(statName:String):void {
 		var stat:StatBar = statByName(statName);
@@ -325,16 +325,17 @@ public class StatsView extends Block {
 		senBar.value          = player.sens;
 		corBar.value          = player.cor;
 		hpBar.maxValue        = player.maxHP();
-		hpBar.value           = player.HP;
+		animateBarChange(hpBar, player.HP);
+		//hpBar.value           = player.HP;
 		/* [INTERMOD: xianxia]
 		wrathBar.maxValue 	  = player.maxWrath();
 		wrathBar.value    	  = player.wrath;
 		*/
 		lustBar.maxValue      = player.maxLust();
 		lustBar.minValue      = player.minLust();
-		lustBar.value         = player.lust;
+		animateBarChange(lustBar, player.lust);
 		fatigueBar.maxValue   = player.maxFatigue();
-		fatigueBar.value      = player.fatigue;
+		animateBarChange(fatigueBar, player.fatigue);
 		/* [INTERMOD: xianxia]
 		manaBar.maxValue 	  = player.maxMana();
 		manaBar.value    	  = player.mana;
@@ -367,7 +368,7 @@ public class StatsView extends Block {
 			levelBar.value           = player.level;
 			if (player.level < kGAMECLASS.levelCap) {
 				xpBar.maxValue  = player.requiredXP();
-				xpBar.value     = player.XP;
+				animateBarChange(xpBar, player.XP);
 			} else {
 				xpBar.maxValue  = player.XP;
 				xpBar.value     = player.XP;
@@ -379,10 +380,10 @@ public class StatsView extends Block {
 			*/
 		}
 
-		var minutesDisplay:String = "" + game.model.time.minutes;
+		var minutesDisplay:String = "" + game.time.minutes;
 		if (minutesDisplay.length == 1) minutesDisplay = "0" + minutesDisplay;
 
-		var hours:Number = game.model.time.hours;
+		var hours:Number = game.time.hours;
 		var hrs:String, ampm:String;
 		if (game.flags[kFLAGS.USE_12_HOURS] == 0) {
 			hrs  = "" + hours;
@@ -391,7 +392,7 @@ public class StatsView extends Block {
 			hrs  = (hours % 12 == 0) ? "12" : "" + (hours % 12);
 			ampm = hours < 12 ? "am" : "pm";
 		}
-		timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
+		timeText.htmlText = "<u>Day#: " + game.time.days + "</u>"+
 						"\nTime: " + hrs + ":" + minutesDisplay + ampm;
 
 		invalidateLayout();
@@ -437,6 +438,27 @@ public class StatsView extends Block {
 			tf.defaultTextFormat = dtf;
 			tf.setTextFormat(dtf);
 		}
+		
+	}
+	
+	public function animateBarChange(bar:StatBar, newValue:Number):void {
+		if (kGAMECLASS.flags[kFLAGS.ANIMATE_STATS_BARS] == 0) {
+			bar.value = newValue;
+			return;
+		}
+		var oldValue:Number = bar.value;
+		//Now animate the bar.
+		var tmr:Timer = new Timer(32, 30);
+		tmr.addEventListener(TimerEvent.TIMER, kGAMECLASS.createCallBackFunction(stepBarChange, bar, [oldValue, newValue, tmr]));
+		tmr.start();
+	}
+	private function stepBarChange(bar:StatBar, args:Array):void {
+		var originalValue:Number = args[0]; 
+		var targetValue:Number = args[1]; 
+		var timer:Timer = args[2];
+		bar.value = originalValue + (((targetValue - originalValue) / timer.repeatCount) * timer.currentCount);
+		if (timer.currentCount >= timer.repeatCount) bar.value = targetValue;
+		if (bar == hpBar) bar.bar.fillColor = Color.fromRgbFloat((1 - (bar.value / bar.maxValue)) * 0.8, (bar.value / bar.maxValue) * 0.8, 0);
 	}
 }
 }

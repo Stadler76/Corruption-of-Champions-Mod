@@ -33,11 +33,10 @@ package classes.BodyParts
 		public static const DEER:int         =  23;
 		public static const WOLF:int         =  24;
 		public static const COCKATRICE:int   =  25;
-		public static const BEAK:int         =  26;
+		public static const BEAK:int         =  26; // This is a placeholder for the next beaked face type, so feel free to refactor (rename)
+		public static const RED_PANDA:int    =  27;
 
 		public var type:Number = HUMAN;
-
-		public function Face() {}
 
 		public function restore():void
 		{

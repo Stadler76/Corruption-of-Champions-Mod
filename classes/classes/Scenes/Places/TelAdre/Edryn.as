@@ -26,7 +26,7 @@ package classes.Scenes.Places.TelAdre {
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			//trace("\nEdryn time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
+			//trace("\nEdryn time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && flags[kFLAGS.EDRYN_PREGNANT_AND_NOT_TOLD_PC_YET] == 0 && pregnancy.type != PregnancyStore.PREGNANCY_TAOTH) {
 				flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION]++; //Pregnancy on hold until the PC discovers it
 			}
@@ -503,7 +503,7 @@ private function fuckEdrynNonTaur():void {
 }
 
 public function edrynBar():Boolean {
-	if (flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0 && model.time.hours >= 14 && model.time.hours <= 19 && (model.time.hours < 17 || flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0))
+	if (flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0 && getGame().time.hours >= 14 && getGame().time.hours <= 19 && (getGame().time.hours < 17 || flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0))
 		return true;
 	return false;
 }
@@ -524,10 +524,10 @@ Scene proc's the first time the PC visits the Wet Bitch after all requirements a
 private var edrynHeliaLastThreesomeCheck:int;
 
 public function edrynHeliaThreesomePossible():Boolean {
-	if (model.time.totalTime == edrynHeliaLastThreesomeCheck || model.time.totalTime == -edrynHeliaLastThreesomeCheck) //Only choose action once per visit to the bar
+	if (getGame().time.totalTime == edrynHeliaLastThreesomeCheck || getGame().time.totalTime == -edrynHeliaLastThreesomeCheck) //Only choose action once per visit to the bar
 		return edrynHeliaLastThreesomeCheck > 0;
-	edrynHeliaLastThreesomeCheck = model.time.totalTime;
-	if (player.gender == 0 || model.time.hours < 14 || model.time.hours >= 20 || rand(2) == 0 || (flags[kFLAGS.HEL_FUCKBUDDY] == 0 && !kGAMECLASS.helFollower.followerHel())
+	edrynHeliaLastThreesomeCheck = getGame().time.totalTime;
+	if (player.gender == 0 || getGame().time.hours < 14 || getGame().time.hours >= 20 || rand(2) == 0 || (flags[kFLAGS.HEL_FUCKBUDDY] == 0 && !kGAMECLASS.helFollower.followerHel())
 	|| (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0)) {
 		edrynHeliaLastThreesomeCheck = -edrynHeliaLastThreesomeCheck; //Make the saved time negative to indicate Helia is not at the bar right now
 		return false;
@@ -543,11 +543,18 @@ public function helAppearance():void {
 //\"<i>Hel</i>\" in Wet Bitch Menu (First Time)
 public function approachHelAtZeBitch():void {
 	clearOutput();
+	kGAMECLASS.helScene.spriteChooser();
 	outputText(images.showImage("hel-chat-at-bar"));
 
 	menu();
 
-	if ((edrynBar() && player.cockThatFits(300) >= 0 && player.statusEffectv1(StatusEffects.Edryn) >= 4) && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
+	//Used for finding what cock to use!
+	var x:Number = player.cockThatFits(300);
+	//If no cocks fit, set to primary
+	if (x < 0) x = 0;
+
+	// PC fullfills the conditions, offer is made
+	if (edrynBar() && player.statusEffectv1(StatusEffects.Edryn) >= 4 && player.cockArea(x) < 300 && player.cockArea(x) > 24 && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way.  \"<i>Well, fancy meeting you here, ");
 		if (player.femininity < 49) outputText("handsome");
 		else outputText("beautiful");
@@ -561,7 +568,7 @@ public function approachHelAtZeBitch():void {
 
 		outputText("Sitting with the salamander, you notice across the crowded bar that Edryn is sitting at her table, sipping a little glass of wine.  Catching your eye, the centauress gives you a sultry wink.  An idea forms in your mind: you could easily introduce the two girls.  Do you?");
 		flags[kFLAGS.HEL_EDRYN_OFFER] = 1;
-		addButton(0, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
+		addButton(1, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
 	}
 	else {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way before swinging over and taking her place on your lap.  \"<i>Well, fancy meeting you here, ");
@@ -571,18 +578,25 @@ public function approachHelAtZeBitch():void {
 
 		outputText("You spend a few minutes talking with the salamander, joking and laughing with your inebriated lover.  ");
 		
-		if (edrynBar() && flags[kFLAGS.HEL_EDRYN_OFFER] == 1) {
+		// Offer has been made and player fullfills the conditions
+		// No point in checking the statuseffect if the offer has been made
+		if (edrynBar() && player.cockArea(x) < 300 && player.cockArea(x) > 24 && flags[kFLAGS.HEL_EDRYN_OFFER] == 1) {
 			outputText("Eventually, though, Hel gives a nod toward Edryn, sitting a ways away from you, and asks if you'd be up for a little threesome time.  Are you?\n\n");
-			addButton(0, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
+			addButton(1, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
 		}
+		// PC is missing some conditions
 		else {
 			outputText("Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n");
-			addDisabledButton(0, "Edryn3Some");
+			if (player.statusEffectv1(StatusEffects.Edryn) < 4) addDisabledButton(1, "Edryn3Some", "This scene requires you to know Edryn better.");
+			else if (player.cockArea(x) > 300) addDisabledButton(1, "Edryn3Some", "This scene requires you to have a smaller cock.");
+			else if (player.cockArea(x) < 24) addDisabledButton(1, "Edryn3Some", "This scene requires you to have a larger cock.");
+			else addDisabledButton(1, "Edryn3Some", "This scene requires Edryn to be around.");
+			// no need to check for HEL_EDRYN_OFFER here
 		}
 	}
 	//(Display Options: [Threesome] [Leave]
 	
-	addButton(1, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs);
+	addButton(0, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs);
 	addButton(14, "Leave", leaveHelInZeBitch);
 }
 
