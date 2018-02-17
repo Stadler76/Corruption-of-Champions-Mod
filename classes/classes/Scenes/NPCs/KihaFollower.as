@@ -64,7 +64,8 @@
 				if (nude) spriteSelect(SpriteDb.s_kiha_nude);
 				else spriteSelect(SpriteDb.s_kiha);
 			else  {
-				spriteSelect(SpriteDb.s_kiha_preg);
+				if (nude) spriteSelect(SpriteDb.s_kiha_nude_preg);
+				else spriteSelect(SpriteDb.s_kiha_preg);
 			}
 		}
 
@@ -835,7 +836,16 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 				return;
 			}
 			outputText("When you approach your dragoness lover, a warm smile spreads across her dark features.  She gives you a playful punch on the shoulder and laughs, \"<i>Hey, doofus. You need something -- maybe a little dragon loving?</i>\" she adds with a wink.");
-			if (canKihaGetPregnant()) outputText("\n\n<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilize her and become a father.</b>");
+			if (canKihaGetPregnant()) outputText("[pg]<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilize her and become a father.</b>");
+			if (pregnancy.isPregnant) {
+				outputText("[pg]");
+				if (pregnancy.incubation > 288) outputText("<b>Her belly appears to be a bit swollen.</b>");
+				else if (pregnancy.incubation > 240 && pregnancy.incubation <= 288) outputText("<b>Her belly is comparable to being six months into pregnant.</b>");
+				else if (pregnancy.incubation > 192 && pregnancy.incubation <= 240) outputText("<b>Her belly is comparable to being eight months into pregnancy.</b>");
+				else if (pregnancy.incubation > 144 && pregnancy.incubation <= 192) outputText("<b>Her belly is comparable to being nine months into pregnancy. It wouldn't take very long until she eventually lays a clutch of eggs.</b>");
+				else if (pregnancy.incubation > 72 && pregnancy.incubation <= 144) outputText("<b>Her belly is even bigger than the average belly size at end of a typical human pregnancy.</b>");
+				else if (pregnancy.incubation <= 72) outputText("<b>It's impossible to not notice her pregnancy. The size of her belly has taken its toll on her. She is about to lay a clutch of eggs soon.</b>");
+			}
 			leave = camp.campLoversMenu;
 			menu();
 			addButton(0, "Appearance", kihaCampAppearance).hint("Examine Kiha's appearance.");
@@ -1775,6 +1785,7 @@ private function kihaCampAppearance():void {
 	else outputText("thighs");
 	outputText(".");
 	outputText("[pg]Between her gropable butt-cheeks, Kiha has a single tight asshole, right where it belongs.");
+/*	if (canKihaGetPregnant()) outputText("[pg]<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilize her and become a father.</b>");
 	if (pregnancy.isPregnant) {
 		outputText("[pg]");
 		if (pregnancy.incubation > 288) outputText("<b>Her belly appears to be a bit swollen.</b>");
@@ -1784,7 +1795,7 @@ private function kihaCampAppearance():void {
 		else if (pregnancy.incubation > 72 && pregnancy.incubation <= 144) outputText("<b>Her belly is even bigger than the average belly size at end of a typical human pregnancy.</b>");
 		else if (pregnancy.incubation <= 72) outputText("<b>It's impossible to not notice her pregnancy. The size of her belly has taken its toll on her. She is about to lay a clutch of eggs soon.</b>");
 	}
-	doNext(kihaScene.encounterKiha);
+*/	doNext(kihaScene.encounterKiha);
 }
 
 

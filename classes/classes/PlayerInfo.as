@@ -552,7 +552,7 @@ package classes
 				interpersonStats += "<b>Lynnette's Approval:</b> " + getGame().mountain.salon.lynnetteApproval() + "\n";
 			
 			if (player.statusEffectv1(StatusEffects.Marble) > 0)
-				interpersonStats += "<b>Marble's Affection:</b>" + player.statusEffectv1(StatusEffects.Marble) + "%\n";
+				interpersonStats += "<b>Marble's Affection:</b> " + player.statusEffectv1(StatusEffects.Marble) + "%\n";
 				
 			if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 				interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";

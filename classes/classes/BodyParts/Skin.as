@@ -18,6 +18,7 @@ package classes.BodyParts
 		public static const FISH_SCALES:int   =   6; // NYI, for future use
 		public static const WOOL:int          =   7;
 		public static const FEATHERED:int     =   8;
+		public static const BARK:int          =   9;
 
 		public var type:Number = PLAIN;
 		public var tone:String = "albino";

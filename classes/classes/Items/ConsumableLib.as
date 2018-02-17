@@ -192,6 +192,7 @@ package classes.Items {
 		public const W_FRUIT:Consumable = new WhiskerFruit();
 		public const WETCLTH:Consumable = new WetCloth();
 		public const WOLF_PP:Consumable = new WolfPepper();
+		public const UBMBOTT:Consumable = new UnlabeledBrownMilkBottle();
 		//Bzzzzt! Bee honey ahoy!
 		public const BEEHONY:Consumable = new BeeHoney(false, false);
 		public const PURHONY:Consumable = new BeeHoney(true, false);

@@ -31,6 +31,10 @@ script:
 after_success:
   - sonar-scanner
 
+# If the build fails, pack up the unit test reports - if any - and dump them to the console
+after_failure:
+  - devTools/ci/dump-report.sh
+
 env:
   global:
     # tell the build file where to find the flex SDK

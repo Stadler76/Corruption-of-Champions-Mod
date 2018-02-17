@@ -2,6 +2,7 @@ package classes.Scenes.NPCs{
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 	import classes.PregnancyStore;
+	import classes.display.SpriteDb;
 
 	public class UrtaPregs extends NPCAwareContent {
 
@@ -63,7 +64,7 @@ private function urtaSexMenu():void {
 			if (flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",urta.slurpFawkesCocksForFunAndInflation);
 			else addButton(1,"Suck Off",urta.blowUrtaUnderTheTableLuv);
 			addButton(2,"Eat Out",urta.eatUrtaOutNomNomPussy);
-			addButton(4,"Leave",telAdre.barTelAdre);
+			addButton(14,"Leave",telAdre.barTelAdre);
 		}
 		//FRIEND
 		else {
@@ -71,7 +72,7 @@ private function urtaSexMenu():void {
 			if (flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(0,"Hidden BJ",urta.slurpFawkesCocksForFunAndInflation);
 			else addButton(0,"Hidden BJ",urta.blowUrtaUnderTable);
 			addButton(1,"Urta's Place",urta.goBackToUrtasForLuvinz);
-			addButton(4,"Leave",telAdre.barTelAdre);
+			addButton(14,"Leave",telAdre.barTelAdre);
 		}
 	}
 	//DRUNK
@@ -137,13 +138,19 @@ internal function urtaPreggoApproached():void {
 					outputText("  The lack of cock-on-wood sounds or motion on Urta's part makes it clear she's not feeling amorous right this moment.  Breaking the kiss, she licks her glossy lips clean and looks at you with a good-natured smirk.  \"<i>Feeling up to talking for a little while?</i>\"");
 					//Display Urta Sexings or Urta Talking as appropriate
 					addButton(0,"Talk",urta.urtaDialogueMenu);
+					addButton(14,"Leave",telAdre.barTelAdre);
 				}
-				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 2: 
-		case 3: if (rand(2) == 0) outputText("Urta's sitting side-saddled in her usual seat, dress bulging in a way that makes it clear she's at least half-erect already, a small paunch of a belly stretching out her dress.  She gives you a somewhat embarrassed smile when she sees you looking at it.  \"<i>I just feel horny all the time now,</i>\" she professes.  \"<i>I think it might be something to do with the hormones, though if you'd rather talk instead, I'd be happy to do that.</i>\"");
+		case 3: if (rand(2) == 0) {
+					outputText("Urta's sitting side-saddled in her usual seat, dress bulging in a way that makes it clear she's at least half-erect already, a small paunch of a belly stretching out her dress.  She gives you a somewhat embarrassed smile when she sees you looking at it.");
+					outputText("\n\n\"<i>I just feel horny all the time now,</i>\" she professes.  \"<i>I think it might be something to do with the hormones, though if you'd rather talk instead, I'd be happy to do that.</i>\"");
+				}
 				//(ALT)
-				else outputText("Urta's sitting side-saddle in her usual seat, belly subtly swollen and dress clearly tenting, more than a little moist at the tip of where her cock is obviously poking.  She gives you a dazzlingly eager smile when she sees notice it.  \"<i>Hey, lover.  Did you come to give this knocked-up, horny vixen some sugar?</i>\"  She pouts.  \"<i>Or just talk?  I think you know which I'd prefer...</i>\"  Her finger dances in little circles around the tent, causing it to widen with her growing flare.");
+				else {
+					outputText("Urta's sitting side-saddle in her usual seat, belly subtly swollen and dress clearly tenting, more than a little moist at the tip of where her cock is obviously poking.  She gives you a dazzlingly eager smile when she sees notice it.");
+					outputText("\n\n\"<i>Hey, lover.  Did you come to give this knocked-up, horny vixen some sugar?</i>\"  She pouts.  \"<i>Or just talk?  I think you know which I'd prefer...</i>\"  Her finger dances in little circles around the tent, causing it to widen with her growing flare.");
+				}
 				//Display both Urta Sex Options and Urta Talk Options
 				addButton(0,"Sex",urtaSexMenu);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
@@ -191,7 +198,7 @@ internal function urtaPreggoApproached():void {
 				menu();
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Tease",urtaRaepsJoo);
-				addButton(4,"Leave",leavePreggoUrta);
+				addButton(14,"Leave",leavePreggoUrta);
 				//Sex triggers normal pregnant Urta sex options, Tease triggers unique PregUrtaRapefest sexscene, Leave is just Leave
 				break;
 		case 9: 
@@ -793,6 +800,7 @@ public function urtaIsHappyAboutPregnancyAtTheBar():void {
 // Urta should probably be at least stage 5 pregnancy to trigger this
 public function urtaIsAPregnantCopScene():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_urta);
 	outputText("As you enter the main square and start looking around to decide where to go next, a commotion erupts across the square.  \"<i>Stop in the name of the law!</i>\"  Edryn's voice rings out as a young, raggedy-looking dog-morph erupts from the crowd, Edryn in hot pursuit.  Unfortunately for the centauress, the smaller biped is quicker, more nimble, and better suited for making his way through the crowd.");
 	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText("  Edryn's pregnant belly isn't helping her, either.");
 	
@@ -813,7 +821,7 @@ public function urtaIsAPregnantCopScene():void {
 //Play this scene upon entering Tel'Adre.
 public function urtaSpecialDeliveries():void {
 	clearOutput();
-	
+	spriteSelect(SpriteDb.s_urta);
 	outputText("As you enter through the gates, Edryn clops up to you, a small basket swinging from the crook of one arm");
 	if (kGAMECLASS.telAdre.edryn.pregnancy.isPregnant) outputText(" and her pregnant belly jiggling from the motions");
 	outputText(", a faint smile on her face.  \"<i>Hey there, [name]; can you do me a favor, please?  Urta's been getting deliveries to her place, but I got an unexpected call, so I'm too busy to take her groceries to her today - you're her " + player.mf("boyfriend","girlfriend") + "; can you please take this for me?</i>\"  The centauress asks.");

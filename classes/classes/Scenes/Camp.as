@@ -1590,7 +1590,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 				if (timeQ > 1) outputText("s");
 				outputText(".  She sleeps next to you, just barely touching you.  You rub her shoulder affectionately before the two of you nod off.");
 			}
-			outputText("\n");
+			outputText("\n\n");
 		}
 		else {
 			if (flags[kFLAGS.SLEEP_WITH] == "Helia" && kGAMECLASS.helScene.followerHel()) {

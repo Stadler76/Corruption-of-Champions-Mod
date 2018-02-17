@@ -642,7 +642,7 @@ public function gymDesc():void {
 		cotton.cottonPregnantAlert();
 		return;
 	}
-
+	spriteSelect(null);
 	clearOutput();
 	outputText("Even though Ingnam, your hometown, was a large, prosperous village, you never saw a gym before coming to Tel'Adre.  The structure itself has numerous architectural differences from the surrounding buildings: short, waist-high walls, an arched ceiling supported by simple columns, and a sand-covered floor.  Perhaps the only 'normal' rooms inside are the changing stands and bathrooms, which ");
 	if (player.cor < 35) outputText("thankfully ");

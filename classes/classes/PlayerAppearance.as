@@ -1512,6 +1512,9 @@ package classes
 			else {
 				outputText("\n\n<b>Something is wrong with your gems!</b>");
 			}
+			if(player.udder.HasUdder && player.udder.fullness != 0) {
+				outputText("\n\nyou have a an udder on your lowerbody it currently has " +player.udder.fullness+"oz of milk")
+			}
 			menu();
 			doNext(playerMenu);
 			output.flush();

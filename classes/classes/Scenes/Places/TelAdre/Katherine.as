@@ -2247,35 +2247,33 @@ private function giveKatherineAnItem(page:int = 0):void {
 	}
 	//Dyes
 	if (page == 3 || page == 4) {
-		var dyeButton:Function = function(color:String, buttonID:int, item:ItemType, func:Function):void {
-			if (hairColor == color) addDisabledButton(buttonID,  item.shortName, "Her hair is already " + color + ".");
-			else if (!player.hasItem(item)) addDisabledButton(buttonID,  item.shortName, "You think she would look good with " + color + " hair if you could find a dye.");
-			else addButton(buttonID, item.shortName, func, undefined, undefined, undefined, "Offer her " + item.longName + ".");
+		var dyeButton:Function = function(color:String, item:ItemType, func:Function):void {
+			if (hairColor == color) addDisabledButton(button++,  item.shortName, "Her hair is already " + color + ".");
+			else if (!player.hasItem(item)) addDisabledButton(button++,  item.shortName, "You think she would look good with " + color + " hair if you could find a dye.");
+else addButton(button++, item.shortName, func, undefined, undefined, undefined, "Offer her " + item.longName + ".");
 		};
 		if (page == 3) {
-			dyeButton("rich auburn", 0, consumables.AUBURND, giveKatDyeAuburn);
-			dyeButton("jet black", 1, consumables.BLACK_D, giveKatDyeBlack);
-			dyeButton("light blonde", 2, consumables.BLOND_D, giveKatDyeBlonde);
-			dyeButton("bright blue", 3, consumables.BLUEDYE, giveKatDyeBlue);
-			dyeButton("chestnut brown", 5, consumables.BROWN_D, giveKatDyeBrown);
-			dyeButton("cloud gray", 6, consumables.GRAYDYE, giveKatDyeGray);
-			dyeButton("lime green", 7, consumables.GREEN_D, giveKatDyeGreen);
-			dyeButton("vibrant orange", 8, consumables.ORANGDY, giveKatDyeOrange);
-			dyeButton("neon pink", 10, consumables.PINKDYE, giveKatDyePink);
-			dyeButton("deep purple", 11, consumables.PURPDYE, giveKatDyePurple);
-			dyeButton("rainbow colored", 12, consumables.RAINDYE, giveKatDyeRainbow);
-			dyeButton("flaming red", 13, consumables.RED_DYE, giveKatDyeRed);
+			dyeButton("rich auburn", consumables.AUBURND, giveKatDyeAuburn);
+			dyeButton("jet black", consumables.BLACK_D, giveKatDyeBlack);
+			dyeButton("light blonde", consumables.BLOND_D, giveKatDyeBlonde);
+			dyeButton("bright blue", consumables.BLUEDYE, giveKatDyeBlue);
+			dyeButton("chestnut brown", consumables.BROWN_D, giveKatDyeBrown);
+			dyeButton("cloud gray", consumables.GRAYDYE, giveKatDyeGray);
+			dyeButton("lime green", consumables.GREEN_D, giveKatDyeGreen);
+			dyeButton("vibrant orange", consumables.ORANGDY, giveKatDyeOrange);
+			dyeButton("neon pink", consumables.PINKDYE, giveKatDyePink);
+			dyeButton("deep purple", consumables.PURPDYE, giveKatDyePurple);
 
-			addButton(4, "Next", giveKatherineAnItem, 4);
-			addDisabledButton(9, "Previous");
+			addButton(13, "Next", giveKatherineAnItem, 4);
 		}
 		else {
-			dyeButton("russet red", 0, consumables.RUSSDYE, giveKatDyeRusset);
-			dyeButton("sunflower yellow", 1, consumables.YELLODY, giveKatDyeYellow);
-			dyeButton("snow white", 2, consumables.WHITEDY, giveKatDyeWhite);
+			dyeButton("rainbow colored", consumables.RAINDYE, giveKatDyeRainbow);
+			dyeButton("flaming red", consumables.RED_DYE, giveKatDyeRed);
+			dyeButton("russet red", consumables.RUSSDYE, giveKatDyeRusset);
+			dyeButton("sunflower yellow", consumables.YELLODY, giveKatDyeYellow);
+			dyeButton("snow white", consumables.WHITEDY, giveKatDyeWhite);
 
-			addDisabledButton(4, "Next");
-			addButton(9, "Previous" , giveKatherineAnItem, 3);
+			addButton(13, "Previous" , giveKatherineAnItem, 3);
 		}
 	}
 }

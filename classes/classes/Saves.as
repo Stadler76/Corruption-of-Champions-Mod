@@ -921,7 +921,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.tailRecharge = player.tail.recharge;
 		saveFile.data.hipRating = player.hips.rating;
 		saveFile.data.buttRating = player.butt.rating;
-		
+		saveFile.data.udder = player.udder.toObject();
 		//Sexual Stuff
 		saveFile.data.balls = player.balls;
 		saveFile.data.cumMultiplier = player.cumMultiplier;
@@ -1858,6 +1858,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			case UnderBody.WOOL:   player.underBody.type = UnderBody.FURRY;   break;
 			default: //Move along.
 		}
+        if (isObject(saveFile.data.udder))
+			player.udder.setAllProps(saveFile.data.udder);
 
 		//Sexual Stuff
 		player.balls = saveFile.data.balls;

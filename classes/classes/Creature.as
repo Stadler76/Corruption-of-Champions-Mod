@@ -19,6 +19,7 @@ package classes
 	import classes.BodyParts.Skin;
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Tongue;
+	import classes.BodyParts.Udder;
 	import classes.BodyParts.UnderBody;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
@@ -393,6 +394,7 @@ package classes
 		public var tongue:Tongue = new Tongue();
 		public var underBody:UnderBody = new UnderBody();
 		public var wings:Wings = new Wings();
+		public var udder:Udder = new Udder();
 
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.

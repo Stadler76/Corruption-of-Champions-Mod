@@ -363,6 +363,7 @@ public function catchRathazulNapping():void {
 }
 
 internal function marbleVsAmilyFreakout():void {
+	kGAMECLASS.amilyScene.amilySprite();
 	clearOutput();
 	flags[kFLAGS.AMILY_NOT_FREAKED_OUT]++;
 	//Marble is in camp first

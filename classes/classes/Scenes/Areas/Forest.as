@@ -22,6 +22,7 @@ import classes.Scenes.API.FnHelpers;
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 //		public var dullahanScene:DullahanScene = new DullahanScene(); //[INTERMOD:8chan]
+		public var dryadScene:DryadScene = new DryadScene();
 
 		public function Forest() {}
 

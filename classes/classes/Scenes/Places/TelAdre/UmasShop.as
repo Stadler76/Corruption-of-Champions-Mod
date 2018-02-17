@@ -986,7 +986,7 @@
 			outputText("You can't resist the wry grin as you comment that it must do wonders for the reputation of her business.\n\n");
 			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra services." + (flags[kFLAGS.LOPPE_PC_MET_UMA] >= 1 ? "  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services." : "") + "</i>\"\n\n");
 			outputText("You laugh at that, thanking her for her generosity and her time, and then tell her it's time for you to go.  Uma smiles at you and says, \"<i>Come visit me again soon.</i>\"\n\n");
-			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
+			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.");
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);

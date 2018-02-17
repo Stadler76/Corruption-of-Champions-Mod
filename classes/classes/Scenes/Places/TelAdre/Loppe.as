@@ -1697,7 +1697,7 @@ private function loppeSqueezedickWhateverThatIs():void {
 	if (flags[kFLAGS.LOPPE_DENIAL_COUNTER] == 0) {
 		outputText("After seeing Loppe's prodigious output, you wonder how she would handle not being able to orgasm.");
 
-		outputText("\n\n\"<i>Different?  What do you have in mind?</i>\"  She asks curiously.");
+		outputText("\n\n\"<i>Different?  What do you have in mind?</i>\" she asks curiously.");
 
 		outputText("\n\nOrgasm denial - a test to see just how long she can bear being pleasured before climaxing.");
 

@@ -16,6 +16,7 @@ package classes.BodyParts
 		public static const BASILISK_SPINES:int =    6;
 		public static const BASILISK_PLUME:int  =    7;
 		public static const WOOL:int            =    8;
+		public static const LEAF:int            =    9;
 
 		public var type:Number   = NORMAL;
 		public var color:String  = "no";

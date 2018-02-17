@@ -57,7 +57,7 @@ public function brookeCapacity():Number {
 //Occurs automatically after the second time you choose to hit the showers after a workout.  From then, the choice to ‘hit the showers’ then becomes either visit the machine or to actually go to the shower.
 public function meetBrookeFirstTime():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_brooke);
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText(images.showImage("brooke-first-meeting"));
 	outputText("After yet another successful, and rewarding, workout, you begin your way down the hallways of the gym back to your favorite machine in the building.  Even after putting in so much effort, you’ve yet to finish – you still have to work <i>every</i> muscle, after all.  However, as you walk down the halls, breath still heavy and feeling the sweat drip off your brow, you pause, taking a few sniffs.  Once you’re out of the gym and into somewhat fresher air, you smell something, and it smells <i>rank</i>.  Smelling around a bit, you lift an arm and whiff your pit – it’s you!  Maybe, for once, you should actually have a wash; as you are now, the monsters would smell you long before they’d see you.");
 
@@ -158,7 +158,7 @@ public function repeatChooseShower():void {
 //Third encounter; body tone 30 minimum
 public function brookeThirdEncounter():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_brooke);
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("You head your way back to the showers after stopping at the lockers to store your [armor].  You wonder to yourself if you'll see Brooke there again.  She seems like the fond, friendly type, and you both have at least one mutual interest, after all.  If nothing else, she's certainly not hard on the eyes.");
 	outputText("\n\nYou walk into the showers, hearing one of the stalls going.  As you enter, you see Brooke, her head just poking over the walls of the stall, busy gently scrubbing at her fur.  You can't tell from your distance if she uses a shampoo or anything.  Again, you're both alone, and one of her ears perks up as she hears you approach.  She whips her shoulder-length hair back, swiping the water from her eyes, as she turns to your direction.  <i>\"Oh, hey [name],\"</i> she says, giving you a warm smile.  <i>\"How's it hanging today?\"</i> You answer that, so far, it's been more of the same, and she nods affirmatively.  She resumes her shower wordlessly while you take your own stall – you choose to take the third one down, leaving one between you in case she'd prefer the privacy.  You remove your towel and start the nozzle.");
 	outputText("\n\n<i>\"So, [name],\"</i> she says casually, going back to gently rubbing the water underneath her fur.  <i>\"Where ya from?  How'd you get to Tel'Adre?\"</i>  You decide to give her the short version: you're from a faraway place called Ingnam.  You found your way to Tel'Adre from wandering aimlessly in the desert for a bit, and were lucky enough to come across the city before a naga's den or something.  You consciously choose to leave out the whole 'Champion' business.  <i>\"Ingnam, huh?  Never heard of it. Must have been quite the journey from there to here.\"</i>");
@@ -180,7 +180,7 @@ public function brookeThirdEncounter():void {
 // Between 16:00 and 18:00, Affection <= 19
 public function lowAffectionBrookeMeeting():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_brooke);
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("You head your way back to the showers, feeling the sweet ache of your muscles as you easily find your way there.  Brooke is there, already rinsing the day's work out of her muscles.  She hears you coming in, and turns to give you a warm greeting, which you happily return.");
 
 	outputText("\n\nThe shower goes by smoothly, the both of you talking idly about whatever happens to come to mind.  Learning from your previous encounter, you try to keep the topics away from Tel'Adre while still asking her about herself, and answer her own questions about yourself whenever she asks.  All in all, things go by rather well, and once again she leaves the showers before you, giving you a wave before she leaves.");
@@ -192,7 +192,7 @@ public function lowAffectionBrookeMeeting():void {
 // Between 16:00 and 18:00, Affection >= 20, <= 39, body tone 40 minimum, one-time event
 public function mediumLowBrookeAffectionOneTime():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_brooke);
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("Another good workout and another fine sheen of sweat to wash off.  The day hasn't been so bad so far, and you start to whistle to yourself as you head to the showers, dropping your [armor] off in a locker beforehand.  Glancing out one of the windows, you guess that Brooke ought to be there around this time of day; and as you approach, you hear the sounds of rushing water.  Sure, it could actually be someone else, but you have a feeling it's the Shepherd girl.");
 
 	outputText("\n\nSure enough, there she is, although she's looking a little... melancholy.  She's staring down at her feet, letting the water rush over her body, not really moving or anything.  One of her ears perks as she hears you coming, and she turns to face you.  <i>\"Oh,\"</i> she sighs, <i>\"hey, [name].\"</i>");
@@ -275,7 +275,7 @@ public function helpBrookeOut():void {
 // Between 16:00 and 18:00, Affection >= 20, <= 39
 public function mediumLowBrookeAffection():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_brooke);
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("After another workout session, you head back to the showers, stopping at the lockers to set down your [armor] and to grab a towel.  You hear the sound of rushing water as you approach and, as usual, you find Brooke in her usual stall.  She's busy lightly scrubbing at her fur, but she easily picks out the sound of your footsteps over the water.  <i>\"Hey, [name]!\"</i> she says, turning to face you with a smile.  <i>\"Right on time, sweetheart.  I could use some company to talk to.  Care to hear a gal pal out?\"</i>");
 
 	outputText("\n\nYou tell her that you'd be glad to.  You step into the stall next to her, lathering up your hands and begin to rub the suds into your [hair].  She finishes doing the same to her own, before crossing her arms over the wall of the stall between you, facing you with a smile.  She waits patiently while you lather yourself – you could take this opportunity to start the conversation yourself, for once.");
@@ -291,7 +291,7 @@ public function mediumLowBrookeAffection():void {
 //Between 16:00 and 18:00, Affection >=40, after first-time sex
 public function mediumBrookeAffectionMeetingAfterSex():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_brooke);
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("After another workout session, you head back to the showers, stopping at the lockers to set down your [armor] and to grab a towel.  You hear the sound of rushing water as you approach and, as usual, you find Brooke in her usual stall.  She's busy lightly scrubbing at her fur, but she easily picks out the sound of your footsteps over the water.  <i>\"Hey there, sexy!\"</i> she calls, turning to face you with a smile.  <i>\"You're just in time.  The water's plenty warm, but my stall is getting cold.  Care to help warm it up?\"</i>");
 
 	outputText("\n\nYou tell her that you'd be glad to.  You step into her stall, lathering up your hands and getting to work rubbing the suds into her sore shoulders.  She moans and leans into your touch, letting your now-practiced hands work their magic on her.");
@@ -825,13 +825,13 @@ public function doubleDicked():void {
 
 	//if {all cockFits  >= 61}
 	if (y < 0 || player.cockThatFits(x) >= brookeCapacity()) {
-		outputText("You hump against her, enjoying the warm, wet feel of her fur against your sensitive monsters.  Brooke moans out, enjoying the way you're using her body, but freezes slightly when one of them begins to press and ply against her butthole.  <i>\"Sorry, sweet thing, but maybe not this time.  Much as I'd love me some double-dickings, one of those things in my butt would be one too many.  I'm down for something else, though.\"</i>");
+		outputText("You hump against her, enjoying the warm, wet feel of her fur against your sensitive monsters.  Brooke moans out, enjoying the way you're using her body, but freezes slightly when one of them begins to press and ply against her butthole.  <i>\"Sorry, sweet thing, but maybe not this time.  Much as I'd love me some double-dickings, one of those things in my butt would be one too many.  I'm down for something else, though.\"</i>\n\n");
 		menu();
 		addButton(0,"Next",gropeDatBrooke);
 		return;
 	}
 	outputText(images.showImage("brooke-gym-male-doubledicked"));
-	outputText("\n\nYou don't bother saying much and choose to just rub yourself against the wet, matted fur of her ass for a bit.  [EachCock] begins to rise and stiffen, thawed by the heat of her body and the friction between you two: your " + player.cockDescript(x) + " drives itself sensually between her thighs and across her sex, while your " + player.cockDescript(y) + " enjoys the warmth and coziness of her ass, rubbing across her taint and teasing her anal ring.  You don't make any attempts at either hole – that comes later.");
+	outputText("You don't bother saying much and choose to just rub yourself against the wet, matted fur of her ass for a bit.  [EachCock] begins to rise and stiffen, thawed by the heat of her body and the friction between you two: your " + player.cockDescript(x) + " drives itself sensually between her thighs and across her sex, while your " + player.cockDescript(y) + " enjoys the warmth and coziness of her ass, rubbing across her taint and teasing her anal ring.  You don't make any attempts at either hole – that comes later.");
 
 	outputText("\n\nBrooke giggles to herself, letting you jerk yourself off with her lower body.  The " + player.cockDescript(x) + " between her legs caresses and tickles against her pussy while another, " + player.cockDescript(y) + " crawls devilishly up her butt and between her cheeks.  She squeezes down on both, forcing you to rub a bit harder, which was just the reaction she was aiming for.");
 

@@ -32,26 +32,77 @@ package com.bit101.components
 
 	public class Style
 	{
-		public static var TEXT_BACKGROUND:uint = 0xFFFFFF;
-		public static var BACKGROUND:uint = 0xCCCCCC;
-		public static var BUTTON_FACE:uint = 0xFFFFFF;
-		public static var BUTTON_DOWN:uint = 0xEEEEEE;
-		public static var INPUT_TEXT:uint = 0x333333;
-		public static var LABEL_TEXT:uint = 0x666666;
-		public static var DROPSHADOW:uint = 0x000000;
-		public static var PANEL:uint = 0xF3F3F3;
-		public static var PROGRESS_BAR:uint = 0xFFFFFF;
-		public static var LIST_DEFAULT:uint = 0xFFFFFF;
-		public static var LIST_ALTERNATE:uint = 0xF3F3F3;
-		public static var LIST_SELECTED:uint = 0xCCCCCC;
-		public static var LIST_ROLLOVER:uint = 0XDDDDDD;
+		//All those privately declared static variables.
+		private static var _textBackground:uint = 0xFFFFFF;
+		private static var _background:uint = 0xCCCCCC;
+		private static var _buttonFace:uint = 0xFFFFFF;
+		private static var _buttonDown:uint = 0xEEEEEE;
+		private static var _inputText:uint = 0x333333;
+		private static var _labelText:uint = 0x666666;
+		private static var _dropShadow:uint = 0x000000;
+		private static var _panel:uint = 0xF3F3F3;
+		private static var _progressBar:uint = 0xFFFFFF;
+		private static var _listDefault:uint = 0xFFFFFF;
+		private static var _listAlternate:uint = 0xF3F3F3;
+		private static var _listSelected:uint = 0xCCCCCC;
+		private static var _listRollover:uint = 0XDDDDDD;
 		
-		public static var embedFonts:Boolean = true;
-		public static var fontName:String = "PF Ronda Seven";
-		public static var fontSize:Number = 8;
+		private static var _embedFonts:Boolean = true;
+		private static var _fontName:String = "PF Ronda Seven";
+		private static var _fontSize:Number = 8;
 		
 		public static const DARK:String = "dark";
 		public static const LIGHT:String = "light";
+		
+		//Getter and setter functions.
+		public static function set TEXT_BACKGROUND(newColor:uint):void { _textBackground = newColor; }
+		public static function get TEXT_BACKGROUND():uint { return _textBackground; }
+		
+		public static function set BACKGROUND(newColor:uint):void { _background = newColor; }
+		public static function get BACKGROUND():uint { return _background; }
+		
+		public static function set BUTTON_FACE(newColor:uint):void { _buttonFace = newColor; }
+		public static function get BUTTON_FACE():uint { return _buttonFace; }
+		
+		public static function set BUTTON_DOWN(newColor:uint):void { _buttonDown = newColor; }
+		public static function get BUTTON_DOWN():uint { return _buttonDown; }
+		
+		public static function set INPUT_TEXT(newColor:uint):void { _inputText = newColor; }
+		public static function get INPUT_TEXT():uint { return _inputText; }
+		
+		public static function set LABEL_TEXT(newColor:uint):void { _labelText = newColor; }
+		public static function get LABEL_TEXT():uint { return _labelText; }
+		
+		public static function set DROPSHADOW(newColor:uint):void { _dropShadow = newColor; }
+		public static function get DROPSHADOW():uint { return _dropShadow; }
+		
+		public static function set PANEL(newColor:uint):void { _panel = newColor; }
+		public static function get PANEL():uint { return _panel; }
+		
+		public static function set PROGRESS_BAR(newColor:uint):void { _progressBar = newColor; }
+		public static function get PROGRESS_BAR():uint { return _progressBar; }
+		
+		public static function set LIST_DEFAULT(newColor:uint):void { _listDefault = newColor; }
+		public static function get LIST_DEFAULT():uint { return _listDefault; }
+		
+		public static function set LIST_ALTERNATE(newColor:uint):void { _listAlternate = newColor; }
+		public static function get LIST_ALTERNATE():uint { return _listAlternate; }
+		
+		public static function set LIST_SELECTED(newColor:uint):void { _listSelected = newColor; }
+		public static function get LIST_SELECTED():uint { return _listSelected; }
+		
+		public static function set LIST_ROLLOVER(newColor:uint):void { _listRollover = newColor; }
+		public static function get LIST_ROLLOVER():uint { return _listRollover; }
+		
+		public static function set embedFonts(newValue:Boolean):void { _embedFonts = newValue; }
+		public static function get embedFonts():Boolean { return _embedFonts; }
+		
+		public static function set fontName(newValue:String):void { _fontName = newValue; }
+		public static function get fontName():String { return _fontName; }
+		
+		public static function set fontSize(newValue:Number):void { _fontSize = newValue; }
+		public static function get fontSize():Number { return _fontSize; }
+
 		
 		/**
 		 * Applies a preset style as a list of color values. Should be called before creating any components.

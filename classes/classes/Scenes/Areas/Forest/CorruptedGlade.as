@@ -1,10 +1,12 @@
 package classes.Scenes.Areas.Forest {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.API.Encounter;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
-
+	import classes.Scenes.Areas.Forest.DryadScene;
+    
 public class CorruptedGlade extends BaseContent implements TimeAwareInterface,Encounter {
 
 
@@ -18,11 +20,18 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 	}
 
 	public function execEncounter():void {
-			if (rand(4) == 0) {
-				trappedSatyr();
-			} else {
-				intro();
+
+			switch (rand(4)){
+				case 0: //satyr
+					trappedSatyr();
+					break;
+				case 1: //dryad
+					(new DryadScene()).encounterdryad();
+					break;
+				default:// continue
+					intro();
 			}
+			
 		}
 		
 		public function CorruptedGlade() {
@@ -88,7 +97,8 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 				addButton(1, "Vines", tentacleFun).hint("These vines look like cocks at their tips. Play with the vines.");
 				addButton(2, "Trees", treeBoobFun).hint("The knots on the trees look a lot like breasts. Play with the trees and lick some sap.");
 				addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
-				addButton(4, "Leave", camp.returnToCampUseOneHour);
+				addButton(4, "Explore More", (new DryadScene()).encounterdryad).hint("Look around a bit more see if there is something you missed.");
+				addButton(5, "Leave", camp.returnToCampUseOneHour);
 			}
 			//Wallow in decadence reaction - UNFINISHED
 		}

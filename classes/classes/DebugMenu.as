@@ -9,6 +9,7 @@ package classes
 	import flash.events.TimerEvent;
 	import flash.utils.*;
 	import flash.utils.describeType;
+	import flash.events.TextEvent;
 
 	public class DebugMenu extends BaseContent
 	{
@@ -56,12 +57,59 @@ package classes
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
 				addButton(5, "DumpEffects", dumpEffectsMenu).hint("Display your status effects");
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
+				addButton(8, "Scene Test", testScene).hint("Manually Proc a Scene.");
 				addButton(14, "Exit", playerMenu);
 			}
 			if (getGame().inCombat) {
 				clearOutput();
 				outputText("You raise the wand and give it a twirl but nothing happens. Seems like it only works when you're not in the middle of a battle.");
 				doNext(playerMenu);
+			}
+		}
+
+		private var selectedScene:*;
+		private function testScene(selected:*=null):void {
+			clearOutput();
+			if(!selected){selected = kGAMECLASS;}
+			selectedScene = selected;
+			mainView.mainText.addEventListener(TextEvent.LINK, linkhandler);
+			getFun("variable",selected);
+			getFun("method",selected);
+			menu();
+			addButton(0,"Back",linkhandler,new TextEvent(TextEvent.LINK,false,false,"-1"));
+
+			function getFun(type:String, scene:*):void {
+				var funsxml:XML = describeType(scene);
+				var funs:Array = [];
+				for each(var item:XML in funsxml[type]) {
+					funs.push(item);
+				}
+				funs.sortOn("@name");
+				if (funs.length > 0) {
+					outputText("<b><u>"+type.toUpperCase()+"</u></b>\n");
+				}
+				for each (var fun:* in funs) {
+					outputText("<u><a href=\"event:"+fun.@name+"\">"+fun.@name+"</a></u>\n")
+				}
+			}
+			function linkhandler(e:TextEvent):void {
+				mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
+				if (e.text == "-1") {
+					mainView.mainText.removeEventListener(TextEvent.LINK, linkhandler);
+					if(selectedScene != kGAMECLASS){testScene();}
+					else{accessDebugMenu();}
+					return;
+				}
+				if (selectedScene[e.text] is Function) {
+					clearOutput();
+					doNext(accessDebugMenu);
+					var selected:Function = selectedScene[e.text];
+					selectedScene = null;
+					selected();
+				} else {
+					selectedScene = selectedScene[e.text];
+					testScene(selectedScene);
+				}
 			}
 		}
 		private function  dumpEffectsMenu():void {
@@ -199,6 +247,7 @@ package classes
 			transformativeArray.push(consumables.W_FRUIT);
 			transformativeArray.push(consumables.WETCLTH);
 			transformativeArray.push(consumables.WOLF_PP);
+			transformativeArray.push(consumables.UBMBOTT);
 			
 			//------------
 			// Consumables
@@ -364,6 +413,7 @@ package classes
 			weaponArray.push(weapons.RRAPIER);
 			weaponArray.push(weapons.RSBLADE);
 			weaponArray.push(weapons.S_BLADE);
+			//Page 3
 			weaponArray.push(weapons.S_GAUNT);
 			weaponArray.push(weapons.SCARBLD);
 			weaponArray.push(weapons.SCIMTR0);
