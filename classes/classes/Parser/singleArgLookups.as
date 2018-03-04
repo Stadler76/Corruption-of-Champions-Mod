@@ -50,6 +50,7 @@
 				"foot"						: function():* { return kGAMECLASS.player.foot(); },
 				"fullchest"					: function():* { return kGAMECLASS.player.allChestDesc(); },
 				"furcolor"					: function():* { return kGAMECLASS.player.skin.furColor; },
+				"genderedrace"				: function():* { return kGAMECLASS.player.genderedRace(); },
 				"hair"						: function():* { return kGAMECLASS.player.hairDescript(); },
 				"haircolor"					: function():* { return kGAMECLASS.player.hair.color; },
 				"hairorfur"					: function():* { return kGAMECLASS.player.hairOrFur(); },

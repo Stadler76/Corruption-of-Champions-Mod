@@ -18,6 +18,7 @@
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import classes.lists.BreastCup;
 	import classes.lists.ColorLists;
+	import classes.lists.Gender;
 
 	use namespace kGAMECLASS;
 
@@ -1077,6 +1078,30 @@
 					redPandaCounter++;
 			}
 			return redPandaCounter;
+		}
+
+		public function genderedRace():String
+		{
+			var genderRaceText:String = ""; // needed in a few cases below
+			var race:String = this.race;
+
+			if (race === "demon-morph") { // could be if (race.match(/^demon-/)) to also match stuff like demon-taur 
+				switch (gender) {
+					case Gender.MALE:   return "incubus-morph";
+					case Gender.FEMALE: return "succubus-morph";
+					case Gender.HERM:   return "omnibus-morph";
+				}
+			}
+
+			if (race.match(/^cow-/)) {
+				if (gender === Gender.HERM)
+					genderRaceText = maleFemaleHerm() + " "; // Start with maleherm or hermaphrodite if herm
+
+				return genderRaceText + mf("bull-morph", "cow-girl");
+			}
+
+			// None of the above? Return the default!
+			return maleFemaleHerm() + " " + race;
 		}
 
 		//cockatrice rating
