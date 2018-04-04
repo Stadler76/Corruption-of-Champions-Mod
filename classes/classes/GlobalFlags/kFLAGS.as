@@ -2979,7 +2979,7 @@ public static const UNKNOWN_FLAG_NUMBER_02970:int                               
 public static const UNKNOWN_FLAG_NUMBER_02971:int                                   = 2971;
 public static const UNKNOWN_FLAG_NUMBER_02972:int                                   = 2972;
 public static const UNKNOWN_FLAG_NUMBER_02973:int                                   = 2973;
-public static const UNKNOWN_FLAG_NUMBER_02974:int                                   = 2974;
+public static const LEGACY_RACIAL_STATS_ENABLED:int                                 = 2974;
 public static const ENEMY_STATS_BARS_ENABLED:int                                    = 2975; // 0 if enemy sidebar is disabled.
 public static const ANIMATE_STATS_BARS:int                                          = 2976;
 public static const DELETE_ITEMS:int                                                = 2977; // Inventory deletion toggle, 0=no, 1=one at a time, 2=stacks

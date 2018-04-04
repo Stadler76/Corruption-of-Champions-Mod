@@ -2818,11 +2818,6 @@
 			var maxTou:Number = 100;
 			var maxSpe:Number = 100;
 			var maxInt:Number = 100;
-			//Apply New Game+
-			maxStr += ascensionFactor();
-			maxTou += ascensionFactor();
-			maxSpe += ascensionFactor();
-			maxInt += ascensionFactor();
 			/* [INTERMOD: xianxia]
 			var maxWis:int = 100;
 			var maxLib:int = 100;
@@ -2873,141 +2868,148 @@
 					maxSpe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
 				}
 			}
-			//Alter max stats depending on race
-			if (impScore() >= 4) {
-				maxSpe += 10;
-				maxInt -= 5;
-			}
-			if (sheepScore() >= 4) {
-				maxSpe += 10;
-				maxInt -= 10;
-				maxTou += 10;
-			}
-			if (wolfScore() >= 4) {
-				maxSpe -= 10;
-				maxInt += 5;
-				maxTou += 10;
-				maxStr += 5;
-			}
-			if (minoScore() >= 4) {
-				maxStr += 20;
-				maxTou += 10;
-				maxInt -= 10;
-			}
-			if (lizardScore() >= 4) {
-				maxInt += 10;
-				if (isBasilisk()) {
-					// Needs more balancing, especially other races, since dracolisks are quite OP right now!
-					maxTou += 5;
-					maxInt += 5;
+			if (flags[kFLAGS.LEGACY_RACIAL_STATS_ENABLED] === 1) {
+				//Alter max stats depending on race
+				if (impScore() >= 4) {
+					maxSpe += 10;
+					maxInt -= 5;
 				}
-			}
-			if (cockatriceScore() >= 8) {
-				maxStr += 5;
-				maxSpe += 25;
-				maxInt += 15;
-			} else if (cockatriceScore() >= 6) {
-				maxSpe += 20;
-				maxInt += 5;
-			} else if (cockatriceScore() >= 4) {
-				maxStr -= 5;
-				maxSpe += 10;
-				maxInt += 5;
-			}
-			if (dragonScore() >= 4) {
-				maxStr += 5;
-				maxTou += 10;
-				maxInt += 10;
-			}
-			if (dogScore() >= 4) {
-				maxSpe += 10;
-				maxInt -= 10;
-			}
-			if (foxScore() >= 4) {
-				maxStr -= 10;
-				maxSpe += 5;
-				maxInt += 5;
-			}
-			if (catScore() >= 4) {
-				maxSpe += 5;
-			}
-			if (bunnyScore() >= 4) {
-				maxSpe += 10;
-			}
-			if (raccoonScore() >= 4) {
-				maxSpe += 15;
-			}
-			if (horseScore() >= 4 && !isTaur() && !isNaga()) {
-				maxSpe += 15;
-				maxTou += 10;
-				maxInt -= 10;
-			}
-			if (gooScore() >= 3) {
-				maxTou += 10;
-				maxSpe -= 10;
-			}
-			if (kitsuneScore() >= 4) {
-				if (tail.type == Tail.FOX) {
-					if (tail.venom == 1) {
-						maxStr -= 2;
-						maxSpe += 2;
-						maxInt += 1;
-					}
-					else if (tail.venom >= 2 && tail.venom < 9) {
-						maxStr -= tail.venom + 1;
-						maxSpe += tail.venom + 1;
-						maxInt += (tail.venom/2) + 0.5;
-					}
-					else if (tail.venom >= 9) {
-						maxStr -= 10;
-						maxSpe += 10;
+				if (sheepScore() >= 4) {
+					maxSpe += 10;
+					maxInt -= 10;
+					maxTou += 10;
+				}
+				if (wolfScore() >= 4) {
+					maxSpe -= 10;
+					maxInt += 5;
+					maxTou += 10;
+					maxStr += 5;
+				}
+				if (minoScore() >= 4) {
+					maxStr += 20;
+					maxTou += 10;
+					maxInt -= 10;
+				}
+				if (lizardScore() >= 4) {
+					maxInt += 10;
+					if (isBasilisk()) {
+						// Needs more balancing, especially other races, since dracolisks are quite OP right now!
+						maxTou += 5;
 						maxInt += 5;
 					}
 				}
+				if (cockatriceScore() >= 8) {
+					maxStr += 5;
+					maxSpe += 25;
+					maxInt += 15;
+				} else if (cockatriceScore() >= 6) {
+					maxSpe += 20;
+					maxInt += 5;
+				} else if (cockatriceScore() >= 4) {
+					maxStr -= 5;
+					maxSpe += 10;
+					maxInt += 5;
+				}
+				if (dragonScore() >= 4) {
+					maxStr += 5;
+					maxTou += 10;
+					maxInt += 10;
+				}
+				if (dogScore() >= 4) {
+					maxSpe += 10;
+					maxInt -= 10;
+				}
+				if (foxScore() >= 4) {
+					maxStr -= 10;
+					maxSpe += 5;
+					maxInt += 5;
+				}
+				if (catScore() >= 4) {
+					maxSpe += 5;
+				}
+				if (bunnyScore() >= 4) {
+					maxSpe += 10;
+				}
+				if (raccoonScore() >= 4) {
+					maxSpe += 15;
+				}
+				if (horseScore() >= 4 && !isTaur() && !isNaga()) {
+					maxSpe += 15;
+					maxTou += 10;
+					maxInt -= 10;
+				}
+				if (gooScore() >= 3) {
+					maxTou += 10;
+					maxSpe -= 10;
+				}
+				if (kitsuneScore() >= 4) {
+					if (tail.type == Tail.FOX) {
+						if (tail.venom == 1) {
+							maxStr -= 2;
+							maxSpe += 2;
+							maxInt += 1;
+						}
+						else if (tail.venom >= 2 && tail.venom < 9) {
+							maxStr -= tail.venom + 1;
+							maxSpe += tail.venom + 1;
+							maxInt += (tail.venom/2) + 0.5;
+						}
+						else if (tail.venom >= 9) {
+							maxStr -= 10;
+							maxSpe += 10;
+							maxInt += 5;
+						}
+					}
+				}
+				if (beeScore() >= 4) {
+					maxSpe += 5;
+					maxTou += 5;
+				}
+				if (spiderScore() >= 4) {
+					maxInt += 15;
+					maxTou += 5;
+					maxStr -= 10;
+				}
+				if (sharkScore() >= 4) {
+					maxStr += 10;
+					maxSpe += 5;
+					maxInt -= 5;
+				}
+				if (harpyScore() >= 4) {
+					maxSpe += 15;
+					maxTou -= 10;
+				}
+				if (sirenScore() >= 4) {
+					maxStr += 5;
+					maxSpe += 20;
+					maxTou -= 5;
+				}
+				if (demonScore() >= 4) {
+					maxSpe += 5;
+					maxInt += 5;
+				}
+				if (rhinoScore() >= 4) {
+					maxStr += 15;
+					maxTou += 15;
+					maxSpe -= 10;
+					maxInt -= 10;
+				}
+				if (satyrScore() >= 4) {
+					maxStr += 5;
+					maxSpe += 5;
+				}
+				if (salamanderScore() >= 4) {
+					maxStr += 5;
+					maxTou += 5;
+				}
+				if (isNaga()) maxSpe += 10;
+				if (isTaur() || isDrider()) maxSpe += 20;
 			}
-			if (beeScore() >= 4) {
-				maxSpe += 5;
-				maxTou += 5;
-			}
-			if (spiderScore() >= 4) {
-				maxInt += 15;
-				maxTou += 5;
-				maxStr -= 10;
-			}
-			if (sharkScore() >= 4) {
-				maxStr += 10;
-				maxSpe += 5;
-				maxInt -= 5;
-			}
-			if (harpyScore() >= 4) {
-				maxSpe += 15;
-				maxTou -= 10;
-			}
-			if (sirenScore() >= 4) {
-				maxStr += 5;
-				maxSpe += 20;
-				maxTou -= 5;
-			}
-			if (demonScore() >= 4) {
-				maxSpe += 5;
-				maxInt += 5;
-			}
-			if (rhinoScore() >= 4) {
-				maxStr += 15;
-				maxTou += 15;
-				maxSpe -= 10;
-				maxInt -= 10;
-			}
-			if (satyrScore() >= 4) {
-				maxStr += 5;
-				maxSpe += 5;
-			}
-			if (salamanderScore() >= 4) {
-				maxStr += 5;
-				maxTou += 5;
-			}
-			if (isNaga()) maxSpe += 10;
-			if (isTaur() || isDrider()) maxSpe += 20;
+			//Apply New Game+
+			maxStr *= 1 + ascensionFactor(0.25);
+			maxTou *= 1 + ascensionFactor(0.25);
+			maxSpe *= 1 + ascensionFactor(0.25);
+			maxInt *= 1 + ascensionFactor(0.25);
 			//Might
 			if (hasStatusEffect(StatusEffects.Might)) {
 				maxStr += statusEffectv1(StatusEffects.Might);
