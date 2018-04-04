@@ -1,23 +1,28 @@
 package classes.internals 
 {
-	
 	/**
-	 * Interface that provides methods for getting random numbers.
+	 * Class that provides random numbers.
 	 */
-	public interface IRandomNumber
+	public class ActionScriptRNG implements RandomNumberGenerator
 	{
 		/**
-		 * Returns a number that is between 0 and max - 1 inclusive.
+		 * Returns a number that is between 0 and max exclusive.
 		 * @param	max the upper limit for the random number
 		 * @return a value between 0 and max - 1
 		 */
-		function random(max:int):int;
+		public function random(max:int):int 
+		{
+			return Utils.rand(max);
+		}
 		
 		/**
 		 * Returns a number that is between 0 and max inclusive.
 		 * @param	max the upper limit for the random number
 		 * @return a value between 0 and max inclusive
 		 */
-		function randomCorrected(max:int):int;
+		public function randomCorrected(max:int):int 
+		{
+			return Utils.rand(max + 1);
+		}
 	}
 }

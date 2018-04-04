@@ -66,11 +66,11 @@ package classes {
 			//Jewelry effect
 			if (player.jewelryEffectId == JewelryLib.CORRUPTION)
 			{
-				if (player.cor < 80) dynStats("cor", (player.jewelryEffectMagnitude/10));
+				if (player.cor < 80) dynStats("cor", (player.jewelryEffectMagnitude / 100));
 			}
 			if (player.jewelryEffectId == JewelryLib.PURITY)
 			{
-				dynStats("cor", -0.1);
+				dynStats("cor", -(player.jewelryEffectMagnitude / 100));
 			}
 			//Armor
 			if (player.armor == armors.LTHCARM)
@@ -448,7 +448,7 @@ package classes {
 					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "scale");
 					player.removeStatusEffect(StatusEffects.Heat); //remove heat
 					if (player.lib < 1) player.lib = 1;
-					getGame().statScreenRefresh();
+					output.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your heat.</b>\n");
 					needNext = true;
 				}
@@ -461,7 +461,7 @@ package classes {
 					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Rut), "scale", false);
 					player.removeStatusEffect(StatusEffects.Rut); //remove heat
 					if (player.lib < 10) player.lib = 10;
-					getGame().statScreenRefresh();
+					output.statScreenRefresh();
 					outputText("\n<b>Your body calms down, at last getting over your rut.</b>\n");
 					needNext = true;
 				}
@@ -1010,7 +1010,7 @@ package classes {
 					player.fertilizeEggs(); //convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust
 					player.orgasm('Dick'); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					getGame().dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+					kGAMECLASS.output.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z
 					return true;
@@ -1030,7 +1030,7 @@ package classes {
 					player.fertilizeEggs(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.orgasm('Dick');
 					getGame().dynStats("lus", 20);
-					getGame().doNext(playerMenu);
+					kGAMECLASS.output.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z
 					return true;

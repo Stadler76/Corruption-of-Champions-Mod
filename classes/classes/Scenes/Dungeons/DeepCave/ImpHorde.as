@@ -196,6 +196,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.short = "imp horde";
 			this.imageName = "impmob";
 			this.long = "Imps of all shapes and sizes fill the room around you, keeping you completely surrounded by their myriad forms.  You can see more than a few sporting disproportionate erections, and there's even some with exotic dog-dicks, horse-pricks, and the odd spiny cat-cock.  Escape is impossible, you'll have to fight or seduce your way out of this one!";
+			this.race = "Imp";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";

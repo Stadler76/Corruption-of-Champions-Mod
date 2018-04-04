@@ -18,7 +18,7 @@ package classes.Items.Consumables
 			outputText("You eat the trail mix. You got energy boost from it!");
 			player.refillHunger(30);
 			player.changeFatigue(-20);
-			game.HPChange(Math.round(player.maxHP() * 0.1), true);
+			player.HPChange(Math.round(player.maxHP() * 0.1), true);
 			
 			return false;
 		}

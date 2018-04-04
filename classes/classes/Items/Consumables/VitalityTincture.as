@@ -38,7 +38,7 @@ package classes.Items.Consumables
 			//tou change
 			game.dynStats("tou", temp);
 			//Chance of fitness change
-			if (game.HPChange(50, false)) {
+			if (player.HPChange(50, false)) {
 				outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.");
 			}
 			

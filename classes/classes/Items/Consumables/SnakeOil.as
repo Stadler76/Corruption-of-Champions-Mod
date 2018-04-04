@@ -43,13 +43,8 @@ package classes.Items.Consumables
 		{
 			var tfSource:String = "snakeOil";
 			player.slimeFeed();
+			mutations.initTransformation([2, 2]);
 			clearOutput();
-			changes = 0;
-			changeLimit = 1;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//b) Description while used
 			outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
 			//(if outside combat)
@@ -59,7 +54,6 @@ package classes.Items.Consumables
 				dynStats("spe", (2 - (player.spe / 10 / 5)));
 				outputText("\n\nYour muscles quiver, feeling ready to strike as fast as a snake!");
 				if (player.spe100 < 40) outputText("  Of course, you're nowhere near as fast as that.");
-				//[removed:1.4.10]//changes++;
 			}
 			//Neck restore
 			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);

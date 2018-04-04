@@ -41,6 +41,10 @@ package classes
 		protected var _description:String;
 		protected var _value:Number;
 
+		protected var _degradable:Boolean = false; //True indicates degrades in durability.
+		protected var _durability:Number = 0; //If it's greater than 0, when threshold is crossed, it will cause item to break.
+		protected var _breaksInto:ItemType = null; //If the weapon breaks, turns into the specific item or vanish into nothing.
+		
 		/**
 		 * Short name to be displayed on buttons
 		 */
@@ -107,6 +111,26 @@ package classes
 		
 		public function getMaxStackSize():int {
 			return 5;
+		}
+		
+		//Durability & Degradation system
+		public function isDegradable():Boolean {
+			return this._degradable;
+		}
+		
+		public function set durability(newValue:int):void {
+			if (newValue > 0) this._degradable = true;
+			this._durability = newValue;
+		}
+		public function get durability():int {
+			return this._durability;
+		}
+		
+		public function set degradesInto(newValue:ItemType):void {
+			this._breaksInto = newValue;
+		}
+		public function get degradesInto():ItemType {
+			return this._breaksInto;
 		}
 	}
 }

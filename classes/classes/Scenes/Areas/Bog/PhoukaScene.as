@@ -6,8 +6,10 @@ package classes.Scenes.Areas.Bog
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.VaginalPregnancy;
+	import classes.Scenes.PregnancyProgression;
 
-	public class PhoukaScene extends BaseContent implements TimeAwareInterface {
+	public class PhoukaScene extends BaseContent implements TimeAwareInterface, VaginalPregnancy {
 
 		internal static var phoukaForm:int = 0; //This keeps track of the form of the phouka across different scenes and through combat
 		internal static const PHOUKA_FORM_FAERIE:int = 0;
@@ -15,9 +17,10 @@ package classes.Scenes.Areas.Bog
 		internal static const PHOUKA_FORM_GOAT:int = 2;
 		internal static const PHOUKA_FORM_HORSE:int = 3;
 
-		public function PhoukaScene() 
+		public function PhoukaScene(pregnancyProgression:PregnancyProgression) 
 		{
 			CoC.timeAwareClassAdd(this);
+			pregnancyProgression.registerVaginalPregnancyScene(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.PREGNANCY_FAERIE, this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -471,7 +474,7 @@ package classes.Scenes.Areas.Bog
 			}
 		}  
 
-		public function phoukaPregBirth():void
+		public function vaginalBirth():void
 		{
 			//Picture is here
 			outputText(images.showImage("birth-phouka"));
@@ -502,7 +505,7 @@ package classes.Scenes.Areas.Bog
 			}
 		}
 
-		public function phoukaPregUpdate():Boolean
+		public function updateVaginalPregnancy():Boolean
 		{ //Belly size doesn't change, instead you get updates on what's going on
 			if (player.pregnancyIncubation == 170) { //Stage 1:
 				if (flags[kFLAGS.PREGNANCY_CORRUPTION] > 0)

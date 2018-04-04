@@ -9,6 +9,7 @@ package classes.Items.Consumables
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.internals.Utils;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public final class Reducto extends Consumable {
 		
@@ -33,16 +34,16 @@ package classes.Items.Consumables
 			var rdtHorns:Function	= (game.player.horns.value > 2 ? shrinkHorns : null);
 			clearOutput();
 			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
-			game.menu();
-			game.addButton(0, "Balls", rdtBalls);
-			game.addButton(1, "Breasts", rdtBreasts);
-			game.addButton(2, "Butt", rdtButt);
-			game.addButton(3, "Clit", rdtClit);
-			game.addButton(4, "Cock", rdtCock);
-			game.addButton(5, "Hips", rdtHips);
-			game.addButton(6, "Nipples", rdtNipples);
-			game.addButton(7, "Horns", rdtHorns);
-			game.addButton(14, "Nevermind", reductoCancel);
+			kGAMECLASS.output.menu();
+			kGAMECLASS.output.addButton(0, "Balls", rdtBalls);
+			kGAMECLASS.output.addButton(1, "Breasts", rdtBreasts);
+			kGAMECLASS.output.addButton(2, "Butt", rdtButt);
+			kGAMECLASS.output.addButton(3, "Clit", rdtClit);
+			kGAMECLASS.output.addButton(4, "Cock", rdtCock);
+			kGAMECLASS.output.addButton(5, "Hips", rdtHips);
+			kGAMECLASS.output.addButton(6, "Nipples", rdtNipples);
+			kGAMECLASS.output.addButton(7, "Horns", rdtHorns);
+			kGAMECLASS.output.addButton(14, "Nevermind", reductoCancel);
 			return(true);
 		}
 		

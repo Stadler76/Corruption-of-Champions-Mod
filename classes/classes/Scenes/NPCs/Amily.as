@@ -5,6 +5,7 @@ package classes.Scenes.NPCs
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.StatusEffects.Combat.AmilyVenomDebuff;
+	import classes.GlobalFlags.kGAMECLASS;
 
 /**
 	 * ...
@@ -82,7 +83,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 					lust += 10 * lustVuln;
 				}
 			}
-			game.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 			outputText("\n");
 			game.combat.combatRoundOver();
 		}
@@ -234,6 +235,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 			this.short = "Amily";
 			this.imageName = "amily";
 			this.long = "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.";
+			this.race = "Mouse-Morph";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 48, 0, 0, 0);

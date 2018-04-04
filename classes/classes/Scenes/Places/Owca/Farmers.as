@@ -30,6 +30,7 @@ package classes.Scenes.Places.Owca
 			this.short = "farmers";
 			this.imageName = "farmers";
 			this.long = "This is a group of thirty angry villagers, almost all human-looking but for the tiny horn-like protrusions growing from their heads and the white fuzz that almost passes off as hair.  They are all armed with pitchforks or other crude farming tools they use in their everyday task.  Rebecc is staring from behind them with horrified eyes at the combat, paralyzed by the sudden turn of events.";
+			this.race = "Humans?";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";

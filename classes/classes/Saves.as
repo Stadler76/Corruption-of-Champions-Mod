@@ -635,6 +635,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.IMAGEPACK_ENABLED] = flags[kFLAGS.IMAGEPACK_ENABLED];
 		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
 		saveFile.data.flags[kFLAGS.ANIMATE_STATS_BARS] = flags[kFLAGS.ANIMATE_STATS_BARS];
+		saveFile.data.flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] = flags[kFLAGS.ENEMY_STATS_BARS_ENABLED];
 		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
 		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
@@ -698,6 +699,10 @@ public function loadPermObject():void {
 				flags[kFLAGS.ANIMATE_STATS_BARS] = saveFile.data.flags[kFLAGS.ANIMATE_STATS_BARS];
 			else
 				flags[kFLAGS.ANIMATE_STATS_BARS] = 1; //Default to ON.
+			if (saveFile.data.flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] != undefined)
+				flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] = saveFile.data.flags[kFLAGS.ENEMY_STATS_BARS_ENABLED];
+			else
+				flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] = 1; //Default to ON.
 			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
 			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
@@ -1035,6 +1040,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.itemStorage[i].id = (itemStorageGet()[i].itype == null) ? null : itemStorageGet()[i].itype.id;
 			saveFile.data.itemStorage[i].quantity = itemStorageGet()[i].quantity;
 			saveFile.data.itemStorage[i].unlocked = itemStorageGet()[i].unlocked;
+			saveFile.data.itemStorage[i].damage = itemStorageGet()[i].damage;
 		}
 		//Set gear slot array
 		for (i = 0; i < gearStorageGet().length; i++)
@@ -1049,6 +1055,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.gearStorage[i].id = (gearStorageGet()[i].isEmpty()) ? null : gearStorageGet()[i].itype.id;
 			saveFile.data.gearStorage[i].quantity = gearStorageGet()[i].quantity;
 			saveFile.data.gearStorage[i].unlocked = gearStorageGet()[i].unlocked;
+			saveFile.data.gearStorage[i].damage = gearStorageGet()[i].damage;
 		}
 		saveFile.data.ass.push([]);
 		saveFile.data.ass.analWetness = player.ass.analWetness;
@@ -1069,55 +1076,66 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.isabellaOffspringData.push(kGAMECLASS.isabellaScene.isabellaOffspringData[i]);
 		}
 		
-		//ITEMZ. Item1s
+		//ITEMZ.
+		//TODO: DRY this.
 		saveFile.data.itemSlot1 = [];
 		saveFile.data.itemSlot1.quantity = player.itemSlot1.quantity;
 		saveFile.data.itemSlot1.id = player.itemSlot1.itype.id;
+		saveFile.data.itemSlot1.damage = player.itemSlot1.damage;
 		saveFile.data.itemSlot1.unlocked = true; 
 		
 		saveFile.data.itemSlot2 = [];
 		saveFile.data.itemSlot2.quantity = player.itemSlot2.quantity;
 		saveFile.data.itemSlot2.id = player.itemSlot2.itype.id;
+		saveFile.data.itemSlot2.damage = player.itemSlot2.damage;
 		saveFile.data.itemSlot2.unlocked = true;
 		
 		saveFile.data.itemSlot3 = [];
 		saveFile.data.itemSlot3.quantity = player.itemSlot3.quantity;
 		saveFile.data.itemSlot3.id = player.itemSlot3.itype.id;
+		saveFile.data.itemSlot3.damage = player.itemSlot3.damage;
 		saveFile.data.itemSlot3.unlocked = true;
 		
 		saveFile.data.itemSlot4 = [];
 		saveFile.data.itemSlot4.quantity = player.itemSlot4.quantity;
 		saveFile.data.itemSlot4.id = player.itemSlot4.itype.id;
+		saveFile.data.itemSlot4.damage = player.itemSlot4.damage;
 		saveFile.data.itemSlot4.unlocked = player.itemSlot4.unlocked;
 		
 		saveFile.data.itemSlot5 = [];
 		saveFile.data.itemSlot5.quantity = player.itemSlot5.quantity;
 		saveFile.data.itemSlot5.id = player.itemSlot5.itype.id;
+		saveFile.data.itemSlot5.damage = player.itemSlot5.damage;
 		saveFile.data.itemSlot5.unlocked = player.itemSlot5.unlocked;
 		
 		saveFile.data.itemSlot6 = [];
 		saveFile.data.itemSlot6.quantity = player.itemSlot6.quantity;
 		saveFile.data.itemSlot6.id = player.itemSlot6.itype.id;
+		saveFile.data.itemSlot6.damage = player.itemSlot6.damage;
 		saveFile.data.itemSlot6.unlocked = player.itemSlot6.unlocked;
 		
 		saveFile.data.itemSlot7 = [];
 		saveFile.data.itemSlot7.quantity = player.itemSlot7.quantity;
 		saveFile.data.itemSlot7.id = player.itemSlot7.itype.id;
+		saveFile.data.itemSlot7.damage = player.itemSlot7.damage;
 		saveFile.data.itemSlot7.unlocked = player.itemSlot7.unlocked;
 		
 		saveFile.data.itemSlot8 = [];
 		saveFile.data.itemSlot8.quantity = player.itemSlot8.quantity;
 		saveFile.data.itemSlot8.id = player.itemSlot8.itype.id;
+		saveFile.data.itemSlot8.damage = player.itemSlot8.damage;
 		saveFile.data.itemSlot8.unlocked = player.itemSlot8.unlocked;
 		
 		saveFile.data.itemSlot9 = [];
 		saveFile.data.itemSlot9.quantity = player.itemSlot9.quantity;
 		saveFile.data.itemSlot9.id = player.itemSlot9.itype.id;
+		saveFile.data.itemSlot9.damage = player.itemSlot9.damage;
 		saveFile.data.itemSlot9.unlocked = player.itemSlot9.unlocked;
 		
 		saveFile.data.itemSlot10 = [];
 		saveFile.data.itemSlot10.quantity = player.itemSlot10.quantity;
 		saveFile.data.itemSlot10.id = player.itemSlot10.itype.id;
+		saveFile.data.itemSlot10.damage = player.itemSlot10.damage;
 		saveFile.data.itemSlot10.unlocked = player.itemSlot10.unlocked;
 
 		
@@ -2100,8 +2118,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					else if (savedIS.shortName.indexOf("Sp Honey") != -1)
 						savedIS.id = "SpHoney";
 				}
-				if (savedIS.quantity>0)
+				if (savedIS.quantity>0) {
 					storage.setItemAndQty(ItemType.lookupItem(savedIS.id || savedIS.shortName), savedIS.quantity);
+					storage.damage = savedIS.damage != undefined ? savedIS.damage : 0;
+				}
 				else
 					storage.emptySlot();
 				storage.unlocked = savedIS.unlocked;
@@ -2129,8 +2149,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
                         || saveFile.data.gearStorage[i].quantity == undefined
 						|| saveFile.data.gearStorage[i].quantity == 0)
 					storage.emptySlot();
-				else
-					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].id || saveFile.data.gearStorage[i].shortName),saveFile.data.gearStorage[i].quantity);
+				else {
+					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].id || saveFile.data.gearStorage[i].shortName), saveFile.data.gearStorage[i].quantity);
+					storage.damage = saveFile.data.gearStorage[i].damage != undefined ? saveFile.data.gearStorage[i].damage : 0;
+				}
 				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 			}
 		}
@@ -2216,44 +2238,54 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.itemSlot1.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot1.id || saveFile.data.itemSlot1.shortName),
 				saveFile.data.itemSlot1.quantity);
+		player.itemSlot1.damage = saveFile.data.itemSlot1.damage != undefined ? saveFile.data.itemSlot1.damage : 0;
 		player.itemSlot2.unlocked = true;
 		player.itemSlot2.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot2.id || saveFile.data.itemSlot2.shortName),
 				saveFile.data.itemSlot2.quantity);
+		player.itemSlot2.damage = saveFile.data.itemSlot2.damage != undefined ? saveFile.data.itemSlot2.damage : 0;
 		player.itemSlot3.unlocked = true;
 		player.itemSlot3.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot3.id || saveFile.data.itemSlot3.shortName),
 				saveFile.data.itemSlot3.quantity);
+		player.itemSlot3.damage = saveFile.data.itemSlot3.damage != undefined ? saveFile.data.itemSlot3.damage : 0;
 		player.itemSlot4.unlocked = saveFile.data.itemSlot4.unlocked;
 		player.itemSlot4.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot4.id || saveFile.data.itemSlot4.shortName),
 				saveFile.data.itemSlot4.quantity);
+		player.itemSlot4.damage = saveFile.data.itemSlot4.damage != undefined ? saveFile.data.itemSlot4.damage : 0;
 		player.itemSlot5.unlocked = saveFile.data.itemSlot5.unlocked;
 		player.itemSlot5.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot5.id || saveFile.data.itemSlot5.shortName),
 				saveFile.data.itemSlot5.quantity);
+		player.itemSlot5.damage = saveFile.data.itemSlot5.damage != undefined ? saveFile.data.itemSlot5.damage : 0;
 		//Extra slots from the mod.
 		if (saveFile.data.itemSlot6 != undefined && saveFile.data.itemSlot7 != undefined && saveFile.data.itemSlot8 != undefined && saveFile.data.itemSlot9 != undefined && saveFile.data.itemSlot10 != undefined) {
 		player.itemSlot6.unlocked = saveFile.data.itemSlot6.unlocked;
 		player.itemSlot6.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot6.id || saveFile.data.itemSlot6.shortName),
 				saveFile.data.itemSlot6.quantity);
+		player.itemSlot6.damage = saveFile.data.itemSlot6.damage != undefined ? saveFile.data.itemSlot6.damage : 0;
 		player.itemSlot7.unlocked = saveFile.data.itemSlot7.unlocked;
 		player.itemSlot7.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot7.id || saveFile.data.itemSlot7.shortName),
 				saveFile.data.itemSlot7.quantity);
+		player.itemSlot7.damage = saveFile.data.itemSlot7.damage != undefined ? saveFile.data.itemSlot7.damage : 0;
 		player.itemSlot8.unlocked = saveFile.data.itemSlot8.unlocked;
 		player.itemSlot8.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot8.id || saveFile.data.itemSlot8.shortName),
 				saveFile.data.itemSlot8.quantity);
+		player.itemSlot8.damage = saveFile.data.itemSlot8.damage != undefined ? saveFile.data.itemSlot8.damage : 0;
 		player.itemSlot9.unlocked = saveFile.data.itemSlot9.unlocked;
 		player.itemSlot9.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot9.id || saveFile.data.itemSlot9.shortName),
 				saveFile.data.itemSlot9.quantity);
+		player.itemSlot9.damage = saveFile.data.itemSlot9.damage != undefined ? saveFile.data.itemSlot9.damage : 0;
 		player.itemSlot10.unlocked = saveFile.data.itemSlot10.unlocked;
 		player.itemSlot10.setItemAndQty(ItemType.lookupItem(
 				saveFile.data.itemSlot10.id || saveFile.data.itemSlot10.shortName),
 				saveFile.data.itemSlot10.quantity);
+		player.itemSlot10.damage = saveFile.data.itemSlot10.damage != undefined ? saveFile.data.itemSlot10.damage : 0;
 		}
 		
 		CoC.loadAllAwareClasses(getGame()); //Informs each saveAwareClass that it must load its values from the flags array
@@ -2504,14 +2536,14 @@ public function unFuckSave():void
 		flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 	}
 	//Rigidly enforce rank caps
-	if (player.perkv1(PerkLib.AscensionDesires) > getGame().charCreation.MAX_DESIRES_LEVEL) player.setPerkValue(PerkLib.AscensionDesires, 1, getGame().charCreation.MAX_DESIRES_LEVEL);
-	if (player.perkv1(PerkLib.AscensionEndurance) > getGame().charCreation.MAX_ENDURANCE_LEVEL) player.setPerkValue(PerkLib.AscensionEndurance, 1, getGame().charCreation.MAX_ENDURANCE_LEVEL);
-	if (player.perkv1(PerkLib.AscensionFertility) > getGame().charCreation.MAX_FERTILITY_LEVEL) player.setPerkValue(PerkLib.AscensionFertility, 1, getGame().charCreation.MAX_FERTILITY_LEVEL);
-	if (player.perkv1(PerkLib.AscensionMoralShifter) > getGame().charCreation.MAX_MORALSHIFTER_LEVEL) player.setPerkValue(PerkLib.AscensionMoralShifter, 1, getGame().charCreation.MAX_MORALSHIFTER_LEVEL);
-	if (player.perkv1(PerkLib.AscensionMysticality) > getGame().charCreation.MAX_MYSTICALITY_LEVEL) player.setPerkValue(PerkLib.AscensionMysticality, 1, getGame().charCreation.MAX_MYSTICALITY_LEVEL);
-	if (player.perkv1(PerkLib.AscensionTolerance) > getGame().charCreation.MAX_TOLERANCE_LEVEL) player.setPerkValue(PerkLib.AscensionTolerance, 1, getGame().charCreation.MAX_TOLERANCE_LEVEL);
-	if (player.perkv1(PerkLib.AscensionVirility) > getGame().charCreation.MAX_VIRILITY_LEVEL) player.setPerkValue(PerkLib.AscensionVirility, 1, getGame().charCreation.MAX_VIRILITY_LEVEL);
-	if (player.perkv1(PerkLib.AscensionWisdom) > getGame().charCreation.MAX_WISDOM_LEVEL) player.setPerkValue(PerkLib.AscensionWisdom, 1, getGame().charCreation.MAX_WISDOM_LEVEL);
+	if (player.perkv1(PerkLib.AscensionDesires) > CharCreation.MAX_DESIRES_LEVEL) player.setPerkValue(PerkLib.AscensionDesires, 1, CharCreation.MAX_DESIRES_LEVEL);
+	if (player.perkv1(PerkLib.AscensionEndurance) > CharCreation.MAX_ENDURANCE_LEVEL) player.setPerkValue(PerkLib.AscensionEndurance, 1, CharCreation.MAX_ENDURANCE_LEVEL);
+	if (player.perkv1(PerkLib.AscensionFertility) > CharCreation.MAX_FERTILITY_LEVEL) player.setPerkValue(PerkLib.AscensionFertility, 1, CharCreation.MAX_FERTILITY_LEVEL);
+	if (player.perkv1(PerkLib.AscensionMoralShifter) > CharCreation.MAX_MORALSHIFTER_LEVEL) player.setPerkValue(PerkLib.AscensionMoralShifter, 1, CharCreation.MAX_MORALSHIFTER_LEVEL);
+	if (player.perkv1(PerkLib.AscensionMysticality) > CharCreation.MAX_MYSTICALITY_LEVEL) player.setPerkValue(PerkLib.AscensionMysticality, 1, CharCreation.MAX_MYSTICALITY_LEVEL);
+	if (player.perkv1(PerkLib.AscensionTolerance) > CharCreation.MAX_TOLERANCE_LEVEL) player.setPerkValue(PerkLib.AscensionTolerance, 1, CharCreation.MAX_TOLERANCE_LEVEL);
+	if (player.perkv1(PerkLib.AscensionVirility) > CharCreation.MAX_VIRILITY_LEVEL) player.setPerkValue(PerkLib.AscensionVirility, 1, CharCreation.MAX_VIRILITY_LEVEL);
+	if (player.perkv1(PerkLib.AscensionWisdom) > CharCreation.MAX_WISDOM_LEVEL) player.setPerkValue(PerkLib.AscensionWisdom, 1, CharCreation.MAX_WISDOM_LEVEL);
 
 	//If converting from vanilla, set Grimdark flag to 0.
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 0 || flags[kFLAGS.GRIMDARK_MODE] == 3) flags[kFLAGS.GRIMDARK_MODE] = 0;

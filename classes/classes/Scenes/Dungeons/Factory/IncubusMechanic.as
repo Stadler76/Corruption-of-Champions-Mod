@@ -9,6 +9,7 @@ package classes.Scenes.Dungeons.Factory
 	import classes.internals.*;
 	import flash.display.InteractiveObject;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class IncubusMechanic extends Monster {
 		
@@ -26,7 +27,7 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function defeatedInDungeon1(hpVictory:Boolean):void {
 			clearOutput();
-			game.menu();
+			kGAMECLASS.output.menu();
 			if (hpVictory)
 				outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
 			else outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.");
@@ -34,15 +35,15 @@ package classes.Scenes.Dungeons.Factory
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 			
 			if (!player.isGenderless()) {
-				game.addButton(0, "Rape", game.lethicesKeep.incubusMechanic.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
+				kGAMECLASS.output.addButton(0, "Rape", game.lethicesKeep.incubusMechanic.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
 			} else {
-				game.addButtonDisabled(0, "Rape", "This scene requires you to have genitals.");
+				kGAMECLASS.output.addButtonDisabled(0, "Rape", "This scene requires you to have genitals.");
 			}
-			game.addButton(1, "Service Him", game.lethicesKeep.incubusMechanic.doOralIncubus).hint("Service the incubus orally.");
-			game.addButton(2, "AnalRide", game.lethicesKeep.incubusMechanic.doRideIncubusAnally).hint("Ride him anally.");
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) game.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
+			kGAMECLASS.output.addButton(1, "Service Him", game.lethicesKeep.incubusMechanic.doOralIncubus).hint("Service the incubus orally.");
+			kGAMECLASS.output.addButton(2, "AnalRide", game.lethicesKeep.incubusMechanic.doRideIncubusAnally).hint("Ride him anally.");
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) kGAMECLASS.output.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
 			// no disabled button for this option
-			game.addButton(14, "Leave", game.combat.cleanupAfterCombat);
+			kGAMECLASS.output.addButton(14, "Leave", game.combat.cleanupAfterCombat);
 		}
 		
 		private function defeatedInDungeon3(hpVictory:Boolean):void
@@ -164,6 +165,7 @@ package classes.Scenes.Dungeons.Factory
 			this.short = "incubus mechanic";
 			this.imageName = "incubusmechanic";
 			this.long = "The demon before you is clad only in cut-off denim overalls.  Covered in stains of oil and other strange fluids, they appear to be in pretty rough shape.  There is a large hole ripped in the crotch, allowing the demon's foot-long member to hang free.  His skin is light purple and perfect, contrasting with the slovenly appearance of his clothing.  His face is rugged and handsome, topped with a simple black ponytail and two large horns that sprout from his forehead like twisted tree-trunks.  He wears a narrow goatee on his chin that is kept skillfully braided.  A cocky smile always seems to grace his features, giving him an air of supreme confidence.";
+			this.race = "Demon";
 			// this.plural = false;
 			this.createCock(12,1.75,CockTypesEnum.DEMON);
 			this.balls = 2;

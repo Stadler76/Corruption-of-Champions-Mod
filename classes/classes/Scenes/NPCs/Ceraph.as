@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class Ceraph extends Monster
 	{
@@ -195,7 +196,7 @@ package classes.Scenes.NPCs
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")
 				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>")
 			}
-			game.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 			outputText("\n");
 			//SECOND ATTACK HERE------
 			//Blind dodge change
@@ -242,7 +243,7 @@ package classes.Scenes.NPCs
 				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")
 				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>")
 			}
-			game.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 			outputText("\n");
 			combatRoundOver();
 		}
@@ -299,6 +300,7 @@ package classes.Scenes.NPCs
 			this.short = "Ceraph";
 			this.imageName = "ceraph";
 			this.long = "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
+			this.race = "Demon";
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.DEMON);
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);

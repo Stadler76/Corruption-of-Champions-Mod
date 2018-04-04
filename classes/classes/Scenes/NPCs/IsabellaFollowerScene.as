@@ -451,17 +451,17 @@ private function isabellasAccentCoaching():void {
 		accentChange = 12 + rand(10);
 	}
 	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 100) 
-		outputText("<b>\n\nIsabella proudly says, \"<i>I think I've learned everything you have to teach, " + player.short + ".</i>\"  You smile at the progress she's made and applaud.  There's little else you can teach for her.</b>");
+		outputText("\n\n<b>Isabella proudly says, \"<i>I think I've learned everything you have to teach, " + player.short + ".</i>\"  You smile at the progress she's made and applaud.  There's little else you can teach for her.</b>");
 	else if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 90 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 90)
-		outputText("<b>  Isabella can often speak without her accent when she tries to, though she doesn't seem to be doing so in everyday conversation yet.  She's so close though!</b>");
+		outputText("\n\n<b>Isabella can often speak without her accent when she tries to, though she doesn't seem to be doing so in everyday conversation yet.  She's so close though!</b>");
 	else if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 75 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 75) 
-		outputText("<b>  Isabella will sometimes manage to say a sentence or two without a single mistake during the lessons.  It's good progress!</b>");
+		outputText("\n\n<b>Isabella will sometimes manage to say a sentence or two without a single mistake during the lessons.  It's good progress!</b>");
 	else if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 50 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 50) 
-		outputText("<b>  Isabella has gained enough control over her language to speak properly... if she talks about half as fast as normal.</b>");
+		outputText("\n\n<b>Isabella has gained enough control over her language to speak properly... if she talks about half as fast as normal.</b>");
 	else if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 25 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 25)
-		outputText("<b>  Isabella is getting better during your lessons.  Generally she can pick out most of her mistakes if she pauses to think over what she just said.</b>");	
+		outputText("\n\n<b>Isabella is getting better during your lessons.  Generally she can pick out most of her mistakes if she pauses to think over what she just said.</b>");	
 	else if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 10 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 10) 
-		outputText("<b>  Isabella has made enough progress that if she thinks about it, she will sometimes catch her mistakes on her own.</b>");
+		outputText("\n\n<b>Isabella has made enough progress that if she thinks about it, she will sometimes catch her mistakes on her own.</b>");
 		
 	//Bump up accent level appropriately.
 	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] += accentChange;
@@ -1218,7 +1218,7 @@ private function getIzzyBurped():void {
 			changed = true;
 		}
 		//[if female/herm and player race not cow-girl]
-		if (changed && player.hasVagina() && player.race() != "cow-girl") {
+		if (changed && player.hasVagina() && player.race != "cow-girl") {
 			outputText("  \"<i>Goodness, look at you!</i>\" Isabella exclaims, waving away the remnant wisps of the gassy mist.  \"<i>Surely, you're giving me a run for ");
 			if (isabellaAccent()) outputText("mein money now, ja?");
 			else outputText("my money now, darling!");
@@ -1236,7 +1236,7 @@ private function getIzzyBurped():void {
 			outputText("</i>\"\n\n");
 		}
 		//[if male and player race not cowboy]
-		else if (changed && player.hasCock() && player.race() != "cow-morph") {
+		else if (changed && player.hasCock() && player.race != "cow-morph") {
 			outputText("  \"<i>");
 			if (isabellaAccent()) outputText("Nein nein nein nein, zis von't do at all!");
 			else outputText("No, no! This is awful!");

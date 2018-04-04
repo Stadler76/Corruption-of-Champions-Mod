@@ -38,6 +38,7 @@ package classes.internals
 		{
 			var random:Number = Math.random()*sum;
 			var action:Function = null;
+			var actions:Array = this.actions.slice();
 			while (random > 0 && actions.length > 0) {
 				var pair:Array = actions.shift();
 				action = pair[0];

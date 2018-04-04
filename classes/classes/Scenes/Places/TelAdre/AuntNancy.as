@@ -59,7 +59,7 @@ public function interactWithAuntNancy():void {
 			addButton(0, "Strong", strongStuff);
 			addButton(1, "Light", lightStuff);
 		}
-		addButton(2, "Agree", timeForAuntNancySpiderCooch);
+		addButton(5, "Massage", timeForAuntNancySpiderCooch);
 		addButton(14, "Back", declineAuntNancyMassage);
 	}
 	//[Interaction 1]

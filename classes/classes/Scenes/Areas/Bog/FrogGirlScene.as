@@ -2,11 +2,23 @@ package classes.Scenes.Areas.Bog {
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.AnalPregnancy;
+	import classes.Scenes.VaginalPregnancy;
+	import classes.Scenes.PregnancyProgression;
+	import classes.internals.GuiOutput;
 
-	public class FrogGirlScene extends BaseContent {
-
-	public function FrogGirlScene()
+	public class FrogGirlScene extends BaseContent implements VaginalPregnancy, AnalPregnancy {
+		//TODO remove after PregnancyProgression cleanup
+		private var pregnancyProgression:PregnancyProgression;
+		private var outputGui:GuiOutput;
+		
+	public function FrogGirlScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 	{
+		this.pregnancyProgression = pregnancyProgression;
+		this.outputGui = output;
+		
+		pregnancyProgression.registerVaginalPregnancyScene(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.PREGNANCY_FROG_GIRL, this);
+		pregnancyProgression.registerAnalPregnancyScene(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.PREGNANCY_FROG_GIRL, this);
 	}
 
 //const TIMES_ENCOUNTERED_FROG:int = 1017;
@@ -203,26 +215,62 @@ private function lessonFollowup():void {
 	doNext(camp.returnToCampUseTwoHours);
 }
 
-//Laying the Eggs
-public function birthFrogEggsAnal():void {
-	//Picture is here
-	outputText(images.showImage("birth-froggirl-anal"));
-	outputText("\n<b>Oh no...</b>\nYou groan, feeling a shudder from deep inside, a churning from your gut.  A trickle of slime leaks from your [asshole] down your [legs] and you feel a pressure from deep inside.");
-	outputText("\n\nWater - you need to be near water!  The instinct is sudden and clear, and you stagger toward the small creek near your camp.  You crouch low on the river bank, hands on the ground, and knees angled up in an oddly frog-like pose.");
-	outputText("\n\nSlime pools beneath you, running down into the water as he first egg begins shoving out of you.  It feels... weird.  The pressure isn’t as intense as some of the things you’ve encountered in Mareth, but it’s still incredibly large.  Your asshole stretches wide, numbed a bit by the slime, but still far larger than you would have thought possible.  As the egg squelches to the ground, you realize that the eggs are jelly-like, and pliant enough to give you some leeway in laying them.");
-	outputText("\n\nThe first egg rolls down into the water, anchored by the pooling slime, but you can’t spare it more than a moment’s glance.  The next egg pushes against you, and you groan, shuddering and panting as you try to force it out.  Your asshole aches with every lurch of your body, but finally, the second watermelon-sized egg wobbles free from your ass.  You’re already exhausted as you feel the next one coming, but you manage to force this one out, too, collapsing face-forward onto the ground.");
+/**
+ * @inheritDoc
+ */
+public function updateAnalPregnancy():Boolean {
+	if (player.buttPregnancyIncubation === 8) {
+		outputGui.text("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your ass.  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
+		
+		if (player.hasVagina()) {
+			outputGui.text("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
+		} else if (player.balls > 0) {
+			outputGui.text("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+		} else if (player.hasCock()) {
+			outputGui.text("  Splashing against the underside of your " + player.multiCockDescriptLight() + ", the slime leaves a warm, oozy sensation that makes you just want to rub [eachCock] over and over and over again.");
+		} else {
+			//genderless
+			outputGui.text("  Your asshole begins twitching, aching for something to push through it over and over again.");
+		}
+		
+		outputGui.text("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
+		dynStats("lus=", player.maxLust(), "scale", false);
+		
+		return true;
+	}
+	
+	return false;
+}
+
+/**
+ * @inheritDoc
+ */
+public function analBirth():void {
+	outputGui.text(images.showImage("birth-froggirl-anal"));
+	outputGui.text("\n<b>Oh no...</b>\nYou groan, feeling a shudder from deep inside, a churning from your gut.  A trickle of slime leaks from your [asshole] down your [legs] and you feel a pressure from deep inside.");
+	outputGui.text("\n\nWater - you need to be near water!  The instinct is sudden and clear, and you stagger toward the small creek near your camp.  You crouch low on the river bank, hands on the ground, and knees angled up in an oddly frog-like pose.");
+	outputGui.text("\n\nSlime pools beneath you, running down into the water as he first egg begins shoving out of you.  It feels... weird.  The pressure isn’t as intense as some of the things you’ve encountered in Mareth, but it’s still incredibly large.  Your asshole stretches wide, numbed a bit by the slime, but still far larger than you would have thought possible.  As the egg squelches to the ground, you realize that the eggs are jelly-like, and pliant enough to give you some leeway in laying them.");
+	outputGui.text("\n\nThe first egg rolls down into the water, anchored by the pooling slime, but you can’t spare it more than a moment’s glance.  The next egg pushes against you, and you groan, shuddering and panting as you try to force it out.  Your asshole aches with every lurch of your body, but finally, the second watermelon-sized egg wobbles free from your ass.  You’re already exhausted as you feel the next one coming, but you manage to force this one out, too, collapsing face-forward onto the ground.");
+	
 	player.buttChange(80,true,true,false);
-	outputText("\n\nNature pushes onward, though, and your body works to push the next egg out.  You moan, only half conscious, the frog slime on your skin once again lifting you into a state of hazy awareness as egg after egg pushes out of your body.");
-	outputText("\n\n<b>Later, you wake up to the sound of splashing....</b>\nIn the river are a dozen tiny figures, each no more than a foot long, and each one a mirror of the frog girl from the waist-up, but oddly featureless from the waist-down. Their lower halves ending in vaguely-finned tails, like tadpoles.");
-	outputText("\n\nThe tadgirls splash each other, playing in the water, but take notice as you wake up.  It seems that they were waiting for you - displaying a level of concern that their original mother lacked.  Maybe they got that from you?  They wave and swim away downstream, and you notice that a few of them have a few unusual splashes of color in their hair and skin, looking a bit more like you than their mother.");
-	outputText("\n\nYou nod to yourself, happy to be finished with that ordeal.  As you stand, you notice a bit of heaviness to your hips, and some added slickness to your asshole.\n");
-	//[Anal moistness +2, Hips +1]
+	
+	outputGui.text("\n\nNature pushes onward, though, and your body works to push the next egg out.  You moan, only half conscious, the frog slime on your skin once again lifting you into a state of hazy awareness as egg after egg pushes out of your body.");
+	outputGui.text("\n\n<b>Later, you wake up to the sound of splashing....</b>\nIn the river are a dozen tiny figures, each no more than a foot long, and each one a mirror of the frog girl from the waist-up, but oddly featureless from the waist-down. Their lower halves ending in vaguely-finned tails, like tadpoles.");
+	outputGui.text("\n\nThe tadgirls splash each other, playing in the water, but take notice as you wake up.  It seems that they were waiting for you - displaying a level of concern that their original mother lacked.  Maybe they got that from you?  They wave and swim away downstream, and you notice that a few of them have a few unusual splashes of color in their hair and skin, looking a bit more like you than their mother.");
+	outputGui.text("\n\nYou nod to yourself, happy to be finished with that ordeal.  As you stand, you notice a bit of heaviness to your hips, and some added slickness to your asshole.\n");
 	player.hips.rating++;
 	player.ass.analWetness += 1;
-	if (player.ass.analWetness > 5) player.ass.analWetness = 5;
+	
+	if (player.ass.analWetness > 5) {
+		player.ass.analWetness = 5;
+	}
+	
 	player.orgasm('Anal');
 	dynStats("sen", 1);
+	
+	pregnancyProgression.detectAnalBirth(PregnancyStore.PREGNANCY_FROG_GIRL);
 }
+
 //Superbonus Vaginal Eggs!
 private function superBonusFrogEggsInYerCooch():void {
 	clearOutput();
@@ -251,8 +299,37 @@ private function superBonusFrogEggsInYerCooch():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function updateVaginalPregnancy():Boolean 
+{
+	var displayedUpdate:Boolean = false;
+	
+	if (player.pregnancyIncubation === 8) {
+		//Egg Maturing
+		if (player.hasVagina()) {
+			outputText("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your [vagina].  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
+			//pussy:
+			if (player.hasVagina()) outputText("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
+			//[balls:
+			else if (player.balls > 0) outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+			//genderless: 
+			else outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
+			outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
+			dynStats("lus=", player.maxLust(), "scale", false);
+			displayedUpdate = true;
+		}
+		else {
+			outputText("\nYour gut churns, but after a moment it settles. Your belly does seem a bit bigger and more gravid afterward, like you're filling up with fluid without any possible vent. You suddenly wonder if losing your pussy was such a great idea.");
+			displayedUpdate = true;
+		}
+	}
+
+	return displayedUpdate;
+}
+
 //Vaginal Egg birth
-public function layFrogEggs():void {
+public function vaginalBirth():void {
+	this.pregnancyProgression.detectVaginalBirth(PregnancyStore.PREGNANCY_FROG_GIRL);
+	
 	//Picture is here
 	outputText(images.showImage("birth-froggirl-vag"));
 	if (player.vaginas.length == 0) {

@@ -26,15 +26,9 @@ package classes.Items.Consumables
 			
 			if (player.hasReptileScales() && player.hasDragonWings() && player.tongue.type === Tongue.DRACONIC)
 				tfSource = "catTransformation-dragonne";
-			changes = 0;
-			changeLimit = 1;
 			var temp2:Number = 0;
 			var temp3:Number = 0;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([2, 2, 3]);
 			//Text go!
 			clearOutput();
 			outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
@@ -55,14 +49,12 @@ package classes.Items.Consumables
 					outputText("\n\nYou pause mid-step and crouch. Your leg muscles have cramped up like crazy. After a few moments, the pain passes and you feel like you could chase anything down.");
 					dynStats("spe", .5);
 				}
-				//[removed:1.4.10]//changes++;
 			}
 			//Strength raises to 40
 			if (player.str100 < 40 && rand(3) === 0 && changes < changeLimit) {
 				if (rand(2) === 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
 				else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
 				dynStats("str", 1);
-				//[removed:1.4.10]//changes++;
 			}
 			//Strength ALWAYS drops if over 60
 			//Does not add to change total
@@ -96,7 +88,6 @@ package classes.Items.Consumables
 				//High intelligence
 				else outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this fruit may have actually made you dumber.  It would be best not to eat too much of it.");
 				dynStats("int", -1);
-				//[removed:1.4.10]//changes++;
 			}
 			//Libido gain
 			if (player.lib100 < 80 && changes < changeLimit && rand(4) === 0) {
@@ -115,7 +106,6 @@ package classes.Items.Consumables
 					outputText("turned on.");
 				}
 				dynStats("lib", 1, "sen", .25);
-				//[removed:1.4.10]//changes++;
 			}
 			
 			//Sexual changes would go here if I wasn't a tard.
@@ -319,7 +309,7 @@ package classes.Items.Consumables
 			//FAILSAFE CHANGE
 			if (changes === 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
-				game.HPChange(50, true);
+				player.HPChange(50, true);
 				dynStats("lus", 3);
 			}
 			if (changes < changeLimit) {

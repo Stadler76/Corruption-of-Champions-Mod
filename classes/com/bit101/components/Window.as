@@ -316,7 +316,6 @@ package com.bit101.components
 		public function set minimized(value:Boolean):void
 		{
 			_minimized = value;
-//			_panel.visible = !_minimized;
 			if(_minimized)
 			{
 				if(contains(_panel)) removeChild(_panel);

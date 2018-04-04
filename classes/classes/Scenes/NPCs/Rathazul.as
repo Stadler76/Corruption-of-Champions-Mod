@@ -63,13 +63,11 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface, Enc
 			if (flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] > 200)
 				flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] = 200;
 		}
-
 	public function encounterChance():Number { return !player.hasStatusEffect(StatusEffects.CampRathazul) ? 0.5 : 0; }
-
 	public function execEncounter():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul)) {
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -104,7 +102,7 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface, Enc
 
 private function rathazulMoveToCamp():void {
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	outputText("Rathazul smiles happily back at you and begins packing up his equipment.  He mutters over his shoulder, \"<i>It will take me a while to get my equipment moved over, but you head on back and I'll see you within the hour.  Oh my, yes.</i>\"\n\nHe has the look of someone experiencing hope for the first time in a long time.");
 	player.createStatusEffect(StatusEffects.CampRathazul, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
@@ -112,7 +110,7 @@ private function rathazulMoveToCamp():void {
 
 private function rathazulMoveDecline():void {
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	outputText("Rathazul wheezes out a sigh, and nods.\n\n\"<i>Perhaps I'll still be of some use out here after all,</i>\" he mutters as he packs up his camp and prepares to head to another spot along the lake.");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -120,7 +118,7 @@ private function rathazulMoveDecline():void {
 public function campRathazul():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul)) {
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -353,7 +351,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	return false;
 }
-//------------ARMOUR------------
+//------------ ARMOUR ------------
 public function rathazulArmorMenu():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
@@ -470,7 +468,7 @@ private function commissionSilkArmorForReal():void {
 private function declineSilkArmorCommish():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	outputText("You take the silk back from Rathazul and let him know that you can't spend 500 gems on a project like that right now.  He sighs, giving you a crestfallen look and a slight nod of his hooded muzzle.");
 	doNext(returnToRathazulMenu);
 }
@@ -822,7 +820,7 @@ private function takethatMarmorD():void {
 		player.removeKeyItem("Divine Bark Plates");
 		inventory.takeItem(armors.DBARMOR, returnToRathazulMenu);
 }
-//------------SHOP------------
+//------------ SHOP ------------
 private function rathazulShopMenu(dyes:Boolean = false, philters:Boolean = false, reductos:Boolean = false):void {
 	if (dyes) { //Dyes
 		addButton(0, "Hair Dyes", buyDyes).hint("Ask him to make a dye for you. \n\nCost: 50 Gems.");
@@ -914,13 +912,12 @@ private function buyDye(dye:ItemType):void {
 private function buyDyeNevermind():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
 	doNext(returnToRathazulMenu);
 }
-
 //Skin Oils
 private function buyOils(fromPage2:Boolean = false):void {
 	clearOutput();
@@ -993,7 +990,7 @@ private function buyOil(oil:ItemType):void {
 }
 private function buyOilNevermind():void {
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	spriteSelect(SpriteDb.s_rathazul);
 	outputText("You change your mind about the oil, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
@@ -1027,7 +1024,7 @@ private function buyLotion(lotion:ItemType):void {
 }
 private function buyLotionNevermind():void {
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	spriteSelect(SpriteDb.s_rathazul);
 	outputText("You change your mind about the lotion, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
@@ -1049,7 +1046,7 @@ private function buyReducto():void {
 		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 	else {
-		outputText(images.showImage("rathazul"));
+		outputText(images.showImage("encounter-rathazul"));
 		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
 		doNext(returnToRathazulMenu);
 	}
@@ -1060,7 +1057,7 @@ private function buyGroPlus():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
-		outputText(images.showImage("item-gro+"));
+		outputText(images.showImage("item-gro-plus"));
 		outputText("Rathazul hands you the GroPlus with a nod before returning to his work.\n\n");
 		player.gems -= cost;
 		inventory.takeItem(consumables.GROPLUS, returnToRathazulMenu);
@@ -1084,7 +1081,7 @@ private function buyPuritySomething(item:ItemType):void {
 	addMixologyXP(4);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
-//------------PURIFY------------
+//------------ PURIFY ------------
 private function purifySomething():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_rathazul);
@@ -1144,7 +1141,7 @@ private function rathazulMakesPurifyPotion():void {
 	menu();
 	addButton(0, "Next", campRathazul);
 }
-//------------ALCHEMY------------
+//------------ ALCHEMY ------------
 private function rathazulAlchemyMenu():void {
 	menu();
 	if (player.hasItem(consumables.BEEHONY)) //Distill Honey
@@ -1278,7 +1275,7 @@ private function rathazulMakesMilkPotion():void {
 }
 private function takethatMotion():void {
 	clearOutput();
-	outputText(images.showImage("item-proLactaid"));
+	outputText(images.showImage("item-lactaid-pro"));
 	outputText("A few minutes later, he comes back with the potion.  \"<i>It's ready. If you have some issues with lactation or you want to produce milk forever, drink this. Keep in mind that it might be irreversible,</i>\" he says. He hands you over the potion and goes back to working.  ");
 	addMixologyXP(8);
 	player.addStatusValue(StatusEffects.MetRathazul,2,1);
@@ -1350,7 +1347,7 @@ private function takethatTotrice():void {
 private function growLethiciteDefense():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	outputText("Rathazul asks, \"<i>Are you absolutely sure?  Growing this thorn canopy as a defense will use one third of the crystal's power.</i>\"\n\n(Do you have Rathazul use the crystal to grow a defensive canopy?)");
 	doYesNo(growLethiciteDefenseYesYesYes, growLethiciteDefenseGuessNot);
 }
@@ -1366,7 +1363,7 @@ private function growLethiciteDefenseYesYesYes():void {
 private function growLethiciteDefenseGuessNot():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	outputText("Rathazul nods sagely, \"<i>That may be wise.  Perhaps there will be another use for this power.</i>\"");
 	doNext(returnToRathazulMenu);
 }
@@ -1394,7 +1391,7 @@ private function getThatRatAss2():void {
 private function getThatRatAss3():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	outputText(images.showImage("rathazul"));
+	outputText(images.showImage("encounter-rathazul"));
 	outputText("An hour later, you muster up the courage to return to the scene of your crime. Much to your surprise, though, there is no scene. Rathazul is back on his feet, though distinctly avoiding looking at you. All he's offered is a note on the ground. You pick it up and read it.\n\n");
 	outputText("\"<i>No. And please do not as me that again.\n- Rathazul</i>\"\n\n");
 	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");

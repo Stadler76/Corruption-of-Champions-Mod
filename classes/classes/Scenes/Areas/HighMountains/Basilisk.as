@@ -2,8 +2,8 @@ package classes.Scenes.Areas.HighMountains
 {
 	import classes.*;
 	import classes.BodyParts.*;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
-import classes.internals.ChainedAction;
+	import classes.Scenes.Monsters.StareMonster;
+	import classes.internals.ChainedAction;
 	import classes.internals.ChainedDrop;
 	import classes.GlobalFlags.*
 	
@@ -11,14 +11,8 @@ import classes.internals.ChainedAction;
 	 * ...
 	 * @author ...
 	 */
-	public class Basilisk extends Monster 
+	public class Basilisk extends StareMonster 
 	{
-
-		public static function speedReduce(player:Player,amount:Number = 0):void {
-			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			bse.applyEffect(amount);
-		}
-
 		//special 1: basilisk mental compulsion attack
 		//(Check vs. Intelligence/Sensitivity, loss = recurrent speed loss each
 		//round, one time lust increase):
@@ -34,7 +28,7 @@ import classes.internals.ChainedAction;
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. You look away quickly, but you can picture them in your mind's eye, staring in at your thoughts, making you feel sluggish and unable to coordinate. Something about the helplessness of it feels so good... you can't banish the feeling that really, you want to look in the basilisk's eyes forever, for it to have total control over you.");
 					game.dynStats("lus", 3);
 					//apply status here
-					speedReduce(player,20);
+					speedReduce(player, 20);
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
 					flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}
@@ -102,6 +96,7 @@ import classes.internals.ChainedAction;
 			this.short = "basilisk";
 			this.imageName = "basilisk";
 			this.long = ""; // Needs to be set to supress validation errors, but is handled by the override.
+			this.race = "Basilisk";
 			// this.plural = false;
 			this.createCock(6,2);
 			this.balls = 2;

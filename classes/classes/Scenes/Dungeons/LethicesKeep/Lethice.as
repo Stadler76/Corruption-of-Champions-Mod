@@ -7,6 +7,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 	import classes.PerkLib;
 	import classes.BodyParts.Butt;
 	import classes.BodyParts.Hips;
+	import classes.GlobalFlags.kGAMECLASS;
 	
 	public class Lethice extends Monster
 	{
@@ -32,6 +33,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			this.short = "Lethice";
 			this.imageName = "lethice";
 			this.long = "";
+			this.race = "Demon";
 			this.tallness = 12 * 9;
 			this.createVagina(false,3,3);
 			this.createBreastRow(8);
@@ -269,12 +271,12 @@ package classes.Scenes.Dungeons.LethicesKeep
 				outputText("You struggle and manage to raise your arm against the tight grasp of the tentacles, managing to");
 			}
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
-			game.doNext(game.combat.combatMenu);
+			kGAMECLASS.output.doNext(game.combat.combatMenu);
 			player.changeFatigue(30,1);
 			outputText("\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
 			game.combat.combatAbilities.spellPerkUnlock();
-			game.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 			doAI();
 		}
 		
@@ -565,16 +567,16 @@ package classes.Scenes.Dungeons.LethicesKeep
 				outputText("Lethice’s minions have all but turned into an orgy, completely forgetting their original intent, no matter how much their draconic queen screeches for them to attack.");
 			}
 			outputText("\n\nWhile the demons are down, and Lethice is still recovering from your first skirmish, you have a much-needed moment to relieve the tensions starting to grow within you. Or you could press the attack, and take the fight to the queen.");
-			game.menu();
+			kGAMECLASS.output.menu();
 			if (Boolean(player.hasCock()) || Boolean(player.hasVagina()))
 			{
-				game.addButton(0,"DemonFuck",p2DemonFuck,hpVictory);
+				kGAMECLASS.output.addButton(0,"DemonFuck",p2DemonFuck,hpVictory);
 			}
 			if (player.hasStatusEffect(StatusEffects.KnowsHeal))
 			{
-				game.addButton(1,"Heal",p2Heal);
+				kGAMECLASS.output.addButton(1,"Heal",p2Heal);
 			}
-			game.addButton(2,"Next",p2Next);
+			kGAMECLASS.output.addButton(2,"Next",p2Next);
 		}
 		
 		private function p2DemonFuck(hpVictory:Boolean):void
@@ -619,13 +621,13 @@ package classes.Scenes.Dungeons.LethicesKeep
 				outputText(" sucking cock.");
 			}
 			outputText("\n\nAround you, spurred on by your face-fucking the omnibus, the defeated demon court undulates in waves of orgiastic pleasure, gleefully sucking each other’s cocks, penetrating any hole they can find, or simply rolling on the floor locked in each other’s sensual embraces. Those that didn’t join the fight hoot and holler from the stands, encouraging you to fuck the omnibus like the eager slut she is. For her part, the horny demon just smirks up at you between long, loving licks across your sex.");
-			game.menu();
-			game.addButton(0,"OralFinish",oralFinish);
+			kGAMECLASS.output.menu();
+			kGAMECLASS.output.addButton(0,"OralFinish",oralFinish);
 			if (player.hasCock())
 			{
-				game.addButton(1,"FuckDemon",fuckDemon);
+				kGAMECLASS.output.addButton(1,"FuckDemon",fuckDemon);
 			}
-			game.addButton(2,"RideCock",rideCock);
+			kGAMECLASS.output.addButton(2,"RideCock",rideCock);
 		}
 		
 		private function oralFinish():void
@@ -732,7 +734,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			{
 				temp = temp * 1.2;
 			}
-			game.HPChange(temp,false);
+			player.HPChange(temp,false);
 			beginPhase3(true);
 		}
 		
@@ -765,10 +767,10 @@ package classes.Scenes.Dungeons.LethicesKeep
 				this.armorName = "lethicite armor";
 				this.armorDef += 30;
 			}
-			game.menu();
+			kGAMECLASS.output.menu();
 			if (doLethNext)
 			{
-				game.addButton(0,"Next",p2Next);
+				kGAMECLASS.output.addButton(0,"Next",p2Next);
 			}
 			else
 			{
@@ -942,7 +944,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 					damage = eOneAttack();
 					outputAttack(damage);
 					postAttack(damage);
-					game.statScreenRefresh();
+					kGAMECLASS.output.statScreenRefresh();
 					outputText("\n");
 				}
 				else

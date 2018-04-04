@@ -637,7 +637,7 @@ private function sheilaReallyMadStandGround():void {
 	if (silly()) {
 		monster.HP *= 1.2;
 		player.changeFatigue(-10);
-		HPChange(20,false);
+		player.HPChange(20,false);
 	}
 }
 
@@ -699,7 +699,7 @@ private function sheilaReconcileKay2():void {
 	
 	outputText("\n\n\"<i>You make it sound like it's only the three blokes and yours truly huddled in a cave for warmth,</i>\" she responds, finally.  \"<i>Sorry, I know I've never said otherwise; just a funny thought.  Actually we're part of a little hidden alcove, village-sized, with over fifteen families.  Everyone I've ever met that's like me lives in a similar enclave, led by a political and quasi-religious yobbo");
 	//[(pc is kangaroo)
-	if (player.race() == "kangaroo-morph") outputText(" - except you, I suppose");
+	if (player.race == "kangaroo-morph") outputText(" - except you, I suppose");
 	outputText(".  We trade our goods in prearranged op shops and dead drops but avoid bringing outsiders into our own settlements, even when they're right corkers.</i>\"");
 	
 	outputText("\n\nYou press her on the last point.  \"<i>Well, what you don't know, you can't reveal when the demons take you, right?</i>\" she answers.  \"<i>I dunno if I should tell you this, but... the other reason has to do with our bodies.</i>\"  She looks over at you, searching your face for something inscrutable; you compose a mask of patient, perfect attention as you chew another mouthful of meat.  \"<i>Y'see, we're very empathetic to and conductive of emotions under certain circumstances - namely, during a shag.</i>\"  She looks away again, into the fire; as you peer closer, she actually appears to be blushing.  \"<i>When we, er... orgasm,</i>\" she resumes, still not meeting your eyes, \"<i>we give or take emotion and feeling from our partner depending on whether they have more or less than us.  For example, it means that horny buggers");
@@ -1240,7 +1240,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 	outputText("\n\nYou nod sagely and get up to dress.  Sheila, or Harriet, does the same, shimmying into her panties and shorts quickly and pulling her top on.  Finished, she drags you off to the night's lodgings anxiously, hat in hand and body language more closely resembling a giddy girl's on her first date than a grizzled, solitary hunter's.");
 	//advance time to 6:00, gain 3 hours rest
 	player.changeFatigue(-20);
-	HPChange(player.maxHP()/2,false);
+	player.HPChange(player.maxHP()/2,false);
 	if (getGame().time.hours > 6) getGame().time.days++;
 	getGame().time.hours = 6;
 	statScreenRefresh();
@@ -4189,7 +4189,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		else outputText("You grab her hips and");
 		outputText(" help her impale herself on your tool.");
 		
-		outputText("\n\nThe demon shudders as your [sheath] bumps up against her vulva.  \"<i>Y-yeah, but I never paid attention to growing dongers without balls and that kinda arcane stuff, mate... didn't think I'd end up fucking a strange " + player.race() + " like you until you stuck it in me.  I always wanted to marry a normal bloke like my dad.</i>\"");
+		outputText("\n\nThe demon shudders as your [sheath] bumps up against her vulva.  \"<i>Y-yeah, but I never paid attention to growing dongers without balls and that kinda arcane stuff, mate... didn't think I'd end up fucking a strange " + player.race + " like you until you stuck it in me.  I always wanted to marry a normal bloke like my dad.</i>\"");
 		
 		outputText("\n\n\"<i>Pardon,</i>\" you interrupt irritably, pushing her back up, \"<i>but </i>you're<i> the one who's sticking it in you.  And if you want to fuck your father so badly, go find him and leave me alone.</i>\"");
 		
@@ -5120,7 +5120,7 @@ public function rebellingScarredBlade(wieldAttempt:Boolean = false):void {
 		var dmg:int = 20
 		dmg -= player.armorDef;
 		if (dmg < 1) dmg = 1;
-		HPChange(-dmg, false);
+		player.HPChange(-dmg, false);
 		player.setWeapon(WeaponLib.FISTS);
 		flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
 	}

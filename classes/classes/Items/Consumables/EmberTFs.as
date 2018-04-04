@@ -45,10 +45,7 @@ package classes.Items.Consumables
 			var tfSource:String = "EmberTFs-" + shortName;
 			var temp:int;
 			var drakesHeart:Boolean = tfSource == "EmberTFs-DrakeHeart";
-			changes = 0;
-			changeLimit = 2;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation(null, 2);
 
 			if (drakesHeart) {
 				output.text("You bring the flower up to your nose and smell it. It has exquisite smell."

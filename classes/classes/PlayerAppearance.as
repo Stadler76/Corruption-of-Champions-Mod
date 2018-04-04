@@ -8,10 +8,10 @@ package classes
 	{
 		public function PlayerAppearance() {}
 
-		protected function footInchOrMetres(...args):String { return measurements.footInchOrMetres.apply(null, args); }
-		protected function numInchesOrCentimetres(inches:Number):String { return measurements.numInchesOrCentimetres(inches); }
-		protected function inchesOrCentimetres(...args):String { return measurements.inchesOrCentimetres.apply(null, args); }
-		protected function shortSuffix(...args):String { return measurements.shortSuffix.apply(null, args); }
+		protected function footInchOrMetres(...args):String { return Measurements.footInchOrMetres.apply(null, args); }
+		protected function numInchesOrCentimetres(inches:Number):String { return Measurements.numInchesOrCentimetres(inches); }
+		protected function inchesOrCentimetres(...args):String { return Measurements.inchesOrCentimetres.apply(null, args); }
+		protected function shortSuffix(...args):String { return Measurements.shortSuffix.apply(null, args); }
 
 		public function appearance():void {
 			if (CoC_Settings.charviewEnabled) mainViewManager.showPlayerDoll(debug);
@@ -22,7 +22,7 @@ package classes
 			var rando:Number = 0;
 			//Determine race type:
 			var race:String = "human";
-			race = player.race();
+			race = player.race;
 			//Discuss race
 			output.clear().header("Appearance");
 			if (race != player.startingRace)	output.text("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm.  ");
@@ -1512,8 +1512,8 @@ package classes
 			else {
 				outputText("\n\n<b>Something is wrong with your gems!</b>");
 			}
-			if(player.udder.HasUdder && player.udder.fullness != 0) {
-				outputText("\n\nyou have a an udder on your lowerbody it currently has " +player.udder.fullness+"oz of milk")
+			if (player.udder.hasUdder && player.udder.fullness != 0) {
+				outputText("\n\nYou have a an udder on your lowerbody it currently has " + player.udder.fullness + "oz of milk");
 			}
 			menu();
 			doNext(playerMenu);

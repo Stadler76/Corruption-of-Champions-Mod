@@ -291,7 +291,7 @@ package classes.Scenes.NPCs
 			{
 				this.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + game.sheilaScene.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, " + (game.sheilaScene.sheilaCorruption() <= 40 ? "small, round things that match her slender frame." : "swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.") + "  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.";
 			}
-			
+			this.race = "Kangaroo-Morph";
 			// this.plural = false;
 			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);

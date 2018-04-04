@@ -17,7 +17,7 @@ package classes.helper
 		/**
 		 * Create a new instance that can be used to fire button events.
 		 * @param	mainView the view that caontains the buttons
-		 * @param	maxButtonIndex the maximum number of buttons, should usually be CoC.MAX_BUTTON_INDEX
+		 * @param	maxButtonIndex the maximum number of buttons, should usually be Output.MAX_BUTTON_INDEX
 		 */
 		public function FireButtonEvent(mainView:MainView, maxButtonIndex:int) 
 		{

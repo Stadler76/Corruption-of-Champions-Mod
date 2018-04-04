@@ -88,7 +88,7 @@ package classes.Scenes.Camp
 				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n") 
 				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
 			}
-			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2))) {
+			if (!(output.buttonIsVisible(0) || output.buttonIsVisible(1) || output.buttonIsVisible(2))) {
 				outputText("<b>Unfortunately, there is nothing you can do right now.</b>");
 			}
 			addButton(14, "Leave", noThanks);

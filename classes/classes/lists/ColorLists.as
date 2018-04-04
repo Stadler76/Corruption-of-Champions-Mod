@@ -24,6 +24,14 @@ package classes.lists
 			"dark green",
 		];
 
+		public static const GOO_MORPH:Array = [
+			"green",
+			"purple",
+			"blue",
+			"cerulean",
+			"emerald",
+		];
+
 		public static const IMP_SKIN:Array = [
 			"red",
 			"orange",

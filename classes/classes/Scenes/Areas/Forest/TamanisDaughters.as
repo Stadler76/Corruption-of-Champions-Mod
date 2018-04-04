@@ -103,6 +103,7 @@ package classes.Scenes.Areas.Forest
 			this.short = "Tamani's daughters";
 			this.imageName = "tamanisdaughters";
 			this.long = "A large grouping of goblin girls has gathered around you, surrounding you on all sides.  Most have varying shades of green skin, though a few have yellowish or light blue casts to their skin.  All are barely clothed, exposing as much of their flesh as possible in order to excite a potential mate.  Their hairstyles are as varied as their clothing and skin-tones, and the only things they seem to have in common are cute faces and curvy forms.  It looks like they want something from you.";
+			this.race = "Goblins";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";

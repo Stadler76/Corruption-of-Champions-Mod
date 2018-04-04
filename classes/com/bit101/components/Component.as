@@ -45,7 +45,7 @@ package com.bit101.components
 	[Event(name="draw", type="flash.events.Event")]
 	public class Component extends Sprite
 	{
-		[Embed(source="../../../../res/ui/Shrewsbury-Titling_Bold.ttf", embedAsCFF="false", fontName="PF Ronda Seven", mimeType="application/x-font")]
+		[Embed(source="../../../../res/ui/pf_ronda_seven_bold.ttf", embedAsCFF="false", fontName="PF Ronda Seven", mimeType="application/x-font")]
 		protected var Ronda:Class;
 		
 		protected var _width:Number = 0;
@@ -103,7 +103,6 @@ package com.bit101.components
 		 */
 		protected function invalidate():void
 		{
-//			draw();
 			addEventListener(Event.ENTER_FRAME, onInvalidate);
 		}
 		

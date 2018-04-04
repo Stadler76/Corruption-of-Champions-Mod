@@ -20,7 +20,7 @@ package classes.Items.Consumables
 			var rand:int = Math.random() * 100;
 			outputText("You pop the small pill into your mouth and swallow. ");
 			
-			if (game.HPChange(50 + player.tou, true)) {
+			if (player.HPChange(50 + player.tou, true)) {
 				outputText("Some of your wounds are healed. ");
 			}
 			else

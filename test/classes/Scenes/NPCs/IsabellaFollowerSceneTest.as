@@ -21,6 +21,7 @@ package classes.Scenes.NPCs
 	import classes.CockTypesEnum;
 	import classes.helper.FireButtonEvent;
 	import classes.CoC;
+	import classes.Output;
 	
 	public class IsabellaFollowerSceneTest 
 	{
@@ -61,7 +62,7 @@ package classes.Scenes.NPCs
 			player = new Player();
 			kGAMECLASS.player = player;
 			
-			fireButon = new FireButtonEvent(kGAMECLASS.mainView, CoC.MAX_BUTTON_INDEX);
+			fireButon = new FireButtonEvent(kGAMECLASS.mainView, Output.MAX_BUTTON_INDEX);
         }
 		
 		[Test]

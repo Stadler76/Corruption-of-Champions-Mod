@@ -8,8 +8,7 @@ package classes.internals
 	import org.hamcrest.text.*;
 	import org.hamcrest.collection.*;
 	
-	import classes.internals.ISerializable;
-	import classes.internals.ISerializableAMF;
+	import classes.internals.Serializable;
 	
 	public class SerializationUtilTest
 	{
@@ -17,8 +16,7 @@ package classes.internals
 		private static const SERIAL_VERSION:int = 2;
 		
 		private var testObject:Array;
-		private var testVector:Vector.<ISerializable>;
-		private var testAMFVector:Vector.<ISerializableAMF>;
+		private var testVector:Vector.<Serializable>;
 		private var deserializedVector:Vector.<*>;
 		private var serializedObject:*;
 		private var dummy:SerializationDummy;
@@ -31,14 +29,6 @@ package classes.internals
 			}
 		}
 		
-		private function buildAmfVector(instances:int):void
-		{
-			for (var i:int = 0; i < instances; i++)
-			{
-				testAMFVector.push(new AMFSerializationDummy(i, i + 1));
-			}
-		}
-		
 		private function getTestObject():* {
 			return SerializationUtils.serializeVector(testVector as Vector.<*>);
 		}
@@ -47,8 +37,7 @@ package classes.internals
 		public function setUp():void
 		{
 			testObject = null;
-			testVector = new Vector.<ISerializable>();
-			testAMFVector = new Vector.<ISerializableAMF>();
+			testVector = new Vector.<Serializable>();
 			deserializedVector = new Vector.<*>();
 			
 			serializedObject = [];
@@ -57,7 +46,6 @@ package classes.internals
 			dummy = new SerializationDummy();
 			
 			buildVector(TEST_INSTANCES);
-			buildAmfVector(TEST_INSTANCES);
 		}
 		
 		[Test]
@@ -74,22 +62,6 @@ package classes.internals
 			testObject = getTestObject();
 			
 			assertThat(testObject[TEST_INSTANCES - 1], hasProperties({foo: TEST_INSTANCES - 1, bar: TEST_INSTANCES}));
-		}
-		
-		[Test]
-		public function serializeVectorWithAMFObjectSize():void
-		{
-			testObject = SerializationUtils.serializeVectorWithAMF(testAMFVector);
-			
-			assertThat(testObject, arrayWithSize(TEST_INSTANCES));
-		}
-		
-		[Test]
-		public function serializeVectorWithAMFLastObjectValue():void
-		{
-			testObject = SerializationUtils.serializeVectorWithAMF(testAMFVector);
-			
-			assertThat(testObject[TEST_INSTANCES - 1], instanceOf(AMFSerializationDummy));
 		}
 		
 		[Test]
@@ -152,37 +124,6 @@ package classes.internals
 			SerializationUtils.castVector(destinationVector, testVector, SerializationDummy);
 			
 			assertThat(destinationVector[TEST_INSTANCES - 1], instanceOf(SerializationDummy));
-		}
-		
-		[Test(expected="ArgumentError")]
-		public function deserializeWithNonSerializableAMFType():void {
-			SerializationUtils.deserializeVectorWithAMF(new Array(), String);
-		}
-		
-		private function deserializeAMF():Vector.<ISerializableAMF> {
-			testObject = SerializationUtils.serializeVectorWithAMF(testAMFVector);
-			return SerializationUtils.deserializeVectorWithAMF(testObject, AMFSerializationDummy);
-		}
-		
-		[Test]
-		public function deserializeVectorWithAMFSize():void {
-			var vector:Vector.<ISerializableAMF> = deserializeAMF();
-			
-			assertThat(vector, arrayWithSize(TEST_INSTANCES));
-		}
-		
-		[Test]
-		public function deserializeVectorWithAMFType():void {
-			var vector:Vector.<ISerializableAMF> = deserializeAMF();
-			
-			assertThat(vector[TEST_INSTANCES - 1], instanceOf(ISerializableAMF));
-		}
-		
-		[Test]
-		public function deserializeVectorWithAMFProperty():void {
-			var vector:Vector.<ISerializableAMF> = deserializeAMF();
-			
-			assertThat(vector[TEST_INSTANCES - 1], hasProperties({foo: TEST_INSTANCES - 1, bar: TEST_INSTANCES}));
 		}
 		
 		[Test]
@@ -275,11 +216,10 @@ package classes.internals
 	}
 }
 
-import classes.internals.ISerializable;
-import classes.internals.ISerializableAMF;
+import classes.internals.Serializable;
 import flash.errors.IllegalOperationError;
 
-class SerializationDummy implements ISerializable
+class SerializationDummy implements Serializable
 {
 	public var foo:int;
 	private var bar:int;
@@ -317,17 +257,5 @@ class SerializationDummy implements ISerializable
 	public function currentSerializationVerison():int 
 	{
 		return 2;
-	}
-}
-
-class AMFSerializationDummy implements ISerializableAMF
-{
-	public var foo:int;
-	public var bar:int;
-	
-	public function AMFSerializationDummy(foo:int = -2, bar:int = -2)
-	{
-		this.foo = foo;
-		this.bar = bar;
 	}
 }

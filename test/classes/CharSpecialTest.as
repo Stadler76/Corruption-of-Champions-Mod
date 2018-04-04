@@ -30,6 +30,12 @@ package classes{
 			return null;
 		}
 		
+		private function createCharByName(name:String):void {
+			var func:Function = findCharFunction(name);
+			
+			func();
+		}
+		
 		[BeforeClass]
 		public static function runOnceForTestClass():void { 
 			kGAMECLASS = new CoC(StageLocator.stage);
@@ -220,6 +226,13 @@ package classes{
 		}
 		
 		[Test]
+		public function leahHpRestored():void {
+			createCharByName(CharSpecial.LEAH_NAME);
+			
+			assertThat(player.HP, equalTo(80));
+		}
+		
+		[Test]
 		public function testKattiBreastFuckable() : void {
 			var func : Function = findCharFunction(CharSpecial.KATTI_NAME);
 			
@@ -291,6 +304,13 @@ package classes{
 			assertThat(player.breastRows[3].nipplesPerBreast, equalTo(4));
 		}
 		
+		[Test]
+		public function nixiHpRestored(): void {
+			createCharByName(CharSpecial.NIXI_NAME);
+			
+			assertThat(player.HP, equalTo(80));
+		}
+		
 				
 		[Test]
 		public function testLukazIsMale() : void {
@@ -302,6 +322,13 @@ package classes{
 		}
 		
 		[Test]
+		public function lukazHPRestored():void {
+			createCharByName(CharSpecial.LUKAZ_NAME);
+			
+			assertThat(player.HP, equalTo(84));
+		}
+		
+		[Test]
 		public function testMaraClitLength() : void {
 			var func : Function = findCharFunction(CharSpecial.MARA_NAME);
 			
@@ -309,5 +336,26 @@ package classes{
 			
 			assertThat(player.getClitLength(), equalTo(0.5));
 		}
-    }
+		
+		[Test]
+		public function vahdunbriiHpRestored(): void {
+			createCharByName(CharSpecial.VAHDUNBRII_NAME);
+			
+			assertThat(player.HP, equalTo(80));
+		}
+		
+		[Test]
+		public function etisHpRestored(): void {
+			createCharByName(CharSpecial.ETIS_NAME);
+			
+			assertThat(player.HP, equalTo(50));
+		}
+		
+		[Test]
+		public function chimeraHpRestored(): void {
+			createCharByName(CharSpecial.CHIMERA_NAME);
+			
+			assertThat(player.HP, equalTo(50));
+		}
+	}
 }

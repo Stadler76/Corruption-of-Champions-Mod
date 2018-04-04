@@ -527,7 +527,7 @@ package classes.Scenes.NPCs
 			outputText("You decide to ask Joy what she thinks about you.");
 			outputText("\n\nJoy blinks and looks at you puzzled. \"<i>What do I, like, think of you? Okay...</i>\" She narrows her eyes, studying you intensely.\n\n");
 			//Race check
-			switch(player.race()) {
+			switch(player.race) {
 				case "human":
 					outputText("\"<i>Well, you're a human. I haven't seen one of your kind in, like, many, many years. I think the demons got 'em all, or at least they got most of 'em. They try to round up every human who comes through, like, the portals, too. Still, I think there's some of you still hidden around.</i>\"");
 					break;
@@ -1352,7 +1352,7 @@ package classes.Scenes.NPCs
 			if (refillAmount > (120 - player.hunger)) refillAmount = (120 - player.hunger); //Constrain max weight gain to +2.
 			player.refillHunger(refillAmount);
 			player.changeFatigue(-40);
-			HPChange(50 + player.maxHP() / 5, false);
+			player.HPChange(50 + player.maxHP() / 5, false);
 			dynStats("lus", 20 + (player.lib / 5));
 			//Libido reduction
 			dynStats("lib", -1);

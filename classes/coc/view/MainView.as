@@ -829,7 +829,6 @@ public class MainView extends Block {
 		this.nameBox.width = 165
 		this.nameBox.text = "";
 		this.nameBox.maxChars = 16;
-		this.nameBox.restrict = "a-zA-Z0-9 .'\\-";
 	}
 	public function moveCombatView(event:TimerEvent = null):void{
 		this.mainText.width -= 10;
@@ -876,6 +875,7 @@ public class MainView extends Block {
 	}
 	
 	public function updateCombatView():void {
+		if (kGAMECLASS.flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] <= 0) return; //Cancel if disabled 
 		monsterStatsView.show();
 		if (monsterStatsView.moved) return;
 		else monsterStatsView.moved = true;

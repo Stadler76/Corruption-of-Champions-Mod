@@ -14,18 +14,18 @@ before_install:
   - sudo apt-get update
   # install VNC and xfce4 so we have a desktop, as the flash player requires one
   - sudo apt-get install vnc4server xfce4 ant ant-optional -y
+  # So flexunit can find the player and the ant build file does not have to be modified
+  - sudo cp build-dep/bin/flashplayer /usr/local/bin/gflashplayer
 
 install:
   # Java 7 is used by default, but sonar requires java 8
   - jdk_switcher  use oraclejdk8
-  # download and install the flex SDK and the flash player
-  - devTools/ci/setup-flex.sh
   # start a VNC session, this will be the desktop for tests
   - Xvnc :1 &
  
 script:
     # this is where the build happens. A separate build is started for every entry in the matrix element
-  - ant test-$BUILD
+  - travis_wait ant test-$BUILD
   - devTools/ci/update-sonar-version.sh
 
 after_success:
@@ -38,7 +38,7 @@ after_failure:
 env:
   global:
     # tell the build file where to find the flex SDK
-    - FLEX_HOME=flex/"
+    - FLEX_HOME=build-dep/bin/flex/"
     # this is to trick the flash player into thinking it is running on a desktop
     - DISPLAY=":1"
   matrix:

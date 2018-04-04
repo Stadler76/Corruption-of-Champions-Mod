@@ -30,6 +30,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			this.short = "living statue";
 			this.imageName = "livingstatue";
 			this.long = "This animate marble statue shows numerous signs of wear and tear, but remains as strong and stable as the day it was carved. Its pearly, white skin is pockmarked in places from age, yet the alabaster muscles seem to move with almost liquid grace. You get the impression that the statue was hewn in the days before the demons, then brought to life shortly after. It bears a complete lack of genitalia - an immaculately carved leaf is all that occupies its loins. It wields a hammer carved from the same material as the rest of it.";
+			this.race = "Statue";
 			
 			initStrTouSpeInte(100, 80, 25, 50);
 			initLibSensCor(10, 10, 100);

@@ -9,10 +9,12 @@ package classes.Scenes.Dungeons
 	import classes.Scenes.Dungeons.DesertCave.*;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
 	import classes.Scenes.Dungeons.DungeonCore;
+	import classes.Scenes.PregnancyProgression;
+	import classes.Scenes.VaginalPregnancy;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	
-	public class DesertCave extends DungeonAbstractContent
+	public class DesertCave extends DungeonAbstractContent implements VaginalPregnancy
 	{
 		/*
 		private static const DUNGEON_WITCH_ENTRANCE_GATEWAY:int		= 23;
@@ -32,7 +34,15 @@ package classes.Scenes.Dungeons
 		private static const DUNGEON_WITCH_SACRIFICIAL_ALTAR:int	= 37;
 		private static const DUNGEON_WITCH_THRONE_ROOM:int			= 38;
 		*/
-		public function DesertCave() {}
+		
+		private var pregnancyProgression:PregnancyProgression;
+		
+		public function DesertCave(pregnancyProgression:PregnancyProgression) {
+			// needed as an instance variable for refactor test code (detectVaginalBirth)
+			this.pregnancyProgression = pregnancyProgression;
+			
+			pregnancyProgression.registerVaginalPregnancyScene(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.PREGNANCY_SAND_WITCH, this);
+		}
 		
 		// SANURA_DISABLED:int = 833;
 		// MET_SANURA:int = 834;
@@ -3237,7 +3247,7 @@ package classes.Scenes.Dungeons
 			outputText("You ask the Sand Mother how her people choose who will be a Sand Mother of a new coven.");
 			
 			outputText("\n\nThe statuesque woman smirks ruefully, \"<i>Politics, of course.</i>\"  Politics?  She sees the confused look on your face and explains, \"<i>It shouldn't surprise you.  You");
-			if (player.race() == "human") outputText("'re a human");
+			if (player.race == "human") outputText("'re a human");
 			else outputText(" were a human");
 			outputText(".  Our people are notorious for forming gangs and cliques, groups focused around a leader's charisma.  It's only natural that has continued in Mareth.  It would not surprise me to learn that even the demons have their own factions and political malcontents, though I imagine they deal with them far more harshly than we.</i>\"");
 			
@@ -3934,7 +3944,7 @@ package classes.Scenes.Dungeons
 			clearOutput();
 			outputText("You allow the girl to continue for a long, long while until your entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized. You start to thank the milk girl for the pleasurable company, but when you open your mouth, she slips into your arms and presses her lips to yours.  Chuckling to yourself, you hold the girl as tight against yourself as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before turning back to the task at hand.");
 			//[+Lust, +HP, -Fatigue]
-			HPChange(player.maxHP()*.33,false);
+			player.HPChange(player.maxHP()*.33,false);
 			player.changeFatigue(-20);
 			doNext(playerMenu);
 		}
@@ -4046,7 +4056,7 @@ package classes.Scenes.Dungeons
 		120 == impossible to conceal
 		72 == painfully distended
 		48 == bulges with unclean spawn..blahblahblah*/
-		public function sandPregUpdate():Boolean {
+		public function updateVaginalPregnancy():Boolean {
 			//1: 
 			if (player.pregnancyIncubation == 336) {
 				outputText("\nYour breasts have felt unusually heavy recently, and a strange pulsing sensation occasionally emanates from them.  Your appetite is a little off; you could really go for some milk...\n");
@@ -4119,7 +4129,9 @@ package classes.Scenes.Dungeons
 		}
 
 		//*Witch Birth Scene:
-		public function birthAWitch():void {
+		public function vaginalBirth():void {
+			pregnancyProgression.detectVaginalBirth(PregnancyStore.PREGNANCY_SAND_WITCH);
+			
 			outputText("\n<b><u>Something amazing happens...</u></b>\n");
 			if (player.vaginas.length == 0) {
 				outputText("You feel a terrible pressure in your groin... then an incredible discomfort accompanied by the rending of flesh.  You look down and behold a vagina.  ");
@@ -4152,7 +4164,7 @@ package classes.Scenes.Dungeons
 				flags[kFLAGS.MET_SANURA] = 1;
 				outputText("Just ahead, in one of the larger dunes, is a square stone doorway, built into the side of a large, sparkling mountain of sand.  You never would have noticed it if the sun hadn't been at the perfect angle to trace a rectangular shadow down the side of the incline.  As you approach, you notice a smooth obsidian orb embedded into the side of it.  Perhaps that's the mechanism to open it?");
 				outputText("\n\nSuddenly, a huge shadow looms over you, and the sound of beating wings echo from on high. You spin around in time to see a huge creature leap from the dune tops and slam into the ground a few feet away.  At first glance, the creature looks like a tall, tanned woman with flowing black hair, adorned in a great wealth of gold and jewels.  A moment later, though, you're able to take in the full view of her form: from the waist down, her shapely human form morphs into the lower body of a great, golden-haired lion, padding on a quartet of powerful legs ending in sharp claws.  From her leonine sides grow a pair of massive wings, easily over a dozen feet across, which quickly furl up against her body.  She's a sphinx!");
-				outputText("\n\nThe sphinx-girl pads over towards you, her arms crossed under her small, palmable breasts. Chestnut-colored eyes examine you, looking you over from your [hair] to your [feet], a playful grin playing across her feminine features.  \"<i>O-ho!  What's this we have here?  A poor, lost " + player.race() + " wandering the desert; or are you something more?  Indeed, I should think so, with your [weapon] so eager for battle, and your [armor] that looks to have seen a thousand blows.  My, my.  Could it be you've come to brave my Mistress's lair?  Ah, if so... you must answer my riddles three, lest I keep from you the key!</i>\" she says, a little tune springing into her voice as she stalks towards you.");
+				outputText("\n\nThe sphinx-girl pads over towards you, her arms crossed under her small, palmable breasts. Chestnut-colored eyes examine you, looking you over from your [hair] to your [feet], a playful grin playing across her feminine features.  \"<i>O-ho!  What's this we have here?  A poor, lost " + player.race + " wandering the desert; or are you something more?  Indeed, I should think so, with your [weapon] so eager for battle, and your [armor] that looks to have seen a thousand blows.  My, my.  Could it be you've come to brave my Mistress's lair?  Ah, if so... you must answer my riddles three, lest I keep from you the key!</i>\" she says, a little tune springing into her voice as she stalks towards you.");
 				outputText("\n\n\"<i>We could even make it interesting...  If you can't guess my riddles, you must surrender your body to my pleasure.  If you win, your pleasure shall be my wish.</i>\"");
 				if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
 					outputText("\n\n(<b>You've discovered a new dungeon, available in the places menu in the future!  Make sure you save before delving too deeply...</b>)");

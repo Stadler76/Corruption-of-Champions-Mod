@@ -24,16 +24,9 @@ package classes.Items.Consumables
 		{
 			var tfSource:String = "pigTruffle";
 			if (boar) tfSource += "-boar";
-			changes = 0;
-			changeLimit = 1;
 			var temp:int = 0;
 			var x:int = 0;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (boar) changeLimit++;
-			if (player.hasPerk(PerkLib.HistoryAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			mutations.initTransformation([2, 2, 3], boar ? 2 : 1);
 			outputText("You take a bite into the pigtail truffle. It oddly tastes like bacon. You eventually finish eating. ");
 			player.refillHunger(20);
 			//-----------------------

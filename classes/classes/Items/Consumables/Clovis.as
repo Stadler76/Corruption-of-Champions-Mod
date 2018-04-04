@@ -21,35 +21,24 @@ package classes.Items.Consumables
 		override public function useItem():Boolean
 		{
 			var tfSource: String = "clovis";
-			changes = 0;
-			changeLimit = 1;
-			// Add to change limit
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			// Perk change limit modifiers
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([2, 2]);
 			outputText("You open the bottle of Clovis, its sweet smell making you feel carefree. You drink the contents and relax to the sensation it brings, feeling like you're being cuddled by a big fluffy cloud.");
 			// Stat changes!
 			if (player.inte > 90 && rand(3) === 0 && changes < changeLimit) {
 				dynStats("int", -(rand(1) + 1));
 				outputText("\n\nThe sense of calm the potion gives you slowly fades into dopey bliss. You haven't a care in the world, not even the fact that you've got a little dumber.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (rand(3) === 0 && changes < changeLimit) {
 				dynStats("tou", rand(1) + 1);
 				outputText("\n\nYou feel a wave of stubborn pride wash over you as you finish the potion. You’re sure nothing could stop you now, not even the demons.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (player.spe < 75 && rand(3) === 0 && changes < changeLimit) {
 				dynStats("spe", rand(2) + 1);
 				outputText("\n\nYou feel oddly compelled to jump from rock to rock across a nearby stream, a sense of sure footedness and increased agility deep within you. To your surprise, you make it across with no trouble. The damp and uneven rocks are barely a challenge to your increased speed.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (rand(3) === 0 && changes < changeLimit) {
 				dynStats("sens", -(rand(1) + 1));
 				outputText("\n\nYou feel less sensitive to the touch, a slight numbness pervading your body as if truly wrapped in cotton wool. The numbness eventually fades, leaving you now less affected by the lusty touches of your foes.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (rand(3) === 0 && changes < changeLimit) {
 				dynStats("cor", -(rand(3) + 2));

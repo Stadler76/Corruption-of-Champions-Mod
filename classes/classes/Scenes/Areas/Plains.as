@@ -8,6 +8,8 @@ package classes.Scenes.Areas {
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Plains.*;
+	import classes.Scenes.PregnancyProgression;
+	import classes.internals.GuiOutput;
 
 	use namespace kGAMECLASS;
 
@@ -15,9 +17,11 @@ package classes.Scenes.Areas {
 		public var bunnyGirl:BunnyGirl = new BunnyGirl();
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
-		public var satyrScene:SatyrScene = new SatyrScene();
+		public var satyrScene:SatyrScene;
 
-		public function Plains() {}
+		public function Plains(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
+			this.satyrScene = new SatyrScene(pregnancyProgression, output);
+		}
 
 		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0; }
 		public function discover():void {

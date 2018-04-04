@@ -907,7 +907,7 @@ public function loseToOwca():void {
 	if (player.weaponName != "fists") outputText("your " + player.weaponName + " is taken away and ");
 	outputText("you are being uncomfortably transported to a destination you can guess easily.  Too dazed to resist or even worry about it; you are promptly brought to the dreaded pit, where the villagers tie you up and rudely shackle you.  Then, before you even realize how desperate your situation is, they're all gone.  Your numerous bruises and fatigue get the better of you and you quickly fall asleep.");
 	//redirect to dusk transition text, restore hp/fat consonant with sleeping until nightfall
-	HPChange(50,false);
+	player.HPChange(50,false);
 	player.changeFatigue(-30);
 	//after nightly scene, next encounter is Post-Mob Encounter
 	doNext(loseOrSubmitToVapula);

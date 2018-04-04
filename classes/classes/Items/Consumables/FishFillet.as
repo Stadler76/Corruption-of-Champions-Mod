@@ -24,7 +24,7 @@ package classes.Items.Consumables
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) dynStats("cor", 0.5);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) dynStats("cor", -0.1);
 			dynStats("cor", 0.1);
-			game.HPChange(Math.round(player.maxHP() * .25), true);
+			player.HPChange(Math.round(player.maxHP() * .25), true);
 			player.refillHunger(30);
 			
 			return false;

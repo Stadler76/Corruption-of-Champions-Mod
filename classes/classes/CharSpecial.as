@@ -24,6 +24,11 @@ package classes
 		public static const NAVORN_NAME: String = "Navorn";
 		public static const LUKAZ_NAME: String = "Lukaz";
 		public static const MARA_NAME: String = "Mara";
+		public static const LEAH_NAME:String = "Leah"; 
+		public static const NIXI_NAME:String = "Nixi"; 
+		public static const VAHDUNBRII_NAME:String = "Vahdunbrii"; 
+		public static const ETIS_NAME:String = "Etis"; 
+		public static const CHIMERA_NAME:String = "Chimera"; 
 		
 		
 		public function CharSpecial() {}
@@ -49,23 +54,23 @@ package classes
 			[ "Annetta", customAnnetta, true, "You're a rather well-endowed hermaphrodite that sports a thick, dog-knotted cock, an unused pussy, and a nice, stretchy butt-hole.  You've also got horns and demonic high-heels on your feet.  It makes you wonder why you would ever get chosen to be champion!" ],
 			[ "Ceveo", customCeveo, true, "As a wandering mage you had found your way into no small amount of trouble in the search for knowledge." ],
 			[ "Charlie", customCharlie, true, "You're strong, smart, fast, and tough.  It also helps that you've got four dongs well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town." ],
-			[ "Chimera", customChimera, true, "Your body is wrecked by your own experiments with otherworldly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying." ],
-			[ "Etis", customEtis, true, "Kitsune-dragon hybrid with 3 tentacle cocks, tentacle hair, tentacle (well, draconic) tongue and very strong magic affinity." ],
+			[ CHIMERA_NAME, customChimera, true, "Your body is wrecked by your own experiments with otherworldly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying." ],
+			[ ETIS_NAME, customEtis, true, "Kitsune-dragon hybrid with 3 tentacle cocks, tentacle hair, tentacle (well, draconic) tongue and very strong magic affinity." ],
 			[ "Isaac", customIsaac, true, "Born of a disgraced priestess, Isaac was raised alone until she was taken by illness.  He worked a number of odd jobs until he was eventually chosen as champion." ],
 			//[ "Kitteh6660", customKitteh6660, true, "" ],
-			[ "Leah", customLeah, true, "No Notes Available." ],
+			[ LEAH_NAME, customLeah, true, "No Notes Available." ],
 			[ LUKAZ_NAME, customLukaz, true, "No Notes Available." ],
 			[ MARA_NAME, customMara, true, "You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past." ],
 			[ "Mihari", customMihari, true, "The portal is not something you fear, not with your imposing armor and inscribed spellblade.  You're much faster and stronger than every champion that came before you, but will it be enough?" ],
 			[ MIRVANNA_NAME, customMirvanna, true, "You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though." ],
 			[ "Nami", customNami, true, "Your exotic appearance caused you some trouble growing up, but you buried your nose in books until it came time to go through the portal." ],
-			[ "Nixi", customNixi, true, "As a German-Shepherd morph, the rest of the village never really knew what to do with you... until they sent you through the portal to face whatever's on the other side..." ],
+			[ NIXI_NAME, customNixi, true, "As a German-Shepherd morph, the rest of the village never really knew what to do with you... until they sent you through the portal to face whatever's on the other side..." ],
 			[ "Prismere", customPrismere, true, "You're more of a scout than a fighter, but you still feel confident you can handle your responsibilities as champion.  After all, what's to worry about when you can outrun everything you encounter?  You have olive skin, deep red hair, and a demonic tail and wings to blend in with the locals." ],
 			[ "Rann Rayla", customRannRayla, true, "You're a young, fiery redhead who\'s utterly feminine.  You've got C-cup breasts and long red hair.  Being a champion can\'t be that bad, right?" ],
 			[ "Sera", customSera, true, "You're something of a shemale - three rows of C-cup breasts matched with three, plump, juicy cocks.  Some decent sized balls, bat wings, and cat-like ears round out the package." ],
 			[ "Siveen", customSiveen, true, "You are a literal angel from beyond, and you take the place of a vilage's champion for your own reasons..." ],
 			[ "Tyriana", customTyriana, true, "Your many, posh tits, incredible fertility, and well-used cunt made you more popular than the village bicycle.  With your cat-like ears, paws, and tail, you certainly had a feline appeal.  It's time to see how you fare in the next chapter of your life." ],
-			[ "Vahdunbrii", customVahdunbrii, true, "You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal." ],
+			[ VAHDUNBRII_NAME, customVahdunbrii, true, "You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal." ],
 		]
 		
 		private function customAnnetta():void {
@@ -557,7 +562,7 @@ package classes
 			player.lib = 15;
 			player.cor = 0;
 			getGame().saves.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.restoreHP();
 			player.hair.length=13;
 			player.skin.type = Skin.PLAIN;
 			player.face.type = Face.HUMAN;
@@ -637,7 +642,7 @@ package classes
 			player.lib = 15;
 			player.cor = 0;
 			getGame().saves.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.restoreHP();
 			player.hair.length = 1;
 			player.skin.type = Skin.PLAIN;
 			player.skin.tone = "light";
@@ -1024,7 +1029,7 @@ package classes
 			player.lib = 15;
 			player.cor = 0;
 			getGame().saves.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.restoreHP();
 			
 			player.skin.type = Skin.PLAIN;
 			player.face.type = Face.HUMAN;
@@ -1261,7 +1266,7 @@ package classes
 			player.lib = 30;
 			player.cor = 71;
 			getGame().saves.notes = "Cheater!";
-			player.HP = kGAMECLASS.maxHP();
+			player.restoreHP();
 			player.hair.length = 10;
 			player.skin.type = Skin.PLAIN;
 			player.face.type = Face.HUMAN;
@@ -1471,7 +1476,7 @@ package classes
 			player.lib = 15;
 			player.cor = 0;
 			getGame().saves.notes = "No Notes Available.";
-			player.HP = kGAMECLASS.maxHP();
+			player.restoreHP();
 			player.hair.length = 10;
 			player.skin.type = Skin.PLAIN;
 			player.face.type = Face.HUMAN;
@@ -1689,7 +1694,7 @@ package classes
 			
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;
-			player.HP = kGAMECLASS.maxHP();
+			player.restoreHP();
 			
 			player.gems += 20;
 			
@@ -1933,7 +1938,7 @@ package classes
 
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;
-			player.HP = kGAMECLASS.maxHP();
+			player.restoreHP();
 
 			player.gems += 15+ rand(55);
 			

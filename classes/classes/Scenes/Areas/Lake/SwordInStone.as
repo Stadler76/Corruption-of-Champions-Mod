@@ -27,7 +27,8 @@ public class SwordInStone extends AbstractLakeContent implements Encounter {
 			}
 			else {
 				outputText("While walking along the lake, a massive tree catches your eye.  You carefully circle some bushes, wary of an ambush as you get closer.   As you close the distance, it becomes clear the tree is terribly corrupt.  It weeps black sap from gnashing mouths and clenching distorting twats.  The very center of the tree has a massive knot, as if it had sustained a massive injury there.  You decide to avoid it, given the hungry-looking nature of its mouths, but before you depart you spot the pieces of a broken sword scattered around the trunk, completely covered in rust.");
-				doNext(camp.returnToCampUseOneHour);
+				outputText("You suppose you could gather the pieces, do you?");
+				doYesNo(takeBrokenSword, camp.returnToCampUseOneHour);
 				player.createStatusEffect(StatusEffects.BSwordBroken,0,0,0,0);
 			}
 		}
@@ -54,6 +55,14 @@ public class SwordInStone extends AbstractLakeContent implements Encounter {
 				inventory.takeItem(weapons.B_SWORD, camp.returnToCampUseOneHour);
 				player.createStatusEffect(StatusEffects.TookBlessedSword,0,0,0,0);
 			}
+		}
+		
+		private function takeBrokenSword():void {
+			clearOutput();
+			outputText(images.showImage("item-brokenSword"));
+			outputText("You decide to look over the pieces of the broken sword. Interestingly enough, it's broken into only two pieces and covered in rust as you've expected but as you look closer, you notice the pommel and guard look intricately designed as if the sword is expertfully crafted by a master craftsman.\n\n");
+			outputText("While the sword might still have some uses, it won't be a very effective weapon. Maybe someone can restore the sword to its full glory or even twist it into a useful yet corrupt weapon?");
+			inventory.takeItem(weapons.BBSWORD, camp.returnToCampUseOneHour);
 		}
 	}
 }

@@ -1,19 +1,16 @@
-// By Foxwells
-// Amarok, a big ass wolf from Inuit mythology. Idek. Glacial Rift is depressingly empty
-// Since it's a big ass god wolf, it's pretty hard to beat
-// Herm, since there's no set gender for it in its mythology
-// Comes with a unique bad end if you lose to it too many times, kinda like the Phoenix
-
-package classes.Scenes.Areas.GlacialRift 
-{
+//By Foxwells
+//Amarok, a big ass wolf from Inuit mythology. Idek. Glacial Rift is depressingly empty
+//Since it's a big ass god wolf, it's pretty hard to beat
+//Herm, since there's no set gender for it in its mythology
+//Comes with an unique bad end if you lose to it too many times, kinda like the Phoenix
+package classes.Scenes.Areas.GlacialRift {
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.BodyParts.Hips;
 	import classes.internals.WeightedDrop;
-	
-	public class Amarok extends Monster
-	{
-		
+
+	public class Amarok extends Monster {
+
 		protected function amarokClaw():void {
 			//Blind
 			if(hasStatusEffect(StatusEffects.Blind)) {
@@ -34,11 +31,11 @@ package classes.Scenes.Areas.GlacialRift
 			}
 			combatRoundOver();
 		}
+		//AMAROK used TAIL SLAP!
 		protected function amarokTail():void {
-			//AMAROK used TAIL SLAP!
 			outputText("The Amarok rushes up to you and immediately turns heel, attempting to crash its tail into you. ");
 			//Blind check...
-			if(hasStatusEffect(StatusEffects.Blind)) {
+			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Luckily, though, its blindness causes it to misjudge your location and it misses entirely.");
 				combatRoundOver();
 			}
@@ -47,11 +44,10 @@ package classes.Scenes.Areas.GlacialRift
 				outputText("You move out of the way before it can hit.");
 				combatRoundOver();
 			}
+			//Damageeee + stun! Reference to the legend of it slapping a kid with its tail, except minus the bone breaking
 			else {
-				//Damageeee + stun! Reference to the legend of it slapping a kid with its tail, except minus the bone breaking.
 				outputText("The hit sends you stumbling back");
-				if (player.findPerk(PerkLib.Resolute) <= 0 && rand(2) == 0) 
-				{
+				if (player.findPerk(PerkLib.Resolute) <= 0 && rand(2) == 0) {
 					outputText(", stunning you");
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
@@ -62,36 +58,29 @@ package classes.Scenes.Areas.GlacialRift
 			}
 			combatRoundOver();
 		}
-		
-		override protected function performCombatAction():void
-		{
+
+		override protected function performCombatAction():void {
 			var chooser:Number = rand(10);
 			if (chooser < 6) amarokClaw(); //60% chance
 			else if (chooser >= 6 && chooser < 9) amarokTail(); //40% chance
 			else eAttack(); //when the hell was this removed?? Game just broke cuz it was .-.;;
 		}
-		
-		override public function defeated(hpVictory:Boolean):void
-		{
-			game.glacialRift.amarokScene.winAgainstAmarok();
-		}
-		
-		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
-		{
-			if(pcCameWorms){
+
+		override public function defeated(hpVictory:Boolean):void { game.glacialRift.amarokScene.winAgainstAmarok(); }
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
+			if (pcCameWorms) {
 				outputText("\n\nThe Amarok looks down at the worms you came, sniffs them, then snarls and walks away. It must consider you to be tainted meat.");
 				doNext(game.combat.endLustLoss);
-			} else {
-				game.glacialRift.amarokScene.amarokChowTime();
 			}
+			else game.glacialRift.amarokScene.amarokChowTime();
 		}
-		
-		public function Amarok() 
-		{
+
+		public function Amarok() {
 			this.a = "the ";
 			this.short = "Amarok";
 			this.imageName = "amarok";
 			this.long = "You are fighting an Amarok, a massive wolf that seems set on hunting you. The buffeting snow does nothing to hide its thick, black fur, and hardly manages to even ruffle it. It has golden, hungry eyes that watch your every move and sharp teeth capable of crushing bones. It looms over you in both height and width, with well-defined muscles, long legs, and bulky paws with deadly claws only adding to its intimidating stature. Even its tail looks capable of knocking you down. It's the most normal animal-like creature you've seen here yet, a normal wolf despite its size, but is no less terrifying. You get the feeling this won't be an easy fight, especially considering it's not about to let you run away.";
+			this.race = "Wolf";
 			this.plural = false;
 			this.createVagina(false, 1, 1);
 			this.createCock(8, 1.5, CockTypesEnum.WOLF);
@@ -136,13 +125,11 @@ package classes.Scenes.Areas.GlacialRift
 			this.special2 = amarokTail;
 			this.tail.type = Tail.WOLF;
 			if (!player.canFly()) {
+				//"Watching your movements" alluded to this. Its lore is stalking and hunting people, so I imagine you can't get away
 				this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
-				//"Watching your movements" alluded to this. Its lore is stalking and hunting people, so I imagine you can't get away.
-				//Otherwise I'd suggest doing a hellhound knock-off of the scent tracking, which makes it harder to run.
+				//Otherwise I'd suggest doing a hellhound knock-off of the scent tracking, which makes it harder to run
 			}
 			checkMonster();
 		}
-		
 	}
-
 }

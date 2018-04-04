@@ -3,6 +3,7 @@ package classes.Scenes.Areas.Plains
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	/**
 	 * ...
@@ -86,7 +87,7 @@ package classes.Scenes.Areas.Plains
 					outputText(" ");
 					player.takeDamage(damage, true);
 				}
-				game.statScreenRefresh();
+				kGAMECLASS.output.statScreenRefresh();
 			}
 		}
 		
@@ -199,7 +200,7 @@ package classes.Scenes.Areas.Plains
 					outputText(" ");
 					player.takeDamage(damage, true);
 				}
-				game.statScreenRefresh();
+				kGAMECLASS.output.statScreenRefresh();
 			}
 		}
 
@@ -338,7 +339,7 @@ package classes.Scenes.Areas.Plains
 						outputText(" ");
 						player.takeDamage(damage);
 					}
-					game.statScreenRefresh();
+					kGAMECLASS.output.statScreenRefresh();
 				}
 				gnollAttackText();
 			}
@@ -375,6 +376,7 @@ package classes.Scenes.Areas.Plains
 			this.short = "gnoll";
 			this.imageName = "gnoll";
 			this.long = "This lanky figure is dappled with black spots across rough, tawny fur. Wiry muscle ripples along long legs and arms, all of it seeming in perpetual frenetic motion: every moment half flinching and half lunging.  The head bears a dark muzzle curled in a perpetual leer and bright orange eyes watching with a savage animal cunning.  Between the legs hang what appears at first to be a long, thin dong; however, on closer inspection it is a fused tube of skin composed of elongated pussy lips and clitoris.  The hyena girl is sporting a pseudo-penis, and judging by the way it bobs higher as she jinks back and forth, she's happy to see you!\n\nShe wears torn rags scavenged from some other, somewhat smaller, creature, and in one hand clutches a twisted club.";
+			this.race = "Gnoll";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("C"));

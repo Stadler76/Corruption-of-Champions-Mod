@@ -78,7 +78,7 @@ package classes.Scenes
 			clearOutput();
 			kGAMECLASS.displayHeader("Inventory");
 			outputText("<b><u>Equipment:</u></b>\n");
-			outputText("<b>Weapon:</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + ")\n");
+			outputText("<b>Weapon:</b> " + player.weapon.name + " (Attack: " + player.weaponAttack + (player.weapon.isDegradable() ? ", Durability: " + (player.weapon.durability - flags[kFLAGS.WEAPON_DURABILITY_DAMAGE]) + "/" + player.weapon.durability : "") + ")\n");
 			outputText("<b>Shield:</b> " + player.shield.name + " (Block Rating: " + player.shieldBlock + ")\n");
 			outputText("<b>Armour:</b> " + player.armor.name + " (Defense: " + player.armorDef + ")\n");
 			outputText("<b>Upper underwear:</b> " + player.upperGarment.name + "\n");
@@ -89,7 +89,7 @@ package classes.Scenes
 			menu();
 			for (x = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked && player.itemSlots[x].quantity > 0) {
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x).hint(player.itemSlots[x].itype.description, capitalizeFirstLetter(player.itemSlots[x].itype.longName));
+					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), useItemInInventory, x).hint(generateInventoryTooltip(player.itemSlots[x]), capitalizeFirstLetter(player.itemSlots[x].itype.longName));
 					foundItem = true;
 				}
 			}
@@ -231,6 +231,8 @@ package classes.Scenes
 			temp = player.emptySlot();
 			if (temp >= 0) {
 				player.itemSlots[temp].setItemAndQty(itype, 1);
+				if (source != null) player.itemSlots[temp].damage = source.damage;
+				else player.itemSlots[temp].damage = 0;
 				outputText("You place " + itype.longName + " in your " + inventorySlotName[temp] + " pouch.");
 				itemGoNext();
 				return;
@@ -442,10 +444,14 @@ package classes.Scenes
 			}
 			else if (item is Weapon) {
 				player.weapon.removeText();
+				var temp:ItemSlotClass = new ItemSlotClass();
+				temp.quantity = - 1;
+				temp.damage = flags[kFLAGS.WEAPON_DURABILITY_DAMAGE];
 				item = player.setWeapon(item as Weapon); //Item is now the player's old weapon
+				flags[kFLAGS.WEAPON_DURABILITY_DAMAGE] = fromSlot != null ? fromSlot.damage : 0; //Set condition accordingly
 				if (item == null)
 					itemGoNext();
-				else takeItem(item, callNext);
+				else takeItem(item, callNext, null, temp);
 			}
 			else if (item is Jewelry) {
 				player.jewelry.removeText();
@@ -483,9 +489,9 @@ package classes.Scenes
 			menu();
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked)
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), replaceItem, itype, x);
+					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), replaceItem, itype, x, source);
 			}
-			if (source != null) {
+			if (source != null && source.quantity >= 0) {
 				currentItemSlot = source;
 				addButton(12, "Put Back", returnItemToInventory, itype, false);
 			}
@@ -503,7 +509,7 @@ package classes.Scenes
 			}
 		}
 		
-		private function replaceItem(itype:ItemType, slotNum:int):void {
+		private function replaceItem(itype:ItemType, slotNum:int, source:ItemSlotClass = null):void {
 			clearOutput();
 			if (player.itemSlots[slotNum].itype == itype) //If it is the same as what's in the slot...just throw away the new item
 				outputText("You discard " + itype.longName + " from the stack to make room for the new one.");
@@ -511,22 +517,10 @@ package classes.Scenes
 				if (player.itemSlots[slotNum].quantity == 1) outputText("You throw away " + player.itemSlots[slotNum].itype.longName + " and replace it with " + itype.longName + ".");
 				else outputText("You throw away " + player.itemSlots[slotNum].itype.longName + "(x" + player.itemSlots[slotNum].quantity + ") and replace it with " + itype.longName + ".");
 				player.itemSlots[slotNum].setItemAndQty(itype, 1);
+				if (source != null) player.itemSlots[slotNum].damage = source.damage;
 			}
 			itemGoNext();
 		}
-		
-		//My unequip function is still superior, albeit rewritten.
-		//private function unequipWeapon():void {
-		//	clearOutput();
-		//	takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
-		//}
-		
-/* Never called
-		public function hasItemsInRacks(itype:ItemType, armor:Boolean):Boolean {
-			if (armor) return itemTypeInStorage(gearStorage, 9, 18, itype);
-			return itemTypeInStorage(gearStorage, 0, 9, itype);
-		}
-*/
 		
 		public function armorRackDescription():Boolean {
 			if (itemAnyInStorage(gearStorage, 9, 18)) {
@@ -651,7 +645,11 @@ package classes.Scenes
 		}
 		//Unequip!
 		private function unequipWeapon():void {
-			takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu);
+			var temp:ItemSlotClass = new ItemSlotClass();
+			temp.damage = flags[kFLAGS.WEAPON_DURABILITY_DAMAGE];
+			temp.quantity = -1;
+			takeItem(player.setWeapon(WeaponLib.FISTS), inventoryMenu, null, temp);
+			flags[kFLAGS.WEAPON_DURABILITY_DAMAGE] = 0;
 		}
 		public function unequipArmor():void {
 			if (player.armorName != "goo armor") takeItem(player.setArmor(ArmorLib.NOTHING), inventoryMenu); 
@@ -870,6 +868,14 @@ package classes.Scenes
 			}
 			outputText("There is no room for " + (orig == qty ? "" : "the remaining ") + qty + "x " + itype.shortName + ".  You leave " + (qty > 1 ? "them" : "it") + " in your inventory.\n");
 			player.itemSlots[slotNum].setItemAndQty(itype, qty);
+		}
+		
+		public function generateInventoryTooltip(slot:ItemSlotClass):String {
+			var tt:String = slot.itype.description;
+			if (slot.itype.isDegradable()) {
+				tt += "\nDurability: " + (slot.itype.durability - slot.damage) + "/" + slot.itype.durability;
+			}
+			return tt;
 		}
 	}
 }

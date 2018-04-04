@@ -22,11 +22,10 @@ package classes.Items.Consumables
 		override public function useItem():Boolean
 		{
 			var tfSource:String = "ferretTF";
-			changes = 0;
-			changeLimit = 1;
 			var temp:int = 0;
 			var x:int = 0;
 			
+			mutations.initTransformation([2, 2, 3]);
 			clearOutput();
 			credits.authorText = "Revised by Coalsack";
 			outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
@@ -69,11 +68,6 @@ package classes.Items.Consumables
 				flags[kFLAGS.FERRET_BAD_END_WARNING] = 0;
 			}
 			
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Ferret Fruit Effects
 			//- + Thin:
 			if (player.thickness > 15 && changes < changeLimit && rand(3) === 0)

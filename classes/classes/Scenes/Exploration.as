@@ -157,7 +157,7 @@ package classes.Scenes
 					//Unlock if haven't already.
 					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
+						outputText("\n\n<b>New codex entry unlocked: Imps!</b> ");
 					}
 				}
 				return;

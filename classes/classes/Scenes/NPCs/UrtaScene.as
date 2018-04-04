@@ -10,7 +10,7 @@
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
-	public class Urta extends NPCAwareContent implements TimeAwareInterface {
+	public class UrtaScene extends NPCAwareContent implements TimeAwareInterface {
 
 //Urta variables
 //flags[kFLAGS.TIMES_FUCKED_URTA] = times fucked
@@ -55,7 +55,7 @@
 		public var pregnancy:PregnancyStore;
 		public var drainedByKath:Boolean;
 
-		public function Urta()
+		public function UrtaScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.URTA_PREGNANCY_TYPE, kFLAGS.URTA_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 330, 334, 288, 240, 192, 144, 96, 48);

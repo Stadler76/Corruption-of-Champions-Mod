@@ -1,63 +1,49 @@
-package classes.Scenes.Areas.Mountain
-{
-
+package classes.Scenes.Areas.Mountain {
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.internals.*;
-
-	/**
-	 * ...
-	 * @author Fake-Name
-	 */
-
-
-	public class Minotaur extends Monster
-	{
+	/* @author Fake-Name */
+	public class Minotaur extends Monster {
 		public var hasAxe:Boolean;
 
-
-		override public function defeated(hpVictory:Boolean):void
-		{
+		override public function defeated(hpVictory:Boolean):void {
 			clearOutput();
 			if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ");
 				game.desert.antsScene.phyllaBeatAMino();
-			} else {
-				game.mountain.minotaurScene.minoVictoryRapeChoices();
 			}
+			else game.mountain.minotaurScene.minoVictoryRapeChoices();
 		}
 
-		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
-		{
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
 			if (hasStatusEffect(StatusEffects.PhyllaFight)) {
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCLostToMino();
-			} else if (pcCameWorms){
+			}
+			else if (pcCameWorms) {
 				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.");
 				game.combat.cleanupAfterCombat();
-			} else
-				game.mountain.minotaurScene.getRapedByMinotaur();
+			}
+			else game.mountain.minotaurScene.getRapedByMinotaur();
 		}
 
-		override public function get long():String
-		{
+		override public function get long():String {
 			return "An angry-looking minotaur looms over you.  Covered in shaggy " + hair.color + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. "+
 					(ballSize > 4?("  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need."):"") +
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
 
-		public function Minotaur(axe:Boolean=false)
-		{
-			//Most times they dont have an axe
-			hasAxe = axe || rand(3)==0;
+		public function Minotaur(axe:Boolean=false) {
+			hasAxe = axe || rand(3)==0; //most times they dont have an axe
 			this.skin.furColor = randomChoice("black","brown");
 			//trace("Minotaur Constructor!");
 			this.a = "the ";
 			this.short = "minotaur";
-			this.imageName = "minotaur";
+			this.imageName = hasAxe?"minoaxe":"minotaur";
 			this.long = "";
-			// this.plural = false;
+			this.race = "Minotaur";
+			//this.plural = false;
 			this.createCock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE);
 			this.balls = 2;
 			this.ballSize = 2 + rand(13);
@@ -89,8 +75,11 @@ package classes.Scenes.Areas.Mountain
 			this.level = hasAxe?6:5;
 			this.gems = rand(5) + 5;
 			if (hasAxe) {
+				this.imageName = "minoaxe";
 				this.drop = new WeightedDrop(consumables.MINOBLO, 1);
-			} else {
+			}
+			else {
+				this.imageName = "minotaur";
 				this.drop = new ChainedDrop().add(consumables.MINOCUM, 1 / 5)
 						.add(consumables.MINOBLO, 1 / 2)
 						.elseDrop(null);
@@ -99,7 +88,5 @@ package classes.Scenes.Areas.Mountain
 			this.tail.type = Tail.COW;
 			checkMonster();
 		}
-
 	}
-
 }

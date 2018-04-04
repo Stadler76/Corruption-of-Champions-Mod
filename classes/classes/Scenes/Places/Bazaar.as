@@ -18,7 +18,7 @@ package classes.Scenes.Places{
 //Set Up With The Travelling, Tainted Bazaar
 public function Bazaar(){
 }
-		private var rng:IRandomNumber = new RandomNumber();
+		private var rng:RandomNumberGenerator = new ActionScriptRNG();
 
 		public var blackCock:BlackCock = new BlackCock();
 		public var benoit:Benoit = new Benoit();

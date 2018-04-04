@@ -47,7 +47,7 @@ package classes.Items.Consumables
 				outputText("You no longer feel the symptoms of withdrawal.\n\n");
 			}
 			//Heals the player 70-100 health
-			game.HPChange(70 + rand(31), true);
+			player.HPChange(70 + rand(31), true);
 			//Restores a portion of fatigue (once implemented)
 			player.changeFatigue(-25);
 			//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.

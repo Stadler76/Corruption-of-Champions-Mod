@@ -89,6 +89,7 @@ package classes.Scenes.Areas.Mountain
 			this.short = "worms";
 			this.imageName = "worms";
 			this.long = "Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.";
+			this.race = "Abomination";
 			this.plural = true;
 			initGenderless();
 			this.pronoun1 = "they";

@@ -35,16 +35,7 @@ package classes.Items.Consumables
 			var tfSource:String = "TonOTrice";
 			var i:int;
 			player.slimeFeed();
-			// init stuff
-			changes = 0;
-			changeLimit = 1;
-			// Randomly choose affects limit
-			if (rand(2) == 0) changeLimit++;
-			if (rand(2) == 0) changeLimit++;
-			if (rand(3) == 0) changeLimit++;
-			if (rand(4) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([2, 2, 3, 4]);
 
 			clearOutput();
 			credits.authorText = "MissBlackthorne";
@@ -60,14 +51,12 @@ package classes.Items.Consumables
 				if (player.spe < player.ngPlus(75)) dynStats("spe", 1);
 				//+1 if above 75.
 				dynStats("spe", 1);
-				//[removed:1.4.10]//changes++;
 			}
 
 			if (player.tou > player.ngPlus(80) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou feel yourself become a little more delicate, as though you can’t handle quite so strong hits anymore. Then again,"
 				          +" who needs to withstand a blow when you can just move with the speed of the wind and dodge it?");
 				dynStats("tou", -1);
-				//[removed:1.4.10]//changes++;
 
 			}
 
@@ -75,7 +64,6 @@ package classes.Items.Consumables
 			if (player.sens > 20 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nThe sensation of prickly pins and needles moves over your body, leaving your senses a little dulled in its wake.");
 				dynStats("sen", -1);
-				//[removed:1.4.10]//changes++;
 			}
 
 			//Raises libido greatly to 50, then somewhat to 75, then slowly to 100.
@@ -104,7 +92,6 @@ package classes.Items.Consumables
 				if (player.lib < 75) dynStats("lib", 1);
 				//+1 if above 75.
 				dynStats("lib", 1);
-				//[removed:1.4.10]//changes++;
 			}
 
 			//Sexual changes
@@ -588,7 +575,7 @@ package classes.Items.Consumables
 			//FAILSAFE CHANGE
 			if (changes == 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
-				game.HPChange(50, true);
+				player.HPChange(50, true);
 				dynStats("lus", 3);
 			}
 

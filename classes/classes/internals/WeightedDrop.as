@@ -33,6 +33,7 @@ package classes.internals
 		{
 			var random:Number = Math.random()*sum;
 			var item:* = null;
+			var items:Array = this.items.slice(); 
 			while (random > 0 && items.length > 0) {
 				var pair:Array = items.shift();
 				item = pair[0];

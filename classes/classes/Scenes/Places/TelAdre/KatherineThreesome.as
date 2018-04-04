@@ -4,7 +4,7 @@
 	import classes.GlobalFlags.*;
 	import classes.display.SpriteDb;
 	import classes.Scenes.Places.TelAdre.Katherine;
-	import classes.Scenes.NPCs.Urta;
+	import classes.Scenes.NPCs.UrtaScene;
 	import classes.lists.BreastCup;
 	import classes.lists.Gender;
 
@@ -17,7 +17,7 @@
 
 		public function get katherine():Katherine { return telAdre.katherine; }
 
-		public function get urta():Urta { return kGAMECLASS.urta; }
+		public function get urta():UrtaScene { return kGAMECLASS.urta; }
 
 		/*
 		Contains the following scenes:
@@ -47,7 +47,7 @@
 			outputText("Smirking, the cat begins to remove her shirt, pulling it off and casting it aside.  “<i>How big of a mess are we going to make with just a circlejerk?</i>”\n\n");
 			outputText("“<i>Kitty, you got no idea who you’re talking about, do you?</i>” Urta says, letting the cat’s dick go to help you remove her clothes and armor as well.\n\n");
 			outputText("As soon as Urta’s top is off her, you move your hands to grope at her soft orbs, pinching and twisting her nipples, then pulling her head against your " + (player.hasBreasts() ? player.breastDescript(0) : "chest") + ", and finally giving her perky fox-ear a gentle bite");
-			var race:String = player.race(); //Looks like the best way to be sure you have sharp teeth
+			var race:String = player.race; //Looks like the best way to be sure you have sharp teeth
 			var race3:String = race.substr(0, 3); //Tests for cat, dog, fox
 			var race6:String = race.substr(0, 6); //Tests for dragon, drider, ferret, spider
 			if (race3 == "cat" || race3 == "dog" || race3 == "fox" || race6 == "dragon" || race6 == "drider" || race6 == "ferret" || race6 == "spider" || race == "naga" || race == "kitsune" || race == "demon-morph" || race == "shark-morph" || race.search("lizan") > -1)

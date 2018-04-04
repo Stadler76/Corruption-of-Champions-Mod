@@ -25,7 +25,7 @@ package classes.Items.Consumables
 			dynStats("lib", 1, "cor", -1);
 			//Health/HP(Large increase; always occurs):
 			outputText("\n\nYou feel suddenly invigorated by the potent beverage, like you could take on a whole horde of barbarians or giants and come out victorious! ");
-			game.HPChange(Math.round(player.maxHP() * .33), true);
+			player.HPChange(Math.round(player.maxHP() * .33), true);
 			if (rand(3) === 0) {
 				outputText("\n\nThe alcohol fills your limbs with vigor, making you feel like you could take on the world with just your fists!");
 				if (game.silly()) outputText("  Maybe you should run around shirtless, drink, and fight!  Saxton Hale would be proud.");

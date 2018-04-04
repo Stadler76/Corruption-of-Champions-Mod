@@ -18,16 +18,11 @@ package classes.Items.Consumables
 		
 		override public function useItem():Boolean
 		{
-			changes = 0;
-			changeLimit = 1;
-			if (rand(3) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([3]);
 			player.slimeFeed();
 			clearOutput();
 			outputText("You down the potion, grimacing at the strong taste.");
 			if (changes < changeLimit && rand(2) === 0 && player.spe100 < 80) {
-				//[removed:1.4.10]//changes++;
 				outputText("\n\nAfter drinking the potion, you feel a bit faster.");
 				dynStats("spe", 1);
 			}

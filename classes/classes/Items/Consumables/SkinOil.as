@@ -33,10 +33,10 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("The skin on your underBody is different from the rest. Where do you want to apply the " + _color + " skin oil?");
 
-			game.menu();
-			game.addButton(0, "Body", oilSkin);
-			game.addButton(1, "Underbody", oilUnderBodySkin);
-			game.addButton(4, "Nevermind", oilCancel);
+			kGAMECLASS.output.menu();
+			kGAMECLASS.output.addButton(0, "Body", oilSkin);
+			kGAMECLASS.output.addButton(1, "Underbody", oilUnderBodySkin);
+			kGAMECLASS.output.addButton(4, "Nevermind", oilCancel);
 			return true;
 		}
 

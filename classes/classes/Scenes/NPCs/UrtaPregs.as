@@ -3,11 +3,14 @@ package classes.Scenes.NPCs{
 	import classes.GlobalFlags.*;
 	import classes.PregnancyStore;
 	import classes.display.SpriteDb;
+	import classes.Scenes.VaginalPregnancy;
+	import classes.Scenes.PregnancyProgression;
 
-	public class UrtaPregs extends NPCAwareContent {
+	public class UrtaPregs extends NPCAwareContent implements VaginalPregnancy {
 
-		public function UrtaPregs()
+		public function UrtaPregs(pregnancyProgression:PregnancyProgression)
 		{
+			pregnancyProgression.registerVaginalPregnancyScene(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.PREGNANCY_URTA, this);
 		}
 //const URTA_INCUBATION:int = 789;
 //const URTA_TIMES_BIRTHED:int = 790;
@@ -275,15 +278,15 @@ private function goVisitUrtaBirfs(withUrta:Boolean = false):void {
 	pregnancy.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 0;
 	flags[kFLAGS.NEW_BABY_ANNOUNCED] = 0;
-	if (!withUrta) outputText("The trip to the clinic where Urta is giving birth to your child is a blur; all that matters is getting there as fast as possible.  The centaur abandons you at the hospital doors, and you make your own way inside, approaching the counter inside.");
+	if (!withUrta) outputText("The trip to the clinic where Urta is giving birth to your child is a blur; all that matters is getting there as fast as possible.  The centaur abandons you at the hospital doors, and you make your own way inside, approaching the counter inside.\n\n");
 	
 	//[1st time:
 	if (flags[kFLAGS.URTA_TIMES_BIRTHED] == 0) {
-		outputText("\n\nA perky-looking young female mouse-morph, her nurse's outfit stretched a little tighter over her breasts than is considered professional, a small name tag with \"Splinter\" clipped onto one hem, looks up at you with a welcoming grin.  \"<i>Hello, " + player.mf("mister","miss") + "; please state the nature of the problem.</i>\"  You explain your reason and her eyes widen with understanding.  \"<i>Ah, I see.  Please, follow me, [name]; I will take you to Urta's room.</i>\"  She promptly gets up out of her seat - allowing you to see a rather unladylike bulge at her crotch, though you have no idea if she's a herm or merely an effeminate male - and starts walking, with you following close behind.");
+		outputText("A perky-looking young female mouse-morph, her nurse's outfit stretched a little tighter over her breasts than is considered professional, a small name tag with \"Splinter\" clipped onto one hem, looks up at you with a welcoming grin.  \"<i>Hello, " + player.mf("mister","miss") + "; please state the nature of the problem.</i>\"  You explain your reason and her eyes widen with understanding.  \"<i>Ah, I see.  Please, follow me, [name]; I will take you to Urta's room.</i>\"  She promptly gets up out of her seat - allowing you to see a rather unladylike bulge at her crotch, though you have no idea if she's a herm or merely an effeminate male - and starts walking, with you following close behind.");
 	}
 	//Else:
 	else {
-		outputText("\n\nSplinter grins when she sees you.  \"<i>Back again, are we?  Here for Urta?  Wow, you two seem to really like popping them out - who'd of thought that the captain of the Watch wanted to be a baby-maker, huh?  Hmm... you know, I've been feeling a little broody myself...</i>\"  She laughs at your response.  \"<i>Just kidding; come on then, stud; Urta is this way.</i>\"  She sets off on the now-familiar route.");
+		outputText("Splinter grins when she sees you.  \"<i>Back again, are we?  Here for Urta?  Wow, you two seem to really like popping them out - who'd of thought that the captain of the Watch wanted to be a baby-maker, huh?  Hmm... you know, I've been feeling a little broody myself...</i>\"  She laughs at your response.  \"<i>Just kidding; come on then, stud; Urta is this way.</i>\"  She sets off on the now-familiar route.");
 	}
 	outputText("\n\nAs soon as you enter Urta's room, you spot the vixen lying on her back in a bed, naked save for a gown.  You greet her and ogle her bulging belly.");
 	
@@ -433,7 +436,7 @@ private function wakeUpWithUrtaAfterStaying():void {
 	statScreenRefresh();
 	player.orgasm('Generic');
 	camp.sleepRecovery(false);
-	HPChange(player.maxHP(), true);
+	player.HPChange(player.maxHP(), true);
 	//PC Wakes with Urta
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 	outputText("As the morning sun shines on the blinds, you open your eyes.  Then you remember the events of the last day.  You spent the whole day with Urta, not having sex, just walking together and buying stuff for your newborn ");
@@ -532,7 +535,7 @@ private function drinkSomeUrtaPostBirthTitMilk():void {
 
 //PC Pregnancy Stages
 //PC takes 3 days to progress from one pregnancy stage to the next
-public function urtaPregooUpdates():Boolean {
+public function updateVaginalPregnancy():Boolean {
 	if (player.pregnancyIncubation == 504) {
 		outputText("\n<b>You're feeling a bit nauseated.  Your mind floats to Urta and you wonder if maybe this means her seed took...</b>\n");
 		return true;
@@ -687,7 +690,7 @@ private function acceptUrtaLevelSixPreggoHelps():void {
 }
 	
 //PC Gives Birth
-public function PCGivesBirf():void {
+public function vaginalBirth():void {
 	outputText("\n");
 	flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 0;
 	flags[kFLAGS.NEW_BABY_ANNOUNCED] = 0;
@@ -2338,7 +2341,7 @@ public function visitTheHouse():void {
 		outputText("\n\n\"<i>Now about that thing I wanted to talk to you about, [name]...</i>\"");
 		
 		//If PC is still human:
-		if (player.race() == "human") outputText("\n\n\"<i>I can't help but notice that you're a human.</i>\"  You are indeed - it is how you were born, you note.");
+		if (player.race == "human") outputText("\n\n\"<i>I can't help but notice that you're a human.</i>\"  You are indeed - it is how you were born, you note.");
 		else outputText("\n\nShe twitches her nose.  \"<i>You smell like a human, but you aren't a human...?</i>\"  You figure it can't hurt and explain you were human before coming to Mareth, but gave up your humanity with the magical items that abound in this land.  She nods her head in realisation.");
 		
 		outputText("\n\nYou ask her what business she has with you.");

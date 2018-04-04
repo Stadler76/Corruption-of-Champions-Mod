@@ -76,7 +76,7 @@ package classes.Items.Consumables
 			if (player.findPerk(PerkLib.BroBody) >= 0 || player.findPerk(PerkLib.FutaForm) >= 0) {
 				outputText("You crack open the can and guzzle it in a hurry.  Goddamn, this shit is the best.  As you crush the can against your forehead, you wonder if you can find a six-pack of it somewhere?\n\n");
 				player.changeFatigue(-33);
-				game.HPChange(100, true);
+				player.HPChange(100, true);
 				player.refillHunger(30);
 				return false;
 			}

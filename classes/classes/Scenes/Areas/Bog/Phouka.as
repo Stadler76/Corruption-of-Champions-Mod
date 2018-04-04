@@ -270,6 +270,7 @@ package classes.Scenes.Areas.Bog
 			this.short = phoukaName;
 			this.imageName = "phouka";
 			this.long = "The " + this.short + " is flying around near you, waiting for an opening.  He has the general appearance of a faerie, though he is slightly larger and his skin and wings are coal black.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
+			this.race = "Faerie?";
 
 			this.createCock(1, 0.5, CockTypesEnum.HUMAN);
 			this.balls = 2;

@@ -183,7 +183,7 @@ package classes.Scenes
 		private function addCodexButton(codexEntryName:String, codexEntryId:String, codexEntry:Function, flag:int):void {
 			var button:int = 0;
 			for (var i:int = 0; i < 14; i++) {
-				if (buttonIsVisible(i)) button++;
+				if (output.buttonIsVisible(i)) button++;
 				if (button == 4 || button == 9) button++; //Last slot of the row is reserved for next and previous.
 			}
 			if (flags[flag] > 0) {

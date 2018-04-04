@@ -155,6 +155,7 @@ package classes.Scenes.NPCs
 			this.short = "Ember";
 			this.imageName = "ember";
 			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + emberMF("he", "she") + " lashes " + emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
+			this.race = "Dragon";
 			// this.plural = false;
 			this.pronoun1 = game.emberScene.emberMF("he", "she");
 			this.pronoun2 = game.emberScene.emberMF("him", "her");

@@ -27,12 +27,7 @@ package classes.Items.Consumables
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			var crit:Number = 1;
-			changes = 0;
-			changeLimit = 1;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([2, 2]);
 			clearOutput();
 			credits.authorText = "Foxwells";
 			outputText("The pepper has an uncomfortable texture to it, being covered in soft fuzz like it's a peach but somewhat crunchy like any other pepper. Its spiciness makes you nearly spit it out, and you're left sniffling after.");
@@ -47,20 +42,17 @@ package classes.Items.Consumables
 				dynStats("tou", (1 * crit));
 				if (crit > 1) outputText("\n\nYou roll your shoulders and tense your arms experimentally. You feel more durable, and your blood seems to run through you more clearly. You know you have more endurance.");
 				else outputText("\n\nYour muscles feel denser and more durable. Not so much that feel stronger, but you feel like you can take more hits.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (player.spe100 > 30 && rand(7) === 0 && changes < changeLimit) {
 				dynStats("spe", (-1 * crit));
 				if (crit > 1) outputText("\n\nThe pepper's strong taste makes you take a couple steps back and lean against the nearest solid object. You don't feel like you'll be moving very fast anymore.");
 				else outputText("\n\nYou stumble forward, but manage to catch yourself. Still, though, you feel somewhat slower.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (player.inte100 < 60 && rand(7) === 0 && changes < changeLimit) {
 				dynStats("int", (1 * crit));
 				outputText("\n\nThe spiciness makes your head twirl, but you manage to gather yourself. A strange sense of clarity comes over you in the aftermath, and you feel ");
 				if (crit > 1) outputText("a lot ");
 				outputText("smarter somehow.");
-				//[removed:1.4.10]//changes++;
 			}
 			//MUTATIONZZZZZ
 			//PRE-CHANGES: become biped, remove horns, remove wings, give human tongue, remove claws, remove antennea

@@ -4,12 +4,16 @@ package classes.Scenes.Areas.VolcanicCrag
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Scenes.NPCs.pregnancies.PlayerBehemothPregnancy;
+	import classes.Scenes.PregnancyProgression;
+	import classes.internals.GuiOutput;
 	
 	public class BehemothScene extends BaseContent
 	{
 		
-		public function BehemothScene() 
+		public function BehemothScene(pregnancyProgression:PregnancyProgression, output:GuiOutput) 
 		{
+			new PlayerBehemothPregnancy(pregnancyProgression, output);
 		}
 		
 		public function timesSexed():int {
@@ -214,7 +218,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			kGAMECLASS.inCombat = false;
 			if (doSFWloss()) {
 				outputText("\n\n\"<i>Heh, guess I won,</i>\" he says. \"<i>I'll take care of you until you recover, but in exchange ....</i>\"\n\n He rifles through your pouch, taking " + gemsLost + " gems before picking you up.  You black out ....");
-				HPChange(player.maxHP() / 2, false);
+				player.HPChange(player.maxHP() / 2, false);
 				player.changeFatigue(-50);
 				return;
 			}
@@ -355,10 +359,10 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("You wake up some time later and kiss his cheek before letting him know you'll be going.  \"<i>See you later,</i>\" he says as he lets you up, though he doesn't bother getting up. The main thing you remember as " + player.clothedOrNaked("he watches you redress and ") + "you walk back to your camp is his expression of utter contentment, and your mood carries on for the rest of the day.");
 			player.orgasm('Anal');
 			player.slimeFeed();
-			HPChange(player.maxHP() / 4, false);
+			player.HPChange(player.maxHP() / 4, false);
 			flags[kFLAGS.BEHEMOTH_ANAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
-			HPChange(50 + (player.maxHP() / 5), false);
+			player.HPChange(50 + (player.maxHP() / 5), false);
 			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
@@ -389,7 +393,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.isPureEnough(25)) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;
 			dynStats("str", 0.5, "tou", 0.5);
-			HPChange(50 + (player.maxHP() / 5), false);
+			player.HPChange(50 + (player.maxHP() / 5), false);
 			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
@@ -447,7 +451,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\n<b>One hour later...</b>");
 			outputText("\n\nYou get out of the cum-filled basin and " + (player.isGoo() ? "absorb the cum into your gooey body": "shake the excessive cum off") + " before " + player.clothedOrNaked("getting yourself re-dressed into your [armor] and") + " rustling the behemoth's hair.  \"<i>See you later. Come back anytime for more fun,</i>\" the behemoth says. You give him a final kiss before you make your way back to camp, already feeling a lot better.");
 			flags[kFLAGS.BEHEMOTH_CUM_BATH]++;
-			HPChange(player.maxHP() / 2, false);
+			player.HPChange(player.maxHP() / 2, false);
 			player.changeFatigue(-50);
 			if (player.armor == armors.GOOARMR) kGAMECLASS.valeria.feedValeria(100);
 			dynStats("str", 0.5, "tou", 0.5, "lus", 30);

@@ -274,7 +274,7 @@ package classes.Scenes.NPCs
 		public function urtaLove(love:Number = 0):Boolean {
 			return kGAMECLASS.urta.urtaLove(love);
 		}
-		protected function get urta():Urta
+		protected function get urta():UrtaScene
 		{
 			return kGAMECLASS.urta;
 		}

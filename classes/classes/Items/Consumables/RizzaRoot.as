@@ -15,14 +15,8 @@ package classes.Items.Consumables
         {
 			var tfSource:String = "rizzaRootEffect";
 			var counter:Number = 0;
+			mutations.initTransformation([2, 3, 4]);
 			clearOutput();
-			changes = 0;
-			changeLimit = 1;
-			if (Utils.rand(2) == 0) changeLimit++;
-			if (Utils.rand(3) == 0) changeLimit++;
-			if (Utils.rand(4) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			outputText("You chew on the thin red roots.  They have a rubbery texture and the taste is something like lemons and oranges mixed together.  The roots dry out your mouth as you chew them but at the same time they cause a cooling and numbing sensation that’s rather pleasant.");
 			if ((changes < changeLimit) && (!player.hasPlainSkin()) && (Utils.rand(6) == 0)){
 				if (player.hasFur())

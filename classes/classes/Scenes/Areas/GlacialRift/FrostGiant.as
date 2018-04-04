@@ -106,7 +106,7 @@ import classes.internals.WeightedDrop;
 				case 0:
 				case 1:
 				case 2: //Taunt
-					outputText("\"<i>Ha, ha, ha! Puny little " + player.race() + "! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
+					outputText("\"<i>Ha, ha, ha! Puny little " + player.race + "! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 10 + rand(str * 0.5);
 					damage = player.reduceDamage(damage);
@@ -124,7 +124,7 @@ import classes.internals.WeightedDrop;
 					combatRoundOver();
 					break;
 				case 5: //Throw
-					outputText("\"<i>Oh, little " + player.race() + " wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
+					outputText("\"<i>Oh, little " + player.race + " wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					player.createStatusEffect(StatusEffects.Stunned, 1 + rand(2), 0, 0, 0);
 					damage = 20 + rand(str);
@@ -224,6 +224,7 @@ import classes.internals.WeightedDrop;
 			this.short = "frost giant";
 			this.imageName = "frost-giant";
 			this.long = "The giant reminds you of the stories you heard as a child in Ingnam, at least twenty feet tall and wider than your height. The giant's skin is a deep, icy blue with patches of frost and ice covering his body in place of armor. Fortunately for you, he's unarmed. Unfortunately for you, being as large as a house has the added benefit of boulders, trees, and handfuls of frozen dirt being ready weapons, all of which is abundant in the area. Plus those hands could probably crush you like a bug. Your battle instincts are definitely going to be tested.";
+			this.race = "Giant";
 			// this.plural = false;
 			this.createCock(36, 4, CockTypesEnum.HUMAN);
 			this.balls = 2;

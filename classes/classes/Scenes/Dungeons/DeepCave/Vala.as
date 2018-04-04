@@ -104,6 +104,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.short = "Vala";
 			this.imageName = "vala";
 			this.long = "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.";
+			this.race = "Faerie";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_GAPING_WIDE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 25, 0, 0, 0);

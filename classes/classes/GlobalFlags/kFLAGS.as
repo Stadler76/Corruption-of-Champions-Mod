@@ -2229,7 +2229,7 @@ public static const ISABELLA_VALERIA_SPARRED:int                                
 public static const FAERIE_ENCOUNTER_DISABLED:int                                   = 2221;
 public static const MINERVA_CORRUPTED_CUM_ADDICTION:int                             = 2222; //This will be used for Corrupted Minerva.
 public static const ERLKING_CANE_OBTAINED:int                                       = 2223;
-public static const ERLKING_CANE_ATTACK_COUNTER:int                                 = 2224; //After 10, has a chance to break.
+public static const WEAPON_DURABILITY_DAMAGE:int                                    = 2224; //This will be used to track equipment damage.
 public static const KIHA_DESTROYING_CORRUPTED_GLADES:int                            = 2225; //1 if Kiha is currently destroying corrupted glades.
 public static const AMILY_DESTROYING_CORRUPTED_GLADES:int                           = 2226; //1 if Amily is currently destroying corrupted glades.
 public static const BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO:int                        = 2227; //How long Bimbo Liqueur has been in stash since Jojo joined.
@@ -2980,7 +2980,7 @@ public static const UNKNOWN_FLAG_NUMBER_02971:int                               
 public static const UNKNOWN_FLAG_NUMBER_02972:int                                   = 2972;
 public static const UNKNOWN_FLAG_NUMBER_02973:int                                   = 2973;
 public static const UNKNOWN_FLAG_NUMBER_02974:int                                   = 2974;
-public static const UNKNOWN_FLAG_NUMBER_02975:int                                   = 2975;
+public static const ENEMY_STATS_BARS_ENABLED:int                                    = 2975; // 0 if enemy sidebar is disabled.
 public static const ANIMATE_STATS_BARS:int                                          = 2976;
 public static const DELETE_ITEMS:int                                                = 2977; // Inventory deletion toggle, 0=no, 1=one at a time, 2=stacks
 public static const PRISON_ENABLED:int                                              = 2978; // Is the prison enabled? true/false value, should be false by default

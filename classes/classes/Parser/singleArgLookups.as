@@ -8,6 +8,7 @@
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
 		import classes.GlobalFlags.kFLAGS;
 		import classes.GlobalFlags.kGAMECLASS;
+		import classes.Measurements;
 		import classes.internals.Utils;
 		
 		public var singleArgConverters:Object =
@@ -89,7 +90,7 @@
 				"onecock"					: function():* { return kGAMECLASS.player.oMultiCockDesc();},
 				"pg"						: function():* { return "\n\n";},
 				"pussy"						: function():* { return kGAMECLASS.player.vaginaDescript(); },
-				"race"						: function():* { return kGAMECLASS.player.race(); },
+				"race"						: function():* { return kGAMECLASS.player.race; },
 				"rearbody"					: function():* { return kGAMECLASS.player.rearBodyDescript(); },
 				"rearbodycolor"				: function():* { return kGAMECLASS.player.rearBody.color; },
 				"sack"						: function():* { return kGAMECLASS.player.sackDescript(); },
@@ -100,7 +101,7 @@
 				"skindesc"					: function():* { return kGAMECLASS.player.skin.desc; },
 				"skinfurscales"				: function():* { return kGAMECLASS.player.skinFurScales(); },
 				"skintone"					: function():* { return kGAMECLASS.player.skin.tone; },
-				"tallness"					: function():* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
+				"tallness"					: function():* { return Measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
 				"tits"						: function():* { return kGAMECLASS.player.breastDescript(0); },
 				"lasttits"					: function():* { return kGAMECLASS.player.breastDescript(-1); },
 				"breastcup"					: function():* { return kGAMECLASS.player.breastCup(0); },

@@ -11,7 +11,7 @@
 		private var _quantity:int = 0;
 		private var _itype:ItemType = ItemType.NOTHING;
 		private var _unlocked:Boolean = false;
-
+		private var _damage:int = 0; //Used for durability
 		
 		public function setItemAndQty(itype:ItemType, quant:int):void
 		{
@@ -73,6 +73,13 @@
 		public function isEmpty():Boolean
 		{
 			return _quantity<=0;
+		}
+		
+		public function set damage(value:int):void {
+			this._damage = value;
+		}
+		public function get damage():int {
+			return this._damage;
 		}
 	}
 }

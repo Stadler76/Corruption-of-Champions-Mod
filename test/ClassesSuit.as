@@ -15,6 +15,7 @@ package {
 	import classes.SavesTest;
 	import classes.PlayerEventsTest;
 	import classes.PlayerEventsVaginaLoosenessRecoveryTest;
+	import classes.MenusSuit;
 
 [Suite]
 [RunWith("org.flexunit.runners.Suite")]
@@ -36,5 +37,6 @@ package {
 		 public var playerEventsTest:PlayerEventsTest;
 		 public var playerEventsVaginaLoosenessRecoveryTest:PlayerEventsVaginaLoosenessRecoveryTest;
 		 public var internalsSuit:InternalsSuit;
+		 public var menusSuit:MenusSuit;
 	}
 }

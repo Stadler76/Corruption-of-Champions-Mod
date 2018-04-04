@@ -23,12 +23,7 @@ package classes.Items.Consumables
 		{
 			var tfSource:String = "sharkTooth";
 			if (type == 1) tfSource += "-tigershark";
-			changes = 0;
-			changeLimit = 2;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (player.hasPerk(PerkLib.HistoryAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			mutations.initTransformation([2, 2], 2);
 			clearOutput();
 			if (type == 0) outputText("You have no idea why, but you decide to eat the pointed tooth. To your surprise, it's actually quite brittle, turning into a fishy-tasting dust. You figure it must just be a tablet made to look like a shark's tooth.");
 			else if (type == 1) outputText("You have no idea why, but you decide to eat the pointed, glowing tooth. To your surprise, it's actually quite brittle, crumbling into a fishy-tasting dust. Maybe it's just a tablet made to look like a shark's tooth.");
@@ -37,30 +32,25 @@ package classes.Items.Consumables
 			if (((player.str100 < 60 && type == 1) || player.str100 < 50) && rand(3) === 0) {
 				dynStats("str", 1 + rand(2));
 				outputText("\n\nA painful ripple passes through the muscles of your body.  It takes you a few moments, but you quickly realize you're a little bit stronger now.");
-				//[removed:1.4.10]//changes++;
 			}
 			//Increase Speed 1-3 points (Up to 75) (100 for tigers)
 			if (((player.spe100 < 100 && type == 1) || player.spe100 < 75) && rand(3) === 0) {
 				dynStats("spe", 1 + rand(3));
-				//[removed:1.4.10]//changes++;
 				outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.");
 			}
 			//Reduce sensitivity 1-3 Points (Down to 25 points)
 			if (player.sens100 > 25 && rand(1.5) === 0 && changes < changeLimit) {
 				dynStats("sen", (-1 - rand(3)));
-				//[removed:1.4.10]//changes++;
 				outputText("\n\nIt takes a while, but you eventually realize your body has become less sensitive.");
 			}
 			//Increase Libido 2-4 points (Up to 75 points) (100 for tigers)
 			if (((player.lib100 < 100 && type == 1) || player.lib100 < 75) && rand(3) === 0 && changes < changeLimit) {
 				dynStats("lib", (1 + rand(3)));
-				//[removed:1.4.10]//changes++;
 				outputText("\n\nA blush of red works its way across your skin as your sex drive kicks up a notch.");
 			}
 			//Decrease intellect 1-3 points (Down to 40 points)
 			if (player.inte100 > 40 && rand(3) === 0 && changes < changeLimit) {
 				dynStats("int", -(1 + rand(3)));
-				//[removed:1.4.10]//changes++;
 				outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
 			}
 			//Smexual stuff!

@@ -16,7 +16,7 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.  ");
 			player.changeFatigue(-15);
-			game.HPChange(Math.round(player.maxHP() * 0.25), true);
+			player.HPChange(Math.round(player.maxHP() * 0.25), true);
 			player.refillHunger(25);	
 			
 			return false;

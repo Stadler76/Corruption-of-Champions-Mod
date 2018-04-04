@@ -90,6 +90,7 @@ import classes.internals.ChainedDrop;
 			this.short = "bee-girl";
 			this.imageName = "beegirl";
 			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
+			this.race = "Bee-Morph";
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;

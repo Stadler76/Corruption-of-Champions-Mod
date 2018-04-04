@@ -333,7 +333,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nSore, you pick yourself up off the floor and wipe a bit of gooey residue off your gear.  To your surprise, you feel rather invigorated after the battle, and rolling your shoulders, you turn your attention back to the dungeon ahead.");
 			}
 			//(PC regains HP)
-			HPChange(1000,false);
+			player.HPChange(1000,false);
 			player.orgasm('Generic');
 			dynStats("lib", 1, "sen", 3);
 			combat.cleanupAfterCombat();
@@ -374,7 +374,7 @@ package classes.Scenes.Dungeons
 			if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) {
 				outputText("You tell her to fuck off -- you don't need armor that might try to kill or rape you at night.");
 				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, and fuck you anyway.  I hope you get raped by harpies, " + player.mf("sir","madam") + ".</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, we'll see if you live through this place without me!</i>\"  Before you can stop her, she ducks out the front door and off to... Wherever goo-armor-girl-things would go, you guess.  Still, to your surprise, you feel rather invigorated after the battle, and rolling your shoulders, you turn your attention back to the dungeon ahead.");
-				HPChange(1000,false);
+				player.HPChange(1000,false);
 				combat.cleanupAfterCombat();
 				doNext(playerMenu);
 			}
@@ -382,7 +382,7 @@ package classes.Scenes.Dungeons
 			else {
 				outputText("You tell her to fuck off -- you don't need armor that might try to kill or rape you at night.");
 				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, and fuck you anyway.  I hope you get raped by jotuns, " + player.mf("sir","madam") + ".</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, I guess I’ll be around here!</i>\"  Before you can stop her, she huffs off to... wherever goo-armor-girl-things would go, you guess.  You make your way back to your camp.");
-				HPChange(player.maxHP(),false);
+				player.HPChange(player.maxHP(),false);
 				combat.cleanupAfterCombat();
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -402,7 +402,7 @@ package classes.Scenes.Dungeons
 				outputText("You tell her that... no thanks, not now -- you don't need armor right now.");
 				outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, maybe you can take me later, " + player.mf("sir", "madam") + "?</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... You know where to find me, right?</i>\"  You give her a nod as you make your way back to your camp.");
 			}
-			HPChange(player.maxHP(),false);
+			player.HPChange(player.maxHP(),false);
 			combat.cleanupAfterCombat();
 			doNext(playerMenu);
 		}
@@ -419,7 +419,7 @@ package classes.Scenes.Dungeons
 			//Set flags
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.VALERIA_FLUIDS] = 80;
-			HPChange(player.maxHP(),false);
+			player.HPChange(player.maxHP(),false);
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			//(PC regains HP)
 			var item:Armor = player.setArmor(armors.GOOARMR); //Item is now the player's old armor
@@ -451,7 +451,7 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.HEL_HARPIES_DEFEATED] = 1;
 			outputText("The harpies collapse in a pile in the center of the room, all utterly defeated... except one.  The lone harpy that did not attack you throughout the fight, a rather slight girl with a shock of bright orange hair, still stands, gaping at the destruction you've wrought.  Eventually, her gaze shifts up to you.");
 
-			outputText("\n\n\"<i>Holy shit, " + player.mf("dude","lady") + ".  You're a goddamn one-" + player.race() + "-army, aren't you? You... you must be [name], right? Hel... er, Miss Helia told me about you.  I'm, uh... I'm Kiri.  Sorry about the other girls - I'd just spiked their drinks, but they didn't have time to finish them.  You're a little earlier than I was expecting.  Sorry,</i>\" she whispers nervously, rubbing the back of her neck.");
+			outputText("\n\n\"<i>Holy shit, " + player.mf("dude","lady") + ".  You're a goddamn one-" + player.race + "-army, aren't you? You... you must be [name], right? Hel... er, Miss Helia told me about you.  I'm, uh... I'm Kiri.  Sorry about the other girls - I'd just spiked their drinks, but they didn't have time to finish them.  You're a little earlier than I was expecting.  Sorry,</i>\" she whispers nervously, rubbing the back of her neck.");
 
 			outputText("\n\nYou ask her who she is exactly and how she knows Hel.");
 

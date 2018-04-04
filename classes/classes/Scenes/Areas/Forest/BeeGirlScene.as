@@ -8,6 +8,8 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Monsters.pregnancies.PlayerBeePregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.VaginaClass;
@@ -24,7 +26,9 @@ package classes.Scenes.Areas.Forest
 		private static const BEE_GIRL_PLAYER_DISGUSTED:int			=          6;
 		private static const BEE_GIRL_PLAYER_DUTY:int				=          7;
 		
-		public function BeeGirlScene() {}
+		public function BeeGirlScene(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
+			new PlayerBeePregnancy(pregnancyProgression, output);
+		}
 		
 		public function setTalked():void { flags[kFLAGS.BEE_GIRL_STATUS] = BEE_GIRL_TALKED; }
 		
@@ -80,7 +84,7 @@ package classes.Scenes.Areas.Forest
 				beeEncounterWithWorms();
 				return;
 			}
-			var isBeeMorph:Boolean = player.race() == "bee-morph";
+			var isBeeMorph:Boolean = player.race == "bee-morph";
 			if (player.hasCock() && (player.cockArea(0) >= 50 || player.cocks[0].cockType == CockTypesEnum.BEE || isBeeMorph)) {
 				outputText(" in the light.\n\n");
 				beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
@@ -727,7 +731,7 @@ package classes.Scenes.Areas.Forest
 			if (player.cocks[0].cockType == CockTypesEnum.BEE) {
 				outputText("You know the deal by now,");
 			}
-			else if (player.race() == "bee-morph") {
+			else if (player.race == "bee-morph") {
 				outputText("All you have to do izzz take thizzz after it hazzz had an hour to zzzet and you’ll be a real man!");
 			}
 			else {

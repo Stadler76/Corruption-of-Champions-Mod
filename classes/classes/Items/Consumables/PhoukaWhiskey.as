@@ -9,6 +9,7 @@ package classes.Items.Consumables
 	import classes.StatusEffects;
     import classes.internals.Utils;
 	import classes.Items.Consumable;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class PhoukaWhiskey extends Consumable {
 		
@@ -115,7 +116,7 @@ package classes.Items.Consumables
 					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusEffect to store more info.
 				game.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
 			}
-			game.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
         }
 		
 		public function phoukaWhiskeyExpires(player:Player):void
@@ -136,7 +137,7 @@ package classes.Items.Consumables
 				outputText("\n<b>The fuzzy, happy feeling ebbs away.  With it goes the warmth and carefree feelings.  Your head aches and you wonder if you should have another whiskey, just to tide you over</b>\n");
 			else
 				outputText("\n<b>The fuzzy, happy feeling ebbs away.  The weight of the world’s problems seems to settle on you once more.  It was nice while it lasted and you wouldn’t mind having another whiskey.</b>\n");
-			game.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 		}
     }
 }

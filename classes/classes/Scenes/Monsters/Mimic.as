@@ -79,6 +79,7 @@ package classes.Scenes.Monsters
 				default:
 					this.imageName = "mimic";
 			}
+			this.race = "Mimic";
 			if (type == 2) 
 				this.createCock(80, 16, CockTypesEnum.HUMAN);
 			else

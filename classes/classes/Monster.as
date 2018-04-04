@@ -13,6 +13,7 @@
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
+	import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 	import classes.internals.ChainedDrop;
 	import classes.internals.RandomDrop;
 	import classes.internals.Utils;
@@ -45,10 +46,10 @@
 			kGAMECLASS.mainView.statsView.showStatDown(a);
 		}
 		protected final function statScreenRefresh():void {
-			game.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 		}
 		protected final function doNext(eventNo:Function):void { //Now typesafe
-			game.doNext(eventNo);
+			kGAMECLASS.output.doNext(eventNo);
 		}
 		protected final function combatMiss():Boolean {
 			return game.combat.combatMiss();
@@ -622,7 +623,7 @@
 				    var damage:int = eOneAttack();
 					outputAttack(damage);
 					postAttack(damage);
-					game.statScreenRefresh();
+					kGAMECLASS.output.statScreenRefresh();
 					outputText("\n");
 				}
 				if (statusEffectv1(StatusEffects.Attacks) >= 0) {
@@ -895,7 +896,7 @@
 			if (temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
-			game.doNext(game.camp.returnToCampUseEightHours);
+			kGAMECLASS.output.doNext(game.camp.returnToCampUseEightHours);
 		}
 
 		/**
@@ -1188,6 +1189,25 @@
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
 			}
+			if (hasStatusEffect(StatusEffects.BasiliskCompulsion) && spe > 1) {
+				var oldSpeed:Number = spe;
+				var speedDiff:Number = 0;
+				var bse:BasiliskSlowDebuff = createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
+				bse.applyEffect(statusEffectv1(StatusEffects.BasiliskCompulsion));
+				speedDiff = Math.round(oldSpeed - spe);
+				if (plural) {
+					outputText(capitalA + short + "  still feel the spell of those grey eyes, making " + pronoun3 + " movements slow and difficult,"
+					          +" the remembered words tempting " + pronoun2 + " to look into your eyes again. "
+					          + Pronoun1 + " need to finish this fight as fast as " + pronoun3 + "  heavy limbs will allow."
+					          +" <b>(<font color=\"#800000\">" + Math.round(speedDiff) + "</font>)</b>\n\n");
+				} else {
+					outputText(capitalA + short + "  still feels the spell of those grey eyes, making " + pronoun3 + " movements slow and difficult,"
+					          +" the remembered words tempting " + pronoun2 + " to look into your eyes again. "
+					          + Pronoun1 + " needs to finish this fight as fast as " + pronoun3 + "  heavy limbs will allow."
+					          +" <b>(<font color=\"#800000\">" + Math.round(speedDiff) + "</font>)</b>\n\n");
+
+				}
+			}
 			if (hasStatusEffect(StatusEffects.OnFire)) {
 				//Countdown to heal
 				addStatusValue(StatusEffects.OnFire,1,-1);
@@ -1326,5 +1346,17 @@
 			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
 		}
 
+		override public function set HP(value:Number):void {
+			super.HP = value;
+			game.mainView.monsterStatsView.refreshStats(game);
+		}
+		override public function set lust(value:Number):void {
+			super.lust = value;
+			game.mainView.monsterStatsView.refreshStats(game);
+		}
+		override public function set fatigue(value:Number):void {
+			super.fatigue = value;
+			game.mainView.monsterStatsView.refreshStats(game);
+		}
 	}
 }

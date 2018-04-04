@@ -9,16 +9,21 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.IExplorable;
 import classes.Scenes.Areas.Swamp.*;
+import classes.Scenes.PregnancyProgression;
+import classes.internals.GuiOutput;
 
 	use namespace kGAMECLASS;
 
 	public class Swamp extends BaseContent implements IExplorable {
-		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
+		public var corruptedDriderScene:CorruptedDriderScene;
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
-		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
+		public var maleSpiderMorphScene:MaleSpiderMorphScene;
 		public var rogar:Rogar = new Rogar();
 
-		public function Swamp() {}
+		public function Swamp(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
+			maleSpiderMorphScene = new MaleSpiderMorphScene(pregnancyProgression, output);
+			corruptedDriderScene = new CorruptedDriderScene(pregnancyProgression, output);
+		}
 
 		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0; }
 		public function discover():void {

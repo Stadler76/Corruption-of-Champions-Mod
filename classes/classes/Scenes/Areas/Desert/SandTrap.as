@@ -119,6 +119,7 @@
 				this.short = "sandtrap";
 			this.imageName = "sandtrap";
 			this.long = "You are fighting the sandtrap.  It sits half buried at the bottom of its huge conical pit, only its lean human anatomy on show, leering at you from beneath its shoulder length black hair with its six equally sable eyes.  You cannot say whether its long, soft face with its pointed chin is very pretty or very handsome - every time the creature's face moves, its gender seems to shift.  Its lithe, brown flat-chested body supports four arms, long fingers playing with the rivulets of powder sand surrounding it.  Beneath its belly you occasionally catch glimpses of its insect half: a massive sand-coloured abdomen which anchors it to the desert, with who knows what kind of anatomy.";
+			this.race = "Sand Trap";
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.HUMAN);
 			this.balls = 2;

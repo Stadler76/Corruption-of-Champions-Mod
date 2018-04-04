@@ -1,8 +1,5 @@
-/**
- * Created by aimozg on 06.01.14.
- */
-package classes.Scenes.Areas
-{
+/* Created by aimozg on 06.01.14 */
+package classes.Scenes.Areas {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -11,27 +8,28 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.HighMountains.*;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
 	use namespace kGAMECLASS;
 
-	public class HighMountains extends BaseContent implements IExplorable
-	{
-		public var basiliskScene:BasiliskScene = new BasiliskScene();
+	public class HighMountains extends BaseContent implements IExplorable {
+		public var basiliskScene:BasiliskScene;
 		public var harpyScene:HarpyScene = new HarpyScene();
-		public var minervaScene:MinervaScene = new MinervaScene();
+		public var minervaScene:MinervaScene;
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		public var cockatriceScene:CockatriceScene = new CockatriceScene();
+		public var cockatriceScene:CockatriceScene;
 
-		public function HighMountains()
-		{
+		public function HighMountains(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
+			this.basiliskScene = new BasiliskScene(pregnancyProgression, output);
+			this.cockatriceScene = new CockatriceScene(pregnancyProgression, output);
+			this.minervaScene = new MinervaScene(pregnancyProgression,output);
 		}
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0;
-		}
+
+		public function isDiscovered():Boolean { return flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0; }
 		public function discover():void {
 			clearOutput();
 			outputText(images.showImage("area-highmountains"));
@@ -42,7 +40,7 @@ package classes.Scenes.Areas
 		//Explore Mountain
 		private var _explorationEncounter:Encounter = null;
 		public function get explorationEncounter():Encounter {
-			const game:CoC     = kGAMECLASS;
+			const game:CoC = kGAMECLASS;
 			const fn:FnHelpers = Encounters.fn;
 			if (_explorationEncounter == null) _explorationEncounter =
 					Encounters.group(game.commonEncounters, {
@@ -75,13 +73,13 @@ package classes.Scenes.Areas
 						call: minotaurMobScene.meetMinotaurSons,
 						mods: [game.commonEncounters.furriteMod]
 					}, {
-						name  : "harpychicken",
-						when  : function ():Boolean {
+						name: "harpychicken",
+						when: function ():Boolean {
 							return player.hasItem(consumables.OVIELIX)
-								   || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0
+								|| flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0
 						},
 						chance: function():Number { return player.itemCount(consumables.OVIELIX); },
-						call  : chickenHarpy
+						call: chickenHarpy
 					}, {
 						name: "phoenix",
 						when: game.dungeons.checkPhoenixTowerClear,
@@ -109,26 +107,29 @@ package classes.Scenes.Areas
 						name: "sophie",
 						when: function ():Boolean {
 							return flags[kFLAGS.SOPHIE_BIMBO] <= 0
-								   && flags[kFLAGS.SOPHIE_DISABLED_FOREVER] <= 0
-								   && !game.sophieFollowerScene.sophieFollower();
+								&& flags[kFLAGS.SOPHIE_DISABLED_FOREVER] <= 0
+								&& !game.sophieFollowerScene.sophieFollower();
 						},
 						call: game.sophieScene.sophieRouter
 					}, {
 						name: "izumi",
 						call: izumiScenes.encounter
+					}, {
+						name:"hike",
+						chance:0.2,
+						call:hike
 					});
 			return _explorationEncounter;
 		}
 		//Explore High Mountain
-		public function explore():void
-		{
+		public function explore():void {
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			explorationEncounter.execEncounter();
 		}
 
 		public function harpyEncounter():void {
 			clearOutput();
-			outputText(images.showImage("monster-harpy"));
+			outputText(images.showImage("encounter-harpy"));
 			outputText("A harpy wings out of the sky and attacks!");
 			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
@@ -141,22 +142,19 @@ package classes.Scenes.Areas
 		public function minoRouter():void {
 			spriteSelect(SpriteDb.s_minotaur);
 			//Cum addictus interruptus!  LOL HARRY POTTERFAG
-			//Withdrawl auto-fuck!
-			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
+			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) //Withdrawl auto-fuck!
 				getGame().mountain.minotaurScene.minoAddictionFuck();
-			} else {
+			else {
 				getGame().mountain.minotaurScene.getRapedByMinotaur(true);
 				spriteSelect(SpriteDb.s_minotaur);
 			}
 		}
 		//\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING
-		//Initial Intro
-		public function chickenHarpy():void
-		{
+		public function chickenHarpy():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
-			outputText(images.showImage("event-chicken"));
-			if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] == 0) {
+			outputText(images.showImage("encounter-chicken-harpy"));
+			if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] == 0) { //Initial Intro
 				outputText("Taking a stroll along the mountains, you come across a peculiar-looking harpy wandering around with a large wooden cart in tow.  She's far shorter and bustier than any regular harpy you've seen before, reaching barely 4' in height but managing to retain some semblance of their thick feminine asses.  In addition to the fluffy white feathers decorating her body, the bird-woman sports about three more combed back upon her forehead like a quiff, vividly red in color.");
 				outputText("\n\nHaving a long, hard think at the person you're currently making uncomfortable with your observational glare, you've come to a conclusion - she must be a chicken harpy!");
 				outputText("\n\nAs you take a look inside of the cart you immediately spot a large hoard of eggs stacked clumsily in a pile.  The curious collection of eggs come in many colors and sizes, protected by a sheet of strong canvas to keep it all together.");
@@ -167,32 +165,25 @@ package classes.Scenes.Areas
 				outputText("\n\nSounds reasonable enough, you suppose.  Two or three elixirs for an egg? Doable for sure.");
 				outputText("\n\n\"<i>So whaddya say, do y'have any elixirs you can fork over?</i>\"");
 			}
-			else {
-				//Repeat Intro
+			else { //Repeat Intro
 				outputText("Taking a stroll along the mountains, you come across a familiar-looking shorty wandering around with a large wooden cart in tow.");
 				outputText("\n\nHaving a long, hard think at the person you're currently making uncomfortable with your observational glare, you've come to a conclusion - she must be the chicken harpy!");
 				outputText("\n\nYou run towards her as she waves a 'hello', stopping the cart to allow you to catch up.  Giving out her usual spiel about the eggs, she giggles and thrusts out a hand.");
 				outputText("\n\n\"<i>Hey sunshine, do y'have any elixirs you can give me today?</i>\"");
-				//[Give Two][Give Three]	[No, I Must Now Return To My People]
 			}
 			flags[kFLAGS.TIMES_MET_CHICKEN_HARPY]++;
-			//[Give Two][Give Three]		[Not Really, No]
 			menu();
 			if (player.hasItem(consumables.OVIELIX, 2)) addButton(0, "Give Two", giveTwoOviElix);
 			if (player.hasItem(consumables.OVIELIX, 3)) addButton(1, "Give Three", giveThreeOviElix);
 			addButton(4, "Leave", leaveChickenx);
 		}
-
-		//If Give Two
-		public function giveTwoOviElix():void
-		{
+		public function giveTwoOviElix():void { //If Give Two
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX);
 			player.consumeItem(consumables.OVIELIX);
 			outputText(images.showImage("item-oElixir"));
 			outputText("You hand over two elixirs, the harpy more than happy to take them from you.  In return, she unties a corner of the sheet atop the cart, allowing you to take a look at her collection of eggs.");
-			//[Black][Blue][Brown][Pink][Purple]
 			menu();
 			addButton(0, "Black", getHarpyEgg, consumables.BLACKEG);
 			addButton(1, "Blue", getHarpyEgg, consumables.BLUEEGG);
@@ -201,16 +192,12 @@ package classes.Scenes.Areas
 			addButton(4, "Purple", getHarpyEgg, consumables.PURPLEG);
 			addButton(5, "White", getHarpyEgg, consumables.WHITEEG);
 		}
-
-		//If Give Three
-		public function giveThreeOviElix():void
-		{
+		public function giveThreeOviElix():void { //If Give Three
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX, 3);
 			outputText(images.showImage("item-oElixir"));
 			outputText("You hand over three elixirs, the harpy ecstatic over the fact that you're willing to part with them.  In return, she unties a side of the sheet atop the cart, allowing you to take a look at a large collection of her eggs.");
-			//[Black][Blue][Brown][Pink][Purple]
 			menu();
 			addButton(0, "Black", getHarpyEgg, consumables.L_BLKEG);
 			addButton(1, "Blue", getHarpyEgg, consumables.L_BLUEG);
@@ -219,26 +206,39 @@ package classes.Scenes.Areas
 			addButton(4, "Purple", getHarpyEgg, consumables.L_PRPEG);
 			addButton(5, "White", getHarpyEgg, consumables.L_WHTEG);
 		}
-
-		//All Text
-		public function getHarpyEgg(itype:ItemType):void
-		{
+		public function getHarpyEgg(itype:ItemType):void { //All Text
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
 			flags[kFLAGS.EGGS_BOUGHT]++;
-			outputText(images.showImage("item-hEgg"));
+			outputText(images.showImage("item-egg-harpy"));
 			outputText("You take " + itype.longName + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
 			inventory.takeItem(itype, chickenHarpy);
 		}
-
-		//If No
-		public function leaveChickenx():void
-		{
+		public function leaveChickenx():void { //If No
 			clearOutput();
 			spriteSelect(SpriteDb.s_chickenHarpy);
+			outputText(images.showImage("area-highmountains"));
 			outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
 			outputText("\n\nYou decide to take your own path, heading back to camp while you can.");
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		private function hike():void {
+			clearOutput();
+			outputText(images.showImage("area-highmountains"));
+			if (player.cor < 90) {
+				outputText("Your hike in the highmountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.");
+				dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
+			}
+			else {
+				outputText("During your hike into the highmountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.");
+				dynStats("tou", .25, "spe", .5, "lib", .25, "lus", player.lib / 10);
+			}
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+		private function findOre():void { //Not used. Doubt if it will ever be added
+			var ore:int = rand(3); //0 = copper, 1 = tin, 2 = iron
 		}
 	}
 }

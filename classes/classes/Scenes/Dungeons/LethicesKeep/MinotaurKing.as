@@ -20,6 +20,7 @@ package classes.Scenes.Dungeons.LethicesKeep {
 			this.a = "the ";
 			this.short = "minotaur king";
 			this.long = "";
+			this.race = "Minotaur";
 			this.tallness = 12 * 14;
 			this.createCock(24,5,CockTypesEnum.HORSE);
 			this.createBreastRow(0);

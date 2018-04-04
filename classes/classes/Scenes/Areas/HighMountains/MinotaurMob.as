@@ -147,6 +147,7 @@ package classes.Scenes.Areas.HighMountains
 				this.short = "minotaur tribe";
 			this.imageName = "minomob";
 			this.long = Num2Text(game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
+			this.race = "Minotaurs";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";

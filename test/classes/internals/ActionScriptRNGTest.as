@@ -7,8 +7,10 @@ package classes.internals
 	import org.hamcrest.object.*;
 	import org.hamcrest.text.*;
 	import org.hamcrest.collection.*;
+
+	import classes.internals.ActionScriptRNG
 	
-	public class RandomNumberTest
+	public class ActionScriptRNGTest
 	{
 		/**
 		 * If the max is 5, odds of not rolling a 5 (with 0 to 5): 5/6
@@ -19,12 +21,12 @@ package classes.internals
 		private static const RANDOM_NUMBER_ITERATIONS:int = 10000;
 		private static const RANDOM_NUMBER_MAX:int = 5;
 		
-		private var cut:RandomNumber;
+		private var cut:ActionScriptRNG;
 		
 		[Before]
 		public function setUp():void
 		{
-			cut = new RandomNumber;
+			cut = new ActionScriptRNG();
 		}
 		
 		[Test]

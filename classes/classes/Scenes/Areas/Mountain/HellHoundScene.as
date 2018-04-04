@@ -6,13 +6,16 @@ package classes.Scenes.Areas.Mountain
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Monsters.pregnancies.PlayerHellhoundPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
 	public class HellHoundScene extends BaseContent
 	{
-		public function HellHoundScene()
+		public function HellHoundScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
+			new PlayerHellhoundPregnancy(pregnancyProgression, output);
 		}
 
 		/*

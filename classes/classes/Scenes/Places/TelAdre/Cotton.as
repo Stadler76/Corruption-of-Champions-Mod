@@ -4,8 +4,10 @@ package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
+	import classes.Scenes.VaginalPregnancy;
+	import classes.Scenes.PregnancyProgression;
 
-	public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface {
+	public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface, VaginalPregnancy {
 
 //176 TIMES HAD YOGA
 //177 MET/FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
@@ -23,12 +25,14 @@ package classes.Scenes.Places.TelAdre {
 
 		public var pregnancy:PregnancyStore;
 
-		public function Cotton()
+		public function Cotton(pregnancyProgression:PregnancyProgression)
 		{
 			pregnancy = new PregnancyStore(kFLAGS.COTTON_PREGNANCY_TYPE, kFLAGS.COTTON_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 200, 100, 40);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4,  5 (< 40)
 			CoC.timeAwareClassAdd(this);
+			
+			pregnancyProgression.registerVaginalPregnancyScene(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.PREGNANCY_COTTON, this);
 		}
 
 		//Implementation of TimeAwareInterface
@@ -1495,7 +1499,7 @@ public function goTellCottonShesAMomDad():void {
 
 
 //Birthing*
-public function birthingCottonsKids():void {
+public function vaginalBirth():void {
 	outputText("\nYou wake up suddenly to strong pains and pressures in your gut.  As your eyes shoot wide open, you look down to see your belly absurdly full and distended.  ");
 	if (player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina. ");
@@ -1626,6 +1630,70 @@ public function birthingCottonsKids():void {
 	flags[kFLAGS.COTTON_KID_COUNT]++;
 	if (flags[kFLAGS.COTTON_KID_COUNT] == 1) flags[kFLAGS.COTTON_OLDEST_KID_AGE] = 1;
 	player.knockUpForce(); //Clear Pregnancy
+}
+
+public function updateVaginalPregnancy():Boolean 
+{
+	var displayedUpdate:Boolean = false;
+
+	if (player.pregnancyIncubation === 320) {
+		outputText("\n<b>You realize your belly has gotten bigger. Maybe you should cut back on all the strange food.  Though you do have odd cravings for oats and grain.</b>\n");
+		displayedUpdate = true;
+	}
+	else if (player.pregnancyIncubation === 280) {
+		outputText("\n<b>Your belly is getting more noticeably distended. You are probably pregnant. The strong hankerings for oats and grains give you a very obvious clue as to who the 'father' might be.</b>\n");
+		displayedUpdate = true;	
+	}
+	else if (player.pregnancyIncubation === 225) {
+		outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  You stroke the orb and wonder with a half-grin if you'll have a daughter who takes after her 'daddy'.</b>\n");
+		displayedUpdate = true;	
+	}
+	else if (player.pregnancyIncubation === 165) {
+		outputText("\n<b>The sudden impact of a tiny kick from inside your womb startles you.  Moments later it happens again, making you gasp.  The baby inside you really must be equine in nature; she's already got quite a wicked kick on her.</b>\n");
+		displayedUpdate = true;	
+	}
+	else if (player.pregnancyIncubation === 105) {
+		outputText("\n<b>You're already as big as any pregnant woman back home. Considering that what you're carrying is technically a foal, you wonder just how much bigger you're going to get...</b>\n");
+		displayedUpdate = true;	
+	}
+	else if (player.pregnancyIncubation === 80) {
+		outputText("\n<b>Your swollen stomach would bring queries about the possibility of twins back in Ingnam.  However, you can only feel one strong heart beating away inside your stretched midriff.  Cotton's foal is definitely growing up healthy...\n\nYou're glad, but a little worried about giving birth.</b>\n");
+		displayedUpdate = true;	
+	}
+	else if (player.pregnancyIncubation === 50) {
+		outputText("\n<b>Your belly is painfully distended and swollen; you feel like you're going to burst before you get much bigger.  You find yourself pacing around restlessly in the night, like the expectant mares back in the village.  You're anxious to finally give birth, as much to get this heavy baby out of you as to finally be able to cuddle your child.</b>\n");
+		displayedUpdate = true;	
+	}
+	//Tits
+	if (player.pregnancyIncubation === 32 || player.pregnancyIncubation === 64 || player.pregnancyIncubation === 85 || player.pregnancyIncubation === 150) {
+		displayedUpdate = true;
+		//Increase lactation!
+		if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
+			outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n");
+			player.boostLactation(.5);
+		}
+		if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
+			outputText("\nDrops of breastmilk escape your nipples as your body prepares for the coming birth.\n");
+			player.boostLactation(.5);
+		}				
+		//Lactate if large && not lactating
+		if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() === 0) {
+			outputText("\n<b>You realize your breasts feel full, and occasionally lactate</b>.  It must be due to the pregnancy.\n");
+			player.boostLactation(1);
+		}
+		//Enlarge if too small for lactation
+		if (player.biggestTitSize() === 2 && player.mostBreastsPerRow() > 1) {
+			outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n");
+			player.growTits(1, 1, false, 3);
+		}
+		//Enlarge if really small!
+		if (player.biggestTitSize() === 1 && player.mostBreastsPerRow() > 1) {
+			outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n");
+			player.growTits(1, 1, false, 3);
+		}
+	}
+	
+	return displayedUpdate;
 }
 
 

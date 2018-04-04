@@ -54,16 +54,9 @@ package classes.Items.Consumables
 			var player:Player = getGame().player;
 			var pure:Boolean = (value == PURE_HONEY_VALUE);
 			var special:Boolean = (value == SPECIAL_HONEY_VALUE);
-			changes = 0;
-			changeLimit = 1;
+			mutations.initTransformation([2, 2, 2]);
 			clearOutput();
 			player.slimeFeed();
-			//Chances of boosting the change limit.
-			if (Utils.rand(2) == 0) changeLimit++;
-			if (Utils.rand(2) == 0) changeLimit++;
-			if (Utils.rand(2) == 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Drink text
 			if (special) {
 				outputText("You uncork the bottle and pour the incredibly strong smelling concentrated honey down your throat.  Its taste is also mighty intense.  All at once you feel the effects of the substance start to course through your body.");
@@ -116,7 +109,6 @@ package classes.Items.Consumables
 			if (changes < changeLimit && Utils.rand(2) == 0 && player.inte100 < 80) {
 				getGame().dynStats("int", 0.1 * (80 - player.inte100));
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.");
-				//[removed:1.4.10]//changes++;
 			}
 			//Sexual Stuff
 			//No idears
@@ -302,7 +294,7 @@ package classes.Items.Consumables
 					player.cocks[0].cockThickness += (0.1 * Utils.rand(5) + 0.5) * mult; //0.5 to 1 inches in thickness
 					getGame().dynStats("sen", 5);
 				}
-				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
+				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race == "bee-morph") {
 					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your " + player.armorName + " and watch in fascination as your " + player.cockDescript(0) + " starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
 					outputText("It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming, and it takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.\n\n");
 					outputText("<b>You now have a bee cock!</b>");

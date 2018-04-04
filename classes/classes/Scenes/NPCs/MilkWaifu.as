@@ -437,7 +437,7 @@ private function communalBath():void {
 	outputText("\n\nThe lot of you carry on like this for nearly an hour, enjoying what little relaxation you're able to get in these dark times.  Eventually, though, you know you must return to your duties.  You and your companions one by one pull yourselves out of the pool, stopping to help " + flags[kFLAGS.MILK_NAME] + " and her bloated breasts; towels are passed around between joking and flirting hands, a few are even cracked over bare skin, making girls scream and yelp.  The camp is soon a mess of laughing and playing, with you in the center of it, teasing your lovers between shameless gropes and playful caresses.");
 	player.refillHunger(50);
 	player.changeFatigue(-40);
-	HPChange(player.maxHP()*.33,false);
+	player.HPChange(player.maxHP()*.33,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -490,7 +490,7 @@ private function dontFuckTheMilkWaifu():void {
 	outputText("You allow the girl to continue for a long, long while until your entire body feels deeply refreshed, her milk having soaked thoroughly into your body and making you feel fresh and revitalized.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she slips into your arms and presses her lips to yours.  Chuckling to yourself, you hold the girl as tight against yourself as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before grabbing a towel and wandering back to the heart of camp.");
 	//[+Lust, +HP, -Fatigue]
 	dynStats("lus", 10+player.sens/10, "scale", false);
-	HPChange(player.maxHP()*.33,false);
+	player.HPChange(player.maxHP()*.33,false);
 	player.changeFatigue(-20);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -514,7 +514,7 @@ private function fuckTheMilkWaifu():void {
 	outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked thoroughly into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank " + flags[kFLAGS.MILK_NAME] + " for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tight as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before grabbing a towel and wandering back to the heart of camp.");
 	//[+Lust, +HP, -Fatigue]
 	player.orgasm('Dick');
-	HPChange(player.maxHP()*.33,false);
+	player.HPChange(player.maxHP()*.33,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -536,7 +536,7 @@ private function beARugMunchingMilkDyke():void {
 	outputText("\n\nYour entire body feels deeply refreshed, her milk having soaked into your body and making you feel fresh and revitalized, and every muscle seems to have relaxed thanks to your blissful coitus.  You start to thank the milk girl for the pleasurable company, but when you open your mouth, she presses her lips to yours for a long, tongue-filled kiss.  Chuckling to yourself, you hold the girl as tight as her udders will allow, turning her to the side to let her nuzzle her cheek into your [chest], kissing the top of her head before the two of you climb from the pool.  You have to help her out, her massive extra weight nearly dragging her back in except for your quick reflexes.  You gather your [armor] and ruffle the milk slave's hair before grabbing a towel and wandering back to the heart of camp.");
 	//[+Lust, +HP, -Fatigue]
 	player.orgasm('Tits');
-	HPChange(player.maxHP()*.33,false);
+	player.HPChange(player.maxHP()*.33,false);
 	doNext(camp.returnToCampUseOneHour);
 }
 	

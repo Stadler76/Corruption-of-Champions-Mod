@@ -49,7 +49,7 @@ package classes.Scenes
 			var goal:int = 14;
 			while (temp < goal)
 			{
-				if (buttonIsVisible(temp)) {
+				if (output.buttonIsVisible(temp)) {
 					button++;
 				}
 				if (button == 4 || button == 9) button++;

@@ -707,18 +707,17 @@ private function kellyAppearance():void {
 			if (farm.farmCorruption.numTattoos("kelly") > 1) outputText("She has the following tattoos emblazoned across her body:\n");
 			else outputText("She has ");
 
-			if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_COLLARBONE] + "\n");
-			if (flags[kFLAGS.KELLY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_SHOULDERS] + "\n");
-			if (flags[kFLAGS.KELLY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_LOWERBACK] + "\n");
-			if (flags[kFLAGS.KELLY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_BUTT] + "\n");
-			outputText("\n");
+			if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_COLLARBONE]);
+			if (flags[kFLAGS.KELLY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_SHOULDERS]);
+			if (flags[kFLAGS.KELLY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_LOWERBACK]);
+			if (flags[kFLAGS.KELLY_TATTOO_BUTT] != 0) outputText(flags[kFLAGS.KELLY_TATTOO_BUTT]);
 		}
 	}
 
 	//Kids flavour text
 	if (flags[kFLAGS.KELLY_KIDS] > 0) {
 		if (flags[kFLAGS.KELLY_KIDS] == 1) {
-			outputText("\nKelly's ");
+			outputText("\n\nKelly's ");
 			if (flags[kFLAGS.KELLY_FIRST_KID_GENDER] == 1) outputText("son");
 			else outputText("daughter");
 			outputText(" is off in a separate field; still very young, you can see ");
@@ -727,7 +726,6 @@ private function kellyAppearance():void {
 		}
 		else if (flags[kFLAGS.KELLY_KIDS] == 2) outputText("\n\nThe " + num2Text(flags[kFLAGS.KELLY_KIDS]) + " children you have had with Kelly are off in a separate field; the sound of their play drifts over the grasslands to your ears.  Kelly evidently prefers to keep her brood away from what you do with her, a remarkably sensible attitude coming from a centauress cumslut.  Maybe motherhood genuinely suits her?");
 		else outputText("\n\nThe " + num2Text(flags[kFLAGS.KELLY_KIDS]) + " children you have had with Kelly are as ever off in a separate field, the distance sounds of their acting out the wars and drama of childhood drifting out over the grasslands to your ears.");
-		outputText("\n");
 	}
 	menu();
 	addButton(0,"Next",approachKelly);
@@ -1315,7 +1313,7 @@ private function rideKellyForPunishment():void {
 			
 			outputText("\n\n\"<i>Don't worry about her,</i>\" you call up casually. \"<i>She's just learning a lesson.</i>\" You have no idea how this works as a valid explanation, but already knowing your face and having seen all manner of centaur entering and leaving all day long, the cat and hare let her pass after a cursory magical examination.  The crystal glows, but not enough to straight-up deny Kelly entrance.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " riding a practically naked, bound and gagged centauress draws a slight hush and open mouths.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race + " riding a practically naked, bound and gagged centauress draws a slight hush and open mouths.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Did you come here before I owned you, ass?</i>\" you wonder aloud.  \"<i>You know, before I gave you those big bouncing tits everyone is staring at, or that nice succulent hole I replaced your dick with.   I bet you did- you knew exactly where I wanted you to go.  Perhaps you even found some of your \"<i>wives</i>\" here, back in the day.  Probably strode these cobbles like you owned them.  I bet you were kicked out for being that much of an asshole, or for raping the wrong person.  Awww, don't be upset!</i>\" You kindly reach around her blinkers and wipe her tears away.  \"<i>You're a different person now, and you're learning to be better, bit by bit.  Isn't that right?</i>\" Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1334,7 +1332,7 @@ private function rideKellyForPunishment():void {
 			
 			outputText("\n\n\"<i>Don't worry about her,</i>\" you call up casually.  \"<i>She's just learning a lesson.</i>\"  You have no idea how this works as a valid explanation, but already knowing you and having seen all manner of centaur entering and leaving all day long, the cat and hare morph turn away.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " leading a practically naked bound and gagged centauress draws a slight hush and open mouths.  The centaurs you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation is soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race + " leading a practically naked bound and gagged centauress draws a slight hush and open mouths.  The centaurs you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation is soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Did you come here before I owned you, ass?</i>\" you wonder aloud.  \"<i>You know, before I gave you those big bouncing tits everyone is staring at, or that nice succulent hole I replaced your dick with.  I bet you did - you knew exactly where I wanted you to go.  Perhaps you even found some of your \"<i>wives</i>\" here, back in the day.  Probably strode these cobbles like you owned them.  I bet you were kicked out for being that much of an asshole, or for raping the wrong person.  Awww, don't be upset!</i>\"  You kindly reach around her blinkers and wipe her tears away.  \"<i>You're a different person now, and you're learning to be better, bit by bit.  Isn't that right?</i>\"  Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1372,7 +1370,7 @@ private function rideKellyForPunishment():void {
 			
 			outputText("\n\nThanks to Mareth's warped geography it doesn't take you long to arrive at the gates of Tel'Adre.  The guards on duty look at you, then look away.  Evidently word is getting around.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " riding a practically naked bound and gagged centauress draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race + " riding a practically naked bound and gagged centauress draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Awww, don't be upset!</i>\"  You kindly reach around her blinkers and wipe her tears away.  \"<i>Everyone might be able to see you're an owned little cocksleeve, you might see faces from back when you had things like dignity and respect, but this is how you'll learn to be better, bit by bit.  Isn't that right?</i>\" Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1391,7 +1389,7 @@ private function rideKellyForPunishment():void {
 			outputText("\n\nWithout another word you grab hold of the reigns and jerk them.  \"<i>You know where you're going,</i>\" you breathe into her ear.  Kelly whimpers, and then sets off behind you at a trot.");
 			outputText("\n\nThanks to Mareth's warped geography it doesn't take you long to arrive at the gates of Tel'Adre.  The guards on duty look at you, then look away.  Evidently word is getting around.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " leading a practically naked bound and gagged centauress around like a show horse draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race + " leading a practically naked bound and gagged centauress around like a show horse draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Awww, don't be upset!</i>\" You kindly reach around her blinkers and wipe her tears away.  \"<i>Everyone might be able to see you're an owned little cocksleeve, you might see faces from back when you had things like dignity and respect, but this is how you'll learn to be better, bit by bit.  Isn't that right?</i>\" Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1935,7 +1933,7 @@ private function giveKellyAppleSauce():void {
 	}
 	//Repeat:
 	else {
-		outputText("\n\nYou go to the barn and grab your trusty metal bowl.  Kelly knows what this means: she clasps her hands eagerly, her horse half clopping backwards and forwards impatiently as she watches you walk casually towards the forest.");
+		outputText("You go to the barn and grab your trusty metal bowl.  Kelly knows what this means: she clasps her hands eagerly, her horse half clopping backwards and forwards impatiently as she watches you walk casually towards the forest.");
 		outputText("\n\nThe small grove of apple trees has changed significantly from when you first found it.  Somebody has begun cutting the encroaching wild trees right back and pruned the rosaceae themselves so they aren't tangling into each other anymore- they look considerably happier.");
 		if (flags[kFLAGS.KELLY_KIDS] > 1) outputText("  Somebody has even cleared an oblong patch of earth alongside the trees- a piece of card stuck into it is scrawled with a childish hand which declares it to be “CAROTS”.  You marvel at it all.  Who would have imagined your lust for horse pussy would have turned a pointless asshole into a loving mother who gardens with her children?  Really, you deserve a medal for your efforts.");
 		

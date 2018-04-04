@@ -115,7 +115,7 @@ inputManager.AddBindableControl(
 			return;
 		}
 		// Button 14
-		if (kGAMECLASS.buttonIsVisible(14) && kGAMECLASS.buttonTextIsOneOf(14, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
+		if (kGAMECLASS.output.buttonIsVisible(14) && kGAMECLASS.output.buttonTextIsOneOf(14, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
 		{
 			//trace( "keyboard(): processing space bar for button 9",
 			//	mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
@@ -293,7 +293,7 @@ inputManager.AddBindableControl(
 	"Button 11",
 	"Activate button 11",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(10))
+		if (kGAMECLASS.output.buttonIsVisible(10))
 		{
 			mainView.toolTipView.hide();
 			mainView.clickButton(10);
@@ -303,7 +303,7 @@ inputManager.AddBindableControl(
 	"Button 12",
 	"Activate button 12",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(11))
+		if (kGAMECLASS.output.buttonIsVisible(11))
 		{
 			mainView.toolTipView.hide();
 			mainView.clickButton(11);
@@ -313,7 +313,7 @@ inputManager.AddBindableControl(
 	"Button 13",
 	"Activate button 13",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(12))
+		if (kGAMECLASS.output.buttonIsVisible(12))
 		{
 			mainView.toolTipView.hide();
 			mainView.clickButton(12);
@@ -323,7 +323,7 @@ inputManager.AddBindableControl(
 	"Button 14",
 	"Activate button 14",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(13))
+		if (kGAMECLASS.output.buttonIsVisible(13))
 		{
 			mainView.toolTipView.hide();
 			mainView.clickButton(13);
@@ -333,7 +333,7 @@ inputManager.AddBindableControl(
 	"Button 15",
 	"Activate button 15",
 	function():void {
-		if (kGAMECLASS.buttonIsVisible(14))
+		if (kGAMECLASS.output.buttonIsVisible(14))
 		{
 			mainView.toolTipView.hide();
 			mainView.clickButton(14);

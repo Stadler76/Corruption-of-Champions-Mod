@@ -1000,7 +1000,7 @@ package classes.Scenes.Areas.Forest
 			//(V & D 1.1inj. end, If wounded/Injured during the fight): 
 			if (player.HP < hpMax()) {
 				outputText("Upon returning to camp, you notice that some of the wounds the plant creature kissed have actually healed.  You're not sure how exactly this worked, but at least you don't have to put up with too many cut and bruises now.");
-				HPChange(50);
+				player.HPChange(50);
 			}
 			player.orgasm('Generic');
 			dynStats("sen", -1);

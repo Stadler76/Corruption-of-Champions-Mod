@@ -2473,7 +2473,9 @@ package classes.Scenes {
 			outputText("You find a flat, comfortable " + description + " to sit down on and meditate. As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.");
 			
 			dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
-			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.isPureEnough(10)) HPChange(50, true);
+			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.isPureEnough(10)) {
+				player.HPChange(50, true);
+			}
 			player.changeFatigue(-10);
 			
 			doNext(camp.returnToCampUseTwoHours);

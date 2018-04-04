@@ -1,33 +1,31 @@
-### Issue type
-- [ ] Bug report
-- [ ] Feature request
-- [ ] Other
+_Please prefix the title with the issue type: [Bug], [Enhancement], [Question], [Other]_
 
-### Before reporting a bug, please check the following:
-- [ ] Check that the bug is still present in the latest release
-- [ ] Search existing issues first(please do not open duplicate issues!)
-- [ ] Fill out the template - it's there for a reason
+### I have checked the following before submitting this issue:
+_Remove this hint: these checkboxes can be checked like this: [x] - Remove this line if you read and understood the checkboxes below_
+- [ ] The bug is still present in the latest release
+- [ ] Searched the existing issues so I do not open a duplicate issue
+- [ ] Filled out the template, so developers are less likely to ask for more info
 
 ### Overview
-	e.g.: When using a large number of y item, the game crashes.
+Give us short description of the issue.
 	
 ### Game version
-	e.g.: 1.0.2_mod_1.4
+Tell us the version of the game where the issue occurs.
 	
 ### Expected behaviour
-	e.g.: Can use as many y item as I want.
+Tell us what should happen.
 	
 ### Actual behaviour
-	e.g.: The game crashes after using around z number of item y.
+Tell us what happens instead.
 
 ### How often can this be reproduced?
-	e.g.: always, 4 out of 10 times, ect.
+Tell us how often this happens.
 
 ### Steps to reproduce the issue
 
-1. e.g.: Switch to debug mode
-2. e.g.: Try to eat n number of item y
-3.
+1. First step
+2. Second step
+3. and so on...
 
-If possible, attach a save file that reproduces the issue.
-Please be aware that any files uploaded here are publicly accessible and cannot be deleted (however, the link to them can be removed).
+_If possible, attach a save file that reproduces the issue._
+_Please be aware that any files uploaded here are publicly accessible and cannot be deleted (however, the link to them can be removed)._

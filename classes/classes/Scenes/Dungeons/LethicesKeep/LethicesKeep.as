@@ -1,6 +1,6 @@
 package classes.Scenes.Dungeons.LethicesKeep {
 	import classes.BaseContent;
-	import classes.Items.Consumables.SimpleConsumable;
+	import classes.Items.Consumable;
 	import classes.Scenes.Dungeons.Factory.IncubusMechanicScenes;
 	import classes.room;
 	import classes.GlobalFlags.kFLAGS;
@@ -357,7 +357,7 @@ package classes.Scenes.Dungeons.LethicesKeep {
 		}
 
 		public function takeEgg(eggMask:int):void {
-			var item:SimpleConsumable;
+			var item:Consumable;
 			if (eggMask == BLACK) item = consumables.L_BLKEG;
 			if (eggMask == BLUE) item = consumables.L_BLUEG;
 			if (eggMask == WHITE) item = consumables.L_WHTEG;

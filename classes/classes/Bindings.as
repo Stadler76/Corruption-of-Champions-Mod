@@ -26,7 +26,7 @@ package classes
 					game.saves.saveGame(slotX);
 					game.clearOutput();
 					game.outputText("Game saved to " + slotX + "!");
-					game.doNext(game.playerMenu);
+					kGAMECLASS.output.doNext(game.playerMenu);
 				};
 				if (flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] !== 0) {
 					doQuickSave();
@@ -34,9 +34,9 @@ package classes
 				}
 				game.clearOutput();
 				game.outputText("You are about to quicksave the current game to <b>" + slotX + "</b>\n\nAre you sure?");
-				game.menu();
-				game.addButton(0, "No", game.playerMenu);
-				game.addButton(1, "Yes", doQuickSave);
+				kGAMECLASS.output.menu();
+				kGAMECLASS.output.addButton(0, "No", game.playerMenu);
+				kGAMECLASS.output.addButton(1, "Yes", doQuickSave);
 			}
 		}
 
@@ -46,11 +46,11 @@ package classes
 				var saveFile:SharedObject = SharedObject.getLocal("CoC_" + slot, "/");
 				var doQuickLoad:Function = function():void {
 					if (game.saves.loadGame("CoC_" + slot)) {
-						game.showStats();
-						game.statScreenRefresh();
+						kGAMECLASS.output.showStats();
+						kGAMECLASS.output.statScreenRefresh();
 						game.clearOutput();
 						game.outputText("Slot " + slot + " Loaded!");
-						game.doNext(game.playerMenu);
+						kGAMECLASS.output.doNext(game.playerMenu);
 					}
 				};
 				if (saveFile.data.exists) {
@@ -60,9 +60,9 @@ package classes
 					}
 					game.clearOutput();
 					game.outputText("You are about to quickload the current game from slot <b>" + slot + "</b>\n\nAre you sure?");
-					game.menu();
-					game.addButton(0, "No", game.playerMenu);
-					game.addButton(1, "Yes", doQuickLoad);
+					kGAMECLASS.output.menu();
+					kGAMECLASS.output.addButton(0, "No", game.playerMenu);
+					kGAMECLASS.output.addButton(1, "Yes", doQuickLoad);
 				}
 			}
 		}

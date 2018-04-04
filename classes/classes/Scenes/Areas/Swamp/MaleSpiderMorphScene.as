@@ -7,13 +7,16 @@ package classes.Scenes.Areas.Swamp
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Scenes.Monsters.pregnancies.PlayerSpiderPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
 	public class MaleSpiderMorphScene extends BaseContent
 	{
-		public function MaleSpiderMorphScene()
+		public function MaleSpiderMorphScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
+			new PlayerSpiderPregnancy(pregnancyProgression, output);
 		}
 
 		//Greeting

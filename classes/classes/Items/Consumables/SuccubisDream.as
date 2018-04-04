@@ -19,16 +19,10 @@ package classes.Items.Consumables
 			player.slimeFeed();
 			
 			var temp:int = 0;
-			changes = 0;
 			var crit:Number = 1;
 			//Determine crit multiplier (x2 or x3)
 			crit += rand(2) + 1;
-			changeLimit = 1;
-			//Chances to up the max number of changes
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([2, 2]);
 			//Generic drinking text
 			clearOutput();
 			outputText("You uncork the bottle and drink down the strange substance, struggling to down the thick liquid.");

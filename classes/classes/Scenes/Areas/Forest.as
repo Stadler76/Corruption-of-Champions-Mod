@@ -3,17 +3,19 @@ package classes.Scenes.Areas {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-import classes.Scenes.API.Encounter;
-import classes.Scenes.API.Encounters;
-import classes.Scenes.API.FnHelpers;
+	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounters;
+	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Forest.*;
+	import classes.Scenes.PregnancyProgression;
+	import classes.internals.GuiOutput;
 
 	use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent implements IExplorable {
 		public var akbalScene:AkbalScene = new AkbalScene();
-		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
+		public var beeGirlScene:BeeGirlScene;
 		public var corruptedGlade:CorruptedGlade = new CorruptedGlade();
 		public var essrayle:Essrayle = new Essrayle();
 		public var faerie:Faerie = new Faerie();
@@ -24,7 +26,9 @@ import classes.Scenes.API.FnHelpers;
 //		public var dullahanScene:DullahanScene = new DullahanScene(); //[INTERMOD:8chan]
 		public var dryadScene:DryadScene = new DryadScene();
 
-		public function Forest() {}
+		public function Forest(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
+			this.beeGirlScene = new BeeGirlScene(pregnancyProgression, output);
+		}
 
 		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0; }
 		public function discover():void {
@@ -42,68 +46,68 @@ import classes.Scenes.API.FnHelpers;
 			const fn:FnHelpers = Encounters.fn;
 			if (_forestEncounter == null) _forestEncounter =
 					Encounters.group(game.commonEncounters.withImpGob, {
-						call  : tamaniScene,
+						call: tamaniScene,
 						chance: 0.15
 					}, game.jojoScene.jojoForest, {
-						call  : essrayle.forestEncounter,
+						call: essrayle.forestEncounter,
 						chance: 0.10
 					}, corruptedGlade, {
-						call  : camp.cabinProgress.forestEncounter,
+						call: camp.cabinProgress.forestEncounter,
 						chance: 0.5
 					}, {
-						name  : "deepwoods",
-						call  : kGAMECLASS.deepWoods.discover,
-						when  : function ():Boolean {
+						name: "deepwoods",
+						call: kGAMECLASS.deepWoods.discover,
+						when: function ():Boolean {
 							return (flags[kFLAGS.TIMES_EXPLORED_FOREST] >= 20) && !player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
 						},
 						chance: Encounters.ALWAYS
 					}, {
-						name  : "beegirl",
-						call  : beeGirlScene.beeEncounter,
+						name: "beegirl",
+						call: beeGirlScene.beeEncounter,
 						chance: 0.50
 					}, {
 						name: "tentabeast",
 						call: tentacleBeastEncounterFn,
 						when: fn.ifLevelMin(2)
 					}, {
-						name  : "mimic",
-						call  : curry(game.mimicScene.mimicTentacleStart, 3),
-						when  : fn.ifLevelMin(3),
+						name: "mimic",
+						call: curry(game.mimicScene.mimicTentacleStart, 3),
+						when: fn.ifLevelMin(3),
 						chance: 0.50
 					}, {
-						name  : "succubus",
-						call  : game.succubusScene.encounterSuccubus,
-						when  : fn.ifLevelMin(3),
+						name: "succubus",
+						call: game.succubusScene.encounterSuccubus,
+						when: fn.ifLevelMin(3),
 						chance: 0.50
 					}, {
-						name  : "marble",
-						call  : marbleVsImp,
-						when  : function ():Boolean {
+						name: "marble",
+						call: marbleVsImp,
+						when: function ():Boolean {
 							return flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0 &&
-								   !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
-								   && !player.hasStatusEffect(StatusEffects.NoMoreMarble)
-								   && player.hasStatusEffect(StatusEffects.Marble)
-								   && flags[kFLAGS.MARBLE_WARNING] == 0;
+								!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
+								&& !player.hasStatusEffect(StatusEffects.NoMoreMarble)
+								&& player.hasStatusEffect(StatusEffects.Marble)
+								&& flags[kFLAGS.MARBLE_WARNING] == 0;
 						},
 						chance: 0.10
 					}, {
 						name: "trip",
 						call: tripOnARoot
 					}, {
-						name  : "chitin",
-						call  : findChitin,
+						name: "chitin",
+						call: findChitin,
 						chance: 0.05
 					}, {
-						name  : "healpill",
-						call  : findHPill,
+						name: "healpill",
+						call: findHPill,
 						chance: 0.10
 					}, {
-						name  : "truffle",
-						call  : findTruffle,
+						name: "truffle",
+						call: findTruffle,
 						chance: 0.35
 					}, {
-						name  : "bigjunk",
-						call  : game.commonEncounters.bigJunkForestScene,
+						name: "bigjunk",
+						call: game.commonEncounters.bigJunkForestScene,
 						chance: game.commonEncounters.bigJunkChance
 					}, {
 						name: "walk",
@@ -111,11 +115,10 @@ import classes.Scenes.API.FnHelpers;
 					});
 			return _forestEncounter;
 		}
-
-		public function tentacleBeastEncounterFn():void { //Oh noes, tentacles!
+		//Oh noes, tentacles!
+		public function tentacleBeastEncounterFn():void {
 			clearOutput();
-			//Tentacle avoidance chance due to dangerous plants
-			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
+			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) { //tentacle avoidance chance due to dangerous plants
 //				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				outputText(images.showImage("item-dPlants"));
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n");

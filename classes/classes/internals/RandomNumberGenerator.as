@@ -1,28 +1,23 @@
 package classes.internals 
 {
+	
 	/**
-	 * Class that provides random numbers.
+	 * Interface that provides methods for getting random numbers.
 	 */
-	public class RandomNumber implements IRandomNumber
+	public interface RandomNumberGenerator
 	{
 		/**
-		 * Returns a number that is between 0 and max exclusive.
+		 * Returns a number that is between 0 and max - 1 inclusive.
 		 * @param	max the upper limit for the random number
 		 * @return a value between 0 and max - 1
 		 */
-		public function random(max:int):int 
-		{
-			return Utils.rand(max);
-		}
+		function random(max:int):int;
 		
 		/**
 		 * Returns a number that is between 0 and max inclusive.
 		 * @param	max the upper limit for the random number
 		 * @return a value between 0 and max inclusive
 		 */
-		public function randomCorrected(max:int):int 
-		{
-			return Utils.rand(max + 1);
-		}
+		function randomCorrected(max:int):int;
 	}
 }

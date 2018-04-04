@@ -12,17 +12,21 @@ package classes.Scenes.Areas {
 	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
+	import classes.Scenes.PregnancyProgression;
 
 	use namespace kGAMECLASS;
 
 	public class Mountain extends BaseContent implements IExplorable {
-		public var hellHoundScene:HellHoundScene = new HellHoundScene();
+		public var hellHoundScene:HellHoundScene;
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
-		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var minotaurScene:MinotaurScene;
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
 
-		public function Mountain() {}
+		public function Mountain(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
+			this.minotaurScene = new MinotaurScene(pregnancyProgression, output);
+			this.hellHoundScene = new HellHoundScene(pregnancyProgression, output);
+		}
 
 		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] > 0; }
 		public function discover():void {
@@ -48,7 +52,7 @@ package classes.Scenes.Areas {
 					}, {
 						name: "highmountains",
 						when: function ():Boolean {
-							return !game.highMountains.isDiscovered() && (player.level >= 5 || flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 40)
+							return !game.highMountains.isDiscovered() && (player.level >= 5 || flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 40);
 						},
 						call: game.highMountains.discover
 					}, {
@@ -115,7 +119,7 @@ package classes.Scenes.Areas {
 						name:"ceraph",
 						chance:0.3,
 						when:function ():Boolean {
-							return !game.ceraphFollowerScene.ceraphIsFollower()
+							return !game.ceraphFollowerScene.ceraphIsFollower();
 								/* [INTERMOD:8chan]
 									&& flags[kFLAGS.CERAPH_KILLED] == 0 */
 								//	&& game.fetishManager.compare(FetishManager.FETISH_EXHIBITION);

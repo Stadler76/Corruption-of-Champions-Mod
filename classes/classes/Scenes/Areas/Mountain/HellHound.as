@@ -3,6 +3,7 @@ package classes.Scenes.Areas.Mountain
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class HellHound extends Monster
 	{
@@ -75,21 +76,21 @@ package classes.Scenes.Areas.Mountain
 			} else {
 				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n");
 			}
-			game.menu();
+			kGAMECLASS.output.menu();
 			
-			game.addButtonDisabled(0, "Fuck it", "Ride his twin cocks. This scene requires you to have vagina and sufficient arousal. This scene can not accommodate naga body.");
-			game.addButtonDisabled(1, "Lick", "Make him use his tongues. This scene requires you to have genitals and sufficient arousal. This scene requires lust victory.");
+			kGAMECLASS.output.addButtonDisabled(0, "Fuck it", "Ride his twin cocks. This scene requires you to have vagina and sufficient arousal. This scene can not accommodate naga body.");
+			kGAMECLASS.output.addButtonDisabled(1, "Lick", "Make him use his tongues. This scene requires you to have genitals and sufficient arousal. This scene requires lust victory.");
 			
 			if (player.lust >= 33 && !player.isGenderless()) {
 				if (player.hasVagina() && !player.isNaga()) {
-					game.addButton(0, "Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, undefined, undefined, undefined, "Ride his twin cocks.");
+					kGAMECLASS.output.addButton(0, "Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, undefined, undefined, undefined, "Ride his twin cocks.");
 				}
 				if (!hpVictory) {
-					game.addButton(1, "Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, undefined, undefined, undefined, "Make him use his tongues.");
+					kGAMECLASS.output.addButton(1, "Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, undefined, undefined, undefined, "Make him use his tongues.");
 				}
 			}
 			
-			game.addButton(14, "Leave", game.combat.cleanupAfterCombat);
+			kGAMECLASS.output.addButton(14, "Leave", game.combat.cleanupAfterCombat);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -110,6 +111,7 @@ package classes.Scenes.Areas.Mountain
 			this.short = "hellhound";
 			this.imageName = "hellhound";
 			this.long = "It looks like a large demon on all fours with two heads placed side-by-side. The heads are shaped almost like human heads, but they have dog ears on the top and have a long dog snout coming out where their mouths and noses would be.  Its eyes and mouth are filled with flames and its hind legs capped with dog paws, but its front ones almost look like human hands.  Its limbs end in large, menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads look at you hungrily as the hellhound circles around you. You get the feeling that reasoning with this beast will be impossible.";
+			this.race = "Hellhound";
 			// this.plural = false;
 			this.createCock(8,2,CockTypesEnum.DOG);
 			this.createCock(8,2,CockTypesEnum.DOG);

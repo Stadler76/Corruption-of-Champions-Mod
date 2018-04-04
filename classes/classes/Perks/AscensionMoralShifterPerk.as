@@ -3,13 +3,14 @@ package classes.Perks
 	import classes.PerkClass;
 	import classes.PerkType;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CharCreation;
 	
 	public class AscensionMoralShifterPerk extends PerkType
 	{
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + kGAMECLASS.charCreation.MAX_MORALSHIFTER_LEVEL + ") Increases corruption gains and losses by " + params.value1 * 20 + "%.";
+			return "(Rank: " + params.value1 + "/" + CharCreation.MAX_MORALSHIFTER_LEVEL + ") Increases corruption gains and losses by " + params.value1 * 20 + "%.";
 		}
 
 		public function AscensionMoralShifterPerk() 

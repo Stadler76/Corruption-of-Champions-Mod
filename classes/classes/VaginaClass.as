@@ -1,11 +1,11 @@
 ﻿package classes
 {
-	import classes.internals.ISerializable;
+	import classes.internals.Serializable;
 	import classes.internals.Utils;
 	import mx.logging.ILogger;
 	import classes.internals.LoggerFactory;
 
-	public class VaginaClass implements ISerializable
+	public class VaginaClass implements Serializable
 	{
 		private static const SERIALIZATION_VERSION:int = 1;
 		

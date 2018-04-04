@@ -1623,7 +1623,7 @@ package classes.Scenes.Areas.HighMountains
 			player.refillHunger(100);
 			player.changeFatigue(-100);
 			outputText(" ");
-			HPChange(player.maxHP(), true)
+			player.HPChange(player.maxHP(), true)
 			outputText("\nWith you fed and rested, the golden broodmother helps you to your feet, despite all the sleep you got; your legs are still a bit wobbly. Thankfully Minerva helps you steady yourself. \"< i > My goodness, are you alright? I guess you're not quite recovered are you, are you sure you don't want to rest more? < / i >\" the gentle maternal herm asks you, knowing that you must get back to your important work soon.");
 
 			outputText("\n\nDespite the feeling in your legs you nod your head in affirmation, while it would be nice to rest you have much to do, demons to slay, damsels to save from said demons. Smiling at the strong front you give, Minerva pulls you into a hug. \"<i>That's my strong hero, so brave, so strong. I just know you will save this world and soon there will be some more sirens in the world that will help make things a bit brighter.</i>\" she says with a bright proud grin on her face as she helps you walk, just to make sure you're alright.");

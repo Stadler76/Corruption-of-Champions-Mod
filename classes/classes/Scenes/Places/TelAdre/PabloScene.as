@@ -2,6 +2,8 @@ package classes.Scenes.Places.TelAdre
 {
 	import classes.GlobalFlags.*;
 	import classes.StatusEffects;
+	import classes.display.SpriteDb;
+
 	/**
 	 * Pablo the Maleherm Pseudo-Imp by worldofdrakan
 	 * @author Kitteh6660
@@ -48,6 +50,7 @@ package classes.Scenes.Places.TelAdre
 		
 		//Introduction to Pablo
 		public function approachPablo():void {
+			spriteSelect(SpriteDb.s_pablo);
 			clearOutput();
 			if (flags[kFLAGS.PABLO_MET] == 0) {
 				outputText("You approach the imp-like creature, a whole swarm of questions flooding your mind. Noticing you, he hops down from his bar.");
@@ -61,7 +64,7 @@ package classes.Scenes.Places.TelAdre
 				outputText("\n\n\"<i>They did,</i>\" he begins, lowering his head and shuffling his feet. He can’t help but chuckle as he looks back on the day he first arrived in the city. \"<i>I had a lot of explaining to do, and it certainly wasn’t easy. In the end, it all came down to this weird corruption scan with some kind of special crystal. You could imagine how surprised they were when I passed their test.</i>\"");
 				outputText("\n\nIf he wasn’t always like this, what was he? And how did he get this way? You really hope he doesn’t mind you asking.");
 				outputText("\n\n\"<i>If you can believe it, I was a human once. I was an adventurer, you see. One day, I stumbled through this portal, and voila! I was in this place, the land of Mareth!</i>\"");
-				outputText("\n\nYour eyes widen. He used to be a human, just like you " + (player.race() == "human" ? "are" : "were") + "!");
+				outputText("\n\nYour eyes widen. He used to be a human, just like you " + (player.race == "human" ? "are" : "were") + "!");
 				outputText("\n\n\"<i>Eventually, I got hungry, -really- hungry. For a while, food was hard to come by, and I had to make do with whatever I could find. Sometimes the imps would have this strange food on them, and sometimes they would have drinks. I think you can see where I’m going here. Long story short, the things I ate ended up changing me.</i>\"");
 				outputText("\n\nYou intently continue to listen to his story.");
 				outputText("\n\n\"<i>My hair wasn’t always this color, either. It was black.</i>\" he says, twirling one of his sandy blonde locks. \"<i>Some crazy bitch out in the desert made it that way, called herself a Sand Witch. Heh. She threw this hissy fit when I refused to let her cast a spell on me. What else was I supposed to do? She wouldn’t even tell me what kind of spell it was. In the end, I gave in just to calm her crazy tits. I’ve gotten kinda used to this color, actually. But I guess that’s enough about me. Perhaps you and I could work out together?</i>\"");
@@ -135,6 +138,7 @@ package classes.Scenes.Places.TelAdre
 		
 		//Pablo has let the cat out of the bag.
 		public function pabloSecret():void {
+			spriteSelect(SpriteDb.s_pablo_nude);
 			clearOutput();
 			outputText("You raise an arm, smelling your armpit. You wrinkle your nose in disgust. The smell is absolutely rank! Bashfully looking around, making certain that everyone around you is out of detection range, you make your way to the lockers. " + player.clothedOrNaked("There, you remove your " + player.armorDescript() + ", stripping naked before grabbing", "There, being naked already, you grab") + " a towel to cover yourself. You hear the sound of running water as you approach the showers, confirming the presence of someone else. Before reaching the entrance to the room, the water stops. Whoever it is, they must be getting out. As you reach the entrance, you see Pablo leaving one of the stalls, getting a full glimpse of his naked figure. He doesn’t appear to have noticed you.");
 			outputText("\n\nBetween his legs is a generous human cock, at least for someone of his stature. You estimate it to be about six inches in length and one and a half inches in width. His balls, the average, each about an inch across. He turns to the stall, giving you a full glimpse of his backside as he flaps his wings, lifting himself in the air to grab his towel which hung over the door. You can now see the small slit which would otherwise be hidden by his balls. He’s a herm!");
@@ -164,6 +168,7 @@ package classes.Scenes.Places.TelAdre
 		
 		//Shower sexy times!
 		public function pabloShowerSexIntro():void {
+			spriteSelect(SpriteDb.s_pablo);
 			clearOutput();
 			outputText("After a long, hard workout, you rest for a moment, wiping your brow of sweat as you catch your breath. If your forehead is that sweaty, surely the rest of your body must be the same way. As such, you elect to take a quick shower before you head back to camp.");
 			outputText("\n\nAs usual, you retreat to the locker room, removing your [Armor] and covering yourself with a towel. As you enter your stall, you see a familiar face enter the room. It’s Pablo. Judging by the towel around his waist, he must be wanting a shower, too. He appears to be very nervous, looking at the floor and twiddling his thumbs.");
@@ -209,6 +214,7 @@ package classes.Scenes.Places.TelAdre
 		}
 		
 		public function pabloSexMenu():void {
+			spriteSelect(SpriteDb.s_pablo_nude);
 			menu();
 			if (player.hasCock()) addButton(0, "Use Dick", pabloDickingTimeSubMenus);
 			else addButtonDisabled(0, "Use Dick", "You need to have a cock for that.");
@@ -423,6 +429,7 @@ package classes.Scenes.Places.TelAdre
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function pabloComesBackAfterWormCure():void {
+			spriteSelect(SpriteDb.s_pablo);
 			clearOutput();
 			outputText("Pablo’s eyes light up as you approach him. He’s clearly happy to see you. But why does he avoid eye contact as you draw closer. What’s got him so bothered? Maybe he’s embarrassed over what happened between the two of you in the showers?");
 			outputText("\n\n\"<i>Oh, hey " + player.short + ",</i>\" he greets you, tail limp. \"<i>I’m… Ah, sorry about before. I really did want to, you know, do it. It’s just… The worms! Whoa, wait a minute. Did you, by chance, come back because you got rid of them?</i>\"");

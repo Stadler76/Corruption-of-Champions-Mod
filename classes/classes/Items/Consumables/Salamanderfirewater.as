@@ -24,15 +24,8 @@ package classes.Items.Consumables
 			var tfSource:String = "salamanderfirewater";
 			player.slimeFeed();
 			//init variables
-			changes = 0;
-			changeLimit = 1;
 			var temp2:Number = 0;
-			//Randomly choose affects limit
-			if (rand(2) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (rand(4) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([2, 3, 4]);
 			//clear screen
 			clearOutput();
 			outputText("You uncork the hip flask and drink it down.  The taste is actually quite good, like an alcohol but with a little fire within.  Just as you expected, it makes you feel all hot and ready to take whole world head on.");
@@ -42,13 +35,11 @@ package classes.Items.Consumables
 			if (player.spe100 > 70 && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel sluggish.  Lying down and enjoying liquor might make you feel better.");
 				dynStats("spe", -1);
-				//[removed:1.4.10]//changes++;
 			}
 			//-Reduces intelligence down to 60.
 			if (player.inte100 > 60 && changes < changeLimit && rand(4) === 0) {
 				outputText("\n\nYou start to feel a bit dizzy, but the sensation quickly passes.  Thinking hard on it, you mentally brush away the fuzziness that seems to permeate your brain and determine that this firewater may have actually made you dumber.  It would be best not to drink too much of it.");
 				dynStats("int", -1);
-				//[removed:1.4.10]//changes++;
 			}
 			//-Raises libido up to 90.
 			if (player.lib100 < 90 && changes < changeLimit && rand(3) === 0) {
@@ -64,7 +55,6 @@ package classes.Items.Consumables
 				//(TARDS)
 				else outputText("puddling in your featureless crotch for a split-second before it slides into your " + player.assDescript() + ".  You want to be fucked, filled, and perhaps even gain a proper gender again.  Through the lust you realize your sex-drive has been permanently increased.");
 				dynStats("lib", 2);
-				//[removed:1.4.10]//changes++;
 			}
 			//-Raises toughness up to 90.
 			//(+3 to 50, +2 to 70, +1 to 90)
@@ -84,13 +74,11 @@ package classes.Items.Consumables
 					outputText("\n\nYou snarl happily as you feel yourself getting even tougher.  It's a barely discernible difference, but you can feel your " + player.skin.desc + " getting tough enough to make you feel invincible.");
 					dynStats("tou", 1);
 				}
-				//[removed:1.4.10]//changes++;
 			}
 			//-Raises strength to 80.
 			if (player.str100 < 80 && rand(3) === 0 && changes < changeLimit) {
 				outputText("\n\nWhile heat builds in your muscles, their already-potent mass shifting slightly as they gain even more strength than before.");
 				dynStats("str", 1);
-				//[removed:1.4.10]//changes++;
 			}
 			//Sexual Changes:
 			//-Lizard dick - first one
@@ -287,7 +275,7 @@ package classes.Items.Consumables
 			//FAILSAFE CHANGE
 			if (changes === 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
-				game.HPChange(100, true);
+				player.HPChange(100, true);
 				dynStats("lus", 5);
 			}
 			player.refillHunger(20);

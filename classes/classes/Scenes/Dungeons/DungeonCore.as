@@ -4,6 +4,7 @@ package classes.Scenes.Dungeons  {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Dungeons.LethicesKeep.LethicesKeep;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
@@ -86,11 +87,13 @@ package classes.Scenes.Dungeons  {
 		public static const DUNGEON_DRAGON_BREEDING_DEN:int     = 64;
 
 
-		public function DungeonCore() {}
+		public function DungeonCore(pregnancyProgression:PregnancyProgression) {
+			this.desertcave = new DesertCave(pregnancyProgression);
+		}
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
-		public var desertcave:DesertCave = new DesertCave;
+		public var desertcave:DesertCave;
 		public var dragoncity:DragonCity = new DragonCity;
 		public var heltower:HelDungeon = new HelDungeon;
 		public var palace:AnzuPalace = new AnzuPalace;

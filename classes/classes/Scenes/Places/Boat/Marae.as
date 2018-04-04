@@ -134,6 +134,7 @@ package classes.Scenes.Places.Boat
 				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 			}
+			this.race = "Deity";
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
 			this.tallness = 10*12;

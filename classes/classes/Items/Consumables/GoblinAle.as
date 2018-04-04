@@ -23,14 +23,7 @@ package classes.Items.Consumables
 		{
 			var tfSource:String = "goblinAle";
 			player.slimeFeed();
-			changes = 0;
-			changeLimit = 1;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (rand(4) === 0) changeLimit++;
-			if (rand(5) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			mutations.initTransformation([2, 3, 4, 5]);
 			clearOutput();
 			outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
 			dynStats("lus", 15);
@@ -65,7 +58,6 @@ package classes.Items.Consumables
 			if (rand(3) === 0 && player.spe100 < 50 && changes < changeLimit) {
 				dynStats("spe", 1 + rand(2));
 				outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.");
-				//[removed:1.4.10]//changes++;
 			}
 			//Neck restore
 			if (player.neck.type != Neck.NORMAL && changes < changeLimit && rand(4) == 0) mutations.restoreNeck(tfSource);
@@ -198,9 +190,7 @@ package classes.Items.Consumables
 
 			//Nipples Turn Back:
 			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) === 0) {
-				outputText("\n\nSomething invisible brushes against your " + player.nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
-				changes++;
-				player.removeStatusEffect(StatusEffects.BlackNipples);
+				mutations.removeBlackNipples(tfSource);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) === 0 && player.vaginaType() === 5 && player.hasVagina()) {

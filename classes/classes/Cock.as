@@ -1,12 +1,12 @@
 package classes
 {
 	import classes.CockTypesEnum;
-	import classes.internals.ISerializable;
+	import classes.internals.Serializable;
 	import classes.internals.Utils;
 	import mx.logging.ILogger;
 	import classes.internals.LoggerFactory;
 
-	public class Cock implements ISerializable
+	public class Cock implements Serializable
 	{
 		private static const LOGGER:ILogger = LoggerFactory.getLogger(Cock);
 		
@@ -362,25 +362,38 @@ package classes
 		{
 			switch(serializedDataVersion) {
 				case 0:
-					LOGGER.info("Upgrading legacy save format...");
+					upgradeLegacyFormat(relativeRootObject);
 					
-					if (relativeRootObject.sock === undefined) {
-						relativeRootObject.sock = "";
-						LOGGER.warn("Cock was missing sock field, setting to {0}", relativeRootObject.sock);
-					}
-					
-					if (relativeRootObject.pShortDesc === "null" || relativeRootObject.pLongDesc === "null")
-					{
-						relativeRootObject.pShortDesc = "";
-						relativeRootObject.pLongDesc = "";
-						LOGGER.warn("Cock piercing description was null, setting to blank");
-					}
-					
-					if (relativeRootObject.pierced === undefined)
-					{
-						relativeRootObject.pierced = 0;
-						LOGGER.warn("Cock piercing was undefined, set to {0}", relativeRootObject.pierced);
-					}
+				default:
+					/*
+					 * The default block is left empty intentionally,
+					 * this switch case operates by using fall through behavior.
+					 */
+			}
+		}
+		
+		/**
+		 * Load un-versioned (legacy) cocks.
+		 */
+		private function upgradeLegacyFormat(relativeRootObject:*):void {
+			LOGGER.info("Upgrading legacy save format...");
+			
+			if (relativeRootObject.sock === undefined) {
+				relativeRootObject.sock = "";
+				LOGGER.warn("Cock was missing sock field, setting to {0}", relativeRootObject.sock);
+			}
+			
+			if (relativeRootObject.pShortDesc === "null" || relativeRootObject.pLongDesc === "null")
+			{
+				relativeRootObject.pShortDesc = "";
+				relativeRootObject.pLongDesc = "";
+				LOGGER.warn("Cock piercing description was null, setting to blank");
+			}
+			
+			if (relativeRootObject.pierced === undefined)
+			{
+				relativeRootObject.pierced = 0;
+				LOGGER.warn("Cock piercing was undefined, set to {0}", relativeRootObject.pierced);
 			}
 		}
 		

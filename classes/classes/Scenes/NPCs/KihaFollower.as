@@ -23,7 +23,6 @@
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			//trace("\Kiha time change: Time is " + getGame().time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant) {
 				if (kihaPregUpdate()) needNext = true;
 				if (pregnancy.incubation == 0) {
@@ -235,7 +234,7 @@ private function warnKihaOfHerImpendingDemise():void {
 	//(Proceed to Spider Horde Combat)
 	//Set first round cover
 	monster.createStatusEffect(StatusEffects.MissFirstRound,0,0,0,0);
-	HPChange(100,false);
+	player.HPChange(100,false);
 	player.changeFatigue(-30);
 	dynStats("lus", -40);
 }
@@ -269,7 +268,7 @@ private function helpKihaAgainstSpoidahs():void {
 	//(Proceed to Spider Horde Combat)
 	startCombat(new SpiderMorphMob());
 	//st - say, 100 hp, -30 fatigue, and -40 lust - then have her cover for you for the first few rounds if you lost to her so you can blitz them or heal. -Z)
-	HPChange(100,false);
+	player.HPChange(100,false);
 	player.changeFatigue(-30);
 	dynStats("lus", -40);
 }
@@ -1785,17 +1784,7 @@ private function kihaCampAppearance():void {
 	else outputText("thighs");
 	outputText(".");
 	outputText("[pg]Between her gropable butt-cheeks, Kiha has a single tight asshole, right where it belongs.");
-/*	if (canKihaGetPregnant()) outputText("[pg]<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilize her and become a father.</b>");
-	if (pregnancy.isPregnant) {
-		outputText("[pg]");
-		if (pregnancy.incubation > 288) outputText("<b>Her belly appears to be a bit swollen.</b>");
-		else if (pregnancy.incubation > 240 && pregnancy.incubation <= 288) outputText("<b>Her belly is comparable to being six months into pregnant.</b>");
-		else if (pregnancy.incubation > 192 && pregnancy.incubation <= 240) outputText("<b>Her belly is comparable to being eight months into pregnancy.</b>");
-		else if (pregnancy.incubation > 144 && pregnancy.incubation <= 192) outputText("<b>Her belly is comparable to being nine months into pregnancy. It wouldn't take very long until she eventually lays a clutch of eggs.</b>");
-		else if (pregnancy.incubation > 72 && pregnancy.incubation <= 144) outputText("<b>Her belly is even bigger than the average belly size at end of a typical human pregnancy.</b>");
-		else if (pregnancy.incubation <= 72) outputText("<b>It's impossible to not notice her pregnancy. The size of her belly has taken its toll on her. She is about to lay a clutch of eggs soon.</b>");
-	}
-*/	doNext(kihaScene.encounterKiha);
+	doNext(kihaScene.encounterKiha);
 }
 
 
@@ -1808,9 +1797,6 @@ private function dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWr
 	//B. It increases the chance of multi-genital play and recognition.
 	//Please note that some scenes have genital requirements, and will not trigger if the PC is lacking the appropriate \"<i>equipment</i>\".
 	//['Dominance' during sex] (can be repeatable once she's in camp, for giggles)
-	//outputText("You feel that Kiha's over-emphasis on dominating you during sex is something that needs to be addressed.  Accordingly, you broach the topic with her.  The dragoness averts her head in response and stares out into the woods to one side of the camp, not bothering to give you the courtesy of a verbal acknowledgement.  \"<i>Hey, I'm talking to you!</i>\"  You assert, annoyed at her refusal to listen.  \"<i>...That's nice,</i>\" Kiha dismissively responds, after a pause."); 
-	//outputText("[pg]You see what's going on: being nice about this isn't going to get you anywhere.  You need to show some dominance if you want her to listen.  \"<i>HEY!  LOOK AT ME WHEN I'M TALKING TO YOU!</i>\"  You snarl, advancing towards the stubborn woman.  Attentively, she returns your gaze.  \"<i>Yes, [name]?  What is it?</i>\"  She inquires, apparently having \"<i>forgotten</i>\" what you just asked her.  You sternly tell her that she needs to learn how to be a bottom in the relationship and take a good fuck from you sometimes, rather than expecting you to play along with her whims.  \"<i>Aw, that's cute; you thinking you have any say in the matter,</i>\" she replies, facetiously.  This makes you angry.  You do have a say in the matter, you tell her, and she will listen.  Kiha grins. \"<i>You're all talk; just be a good " + player.mf("boy","girl") + " and let me do my thing during sex.  Otherwise, I might have to hurt you.  I wouldn't want to hurt my </i>friend<i> now, would I?</i>\"");
-	//outputText("[pg]That seems like a challenge.  Will you rise to it, or will you back down?");
 	outputText("Feeling that Kiha's natural inclination for dominance has grown a little stale, you broach the idea of YOU dominating Her.  The dragoness glances your way and grins toothily as she cracks her knuckles.  \"<i>Why would I want to let you dominate me, doofus?  I've been fighting to stay on top out in the swamps as long as I can remember.  What makes you think I'd want to submit to some cute " + player.mf("guy","girl") + " I just met?</i>\"  She blushes a little when she realizes she just called you cute.");
 	outputText("[pg]Sighing, you fold your arms across your chest and tell her that you won't take no for an answer.  Kiha snorts derisively, two tiny puffs of flame shooting from her nostrils as she cracks her neck and stands.  She grabs her axe out of the dirt and whirls to face you.");
 	outputText("[pg]\"<i>If you want have your way with me, you'll need to earn it, just like anyone else,</i>\" Kiha explains.  She narrows her eyes at you and questions, \"<i>The question is, are you " + player.mf("man","woman") + " enough to take what you want?  I wouldn't want you to get hurt.</i>\"");

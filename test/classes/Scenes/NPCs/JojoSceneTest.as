@@ -1,4 +1,6 @@
 package classes.Scenes.NPCs{
+	import classes.Scenes.PregnancyProgression;
+	import classes.helper.DummyOutput;
     import org.flexunit.asserts.*;
 	import org.hamcrest.assertThat;
 	import org.hamcrest.core.*;
@@ -27,7 +29,7 @@ package classes.Scenes.NPCs{
          
         [Before]
         public function setUp():void {  
-			cut = new JojoSceneForTest();
+			cut = new JojoSceneForTest(new PregnancyProgression(), new DummyOutput());
 			player = new Player();
 			kGAMECLASS.player = player;
         }
@@ -56,9 +58,16 @@ package classes.Scenes.NPCs{
 }
 
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.PregnancyProgression;
+import classes.internals.GuiOutput;
 
 class JojoSceneForTest extends JojoScene {
-	public var collectedOutput:Vector.<String> = new Vector.<String>(); 
+	public var collectedOutput:Vector.<String> = new Vector.<String>();
+	
+	public function JojoSceneForTest(pregnancyProgression:PregnancyProgression, output:GuiOutput) 
+	{
+		super(pregnancyProgression, output);
+	}
 	
 	public function testCorruptJojoVaginalSmother():void {
 		corruptJojoVaginalSmother();

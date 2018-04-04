@@ -149,6 +149,7 @@ package classes{
 			assertThat(cut.cockThickness, equalTo(999.9));
 		}
 		
+		[Test]
 		public function deserializeCockLength():void {
 			serializedClass.cockLength = COCK_LENGTH;
 			

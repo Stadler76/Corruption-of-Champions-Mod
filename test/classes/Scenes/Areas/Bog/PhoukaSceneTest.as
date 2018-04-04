@@ -33,7 +33,7 @@ package classes.Scenes.Areas.Bog
 			player.createVagina();
 			kGAMECLASS.player = player;
 			
-			cut = new SceneForTest();
+			cut = new SceneForTest(kGAMECLASS.pregnancyProgress);
 		}
 		
 		[Test(description="Exposes bug #1116, sex scene skipped")]
@@ -46,9 +46,14 @@ package classes.Scenes.Areas.Bog
 }
 
 import classes.Scenes.Areas.Bog.PhoukaScene;
+import classes.Scenes.PregnancyProgression;
 
 class SceneForTest extends PhoukaScene {
-	public var collectedOutput:Vector.<String> = new Vector.<String>(); 
+	public var collectedOutput:Vector.<String> = new Vector.<String>();
+
+	public function SceneForTest(pregnancyProgression:PregnancyProgression) {
+		super(pregnancyProgression);
+	}
 	
 	public function horseScene():void {
 		this.phoukaSexHorseChoice();

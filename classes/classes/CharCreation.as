@@ -15,24 +15,20 @@ package classes {
 	import com.bit101.components.ComboBox;
 	import flash.events.Event;
 
-
 	public class CharCreation extends BaseContent {
-
-		public const MAX_TOLERANCE_LEVEL:int = 20;
-		public const MAX_MORALSHIFTER_LEVEL:int = 10;
-		public const MAX_DESIRES_LEVEL:int = 10;
-		public const MAX_ENDURANCE_LEVEL:int = 10;
-		public const MAX_MYSTICALITY_LEVEL:int = 10;
-		public const MAX_WISDOM_LEVEL:int = 5;
-		public const MAX_FORTUNE_LEVEL:int = -1; //No maximum level.
-		public const MAX_VIRILITY_LEVEL:int = 15;
-		public const MAX_FERTILITY_LEVEL:int = 15;
-
+		public static const MAX_TOLERANCE_LEVEL:int = 20;
+		public static const MAX_MORALSHIFTER_LEVEL:int = 10;
+		public static const MAX_DESIRES_LEVEL:int = 10;
+		public static const MAX_ENDURANCE_LEVEL:int = 10;
+		public static const MAX_MYSTICALITY_LEVEL:int = 10;
+		public static const MAX_WISDOM_LEVEL:int = 5;
+		public static const MAX_FORTUNE_LEVEL:int = -1; //no max level
+		public static const MAX_VIRILITY_LEVEL:int = 15;
+		public static const MAX_FERTILITY_LEVEL:int = 15;
 		public static const NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX:Number = 1.5;
 
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
-
 		private var boxNames:ComboBox;
 
 		public function CharCreation() {}
@@ -117,7 +113,7 @@ package classes {
 			kGAMECLASS.inRoomedDungeonResume = null;
 			//Hold onto old data for NG+
 			var oldPlayer:Player = player;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) player = new Player(); //Reset all standard stats
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) player = new Player(); //reset all standard stats
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) {
 				player.str = 15;
 				player.tou = 15;
@@ -138,7 +134,7 @@ package classes {
 				player.level = 1;
 				player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 			}
-			player.HP = player.maxHP();
+			player.restoreHP();
 			player.hair.length = 5;
 			player.skin.type = Skin.PLAIN;
 			player.underBody.restore();
@@ -231,30 +227,30 @@ package classes {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) {
 				//NG+ Clothes reset
 				if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] !== 0) {
-					flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 0; //Clear Raphael's training variable so it does not effect
+					flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 0; //clear Raphael's training variable so it does not effect
 					if (!(oldPlayer.armor is GooArmor))
 						 player.setArmor(oldPlayer.armor);
 					else player.setArmor(armors.C_CLOTH);
-					player.setWeapon(oldPlayer.weapon); //Weapon strength post-newgame.
+					player.setWeapon(oldPlayer.weapon); //weapon strength post-newgame
 				}
-				else { //Clothes clear
+				else { //clothes clear
 					player.setArmor(armors.C_CLOTH);
 					player.setWeapon(WeaponLib.FISTS);
 				}
 				//Clear old camp slots
 				inventory.clearStorage();
 				inventory.clearGearStorage();
-				inventory.initializeGearStorage(); //Initialize gearStorage
+				inventory.initializeGearStorage(); //initialize gearStorage
 
 				while(player.cocks.length > 0) {
-					player.removeCock(0,1); //Clear cocks
-					//trace("1 cock purged.");
+					player.removeCock(0,1); //clear cocks
+				//	trace("1 cock purged.");
 				}
 				while(player.vaginas.length > 0) {
-					player.removeVagina(0,1); //Clear vaginas
-					//trace("1 vagina purged.");
+					player.removeVagina(0,1); //clear vaginas
+				//	trace("1 vagina purged.");
 				}
-				player.breastRows = new Vector.<BreastRowClass>(); //Clear breasts
+				player.breastRows = new Vector.<BreastRowClass>(); //clear breasts
 			}
 			else {
 				var hadOldCock:Boolean = player.hasCock();
@@ -264,12 +260,12 @@ package classes {
 				if (hadOldVagina)
 					oldClitLength = player.getClitLength();
 				while(player.cocks.length > 0) {
-					player.removeCock(0,1); //Clear cocks
-					//trace("1 cock purged.");
+					player.removeCock(0,1); //clear cocks
+				//	trace("1 cock purged.");
 				}
 				while(player.vaginas.length > 0) {
-					player.removeVagina(0,1); //Clear vaginas
-					//trace("1 vagina purged.");
+					player.removeVagina(0,1); //clear vaginas
+				//	trace("1 vagina purged.");
 				}
 				//Keep gender and normalize genitals
 				if (hadOldCock) player.createCock(5.5, 1, CockTypesEnum.HUMAN);
@@ -287,8 +283,8 @@ package classes {
 				if (player.nippleLength > 1)
 					player.nippleLength = 1;
 				while (player.biggestTitSize() > 14) player.shrinkTits(true);
-				if (!(oldPlayer.armor is GooArmor)) //Sorry but you can't come, Valeria!
-					player.setArmor(oldPlayer.armor);
+				if (!(oldPlayer.armor is GooArmor)) //sorry but you can't come, Valeria!
+					 player.setArmor(oldPlayer.armor);
 				else player.setArmor(armors.C_CLOTH);
 			}
 			//Clear Statuses
@@ -317,7 +313,7 @@ package classes {
 			if (keyItemTemp.length > 0)
 				for (i = 0; i < keyItemTemp.length; i++)
 					player.createKeyItem(keyItemTemp[i].keyName, keyItemTemp[i].value1, keyItemTemp[i].value2, keyItemTemp[i].value3, keyItemTemp[i].value4);
-			//player.perkPoints = player.level - 1;
+//			player.perkPoints = player.level - 1;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
 				var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				var difficulty:int = flags[kFLAGS.GAME_DIFFICULTY];
@@ -329,7 +325,7 @@ package classes {
 			//Clear plot storage array!
 			flags = new DefaultDict();
 			kGAMECLASS.saves.loadPermObject();
-			//Carry over data if new game plus.
+			//Carry over data if new game plus
 			if (newGamePlusLevel > 0) {
 				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
 				flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
@@ -348,7 +344,7 @@ package classes {
 
 		private function chooseName():void {
 			if (mainView.nameBox.text === "") {
-				//If part of newgame+, don't fully wipe. / Isn't this redundant? This is covered in `newGameGo`.
+				//If part of newgame+, don't fully wipe. Isn't this redundant? This is covered in `newGameGo`
 				if (player.XP > 0) {
 					flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
 					if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] === 0)
@@ -368,7 +364,7 @@ package classes {
 			if (boxNames !== null) boxNames.visible = false;
 			mainView.nameBox.visible = false;
 			player.short = mainView.nameBox.text;
-			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) { //Dirty checking as the NG+ flag is incremented after reincarnating.
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) { //dirty checking as the NG+ flag is incremented after reincarnating
 				clearOutput();
 				outputText("You shall be known as " + player.short + " now.");
 				ascensionMenu();
@@ -382,8 +378,7 @@ package classes {
 				addButton(0, "SpecialName", useCustomProfile);
 				addButton(1, "Continue On", noCustomProfile);
 			}
-			else //Proceed with normal character creation
-				genericGenderChoice();
+			else genericGenderChoice(); //proceed with normal character creation
 		}
 
 		private function genericGenderChoice():void {
@@ -403,11 +398,11 @@ package classes {
 			if (specialName(player.short) !== null) {
 				outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
 				flags[kFLAGS.HISTORY_PERK_SELECTED] = 1;
-				completeCharacterCreation(); //Skip character creation, customPlayerProfile will be called in completeCharacterCreation
+				completeCharacterCreation(); //skip character creation, customPlayerProfile will be called in completeCharacterCreation
 			}
 			else {
 				outputText("There is something different about you, but first, what is your basic gender?  An individual such as you may later overcome this, of course...\n\n");
-				genericGenderChoice(); //After character creation the fact that customPlayerProfile is not null will activate a custom player setup
+				genericGenderChoice(); //after character creation the fact that customPlayerProfile is not null will activate a custom player setup
 			}
 		}
 
@@ -424,7 +419,7 @@ package classes {
 		}
 
 		private function selectName(event:Event):void {
-			if (ComboBox(event.target).selectedItem.data[0].length > 16) return; //Not a name
+			if (ComboBox(event.target).selectedItem.data[0].length > 16) return; //not a name
 			clearOutput();
 			outputText("<b>" + ComboBox(event.target).selectedItem.data[0] + ":</b> " + ComboBox(event.target).selectedItem.data[3]);
 			if (ComboBox(event.target).selectedItem.data[2]) outputText("\n\nThis character have pre-defined history.");
@@ -437,7 +432,7 @@ package classes {
 			for (var i:int = 0; i < specialCharacters.customs.length; i++)
 				if (specialCharacters.customs[i][0] === arg && !specialCharacters.customs[i][2])
 					return specialCharacters.customs[i][1];
-			return specialName(arg); //Must check against the special name list as well
+			return specialName(arg); //must check against the special name list as well
 		}
 		//Does PC skip creation?
 		private function specialName(arg:String):Function {
@@ -448,8 +443,7 @@ package classes {
 		}
 
 		private function isAMan():void {
-			//Attributes
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) { //attributes
 				player.str += 3;
 				player.tou += 2;
 			}
@@ -466,13 +460,11 @@ package classes {
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
-			//Breasts
-			player.createBreastRow();
-			//Choices
+			player.createBreastRow(); //breasts
 			clearOutput();
 			outputText(images.showImage("event-question"));
 			outputText("You are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?");
-			menu();
+			menu(); //choices
 			addButton(0, "Lean", buildLeanMale);
 			addButton(1, "Average", buildAverageMale);
 			addButton(2, "Thick", buildThickMale);
@@ -480,8 +472,7 @@ package classes {
 		}
 
 		internal function isAWoman():void {
-			//Attributes
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) { //attributes
 				player.spe += 3;
 				player.inte += 2;
 			}
@@ -494,13 +485,11 @@ package classes {
 			player.balls = 0;
 			player.ballSize = 0;
 			player.createVagina();
-			//Breasts
-			player.createBreastRow();
-			//Choices
+			player.createBreastRow(); //breasts
 			clearOutput();
 			outputText(images.showImage("event-question"));
 			outputText("You are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?");
-			menu();
+			menu(); //choices
 			addButton(0, "Slender", buildSlenderFemale);
 			addButton(1, "Average", buildAverageFemale);
 			addButton(2, "Curvy", buildCurvyFemale);
@@ -508,8 +497,7 @@ package classes {
 		}
 
 		internal function isAHerm():void {
-			//Attributes
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] === 0) { //attributes
 				player.str+=1;
 				player.tou+=1;
 				player.spe+=1;
@@ -529,123 +517,100 @@ package classes {
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
-			//Breasts
-			player.createBreastRow();
-			//Choices
+			player.createBreastRow(); //breasts
 			clearOutput();
 			outputText(images.showImage("event-question"));
 			outputText("You are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?");
-			menu();
-			addButton(0, "Fem. Slender", buildSlenderFemale).hint("Feminine build. \n\nWill make you a futanari.", "Feminine, Slender");
-			addButton(1, "Fem. Average", buildAverageFemale).hint("Feminine build. \n\nWill make you a futanari.", "Feminine, Average");
-			addButton(2, "Fem. Curvy", buildCurvyFemale).hint("Feminine build. \n\nWill make you a futanari.", "Feminine, Curvy");
-			addButton(3, "Fem. Tomboy", buildTomboyishFemale).hint("Androgynous build. \n\nA bit feminine, but fit and slender.", "Feminine, Tomboyish");
-			//addButton(4, "Androgynous", chooseBodyTypeAndrogynous).hint("Confusing build. \n\nWill make you as average as possible.", "Androgynous");
-			addButton(5, "Mas. Lean", buildLeanMale).hint("Masculine build. \n\nWill make you a maleherm.", "Masculine, Lean");
-			addButton(6, "Mas. Average", buildAverageMale).hint("Masculine build. \n\nWill make you a maleherm.", "Masculine, Average");
-			addButton(7, "Mas. Thick", buildThickMale).hint("Masculine build. \n\nWill make you a maleherm.", "Masculine, Thick");
-			addButton(8, "Mas. Girly", buildGirlyMale).hint("Androgynous build. \n\nA bit masculine, but soft and slender.", "Masculine, Girly");
+			menu(); //choices
+			addButton(0, "Fem. Slender", buildSlenderFemale).hint("Feminine build.\n\nWill make you a futanari.", "Feminine, Slender");
+			addButton(1, "Fem. Average", buildAverageFemale).hint("Feminine build.\n\nWill make you a futanari.", "Feminine, Average");
+			addButton(2, "Fem. Curvy", buildCurvyFemale).hint("Feminine build.\n\nWill make you a futanari.", "Feminine, Curvy");
+			addButton(3, "Fem. Tomboy", buildTomboyishFemale).hint("Androgynous build.\n\nA bit feminine, but fit and slender.", "Feminine, Tomboyish");
+//			addButton(4, "Androgynous", chooseBodyTypeAndrogynous).hint("Confusing build.\n\nWill make you as average as possible.", "Androgynous");
+			addButton(5, "Mas. Lean", buildLeanMale).hint("Masculine build.\n\nWill make you a maleherm.", "Masculine, Lean");
+			addButton(6, "Mas. Average", buildAverageMale).hint("Masculine build.\n\nWill make you a maleherm.", "Masculine, Average");
+			addButton(7, "Mas. Thick", buildThickMale).hint("Masculine build.\n\nWill make you a maleherm.", "Masculine, Thick");
+			addButton(8, "Mas. Girly", buildGirlyMale).hint("Androgynous build.\n\nA bit masculine, but soft and slender.", "Masculine, Girly");
 		}
 
 		private function buildLeanMale():void {
 			player.str -= 1;
 			player.spe += 1;
-
 			player.femininity = 34;
 			player.thickness = 30;
 			player.tone += 5;
-
 			player.breastRows[0].breastRating = BreastCup.FLAT;
 			player.butt.rating = Butt.RATING_TIGHT;
 			player.hips.rating = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
-
 		private function buildSlenderFemale():void {
 			player.str -= 1;
 			player.spe += 1;
-
 			player.femininity = 66;
 			player.thickness = 30;
 			player.tone += 5;
-
 			player.breastRows[0].breastRating = BreastCup.B;
 			player.butt.rating = Butt.RATING_TIGHT;
 			player.hips.rating = Hips.RATING_AMPLE;
 			chooseComplexion();
 		}
-
 		private function buildAverageMale():void {
 			player.femininity = 30;
 			player.thickness = 50;
-
 			player.breastRows[0].breastRating = BreastCup.FLAT;
 			player.butt.rating = Butt.RATING_AVERAGE;
 			player.hips.rating = Hips.RATING_AVERAGE;
 			chooseComplexion();
 		}
-
 		private function buildAverageFemale():void {
 			player.femininity = 70;
 			player.thickness = 50;
-
 			player.breastRows[0].breastRating = BreastCup.C;
 			player.butt.rating = Butt.RATING_NOTICEABLE;
 			player.hips.rating = Hips.RATING_AMPLE;
 			chooseComplexion();
 		}
-
 		private function buildThickMale():void {
 			player.spe -= 4;
 			player.str += 2;
 			player.tou += 2;
-
 			player.femininity = 29;
 			player.thickness = 70;
 			player.tone -= 5;
-
 			player.breastRows[0].breastRating = BreastCup.FLAT;
 			player.butt.rating = Butt.RATING_NOTICEABLE;
 			player.hips.rating = Hips.RATING_AVERAGE;
 			chooseComplexion();
 		}
-
 		private function buildCurvyFemale():void {
 			player.spe -= 2;
 			player.str += 1;
 			player.tou += 1;
-
 			player.femininity = 71;
 			player.thickness = 70;
-
 			player.breastRows[0].breastRating = BreastCup.D;
 			player.butt.rating = Butt.RATING_LARGE;
 			player.hips.rating = Hips.RATING_CURVY;
 			chooseComplexion();
 		}
-
 		private function buildGirlyMale():void {
 			player.str -= 2;
 			player.spe += 2;
-
 			player.femininity = player.hasVagina() ? 49 : 50;
 			player.thickness = 50;
 			player.tone = 26;
-
 			player.breastRows[0].breastRating = BreastCup.A;
 			player.butt.rating = Butt.RATING_NOTICEABLE;
 			player.hips.rating = Hips.RATING_SLENDER;
 			chooseComplexion();
 		}
-
 		private function buildTomboyishFemale():void {
 			player.str += 1;
 			player.spe -= 1;
-
 			player.femininity = player.hasCock() ? 55 : 56;
 			player.thickness = 50;
 			player.tone = 50;
-
 			player.breastRows[0].breastRating = BreastCup.A;
 			player.butt.rating = Butt.RATING_TIGHT;
 			player.hips.rating = Hips.RATING_SLENDER;
@@ -671,7 +636,7 @@ package classes {
 			clearOutput();
 			outputText(images.showImage("event-question"));
 			outputText("You selected a " + choice + " complexion.\n\nWhat color is your hair?");
-			menu(); //And choose hair
+			menu(); //and choose hair
 			addButton(0, "Blonde", setHair, "blonde");
 			addButton(1, "Brown", setHair, "brown");
 			addButton(2, "Black", setHair, "black");
@@ -684,10 +649,10 @@ package classes {
 			player.hair.color = choice;
 			clearOutput();
 			outputText("You have " + player.hairDescript() + ".\n\nYou will proceed to customization.");
-			//chooseEndowment(false);
+		//	chooseEndowment(false);
 			genericStyleCustomizeMenu();
 		}
-		//-----------------GENERAL STYLE-----------------
+		//----------------- GENERAL STYLE -----------------
 		private function genericStyleCustomizeMenu():void {
 			clearOutput();
 			mainView.nameBox.visible = false;
@@ -712,7 +677,7 @@ package classes {
 			addButton(6, "Breast Size", menuBreastSize);
 			addButton(9, "Done", chooseEndowment);
 		}
-		//-----------------SKIN COLOURS-----------------
+		//----------------- SKIN COLOURS -----------------
 		private function menuSkinComplexion():void {
 			clearOutput();
 			outputText(images.showImage("event-question"));
@@ -731,7 +696,7 @@ package classes {
 			player.skin.tone = complexion;
 			genericStyleCustomizeMenu();
 		}
-		//-----------------HAIR COLOURS-----------------
+		//----------------- HAIR COLOURS -----------------
 		private function menuHairColor():void {
 			clearOutput();
 			outputText(images.showImage("event-question"));
@@ -750,7 +715,7 @@ package classes {
 			player.hair.color = color;
 			genericStyleCustomizeMenu();
 		}
-		//-----------------BEARD STYLE-----------------
+		//----------------- BEARD STYLE -----------------
 		private function menuBeardSettings():void {
 			clearOutput();
 			outputText("You can choose your beard length and style.\n\n");
@@ -793,7 +758,7 @@ package classes {
 			player.beard.length = choiceLength;
 			menuBeardSettings();
 		}
-		//-----------------HEIGHT-----------------
+		//----------------- HEIGHT -----------------
 		private function setHeight():void {
 			clearOutput();
 			outputText("Set your height in inches.");
@@ -816,19 +781,19 @@ package classes {
 			if (int(mainView.nameBox.text) < 48) {
 				clearOutput();
 				outputText("That is below your minimum height choices!");
-				doNext(setHeight); //Off to the height selection!
+				doNext(setHeight); //off to the height selection!
 				return;
 			}
 			if (int(mainView.nameBox.text) > 96) {
 				clearOutput();
 				outputText("That is above your maximum height choices!");
-				doNext(setHeight); //Off to the height selection!
+				doNext(setHeight); //off to the height selection!
 				return;
 			}
 			if (mainView.nameBox.text === "") {
 				clearOutput();
 				outputText("Please input your height. Off you go to the height selection!");
-				doNext(setHeight); //Off to the height selection!
+				doNext(setHeight); //off to the height selection!
 				return;
 			}
 			player.tallness = int(mainView.nameBox.text);
@@ -838,10 +803,10 @@ package classes {
 			outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?");
 			doYesNo(genericStyleCustomizeMenu, setHeight);
 		}
-		//-----------------COCK LENGTH-----------------
+		//----------------- COCK LENGTH -----------------
 		private function menuCockLength():void {
 			clearOutput();
-			outputText("You can choose a cock length between 4 and 8 inches. Your starting cock length will also affect starting cock thickness. \n\nCock type and size can be altered later in the game through certain items.");
+			outputText("You can choose a cock length between 4 and 8 inches. Your starting cock length will also affect starting cock thickness.\n\nCock type and size can be altered later in the game through certain items.");
 			menu();
 			addButton(0, "4\"", chooseCockLength, 4);
 			addButton(1, "4.5\"", chooseCockLength, 4.5);
@@ -859,7 +824,7 @@ package classes {
 			player.cocks[0].cockThickness = Utils.floor(((length / 5) - 0.1),1);
 			genericStyleCustomizeMenu();
 		}
-		//-----------------BREAST SIZE-----------------
+		//----------------- BREAST SIZE -----------------
 		private function menuBreastSize():void {
 			clearOutput();
 			outputText("You can choose a breast size. Breast size may be altered later in the game.");
@@ -876,7 +841,7 @@ package classes {
 			player.breastRows[0].breastRating = size;
 			genericStyleCustomizeMenu();
 		}
-		//-----------------STARTER PERKS-----------------
+		//----------------- STARTER PERKS -----------------
 		private function chooseEndowment():void {
 			clearOutput();
 			outputText(images.showImage("event-question"));
@@ -904,7 +869,7 @@ package classes {
 					totalStartingPerks++;
 				}
 			}
-			if (totalStartingPerks >= 4) //Option to skip if you have enough starting perks
+			if (totalStartingPerks >= 4) //option to skip if you have enough starting perks
 				addButton(14, "Skip", chooseHistory);
 		}
 
@@ -934,7 +899,7 @@ package classes {
 			addButton(1, "No", chooseEndowment);
 		}
 
-		private function setEndowment(choice:PerkType):void {
+		protected function setEndowment(choice:PerkType):void {
 			switch(choice) {
 				//Attribute-specific
 				case PerkLib.Strong:
@@ -948,7 +913,7 @@ package classes {
 					player.tone += 5;
 					player.thickness += 5;
 					player.createPerk(PerkLib.Tough, 0.25, 0, 0, 0);
-					player.HP = kGAMECLASS.maxHP();
+					player.restoreHP();
 					break;
 				case PerkLib.Fast:
 					player.spe += 5;
@@ -1005,16 +970,15 @@ package classes {
 					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
 					player.createPerk(PerkLib.WetPussy, 2, 0, 0, 0);
 					break;
-				default:
-					//Move along, nothing happens in this defaultness.
+				default: //move along, nothing happens in this defaultness
 			}
 			chooseHistory();
 		}
-		//-----------------HISTORY PERKS-----------------
+		//----------------- HISTORY PERKS -----------------
 		public function chooseHistory():void {
 			clearOutput();
 			outputText(images.showImage("event-question"));
-			if (flags[kFLAGS.HISTORY_PERK_SELECTED] !== 0) //This flag can only be non-zero if chooseHistory is called from camp.as
+			if (flags[kFLAGS.HISTORY_PERK_SELECTED] !== 0) //this flag can only be non-zero if chooseHistory is called from camp.as
 				outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>\n\n");
 			outputText("Before you became a champion, you had other plans for your life.  What were you doing before?");
 			menu();
@@ -1115,7 +1079,7 @@ package classes {
 			hideUpDown();
 			dynStats("lus", 40, "cor", 2);
 			getGame().time.hours = 18;
-			outputText(images.showImage("zetaz-encounter-first"));
+			outputText(images.showImage("encounter-zetaz"));
 			spriteSelect(SpriteDb.s_zetaz_imp);
 			outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ");
 			if (player.gender === Gender.FEMALE) outputText("the urge to chase down his rod and impale yourself on it.\n\n");
@@ -1148,7 +1112,7 @@ package classes {
 			awardAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, true, true);
 			doNext(playerMenu);
 		}
-		//-----------------GAME MODES-----------------
+		//----------------- GAME MODES -----------------
 		private function chooseModeDifficulty():void {
 			if (flags[kFLAGS.GAME_DIFFICULTY] < 3) flags[kFLAGS.GAME_DIFFICULTY]++;
 			else flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1220,7 +1184,7 @@ package classes {
 		}
 
 		private function startTheGame():void {
-			player.startingRace = player.race();
+			player.startingRace = player.race;
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
 			if (flags[kFLAGS.GRIMDARK_MODE] > 0) flags[kFLAGS.BACKGROUND_STYLE] = 9;
 			kGAMECLASS.saves.loadPermObject();
@@ -1250,7 +1214,7 @@ package classes {
 			flags[kFLAGS.IN_INGNAM] = 1;
 			kGAMECLASS.ingnam.menuIngnam();
 		}
-		//------------ASCENSION------------
+		//------------ ASCENSION ------------
 		public function ascensionMenu():void {
 			hideStats();
 			clearOutput();
@@ -1319,9 +1283,9 @@ package classes {
 			menu();
 			for (var i:int = 0; i < player.perks.length; i++) {
 				if (isPermable(player.perks[i].ptype) && button < 14) {
-					if (countBeforeAdding > 0) //Decrement count before adding buttons
-						countBeforeAdding--;
-					else { //Add buttons when the count reaches zero
+					if (countBeforeAdding > 0)
+						countBeforeAdding--; //decrement count before adding buttons
+					else { //add buttons when the count reaches zero
 						if (player.perks[i].value4 === 0)
 							 addButton(button++, player.perks[i].ptype.id, permanentizePerk, player.perks[i].ptype, null, null, player.perks[i].ptype.desc(player.perks[i]));
 						else addButtonDisabled(button++, player.perks[i].ptype.id, "This perk is already made permanent and will carry over in all subsequent ascensions.");
@@ -1339,20 +1303,17 @@ package classes {
 		private function permanentizePerk(perk:PerkType):void {
 			if (player.ascensionPerkPoints < permanentizeCost()) return; //Not enough points? Cancel
 			if (player.perkv4(perk) > 0) return; //Perk already permed? Cancel
-			player.ascensionPerkPoints -= permanentizeCost(); //Deduct points
-			player.addPerkValue(perk, 4, 1); //Permanentize a perk
+			player.ascensionPerkPoints -= permanentizeCost(); //deduct points
+			player.addPerkValue(perk, 4, 1); //permanentize a perk
 			ascensionPermeryMenu();
 		}
 		private function permanentizeCost():int {
 			var count:int = 1;
-
 			for each (var perk:PerkType in PerkLists.PERMEABLE)
 				if (player.perkv4(perk) > 0) count++;
 			return count;
 		}
-		private function isPermable(perk:PerkType):Boolean {
-			return PerkLists.PERMEABLE.indexOf(perk) !== -1;
-		}
+		private function isPermable(perk:PerkType):Boolean { return PerkLists.PERMEABLE.indexOf(perk) !== -1; }
 		//Respec
 		private function respecLevelPerks():void {
 			clearOutput();
@@ -1437,19 +1398,12 @@ package classes {
 			player.vaginas = new Vector.<VaginaClass>();
 			doNext(routeToGenderChoiceReincarnation);
 		}
-
 		private function routeToGenderChoiceReincarnation():void {
 			clearOutput();
 			genericGenderChoice();
 		}
-		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean {
-			return perk.ptype.keepOnAscension(respec) || perk.value4 > 0;
-		}
-		private function isSpecialKeyItem(keyName:* = null):Boolean {
-			return (keyName === "Camp - Chest" || keyName === "Camp - Murky Chest" || keyName === "Camp - Ornate Chest" || keyName === "Equipment Rack - Weapons" || keyName === "Equipment Rack - Armor" || keyName === "Equipment Rack - Shields" || keyName === Inventory.STORAGE_JEWELRY_BOX || keyName === "Backpack" || keyName === "Nieve's Tear"); 
-		}
-		private function isSpell(statusEffect:* = null):Boolean {
-			return (statusEffect === StatusEffects.KnowsCharge || statusEffect === StatusEffects.KnowsBlind || statusEffect === StatusEffects.KnowsWhitefire || statusEffect === StatusEffects.KnowsArouse || statusEffect === StatusEffects.KnowsHeal || statusEffect === StatusEffects.KnowsMight || statusEffect === StatusEffects.KnowsBlackfire); 
-		}
+		private function isAscensionPerk(perk:PerkClass, respec:Boolean = false):Boolean { return perk.ptype.keepOnAscension(respec) || perk.value4 > 0; }
+		private function isSpecialKeyItem(keyName:* = null):Boolean { return (keyName === "Camp - Chest" || keyName === "Camp - Murky Chest" || keyName === "Camp - Ornate Chest" || keyName === "Equipment Rack - Weapons" || keyName === "Equipment Rack - Armor" || keyName === "Equipment Rack - Shields" || keyName === Inventory.STORAGE_JEWELRY_BOX || keyName === "Backpack" || keyName === "Nieve's Tear"); }
+		private function isSpell(statusEffect:* = null):Boolean { return (statusEffect === StatusEffects.KnowsCharge || statusEffect === StatusEffects.KnowsBlind || statusEffect === StatusEffects.KnowsWhitefire || statusEffect === StatusEffects.KnowsArouse || statusEffect === StatusEffects.KnowsHeal || statusEffect === StatusEffects.KnowsMight || statusEffect === StatusEffects.KnowsBlackfire); }
 	}
 }

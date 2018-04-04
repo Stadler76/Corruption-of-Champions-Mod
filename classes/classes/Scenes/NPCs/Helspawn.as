@@ -149,6 +149,7 @@ private function calledShot():void {
 								'scimitar and shield': "scimitar and shield, giving her a balanced fighting style"
 							}[ weapon] +
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.";
+			this.race = "Salamander";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 85, 0, 0, 0);

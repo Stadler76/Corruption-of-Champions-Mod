@@ -196,6 +196,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			this.a = "the ";
 			this.short = "doppelganger";
 			this.long = ""; // Needs to be set to supress validation errors, but is handled by an accessor override.
+			this.race = "Demon";
 			this.imageName = "doppleganger";
 			this.plural = false;
 			
@@ -293,7 +294,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			
 			str += "You are fighting the doppelganger. " + player.mf("He", "She") +" is a ";
 			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall ");
-			str += player.race() + ", with " + player.bodyType() + ". ";
+			str += player.race + ", with " + player.bodyType() + ". ";
 			
 			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ".";
 			

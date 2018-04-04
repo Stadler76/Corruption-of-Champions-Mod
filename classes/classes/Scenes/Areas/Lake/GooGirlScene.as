@@ -8,12 +8,15 @@ package classes.Scenes.Areas.Lake
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
+	import classes.Scenes.Monsters.pregnancies.PlayerGooGirlPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
 public class GooGirlScene extends AbstractLakeContent implements Encounter {
-		public function GooGirlScene()
+		public function GooGirlScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
+			new PlayerGooGirlPregnancy(pregnancyProgression, output);
 		}
 
 	public function encounterName():String {

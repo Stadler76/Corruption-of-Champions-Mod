@@ -61,6 +61,9 @@ import flash.ui.Keyboard;
 			mainView.statsView.setTheme((flags[kFLAGS.USE_OLD_FONT] > 0) ? StatsView.ValueFontOld : StatsView.ValueFont,
 					textColorArray[flags[kFLAGS.BACKGROUND_STYLE]],
 					barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]]);
+			mainView.monsterStatsView.setTheme((flags[kFLAGS.USE_OLD_FONT] > 0) ? StatsView.ValueFontOld : StatsView.ValueFont, 
+					textColorArray[flags[kFLAGS.BACKGROUND_STYLE]],
+					barAlphaArray[flags[kFLAGS.BACKGROUND_STYLE]]);
 		}
 
 		public function hideSprite():void {

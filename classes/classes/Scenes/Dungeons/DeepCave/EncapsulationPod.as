@@ -207,6 +207,7 @@ package classes.Scenes.Dungeons.DeepCave
 			this.short = "pod";
 			this.imageName = "pod";
 			this.long = "";
+			this.race = "Abomination";
 			// this.plural = false;
 			initGenderless();
 			createBreastRow(0,0);

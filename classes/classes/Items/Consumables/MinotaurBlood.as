@@ -24,16 +24,7 @@ package classes.Items.Consumables
 		{
 			var tfSource:String = "minotaurBlood";
 			player.slimeFeed();
-			//Changes done
-			changes = 0;
-			//Change limit
-			changeLimit = 1;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
-			if (changeLimit === 1) changeLimit = 2;
+			mutations.initTransformation([2, 3, 3], 1, 2);
 			//Temporary storage
 			var temp:Number = 0;
 			var temp2:Number = 0;
@@ -64,7 +55,6 @@ package classes.Items.Consumables
 					outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
 					dynStats("spe", -1);
 				}
-				//[removed:1.4.10]//changes++;
 			}
 			//Toughness (chance of - sensitivity)
 			if (rand(3) === 0 && changes < changeLimit) {
@@ -98,7 +88,6 @@ package classes.Items.Consumables
 						dynStats("sen", -3);
 					}
 				}
-				//[removed:1.4.10]//changes++;
 			}
 			//SEXUAL
 			//Boosts ball size MORE than equinum :D:D:D:D:D:D:
@@ -133,7 +122,6 @@ package classes.Items.Consumables
 			//+hooves
 			if (player.lowerBody.type !== LowerBody.HOOFED) {
 				if (changes < changeLimit && rand(3) === 0) {
-					//[removed:1.4.10]//changes++;
 					if (player.lowerBody.type === LowerBody.HUMAN) outputText("\n\nYou stagger as your feet change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
 					else if (player.lowerBody.type === LowerBody.DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!");
 					else if (player.lowerBody.type === LowerBody.NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!");
@@ -428,7 +416,7 @@ package classes.Items.Consumables
 					outputText("Your balls feel as if they've grown heavier with the weight of more sperm.\n");
 					player.hoursSinceCum += 200;
 				}
-				game.HPChange(50, true);
+				player.HPChange(50, true);
 				dynStats("lus", 50);
 			}
 			player.refillHunger(25);

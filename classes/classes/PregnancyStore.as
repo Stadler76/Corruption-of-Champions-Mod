@@ -92,7 +92,7 @@ package classes
 		public static const INCUBATION_MINERVA:int           	= 216; 
 		public static const INCUBATION_BEHEMOTH:int           	=1440; //Sorry Behemoth, but Isabella wins.
 		public static const INCUBATION_PHOENIX:int           	= 168; 
-		public static const INCUBATION_KIHA:int                 = 384;
+		public static const INCUBATION_KIHA:int                 = 336;
 		public static const INCUBATION_ISABELLA:int             =2160; //Longest pregnancy ever. 
 		
 		private static const MAX_FLAG_VALUE:int                 = 2999;

@@ -2,7 +2,7 @@ package classes.Scenes.Places.Bazaar{
 	import classes.Appearance;
 	import classes.BodyParts.Butt;
 	import classes.helper.FireButtonEvent;
-	import classes.internals.IRandomNumber;
+	import classes.internals.RandomNumberGenerator;
     import org.flexunit.asserts.*;
 	import org.hamcrest.assertThat;
 	import org.hamcrest.core.*;
@@ -17,6 +17,7 @@ package classes.Scenes.Places.Bazaar{
 	import classes.Player;
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Output;
      
     public class RoxanneTest {
 		private static const EVENT_ITERATIONS:int = 5;
@@ -32,7 +33,7 @@ package classes.Scenes.Places.Bazaar{
          
         [Before]
         public function setUp():void {
-			var rng:IRandomNumber = new RngMock();
+			var rng:RandomNumberGenerator = new RngMock();
 			
 			cut = new RoxanneForTest(rng);
 			
@@ -40,7 +41,7 @@ package classes.Scenes.Places.Bazaar{
 			player.rng = rng;
 			kGAMECLASS.player = player;
 			
-			fireButtons = new FireButtonEvent(kGAMECLASS.mainView, CoC.MAX_BUTTON_INDEX);
+			fireButtons = new FireButtonEvent(kGAMECLASS.mainView, Output.MAX_BUTTON_INDEX);
 			
 			player.flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] = 10;
 			player.flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] = 1;
@@ -149,12 +150,12 @@ package classes.Scenes.Places.Bazaar{
 }
 
 import classes.Scenes.Places.Bazaar.Roxanne;
-import classes.internals.IRandomNumber;
+import classes.internals.RandomNumberGenerator;
 
 class RoxanneForTest extends Roxanne {
 	public var collectedOutput:Vector.<String> = new Vector.<String>();
 	
-	public function RoxanneForTest(rng:IRandomNumber) 
+	public function RoxanneForTest(rng:RandomNumberGenerator) 
 	{
 		super(rng);
 	}
@@ -168,7 +169,7 @@ class RoxanneForTest extends Roxanne {
 	}
 }
 
-class RngMock implements IRandomNumber {
+class RngMock implements RandomNumberGenerator {
 	public var randomValue:int = 0;
 	
 	public function random(max:int):int 

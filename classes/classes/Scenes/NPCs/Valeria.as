@@ -277,7 +277,7 @@ public function valeriaGetFucked():void {
 
 	player.orgasm('VaginalAnal');
 	dynStats("sen", -1);
-	HPChange(25 + (player.newGamePlusMod() * 15),false);
+	player.HPChange(25 + (player.newGamePlusMod() * 15),false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -308,7 +308,7 @@ public function gooFlation(clearText:Boolean = true):void {
 		outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, alright?</i>\"");
 		player.orgasm('Generic');
 		dynStats("sen", 1);
-		HPChange(25 + (player.newGamePlusMod() * 15),false);
+		player.HPChange(25 + (player.newGamePlusMod() * 15),false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -334,7 +334,7 @@ public function penetrateValeria():void {
 	outputText("\n\nYou run your hand along her curves as she digests her meal, but eventually you know you need to get on with your duties.  You roll Valeria off of you and start to redress.");
 	player.orgasm('Dick');
 	dynStats("sen", 1);
-	HPChange(25 + (player.newGamePlusMod() * 15), false);
+	player.HPChange(25 + (player.newGamePlusMod() * 15), false);
 	feedValeria(Math.sqrt(player.cumQ()) + 5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -396,7 +396,7 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 		outputText("\n\n\"<i>Oh, that's good... good, " + player.mf("boy","girl") + ", good.  Yes, let it all out, just like that... just like that,</i>\" she moans, soaking your juices up until your orgasm finally passes.  Sated, she withdraws around your foot, leaving you a quivering mess on the ground.");
 		outputText("\n\n\"<i>Mmm, not bad, partner</i>\" Valeria says, patting her full belly.  You can see a bit of your cum swirling around inside her.  \"<i>We'll do this again sometime,</i>\" she adds, walking off to another part of camp with a wink.");
 	}
-	HPChange(25 + (player.newGamePlusMod() * 15), false);
+	player.HPChange(25 + (player.newGamePlusMod() * 15), false);
 	feedValeria(Math.sqrt(player.cumQ()) + 5 + (player.averageVaginalWetness() * 5));
 	player.orgasm('Generic');
 	dynStats("sen", 1);
@@ -414,7 +414,7 @@ private function talkWithValeria():void {
 	outputText("\n\n\"<i>I dunno, partner,</i>\" she teases, sitting down beside you, \"<i>That's asking an awful lot.</i>\"");
 	outputText("\n\nYou roll your eyes and, after a few pleasantries, venture to ask her... well, what the hell she is, exactly.  She's not at all like the average goo-girl wandering around Mareth.  She talks, she walks on two legs...");
 	outputText("\n\nShe laughs girlishly, waving you off like you've said something absurd.  \"<i>I'm not a real goo, you know. At least, I didn't start out this way,</i>\" she adds, indicating her gooey blue form.  \"<i>No, I was a human, like you");
-	if (player.race() != "human") outputText(" were");
+	if (player.race != "human") outputText(" were");
 	outputText(".  I just, I dunno, changed, I guess.</i>\"");
 	outputText("\n\nChanged?");
 	outputText("\n\n\"<i>Well, yeah. Back when the demons first came.  One of them took me and... changed me,</i>\" she says quietly, looking quickly away. \"<i>I don't know if there were real goo-girls or slimes back then.  I guess I was something of an experiment - a prototype, maybe.  The magic the demons used on me wasn't quite the same as whatever creates the goos nowadays, though.  I'm as mentally capable as I ever was, can talk, walk on two legs... The whole deal.  Biggest change is that shit like this happens,</i>\" she adds, picking up a nearby rock and poking into her belly. It floats listlessly inside her, darkly visible through her gooey skin.");

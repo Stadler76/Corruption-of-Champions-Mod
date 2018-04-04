@@ -4,6 +4,8 @@ package classes.Scenes.Areas.HighMountains {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Scenes.NPCs.pregnancies.PlayerMinervaPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
@@ -11,10 +13,12 @@ package classes.Scenes.Areas.HighMountains {
 
 		public var pregnancy:PregnancyStore;
 		
-		public function MinervaScene() {
+		public function MinervaScene(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
 			pregnancy = new PregnancyStore(kFLAGS.MINERVA_PREGNANCY_TYPE, kFLAGS.MINERVA_PREGNANCY_INCUBATION, 0, 0);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 216, 144, 72);
 			CoC.timeAwareClassAdd(this);
+			
+			new PlayerMinervaPregnancy(pregnancyProgression, output);
 		}
 		
 //const MINERVA_LOVE:int = 813;

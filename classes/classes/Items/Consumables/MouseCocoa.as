@@ -33,14 +33,8 @@ package classes.Items.Consumables
 			var tfSource:String = "mouseCocoa";
 			var temp:int = 0;
 			
+			mutations.initTransformation([2, 3, 3]);
 			clearOutput();
-			changes = 0;
-			changeLimit = 1;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (rand(3) === 0) changeLimit++;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//use:
 			outputText("You pop several of the beans in your mouth and suck; they immediately reward you by giving up an oily, chocolatey flavor with a hint of bitterness.  For several minutes you ");
 			if (!player.isTaur()) outputText("sit and ");
@@ -65,7 +59,6 @@ package classes.Items.Consumables
 			//lose tough
 			if (player.tou100 > 50 && changes < changeLimit && rand(3) === 0) {
 				outputText("\n\nYou feel a bit less sturdy, both physically and mentally.  In fact, you'd prefer to have somewhere to hide for the time being, until your confidence returns.  The next few minutes are passed in a mousey funk - even afterward, you can't quite regain the same sense of invincibility you had before.");
-				//[removed:1.4.10]//changes++;
 				dynStats("tou", -1);
 				if (player.tou100 >= 75) dynStats("tou", -1);
 				if (player.tou100 >= 90) dynStats("tou", -1);

@@ -3045,7 +3045,7 @@ private function giveArianLactaid():void {
 	}
 	else { //Lizard milk! Recover some HP and fatigue.
 		player.changeFatigue(-15);
-		HPChange(player.maxHP() * .2, false);
+		player.HPChange(player.maxHP() * .2, false);
 		outputText("\n\nAfter some time, Arian begins panting, sweating as [Arian eir] body temperature goes up.  \"<i>I feel... hot.</i>\"  In an attempt to lower [Arian eir] body temperature, Arian discards [Arian eir] robes and lays down on [Arian eir] bed, fanning herself with [Arian eir] clawed hands.");
 		
 		outputText("\n\nYou approach [Arian em] cautiously, asking if [Arian ey]'s okay.");
@@ -3319,7 +3319,7 @@ private function giveArianReptilum():void {
 	
 	outputText("\n\nAt one point the bending lizan gives up and falls flat on [Arian eir] back then gets right up eyeing you with a glow in [Arian eir] eyes.  \"<i>That was a stupid idea!  I know just how to make it!  I can lick your butt instead!  Do you think it tastes like cloud ice-cream like your rainbow aura?</i>\"");
 	
-	outputText("\n\nYou shake your head and tell [Arian em] you'd rather [Arian ey] didn't lick your butt.  Why don't you go and get [Arian em] some candy instead?  \"<i>Candy!?  I love candy!  You can smear chocolate on yourself and I could lick it clean! Then we'd get chocolate flavored cloud ice-cream with " + player.race() + " musk!  What a great idea!  Get your undies off so I can get started!</i>\"  [Arian Ey] pounces on you, effectively removing your underpants and exposing your ");
+	outputText("\n\nYou shake your head and tell [Arian em] you'd rather [Arian ey] didn't lick your butt.  Why don't you go and get [Arian em] some candy instead?  \"<i>Candy!?  I love candy!  You can smear chocolate on yourself and I could lick it clean! Then we'd get chocolate flavored cloud ice-cream with " + player.race + " musk!  What a great idea!  Get your undies off so I can get started!</i>\"  [Arian Ey] pounces on you, effectively removing your underpants and exposing your ");
 	if (player.hasCock()) {
 		outputText(player.multiCockDescriptLight());
 		if (player.hasVagina()) outputText(" and ");

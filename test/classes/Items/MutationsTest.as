@@ -1,5 +1,6 @@
 package classes.Items {
-    import org.flexunit.asserts.*;
+	import classes.Items.Consumables.LaBova;
+	import org.flexunit.asserts.*;
 	import org.hamcrest.assertThat;
 	import org.hamcrest.core.*;
 	import org.hamcrest.number.*;
@@ -47,10 +48,14 @@ package classes.Items {
 			assertThat(femalePlayer.vaginas[0].recoveryProgress, equalTo(RECOVERY_PROGRESS));
         }
 		
-		private function drinkBova(count:int, tainted : Boolean, enhanced : Boolean, player : Player):void {
-			var i:int;
-			for(i = 0; i < count; i++) {
-				cut.laBova(tainted, enhanced, player);
+		private function drinkBova(count:int, type:int, player:Player):void {
+			var consumable:Consumable = new LaBova(type);
+
+			// Override global player value because intended(?) Maybe come up with a better solution, like a hook(???) ~Stadler76
+			kGAMECLASS.player = player;
+
+			for (var i:int = 0; i < count; i++) {
+				consumable.useItem();
 			}
 		}
 		
@@ -61,7 +66,7 @@ package classes.Items {
 		
 		[Test]
 		public function testLaBovaResetsRecoveryProgress():void {
-			drinkBova(100, true, false, femalePlayer);
+			drinkBova(100, LaBova.STANDARD, femalePlayer);
 			
 			assertThat(femalePlayer.vaginas[0].recoveryProgress, equalTo(0))
         }

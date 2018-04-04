@@ -277,7 +277,7 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	outputText("\n\nA wonderful warmth fills your body, making your pain fade away.  However, it also makes your crotch tingle - combined with the relaxation imparted already, you feel <b>very</b> turned-on.  A beautiful, warm, fuzzy sensation follows and fills your head, like your brain is being wrapped in cotton wool.  You don't feel quite as smart as before, but that's all right, it feels so nice...");
 	outputText("\n\nYour balance suddenly feels off-kilter and you stumble, narrowly avoiding falling.  You just can't move as fast as you could, not with your head feeling so full of fluff and fuzz; your body prickles and tingles with the warmth once your head feels full, the sensation concentrating around your erogenous zones.  You just feel so fluffy... you want to hold somebody and share your warmth with them, too; it's just so wonderful.");
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
-	HPChange(40 + rand(21),false);
+	player.HPChange(40 + rand(21),false);
 	var lib:Number = 0;
 	if (player.hasStatusEffect(StatusEffects.BlackCatBeer)) {
 		if (player.getMaxStats('lib') - player.lib >= 10) lib = 10;

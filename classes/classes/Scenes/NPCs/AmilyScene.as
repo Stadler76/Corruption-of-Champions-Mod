@@ -7,6 +7,8 @@ package classes.Scenes.NPCs
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.NPCs.pregnancies.PlayerAmilyPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.lists.BreastCup;
@@ -96,12 +98,14 @@ package classes.Scenes.NPCs
 
 		public var pregnancy:PregnancyStore;
 
-		public function AmilyScene()
+		public function AmilyScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
 			pregnancy = new PregnancyStore(kFLAGS.AMILY_PREGNANCY_TYPE, kFLAGS.AMILY_INCUBATION, kFLAGS.AMILY_BUTT_PREGNANCY_TYPE, kFLAGS.AMILY_OVIPOSITED_COUNTDOWN);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 100, 96, 90, 72, 48);
 												//Event: 0 (= not pregnant),  1,   2,   3,  4,  5,  6,  7,  8 (< 48)
 			CoC.timeAwareClassAdd(this);
+			
+			new PlayerAmilyPregnancy(pregnancyProgression, output);
 		}
 
 		//Implementation of TimeAwareInterface

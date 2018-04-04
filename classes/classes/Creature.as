@@ -31,7 +31,7 @@ package classes
 	import classes.StatusEffects.Combat.CombatStrBuff;
 	import classes.StatusEffects.Combat.CombatTouBuff;
 	import classes.VaginaClass;
-	import classes.internals.IRandomNumber;
+	import classes.internals.RandomNumberGenerator;
 	import classes.internals.LoggerFactory;
 	import classes.internals.Utils;
 	import classes.internals.profiling.Begin;
@@ -61,19 +61,20 @@ package classes
 		//"a" refers to how the article "a" should appear in text. 
 		private var _short:String = "You";
 		private var _a:String = "a ";
+		private var _race:String = "";
 		
 		/**
 		 * Normally creatures do not need a unique RNG,
 		 * so to avoid unnecessary memory usage they use the default instance.
 		 */
-		private var _rng:IRandomNumber = Utils.DEFAULT_RNG;
+		private var _rng:RandomNumberGenerator = Utils.DEFAULT_RNG;
 		
 		/**
 		 * Set the RNG this class uses. Intended for testing.
 		 * @param	rng to use for random numbers
 		 * @return the RNG that was set
 		 */
-		public function set rng(rng:IRandomNumber):void {
+		public function set rng(rng:RandomNumberGenerator):void {
 			if (rng === null) {
 				throw new ArgumentError("RNG cannot be null");
 			}
@@ -85,7 +86,7 @@ package classes
 		 * Get the RNG this class uses. Intended for testing.
 		 * @return the RNG used
 		 */
-		public function get rng():IRandomNumber {
+		public function get rng():RandomNumberGenerator {
 			return this._rng;
 		}
 		
@@ -184,12 +185,10 @@ package classes
 		public var lib:Number = 0;
 		public var sens:Number = 0;
 		public var cor:Number = 0;
-		public var fatigue:Number = 0;
-		
 		//Combat Stats
-		public var HP:Number = 0;
-		public var lust:Number = 0;		
-		
+		private var _HP:Number = 0;
+		private var _lust:Number = 0;		
+		private var _fatigue:Number = 0;
 		//Level Stats
 		public var XP:Number = 0;
 		public var level:Number = 0;
@@ -371,6 +370,8 @@ package classes
 			}
 			return Gender.NONE;
 		}
+		public function get race():String { return this._race; }
+		public function set race(value:String):void { this._race = value; }
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
@@ -2579,6 +2580,37 @@ package classes
 			}
 		}
 		
+		/**
+		 * Removes all gender releated parts: cocks, vaginas, breasts and balls.
+		 */
+		public function clearGender(): void {
+			LOGGER.info("Clearing gender...");
+			
+			LOGGER.debug("Removing balls");
+			balls = 0;
+			
+			while (hasCock()) {
+				LOGGER.debug("Removing cock {0}", cocks[0]);
+				removeCock(0, 1);
+			}
+			
+			while (hasVagina()) {
+				LOGGER.debug("Removing vagina {0}", vaginas[0]);
+				removeVagina(0, 1);
+			}
+			
+			// hasBreasts can currently not be used, as creatures must have at least one breast row
+			while (breastRows.length > 1) {
+				LOGGER.debug("Removing breast {0}", breastRows[0]);
+				removeBreastRow(0, 1);
+			}
+			
+			if (hasBreasts()) {
+				LOGGER.debug("Setting breast row {0}, size to flat (size 0)", breastRows[0]);
+				breastRows[0].breastRating = 0;
+			}
+		}
+		
 		// This is placeholder shit whilst I work out a good way of BURNING ENUM TO THE FUCKING GROUND
 		// and replacing it with something that will slot in and work with minimal changes and not be
 		// A FUCKING SHITSTAIN when it comes to intelligent de/serialization.
@@ -3874,36 +3906,20 @@ package classes
 			return getEvasionReason(useMonster, attackSpeed) != null;
 		}
 		
-		public function maxFatigue():Number
-		{
-			var max:Number = 100;
-			if (findPerk(PerkLib.ImprovedEndurance) >= 0) max += 20;
-			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 5;
-			if (max > 999) max = 999;
-			return max;
-		}
 		public function getMaxStats(stats:String):int {
 			return 100;
 		}
 
-		public function maxHP():Number
-		{
-			var max:Number = 0;
-			max += int(tou * 2 + 50);
-			if (findPerk(PerkLib.Tank) >= 0) max += 50;
-			if (findPerk(PerkLib.Tank2) >= 0) max += Math.round(tou);
-			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-			if (flags[kFLAGS.GRIMDARK_MODE] >= 1)
-				max += level * 5;
-			else
-				max += level * 15;
-			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
-			max *= 1 + (countCockSocks("green") * 0.02);
-			max = Math.round(max);
-			if (max > 9999) max = 9999;
-			return max;
-		}
-
+		public function get HP():Number { return this._HP; }
+		public function set HP(value:Number):void { this._HP = value; }
+		
+		public function get lust():Number { return this._lust; }
+		public function set lust(value:Number):void { this._lust = value; }
+		
+		public function get fatigue():Number { return this._fatigue; }
+		public function set fatigue(value:Number):void { this._fatigue = value; }
+		
+		//Minimum Libido, Sensitivty, Lust
 		public function minLib():Number {
 			return 1;
 		}
@@ -3913,18 +3929,68 @@ package classes
 		public function minLust():Number {
 			return 0;
 		}
+		
+		//Max HP, Lust, Fatigue
+		public function maxHP():Number
+		{
+			var max:Number = 0;
+			max += int(tou * 2 + 50);
+			if (findPerk(PerkLib.Tank) >= 0) max += 50;
+			if (findPerk(PerkLib.Tank2) >= 0) max += Math.round(tou);
+			if (findPerk(PerkLib.Tank3) >= 0) max += level * 5;
+			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
+			if (flags[kFLAGS.GRIMDARK_MODE] >= 1)
+				max += level * 5;
+			else
+				max += level * 15;
+			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
+			max *= 1 + (countCockSocks("green") * 0.02);
+			max = Math.round(max);
+			if (max < 50) max = 50;
+			if (max > 9999) max = 9999;
+			return max;
+		}
+		
+		/**
+		 * Restore the HP of the creature.
+		 * @param amount the amount to heal. If omitted, heal to max HP. Value must not be negative.
+		 */
+		public function restoreHP(amount:Number = Number.MAX_VALUE): void {
+			if (amount < 0) {
+				throw new RangeError("Value must not be negative");
+			}
+			
+			HP += amount;
+			
+			if (HP > maxHP()) {
+				HP = maxHP();
+			}
+		}
 
 		public function maxLust():Number
 		{
 			var max:Number = 100;
 			if (this == game.player && game.player.demonScore() >= 4) max += 20;
 			if (findPerk(PerkLib.ImprovedSelfControl) >= 0) max += 20;
+			if (findPerk(PerkLib.ImprovedSelfControl2) >= 0) max += 10;
+			if (findPerk(PerkLib.ImprovedSelfControl3) >= 0) max += 10;
 			if (findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) max += 20;
 			if (findPerk(PerkLib.OmnibusGift) >= 0) max += 15;
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 5;
 			if (max > 999) max = 999;
 			return max;
 		}
+		public function maxFatigue():Number
+		{
+			var max:Number = 100;
+			if (findPerk(PerkLib.ImprovedEndurance) >= 0) max += 20;
+			if (findPerk(PerkLib.ImprovedEndurance2) >= 0) max += 10;
+			if (findPerk(PerkLib.ImprovedEndurance3) >= 0) max += 10;
+			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 5;
+			if (max > 999) max = 999;
+			return max;
+		}
+		
 		public function takeDamage(damage:Number, display:Boolean = false):Number {
 			HP = boundFloat(0,HP-Math.round(damage),HP);
 			return (damage > 0 && damage < 1) ? 1 : damage;
@@ -3935,7 +4001,7 @@ package classes
 			return (lustDmg > 0 && lustDmg < 1) ? 1 : lustDmg;
 		}
 		
-		public function generateTooltip():String{
+		public function generateTooltip():String {
 			var retv:String = "<b>Corruption:</b>" +  cor + "\n<b>Armor:</b>" + armorDef +"\n";
 			if (hasStatusEffect(StatusEffects.IzmaBleed)) retv += "<b>Bleeding:</b> Target is bleeding and takes damage each turn.\n";
 			if (hasStatusEffect(StatusEffects.Stunned)) retv += "<b>Stunned</b> Target is stunned, and may not act for " + (statusEffectv1(StatusEffects.Stunned)+1) + " turns.\n";

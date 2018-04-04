@@ -124,10 +124,10 @@ private function nameZeGargoyle():void {
 		// Solution? Fuck you for naming your Gargoyle "0".
 		clearOutput();
 		outputText("<b>You must name her.</b>");
+		menu();
 		mainView.promptCharacterName();
 		mainView.nameBox.x = mainView.mainText.x + 5;
 		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-		menu();
 		addButton(0,"Next",nameZeGargoyle);
 		return;
 	}
@@ -1183,7 +1183,7 @@ private function garNameA():void {
 	outputText("Curious about your gargoyle, you ask " + flags[kFLAGS.GAR_NAME] + " to tell you a little bit about her life before you arrived.  She makes a nervous chuckle at the request, and shyly says, \"<i>Master is too kind...  I am no one special...</i>\"");
 	
 	outputText("\n\nYou urge her on, adding that you can make it a command if you have to.  She fidgets awkwardly for a moment, but finally says, \"<i>If Master insists.  I was sculpted in a village not far from here.  The high priest ordered me and a dozen others from the finest sculptor in the land.  We were perfect, in a way.  Each of us was unique, complete, made to be as human as you ");
-	if (player.race() == "human") outputText("are");
+	if (player.race == "human") outputText("are");
 	else outputText("once were");
 	outputText(", Master, and more.  We were to be their guardians, protectors – their perfect servants.</i>\"");
 	

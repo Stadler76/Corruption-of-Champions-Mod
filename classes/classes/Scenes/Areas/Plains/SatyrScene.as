@@ -2,13 +2,16 @@ package classes.Scenes.Areas.Plains{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Scenes.Monsters.pregnancies.PlayerSatyrPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
 	public class SatyrScene extends BaseContent{
 
-	public function SatyrScene()
+	public function SatyrScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 	{
+		new PlayerSatyrPregnancy(pregnancyProgression, output);
 	}
 
 //const SATYR_KIDS:int = 603;

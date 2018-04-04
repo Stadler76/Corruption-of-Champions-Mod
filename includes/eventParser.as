@@ -21,7 +21,7 @@ public function playerMenu():void {
 	if (!inCombat) spriteSelect(null);
 	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
 	mainView.nameBox.visible = false;
-	showStats();
+	output.showStats();
 	if (_gameState == 1 || _gameState == 2) {
 		kGAMECLASS.combat.combatMenu();
 		return;
@@ -73,9 +73,9 @@ public function gameOver(clear:Boolean = false):void { //Leaves text on screen u
 	}
 	flags[kFLAGS.TIMES_BAD_ENDED]++;
 	awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
-	menu();
-	addButton(0, "Game Over", gameOverMenuOverride).hint("Your game has ended. Please load a saved file or start a new game.");
-	if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Nightmare", camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
+	output.menu();
+	output.addButton(0, "Game Over", gameOverMenuOverride).hint("Your game has ended. Please load a saved file or start a new game.");
+	if (flags[kFLAGS.HARDCORE_MODE] <= 0) output.addButton(1, "Nightmare", camp.wakeFromBadEnd).hint("It's all just a dream. Wake up.");
 	//addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
 	//if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) addButton(4, "Debug Cheat", playerMenu);
 	gameOverMenuOverride();
@@ -118,7 +118,7 @@ public function errorPrint(details:* = null):void
 		rawOutputText(" (including the above stack trace copy&pasted into the details),");
 	rawOutputText(" to make tracking the issue down easier. Thanks!");
 
-	doNext(camp.returnToCampUseOneHour);
+	output.doNext(camp.returnToCampUseOneHour);
 }
 
 //Argument is time passed.  Pass to event parser if nothing happens.
@@ -195,7 +195,7 @@ private function goNextWrapped(timeAmt:Number, needNext:Boolean):Boolean  {
 			else if (temp > rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
 				if (player.gender > 0 && !(player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
 					impScene.impGangabangaEXPLOSIONS();
-					doNext(playerMenu);
+					output.doNext(playerMenu);
 					return true;
 				}
 				else if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && kihaFollower.followerKiha()) {
@@ -349,7 +349,7 @@ private function goNextWrapped(timeAmt:Number, needNext:Boolean):Boolean  {
 			if (!player.hasStatusEffect(StatusEffects.Eggs)) { //Handling of errors.
 				outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
 				player.removeStatusEffect(StatusEffects.LootEgg);
-				doNext(playerMenu);
+				output.doNext(playerMenu);
 				return true;
 			}
 			//default
@@ -470,7 +470,7 @@ private function goNextWrapped(timeAmt:Number, needNext:Boolean):Boolean  {
 		return true;
 	}
 	//Unequip shield if you're wielding a large weapon.
-	if (player.weaponPerk == "Large" && player.shield != ShieldLib.NOTHING) {
+	if (player.weaponPerk == "Large" && player.shield != ShieldLib.NOTHING && !(player.hasPerk(PerkLib.TitanGrip) && player.str >= 90)) {
 		outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
 		inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
 		return true;
@@ -498,9 +498,9 @@ private function goNextWrapped(timeAmt:Number, needNext:Boolean):Boolean  {
 		prison.goBackToPrisonBecauseQuestTimeIsUp();
 		return true;
 	}
-	statScreenRefresh();
+	output.statScreenRefresh();
 	if (needNext) {
-		doNext(playerMenu);
+		output.doNext(playerMenu);
 		return true;
 	}
 	playerMenu();
@@ -515,7 +515,7 @@ public function cheatTime(timeAmt:Number, needNext:Boolean = false):void {
 	if (time.minutes > 59) {
 		timeQ++;
 		time.minutes -= 60;
-		if (!buttonIsVisible(0)) goNext(timeQ, needNext);
+		if (!kGAMECLASS.output.buttonIsVisible(0)) goNext(timeQ, needNext);
 	}
 	timeAmt = Math.floor(timeAmt);
 	//Advance hours
@@ -527,5 +527,5 @@ public function cheatTime(timeAmt:Number, needNext:Boolean = false):void {
 			time.hours = 0;
 		}
 	}
-	statScreenRefresh();
+	output.statScreenRefresh();
 }

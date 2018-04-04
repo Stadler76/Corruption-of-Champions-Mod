@@ -62,6 +62,7 @@
 				"hasfurryunderbody"	: function():* {return  kGAMECLASS.player.hasFurryUnderBody();},
 				"isfurry"			: function():* {return  kGAMECLASS.player.isFurry();},
 				"isfluffy"			: function():* {return  kGAMECLASS.player.isFluffy();},
+				"isgenderless"		: function():* {return  (kGAMECLASS.player.isGenderless());},
 				"ismale"			: function():* {return  (kGAMECLASS.player.isMale());},
 				"isfemale"			: function():* {return  (kGAMECLASS.player.isFemale());},
 				"isherm"			: function():* {return  (kGAMECLASS.player.isHerm());},

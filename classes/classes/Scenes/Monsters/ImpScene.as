@@ -4,19 +4,23 @@
 package classes.Scenes.Monsters
 {
 	import classes.*;
+	import classes.Scenes.Monsters.pregnancies.PlayerImpPregnancy;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.Camp.ImpGang;
+	import classes.internals.GuiOutput;
+	import classes.Scenes.PregnancyProgression;
 
 	use namespace kGAMECLASS;
 
 	public class ImpScene extends BaseContent
 	{
-		public function ImpScene()
+		public function ImpScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
+			new PlayerImpPregnancy(pregnancyProgression, output);
 		}
 		
 		public function impVictory():void {

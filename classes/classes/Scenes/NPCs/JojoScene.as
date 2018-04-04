@@ -4,6 +4,8 @@
 	import classes.*;
 	import classes.Scenes.API.Encounter;
 	import classes.Scenes.API.Encounters;
+	import classes.Scenes.NPCs.pregnancies.PlayerMousePregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
@@ -11,11 +13,13 @@
 
 		public var pregnancy:PregnancyStore;
 
-		public function JojoScene()
+		public function JojoScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
 			pregnancy = new PregnancyStore(kFLAGS.JOY_PREGNANCY_TYPE, kFLAGS.JOY_PREGNANCY_INCUBATION, kFLAGS.JOJO_BUTT_PREGNANCY_TYPE, kFLAGS.JOJO_EGGCUBATE_COUNT);
 			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 150, 120, 96, 72, 48);
 			CoC.timeAwareClassAdd(this);
+			
+			new PlayerMousePregnancy(pregnancyProgression, output);
 		}
 
 		public function jojoEncounterFn():void {

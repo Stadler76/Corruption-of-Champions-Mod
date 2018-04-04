@@ -80,6 +80,7 @@ package classes.Scenes.Monsters
 			this.short = "imp";
 			this.imageName = "imp";
 			this.long = "An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.";
+			this.race = "Imp";
 			// this.plural = false;
 			this.createCock(rand(2) + 11, 2.5, CockTypesEnum.DEMON);
 			this.balls = 2;

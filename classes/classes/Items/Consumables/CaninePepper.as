@@ -74,12 +74,7 @@ package classes.Items.Consumables
 			var temp3:Number = 0;
 			var crit:Number = 1;
 			//Set up changes and changeLimit
-			changes = 0;
-			changeLimit = 1;
-			if (rand(2) === 0) changeLimit++;
-			if (rand(2) === 0) changeLimit++;
-			if (player.hasPerk(PerkLib.HistoryAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			mutations.initTransformation([2, 2]);
 			//Initial outputs & crit level
 			clearOutput();
 			switch(type) {
@@ -143,20 +138,17 @@ package classes.Items.Consumables
 				dynStats("str", (crit));
 				if (crit > 1) outputText("\n\nYour muscles ripple and grow, bulging outwards.");
 				else outputText("\n\nYour muscles feel more toned.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (player.spe100 < 30 && rand(3) === 0 && changes < changeLimit) {
 				dynStats("spe", (crit));
 				if (crit > 1) outputText("\n\nYou find your muscles responding quicker, faster, and you feel an odd desire to go for a walk.");
 				else outputText("\n\nYou feel quicker.");
-				//[removed:1.4.10]//changes++;
 			}
 			if (player.inte100 > 30 && rand(3) === 0 && changes < changeLimit && type !== 3) {
 				dynStats("int", (-1 * crit));
 				outputText("\n\nYou feel ");
 				if (crit > 1) outputText("MUCH ");
 				outputText("dumber.");
-				//[removed:1.4.10]//changes++;
 			}
 			//Neck restore
 			if (player.neck.type !== Neck.NORMAL && changes < changeLimit && rand(4) === 0) mutations.restoreNeck(tfSource);
@@ -743,7 +735,7 @@ package classes.Items.Consumables
 			//If no changes yay
 			if (changes == 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
-				getGame().HPChange(20, true);
+				player.HPChange(20, true);
 				dynStats("lus", 3);
 			}
 			player.refillHunger(15);

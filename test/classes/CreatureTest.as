@@ -5,9 +5,10 @@ package classes{
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.PerkLib;
 	import classes.helper.StageLocator;
-	import classes.internals.IRandomNumber;
-	import classes.internals.RandomNumber;
+	import classes.internals.RandomNumberGenerator;
+	import classes.internals.ActionScriptRNG;
 	import classes.lists.Gender;
+	import classes.lists.BreastCup;
 	import org.flexunit.asserts.*;
 	import org.hamcrest.assertThat;
 	import org.hamcrest.collection.*;
@@ -30,11 +31,12 @@ package classes{
 		private const ANAL_LOOSENESS:Number = 1;
 		private const ANAL_CAPACITY:Number = 6;
 		
-        private var cut:Creature;
+        	private var cut:Creature;
 		private var noVagina:Creature;
 		private var oneVagina:Creature;
 		private var maxVagina:Creature;
-		private var alwaysZero:IRandomNumber;
+		private var fullEquip:Creature;
+		private var alwaysZero:RandomNumberGenerator;
 		
 		private function createVaginas(numberOfVaginas:Number, instance:Creature):void {
 			var i:Number;
@@ -69,6 +71,8 @@ package classes{
 			cut = new Creature();
 			cut.rng = alwaysZero;
 			cut.ass.analLooseness = ANAL_LOOSENESS;
+						cut.tou = 100;
+			cut.HP = 1;
 			
 			noVagina = new Creature();
 			
@@ -83,6 +87,15 @@ package classes{
 				vag.recoveryProgress = RECOVERY_COUNT;		
 			}
 			
+			fullEquip = new Creature();
+			fullEquip.createCock();
+			fullEquip.createCock();
+			fullEquip.createVagina();
+			fullEquip.createVagina();
+			fullEquip.createBreastRow(BreastCup.B);
+			fullEquip.createBreastRow(BreastCup.B);
+			fullEquip.balls = 4;
+			
 			// verify created test instances
 			assertThat(noVagina.hasVagina(), equalTo(false));
 			
@@ -91,6 +104,8 @@ package classes{
 			
 			assertThat(maxVagina.hasVagina(),equalTo(true));
 			assertThat(maxVagina.vaginas, arrayWithSize(MAX_SUPPORTED_VAGINAS));
+			
+			assertThat(fullEquip.isHerm(), equalTo(true));
         }  
 		
 		[Test] 
@@ -573,7 +588,7 @@ package classes{
 		
 		[Test]
 		public function setNewRng():void {
-			var rng:IRandomNumber = new RandomNumber();
+			var rng:RandomNumberGenerator = new ActionScriptRNG();
 			
 			cut.rng = rng;
 			
@@ -600,12 +615,75 @@ package classes{
 		public function analStretchWithArea90PercentOfCapacity(): void {
 			assertThat(cut.buttChangeNoDisplay(ANAL_CAPACITY * 0.9), equalTo(true));
 		}
-    }
+		
+		[Test]
+		public function clearGenderRemovesCock(): void {
+			fullEquip.clearGender();
+			
+			assertThat(fullEquip.hasCock(), equalTo(false));
+		}
+		
+		[Test]
+		public function clearGenderRemovesVagina(): void {
+			fullEquip.clearGender();
+			
+			assertThat(fullEquip.hasVagina(), equalTo(false));
+		}
+		
+		[Test]
+		public function clearGenderRemovesBreasts(): void {
+			fullEquip.clearGender();
+			
+			assertThat(fullEquip.hasBreasts(), equalTo(false));
+		}
+		
+		[Test]
+		public function clearGenderRemovesBalls(): void {
+			fullEquip.clearGender();
+			
+			assertThat(fullEquip.balls, equalTo(0));
+		}
+		
+		[Test]
+		public function clearGenderNoBreasts(): void {
+			cut.clearGender();
+			
+			assertThat(cut.hasBreasts(), equalTo(false));
+		}
+		
+		[Test]
+		public function healToMaxHP():void {
+			cut.restoreHP();
+
+			assertThat(cut.HP, equalTo(250));
+		}
+
+		[Test]
+		public function healByAmount():void {
+			cut.restoreHP(1);
+
+			assertThat(cut.HP, equalTo(2));
+		}
+
+		[Test]
+		public function healOverflowCheck():void {
+			cut.HP = 1000;
+			
+			cut.restoreHP();
+
+			assertThat(cut.HP, equalTo(250));
+		}
+		
+		[Test(expected="RangeError")]
+		public function healByNegativeAmount():void {
+			cut.restoreHP(-1);
+		}
+	}
 }
 
-import classes.internals.IRandomNumber;
+import classes.internals.RandomNumberGenerator;
 
-class AlwaysZeroRNG implements IRandomNumber {
+class AlwaysZeroRNG implements RandomNumberGenerator {
 	public function random(max:int):int 
 	{
 		return 0;

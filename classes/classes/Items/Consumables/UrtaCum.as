@@ -16,7 +16,7 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You uncork the bottle and drink the vulpine cum; it tastes great. Urta definitely produces good-tasting cum!");
 			dynStats("sens", 1, "lus", 5 + (player.cor / 5));
-			game.HPChange(Math.round(player.maxHP() * .25), true);
+			player.HPChange(Math.round(player.maxHP() * .25), true);
 			player.slimeFeed();
 			player.refillHunger(25);
 			player.orgasm('Lips',false);

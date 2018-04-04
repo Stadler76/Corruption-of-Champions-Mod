@@ -42,7 +42,7 @@ package classes
 		}
 
 		private function setOrUpdateSettings(pane:SettingPane):void {
-			if (pane.name == PANES_CONFIG[0][0]) {
+			if (pane.name == PANES_CONFIG[0][0]) { //Gameplay
 				pane.addOrUpdateToggleSettings("Game Difficulty", [
 					["Choose", difficultySelectionMenu, getDifficultyText(), false],
 					"overridesLabel"
@@ -83,7 +83,7 @@ package classes
 				]);
 				pane.update();
 			}
-			else if (pane.name == PANES_CONFIG[1][0]) {
+			else if (pane.name == PANES_CONFIG[1][0]) { //Interface
 				pane.addOrUpdateToggleSettings("Main Background", [
 					["Choose", menuMainBackground, "", false]
 				]);
@@ -111,6 +111,10 @@ package classes
 					["ON", createCallBackFunction(toggleSetting, kFLAGS.ANIMATE_STATS_BARS, true), "The stats bars and numbers will be animated if changed.", flags[kFLAGS.ANIMATE_STATS_BARS] == true],
 					["OFF", createCallBackFunction(toggleSetting, kFLAGS.ANIMATE_STATS_BARS, false), "The stats will not animate. Basically classic.", flags[kFLAGS.ANIMATE_STATS_BARS] == false]
 				]);
+				pane.addOrUpdateToggleSettings("Show Enemy Stats Bars", [
+					["ON", createCallBackFunction(toggleSetting, kFLAGS.ENEMY_STATS_BARS_ENABLED, true), "Opponent's stat bars will be displayed in combat.", flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] == true],
+					["OFF", createCallBackFunction(toggleSetting, kFLAGS.ENEMY_STATS_BARS_ENABLED, false), "Opponent's stat bars will not be displayed in combat, and classic enemy info display will be used.", flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] == false]
+				]);
 				pane.addOrUpdateToggleSettings("Time Format", [
 					["12-hour", createCallBackFunction(toggleSetting, kFLAGS.USE_12_HOURS, true), "Time will be shown in 12-hour format. (AM/PM)", flags[kFLAGS.USE_12_HOURS] == true],
 					["24-hour", createCallBackFunction(toggleSetting, kFLAGS.USE_12_HOURS, false), "Time will be shown in 24-hour format.", flags[kFLAGS.USE_12_HOURS] == false]
@@ -129,7 +133,7 @@ package classes
 				]);
 				pane.update();
 			}
-			else if (pane.name == PANES_CONFIG[2][0]) {
+			else if (pane.name == PANES_CONFIG[2][0]) { //Fetishes
 				pane.addOrUpdateToggleSettings("Watersports (Urine)", [
 					["ON", createCallBackFunction(toggleSetting, kFLAGS.WATERSPORTS_ENABLED, true), "Watersports are enabled. You kinky person.", flags[kFLAGS.WATERSPORTS_ENABLED] == true],
 					["OFF", createCallBackFunction(toggleSetting, kFLAGS.WATERSPORTS_ENABLED, false), "You won't see watersports scenes.", flags[kFLAGS.WATERSPORTS_ENABLED] == false]
@@ -219,18 +223,12 @@ package classes
 		public function disableHardcoreCheatSettings():void {
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
-				/*addButtonDisabled(0, "Debug", "You cannot enable debug in Hardcore Mode. No cheating!");
-				addButtonDisabled(1, "Difficulty", "You cannot change difficulty in Hardcore Mode.");
-				addButtonDisabled(3, "Low Standards", "You cannot enable Low Standards in Hardcore Mode.");
-				addButtonDisabled(4, "Hyper Happy", "You cannot enable Hyper Happy in Hardcore Mode.");*/
 				debug = false;
 				flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
 				flags[kFLAGS.HYPER_HAPPY] = 0;
 				flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 			}
 			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
-				//addButtonDisabled(0, "Debug", "Nuh-uh. No cheating in Grimdark Mode!");
-				//addButtonDisabled(1, "Difficulty", "You cannot change difficulty in Grimdark Mode. It's meant to be the hardest game mode ever.");
 				debug = false;
 				flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
 				flags[kFLAGS.GAME_DIFFICULTY] = 3;
@@ -241,14 +239,12 @@ package classes
 			hideSettingPane();
 			clearOutput();
 			outputText("You can choose a difficulty to set how hard battles will be.\n");
-			//outputText("\n<b>Peaceful:</b> Same as Easy but encounters can be avoided or skipped.");
 			outputText("\n<b>Easy:</b> -50% damage, can ignore bad-ends.");
 			outputText("\n<b>Normal:</b> No stats changes.");
 			outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
 			outputText("\n<b>Nightmare:</b> +50% HP, +30% damage.");
 			outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
 			menu();
-			//addButton(0, "Peaceful", chooseDifficulty, -2);
 			addButton(0, "Easy", chooseDifficulty, -1);
 			addButton(1, "Normal", chooseDifficulty, 0);
 			addButton(2, "Hard", chooseDifficulty, 1);

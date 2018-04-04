@@ -9,6 +9,7 @@ public class CombatBuff extends TemporaryBuff{
 
 	override public function onCombatEnd():void {
 		super.onCombatEnd();
+		restore();
 		remove();
 	}
 }

@@ -11,7 +11,23 @@ package classes.Scenes.Areas {
 	public class DeepWoods extends BaseContent implements IExplorable {
 		private var forest:Forest;
 
-		public function DeepWoods(forest:Forest) { this.forest = forest; }
+		/**
+		 * Create a new deepwoods instance for exploring.
+		 * 
+		 * The constructor will fail if the forest is not valid. This fail-fast
+		 * behaviour is used because explore() is only called much later, making it harder
+		 * to figure out what happened.
+		 * @param	forest the forest to use for encounters
+		 * @throws ArgumentError if the forest is null or undefined
+		 */
+		public function DeepWoods(forest:Forest)
+		{
+			if (forest === null) {
+				throw ArgumentError("Forest cannot be null");
+			}
+			
+			this.forest = forest;
+		}
 
 		public function isDiscovered():Boolean {
 			//TODO refactor all areas to use class fields as counters

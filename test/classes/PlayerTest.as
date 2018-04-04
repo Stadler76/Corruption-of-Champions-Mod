@@ -15,9 +15,12 @@ package classes
 	import org.hamcrest.number.*;
 	import org.hamcrest.object.*;
 	import org.hamcrest.text.*;
+	import classes.Items.ArmorLib;
 
 	public class PlayerTest 
 	{
+		private static const HP_OVER_HEAL:Number = 1000;
+		private static const PLAYER_MAX_HP:Number = 250;
 		private const MAX_SUPPORTED_VAGINAS:Number = 2;
 		private const MAX_SUPPORTED_BREAST_ROWS:Number = 10;
 
@@ -27,6 +30,7 @@ package classes
 		private var wolfPlayer:Player;
 		private var dogPlayer:Player;
 		private var mutantPlayer:Player;
+		private var cut:DummyPlayer;
 
 		private function createVaginas(numberOfVaginas:Number, instance:Player):void
 		{
@@ -164,6 +168,10 @@ package classes
 			mutantPlayer.createCock();
 			mutantPlayer.createCock();
 			mutantPlayer.createVagina();
+			
+			cut = new DummyPlayer();
+			cut.HP = 1;
+			cut.tou = 100;
 		}
 
 		[Test]
@@ -812,5 +820,195 @@ package classes
 
 			assertThat(bimboPlayer.bimboScore(), greaterThan(0));
 		}
+		
+		[Test]
+		public function hpChangeNotifyNoChange(): void {
+			cut.HPChangeNotify(0);
+			
+			assertThat(cut.collectedOutput, emptyArray());
+		}
+		
+		[Test]
+		public function hpChangeNotifyNoChangeOverMaxHp(): void {
+			cut.HP = HP_OVER_HEAL;
+			
+			cut.HPChangeNotify(0);
+			
+			assertThat(cut.collectedOutput, hasItem(startsWith("You're as healthy as you can be.")));
+		}
+		
+		[Test]
+		public function hpChangeNotifyHeal(): void {
+			cut.HPChangeNotify(1);
+			
+			assertThat(cut.collectedOutput, hasItem(startsWith("You gain")));
+		}
+		
+		[Test]
+		public function hpChangeNotifyHealOverMaxHp(): void {
+			cut.HP = HP_OVER_HEAL;
+			
+			cut.HPChangeNotify(1);
+			
+			assertThat(cut.collectedOutput, hasItem(startsWith("Your HP maxes out at")));
+		}
+		
+		[Test]
+		public function hpChangeNotifyDamage(): void {
+			cut.HPChangeNotify(-1);
+			
+			assertThat(cut.collectedOutput, hasItem(containsString("damage.")));
+		}
+		
+		[Test]
+		public function hpChangeNotifyDamageHpBelowZero(): void {
+			cut.HP = -1;
+			
+			cut.HPChangeNotify(-1);
+			
+			assertThat(cut.collectedOutput, hasItem(containsString("damage, dropping your HP to 0.")));
+		}
+		
+		[Test]
+		public function hpChangeZeroNoDelta(): void {
+			assertThat(cut.HPChange(0, false), equalTo(0));
+		}
+		
+		[Test]
+		public function hpChangeHealerBoost(): void {
+			cut.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
+			
+			assertThat(cut.HPChange(100, false), equalTo(120));
+		}
+		
+		[Test]
+		public function hpChangeNurseOutfitBoost(): void {
+			cut.setArmor(new ArmorLib().NURSECL);
+			
+			assertThat(cut.HPChange(100, false), equalTo(110));
+		}
+		
+		[Test]
+		public function hpChangeOverHeal(): void {
+			assertThat(cut.HPChange(HP_OVER_HEAL, false), equalTo(249));
+		}
+		
+		[Test]
+		public function hpChangeOverHealPlayerHp(): void {
+			cut.HPChange(HP_OVER_HEAL, false);
+			
+			assertThat(cut.HP, equalTo(PLAYER_MAX_HP));
+		}
+		
+		[Test]
+		public function hpChangeOverHealDisplayHpChange(): void {
+			cut.HPChange(HP_OVER_HEAL, true);
+			
+			assertThat(cut.calls, arrayWithSize(1));
+			assertThat(cut.calls, hasItem(equalTo(HP_OVER_HEAL)));
+		}
+		
+		[Test]
+		public function hpChangePlayerHpOverMaxDelta(): void {
+			cut.HP = HP_OVER_HEAL;
+			
+			assertThat(cut.HPChange(HP_OVER_HEAL, false), equalTo(0));
+		}
+		
+		[Test]
+		public function hpChangePlayerHpOverMaxPlayerHp(): void {
+			cut.HP = HP_OVER_HEAL;
+			
+			cut.HPChange(HP_OVER_HEAL, false);
+			
+			assertThat(cut.HP, equalTo(1000));
+		}
+		
+		[Test]
+		public function hpChangePlayerHpOverMaxDisplayHpChange(): void {
+			cut.HP = HP_OVER_HEAL;
+			
+			cut.HPChange(HP_OVER_HEAL, true);
+			
+			assertThat(cut.calls, arrayWithSize(1));
+			assertThat(cut.calls, hasItem(equalTo(HP_OVER_HEAL)));
+		}
+		
+		[Test]
+		public function hpChangeHealDisplayHpChange(): void {
+			cut.HPChange(1, true);
+			
+			assertThat(cut.calls, arrayWithSize(1));
+			assertThat(cut.calls, hasItem(equalTo(1)));
+		}
+		
+		[Test]
+		public function hpChangeHealPlayerHP(): void {
+			cut.HPChange(1, true);
+			
+			assertThat(cut.HP, equalTo(2));
+		}
+		
+		[Test]
+		public function hpChangeDamageDisplayHpChange(): void {
+			cut.HP = 50;
+			
+			cut.HPChange(-1, true);
+			
+			assertThat(cut.calls, arrayWithSize(1));
+			assertThat(cut.calls, hasItem(equalTo(-1)));
+		}
+		
+		[Test]
+		public function hpChangeDamagePlayerHp(): void {
+			cut.HP = 50;
+			
+			cut.HPChange(-1, false);
+			
+			assertThat(cut.HP, equalTo(49));
+		}
+		
+		[Test]
+		public function hpChangeDamageBelowZeroDisplayHpChange(): void {
+			cut.HPChange(-HP_OVER_HEAL, true);
+			
+			assertThat(cut.calls, arrayWithSize(1));
+			assertThat(cut.calls, hasItem(equalTo(-HP_OVER_HEAL)));
+		}
+		
+		[Test]
+		public function hpChangeDamageBelowZeroPlayerHp(): void {
+			cut.HPChange(-HP_OVER_HEAL, false);
+			
+			assertThat(cut.HP, equalTo(0));
+		}
+	}
+}
+
+import classes.Player;
+
+/**
+ * Yes, i'm a lazy git.
+ */
+class DummyPlayer extends Player {
+	public var calls:Vector.<Number> = new Vector.<Number>();
+	public var collectedOutput:Vector.<String> = new Vector.<String>();
+
+	/**
+	 * Intercept calls to HPChangeNotify so we can sense them in tests.
+	 * 
+	 * @param	changeNum the value of the HP change?
+	 */
+	override public function HPChangeNotify(changeNum:Number):void {
+		calls.push(changeNum);
+		super.HPChangeNotify(changeNum);
+	}
+	
+	/**
+	 * Redirect output to a vector instead of displaying it on the GUI.
+	 * @param	text to store
+	 */
+	override protected function outputText(text:String):void {
+		collectedOutput.push(text);
 	}
 }

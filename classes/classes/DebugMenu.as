@@ -6,6 +6,7 @@ package classes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.internals.Profiling;
+	import classes.menus.GenderDebug;
 	import flash.events.TimerEvent;
 	import flash.utils.*;
 	import flash.utils.describeType;
@@ -41,6 +42,10 @@ package classes
 			//buildArray();
 			Profiling.LogProfilingReport();
 			if (!getGame().inCombat) {
+				
+				// initalizing the menu here due to order the required classes are inizalized
+				var genderDebugMenu:GenderDebug = new GenderDebug(kGAMECLASS, kGAMECLASS.output, kGAMECLASS.player, accessDebugMenu);
+				
 				hideMenus();
 				mainView.nameBox.visible = false;
 				mainView.nameBox.text = "";
@@ -58,6 +63,7 @@ package classes
 				addButton(5, "DumpEffects", dumpEffectsMenu).hint("Display your status effects");
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
 				addButton(8, "Scene Test", testScene).hint("Manually Proc a Scene.");
+				addButton(9, genderDebugMenu.getButtonText(), genderDebugMenu.enter).hint(genderDebugMenu.getButtonHint());
 				addButton(14, "Exit", playerMenu);
 			}
 			if (getGame().inCombat) {
@@ -89,7 +95,7 @@ package classes
 					outputText("<b><u>"+type.toUpperCase()+"</u></b>\n");
 				}
 				for each (var fun:* in funs) {
-					outputText("<u><a href=\"event:"+fun.@name+"\">"+fun.@name+"</a></u>\n")
+					outputText("<u><a href=\"event:" + fun.@name+"\">" + fun.@name+"</a></u>\n");
 				}
 			}
 			function linkhandler(e:TextEvent):void {
@@ -363,7 +369,7 @@ package classes
 			materialArray.push(useables.EBNFLWR);
 			materialArray.push(useables.IMPSKLL);
 			materialArray.push(useables.LETHITE);
-			materialArray.push(null);
+			materialArray.push(useables.OBSHARD);
 			materialArray.push(null);
 			materialArray.push(null);
 			materialArray.push(null);

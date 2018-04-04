@@ -3,13 +3,14 @@ package classes.Perks
 	import classes.PerkClass;
 	import classes.PerkType;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.CharCreation;
 	
 	public class AscensionMysticalityPerk extends PerkType
 	{
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			return "(Rank: " + params.value1 + "/" + kGAMECLASS.charCreation.MAX_MYSTICALITY_LEVEL + ") Increases spell effect multiplier by " + params.value1 * 5 + "% multiplicatively.";
+			return "(Rank: " + params.value1 + "/" + CharCreation.MAX_MYSTICALITY_LEVEL + ") Increases spell effect multiplier by " + params.value1 * 5 + "% multiplicatively.";
 		}
 
 		public function AscensionMysticalityPerk() 

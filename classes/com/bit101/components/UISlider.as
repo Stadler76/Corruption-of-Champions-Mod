@@ -223,7 +223,6 @@ package com.bit101.components
 		public function set label(str:String):void
 		{
 			_labelText = str;
-//			invalidate();
 			draw();
 		}
 		public function get label():String

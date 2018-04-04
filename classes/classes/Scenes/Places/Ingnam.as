@@ -345,7 +345,7 @@ package classes.Scenes.Places
 			outputText("\n" + capitalizeFirstLetter(item.longName) + " - " + price + " gems");
 			var button:int = 0;
 			for (var i:int = 0; i < 14; i++) {
-				if (buttonIsVisible(i)) button++;
+				if (output.buttonIsVisible(i)) button++;
 			}
 			addButton(button, item.shortName, transactionItemConfirmation, item, price, shop);
 		}
@@ -389,7 +389,7 @@ package classes.Scenes.Places
 			outputText("The innkeeper looks at you and says, \"<i>Welcome back! I've missed you! How did your adventures go?</i>\"");
 			outputText("\n\nYou tell the innkeeper about your adventures and how you've met various denizens in Mareth.\n\n");
 			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\""); 
-			else if (player.race() == "human") {
+			else if (player.race == "human") {
 				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed a bit.</i>\" ");
 			}
 			else {
@@ -502,7 +502,7 @@ package classes.Scenes.Places
 			outputText("\"<i>I'd like a glass of milk please,</i>\" you say. You hand over the two gems to the innkeeper and he pours you a glass of milk.");
 			outputText("\n\nYou drink the cup of milk. You feel calm and refreshed. ");
 			player.changeFatigue(-15);
-			HPChange(player.maxHP() / 4, false);
+			player.HPChange(player.maxHP() / 4, false);
 			player.refillHunger(10);
 			cheatTime(1/12);
 			doNext(menuTavern);
@@ -518,7 +518,7 @@ package classes.Scenes.Places
 			outputText("\"<i>I'd like a glass of root beer please,</i>\" you say. You hand over the three gems to the innkeeper and he pours you a glass of root beer.");
 			outputText("\n\nYou drink the cup of root beer. Refreshing! ");
 			player.changeFatigue(-15);
-			HPChange(player.maxHP() / 4, false);
+			player.HPChange(player.maxHP() / 4, false);
 			player.refillHunger(10);
 			cheatTime(1/12);
 			doNext(menuTavern);
@@ -550,7 +550,7 @@ package classes.Scenes.Places
 			player.gems -= 5;
 			outputText("You tell the innkeeper that you would like a sandwich and toss five gems at him. \"<i>Certainly, " + player.mf("sir", "madam") + ",</i>\" he says as he quickly grabs a plate and assembles a sandwich. Hey, it's your favorite type!");
 			outputText("\n\nYou eat the sandwich. Delicious!");
-			HPChange(player.maxHP() / 3, false);
+			player.HPChange(player.maxHP() / 3, false);
 			player.refillHunger(25);
 			cheatTime(1/12);
 			doNext(menuTavern);
@@ -566,7 +566,7 @@ package classes.Scenes.Places
 			player.gems -= 3;
 			outputText("You tell the innkeeper that you would like a bowl of soup and toss three gems at him. \"<i>Certainly, " + player.mf("sir", "madam") + ",</i>\" he says as he grabs a bowl and fills it with steaming soup. Hey, it's your favorite type!");
 			outputText("\n\nYou take one spoonful at a time, blowing to make sure the soup isn't too hot. You eventually finish the soup. Delicious!");
-			HPChange(player.maxHP() / 3, false);
+			player.HPChange(player.maxHP() / 3, false);
 			player.refillHunger(20);
 			cheatTime(1/12);
 			doNext(menuTavern);

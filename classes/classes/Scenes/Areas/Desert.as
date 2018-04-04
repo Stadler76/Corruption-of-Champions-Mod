@@ -9,6 +9,8 @@ package classes.Scenes.Areas {
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.API.IExplorable;
 	import classes.Scenes.Areas.Desert.*;
+	import classes.Scenes.PregnancyProgression;
+	import classes.internals.GuiOutput;
 
 	use namespace kGAMECLASS;
 
@@ -16,12 +18,14 @@ package classes.Scenes.Areas {
 		public var antsScene:AntsScene = new AntsScene();
 		public var nagaScene:NagaScene = new NagaScene();
 		public var oasis:Oasis = new Oasis();
-		public var sandTrapScene:SandTrapScene = new SandTrapScene();
+		public var sandTrapScene:SandTrapScene;
 		public var sandWitchScene:SandWitchScene = new SandWitchScene();
 		public var ghoulScene:GhoulScene = new GhoulScene();
 		public var wanderer:Wanderer = new Wanderer();
 
-		public function Desert() {}
+		public function Desert(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
+			this.sandTrapScene = new SandTrapScene(pregnancyProgression, output);
+		}
 
 		public function isDiscovered():Boolean { return flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0; }
 		public function discover():void {

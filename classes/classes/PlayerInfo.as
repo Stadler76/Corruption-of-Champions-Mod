@@ -921,12 +921,13 @@ package classes
 			else
 				doNext(playerMenu);
 		}
+		public var boxPerks:ComboBox;
 		//Perk menu
 		private function perkBuyMenu():void {
 			clearOutput();
-			var perkList:Array = buildPerkList();
-			mainView.aCb.items = perkList;
-			if (perkList.length == 0) {
+			var preList:Array = [];
+			preList = buildPerkList();
+			if (preList.length == 0) {
 				outputText(images.showImage("event-cross"));
 				outputText("<b>You do not qualify for any perks at present.  </b>In case you qualify for any in the future, you will keep your " + num2Text(player.perkPoints) + " perk point");
 				if (player.perkPoints > 1) outputText("s");
@@ -936,24 +937,30 @@ package classes
 			}
 			outputText(images.showImage("event-arrow-up"));
 			outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n\n");
-			mainView.aCb.x = 210;
-			mainView.aCb.y = 112;
-			if (mainView.aCb.parent == null) mainView.addChild(mainView.aCb);
-			mainView.aCb.visible = true;
+			boxPerks = new ComboBox();
+			boxPerks.width = 200; 
+			boxPerks.scaleY = 1.1;
+			boxPerks.defaultLabel = "Select a perk";
+			boxPerks.x = 210;
+			boxPerks.y = 112;
+			boxPerks.items = preList;
+			mainView.addChild(boxPerks);
+			boxPerks.visible = true;
 			menu();
+			boxPerks.addEventListener(Event.SELECT, changeHandler);
 			addButton(1, "Skip", perkSkip);
 		}
 		private function perkSelect(selected:PerkClass):void {
 			mainView.stage.focus = null;
-			if (mainView.aCb.parent != null) {
-				mainView.removeChild(mainView.aCb);
+			if (boxPerks.parent != null) {
+				mainView.removeChild(boxPerks);
 				applyPerk(selected);
 			}
 		}
 		private function perkSkip():void {
 			mainView.stage.focus = null;
-			if (mainView.aCb.parent != null) {
-				mainView.removeChild(mainView.aCb);
+			if (boxPerks != null) {
+				mainView.removeChild(boxPerks);
 				playerMenu();
 			}
 		}
@@ -962,7 +969,7 @@ package classes
 			//Store perk name for later addition
 			clearOutput();
 			var selected:PerkClass = ComboBox(event.target).selectedItem.perk;
-			mainView.aCb.move(210, 85);
+			boxPerks.move(210, 85);
 			outputText("You have selected the following perk:\n\n\n");
 			outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
 			var unlocks:Array = kGAMECLASS.perkTree.listUnlocks(selected.ptype);
@@ -997,7 +1004,7 @@ package classes
 			if (perk.ptype == PerkLib.StrongBack2) player.itemSlot5.unlocked = true;
 			if (perk.ptype == PerkLib.StrongBack) player.itemSlot4.unlocked = true;
 			if (perk.ptype == PerkLib.Tank2) {
-				HPChange(player.tou, false);
+				player.HPChange(player.tou, false);
 				statScreenRefresh();
 			}
 			doNext(playerMenu);

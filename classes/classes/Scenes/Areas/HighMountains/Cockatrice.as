@@ -3,6 +3,7 @@ package classes.Scenes.Areas.HighMountains
 	import classes.*;
 	import classes.BodyParts.*;
 	import classes.BodyParts.Hips;
+	import classes.Scenes.Monsters.StareMonster;
 	import classes.internals.WeightedAction;
 	import classes.internals.WeightedDrop;
 	import classes.GlobalFlags.*
@@ -11,7 +12,7 @@ package classes.Scenes.Areas.HighMountains
 	 * ...
 	 * @author ...
 	 */
-	public class Cockatrice extends Monster 
+	public class Cockatrice extends StareMonster 
 	{
 		public var spellCostCompulsion:int = 20;
 		public var spellCostTailSwipe:int  = 25;
@@ -52,7 +53,7 @@ package classes.Scenes.Areas.HighMountains
 					          +" you want to look in the cockatrice’s eyes forever, for it to have total control over you.");
 					player.takeLustDamage(3, true);
 					//apply status here
-					Basilisk.speedReduce(player,20);
+					speedReduce(player, 20);
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
 					flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}
@@ -140,7 +141,7 @@ package classes.Scenes.Areas.HighMountains
 				.add(eAttack,    20);
 
 			if (!player.hasStatusEffect(StatusEffects.BasiliskCompulsion) && !hasStatusEffect(StatusEffects.Blind))
-				actionChoices.add(compulsion, 40);
+				actionChoices.add(compulsion, 65);
 
 			actionChoices.exec();
 		}
@@ -152,6 +153,12 @@ package classes.Scenes.Areas.HighMountains
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+			clearOutput();
+			if (hpVictory) {
+				player.HP = 1;
+				outputText("Your wounds are too great to bear, and you fall unconscious.");
+			}
+
 			if (pcCameWorms) {
 				outputText("\n\nThe cockatrice smirks, but waits for you to finish...");
 				doNext(game.combat.endLustLoss);
@@ -172,6 +179,7 @@ package classes.Scenes.Areas.HighMountains
 			           +" exotic plumage and cream scaled belly."
 			           +" [if (monster.canFly) Every so often he spreads his large feathered wings in an attempt to intimidate you.]"
 			           +" His lizard like feet occasionally gouge into the rubble of the plateau, flinging it up as he shifts his stance. ";
+			this.race = "Cockatrice";
 			// this.plural = false;
 			this.createCock(8,2, CockTypesEnum.LIZARD);
 			this.balls = 2;

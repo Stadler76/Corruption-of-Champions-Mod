@@ -42,7 +42,7 @@
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10];
 		}
 		
-		protected final function outputText(text:String):void
+		protected function outputText(text:String):void
 		{
 			game.outputText(text);
 		}
@@ -595,7 +595,7 @@
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				//game.HPChange(-damage, display);
+				//player.HPChange(-damage, display);
 				HP -= damage;
 				if (display) game.output.text(game.combat.getDamageText(damage));
 				game.mainView.statsView.showStatDown('hp');
@@ -606,7 +606,7 @@
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
-					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
+					//This call did nothing. There is no event 5010: if (game.inCombat) kGAMECLASS.output.doNext(5010);
 				}
 			}
 			return returnDamage;
@@ -779,8 +779,8 @@
 			}
 			return desc;
 		}
-
-		public function race():String
+		
+		override public function get race():String
 		{
 			//Determine race type:
 			var race:String = "human";
@@ -2184,7 +2184,7 @@
 				if (oldHunger >= 90) kGAMECLASS.awardAchievement("Glutton ", kACHIEVEMENTS.REALISTIC_GLUTTON);
 				if (hunger > oldHunger) kGAMECLASS.mainView.statsView.showStatUp("hunger");
 				game.dynStats("lus", 0, "scale", false);
-				kGAMECLASS.statScreenRefresh();
+				kGAMECLASS.output.statScreenRefresh();
 			}
 		}
 		
@@ -2352,7 +2352,7 @@
 			kGAMECLASS.dynStats("lus", 0, "scale", false); //Force display fatigue up/down by invoking zero lust change.
 			if (fatigue > maxFatigue()) fatigue = maxFatigue();
 			if (fatigue < 0) fatigue = 0;
-			kGAMECLASS.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 		}
 		
 		public function armorDescript(nakedText:String = "gear"):String
@@ -2793,8 +2793,8 @@
 				if (findPerk(PerkLib.Sensitive) >= 0 && dsens >= 0) dsens*= 1+ perk(findPerk(PerkLib.Sensitive)).value1;
 			}
 			super.modStats(dstr, dtou, dspe, dinte, dlib, dsens, dlust, dcor, false, max);
-			game.showUpDown();
-			game.statScreenRefresh();
+			game.output.showUpDown();
+			kGAMECLASS.output.statScreenRefresh();
 		}
 
 
@@ -3046,7 +3046,7 @@
 		{
 			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
 				inte += kGAMECLASS.monster.statusEffectv1(StatusEffects.TwuWuv);
-				kGAMECLASS.statScreenRefresh();
+				kGAMECLASS.output.statScreenRefresh();
 				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
 			}
 			if (hasStatusEffect(StatusEffects.Disarmed)) {
@@ -3384,13 +3384,13 @@
 			return totalGrowth;
 		}
 		
-		// Attempts to put the player in heat (or deeper in heat).
-		// Returns true if successful, false if not.
-		// The player cannot go into heat if she is already pregnant or is a he.
-		// 
-		// First parameter: boolean indicating if function should output standard text.
-		// Second parameter: intensity, an integer multiplier that can increase the 
-		// duration and intensity. Defaults to 1.
+		/**
+		 * Attempts to put the player in heat (or deeper in heat).
+		 * The player cannot go into heat if she is already pregnant or is a he.
+		 * @param	output if true, output standard text
+		 * @param	intensity multiplier that can increase the duration and intensity. Defaults to 1.
+		 * @return true if successful
+		 */
 		public function goIntoHeat(output:Boolean, intensity:int = 1):Boolean {
 			if (!hasVagina() || pregnancyIncubation != 0) {
 				// No vagina or already pregnant, can't go into heat.
@@ -3491,6 +3491,113 @@
 
 			if (underBodyProps != null)
 				underBody.setProps(underBodyProps);
+		}
+		
+		override public function set HP(value:Number):void {
+			super.HP = value;
+			game.mainView.statsView.refreshStats(game);
+		}
+		override public function set lust(value:Number):void {
+			super.lust = value;
+			game.mainView.statsView.refreshStats(game);
+		}
+		override public function set fatigue(value:Number):void {
+			super.fatigue = value;
+			game.mainView.statsView.refreshStats(game);
+		}
+		
+		/**
+		 * Alters player's HP.
+		 * @param	changeNum The amount to damage (negative) or heal (positive).
+		 * @param	display Show the damage or heal taken.
+		 * @return  effective delta
+		 */
+		public function HPChange(changeNum:Number, display:Boolean):Number
+		{
+			var before:Number = HP;
+			
+			if (changeNum === 0) {
+				return 0;
+			}
+			
+			if (changeNum > 0) {
+				if (findPerk(PerkLib.HistoryHealer) >= 0) {
+					changeNum *= 1.2; //Increase by 20%!
+				}
+				
+				if (armor.name === "skimpy nurse's outfit") {
+					changeNum *= 1.1; //Increase by 10%!
+				}
+				
+				if (HP + int(changeNum) > maxHP()) {
+					if (HP >= maxHP()) {
+						if (display) {
+							HPChangeNotify(changeNum);
+						}
+						
+						return HP - before;
+					}
+					
+					if (display) {
+						HPChangeNotify(changeNum);
+					}
+					
+					restoreHP();
+				}
+				else
+				{
+					if (display) {
+						HPChangeNotify(changeNum);
+					}
+					
+					HP += int(changeNum);
+					kGAMECLASS.mainView.statsView.showStatUp( 'hp' );
+				}
+			}
+			//Negative HP
+			else
+			{
+				if (HP + changeNum <= 0) {
+					if (display) {
+						HPChangeNotify(changeNum);
+					}
+					
+					HP = 0;
+					kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+				}
+				else {
+					if (display) {
+						HPChangeNotify(changeNum);
+					}
+					
+					HP += changeNum;
+					kGAMECLASS.mainView.statsView.showStatDown( 'hp' );
+				}
+			}
+			
+			dynStats("lust", 0, "scale", false); //Workaround to showing the arrow.
+			kGAMECLASS.output.statScreenRefresh();
+			return HP - before;
+		}
+
+		public function HPChangeNotify(changeNum:Number):void {
+			if (changeNum === 0) {
+				if (HP >= maxHP()) {
+					outputText("You're as healthy as you can be.\n");
+				}
+			} else if (changeNum > 0) {
+				if (HP >= maxHP()) {
+					outputText("Your HP maxes out at " + maxHP() + ".\n");
+				} else {
+					outputText("You gain <b><font color=\"#008000\">" + int(changeNum) + "</font></b> HP.\n");
+				}
+			} else {
+				if (HP <= 0) {
+					outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage, dropping your HP to 0.\n");
+				} else {
+					outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n");
+				}
+			}
 		}
 	}
 }

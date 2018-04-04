@@ -41,6 +41,7 @@
 			this.short = "green slime";
 			this.imageName = "greenslime";
 			this.long = "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.";
+			this.race = "Slime";
 			// this.plural = false;
 			this.createCock(18, 2, CockTypesEnum.HUMAN);
 			this.cumMultiplier = 3;

@@ -4,7 +4,7 @@ package classes.Scenes.Places.TelAdre{
 	import classes.GlobalFlags.*;
 	import classes.display.SpriteDb;
 	import classes.Scenes.Places.TelAdre.Katherine;
-	import classes.Scenes.NPCs.Urta;
+	import classes.Scenes.NPCs.UrtaScene;
 
 	public class KatherineEmployment extends TelAdreAbstractContent {
 		//This class holds all the employment quest specific content for Katherine. It's split off to reduce the size of Katherine.as
@@ -22,7 +22,7 @@ package classes.Scenes.Places.TelAdre{
 
 		public function get threesome():KatherineThreesome { return telAdre.katherineThreesome; }
 
-		public function get urta():Urta { return kGAMECLASS.urta; }
+		public function get urta():UrtaScene { return kGAMECLASS.urta; }
 
 		public function employmentTalk():void
 		{

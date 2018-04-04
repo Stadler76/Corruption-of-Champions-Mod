@@ -21,6 +21,7 @@ package classes.Scenes.Places.Ingnam
 			this.short = "thief";
 			this.imageName = "thief";
 			this.long = "The thief standing before you is a human.  His skin is fairly pale and his hair is brown.  He's wearing a set of leather armor and wielding a dagger in his right hand.  He's intent on knocking you out so he can take your gems.";
+			this.race = "Human";
 			// this.plural = false;
 			this.createCock();
 			createBreastRow(Appearance.breastCupInverse("flat"));

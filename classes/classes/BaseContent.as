@@ -43,11 +43,6 @@
 			return kGAMECLASS.credits;
 		}
 
-		protected function get measurements():Measurements
-		{
-			return kGAMECLASS.measurements;
-		}
-
 		protected function get timeQ():Number
 		{
 			return kGAMECLASS.timeQ;
@@ -168,25 +163,25 @@
 		/** Refreshes the stats panel. */
 		protected function statScreenRefresh():void
 		{
-			kGAMECLASS.statScreenRefresh();
+			kGAMECLASS.output.statScreenRefresh();
 		}
 		
 		/** Displays the stats panel. */
 		protected function showStats():void
 		{
-			kGAMECLASS.showStats();
+			kGAMECLASS.output.showStats();
 		}
 
 		/** Hide the stats panel. */
 		protected function hideStats():void
 		{
-			kGAMECLASS.hideStats();
+			kGAMECLASS.output.hideStats();
 		}
 		
 		/** Hide the up/down arrows. */
 		protected function hideUpDown():void
 		{
-			kGAMECLASS.hideUpDown();
+			kGAMECLASS.output.hideUpDown();
 		}
 
 		/** Create a function that will pass one argument. */
@@ -242,7 +237,7 @@
 
 		protected function doNext(eventNo:Function):void //Now typesafe
 		{
-			kGAMECLASS.doNext(eventNo);
+			kGAMECLASS.output.doNext(eventNo);
 		}
 		
 		/**
@@ -253,39 +248,39 @@
 		 */
 		protected function menu():void
 		{
-			kGAMECLASS.menu();
+			kGAMECLASS.output.menu();
 		}
 
 		protected function hideMenus():void
 		{
-			kGAMECLASS.hideMenus();
+			kGAMECLASS.output.hideMenus();
 		}
 		
 		protected function doYesNo(eventYes:Function, eventNo:Function):void { //Now typesafe
-			kGAMECLASS.doYesNo(eventYes, eventNo);
+			kGAMECLASS.output.doYesNo(eventYes, eventNo);
 		}
 
 		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			return kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+			return kGAMECLASS.output.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
 		}
 		
 		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return kGAMECLASS.output.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
 		protected function addDisabledButton(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton
 		{
-			return kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+			return kGAMECLASS.output.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
 		protected function button(pos:int):CoCButton
 		{
-			return kGAMECLASS.button(pos);
+			return kGAMECLASS.output.button(pos);
 		}
 		
 		protected function removeButton(arg:*):void
 		{
-			kGAMECLASS.removeButton(arg);
+			kGAMECLASS.output.removeButton(arg);
 		}
 		
 		protected function openURL(url:String):void{
@@ -317,11 +312,6 @@
 		protected function silly():Boolean
 		{
 			return kGAMECLASS.silly();
-		}
-
-		protected function HPChange(changeNum:Number,display:Boolean):void
-		{
-			kGAMECLASS.HPChange(changeNum,display);
 		}
 		
 		protected function playerMenu():void { 
@@ -510,17 +500,6 @@
 			kGAMECLASS.mainView.statsView.showStatUp(arg);
 		}
 		
-		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
-			return kGAMECLASS.buttonTextIsOneOf(index, possibleLabels);
-		}		
-		
-		protected function getButtonText(index:int):String {
-			return kGAMECLASS.getButtonText(index);
-		}
-		
-		protected function buttonIsVisible(index:int):Boolean {
-			return kGAMECLASS.buttonIsVisible(index);
-		}
 				
 		/**
 		 * PRIMO BULLSHIT FUNCTION ACCESS

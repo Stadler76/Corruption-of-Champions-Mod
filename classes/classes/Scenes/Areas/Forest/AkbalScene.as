@@ -467,7 +467,7 @@ public class AkbalScene extends BaseContent implements Encounter
 		private function girlsRapeAkbalPart2():void
 		{
 			clearOutput();
-			kGAMECLASS.hideUpDown();
+			kGAMECLASS.output.hideUpDown();
 			//Centaur
 			outputText(images.showImage("akbal-deepwoods-female-taur-bindakbal"));
 			if (player.isTaur())

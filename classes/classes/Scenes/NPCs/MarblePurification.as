@@ -921,7 +921,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\n\"<i>Well, that might be true, but there is more to it than that,</i>\" a shadow crosses over Marble's face for a moment before she says softly, \"<i>Even if it hurts me.</i>\"");
 	 	outputText("\n\n\"<i>Then if " + player.short + " loves you so much, why can't " + player.mf("he","she") + " change for your sake?  Why can't they become addicted to show just how much they love you?</i>\"");
 	 	outputText("\n\nMarble swallows before saying, \"<i>Do you have any idea of what " + player.short + " is trying to do?  " + player.mf("He","She") + " is trying to defeat the demons!  To stop the corruption for good!</i>\"");
-	 	outputText("\n\nAt this Clara bursts out laughing, \"<i>Oh, and save the world I take it?  This " + player.race() + "?  Don't be ridiculous.</i>\"");
+	 	outputText("\n\nAt this Clara bursts out laughing, \"<i>Oh, and save the world I take it?  This " + player.race + "?  Don't be ridiculous.</i>\"");
 	 	outputText("\n\nMarble starts quivering in rage once more.");
 	 	outputText("\n\n\"<i>Seriously, there is no damn way someone as pathetic as " + player.short + " could accomplish that,</i>\" she continues while struggling to her feet.  \"<i>You need to be like a twenty foot giant, champion fighter, god master of magic to pull a stunt like wiping out the demons.  " + player.short + " is none of those things.  Do you really think someone who could would actually care about a lowly Lacta Bovine like you?</i>\"  Clara pokes her finger into Marble's chest.  \"<i>I guess the saying among our kind is right, 'the first daughter has the sourest milk.'</i>\"");
 	 	outputText("\n\nYou can't help but muse that a cow-girl's endurance is something that should never be underestimated.  Their strength certainly isn't as great, but is still more than an average human's by a fair margin.  Making someone who is quite strong completely enraged is generally a bad idea.  Especially when that someone has been working on a farm for close to a year lifting increasingly heavy loads and training with a massive hammer.");
@@ -1514,7 +1514,7 @@ package classes.Scenes.NPCs {
 			player.refillHunger(30);
 		 	outputText("\n\nFinally, your tender moment with your mate comes to an end, and the last of her milk flows down your throat.  You separate, and a small burp escapes your lips.  Marble giggles at this and tells you to come and see her again whenever you're feeling thirsty.  She should be ready to nurse you again in about four hours.");
 			//Restore 20% of PC's health
-			HPChange(Math.round(player.maxHP()*.2),false);
+			player.HPChange(Math.round(player.maxHP()*.2),false);
 			//Restore 30 fatigue
 			player.changeFatigue(-30);
 			//increase lust by 15

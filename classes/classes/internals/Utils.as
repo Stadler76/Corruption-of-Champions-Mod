@@ -5,8 +5,14 @@ package classes.internals
 {
 	import classes.*;
 	import coc.script.Eval;
+	import classes.internals.LoggerFactory;
+	import mx.logging.ILogger;
+	import classes.internals.ActionScriptRNG;
+	
 	public class Utils extends Object
 	{
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(Utils);
+		
 		private static const NUMBER_WORDS_NORMAL:Array		= ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 		private static const NUMBER_WORDS_CAPITAL:Array		= ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 		private static const NUMBER_WORDS_POSITIONAL:Array	= ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
@@ -14,7 +20,7 @@ package classes.internals
 		/**
 		 * Default RNG instance. Uses Utils.rand internally.
 		 */
-		public static const DEFAULT_RNG:IRandomNumber = new RandomNumber();
+		public static const DEFAULT_RNG:RandomNumberGenerator = new ActionScriptRNG();
 		
 		public function Utils()
 		{
@@ -180,7 +186,7 @@ package classes.internals
 						skey = pd.skey;
 						dkey = pd.dkey;
 					} else {
-						//trace("WARNING: missing 'key' or 'skey'+'dkey' in property descriptor "+pd);
+						LOGGER.warn("Missing 'key' or 'skey'+'dkey' in property descriptor {0}", pd);
 						continue;
 					}
 					if (!forward) {
@@ -269,13 +275,7 @@ package classes.internals
 		public static function num2Text2(number:int):String {
 			if (number < 0) return number.toString(); //Can't really have the -10th of something
 			if (number <= 10) return NUMBER_WORDS_POSITIONAL[number];
-			// For (number > 10) the method would return 11st, 12nd, 13rd and so on with the switch-case below (Stadler76)
-			/*switch (number % 10) {
-				case 1: return number.toString() + "st";
-				case 2: return number.toString() + "nd";
-				case 3: return number.toString() + "rd";
-				default:
-			}*/
+			
 			return number.toString() + "th";
 		}
 		
@@ -299,10 +299,14 @@ package classes.internals
 			return (string.substr(0, 1).toUpperCase() + string.substr(1));
 		}
 		
-		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
-		// Accepts any type.
-		// Can also accept a *single* array of items, in which case it picks from the array instead.
-		// This lets you pre-construct the argument, to make things cleaner
+		/**
+		 * Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random. Accepts any type.
+		 * Can also accept a *single* array of items, in which case it picks from the array instead.
+		 * This lets you pre-construct the argument, to make things cleaner
+		 * 
+		 * @param	...args arguments to pick from
+		 * @return a randomly selected argument
+		 */
 		public static function randomChoice(...args):*
 		{
 			var tar:Array;
@@ -416,38 +420,5 @@ package classes.internals
 			while (n-->0) rslt += s;
 			return rslt;
 		}
-
-		/* None of these functions are called anymore
-		// lazy(obj,arg1,...,argN)() = obj[arg1]...[argN]
-		public static function lazyIndex(obj:*,...args):Function{
-			return function():*{
-				while(args.length>0)
-					obj=obj[args.shift()];
-				return obj;
-			};
-		}
-		// lazy2(func,arg1,...,argN)() = func()[arg1]...[argN]
-		public static function lazyCallIndex(func:Function,...args):Function{
-			var _args:Array = args.slice();
-			return function():*{
-				var obj:*=func();
-				var __args:Array = _args.slice();
-				while(__args.length>0)
-					obj=obj[__args.shift()];
-				return obj
-			};
-		}
-		// lazy2(func,arg1,...,argN)(args2) = func()[arg1]...[argN](args2)
-		public static function lazyCallIndexCall(func:Function,...args):Function{
-			var _args:Array = args.slice();
-			return function (...fargs):*{
-				var obj:*=func();
-				var __args:Array = _args.slice();
-				while(__args.length>0)
-					obj=obj[__args.shift()];
-				return obj.apply(null,fargs);
-			};
-		}
-		*/
 	}
 }

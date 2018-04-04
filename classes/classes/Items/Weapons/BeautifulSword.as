@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function BeautifulSword() {
 			this.weightCategory = Weapon.WEIGHT_MEDIUM;
-			super("B.Sword", "B.Sword", "beautiful sword", "a beautiful shining sword", "slash", 7, 400, "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.", "holySword");
+			super("B.Sword", "B.Sword", "beautiful sword", "a beautiful shining sword", "slash", 7, 400, "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade. The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.", "holySword");
 		}
 		
 		override public function get attack():Number { 

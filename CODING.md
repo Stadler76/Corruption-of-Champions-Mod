@@ -38,7 +38,7 @@ In addition to that use an empty line between function definitions like in the e
 Put the opening curly brace into **the same** line:
 
 ```as3
-if (foobar == "moo") {
+if (foobar === "moo") {
 	expression;
 	expression;
 } else {
@@ -66,12 +66,12 @@ If **both** the `if (expr)` and the `else`-branch contain a single expression yo
 ##### Do this
 ```as3
 
-if (foo == "bar")
+if (foo === "bar")
 	outputText("foobar");
 else
 	outputText("moo");
 
-if (foobar == "moo") {
+if (foobar === "moo") {
 	outputText("blah, blah");
 } else {
 	outputText("blah, blah");
@@ -81,11 +81,11 @@ if (foobar == "moo") {
 
 ##### But dont't do this:
 ```as3
-if (foo == "bar")
+if (foo === "bar")
 	outputText("foobar");
 else outputText("moo");
 
-if (foobar == "moo")
+if (foobar === "moo")
 	outputText("blah, blah");
 else {
 	outputText("blah, blah");
@@ -93,12 +93,14 @@ else {
 }
 ```
 
+**However:** If theres even the slightest possibility, that someone may add more expressions to it its recommended to add the curly braces anyway to avoid mistake like forgetting to add curly braces and to keep future diffs less noisy.
+
 #### Good practice for the `else` in conditionals
 Try keeping the `else`-part of a conditional as near as possible to the `if`
 
 ##### Avoid this:
 ```as3
-if (foobar == "moo") {
+if (foobar === "moo") {
 	expression;
 	expression;
 	expression;
@@ -111,7 +113,7 @@ if (foobar == "moo") {
 
 ##### Instead use this:
 ```as3
-if (foobar != "moo") {
+if (foobar !== "moo") {
 	expression;
 } else {
 	expression;
@@ -122,7 +124,7 @@ if (foobar != "moo") {
 }
 ```
 
-As you can see there, I've changed the condition to the opposite. From `foobar == "moo"` to `foobar != "moo"` in that case.
+As you can see there, I've changed the condition to the opposite. From `foobar === "moo"` to `foobar !== "moo"` in that case.
 
 ### Indenting and aligning code
 Indent with single tabs (per indentation level) and align with spaces:
@@ -179,7 +181,7 @@ while (i < theArray.length) {
 	// do something
 }
 
-if (condition != "something") {
+if (condition !== "something") {
 	// do something
 } else {
 	// do something
@@ -255,29 +257,30 @@ Instead use this:
 	}
 ```
 
-##### Exemption: Commenting out code blocks
-When commenting out code blocks of 3 or more line, you may put the comments at the beginning of the line(s) but leave the indentation of the code intact.
-
-```as3
-/*
-			if (foo == bar) {
-				outputText("blah, blah, blah\n");
-				outputText("yadda, yadda, yadda\n");
-			}
-*/
-
-//			if (foo == bar) {
-//				outputText("blah, blah, blah\n");
-//				outputText("yadda, yadda, yadda\n");
-//			}
-```
-
 ### Naming conventions
 
-| **What**                              | **Convention**                                         | **Examples**                        |
-|---------------------------------------|--------------------------------------------------------|-------------------------------------|
-| class                                 | Use UpperCamelCase                                     | `MinotaurScene`, `PlayerAppearance` |
-| function / method                     | Use lowerCamelCase                                     | `setType`, `restoreLegs`            |
-| variables (including class variables) | Use lowerCamelCase                                     | `furColor`, `skinType`              |
-| constants                             | Use capital letters and words separated by underscores | `CAN_FLY_WINGS`, `RED_PANDA`        |
+| **What**                              | **Convention**                                                          | **Examples**                            |
+|---------------------------------------|-------------------------------------------------------------------------|-----------------------------------------|
+| class                                 | Use UpperCamelCase                                                      | `MinotaurScene`, `PlayerAppearance`     |
+| interface                             | Use UpperCamelCase<br>**Note:** No `I` or `Interface` prefix or suffix! | `RandomNumberGenerator`, `Serializable` |
+| function / method                     | Use lowerCamelCase                                                      | `setType`, `restoreLegs`                |
+| variables (including class variables) | Use lowerCamelCase                                                      | `furColor`, `skinType`                  |
+| constants                             | Use capital letters and words separated by underscores                  | `CAN_FLY_WINGS`, `RED_PANDA`            |
 
+### Arrays and trailing commas
+When adding elements to arrays where every array element is in it own line its common practice and recommended to add a trailing comma (`,`) to the new element, to reduce the noise of future diffs:
+```as3
+public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
+		[
+			[Arms.HUMAN, "human"],
+			[Arms.HARPY, "harpy"],
+			[Arms.SPIDER, "spider"],
+			[Arms.WOLF, "wolf"],
+			[Arms.PREDATOR, "predator"],
+			[Arms.SALAMANDER, "salamander"],
+			[Arms.COCKATRICE, "cockatrice"],
+			[Arms.RED_PANDA, "red-panda"],
+			[Arms.OTTER, "otter"],
+		]
+);
+```

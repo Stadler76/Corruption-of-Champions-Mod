@@ -3,6 +3,9 @@ package classes.Scenes.Areas.Desert {
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Scenes.Monsters.pregnancies.PlayerSandTrapFertilePregnancy;
+	import classes.Scenes.Monsters.pregnancies.PlayerSandTrapPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
@@ -11,8 +14,10 @@ package classes.Scenes.Areas.Desert {
 			return monster as SandTrap;
 		}
 
-		public function SandTrapScene()
+		public function SandTrapScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
+			new PlayerSandTrapPregnancy(pregnancyProgression, output);
+			new PlayerSandTrapFertilePregnancy(pregnancyProgression, output);
 		}
 
 //const TIMES_ENCOUNTERED_SAND_TRAPS:int = 578;

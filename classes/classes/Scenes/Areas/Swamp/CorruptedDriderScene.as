@@ -8,6 +8,8 @@ package classes.Scenes.Areas.Swamp
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Scenes.Monsters.pregnancies.PlayerDriderPregnancy;
+	import classes.Scenes.PregnancyProgression;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 
@@ -15,8 +17,9 @@ package classes.Scenes.Areas.Swamp
 
 	public class CorruptedDriderScene extends BaseContent
 	{
-		public function CorruptedDriderScene()
+		public function CorruptedDriderScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
 		{
+			new PlayerDriderPregnancy(pregnancyProgression, output);
 		}
 
 //VARS
@@ -802,6 +805,11 @@ package classes.Scenes.Areas.Swamp
 
 		public function driderPregVagBirth():void
 		{
+			if (!player.hasVagina()) {
+				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
+				player.createVagina();
+			}
+			
 			spriteSelect(SpriteDb.s_drider);
 			outputText(images.showImage("birth-cDrider-vag"));
 			outputText("\nYou shudder violently, your stomach growling fiercely at you.  It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world.  A slimy green fluid starts leaking out of your cunt, making a small puddle on the ground.  The sensation is extremely pleasurable as you feel it running down your thighs.  Groaning, you start to push out a small, smooth green ball, and the action makes your pussy so much wetter.  Groaning, you push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo.  After the sixth, you orgasm, spraying your cum all over the ground underneath you, each egg squeezing out and prolonging the intense feeling.");

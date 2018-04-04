@@ -16,7 +16,7 @@ package classes.Items.Consumables
 			clearOutput();
 			outputText("You uncork the bottle and drink the behemoth cum; it tastes great and by the time you've finished drinking, you feel a bit stronger. ");
 			dynStats("str", 0.5, "tou", 0.5, "lus", 5 + (player.cor / 5));
-			game.HPChange(Math.round(player.maxHP() * .25), true);
+			player.HPChange(Math.round(player.maxHP() * .25), true);
 			player.slimeFeed();
 			player.refillHunger(25);
 			player.orgasm('Lips',false);

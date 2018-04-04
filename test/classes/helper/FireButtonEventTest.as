@@ -11,6 +11,7 @@ package classes.helper
 	import classes.helper.FireButtonEvent;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.CoC;
+	import classes.Output;
 	
 	public class FireButtonEventTest
 	{
@@ -29,7 +30,7 @@ package classes.helper
 		[Before]
 		public function setUp():void
 		{
-			cut = new FireButtonEvent(kGAMECLASS.mainView, CoC.MAX_BUTTON_INDEX);
+			cut = new FireButtonEvent(kGAMECLASS.mainView, Output.MAX_BUTTON_INDEX);
 			eventTriggeredFlag = false;
 		}
 		
@@ -65,14 +66,14 @@ package classes.helper
 		
 		[Test]
 		public function doNextEventNotTriggered():void {
-			kGAMECLASS.doNext(setFlagEvent);
+			kGAMECLASS.output.doNext(setFlagEvent);
 			
 			assertThat(eventTriggeredFlag, equalTo(false));
 		}
 		
 		[Test]
 		public function doNextEventTriggered():void {
-			kGAMECLASS.doNext(setFlagEvent);
+			kGAMECLASS.output.doNext(setFlagEvent);
 			
 			cut.fireNextButtonEvent();
 			

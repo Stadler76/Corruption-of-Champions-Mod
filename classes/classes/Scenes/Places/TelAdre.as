@@ -7,6 +7,7 @@
 	import classes.Scenes.Places.TelAdre.*;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
+	import classes.Scenes.PregnancyProgression;
 
 	/**
  * The lovely town of Tel Adre
@@ -17,7 +18,7 @@
 		public var auntNancy:AuntNancy = new AuntNancy();
 		public var bakeryScene:BakeryScene = new BakeryScene();
 		public var brooke:Brooke = new Brooke();
-		public var cotton:Cotton = new Cotton();
+		public var cotton:Cotton;
 		public var dominika:Dominika = new Dominika();
 		public var edryn:Edryn = new Edryn();
 		public var frosty:Frosty = new Frosty();
@@ -40,9 +41,9 @@
 
 		public var vala:ValaScene = new ValaScene();
 		
-		public function TelAdre()
+		public function TelAdre(pregnancyProgression:PregnancyProgression)
 		{
-			
+			this.cotton = new Cotton(pregnancyProgression);
 		}
 
 //const YVONNE_FUCK_COUNTER:int = 437;

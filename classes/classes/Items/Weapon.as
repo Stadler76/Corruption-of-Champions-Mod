@@ -3,6 +3,8 @@
  */
 package classes.Items
 {
+	import classes.ItemType;
+	import classes.PerkLib;
 
 	public class Weapon extends Useable //Equipable
 	{
@@ -42,7 +44,10 @@ package classes.Items
 		}
 		
 		override public function get shortName():String {
-			return this._shortName + (_tier > 0 ? "+" + _tier : "");
+			var sn:String = this._shortName;
+			if (_tier > 0 && !isObsidian()) sn += "+" + _tier;
+			if (isObsidian()) sn = "Ob." + sn; //For obsidian weapons, unless specified.
+			return sn;
 		}
 		
 		override public function get description():String {
@@ -53,6 +58,10 @@ package classes.Items
 					break;
 				case 2:
 					desc += " This weapon has been upgraded to be of masterwork quality.";
+					break;
+				case 3:
+					if (_degradable) desc += "This weapon has been enhanced with reinforced obsidian " + (isSharp() ? "lining its blade that could deliver sharper blows" : "spikes carefully attached to deliver more painful attacks") + ".";
+					else desc += " This weapon has been upgraded to be of epic quality and takes on a more fearsome look.";
 					break;
 				default:
 					desc += "";
@@ -76,7 +85,7 @@ package classes.Items
 		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
-			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING) {
+			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING && !(game.player.hasPerk(PerkLib.TitanGrip) && game.player.str >= 90)) {
 				outputText("Because the weapon requires the use of two hands, you have unequipped your shield. ");
 			}
 		}
@@ -86,7 +95,7 @@ package classes.Items
 		}
 		
 		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
-			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING) {
+			if (perk == "Large" && game.player.shield != ShieldLib.NOTHING && !(game.player.hasPerk(PerkLib.TitanGrip) && game.player.str >= 90)) {
 				game.inventory.unequipShield();
 			}
 			return this;
@@ -115,5 +124,22 @@ package classes.Items
 		public function get weightCategory():String {
 			return this._weight;
 		}
+		
+		//For possible condition checking
+		public function isObsidian():Boolean {
+			return this.longName.toLowerCase().indexOf("obsidian") >= 0;
+		}
+		public function isSharp():Boolean {
+			return (verb == "slash" || verb == "keen cut" || verb == "stab");
+		}
+		
+		//For obsidian and breakable weapons.
+		public function setDegradation(durability:int, weaponToDegradeInto:ItemType):Weapon {
+			this._degradable = true;
+			this._durability = durability;
+			this._breaksInto = weaponToDegradeInto;
+			return this;
+		}
+		
 	}
 }

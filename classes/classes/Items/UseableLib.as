@@ -35,6 +35,9 @@ package classes.Items
 		public const EBNFLWR:SimpleUseable = new SimpleUseable("E.Flower", "E.Flower", "an Ebonbloom flower", 600,
 			"Grey metallic flowers that are known to bloom in the deepest caves below the mountains.",
 			"You look over the Ebonbloom flower. It's rather pretty, outside of the fact that it reflects sunlight and blinds you. They're rare, so you're sure you could sell it if you wanted, though you can't help but wonder if there's another use for it.");
+		public const OBSHARD:SimpleUseable = new SimpleUseable("ObShard", "Ob.Shard", "a shard of obsidian", 200,
+			"A small shard of obsidian. Formed from rapidly-cooling lava, it's a volcanic glass that is known to be very sharp albeit fragile.",
+			"You look over the shard of obsidian, holding the shard with care. It's rather shiny, easily reflecting the sunlight. Knowing how sharp the shard is, you could find someone who could work it into some deadly weapons.");
 		//WALL DECOR
 		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25, 
 			"A skull taken from a slain imp.",

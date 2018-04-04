@@ -176,7 +176,7 @@ package classes.Scenes.Areas.Desert
 			this.short = "Cum Witch";
 			this.imageName = "cumwitch";
 			this.long = "The Cum Witch is a moderately tall woman, almost six feet in height.  Her dark ebony skin is nearly as black as pitch, though it glitters with sweat from her recent sexual activities and the fight.  She has plump lips and long, smooth blonde hair, though much of it is hidden behind a pointed, wide-brimmed hat.  Her robes are even blacker than she is, but she wields an alabaster staff that fairly sizzles with magical might.  Of course, her garments don't do much to conceal her gigantic breasts.  Though there are only two, they're large enough to dwarf the four tits most sand witches are packing.";
-			// this.plural = false;
+			this.race = "Human?";
 			this.createCock(12,2,CockTypesEnum.HUMAN);
 			this.balls = 0;
 			this.ballSize = 0;

@@ -12,22 +12,10 @@ package classes.Scenes.Dungeons {
 	use namespace kGAMECLASS;
 
 	public class Factory extends DungeonAbstractContent {
-		/*
-		private static const DUNGEON_FACTORY_FOYER:int				= 0;
-		private static const DUNGEON_FACTORY_PUMP_ROOM:int			= 1;
-		private static const DUNGEON_FACTORY_BREAK_ROOM:int			= 2;
-		private static const DUNGEON_FACTORY_FURNACE_ROOM:int		= 3;
-		private static const DUNGEON_FACTORY_REPAIR_CLOSET:int		= 4;
-		private static const DUNGEON_FACTORY_MAIN_CHAMBER:int		= 5;
-		private static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	= 6;
-		private static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
-		private static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
-		private static const DUNGEON_FACTORY_BATHROOM:int			= 9;
-		*/
 		public function Factory() {}
 
 		public var secretarialSuccubus:SecretarialSuccubusScene = new SecretarialSuccubusScene();
-		//Incubus Mechanic would be in this line but this is in D3.
+		//Incubus Mechanic would be in this line but this is in Lethice Dungeon
 		public var omnibusOverseer:OmnibusOverseerScene = new OmnibusOverseerScene();
 		//EVENTS
 		public function enterDungeon():void {
@@ -136,11 +124,13 @@ package classes.Scenes.Dungeons {
 		}
 		
 		private function takeGroPlus():void {
+			clearOutput();
 			flags[kFLAGS.FACTORY_TAKEN_GROPLUS]++
-			outputText(images.showImage("item-gro+"));
+			outputText(images.showImage("item-gro-plus"));
 			inventory.takeItem(consumables.GROPLUS, roomPremiumStorage);
 		}
 		private function takeLactaid():void {
+			clearOutput();
 			flags[kFLAGS.FACTORY_TAKEN_LACTAID]++
 			outputText(images.showImage("item-lactaid"));
 			inventory.takeItem(consumables.LACTAID, roomPremiumStorage);
@@ -152,7 +142,7 @@ package classes.Scenes.Dungeons {
 			outputText(images.showImage("item-coffee"));
 			outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or a victim of this place's dark master.");
 			dynStats("lus", 1);
-			HPChange(35, false);
+			player.HPChange(35, false);
 			player.refillHunger(10);
 			doNext(roomBreakRoom);
 		}
@@ -178,9 +168,9 @@ package classes.Scenes.Dungeons {
 		private function doTensionRelease():void {
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.TensionReleased)) { //First time...
-					if (player.hasVagina() && player.hasCock()) outputText(images.showImage("factory-tension-herm"));
-					else if (player.hasVagina() && !player.hasCock()) outputText(images.showImage("factory-tension-female"));
-					else outputText(images.showImage("factory-tension-male"));
+				if (player.hasVagina() && player.hasCock()) outputText(images.showImage("factory-tension-herm"));
+				else if (player.hasVagina() && !player.hasCock()) outputText(images.showImage("factory-tension-female"));
+				else outputText(images.showImage("factory-tension-male"));
 				outputText("You nod and step forwards, allowing her to hook up a modified harness and inject you with the demonic concoction.  In no time heat boils through your veins, pooling on your chest and crotch.  ");
 				if (player.biggestTitSize() < 10) {
 					player.growTits(1, (2+rand(3)), true, 1);
@@ -194,9 +184,9 @@ package classes.Scenes.Dungeons {
 			}
 			else { //Second/third times...
 				if (player.statusEffectv1(StatusEffects.TensionReleased) == 0) { //2nd time
-						if (player.hasVagina() && player.hasCock()) outputText(images.showImage("factory-tension-herm"));
-						else if (player.hasVagina() && !player.hasCock()) outputText(images.showImage("factory-tension-female"));
-						else outputText(images.showImage("factory-tension-male"));
+					if (player.hasVagina() && player.hasCock()) outputText(images.showImage("factory-tension-herm"));
+					else if (player.hasVagina() && !player.hasCock()) outputText(images.showImage("factory-tension-female"));
+					else outputText(images.showImage("factory-tension-male"));
 					outputText("You eagerly put on the modified harness and let them inject you with more of those body-altering chemicals.  As they fill you with artificial lust and desire, you cry out and beg for more.  They oblige you and give you a larger dose than the first time.  ");
 					if (player.cocks.length > 0) { //Grow dick!
 						player.lengthChange(player.increaseCock(0, 5), player.cocks.length);
@@ -217,8 +207,8 @@ package classes.Scenes.Dungeons {
 							}
 						}
 					}
-					if (player.breastRows.length == 0) { //If player has 0 bewbs
-						player.createBreastRow(); //Grow chest
+					if (player.breastRows.length == 0) { //if player has 0 bewbs
+						player.createBreastRow(); //grow chest
 						outputText("Your chest tingles, revealing a pair of pink nipples on your new mammory glands.  ");
 					}
 					player.growTits(1, (2+rand(3)), true, 1);
@@ -241,8 +231,10 @@ package classes.Scenes.Dungeons {
 					player.addStatusValue(StatusEffects.TensionReleased,1,1);
 					player.slimeFeed();
 				}
-				else //3rd time, move on to bad end!
+				else { //3rd time, move on to bad end!
 					doBadEndTension();
+					return;
+				}
 			}
 			doNext(roomMainChamber);
 		}
@@ -297,11 +289,10 @@ package classes.Scenes.Dungeons {
 			getGame().gameOver();
 		}
 
-		private function doBadEndTension():void {
-			clearOutput();
-				if (player.hasVagina() && player.hasCock()) outputText(images.showImage("factory-tension-herm"));
-				else if (player.hasVagina() && !player.hasCock()) outputText(images.showImage("factory-tension-female"));
-				else outputText(images.showImage("factory-tension-male"));
+		public function doBadEndTension():void {
+			if (player.hasVagina() && player.hasCock()) outputText(images.showImage("factory-tension-herm"));
+			else if (player.hasVagina() && !player.hasCock()) outputText(images.showImage("factory-tension-female"));
+			else outputText(images.showImage("factory-tension-male"));
 			outputText("Desperate for more of the demon-drugs, you slide into the now-familiar harness and let the needles sink into your skin.   Panting in lust, you beg for them increase the dosage again.   Desire burns through your veins as the cocktail surges through them");
 			if (player.cocks.length > 0) {
 				outputText(", filling your " + player.multiCockDescriptLight());
@@ -317,19 +308,19 @@ package classes.Scenes.Dungeons {
 			else outputText(".  ");
 			outputText("Your " + player.nippleDescript(0) + "s throb, becoming hard, puffy, and starting to dribble milk.  ");
 			if (player.vaginas.length > 0) outputText("Your pussy is instantaneously soaked, filling the air with the scent of sex.  ");
-			outputText("The desire for more of the drugs battles with your need to fuck and be fucked, until a small functioning part of your brain realizes it'll be easier to get sex than to get more of the drug.  You pull free and throw yourself into the mass of sweaty bodies, losing yourself in the salty tang of sweat and sex, pleasing nipples, clits, and cocks with your hands, and giving and receiving as much pleasure as you can.  You're in heaven.  Vaguely you realize time is passing, but it is a secondary concern next to the idea of having another groin-soaking orgasm.   You fuck and suck until you pass out from delirium.\n\n");
-			doNext(doBadEndTension2);
+			outputText("The desire for more of the drugs battles with your need to fuck and be fucked, until a small functioning part of your brain realizes it'll be easier to get sex than to get more of the drug.  You pull free and throw yourself into the mass of sweaty bodies, losing yourself in the salty tang of sweat and sex, pleasing nipples, clits, and cocks with your hands, and giving and receiving as much pleasure as you can.  You're in heaven.  Vaguely you realize time is passing, but it is a secondary concern next to the idea of having another groin-soaking orgasm.   You fuck and suck until you pass out from delirium.");
+			dynStats("int", -25, "lus", -75, "cor", 2);
+			doNext(BadEndTension);
 		}
-		private function doBadEndTension2():void { //GAME OVERZZ
+		public function BadEndTension():void {
 			clearOutput();
 			outputText(images.showImage("badend-tension"));
 			outputText("In time you wake, your body aching both from the exertion and a desire for more.  On one hand you had a mission here, but why fight and struggle with danger and loneliness when you could be high on sex and cumming near-constantly?  You cuddle up to an exhausted girl and decide to wait for the drug-mistresses to give you another turn in the pile.  One of them turns, as if noticing your train of thought, and wheels over a breast-pump.  She hooks it up to your still-leaking nipples and you ");
-			if (player.biggestLactation() >= 3)
-				 outputText("moo");
+			if (player.biggestLactation() >= 3) outputText("moo");
 			else outputText("cry");
 			outputText(" with happiness, promising another dose to you if you are a good cow for her.");
-			dynStats("int", -100, "lib", 100, "cor", 2);
-			getGame().gameOver();			
+			dynStats("int", -75, "lib", 100, "cor", 3);
+			getGame().gameOver();
 		}
 		//ROOMS
 		public function roomLobby():void {
@@ -365,7 +356,7 @@ package classes.Scenes.Dungeons {
 			outputText("<u><b>Pump Room</b></u>\n");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] < 1)
 				 outputText("As you step through the iron door, a cacophony of thrumming mechanical noise assaults your ears.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The constant thrum-thrum-thrum of concealed pumps and mechanisms makes it difficult to hear anything, but you swear you can make out the faint sounds of sexual pleasure emanating from the northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.  The vibrations of all the machinery are strongest along the east walls, indicating the possible site of this hellish place's power-plant. There is a door on the east wall and a door on the north.  To the south is a solid iron door that leads back to the lobby.");
-			else outputText("As you step through the iron door, silence is the only noise you hear.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The near-complete silence of the place unnerves you, but allows you to make out the faint sounds of sexual pleasure emanating from northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.  There are two other doors, one along the east wall and one on the north.  To the south is a solid iron door that leads back to the lobby.");
+			else outputText("As you step through the iron door, silence is the only noise you hear.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The near-complete silence of the place unnerves you, but allows you to make out the faint sounds of sexual pleasure emanating from northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.\nThere are two other doors, one along the east wall and one on the north.  To the south is a solid iron door that leads back to the lobby.");
 			dungeons.setDungeonButtons(roomRepairCloset, roomLobby, roomMainChamber, roomFurnaceRoom);	
 		}
 		public function roomFurnaceRoom():void {
@@ -377,7 +368,7 @@ package classes.Scenes.Dungeons {
 				 outputText("The air inside this room is hot enough to coat your " + player.skin.tone + " " + player.skin.desc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some kind of pink crystalline fuel being burned by purple-white fire.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ");
 			else outputText("Despite the machinery being shut down, the air in this room is still hot enough to coat your " + player.skin.tone + " " + player.skin.desc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some the ashes of a previous fuel source.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ");
 			dungeons.setDungeonButtons(null, null, roomPumpRoom, null);
-			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] <= 0) //Incubus is ALLLLIVE
+			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] <= 0) //incubus is ALLLLIVE
 				getGame().lethicesKeep.incubusMechanic.encounterIncubusFactory();
 		}
 		public function roomRepairCloset():void {
@@ -414,7 +405,7 @@ package classes.Scenes.Dungeons {
 				else outputText("You wish you had some machinery like this for yourself.  It looks so fun!  Still, you suppose you should find the control panel to shut this down and free these people.  ");
 				outputText("There is a doorway to the east marked with an 'exit' sign above it.  Along the southern wall is a stairwell that leads up to some kind of foreman's office.  Perhaps the controls are in there?");
 			}
-			else { //Dungeon shut down
+			else { //dungeon shut down
 				outputText("The chamber is significantly emptier since you've shut down this factory.  Roughly half the girls appear to have left.  The rest seem to be pre-occupied by fucking each other in a massive orgy.  A few enterprising ladies have found leather outfits and appear to be helping to manually administer the chemical cocktails to those engaged in rampant sexual exploits.  It seems some of them preferred a life of near-constant orgasm to their freedom.  There is a door to the east marked as 'EXIT', and a stairwell along the south wall that leads to an overseer's office.");
 				outputText("\n\nOne of the leather-clad ladies steps over and offers, 'Would you like a dose?  You look like you need to relieve some tension...");
 				addButton(0, "Tension", doTensionRelease);
@@ -449,7 +440,7 @@ package classes.Scenes.Dungeons {
 				outputText("-You could perform a system shutdown and then smash the controls.  It'd let the girls go and keep the factory shut down in the short term.  However most of the equipment would be undamaged and the place could be re-opened without too much work on the demons' part.\n");
 				//(Consequences - If Marcus is a demon he takes over running the factory forever.  If not, nothing bad happens)
 				outputText("-You could leave the equipment to continue running.  After all, the girls downstairs did seem to be enjoying themselves...\n");
-				//(Consequences - Marcus takes over if demonic choice taken, if not he shuts down the equipment & things continue as per #3).
+				//(Consequences - Marcus takes over if demonic choice taken, if not he shuts down the equipment & things continue as per #3)
 			}
 			else outputText("The controls are now inoperable due to the damage your actions have caused.");
 			dungeons.setDungeonButtons(null, null, roomForemanOffice, null);
@@ -463,23 +454,25 @@ package classes.Scenes.Dungeons {
 			clearOutput();
 			outputText(images.showImage("factory-storage"));
 			outputText("<b><u>Premium Products</u></b>\n");
-			outputText("This store room is filled with a few opened crates, meant to store the various substances in the factory.  It looks as if the current overseer has allowed supplies to run low, as there is not much to be gleaned from this meager stash.\n\n");
+			outputText("This store room is filled with a few opened crates, meant to store the various substances in the factory.  It looks as if the current overseer has allowed supplies to run low, as there is not much to be gleaned from this meager stash.\n");
 			dungeons.setDungeonButtons(roomForemanOffice, null, null, null);
 			if (flags[kFLAGS.FACTORY_TAKEN_LACTAID] > 0) {
 				if (flags[kFLAGS.FACTORY_TAKEN_LACTAID] < 5) {
-					outputText("There is a crate with " + num2Text(5 - flags[kFLAGS.FACTORY_TAKEN_LACTAID]) + " bottles of something called 'Lactaid' inside.\n\n");
+					outputText("There is a crate with " + num2Text(5 - flags[kFLAGS.FACTORY_TAKEN_LACTAID]) + " bottles of something called 'Lactaid' inside.\n");
 					addButton(0, "Lactaid", takeLactaid);
 				}
-			} else {
+			}
+			else {
 				outputText("There is an unopened crate with five bottles of something called 'Lactaid' inside.\n\n");
 				addButton(0, "Lactaid", takeLactaid);
 			}
 			if (flags[kFLAGS.FACTORY_TAKEN_GROPLUS] > 0) {
 				if (flags[kFLAGS.FACTORY_TAKEN_GROPLUS] < 5) {
-					outputText("There is a crate with " + num2Text(5 - flags[kFLAGS.FACTORY_TAKEN_GROPLUS]) + " bottles of something called 'Gro+' inside.\n\n");
+					outputText("There is a crate with " + num2Text(5 - flags[kFLAGS.FACTORY_TAKEN_GROPLUS]) + " bottles of something called 'Gro+' inside.\n");
 					addButton(1, "GroPlus", takeGroPlus);
 				}
-			} else {
+			}
+			else {
 				outputText("There is an unopened crate with five bottles of something called 'Gro+' inside.\n\n");
 				addButton(1, "GroPlus", takeGroPlus);
 			}
