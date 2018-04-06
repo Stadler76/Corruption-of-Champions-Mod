@@ -2898,6 +2898,21 @@
 						maxInt += 5;
 					}
 				}
+				if (ferretScore() >= 8) {
+					maxStr += 15;
+					maxSpe += 25;
+				} else if (ferretScore() >= 4) {
+					maxStr += 5;
+					maxSpe += 15;
+				}
+				if (redPandaScore() >= 8) {
+					maxInt += 10;
+					maxSpe += 25;
+					maxStr += 5;
+				} else if (redPandaScore() >= 4) {
+					maxInt += 5;
+					maxSpe += 15;
+				}
 				if (cockatriceScore() >= 8) {
 					maxStr += 5;
 					maxSpe += 25;
