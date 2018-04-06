@@ -1010,6 +1010,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.statusAffects[i].value2 = player.statusEffect(i).value2;
 			saveFile.data.statusAffects[i].value3 = player.statusEffect(i).value3;
 			saveFile.data.statusAffects[i].value4 = player.statusEffect(i).value4;
+			if (player.statusEffect(i).dataStore !== null) {
+				saveFile.data.statusAffects[i].dataStore = player.statusEffect(i).dataStore;
+			}
 		}
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
@@ -2070,13 +2073,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				CoC_Settings.error("Cannot find status affect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
 				continue;
 			}
-			player.createStatusEffect(stype,
-					saveFile.data.statusAffects[i].value1,
-					saveFile.data.statusAffects[i].value2,
-					saveFile.data.statusAffects[i].value3,
-					saveFile.data.statusAffects[i].value4,
-					false);
-				//trace("StatusEffect " + player.statusEffect(i).stype.id + " loaded.");
+			var sec:StatusEffectClass = player.createStatusEffect(
+				stype,
+				saveFile.data.statusAffects[i].value1,
+				saveFile.data.statusAffects[i].value2,
+				saveFile.data.statusAffects[i].value3,
+				saveFile.data.statusAffects[i].value4,
+				false
+			);
+			if (saveFile.data.statusAffects[i].dataStore !== undefined) {
+				sec.dataStore = saveFile.data.statusAffects[i].dataStore;
+			}
+			//trace("StatusEffect " + player.statusEffect(i).stype.id + " loaded.");
 		}
 		//Make sure keyitems exist!
 		if (saveFile.data.keyItems != undefined)

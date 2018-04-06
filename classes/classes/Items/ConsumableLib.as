@@ -87,9 +87,9 @@ package classes.Items
 		public const NPEPREG:Consumable = new NeonPinkEgg(true);
 
 //		FOOD & BEVERAGES
-		public const BC_BEER:SimpleConsumable = mk("BC Beer", "BC Beer", "a mug of Black Cat Beer", function(player:Player):void { getGame().telAdre.niamh.blackCatBeerEffects(player) }, "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.", 1);
+		public const BC_BEER:BlackCatBeer = new BlackCatBeer();
 		public const BHMTCUM:Consumable = new BehemothCum();
-		public const BIMBOCH:SimpleConsumable = mk("BimboCh","BimboCh", "a bottle of bimbo champagne", curry(function(player:Player):void{getGame().telAdre.niamh.bimboChampagne(player,true,true)}), "A bottle of bimbo champagne. Drinking this might incur temporary bimbofication.", 1);
+		public const BIMBOCH:BimboChampagne = new BimboChampagne();
 		public const C_BREAD:Consumable = new CumBread();
 		public const CCUPCAK:Consumable = new GiantChocolateCupcake();
 		public const FISHFIL:Consumable = new FishFillet();
@@ -166,7 +166,7 @@ package classes.Items
 		public const HUMMUS_:Consumable = new RegularHummus();
 		public const IMPFOOD:Consumable = new ImpFood();
 		public const KANGAFT:Consumable = new KangaFruit(KangaFruit.STANDARD);
-		public const LABOVA_:Consumable = new LaBova(LaBova.STANDARD);
+		public const LABOVA_:LaBova     = new LaBova(LaBova.STANDARD);
 		public const MAGSEED:Consumable = new GoldenSeed(GoldenSeed.ENHANCED);
 		public const MGHTYVG:Consumable = new KangaFruit(KangaFruit.ENHANCED);
 		public const MOUSECO:Consumable = new MouseCocoa();
@@ -210,18 +210,7 @@ package classes.Items
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
-		/**
-		 * A handy function to create SimpleConsumables (useable by any player, effect is a function accepting player:Player,
-		 * shortName, longName, description and value are const)
-		 * @param id id. Must be String 7 chars long
-		 * @param shortName shortName, null to use id as shortName
-		 * @param longName null to use shortName as longName
-		 * @param effect function(player:Player) called to produce effect
-		 * @param description null to use longName as description
-		 */
-		private static function mk(id:String, shortName:String, longName:String, effect:Function, description:String, value:Number = DEFAULT_VALUE):SimpleConsumable {
-			return new SimpleConsumable(id, shortName, longName, effect, value, description);
-		}
+
 		public function ConsumableLib() {}
 	}
 }

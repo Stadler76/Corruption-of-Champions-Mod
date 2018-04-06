@@ -49,13 +49,10 @@ package classes.Items {
         }
 		
 		private function drinkBova(count:int, type:int, player:Player):void {
-			var consumable:Consumable = new LaBova(type);
-
-			// Override global player value because intended(?) Maybe come up with a better solution, like a hook(???) ~Stadler76
-			kGAMECLASS.player = player;
+			var consumable:LaBova = new LaBova(type);
 
 			for (var i:int = 0; i < count; i++) {
-				consumable.useItem();
+				consumable.applyEffect(player);
 			}
 		}
 		

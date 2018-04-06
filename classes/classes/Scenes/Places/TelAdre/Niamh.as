@@ -27,14 +27,14 @@
 			if (player.hasStatusEffect(StatusEffects.BimboChampagne)) {
 				player.addStatusValue(StatusEffects.BimboChampagne,1,-1);
 				if (player.statusEffectv1(StatusEffects.BimboChampagne) <= 0) {
-					removeBimboChampagne();
+					consumables.BIMBOCH.removeBimboChampagne();
 					needNext = true;
 				}
 			}
 			if (player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				player.addStatusValue(StatusEffects.BlackCatBeer,1,-1);
 				if (player.statusEffectv1(StatusEffects.BlackCatBeer) <= 0) {
-					blackCatBeerExpires();
+					consumables.BC_BEER.blackCatBeerExpires();
 					needNext = true;
 				}
 			}
@@ -192,7 +192,7 @@ private function drinkNiamhsBeerInTelAdre():void {
 	}
 	outputText("You yell \"<i>Skoal!</i>\" and upend the mug into your mouth, drinking greedily.  The warmth of the booze quickly follows the liquid itself - potent stuff, this is.");
 	//PC is affected by Black Cat Beer item effects
-	blackCatBeerEffects(player,false,true);
+	consumables.BC_BEER.applyEffect(player, false, true);
 	//both output
 	if (getGame().time.hours <= 15) outputText("\n\n\"<i>Thanks for the business, " + player.mfn("laddie","lassie","customer") + "!  Remember, Niamh sells her Black Cat Beer every day from 8 until 4.</i>\"  You nod your head in thanks and step away from the table.");
 	//16:00 ending
@@ -266,41 +266,6 @@ private function leaveNiamh():void {
 	outputText("You decide that you don't really want to talk to this strange cat-girl and, as politely as possible, excuse yourself.");
 	//Player returns to Wet Bitch menu
 	doNext(telAdre.barTelAdre);
-}
-
-//Black Cat Beer
-//is affected by Black Cat Beer item effects
-public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,newLine:Boolean = false):void {
-	if (clearScreen) clearOutput();
-	if (newLine) outputText("\n\n");
-	outputText("Uncapping the mug, you swill the stuff down in a single swig, gasping as it burns a fiery trail into your belly.  It's rich and sweet, and damn, but it's strong stuff!");
-	outputText("\n\nA wonderful warmth fills your body, making your pain fade away.  However, it also makes your crotch tingle - combined with the relaxation imparted already, you feel <b>very</b> turned-on.  A beautiful, warm, fuzzy sensation follows and fills your head, like your brain is being wrapped in cotton wool.  You don't feel quite as smart as before, but that's all right, it feels so nice...");
-	outputText("\n\nYour balance suddenly feels off-kilter and you stumble, narrowly avoiding falling.  You just can't move as fast as you could, not with your head feeling so full of fluff and fuzz; your body prickles and tingles with the warmth once your head feels full, the sensation concentrating around your erogenous zones.  You just feel so fluffy... you want to hold somebody and share your warmth with them, too; it's just so wonderful.");
-	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
-	player.HPChange(40 + rand(21),false);
-	var lib:Number = 0;
-	if (player.hasStatusEffect(StatusEffects.BlackCatBeer)) {
-		if (player.getMaxStats('lib') - player.lib >= 10) lib = 10;
-		else lib = player.getMaxStats('lib') - player.lib;
-		player.addStatusValue(StatusEffects.BlackCatBeer,1,4);
-		player.addStatusValue(StatusEffects.BlackCatBeer,2,lib);
-		outputText("\n\nDamn, it's even better with every extra drink!");
-		dynStats("spe", -1, "int", -1, "lib", lib, "lus", 30+rand(player.lib/4));
-	}
-	else {
-		if (player.getMaxStats('lib') - player.lib >= 10) lib = 10;
-		else lib = player.getMaxStats('lib') - player.lib;
-		player.createStatusEffect(StatusEffects.BlackCatBeer,8,lib,0,0);
-		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
-	}
-	player.slimeFeed();
-}
-
-//Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
-public function blackCatBeerExpires():void {
-	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusEffectv2(StatusEffects.BlackCatBeer)));
-	player.removeStatusEffect(StatusEffects.BlackCatBeer);
-	outputText("\n<b>The warm, fuzzy feeling finally dissipates, leaving you thinking clearer, focusing better, and less horny.  It was nice while it lasted, but it's also good to be back to normal.  Still, a part of you kind of wants another beer.</b>\n");
 }
 
 private function giveNiamphBimboLiquer():void
@@ -443,7 +408,7 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 		outputText("\n\n\"<i>Yummy, isn't it?</i>\" Niamh purrs.  \"<i>Like, drink up; I gots lots more where that came from!</i>\"  She giggles, trying to push her breast forward; with how big it is, she can't really reach around to force you into it like she'd like.");
 		outputText("\n\nStill, refusing such a delicious drink is not something a true connoisseur does; you nuzzle eagerly into her swollen breast.  A little too hard, in hindsight; the pressure makes the vast quantity of champagne inside come spurting into your mouth, filling you up with sweet richness and forcing you to chug it down to avoid choking.  Once you get the rhythm right, though, it's much easier; you hardly need to suckle, just keep squeezing jet after glorious jet down your thirsty gullet.");
 		outputText("\n\n...This stuff is, like, way too freaking good!  Er?  Did you really just think that?  Come to think of it, it's getting harder to think, like, about anything... but izzat really so bad?  What do you need to think about, other than this sweet, sweet booze?");
-		bimboChampagne(player,false,false);
+		consumables.BIMBOCH.applyEffect(player, false, false);
 		outputText("\n\nGiggling happily around your boozy boob of love, you start to scrape your crotch against the ground and rub your bouncy big boobs against Niamh's; that feels just sooo good!  Niamh is meowing and purring and occasionally burping; she, like, really likes you sucking on her... that's good, since you like sucking on her too.  You move one of your hands down between her legs... ooh, she's, like, not wearing any panties... what a naughty, naughty kitty-girl! You grin into her boob and, still sucking, start to play with her little pleasure button and her wet, sticky girly bits.");
 		outputText("\n\nNiamh yowls and shudders, her pussy-parts squeezing around your fingers, and then, all of a sudden, she clenches up and lets go.  Girly-goo drizzles into your hand, getting you all sticky, and her big boobies suddenly start spurting... uh, whatsit, sham-pain?  From her big ol' nipples.  The other breast starts spraying the grass, which is a waste of good bubbly brew, but you get more than your fair share since her other breast is gushing into your mouth and you swallow and gulp and slurp as fast as you can.  But, in the end, you just can't keep up and you, like, have to let go.  Have to.");
 		outputText("\n\nFinally, Niamh's boobgasm comes to an end and she falls back on her big jiggly butt.  \"<i>Like, that feels so much better than when I put my big ol' boob in my own mouth...  Hey, [name]... you, like, okay?</i>\" she asks.  She half-crawls over to you, then giggles.  \"<i>You, like, got a big sloshy belly on you now, [name]!  You look so funny with this giant gutty-gut.</i>\"");
@@ -465,69 +430,10 @@ private function niamhCorruptedMobileSnackDrinkTime():void {
 		outputText("\n\nGlancing around, you can't help but agree, judging by the lake of ale surrounding you both.  Luckily, her self-entertainment seems to have shrunk her normally-gigantic tits to a more manageable size, and with your assistance, she's soon back on her feet.  \"<i>I heard there was a form of refuge for... well, differently-blessed lassies like meself,</i>\" she says, somewhat drily, patting the top of her huge azure bosom for emphasis.  \"<i>I'm heading there.  Maybe I'll find you there eventually, hey?</i>\"");
 		outputText("\n\nShe gives you a little punch in the shoulder, shooting you a wink and walking away.  \"<i>Don't think I forgot about how I got like this,  " + player.mf("boy","gal") + ", ,</i>\" she yells over her shoulder, stopping you in your tracks as you turn to leave.  Several moments pass before she finally turns around and resumes her departure.");
 		outputText("\n\nJust before you move out of earshot, a last word from Niamh floats to your ears.  You can't be sure, but... did she say... \"<i>Thanks?</i>\"");
-		blackCatBeerEffects(player,false,true);
+		consumables.BC_BEER.applyEffect(player, false, true);
 		//[end encounter]*/
 	}
 	doNext(camp.returnToCampUseOneHour);
-}
-public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):void {
-	if (clearScreen) clearOutput();
-	if (intro) {
-		if ((player.findPerk(PerkLib.FutaFaculties) >= 0 && player.findPerk(PerkLib.FutaForm) >= 0) || (player.findPerk(PerkLib.BimboBody) >= 0 && player.findPerk(PerkLib.BimboBrains) >= 0)) {
-			outputText("You could've swore the stuff worked when you saw Niamh do it to others, but for some reason, it had, like, no effect on you. How weird!");
-		}
-		else if (!player.hasStatusEffect(StatusEffects.BimboChampagne)) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");
-		else outputText("You find yourself falling even further into the dense bimbo mindset.  You do feel, like, super-good and all, though!\n\nMoaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  You sink your fingers into your sloppy cunt with a groan of satisfaction.  Somehow, you feel like you could fuck anyone right now!");
-	}
-	if (player.hasStatusEffect(StatusEffects.BimboChampagne)) {
-		player.addStatusValue(StatusEffects.BimboChampagne,1,4);
-		dynStats("spe", -2, "lib", 1, "lus", 10);
-	}
-	else {
-		player.createStatusEffect(StatusEffects.BimboChampagne,8,0,0,0);
-		//(Player has breasts smaller than DD-cup:
-		if (player.breastRows[0].breastRating < 5) {
-			outputText("\n\nYou feel this, like, totally sweet tingling in your boobies... And then your [armor] gets, like, tighter; wow, it seems like Niamh's booze is making your boobies grow!  That's so awesome!  You giggle and gulp down as much as you can... Aw; your boobies are <b>kinda</b> big now, but, like, you wanted great big bouncy sloshy boobies like Niamh has.  That'd be so hot!");
-			player.changeStatusValue(StatusEffects.BimboChampagne,2,5-player.biggestTitSize());
-			player.breastRows[0].breastRating = 5;
-		}
-		//(Player does not have vagina:
-		if (!player.hasVagina()) {
-			player.createVagina();
-			outputText("\n\nYou can feel ");
-			if (player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true)  and behind your [balls]]");
-			else outputText("the blank expanse of flesh that is your crotch");
-			outputText(" start to tingle and squirm... mmm... that feels nice!  There's a sensation you, like, can't describe, and then your crotch feels all wet... but in a good, sticky sorta way.  Oh, wow!  <b>You've, like, just grown a new virgin pussy!</b>  Awesome!");
-			player.changeStatusValue(StatusEffects.BimboChampagne,3,1);
-		}
-		//(player ass smaller than bimbo:
-		if (player.butt.rating < 12) {
-			outputText("\n\nYour butt jiggles deliciously - it feels like the bubbles from the drink are pushing out your plump rump, filling it like bagged sparkling wine!  Your bubbly booty swells and inflates until it feels as airy as your head.  Like, this is soooo plush!");
-			player.changeStatusValue(StatusEffects.BimboChampagne,4,12-player.butt.rating);
-			player.butt.rating = 12;
-			if (player.hips.rating < 10) player.hips.rating = 10;
-		}
-		dynStats("spe", -10, "lib", 1, "lus", 25);
-	}
-}
-
-public function removeBimboChampagne():void {
-	outputText("\n<b>Whoah!  Your head is clearing up, and you feel like you can think clearly for the first time in forever.  Niamh sure is packing some potent stuff!  You shake the cobwebs out of your head, glad to once again be less dense than a goblin with a basilisk boyfriend.</b>");
-	dynStats("spe", 10, "lib", -1);
-	if (player.statusEffectv2(StatusEffects.BimboChampagne) > 0) {
-		player.breastRows[0].breastRating -= player.statusEffectv2(StatusEffects.BimboChampagne);
-		outputText("  As the trecherous brew fades, your [chest] loses some of its... bimboliciousness.  Your back feels so much lighter without the extra weight dragging down on it.");
-	}
-	if (player.statusEffectv3(StatusEffects.BimboChampagne) > 0) {
-		outputText("  At the same time, your [vagina] slowly seals itself up, disappearing as quickly as it came.  Goodbye womanhood.");
-		player.removeVagina();
-	}
-	if (player.statusEffectv4(StatusEffects.BimboChampagne) > 0) {
-		player.butt.rating -= player.statusEffectv4(StatusEffects.BimboChampagne);
-		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
-	}
-	player.removeStatusEffect(StatusEffects.BimboChampagne);
-	outputText("\n");
 }
 
 public function bazaarNiamh():void {
@@ -597,7 +503,7 @@ private function drinkFromZeTap():void {
 	outputText("\n\nYou snap back to your senses with a jolt, finding yourself flat on your back and gazing up at the sky.  \"<i>Like, are you alright, [name]?</i>\" Niamh asks, amused.  \"<i>My fizzy titties, like, really hit some people harder than they can, y'know, deal with.  You okay?</i>\"");
 
 	outputText("\n\nYou push yourself upright and assure the pretty catgirl that you feel, like, super-duper wonderful!  You punctuate this declaration with a burp as the sudden motion makes all the yummy bubbles in your belly dance, and then you giggle at how naughty that was.");
-	bimboChampagne(player,false,false);
+	consumables.BIMBOCH.applyEffect(player, false, false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -1,13 +1,9 @@
 package classes.Scenes.Places.Farm
 {
 	import classes.BodyParts.*;
-	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Consumable;
-	import classes.Items.ConsumableLib;
-	import classes.Items.Consumables.SimpleConsumable;
-	import classes.ItemSlotClass;
-	import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 	import classes.StatusEffects;
 	import classes.display.SpriteDb;
 	import classes.internals.*;

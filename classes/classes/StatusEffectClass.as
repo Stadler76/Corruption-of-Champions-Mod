@@ -17,6 +17,7 @@ import classes.internals.Utils;
 		public var value2:Number = 0;
 		public var value3:Number = 0;
 		public var value4:Number = 0;
+		public var dataStore:Object = null;
 		//MEMBER FUNCTIONS
 		public function get stype():StatusEffectType
 		{

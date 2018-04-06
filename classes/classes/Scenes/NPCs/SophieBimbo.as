@@ -1,8 +1,8 @@
-package classes.Scenes.NPCs{
+package classes.Scenes.NPCs
+{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.Consumables.SimpleConsumable;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 

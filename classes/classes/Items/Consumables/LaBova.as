@@ -5,6 +5,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
 	import classes.PerkLib;
+	import classes.Player;
 	import classes.StatusEffects;
 	import classes.VaginaClass;
 
@@ -69,7 +70,7 @@ package classes.Items.Consumables
 			super(id, shortName, longName, value, description);
 		}
 
-		override public function useItem():Boolean
+		public function applyEffect(player:Player):Boolean
 		{
 			var tfSource:String = "laBova";
 			player.slimeFeed();
@@ -469,6 +470,11 @@ package classes.Items.Consumables
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 
 			return false;
+		}
+
+		override public function useItem():Boolean
+		{
+			return applyEffect(player);
 		}
 	}
 }
