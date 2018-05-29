@@ -546,7 +546,9 @@ package classes
 			player.setWeapon(weapons.W_STAFF);
 			player.itemSlot1.setItemAndQty(consumables.B__BOOK, 1);
 			player.itemSlot2.setItemAndQty(consumables.W__BOOK, 2);
-	
+			
+			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
+
 			player.createBreastRow();
 			player.createVagina();
 			player.breastRows[0].breastRating = 4;

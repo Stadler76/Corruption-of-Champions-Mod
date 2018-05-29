@@ -506,10 +506,10 @@ package classes.Scenes.Combat
 				player.removeStatusEffect(StatusEffects.Confusion);
 				monster.doAI();
 			}
-			else if (monster is Doppleganger) {
+			else if (monster is Doppelganger) {
 				clearOutput();
 				outputText("You decide not to take any action this round.\n\n");
-				(monster as Doppleganger).handlePlayerWait();
+				(monster as Doppelganger).handlePlayerWait();
 				monster.doAI();
 			}
 			else {
@@ -916,7 +916,7 @@ package classes.Scenes.Combat
 			}
 
 			// Have to put it before doDamage, because doDamage applies the change, as well as status effects and shit.
-			if (monster is Doppleganger)
+			if (monster is Doppelganger)
 			{
 				if (!monster.hasStatusEffect(StatusEffects.Stunned))
 				{
@@ -924,11 +924,11 @@ package classes.Scenes.Combat
 					if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 					if (damage > 0) damage = doDamage(damage, false);
 				
-					(monster as Doppleganger).mirrorAttack(damage);
+					(monster as Doppelganger).mirrorAttack(damage);
 					return;
 				}
 				
-				// Stunning the doppleganger should now "buy" you another round.
+				// Stunning the doppelganger should now "buy" you another round.
 			}
 			if (player.weapon == weapons.HNTCANE) {
 				switch(rand(2)) {
@@ -1778,11 +1778,13 @@ package classes.Scenes.Combat
 			if (player.findPerk(PerkLib.Spellsword) >= 0 && player.lust100 < combatAbilities.getWhiteMagicLustCap()) {
 				combatAbilities.spellChargeWeapon(true); // XXX: message?
 			}
-			monster.str += 25 * player.newGamePlusMod();
-			monster.tou += 25 * player.newGamePlusMod();
-			monster.spe += 25 * player.newGamePlusMod();
-			monster.inte += 25 * player.newGamePlusMod();
-			monster.level += 30 * player.newGamePlusMod();
+			if (!(monster is Doppelganger)) {
+				monster.str *= 1 + player.ascensionFactor(0.25);
+				monster.tou *= 1 + player.ascensionFactor(0.25);
+				monster.spe *= 1 + player.ascensionFactor(0.25);
+				monster.inte *= 1 + player.ascensionFactor(0.25);
+			}
+			monster.level += player.ascensionFactor(30);
 			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				monster.level = Math.round(Math.pow(monster.level, 1.4));
 			}

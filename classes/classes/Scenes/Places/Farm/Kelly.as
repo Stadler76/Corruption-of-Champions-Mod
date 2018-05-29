@@ -72,9 +72,10 @@ Every encounter raises corruption by 5, except the last one that raises corrupti
 		//End of Interface Implementation
 
 public function kellySprite(nude:Boolean = false):void {
-	if (!pregnancy.isPregnant)
+	if (!pregnancy.isPregnant) {
 		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) spriteSelect(SpriteDb.s_kelly);
 		else spriteSelect(SpriteDb.s_kelly_brst);
+	}
 	else  {
 		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) spriteSelect(SpriteDb.s_kelly_preg);
 		else spriteSelect(SpriteDb.s_kelly_brst_preg);

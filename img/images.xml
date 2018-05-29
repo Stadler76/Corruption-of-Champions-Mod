@@ -109,9 +109,21 @@
 				<ImageFile>./img/akbal-deepwoods-taur-sumbitanal</ImageFile>
 				<ImageFile>./img/akbal-deepwoods-taur-sumbitanal_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="amarok-chompo">
-				<ImageFile>./img/amarok-chompo</ImageFile>
-				<ImageFile>./img/amarok-chompo_1</ImageFile>
+			<ImageSet id="amarok-chompo-female">
+				<ImageFile>./img/amarok-chompo-female</ImageFile>
+				<ImageFile>./img/amarok-chompo-female_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="amarok-chompo-male">
+				<ImageFile>./img/amarok-chompo-male</ImageFile>
+				<ImageFile>./img/amarok-chompo-male_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="amarok-defeat">
+				<ImageFile>./img/amarok-defeat</ImageFile>
+				<ImageFile>./img/amarok-defeat_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="amarok-victory">
+				<ImageFile>./img/amarok-victory</ImageFile>
+				<ImageFile>./img/amarok-victory_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="amily-forest-fuckpreg">
 				<ImageFile>./img/amily-forest-fuckpreg</ImageFile>
@@ -1061,6 +1073,10 @@
 				<ImageFile>./img/camp-cabin</ImageFile>
 				<ImageFile>./img/camp-cabin_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="camp-campfire">
+				<ImageFile>./img/camp-campfire</ImageFile>
+				<ImageFile>./img/camp-campfire_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="camp-dream">
 				<ImageFile>./img/camp-dream</ImageFile>
 				<ImageFile>./img/camp-dream_1</ImageFile>
@@ -1164,10 +1180,6 @@
 			<ImageSet id="camp-watch-sunset">
 				<ImageFile>./img/camp-watch-sunset</ImageFile>
 				<ImageFile>./img/camp-watch-sunset_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="campfire">
-				<ImageFile>./img/campfire</ImageFile>
-				<ImageFile>./img/campfire_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="chameleon-female-lose-facesit-tailfuck">
 				<ImageFile>./img/chameleon-female-lose-facesit-tailfuck</ImageFile>
@@ -1449,6 +1461,18 @@
 				<ImageFile>./img/ember-visit-at-camp</ImageFile>
 				<ImageFile>./img/ember-visit-at-camp_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="encounter-amarok">
+				<ImageFile>./img/encounter-amarok</ImageFile>
+				<ImageFile>./img/encounter-amarok_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="encounter-chicken-harpy">
+				<ImageFile>./img/encounter-chicken-harpy</ImageFile>
+				<ImageFile>./img/encounter-chicken-harpy_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="encounter-harpy">
+				<ImageFile>./img/encounter-harpy</ImageFile>
+				<ImageFile>./img/encounter-harpy_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="encounter-lumi">
 				<ImageFile>./img/encounter-lumi</ImageFile>
 				<ImageFile>./img/encounter-lumi_1</ImageFile>
@@ -1457,9 +1481,29 @@
 				<ImageFile>./img/encounter-lumi-repeat</ImageFile>
 				<ImageFile>./img/encounter-lumi-repeat_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="encounter-minotaur">
+				<ImageFile>./img/encounter-minotaur</ImageFile>
+				<ImageFile>./img/encounter-minotaur_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="encounter-rathazul">
+				<ImageFile>./img/encounter-rathazul</ImageFile>
+				<ImageFile>./img/encounter-rathazul_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="encounter-stranger">
 				<ImageFile>./img/encounter-stranger</ImageFile>
 				<ImageFile>./img/encounter-stranger_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="encounter-valkyrie">
+				<ImageFile>./img/encounter-valkyrie</ImageFile>
+				<ImageFile>./img/encounter-valkyrie_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="encounter-yeti">
+				<ImageFile>./img/encounter-yeti</ImageFile>
+				<ImageFile>./img/encounter-yeti_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="encounter-zetaz">
+				<ImageFile>./img/encounter-zetaz</ImageFile>
+				<ImageFile>./img/encounter-zetaz_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="essrayle-discussion">
 				<ImageFile>./img/essrayle-discussion</ImageFile>
@@ -1476,10 +1520,6 @@
 			<ImageSet id="event-arrow-up">
 				<ImageFile>./img/event-arrow-up</ImageFile>
 				<ImageFile>./img/event-arrow-up_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="event-chicken">
-				<ImageFile>./img/event-chicken</ImageFile>
-				<ImageFile>./img/event-chicken_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="event-creation">
 				<ImageFile>./img/event-creation</ImageFile>
@@ -1520,6 +1560,18 @@
 			<ImageSet id="event-island">
 				<ImageFile>./img/event-island</ImageFile>
 				<ImageFile>./img/event-island_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="event-lake-bSword">
+				<ImageFile>./img/event-lake-bSword</ImageFile>
+				<ImageFile>./img/event-lake-bSword_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="event-lake-lights">
+				<ImageFile>./img/event-lake-lights</ImageFile>
+				<ImageFile>./img/event-lake-lights_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="event-lake-lights-adoption">
+				<ImageFile>./img/event-lake-lights-adoption</ImageFile>
+				<ImageFile>./img/event-lake-lights-adoption_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="event-lumi">
 				<ImageFile>./img/event-lumi</ImageFile>
@@ -2081,10 +2133,6 @@
 				<ImageFile>./img/item-Bread</ImageFile>
 				<ImageFile>./img/item-Bread_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="item-Bsword">
-				<ImageFile>./img/item-Bsword</ImageFile>
-				<ImageFile>./img/item-Bsword_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="item-bArmor-corrupt">
 				<ImageFile>./img/item-bArmor-corrupt</ImageFile>
 				<ImageFile>./img/item-bArmor-corrupt_1</ImageFile>
@@ -2097,9 +2145,17 @@
 				<ImageFile>./img/item-bChitin</ImageFile>
 				<ImageFile>./img/item-bChitin_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="item-bSword">
+				<ImageFile>./img/item-bSword</ImageFile>
+				<ImageFile>./img/item-bSword_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="item-bow">
 				<ImageFile>./img/item-bow</ImageFile>
 				<ImageFile>./img/item-bow_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="item-brokenSword">
+				<ImageFile>./img/item-brokenSword</ImageFile>
+				<ImageFile>./img/item-brokenSword_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="item-cBread">
 				<ImageFile>./img/item-cBread</ImageFile>
@@ -2221,10 +2277,6 @@
 				<ImageFile>./img/item-ebonVest</ImageFile>
 				<ImageFile>./img/item-ebonVest_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="item-egg-NP">
-				<ImageFile>./img/item-egg-NP</ImageFile>
-				<ImageFile>./img/item-egg-NP_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="item-egg-black">
 				<ImageFile>./img/item-egg-black</ImageFile>
 				<ImageFile>./img/item-egg-black_1</ImageFile>
@@ -2236,6 +2288,14 @@
 			<ImageSet id="item-egg-brown">
 				<ImageFile>./img/item-egg-brown</ImageFile>
 				<ImageFile>./img/item-egg-brown_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="item-egg-harpy">
+				<ImageFile>./img/item-egg-harpy</ImageFile>
+				<ImageFile>./img/item-egg-harpy_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="item-egg-neon">
+				<ImageFile>./img/item-egg-neon</ImageFile>
+				<ImageFile>./img/item-egg-neon_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="item-egg-pile">
 				<ImageFile>./img/item-egg-pile</ImageFile>
@@ -2289,9 +2349,9 @@
 				<ImageFile>./img/item-gems</ImageFile>
 				<ImageFile>./img/item-gems_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="item-hEgg">
-				<ImageFile>./img/item-hEgg</ImageFile>
-				<ImageFile>./img/item-hEgg_1</ImageFile>
+			<ImageSet id="item-gro-plus">
+				<ImageFile>./img/item-gro-plus</ImageFile>
+				<ImageFile>./img/item-gro-plus_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="item-hPill">
 				<ImageFile>./img/item-hPill</ImageFile>
@@ -2345,6 +2405,10 @@
 				<ImageFile>./img/item-lactaid</ImageFile>
 				<ImageFile>./img/item-lactaid_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="item-lactaid-pro">
+				<ImageFile>./img/item-lactaid-pro</ImageFile>
+				<ImageFile>./img/item-lactaid-pro_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="item-letter">
 				<ImageFile>./img/item-letter</ImageFile>
 				<ImageFile>./img/item-letter_1</ImageFile>
@@ -2384,10 +2448,6 @@
 			<ImageSet id="item-pigTruffle">
 				<ImageFile>./img/item-pigTruffle</ImageFile>
 				<ImageFile>./img/item-pigTruffle_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="item-proLactaid">
-				<ImageFile>./img/item-proLactaid</ImageFile>
-				<ImageFile>./img/item-proLactaid_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="item-purePotion">
 				<ImageFile>./img/item-purePotion</ImageFile>
@@ -2788,10 +2848,6 @@
 			<ImageSet id="kiha-vagfuck">
 				<ImageFile>./img/kiha-vagfuck</ImageFile>
 				<ImageFile>./img/kiha-vagfuck_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="lake-lights">
-				<ImageFile>./img/lake-lights</ImageFile>
-				<ImageFile>./img/lake-lights_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="lethice-boob-male">
 				<ImageFile>./img/lethice-boob-male</ImageFile>
@@ -3693,9 +3749,13 @@
 				<ImageFile>./img/monster-demonmob</ImageFile>
 				<ImageFile>./img/monster-demonmob_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="monster-doppleganger">
-				<ImageFile>./img/monster-doppleganger</ImageFile>
-				<ImageFile>./img/monster-doppleganger_1</ImageFile>
+			<ImageSet id="monster-doppelganger">
+				<ImageFile>./img/monster-doppelganger</ImageFile>
+				<ImageFile>./img/monster-doppelganger_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="monster-dryad">
+				<ImageFile>./img/monster-dryad</ImageFile>
+				<ImageFile>./img/monster-dryad_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="monster-ember">
 				<ImageFile>./img/monster-ember</ImageFile>
@@ -3912,6 +3972,10 @@
 			<ImageSet id="monster-minervapure">
 				<ImageFile>./img/monster-minervapure</ImageFile>
 				<ImageFile>./img/monster-minervapure_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="monster-minoaxe">
+				<ImageFile>./img/monster-minoaxe</ImageFile>
+				<ImageFile>./img/monster-minoaxe_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="monster-minomob">
 				<ImageFile>./img/monster-minomob</ImageFile>
@@ -4352,10 +4416,6 @@
 			<ImageSet id="raphael-talk">
 				<ImageFile>./img/raphael-talk</ImageFile>
 				<ImageFile>./img/raphael-talk_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="rathazul">
-				<ImageFile>./img/rathazul</ImageFile>
-				<ImageFile>./img/rathazul_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="rathazul-accident">
 				<ImageFile>./img/rathazul-accident</ImageFile>
@@ -5357,10 +5417,6 @@
 				<ImageFile>./img/wildhunt-catched-male-shark</ImageFile>
 				<ImageFile>./img/wildhunt-catched-male-shark_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="wildhunt-catched-male-wolf">
-				<ImageFile>./img/wildhunt-catched-male-wolf</ImageFile>
-				<ImageFile>./img/wildhunt-catched-male-wolf_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="wildhunt-chase">
 				<ImageFile>./img/wildhunt-chase</ImageFile>
 				<ImageFile>./img/wildhunt-chase_1</ImageFile>
@@ -5401,10 +5457,6 @@
 				<ImageFile>./img/wildhunt-prey-female-feline</ImageFile>
 				<ImageFile>./img/wildhunt-prey-female-feline_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="wildhunt-prey-female-human">
-				<ImageFile>./img/wildhunt-prey-female-human</ImageFile>
-				<ImageFile>./img/wildhunt-prey-female-human_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="wildhunt-prey-male">
 				<ImageFile>./img/wildhunt-prey-male</ImageFile>
 				<ImageFile>./img/wildhunt-prey-male_1</ImageFile>
@@ -5424,10 +5476,6 @@
 			<ImageSet id="wildhunt-prey-male-feline">
 				<ImageFile>./img/wildhunt-prey-male-feline</ImageFile>
 				<ImageFile>./img/wildhunt-prey-male-feline_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="wildhunt-prey-male-human">
-				<ImageFile>./img/wildhunt-prey-male-human</ImageFile>
-				<ImageFile>./img/wildhunt-prey-male-human_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="wildhunt-prey-taur-female">
 				<ImageFile>./img/wildhunt-prey-taur-female</ImageFile>
@@ -5493,9 +5541,9 @@
 				<ImageFile>./img/wildhunt-princess-lickgina</ImageFile>
 				<ImageFile>./img/wildhunt-princess-lickgina_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="wildhunt-princess-lickgina-big">
-				<ImageFile>./img/wildhunt-princess-lickgina-big</ImageFile>
-				<ImageFile>./img/wildhunt-princess-lickgina-big_1</ImageFile>
+			<ImageSet id="wildhunt-princess-lickgina-dragon">
+				<ImageFile>./img/wildhunt-princess-lickgina-dragon</ImageFile>
+				<ImageFile>./img/wildhunt-princess-lickgina-dragon_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="wildhunt-princess-lickgina-equine">
 				<ImageFile>./img/wildhunt-princess-lickgina-equine</ImageFile>
@@ -5513,6 +5561,10 @@
 				<ImageFile>./img/wildhunt-princess-orally-bovine</ImageFile>
 				<ImageFile>./img/wildhunt-princess-orally-bovine_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="wildhunt-princess-orally-canine">
+				<ImageFile>./img/wildhunt-princess-orally-canine</ImageFile>
+				<ImageFile>./img/wildhunt-princess-orally-canine_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="wildhunt-princess-orally-deer">
 				<ImageFile>./img/wildhunt-princess-orally-deer</ImageFile>
 				<ImageFile>./img/wildhunt-princess-orally-deer_1</ImageFile>
@@ -5524,10 +5576,6 @@
 			<ImageSet id="wildhunt-princess-orally-horse">
 				<ImageFile>./img/wildhunt-princess-orally-horse</ImageFile>
 				<ImageFile>./img/wildhunt-princess-orally-horse_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="wildhunt-princess-orally-wolf">
-				<ImageFile>./img/wildhunt-princess-orally-wolf</ImageFile>
-				<ImageFile>./img/wildhunt-princess-orally-wolf_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="wildhunt-revenge">
 				<ImageFile>./img/wildhunt-revenge</ImageFile>
@@ -5556,10 +5604,6 @@
 			<ImageSet id="yeti-vag-ride">
 				<ImageFile>./img/yeti-vag-ride</ImageFile>
 				<ImageFile>./img/yeti-vag-ride_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="zetaz-encounter-first">
-				<ImageFile>./img/zetaz-encounter-first</ImageFile>
-				<ImageFile>./img/zetaz-encounter-first_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="zetaz-loss-female">
 				<ImageFile>./img/zetaz-loss-female</ImageFile>

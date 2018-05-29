@@ -10,10 +10,10 @@
 	 * ...
 	 * @author Gedan
 	 */
-	public class DopplegangerScenes extends BaseContent
+	public class DoppelgangerScenes extends BaseContent
 	{
 		
-		public function DopplegangerScenes() 
+		public function DoppelgangerScenes() 
 		{
 			
 		}
@@ -37,12 +37,12 @@
 			outputText("\n\n“<i>Do you know what it is like to spend ten years without a form? To spend ten years imitating an empty room? Well, don’t worry, [name]. When I have taken your place and bound you to this thing I’ll make sure to put it somewhere nice and busy, so you will never have to know that torment!</i>” " + player.mf("He", "She") +" draws the mirror image of your [weapon] and advances upon you, your own features hiked into a rictus of madness.");
 			outputText("\n\nYou must fight yourself!");
 			
-			startCombat(new Doppleganger());
+			startCombat(new Doppelganger());
 		}
 		
 		public function punchYourselfInTheBalls():void
 		{
-			flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED] = 1;
+			flags[kFLAGS.D3_DOPPELGANGER_DEFEATED] = 1;
 			player.createKeyItem("Laybans", 0, 0, 0, 0);
 			
 			clearOutput();

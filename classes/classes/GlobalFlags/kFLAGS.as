@@ -1249,7 +1249,7 @@ public static const D3_ENTERED_MAGPIEHALL:int                                   
 public static const D3_BASILISKS_REMOVED_FROM_MAGPIE_HALL:int                       = 1241;
 public static const D3_MIRRORS_SHATTERED:int                                        = 1242;
 public static const D3_JEAN_CLAUDE_DEFEATED:int                                     = 1243;
-public static const D3_DOPPLEGANGER_DEFEATED:int                                    = 1244;
+public static const D3_DOPPELGANGER_DEFEATED:int                                    = 1244;
 public static const D3_MECHANIC_LAST_GREET:int                                      = 1245;
 public static const D3_MECHANIC_FIGHT_RESULT:int                                    = 1246;
 public static const D3_MECHANIC_COCK_TYPE_SELECTION:int                             = 1247; // This is the kinda shit that sounds like it might get referenced in future (HAHAHA YEAH RIGHT?)

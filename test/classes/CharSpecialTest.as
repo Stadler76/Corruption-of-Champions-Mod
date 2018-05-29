@@ -357,5 +357,12 @@ package classes{
 			
 			assertThat(player.HP, equalTo(50));
 		}
+		
+		[Test]
+		public function leahHasHistoryPerk(): void {
+			createCharByName(CharSpecial.LEAH_NAME);
+			
+			assertThat(player.hasPerk(PerkLib.HistoryScholar), equalTo(true));
+		}
 	}
 }

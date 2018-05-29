@@ -1,4 +1,5 @@
-
+from __future__ import print_function
+import io
 import sys
 import re
 import os
@@ -13,13 +14,15 @@ def getImageIDList():
 	ret = set()
 
 	scanPath = "../"
-	for root, dirs, files in os.walk(scanPath):
-		#print root, dir#, files
+	excludeDirs = set(["build-dep", "test", "bit101"])
+	for root, dirs, files in os.walk(scanPath, topdown=True):
+		dirs[:] = [d for d in dirs if d not in excludeDirs]
+		#print(root, dir#, files)
 		for fileN in files:
 			if fileN.endswith(".as"):
 				wholePath = os.path.join(root, fileN)
-				print "Scanning file: ", wholePath
-				with open(wholePath, "r") as fp:
+				print("Scanning file: ", wholePath)
+				with io.open(wholePath, "r", encoding="utf8") as fp:
 					cont = fp.read()
 					items = set(imgTagRe.findall(cont))
 
@@ -34,7 +37,7 @@ def getImageIDList():
 	ret.add("monster-hollispawn")  # Hack because matching this would be a giant pain in the ass
 	ret.add("monster-cockatricewithwings")  # Didn't want to add a class WingedCockatrice extends Cockatrice just for that
 
-	print "Found %s image IDs" % len(ret)
+	print("Found %s image IDs" % len(ret))
 	return ret
 
 
@@ -49,7 +52,7 @@ def genFile():
 
 
 
-	#print imageIDs
+	#print(imageIDs)
 
 	# Crapping out XML using string manipulation because FUCK YOU
 	ret = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
@@ -60,7 +63,7 @@ def genFile():
 			ret += "		<Image id=\"%s\">./img/%s.%s</Image>\n" % (itemClean, itemClean, extension)
 
 	ret += "</Images>"
-	#print ret
+	#print(ret)
 
 	ret = ""
 	ret += '<?xml version="1.0" encoding="utf-8"?>\n'
@@ -82,7 +85,7 @@ def genFile():
 	ret += '	</Images>\n'
 
 
-	with open("images.xml", "w") as fp:
+	with io.open("images.xml", "w", encoding="utf8") as fp:
 		fp.write(ret)
 
 if __name__ == "__main__":

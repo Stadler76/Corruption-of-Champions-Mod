@@ -6,6 +6,7 @@
 		// tags not present in the singleArgConverters object return an error message.
 		//
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
+		import classes.BodyParts.BaseBodyPart;
 		import classes.GlobalFlags.kFLAGS;
 		import classes.GlobalFlags.kGAMECLASS;
 		import classes.Measurements;
@@ -26,6 +27,7 @@
 				"armorname"					: function():* { return kGAMECLASS.player.armorName;},
 				"ass"						: function():* { return kGAMECLASS.player.buttDescript();},
 				"asshole"					: function():* { return kGAMECLASS.player.assholeDescript(); },
+				"assholeorpussy"			: function():* { return kGAMECLASS.player.assholeOrPussy(); },
 				"balls"						: function():* { return kGAMECLASS.player.ballsDescriptLight(); },
 				"bodytype"					: function():* { return kGAMECLASS.player.bodyType(); },
 				"boyfriend"					: function():* { return kGAMECLASS.player.mf("boyfriend", "girlfriend"); },
@@ -41,6 +43,7 @@
 				"cocks"						: function():* { return kGAMECLASS.player.multiCockDescriptLight(); },
 				"cunt"						: function():* { return kGAMECLASS.player.vaginaDescript(); },
 				"eachcock"					: function():* { return kGAMECLASS.player.sMultiCockDesc();},
+				"eachcockUC"				: function():* { return kGAMECLASS.player.SMultiCockDesc();},
 				"evade"						: function():* { return "[Evade]"; },
 				"extraeyes"					: function():* { return kGAMECLASS.player.extraEyesDescript();},
 				"extraeyesshort"			: function():* { return kGAMECLASS.player.extraEyesDescriptShort();},
@@ -73,6 +76,7 @@
 				"legcounttextuc"			: function():* { return Utils.Num2Text(kGAMECLASS.player.lowerBody.legCount); },
 				"legs"						: function():* { return kGAMECLASS.player.legs(); },
 				"lowergarment"				: function():* { return kGAMECLASS.player.lowerGarmentName; },
+				"malespersons"				: function():* { return kGAMECLASS.player.mf("males", "persons"); },
 				"man"						: function():* { return kGAMECLASS.player.mf("man", "woman"); },
 				"men"						: function():* { return kGAMECLASS.player.mf("men", "women"); },
 				"malefemaleherm"			: function():* { return kGAMECLASS.player.maleFemaleHerm(); },
@@ -126,6 +130,9 @@
 				"guy"						: function():* { return kGAMECLASS.player.mf("guy", "girl"); },
 				"wings"						: function():* { return kGAMECLASS.player.wingsDescript(); },
 				"wingcolor"					: function():* { return kGAMECLASS.player.wings.color; },
+				"wingcolor2"				: function():* { return kGAMECLASS.player.wings.color2; },
+				"wingcolordesc"				: function():* { return kGAMECLASS.player.wings.getColorDesc(BaseBodyPart.COLOR_ID_MAIN); },
+				"wingcolor2desc"			: function():* { return kGAMECLASS.player.wings.getColorDesc(BaseBodyPart.COLOR_ID_2ND); },
 				"tail"						: function():* { return kGAMECLASS.player.tailDescript(); },
 				"onetail"					: function():* { return kGAMECLASS.player.oneTailDescript(); },
 

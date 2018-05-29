@@ -364,6 +364,41 @@ package classes.Items
 			return true;
 		}
 
+		/**
+		 * Removes wings and optionally the shark-fin, too.
+		 * @param	tfSource        The method- or classname plus additional info seperated by the '-'-character
+		 * @param	removeSharkFin  If true (the default), remove the shark-fin, too.
+		 * @return	true: lost them, false: no change
+		 * @author	Stadler76
+		 */
+		public function removeWings(tfSource:String, removeSharkFin:Boolean = true):Boolean
+		{
+			var changed:Boolean = false;
+
+			LOGGER.debug("called removeWings(\"{0}\"{1})", tfSource, removeSharkFin ? "" : ", false");
+
+			if (removeSharkFin && player.rearBody.type === RearBody.SHARK_FIN) {
+				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine."
+				          +" <b>After a moment the pain passes, though your fin is gone!</b>");
+				player.rearBody.restore();
+				changed = true;
+			}
+
+			if (player.wings.type !== Wings.NONE) {
+				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your"
+				          +" shoulder-blades."
+				          +" <b>After a moment the pain passes, though your wings are gone!</b>");
+				player.wings.restore();
+				changed = true;
+			}
+
+			if (changed) {
+				changes++;
+			}
+
+			return changed;
+		}
+
 		public function removeBassyHair():Boolean
 		{
 			// Failsafe, duh

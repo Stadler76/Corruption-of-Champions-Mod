@@ -342,7 +342,7 @@ package classes.Scenes.Seasonal {
 			//Marble (Written by TDM himself)
 			else if (flags[kFLAGS.JACK_FROST_PROGRESS] <= 7 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 				flags[kFLAGS.JACK_FROST_PROGRESS] = 8;
-				spriteSelect(SpriteDb.s_marble);
+				kGAMECLASS.marbleScene.marbleSprite();
 				//With Kids
 				if (flags[kFLAGS.MARBLE_KIDS] > 0 && flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] >= 100) {
 					outputText("You find Marble simply staring into the sky, a look of wonder covering her face.  Dancing around her in excitement ");

@@ -140,7 +140,7 @@ public class MainView extends Block {
 	internal static const BOTTOM_W:Number         = TEXTZONE_W;
 	internal static const BOTTOM_HGAP:Number      = (BOTTOM_W - BTN_W * BOTTOM_COLS) / (2 * BOTTOM_COLS);
 	internal static const BOTTOM_Y:Number         = SCREEN_H - BOTTOM_H;
-	internal static const MONSTER_X:Number        = TEXTZONE_X + MainView.TEXTZONE_W + GAP;
+	internal static const MONSTER_X:Number        = TEXTZONE_X + TEXTZONE_W + GAP;
 	internal static const MONSTER_Y:Number        = TEXTZONE_Y;
 	internal static const MONSTER_W:Number        = 200;
 	internal static const MONSTER_H:Number        = TEXTZONE_H;
@@ -865,27 +865,40 @@ public class MainView extends Block {
 		if (!monsterStatsView.moved) return;
 		else monsterStatsView.moved = false;
 		//Now animate the bar.
-		var tmr:Timer = new Timer(30, 20);
-		tmr.addEventListener(TimerEvent.TIMER, moveCombatViewBack);
-		/*tmr.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-				this.monsterStatsView.x -= 200;
-			});*/
-		tmr.start();
+		//var tmr:Timer = new Timer(30, 20);
+		//tmr.addEventListener(TimerEvent.TIMER, moveCombatViewBack);
+		//tmr.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
+			this.mainText.x = TEXTZONE_X;
+			this.mainText.width = TEXTZONE_W;
+			this.scrollBar.x = TEXTZONE_X + TEXTZONE_W;
+			this.textBGTan.width = TEXTZONE_W;
+			this.textBGWhite.width = TEXTZONE_W;
+			this.textBGTranslucent.width = TEXTZONE_W;
+			this.monsterStatsView.x = MONSTER_X;
+		//});
+		//tmr.start();
 		this.monsterStatsView.hide();
 	}
-	
+
 	public function updateCombatView():void {
 		if (kGAMECLASS.flags[kFLAGS.ENEMY_STATS_BARS_ENABLED] <= 0) return; //Cancel if disabled 
 		monsterStatsView.show();
 		if (monsterStatsView.moved) return;
 		else monsterStatsView.moved = true;
 		//Now animate the bar.
-		var tmr:Timer = new Timer(30, 20);
-		tmr.addEventListener(TimerEvent.TIMER, moveCombatView);
-		/*tmr.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
-				this.monsterStatsView.x -= 200;
-			});*/
-		tmr.start();
+		//var tmr:Timer = new Timer(30, 20);
+		//tmr.addEventListener(TimerEvent.TIMER, moveCombatView);
+		//tmr.addEventListener(TimerEvent.TIMER_COMPLETE, function ():void {
+			this.mainText.x = TEXTZONE_X;
+			this.mainText.width = TEXTZONE_W - MONSTER_W;
+			this.scrollBar.x = TEXTZONE_X + TEXTZONE_W - MONSTER_W;
+			this.textBGTan.width = TEXTZONE_W - MONSTER_W;
+			this.textBGWhite.width = TEXTZONE_W - MONSTER_W;
+			this.textBGTranslucent.width = TEXTZONE_W - MONSTER_W;
+			this.monsterStatsView.x = MONSTER_X - MONSTER_W;
+			this.monsterStatsView.refreshStats(kGAMECLASS);
+		//});
+		//tmr.start();
 	}
 }
 }

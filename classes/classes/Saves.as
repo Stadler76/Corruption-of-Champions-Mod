@@ -919,6 +919,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		// </mod>
 		saveFile.data.wingType = player.wings.type;
 		saveFile.data.wingColor = player.wings.color;
+		saveFile.data.wingColor2 = player.wings.color2;
 		saveFile.data.lowerBody = player.lowerBody.type;
 		saveFile.data.legCount = player.lowerBody.legCount;
 		saveFile.data.tailType = player.tail.type;
@@ -1810,13 +1811,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		player.wings.type = saveFile.data.wingType;
 		player.wings.color = saveFile.data.wingColor || "no";
+		player.wings.color2 = saveFile.data.wingColor2 || "no";
 		player.lowerBody.type = saveFile.data.lowerBody;
 		player.tail.type = saveFile.data.tailType;
 		player.tail.venom = saveFile.data.tailVenum;
 		player.tail.recharge = saveFile.data.tailRecharge;
 		player.hips.rating = saveFile.data.hipRating;
 		player.butt.rating = saveFile.data.buttRating;
-		
+
+		if (player.hasDragonWings() && (["", "no"].indexOf(player.wings.color) !== -1 || ["", "no"].indexOf(player.wings.color2) !== -1)) {
+			player.wings.color = player.skin.tone;
+			player.wings.color2 = player.skin.tone;
+		}
 
 		if (player.wings.type == 8) {
 			player.wings.restore();

@@ -146,6 +146,11 @@ public class SpriteDb {
 	public static function get s_cinnabar(): Class {
 		return is8bit ? null : s_cinnabar_16bit;
 	}
+	[Embed(source="../../../res/sprites/clara.png")]
+	public static const s_clara_16bit:Class;
+	public static function get s_clara(): Class {
+		return is8bit ? null : s_clara_16bit;
+	}
 	[Embed(source="../../../res/sprites/cloaked dominika.png")]
 	public static const s_cloaked_dominika_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/dominika-old.png")]
@@ -599,6 +604,11 @@ public class SpriteDb {
 	public static const s_marble_8bit:Class;
 	public static function get s_marble(): Class {
 		return is8bit ? s_marble_8bit : s_marble_16bit;
+	}
+	[Embed(source="../../../res/sprites/marble_cow.png")]
+	public static const s_marble_cow_16bit:Class;
+	public static function get s_marble_cow(): Class {
+		return is8bit ? s_marble_8bit : s_marble_cow_16bit;
 	}
 	[Embed(source="../../../res/sprites/markus and lucia.png")]
 	public static const s_markus_and_lucia_16bit:Class;

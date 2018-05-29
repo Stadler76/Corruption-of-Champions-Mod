@@ -96,11 +96,11 @@ package classes
 			if (ITEM_LIBRARY[_id] != null) {
 				CoC_Settings.error("Duplicate itemid "+_id+", old item is "+(ITEM_LIBRARY[_id] as ItemType).longName);
 			}
-			if (ITEM_SHORT_LIBRARY[_shortName] != null){
-				CoC_Settings.error("WARNING: Item with duplicate shortname: '"+_id+"' and '"+(ITEM_SHORT_LIBRARY[this._shortName] as ItemType)._id+"' share "+this._shortName);
+			if (ITEM_SHORT_LIBRARY[this.shortName] != null){
+				CoC_Settings.error("WARNING: Item with duplicate shortname: '"+_id+"' and '"+(ITEM_SHORT_LIBRARY[this.shortName] as ItemType)._id+"' share "+this.shortName);
 			}
 			ITEM_LIBRARY[_id] = this;
-			ITEM_SHORT_LIBRARY[this._shortName] = this;
+			ITEM_SHORT_LIBRARY[this.shortName] = this;
 		}
 
 

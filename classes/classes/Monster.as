@@ -10,8 +10,13 @@
 	import classes.Items.WeaponLib;
 	import classes.Items.ShieldLib;
 	import classes.Items.UndergarmentLib;
+	import classes.Scenes.Areas.Desert.SandTrap;
+	import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+	import classes.Scenes.Dungeons.LethicesKeep.Doppelganger;
+	import classes.Scenes.Dungeons.LethicesKeep.Lethice;
 	import classes.Scenes.NPCs.Kiha;
+	import classes.Scenes.Places.Boat.Marae;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 	import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 	import classes.internals.ChainedDrop;
@@ -160,34 +165,30 @@
 		public override function maxHP():Number
 		{
 			//Base HP
-			var temp:Number = 50 + this.bonusHP;
-			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
-				temp = (15 * level) + this.bonusHP;
-			}
-			temp += (this.tou * 2);
-			//Apply perks
-			if (findPerk(PerkLib.Tank) >= 0) temp += 50;
-			if (findPerk(PerkLib.Tank2) >= 0) temp += this.tou;
+			var hp:Number = (flags[kFLAGS.GRIMDARK_MODE] > 0 ? (15 * level) : 50) + this.bonusHP;
+
 			//Apply NG+, NG++, NG+++, etc.
-			if (short === "doppleganger" || short === "pod" || short === "sand trap" || short === "sand tarp") {
-				temp += 200 * player.newGamePlusMod();
-			}
-			else if (short === "Lethice") {
-				temp += 1200 * player.newGamePlusMod();
-			}
-			else if (short === "Marae") {
-				temp += 2500 * player.newGamePlusMod();
-			}
-			else {
-				temp += 1000 * player.newGamePlusMod();
-			}
+			hp = getAscensionHP(hp);
+
+			hp += (this.tou * 2);
+
+			//Apply perks
+			if (findPerk(PerkLib.Tank) >= 0) hp += 50;
+			if (findPerk(PerkLib.Tank2) >= 0) hp += this.tou;
+			if (findPerk(PerkLib.Tank3) >= 0) hp += level * 5;
+
 			//Apply difficulty
-			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) temp *= 1.0;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] === 1) temp *= 1.25;
-			else if (flags[kFLAGS.GAME_DIFFICULTY] === 2) temp *= 1.5;
-			else temp *= 2.0;
-			temp = Math.round(temp);
-			return temp;
+			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) hp *= 1.0;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] === 1) hp *= 1.25;
+			else if (flags[kFLAGS.GAME_DIFFICULTY] === 2) hp *= 1.5;
+			else hp *= 2.0;
+
+			return Math.round(hp);
+		}
+
+		public function getAscensionHP(hp:Number):Number
+		{
+			return hp * (1 + player.ascensionFactor(1.50)); // +150% per NG+-level
 		}
 
 		override public function maxLust():Number {

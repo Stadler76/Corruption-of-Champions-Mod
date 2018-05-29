@@ -168,16 +168,7 @@ package classes.Items.Consumables
 			}
 			//Removes wings
 			if ((player.wings.type !== Wings.NONE || player.rearBody.type == RearBody.SHARK_FIN) && rand(5) === 0 && changes < changeLimit) {
-				if (player.rearBody.type == RearBody.SHARK_FIN) {
-					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine."
-					          +" After a moment the pain passes, though your fin is gone!");
-					player.rearBody.restore();
-				} else {
-					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your"
-					          +" shoulder-blades.  After a moment the pain passes, though your wings are gone!");
-				}
-				player.wings.type = Wings.NONE;
-				changes++;
+				mutations.removeWings(tfSource);
 			}
 			//Removes tail
 			if (player.tail.type !== Tail.NONE && rand(5) === 0 && changes < changeLimit) {

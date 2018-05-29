@@ -216,6 +216,10 @@ package classes.Items.Consumables
 					output.text("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
 					player.wings.type = Wings.DRACONIC_SMALL;
 				}
+				if (["", "no"].indexOf(player.wings.color) !== -1 || ["", "no"].indexOf(player.wings.color2) !== -1) {
+					player.wings.color = player.skin.tone;
+					player.wings.color2 = player.skin.tone;
+				}
 				changes++;
 			}
 			// <mod name="BodyParts.RearBody" author="Stadler76">

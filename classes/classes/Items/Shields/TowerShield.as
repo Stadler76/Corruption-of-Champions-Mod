@@ -10,6 +10,7 @@ package classes.Items.Shields
 			var eqptNames:Array = ["tower shield", "fine tower shield", "masterwork tower shield"];
 			var longNames:Array = ["a tower shield", "a fine tower shield", "a masterwork tower shield"];
 			this.weightCategory = Shield.WEIGHT_HEAVY;
+			this.tier = tier;
 			super(ids[tier], "TowerShld", eqptNames[tier], longNames[tier], 16, 500, "A towering metal shield. It looks heavy! The weight of this shield might incite some penalties to accuracy.");
 		}
 		

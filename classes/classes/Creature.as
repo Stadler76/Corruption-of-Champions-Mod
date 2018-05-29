@@ -2733,6 +2733,11 @@ package classes
 			return gills.type != Gills.NONE;
 		}
 
+		public function hasTail():Boolean
+		{
+			return tail.type !== Tail.NONE;
+		}
+
 		public function hasFeathers():Boolean
 		{
 			return skin.hasFeathers();

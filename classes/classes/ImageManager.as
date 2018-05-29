@@ -56,7 +56,7 @@
 			_mainView = mainView;
 			mStage = stage;
 			_imgListXML = new XML(new XML_IMAGES);
-			if (Security.sandboxType != Security.REMOTE)
+			if (Security.sandboxType != Security.REMOTE && !CONFIG::AIR)
 			{
 				//trace("Creating Image File hashmap");
 				loadImageList();

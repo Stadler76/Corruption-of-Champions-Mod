@@ -2825,7 +2825,7 @@ package classes.Scenes.Areas.Desert
 				else {
 					outputText("\n\nPhylla quickly gets into position, although at first she looks uncertain of if what's she done is correct.");
 					//If PC corruption over 75:
-					if (player.cor < 75) outputText("  Little does poor Phylla know, you're going to just use her as a baby maker to ease the tension of your own sacks.");
+					if (player.cor > 75) outputText("  Little does poor Phylla know, you're going to just use her as a baby maker to ease the tension of your own sacks.");
 				}
 				outputText("\n\nYou help pose her in the right position; angling her pussy towards you as you clamber along the bed.  Finally coming to rest on top of Phylla, you take her soft face in your hands and kiss her. You hold her body firmly under yours as you work your ovipositor against her vagina.");
 

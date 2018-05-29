@@ -22,7 +22,7 @@ package classes.Scenes.Dungeons.LethicesKeep {
 		private static const LOGGER:ILogger = LoggerFactory.getLogger(LethicesKeep);
 
 		public var jeanClaude:JeanClaudeScenes = new JeanClaudeScenes();
-		public var doppleganger:DopplegangerScenes = new DopplegangerScenes();
+		public var doppelganger:DoppelgangerScenes = new DoppelgangerScenes();
 		public var incubusMechanic:IncubusMechanicScenes = new IncubusMechanicScenes();
 		public var livingStatue:LivingStatueScenes = new LivingStatueScenes();
 		public var succubusGardener:SuccubusGardenerScenes = new SuccubusGardenerScenes();
@@ -281,7 +281,7 @@ package classes.Scenes.Dungeons.LethicesKeep {
 				outputText("\n\nNear the back, next to the broken stack is a white stand, displaying what appear to be a number of dark shades.");
 				if (flags[kFLAGS.D3_ENTERED_MAGPIEHALL] == 1) outputText("  Your spirits rise. They look like they may very well be made of the same material as the screen in the basilisk hall.");
 				if (player.inte >= 70 || player.sens >= 70) outputText("  Disquiet edges down your spine. Something about this place doesn’t feel right. The room seems faded at the corners, as if it’s not quite there.");
-				addButton(2, "Glasses", doppleganger.getDemGlasses);
+				addButton(2, "Glasses", doppelganger.getDemGlasses);
 			}
 			return false;
 		}

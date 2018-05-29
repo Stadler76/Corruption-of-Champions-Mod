@@ -59,9 +59,10 @@
 		//End of Interface Implementation
 
 		public function kihaSprite(nude:Boolean = false):void {
-			if (!pregnancy.isPregnant)
+			if (!pregnancy.isPregnant) {
 				if (nude) spriteSelect(SpriteDb.s_kiha_nude);
 				else spriteSelect(SpriteDb.s_kiha);
+			}
 			else  {
 				if (nude) spriteSelect(SpriteDb.s_kiha_nude_preg);
 				else spriteSelect(SpriteDb.s_kiha_preg);

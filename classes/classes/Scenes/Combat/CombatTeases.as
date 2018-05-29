@@ -1410,7 +1410,7 @@ package classes.Scenes.Combat
 				damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 				
 				if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
-				else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
+				else if (monster is Doppelganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppelganger).mirrorTease(damage, true);
 				else if (!justText) monster.teased(damage);
 				
 				if (flags[kFLAGS.PC_FETISH] >= 1 && !getGame().urtaQuest.isUrta()) 
@@ -1428,7 +1428,7 @@ package classes.Scenes.Combat
 				if (!justText && !getGame().urtaQuest.isUrta()) teaseXP(5);
 				
 				if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
-				else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
+				else if (monster is Doppelganger) (monster as Doppelganger).mirrorTease(0, false);
 				else if (!justText) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.");
 			}
 			outputText("\n\n");

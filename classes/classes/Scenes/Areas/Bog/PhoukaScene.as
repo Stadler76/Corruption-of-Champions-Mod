@@ -189,8 +189,10 @@ package classes.Scenes.Areas.Bog
 						else
 							outputText("<i>“");
 						outputText("I could change inta a goat for ya.  That suit yer fancy?  Is it a fond dream o' yers to let a goat blow its load in yer cornhole?");
-						if (player.hasVagina()) 
-							outputText("\n\nOh, there's one more ye might like.  Ever rode a stallion?  Ever wondered what it'd be like ta pack what a horse has between its legs inta what you've got tween yers?  Just say the word missy an' I'll change inta a stallion an split ye wide open.”</i>");
+						if (player.hasVagina()) {
+							outputText("”</i>");
+							outputText("\n\n<i>“Oh, there's one more ye might like.  Ever rode a stallion?  Ever wondered what it'd be like ta pack what a horse has between its legs inta what you've got tween yers?  Just say the word missy an' I'll change inta a stallion an split ye wide open.”</i>");
+						}
 						else
 							outputText("  If it ain't then tough shite, cause that's what I want.”</i>");
 						menu();

@@ -43,6 +43,13 @@ package classes.lists
 			Face.RED_PANDA,
 		];
 
+		public static const HUMANISH_FACES:Array = [
+			Face.HUMAN,
+			Face.SHARK_TEETH,
+			Face.SNAKE_FANGS,
+			Face.SPIDER_FANGS,
+		];
+
 		public static const LONG_TAILS:Array = [
 			Tail.DOG,
 			Tail.DEMONIC,

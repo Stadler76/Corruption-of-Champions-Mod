@@ -66,6 +66,11 @@ package classes.Scenes.Dungeons.LethicesKeep
 			this.checkMonster();
 		}
 		
+		override public function getAscensionHP(hp:Number):Number
+		{
+			return hp * (1 + player.ascensionFactor(1.75)); // +175% per NG+-level --> = +1225 per level then
+		}
+
 		override public function get long():String
 		{
 			var str:* = "";

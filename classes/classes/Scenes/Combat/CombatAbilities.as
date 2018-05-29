@@ -276,9 +276,9 @@ package classes.Scenes.Combat
 				monster.doAI();
 				return;
 			}
-			if (monster is Doppleganger)
+			if (monster is Doppelganger)
 			{
-				(monster as Doppleganger).handleSpellResistance("whitefire");
+				(monster as Doppelganger).handleSpellResistance("whitefire");
 				flags[kFLAGS.SPELLS_CAST]++;
 				spellPerkUnlock();
 				return;
@@ -511,9 +511,9 @@ package classes.Scenes.Combat
 				monster.doAI();
 				return;
 			}
-			if (monster is Doppleganger)
+			if (monster is Doppelganger)
 			{
-				(monster as Doppleganger).handleSpellResistance("blackfire");
+				(monster as Doppelganger).handleSpellResistance("blackfire");
 				flags[kFLAGS.SPELLS_CAST]++;
 				spellPerkUnlock();
 				return;
@@ -967,9 +967,9 @@ package classes.Scenes.Combat
 				monster.doAI();
 				return;
 			}
-			if (monster is Doppleganger)
+			if (monster is Doppelganger)
 			{
-				(monster as Doppleganger).handleSpellResistance("fireball");
+				(monster as Doppelganger).handleSpellResistance("fireball");
 				flags[kFLAGS.SPELLS_CAST]++;
 				spellPerkUnlock();
 				return;

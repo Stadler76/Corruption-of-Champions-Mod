@@ -201,6 +201,11 @@ package classes.Scenes.Dungeons.DeepCave
 			return _long;
 		}
 
+		override public function getAscensionHP(hp:Number):Number
+		{
+			return hp * (1 + player.ascensionFactor(1.00)); // +100% per NG+-level
+		}
+
 		public function EncapsulationPod()
 		{
 			this.a = "the ";

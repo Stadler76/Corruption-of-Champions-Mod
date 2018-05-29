@@ -11,7 +11,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 	 * ...
 	 * @author Gedan
 	 */
-	public class Doppleganger extends Monster
+	public class Doppelganger extends Monster
 	{
 		private var _roundCount:int = 0;
 		
@@ -19,7 +19,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 		{
 			this.createStatusEffect(StatusEffects.MirroredAttack, 0, 0, 0, 0);
 			
-			outputText("As you swing your [weapon] at the doppleganger, " + player.mf("he", "she") + " smiles mockingly, and mirrors your move exactly, lunging forward with " + player.mf("his", "her") + " duplicate " + weaponName + ".");
+			outputText("As you swing your [weapon] at the doppelganger, " + player.mf("he", "she") + " smiles mockingly, and mirrors your move exactly, lunging forward with " + player.mf("his", "her") + " duplicate " + weaponName + ".");
 			
 			// Cribbing from combat mechanics - if the number we got here is <= 0, it was deflected, blocked or otherwise missed.
 			// We'll use this as our primary failure to hit, and then mix in a bit of random.
@@ -143,12 +143,12 @@ package classes.Scenes.Dungeons.LethicesKeep
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.lethicesKeep.doppleganger.punchYourselfInTheBalls();
+			game.lethicesKeep.doppelganger.punchYourselfInTheBalls();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.lethicesKeep.doppleganger.inSovietCoCSelfFucksYou();
+			game.lethicesKeep.doppelganger.inSovietCoCSelfFucksYou();
 		}
 		
 		public function handleSpellResistance(spell:String):void
@@ -175,7 +175,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 		
 		public function handlePlayerWait():void
 		{
-			outputText("Your doppleganger similarly opts to take a momentary break from the ebb and flow of combat.");
+			outputText("Your doppelganger similarly opts to take a momentary break from the ebb and flow of combat.");
 			addTalkShit();
 		}
 		
@@ -190,14 +190,19 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText("Your duplicate chuckles in the face of your attacks.");
 			addTalkShit();
 		}
+
+		override public function getAscensionHP(hp:Number):Number
+		{
+			return hp * (1 + player.ascensionFactor(0.50)); // +50% per NG+-level
+		}
 		
-		public function Doppleganger() 
+		public function Doppelganger() 
 		{
 			this.a = "the ";
 			this.short = "doppelganger";
 			this.long = ""; // Needs to be set to supress validation errors, but is handled by an accessor override.
 			this.race = "Demon";
-			this.imageName = "doppleganger";
+			this.imageName = "doppelganger";
 			this.plural = false;
 			
 			this.tallness = player.tallness;

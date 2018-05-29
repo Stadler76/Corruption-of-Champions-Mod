@@ -119,6 +119,11 @@ package classes.Scenes.Places.Boat
 			}
 		}
 		
+		override public function getAscensionHP(hp:Number):Number
+		{
+			return hp * (1 + player.ascensionFactor(0.55)); // +55% per NG+-level --> = +2640 per level then
+		}
+
 		public function Marae() 
 		{
 			this.a = "";

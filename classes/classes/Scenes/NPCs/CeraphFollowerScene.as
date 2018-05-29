@@ -1087,7 +1087,7 @@ package classes.Scenes.NPCs
 //(should probably add a cock-limit of like, whatever you want, cuz you're fucking her butt)
 		private function sweetieNOOOO():void
 		{
-			spriteSelect(SpriteDb.s_marble);
+			marbleScene.marbleSprite();
 			clearOutput();
 			//requires PC to have Marble as follower or have removed Marble from game via rape attempt and confrontation
 			outputText("\"<i>Aaaah, not satisfied with me, " + player.mf("Master", "Mistress") + "?</i>\" Ceraph huffs, feigning exasperation.  She pointedly runs a hand along her muscular thigh, up her taut belly, and around one of her perfectly-formed lilac breasts.  \"<i>And what did you have in mind for our... playtime?</i>\"\n\n");
@@ -1130,7 +1130,6 @@ package classes.Scenes.NPCs
 		private function noUdderPlz(perm:Boolean = false):void
 		{
 			clearOutput();
-			spriteSelect(SpriteDb.s_marble);
 			if (perm) flags[kFLAGS.CERAPH_SWEETIE_NO_RP_UTTER_MOO_DISABLED] = 1;
 			outputText("A sharp head-shake is the only declination she needs.  \"<i>Of course, Sweetie, that wouldn't be very... Marble-like, would it?</i>\"\n\n");
 			flags[kFLAGS.CERAPH_SWEETIE_NO_RP_UTTER_MOO_DISABLED] = 0;
@@ -1141,7 +1140,6 @@ package classes.Scenes.NPCs
 		private function yesUdderPWEASE():void
 		{
 			clearOutput();
-			spriteSelect(SpriteDb.s_marble);
 			outputText("A brightening of your eyes and a slight part of your lips clues her in to your answer.  She pulls her blouse up over her belly, tucking it into her cleavage to keep it out of the way.  As you watch, Ceraph pinches two spots right above her belly button, and she moves her fingers away to reveal... nipples!  She repeats the process a few inches lower, then frames the four nubs with her thumb and forefinger, taking a deep breath in anticipation.  The demoness flexes her belly muscles, and a familiar bulge pops up, nipples lengthening to match.  Liquid can also be heard splashing around her pink protrusion, and she can't help but give the thing a little slap.  Both of you delight in the subsequent jostling and splashing of the milk inside.  Her cheeks bulge with exertion as the milk-sack grows, burgeoning larger and wider with more and more milk before finally flopping heavily down above her crotch.  She sighs in relief, then slips her top back over her new udder, taking apparent pride in the four small stains forming in the fabric.\n\n");
 			flags[kFLAGS.CERAPH_SWEETIE_NO_RP_UTTER_MOO_DISABLED] = 1;
 			postUdderChoice();
@@ -1149,7 +1147,6 @@ package classes.Scenes.NPCs
 
 		private function postUdderChoice(newl:Boolean = false):void
 		{
-			spriteSelect(SpriteDb.s_marble);
 			if (newl) clearOutput();
 			outputText("That out of the way, she pulls her overall back over her shoulders and turns her back to you, waiting several seconds before turning around.  \"<i>Sweetie!?</i>\" she exclaims in horror, eyes wide and arms flung in front of her as she cowers from you.  \"<i>What-... what are you doing...</i>\"\n\n");
 

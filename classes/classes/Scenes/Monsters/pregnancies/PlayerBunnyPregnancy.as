@@ -51,7 +51,7 @@ package classes.Scenes.Monsters.pregnancies
 			
 			if (player.pregnancyIncubation === 785) {
 				//output.text("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
-				kGAMECLASS.consumables.NPEPREG.useItem();
+				kGAMECLASS.consumables.NPNKEGG.applyEffect(player, true);
 				output.text("\n");
 				displayedUpdate = true;
 			}
@@ -63,7 +63,7 @@ package classes.Scenes.Monsters.pregnancies
 			
 			if (player.pregnancyIncubation === 765) {
 				//output.text("\n<b>An unexpected change occurs, no doubt brought on by the bunny's eggs inside you!</b>");
-				kGAMECLASS.consumables.NPEPREG.useItem();
+				kGAMECLASS.consumables.NPNKEGG.applyEffect(player, true);
 				output.text("\n");
 				displayedUpdate = true;
 			}
@@ -223,7 +223,7 @@ package classes.Scenes.Monsters.pregnancies
 			}
 			
 			if (player.buttPregnancyIncubation === 785) {
-				kGAMECLASS.consumables.NPEPREG.useItem();
+				kGAMECLASS.consumables.NPNKEGG.applyEffect(player, true);
 				output.text("\n");
 				
 				displayedUpdate = true;
@@ -236,7 +236,7 @@ package classes.Scenes.Monsters.pregnancies
 			}
 			
 			if (player.buttPregnancyIncubation === 765) {
-				kGAMECLASS.consumables.NPEPREG.useItem();
+				kGAMECLASS.consumables.NPNKEGG.applyEffect(player, true);
 				output.text("\n");
 				
 				displayedUpdate = true;

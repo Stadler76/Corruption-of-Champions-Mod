@@ -20,6 +20,7 @@ package classes.Scenes.NPCs {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.display.SpriteDb;
 
 	public class MarblePurification extends NPCAwareContent{
 
@@ -56,6 +57,7 @@ package classes.Scenes.NPCs {
 	//The PC must have the Marble Resistant perk, must not have the Marble’s Milk perk to trigger this scene, they must have below 50 corruption, and they cannot have any corrupt followers in camp.  If at any time the PC's corruption goes over 50, or they gain a corrupt follower, the quest is cancelled.  The quest can be continued if they once again drop under 50 corruption and lose all corrupt followers.
 	public function BLUHBLUH():void {
 		clearOutput();
+		marbleScene.marbleSprite();
 	 	outputText("When you return to camp, you find Marble seated at the campfire, staring gloomily into the ashes. Curious, you approach your bovine lover and ask her what the matter is. She looks up at you, her ");
 		if (flags[kFLAGS.MARBLE_BOVA_LEVEL] <= 1) outputText("human");
 		else outputText("bovine");
@@ -188,6 +190,7 @@ package classes.Scenes.NPCs {
 	public function rathazulsMurbelReport():void
 	{
 		clearOutput();
+		marbleScene.marbleSprite();
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] = 0;
 	 	outputText("When you wake and join Marble ");
 		if (kGAMECLASS.camp.companionsCount() > 2) outputText("and your other followers ");
@@ -234,6 +237,7 @@ package classes.Scenes.NPCs {
 	public function claraShowsUpInCampBECAUSESHESACUNT():void
 	{
 		clearOutput();
+		marbleScene.marbleSprite();
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 0;
 	 	outputText("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!</i>\"  Marble excitedly exclaims at the sight of you coming out of your " + camp.homeDesc() + ".  <i>\"Let me introduce you to my sister, Clara.</i>\"");
 	 	outputText("\n\nThe other woman, whom you presume is Clara, certainly does look like she is related to Marble.  She is obviously another Lacta Bovine, with many of the same features as ");
@@ -266,6 +270,7 @@ package classes.Scenes.NPCs {
 	public function partTwoOfClaraShowingUpAndBeingACunt():void 
 	{
 		clearOutput();
+		spriteSelect(SpriteDb.s_clara);
 	 	outputText("You turn back to the camp and continue going about your morning routine.  By the time you’re ready to head out, the girls have come back from the farm, bearing a bottle of Clara’s milk.  The spotted bovine’s foul mood seems to have improved as well.");
 		//PC greets Clara and is told that her mood was improved from using the milkers, she is surprised at how satisfying that was.
 	 	outputText("\n\n\"<i>Hey there, charmer!</i>\" Clara says cheerfully, \"<i>I was surprised at how goood it felt to use those milkers, have you seen the setup that Marble’s got there?  I think Ophelia would kill for a suite like that.  Marble, would you please give that bottle to the rat?</i>\"  Marble gives her sister a look, then takes the bottle and goes over to the alchemist’s corner of the camp.");
@@ -845,6 +850,7 @@ package classes.Scenes.NPCs {
 	//PC defeats Clara outside camp
 	public function defeatClaraCuntInAFight(cheated:Boolean = false):void
 	{
+		marbleScene.marbleSprite();
 		if (cheated) clearOutput();
 		else
 		{
@@ -903,7 +909,7 @@ package classes.Scenes.NPCs {
 		}
 	 	outputText("The frustration of not being able to nurse, someone, anyone, but especially my mate is tearing me apart!</i>\"  Marble stops screaming and her head drops.  All that's coming out of her now is heavy breathing.");
 
-	 	outputText("\n\n\"<i>There, you see?  Now I'm sure you understand why me and " + player.short + " here belong toogether.  I won't deny the proper order of things, and I'll make sure that " + player.mf("he","she") + " leads a fulfilling life as my milk slave.  " + player.mf("He","She") + "'ll even by my first husband!</i>\"");
+	 	outputText("\n\n\"<i>There, you see?  Now I'm sure you understand why me and " + player.short + " here belong toogether.  I won't deny the proper order of things, and I'll make sure that " + player.mf("he","she") + " leads a fulfilling life as my milk slave.  " + player.mf("He","She") + "'ll even be my first husband!</i>\"");
 	 	outputText("\n\nTentatively you ask what Clara means by first husband?");
 
 	 	outputText("\n\nClara laughs at your question, \"<i>Of course!  I deserve more than the typical Lacta Bovine.  You're going to help me find at least two more husbands, build me the perfect hoome, care for my young, and take care of my every need.  You should feel hoonoored.</i>\"");
@@ -949,7 +955,8 @@ package classes.Scenes.NPCs {
 	public function murbleSpanksCowCunt():void
 	{
 		clearOutput();
-	 	outputText("Marble seems to have a good idea on how to punish Clara already, so you just sit back and watch.");
+	 	spriteSelect(SpriteDb.s_clara);
+		outputText("Marble seems to have a good idea on how to punish Clara already, so you just sit back and watch.");
 	 	outputText("\n\nThe older sister puts the younger one over her knee and raises her hand up in the air.  \"<i>Uh sis, what do you think you're doing?</i>\"  The hand comes down, and gives a dull thwack on impact.  \"<i>OOE!</i>\"  The hand goes up once more, then brought down along with another dull thwack.  \"<i>OOE!  Stop it!</i>\"");
 	 	outputText("\n\n\"<i>Not until you learn how much what you did to me hurts.</i>\"");
 	 	outputText("\n\n\"<i>What?!  OOE!</i>\"");
@@ -972,6 +979,7 @@ package classes.Scenes.NPCs {
 	//does not work with centaur, naga, drider, or goo bodies.  However, I don't particularly want to just say you can't do this scene if you have them.
 	{
 		clearOutput();
+		spriteSelect(SpriteDb.s_clara);
 		var x:int = player.cockThatFits(20);
 	 	outputText("You step forward and suggest to Marble that the two of you should work together to punish Clara.  She nods and asks what you have in mind.  Well, you were thinking that a sexual punishment from the two of you would be appropriate.");
 	 	outputText("\n\n\"<i>What?  I don't want to have a threesome with my sister!  Only " + player.short + " should be able to touch me!</i>\"");
@@ -1042,6 +1050,7 @@ package classes.Scenes.NPCs {
 	//does not work with centaur or drider bodies.  However, I don't particularly want to just say you can't do this scene if you have them.
 	public function NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG():void {
 		clearOutput();
+		marbleScene.marbleSprite(true);
 	 	outputText("You ");
 	 	outputText("step forward and tell Marble that you think that since Clara thinks your love for one another isn't real, how about the two of you show her just how real it is?  \"<i>Good idea, " + player.short + ",</i>\" your lover tersely replies through her still seething visage and steps forwards.  In an instant you're forcibly pulled into a strong passionate kiss upon humanlike lips while a decidedly inhumanly long tongue invades your mouth.  “<i>Wait, are you two just gooing to fuck right in front of me?</i>\" comes an incredulous voice from somewhere behind the woman you're kissing.  Neither of you pay it any mind and continue to taste, devour, and lavish affection on each other's mouths.  An angry grunt comes once more from the woman you're showing what loves means to, and sounds of a struggle accompany it.");
 	 	outputText("\n\nProper lovemaking does not stop at kissing.  You have to be sure to show a would be thief the whole process.  Your partner is already working on that matter through efforts to free your body from the " + player.armorName + " that contains it.  Not one to be outdone, you begin to remove the familiar top that oh-so-often holds bovine breasts at bay.  With Marble's melons free, she immediately pulls your head down into the great valley of flesh her breasts create.");
@@ -1079,6 +1088,7 @@ package classes.Scenes.NPCs {
 	public function futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock():void
 	{
 		clearOutput();
+		spriteSelect(SpriteDb.s_clara);
 	 	outputText("You call out to Marble and suggest that she should use her new \"appendage\" to punish Clara.  She hesitates for a moment, then nods.  You doubt that you could have ever gotten her to do something like that if she wasn't as worked up as she is.");
 	 	outputText("\n\n\"<i>What new appendage?</i>\" Clara asks in apprehension, a picture of fear now painted across her face.  Marble lifts up her skirt and reveals her growing erection.  \"<i>What the hell?!</i>\" is the response to this revelation.  Under normal circumstances, your mate is filled with trepidation when it comes using her seven inch cock.  Now, she only shows eagerness when she pushes Clara onto her back and positions her sister's legs against her torso.  \"<i>No, no, no, I'm not about to looose my virginity to my sister, I'm not about to looose my virginity to my sister.  DAMN IT MARBLE, STOP!</i>\"");
 	 	outputText("\n\nThe older sister hesitates for a moment, \"<i>Are you sorry for trying to steal " + player.short + " from me?</i>\"");
@@ -1100,6 +1110,7 @@ package classes.Scenes.NPCs {
 	public function calmMurblesFatAssDown():void
 	{
 		clearOutput();
+		marbleScene.marbleSprite();
 	 	outputText("That's enough.  You put your hand on Marble's shoulder and she turns to you in surprise.  Her body is still shaking with barely controlled rage, eyes filled with pain and anger mixed together, the flood of tears is just barely kept at bay.  You tell her to calm down and take a deep breath while wrapping your arms tightly around her body.  Instantly her body freezes in place for several moments, then she bursts into tears and ");
 		//if ((PC taller than 6'8" and Marble not cow-morph) or (PC taller than 7'2" and Marble cow-morph))
 		if ((player.tallness >= 80 && flags[kFLAGS.MARBLE_BOVA_LEVEL] < 2) || (player.tallness >= 86 && flags[kFLAGS.MARBLE_BOVA_LEVEL] >= 2))
@@ -1126,6 +1137,7 @@ package classes.Scenes.NPCs {
 	{
 		//Initial check
 		clearOutput();
+		spriteSelect(SpriteDb.s_rathazul);
 	 	outputText("The rather colorful events of the morning seem to have gone largely unnoticed by the elderly rat.  He is uncharacteristically engrossed in the whitish bubbling formula in front of him, so much so that he doesn't actually notice when you and Marble come up to him.  The two of you are surprised that he doesn't address your presence at all.  It's several moments before you clear your throat and announce your presence.  Starting, the camp's alchemist turns to you blinking in confusion for another moment, then addresses you, \"<i>Ah, " + player.short + ", Marble.  Good news, you two!  This will likely be very potent and capable of purifying cow-girls in very small doses.  Even those who have not yet been fed doses of purified LaBova.  However, it may not be effective on those unrelated to you.</i>\"");
 	 	outputText("\n\n\"<i>So does that mean it is ready?</i>\" your mate asks.");
 	 	outputText("\n\n\"<i>No, not quite yet.  The process should be done in about half an hour.  ");
@@ -1148,6 +1160,7 @@ package classes.Scenes.NPCs {
 	public function theFormulaIsDone():void
 	{
 		clearOutput();
+		marbleScene.marbleSprite();
 	 	outputText("Rathazul tells you that the formula is ready, so you head over to Marble to let her know.");
 		//Scene adapted from Rayfire's scene
 	 	outputText("\n\nYou find her sitting on a ruined low stone wall at the edge of camp, still deep in thought.  It takes a few moments for you to scramble up next to her, and you take a seat just a short ways from her.  She gives a hard sigh and fiddles with her brown hair a bit before resuming her long thought. It's not until you tap her shoulder and call out her name that she turns to you with a startled look.  \"<i>S-Sweetie!</i>\" she calls out in a surprised manner and looks up at you, eyes lidded with dried tears.  You ask if she minds you sitting next to her and she agrees half-heartedly.  You both sit in silence for a few minutes before she brings up the courage to even utter a word to you.");
@@ -1245,6 +1258,7 @@ package classes.Scenes.NPCs {
 	public function dealingWithCowCuntPostPurification():void
 	{
 		clearOutput();
+		spriteSelect(SpriteDb.s_clara);
 	 	outputText("Now there is only one more loose end in this whole effort to purify Marble: her sister.");
 	 	outputText("\n\nShe is still laying on the ground, tied up next to the firepit.  Fittingly, a couple of discarded cups lay next to her, and her tea pot lays overturned at her feet.  Your return does not go unnoticed.  \"<i>Finally remembered me, huh?  You damn evil people, do you have any idea what kind of a person I am?</i>\"");
 	 	outputText("\n\n\"<i>The kind who thinks they deserve the world thanks to a parent spoiling them horribly as a child,</i>\" Marble responds.  \"<i>However, you do deserve one thing.  Thank you, sister, for giving me your milk.  I've been purified now, and my milk is safe for anyone to drink.</i>\"");
@@ -1349,6 +1363,7 @@ package classes.Scenes.NPCs {
 	public function purificationQuestFinal():void
 	{
 		clearOutput();
+		marbleScene.marbleSprite();
 	 	outputText("\"<i>It has been quite the morning, hasn't it sweetie?</i>\"  It certainly has been, but at least now, your lover is finally free of her corruption once and for all.");
 	 	outputText("\n\nYou've gained 500 exp for helping Marble attain purity.");
 		//increase exp by x

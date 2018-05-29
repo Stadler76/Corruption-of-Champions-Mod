@@ -25,17 +25,47 @@ package classes.BodyParts
 
 		public var type:Number  = NONE;
 		public var color:String = "no";
+		public var color2:String = "no";
+
+		/**
+		 * Returns a string that describes, what the actual color number (=id) is for.
+		 * e. g.: Dragon Wings main color => "membranes" and secondary color => "bones"
+		 * @param   id  The 'number' of the chosen color (main = color, secondary = color2)
+		 * @return  The resulting description string
+		 */
+		override public function getColorDesc(id:int):String
+		{
+			switch (type) {
+				case DRACONIC_SMALL:
+				case DRACONIC_LARGE:
+					switch (id) {
+						case COLOR_ID_MAIN:
+							return "membranes";
+
+						case COLOR_ID_2ND:
+							return "bones";
+
+						default: 
+							return "";
+					}
+
+				default:
+					return "";
+			}
+		}
 
 		public function restore():void
 		{
 			type  = NONE;
 			color = "no";
+			color2 = "no";
 		}
 
 		public function setProps(p:Object):void
 		{
 			if (p.hasOwnProperty('type'))  type  = p.type;
 			if (p.hasOwnProperty('color')) color = p.color;
+			if (p.hasOwnProperty('color2')) color2 = p.color2;
 		}
 
 		public function setAllProps(p:Object):void
@@ -57,6 +87,36 @@ package classes.BodyParts
 		override public function applyDye(_color:String):void
 		{
 			color = _color;
+		}
+
+		override public function canOil():Boolean
+		{
+			return [DRACONIC_SMALL, DRACONIC_LARGE].indexOf(type) !== -1;
+		}
+
+		override public function hasOilColor(_color:String):Boolean
+		{
+			return color === _color;
+		}
+
+		override public function applyOil(_color:String):void
+		{
+			color = _color;
+		}
+
+		override public function canOil2():Boolean
+		{
+			return [DRACONIC_SMALL, DRACONIC_LARGE].indexOf(type) !== -1;
+		}
+
+		override public function hasOil2Color(_color2:String):Boolean
+		{
+			return color2 === _color2;
+		}
+
+		override public function applyOil2(_color2:String):void
+		{
+			color2 = _color2;
 		}
 	}
 }

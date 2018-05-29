@@ -83,8 +83,7 @@ package classes.Items
 		public const L_WHTEG:Consumable = new WhiteEgg(WhiteEgg.LARGE);
 		//Others
 		public const DRGNEGG:Consumable = new EmberEgg();
-		public const NPNKEGG:Consumable = new NeonPinkEgg();
-		public const NPEPREG:Consumable = new NeonPinkEgg(true);
+		public const NPNKEGG:NeonPinkEgg = new NeonPinkEgg();
 
 //		FOOD & BEVERAGES
 		public const BC_BEER:BlackCatBeer = new BlackCatBeer();

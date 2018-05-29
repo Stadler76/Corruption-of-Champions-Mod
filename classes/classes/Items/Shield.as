@@ -38,7 +38,17 @@ public class Shield extends Useable //Equipable
 		public function get perk():String { return _perk; }
 		
 		public function get name():String { return _name; }
-		
+
+		override public function get value():Number {
+			return this._value * (1 + (_tier / 2));
+		}
+
+		override public function get shortName():String {
+			var sn:String = this._shortName;
+			if (_tier > 0) sn += "+" + _tier;
+			return sn;
+		}
+
 		override public function get description():String {
 			var desc:String = _description;
 			switch(_tier) {

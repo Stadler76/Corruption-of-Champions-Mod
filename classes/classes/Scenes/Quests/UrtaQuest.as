@@ -273,11 +273,11 @@ public function startUrtaQuest():void {
 	player.level = 15;
 	player.teaseLevel = 4;
 	//Apply new game plus modifier.
-	player.level += (player.newGamePlusMod() * 30);
-	player.str += (player.newGamePlusMod() * 25);
-	player.tou += (player.newGamePlusMod() * 25);
-	player.spe += (player.newGamePlusMod() * 25);
-	player.inte += (player.newGamePlusMod() * 25);
+	player.level += player.ascensionFactor(30);
+	player.str *= 1 + player.ascensionFactor(0.25);
+	player.tou *= 1 + player.ascensionFactor(0.25);
+	player.spe *= 1 + player.ascensionFactor(0.25);
+	player.inte *= 1 + player.ascensionFactor(0.25);
 	player.HP = player.maxHP();
 	player.fatigue = 0;
 
