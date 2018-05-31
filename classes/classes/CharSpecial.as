@@ -369,6 +369,8 @@ package classes
 			player.ballSize = 8;
 			//A virility boost would be nice too if possible.
 			player.cumMultiplier = 50;
+			player.createPerk(PerkLib.HistoryFighter, 0, 0, 0, 0);
+			player.createPerk(PerkLib.HistoryWhore, 0, 0, 0, 0);
 		}
 		
 		private function customCody():void {
@@ -1108,6 +1110,7 @@ package classes
 			//She has a demonic tail and small demonic wings thanks to some encounters early on with succubus milk (that stuff is delicious!) but is otherwise still human.
 			player.wings.type = Wings.BAT_LIKE_LARGE;
 			player.tail.type = Tail.DEMONIC;
+			flags[kFLAGS.HISTORY_PERK_SELECTED] = 0;
 			//I feel really weird talking about all this, so if there's anything you need to change or can't do, or if I totally misinterpreted this, just shoot me an email! jordie.wierenga@gmail.com . Thanks in advance... I'm a big fan. "	Prismere
 		}
 		
@@ -1128,6 +1131,7 @@ package classes
 			player.thickness = 25;
 			player.tone = 65;
 			player.tallness = 65;
+			player.createPerk(PerkLib.HistorySlacker, 0, 0, 0, 0);
 		}
 		
 		private function customRope():void {

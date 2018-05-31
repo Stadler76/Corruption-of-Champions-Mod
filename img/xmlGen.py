@@ -3,70 +3,36 @@ import io
 import sys
 import re
 import os
-import os.path
+
 
 def getImageIDList():
-
-	r"init01Names\([\"']\w*[\"'], [\"']\w*[\"'], [\"'](\w+)[\"'], [\"']\w?[\"'], plural=false)"
-
 	imgTagRe        = re.compile(r"images\.showImage\([\"']([\w\d-]+)[\"'](?:,.*?)?\)")
 	monsterNameRe   = re.compile(r"this\.imageName\s?=\s?[\"'](\w+)[\"'];?")
 	ret = set()
 
 	scanPath = "../"
-	excludeDirs = set(["build-dep", "test", "bit101"])
+	excludeDirs = {"build-dep", "test", "bit101"}
 	for root, dirs, files in os.walk(scanPath, topdown=True):
 		dirs[:] = [d for d in dirs if d not in excludeDirs]
-		#print(root, dir#, files)
+		files[:] = [f for f in files if f.endswith(".as")]
 		for fileN in files:
-			if fileN.endswith(".as"):
-				wholePath = os.path.join(root, fileN)
-				print("Scanning file: ", wholePath)
-				with io.open(wholePath, "r", encoding="utf8") as fp:
-					cont = fp.read()
-					items = set(imgTagRe.findall(cont))
-
-					ret.update(items)
-
-					monsterNames = monsterNameRe.findall(cont)
-					if monsterNames:
-						for name in monsterNames:
-							name = "monster-%s" % name
-							ret.add(name)
-
-	ret.add("monster-hollispawn")  # Hack because matching this would be a giant pain in the ass
-	ret.add("monster-cockatricewithwings")  # Didn't want to add a class WingedCockatrice extends Cockatrice just for that
+			wholePath = os.path.join(root, fileN)
+			print("Scanning file: ", wholePath)
+			with io.open(wholePath, "r", encoding="utf8") as fp:
+				cont = fp.read()
+				ret.update(set(imgTagRe.findall(cont)))
+				for name in monsterNameRe.findall(cont):
+					ret.add("monster-%s" % name)
 
 	print("Found %s image IDs" % len(ret))
 	return ret
 
 
 def genFile():
-
-
-	imageIDs = getImageIDList()
-	imageIDs = list(imageIDs)
+	imageIDs = list(getImageIDList())
 	imageIDs.sort()
 
-	extensions = ["png", "jpg", "jpeg", "gif"]
-
-
-
-	#print(imageIDs)
-
-	# Crapping out XML using string manipulation because FUCK YOU
-	ret = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-	ret += "	<Images>\n"
-	for item in imageIDs:
-		for extension in extensions:
-			itemClean = item.rstrip().lstrip()
-			ret += "		<Image id=\"%s\">./img/%s.%s</Image>\n" % (itemClean, itemClean, extension)
-
-	ret += "</Images>"
-	#print(ret)
-
-	ret = ""
-	ret += '<?xml version="1.0" encoding="utf-8"?>\n'
+	ret = '<?xml version="1.0" encoding="utf-8"?>\n'
 	ret += '	<Images>\n'
 	ret += '		<ImageList>\n'
 	for imId in imageIDs:
@@ -76,17 +42,14 @@ def genFile():
 		ret += '			</ImageSet>\n'
 	ret += '		</ImageList>\n'
 	ret += '		<ExtensionList>\n'
-	ret += '			<ExtensionType>png</ExtensionType>\n'
-	ret += '			<ExtensionType>jpg</ExtensionType>\n'
-	ret += '			<ExtensionType>jpeg</ExtensionType>\n'
-	ret += '			<ExtensionType>gif</ExtensionType>\n'
+	for extension in ["png", "jpg", "jpeg", "gif"]:
+		ret += '			<ExtensionType>%s</ExtensionType>\n' % extension
 	ret += '		</ExtensionList>\n'
-
 	ret += '	</Images>\n'
-
 
 	with io.open("images.xml", "w", encoding="utf8") as fp:
 		fp.write(ret)
+
 
 if __name__ == "__main__":
 	genFile()

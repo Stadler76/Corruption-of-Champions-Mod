@@ -18,13 +18,6 @@ package classes.Scenes.Areas.HighMountains
 		public var spellCostTailSwipe:int  = 25;
 		public var spellCostSandAttack:int = 15;
 
-		public function wingify():void
-		{
-			wings.type = Wings.FEATHERED_LARGE;
-			spe += 10;
-			imageName += "withwings";
-		}
-
 		//special 1: cockatrice compulsion attack
 		//(Check vs. Intelligence/Sensitivity, loss = recurrent speed loss each
 		//round, one time lust increase):

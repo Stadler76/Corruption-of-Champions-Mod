@@ -18,11 +18,12 @@ package classes.Scenes.Areas.HighMountains {
 
 		//Intros and Fight Texts.
 		public function greeting():void {
-			var cockatrice:Cockatrice = new Cockatrice();
+			var cockatrice:Cockatrice;
 			//spriteSelect(75);
 			clearOutput();
 			credits.authorText = "MissBlackthorne";
 			if (flags[kFLAGS.TIMES_ENCOUNTERED_COCKATRICES] == 0) { //First encounter:
+				cockatrice = new Cockatrice();
 				outputText("As you follow the trails in the high mountains, the rocky terrain becomes less stable, the path devolving into a series of loose crags with gravel like sediment surrounding large boulders and rough stepping stone-like structures. "
 				          +"As you cling to the rock face trying to step from one rock to another you see something in the distance. "
 				          +"A figure, perched on one of the outcroppings with surprising ease.\n\n");
@@ -59,8 +60,12 @@ package classes.Scenes.Areas.HighMountains {
 				StareMonster.speedReduce(player, 5);
 			}
 			else { //Standard encounter:
-				if (rand(100) < 40) //40% chance of wings
-					cockatrice.wingify();
+				if (rand(100) < 40) {
+					//40% chance of wings
+					cockatrice = new WingedCockatrice();
+				} else {
+					cockatrice = new Cockatrice();
+				}
 				outputText(images.showImage("monster-cockatrice"));
 				outputText("As you once again climb high in the mountains, you spend some time catching your breath on a rocky plateau to avoid the loose gravelly ground. "
 				          +"You see a brightly coloured creature in the distance, ");

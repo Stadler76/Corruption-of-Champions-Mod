@@ -939,6 +939,16 @@ package classes
 		}
 		return perk(counter).value4;
 	}
+
+	public function hasHistoryPerk():Boolean
+	{
+		for each (var p:Object in PerkLists.HISTORY) {
+			if (hasPerk(p.perk)) {
+				return true;
+			}
+		}
+		return false;
+	}
 		
 		/*
 		

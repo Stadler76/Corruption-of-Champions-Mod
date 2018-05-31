@@ -850,22 +850,20 @@ package classes {
 			var totalStartingPerks:int = 0;
 			var button:int = 0;
 			//Attribute Perks
-			var buttonTexts:Array = ["Strong", "Tough", "Fast", "Smarts", "Libido", "Touch", "Perversion"];
-			var buttonPerks:Array = [PerkLib.Strong, PerkLib.Tough, PerkLib.Fast, PerkLib.Smart, PerkLib.Lusty, PerkLib.Sensitive, PerkLib.Pervert];
+			var endowmentPerks:Array = PerkLists.ENDOWMENT_ATTRIBUTE;
 			//Endowment Perks
 			if (player.hasCock()) {
-				buttonTexts.push("Big Cock", "Lots of Jizz");
-				buttonPerks.push(PerkLib.BigCock, PerkLib.MessyOrgasms);
+				endowmentPerks = endowmentPerks.concat(PerkLists.ENDOWMENT_COCK);
 			}
 			if (player.hasVagina()) {
-				buttonTexts.push("Big Breasts", "Big Clit", "Fertile", "Wet Vagina");
-				buttonPerks.push(PerkLib.BigTits, PerkLib.BigClit, PerkLib.Fertile, PerkLib.WetPussy);
+				endowmentPerks = endowmentPerks.concat(PerkLists.ENDOWMENT_VAGINA);
 			}
 			//Add buttons
-			for (var i:int = 0; i < buttonTexts.length; i++) {
-				if (player.findPerk(buttonPerks[i]) < 0) addButton(button++, buttonTexts[i], confirmEndowment, buttonPerks[i]);
-				else {
-					addButtonDisabled(button++, buttonTexts[i], "You already have this starting perk.");
+			for each (var p:Object in endowmentPerks) {
+				if (!player.hasPerk(p.perk)) {
+					addButton(button++, p.text, confirmEndowment, p.perk);
+				} else {
+					addButtonDisabled(button++, p.text, "You already have this starting perk.");
 					totalStartingPerks++;
 				}
 			}
@@ -985,13 +983,11 @@ package classes {
 			var totalHistoryPerks:int = 0;
 			var button:int = 0;
 			//Attribute Perks
-			var buttonTexts:Array = ["Alchemy", "Fighting", "Fortune", "Healing", "Religion", "Schooling", "Slacking", "Slutting", "Smithing", "Whoring"];
-			var buttonPerks:Array = [PerkLib.HistoryAlchemist, PerkLib.HistoryFighter, PerkLib.HistoryFortune, PerkLib.HistoryHealer, PerkLib.HistoryReligious, PerkLib.HistoryScholar, PerkLib.HistorySlacker, PerkLib.HistorySlut, PerkLib.HistorySmith, PerkLib.HistoryWhore];
-			for (var i:int = 0; i < buttonTexts.length; i++) {
-				if (player.findPerk(buttonPerks[i]) < 0)
-					addButton(button++, buttonTexts[i], confirmHistory, buttonPerks[i]);
+			for each (var p:Object in PerkLists.HISTORY) {
+				if (!player.hasPerk(p.perk))
+					addButton(button++, p.text, confirmHistory, p.perk);
 				else {
-					addButtonDisabled(button++, buttonTexts[i], "You already have this history perk.");
+					addButtonDisabled(button++, p.text, "You already have this history perk.");
 					totalHistoryPerks++;
 				}
 			}
