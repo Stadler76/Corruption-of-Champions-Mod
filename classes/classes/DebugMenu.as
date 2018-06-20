@@ -1200,7 +1200,7 @@ package classes
 			[Claws.SALAMANDER,"(3) SALAMANDER"],
 			[Claws.CAT,"(4) CAT"],
 			[Claws.DOG,"(5) DOG"],
-			[Claws.RAPTOR,"(6) RAPTOR"],
+			[Claws.FOX,"(6) FOX"],
 			[Claws.MANTIS,"(7) MANTIS"],
 		];
 		private static const TAIL_TYPE_CONSTANTS:Array  = [
@@ -1651,7 +1651,7 @@ package classes
 		
 		private function saveFlag(flagId:int = 0):void {
 			var temp:* = Number(mainView.nameBox.text);
-			if (temp is Number || temp is int) flags[flagId] = temp;
+			if (!isNaN(temp)) flags[flagId] = temp;
 			else flags[flagId] = mainView.nameBox.text;
 			flagEditor();
 		}

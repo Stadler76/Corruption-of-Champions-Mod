@@ -23,7 +23,7 @@ package classes.Scenes.Dungeons {
 		public var MAP_ANZUPALACE_F2:Array;
 		public var MAP_ANZUPALACE_F3:Array;
 		public var MAP_ANZUPALACE_F4:Array;
-		public var MAP_HELLHOUNDLABS:Array;
+		public var MAP_HELLCOMPLEX:Array;
 		public var MAP_DRAGONCITY_F1:Array;
 		public var MAP_DRAGONCITY_B1:Array;
 
@@ -152,9 +152,16 @@ package classes.Scenes.Dungeons {
 				[-1, -2, -1, -2, -1],
 				[-1, -2, 52, -2, -1]];
 			//Hellhound Master Dungeon
-			MAP_HELLHOUNDLABS = [
-				"Hellhound Labs",
-				[]];
+			MAP_HELLCOMPLEX = [
+				"Hellhound Complex",
+				[-1, -2, 74, -2, -1],
+				[-1, -2, -3, -2, -1],
+				[70, -4, 67, -4, 71],
+				[-3, -2, -3, -2, -1],
+				[69, -4, 66, -2, -1],
+				[-1, -2, -3, -2, -1],
+				[-1, -2, 65, -2, -1],
+				[-1, -2, -3, -2, -1]];
 			//Dragon City (Ember Quest)
 			MAP_DRAGONCITY_F1 = [
 				"Dragon City",
@@ -226,6 +233,8 @@ package classes.Scenes.Dungeons {
 					 buildMapDisplay(MAP_DRAGONCITY_F1);
 				else buildMapDisplay(MAP_DRAGONCITY_B1);
 			}
+			else if (kGAMECLASS.dungeonLoc >= 65 && kGAMECLASS.dungeonLoc < 75)
+				buildMapDisplay(MAP_HELLCOMPLEX);
 		}
 
 		public function buildMapDisplay(map:Array):void {

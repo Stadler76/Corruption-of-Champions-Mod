@@ -588,6 +588,12 @@ package classes
 					interpersonStats += "<b>Urta's Status:</b> Ready To Confess Love\n";
 			}
 			
+			if (flags[kFLAGS.AIKO_TIMES_MET] > 0) {
+				interpersonStats  += "<b>Aiko affection</b>: "+flags[kFLAGS.AIKO_AFFECTION]+"\n";
+				if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
+					interpersonStats  += "<b>Aiko corruption</b>: "+flags[kFLAGS.AIKO_CORRUPTION]+"\n";
+			}
+			
 			if (interpersonStats != "")
 				outputText("\n<b><u>Interpersonal Stats</u></b>\n" + interpersonStats);
 			// End Interpersonal Stats

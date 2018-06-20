@@ -159,6 +159,7 @@ package classes
 			dogPlayer.face.type = Face.DOG;
 			dogPlayer.ears.type = Ears.DOG;
 			dogPlayer.tail.type = Tail.DOG;
+			dogPlayer.arms.setType(Arms.DOG);
 			dogPlayer.lowerBody.type = LowerBody.DOG;
 			dogPlayer.skin.type = Skin.FUR;
 
@@ -430,6 +431,7 @@ package classes
 			foxPlayer.ears.type = Ears.FOX;
 			foxPlayer.tail.type = Tail.FOX;
 			foxPlayer.lowerBody.type = LowerBody.FOX;
+			foxPlayer.arms.setType(Arms.FOX);
 			foxPlayer.skin.type = Skin.FUR;
 
 			assertThat(foxPlayer.foxScore(), greaterThan(0));
@@ -446,6 +448,7 @@ package classes
 			catPlayer.ears.type = Ears.CAT;
 			catPlayer.tail.type = Tail.CAT;
 			catPlayer.lowerBody.type = LowerBody.CAT;
+			catPlayer.arms.setType(Arms.CAT);
 			catPlayer.skin.type = Skin.FUR;
 
 			assertThat(catPlayer.catScore(), greaterThan(0));

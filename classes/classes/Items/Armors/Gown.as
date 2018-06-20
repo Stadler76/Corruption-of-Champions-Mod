@@ -8,12 +8,15 @@ package classes.Items.Armors
 	import classes.Scenes.BimboProgression;
 	import classes.TimeAwareInterface;
 	import classes.lists.Gender;
+	import classes.lists.BreastCup;
 	import classes.CoC;
 
 	public class Gown extends Armor implements TimeAwareInterface {
 
 		public function Gown():void {
 			super("FrsGown","FrsGown","Forest Gown","A Forest Gown.",1,10,"This the very earthy gown commonly worn by dryads.   It is made from a mixture of plants.   The predominate fabric looks like a weave of fresh grass.   It is decorated by simple flowers that are attached to it.   Strangely, everything seems alive like it was still planted.   There must be some peculiar magic at work here.","Light");
+		
+			CoC.timeAwareClassAdd(this);
 		}
 
 		override public function useText():void{ //Produces any text seen when equipping the armor normally
@@ -34,7 +37,7 @@ package classes.Items.Armors
 			if (kGAMECLASS.player.hasCock()) 
 				outputText("You notice the bulge from [cock] in the folds of the dress and wish it wasn't there.\n");
 
-			CoC.timeAwareClassAdd(this);
+			
 		}
 		public function timeChangeLarge():Boolean { return false; }
 		public function timeChange():Boolean {
@@ -123,22 +126,30 @@ package classes.Items.Armors
 					changed = 1;
 					break;
 
-				case "breasts":
-					outputText("You feel like a beautful flower in your gown.  Dawn approaches and you place your hands on your chest as if expecting them to bloom to greet the rising sun.\n");
-					for (x = 0; x < kGAMECLASS.player.bRows(); x++) {
-						if (kGAMECLASS.player.breastRows[x].breastRating > 4) {
-							kGAMECLASS.player.breastRows[x].breastRating--;
-							outputText("A chill runs against your chest and your boobs become smaller.\n\n");
-							changed = 1;
-						}
-						
+	case "breasts":
+		outputText("You feel like a beautful flower in your gown.  Dawn approaches and you place your hands on your chest as if expecting your nipples to bloom to greet the rising sun.\n");
+		
+				if (kGAMECLASS.player.bRows() > 1) {
+					x = 1;
+					outputText("Some of your breasts shrink back into your body leaving you with just two.");
+					while (x < kGAMECLASS.player.bRows()) {
+						if (kGAMECLASS.player.breastRows[x].breastRating < 1) kGAMECLASS.player.breastRows[x].breastRating = 1;
+						x++;
 					}
-					if (kGAMECLASS.player.breastRows[0].breastRating < 3) {
-						kGAMECLASS.player.breastRows[0].breastRating++;
-						outputText("Heat builds in chest and your boobs become bigger.\n\n  <b>You now have [breasts]</b>");
+				if (kGAMECLASS.player.breastRows[0].breastRating > BreastCup.D )
+					{
+						kGAMECLASS.player.breastRows[0].breastRating = BreastCup.D;
+						outputText("A chill runs against your chest and <b>your boobs become smaller. You now have [breasts]</b>\n\n");
+						changed = 1;	
+					}
+					
+				if ( kGAMECLASS.player.smallestTitSize() < BreastCup.D )
+					{
+						kGAMECLASS.player.breastRows[0].breastRating = BreastCup.D;
+						outputText("Heat builds in chest and your boobs become bigger.\n\n<b>You now have [breasts]</b>");
 						changed = 1;
 					}
-					break;
+				}
 
 				case "girlyness":
 					text = kGAMECLASS.player.modFem(70, 2);

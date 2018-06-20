@@ -377,6 +377,20 @@ package classes.Items.Consumables
 				changes++;
 				player.face.type = Face.FOX;
 			}
+			//Arms
+			if (player.arms.type !== Arms.FOX && player.isFurry() && player.tail.type === Tail.FOX && player.lowerBody.type === LowerBody.FOX && rand(4) === 0 && changes < changeLimit)
+			{
+				outputText("\n\nWeakness overcomes your arms, and no matter what you do, you can’t muster the strength to raise or move them."
+				          +" Did the berry have some drug-like effects? Sitting on the ground, you wait for the limpness to end."
+				          +" As you do so, you realize that the bones at your hands are changing, as well as the muscles on your arms."
+				          +" They’re soon covered, from the shoulders to the tip of your digits, on a layer of soft,"
+				          +" fluffy [if (hasFurryUnderBody)[underBody.furColor]|[furColor]] fur. Your hands gain pink,"
+				          +" padded paws where your palms were once, and your nails become short claws, not sharp enough to tear flesh,"
+				          +" but nimble enough to make climbing and exploring easier."
+				          +" <b>Your arms have become like those of a fox!</b>");
+				player.arms.setType(Arms.FOX);
+				changes++;
+			}
 			if (player.tone > 40 && changes < changeLimit && rand(2) === 0) {
 				outputText("\n\nMoving brings with it a little more jiggle than you're used to.  You don't seem to have gained weight, but your muscles seem less visible, and various parts of you are pleasantly softer.");
 				player.tone -= 4;

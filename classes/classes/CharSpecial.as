@@ -1634,7 +1634,7 @@ package classes
 			
 			player.face.type = Face.FOX;
 			player.ears.type = Ears.FOX;
-			player.arms.claws.type = Claws.DOG;
+			player.arms.setType(Arms.FOX);
 			player.arms.claws.tone = "ivory";
 			player.eyes.type = Eyes.DRAGON;
 			player.lowerBody.type = LowerBody.FOX;
@@ -1644,6 +1644,8 @@ package classes
 			player.horns.type = Horns.DRACONIC_X2; // draconic horns adds to your exotic look, counts towards dragon score and keeps your tentacle hair out of your face! and your partners can use them as handles on occasions, letting your delicate ears uncrumpled!
 			player.horns.value = 8;
 			player.wings.type = Wings.DRACONIC_LARGE; // wings! to fly!
+			player.wings.color = "snow white";
+			player.wings.color2 = "snow white";
 			
 			player.str += -10; // strength? not a kitsune way, besides, you are small and really neglected physical training
 			player.tou += 0; // still, your dragon blood makes you surprisingly tough for your size and condition
@@ -1653,35 +1655,35 @@ package classes
 			player.cor += 31; // have high initial corruption, but also have religious history to meditate
 			
 			// almost compulsive hoarder, start with backpack, chests and racks... never enough storage space
-			if (player.findPerk(PerkLib.StrongBack) < 0) { player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0); player.itemSlot4.unlocked = true; }
-			if (player.findPerk(PerkLib.StrongBack2) < 0) { player.createPerk(PerkLib.StrongBack2, 0, 0, 0, 0); player.itemSlot5.unlocked = true; }
+			if (player.createPerkIfNotHasPerk(PerkLib.StrongBack)) player.itemSlot4.unlocked = true;
+			if (player.createPerkIfNotHasPerk(PerkLib.StrongBack2)) player.itemSlot5.unlocked = true;
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 5, 0, 0, 0);	
 			
 			// have lots of different traits
-			if (player.findPerk(PerkLib.HistoryReligious) < 0) player.createPerk(PerkLib.HistoryReligious, 0, 0, 0, 0); // abandoned religion after obtaining nine tails
-			if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
-			if (player.findPerk(PerkLib.HistoryAlchemist) < 0) player.createPerk(PerkLib.HistoryAlchemist, 0, 0, 0, 0); // and resorted to your hobby - alchemy
-			if (player.findPerk(PerkLib.TransformationResistance) < 0) player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);  // tf resistance and alchemist are actually mutually nullifying each other - this is flavor mostly
-			if (player.findPerk(PerkLib.HistoryHealer) < 0) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);  // with religious and alchemical knowledge you are skilled healer
-			if (player.findPerk(PerkLib.Medicine) < 0) player.createPerk(PerkLib.Medicine, 0, 0, 0, 0); // able to treat wounds and poisoning alike
-			if (player.findPerk(PerkLib.AscensionWisdom) < 0) player.createPerk(PerkLib.AscensionWisdom, 5, 0, 0, 0); // learns quickly
-			if (player.findPerk(PerkLib.AscensionTolerance) < 0) player.createPerk(PerkLib.AscensionTolerance, 10, 0, 0, 0); // but in the same time your enlightment keeps you from really turning to demon, so corruption level does not really affect you much
-			if (player.findPerk(PerkLib.Fast) < 0) player.createPerk(PerkLib.Fast, 0.25, 0, 0, 0); // gaining speed is pain in ass... this one is not for history flavor
-			if (player.findPerk(PerkLib.Smart) < 0) player.createPerk(PerkLib.Smart, 0.25, 0, 0, 0); // int is easy to get, just for history flavor
-			if (player.findPerk(PerkLib.Lusty) < 0) player.createPerk(PerkLib.Lusty, 0.25, 0, 0, 0); // have a lust problem
-			if (player.findPerk(PerkLib.HotBlooded) < 0) player.createPerk(PerkLib.HotBlooded, 20, 0, 0, 0); // even with your willpower and religious training you sometimes struggling to restrain your impulse
-			if (player.findPerk(PerkLib.Pervert) < 0) player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0); // you always ready for something VERY lewd
-			if (player.findPerk(PerkLib.Masochist) < 0) player.createPerk(PerkLib.Masochist, 0, 0, 0, 0); // with your knowledge of healing and innatural body it is easy for you to enjoy things which would be really painful for others
-			if (player.findPerk(PerkLib.Sadist) < 0) player.createPerk(PerkLib.Sadist, 0, 0, 0, 0); // and you are always ready to return favor
-			if (player.findPerk(PerkLib.SensualLover) < 0) player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0); // still you tend to care about mutual enjoyment - there are difference between extreme entertainment and torture, and you are mischievous, not evil
-			if (player.findPerk(PerkLib.SpellcastingAffinity) < 0) player.createPerk(PerkLib.SpellcastingAffinity, 80, 0, 0, 0); // very strong magic affinity, can even be effective as mage without robe
-			if (player.findPerk(PerkLib.Channeling) < 0) player.createPerk(PerkLib.Channeling, 0, 0, 0, 0); // despite strong magic affinity wasn't actually much interested in combat magic before, so only can use fox fire as offensive spell
-			if (player.findPerk(PerkLib.Spellpower) < 0) player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
+			player.createPerkIfNotHasPerk(PerkLib.HistoryReligious); // abandoned religion after obtaining nine tails
+			player.createPerkIfNotHasPerk(PerkLib.EnlightenedNinetails);
+			player.createPerkIfNotHasPerk(PerkLib.HistoryAlchemist); // and resorted to your hobby - alchemy
+			player.createPerkIfNotHasPerk(PerkLib.TransformationResistance);  // tf resistance and alchemist are actually mutually nullifying each other - this is flavor mostly
+			player.createPerkIfNotHasPerk(PerkLib.HistoryHealer);  // with religious and alchemical knowledge you are skilled healer
+			player.createPerkIfNotHasPerk(PerkLib.Medicine); // able to treat wounds and poisoning alike
+			player.createPerkIfNotHasPerk(PerkLib.AscensionWisdom, 5); // learns quickly
+			player.createPerkIfNotHasPerk(PerkLib.AscensionTolerance, 10); // but in the same time your enlightment keeps you from really turning to demon, so corruption level does not really affect you much
+			player.createPerkIfNotHasPerk(PerkLib.Fast, 0.25); // gaining speed is pain in ass... this one is not for history flavor
+			player.createPerkIfNotHasPerk(PerkLib.Smart, 0.25); // int is easy to get, just for history flavor
+			player.createPerkIfNotHasPerk(PerkLib.Lusty, 0.25); // have a lust problem
+			player.createPerkIfNotHasPerk(PerkLib.HotBlooded, 20); // even with your willpower and religious training you sometimes struggling to restrain your impulse
+			player.createPerkIfNotHasPerk(PerkLib.Pervert, 0.25); // you always ready for something VERY lewd
+			player.createPerkIfNotHasPerk(PerkLib.Masochist); // with your knowledge of healing and innatural body it is easy for you to enjoy things which would be really painful for others
+			player.createPerkIfNotHasPerk(PerkLib.Sadist); // and you are always ready to return favor
+			player.createPerkIfNotHasPerk(PerkLib.SensualLover); // still you tend to care about mutual enjoyment - there are difference between extreme entertainment and torture, and you are mischievous, not evil
+			player.createPerkIfNotHasPerk(PerkLib.SpellcastingAffinity, 80); // very strong magic affinity, can even be effective as mage without robe
+			player.createPerkIfNotHasPerk(PerkLib.Channeling); // despite strong magic affinity wasn't actually much interested in combat magic before, so only can use fox fire as offensive spell
+			player.createPerkIfNotHasPerk(PerkLib.Spellpower);
 			// have some racial traits
-			if (player.findPerk(PerkLib.Dragonfire) < 0) player.createPerk(PerkLib.Dragonfire, 0, 0, 0, 0);				
+			player.createPerkIfNotHasPerk(PerkLib.Dragonfire);
 			// some experiments with your body gave unusual results
-			if (player.findPerk(PerkLib.LustyRegeneration) < 0) player.createPerk(PerkLib.LustyRegeneration, 0, 0, 0, 0); // some of your experiments had nice returns
-			if (player.findPerk(PerkLib.Incorporeality) < 0) player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);	// some was... strange
+			player.createPerkIfNotHasPerk(PerkLib.LustyRegeneration); // some of your experiments had nice returns
+			player.createPerkIfNotHasPerk(PerkLib.Incorporeality); // some was... strange
 			// Metamorph, Magic Metabolism and Puppeteer suggested perks would be also nice addition to character, but they are not implemented yet
 			
 			if (player.armor == ArmorLib.NOTHING || player.armor == armors.C_CLOTH) player.setArmor(armors.KIMONO);

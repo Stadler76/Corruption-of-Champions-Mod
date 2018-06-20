@@ -156,8 +156,6 @@ package classes.Items.Consumables
 			if (player.hasNonSharkRearBody() && changes < changeLimit && rand(5) === 0) mutations.restoreRearBody(tfSource);
 			//Ovi perk loss
 			if (rand(5) === 0) mutations.updateOvipositionPerk(tfSource);
-			//Restore arms to become human arms again
-			if (rand(4) === 0) mutations.restoreArms(tfSource);
 			//Remove feathery hair
 			mutations.removeFeatheryHair();
 			//if (type !== 2 && type !== 4 && type !== 5) outputText("\n");
@@ -723,6 +721,20 @@ package classes.Items.Consumables
 				changes++;
 				player.tail.type = Tail.DOG;
 				outputText("<b>You now have a dog-tail.</b>");
+			}
+			//Arms
+			if (player.arms.type !== Arms.DOG && player.isFurry() && player.tail.type === Tail.DOG && player.lowerBody.type === LowerBody.DOG && rand(4) === 0 && changes < changeLimit)
+			{
+				outputText("\n\nWeakness overcomes your arms, and no matter what you do, you can’t muster the strength to raise or move them."
+				          +" Did the pepper have some drug-like effects? Sitting on the ground, you wait for the limpness to end."
+				          +" As you do so, you realize that the bones at your hands are changing, as well as the muscles on your arms."
+				          +" They’re soon covered, from the shoulders to the tip of your digits, on a layer of soft,"
+				          +" fluffy [if (hasFurryUnderBody)[underBody.furColor]|[furColor]] fur."
+				          +" Your hands gain pink, padded paws where your palms were once, and your nails become short claws,"
+				          +" not sharp enough to tear flesh, but nimble enough to make climbing and exploring easier."
+				          +" <b>Your arms have become like those of a dog!</b>");
+				player.arms.setType(Arms.DOG);
+				changes++;
 			}
 			// Remove gills
 			if (rand(4) === 0 && player.hasGills() && changes < changeLimit) mutations.updateGills();

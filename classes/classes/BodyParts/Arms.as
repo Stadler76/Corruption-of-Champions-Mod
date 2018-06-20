@@ -19,6 +19,9 @@ package classes.BodyParts
 		public static const COCKATRICE:int =   7;
 		public static const RED_PANDA:int  =   8;
 		public static const FERRET:int     =   9;
+		public static const CAT:int        =  10;
+		public static const DOG:int        =  11;
+		public static const FOX:int        =  12;
 
 		private var _creature:Creature;
 		public var type:Number = HUMAN;
@@ -39,6 +42,9 @@ package classes.BodyParts
 				case COCKATRICE: updateClaws(Claws.COCKATRICE); break;
 				case RED_PANDA:  updateClaws(Claws.RED_PANDA);  break;
 				case FERRET:     updateClaws(Claws.FERRET);     break;
+				case CAT:        updateClaws(Claws.CAT);        break;
+				case DOG:        updateClaws(Claws.DOG);        break;
+				case FOX:        updateClaws(Claws.FOX);        break;
 
 				case HUMAN:
 				case HARPY:

@@ -5,15 +5,15 @@ package classes.Scenes.Areas.HighMountains
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	
-	public class MinervaCorruption 
+	public class MinervaCorruption extends BaseContent
 	{
-		//I might not work on this, unfortunately.
 		public function MinervaCorruption() 
 		{
 			
 		}
+		
 		/*
-		Minerva appearance (corrupted) http://i49.tinypic.com/2vbr1ax.jpg
+				Minerva appearance (corrupted) http://i49.tinypic.com/2vbr1ax.jpg
 Corrupted Minerva at first glance looks like some demonic looking being, her skin is Ultraviolet with a deep red belly, inner thighs, neck as well as her stripes. Minerva’s eyes change from electric blue to a dark blood red  her sclera grow even darker, turing into two black pits accentuating the new color of her eyes.
 
 Her hair and feathers also change, her feathers turning pure black with her wrings growing larger. Minerva’s red hair gaining black streaks in it
@@ -33,79 +33,142 @@ Offspring notes.
 
 only corrupt siren daughters that the PC themselves father or birth stay at the tower and count toward the number of siren daughters
 
+		 */
+		
+		private function minervaRomanced():Boolean {
+			return getGame().highMountains.minervaScene.minervaRomanced();
+		}
+		
+		public function introToCorruptMinerva():void {
+			clearOutput();
+			if (minervaRomanced()) { //Minerva is your love!
+				outputText("You grin and approach Minerva with devilish intent. The tall redhead blushes and smiles at the sight of you, clearly very happy to see you after the romantic encounter you had earlier. As soon as she notices your grin, she giggles and give you a sly look, believing she knows of your intentions. “Well, well, well, someone is perky today; happy to see your beloved siren?” she asks playfully, clearly having no idea what you have planned.");
+				outputText("\n\nAs if to answer her you slide an arm around her waist, grab a handful of her curvy rear and pull her close to you, giving her a squeeze, eliciting a squeak from her and causing her blush to deepen. You spin the most flattering comments you can devise,  your words working their magic on the shark harpy. She smiles and giggles to you, before pulling you into a hug and kissing you deeply, her tantalisingly long tongue sliding into your mouth and around your own.");
+				outputText("\n\nAfter a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. [if pc corruption is 50-60 use this: A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you like this and trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 60-80 use this: A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 80-100 use this: You know it’s wrong to trick such a sweet woman that loves you like this, but fortunately for you your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.] You reach into your pack and pull out a red bubbling vial and show it to your companion. In a preemptive act of cunning you have scratched off its label to hide its intentions.");
+				outputText("\n\nMinerva looks at it curiously and with a bit of nervousness. “What’s that, love? Is that one of your spoils from battles with the beasts of the land?” she asks you, clearly wondering why you would show her something like that. You shake your head and tell her it’s something you had cooked up by an alchemist you know, something that would make your already passionate lovemaking even more amazing and that she told you the two of you could add it to the pure spring and take a bath in the new mixture. You assure her that it's safe and won't cause any harm to the spring.");
+				if (player.inte < 50) { //Not smart enough, take you back.
+					outputText("\n\nAs you explain what you have in mind and show Minerva the potion, she looks at you with worry and bites her pierced lip slowly. “I don't know... I don't think it would be good to chance it. The spring is too important to risk exposing it to things from the corruption-infested outside world.” She leans in and nuzzles you gently. “I'm sorry love. I just can’t risk it.” She says, as she gently pushes the vial back into your hands.");
+					doNext(createCallBackFunction(getGame().highMountains.minervaScene.genericMenu, true));
+					return;
+				}
+				else { //Success!
+					outputText("\n\nYour explanation of the situation as well as the pros of using the vial’s contents seems to work. Making sure to calm the worried siren by telling her that you worked with an expert alchemist on this to ensure it would be safe for you doesn’t hurt either. As you intelligently speak about the delights of using the vial, Minerva’s face brightens more and more until she is grinning widely and her eyes are shining brightly like precious gems. Without waiting, Minerva grabs the vial and looks it over. “It will make things even better, huh? Well, what are we waiting for, " + player.mf("stud", "sexy") + "?” she asks, but doesn't wait for the answer before practically bouncing over to her pure spring and uncorking the vial. She sniffs it, smelling the strongly sweet-scented potion before pouring the roiling red liquid into the pool.");
+					outputText("\n\nThe new fluid turns the spring cloudy red for a moment, before settling into the pure water and giving it a very slight, reddish tinge. The new lust-enhancing steam starts flowing off the water and mixes with the air. You can already feel its effects seeping into you, first causing a tingling on your skin, the a heat surges in your loins, your [player cock] swelling in your [player armor] / your [player pussy] quivering and grow wet. If this is what's happening to you so soon, Minerva must been feeling much more. Licking your lips, you approach your shark-harpy and pull her against you. Kissing her neck, you whisper to her, suggesting that the two of you take that bath now.");
+					outputText("\n\nMinerva gulps and looks over to you with a blushing face. She then smiles and nods before pulling away just long enough to strip her tube top and short shorts off and step into the soothing waters. The tall redhead looks over her shoulder, beckoning for you to join her.");
+					dynStats("cor", 1);
+					player.destroyItems(consumables.F_DRAFT, 1);
+					flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = 1; //The start of corruption.
+					doNext(createCallBackFunction(getGame().highMountains.minervaScene.genericMenu, true));
+				}
+			}
+			else { //Or not? Just friends...
+				outputText("Smirking, you approach Minerva, who smiles at you softly and looks between you and the floor. Clearly she still has feelings for you despite your rejection, something that will greatly aid you in what you want to do with her. You look the tall, enamored siren up and down before looking at her seriously. You tell the siren that you want to talk about your previous discussion, but the mere mention of that awkward conversation causes the tall redhead to become embarrassed and given how things went you can't blame her.");
+				outputText("\n\n“Hey, no, it’s alright...I mean. I thought we had something special, but it’s alright; I’ll be fine. I’ve been alone for a long time, so I’m used to it.... I’m very glad you came back though, that you still want to visit me here” she says, not quite making eye contact. It’s easy to see she is still sore from before and is just trying to hide it so you won’t feel bad.");
+				outputText("\n\nShaking your head, you decide to push forward with your plan for the shark-like harpy. You hold up your hand to stop her from talking. You tell her that you’ve been thinking about the idea, and you want to see if maybe you can work as a couple after all, trying to be as convincing as possible so she will fall for it.");
+				outputText("\n\nAs if to answer her, you slide an arm around her waist and, grabbing a handful of her curvy rear, you pull her close to you and give her a squeeze, eliciting a squeak from her and causing her blush to deepen. As you hold onto her you promise her that you really do want to try and be a couple, your words working their magic on the lonely shark-harpy. She smiles and giggles to you, before pulling you into a hug and kissing you deeply, her long demonic tongue sliding into your mouth and around your own.");
+				outputText("\n\nAfter a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. [if pc corruption is 50-60 use this: A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you to trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 60-80 use this: A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 80-100 use this: You know it’s wrong to trick such a sweet woman that loves you like this, but fortunately for you your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.]");
+				outputText("\n\nYou don't have to wait long before a bright smile breaks out across her face, her sharp shark-like teeth showing in all their jaggedness. As soon as you finish speaking she grabs you and hugs you tightly, almost like she is trying to squeeze the life from you with her grip. She really does care for you. (And here you are lying to her...you dick) “Oh [player name] that's... that’s amazing. I’m so glad. I promise I’ll do everything I can to make you happy, it’s the least I can do for you after how nice you have been. Visiting me all the way up here, taking time out of your quest to talk to me and make me feel companionship for the first time in so long.” she says honestly as she hugs you tightly.");
+				outputText("\n\nNow that she believes you, it's time to go through with your plan. Reaching behind yourself, you delve into your back and pull out a vial filled with a rolling red liquid. You hold the fuckdraft in your hands and show it to Minerva. Thankfully, you had the forethought to scratch off the label so she wouldn't know what was inside.");
+				outputText("\n\nMinerva looks at it curiously and with a bit of nervousness. “What’s that, love? Is that one of your spoils from battles with the beasts of the land?” she asks you, clearly wondering why you would show her something like that. You shake your head and tell her it’s something you had cooked up by an alchemist you know, something that would make your already passionate lovemaking even more amazing, that she told you the two of you could add it to the pure spring and take a bath in the new mixture. You assure her that it's safe and won't cause any harm to the spring.");
+				if (player.inte < 50) { //Not smart enough!
+					outputText("As you explain what you have in mind and show Minerva the potion, she looks at you with worry and bites her pierced lip slowly. “I don't know... I don't think it would be good to chance it. The spring is too important to risk exposing it to things from the corruption-infested outside world.” She leans in and nuzzles you gently. “I'm sorry love. i just can’t risk it.” she says as she gently pushes the vial back into your hands.");
+					doNext(createCallBackFunction(getGame().highMountains.minervaScene.genericMenu, true));
+					return;
+				}
+				else { //Success!
+					outputText("\n\nYour explanation of the situation as well as the pros of using the vial’s contents seem to work. Making sure to calm the worried siren that you worked with an expert alchemist on this to ensure it would be safe for you doesn’t hurt either. As you intelligently speak about the delights of using the vial, Minerva’s face brightens more and more until she is grinning widely and her eyes are shining brightly like precious gems. Without waiting, Minerva grabs the vial and looks it over. “It will make things even better huh? Well, what are we waiting for, " + player.mf("stud", "sexy") + "? I promised I would do anything for you, my love.” she says, but doesn't wait for your response before practically bouncing over to her pure spring and uncorking the vial. She sniffs it, smelling the strongly sweet-scented potion before pouring the roiling red liquid into the pool.");
+					outputText("\n\nThe new fluid turns the spring cloudy red for a moment, before settling into the pure water and giving it a very slight reddish tinge. The new lust-enhancing steam starts flowing off the water and mixes with the air. You can already feel its effects seeping into you, first causing a tingling on your skin, then a heat surges in your loins, your [player cock] swelling in your [player armor] / your [player pussy] quivering and grow wet. If this is what's happening to you so soon, Minerva must been feeling much more. Licking your lips, you approach your shark-harpy and pull her against you. Kissing her neck,you whisper to her, suggesting that the two of you get started on your new romance.");
+					outputText("\n\nMinerva gulps and looks over to you with a blushing face, but then she smiles and nods, before pulling away just long enough to strip her tube top and short shorts off and step into the soothing waters. The tall redhead looks over her shoulder, beckoning for you to join her.");
+					dynStats("cor", 1);
+					player.destroyItems(consumables.F_DRAFT, 1);
+					flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = 1; //The start of corruption.
+					doNext(createCallBackFunction(getGame().highMountains.minervaScene.genericMenu, true)); //TODO: Replace with whatever's appropriate
+				}
+			}
+		}
+		
+		//Copy-paste functions for ease of adding content
+		private function corruptionMinervaFunc1():void {
+			clearOutput();
+			outputText("");
+			outputText("");
+			outputText("");
+		}
+		
+		private function corruptionMinervaFunc2():void {
+			clearOutput();
+			outputText("");
+			outputText("");
+			outputText("");
+		}
+		
+		//Post-taint, pre-corruption encounter
+		public function lustfulMinervaEncounter():void {
+			clearOutput();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] == 1) {
+				outputText("You make your way back up the mountain, passing the usual harpy nests as you go. Climbing through the clouds you reach a height that has become easy to you, thanks to the repeated effort. Your hands grip the rough stone as you pull yourself up higher still, pushing yourself to reach the top of this enormous mountain. Looking up above yourself, you see the lip of the cliff that marks the top, luring you with the promise of a respite from your climb long with food and hopefully very pleasurable company.");
+				outputText("\n\nGritting your teeth you push yourself, forcing your tired muscles to pull you up over that lip, your hands grabbing for anything you can hold onto as you pull yourself up and over the rocky ridge. As soon as you are up you roll onto your back and lay there panting from your difficult workout. You lick your lips as you think of what will be waiting for you in the tower. Ever since you spiked Minerva’s spring with a fuck draft you have been anticipating another visit to your lust-filled siren.");
+				outputText("\n\nEven before you enter the tower you can hear sounds coming from inside. The pleasure-filled sounds of someone pleasuring themselves. However, as you get closer you can hear two sets of sounds. Deciding to investigate, you enter to find Minerva pinning a harpy to the mossy ground as she furiously pounds the fat-reared female’s cunt with her bloated, tentacle-bedecked member. The “unfortunate” harpy seems to have her wings bound behind her back, as if Minerva captured her to use as her own sex slave... Maybe you shouldn’t of had her pour so much of that fuck draft into her pool. Despite being tied up, the harpy clearly doesn't seem to mind her position, as the feathery fuck slut is groaning and chirping with ecstasy.");
+				outputText("\n\nAs you step closer the fuck-hungry shark-harpy notices your presence and grins, her tail swaying with playful glee at the thought of having someone else to play with. With a groan she turns her attention from you back to her harpy, just in time to ram her powerful hips against her lover’s wide, meaty thighs. Minerva shudders as her painfully engorged balls swell and stuff her harpy with gout after gout of her thick creamy cum. The slutty harpy lets out a delighted shriek as her belly inflates from the sheer amount of jizz being pumped into her womb by her fertile mistress.");
+				outputText("\n\nMinerva sighs and pulls out of her bound companion and lets the big-butted female flop to the side, the harpy’s gaping pussy leaking thick globs of sperm as she pants and coos in a sex induced daze, licking her golden lips. Your siren lover turns her attention back to you before approaching you, her generous hips swaying back and forth enticingly, as she struts toward you, her anemone dick clearly still bloated with lust. “Mmmm, so good of you to come [player name], I’m not sure what’s going on with my body, but I’ve been so needy lately. That slutty harpy I caught has really helped out, but I need to fuck her at least once a day just to stop from going crazy. So... what can I do for you, love? Want to help me through this strange new hunger of mine?” she asks, licking her lips and sliding a hand across your thigh, as if to accentuate her need and help convince you to mate with her.");
+				flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS]++;
+			}
+			else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] == 2) {
+				outputText("You make your way back up the mountain, passing the usual harpy nests as you go. Climbing through the clouds you reach a height that has become easy to you, the repeated effort. Your hands grip the rough stone as you pull yourself up, higher still, pushing yourself to reach the top of this enormous mountain. Looking up above yourself, you see the lip of the cliff that marks the top, lureing you with the promise of a respite from your climb long with food and very pleasurable company.");
+				outputText("\n\nGritting your teeth you push yourself, forcing your tired muscles to pull you up over that lip, your hands grabbing for anything you can hold onto as you pull yourself up and over the rocky ridge. As soon as your are up, you roll onto your back and lay there panting from your difficult workout. You lick your lips as you think of what will be waiting for you in the tower. Ever since you spiked the pure spring with a fuck draft you have been anticipating your new lusty siren. Hopefully, she just hasn't realized what you did to her oasis.");
+				outputText("\n\nEven before you enter the tower you can hear sounds coming from inside. Clearly Minerva is playing with her harpy slut as usual, you definitely put too much fuckdraft into her spring... that, or her unique corruption somehow amplified the effects.");
+				outputText("\n\nAs you step closer the fuck-hungry shark-harpy notices your presence and grins, her tail swaying with playful glee at the thought of having someone else to play with. With a groan she turns her attention from you back to her harpy, just in time to ram her powerful hips against her lover’s wide, meaty thighs. Minerva shudders as her painfully engorged balls swell and stuff her harpy with gout after gout of her thick, frothy, creamy cum. The slutty harpy lets out a delighted shriek as her belly inflates from the sheer amount of jizz being pumped into her womb by her virile mistress.");
+				outputText("\n\nMinerva sighs and pulls out of her bound companion and lets the ample hipped bird woman flop to the side, the harpy’s gaping pussy leaking thick globs of sperm as she pants and coos in a sex induced daze, licking her golden lips. Your siren lover turns her attention back to you before approaching you, her generous hips swaying back and forth enticingly as she struts toward you, her anemone dick clearly still bloated with lust. “Oh, good! [player name] I’ve missed you so much... have you come to spend some time with little old me? Would you like to help me get this hunger of mine under control?”");
+				flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS]++;
+			}
+			else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] == 4) { //The process of corruption, third visit.
+				minervaPreCorruptionQuestBegin();
+				return;
+			}
+			getGame().highMountains.minervaScene.genericMenu();
+		}
+		
+		private function minervaPreCorruptionQuestBegin():void { //TODO. Help welcome.
+			outputText("");
+			outputText("\n\n");
+			outputText("\n\n");
+			outputText("\n\n");
+			outputText("\n\n");
+			outputText("\n\n");
+			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 2) { //Begins the quest so you have some time to do purification.
+				flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] = 1;
+				flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] = 1;
+				flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] = 1;
+				flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] = 2;
+			}
+			flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] = 10; //Corruption is complete. No turning back now.
+		}
+		/*
+
 
 Lustful line. encounter with all sub scenes
 1-1= Taint spring with fuck draft scene
 - requires pc be carrying a fuckdraft while at the ruined tower  and to have visited Minerva 7 times- new option button = drug corruptuon 50+ only
 
-romance=yes variant
-    You grin and approach Minerva with devilish intent. The tall redhead blushes and smiles at the sight of you, clearly very happy to see you after the romantic encounter you had earlier. As soon as she notices your grin, she giggles and give you a sly look, believing she knows of your intentions. “Well, well, well, someone is perky today; happy to see your beloved siren?” she asks playfully, clearly having no idea what you have planned.
 
-    As if to answer her you slide an arm around her waist, grab a handful of her curvy rear and pull her close to you, giving her a squeeze, eliciting a squeak from her and causing her blush to deepen. You spin the most flattering comments you can devise,  your words working their magic on the shark harpy. She smiles and giggles to you, before pulling you into a hug and kissing you deeply, her tantalisingly long tongue sliding into your mouth and around your own.
-
-    After a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. [if pc corruption is 50-60 use this: A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you like this and trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 60-80 use this: A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 80-100 use this: You know it’s wrong to trick such a sweet woman that loves you like this, but fortunately for you your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.] You reach into your pack and pull out a red bubbling vial and show it to your companion. In a preemptive act of cunning you have scratched off its label to hide its intentions.
-
-    Minerva looks at it curiously and with a bit of nervousness. “What’s that, love? Is that one of your spoils from battles with the beasts of the land?” she asks you, clearly wondering why you would show her something like that. You shake your head and tell her it’s something you had cooked up by an alchemist you know, something that would make your already passionate lovemaking even more amazing and that she told you the two of you could add it to the pure spring and take a bath in the new mixture. You assure her that it's safe and won't cause any harm to the spring.
-
-[pc intelligence check. if pc intelligence is under 50 use this: As you explain what you have in mind and show Minerva the potion, she looks at you with worry and bites her pierced lip slowly. “I don't know... I don't think it would be good to chance it. The spring is too important to risk exposing it to things from the corruption-infested outside world.” She leans in and nuzzles you gently. “I'm sorry love. I just can’t risk it.” She says, as she gently pushes the vial back into your hands.]  = end scene
-
-[if pc intelligence is 50+ use this: Your explanation of the situation as well as the pros of using the vial’s contents seems to work. Making sure to calm the worried siren by telling her that you worked with an expert alchemist on this to ensure it would be safe for you doesn’t hurt either. As you intelligently speak about the delights of using the vial, Minerva’s face brightens more and more until she is grinning widely and her eyes are shining brightly like precious gems. Without waiting, Minerva grabs the vial and looks it over. “It will make things even better, huh? Well, what are we waiting for, {sexy=female/stud=male and herm}?” she asks, but doesn't wait for the answer before practically bouncing over to her pure spring and uncorking the vial. She sniffs it, smelling the strongly sweet-scented potion before pouring the roiling red liquid into the pool.
-
-    The new fluid turns the spring cloudy red for a moment, before settling into the pure water and giving it a very slight, reddish tinge. The new lust-enhancing steam starts flowing off the water and mixes with the air. You can already feel its effects seeping into you, first causing a tingling on your skin, the a heat surges in your loins, your [player cock] swelling in your [player armor] / your [player pussy] quivering and grow wet. If this is what's happening to you so soon, Minerva must been feeling much more. Licking your lips, you approach your shark-harpy and pull her against you. Kissing her neck, you whisper to her, suggesting that the two of you take that bath now.
-
-    Minerva gulps and looks over to you with a blushing face. She then smiles and nods before pulling away just long enough to strip her tube top and short shorts off and step into the soothing waters. The tall redhead looks over her shoulder, beckoning for you to join her.
-
-romance=no variant
-
-    Smirking, you approach Minerva, who smiles at you softly and looks between you and the floor. Clearly she still has feelings for you despite your rejection, something that will greatly aid you in what you want to do with her. You look the tall, enamored siren up and down before looking at her seriously. You tell the siren that you want to talk about your previous discussion, but the mere mention of that awkward conversation causes the tall redhead to become embarrassed and given how things went you can't blame her.
-
-    “Hey, no, it’s alright...I mean. I thought we had something special, but it’s alright; I’ll be fine. I’ve been alone for a long time, so I’m used to it.... I’m very glad you came back though, that you still want to visit me here” she says, not quite making eye contact. It’s easy to see she is still sore from before and is just trying to hide it so you won’t feel bad.
-
-    Shaking your head, you decide to push forward with your plan for the shark-like harpy. You hold up your hand to stop her from talking. You tell her that you’ve been thinking about the idea, and you want to see if maybe you can work as a couple after all, trying to be as convincing as possible so she will fall for it.
-
-    As if to answer her, you slide an arm around her waist and, grabbing a handful of her curvy rear, you pull her close to you and give her a squeeze, eliciting a squeak from her and causing her blush to deepen. As you hold onto her you promise her that you really do want to try and be a couple, your words working their magic on the lonely shark-harpy. She smiles and giggles to you, before pulling you into a hug and kissing you deeply, her long demonic tongue sliding into your mouth and around your own.
-
-    After a steamy, tongue-tangling make out session you pull back to see her happy blushing expression. [if pc corruption is 50-60 use this: A small part of you feels bad for what you're going to do and that it’s cruel to use her feelings for you to trick her into taking some potion. But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 60-80 use this: A small voice, almost like a whisper in the back of your mind, tells you this is wrong and you shouldn’t take advantage of Minerva’s feelings for you like this... But you came here with the potion in hand for a reason and it’s too late to stop now.] [if pc corruption is 80-100 use this: You know it’s wrong to trick such a sweet woman that loves you like this, but fortunately for you your corrupted mind giggles at the thought of how horny and fun she will be after getting a dose of this potion.]
-
-    You don't have to wait long before a bright smile breaks out across her face, her sharp shark-like teeth showing in all their jaggedness. As soon as you finish speaking she grabs you and hugs you tightly, almost like she is trying to squeeze the life from you with her grip. She really does care for you. (And here you are lying to her...you dick) “Oh [player name] that's... that’s amazing. I’m so glad. I promise I’ll do everything I can to make you happy, it’s the least I can do for you after how nice you have been. Visiting me all the way up here, taking time out of your quest to talk to me and make me feel companionship for the first time in so long.” she says honestly as she hugs you tightly.
-
-    Now that she believes you, it's time to go through with your plan. Reaching behind yourself, you delve into your back and pull out a vial filled with a rolling red liquid. You hold the fuckdraft in your hands and show it to Minerva. Thankfully, you had the forethought to scratch off the label so she wouldn't know what was inside.
-
-    Minerva looks at it curiously and with a bit of nervousness. “What’s that, love? Is that one of your spoils from battles with the beasts of the land?” she asks you, clearly wondering why you would show her something like that. You shake your head and tell her it’s something you had cooked up by an alchemist you know, something that would make your already passionate lovemaking even more amazing, that she told you the two of you could add it to the pure spring and take a bath in the new mixture. You assure her that it's safe and won't cause any harm to the spring.
-
-[pc intelligence check. if pc intelligence is under 50 use this: As you explain what you have in mind and show Minerva the potion, she looks at you with worry and bites her pierced lip slowly. “I don't know... I don't think it would be good to chance it. The spring is too important to risk exposing it to things from the corruption-infested outside world.” She leans in and nuzzles you gently. “I'm sorry love. i just can’t risk it.” she says as she gently pushes the vial back into your hands.]  = end scene
-
-[if pc intelligence is 50+ use this: Your explanation of the situation as well as the pros of using the vial’s contents seem to work. Making sure to calm the worried siren that you worked with an expert alchemist on this to ensure it would be safe for you doesn’t hurt either. As you intelligently speak about the delights of using the vial, Minerva’s face brightens more and more until she is grinning widely and her eyes are shining brightly like precious gems. Without waiting, Minerva grabs the vial and looks it over. “It will make things even better huh? Well, what are we waiting for, {sexy=female/stud=male and herm}? I promised I would do anything for you, my love.” she says, but doesn't wait for your response before practically bouncing over to her pure spring and uncorking the vial. She sniffs it, smelling the strongly sweet-scented potion before pouring the roiling red liquid into the pool.
-
-The new fluid turns the spring cloudy red for a moment, before settling into the pure water and giving it a very slight reddish tinge. The new lust-enhancing steam starts flowing off the water and mixes with the air. You can already feel its effects seeping into you, first causing a tingling on your skin, then a heat surges in your loins, your [player cock] swelling in your [player armor] / your [player pussy] quivering and grow wet. If this is what's happening to you so soon, Minerva must been feeling much more. Licking your lips, you approach your shark-harpy and pull her against you. Kissing her neck,you whisper to her, suggesting that the two of you get started on your new romance.
-
-    Minerva gulps and looks over to you with a blushing face, but then she smiles and nods, before pulling away just long enough to strip her tube top and short shorts off and step into the soothing waters. The tall redhead looks over her shoulder, beckoning for you to join her.
 
 1-2= Lustful Minerva encounter. Use if the pc has spiked the pure spring with lust draft
 (first lustful encounter)
 
-        You make your way back up the mountain, passing the usual harpy nests as you go. Climbing through the clouds you reach a height that has become easy to you, thanks to the repeated effort. Your hands grip the rough stone as you pull yourself up higher still, pushing yourself to reach the top of this enormous mountain. Looking up above yourself, you see the lip of the cliff that marks the ,top luring you with the promise of a respite from your climb long with food and hopefully very pleasurable company.
+        
 
-    Gritting your teeth you push yourself, forcing your tired muscles to pull you up over that lip, your hands grabbing for anything you can hold onto as you pull yourself up and over the rocky ridge. As soon as you are up you roll onto your back and lay there panting from your difficult workout. You lick your lips as you think of what will be waiting for you in the tower. Ever since you spiked Minerva’s spring with a fuck draft you have been anticipating another visit to your lust-filled siren.
+    
 
-    Even before you enter the tower you can hear sounds coming from inside. The pleasure-filled sounds of someone pleasuring themselves. However, as you get closer you can hear two sets of sounds. Deciding to investigate, you enter to find Minerva pinning a harpy to the mossy ground as she furiously pounds the fat-reared female’s cunt with her bloated, tentacle-bedecked member. The “unfortunate” harpy seems to have her wings bound behind her back, as if Minerva captured her to use as her own sex slave... Maybe you shouldn’t of had her pour so much of that fuck draft into her pool. Despite being tied up, the harpy clearly doesn't seem to mind her position, as the feathery fuck slut is groaning and chirping with ecstasy
 
-    As you step closer the fuck-hungry shark-harpy notices your presence and grins, her tail swaying with playful glee at the thought of having someone else to play with. With a groan she turns her attention from you back to her harpy, just in time to ram her powerful hips against her lover’s wide, meaty thighs. Minerva shudders as her painfully engorged balls swell and stuff her harpy with gout after gout of her thick creamy cum. The slutty harpy lets out a delighted shriek as her belly inflates from the sheer amount of jizz being pumped into her womb by her fertile mistress.
 
-    Minerva sighs and pulls out of her bound companion and lets the big butted female flop to the side, the harpy’s gaping pussy leaking thick globs of sperm as she pants and coos in a sex induced daze, licking her golden lips. Your siren lover turns her attention back to you before approaching you, her generous hips swaying back and forth enticingly, as she struts toward you, her anemone dick clearly still bloated with lust. “Mmmm, so good of you to come [player name], I’m not sure what’s going on with my body, but I’ve been so needy lately. That slutty harpy I caught has really helped out, but I need to fuck her at least once a day just to stop from going crazy. So... what can I do for you, love? Want to help me through this strange new hunger of mine?” she asks, licking her lips and sliding a hand across your thigh, as if to accentuate her need and help convince you to mate with her.
 {options. Talk, Sex, Leave, Eat, Fight}
 
 (lustful encounter repeated variant. repeatable version of the first time encounter)
 
-You make your way back up the mountain, passing the usual harpy nests as you go. Climbing through the clouds you reach a height that has become easy to you, the repeated effort. Your hands grip the rough stone as you pull yourself up, higher still, pushing yourself to reach the top of this enormous mountain. Looking up above yourself, you see the lip of the cliff that marks the top, lureing you with the promise of a respite from your climb long with food and very pleasurable company.
 
-    Gritting your teeth you push yourself, forcing your tired muscles to pull you up over that lip, your hands grabbing for anything you can hold onto as you pull yourself up and over the rocky ridge. As soon as your are up, you roll onto your back and lay there panting from your difficult workout. You lick your lips as you think of what will be waiting for you in the tower. Ever since you spiked the pure spring with a fuck draft you have been anticipating your new lusty siren. Hopefully, she just hasn't realized what you did to her oasis.
+ 
 
-    Even before you enter the tower you can hear sounds coming from inside. Clearly Minerva is playing with her harpy slut as usual, you definitely put too much fuckdraft into her spring... that, or her unique corruption somehow amplified the effects.
 
-    As you step closer the fuck-hungry shark-harpy notices your presence and grins, her tail swaying with playful glee at the thought of having someone else to play with. With a groan she turns her attention from you back to her harpy, just in time to ram her powerful hips against her lover’s wide, meaty thighs. Minerva shudders as her painfully engorged balls swell and stuff her harpy with gout after gout of her thick, frothy, creamy cum. The slutty harpy lets out a delighted shriek as her belly inflates from the sheer amount of jizz being pumped into her womb by her virile mistress.
-
-    Minerva sighs and pulls out of her bound companion and lets the ample hipped bird woman flop to the side, the harpy’s gaping pussy leaking thick globs of sperm as she pants and coos in a sex induced daze, licking her golden lips. Your siren lover turns her attention back to you before approaching you, her generous hips swaying back and forth enticingly as she struts toward you, her anemone dick clearly still bloated with lust. “Oh, good! [player name] I’ve missed you so much... have you come to spend some time with little old me? Would you like to help me get this hunger of mine under control?”
 
 
 (lustful encounter replaces encounter after 3 lustful visits)

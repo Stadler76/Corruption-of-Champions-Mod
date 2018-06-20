@@ -25,6 +25,7 @@ package classes.Scenes.Areas {
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 //		public var dullahanScene:DullahanScene = new DullahanScene(); //[INTERMOD:8chan]
 		public var dryadScene:DryadScene = new DryadScene();
+		public var aikoScene:AikoScene = new AikoScene();
 
 		public function Forest(pregnancyProgression:PregnancyProgression, output:GuiOutput) {
 			this.beeGirlScene = new BeeGirlScene(pregnancyProgression, output);
@@ -46,68 +47,68 @@ package classes.Scenes.Areas {
 			const fn:FnHelpers = Encounters.fn;
 			if (_forestEncounter == null) _forestEncounter =
 					Encounters.group(game.commonEncounters.withImpGob, {
-						call: tamaniScene,
+						call  : tamaniScene,
 						chance: 0.15
 					}, game.jojoScene.jojoForest, {
-						call: essrayle.forestEncounter,
+						call  : essrayle.forestEncounter,
 						chance: 0.10
 					}, corruptedGlade, {
-						call: camp.cabinProgress.forestEncounter,
+						call  : camp.cabinProgress.forestEncounter,
 						chance: 0.5
 					}, {
-						name: "deepwoods",
-						call: kGAMECLASS.deepWoods.discover,
-						when: function ():Boolean {
+						name  : "deepwoods",
+						call  : kGAMECLASS.deepWoods.discover,
+						when  : function ():Boolean {
 							return (flags[kFLAGS.TIMES_EXPLORED_FOREST] >= 20) && !player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
 						},
 						chance: Encounters.ALWAYS
 					}, {
-						name: "beegirl",
-						call: beeGirlScene.beeEncounter,
+						name  : "beegirl",
+						call  : beeGirlScene.beeEncounter,
 						chance: 0.50
 					}, {
 						name: "tentabeast",
 						call: tentacleBeastEncounterFn,
 						when: fn.ifLevelMin(2)
 					}, {
-						name: "mimic",
-						call: curry(game.mimicScene.mimicTentacleStart, 3),
-						when: fn.ifLevelMin(3),
+						name  : "mimic",
+						call  : curry(game.mimicScene.mimicTentacleStart, 3),
+						when  : fn.ifLevelMin(3),
 						chance: 0.50
 					}, {
-						name: "succubus",
-						call: game.succubusScene.encounterSuccubus,
-						when: fn.ifLevelMin(3),
+						name  : "succubus",
+						call  : game.succubusScene.encounterSuccubus,
+						when  : fn.ifLevelMin(3),
 						chance: 0.50
 					}, {
-						name: "marble",
-						call: marbleVsImp,
-						when: function ():Boolean {
+						name  : "marble",
+						call  : marbleVsImp,
+						when  : function ():Boolean {
 							return flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0 &&
-								!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
-								&& !player.hasStatusEffect(StatusEffects.NoMoreMarble)
-								&& player.hasStatusEffect(StatusEffects.Marble)
-								&& flags[kFLAGS.MARBLE_WARNING] == 0;
+								   !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
+								   && !player.hasStatusEffect(StatusEffects.NoMoreMarble)
+								   && player.hasStatusEffect(StatusEffects.Marble)
+								   && flags[kFLAGS.MARBLE_WARNING] == 0;
 						},
 						chance: 0.10
 					}, {
 						name: "trip",
 						call: tripOnARoot
 					}, {
-						name: "chitin",
-						call: findChitin,
+						name  : "chitin",
+						call  : findChitin,
 						chance: 0.05
 					}, {
-						name: "healpill",
-						call: findHPill,
+						name  : "healpill",
+						call  : findHPill,
 						chance: 0.10
 					}, {
-						name: "truffle",
-						call: findTruffle,
+						name  : "truffle",
+						call  : findTruffle,
 						chance: 0.35
 					}, {
-						name: "bigjunk",
-						call: game.commonEncounters.bigJunkForestScene,
+						name  : "bigjunk",
+						call  : game.commonEncounters.bigJunkForestScene,
 						chance: game.commonEncounters.bigJunkChance
 					}, {
 						name: "walk",
@@ -116,7 +117,7 @@ package classes.Scenes.Areas {
 			return _forestEncounter;
 		}
 		//Oh noes, tentacles!
-		public function tentacleBeastEncounterFn():void {
+		public function tentacleBeastEncounterFn():void { //Oh noes, tentacles!
 			clearOutput();
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) { //tentacle avoidance chance due to dangerous plants
 //				trace("TENTACLE'S AVOIDED DUE TO BOOK!");

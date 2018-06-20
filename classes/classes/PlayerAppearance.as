@@ -630,6 +630,18 @@ package classes
 					          +" [if (hasFurryUnderBody)[underBody.furColor]|brown-black] fur from elbows to paws."
 					          +" The latter have cute, pink paw pads and short claws.");
 					break;
+
+				case Arms.DOG:
+					outputText("  Soft, [hairOrFurColor] fluff covers your arms. Your paw-like hands have cute, pink paw pads and short claws."
+					          +" They should assist you walking on all [if (isTaur)sixs|fours]"
+					          +" just like the hellhounds you saw lurking in the mountains.");
+					break;
+
+				case Arms.CAT:
+				case Arms.FOX:
+					outputText("  Soft, [hairOrFurColor] fluff covers your arms. Your paw-like hands have cute, pink paw pads and [claws].");
+					break;
+
 				default:
 					//Nothing here, move along!
 			}

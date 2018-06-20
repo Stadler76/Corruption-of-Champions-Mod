@@ -2313,7 +2313,7 @@ public static const KIHA_SPAR_VICTORIES:int                                     
 public static const ISABELLA_SPAR_VICTORIES:int                                     = 2305;
 public static const MINERVA_SPAR_VICTORIES:int                                      = 2306;
 public static const VALERIA_SPAR_VICTORIES:int                                      = 2307;
-public static const UNKNOWN_FLAG_NUMBER_02308:int                                   = 2308; // Reserved for additional sparrable partner.
+public static const AIKO_SPAR_VICTORIES:int											= 2308;
 public static const UNKNOWN_FLAG_NUMBER_02309:int                                   = 2309; // Reserved for additional sparrable partner.
 public static const SANDWITCH_SERVICED:int                                          = 2310; // Number of times, the player has serviced a sand witch.
 public static const JOJO_STATUS:int                                                 = 2311; // Replacement for `CoC.monk` variable.
@@ -2358,26 +2358,26 @@ public static const ARMOUR_SHOP_UPGRADE_ITEM:int                                
 public static const ARMOUR_SHOP_UPGRADE_TIME:int                                    = 2350;
 public static const CHILL_SMITH_UPGRADE_ITEM:int                                    = 2351;
 public static const CHILL_SMITH_UPGRADE_TIME:int                                    = 2352;
-public static const UNKNOWN_FLAG_NUMBER_02353:int                                   = 2353;
-public static const UNKNOWN_FLAG_NUMBER_02354:int                                   = 2354;
-public static const UNKNOWN_FLAG_NUMBER_02355:int                                   = 2355;
-public static const UNKNOWN_FLAG_NUMBER_02356:int                                   = 2356;
-public static const UNKNOWN_FLAG_NUMBER_02357:int                                   = 2357;
-public static const UNKNOWN_FLAG_NUMBER_02358:int                                   = 2358;
-public static const UNKNOWN_FLAG_NUMBER_02359:int                                   = 2359;
-public static const UNKNOWN_FLAG_NUMBER_02360:int                                   = 2360;
-public static const UNKNOWN_FLAG_NUMBER_02361:int                                   = 2361;
-public static const UNKNOWN_FLAG_NUMBER_02362:int                                   = 2362;
-public static const UNKNOWN_FLAG_NUMBER_02363:int                                   = 2363;
-public static const UNKNOWN_FLAG_NUMBER_02364:int                                   = 2364;
-public static const UNKNOWN_FLAG_NUMBER_02365:int                                   = 2365;
-public static const UNKNOWN_FLAG_NUMBER_02366:int                                   = 2366;
-public static const UNKNOWN_FLAG_NUMBER_02367:int                                   = 2367;
-public static const UNKNOWN_FLAG_NUMBER_02368:int                                   = 2368;
-public static const UNKNOWN_FLAG_NUMBER_02369:int                                   = 2369;
-public static const UNKNOWN_FLAG_NUMBER_02370:int                                   = 2370;
-public static const UNKNOWN_FLAG_NUMBER_02371:int                                   = 2371;
-public static const UNKNOWN_FLAG_NUMBER_02372:int                                   = 2372;
+public static const AIKO_TIMES_MET:int 												= 2353	//1=first, 2=second 3=third, 4+=fourth
+public static const AIKO_CORRUPTION:int 											= 2354	//corruption score /100
+public static const AIKO_CORRUPTION_ACTIVE:int										= 2355	//0=off, 1=on (corruption can be switched on by preference when you meet her and toggled from e4+)
+public static const AIKO_AFFECTION:int 												= 2356	//affection score  /100
+public static const AIKO_SEXED:int 													= 2357	//times sexed Aiko
+public static const AIKO_BALL_RETURNED:int 											= 2358	//1=returned ball 2=didnt return ball (lock out Aiko encounters)
+public static const AIKO_FIRST_CHOICE:int											= 2359	//1=riches, 2=power, 3=sex, 4=nothing, 5=fight, 6=touchFluffTail
+public static const AIKO_FIRST_SEX_COOLDOWN:int										= 2360	//cooldown period after first time sex prank
+public static const AIKO_HAS_FOUGHT:int												= 2361	//has fought Aiko about ball
+public static const AIKO_FIGHT_WON:int												= 2362	//1=won, 2=lost fight about ball
+public static const AIKO_HOT_BLOOD:int												= 2363	//once off special encounter
+public static const AIKO_APOLOGY_SINCERE:int 										= 2364	//1=sincere, 2=trick apologize for fighting
+public static const AIKO_RAPE:int													= 2365	//1=raped Aiko in scene 2
+public static const AIKO_TALK_CULTURE:int 											= 2366	//1=first time 2+=repeated times
+public static const AIKO_TALK_AIKO:int												= 2367	//1=first time 2+=repeated times	
+public static const AIKO_TALK_ARCHERY:int											= 2368	//1=first time 2+=repeated times	
+public static const AIKO_BOSS_INTRO:int												= 2369	//1=Yamata scene introduction at lvl 24+ and Aiko 100 affection
+public static const AIKO_BOSS_COMPLETE:int											= 2370	//1=Yamata is dead 2 Yamata is released
+public static const AIKO_BOSS_OUTRO:int												= 2371	//
+public static const YAMATA_MASOCHIST:int											= 2372	//counter increases to 100, if not defeated before reaching 100, gain masochist perk.
 public static const UNKNOWN_FLAG_NUMBER_02373:int                                   = 2373;
 public static const UNKNOWN_FLAG_NUMBER_02374:int                                   = 2374;
 public static const UNKNOWN_FLAG_NUMBER_02375:int                                   = 2375;

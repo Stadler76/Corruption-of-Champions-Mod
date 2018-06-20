@@ -85,7 +85,17 @@ package classes.Scenes.Dungeons  {
 		public static const DUNGEON_DRAGON_SEWERS_WEST:int      = 62;
 		public static const DUNGEON_DRAGON_SEWERS_EAST:int      = 63;
 		public static const DUNGEON_DRAGON_BREEDING_DEN:int     = 64;
-
+		//Hellhound Dungeon
+		public static const DUNGEON_HELLHOUND_ENTRANCE:int      = 65;
+		public static const DUNGEON_HELLHOUND_CORRIDOR1:int     = 66;
+		public static const DUNGEON_HELLHOUND_CORRIDOR2:int     = 67;
+		public static const DUNGEON_HELLHOUND_CORRIDOR3:int     = 68;
+		public static const DUNGEON_HELLHOUND_KENNELS:int       = 69;
+		public static const DUNGEON_HELLHOUND_PLEASURE_PITS:int = 70;
+		public static const DUNGEON_HELLHOUND_LAB:int           = 71;
+		public static const DUNGEON_HELLHOUND_UNKNOWN_1:int     = 72;
+		public static const DUNGEON_HELLHOUND_UNKNOWN_2:int     = 73;
+		public static const DUNGEON_HELLHOUND_INNER_SANCTUM:int = 74;
 
 		public function DungeonCore(pregnancyProgression:PregnancyProgression) {
 			this.desertcave = new DesertCave(pregnancyProgression);
@@ -94,6 +104,7 @@ package classes.Scenes.Dungeons  {
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
 		public var desertcave:DesertCave;
+		public var hellcomplex:HellhoundComplex = new HellhoundComplex;
 		public var dragoncity:DragonCity = new DragonCity;
 		public var heltower:HelDungeon = new HelDungeon;
 		public var palace:AnzuPalace = new AnzuPalace;
@@ -164,6 +175,14 @@ package classes.Scenes.Dungeons  {
 			if (kGAMECLASS.dungeonLoc === DUNGEON_ANZU_ROOF) palace.roomRoof();
 			if (kGAMECLASS.dungeonLoc === DUNGEON_ANZU_BASEMENT) palace.roomBasement();
 			if (kGAMECLASS.dungeonLoc === DUNGEON_ANZU_ARMORY) palace.roomArmory();
+			//Hellhound Complex
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_ENTRANCE) hellcomplex.roomEntrance();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_CORRIDOR1) hellcomplex.roomCorridor1();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_CORRIDOR2) hellcomplex.roomCorridor2();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_KENNELS) hellcomplex.roomKennels();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_PLEASURE_PITS) hellcomplex.roomPleasurePits();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_LAB) hellcomplex.roomLab();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_INNER_SANCTUM) hellcomplex.roomInnerSanctum();
 			//Dragon City
 			if (kGAMECLASS.dungeonLoc === DUNGEON_DRAGON_CITY_SQUARE) dragoncity.roomCitySquare();
 			if (kGAMECLASS.dungeonLoc === DUNGEON_DRAGON_HOUSING_DISTRICT) dragoncity.roomHousingDistrict();

@@ -977,6 +977,16 @@ public class SpriteDb {
 	public static function get s_zetaz(): Class {
 		return is8bit ? s_impOverlord_8bit : s_zetaz_16bit;
 	}
+	[Embed(source="../../../res/sprites/aiko.png")]
+	public static const s_aiko_16bit:Class;
+	public static function get s_aiko():Class {
+		return is8bit ? s_kitsune_blonde_8bit : s_aiko_16bit;
+	}
+	[Embed(source="../../../res/sprites/yamata.png")]
+	public static const s_yamata_16bit:Class;
+	public static function get s_yamata():Class {
+		return is8bit ? s_kitsune_black_8bit : s_yamata_16bit;
+	}
 	
 
 	[Embed(source="../../../res/sprites/dryad.png")]

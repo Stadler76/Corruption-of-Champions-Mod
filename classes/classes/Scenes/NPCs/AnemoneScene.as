@@ -290,7 +290,7 @@ package classes.Scenes.NPCs
 					else outputText("monstrously");
 					outputText(" pregnant when you've finished, her little blue dick poking out below a swollen stomach... not a bad look, actually.  You get a little turned on at the idea.  ");
 				}
-				outputText("After the last of your cum has been squeezed out, you pull your " + player.cockDescript(0) + " out and rinse it off in the lakewater.  You gather your gear while the anemone holds her belly and smiles placidly, staring into the sky.");
+				outputText("After the last of your cum has been squeezed out, you pull your " + player.cockDescript(x) + " out and rinse it off in the lakewater.  You gather your gear while the anemone holds her belly and smiles placidly, staring into the sky.");
 				//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
 				player.orgasm('Dick');
 				combat.cleanupAfterCombat();
@@ -1043,7 +1043,7 @@ package classes.Scenes.NPCs
 				outputText(", leaving");
 			}
 			else outputText("leave");
-			outputText(" you holding the bag... of eggs, as it were.  Your steel your resolve and stride atop her, pinning the loose, wiggling end of her ponytail harmlessly against your chitinous underside and forcing her hands underneath her by lowering some of your weight onto her back.");
+			outputText(" you holding the bag... of eggs, as it were.  You steel your resolve and stride atop her, pinning the loose, wiggling end of her ponytail harmlessly against your chitinous underside and forcing her hands underneath her by lowering some of your weight onto her back.");
 
 			outputText("\n\n\"<i>Be just a minute,</i>\" you grunt, searching out her pussy with your egg-laying tool.  A caress and a tingle of venom from its feelers tell you that you've found it, and you thrust forward, impaling the blue girl's cunt.");
 
@@ -1051,7 +1051,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\n\"<i>Oooh...</i>\" she sighs, relaxing under you.  \"<i>M-more...</i>\"  The girl has completely forgotten about her hair now, consumed by arousal.  Her pussy clings wetly to your egg-laying tube as you pump her; not strong enough to clamp the slime-slicked organ in place, her squeezes only serve to tighten the passage you thrust through and tickle the tip as you rub it against her insides.  The sensation is beyond you, and the first of your eggs pushes into position, sliding smoothly down your oviduct and into her snatch.");
 
-			outputText("\n\n\"<i>Ah-ahh!</i>\" she cries, as it enters her.  The anemone's passageway ripples around you in climax, and below her body, unseen by you, her little blue cock drools its seed into the lake.  Her elbows buckle as your egg-bloated prong plugs her tight vagina, but your grip on her chin prevents her from falling facefirst into the water; she looks up at you adoringly, eyes alight with affection.");
+			outputText("\n\n\"<i>Ah-ahh!</i>\" she cries, as it enters her.  The anemone's passageway ripples around you in climax, and below her body, unseen by you, her little blue cock drools its seed into the lake.  Her elbows buckle as your egg-bloated prong plugs her tight vagina, but your grip on her chin prevents her from falling face first into the water; she looks up at you adoringly, eyes alight with affection.");
 
 			outputText("\n\n\"<i>Don't worry,</i>\" you murmur, ");
 			//[(sexed)

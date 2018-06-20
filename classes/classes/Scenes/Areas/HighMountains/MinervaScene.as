@@ -81,6 +81,9 @@ package classes.Scenes.Areas.HighMountains {
 		}
 	
 		public function timeChangeLarge():Boolean {
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] > 0 && flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] < 9 && flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] != 4) {
+				flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS]++;
+			}
 			return false;
 		}
 
@@ -409,24 +412,25 @@ public function fightMinerva():void {
 	playerMenu();
 }
 
-private function genericMenu(display:Boolean = false):void {
+public function genericMenu(display:Boolean = false):void {
 	menu();
 	if (display) outputText("\"<i>So what will it be then?</i>\"");
 	if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) {
 		minervaPurification.pureMinervaMenu();
 		return;
 	}
-	addButton(0,"Appearance",minervaAppearance);
-	addButton(1,"Talk",minervaTalkSelect);
-	if (player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
+	addButton(0,"Appearance",minervaAppearance).hint("Get a good, detailed look at the siren.");
+	addButton(1,"Talk",minervaTalkSelect).hint("Discuss something with Minerva.");
+	if (player.lust >= 33) addButton(2,"Sex",minervaSexMenu).hint("Get hot and steamy with the sexy siren!");
 	else addButtonDisabled(2, "Sex", "You are not horny enough.");
-	addButton(3,"Eat",eatSomethingYouCunt);
-	addButton(4,"Drink",getADrinkYouBitch);
-	addButton(5, "Spar", fightMinerva);
-	if (minervaRomanced() && getGame().time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
+	addButton(3,"Eat",eatSomethingYouCunt).hint("Pick something to eat.");
+	addButton(4,"Drink",getADrinkYouBitch).hint("Get a drink from the spring to quench your thirst.");
+	addButton(5, "Spar", fightMinerva).hint("Start a fight session with Minerva to see who comes out top!");
+	if (minervaRomanced() && getGame().time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva).hint("Sleep with Minerva for the night.");
 	else addDisabledButton(6, "Sleep With", "Available at evenings with high enough affection.");
-	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul)
-	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae)
+	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul).hint("Use the concoction Rathazul made for you to purify the siren.");
+	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae).hint("Plant the seed Marae gave to you. You have a good feeling it will make the tower even more livable!");
+	if (player.isCorruptEnough(50) && player.hasItem(consumables.F_DRAFT) && flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] == 0) addButton(9, "Taint", minervaCorruption.introToCorruptMinerva).hint("Taint the water with the Fuck Draft. Why would you do that?");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);	
 }
 

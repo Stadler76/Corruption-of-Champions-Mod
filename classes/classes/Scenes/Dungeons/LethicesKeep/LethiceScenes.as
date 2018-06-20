@@ -1022,6 +1022,8 @@ package classes.Scenes.Dungeons.LethicesKeep
 				levelOfFuckedness += 10;
 			if(flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] != 0)
 				levelOfFuckedness += 10;
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10)
+				levelOfFuckedness += 15;
 			//Decrease the fuckedness
 			if(flags[kFLAGS.MORE_CUM_WITCHES] == 1)
 				levelOfFuckedness -= 10;

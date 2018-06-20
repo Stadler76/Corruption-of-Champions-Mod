@@ -212,6 +212,7 @@ package classes.Scenes.Combat
 				outputText("\n<b>The demonesses tentacles are constricting your limbs!</b>");
 				temp = true;
 			}
+			if (player.hasStatusEffect(StatusEffects.YamataEntwine)) temp = true;
 			return temp;
 		}
 
@@ -322,6 +323,10 @@ package classes.Scenes.Combat
 				if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
 					addButton(0, "Struggle", (monster as SuccubusGardener).grappleStruggle);
 					addButton(1, "Wait", (monster as SuccubusGardener).grappleWait);
+				}
+				if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
+					addButton(0, "Struggle", (monster as Yamata).entwineStruggle);
+					addButton(1, "Wait", (monster as Yamata).entwineWait);
 				}
 			}
 			//Silence: Disables magic menu.
@@ -1570,6 +1575,28 @@ package classes.Scenes.Combat
 					outputText("\n\n");
 				}
 			}
+			if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
+				if (player.statusEffectv1(StatusEffects.AikoLightningArrow) <= 0) {
+					player.removeStatusEffect(StatusEffects.AikoLightningArrow);
+					outputText("<b>You feel stronger as Aiko's lightning finally fades, though the arrow is still lodged in your side.</b>\n\n");
+					player.addCombatBuff('str',6);
+					player.addCombatBuff('spe',6);
+				}
+				//Shock effect:
+				else {
+					outputText("You fall to one knee as Aiko's Lighting pulses through your limbs, Oh how this hurts...");
+					player.takeDamage(15, true);
+					outputText("\n\n");
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.YamataEntwine)) {
+				//Corrupting entwine effect:
+				outputText("Yamata's serpentine hair continues to pump their corrupted flames into you!  ");
+				player.takeDamage(8);
+				player.takeLustDamage(7, true);
+				player.dynStats("cor", 1);
+				flags[kFLAGS.YAMATA_MASOCHIST]++;
+			}
 			//Harpy lip gloss
 			if (player.hasCock() && player.hasStatusEffect(StatusEffects.Luststick) && (monster.short == "harpy" || monster.short == "Sophie")) {
 				//Chance to cleanse!
@@ -1994,6 +2021,18 @@ package classes.Scenes.Combat
 				if (monster.lust100 > 30 && monster.lust100 < 60) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.");
 				if (monster.lust100 >= 60 && monster.lust100 < 80) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.");
 				if (monster.lust100 >= 80) outputText(" The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.");
+			}
+			else if (monster.short == "Aiko") {
+				if (monster.lust100 > 50 && monster.lust100 < 60) outputText("Aiko’s face is slightly pink from arousal. You can see her fidgeting in her stance once or twice, biting her lip slightly.  ");
+				if (monster.lust100 >= 60 && monster.lust100 < 80) outputText("Aiko’s cheeks are a deep crimson, and she breaks stance frequently to fan herself, panting visibly.  ");
+				if (monster.lust100 >= 80) outputText("Aiko’s knees are trembling with barely-restrained arousal, and you can see a small puddle forming at her feet as she takes a deep breath, trying to calm her flustered nerves.  ");
+			}
+			else if (monster.short == "Yamata") {
+				if (monster.lust100 < 20) outputText("Yamata seems to be fairly calm and collected, in spite of her obviously deranged nature. A barely-restrained psychosis swims just under the surface, threatening to boil over at any moment."+(monster.lust100 > 10?" Is she getting stronger?":"")+"  ");
+				if (monster.lust100 >= 20 && monster.lust100 < 40) outputText("Yamata is swaying a little with sadistic glee now, her psychotic grin wide and toothy. She occasionally twirls her sword around, cracking the joints in her neck from time to time and goading you into attacking. It seems like the more turned-on she becomes, the more powerful her attacks are.  ");
+				if (monster.lust100 >= 40 && monster.lust100 < 60) outputText("Yamata’s movements have started to become reckless, but that only serves to make her even more dangerous. The psychotic flame in her eyes is now accompanied by a lusty gaze and an occasional lick of her lips. You’re sure of it now; the more turned-on she is, the more dangerous her attacks become.  ");
+				if (monster.lust100 >= 60 && monster.lust100 < 80) outputText("Bloodlust is evident in Yamata’s eyes now, and it seems like she is subsisting on animalistic rage and adrenaline alone. Every swing is accompanied by hysterical laughter, and the smells of sex and violence emanating from her are overpowering. She’s getting more and more reckless with each swing! You should end this soon!  ");
+				if (monster.lust100 >= 80) outputText("Yamata has whipped herself into a lustful berserk frenzy, lashing out with reckless abandon. All of her self control has been cast aside, and she’s putting everything she has into every attack now. If things keep going like this, she might even end up wearing herself out! Though it might be hard to hold out until she eventually burns out!  ");
 			}
 			else {
 				if (monster.plural) {

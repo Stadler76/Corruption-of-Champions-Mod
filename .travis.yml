@@ -32,8 +32,9 @@ after_success:
   - sonar-scanner
 
 # If the build fails, pack up the unit test reports - if any - and dump them to the console
+# The sleep is required for Travis to flush the log, otherwise the encoded dump will be cut off
 after_failure:
-  - devTools/ci/dump-report.sh
+  - devTools/ci/dump-report.sh && sleep 10
 
 env:
   global:

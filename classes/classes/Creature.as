@@ -690,7 +690,7 @@ package classes
 		}
 
 		//Create a perk
-		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void
+		public function createPerk(ptype:PerkType, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):void
 		{
 			var newKeyItem:PerkClass = new PerkClass(ptype);
 			//used to denote that the array has already had its new spot pushed on.
@@ -829,6 +829,25 @@ package classes
 					return true;
 			}
 			return false;
+		}
+
+		/**
+		 * Creates a perk only, if the creature (usually the player) doesn't already have that perk
+		 * @param   ptype   The perk to be created
+		 * @param   value1  Perk value 1
+		 * @param   value2  Perk value 2
+		 * @param   value3  Perk value 3
+		 * @param   value4  Perk value 4
+		 * @return  true, if the perk was created. false, if the creature (usually the player) already had that perk
+		 */
+		public function createPerkIfNotHasPerk(ptype:PerkType, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean
+		{
+			if (hasPerk(ptype)) {
+				return false;
+			}
+
+			createPerk(ptype, value1, value2, value3, value4);
+			return true;
 		}
 		
 		//Duplicate perk
@@ -2738,6 +2757,11 @@ package classes
 			return [Face.BEAK, Face.COCKATRICE].indexOf(face.type) != -1;
 		}
 
+		public function hasClaws():Boolean
+		{
+			return arms.claws.type !== Claws.NORMAL;
+		}
+
 		public function hasGills():Boolean
 		{
 			return gills.type != Gills.NONE;
@@ -2940,9 +2964,12 @@ package classes
 
 			switch (arms.claws.type) {
 				case Claws.NORMAL: return "fingernails";
-				case Claws.LIZARD: return "short curved" + toneText + "claws";
 				case Claws.DRAGON: return "powerful, thick curved" + toneText + "claws";
 				case Claws.IMP:    return "long" + toneText + "claws";
+				case Claws.CAT:    return "long, thin curved" + toneText + "claws";
+				case Claws.LIZARD:
+				case Claws.DOG:
+				case Claws.FOX:    return "short curved" + toneText + "claws";
 				default: // Since mander and cockatrice arms are hardcoded and the others are NYI, we're done here for now
 			}
 			return "fingernails";

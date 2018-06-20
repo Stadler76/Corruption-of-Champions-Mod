@@ -610,18 +610,18 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 		}
 		//[HERMS]
 		else {
-			outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + player.sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Plant-spooge is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
+			outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + player.sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Plant-spooge is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks,");
 
 			//(HAZ NEITHER)
 			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0 && player.findPerk(PerkLib.MaraesGiftStud) < 0) {
 				//(RANDOM 1)
 				if (rand(2) == 0 && player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
-					outputText("You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ");
+					outputText(" \"<i>You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ");
 					player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
 				}
 				//(RANDOM 2)
 				else if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
-					outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
+					outputText(" \"<i>You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
 					player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
 				}
 				outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
@@ -647,7 +647,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 			}
 			//(HAZ BREEDER)
 			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
-				outputText("I can't believe I didn't think to do this last time!  I mean, I spent so much time making you a great baby-birther that I didn't bother to make you a stud too!  I fixed that this time though – you'll be squirting huge loads that are sure to knock up any of the pretty girls out there.  It'll even punch its way through most birth-controlling herbs.  Aren't I nice?</i>\"  ");
+				outputText(" \"<i>I can't believe I didn't think to do this last time!  I mean, I spent so much time making you a great baby-birther that I didn't bother to make you a stud too!  I fixed that this time though – you'll be squirting huge loads that are sure to knock up any of the pretty girls out there.  It'll even punch its way through most birth-controlling herbs.  Aren't I nice?</i>\"  ");
 
 				outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
@@ -659,7 +659,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 			}
 			//(HAZ STUD)
 			else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
-				outputText("I can't believe I didn't think of this last time!  I made you such a great stud that I didn't think to make you just as good at popping out your own kids!  Well I went ahead and fixed that while you were sleeping.  Your womb is nice and fertile, and you'll pop out kids a LOT quicker than before.  We'll be repopulating everything in Mareth in no time!  Just be sure to knock up the girls and let the boys fuck your pussy, okay?</i>\"  ");
+				outputText(" \"<i>I can't believe I didn't think of this last time!  I made you such a great stud that I didn't think to make you just as good at popping out your own kids!  Well I went ahead and fixed that while you were sleeping.  Your womb is nice and fertile, and you'll pop out kids a LOT quicker than before.  We'll be repopulating everything in Mareth in no time!  Just be sure to knock up the girls and let the boys fuck your pussy, okay?</i>\"  ");
 
 				outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 

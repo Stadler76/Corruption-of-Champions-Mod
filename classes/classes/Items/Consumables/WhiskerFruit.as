@@ -302,6 +302,20 @@ package classes.Items.Consumables
 				player.face.type = Face.CAT;
 				changes++;
 			}
+			//Arms
+			if (player.arms.type !== Arms.CAT && player.isFurry() && player.tail.type === Tail.CAT && player.lowerBody.type === LowerBody.CAT && rand(4) === 0 && changes < changeLimit)
+			{
+				outputText("\n\nWeakness overcomes your arms, and no matter what you do, you can’t muster the strength to raise or move them."
+				          +" Did the fruit have some drug-like effects? Sitting on the ground, you wait for the limpness to end."
+				          +" As you do so, you realize that the bones at your hands are changing, as well as the muscles on your arms."
+				          +" They’re soon covered, from the shoulders to the tip of your digits, on a layer of soft,"
+				          +" fluffy [if (hasFurryUnderBody)[underBody.furColor]|[furColor]] fur. Your hands gain pink,"
+				          +" padded paws where your palms were once, and your nails become long, thin, curved claws,"
+				          +" sharp enough to tear flesh and nimble enough to make climbing and exploring easier."
+				          +" <b>Your arms have become like those of a cat!</b>");
+				player.arms.setType(Arms.CAT);
+				changes++;
+			}
 			// Remove gills
 			if (rand(4) === 0 && player.hasGills() && changes < changeLimit) {
 				mutations.updateGills();

@@ -55,6 +55,7 @@
 				"hascock"			: function():* {return  kGAMECLASS.player.hasCock();},
 				"hassheath"			: function():* {return  kGAMECLASS.player.hasSheath();},
 				"hasbeak"			: function():* {return  kGAMECLASS.player.hasBeak();},
+				"hasclaws"			: function():* {return  kGAMECLASS.player.hasClaws();},
 				"hasdragonneck"		: function():* {return  kGAMECLASS.player.hasDragonNeck();},
 				"hastail"			: function():* {return  kGAMECLASS.player.hasTail();},
 				"neckpos"			: function():* {return  kGAMECLASS.player.neck.pos;},

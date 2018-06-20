@@ -603,6 +603,9 @@
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					game.dynStats("lus", int(damage / 2));
 				}
+				if (flags[kFLAGS.YAMATA_MASOCHIST]>1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
+					game.dynStats("lus", int(damage / 8));
+				}
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
@@ -977,6 +980,10 @@
 			if (satyrScore() >= 4)
 			{
 				race = "satyr";
+			}
+			if (DryadScore() >= 3)
+			{
+				race = "dryad";
 			}
 			if (rhinoScore() >= 4)
 			{
@@ -1361,6 +1368,8 @@
 				dogCounter++;
 			if (lowerBody.type == LowerBody.DOG)
 				dogCounter++;
+			if (arms.type == Arms.DOG)
+				dogCounter++;
 			if (dogCocks() > 0)
 				dogCounter++;
 			//Fur only counts if some canine features are present
@@ -1433,6 +1442,8 @@
 				foxCounter++;
 			if (lowerBody.type == LowerBody.FOX)
 				foxCounter++;
+			if (arms.type == Arms.FOX)
+				foxCounter++;
 			if (dogCocks() > 0 && foxCounter > 0)
 				foxCounter++;
 			if (breastRows.length > 1 && foxCounter > 0)
@@ -1458,6 +1469,8 @@
 			if (tail.type == Tail.CAT)
 				catCounter++;
 			if (lowerBody.type == LowerBody.CAT)
+				catCounter++;
+			if (arms.type == Arms.CAT)
 				catCounter++;
 			if (countCocksOfType(CockTypesEnum.CAT) > 0)
 				catCounter++;
@@ -1856,6 +1869,25 @@
 		//------------
 		// Mod-Added
 		//------------
+		
+	    //dryad score
+		public function DryadScore():Number
+		{
+			var dryad:Number = 0;
+			if (hasCock())
+				dryad--;
+			if (arms.type != Arms.HUMAN)
+				dryad--;
+			if (hair.type == Hair.LEAF)
+				dryad++;
+			if (dryad >= 1 && ears.type == Ears.ELFIN)
+				dryad++;
+			if (skin.type == Skin.BARK)
+				dryad++;
+			
+			return dryad;
+		}
+
 		public function sirenScore():Number 
 		{
 			var sirenCounter:Number = 0;

@@ -11,9 +11,9 @@ package classes.BodyParts
 		public static const LIZARD:int     =   1;
 		public static const DRAGON:int     =   2;
 		public static const SALAMANDER:int =   3;
-		public static const CAT:int        =   4; // NYI! Placeholder for now!!
-		public static const DOG:int        =   5; // NYI! Placeholder for now!!
-		public static const RAPTOR:int     =   6; // NYI! Placeholder for now!!
+		public static const CAT:int        =   4;
+		public static const DOG:int        =   5;
+		public static const FOX:int        =   6;
 		public static const MANTIS:int     =   7; // NYI! Placeholder for Xianxia mod
 		public static const IMP:int        =   8;
 		public static const COCKATRICE:int =   9;

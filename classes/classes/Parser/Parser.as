@@ -1065,7 +1065,7 @@ package classes.Parser
 
 			var ret:String = "";
 			// Run through the parser
-			contents = contents.replace(/\\n/g, "\n")
+			contents = contents.replace(/\r\n?|\\n/g, "\n")
 			ret = recParser(contents, 0);
 			if (printIntermediateParseStateDebug) LOGGER.warn("WARNING: Parser intermediate contents = ", ret)
 			// Currently, not parsing text as markdown by default because it's fucking with the line-endings.
