@@ -20,18 +20,75 @@ package classes.Items.Armors
 		private var playerPerk2V3:Number;
 		private var playerPerk2V4:Number;
 		
-		public function ArmorWithPerk(id:String, shortName:String,name:String, longName:String, def:Number, value:Number, description:String, perk:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", playerPerk2:PerkType = null, playerPerk2V1:Number = 0, playerPerk2V2:Number = 0, playerPerk2V3:Number = 0, playerPerk2V4:Number = 0, playerPerk2Desc:String = "", supportsBulge:Boolean = false, supportsUndergarment:Boolean = true) {
-			super(id, shortName, name, longName, def, value, description, perk, supportsBulge, supportsUndergarment);
-			this.playerPerk = playerPerk;
-			this.playerPerkV1 = playerPerkV1;
-			this.playerPerkV2 = playerPerkV2;
-			this.playerPerkV3 = playerPerkV3;
-			this.playerPerkV4 = playerPerkV4;
-			this.playerPerk2 = playerPerk2;
-			this.playerPerk2V1 = playerPerk2V1;
-			this.playerPerk2V2 = playerPerk2V2;
-			this.playerPerk2V3 = playerPerk2V3;
-			this.playerPerk2V4 = playerPerk2V4;
+		public function ArmorWithPerk(...args)
+		{
+			var errorString:String = "";
+			var paramObject:Object;
+
+			if (args.length === 0 || (args.length > 1 && args.length < 13)) {
+				errorString = "Invalid number of arguments given for ArmorWithPerk-constructor.";
+			}
+
+			if (args.length === 1) {
+				if (!(args[0] is ArmorWithPerkParamBuilder)) {
+					errorString = "Single argument must be of type ArmorWithPerkParamBuilder for ArmorWithPerk-constructor.";
+				} else {
+					paramObject = args[0].toObject();
+				}
+			} else if (errorString === "") {
+				paramObject = {
+					id:                   args[0],
+					shortName:            args[1],
+					name:                 args[2],
+					longName:             args[3],
+					def:                  args[4],
+					value:                args[5],
+					description:          args[6],
+					perk:                 args[7],
+					playerPerk:           args[8],
+					playerPerkV1:         args[9],
+					playerPerkV2:         args[10],
+					playerPerkV3:         args[11],
+					playerPerkV4:         args[12],
+					playerPerkDesc:       args.length >= 14 ? args[13] : "",
+					playerPerk2:          args.length >= 15 ? args[14] : null,
+					playerPerk2V1:        args.length >= 16 ? args[15] : 0,
+					playerPerk2V2:        args.length >= 17 ? args[16] : 0,
+					playerPerk2V3:        args.length >= 18 ? args[17] : 0,
+					playerPerk2V4:        args.length >= 19 ? args[18] : 0,
+					playerPerk2Desc:      args.length >= 20 ? args[19] : "",
+					supportsBulge:        args.length >= 21 ? args[20] : false,
+					supportsUndergarment: args.length >= 22 ? args[21] : true
+				};
+			}
+
+			if (errorString === "") {
+				super(
+					paramObject.id,
+					paramObject.shortName,
+					paramObject.name,
+					paramObject.longName,
+					paramObject.def,
+					paramObject.value,
+					paramObject.description,
+					paramObject.perk,
+					paramObject.supportsBulge,
+					paramObject.supportsUndergarment
+				);
+				this.playerPerk = paramObject.playerPerk;
+				this.playerPerkV1 = paramObject.playerPerkV1;
+				this.playerPerkV2 = paramObject.playerPerkV2;
+				this.playerPerkV3 = paramObject.playerPerkV3;
+				this.playerPerkV4 = paramObject.playerPerkV4;
+				this.playerPerk2 = paramObject.playerPerk2;
+				this.playerPerk2V1 = paramObject.playerPerk2V1;
+				this.playerPerk2V2 = paramObject.playerPerk2V2;
+				this.playerPerk2V3 = paramObject.playerPerk2V3;
+				this.playerPerk2V4 = paramObject.playerPerk2V4;
+			} else {
+				// Nasty workaround-ish error handling, because of: "Error: A super statement cannot occur after a this, super, return, or throw statement."
+				throw new Error(errorString);
+			}
 		}
 		
 		override public function playerEquip():Armor { //This item is being equipped by the player. Add any perks, etc.
