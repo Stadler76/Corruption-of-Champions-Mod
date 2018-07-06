@@ -78,18 +78,5 @@ package classes.Items
 		public const GOLDRNG:Jewelry = new Jewelry("GoldRng", "Gold Ring", "gold ring", "a shining gold ring", 0, 0, 400, "This shining ring is made of gold. ","Ring");
 		public const PLATRNG:Jewelry = new Jewelry("PlatRng", "Plat Ring", "platinum ring", "a shining platinum ring", 0, 0, 1000, "This shining ring is made of platinum, one of the rare precious metals. It looks expensive! ","Ring");
 		public const SILVRNG:Jewelry = new Jewelry("SilvRng", "Silver Ring", "silver ring", "a normal silver ring", 0, 0, 200, "This ring looks like it's made of silver. ","Ring");
-		
-		/*private static function mk(id:String,shortName:String,name:String,longName:String,effectId:Number,effectMagnitude:Number,value:Number,description:String,type:String,perk:String=""):Jewelry {
-			return new Jewelry(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);
-		}*/
-		/*private static function mk2(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String,
-				playerPerk:PerkType,playerPerkV1:Number,playerPerkV2:Number,playerPerkV3:Number,playerPerkV4:Number,playerPerkDesc:String=null):ArmorWithPerk{
-			return new ArmorWithPerk(id,shortName,name,longName,def,value,description,perk,
-					playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
-		}*/
-		public function JewelryLib()
-		{
-		}
 	}
-
 }

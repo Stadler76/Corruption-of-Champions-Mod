@@ -9,8 +9,20 @@ package classes.Items.Armors
 
 	public final class InquisitorsRobes extends ArmorWithPerk {
 		
-		public function InquisitorsRobes() {
-			super("I.Robes", "I.Robes", "inquisitor's robes", "inquisitor's robes", 8, 2000, "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.", "Light", PerkLib.BloodMage, 0, 0, 0, 0);
+		public function InquisitorsRobes()
+		{
+			super(new ArmorWithPerkBuilder()
+				.id("I.Robes")
+				.shortName("I.Robes")
+				.name("inquisitor's robes")
+				.longName("inquisitor's robes")
+				.def(8)
+				.value(2000)
+				.description("These foreboding red and gold robes are embroidered with the symbols of a lost kingdom."
+				            +" Wearing them will cause spells to tax your health instead of exhausting you.")
+				.perk("Light")
+				.playerPerk(PerkLib.BloodMage)
+			);
 		}
 		
 		override public function useText():void {

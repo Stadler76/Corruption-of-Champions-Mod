@@ -12,7 +12,7 @@ package classes.Items.Armors
 	{
 		public function BimboSkirt()
 		{
-			super(new ArmorWithPerkParamBuilder()
+			super(new ArmorWithPerkBuilder()
 				.id("BimboSk")
 				.shortName("BimboSk")
 				.name("bimbo skirt")

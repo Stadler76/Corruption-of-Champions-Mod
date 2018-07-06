@@ -5,7 +5,7 @@ package classes.Items.Armors
 	 * ...
 	 * @author Stadler76
 	 */
-	public class ArmorWithPerkParamBuilder 
+	public class ArmorWithPerkBuilder 
 	{
 		private var _id:String;
 		private var _shortName:String;
@@ -30,55 +30,66 @@ package classes.Items.Armors
 		private var _supportsBulge:Boolean = false;
 		private var _supportsUndergarment:Boolean = true;
 
-		public function id(id:String):ArmorWithPerkParamBuilder
+		private var _requirements:Array = ['id', 'shortName', 'name', 'longName', 'def', 'value', 'description', 'perk', 'playerPerk'];
+		private var _requirementsMet:Array = [];
+
+		public function id(id:String):ArmorWithPerkBuilder
 		{
 			_id = id;
+			_requirementsMet.push("id");
 			return this;
 		}
 
-		public function shortName(shortName:String):ArmorWithPerkParamBuilder
+		public function shortName(shortName:String):ArmorWithPerkBuilder
 		{
 			_shortName = shortName;
+			_requirementsMet.push("shortName");
 			return this;
 		}
 
-		public function name(name:String):ArmorWithPerkParamBuilder
+		public function name(name:String):ArmorWithPerkBuilder
 		{
 			_name = name;
+			_requirementsMet.push("name");
 			return this;
 		}
 
-		public function longName(longName:String):ArmorWithPerkParamBuilder
+		public function longName(longName:String):ArmorWithPerkBuilder
 		{
 			_longName = longName;
+			_requirementsMet.push("longName");
 			return this;
 		}
 
-		public function def(def:Number):ArmorWithPerkParamBuilder
+		public function def(def:Number):ArmorWithPerkBuilder
 		{
 			_def = def;
+			_requirementsMet.push("def");
 			return this;
 		}
 
-		public function value(value:Number):ArmorWithPerkParamBuilder
+		public function value(value:Number):ArmorWithPerkBuilder
 		{
 			_value = value;
+			_requirementsMet.push("value");
 			return this;
 		}
 
-		public function description(description:String):ArmorWithPerkParamBuilder
+		public function description(description:String):ArmorWithPerkBuilder
 		{
 			_description = description;
+			_requirementsMet.push("description");
 			return this;
 		}
 
-		public function perk(perk:String):ArmorWithPerkParamBuilder
+		public function perk(perk:String):ArmorWithPerkBuilder
 		{
 			_perk = perk;
+			_requirementsMet.push("perk");
 			return this;
 		}
 
-		public function playerPerk(playerPerk:PerkType, playerPerkV1:Number = NaN, playerPerkV2:Number = NaN, playerPerkV3:Number = NaN, playerPerkV4:Number = NaN, playerPerkDesc:String = null):ArmorWithPerkParamBuilder
+		public function playerPerk(playerPerk:PerkType, playerPerkV1:Number = NaN, playerPerkV2:Number = NaN, playerPerkV3:Number = NaN, playerPerkV4:Number = NaN, playerPerkDesc:String = null):ArmorWithPerkBuilder
 		{
 			_playerPerk = playerPerk;
 			if (!isNaN(playerPerkV1)) _playerPerkV1 = playerPerkV1;
@@ -86,40 +97,41 @@ package classes.Items.Armors
 			if (!isNaN(playerPerkV3)) _playerPerkV3 = playerPerkV3;
 			if (!isNaN(playerPerkV4)) _playerPerkV4 = playerPerkV4;
 			if (playerPerkDesc !== null) _playerPerkDesc = playerPerkDesc;
+			_requirementsMet.push("playerPerk");
 			return this;
 		}
 
-		public function playerPerkV1(playerPerkV1:Number):ArmorWithPerkParamBuilder
+		public function playerPerkV1(playerPerkV1:Number):ArmorWithPerkBuilder
 		{
 			_playerPerkV1 = playerPerkV1;
 			return this;
 		}
 
-		public function playerPerkV2(playerPerkV2:Number):ArmorWithPerkParamBuilder
+		public function playerPerkV2(playerPerkV2:Number):ArmorWithPerkBuilder
 		{
 			_playerPerkV2 = playerPerkV2;
 			return this;
 		}
 
-		public function playerPerkV3(playerPerkV3:Number):ArmorWithPerkParamBuilder
+		public function playerPerkV3(playerPerkV3:Number):ArmorWithPerkBuilder
 		{
 			_playerPerkV3 = playerPerkV3;
 			return this;
 		}
 
-		public function playerPerkV4(playerPerkV4:Number):ArmorWithPerkParamBuilder
+		public function playerPerkV4(playerPerkV4:Number):ArmorWithPerkBuilder
 		{
 			_playerPerkV4 = playerPerkV4;
 			return this;
 		}
 
-		public function playerPerkDesc(playerPerkDesc:String):ArmorWithPerkParamBuilder
+		public function playerPerkDesc(playerPerkDesc:String):ArmorWithPerkBuilder
 		{
 			_playerPerkDesc = playerPerkDesc;
 			return this;
 		}
 
-		public function playerPerk2(playerPerk2:PerkType, playerPerk2V1:Number = NaN, playerPerk2V2:Number = NaN, playerPerk2V3:Number = NaN, playerPerk2V4:Number = NaN, playerPerk2Desc:String = null):ArmorWithPerkParamBuilder
+		public function playerPerk2(playerPerk2:PerkType, playerPerk2V1:Number = NaN, playerPerk2V2:Number = NaN, playerPerk2V3:Number = NaN, playerPerk2V4:Number = NaN, playerPerk2Desc:String = null):ArmorWithPerkBuilder
 		{
 			_playerPerk2 = playerPerk2;
 			if (!isNaN(playerPerk2V1)) _playerPerk2V1 = playerPerk2V1;
@@ -130,43 +142,43 @@ package classes.Items.Armors
 			return this;
 		}
 
-		public function playerPerk2V1(playerPerk2V1:Number):ArmorWithPerkParamBuilder
+		public function playerPerk2V1(playerPerk2V1:Number):ArmorWithPerkBuilder
 		{
 			_playerPerk2V1 = playerPerk2V1;
 			return this;
 		}
 
-		public function playerPerk2V2(playerPerk2V2:Number):ArmorWithPerkParamBuilder
+		public function playerPerk2V2(playerPerk2V2:Number):ArmorWithPerkBuilder
 		{
 			_playerPerk2V2 = playerPerk2V2;
 			return this;
 		}
 
-		public function playerPerk2V3(playerPerk2V3:Number):ArmorWithPerkParamBuilder
+		public function playerPerk2V3(playerPerk2V3:Number):ArmorWithPerkBuilder
 		{
 			_playerPerk2V3 = playerPerk2V3;
 			return this;
 		}
 
-		public function playerPerk2V4(playerPerk2V4:Number):ArmorWithPerkParamBuilder
+		public function playerPerk2V4(playerPerk2V4:Number):ArmorWithPerkBuilder
 		{
 			_playerPerk2V4 = playerPerk2V4;
 			return this;
 		}
 
-		public function playerPerk2Desc(playerPerk2Desc:String):ArmorWithPerkParamBuilder
+		public function playerPerk2Desc(playerPerk2Desc:String):ArmorWithPerkBuilder
 		{
 			_playerPerk2Desc = playerPerk2Desc;
 			return this;
 		}
 
-		public function supportsBulge(supportsBulge:Boolean):ArmorWithPerkParamBuilder
+		public function supportsBulge(supportsBulge:Boolean):ArmorWithPerkBuilder
 		{
 			_supportsBulge = supportsBulge;
 			return this;
 		}
 
-		public function supportsUndergarment(supportsUndergarment:Boolean):ArmorWithPerkParamBuilder
+		public function supportsUndergarment(supportsUndergarment:Boolean):ArmorWithPerkBuilder
 		{
 			_supportsUndergarment = supportsUndergarment;
 			return this;
@@ -174,6 +186,16 @@ package classes.Items.Armors
 
 		public function toObject():Object
 		{
+			var missingRequirements:Array = [];
+			for each (var req:String in _requirements) {
+				if (_requirementsMet.indexOf(req) === -1) {
+					missingRequirements.push(req);
+				}
+			}
+			if (missingRequirements.length > 0) {
+				throw new Error("The following required values have not been set: " + missingRequirements.join(", ")+ ".");
+			}
+
 			return {
 				id:                   _id,
 				shortName:            _shortName,
@@ -198,34 +220,6 @@ package classes.Items.Armors
 				supportsBulge:        _supportsBulge,
 				supportsUndergarment: _supportsUndergarment
 			};
-		}
-
-		public function toArray():Array
-		{
-			return [
-				_id,
-				_shortName,
-				_name,
-				_longName,
-				_def,
-				_value,
-				_description,
-				_perk,
-				_playerPerk,
-				_playerPerkV1,
-				_playerPerkV2,
-				_playerPerkV3,
-				_playerPerkV4,
-				_playerPerkDesc,
-				_playerPerk2,
-				_playerPerk2V1,
-				_playerPerk2V2,
-				_playerPerk2V3,
-				_playerPerk2V4,
-				_playerPerk2Desc,
-				_supportsBulge,
-				_supportsUndergarment,
-			];
 		}
 	}
 }
