@@ -1,4 +1,5 @@
 package classes.Scenes.NPCs{
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.PregnancyProgression;
 	import classes.helper.DummyOutput;
     import org.flexunit.asserts.*;
@@ -32,6 +33,7 @@ package classes.Scenes.NPCs{
 			cut = new JojoSceneForTest(new PregnancyProgression(), new DummyOutput());
 			player = new Player();
 			kGAMECLASS.player = player;
+			kGAMECLASS.flags[kFLAGS.JOJO_STATUS] = 1;
         }
 		
 		[Test] 
@@ -53,8 +55,33 @@ package classes.Scenes.NPCs{
 			
 			assertThat(cut.collectedOutput, hasItem(startsWith(ALWAYS_EXPECTED_TEXT)));
 			assertThat(cut.collectedOutput, hasItem(startsWith(WET_ONLY_EXPECTED_TEXT)));
-		} 
-    }
+		}
+		
+		[Test]
+		public function jojoCorruptFemalePCrapeUsesCockArea(): void {
+			kGAMECLASS.flags[kFLAGS.JOJO_STATUS] = 5;
+			kGAMECLASS.monster = new Jojo();
+			
+			player.createVagina(false, 1, 2);
+			player.lust = player.maxLust();
+			
+			cut.loseToJojo();
+			
+			assertThat(player.vaginas[0].vaginalLooseness, equalTo(3));
+		}
+		
+		[Test]
+		public function jojoNotFullyCorrupted(): void {
+			assertThat(cut.isJojoCorrupted(), equalTo(false));
+		}
+		
+		[Test]
+		public function jojoFullyCorrupted(): void {
+			kGAMECLASS.flags[kFLAGS.JOJO_STATUS] = 6;
+			
+			assertThat(cut.isJojoCorrupted(), equalTo(true));
+		}
+	}
 }
 
 import classes.Scenes.NPCs.JojoScene;

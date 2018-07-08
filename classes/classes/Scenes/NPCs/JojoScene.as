@@ -10,7 +10,11 @@
 	import classes.internals.*;
 
 	public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
-
+		/**
+		 * If jojo's status reaches this, he is now the PCs slave.
+		 */
+		public static const JOJO_FULL_CORRUPTION_STATUS:int = 6;
+		
 		public var pregnancy:PregnancyStore;
 
 		public function JojoScene(pregnancyProgression:PregnancyProgression, output:GuiOutput)
@@ -130,7 +134,16 @@ public function tentacleJojo():Boolean {
 
 }
 override public function campCorruptJojo():Boolean {
-	return flags[kFLAGS.JOJO_STATUS] >= 5 && !player.hasStatusEffect(StatusEffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
+	return isJojoCorrupted() && !player.hasStatusEffect(StatusEffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
+}
+
+/**
+ * Has the PC completly corrupted jojo (jojo as slave)?
+ * <b>Note:</b> Based soley on NPC status, other flags and status effects are not checked. Used for legacy code.
+ * @return true if jojo is corrupted
+ */
+public function isJojoCorrupted(): Boolean {
+	return flags[kFLAGS.JOJO_STATUS] >= JOJO_FULL_CORRUPTION_STATUS;
 }
 
 private function jojoMutationOffer():void {
@@ -1596,6 +1609,8 @@ public function jojoFollowerMeditate():void {
 				outputText("When you're done you feel more clear-headed, but Jojo looks hornier than ever.");
 				dynStats("lib", -4);
 			}
+			
+			flags[kFLAGS.JOJO_STATUS] += 1;
 		}
 		
 		public function loseToJojo():void {
@@ -1630,7 +1645,7 @@ public function jojoFollowerMeditate():void {
 						if (player.cockTotal() > 1) outputText("Your " + player.cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ");
 						else outputText("Your " + player.vaginaDescript(0) + " cums on him many more times it until it is sore and tender, dripping with spunk.  ");
 						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.");
-						player.cuntChange(monster.cocks[0].cockThickness, true);
+						player.cuntChange(monster.cockArea(0), true);
 						//Preggers chance!
 						player.knockUp(PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.INCUBATION_MOUSE + 82, 101); //Jojo's kids take longer for some reason
 					}

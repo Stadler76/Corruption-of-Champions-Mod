@@ -275,7 +275,7 @@ package classes
 		// Scenes/Places/
 		public var bazaar:Bazaar = new Bazaar();
 		public var boat:Boat = new Boat();
-		public var farm:Farm = new Farm();
+		public var farm:Farm;
 		public var owca:Owca = new Owca();
 		public var telAdre:TelAdre;
 		public var ingnam:Ingnam = new Ingnam();
@@ -458,6 +458,7 @@ package classes
 			desert = new Desert(pregnancyProgression, output);
 			
 			telAdre = new TelAdre(pregnancyProgression);
+			farm = new Farm(output);
 			
 			impScene = new ImpScene(pregnancyProgression, output);
 			anemoneScene = new AnemoneScene(pregnancyProgression, output);

@@ -93,7 +93,7 @@ package classes.Scenes.NPCs
 			spriteSelect(SpriteDb.s_ceraph);
 			clearOutput();
 			//UBER-Fullbodypenetration
-			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusEffectv1(StatusEffects.Exgartuan) == 1 || flags[kFLAGS.JOJO_STATUS] >= 5)) {
+			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusEffectv1(StatusEffects.Exgartuan) == 1 || getGame().jojoScene.isJojoCorrupted())) {
 				hugeCorruptionForceFuckCeraph();
 				return;
 			}

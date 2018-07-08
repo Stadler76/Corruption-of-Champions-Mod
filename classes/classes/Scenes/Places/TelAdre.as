@@ -111,7 +111,7 @@ private function telAdreCrystal():void {
 		return;
 	}
 	//-50+ corruption or corrupted Jojo
-	else if (!player.isPureEnough(50) || flags[kFLAGS.JOJO_STATUS] >= 5) {
+	else if (!player.isPureEnough(50) || getGame().jojoScene.isJojoCorrupted()) {
 		outputText("The crystal pendant shimmers, vibrating in place and glowing a purple hue.  Edryn steps back, watching you warily, \"<i>You've been deeply touched by corruption.  You balance on a razor's edge between falling completely and returning to sanity.  You may enter, but we will watch you closely.</i>\"\n\n");
 	}
 	//-25+ corruption or corrupted Marae

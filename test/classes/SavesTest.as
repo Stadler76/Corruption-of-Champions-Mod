@@ -13,6 +13,7 @@ package classes{
 	import classes.Saves;
 	import classes.helper.StageLocator;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kFLAGS;
 	
 	public class SavesTest {
 		private static const TEST_VERSION:String = "test";
@@ -26,7 +27,9 @@ package classes{
 		private static const VIRIDIAN_SOCK:String = "viridian";
 		
 		private var player:Player;
-		private var cut:Saves;
+		private var cut:SavesForTest;
+
+		private var saveFile:*;
 		
 		[BeforeClass]
 		public static function setUpClass():void {
@@ -43,10 +46,14 @@ package classes{
 			kGAMECLASS.ver = TEST_VERSION;
 			kGAMECLASS.version = TEST_VERSION;
 			
-			cut = new Saves(kGAMECLASS.gameStateDirectGet, kGAMECLASS.gameStateDirectSet);
+			cut = new SavesForTest(kGAMECLASS.gameStateDirectGet, kGAMECLASS.gameStateDirectSet);
 			kGAMECLASS.inventory = new Inventory(cut);
 			
 			saveGame();
+
+			kGAMECLASS.flags[kFLAGS.JOJO_STATUS] = 5;
+			saveFile = [];
+			saveFile.data = [];
 		}
 		
 		private function saveGame():void {
@@ -138,5 +145,67 @@ package classes{
 			
 			assertThat(player.hasPerk(PerkLib.LustyRegeneration), equalTo(false));
 		}
+
+		[Test]
+		public function jojoLegacyStatusLoadJojoIsSlave():void {
+			cut.loadNPCstest(saveFile);
+
+			assertThat(kGAMECLASS.flags[kFLAGS.JOJO_STATUS], equalTo(6));
+		}
+
+		[Test]
+		public function jojoLegacyStatusLoadJojoEncountersInProgress():void {
+			var jojoStatus:int = 3;
+			kGAMECLASS.flags[kFLAGS.JOJO_STATUS] = jojoStatus;
+			
+			cut.loadNPCstest(saveFile);
+
+			assertThat(kGAMECLASS.flags[kFLAGS.JOJO_STATUS], equalTo(jojoStatus));
+		}
+
+		[Test]
+		public function jojoNewStatusLoadUpdateSlaveStatus():void {
+			saveFile.data.npcs = [];
+			saveFile.data.npcs.jojo = [];
+			saveFile.data.npcs.jojo.serializationVersion = 1;
+
+			cut.loadNPCstest(saveFile);
+
+			assertThat(kGAMECLASS.flags[kFLAGS.JOJO_STATUS], equalTo(5));
+		}
+
+		[Test]
+		public function loadWithMissingNpcs():void {
+			saveFile.data = [];
+
+			cut.loadNPCstest(saveFile);
+
+			assertThat(kGAMECLASS.flags[kFLAGS.JOJO_STATUS], equalTo(6));
+		}
+
+		[Test]
+		public function loadWithMissingJojoNpc():void {
+			saveFile.data.npcs = [];
+
+			cut.loadNPCstest(saveFile);
+
+			assertThat(kGAMECLASS.flags[kFLAGS.JOJO_STATUS], equalTo(6));
+		}
+	}
+}
+
+import classes.Saves
+
+class SavesForTest extends Saves {
+	public function SavesForTest(gameStateDirectGet:Function, gameStateDirectSet:Function) {
+		super(gameStateDirectGet, gameStateDirectSet);
+	}
+
+	public function saveNPCstest(saveFile:*):void {
+		this.saveNPCs(saveFile);
+	}
+
+	public function loadNPCstest(saveFile:*):void {
+		this.loadNPCs(saveFile);
 	}
 }

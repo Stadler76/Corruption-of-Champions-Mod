@@ -75,14 +75,14 @@ package classes.Items.Consumables
 			// TRANSFORMATIONS
 			//-----------------------
 			//Gain pig cock, independent of other pig TFs.
-			if (rand(4) === 0 && changes < changeLimit && player.cocks.length > 0 && player.cocks[0].cockType !== CockTypesEnum.PIG) {
+			if (rand(4) === 0 && changes < changeLimit && player.hasCockNotOfType(CockTypesEnum.PIG)) {
 				if (player.cocks.length == 1) { //Single cock
 					outputText("\n\nYou feel an uncomfortable pinching sensation in your [cock]. " + player.clothedOrNakedLower("You pull open your [armor]", "You look down at your exposed groin") + ", watching as it warps and changes. As the transformation completes, you’re left with a shiny, pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>");
 					player.cocks[0].cockType = CockTypesEnum.PIG;
 				}
 				else { //Multiple cocks
 					outputText("\n\nYou feel an uncomfortable pinching sensation in one of your cocks. You pull open your [armor], watching as it warps and changes. As the transformation completes, you’re left with a shiny pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>");
-					player.cocks[rand(player.cocks.length+1)].cockType = CockTypesEnum.PIG;
+					player.setFirstCockNotOfType(CockTypesEnum.PIG);
 				}
 				changes++;
 			}
@@ -133,17 +133,7 @@ package classes.Items.Consumables
 			}
 			//Change skin colour
 			if (rand(boar ? 3 : 4) === 0 && changes < changeLimit) {
-				var skinChoose:int = rand(3);
-				var skinToBeChosen:String = "pink";
-				if (boar) {
-					if (skinChoose == 0) skinToBeChosen = "dark brown";
-					else skinToBeChosen = "brown";
-				}
-				else {
-					if (skinChoose == 0) skinToBeChosen = "pink";
-					else if (skinChoose == 1) skinToBeChosen = "tan";
-					else skinToBeChosen = "sable";
-				}
+				var skinToBeChosen:String = randomChoice(boar ? ["dark brown", "brown", "brown"] : ["pink", "tan", "sable"]);
 				outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + skinToBeChosen + ".");
 				player.skin.tone = skinToBeChosen;
 				player.arms.updateClaws(player.arms.claws.type);

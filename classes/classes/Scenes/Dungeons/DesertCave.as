@@ -2392,7 +2392,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nSuddenly, the Queen jerks up, looking you in the eye with her strange, white-irised gaze.");
 			//(No new PG.  Corrupt version)
 			if (!player.isPureEnough(100 - player.inte100)
-				|| flags[kFLAGS.JOJO_STATUS] >= 5
+				|| getGame().jojoScene.isJojoCorrupted()
 				|| player.hasStatusEffect(StatusEffects.Exgartuan)
 				|| kGAMECLASS.amilyScene.amilyCorrupt()
 				|| flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0

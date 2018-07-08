@@ -1,4 +1,5 @@
 package classes {
+	import classes.Items.ArmorsSuite;
 	import classes.Items.ConsumableTest;
 	import classes.Items.MutationsTest;
 
@@ -8,5 +9,6 @@ package classes {
 	{
 		 public var mutationsTest:MutationsTest;
 		 public var consumableTest:ConsumableTest;
+		 public var armorsSuite:ArmorsSuite;
 	}
 }

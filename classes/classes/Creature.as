@@ -2128,33 +2128,70 @@ package classes
 			return countCocksOfType(CockTypesEnum.WOLF);
 		}
 		
+		/**
+		 * Checks if the creature has a cock that is <b>not</b> of the given type.
+		 * @param	ctype Cock type to ignore
+		 * @return true if the creature has a cock that is <b>not</b> of the given type
+		 */
+		public function hasCockNotOfType(ctype:CockTypesEnum):Boolean
+		{
+			if (!hasCock())
+				return false;
+
+			for each (var cock:Cock in cocks) {
+				if (cock.cockType != ctype) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/**
+		 * Find and return the first cock that is <b>not</b> of the give type.
+		 * @param	ctype cock type to ignore
+		 * @return The first cock that is <b>not</b> of the given type, or -1 if none are found
+		 */
+		public function findFirstCockNotOfType(ctype:CockTypesEnum):Number
+		{
+			for (var i:int = 0; i < cocks.length; i++) {
+				if (cocks[i].cockType != ctype)
+					return i;
+			}
+			return -1;
+		}
+
+		/**
+		 * Set the first cock that does <b>not</b> not of the given type to the new type.
+		 * If all cocks are of the ignored type, this function does nothing.
+		 * @param	ctype the cock type ignore
+		 * @param	newType the cock type to set the first non-ignored cock to
+		 * @return true if a cock was changed
+		 */
+		public function setFirstCockNotOfType(ctype:CockTypesEnum, newType:CockTypesEnum = null):Boolean
+		{
+			var wrongCock:Number = findFirstCockNotOfType(ctype);
+
+			if (wrongCock === -1)
+				return false;
+
+			if (newType === null)
+				newType = ctype;
+
+			cocks[wrongCock].cockType = newType;
+			return true;
+		}
+
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
-			//if (cocks[index].cockType == ctype)
-			//	return index;
 			for (index = 0; index < cocks.length; index++) {
 				if (cocks[index].cockType == ctype)
 					return index;
 			}
-			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + ctype + " and could not find it.");
-			return 0;
+			LOGGER.debug("Creature.findFirstCockType ERROR - searched for cocktype: {0} and could not find it.", ctype);
+			return -1;
 		}
-		
-		/*public function findFirstCockType(type:Number = 0):Number
-		{
-			var index:Number = 0;
-			if (cocks[index].cockType == type)
-				return index;
-			while (index < cocks.length)
-			{
-				index++;
-				if (cocks[index].cockType == type)
-					return index;
-			}
-			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
-			return 0;
-		}*/
 		
 		//Change first normal cock to horsecock!
 		//Return number of affected cock, otherwise -1

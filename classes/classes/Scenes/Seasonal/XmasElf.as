@@ -48,7 +48,7 @@ package classes.Scenes.Seasonal {
 			addDisabledButton(1, "Unwrap Elf");
 			addButton(4, "Decline", declineXmasPresent);
 			
-			if (!player.isPureEnough(90) || flags[kFLAGS.JOJO_STATUS] >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
+			if (!player.isPureEnough(90) || getGame().jojoScene.isJojoCorrupted() || player.hasStatusEffect(StatusEffects.Exgartuan) || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
 			{
 				outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
 				if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
@@ -83,7 +83,7 @@ package classes.Scenes.Seasonal {
 			spriteSelect(SpriteDb.s_christmas_elf);
 			clearOutput();
 			outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
-			if (!player.isPureEnough(90) || flags[kFLAGS.JOJO_STATUS] >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+			if (!player.isPureEnough(90) || getGame().jojoScene.isJojoCorrupted() || player.hasStatusEffect(StatusEffects.Exgartuan) || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 				//[Bad Present]
 				outputText("shock at the box's contents – a nine inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n");
 				

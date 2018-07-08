@@ -6,11 +6,64 @@ package classes.Scenes.Areas.Forest
 	import classes.internals.*;
 	import classes.Items.ArmorLib;
 
-	public class Aiko extends Monster
+	public class Aiko extends BaseKitsune
 	{
 		private var castIllusion:int = 0;
 
-		
+		public function Aiko() {
+			init();
+		}
+
+		/**
+		 * Constructor code extracted into function to make use of the JIT compiler.
+		 * Code in the constructor is always interpreted.
+		 */
+		private function init(): void
+		{
+			this.a = "";
+			this.short = "Aiko";
+			this.imageName = "aiko";
+			if (game.flags[kFLAGS.AIKO_CORRUPTION] < 50 || game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0)
+				this.long = "Aiko stands before you, a little over 5’4 tall. She has a head of short silver-blond hair that ends above her shoulders, parted by two large, furry fox ears. "+(flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0 ? "Eight":"Seven")+" luxurious fox tails sway behind her, the silky fur shimmering as they move. She wears a set of revealing blue and white robes, neatly pressed and hung off her features with care, her D-cup breasts bound by a cloth chest wrap that is just a little too tight. She sports a number of red “tattoos” adorning her face and body; the most prominent of which are the spiral-shaped patterns on her palms and buttocks, and a stylized lotus flower on her lower back.  She wields a longbow almost as tall as she is that she can summon and dismiss with a snap of her fingers, and stares you down with a determined fire in her glittering blue eyes.";
+			else
+				this.long = "Aiko stands before you, a little over 5’4 tall. She has a head of short, unkempt silver-blond hair that ends above her shoulders, parted by two large, furry fox ears. "+(flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0 ? "Eight":"Seven")+" fox tails sway behind her, their fur shaggy and matted down. She wears a set of ragged, bloodied robes that show a lot of skin, her D-cup breasts haphazardly bound by a set of bandages in dire need of changing, and you can smell sex and violence on her even from here. She sports a number of red “tattoos” adorning her face and body; the most prominent of which are the spiral-shaped patterns on her palms and buttocks, and a stylized lotus flower on her lower back. She is wielding an over-sized bill-hook hatchet that she can summon and dismiss with a snap of her fingers, and stares you down with a maniacal fire in her crazed blue eyes."
+			this.race = "Kitsune";
+			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 200, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
+			this.tallness = 64;
+			this.hips.rating = Hips.RATING_AMPLE;
+			this.butt.rating = Butt.RATING_AVERAGE+1;
+			this.skin.tone = "light tan";			//might need to change to russet
+			this.hair.color = "silver-blonde";
+			this.hair.length = 10;
+			initStrTouSpeInte(25, 30, 90, 100);
+			initLibSensCor(40, 65, game.flags[kFLAGS.AIKO_CORRUPTION]);
+			this.weaponName = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "bill-hook hatchet" : "longbow");
+			this.weaponVerb = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "slash" : "shoot");
+			this.armorName = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "ragged, bloodied robes" : "revealing blue and white robes");
+			this.armorDef = 16;
+			this.bonusHP = 350;
+			this.lust = 25;
+			this.lustVuln = 0.4;
+			this.temperment = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? TEMPERMENT_LOVE_GRAPPLES : TEMPERMENT_LUSTY_GRAPPLES);
+			if (flags[kFLAGS.AIKO_BOSS_COMPLETE] >0) {			
+				this.level = 28;
+				this.tail.venom = 8;
+			} else {
+				this.level = 18;
+				this.tail.venom = 7;
+			}
+			this.gems = rand(10) + 30;
+			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);
+			this.tail.type = Tail.FOX;
+			this.ears.type = Ears.FOX;
+			checkMonster();
+		}
+
 		private function aikoBasic():void
 		{
 			var damage:int = int(str) + rand(15);
@@ -194,6 +247,15 @@ package classes.Scenes.Areas.Forest
 			combatRoundOver();
 		}
 		
+		/**
+		 * Prints a text message that the user should report a bug.
+		 *
+		 * @param bugId a string to help developers find whatever triggered the bug
+		 */
+		private function reportABug(bugId:String): void {
+			outputText("This is probably a bug. Please open a issue so it can be fixed - " + bugId);
+		}
+
 		private function aikoTease():void
 		{
 			var temp:int = rand(4);
@@ -210,6 +272,10 @@ package classes.Scenes.Areas.Forest
 				case 3:
 					outputText("<i>“You know, we don’t have to fight... Wouldn’t you rather come pet my super fluffy tails?”</i> Aiko teases, running a hand along her tails and making them fan out around her seductively. You find yourself nodding before you can even think to stop yourself — yes, you <i>DO</i> want the fluffy tails!  ");
 					break;
+
+				default:
+					reportABug("Aiko Tease");
+					break;
 			}
 			
 			var lustDmg:int = 8 + int(player.sens / 5);
@@ -221,18 +287,21 @@ package classes.Scenes.Areas.Forest
 		{
 			var x:int = rand(6);
 			var lustDmg:int = 11 + int(player.sens / 5);
+			
 			if (player.hasStatusEffect(StatusEffects.Illusion)) {
 				outputText("A series of Aiko's illusions surround you! You try to find the real one but you're too slow! An arrow comes from the side, impaling you!  ");
 				player.takeDamage(int(str/2) + rand(15), true);
-				switch (x) {
-					case 0:
+				
+				if (x === 0) {
 						outputText("\n\nYou attack Aiko, but her figure was just an illusion! She appears behind you and rapidly shoots an arrow, she got you! But.... what has she done?! You feel a tingling sensation in your groin, the arrow was poisoned with some kind of lust-inducing venom!  ");
-						if (!player.hasStatusEffect(StatusEffects.lustvenom))
+						
+						if (!player.hasStatusEffect(StatusEffects.lustvenom)) {
 							player.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
-						break;
-					case 1:
+						}
+				} else if (x === 1) {
 						outputText("\n\n<i>“This is my realm... and in my realm... you get to feel good...”</i> her strange words entice you as you widen your eyes, you try to hit her but you always seem to miss. A mischievous grin comes from her figure as you feel something rubbing your crotch, is one of her tails! Oh damn, it feels so good!  ");
 						player.takeLustDamage(lustDmg);
+						
 						if (player.hasStatusEffect(StatusEffects.Illusion)) {
 							player.addCombatBuff("spe", -3);
 						} else {
@@ -240,7 +309,8 @@ package classes.Scenes.Areas.Forest
 							addCombatBuff("spe", -7);
 							castIllusion += 2;
 						}
-						break;
+				} else {
+					reportABug("Aiko Illusion");
 				}
 			}
 			else if (x==3) {
@@ -251,17 +321,19 @@ package classes.Scenes.Areas.Forest
 			else if (x==4) {
 				outputText("Aiko devilishly looks at you, you find yourself surrounded by many Aikos! <i>“Would you like a reverse gangbang, big boy?”</i> all of the Aikos' seductively grab one bound breast and lower their pants, the tatoo on their pubic mounds drawing your attention to their most private parts.\n\n"
 				+"In your distraction you don't notice the illusion Aiko has cast over you!  ");
-				player.takeLustDamage(lustDmg*2);
+				player.takeLustDamage(lustDmg * 2);
+				
 				if (player.hasStatusEffect(StatusEffects.Illusion)) {
 					player.addCombatBuff("spe", -3);
 				} else {
 					player.createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
 					addCombatBuff("spe", -7);
-				}				
+				}
 			} else {
 				outputText("Aiko takes a moment to stretch out her limber body, thrusting out her chest as she stretches her arms toward the sky. She spins girlishly, giving you a come-hither glare, and then bows forward to give you a good angle at her cleavage, packed tightly into her too-small chest wrap."
 				+"\n\n<i>“You know, we don’t have to fight... Wouldn’t you rather come pet my super fluffy tails?”</i> Aiko teases, running a hand along her tails and making them fan out around her seductively. You find yourself nodding before you can even think to stop yourself—yes, you DO want the fluffy tails!  ");
 			}
+			
 			player.takeLustDamage(lustDmg);
 			combatRoundOver();
 		}
@@ -376,85 +448,48 @@ package classes.Scenes.Areas.Forest
 			combatRoundOver();
 		}
 		
-		private function kitsuneSealAttack():void
+		override protected function kitsuneSealAttack():void
 		{
-			var resist:int = 0;
-			if (player.inte < 30)
-				resist = Math.round(player.inte);
-			else
-				resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.isPureEnough(20)) resist += 20 - player.corAdjustedDown();
+			var resist:int = calculateAttackResist();
 			var select:int = rand(5);
-			//Attack:
-			if (select == 0) {
-				outputText("The kitsune playfully darts around you, grinning coyly.  She somehow slips in under your reach, and before you can react, draws a small circle on your chest with her fingertip.  As you move to strike again, the flaming runic symbol she left on you glows brightly, and your movements are halted mid-swing.");
-				outputText("\n\n\"<i>Naughty naughty, you should be careful with that.</i>\"");
 
-				outputText("\n\nDespite your best efforts, every time you attempt to attack her, your muscles recoil involuntarily and prevent you from going through with it.  <b>The kitsune's spell has sealed your attack!</b>  You'll have to wait for it to wear off before you can use your basic attacks.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 0, 0, 0);
+			if (select == 0) {
+				sealPlayerAttack();
+			} else if (select == 1) {
+				sealPlayerTease();
+			} else if (select == 2) {
+				sealPlayerItems();
+			} else if (select == 3) {
+				sealPlayerMovement();
 			}
-			else if (select == 1) {
-				//Tease:
-				outputText("You are taken by surprise when the kitsune appears in front of you out of nowhere, trailing a fingertip down your chest.  She draws a small circle, leaving behind a glowing, sparking rune made of flames.  You suddenly find that all your knowledge of seduction and titillation escapes you.  <b>The kitsune's spell has sealed your ability to tease!</b>  Seems you won't be getting anyone hot and bothered until it wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 1, 0, 0);
-			}
-			//Items:
-			else if (select == 2) {
-				outputText("\"<i>Tsk tsk, using items?  That's cheating!</i>\"  the kitsune says as she appears right in front of you, taking you off guard.  Her finger traces a small circle on your pouch, leaving behind a glowing rune made of crackling flames.  No matter how hard you try, you can't seem to pry it open.  <b>The kitsune's spell has sealed your item pouch!</b>  Looks like you won't be using any items until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 3, 0, 0);
-			}
-			//Run:
-			else if (select == 3) {
-				outputText("\"<i>Tsk tsk, leaving so soon?</i>\"  the kitsune says, popping up in front of you suddenly as you attempt to make your escape.  Before you can react, she draws a small circle on your chest with her fingertip, leaving behind a glowing rune made of crackling blue flames.  You try to run the other way, but your " + player.legs() + " won't budge!\n\n\"<i>Sorry baby, you'll just have to stay and play~.</i>\" she says in a singsong tone, appearing in front of you again.  <b>The kitsune's spell prevents your escape!</b>  You'll have to tough it out until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 4, 0, 0);
-			}
-			//P.Special:
 			else {
-				outputText("You jump with surprise as the kitsune appears in front of you, grinning coyly.  As she draws a small circle on your forehead with her fingertip, you find that you suddenly can't remember how to use any of your physical skills!");
-				outputText("\n\n\"<i>Oh no darling, </i>I'm<i> the one with all the tricks here.</i>\"");
-				outputText("\n\n<b>The kitsune's spell has sealed your physical skills!</b>  You won't be able to use any of them until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 5, 0, 0);
+				sealPlayerPhysicalSpecialSkills();
 			}
+			
 			if (resist >= rand(100)) {
-				outputText("\n\nUpon your touch, the seal dissipates, and you are free of the kitsune's magic!  She pouts in disappointment, looking thoroughly irritated, but quickly resumes her coy trickster facade.");
-				player.removeStatusEffect(StatusEffects.Sealed);
+				resistSeal();
 			}
+			
 			combatRoundOver();
 		}
 		
 		private function kitsuneSealMagic():void
 		{
-			var resist:int = 0;
-			if (player.inte < 30)
-				resist = Math.round(player.inte);
-			else
-				resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.isPureEnough(20)) resist += 20 - player.corAdjustedDown();
-			//Spells:
+			var resist:int = calculateAttackResist();
 			var select:int = rand(3);
+			
 			if (select == 0) {
-				outputText("\"<i>Oh silly, trying to beat me at my own game are you?</i>\"  the kitsune says with a smirk, surprising you as she appears right in front of you.  She traces a small circle around your mouth, and you find yourself stricken mute!  You try to remember the arcane gestures to cast your spell and find that you've forgotten them too.  <b>The kitsune's spell has sealed your magic!</b>  You won't be able to cast any spells until it wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 2, 0, 0);
-			}
-			//Run:
-			else if (select == 1) {
-				outputText("\"<i>Tsk tsk, leaving so soon?</i>\"  the kitsune says, popping up in front of you suddenly as you attempt to make your escape.  Before you can react, she draws a small circle on your chest with her fingertip, leaving behind a glowing rune made of crackling blue flames.  You try to run the other way, but your " + player.legs() + " won't budge!\n\n\"<i>Sorry baby, you'll just have to stay and play~.</i>\" she says in a singsong tone, appearing in front of you again.  <b>The kitsune's spell prevents your escape!</b>  You'll have to tough it out until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 4, 0, 0);
-			}
-			//M.Special:
-			else {
-				outputText("You jump with surprise as the kitsune appears in front of you, grinning coyly.  As she draws a small circle on your forehead with her fingertip, you find that you suddenly can't remember how to use any of your magical skills!");
-				outputText("\n\n\"<i>Oh no darling, </i>I'm<i> the one with all the tricks here.</i>\"");
-				outputText("\n\n<b>The kitsune's spell has sealed your magical skills!</b>  You won't be able to use any of them until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 6, 0, 0);
+				sealPlayerSpells();
+			} else if (select == 1) {
+				sealPlayerMovement();
+			} else {
+				sealPlayerMagicSpecialSkills();
 			}
 			
 			if (resist >= rand(100)) {
-				outputText("\n\nUpon your touch, the seal dissipates, and you are free of the kitsune's magic!  She pouts in disappointment, looking thoroughly irritated, but quickly resumes her coy trickster facade.");
-				player.removeStatusEffect(StatusEffects.Sealed);
+				resistSeal();
 			}
+			
 			combatRoundOver();
 		}
 		
@@ -489,11 +524,9 @@ package classes.Scenes.Areas.Forest
 			if (player.hasStatusEffect(StatusEffects.Illusion))
 				resistIllusion();
 			
-			if (rand(12) == 0)
+			if ((rand(12) == 0) && (!this.hasStatusEffect(StatusEffects.AikoArcaneArcher)))
 			{
-				if (!this.hasStatusEffect(StatusEffects.AikoArcaneArcher)) {
 					arcaneArcherActivate();
-				}
 			}
 			
 			//basic attack has 2x chance unless arcane archer active
@@ -553,52 +586,6 @@ package classes.Scenes.Areas.Forest
 			} else {
 				game.forest.aikoScene.aikoWinsIntro();
 			}
-		}
-
-		public function Aiko()
-		{
-			this.a = "";
-			this.short = "Aiko";
-			this.imageName = "aiko";
-			if (game.flags[kFLAGS.AIKO_CORRUPTION] < 50 || game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==0)
-				this.long = "Aiko stands before you, a little over 5’4 tall. She has a head of short silver-blond hair that ends above her shoulders, parted by two large, furry fox ears. "+(flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0 ? "Eight":"Seven")+" luxurious fox tails sway behind her, the silky fur shimmering as they move. She wears a set of revealing blue and white robes, neatly pressed and hung off her features with care, her D-cup breasts bound by a cloth chest wrap that is just a little too tight. She sports a number of red “tattoos” adorning her face and body; the most prominent of which are the spiral-shaped patterns on her palms and buttocks, and a stylized lotus flower on her lower back.  She wields a longbow almost as tall as she is that she can summon and dismiss with a snap of her fingers, and stares you down with a determined fire in her glittering blue eyes.";
-			else
-				this.long = "Aiko stands before you, a little over 5’4 tall. She has a head of short, unkempt silver-blond hair that ends above her shoulders, parted by two large, furry fox ears. "+(flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0 ? "Eight":"Seven")+" fox tails sway behind her, their fur shaggy and matted down. She wears a set of ragged, bloodied robes that show a lot of skin, her D-cup breasts haphazardly bound by a set of bandages in dire need of changing, and you can smell sex and violence on her even from here. She sports a number of red “tattoos” adorning her face and body; the most prominent of which are the spiral-shaped patterns on her palms and buttocks, and a stylized lotus flower on her lower back. She is wielding an over-sized bill-hook hatchet that she can summon and dismiss with a snap of her fingers, and stares you down with a maniacal fire in her crazed blue eyes."
-			this.race = "Kitsune";
-			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
-			this.createStatusEffect(StatusEffects.BonusVCapacity, 200, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
-			this.tallness = 64;
-			this.hips.rating = Hips.RATING_AMPLE;
-			this.butt.rating = Butt.RATING_AVERAGE+1;
-			this.skin.tone = "light tan";			//might need to change to russet
-			this.hair.color = "silver-blonde";
-			this.hair.length = 10;
-			initStrTouSpeInte(25, 30, 90, 100);
-			initLibSensCor(40, 65, game.flags[kFLAGS.AIKO_CORRUPTION]);
-			this.weaponName = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "bill-hook hatchet" : "longbow");
-			this.weaponVerb = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "slash" : "shoot");
-			this.armorName = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "ragged, bloodied robes" : "revealing blue and white robes");
-			this.armorDef = 16;
-			this.bonusHP = 350;
-			this.lust = 25;
-			this.lustVuln = 0.4;
-			this.temperment = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? TEMPERMENT_LOVE_GRAPPLES : TEMPERMENT_LUSTY_GRAPPLES);
-			if (flags[kFLAGS.AIKO_BOSS_COMPLETE] >0) {			
-				this.level = 28;
-				this.tail.venom = 8;
-			} else {
-				this.level = 18;
-				this.tail.venom = 7;
-			}
-			this.gems = rand(10) + 30;
-			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);
-			this.tail.type = Tail.FOX;
-			this.ears.type = Ears.FOX;
-			checkMonster();
 		}
 	}
 }

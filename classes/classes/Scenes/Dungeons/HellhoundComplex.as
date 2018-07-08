@@ -38,7 +38,15 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>Corridor 1</u></b>\n");
 			outputText("(Placeholder) A dark corridor leading the way between the lobby and the kennels.");
 			outputText("There's another door leading deeper inside but it's locked, maybe you should going through the kennels?");
-			dungeons.setDungeonButtons(null, roomEntrance, roomKennels, null);
+			dungeons.setDungeonButtons(null, roomEntrance, roomKennels, roomKitchen);
+		}
+		
+		public function roomKitchen():void {
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HELLHOUND_KITCHEN;
+			clearOutput();
+			outputText(images.showImage("location-hellhound-kitchen"));
+			outputText("<b><u>Kitchen</u></b>\n");
+			dungeons.setDungeonButtons(null, null, roomCorridor1, null);
 		}
 		
 		public function roomKennels():void {
@@ -77,7 +85,15 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>Laboratory</u></b>\n");
 			outputText("(Placeholder) A room where the demons conduct experiments on willing hellhounds but also the unwilling ones who were punished.");
 			outputText("\n\nThis will also be where you fight the demon to get the key to unlock the Inner Sanctum.");
-			dungeons.setDungeonButtons(null, null, roomCorridor2, null);
+			dungeons.setDungeonButtons(roomStorage, null, roomCorridor2, null);
+		}
+		
+		public function roomStorage():void {
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HELLHOUND_STORAGE;
+			clearOutput();
+			outputText(images.showImage("location-hellhound-storage"));
+			outputText("<b><u>Storage</u></b>\n");
+			dungeons.setDungeonButtons(null, roomLab, null, null);
 		}
 		
 		public function roomInnerSanctum():void {

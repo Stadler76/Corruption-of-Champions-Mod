@@ -8,8 +8,13 @@ package classes.Scenes.Places.Farm {
 	public class KeltScene extends AbstractFarmContent {
 
 		public var kelly:Kelly = new Kelly();
+		
+		private var outputLocal:GuiOutput;
 
-	public function KeltScene() {}
+		public function KeltScene(output:GuiOutput)
+		{
+			this.outputLocal = output;
+		}
 
 	/*Kelt the Centaur Archer
 A Corruption of Champions Event by Ourakun
@@ -53,6 +58,22 @@ STATUSES:
 "BlowjobOn"
 "Kelt" - v1 = Archery, v2 = Submissiveness, v3 = total encounters.
 "KeltOff" - Turns off Kelt */
+
+		/**
+		 * Redirtect the output to injected output instance.
+		 * @param	output text to output
+		 */
+		override protected function outputText(output:String):void {
+			outputLocal.text(output);
+		}
+		
+		/**
+		 * Redirect the clear output call to the injected output instance.
+		 */
+		override protected function clearOutput():void
+		{
+			outputLocal.clear();
+		}
 
 private function bowSkill(diff:Number):Number {
 	player.addStatusValue(StatusEffects.Kelt,1,diff);
@@ -500,7 +521,6 @@ private function keltMainEncounterAfterNakedReq():void {
 }
 //Normal Encounter 2
 private function keltMainEncounter2():void {
-	clearOutput();
 	//Used for randomization
 	var temporary:Number = 0;
 	if (player.hasKeyItem("Bow") < 0) { //No bow equipped

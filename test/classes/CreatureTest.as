@@ -46,6 +46,14 @@ package classes{
 			}
 		}
 		
+		private function createCocks(cockType:CockTypesEnum, count:int, instance:Creature):void
+		{
+			var i:int;
+			for (i = 0; i < count; i++) {
+				instance.createCock(5, 1, cockType);
+			}
+		}
+		
 		private function createMaxVaginas(instance:Creature):void {
 			createVaginas(MAX_SUPPORTED_VAGINAS, instance);
 		}
@@ -95,6 +103,7 @@ package classes{
 			fullEquip.createBreastRow(BreastCup.B);
 			fullEquip.createBreastRow(BreastCup.B);
 			fullEquip.balls = 4;
+			
 			
 			// verify created test instances
 			assertThat(noVagina.hasVagina(), equalTo(false));
@@ -677,6 +686,122 @@ package classes{
 		[Test(expected="RangeError")]
 		public function healByNegativeAmount():void {
 			cut.restoreHP(-1);
+		}
+		
+		[Test]
+		public function hasCockNotOfTypeWithNoCock(): void
+		{
+			assertThat(cut.hasCockNotOfType(CockTypesEnum.HUMAN), equalTo(false));
+		}
+		
+		[Test]
+		public function hasCockNotOfTypeWithOneMatchingCock(): void
+		{
+			cut.createCock(5, 1, CockTypesEnum.HUMAN);
+			
+			assertThat(cut.hasCockNotOfType(CockTypesEnum.HUMAN), equalTo(false));
+		}
+		
+		[Test]
+		public function hasCockNotOfTypeWithManyMatchingCocks(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 3, cut);
+			
+			assertThat(cut.hasCockNotOfType(CockTypesEnum.HUMAN), equalTo(false));
+		}
+		
+		[Test]
+		public function hasCockNotOfTypeWithNonMatchingCock(): void
+		{
+			createCocks(CockTypesEnum.HORSE, 1, cut);
+			
+			assertThat(cut.hasCockNotOfType(CockTypesEnum.HUMAN), equalTo(true));
+		}
+		
+		[Test]
+		public function findFirstCockNotOfTypeWithNoCock(): void
+		{
+			assertThat(cut.findFirstCockNotOfType(CockTypesEnum.HUMAN), equalTo(-1));
+		}
+		
+		[Test]
+		public function findFirstCockNotOfTypeWithMatchingCock(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 1, cut);
+			
+			assertThat(cut.findFirstCockNotOfType(CockTypesEnum.HUMAN), equalTo(-1));
+		}
+		
+		[Test]
+		public function findFirstCockNotOfTypeWithNonMatchingCock(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 1, cut);
+			createCocks(CockTypesEnum.HORSE, 1, cut);
+			
+			assertThat(cut.findFirstCockNotOfType(CockTypesEnum.HUMAN), equalTo(1));
+		}
+		
+		[Test]
+		public function setFirstCockNotOfTypeWithNoCock(): void
+		{
+			assertThat(cut.setFirstCockNotOfType(CockTypesEnum.HORSE), equalTo(false));
+		}
+		
+		[Test]
+		public function setFirstCockNotOfTypeWithMatchingCock(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 1, cut);
+			
+			assertThat(cut.setFirstCockNotOfType(CockTypesEnum.HUMAN), equalTo(false));
+		}
+		
+		[Test]
+		public function setFirstCockNotOfTypeWithNonMatchingCockReturnValue(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 1, cut);
+			
+			assertThat(cut.setFirstCockNotOfType(CockTypesEnum.HORSE), equalTo(true));
+		}
+		
+		[Test]
+		public function setFirstCockNotOfTypeWithNonMatchingCockType(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 1, cut);
+			
+			cut.setFirstCockNotOfType(CockTypesEnum.HORSE);
+			
+			assertThat(cut.cocks[0].cockType, equalTo(CockTypesEnum.HORSE));
+		}
+		
+		[Test]
+		public function setFirstCockNotOfTypeWithDifferingTypes(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 2, cut);
+			createCocks(CockTypesEnum.DOG, 2, cut);
+			
+			cut.setFirstCockNotOfType(CockTypesEnum.HUMAN, CockTypesEnum.HORSE);
+			
+			assertThat(cut.cocks[0].cockType, equalTo(CockTypesEnum.HUMAN));
+			assertThat(cut.cocks[1].cockType, equalTo(CockTypesEnum.HUMAN));
+			assertThat(cut.cocks[2].cockType, equalTo(CockTypesEnum.HORSE));
+			assertThat(cut.cocks[3].cockType, equalTo(CockTypesEnum.DOG));
+		}
+
+		[Test]
+		public function findFirstCocktOfTypeFoundType(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 2, cut);
+			createCocks(CockTypesEnum.DOG, 2, cut);
+			
+			assertThat(cut.findFirstCockType(CockTypesEnum.DOG), equalTo(2));
+		}
+
+		[Test]
+		public function findFirstCocktOfTypeNotFound(): void
+		{
+			createCocks(CockTypesEnum.HUMAN, 2, cut);
+			
+			assertThat(cut.findFirstCockType(CockTypesEnum.HORSE), equalTo(-1));
 		}
 	}
 }

@@ -5,6 +5,7 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
+	import classes.Scenes.NPCs.Jojo;
 	import classes.internals.LoggerFactory;
 	import classes.internals.SerializationUtils;
 	import classes.lists.BreastCup;
@@ -965,6 +966,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.cocks = SerializationUtils.serializeVector(player.cocks as Vector.<*>);
 		saveFile.data.vaginas = SerializationUtils.serializeVector(player.vaginas as Vector.<*>);
 		
+		saveNPCs(saveFile);
+		
 		//NIPPLES
 		saveFile.data.nippleLength = player.nippleLength;
 		//Set Breast Array
@@ -1259,6 +1262,20 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		addButton(9, "Restore", restore, slot);
 	}
 	
+}
+
+/**
+ * Save NPCs to the save file. The NPC data is placed in the 'npcs' object (saveFile.data.npcs).
+ * This method is protected instead of private to allow for testing.
+ * @param	saveFile the file to save the NPC data to.
+ */
+protected function saveNPCs(saveFile:*): void {
+	saveFile.data.npcs = [];
+	var npcs:* = saveFile.data.npcs;
+	
+	npcs.jojo = [];
+	
+	SerializationUtils.serialize(npcs.jojo, new Jojo());
 }
 
 public function restore(slotName:String):void
@@ -1910,6 +1927,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.vaginas = new Vector.<VaginaClass>();
 		SerializationUtils.deserializeVector(player.vaginas as Vector.<*>, saveFile.data.vaginas, VaginaClass);
 		
+		loadNPCs(saveFile);
+		
 		if (player.hasVagina() && player.vaginaType() != 5 && player.vaginaType() != 0)
 			player.vaginaType(0);
 		
@@ -2317,6 +2336,27 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		doNext(playerMenu);
 	}
+}
+
+/**
+ * Load NPCs from the save file. The NPC data is loaded from the 'npcs' object (saveFile.data.npcs).
+ * Creates empty dummy structure if the NPC data is missing, to avoid errors on loading.
+ * This method is protected instead of private to allow for testing.
+ * @param	saveFile the file to save the NPC data to.
+ */
+protected function loadNPCs(saveFile:*):void 
+{
+	var npcs:* = saveFile.data.npcs;
+	//TODO change safeFile structure with versioning of the saveFile itself.
+	if (npcs === undefined) {
+		npcs = [];
+	}
+	
+	if (npcs.jojo === undefined) {
+		npcs.jojo = [];
+	}
+	
+	SerializationUtils.deserialize(npcs.jojo, new Jojo());
 }
 
 public function unFuckSave():void

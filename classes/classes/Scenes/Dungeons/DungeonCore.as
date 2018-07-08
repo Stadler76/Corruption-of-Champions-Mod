@@ -93,8 +93,8 @@ package classes.Scenes.Dungeons  {
 		public static const DUNGEON_HELLHOUND_KENNELS:int       = 69;
 		public static const DUNGEON_HELLHOUND_PLEASURE_PITS:int = 70;
 		public static const DUNGEON_HELLHOUND_LAB:int           = 71;
-		public static const DUNGEON_HELLHOUND_UNKNOWN_1:int     = 72;
-		public static const DUNGEON_HELLHOUND_UNKNOWN_2:int     = 73;
+		public static const DUNGEON_HELLHOUND_KITCHEN:int       = 72;
+		public static const DUNGEON_HELLHOUND_STORAGE:int       = 73;
 		public static const DUNGEON_HELLHOUND_INNER_SANCTUM:int = 74;
 
 		public function DungeonCore(pregnancyProgression:PregnancyProgression) {
@@ -182,6 +182,8 @@ package classes.Scenes.Dungeons  {
 			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_KENNELS) hellcomplex.roomKennels();
 			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_PLEASURE_PITS) hellcomplex.roomPleasurePits();
 			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_LAB) hellcomplex.roomLab();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_KITCHEN) hellcomplex.roomKitchen();
+			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_STORAGE) hellcomplex.roomStorage();
 			if (kGAMECLASS.dungeonLoc === DUNGEON_HELLHOUND_INNER_SANCTUM) hellcomplex.roomInnerSanctum();
 			//Dragon City
 			if (kGAMECLASS.dungeonLoc === DUNGEON_DRAGON_CITY_SQUARE) dragoncity.roomCitySquare();

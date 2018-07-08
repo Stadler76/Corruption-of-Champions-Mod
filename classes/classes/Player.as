@@ -981,7 +981,7 @@
 			{
 				race = "satyr";
 			}
-			if (DryadScore() >= 3)
+			if (dryadScore() >= 3)
 			{
 				race = "dryad";
 			}
@@ -1871,7 +1871,7 @@
 		//------------
 		
 	    //dryad score
-		public function DryadScore():Number
+		public function dryadScore():Number
 		{
 			var dryad:Number = 0;
 			if (hasCock())

@@ -6,9 +6,61 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
 
-	public class Kitsune extends Monster
+	public class Kitsune extends BaseKitsune
 	{
+		public function Kitsune(hairColor:String)
+		{
+			init(hairColor);
+		}
+		
+		private function init(hairColor:String):void
+		{
+			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
+			this.a = "a ";
+			this.short = "kitsune";
+			this.imageName = "kitsune";
+			this.long = "A kitsune stands in front of you, about five and a half feet tall.  She has a head of " + ({
+						"blonde": "long flaxen",
+						"black": "lustrous, ass-length black",
+						"red": "unkempt, shoulder-length reddish"
+					}[hairColor]) +
+							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
+			this.race = "Kitsune";
 
+			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
+				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN);
+				this.balls = 2;
+				this.ballSize = 2 + rand(13);
+				this.cumMultiplier = 1.5;
+				this.hoursSinceCum = ballSize * 10;
+			}
+			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("D"));
+			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
+			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
+			this.tallness = rand(24) + 60;
+			this.hips.rating = Hips.RATING_AMPLE;
+			this.butt.rating = Butt.RATING_AVERAGE+1;
+			this.skin.tone = "pale";
+			this.hair.color = hairColor;
+			this.hair.length = 13 + rand(20);
+			initStrTouSpeInte(35, 45, 90, 95);
+			initLibSensCor(60, 65, 45);
+			this.weaponName = "claws";
+			this.weaponVerb="punch";
+			this.armorName = "skin";
+			this.bonusHP = 120;
+			this.lust = 20;
+			this.lustVuln = 0.9;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 6;
+			this.gems = rand(10) + 10;
+			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);
+			this.tail.type = Tail.FOX;
+			checkMonster();
+		}
 
 		// Combat Abilities:
 		// the kitsune are an almost purely magical mob, relying mainly on tease attacks and spells that raise lust.
@@ -75,76 +127,14 @@ package classes.Scenes.Areas.Forest
 		{
 			outputText("You struggle to keep your eyes on the kitsune, ghostly laughter echoing all around you as you turn to and fro, trying to track her movements.  It almost seems like the edges of reality are blurring around her, severely distorting your perceptions and making it hard to follow her.  It's going to be much harder to hit her if she keeps this up!");
 			//Resist: - successfully resisting deals small health & lust damage to kitsune
-			var resist:int = 0;
-			if (player.inte < 30) resist = Math.round(player.inte);
-			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.isPureEnough(20)) resist += 20 - player.corAdjustedDown();
+			var resist:int = calculateAttackResist();
+			
 			if (rand(100) < resist) {
 				outputText("\n\nThe kitsune seems to melt away before your eyes for a moment, as though the edges of reality are blurring around her.  You tighten your focus, keeping your eyes trained on her, and she suddenly reels in pain, clutching her forehead as she is thrust back into view.  She lets out a frustrated huff of disappointment, realizing that you have resisted her illusions.");
 			}
 			else {
 				createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
 				spe += 20;
-			}
-			combatRoundOver();
-		}
-
-//Seal: - cancels and disables whatever command the player uses this round. Lasts 3 rounds, cannot seal more than one command at a time.
-//PCs with "Religious" background and < 20 corruption have up to 20% resistance to sealing at 0 corruption, losing 1% per corruption.
-		private function kitsuneSealAttack():void
-		{
-			var resist:int = 0;
-			if (player.inte < 30) resist = Math.round(player.inte);
-			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.isPureEnough(20)) resist += 20 - player.corAdjustedDown();
-			var select:int = rand(7);
-			//Attack:
-			if (select == 0) {
-				outputText("The kitsune playfully darts around you, grinning coyly.  She somehow slips in under your reach, and before you can react, draws a small circle on your chest with her fingertip.  As you move to strike again, the flaming runic symbol she left on you glows brightly, and your movements are halted mid-swing.");
-				outputText("\n\n\"<i>Naughty naughty, you should be careful with that.</i>\"");
-
-				outputText("\n\nDespite your best efforts, every time you attempt to attack her, your muscles recoil involuntarily and prevent you from going through with it.  <b>The kitsune's spell has sealed your attack!</b>  You'll have to wait for it to wear off before you can use your basic attacks.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 0, 0, 0);
-			}
-			else if (select == 1) {
-				//Tease:
-				outputText("You are taken by surprise when the kitsune appears in front of you out of nowhere, trailing a fingertip down your chest.  She draws a small circle, leaving behind a glowing, sparking rune made of flames.  You suddenly find that all your knowledge of seduction and titillation escapes you.  <b>The kitsune's spell has sealed your ability to tease!</b>  Seems you won't be getting anyone hot and bothered until it wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 1, 0, 0);
-			}
-			//Spells:
-			else if (select == 2) {
-				outputText("\"<i>Oh silly, trying to beat me at my own game are you?</i>\"  the kitsune says with a smirk, surprising you as she appears right in front of you.  She traces a small circle around your mouth, and you find yourself stricken mute!  You try to remember the arcane gestures to cast your spell and find that you've forgotten them too.  <b>The kitsune's spell has sealed your magic!</b>  You won't be able to cast any spells until it wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 2, 0, 0);
-			}
-			//Items:
-			else if (select == 3) {
-				outputText("\"<i>Tsk tsk, using items?  That's cheating!</i>\"  the kitsune says as she appears right in front of you, taking you off guard.  Her finger traces a small circle on your pouch, leaving behind a glowing rune made of crackling flames.  No matter how hard you try, you can't seem to pry it open.  <b>The kitsune's spell has sealed your item pouch!</b>  Looks like you won't be using any items until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 3, 0, 0);
-			}
-			//Run:
-			else if (select == 4) {
-				outputText("\"<i>Tsk tsk, leaving so soon?</i>\"  the kitsune says, popping up in front of you suddenly as you attempt to make your escape.  Before you can react, she draws a small circle on your chest with her fingertip, leaving behind a glowing rune made of crackling blue flames.  You try to run the other way, but your " + player.legs() + " won't budge!\n\n\"<i>Sorry baby, you'll just have to stay and play~.</i>\" she says in a singsong tone, appearing in front of you again.  <b>The kitsune's spell prevents your escape!</b>  You'll have to tough it out until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 4, 0, 0);
-			}
-			//P.Special:
-			else if (select == 5) {
-				outputText("You jump with surprise as the kitsune appears in front of you, grinning coyly.  As she draws a small circle on your forehead with her fingertip, you find that you suddenly can't remember how to use any of your physical skills!");
-				outputText("\n\n\"<i>Oh no darling, </i>I'm<i> the one with all the tricks here.</i>\"");
-				outputText("\n\n<b>The kitsune's spell has sealed your physical skills!</b>  You won't be able to use any of them until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 5, 0, 0);
-			}
-			//M.Special:
-			else {
-				outputText("You jump with surprise as the kitsune appears in front of you, grinning coyly.  As she draws a small circle on your forehead with her fingertip, you find that you suddenly can't remember how to use any of your magical skills!");
-				outputText("\n\n\"<i>Oh no darling, </i>I'm<i> the one with all the tricks here.</i>\"");
-				outputText("\n\n<b>The kitsune's spell has sealed your magical skills!</b>  You won't be able to use any of them until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 6, 0, 0);
-			}
-			if (resist >= rand(100)) {
-				outputText("\n\nUpon your touch, the seal dissipates, and you are free of the kitsune's magic!  She pouts in disappointment, looking thoroughly irritated, but quickly resumes her coy trickster facade.");
-				player.removeStatusEffect(StatusEffects.Sealed);
 			}
 			combatRoundOver();
 		}
@@ -189,57 +179,5 @@ package classes.Scenes.Areas.Forest
 				game.forest.kitsuneScene.loseToKitsunes();
 			}
 		}
-
-		public function Kitsune(hairColor:String)
-		{
-
-			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
-			this.a = "a ";
-			this.short = "kitsune";
-			this.imageName = "kitsune";
-			this.long = "A kitsune stands in front of you, about five and a half feet tall.  She has a head of " + ({
-						"blonde": "long flaxen",
-						"black": "lustrous, ass-length black",
-						"red": "unkempt, shoulder-length reddish"
-					}[hairColor]) +
-							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
-			this.race = "Kitsune";
-			// this.plural = false;
-			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
-				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN);
-				this.balls = 2;
-				this.ballSize = 2 + rand(13);
-				this.cumMultiplier = 1.5;
-				this.hoursSinceCum = ballSize * 10;
-			}
-			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
-			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
-			this.tallness = rand(24) + 60;
-			this.hips.rating = Hips.RATING_AMPLE;
-			this.butt.rating = Butt.RATING_AVERAGE+1;
-			this.skin.tone = "pale";
-			this.hair.color = hairColor;
-			this.hair.length = 13 + rand(20);
-			initStrTouSpeInte(35, 45, 90, 95);
-			initLibSensCor(60, 65, 45);
-			this.weaponName = "claws";
-			this.weaponVerb="punch";
-			this.armorName = "skin";
-			this.bonusHP = 120;
-			this.lust = 20;
-			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 6;
-			this.gems = rand(10) + 10;
-			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);
-			this.tail.type = Tail.FOX;
-			checkMonster();
-		}
-
 	}
-
 }

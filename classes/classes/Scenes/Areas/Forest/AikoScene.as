@@ -208,7 +208,7 @@ package classes.Scenes.Areas.Forest
 					menu();
 					addButton(0, "Talk", aikoTalkE3).hint("Talk with the foxy girl.");
 					addButton(1, "Sex", aikoSex).hint("Have some fun times with foxy Aiko!");
-					addButton(4, "Fight", aikoFight).hint("Attack that fox bitch!").disableIf(player.isPureEnough(60), "You are not corrupt enough to just attack her out of the blue.");;
+					addButton(4, "Fight", aikoFight).hint("Attack that fox bitch!").disableIf(player.isPureEnough(60), "You are not corrupt enough to just attack her out of the blue.");
 					addButton(14, "Leave", leave).hint("Leave the clearing");
 				}
 			} else {
@@ -392,7 +392,7 @@ package classes.Scenes.Areas.Forest
 	
 	/////////////////////////////////////////////////////////////////////
 	//////////////////////AIKO CORRUPTION SETTINGS///////////////////////
-	private var init_scene:String = "Peace";
+	private var initScene:String = "Peace";
 	private function initialCorruptionSetting():void
 	{
 		clearOutput();
@@ -407,7 +407,7 @@ package classes.Scenes.Areas.Forest
 	{
 		flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] = 1;
 		outputText("Aiko's corruption has been enabled and will progress as normal with certain interactions.");
-		if (init_scene == "Aggro")
+		if (initScene == "Aggro")
 			 doNext(aikoAggroGreeting);
 		else 
 			doNext(aikoPeaceGreeeting);
@@ -417,7 +417,7 @@ package classes.Scenes.Areas.Forest
 	{
 		flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] = 0;
 		outputText("Aiko's corruption has been disabled and will not progress regardless of interactions.");
-		if (init_scene == "Aggro")
+		if (initScene == "Aggro")
 			 doNext(aikoAggroGreeting);
 		else 
 			doNext(aikoPeaceGreeeting);
@@ -440,7 +440,7 @@ package classes.Scenes.Areas.Forest
 		+"<i>“Heheh… well… you know, maybe I was hasty. Perhaps we could strike a deal? What do you say? My Ball in exchange for anything your heart desires. Riches, power… I could help take the edge off things, if you know what I mean,”</i> she says coyly, wiggling her hips seductively.\n\n"
 		+"Whatever this ball is for, it seems like it is very important to her. Maybe you should reconsider—you could probably get her to do anything… but it might be a trick. What will you ask for?");
 		
-		init_scene = "Aggro";
+		initScene = "Aggro";
 		//[Riches][Power][Sex][Nothing][Fight][TouchFluffTail]
 		menu();
 		addButton(0, "Riches", aikoE1Riches).hint("GIVE ME ALL THE GOLD!!!");
@@ -461,7 +461,7 @@ package classes.Scenes.Areas.Forest
 		+"<i>“Okay, listen up, I’ll tell you what. I like you, so I’m willing to make a deal with you. Besides, it was fun messing with you, so… What’ll it take to get my Ball back, hm? Riches? Power? Maybe a little… release?”</i> she says coyly, turning around and slapping her own plump, juicy rear playfully, revealing two spiral-shaped tattoos on her buttocks.\n\n"
 		+"Whatever this ball is for, it seems like it is very important to her. You could probably get her to do just about anything… What will you ask for?");
 		
-		init_scene = "Peace";
+		initScene = "Peace";
 		//[Riches][Power][Sex][Nothing][TouchFluffTail]
 		menu();
 		addButton(0, "Riches", aikoE1Riches).hint("GIVE ME ALL THE GOLD!!!");
@@ -624,18 +624,6 @@ package classes.Scenes.Areas.Forest
 		flags[kFLAGS.AIKO_AFFECTION] += 15;
 		player.dynStats("lus", 10+rand(11), "cor", -5);
 		doNext(camp.returnToCampUseOneHour);
-	}
-	
-	private function aikoE1Fight():void
-	{
-		clearOutput();
-		spriteSelect(SpriteDb.s_aiko);		
-		outputText("When it becomes apparent that you won’t be talked out of fighting, Aiko lets out a disappointed sigh.\n\n"
-		+"<i>“I was really hoping to avoid a fight,”</i> she says, holding her hands up defensively, taking a few small steps backward. <i>“But I really need that ball back, and if I can’t convince you... I’ll just have to force you to give it up.”</i>");
-		flags[kFLAGS.AIKO_FIRST_CHOICE] = 5;
-		flags[kFLAGS.AIKO_HAS_FOUGHT] = 1;
-		flags[kFLAGS.AIKO_AFFECTION] -= 2;
-		startCombat(new Aiko());
 	}
 		
 	internal function aikoLosesIntro():void
@@ -1107,10 +1095,7 @@ package classes.Scenes.Areas.Forest
 		+"<i>“When a kitsune gets their last tail, a ceremony is induced and all of the village celebrates at their newly acquired leader. During said ceremony, the new nine tails can select one or more retainers who will act as their servants and lieutenants, these retainers need to have five or more tails and may even be from other clans. It is a very high honor to be selected.”</i>\n\n"
 		+"You nod as you see her lips stop moving. You ask if she has ever became a retainer, noting that she has [if (flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)eight|seven] tails. You see her with an irritated grin immediately after you finished talking, it's clear something is up.\n\n"
 		+"<i>“Well... yes. I was a retainer, to the last nine tails ever created in my village. Her name is “Ginko” ... let's just say she loved nagging us and had... somewhat of a passion for sexually dominating us. That is until I became the guardian of my village.”</i>\n\n"
-		+"With a grin, you giggle at her obvious distaste for her time as a servant, earning a raspberry from her irritated form before sharing a laugh.\n\n"
-		//Kitsune retainers are a potential future expansion
-		/*+((player.tail.type == Tail.FOX && player.tail.venom == 9)?"<i>“So, if I may ask, who are your retainers? If you have been to Taoth's shrine, you have certainly met the apprentices eager to serve you? [If (flags[kFLAGS.AIKO_AFFECTION]>80) <i>“if I weren't a guardian... I wouldn't mind becoming your retainer.”</i> She says while playfully spanking your ass, lighting a grin on your lips. Maybe you seriously will take her as a retainer when she is released of her duty.]\n\n":"")
-		+"You tell her you didn't even know you could have retainers before hearing it from her. <i>“That's fun to hear... I'll be curious to see who you will pick, and if they can please you properly...”</i> She seductively moves a finger onto your "+((player.armor != ArmorLib.NOTHING)"[armor]":"[skin]")+", grinning.\n\n"*/);
+		+"With a grin, you giggle at her obvious distaste for her time as a servant, earning a raspberry from her irritated form before sharing a laugh.\n\n");
 		if (talkAndSex) {
 			outputText("Thanking her for the information, you decide to change the subject, bringing up your previous proposition again.");
 			doNext(aikoSex);
@@ -1377,7 +1362,6 @@ package classes.Scenes.Areas.Forest
 	
 	public function aikoRapeSex():void {
 		//[Fuck Vagina][Fuck Ass][Humiliate][Leave]
-		//apply //flags[kFLAGS.AIKO_SEXED]++;
 		menu();
 		addButton(0, "Fuck Vag", aikoRapeFuckVag).hint("Pound ze foxy pussy!").disableIf(!player.hasCock(),"Requires a dick you moron!");
 		addButton(1, "Fuck Ass", aikoRapeFuckAss).hint("Get some of that tight, juicy ass!").disableIf(!player.hasCock(),"Requires a dick you moron!").disableIf(player.cockThatFits(50) < 0,"You dick too huge man, She be delicate in the heinie");
@@ -1390,6 +1374,53 @@ package classes.Scenes.Areas.Forest
 			addButton(14, "Leave", aikoRequestsBallAfterLose).hint("Leave the clearing without touching her.");
 		else 
 			addButton(14, "Leave", leave).hint("Leave the clearing without touching her.");
+	}
+	
+	/**
+	 * Update Aiko's flags and the players corruption after rape.
+	 */
+	private function postRapeUpdate(): void {
+		if (flags[kFLAGS.AIKO_CORRUPTION] >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
+			flags[kFLAGS.AIKO_AFFECTION] += 5;
+		} else {
+			flags[kFLAGS.AIKO_AFFECTION] -= 5;
+		}
+		
+		flags[kFLAGS.AIKO_RAPE]++;
+		
+		if (player.isPureEnough(50)) {
+			player.dynStats("cor", 5);
+			
+			if (player.cor > 50) {
+				player.cor = 50;
+			}
+		}
+		
+		if ((player.cor > flags[kFLAGS.AIKO_CORRUPTION] || player.hasPerk(PerkLib.Sadist)) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) {
+			flags[kFLAGS.AIKO_CORRUPTION] += 12;
+		} else if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 1) {
+			flags[kFLAGS.AIKO_CORRUPTION] += 8;
+		}
+		
+		if (flags[kFLAGS.AIKO_CORRUPTION] > 100) {
+			flags[kFLAGS.AIKO_CORRUPTION] = 100;
+		}
+	}
+	
+	/**
+	 * Update Aiko's flags and the players corruption after consensual sex.
+	 */
+	private function postSexUpdate(): void {
+		flags[kFLAGS.AIKO_AFFECTION] += 4;
+		
+		if (player.isCorruptEnough(50) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0) {
+			flags[kFLAGS.AIKO_CORRUPTION] += 4;
+		}
+		
+		if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.isPureEnough(flags[kFLAGS.AIKO_CORRUPTION])) {
+			player.cor += 2;
+			flags[kFLAGS.AIKO_CORRUPTION] -= 2;
+		}
 	}
 	
 	private function aikoRapeFuckVag():void
@@ -1418,23 +1449,11 @@ package classes.Scenes.Areas.Forest
 		+(flags[kFLAGS.AIKO_BALL_RETURNED] == 0 ?"<i>“You got what you wanted…”</i> she says, almost whispering. <i>“Now will you give me back my Ball?”</i>\n\n"
 		+"You have no use for it, you reason, and she was a decent fuck, so you reach into your pouch and pull out the ball, haphazardly tossing it over. It lands in the sticky pool of cum forming between Aiko’s legs, a bit of it splattering up onto her thighs[if (player.isCorruptEnough(50) ||player.hasPerk(PerkLib.Sadist)), and for good measure, you hock a wad of spit onto it as well]. ":"")
 		+"You leave her to figure out how to untie herself as you head back for camp.");
+		
 		flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
-		if (flags[kFLAGS.AIKO_CORRUPTION] >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
-			flags[kFLAGS.AIKO_AFFECTION] += 5;
-		} else {
-			flags[kFLAGS.AIKO_AFFECTION] -= 5;
-		}
-		flags[kFLAGS.AIKO_RAPE]++;
-		if (player.isPureEnough(50)) {
-			player.dynStats("cor", 5);
-			if (player.cor > 50)
-				player.cor = 50;
-		}
-		if ((player.cor > flags[kFLAGS.AIKO_CORRUPTION]||player.hasPerk(PerkLib.Sadist)) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 12;
-		else if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 1) 
-			flags[kFLAGS.AIKO_CORRUPTION] += 8;
-		if (flags[kFLAGS.AIKO_CORRUPTION]>100) flags[kFLAGS.AIKO_CORRUPTION] = 100;
+		
+		postRapeUpdate();
+		
 		player.orgasm('Dick');
 		combat.cleanupAfterCombat();
 	}
@@ -1456,23 +1475,11 @@ package classes.Scenes.Areas.Forest
 		+(player.hasKnot(x)?"You are held together for a while longer by your distended and sensitive knot, which only starts deflating after several minutes.\n\n":"")
 		+"When you pull out, her ass makes a sloppy slurping noise around your shaft, a glob of jism spilling out after it and splashing to the ground. [if(player.isCorruptEnough(50) ||player.hasPerk(PerkLib.Sadist))Aiko lays in a puddle comprised mainly of her own pussy juices, tears, and shame, weeping softly. ]You stand and brush yourself off, giving the kitsune priestess a hearty smack on the ass"+
 		(flags[kFLAGS.AIKO_BALL_RETURNED] == 0 ?", and [if(player.isCorruptEnough(50) ||player.hasPerk(PerkLib.Sadist))pull out her ball, smirking evilly as a despicable idea comes into your mind. You place the ball up against Aiko’s brutalized anus and push it in, eliciting another shameful groan from her throat. Well, she said she wanted it back, and now she has it, you think to yourself with a terrible grin as you set off for camp. |gently drop her ball on the ground next to her, setting off for camp.]":" and set off back to camp."));
+		
 		flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
-		if (flags[kFLAGS.AIKO_CORRUPTION] >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
-			flags[kFLAGS.AIKO_AFFECTION] += 5;
-		} else {
-			flags[kFLAGS.AIKO_AFFECTION] -= 5;
-		}
-		flags[kFLAGS.AIKO_RAPE]++;
-		if (player.isPureEnough(50)) {
-			player.dynStats("cor", 5);
-			if (player.cor > 50)
-				player.cor = 50;
-		}
-		if ((player.cor > flags[kFLAGS.AIKO_CORRUPTION]||player.hasPerk(PerkLib.Sadist))&& flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 12;
-		else if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 8;
-		if (flags[kFLAGS.AIKO_CORRUPTION]>100) flags[kFLAGS.AIKO_CORRUPTION] = 100;
+		
+		postRapeUpdate();
+		
 		player.orgasm('Dick');
 		combat.cleanupAfterCombat();
 	}
@@ -1524,21 +1531,9 @@ package classes.Scenes.Areas.Forest
 		+"\n\n[if(player.isCorruptEnough(50) ||player.hasPerk(PerkLib.Sadist))Feeling immensely proud of yourself|Feeling a bit disgusted with yourself], you turn and head back to camp.");
 		
 		flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
-		if (flags[kFLAGS.AIKO_CORRUPTION] >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
-			flags[kFLAGS.AIKO_AFFECTION] += 5;
-		} else {
-			flags[kFLAGS.AIKO_AFFECTION] -= 5;
-		}
-		flags[kFLAGS.AIKO_RAPE]++;
-		if (player.isPureEnough(50)) {
-			player.dynStats("cor", 5);
-			if (player.cor > 50)
-				player.cor = 50;
-		}
-		if ((player.cor > flags[kFLAGS.AIKO_CORRUPTION]||player.hasPerk(PerkLib.Sadist))&& flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 12;
-		else if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1) flags[kFLAGS.AIKO_CORRUPTION] += 8;
-		if (flags[kFLAGS.AIKO_CORRUPTION]>100) flags[kFLAGS.AIKO_CORRUPTION] = 100;
+
+		postRapeUpdate();
+		
 		combat.cleanupAfterCombat();
 	}
 	private function aikoFistHer():void
@@ -1552,22 +1547,8 @@ package classes.Scenes.Areas.Forest
 		+"You begin to vigorously pump your arm into her, punishing her slutty cunt for daring to get off before you’re finished disciplining her. She begins to thrash wildly, unable to come down from her orgasm, and tears start to pour from her eyes from the tortuous constant pleasure. By now your arm is flying in and out of her, sending a new spray of juices flying with each thrust. You have little doubt anymore that she could easily take you up to the shoulder, but you’re trying to punish her. You knock the wind out of her with one last forceful thrust, and she tenses up into a second orgasm, rolling her eyes back in her head as she turns into little more than a mass of pure pleasure on the forest floor."
 		+"When you pull back, your arm is thoroughly drenched, [if(player.hasFur())the [furcolor] fur matted down with her juices] and Aiko is still rolling from side to side in pleasure, her fuckhole gaping obscenely with the absence of your fist. You wipe yourself off on her discarded robes, flipping her onto her stomach and untying her as an afterthought, leaving the insensate kitsune to recover from her pleasure coma as you head back to camp.");
 		
-		if (flags[kFLAGS.AIKO_CORRUPTION] >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
-			flags[kFLAGS.AIKO_AFFECTION] += 5;
-		} else {
-			flags[kFLAGS.AIKO_AFFECTION] -= 5;
-		}
-		flags[kFLAGS.AIKO_RAPE]++;
-		if (player.isPureEnough(50)) {
-			player.dynStats("cor", 5);
-			if (player.cor > 50)
-				player.cor = 50;
-		}
-		if ((player.cor > flags[kFLAGS.AIKO_CORRUPTION]||player.hasPerk(PerkLib.Sadist))&& flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 12;
-		else if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 8;
-		if (flags[kFLAGS.AIKO_CORRUPTION]>100) flags[kFLAGS.AIKO_CORRUPTION] = 100;
+		postRapeUpdate();
+		
 		combat.cleanupAfterCombat();
 	}
 	//maybe add tail fuck if naga or lizard tail? refer to KihaScene
@@ -1588,22 +1569,9 @@ package classes.Scenes.Areas.Forest
 		+"You shiver with satisfaction and dismount her, giving her a light shove that she accepts easily, falling onto her back. Her face and the upper portion of her robes are drenched in your essence, mouth open wide and tongue hanging out. Her legs open in a shameful display, slightly twitching as a small puddle slowly spreads out from between them. Leaning down, pat her on the head and tell her she’s a <i>“good girl,”</i> chuckling to yourself as you pick up your [armor] and set off, leaving the priestess to her shame.");
 		
 		flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
-		if (flags[kFLAGS.AIKO_CORRUPTION] >= 50 && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0) {
-			flags[kFLAGS.AIKO_AFFECTION] += 5;
-		} else {
-			flags[kFLAGS.AIKO_AFFECTION] -= 5;
-		}
-		flags[kFLAGS.AIKO_RAPE]++;
-		if (player.isPureEnough(50)) {
-			player.dynStats("cor", 5);
-			if (player.cor > 50)
-				player.cor = 50;
-		}
-		if ((player.cor > flags[kFLAGS.AIKO_CORRUPTION]||player.hasPerk(PerkLib.Sadist))&& flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 12;
-		else if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] == 1)
-			flags[kFLAGS.AIKO_CORRUPTION] += 8;
-		if (flags[kFLAGS.AIKO_CORRUPTION]>100) flags[kFLAGS.AIKO_CORRUPTION] = 100;
+
+		postRapeUpdate();
+		
 		player.orgasm('Vagina');
 		combat.cleanupAfterCombat();
 	}
@@ -1685,13 +1653,9 @@ package classes.Scenes.Areas.Forest
 		+"Gathering your things, you put on your [armor] and head back to camp.");
 		
 		flags[kFLAGS.AIKO_SEXED]++;
-		flags[kFLAGS.AIKO_AFFECTION] += 4;
-		if (player.isCorruptEnough(50) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
-			flags[kFLAGS.AIKO_CORRUPTION] += 4;
-		if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.isPureEnough(flags[kFLAGS.AIKO_CORRUPTION])) {
-			player.cor += 2;
-			flags[kFLAGS.AIKO_CORRUPTION] -= 2;
-		}
+		
+		postSexUpdate();
+		
 		player.orgasm('Dick');
 		if (y != 0)
 			player.orgasm('Dick');
@@ -1738,13 +1702,9 @@ package classes.Scenes.Areas.Forest
 		+"<i>“Ah, that was fun,”</i> she says, stretching out and letting out a cute sigh.");
 		
 		flags[kFLAGS.AIKO_SEXED]++;
-		flags[kFLAGS.AIKO_AFFECTION] += 4;
-		if (player.isCorruptEnough(50) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
-			flags[kFLAGS.AIKO_CORRUPTION] += 4;
-		if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.isPureEnough(flags[kFLAGS.AIKO_CORRUPTION])) {
-			player.cor += 2;
-			flags[kFLAGS.AIKO_CORRUPTION] -= 2;
-		}
+		
+		postSexUpdate();
+		
 		player.orgasm('Dick');
 		if (flags[kFLAGS.AIKO_TIMES_MET == 1])
 			doNext(aikoE1SexPart2)
@@ -1763,7 +1723,6 @@ package classes.Scenes.Areas.Forest
 	{
 		clearOutput();
 		spriteSelect(SpriteDb.s_aiko);
-		var x:int = rand(player.cocks.length);
 		outputText((playerchoice?"You tell Aiko you want her to eat you out this time, eagerly stripping down so you can get things started.":"<i>“Pulling you out of your [armor] and setting it aside, Aiko gives you a wry grin as she watches you with lust in her eyes.")
 		+"\n\nShe smirks a little as your [vagina] comes into view, running her tongue along the edges of her upper teeth. Her tails wrap around your ankles, and you find yourself on the receiving end of a playful shove. Your heart skips a beat, but you soon find yourself sliding down onto a blanket of writhing fox tails that catch you and lower you gently onto your back.\n\n"
 		+"Aiko stands over you, undoing the sash that holds her robes together and letting them drop to the ground in a pile. Turning around, she lowers herself daintily across your prone form, giving you a good view of her supple ass cheeks and the red spiral tattoos that adorn them. Settling her head between your thighs, she presses her moist snatch against your lips, her tails moving beneath your neck to form a pillow. She wraps her arms around your thighs, lowering her lips to your quivering [vagina], while her tails lift your head up into her sweet-smelling honeypot.\n\n"
@@ -1777,13 +1736,9 @@ package classes.Scenes.Areas.Forest
 		+(flags[kFLAGS.AIKO_TIMES_MET] >1 ?"You can only nod your agreement as you lay there in satisfied exhaustion for some time, until you finally push yourself up and begin to gather your [armor]. Bidding Aiko farewell, you head back to camp.":""));
 		
 		flags[kFLAGS.AIKO_SEXED]++;
-		flags[kFLAGS.AIKO_AFFECTION] += 4;
-		if (player.isCorruptEnough(50) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
-			flags[kFLAGS.AIKO_CORRUPTION] += 4;
-		if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.isPureEnough(flags[kFLAGS.AIKO_CORRUPTION])) {
-			player.cor += 2;
-			flags[kFLAGS.AIKO_CORRUPTION] -= 2;
-		}
+		
+		postSexUpdate();
+		
 		player.orgasm('Vagina');
 		if (flags[kFLAGS.AIKO_TIMES_MET == 1])
 			doNext(aikoE1SexPart2);
@@ -1876,13 +1831,7 @@ package classes.Scenes.Areas.Forest
 			+"Thoroughly coated in your own spunk, you lay on the ground as Aiko releases you from her grip. <i>“Mn… that’s a good look for you”</i> she says, rubbing her foot against your sensitive crotch some more and then turning to walk away. You lie in your own shame for a time before finally cleaning yourself off and gathering your things to return to camp.");
 			player.orgasm('Dick');
 			
-			flags[kFLAGS.AIKO_AFFECTION] += 4;
-			if (player.isCorruptEnough(50) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
-				flags[kFLAGS.AIKO_CORRUPTION] += 4;
-			if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.isPureEnough(flags[kFLAGS.AIKO_CORRUPTION])) {
-				player.cor += 2;
-				flags[kFLAGS.AIKO_CORRUPTION] -= 2;
-			}
+			postSexUpdate();
 		}
 		flags[kFLAGS.AIKO_SEXED]++;
 
@@ -1924,13 +1873,7 @@ package classes.Scenes.Areas.Forest
 			player.dynStats("tou", 2, "sen", -2);
 			player.changeFatigue(30);
 			
-			flags[kFLAGS.AIKO_AFFECTION] += 4;
-			if (player.isCorruptEnough(50) && flags[kFLAGS.AIKO_CORRUPTION_ACTIVE] > 0)
-				flags[kFLAGS.AIKO_CORRUPTION] += 4;
-			if (flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]>0 && flags[kFLAGS.AIKO_CORRUPTION] >= 50 && player.isPureEnough(flags[kFLAGS.AIKO_CORRUPTION])) {
-				player.cor += 2;
-				flags[kFLAGS.AIKO_CORRUPTION] -= 2;
-			}
+			postSexUpdate();
 		}
 		flags[kFLAGS.AIKO_SEXED]++;
 

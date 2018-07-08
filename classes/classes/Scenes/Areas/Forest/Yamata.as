@@ -5,8 +5,51 @@ package classes.Scenes.Areas.Forest
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
 
-	public class Yamata extends Monster
-	{				
+	public class Yamata extends BaseKitsune
+	{
+		public function Yamata()
+		{
+			init();
+		}
+
+		private function init():void
+		{
+			this.a = "";
+			this.short = "Yamata";
+			this.imageName = "yamata";
+			this.long = "Yamata stands before you, grinning psychotically as her nine fox tails flare out behind her. Her jet black hair twists and writhes in the air, forming eight serpentine heads that snap at anything within reach. A pair of demonic horns curves up in front of her ears, and she is wielding a cursed black sword that resembles an oversized billhook bathed in demonic power. Just looking at her for too long causes strange thoughts to enter your mind, urging you to submit to her and become her loyal masochistic pet. You’ll have to keep your wits about you, or you might start enjoying the pain!";
+			this.race = "Kitsune";
+			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0);
+			createBreastRow(Appearance.breastCupInverse("E"));
+			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
+			this.ass.analWetness = AssClass.WETNESS_MOIST;
+			this.createStatusEffect(StatusEffects.BonusACapacity,200,0,0,0);
+			this.tallness = 69;
+			this.hips.rating = Hips.RATING_AMPLE;
+			this.butt.rating = Butt.RATING_AVERAGE+1;
+			this.skin.tone = "light tan";			//might need to change to russet
+			this.hair.color = "black";
+			this.hair.length = 22;
+			initStrTouSpeInte(60, 70, 90, 100);
+			initLibSensCor(60, 65, 100);
+			this.weaponName = "Muramasa";
+			this.weaponVerb = "slash"
+			this.armorName = "tight chest wrap and baggy pants";
+			this.armorDef = 16;
+			this.bonusHP = 2400;
+			this.lust = 25;
+			this.bonusLust = 150;
+			this.lustVuln = 0.35;
+			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.level = 30;
+			this.gems = rand(20) + 30;
+			this.drop = new WeightedDrop(consumables.MYSTJWL, 1);
+			this.tail.type = Tail.FOX;
+			this.tail.venom = 9;
+			checkMonster();
+		}
+		
 		//Corrupted Yamata Attacks
 		private function yamataBasic():void
 		{
@@ -51,7 +94,7 @@ package classes.Scenes.Areas.Forest
 			combatRoundOver();
 		}
 		
-		private function YamataNightmare():void
+		private function yamataNightmare():void
 		{
 			outputText("You can hear a whispering voice clouding the edges of your mind, and begin to shrink back as darkness begins to close in on you. As the all-consuming blackness fills your field of vision, you are beset on all sides by unimaginable horrors too terrifying to describe! You feel yourself falling deeper and deeper into a void of despair, but somehow you know that you could end all the suffering if you would only submit yourself to Yamata...  ");
 			//Resist: - successfully resisting deals small health & lust damage to Yamata
@@ -117,6 +160,10 @@ package classes.Scenes.Areas.Forest
 						outputText("\n\nYamata turns around, brushing her tails to the side to expose her ample hindquarters, showing off her juicy-looking cheeks. Her display sends blood rushing to your groin, making you lick your lips eagerly.\n\n"
 						+"Yamata pauses for a moment, placing a hand on her taut abs and sliding her fingers downward slowly, gazing deep into your eyes. Her tails fan out around her, curling around her limbs seductively, and she gives you a flirtatious leer as she watches your body tremble with desire.  ");
 						player.takeLustDamage(lustDmg*2);
+						break;
+						
+					default:
+						outputText("This is a bug, please report it - yamataIllusionLust");
 						break;
 				}
 			outputText("\n\nYamata takes a moment to stretch out her limber body, thrusting out her bound chest as she stretches her arms toward the sky. She twirls around, head slightly askew, and then bows forward to give you a good angle at her cleavage, packed tightly into her chest wrap, all the while with a sickly grin on her face.\n\n"
@@ -196,14 +243,14 @@ package classes.Scenes.Areas.Forest
 			combatRoundOver();
 		}
 				
-		private function FoxfireCanon1():void
+		private function foxfireCanon1():void
 		{
 			outputText("Yamata’s hair snakes begin to fan themselves out, curling toward you with their jaws unhinged and open wide. They seem to be drawing in energy as bright balls of purple flame begin to build up in each of their mouths. It looks like Yamata is charging up for something big!");
 			this.createStatusEffect(StatusEffects.YamataCanon, 0, 0, 0, 0);
 			combatRoundOver();
 		}
 		
-		private function FoxfireCanon2():void
+		private function foxfireCanon2():void
 		{
 			var totaldmg:int = 0;
 			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
@@ -231,65 +278,6 @@ package classes.Scenes.Areas.Forest
 			this.removeStatusEffect(StatusEffects.YamataCanon);
 			combatRoundOver();
 		}
-
-		private function kitsuneSealAttack():void
-		{
-			var resist:int = 0;
-			if (player.inte < 30) resist = Math.round(player.inte);
-			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.isPureEnough(20)) resist += 20 - player.corAdjustedDown();
-			var select:int = rand(7);
-			//Attack:
-			if (select == 0) {
-				outputText("The kitsune playfully darts around you, grinning coyly.  She somehow slips in under your reach, and before you can react, draws a small circle on your chest with her fingertip.  As you move to strike again, the flaming runic symbol she left on you glows brightly, and your movements are halted mid-swing.");
-				outputText("\n\n\"<i>Naughty naughty, you should be careful with that.</i>\"");
-
-				outputText("\n\nDespite your best efforts, every time you attempt to attack her, your muscles recoil involuntarily and prevent you from going through with it.  <b>The kitsune's spell has sealed your attack!</b>  You'll have to wait for it to wear off before you can use your basic attacks.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 0, 0, 0);
-			}
-			else if (select == 1) {
-				//Tease:
-				outputText("You are taken by surprise when the kitsune appears in front of you out of nowhere, trailing a fingertip down your chest.  She draws a small circle, leaving behind a glowing, sparking rune made of flames.  You suddenly find that all your knowledge of seduction and titillation escapes you.  <b>The kitsune's spell has sealed your ability to tease!</b>  Seems you won't be getting anyone hot and bothered until it wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 1, 0, 0);
-			}
-			//Spells:
-			else if (select == 2) {
-				outputText("\"<i>Oh silly, trying to beat me at my own game are you?</i>\"  the kitsune says with a smirk, surprising you as she appears right in front of you.  She traces a small circle around your mouth, and you find yourself stricken mute!  You try to remember the arcane gestures to cast your spell and find that you've forgotten them too.  <b>The kitsune's spell has sealed your magic!</b>  You won't be able to cast any spells until it wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 2, 0, 0);
-			}
-			//Items:
-			else if (select == 3) {
-				outputText("\"<i>Tsk tsk, using items?  That's cheating!</i>\"  the kitsune says as she appears right in front of you, taking you off guard.  Her finger traces a small circle on your pouch, leaving behind a glowing rune made of crackling flames.  No matter how hard you try, you can't seem to pry it open.  <b>The kitsune's spell has sealed your item pouch!</b>  Looks like you won't be using any items until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 3, 0, 0);
-			}
-			//Run:
-			else if (select == 4) {
-				outputText("\"<i>Tsk tsk, leaving so soon?</i>\"  the kitsune says, popping up in front of you suddenly as you attempt to make your escape.  Before you can react, she draws a small circle on your chest with her fingertip, leaving behind a glowing rune made of crackling blue flames.  You try to run the other way, but your " + player.legs() + " won't budge!\n\n\"<i>Sorry baby, you'll just have to stay and play~.</i>\" she says in a singsong tone, appearing in front of you again.  <b>The kitsune's spell prevents your escape!</b>  You'll have to tough it out until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 4, 0, 0);
-			}
-			//P.Special:
-			else if (select == 5) {
-				outputText("You jump with surprise as the kitsune appears in front of you, grinning coyly.  As she draws a small circle on your forehead with her fingertip, you find that you suddenly can't remember how to use any of your physical skills!");
-				outputText("\n\n\"<i>Oh no darling, </i>I'm<i> the one with all the tricks here.</i>\"");
-				outputText("\n\n<b>The kitsune's spell has sealed your physical skills!</b>  You won't be able to use any of them until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 5, 0, 0);
-			}
-			//M.Special:
-			else {
-				outputText("You jump with surprise as the kitsune appears in front of you, grinning coyly.  As she draws a small circle on your forehead with her fingertip, you find that you suddenly can't remember how to use any of your magical skills!");
-				outputText("\n\n\"<i>Oh no darling, </i>I'm<i> the one with all the tricks here.</i>\"");
-				outputText("\n\n<b>The kitsune's spell has sealed your magical skills!</b>  You won't be able to use any of them until the spell wears off.");
-				player.createStatusEffect(StatusEffects.Sealed, 4, 6, 0, 0);
-			}
-			
-			if (resist >= rand(100)) {
-				outputText("\n\nUpon your touch, the seal dissipates, and you are free of the kitsune's magic!  She pouts in disappointment, looking thoroughly irritated, but quickly resumes her coy trickster facade.");
-				player.removeStatusEffect(StatusEffects.Sealed);
-			}
-			combatRoundOver();
-		}
-
 		
 		private function yamataMiss():void
 		{
@@ -329,16 +317,16 @@ package classes.Scenes.Areas.Forest
 			
 			//basic attack has 2x chance unless arcane archer active
 			var moves:Array;
-				moves = [yamataBasic, yamataDarkFoxfire, YamataNightmare, yamataBasic, yamataIllusionLust, yamataLustAttack, kitsuneSealAttack];
+				moves = [yamataBasic, yamataDarkFoxfire, yamataNightmare, yamataBasic, yamataIllusionLust, yamataLustAttack, kitsuneSealAttack];
 			if (player.getEvasionRoll()) {
 				moves = [yamataMiss];
 			}
 			
 			if (this.hasStatusEffect(StatusEffects.YamataCanon)) {
-				FoxfireCanon2();
+				foxfireCanon2();
 			}
 			else if (rand(15) == 0) {
-				FoxfireCanon1();
+				foxfireCanon1();
 			}
 			else if (rand(10) == 0) {
 				if (!this.hasStatusEffect(StatusEffects.YamataEntwine)) {
@@ -357,44 +345,6 @@ package classes.Scenes.Areas.Forest
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			game.forest.aikoScene.yamataWins();
-		}
-
-		public function Yamata()
-		{
-			this.a = "";
-			this.short = "Yamata";
-			this.imageName = "yamata";
-			this.long = "Yamata stands before you, grinning psychotically as her nine fox tails flare out behind her. Her jet black hair twists and writhes in the air, forming eight serpentine heads that snap at anything within reach. A pair of demonic horns curves up in front of her ears, and she is wielding a cursed black sword that resembles an oversized billhook bathed in demonic power. Just looking at her for too long causes strange thoughts to enter your mind, urging you to submit to her and become her loyal masochistic pet. You’ll have to keep your wits about you, or you might start enjoying the pain!";
-			this.race = "Kitsune";
-			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
-			this.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_MOIST;
-			this.createStatusEffect(StatusEffects.BonusACapacity,200,0,0,0);
-			this.tallness = 69;
-			this.hips.rating = Hips.RATING_AMPLE;
-			this.butt.rating = Butt.RATING_AVERAGE+1;
-			this.skin.tone = "light tan";			//might need to change to russet
-			this.hair.color = "black";
-			this.hair.length = 22;
-			initStrTouSpeInte(60, 70, 90, 100);
-			initLibSensCor(60, 65, 100);
-			this.weaponName = "Muramasa";
-			this.weaponVerb = "slash"
-			this.armorName = "tight chest wrap and baggy pants";
-			this.armorDef = 16;
-			this.bonusHP = 2400;
-			this.lust = 25;
-			this.bonusLust = 150;
-			this.lustVuln = 0.35;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 30;
-			this.gems = rand(20) + 30;
-			this.drop = new WeightedDrop(consumables.MYSTJWL, 1);
-			this.tail.type = Tail.FOX;
-			this.tail.venom = 9;
-			checkMonster();
 		}
 	}
 }

@@ -1,4 +1,5 @@
 package {
+	import classes.AppearanceTest;
 	import classes.HelperSuit;
 	import classes.InternalsSuit;
 	import classes.PlayerTest;
@@ -38,5 +39,6 @@ package {
 		 public var playerEventsVaginaLoosenessRecoveryTest:PlayerEventsVaginaLoosenessRecoveryTest;
 		 public var internalsSuit:InternalsSuit;
 		 public var menusSuit:MenusSuit;
+		 public var appearanceTest:AppearanceTest;
 	}
 }
