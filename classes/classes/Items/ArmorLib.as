@@ -26,7 +26,7 @@ package classes.Items
 			.perk("Light")
 			.def(0)
 			.value(600)
-			.playerPerk(PerkLib.SluttySeduction, 10, 0, 0, 0, "Your fetishy bondage outfit allows you access to an improved form of 'Tease'.")
+			.playerPerk(PerkLib.SluttySeduction, 10, 0, 0, 0)
 			.supportsUndergarment(false)
 		);
 		public const C_CLOTH:ComfortableClothes = new ComfortableClothes();
@@ -46,7 +46,7 @@ package classes.Items
 			.perk("Light")
 			.def(0)
 			.value(800)
-			.playerPerk(PerkLib.SluttySeduction, 8, 0, 0, 0, "Your fetishy nurse outfit allows you access to an improved form of 'Tease'.")
+			.playerPerk(PerkLib.SluttySeduction, 8, 0, 0, 0)
 		);
 		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 60, "A simple white shirt and overalls.", "Light", true);
 		public const R_BDYST:Armor = new Armor("R.BdySt","R.BdySt","red, high-society bodysuit","a red bodysuit for high society",1,1200,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.","Light", true, false);
@@ -59,7 +59,7 @@ package classes.Items
 			.perk("Light")
 			.def(3)
 			.value(1000)
-			.playerPerk(PerkLib.SluttySeduction, 8, 0, 0, 0, "Your fetishy rubberwear allows you access to 'Seduce', an improved form of 'Tease'.")
+			.playerPerk(PerkLib.SluttySeduction, 8, 0, 0, 0)
 			.supportsBulge(true)
 			.supportsUndergarment(false)
 		);
@@ -73,7 +73,7 @@ package classes.Items
 			.perk("Light")
 			.def(0)
 			.value(1300)
-			.playerPerk(PerkLib.SluttySeduction, 7, 0, 0, 0, "Your clingy transparent bodysuit allows you access to 'Seduce', an improved form of 'Tease'.")
+			.playerPerk(PerkLib.SluttySeduction, 7, 0, 0, 0)
 		);
 		public const TUBETOP:Armor = new Armor("TubeTop","Tube Top","tube top and short shorts","a snug tube top and VERY short shorts",0,80,"A clingy tube top and VERY short shorts.","Light");
 
@@ -89,8 +89,7 @@ package classes.Items
 			.perk("Light")
 			.def(2)
 			.value(700)
-			.playerPerk(PerkLib.SluttySeduction, 5, 0, 0, 0,
-				"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.")
+			.playerPerk(PerkLib.SluttySeduction, 5, 0, 0, 0)
 			.supportsUndergarment(false)
 		);
 		public const DBARMOR:Armor = new PureMaraeArmor();
@@ -154,7 +153,7 @@ package classes.Items
 			.def(6)
 			.value(3000)
 			.playerPerk(PerkLib.WizardsEndurance, 30, 0, 0, 0)
-			.playerPerk2(PerkLib.SluttySeduction, 5, 0, 0, 0, "Your revealing robes allow you access to 'Seduce', an improved form of 'Tease'.")
+			.playerPerk2(PerkLib.SluttySeduction, 5, 0, 0, 0)
 			.supportsBulge(true)
 		);
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
@@ -173,8 +172,7 @@ package classes.Items
 			.perk("Medium")
 			.def(5)
 			.value(800)
-			.playerPerk(PerkLib.SluttySeduction, 6, 0, 0, 0,
-				"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.")
+			.playerPerk(PerkLib.SluttySeduction, 6, 0, 0, 0)
 		);
 		public const LEATHRA:Armor = new Armor("LeathrA","LeathrA","leather armor segments","a set of leather armor",5,76,"This is a suit of well-made leather armor.  It looks fairly rugged.","Light");
 		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();

@@ -21,7 +21,7 @@ package classes.Items.Armors
 				.value(50)
 				.description("A tight, cleavage-inducing halter top and an extremely short miniskirt. The sexual allure of this item is undoubtable.")
 				.perk("Light")
-				.playerPerk(PerkLib.SluttySeduction, 10, 0, 0, 0, "Your delightfully slutty yet upbeat garb helps you seduce your foes!")
+				.playerPerk(PerkLib.SluttySeduction, 10, 0, 0, 0)
 				.supportsUndergarment(false)
 			);
 		}

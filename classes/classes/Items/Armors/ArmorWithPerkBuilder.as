@@ -16,17 +16,15 @@ package classes.Items.Armors
 		private var _description:String;
 		private var _perk:String;
 		private var _playerPerk:PerkType;
-		private var _playerPerkV1:Number;
-		private var _playerPerkV2:Number;
-		private var _playerPerkV3:Number;
-		private var _playerPerkV4:Number;
-		private var _playerPerkDesc:String = "";
+		private var _playerPerkV1:Number = 0;
+		private var _playerPerkV2:Number = 0;
+		private var _playerPerkV3:Number = 0;
+		private var _playerPerkV4:Number = 0;
 		private var _playerPerk2:PerkType = null;
 		private var _playerPerk2V1:Number = 0;
 		private var _playerPerk2V2:Number = 0;
 		private var _playerPerk2V3:Number = 0;
 		private var _playerPerk2V4:Number = 0;
-		private var _playerPerk2Desc:String = "";
 		private var _supportsBulge:Boolean = false;
 		private var _supportsUndergarment:Boolean = true;
 
@@ -89,14 +87,13 @@ package classes.Items.Armors
 			return this;
 		}
 
-		public function playerPerk(playerPerk:PerkType, playerPerkV1:Number = NaN, playerPerkV2:Number = NaN, playerPerkV3:Number = NaN, playerPerkV4:Number = NaN, playerPerkDesc:String = null):ArmorWithPerkBuilder
+		public function playerPerk(playerPerk:PerkType, playerPerkV1:Number = NaN, playerPerkV2:Number = NaN, playerPerkV3:Number = NaN, playerPerkV4:Number = NaN):ArmorWithPerkBuilder
 		{
 			_playerPerk = playerPerk;
 			if (!isNaN(playerPerkV1)) _playerPerkV1 = playerPerkV1;
 			if (!isNaN(playerPerkV2)) _playerPerkV2 = playerPerkV2;
 			if (!isNaN(playerPerkV3)) _playerPerkV3 = playerPerkV3;
 			if (!isNaN(playerPerkV4)) _playerPerkV4 = playerPerkV4;
-			if (playerPerkDesc !== null) _playerPerkDesc = playerPerkDesc;
 			_requirementsMet.push("playerPerk");
 			return this;
 		}
@@ -125,20 +122,13 @@ package classes.Items.Armors
 			return this;
 		}
 
-		public function playerPerkDesc(playerPerkDesc:String):ArmorWithPerkBuilder
-		{
-			_playerPerkDesc = playerPerkDesc;
-			return this;
-		}
-
-		public function playerPerk2(playerPerk2:PerkType, playerPerk2V1:Number = NaN, playerPerk2V2:Number = NaN, playerPerk2V3:Number = NaN, playerPerk2V4:Number = NaN, playerPerk2Desc:String = null):ArmorWithPerkBuilder
+		public function playerPerk2(playerPerk2:PerkType, playerPerk2V1:Number = NaN, playerPerk2V2:Number = NaN, playerPerk2V3:Number = NaN, playerPerk2V4:Number = NaN):ArmorWithPerkBuilder
 		{
 			_playerPerk2 = playerPerk2;
 			if (!isNaN(playerPerk2V1)) _playerPerk2V1 = playerPerk2V1;
 			if (!isNaN(playerPerk2V2)) _playerPerk2V2 = playerPerk2V2;
 			if (!isNaN(playerPerk2V3)) _playerPerk2V3 = playerPerk2V3;
 			if (!isNaN(playerPerk2V4)) _playerPerk2V4 = playerPerk2V4;
-			if (playerPerk2Desc !== null) _playerPerk2Desc = playerPerk2Desc;
 			return this;
 		}
 
@@ -166,12 +156,6 @@ package classes.Items.Armors
 			return this;
 		}
 
-		public function playerPerk2Desc(playerPerk2Desc:String):ArmorWithPerkBuilder
-		{
-			_playerPerk2Desc = playerPerk2Desc;
-			return this;
-		}
-
 		public function supportsBulge(supportsBulge:Boolean):ArmorWithPerkBuilder
 		{
 			_supportsBulge = supportsBulge;
@@ -193,7 +177,7 @@ package classes.Items.Armors
 				}
 			}
 			if (missingRequirements.length > 0) {
-				throw new Error("The following required values have not been set: " + missingRequirements.join(", ")+ ".");
+				throw new Error("The following required values have not been set: " + missingRequirements.join(", ") + ".");
 			}
 
 			return {
@@ -210,13 +194,11 @@ package classes.Items.Armors
 				playerPerkV2:         _playerPerkV2,
 				playerPerkV3:         _playerPerkV3,
 				playerPerkV4:         _playerPerkV4,
-				playerPerkDesc:       _playerPerkDesc,
 				playerPerk2:          _playerPerk2,
 				playerPerk2V1:        _playerPerk2V1,
 				playerPerk2V2:        _playerPerk2V2,
 				playerPerk2V3:        _playerPerk2V3,
 				playerPerk2V4:        _playerPerk2V4,
-				playerPerk2Desc:      _playerPerk2Desc,
 				supportsBulge:        _supportsBulge,
 				supportsUndergarment: _supportsUndergarment
 			};
