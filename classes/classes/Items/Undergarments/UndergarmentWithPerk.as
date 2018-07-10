@@ -18,16 +18,28 @@ package classes.Items.Undergarments {
 		private var playerPerkV3:Number;
 		private var playerPerkV4:Number;
 		
-		public function UndergarmentWithPerk(id:String, shortName:String, name:String, longName:String, undergarmentType:Number, value:Number, description:String, playerPerk:PerkType, playerPerkV1:Number, playerPerkV2:Number, playerPerkV3:Number, playerPerkV4:Number, playerPerkDesc:String = "", perk:String = "") {
-			super(id, shortName, name, longName, undergarmentType, value, description, perk);
-			this._type = undergarmentType;
-			this._name = name;
-			this._perk = perk;
-			this.playerPerk = playerPerk;
-			this.playerPerkV1 = playerPerkV1;
-			this.playerPerkV2 = playerPerkV2;
-			this.playerPerkV3 = playerPerkV3;
-			this.playerPerkV4 = playerPerkV4;
+		public function UndergarmentWithPerk(builder:UndergarmentWithPerkBuilder)
+		{
+			var paramObject:Object = builder.toObject();
+
+			super(
+				paramObject.id,
+				paramObject.shortName,
+				paramObject.name,
+				paramObject.longName,
+				paramObject.type,
+				paramObject.value,
+				paramObject.description,
+				paramObject.perk
+			);
+			this._type = paramObject.type;
+			this._name = paramObject.name;
+			this._perk = paramObject.perk;
+			this.playerPerk = paramObject.playerPerk;
+			this.playerPerkV1 = paramObject.playerPerkV1;
+			this.playerPerkV2 = paramObject.playerPerkV2;
+			this.playerPerkV3 = paramObject.playerPerkV3;
+			this.playerPerkV4 = paramObject.playerPerkV4;
 		}
 		
 		override public function get type():Number { return _type; }

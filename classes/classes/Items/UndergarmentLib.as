@@ -42,12 +42,38 @@ package classes.Items
 		public const EBNJOCK:Undergarment = new Undergarment("EWStrap", "Ebon Jock", "Ebonweave jockstrap", "an Ebonweave jockstrap", TYPE_LOWERWEAR, 900, "This jock is ebonweave, made of refined Ebonbloom petals. It’s comfortable and elastic, providing support while containing assets of any size.");
 		public const EBNTHNG:Undergarment = new Undergarment("EWThong", "Ebon Thong", "Ebonweave thong", "an Ebonweave thong", TYPE_LOWERWEAR, 900, "This thong is made of ebonweave, designed to fit snugly around your form. Thanks to alchemic treatments, it’s elastic enough to hold assets of any size.");
 		public const EBNCLTH:Undergarment = new Undergarment("EWCloth", "Ebon Loin", "Ebonweave loincloth", "an Ebonweave loincloth", TYPE_LOWERWEAR, 900, "This loincloth is made of ebonweave, designed to fit snugly around your form. Thanks to alchemic treatments, it’s elastic enough to hold assets of any size.", "NagaWearable");
-		public const EBNRJCK:Undergarment = new UndergarmentWithPerk("RnStrap", "Rune Jock", "runed Ebonweave jockstrap", "a runed Ebonweave jockstrap", TYPE_LOWERWEAR, 1200, "This jock is ebonweave, made of refined Ebonbloom petals. Adorning the pouch is a rune of lust, glowing with dark magic.",
-				PerkLib.WellspringOfLust,0,0,0,0,"At the beginning of combat, lust raises to black magic threshold if lust is below black magic threshold.");
-		public const EBNRTNG:Undergarment = new UndergarmentWithPerk("RnThong", "Rune Thong", "runed Ebonweave thong", "a runed Ebonweave thong", TYPE_LOWERWEAR, 1200, "This thong is made of ebonweave, designed to fit snugly around your form. Adorning the front is a rune of lust, glowing with dark magic.",
-				PerkLib.WellspringOfLust,0,0,0,0,"At the beginning of combat, lust raises to black magic threshold if lust is below black magic threshold.");
-		public const EBNRLNC:Undergarment = new UndergarmentWithPerk("RnCloth", "Rune Loin", "runed Ebonweave loincloth", "a runed Ebonweave loincloth", TYPE_LOWERWEAR, 1200, "This loincloth is made of ebonweave, designed to fit snugly around your form. Adorning the front is a rune of lust, glowing with dark magic.",
-				PerkLib.WellspringOfLust,0,0,0,0,"At the beginning of combat, lust raises to black magic threshold if lust is below black magic threshold.","NagaWearable");
+		public const EBNRJCK:Undergarment = new UndergarmentWithPerk(new UndergarmentWithPerkBuilder()
+			.id("RnStrap")
+			.shortName("Rune Jock")
+			.name("runed Ebonweave jockstrap")
+			.longName("a runed Ebonweave jockstrap")
+			.type(TYPE_LOWERWEAR)
+			.value(1200)
+			.description("This jock is ebonweave, made of refined Ebonbloom petals. Adorning the pouch is a rune of lust, glowing with dark magic.")
+			.playerPerk(PerkLib.WellspringOfLust, 0, 0, 0, 0)
+		);
+		public const EBNRTNG:Undergarment = new UndergarmentWithPerk(new UndergarmentWithPerkBuilder()
+			.id("RnThong")
+			.shortName("Rune Thong")
+			.name("runed Ebonweave thong")
+			.longName("a runed Ebonweave thong")
+			.type(TYPE_LOWERWEAR)
+			.value(1200)
+			.description("This thong is made of ebonweave, designed to fit snugly around your form."
+			            +" Adorning the front is a rune of lust, glowing with dark magic.")
+			.playerPerk(PerkLib.WellspringOfLust, 0, 0, 0, 0)
+		);
+		public const EBNRLNC:Undergarment = new UndergarmentWithPerk(new UndergarmentWithPerkBuilder()
+			.id("RnCloth")
+			.shortName("Rune Loin")
+			.name("runed Ebonweave loincloth")
+			.longName("a runed Ebonweave loincloth")
+			.type(TYPE_LOWERWEAR)
+			.value(1200)
+			.description("This loincloth is made of ebonweave, designed to fit snugly around your form."
+			            +" Adorning the front is a rune of lust, glowing with dark magic.")
+			.playerPerk(PerkLib.WellspringOfLust, 0, 0, 0, 0)
+		);
 		
 		public function UndergarmentLib() 
 		{
