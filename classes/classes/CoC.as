@@ -556,7 +556,7 @@ package classes
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4.13b"; //Version NUMBER
+			ver = "1.0.2_mod_1.4.14"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
 			version = ver + " (<b>Weapon Upgrading!</b>)"; //Version TEXT
 			
