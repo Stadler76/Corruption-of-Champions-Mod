@@ -8,6 +8,7 @@ package classes {
 	import classes.Scenes.Inventory;
 	import classes.internals.Utils;
 	import classes.lists.BreastCup;
+	import classes.lists.FlagLists;
 	import classes.lists.Gender;
 	import classes.lists.PerkLists;
 	import classes.display.SpriteDb;
@@ -314,25 +315,21 @@ package classes {
 				for (i = 0; i < keyItemTemp.length; i++)
 					player.createKeyItem(keyItemTemp[i].keyName, keyItemTemp[i].value1, keyItemTemp[i].value2, keyItemTemp[i].value3, keyItemTemp[i].value4);
 //			player.perkPoints = player.level - 1;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) {
-				var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				var difficulty:int = flags[kFLAGS.GAME_DIFFICULTY];
-				var gameMode:Number = flags[kFLAGS.HUNGER_ENABLED];
-				var hardcoreMode:int = flags[kFLAGS.HARDCORE_MODE];
-				var hardcoreSlot:String = flags[kFLAGS.HARDCORE_SLOT];
-				var mrapierBought:int = flags[kFLAGS.MRAPIER_BOUGHT];
+			var newGamePlusLevel:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			if (newGamePlusLevel > 0) {
+				var storedFlags:Array = [];
+				for (i = 0; i < FlagLists.KEEP_ON_ASCENSION.length; i++) {
+					storedFlags[i] = flags[FlagLists.KEEP_ON_ASCENSION[i]];
+				}
 			}
 			//Clear plot storage array!
 			flags = new DefaultDict();
 			kGAMECLASS.saves.loadPermObject();
 			//Carry over data if new game plus
 			if (newGamePlusLevel > 0) {
-				flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = newGamePlusLevel;
-				flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
-				flags[kFLAGS.HUNGER_ENABLED] = gameMode;
-				flags[kFLAGS.HARDCORE_MODE] = hardcoreMode;
-				flags[kFLAGS.HARDCORE_SLOT] = hardcoreSlot;
-				flags[kFLAGS.MRAPIER_BOUGHT] = mrapierBought;
+				for (i = 0; i < FlagLists.KEEP_ON_ASCENSION.length; i++) {
+					flags[FlagLists.KEEP_ON_ASCENSION[i]] = storedFlags[i];
+				}
 				if (player.findPerk(PerkLib.Misdirection) > 0) flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING];
 				if (player.findPerk(PerkLib.RapierTraining) > 0) flags[kFLAGS.RAPHAEL_RAPIER_TRANING] === 4;
 			}
