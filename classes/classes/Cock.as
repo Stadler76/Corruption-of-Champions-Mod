@@ -3,6 +3,7 @@ package classes
 	import classes.CockTypesEnum;
 	import classes.internals.Serializable;
 	import classes.internals.Utils;
+	import classes.lists.GenitalLists;
 	import mx.logging.ILogger;
 	import classes.internals.LoggerFactory;
 
@@ -12,14 +13,19 @@ package classes
 		
 		private static const SERIALIZATION_VERSION:int = 1;
 		
+		private static const OBJECT_NOT_FOUND:int = -1;
+
 		public static const MAX_LENGTH:Number = 9999.9;
 		public static const MAX_THICKNESS:Number = 999.9;
+		public static const KNOTMULTIPLIER_NO_KNOT:Number = 1;
 		
 		private var _cockLength:Number;
 		private var _cockThickness:Number;		
 		private var _cockType:CockTypesEnum;	//See CockTypesEnum.as for all cock types
 		
-		//Used to determine thickness of knot relative to normal thickness
+		/**
+		 * Used to determine thickness of knot relative to normal thickness
+		 */
 		private var _knotMultiplier:Number;
 		
 		//Piercing info
@@ -56,7 +62,7 @@ package classes
 			_cockThickness = i_cockThickness;
 			_cockType = i_cockType;
 			_pierced = 0;
-			_knotMultiplier = 1;
+			_knotMultiplier = KNOTMULTIPLIER_NO_KNOT;
 			_isPierced = false;
 			_pShortDesc = "";
 			_pLongDesc = "";
@@ -223,7 +229,17 @@ package classes
 			}
 			LOGGER.debug("thickenCock called and thickened by: {0}", amountGrown);
 			return amountGrown;
-		}	
+		}
+
+		/**
+		 * Check if the given cockType supports a knot.
+		 * @param cockType the cockType to check
+		 * @return true if the cockType supports a knot
+		 */
+		public static function supportsKnot(cockType:CockTypesEnum):Boolean
+		{
+			return GenitalLists.KNOTTED_COCKS.indexOf(cockType) != OBJECT_NOT_FOUND;
+		}
 		
 		public function get cockLength():Number 
 		{
@@ -250,14 +266,23 @@ package classes
 			return _cockType;
 		}
 		
+		/**
+		 * Sets the cock type.
+		 * If the cock type does not support a knot, the knot is reset.
+		 */
 		public function set cockType(value:CockTypesEnum):void 
 		{
 			_cockType = value;
+
+			if (!supportsKnot(value) && this.knotMultiplier !== KNOTMULTIPLIER_NO_KNOT) {
+				this.knotMultiplier = KNOTMULTIPLIER_NO_KNOT;
+				LOGGER.debug("Cock type {0} does not support knots, setting knot knotMultiplier to {1}", value, knotMultiplier);
+			}
 		}
 		
 		public function hasKnot():Boolean
 		{
-			return knotMultiplier > 1;
+			return knotMultiplier > KNOTMULTIPLIER_NO_KNOT;
 		}
 		
 		public function get knotMultiplier():Number 
@@ -336,8 +361,8 @@ package classes
 		{
 			this.cockThickness = relativeRootObject.cockThickness;
 			this.cockLength = relativeRootObject.cockLength;
-			this.cockType = CockTypesEnum.ParseConstantByIndex(relativeRootObject.cockType);
 			this.knotMultiplier = relativeRootObject.knotMultiplier;
+			this.cockType = CockTypesEnum.ParseConstantByIndex(relativeRootObject.cockType);
 			this.sock = relativeRootObject.sock;
 			
 			this.pierced = relativeRootObject.pierced;

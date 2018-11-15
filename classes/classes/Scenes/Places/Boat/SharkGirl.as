@@ -49,11 +49,11 @@ package classes.Scenes.Places.Boat
 			this.long = "The shark girl stands just over 5'5\", with grey skin shimmering from water droplets catching the sunlight and slender muscles built for swimming.  Her shoulder-length silver hair brushes past her pretty face and her eyes are a striking shade of red. She has rows of intimidating sharp teeth glinting in the light. A fish-like tail protrudes from her backside, wrapping around her toned legs at every opportunity. She's wearing a rather skimpy black bikini, strings done in such a way that they move around her fin; though the swimwear itself barely covers her perky breasts and tight snatch.";
 			this.race = "Shark-Morph";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_DROOLING, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 15, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 5*12+5;
 			this.hips.rating = Hips.RATING_AMPLE+2;

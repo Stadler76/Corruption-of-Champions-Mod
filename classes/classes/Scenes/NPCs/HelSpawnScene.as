@@ -202,10 +202,10 @@ private function heliaLoveFollowup():void {
 	}
 	outputText("  So what do you say, [name]?  Let's have a kid!</i>\"");
 	menu();
-	if (player.hasCock() && player.cockThatFits(helFollower.heliaCapacity()) >= 0) addButton(0,"Have A Kid",haveAKid);
+	if (player.hasCock() && player.cockThatFits(helFollower.heliaCapacity()) >= 0) addButton(0,"Have A Kid",haveAKid).hint("Be the father and knock up your salamander lover.");
 	else if (player.hasCock()) outputText("  <b>Unfortunately, you're too big to squeeze inside Helia to do the business yourself.  You might need to shrink down some.</b>");
-	addButton(1,"Another Dad",getAnotherDad);
-	addButton(2,"No Or Later",noKidsHel);
+	addButton(1,"Another Dad",getAnotherDad).hint("Someone else could fill Helia up.");
+	addButton(2,"No Or Later",noKidsHel).hint("Put off the decision of having a kid for now.");
 }
 
 //[Have a Kid] (PC has a Dick)
@@ -303,13 +303,13 @@ private function getAnotherDad():void {
 	}
 	menu();
 	//{If Tel'Adre has been discovered: [Mai]}
-	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(0,"Mai",maiWouldBeTheBestInseminator);
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(0,"Mai",maiWouldBeTheBestInseminator).hint("The hermaphroditic fox could be a good choice.");
 	//[Spiderboy]
-	addButton(1,"Spiderboy",spiderboyWouldBeBestDad);
+	addButton(1,"Spiderboy",spiderboyWouldBeBestDad).hint("An interesting choice. The horny spiders in the swamp could fill the salamander nicely for sure.");
 	//[I will] (If PC has a dick)
-	if (player.hasCock() && player.cockThatFits(helFollower.heliaCapacity()) >= 0) addButton(2,"I Will",haveAKid);
-	else if (!player.hasCock()) addButton(2,"I Will",growingDicks4Hel);
-	addButton(3,"No Or Later",noKidsHel);
+	if (player.hasCock() && player.cockThatFits(helFollower.heliaCapacity()) >= 0) addButton(2,"I Will",haveAKid).hint("Be the father and knock up your salamander lover.");
+	else if (!player.hasCock()) addButton(2,"I Will",growingDicks4Hel).hint("Even though you're lacking a male endowment, you could still volunteer and make a promise that you'll grow a nice penis to knock up your lover.");
+	addButton(3,"No Or Later",noKidsHel).hint("Put off the decision of having a kid for now.");
 }
 
 //Mai
@@ -508,8 +508,8 @@ public function heliaSwollenNotice():void {
 	outputText("\n\n\"<i>Or he.  Whichever... so, which do you want, lover mine?  A big strong boy, or a fiery little girl just like her mom?</i>\"");
 //Shouldn't be needed, bet this was originally here to stop duplicate notices:	flags[kFLAGS.HEL_PREGNANCY_INCUBATION]--;
 	menu();
-	addButton(0,"Boy",youWantABoy);
-	addButton(1,"Girl",youWantAGirl);
+	addButton(0,"Boy",youWantABoy).hint("Tell Helia you want a big, strong boy.");
+	addButton(1,"Girl",youWantAGirl).hint("Tell Helia you want a strong yet beautiful girl.");
 }
 
 //Boy
@@ -583,8 +583,8 @@ internal function heliaTalkSeven():void {
 	if (flags[kFLAGS.HELSPAWN_DADDY] != 0) outputText(", even if he's not your get, I can hope, you know?  If he spends enough time around you, maybe he'll take more after you than me");
 	outputText(".</i>\"");
 	menu();
-	addButton(0,"EncourageHer",encouragePregalia);
-	addButton(1,"Wellll...",helsLifestyle);
+	addButton(0,"EncourageHer",encouragePregalia).hint("Despite everything, Helia will be a great mother! Boost her spirit with your words of encouragement!", "Encourage Her");
+	addButton(1,"Wellll...",helsLifestyle).hint("Maybe Helia should reconsider her lifestyle after all...");
 }
 
 //[Encourage Her]
@@ -824,8 +824,8 @@ public function helspawnDiscoversBooze():void {
 	
 	outputText("\n\nFlopped down on the ground with her mouth right under the spigot is " + flags[kFLAGS.HELSPAWN_NAME] + ", using her tail to keep the tap open and flowing into her waiting maw as she lazes beneath it.  When you loudly clear your throat, she flails around a moment, letting the tap go as she scrambles to her feet - only to fall drunkenly on her ass.  \"<i>Uh...</i>\" she groans, wiping the booze off her cheeks as she hiccups drunkenly.  \"<i>Hi there, " + championRef() + ".</i>\"");
 	menu();
-	addButton(1,"Scold Her",scoldHelSpawn);
-	addButton(0,"Encourage",encourageHelspawn);
+	addButton(1,"Scold Her",scoldHelSpawn).hint("No, she cannot be allowed to have the booze!\n\n+10 Chaste Personality");
+	addButton(0,"Encourage",encourageHelspawn).hint("Why stop her? Let her have a taste of some booze, it's only natural for her to learn the hard way after all...\n\n+10 Slutty Personality");
 }
 
 //Scold Her
@@ -898,9 +898,9 @@ public function helSpawnChoosesAFightingStyle():void {
 		outputText("\n\nThen again, while the little salamander needs to be able to defend herself, it might be better to give her a more defensive weapon altogether.  The guards of your village called the bow the wise man's weapon, as the archers sat behind the lines or atop high walls, picking off enemies.  While you weren't trained with it back home, you've gotten pretty good with your bow during your time here.  Perhaps it's time to pass on those skills to " + flags[kFLAGS.HELSPAWN_NAME] + ".");
 	}
 	menu();
-	if (player.statusEffectv1(StatusEffects.Kelt) >= 100) addButton(2,"Bow",snipermanders);
-	addButton(0,"You Train",swordAndBoardmander);
-	addButton(1,"Loan",dasBarbarimander);
+	if (player.statusEffectv1(StatusEffects.Kelt) >= 100) addButton(2,"Bow",snipermanders).hint("You're proficient with bows so you could teach your daughter in the fine art of archery.");
+	addButton(0,"You Train",swordAndBoardmander).hint("Take up the mantle of being the combat teacher for your daughter.\n\n+10 Chaste Personality");
+	addButton(1,"Loan",dasBarbarimander).hint("Some gems might do the trick. " + (player.gems < 200 ? "Unfortunately, you're not rich so that will have to be settled with something else.\n\n+10 Slutty Personality" : "Two hundred of them should suffice."));
 	
 }
 
@@ -1045,8 +1045,8 @@ public function helspawnIsASlut():void {
 	outputText("\n\nWell then. You suppose you ought to go stop " + flags[kFLAGS.HELSPAWN_NAME] + " from making a whore of herself... but then again, she's old enough to make her own mistakes by now.");
 	if (player.cor >= 50) outputText("  And by mistake you clearly mean old enough to get her ass fucked in by a cute little spider trap... you contemplate jumping in on it, but with a sigh figure it's " + flags[kFLAGS.HELSPAWN_NAME] + "'s catch.  Let her enjoy it.");
 	menu();
-	addButton(0,"Stop Them",helSpawnStopFucking);
-	addButton(1,"Do Nothing",helspawnDoNothing);
+	addButton(0,"Stop Them",helSpawnStopFucking).hint("Stop your daughter from having some fun with the spider trap.\n\n+10 Chaste Personality");
+	addButton(1,"Do Nothing",helspawnDoNothing).hint("Let your daughter enjoy some pleasure times with the spider trap.\n\n+10 Slutty Personality");
 }
 
 //Do Nothing
@@ -1132,14 +1132,14 @@ public function helspawnsMainMenu():void {
 	menu();
 	//Display Options:
 	//[Hug]
-	addButton(0,"Hug",hugHelspawn);
+	addButton(0,"Hug",hugHelspawn).hint("Give " + flags[kFLAGS.HELSPAWN_NAME] + " a hug. A bear hug, of course!");
 	//[Talk]
-	addButton(1,"Talk",talkToHelspawn);
+	addButton(1,"Talk",talkToHelspawn).hint("Have a chat with " + flags[kFLAGS.HELSPAWN_NAME] + " about random things in general.");
 	//[Spar]
-	addButton(2,"Spar",sparHelspawn);
+	addButton(2,"Spar",sparHelspawn).hint("See if your salamander daughter is up for a quick fight session!");
 	//[Sex] {?}
 	//[Appearance]
-	addButton(8,"Appearance",helSpawnsAppearanceScreen);
+	addButton(8,"Appearance",helSpawnsAppearanceScreen).hint("Examine " + flags[kFLAGS.HELSPAWN_NAME] + "'s appearance.");
 	addButton(14,"Back",camp.campFollowers);
 }
 
@@ -1186,10 +1186,10 @@ private function talkToHelspawn():void {
 		else outputText("Of course, as her adoptive father, you could always say that you love her in a different, more intimate way.");
 		outputText("  She wouldn't need monsters with you around.");
 		menu();
-		addButton(0,"Stop Fucking",dontFuckAlex);
-		addButton(1,"Her Boyfriend",helSpawnBoyfriend);
-		addButton(2,"Incest",incestWithHelspawn);
-		//if (silly() && flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) addButton(3, "Both", whyNotBoth).hint("Why don't we have both?")
+		addButton(0,"Stop Fucking",dontFuckAlex).hint("No, you cannot allow your salamander daughter to fuck Alex the spider boyfriend. But why would you? You cruel monster.");
+		addButton(1,"Her Boyfriend",helSpawnBoyfriend).hint("You go girl! Ask about her boyfriend.");
+		addButton(2,"Incest",incestWithHelspawn).hint("Take intimacy to a whole new level between you and " + flags[kFLAGS.HELSPAWN_NAME] + ".\n\n(But there are no incest scenes so this button might as well be removed.)");
+		//if (silly() && flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) addButton(3, "Both", whyNotBoth).hint("Why don't we have both?");
 	}
 	//Talk 2
 	//{Kiha must be at camp}
@@ -1201,8 +1201,8 @@ private function talkToHelspawn():void {
 		outputText("\n\n\"<i>And it'll be YOUR favorite too, mini-doofus, just you wait,</i>\" the dragoness laughs, her foot making another slow, steady circuit around the pot, stirring the ingredients.  Grinning at you, Kiha lifts her ladle up, letting you take it from between her toes.  The powerful reek of whatever it is they’re trying to cook almost overwhelms you when you bring it up to your lips, nearly staggering you.  By Marae, what did Kiha <i>put</i> in this?  Raw ass?");
 		//[Oh God EW] [Um, yum?]
 		menu();
-		addButton(0,"Oh God Ew",ohGodEwKihaAndHelspawnSuckAtCooking);
-		addButton(1,"Um, Yum?",umYum);
+		addButton(0,"Oh God Ew",ohGodEwKihaAndHelspawnSuckAtCooking).hint("This meal is fucking disgusting! Show the two your proper way of cooking.");
+		addButton(1,"Um, Yum?",umYum).hint("Despite the strangeness, eat the meal entirely. This might not be good for you, unless you're THAT hungry.");
 	}
 	//Talk 3
 	//{Needs Rath at camp]
@@ -1229,8 +1229,8 @@ private function talkToHelspawn():void {
 		outputText(" it wouldn't hurt to check around.  She does tend to wander into the traps around camp from time to time.  Offering " + flags[kFLAGS.HELSPAWN_NAME] + " your hand, you start searching the camp for your missing milk maid.  The two of you make a circuit around camp, checking the traps and behind various rocks and hollows, to no avail.  Finally, as you're starting to get worried about the dusky maid, you happen to look into the steel pool in her part of camp.  Sure enough, you spy " + flags[kFLAGS.MILK_NAME] + " curled up at the bottom of the pool, cuddled up with a ragged blanket to catch a quick nap.");
 		outputText("\n\n\"<i>Aww,</i>\" " + flags[kFLAGS.HELSPAWN_NAME] + " grins, looking down at the napping " + flags[kFLAGS.MILK_NAME] + ".  \"<i>Guess I can milk her later, then.</i>\"");
 		menu();
-		addButton(0,"MilkHerLater",	helSpawnSureMilkHerLater);
-		addButton(1,"MilkHerNow",helSpawnMilkHerNow);
+		addButton(0,"MilkHerLater",	helSpawnSureMilkHerLater).hint("The massively-endowed ebony girl can wait for sure.");
+		addButton(1,"MilkHerNow",helSpawnMilkHerNow).hint("Take the opportunity to milk the immensively-endowed girl.");
 	}
 	//Talk 5
 	//{Isabella must be at camp}
@@ -1573,8 +1573,8 @@ public function hakonAndKiriComeVisit():void {
 	
 	outputText("\n\n\"<i>Aww, you're no fun,</i>\" Hel teases, giving the half-harpy a light punch on the shoulder before turning to you.  \"<i>What do you say, lover mine?  Wanna go hunting with your three favorite salamanders some time?</i>\"");
 	menu();
-	addButton(0,"Sure",goHuntingBitches);
-	addButton(1,"Maybe Not",noHuntingBitches);
+	addButton(0,"Sure",goHuntingBitches).hint("Of course, it would be so fun hunting the gnolls! If such scenes ever come, which sadly won't. Because Savin.");
+	addButton(1,"Maybe Not",noHuntingBitches).hint("Nah, hunting is not your thing.");
 }
 
 //Sure!
@@ -1588,7 +1588,9 @@ private function goHuntingBitches():void {
 	
 	outputText("\n\n\"<i>R-right!</i>\"");
 	
-	outputText("\n\nWith that settled, you sit down as Hel passes out something that must be akin to dinner for her family - mostly booze and rations - and soon you're enjoying a meal with the rowdy family, laughing at Hel's ribald jokes or Hakon's old war stories.  Eventually, Hakon and Kiri leave, but not before promising to come and get you and the family for their next gnoll hunt.");
+	outputText("\n\nWith that settled, you sit down as Hel passes out something that must be akin to dinner for her family - mostly booze and rations - and soon you're enjoying a meal with the rowdy family, laughing at Hel's ribald jokes or Hakon's old war stories.  "); 
+	player.refillHunger(30, false);
+	outputText("Eventually, Hakon and Kiri leave, but not before promising to come and get you and the family for their next gnoll hunt.");
 	doNext(camp.returnToCampUseOneHour);
 }
 //Maybe not
@@ -1598,7 +1600,9 @@ private function noHuntingBitches():void {
 	outputText("\"<i>I'll pass,</i>\" you say with a laugh, earning a shrug from the salamanders.");
 	outputText("\n\n\"<i>Well, maybe you'll change your mind next time.  Plenty of evil furbags to go around!</i>\" Hel says with a laugh.  \"<i>C'mon, let's find something for the folks to eat, huh?</i>\"");
 	
-	outputText("\n\nWith that settled, you sit down as Hel passes out something that must be akin to dinner for her family - mostly booze and ration - and soon you're enjoying a meal with the rowdy family, laughing at Hel's ribald jokes or Hakon's old war stories.  Eventually, Hakon and Kiri leave, waving goodbye until the next time they can visit.");
+	outputText("\n\nWith that settled, you sit down as Hel passes out something that must be akin to dinner for her family - mostly booze and ration - and soon you're enjoying a meal with the rowdy family, laughing at Hel's ribald jokes or Hakon's old war stories.  "); 
+	player.refillHunger(30, false);
+	outputText("Eventually, Hakon and Kiri leave, waving goodbye until the next time they can visit.");
 	doNext(camp.returnToCampUseOneHour);
 }
 

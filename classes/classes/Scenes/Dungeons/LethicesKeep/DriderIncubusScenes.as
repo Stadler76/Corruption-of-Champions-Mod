@@ -307,16 +307,16 @@ package classes.Scenes.Dungeons.LethicesKeep
 			menu();
 			if (flags[kFLAGS.DRIDERINCUBUS_KILLED] != 1 && flags[kFLAGS.DRIDERINCUBUS_FUCKED] != 1)
 			{
-				addButton(0,"Kill Drider",killDrider);
+				addButton(0,"Kill Drider",killDrider).hint("Get it over and done with. End the drider's life.");
 				if (player.vaginas.length > 0)
 				{
-					addButton(1,"Ride Drider",rideDrider);
+					addButton(1,"Ride Drider",rideDrider).hint("Put that drider's dick to a good use stuffing your pussy.");
 				} else {
 					addDisabledButton(1, "Ride Drider", "This scene requires you to have vagina.");
 				}
 				if (player.cocks.length > 0)
 				{
-					addButton(2,"Buttfuck Drider",buttfuckDrider);
+					addButton(2,"Buttfuck Drider",buttfuckDrider).hint("That drider's butt looks so inviting. Stuff your dick inside him.");
 				} else {
 					addDisabledButton(2, "Buttfuck Drider", "This scene requires you to have cock.");
 				}
@@ -331,23 +331,23 @@ package classes.Scenes.Dungeons.LethicesKeep
 				{
 					if (player.cocks.length > 0)
 					{
-						addButton(5,"Fuck Goblin",fuckMitzi);
-						addButton(6,"Goblin Tittyfuck",titfuckMitzi);
+						addButton(5,"Fuck Goblin",fuckMitzi).hint("Give the goblin bitch a good dicking. Bitches love dicks.");
+						addButton(6,"Goblin Tittyfuck",titfuckMitzi).hint("Those tits look so perfect against your pecker for sure.");
 					} else {
-						addDisabledButton(5, "Fuck Goblin", "This scene requires you to have cock.");
-						addDisabledButton(6, "Goblin Tittyfuck", "This scene requires you to have cock.");
+						addDisabledButton(5, "Fuck Goblin", "This scene requires you to have a cock.");
+						addDisabledButton(6, "Goblin Tittyfuck", "This scene requires you to have a cock.");
 					}
 					if (player.vaginas.length > 0)
 					{
-						addButton(7,"Goblin Licks",mitziEatsPussy);
+						addButton(7,"Goblin Licks",mitziEatsPussy).hint("Have the goblin eat you out.");
 					} else {
-						addDisabledButton(7, "Goblin Licks", "This scene requires you to have vagina.");
+						addDisabledButton(7, "Goblin Licks", "This scene requires you to have a vagina.");
 					}
 				}
-				addButton(8,"Recruit Goblin",recruitMitzi);
+				addButton(8,"Recruit Goblin",recruitMitzi).hint("Recruit the goblin. She might be so grateful if you do that.");
 				if (doneDriderbus)
 				{
-					addButton(9,"Leave Goblin",afterDriderbuttFight);
+					addButton(9,"Leave Goblin",afterDriderbuttFight).hint("Leave the goblin and proceed to the next opponent.");
 				}
 			}
 			else
@@ -505,7 +505,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			}
 			outputText(". She’s slowly rousing back to consciousness, but do you really need a goblin distracting you? You could tell her to wait for you outside, or forget about her and move on.");
 			menu();
-			addButton(0,"Recruit Mitzi",recruitMitzi);
+			addButton(0,"Recruit Mitzi",recruitMitzi).hint("Recruit the goblin. She might be so grateful if you do that.");
 			addButton(1,"Next",driderDefeatMenu);
 		}
 		
@@ -568,7 +568,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText("\n\n<i>“What should Mitzi do now, [Master]?”</i> The harlot with the too-long tongue asks, licking her lips. <i>“Want another cum?”</i>");
 			outputText("\n\nYou don’t have time to join in on the debauchery here, but you’ve got to come to a decision about this goblin now. Otherwise, she might distract you while you confront Lethice. Do you tell her that you’ll keep her and send her back to camp?");
 			menu();
-			addButton(0,"Recruit Mitzi",recruitMitzi);
+			addButton(0,"Recruit Mitzi",recruitMitzi).hint("Recruit the goblin. She might be so grateful if you do that.");
 			addButton(1,"Next",driderDefeatMenu);
 		}
 		
@@ -585,8 +585,8 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText("\n\n<i>“Ohhh, it really needs a good cum, doesn’t it?”</i> Mitzi purrs after one particularly slobbery kiss. <i>“Do you want Mitzi to make you squirt fast or slow? She knows you’re in a hurry.”</i> The goblin wraps both her small hands around you and gently strokes. <i>“Please [master], tell Mitzi how.”</i>");
 			outputText("\n\nShe thinks she can get you off fast and let you return to your mission, but is also offering to make love to your [cock biggest] until the pleasure gradually overwhelms you. Which do you prefer?");
 			menu();
-			addButton(0,"Quick",titfuckMitziQuick);
-			addButton(1,"Slow",titfuckMitziSlow);
+			addButton(0,"Quick",titfuckMitziQuick).hint("Faster! Rough!");
+			addButton(1,"Slow",titfuckMitziSlow).hint("Take it nice and slow. The demons aren't going to intervene you anyway.");
 		}
 		
 		public function titfuckMitziSlow():void
@@ -732,7 +732,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText("\n\nYou sit up, noting that she’s positioned herself so that her lust-engorged quim is spread before you. You could take her for another go right this very moment without anyone batting an eye. Most of the demons are still too distracted by their own fucking.");
 			outputText("\n\nBut... you’ve got a demon queen to face down. If you want to have the goblin as your own, all you have to do is tell her to wait for you outside... Do you keep her?");
 			menu();
-			addButton(0,"Recruit Mitzi",recruitMitzi);
+			addButton(0,"Recruit Mitzi",recruitMitzi).hint("Recruit the goblin. She might be so grateful if you do that.");
 			addButton(1,"Next",driderDefeatMenu);
 		}
 		
@@ -791,7 +791,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText(" eyelashes at you and pushes a stray droplet of spooge past her puffy cocksuckers, swallowing noisily.");
 			outputText("\n\nYou should probably decide if you’re going to keep her before moving on. Do you want a goblin slave at camp? She could wait outside for you. It’d be easy. [EachCock] tingles with aftershocks, subtly agreeing.");
 			menu();
-			addButton(0,"Recruit Mitzi",recruitMitzi);
+			addButton(0,"Recruit Mitzi",recruitMitzi).hint("Recruit the goblin. She might be so grateful if you do that.");
 			addButton(1,"Next",driderDefeatMenu);
 		}
 		
@@ -827,8 +827,8 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText("\n\n<i>“Hey, Champion, please... use the goblin. Let me save face. I won’t oppose you again,”</i> Kinariel pleads. <i>“Let me save face.”</i>");
 			outputText("\n\nKneeling over him, you consider him and his desperately pulsating member. You could change your mind and use the goblin if you wanted him to owe you a favor... or you could force him to indulge the obvious fetish he has for his own humiliation by riding him into the ground in front of his peers and superiors. Your call.");
 			menu();
-			addButton(0,"Fuck Him",actuallyRideDriderDick);
-			addButton(1,"Use Goblin",rideDriderToGoblin);
+			addButton(0,"Fuck Him",actuallyRideDriderDick).hint("Really put the drider's dick to a good use.");
+			addButton(1,"Use Goblin",rideDriderToGoblin).hint("You could use Mitzi the goblin.");
 			addButton(2,"Nevermind",driderDefeatMenu);
 		}
 		
@@ -839,14 +839,15 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText("\n\nKinariel nods almost too enthusiastically. Coward.");
 			outputText("\n\nNow... about this goblin. She looks at you eagerly once more, cupping her own breasts excitedly. <i>“Let Mitzi show you what she can do, and you’ll never want to fuck anyone else!”</i>");
 			outputText("\n\nQuite the claim. What do you do with her?");
+			menu();
 			if (player.cocks.length > 0)
 			{
-				addButton(5,"Fuck Mitzi",fuckMitzi);
-				addButton(6,"MitziTitfuck",titfuckMitzi);
+				addButton(5,"Fuck Mitzi",fuckMitzi).hint("Give the goblin bitch a good dicking. Bitches love dicks.");
+				addButton(6,"MitziTitfuck",titfuckMitzi).hint("Those tits look so perfect against your pecker for sure.");
 			}
 			if (player.vaginas.length > 0)
 			{
-				addButton(7,"Mitzi Licks",mitziEatsPussy);
+				addButton(7,"Mitzi Licks",mitziEatsPussy).hint("Have the goblin eat you out.");
 			}
 		}
 		

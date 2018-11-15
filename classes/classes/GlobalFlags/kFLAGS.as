@@ -2378,10 +2378,10 @@ public static const AIKO_BOSS_INTRO:int												= 2369;	//1=Yamata scene intr
 public static const AIKO_BOSS_COMPLETE:int											= 2370;	//1=Yamata is dead 2 Yamata is released
 public static const AIKO_BOSS_OUTRO:int												= 2371;	//
 public static const YAMATA_MASOCHIST:int											= 2372;	//counter increases to 100, if not defeated before reaching 100, gain masochist perk.
-public static const UNKNOWN_FLAG_NUMBER_02373:int                                   = 2373;
-public static const UNKNOWN_FLAG_NUMBER_02374:int                                   = 2374;
-public static const UNKNOWN_FLAG_NUMBER_02375:int                                   = 2375;
-public static const UNKNOWN_FLAG_NUMBER_02376:int                                   = 2376;
+public static const TOTAL_HP_VICTORIES:int                                          = 2373; //How many HP victories. If you defeat Lethice while this counter is 0 and don't kill NPCs, gain Pacifist achievement.
+public static const TENTACLE_BEASTS_KILLED:int                                      = 2374;
+public static const WORMS_MASS_KILLED:int                                           = 2375;
+public static const ACHIEVEMENT_PROGRESS_DAMAGE_SPONGE:int                          = 2376;
 public static const UNKNOWN_FLAG_NUMBER_02377:int                                   = 2377;
 public static const UNKNOWN_FLAG_NUMBER_02378:int                                   = 2378;
 public static const UNKNOWN_FLAG_NUMBER_02379:int                                   = 2379;

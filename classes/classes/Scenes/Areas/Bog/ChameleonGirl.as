@@ -131,10 +131,10 @@ package classes.Scenes.Areas.Bog
 			this.long = "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.";
 			this.race = "Chameleon-Morph";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("B"));
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = rand(2) + 68;
 			this.hips.rating = Hips.RATING_AMPLE + 2;
 			this.butt.rating = Butt.RATING_LARGE;

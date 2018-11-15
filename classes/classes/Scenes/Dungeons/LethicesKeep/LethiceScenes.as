@@ -93,21 +93,21 @@ package classes.Scenes.Dungeons.LethicesKeep
 			menu();
 			if(player.hasCock())
 			{
-				addButton(0,"Plow Her",plowHer);
+				addButton(0,"Plow Her",plowHer).hint("Be the king for this one! Give the Demon Queen a good dicking, show your dominance.");
 			} else {
-				addDisabledButton(0, "Plow Her", "This scene requires you to have cock.");
+				addDisabledButton(0, "Plow Her", "This scene requires you to have a cock.");
 			}
 			if(player.hasVagina())
 			{
-				addButton(1,"Queen Her",queenHer);
+				addButton(1,"Queen Her",queenHer).hint("Be the queen and dominate the former Demon Queen.");
 			} else {
-				addDisabledButton(1, "Queen Her", "This scene requires you to have vagina.");
+				addDisabledButton(1, "Queen Her", "This scene requires you to have a vagina.");
 			}
 			addButton(2,"Boob Play",boobPlay,hpVictory);
 			var hasLethicite:Boolean = player.hasKeyItem("Sheila's Lethicite") > 0 || player.hasKeyItem("Stone Statue Lethicite") > 0;
 			if (Boolean(hasLethicite) && flags[kFLAGS.MET_MARAE] > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1)
 			{
-				addButton(5, "Redemption", redemption, hpVictory);
+				addButton(5, "Redemption", redemption, hpVictory).hint("You could have Lethice redeemed now that Marae is saved and you have a large lethicite chunk.");
 			}
 			addButton(14, "Skip Out", theChoiceDunDunDun).hint("Screw this! Skip out and make the choice.");
 		}
@@ -146,7 +146,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			{
 				outputText("\n\nUnless you have better plans...");
 				menu();
-				addButton(0,"Fuck Pussy",plowHerPussy);
+				addButton(0,"Fuck Pussy",plowHerPussy).hint("");
 				addButton(1,"Fuck Butt",plowHerButt);
 				return;
 			}
@@ -1266,7 +1266,16 @@ package classes.Scenes.Dungeons.LethicesKeep
 			outputText("You may have defeated Lethice and completed the main story but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
 			outputText("\n\n<b>You can now ascend if you like. Search for the book in the ruined cathedral and perform the ritual at your camp.</b>");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
-			if (player.level <= 1) awardAchievement("Ultimate Noob", kACHIEVEMENTS.CHALLENGE_ULTIMATE_NOOB, true, true, false); //Lethice beaten at level 1!
+			//Lethice beaten at level 1!
+			if (player.level <= 1) awardAchievement("The Ultimate Noob", kACHIEVEMENTS.CHALLENGE_ULTIMATE_NOOB, true, true, false); 
+			//Lethice beaten without casting spells.
+			if (flags[kFLAGS.SPELLS_CAST] <= 0) awardAchievement("The Mundane Champion", kACHIEVEMENTS.CHALLENGE_ULTIMATE_MUNDANE, true, true, false);
+			//Finish with no sex or masturbating.
+			if (flags[kFLAGS.TIMES_MASTURBATED] <= 0 && flags[kFLAGS.TIMES_ORGASMED] <= 0) awardAchievement("The Celibate Hero", kACHIEVEMENTS.CHALLENGE_ULTIMATE_CELIBATE, true, true, false);
+			//Defeat without killing anybody and just show every enemy some MERCY.
+			if (flags[kFLAGS.TOTAL_HP_VICTORIES] <= 0 && camp.getTotalKills() <= 0) awardAchievement("Pacifist", kACHIEVEMENTS.CHALLENGE_PACIFIST, true, true, false);
+			//Finish within 30 days or less on a fresh game.
+			if (getGame().time.days <= 30 && player.newGamePlusMod() == 0) awardAchievement("Speedrunner", kACHIEVEMENTS.CHALLENGE_SPEEDRUN, true, true, false);
 			inDungeon = false;
 			inRoomedDungeon = false;
 			player.HP = player.maxHP();

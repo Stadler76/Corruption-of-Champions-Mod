@@ -14,7 +14,7 @@ import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.Monsters.Imp;
 import classes.display.SpriteDb;
 import classes.internals.*;
-import classes.VaginaClass;
+import classes.Vagina;
 
 public class CommonEncounters extends BaseContent implements Encounter {
 
@@ -64,17 +64,17 @@ public class CommonEncounters extends BaseContent implements Encounter {
 				call  : goblinCombatEncounter
 			}, {
 				name  : "gobass",
-				call  : kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter,
+				call  : curry(kGAMECLASS.goblinSpecialScene.goblinSpecialEncounter, 0),
 				when  : fn.ifLevelMin(10),
 				chance: fn.lineByLevel(10, 14, 0.5, 2.0) // x0.5 at level 10, x2 at level 16+
 			}, {
 				name  : "gobwar",
-				call  : kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter,
+				call  : curry(kGAMECLASS.goblinSpecialScene.goblinSpecialEncounter, 1),
 				when  : fn.ifLevelMin(12),
 				chance: fn.lineByLevel(12, 18, 0.5, 3.0) // x0.5 at level 12, x3 at level 18+
 			}, {
 				name  : "gobsha",
-				call  : kGAMECLASS.goblinShamanScene.goblinShamanEncounter,
+				call  : curry(kGAMECLASS.goblinSpecialScene.goblinSpecialEncounter, 2),
 				when  : fn.ifLevelMin(12),
 				chance: fn.lineByLevel(12, 18, 0.5, 3.0) // x0.5 at level 12, x3 at level 18+
 			}, {
@@ -156,11 +156,8 @@ public class CommonEncounters extends BaseContent implements Encounter {
 	}
 
 	private function unlockCodexImps():void {
-//Unlock if haven't already.
-		if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-			outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
-		}
+		//Unlock if haven't already.
+		unlockCodexEntry("Imps", kFLAGS.CODEX_ENTRY_IMPS);
 	}
 
 	private function twoImpsClashing():void {
@@ -190,10 +187,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 			clearOutput();
 			outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
 		}
-		if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-			outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
-		}
+		unlockCodexEntry("Goblins", kFLAGS.CODEX_ENTRY_GOBLINS);
 		startCombat(new Goblin());
 		spriteSelect(SpriteDb.s_goblin);
 	}
@@ -248,7 +242,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 			if (player.vaginas.length >= 1) {
 				outputText("  Your " + player.vaginaDescript() + " and " + player.clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + player.buttDescript() + " above.");
 				//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
+				if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_DROOLING) {
 					outputText("  Juices stream from your womanhood and begin pooling on the dirt and twigs beneath you.  ");
 					if (lake) outputText("The drooling fem-spunk only makes the ground more muddy.");
 					else outputText("The sticky fem-spunk immediately soaks down into the rich soil.");
@@ -273,7 +267,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 			if (player.vaginas.length >= 1) {
 				outputText("  Your " + player.vaginaDescript() + " and " + player.clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + player.buttDescript() + " above.");
 				//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) {
+				if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_DROOLING) {
 					if (lake) outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the mud beneath you.  The sloppy fem-spunk only makes the ground more muddy.");
 					else outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the dirt and twigs beneath you.");
 				}
@@ -337,7 +331,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 			if (player.vaginas.length >= 1) {
 				outputText("  Your " + player.vaginaDescript() + " and " + player.clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + player.buttDescript() + " above.");
 				//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
+				if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ");
 			}
 		}
 		//FOR CENTAURS
@@ -351,7 +345,7 @@ public class CommonEncounters extends BaseContent implements Encounter {
 			if (player.vaginas.length >= 1) {
 				outputText("  Your " + player.vaginaDescript() + " and " + player.clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + player.buttDescript() + " above.");
 				//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
+				if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.");
 			}
 		}
 		outputText("\n\n");

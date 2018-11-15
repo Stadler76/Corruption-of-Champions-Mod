@@ -108,7 +108,7 @@ package classes.Scenes.Monsters
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.goblinShamanScene.goblinShamanRapeIntro();
+			game.goblinSpecialScene.gobboSpecialRapeIntro(hpVictory);
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
@@ -117,7 +117,7 @@ package classes.Scenes.Monsters
 				game.combat.cleanupAfterCombat();
 			} 
 			else {
-				game.goblinShamanScene.goblinShamanBeatYaUp();
+				game.goblinSpecialScene.gobboSpecialBeatYaUp();
 			}
 		}
 		
@@ -129,11 +129,11 @@ package classes.Scenes.Monsters
 			this.long = "The goblin before you stands approximately three feet and a half. Her ears appear to be pierced more times than the amount of piercings a typical goblin has. Her hair is deep indigo. She’s unlike most of the goblins you’ve seen. She’s wielding a staff in her right hand. In addition to the straps covering her body, she’s wearing a necklace seemingly carved with what looks like shark teeth. She’s also wearing a tattered loincloth, unlike most goblins who would show off their pussies. From the looks of one end of her staff glowing, she’s clearly a shaman!";
 			this.race = "Goblin";
 			if (player.hasCock()) this.long += "  She's clearly intent on casting you into submission just so she can forcibly make you impregnate her.";
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_DROOLING, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 44 + rand(7);
 			this.hips.rating = Hips.RATING_AMPLE+2;

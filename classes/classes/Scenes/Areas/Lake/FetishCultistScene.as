@@ -46,10 +46,7 @@ public class FetishCultistScene extends AbstractLakeContent implements Encounter
 
 			} else {
 			outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.");
-			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
-			}
+			unlockCodexEntry("Followers of the Fetish", kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
 			startCombat(new FetishCultist());
 			spriteSelect(SpriteDb.s_fetish_cultist);
 			doNext(playerMenu);
@@ -490,12 +487,12 @@ public class FetishCultistScene extends AbstractLakeContent implements Encounter
 				//player chooses between; penetrate vagina, vibrator vagina, nevermind.  Options as appropriate.
 				menu();
 				if (player.hasCock()) {
-					addButton(0, "FuckHerVag", plugSwimsuitVag);
+					addButton(0, "FuckHerVag", plugSwimsuitVag).hint("You could penetrate the cultist vaginally.");
 				} else {
 					addDisabledButton(0, "FuckHerVag", "This scene requires you to have cock.");
 				}
 				if (player.hasVagina()) {
-					addButton(1, "Vibrator", swimsuitVibrators);
+					addButton(1, "Vibrator", swimsuitVibrators).hint("Since she mentioned the vibrators, it wouldn't hurt to make good use of them for pleasure.");
 				} else {
 					addDisabledButton(1, "Vibrator", "This scene requires you to have vagina.");
 				}

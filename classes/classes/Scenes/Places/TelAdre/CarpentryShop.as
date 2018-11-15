@@ -20,10 +20,7 @@ package classes.Scenes.Places.TelAdre
 			spriteSelect(SpriteDb.s_carpenter);
 			outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n");
 			outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n");
-			if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ZEBRAS] = 1; //Unlocks codex entry for Zebra. :)
-				outputText("<b>New codex entry unlocked: Zebras!</b>")
-			}
+			unlockCodexEntry("Zebra-Morphs", kFLAGS.CODEX_ENTRY_ZEBRAS, false, false);
 			doNext(carpentryShopInside);
 		}
 

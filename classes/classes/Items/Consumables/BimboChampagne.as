@@ -5,7 +5,7 @@ package classes.Items.Consumables
 	import classes.Items.Consumable;
 	import classes.PerkLib;
 	import classes.Player;
-	import classes.StatusEffectClass;
+	import classes.StatusEffect;
 	import classes.StatusEffects;
 
 	/**
@@ -47,7 +47,7 @@ package classes.Items.Consumables
 					          +" Somehow, you feel like you could fuck anyone right now!");
 				}
 			}
-			var champagneEffect:StatusEffectClass = player.statusEffectByType(StatusEffects.BimboChampagne);
+			var champagneEffect:StatusEffect = player.statusEffectByType(StatusEffects.BimboChampagne);
 			if (champagneEffect !== null) {
 				//player.addStatusValue(StatusEffects.BimboChampagne, 1, 4);
 				champagneEffect.value1 += 4;
@@ -103,7 +103,7 @@ package classes.Items.Consumables
 
 		public function removeBimboChampagne():void
 		{
-			var champagneEffect:StatusEffectClass = player.statusEffectByType(StatusEffects.BimboChampagne);
+			var champagneEffect:StatusEffect = player.statusEffectByType(StatusEffects.BimboChampagne);
 			outputText("\n<b>Whoah! Your head is clearing up, and you feel like you can think clearly for the first time in forever."
 			          +" Niamh sure is packing some potent stuff!  You shake the cobwebs out of your head, glad to once again be less dense than"
 			          +" a goblin with a basilisk boyfriend.</b>");

@@ -5,6 +5,14 @@ package classes.Scenes.Combat
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
+	import classes.Items.Weapons.Blunderbuss;
+	import classes.Items.Weapons.Crossbow;
+	import classes.Items.Weapons.FlintlockPistol;
+	import classes.Items.Weapons.HookedGauntlet;
+	import classes.Items.Weapons.HugeWarhammer;
+	import classes.Items.Weapons.LethicesWhip;
+	import classes.Items.Weapons.SpikedGauntlet;
+	import classes.Items.Weapons.Whip;
 	import classes.Scenes.Areas.Desert.*;
 	import classes.Scenes.Areas.Forest.*;
 	import classes.Scenes.Areas.GlacialRift.*;
@@ -84,6 +92,7 @@ package classes.Scenes.Combat
 		//No longer used:		itemSwapping = false;
 				//Player won
 				if (monster.HP < 1 || monster.lust >= monster.maxLust()) {
+					if (monster.HP < 1) flags[kFLAGS.TOTAL_HP_VICTORIES]++;
 					awardPlayer(nextFunc);
 				}
 				//Player lost
@@ -158,7 +167,7 @@ package classes.Scenes.Combat
 			while (player.hasStatusEffect(StatusEffects.KnockedBack)) {
 				player.removeStatusEffect(StatusEffects.KnockedBack);
 			}
-			if (player.weaponName == "flintlock pistol") {
+			if (player.weapon is FlintlockPistol) {
 				if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0) {
 					flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 					outputText("At the same time, you open the chamber of your pistol to reload the ammunition.  This takes up a turn.\n\n");
@@ -171,7 +180,12 @@ package classes.Scenes.Combat
 					return;
 				}
 			}
-			if (player.weaponName == "crossbow") {
+			if (player.weapon is Blunderbuss) { //Dirty code, will put ammo later.
+				outputText("At the same time, you fire a round at " + monster.short + ". ");
+				attack();
+				return;
+			}
+			if (player.weapon is Crossbow) {
 				outputText("At the same time, you fire a bolt at " + monster.short + ". ");
 				attack();
 				return;
@@ -289,7 +303,7 @@ package classes.Scenes.Combat
 			{
 				outputText("\n<b>You'll need to close some distance before you can use any physical attacks!</b>");
 				if (isWieldingRangedWeapon()) {
-					if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponName == "flintlock pistol") addButton(10, "Reload&Approach", approachAfterKnockback).hint("Reload your flintlock pistol while approaching.", "Reload and Approach");
+					if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weapon is FlintlockPistol) addButton(10, "Reload&Approach", approachAfterKnockback).hint("Reload your flintlock pistol while approaching.", "Reload and Approach");
 					else addButton(10, "Fire&Approach", approachAfterKnockback).hint("Land a shot at your opponent and approach.", "Fire and Approach");
 				}
 				else addButton(0, "Approach", approachAfterKnockback).hint("Close some distance between you and your opponent.");
@@ -704,7 +718,7 @@ package classes.Scenes.Combat
 			}
 			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 			//Reload
-			if (player.weaponName == "flintlock pistol") {
+			if (player.weapon is FlintlockPistol) {
 				if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0) {
 					flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
 					outputText("You open the chamber of your pistol to reload the ammunition.  This takes up a turn.\n\n");
@@ -994,7 +1008,7 @@ package classes.Scenes.Combat
 						outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.");
 						monster.teased(monster.lustVuln * (5 + player.cor / 10));
 					}
-					if (player.weaponName == "coiled whip" && rand(2) == 0) {		
+					if (player.weapon is Whip && rand(2) == 0) {		
 						if (!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and gets turned on from the whipping.");
 						else outputText("\n" + monster.capitalA + monster.short + " shiver and get turned on from the whipping.");
 						monster.teased(monster.lustVuln * (5 + player.cor / 12));
@@ -1009,9 +1023,8 @@ package classes.Scenes.Combat
 							outputText(" You get a sexual thrill from it. ");
 							player.takeLustDamage(1, true);
 						}
-						
 					}
-					if (player.weapon == weapons.L_WHIP) {
+					if (player.weapon is LethicesWhip) {
 						if (player.cor < 60) dynStats("cor", .1);
 						if (player.cor < 90) dynStats("cor", .05);
 						if (!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the flaming whip's touches.");
@@ -1024,14 +1037,14 @@ package classes.Scenes.Combat
 					}
 				}
 				//Weapon Procs!
-				if (player.weaponName == "huge warhammer" || player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
+				if (player.weapon is HugeWarhammer || player.weapon is SpikedGauntlet || player.weapon is HookedGauntlet) {
 					//10% chance
 					if (rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 						outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.");
 						if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned,rand(2),0,0,0);
 					}
 					//50% Bleed chance
-					if (player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
+					if (player.weapon is HookedGauntlet && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusEffect(StatusEffects.IzmaBleed))
 					{
 						if (monster is LivingStatue)
 						{
@@ -1129,7 +1142,7 @@ package classes.Scenes.Combat
 			else return false;
 		}
 		public function isWieldingRangedWeapon():Boolean {
-			if (player.weaponName == "flintlock pistol" || player.weaponName == "crossbow" || player.weaponName == "blunderbuss rifle" || (player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0)) return true;
+			if (player.weapon is FlintlockPistol || player.weapon is Blunderbuss || player.weapon is Crossbow || (player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0)) return true;
 			else return false;
 		}
 
@@ -1154,7 +1167,7 @@ package classes.Scenes.Combat
 			}
 			
 			// Uma's Massage Bonuses
-			var stat:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
+			var stat:StatusEffect = player.statusEffectByType(StatusEffects.UmasMassage);
 			if (stat != null) {
 				if (stat.value1 == UmasShop.MASSAGE_POWER) {
 					damage *= stat.value2;
@@ -1375,7 +1388,7 @@ package classes.Scenes.Combat
 		//Clear statuses
 		public function clearStatuses():void {
 			player.clearStatuses();
-			for (var a:/*StatusEffectClass*/Array=monster.statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
+			for (var a:/*StatusEffect*/Array=monster.statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
 				// Using a copy of array because some effects will be removed
 				a[i].onCombatEnd();
 			}
@@ -1725,7 +1738,7 @@ package classes.Scenes.Combat
 					player.removeStatusEffect(StatusEffects.WhipSilence);
 				}
 			}
-			for (var a:/*StatusEffectClass*/Array=player.statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
+			for (var a:/*StatusEffect*/Array=player.statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
 				// Using a copy of array because some effects will be removed
 				a[i].onCombatRound();
 			}
@@ -1822,8 +1835,8 @@ package classes.Scenes.Combat
 			else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.4;
 			monster.HP = monster.maxHP();
 			monster.XP = monster.totalXP();
-			if (player.weaponName == "flintlock pistol") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
-			if (player.weaponName == "blunderbuss") flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 12;
+			if (player.weapon is FlintlockPistol) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 4;
+			if (player.weapon is Blunderbuss) flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] = 12;
 			if (prison.inPrison && prison.prisonCombatAutoLose) {
 				dynStats("lus", player.maxLust(), "scale", false);
 				doNext(endLustLoss);
@@ -2409,3 +2422,4 @@ package classes.Scenes.Combat
 	}
 
 }
+

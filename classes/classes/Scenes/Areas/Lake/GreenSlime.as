@@ -50,8 +50,8 @@
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			createBreastRow(0);
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 80;
 			this.hips.rating = Hips.RATING_AMPLE;
 			this.butt.rating = Butt.RATING_LARGE;

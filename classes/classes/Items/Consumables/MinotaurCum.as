@@ -3,7 +3,7 @@ package classes.Items.Consumables
 	import classes.GlobalFlags.*;
 	import classes.Items.Consumable;
 	import classes.PerkLib;
-	import classes.VaginaClass;
+	import classes.Vagina;
 
 	/**
 	 * @since March 30, 2018
@@ -88,9 +88,9 @@ package classes.Items.Consumables
 				outputText("  Your " + player.clitDescript() + " engorges, ");
 				if (player.getClitLength() < 3) outputText("parting your lips.");
 				else outputText("bursting free of your lips and bobbing under its own weight.");
-				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL) outputText("  Wetness builds inside you as your " + player.vaginaDescript(0) + " tingles and aches to be filled.");
-				else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_SLICK) outputText("  A trickle of wetness escapes your " + player.vaginaDescript(0) + " as your body reacts to the desire burning inside you.");
-				else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING) outputText("  Wet fluids leak down your thighs as your body reacts to this new stimulus.");
+				if (player.vaginas[0].vaginalWetness <= Vagina.WETNESS_NORMAL) outputText("  Wetness builds inside you as your " + player.vaginaDescript(0) + " tingles and aches to be filled.");
+				else if (player.vaginas[0].vaginalWetness <= Vagina.WETNESS_SLICK) outputText("  A trickle of wetness escapes your " + player.vaginaDescript(0) + " as your body reacts to the desire burning inside you.");
+				else if (player.vaginas[0].vaginalWetness <= Vagina.WETNESS_DROOLING) outputText("  Wet fluids leak down your thighs as your body reacts to this new stimulus.");
 				else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.");
 			}
 			//(Minotaur fantasy)

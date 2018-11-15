@@ -65,7 +65,17 @@ package classes.Scenes.Dungeons
 			outputText("<b><u>Pleasure Pits</u></b>\n");
 			outputText("(Placeholder) Full of cages where the horny hellhounds romp about, fucking each other senselessly. The door to the east leads to another corridor.");
 			outputText("\n\nYou may also have to fight a horde of hellhounds here. By Marae, it smells like corrupted cum" + (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 ? " and of course, demonic piss" : "") + "!");
-			dungeons.setDungeonButtons(null, roomKennels, null, roomCorridor2);
+			dungeons.setDungeonButtons(roomLivingQuarters, roomKennels, null, roomCorridor2);
+		}
+		
+		public function roomLivingQuarters():void {
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HELLHOUND_QUARTERS;
+			clearOutput();
+			outputText(images.showImage("location-living-quarters"));
+			outputText("<b><u>Living Quarters</u></b>\n");
+			outputText("(Placeholder) Full of bunk beds and footlockers. Also where the demons sleep.");
+			outputText("\n\nMay contain a loot here.");
+			dungeons.setDungeonButtons(null, roomPleasurePits, null, null);
 		}
 		
 		public function roomCorridor2():void {

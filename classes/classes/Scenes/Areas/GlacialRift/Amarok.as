@@ -93,8 +93,8 @@ package classes.Scenes.Areas.GlacialRift {
 			createBreastRow(2,1);
 			createBreastRow(2,1);
 			createBreastRow(2,1);
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = 8*12;
 			this.hips.rating = Hips.RATING_AVERAGE;
 			this.butt.rating = Butt.RATING_AVERAGE;

@@ -3,13 +3,13 @@
  */
 package classes.Perks
 {
-	import classes.PerkClass;
+	import classes.Perk;
 	import classes.PerkType;
 
 	public class WizardsFocusPerk extends PerkType
 	{
 
-		override public function desc(params:PerkClass = null):String
+		override public function desc(params:Perk = null):String
 		{
 			return "Increases your spell effect modifier by " + params.value1 * 100 + "%.";
 		}

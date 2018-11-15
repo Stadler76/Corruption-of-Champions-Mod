@@ -243,11 +243,11 @@ package classes.Scenes.NPCs
 			this.ballSize = 0;
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
-			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_WET, Vagina.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
 			this.hips.rating = Hips.RATING_CURVY;
 			this.butt.rating = Butt.RATING_LARGE;

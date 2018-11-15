@@ -24,7 +24,7 @@ package classes{
 		private const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		private const TEST_CLIT_LENGTH:Number = 3;
 		private const CUNT_CHANGE_VALUE:Number = 5;
-		private const VAGINAL_LOOSENESS_VALUE:Number = VaginaClass.LOOSENESS_LOOSE;
+		private const VAGINAL_LOOSENESS_VALUE:Number = Vagina.LOOSENESS_LOOSE;
 		private const VAGINAL_CAPCITY_OFFSET:Number = 2;
 		private const VAGINAL_CAPCITY_TEST_DELTA:Number = 2;
 		private const RECOVERY_COUNT:Number = 5;
@@ -91,7 +91,7 @@ package classes{
 			maxVagina = new Creature();
 			createMaxVaginas(maxVagina);
 
-			for each (var vag:VaginaClass in maxVagina.vaginas){
+			for each (var vag:Vagina in maxVagina.vaginas){
 				vag.recoveryProgress = RECOVERY_COUNT;		
 			}
 			
@@ -139,24 +139,24 @@ package classes{
 		
 		[Test] 
         public function testVaginaTypeWithVagina():void {
-			assertThat(oneVagina.vaginaType(), equalTo(VaginaClass.HUMAN));
+			assertThat(oneVagina.vaginaType(), equalTo(Vagina.HUMAN));
         }
 		
 		[Test] 
         public function testSetVaginaTypeWithNoVagina():void {
-			assertThat(noVagina.vaginaType(VaginaClass.EQUINE), equalTo(-1));
+			assertThat(noVagina.vaginaType(Vagina.EQUINE), equalTo(-1));
         }
 		
 		[Test] 
         public function testSetVaginaTypeWithVagina():void {
-			assertThat(oneVagina.vaginaType(VaginaClass.EQUINE), equalTo(VaginaClass.EQUINE));
+			assertThat(oneVagina.vaginaType(Vagina.EQUINE), equalTo(Vagina.EQUINE));
         }
 		
 		[Test] 
         public function testReadVaginaTypeAfterSet():void {
-			oneVagina.vaginaType(VaginaClass.EQUINE);
+			oneVagina.vaginaType(Vagina.EQUINE);
 			
-			assertThat(oneVagina.vaginaType(), equalTo(VaginaClass.EQUINE));
+			assertThat(oneVagina.vaginaType(), equalTo(Vagina.EQUINE));
         }
 		
 		[Test] 
@@ -529,7 +529,7 @@ package classes{
 		
 		[Test] 
         public function getClitLength_oneVagina():void {
-			assertThat(oneVagina.getClitLength(), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+			assertThat(oneVagina.getClitLength(), equalTo(Vagina.DEFAULT_CLIT_LENGTH));
         }
 		
 		[Test] 
@@ -541,7 +541,7 @@ package classes{
 		
 		[Test] 
         public function getClitLength_multiVagina():void {
-			assertThat(maxVagina.getClitLength(1), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+			assertThat(maxVagina.getClitLength(1), equalTo(Vagina.DEFAULT_CLIT_LENGTH));
         }
 		
 				
@@ -552,12 +552,12 @@ package classes{
 		
 		[Test] 
         public function changeClitLength_increase():void {
-			assertThat(oneVagina.changeClitLength(1), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH + 1));
+			assertThat(oneVagina.changeClitLength(1), equalTo(Vagina.DEFAULT_CLIT_LENGTH + 1));
         }
 		
 		[Test] 
         public function changeClitLength_decrease():void {
-			assertThat(oneVagina.changeClitLength(-0.2), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH - 0.2));
+			assertThat(oneVagina.changeClitLength(-0.2), equalTo(Vagina.DEFAULT_CLIT_LENGTH - 0.2));
         }
 		
 		[Test] 

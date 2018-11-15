@@ -40,6 +40,16 @@ package classes.Items
 		
 		override public function get description():String {
 			var desc:String = _description;
+			switch(_tier) {
+				case 1:
+					desc += " This armour has been upgraded to be of fine quality.";
+					break;
+				case 2:
+					desc += " This armour has been upgraded to be of masterwork quality.";
+					break;
+				default:
+					desc += "";
+			}
 			//Type
 			desc += "\n\nType: ";
 			if (perk == "Light" || perk == "Medium" || perk == "Heavy") {
@@ -48,6 +58,7 @@ package classes.Items
 			else desc += "Clothing ";
 			//Defense
 			desc += "\nDefense: " + String(def);
+			desc += appendStatsDifference(def - (game.player.armor.def));
 			//Value
 			desc += "\nBase value: " + String(value);
 			return desc;

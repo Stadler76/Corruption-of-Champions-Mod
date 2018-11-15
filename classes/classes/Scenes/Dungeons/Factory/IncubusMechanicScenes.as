@@ -9,7 +9,7 @@ package classes.Scenes.Dungeons.Factory
 	import classes.PregnancyStore;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	
 	/**
 	 * ...
@@ -283,9 +283,9 @@ package classes.Scenes.Dungeons.Factory
 				//(set cocksize = to 80% vaginalCapacity).
 				
 				outputText("Thankful for the gesture, you sink down onto him, letting the nubs of his crown stimulate your lips and the underside of your " + player.clitDescript() + ".  ");
-				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText("In no time flat your drooling fluids soak him in slippery wetness.  ");
-				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK && player.vaginas[0].vaginalWetness != VaginaClass.WETNESS_DRY) outputText("Before long, you've lubricated a fair portion of his tool with wetness.  ");
-				if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) outputText("Despite your usual light lubrication, you manage to moisten the top-half of his tool with wetness.  ");
+				if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_SLICK) outputText("In no time flat your drooling fluids soak him in slippery wetness.  ");
+				if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLICK && player.vaginas[0].vaginalWetness != Vagina.WETNESS_DRY) outputText("Before long, you've lubricated a fair portion of his tool with wetness.  ");
+				if (player.vaginas[0].vaginalWetness == Vagina.WETNESS_DRY) outputText("Despite your usual light lubrication, you manage to moisten the top-half of his tool with wetness.  ");
 				outputText("Relaxing the muscles in your " + player.legs() + ", you let a few inches of his length slip inside you, every nub and nodule of his corrupted prick filling the walls of your love-canal with inhuman pleasures that make your knees weak.  A particularly delightful bump brushes your " + player.clitDescript() + ", causing your " + player.legs() + " to finally give out. The incubus' nubbly cock plunges entirely inside you.\n\n");
 				outputText("You gasp and moan like a cheap whore, disgusted by yourself and yet so turned on by the total loss of self-control.  The incubus is leering up at you, having regained some of his lost confidence.  Despite the lust, desire and pleasure burning through the hot pole buried in your abdomen, you work up enough rage to grip his neck with your left hand and practically choke him out.  You work your hips quickly as you feel his pre start to drip into your canal, spreading tingling warmth in the deepest parts of your passage and into your cervix.  You tighten your grip as you forcibly take your pleasure, barking in displeasure at the demon, \"<i>Don't look like you're enjoying this too much bitch, or I'll take it out of your hide.</i>\"  Satisfied at the renewed look of fear in his eyes, you return to using his magnificent tool as a masturbation aid.\n\n");
 				outputText("Unable to contain your body's desires due to either the demon's aura or his wonderful penis, you slam your " + player.vaginaDescript(0) + " onto his member with impunity, twitching and squeezing involuntarily.  His tainted pre-cum begins seeping deep inside your uterus and you cry out with orgasmic intensity.  Your entire body clenches down, even the hand clamped on the incubus' windpipe. You feel his demon-cock swell up inside you in response to his stress, stretching your cunt taut.  His skin darkens from the lack of oxygen as he begins cumming HARD inside you.  Your womb immediately fills with his demon-seed, leaving ribbons of spunk to drip from your tightly-stretched cunt.  You sigh in delight as your muscles slowly stop quivering.  With a pleasured gasp, you rise off the distended demon-prick, and realize that you've choked your foe into unconsciousness. Still, you did let him cum, so maybe he won't mind too much when he wakes.  Feeling sensual and sated, you redress and prepare to explore the rest of the factory. ");

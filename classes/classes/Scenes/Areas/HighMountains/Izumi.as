@@ -18,10 +18,10 @@ package classes.Scenes.Areas.HighMountains
 			this.long = "You're fighting the immense Oni, Izumi.  Standing around 9 feet tall and wielding little more than her fists, she is the picture of strength and power.  She is clad in a scandalous blue and white Kimono, the garment drawing your eyes to her humongous breasts, and her perfectly sculpted thighs.  A curious horn juts from her head, the texture of it almost lost amongst the rock lining the inside of the cave.\n\nA distinctly cocky grin is painted across her face, her undivided attention focused upon you.";
 			this.race = "Oni";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_SLICK, Vagina.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("FF")); // The doc mentions her breasts would be around D/DD on a "normal human" so err, winging this shit
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = 9*12+0;
 			this.hips.rating = Hips.RATING_AVERAGE;
 			this.butt.rating = Butt.RATING_TIGHT;

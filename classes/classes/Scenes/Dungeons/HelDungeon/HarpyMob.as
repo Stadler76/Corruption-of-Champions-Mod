@@ -86,10 +86,10 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
 			this.pronoun3 = "their";
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING_WIDE);
+			this.createVagina(false, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_GAPING_WIDE);
 			createBreastRow(Appearance.breastCupInverse("B"));
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(8) + 70;
 			this.hips.rating = Hips.RATING_CURVY+2;
 			this.butt.rating = Butt.RATING_LARGE;

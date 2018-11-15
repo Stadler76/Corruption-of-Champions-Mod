@@ -8,7 +8,7 @@ package classes.Items.Consumables
 	import classes.Items.ConsumableLib;
 	import classes.PerkLib;
 	import classes.StatusEffects;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	
 	/**
 	 * Minotaur transformative item.
@@ -139,7 +139,7 @@ package classes.Items.Consumables
 			{
 				//Kills vagina size (and eventually the whole vagina)
 				if (player.vaginas.length > 0) {
-					if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_TIGHT) {
+					if (player.vaginas[0].vaginalLooseness > Vagina.LOOSENESS_TIGHT) {
 						//tighten that bitch up!
 						outputText("\n\nYour " + player.vaginaDescript(0) + " clenches up painfully as it tightens up, becoming smaller and tighter.");
 						player.vaginas[0].vaginalLooseness--;

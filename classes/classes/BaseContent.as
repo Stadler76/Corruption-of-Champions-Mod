@@ -79,9 +79,14 @@
 			return kGAMECLASS.goNext(time,defNext);
 		}
 		
-		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
+		protected function awardAchievement(title:String, achievement:int, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
 		{
 			return kGAMECLASS.awardAchievement(title, achievement, display, nl, nl2);
+		}
+		
+		protected function unlockCodexEntry(title:String, codexEntry:int, nlBefore:Boolean = true, nlAfter:Boolean = false):void
+		{
+			return kGAMECLASS.unlockCodexEntry(title, codexEntry, nlBefore, nlAfter);
 		}
 		
 		//SEASONAL EVENTS!

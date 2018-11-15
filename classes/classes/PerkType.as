@@ -50,7 +50,7 @@ import flash.utils.Dictionary;
 		/**
 		 * Short description used in perk listing
 		 */
-		public function desc(params:PerkClass=null):String
+		public function desc(params:Perk=null):String
 		{
 			return _desc;
 		}

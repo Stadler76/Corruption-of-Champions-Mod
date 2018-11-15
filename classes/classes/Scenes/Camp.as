@@ -218,7 +218,7 @@ private function doCamp():void { //only called by playerMenu
 			}
 		}
 	}
-	if (flags[kFLAGS.HELSPAWN_AGE] == 1 && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7) {
+	if (flags[kFLAGS.HELSPAWN_AGE] == 1 && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] >= 7) {
 		hideMenus();
 		helSpawnScene.helSpawnGraduation();
 		return;
@@ -634,7 +634,7 @@ private function doCamp():void { //only called by playerMenu
 			addDisabledButton(4, kGAMECLASS.output.getButtonText(4), "You are too tired to perform any camp actions. All you can do right now is to sleep until morning."); //Camp Actions
 			if (followersCount() > 0) addDisabledButton(5, kGAMECLASS.output.getButtonText(5), "Your followers are sleeping at the moment."); //Followers
 			if (loversCount() > 0) addDisabledButton(6, kGAMECLASS.output.getButtonText(6), "Your lovers are sleeping at the moment."); //Followers
-			if (slavesCount() > 0) addDisabledButton(6, kGAMECLASS.output.getButtonText(7), "Your slaves are sleeping at the moment. Even slaves need their sleepy times to recuperate."); //Followers
+			if (slavesCount() > 0) addDisabledButton(7, kGAMECLASS.output.getButtonText(7), "Your slaves are sleeping at the moment. Even slaves need their sleepy times to recuperate."); //Followers
 		}
 	}
 	if (player.lust >= player.maxLust() && canFap) {
@@ -2066,16 +2066,16 @@ public function setLevelButton():Boolean {
 		if (player.XP < player.requiredXP() || player.level >= kGAMECLASS.levelCap) {
 			if (player.statPoints > 0) {
 				mainView.setMenuButton (MainView.MENU_LEVEL, "Stat Up");
-				mainView.levelButton.toolTipText = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
+				mainView.levelButton.toolTipTextInstance = "Distribute your stats points. \n\nYou currently have " + String(player.statPoints) + ".";
 			}
 			else {
 				mainView.setMenuButton (MainView.MENU_LEVEL, "Perk Up");
-				mainView.levelButton.toolTipText = "Spend your perk points on a new perk. \n\nYou currently have " + String(player.perkPoints) + ".";
+				mainView.levelButton.toolTipTextInstance = "Spend your perk points on a new perk. \n\nYou currently have " + String(player.perkPoints) + ".";
 			}
 		}
 		else {
 			mainView.setMenuButton (MainView.MENU_LEVEL, "Level Up");
-			mainView.levelButton.toolTipText = "Level up to increase your maximum HP by 15 and gain 5 attribute points and 1 perk points.";
+			mainView.levelButton.toolTipTextInstance = "Level up to increase your maximum HP by 15 and gain 5 attribute points and 1 perk points.";
 			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
 				kGAMECLASS.playerInfo.levelUpGo();
 				return true; //true indicates that you should be routed to level-up
@@ -2375,6 +2375,40 @@ private function updateSaveFlags():void {
 	doNext(doCamp);
 }
 
+//Unique NPCs killed
+public function getUniqueKills():int {
+	var count:int = 0;
+	if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) count++;
+	if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) count++;
+	if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) count++;
+	if (flags[kFLAGS.KELT_KILLED] > 0) count++;
+	if (flags[kFLAGS.JOJO_DEAD_OR_GONE] == 2) count++;
+	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) count++;
+	if (flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) count++;
+	if (flags[kFLAGS.TAMANI_BAD_ENDED] > 0) count++;
+	//Lethice Keep encounters
+	if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) count++;
+	if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 1) count++;
+	if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 1) count++;
+	if (flags[kFLAGS.DRIDERINCUBUS_KILLED] > 0) count++;
+	if (flags[kFLAGS.MINOTAURKING_KILLED] > 0) count++;
+	if (flags[kFLAGS.LETHICE_KILLED] > 0) count++;
+	return count;
+}
+
+//Total NPCs killed
+public function getTotalKills():int {
+	var count:int = 0;
+	count += getUniqueKills();
+	count += flags[kFLAGS.IMPS_KILLED];
+	count += flags[kFLAGS.GOBLINS_KILLED];
+	count += flags[kFLAGS.TENTACLE_BEASTS_KILLED];
+	count += flags[kFLAGS.HELLHOUNDS_KILLED];
+	count += flags[kFLAGS.MINOTAURS_KILLED];
+	count += flags[kFLAGS.WORMS_MASS_KILLED];
+	return count;
+}
+
 private function updateAchievements():void {
 	//Story
 	awardAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER);
@@ -2410,7 +2444,8 @@ private function updateAchievements():void {
 	if (player.level >= 30) awardAchievement("Master", kACHIEVEMENTS.LEVEL_MASTER);
 	if (player.level >= 45) awardAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER);
 	if (player.level >= 60) awardAchievement("Illustrious", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS);
-	if (player.level >= 100) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
+	if (player.level >= 90) awardAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD);
+	if (player.level >= 120) awardAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD);
 	//Population
 	if (getCampPopulation() >= 2) awardAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST);
 	if (getCampPopulation() >= 5) awardAchievement("Hamlet", kACHIEVEMENTS.POPULATION_HAMLET);
@@ -2486,24 +2521,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.DEMONS_DEFEATED] >= 25 && getGame().time.days >= 10) awardAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER);
 	if (flags[kFLAGS.LETHICE_KILLED] == 2) awardAchievement("Off With Her Head!", kACHIEVEMENTS.GENERAL_OFF_WITH_HER_HEAD);
 	//Check how many NPCs got bad-ended
-	var NPCsBadEnds:int = 0;
-	if (flags[kFLAGS.D1_OMNIBUS_KILLED] > 0) NPCsBadEnds++;
-	if (flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] > 0) NPCsBadEnds++;
-	if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) NPCsBadEnds++;
-	if (flags[kFLAGS.KELT_KILLED] > 0 || flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) NPCsBadEnds++;
-	if (flags[kFLAGS.JOJO_DEAD_OR_GONE] == 2) NPCsBadEnds++;
-	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) NPCsBadEnds++;
-	if (flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) NPCsBadEnds++;
-	if (flags[kFLAGS.TAMANI_BAD_ENDED] > 0) NPCsBadEnds++;
-		//Lethice Keep encounters
-		if (flags[kFLAGS.D3_GARDENER_DEFEATED] == 3) NPCsBadEnds++;
-		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] == 1) NPCsBadEnds++;
-		if (flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] == 1) NPCsBadEnds++;
-		if (flags[kFLAGS.DRIDERINCUBUS_KILLED] > 0) NPCsBadEnds++;
-		if (flags[kFLAGS.MINOTAURKING_KILLED] > 0) NPCsBadEnds++;
-		if (flags[kFLAGS.LETHICE_KILLED] > 0) NPCsBadEnds++;
-	if (NPCsBadEnds >= 3) //Lord of Bad Ends
-		awardAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER);
+	if (getUniqueKills() >= 3) awardAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER);
 	//Transformations
 	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 1) awardAchievement("What's Happening to Me?", kACHIEVEMENTS.GENERAL_WHATS_HAPPENING_TO_ME);
 	if (flags[kFLAGS.TIMES_TRANSFORMED] >= 10) awardAchievement("Transformer", kACHIEVEMENTS.GENERAL_TRANSFORMER);
@@ -2538,7 +2556,8 @@ private function updateAchievements():void {
 		awardAchievement("Home Sweet Home", kACHIEVEMENTS.GENERAL_HOME_SWEET_HOME);
 	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) awardAchievement("Make Mareth Great Again", kACHIEVEMENTS.GENERAL_MAKE_MARETH_GREAT_AGAIN);
 	if (flags[kFLAGS.CAMP_WALL_STATUES] >= 100) awardAchievement("Terracotta Impy", kACHIEVEMENTS.GENERAL_TERRACOTTA_IMPY);
-	if (player.tallness >= 132) awardAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11);
+	if (Math.ceil(player.tallness) >= 132) awardAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_UP_TO_11);
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) awardAchievement("Up to Eleven", kACHIEVEMENTS.GENERAL_JOJOS_BIZARRE_ADVENTURE);
 	//Check how many NPCs are dedicked
 	var NPCsDedicked:int = 0;
 	if (flags[kFLAGS.IZMA_NO_COCK] > 0) NPCsDedicked++;
@@ -2552,5 +2571,6 @@ private function updateAchievements():void {
 	if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 	if (NPCsDedicked >= 7) awardAchievement("You Bastard!", kACHIEVEMENTS.GENERAL_YOU_BASTARD); //take that, dedickers!
 }
+
 }
 }

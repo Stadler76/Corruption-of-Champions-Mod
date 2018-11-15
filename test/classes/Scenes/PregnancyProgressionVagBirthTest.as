@@ -23,7 +23,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PregnancyStore;
 	import classes.StatusEffects;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	import classes.StatusEffects;
 	import classes.Scenes.Areas.Bog;
 	
@@ -56,7 +56,7 @@ package classes.Scenes
 		[Before]
 		public function setUp():void {
 			player = new Player();
-			player.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_GAPING);
+			player.createVagina(true, Vagina.WETNESS_NORMAL, Vagina.LOOSENESS_GAPING);
 			player.hips.rating = 3;
 			kGAMECLASS.player = player;
 			

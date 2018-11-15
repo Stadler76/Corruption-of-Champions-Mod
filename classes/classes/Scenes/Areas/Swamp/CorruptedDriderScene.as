@@ -61,10 +61,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and this one looks to be no different.");
 			}
 			flags[kFLAGS.TIMES_ENCOUNTERED_DRIDER]++;
-			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
-			}
+			unlockCodexEntry("Arachnes, Spider-Morphs and Driders", kFLAGS.CODEX_ENTRY_ARACHNES);
 			startCombat(drider);
 		}
 
@@ -98,27 +95,27 @@ package classes.Scenes.Areas.Swamp
 			
 			if (player.lust >= 33) {
 				if (player.cockThatFits(monster.analCapacity()) >= 0) {
-					addButton(0, "Butt Fuck", buttFuckADriderOhBaby);
+					addButton(0, "Butt Fuck", buttFuckADriderOhBaby).hint("You could fuck the drider anally, and this is probably a safer option as she'd be unable to reach you with her lips.");
 				}
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					addButton(1, "Fuck Pussy", winDriderPCDickInSpiderCunt, undefined, undefined, undefined, "You could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.");
+					addButton(1, "Fuck Pussy", winDriderPCDickInSpiderCunt).hint("You could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.");
 					if (player.tail.type == Tail.SPIDER_ABDOMEN || player.hasItem(useables.T_SSILK)) {
-						addButton(2, "Bondage Fuck", driderVagSmartFuck, undefined, undefined, undefined, "You could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
+						addButton(2, "Bondage Fuck", driderVagSmartFuck).hint("You could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
 					}
 				}
 				if (player.cockThatFits(12) >= 0) {
-					addButton(3, "FuckSpinner", victoryVSDriderStickDickInSpinneret, undefined, undefined, undefined, "You could fuck her spinneret.");
+					addButton(3, "FuckSpinner", victoryVSDriderStickDickInSpinneret).hint("You could fuck her spinneret as you have a dick that's small enough.", "Fuck Spinneret");
 				}
 				
 				if (player.hasVagina()) {
-					addButton(4, "Ride Cock", winVSDriderTakeItsCockInCunt, undefined, undefined, undefined, "You could ride the drider's retractible demon-cock.");
-					addButton(5, "Ride Ovi", victoryVSDriderRideOviVaginal, undefined, undefined, undefined, "You could ride the drider's ovipositor.");
+					addButton(4, "Ride Cock", winVSDriderTakeItsCockInCunt).hint("You could ride the drider's retractible demon-cock.");
+					addButton(5, "Ride Ovi", victoryVSDriderRideOviVaginal).hint("You could ride the drider's ovipositor. You'll end up getting stuffed with her eggs if you want that...", "Ride Ovipositor Vaginally");
 					if (player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
-						addButton(7, "Ride Cock", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, undefined, undefined, undefined, "");
+						addButton(7, "Ride Cock", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri).hint("You could ride the drider's retractible demon-cock. Given what you're currently wearing and your breast size, this is going to be different.");
 					}
 				}
 				
-				addButton(6, "RideOviAnal", victoryVSDriderRideOviAnal, undefined, undefined, undefined, "You could always ride her ovipositor anally...");
+				addButton(6, "RideOviAnal", victoryVSDriderRideOviAnal).hint("You could always ride her ovipositor anally though you'll end up getting butt-stuffed with her eggs. If you want that...", "Ride Ovipositor Anally");
 			}
 			
 			addButton(14, "Leave", combat.cleanupAfterCombat);

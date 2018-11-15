@@ -2233,7 +2233,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou barely register Joy's comment though, the feeling of your breasts being slowly drained of their milk feels so nice, you can't help but fall asleep...");
 			player.knockUpForce(); //Clear pregnancy
 			player.cuntChange(60, true,true,false);
-			if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+			if (player.vaginas[0].vaginalWetness == Vagina.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 			player.orgasm('Vaginal');
 			dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 			flags[kFLAGS.JOY_TWINS_BIRTHED]++;

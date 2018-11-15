@@ -1,5 +1,6 @@
 package classes.BodyParts 
 {
+	import classes.Creature;
 	/**
 	 * Container class for the players face
 	 * @since August 08, 2017
@@ -13,7 +14,7 @@ package classes.BodyParts
 		public static const COW_MINOTAUR:int =   3;
 		public static const SHARK_TEETH:int  =   4;
 		public static const SNAKE_FANGS:int  =   5;
-		public static const CAT:int          =   6;
+		public static const CATGIRL:int      =   6;
 		public static const LIZARD:int       =   7;
 		public static const BUNNY:int        =   8;
 		public static const KANGAROO:int     =   9;
@@ -35,8 +36,39 @@ package classes.BodyParts
 		public static const COCKATRICE:int   =  25;
 		public static const BEAK:int         =  26; // This is a placeholder for the next beaked face type, so feel free to refactor (rename)
 		public static const RED_PANDA:int    =  27;
+		public static const CAT:int          =  28;
 
+		private var _creature:Creature;
 		public var type:Number = HUMAN;
+
+		public function Face(i_creature:Creature = null)
+		{
+			_creature = i_creature;
+		}
+
+		public function setType(faceType:Number, eyeType:Number = NaN):void
+		{
+			type = faceType;
+
+			if (_creature === null) {
+				return;
+			}
+
+			if (!isNaN(eyeType)) {
+				_creature.eyes.setType(eyeType);
+				return;
+			}
+
+			switch (faceType) {
+				case Face.CAT:
+				case Face.CATGIRL:
+					_creature.eyes.setType(Eyes.CAT);
+					break;
+
+				default:
+					// Empty default because SonarQQbe ...
+			}
+		}
 
 		public function restore():void
 		{

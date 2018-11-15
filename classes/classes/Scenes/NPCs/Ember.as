@@ -169,14 +169,14 @@ package classes.Scenes.NPCs
 				// this.hoursSinceCum = 0;
 			}
 			if (gender >= 2) {
-				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
+				this.createVagina(game.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_LOOSE);
 				createBreastRow(Appearance.breastCupInverse("F"));
 			} else {
 				createBreastRow(Appearance.breastCupInverse("flat"));
 			}
 
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
 			this.hips.rating = Hips.RATING_AMPLE+2;
 			this.butt.rating = Butt.RATING_LARGE;

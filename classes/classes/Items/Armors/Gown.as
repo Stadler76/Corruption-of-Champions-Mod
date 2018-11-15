@@ -11,48 +11,53 @@ package classes.Items.Armors
 	import classes.lists.BreastCup;
 	import classes.CoC;
 
-	public class Gown extends Armor implements TimeAwareInterface {
-
-		public function Gown():void {
+	public class Gown extends Armor implements TimeAwareInterface
+	{
+		public function Gown():void
+		{
 			super("FrsGown","FrsGown","forest gown","a forest gown",1,10,"This the very earthy gown commonly worn by dryads.   It is made from a mixture of plants.   The predominate fabric looks like a weave of fresh grass.   It is decorated by simple flowers that are attached to it.   Strangely, everything seems alive like it was still planted.   There must be some peculiar magic at work here.","Light");
-		
+
 			CoC.timeAwareClassAdd(this);
 		}
 
-		override public function useText():void{ //Produces any text seen when equipping the armor normally
+		override public function useText():void
+		{
+			//Produces any text seen when equipping the armor normally
 			switch (kGAMECLASS.player.gender) {
 				case Gender.FEMALE:   
-					outputText("You comfortably slide into the forest gown.   You spin around several times and giggle happily."
+					outputText("You comfortably slide into the forest gown. You spin around several times and giggle happily."
 					          +" Where did that come from?");
 					break;
 
-				case  Gender.MALE:
+				case Gender.MALE:
 					outputText("You slide forest gown over your head and down to your toes. It obviously would fit someone more female."
 					          +" You feel sad and wish you had the svelte body that would look amazing in this gown."
 					          +" Wait, did you always think that way?");
-			     break;
-			  default :  //non-binary
-				  outputText("You slide the gown over your head and slip it into place.");
+					break;
+				default:  //non-binary
+					outputText("You slide the gown over your head and slip it into place.");
 			}
 			if (kGAMECLASS.player.hasCock()) 
 				outputText("You notice the bulge from [cock] in the folds of the dress and wish it wasn't there.\n");
-
-			
 		}
+
 		public function timeChangeLarge():Boolean { return false; }
-		public function timeChange():Boolean {
+
+		public function timeChange():Boolean
+		{
 			if (kGAMECLASS.player.armor is Gown && kGAMECLASS.time.hours == 5) { //only call function once per day as time change is called every hour
 				dryadProgression(); 
 				return true;
 			}
 			return false; //stop if not wearing
 		}
-		public function dryadProgression():void {
+
+		public function dryadProgression():void
+		{
 			var verb:String; 
 			var text:String;
-			var x :int;
-			var changed :int = 0;
-			var tfChoice :Array = []; 
+			var changed:Boolean = false;
+			var tfChoice:Array = [];
 			var dryadDreams:Array = [
 				"In your dream you find yourself in a lush forest standing next to a tree. The tree seems like your best friend and You give it a hug before sitting down next to it. Looking around, there is grass and flowers all about. You can’t help but hum a cheery tune enjoying nature as a bright butterfly flutters nearby, holding out your hand the butterfly lands softly on your finger and smile sweetly to it.",
 				"You walk through a meadow and down towards a swift running brook, It looks like some clean water.   You sit down, pull up your gown and admire your feet. They are brown, the color of bark.   You place your feet in the cool water of the brook and soak up the water through your feet,  a cool refreshing feeling fills your body. Ah, being a Dryad is so nice.",
@@ -70,156 +75,152 @@ package classes.Items.Armors
 			];
 			//display a random dream
 			clearOutput();
-			outputText("\n\n"+dryadDreams[rand(dryadDreams.length)]+"\n\n");
+			outputText("\n\n" + dryadDreams[rand(dryadDreams.length)] + "\n\n");
 			//build a list of non ideal parts 
-			if (kGAMECLASS.player.hips.rating != 5 )
-				 tfChoice.push("hips");
-			if (kGAMECLASS.player.butt.rating != 5 )
+			if (kGAMECLASS.player.hips.rating != 5)
+				tfChoice.push("hips");
+			if (kGAMECLASS.player.butt.rating != 5)
 				tfChoice.push("butt");
-			if (kGAMECLASS.player.hasCock() != false )
+			if (kGAMECLASS.player.hasCock())
 				tfChoice.push("cock");
 			if (kGAMECLASS.player.breastRows[0].breastRating != 4 || kGAMECLASS.player.bRows() > 1)
 				tfChoice.push("breasts");
 			if (kGAMECLASS.player.femininity < 70)
 				tfChoice.push("girlyness");
 
-			//progress slowly to the ideal dryad build	
+			//progress slowly to the ideal dryad build
 			switch (randomChoice(tfChoice)) {
 				case "hips":
-						outputText("You wiggle around in your gown, pleasant feeling of flower petals rubbing against your skin washes over you.  The feeling settles on your [hips].\n");
+					outputText("You wiggle around in your gown, the pleasant feeling of flower petals rubbing against your skin washes over you."
+					          +" The feeling settles on your [hips].\n");
 
-						if (kGAMECLASS.player.hips.rating < 5) {
-							verb = "enlarge";
-							kGAMECLASS.player.hips.rating++;
-						}
-						if (kGAMECLASS.player.hips.rating > 5) {
-							verb = "shrink";
-							kGAMECLASS.player.hips.rating--;
-						} 
-						if (kGAMECLASS.player.hips.rating == 5)
-							break;
-						outputText("You feel them slowly " + verb + ".<b>  You now have [hips].</b>\n"); 
-						changed = 1;
+					if (kGAMECLASS.player.hips.rating < 5) {
+						verb = "enlarge";
+						kGAMECLASS.player.hips.rating++;
+					} else {
+						verb = "shrink";
+						kGAMECLASS.player.hips.rating--;
+					}
+
+					outputText("You feel them slowly " + verb + ".<b>  You now have [hips].</b>\n");
+					changed = true;
 					break;
 
 				case "butt":
-					outputText("You wiggle around in your gown, the pleasant feeling of flower petals rubbing against your skin washes over you.  The feeling settles on your [butt].\n");
-				
+					outputText("You wiggle around in your gown, the pleasant feeling of flower petals rubbing against your skin washes over you."
+					          +"The feeling settles on your [butt].\n");
+
 					if (kGAMECLASS.player.butt.rating < 5) {
 						verb = "enlarge";
 						kGAMECLASS.player.butt.rating++;
-					}
-					if (kGAMECLASS.player.butt.rating > 5) {
-						verb = "shrink";	
+					} else {
+						verb = "shrink";
 						kGAMECLASS.player.butt.rating--;
 					} 
-					if (kGAMECLASS.player.butt.rating == 5)
-						break;
 
-					outputText("You feel them slowly " + verb + ". <b>You now have a [butt].</b>"); 
-					changed = 1;
+					outputText("You feel them slowly " + verb + ". <b>You now have a [butt].</b>");
+					changed = true;
 					break;
 
 				case "cock":
 					outputText("Your [cock] feels strange as it brushes against the fabric of your gown.\n");
 					(new BimboProgression).shrinkCock();
-					changed = 1;
+					changed = true;
 					break;
 
-	case "breasts":
-		outputText("You feel like a beautful flower in your gown.  Dawn approaches and you place your hands on your chest as if expecting your nipples to bloom to greet the rising sun.\n");
-		
-				if (kGAMECLASS.player.bRows() > 1)
-				{
-					x = 1;
-					outputText("Some of your breasts shrink back into your body leaving you with just two.");
-					kGAMECLASS.player.breastRows.length = 1;
-				}
-				
-				if (kGAMECLASS.player.breastRows[0].breastRating > BreastCup.D )
-					{
-						kGAMECLASS.player.breastRows[0].breastRating = BreastCup.D;
-						outputText("A chill runs against your chest and <b>your boobs become smaller. You now have [breasts]</b>\n\n");
-						changed = 1;	
+				case "breasts":
+					outputText("You feel like a beautful flower in your gown. Dawn approaches and you place your hands on your chest"
+					          +" as if expecting your nipples to bloom to greet the rising sun.\n");
+
+					if (kGAMECLASS.player.bRows() > 1) {
+						outputText("Some of your breasts shrink back into your body leaving you with just two.");
+						kGAMECLASS.player.breastRows.length = 1;
 					}
-					
-				if ( kGAMECLASS.player.smallestTitSize() < BreastCup.D )
-					{
+
+					if (kGAMECLASS.player.breastRows[0].breastRating !== BreastCup.D) {
+						if (kGAMECLASS.player.breastRows[0].breastRating > BreastCup.D) {
+							outputText("\nA chill runs against your chest and your boobs become smaller.");
+						} else {
+							outputText("\nHeat builds in chest and your boobs become bigger.");
+						}
+						outputText("\n<b>You now have [breasts]</b>");
 						kGAMECLASS.player.breastRows[0].breastRating = BreastCup.D;
-						outputText("Heat builds in chest and your boobs become bigger.\n\n<b>You now have [breasts]</b>");
-						changed = 1;
+						changed = true;
 					}
-				break;
-				
+					break;
+
 				case "girlyness":
 					text = kGAMECLASS.player.modFem(70, 2);
 					if (text == "") break;
-					outputText("You run your [hands] across the fabric of your Gown, then against your face as it feels like there is something you need to wipe off.\n");
+					outputText("You run your [hands] across the fabric of your Gown, then against your face as it feels like"
+					          +" there is something you need to wipe off.\n");
 					outputText(text);
-					changed = 1;
+					changed = true;
 					break;
-					
+
 				default:
-					outputText("\nERROR: this forest gown TF choice shouldn't ever get called.");
+					// no error, intended
 			}
 			outputText("\n\n"); //spacing issues
-			if (changed !== 1) DryadProg();   //if no small changes, start big changes
+			if (!changed) {
+				dryadProg(); //if no small changes, start big changes
+			}
 		}
 
-		public function DryadProg():void {
-
-		//types of changes
+		public function dryadProg():void
+		{
+			//types of changes
 			var tfChoice:String = randomChoice("skin", "ears", "face", "lowerbody", "arms", "hair");
 			outputText("\n\n");
 			switch (tfChoice) {
-			case "ears":
-				if (kGAMECLASS.player.ears.type !== Ears.ELFIN) {
-					outputText("There is a tingling on the sides of your head as your ears change to pointed elfin ears.");
-					kGAMECLASS.player.ears.type = Ears.ELFIN;
-				}
-				break;
+				case "ears":
+					if (kGAMECLASS.player.ears.type !== Ears.ELFIN) {
+						outputText("There is a tingling on the sides of your head as your ears change to pointed elfin ears.");
+						kGAMECLASS.player.ears.type = Ears.ELFIN;
+					}
+					break;
 
-			case "skin":
-				if (kGAMECLASS.player.skin.type !== Skin.PLAIN) {
-					outputText("A tingling runs up along your [skin] as it changes back to normal");
-				} else if (kGAMECLASS.player.skin.tone !== "bark" && kGAMECLASS.player.skin.type == Skin.PLAIN) {
-					outputText("Your skin hardens and becomes the consistency of tree’s bark."); 
-					kGAMECLASS.player.skin.tone = "woodly brown";
-					kGAMECLASS.player.skin.type = Skin.BARK;
-				}
-				break;
+				case "skin":
+					if (kGAMECLASS.player.skin.type !== Skin.PLAIN) {
+						outputText("A tingling runs up along your [skin] as it changes back to normal");
+					} else if (kGAMECLASS.player.skin.tone !== "bark" && kGAMECLASS.player.skin.type == Skin.PLAIN) {
+						outputText("Your skin hardens and becomes the consistency of tree’s bark.");
+						kGAMECLASS.player.skin.tone = "woodly brown";
+						kGAMECLASS.player.skin.type = Skin.BARK;
+					}
+					break;
 
-			case "lowerbody":
-				if (kGAMECLASS.player.lowerBody.type !== LowerBody.HUMAN) {
-					outputText("There is a rumbling in your lower body as it returns to a human shape.");
-					kGAMECLASS.player.lowerBody.type = LowerBody.HUMAN;
-				}
-				break;
+				case "lowerbody":
+					if (kGAMECLASS.player.lowerBody.type !== LowerBody.HUMAN) {
+						outputText("There is a rumbling in your lower body as it returns to a human shape.");
+						kGAMECLASS.player.lowerBody.type = LowerBody.HUMAN;
+					}
+					break;
 
-			case "arms":
-				if (kGAMECLASS.player.arms.type !== Arms.HUMAN || kGAMECLASS.player.arms.claws.type !== Claws.NORMAL) {
-					outputText("Your hands shake and shudder as they slowly transform back into normal human hands.");
-					kGAMECLASS.player.arms.restore();
-				}
-				break;
+				case "arms":
+					if (kGAMECLASS.player.arms.type !== Arms.HUMAN || kGAMECLASS.player.arms.claws.type !== Claws.NORMAL) {
+						outputText("Your hands shake and shudder as they slowly transform back into normal human hands.");
+						kGAMECLASS.player.arms.restore();
+					}
+					break;
 
-			case "face":
-				if (kGAMECLASS.player.face.type !== Face.HUMAN) {
-					outputText("Your face twitches a few times and slowly morphs itself back to a normal human face.");
-					kGAMECLASS.player.face.type = Face.HUMAN;
-				}
-				break;
+				case "face":
+					if (kGAMECLASS.player.face.type !== Face.HUMAN) {
+						outputText("Your face twitches a few times and slowly morphs itself back to a normal human face.");
+						kGAMECLASS.player.face.type = Face.HUMAN;
+					}
+					break;
 
-			case "hair":
-				if (kGAMECLASS.player.hair.type !== Hair.LEAF) {
-					outputText("Much to your shock, your hair begins falling out in tuffs onto the ground. "
-					          +" Moments later, your scalp sprouts vines all about that extend down and bloom into leafy hair.");
-					kGAMECLASS.player.hair.type = Hair.LEAF;
-				}
+				case "hair":
+					if (kGAMECLASS.player.hair.type !== Hair.LEAF) {
+						outputText("Much to your shock, your hair begins falling out in tuffs onto the ground. "
+						          +" Moments later, your scalp sprouts vines all about that extend down and bloom into leafy hair.");
+						kGAMECLASS.player.hair.type = Hair.LEAF;
+					}
+					break;
 
-				break;
-			default:
-				outputText("\nERROR: this forest gown TF choice shouldn't ever get called.");
+				default:
+					outputText("\nERROR: this forest gown TF choice shouldn't ever get called.");
 			}
 		}
 	}

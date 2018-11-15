@@ -169,11 +169,11 @@ private function bunbunFucksYourVag():void {
 	
 	if (player.weaponName != "fists") outputText(" and " + player.weaponName);
 	outputText(" in a hurry.   Meanwhile the bunny looks on in a semi-aroused stupor, stroking her length with one hand while her other teases one of the hard nubs of her nipples.  You sigh with excitement as you position yourself above her, lining up her somewhat angular crown with the entrance to your " + player.vaginaDescript(0) + " before you start to drop.");
-	if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_DROOLING) outputText("  Moisture leaks in a steady drizzle, mixing with bunny-pre to totally slick the soon-to-be invading member.");
+	if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_DROOLING) outputText("  Moisture leaks in a steady drizzle, mixing with bunny-pre to totally slick the soon-to-be invading member.");
 	outputText("\n\n");
 	
 	outputText("Gasping hotly, you swallow her pointed tip into your depths, feeling the rabbit-like girl's tip swell and pump out a few more drops of lube");
-	if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText(", not that you needed it");
+	if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_SLICK) outputText(", not that you needed it");
 	outputText(".  You don't need any more encouragement.  The long, slow slide down her thick bunny-dick is heavenly, as the veins on its surface scratch your 'itch' in just the right way.  ");
 	if (player.vaginalCapacity() < 20) outputText("By the time you're getting close to the bottom you have to work to encompass her length and girth within your velvet folds and grunt with discomfort from each new inch of throbbing fuck-stick, but you take it all.  ");
 	else if (player.vaginalCapacity() < 50) outputText("By the time you get to the bottom you're panting and moaning, delighting in the feeling of being so perfectly impaled on a rigid fuck-stick.   With her entirely inside you, you're ready to fuck her in earnest.  ");
@@ -271,7 +271,7 @@ private function bunbunFucksPCInAss():void {
 	
 	outputText("Without meaning to, you begin to pick up the speed of your up and down strokes.  Your body is feeling horny and warm from all the sex, and having such a strange, attractive lover mating with your backside isn't helping.  ");
 	if (player.hasVagina()) {
-		if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText("Juices begin to run from your " + player.vaginaDescript(0) + ", but you ignore the empty feeling and focus on the throbbing meat inside your backdoor.  ");
+		if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_SLICK) outputText("Juices begin to run from your " + player.vaginaDescript(0) + ", but you ignore the empty feeling and focus on the throbbing meat inside your backdoor.  ");
 	}
 	outputText("Fingers find their way to your nipples without conscious thought, and begin ");
 	if (!player.hasFuckableNipples()) {

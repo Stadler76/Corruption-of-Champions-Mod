@@ -296,9 +296,9 @@ package classes {
 				}
 			}
 			if (player.findPerk(PerkLib.WetPussy) >= 0 && player.hasVagina()) {
-				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) {
+				if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_WET) {
 					outputText("\n<b>Your " + player.vaginaDescript(0) + " returns to its normal, wet state.</b>\n");
-					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
+					player.vaginas[0].vaginalWetness = Vagina.WETNESS_WET;
 					needNext = true;
 				}
 			}
@@ -723,26 +723,26 @@ package classes {
 				var recoveryProgress:int = player.vaginas[0].recoveryProgress;
 				
 				if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
-					if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_LOOSE) {
+					if (player.vaginas[0].vaginalLooseness == Vagina.LOOSENESS_LOOSE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_LOOSE) {
 						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.vaginas[0].resetRecoveryProgress();
 						needNext = true;
 					}
-					if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING) {
+					if (player.vaginas[0].vaginalLooseness == Vagina.LOOSENESS_GAPING && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING) {
 						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.vaginas[0].resetRecoveryProgress();
 						needNext = true;
 					}
-					if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING_WIDE) {
+					if (player.vaginas[0].vaginalLooseness == Vagina.LOOSENESS_GAPING_WIDE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING_WIDE) {
 						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n");
 						player.vaginas[0].vaginalLooseness--;
 						player.vaginas[0].resetRecoveryProgress();
 						needNext = true;
 					}
 				}
-				if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_CLOWN_CAR) {
+				if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_LEVEL_CLOWN_CAR && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_CLOWN_CAR) {
 					outputText("\nYour " + player.vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
 					player.vaginas[0].vaginalLooseness--;
 					player.vaginas[0].resetRecoveryProgress();

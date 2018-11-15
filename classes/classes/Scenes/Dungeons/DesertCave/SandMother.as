@@ -120,12 +120,12 @@ package classes.Scenes.Dungeons.DesertCave
 			this.long = "The Sand Mother is a towering woman of imposing stature and bust.  She wears a much silkier, regal-looking robe than her sisters, and it barely serves to contain her four milk-laden breasts, straining under their jiggling weight.  Dangling around her in a way that reminds you oddly of a halo, the Sand Mother's blonde-white hair fans around her, hanging long behind her.  The queen witch is brandishing a pearly white scepter rather threateningly, though from the way she holds it, it's clear she doesn't intend to use it as a physical weapon.";
 			this.race = "Human?";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_WET, Vagina.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 70, 0, 0, 0);
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 8*12+6;
 			this.hips.rating = Hips.RATING_CURVY;

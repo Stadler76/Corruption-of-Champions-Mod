@@ -95,11 +95,11 @@ package classes.Scenes.Quests.UrtaQuest
 			this.long = "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.";
 			this.race = "Demon";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 300, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("G"));
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_SLIME_DROOLING;
 			this.tallness = 84;
 			this.hips.rating = Hips.RATING_CURVY;
 			this.butt.rating = Butt.RATING_LARGE+1;

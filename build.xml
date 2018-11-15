@@ -108,7 +108,7 @@
 		<copy file="${test.src.dir}/TestRunner.mxml" tofile="${single-runner}" overwrite="true"/>
 		
 		<!-- And rewrite the import and class to run to the target test or suite -->
-		<replace file="${single-runner}" token="AllTestsSuit" value="${testclass}"/>
+		<replace file="${single-runner}" token="AllTestsSuite" value="${testclass}"/>
 		
 		<build-unit-tests debug-flag="true" release-flag="false" test-runner="${single-runner}">
 		</build-unit-tests>

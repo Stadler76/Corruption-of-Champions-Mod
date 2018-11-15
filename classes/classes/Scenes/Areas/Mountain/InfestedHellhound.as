@@ -79,7 +79,7 @@ package classes.Scenes.Areas.Mountain
 			
 			if (player.lust >= 33 && !player.isGenderless()) {
 				if (!hpVictory) {
-					kGAMECLASS.output.addButton(0, "Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, undefined, undefined, undefined, "Make him use his tongues.");
+					kGAMECLASS.output.addButton(0, "Lick", game.mountain.hellHoundScene.hellHoundGetsRaped).hint("Make him use his tongues. Two heads are better than one, so to speak.");
 				}
 			}
 			
@@ -116,8 +116,8 @@ package classes.Scenes.Areas.Mountain
 			this.createBreastRow();
 			this.createBreastRow();
 			this.createBreastRow();
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = 47;
 			this.hips.rating = Hips.RATING_AVERAGE;
 			this.butt.rating = Butt.RATING_AVERAGE + 1;

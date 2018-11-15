@@ -1,13 +1,13 @@
 package classes.Scenes.Dungeons.Factory 
 {
-	import classes.AssClass;
+	import classes.Ass;
 	import classes.BaseContent;
 	import classes.BodyParts.*;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkLib;
 	import classes.StatusEffects;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.lists.Gender;
@@ -291,9 +291,9 @@ package classes.Scenes.Dungeons.Factory
 			if (temp > 0) outputText("\n\n");
 			//Vajajay
 			if (player.vaginas.length > 0) {
-				if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) {
+				if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_SLICK) {
 					outputText("The constant fluids leaking from your " + player.vaginaDescript(0) + " slow down, then stop.  ");
-					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_WET;
+					player.vaginas[0].vaginalWetness = Vagina.WETNESS_WET;
 					temp++;
 				}		
 			}
@@ -321,9 +321,9 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\n");
 			}
 			//Reduce excessive anal wetness
-			if (player.ass.analWetness >= AssClass.WETNESS_SLIMY) { 
+			if (player.ass.analWetness >= Ass.WETNESS_SLIMY) { 
 				outputText("The constant fluids leaking from your " + player.assDescript() + " slow down, then stop.  ");
-				player.ass.analWetness = AssClass.WETNESS_MOIST;
+				player.ass.analWetness = Ass.WETNESS_MOIST;
 				temp++;
 			}
 
@@ -494,8 +494,8 @@ package classes.Scenes.Dungeons.Factory
 				else outputText("The demoness smiles with wicked intent and yanks your " + player.armorName + "'s bottom the rest of the way off.  She leans close, smiling and inhaling the scent of your sex, savoring it like an aroma of a fine wine.  Licking her perfect lips with anticipation, she inverts the panties and holds them up for you to see.\n\n");
 				outputText("They aren't panties at all, but instead some living creature.  The entire inside surface of the living garment is covered with fleshy pink nodules that wriggle constantly, practically dripping with a pungent lubricant that smells not unlike your own juices.  Horrifyingly, there is a large lump of flesh towards the front.  Its surface is ribbed and pulses, constantly swelling and shrinking.  It's clearly designed to enter the passage of anyone who wears it.  Worse yet is a smaller narrower protrusion on the backside.  This... creature... will certainly do its best to plug both your holes.\n\n");
 				outputText("Your captor pulls it back and leans closer, letting the scent of her own fragrant puss fill the air.  It smells tangy and sweet and makes you ");
-				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_WET) outputText("wet ");
-				else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING) outputText("drip on the chair ");
+				if (player.vaginas[0].vaginalWetness <= Vagina.WETNESS_WET) outputText("wet ");
+				else if (player.vaginas[0].vaginalWetness <= Vagina.WETNESS_DROOLING) outputText("drip on the chair ");
 				else outputText("soak the chair ");
 				outputText("from the heady taste that clings to your nostrils.  She speaks with confidence, \"<i>You needn't worry my dear.  I call this little creature my slut-panties.  You see, when you wear them they will stimulate every part of you.  They'll suck on your clit while the two large mounds grow inside you, filling you with wriggling pleasure.  Their slime is a wonderful lubricant and a mild aphrodisiac.  Between the constant touches and its secretions, you'll be horny and on the edge of orgasm in no time.</i>\"\n\n");
 				outputText("You shake your head in desperate denial and start to cry as you realize she intends to keep you locked in some kind of hellish pleasure-prison.  The panties slide up your legs with ease, and with a swift movement, the demon lifts your ass up and slips them into position with a wet 'SQUELCH'.  You moan as it goes to work, wrapping your " + player.clitDescript() + " in slippery tightness.  The two 'lumps' you observed elongate, the ridged surfaces making your " + player.vaginaDescript(0) + " quiver and dance with pleasure.  In mere seconds you're panting hotly and ready to cum.  Your crying devolves into heated moans of pleasure and longing.\n\n");

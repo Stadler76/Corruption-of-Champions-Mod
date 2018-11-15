@@ -165,21 +165,21 @@ package classes
 					outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering [skinFurScales].");
 			}
 			//cat-face
-			if (player.face.type == Face.CAT) 
+			if (player.hasCatFace())
 			{
-				if (player.hasPlainSkin() || player.hasGooSkin()) 
-					outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face.");
-				if (player.hasFur())
-					if (player.hasDifferentUnderBody())
-						outputText("  You have a cat-like face, complete with moist nose and whiskers.  You have [skinFurScales] on your upper jaw and head, while your lower jaw is decorated by [underBody.skinFurScales], hiding your [skin.noadj] underneath.");
-					else
-						outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skinDesc] is [furColor], hiding your [skin.noadj] underneath.");
-				if (player.hasScales()) 
-					outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skinFurScales].");
-				if (player.eyes.type != Eyes.BLACK_EYES_SAND_TRAP)
+				if (player.face.type === Face.CAT && player.isFurryOrScaley())
 				{
-					outputText("  Of course, no feline face would be complete without vertically slit eyes");
-					outputText(!player.hasReptileEyes() ? "." : ", although they come with a second set of eyelids, which is somewhat unusual for a cats face.");
+					if (player.hasDifferentUnderBody())
+						outputText("  You have a cat-like face, complete with moist nose and whiskers."
+						          +" You have [skinFurScales] on your upper jaw and head, while your lower jaw is decorated"
+						          +" by [underBody.skinFurScales][if (isFurry), hiding your [skin.noadj] underneath].");
+					else
+						outputText("  You have a cat-like face, complete with moist nose and whiskers."
+						          +" It has [skinFurScales][if (isFurry), hiding your [skin.noadj] underneath].");
+				}
+				else
+				{
+					outputText("  Your face is human in appearance. You have a set of sharp cat-like teeth in your mouth.");
 				}
 			}
 			//Minotaaaauuuur-face
@@ -290,7 +290,9 @@ package classes
 			else if (player.eyes.type == Eyes.COCKATRICE)
 				outputText("  You have electric blue eyes spiderwebbed with lightning like streaks that signal their power and slit reptilian pupils."
 				          +" When excited your pupils dilate into wide circles.");
-			else if (player.face.type != Face.CAT && player.hasReptileEyes())
+			else if (player.eyes.type == Eyes.CAT)
+				outputText("  Your eyes are similar to those of a cat, with slit pupils.");
+			else if (player.hasReptileEyes())
 			{
 				outputText("  Your eyes are");
 				switch (player.eyes.type)
@@ -413,18 +415,36 @@ package classes
 			}
 			
 			//Tongue
-			if (player.tongue.type == Tongue.SNAKE) 
-				outputText("  A snake-like tongue occasionally flits between your lips, tasting the air.");
-			else if (player.tongue.type == Tongue.DEMONIC) 
-				outputText("  A slowly undulating tongue occasionally slips from between your lips.  It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
-			else if (player.tongue.type == Tongue.DRACONIC) 
-				outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet.  It has sufficient manual dexterity that you can use it almost like a third arm.");
-			else if (player.tongue.type == Tongue.ECHIDNA)
-				outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
-			else if (player.tongue.type == Tongue.LIZARD)
-				outputText("  Your mouth contains a thick, fleshy lizard tongue, bringing to mind the tongue of large predatory reptiles."
-				          +" It can reach up to one foot, its forked tips tasting the air as they flick at the end of each movement.");
-			//Horns
+			switch (player.tongue.type) {
+				case Tongue.SNAKE:
+					outputText("  A snake-like tongue occasionally flits between your lips, tasting the air.");
+					break;
+
+				case Tongue.DEMONIC:
+					outputText("  A slowly undulating tongue occasionally slips from between your lips."
+					          +" It hangs nearly two feet long when you let the whole thing slide out, though you can retract it to appear normal.");
+					break;
+
+				case Tongue.DRACONIC:
+					outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet."
+					          +" It has sufficient manual dexterity that you can use it almost like a third arm.");
+					break;
+
+				case Tongue.ECHIDNA:
+					outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
+					break;
+
+				case Tongue.LIZARD:
+					outputText("  Your mouth contains a thick, fleshy lizard tongue, bringing to mind the tongue of large predatory reptiles."
+					          +" It can reach up to one foot, its forked tips tasting the air as they flick at the end of each movement.");
+					break;
+
+				case Tongue.CAT:
+					outputText("  Your tongue is rough like that of a cat. You sometimes groom yourself with it.");
+					break;
+
+				default:
+			}
 			if (player.horns.type == Horns.IMP) {
 				outputText(" A set of pointed imp horns rest atop your head.");
 			}
@@ -1401,21 +1421,21 @@ package classes
 				
 				{
 					//Wetness
-					if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING) 
+					if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_WET && player.vaginas[0].vaginalWetness< Vagina.WETNESS_DROOLING) 
 						outputText("Moisture gleams in ");
-					if (player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING) 
+					if (player.vaginas[0].vaginalWetness>= Vagina.WETNESS_DROOLING) 
 					{
 						outputText("Occasional beads of ");
 						outputText("lubricant drip from ");
 					}
 					//Different description based on vag looseness
-					if (player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET) 
+					if (player.vaginas[0].vaginalWetness>= Vagina.WETNESS_WET) 
 					{
-						if (player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE) 
+						if (player.vaginas[0].vaginalLooseness< Vagina.LOOSENESS_LOOSE) 
 							outputText("your " + player.vaginaDescript(0) + ". ");
-						if (player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE) 
+						if (player.vaginas[0].vaginalLooseness>= Vagina.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< Vagina.LOOSENESS_GAPING_WIDE) 
 							outputText("your " + player.vaginaDescript(0) + ", its lips slightly parted. ");
-						if (player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE) 
+						if (player.vaginas[0].vaginalLooseness>= Vagina.LOOSENESS_GAPING_WIDE) 
 							outputText("the massive hole that is your " + player.vaginaDescript(0) + ".  ");
 					}
 				}
@@ -1423,54 +1443,54 @@ package classes
 				
 				{
 					//Wetness
-					if (player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET) 
+					if (player.vaginas[0].vaginalWetness< Vagina.WETNESS_WET) 
 						outputText("Moisture gleams in ");
-					if (player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING) 
+					if (player.vaginas[0].vaginalWetness>= Vagina.WETNESS_WET && player.vaginas[0].vaginalWetness< Vagina.WETNESS_DROOLING) 
 					{
 						outputText("Occasional beads of ");
 						outputText("lubricant drip from ");
 					}
-					if (player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING) 
+					if (player.vaginas[0].vaginalWetness>= Vagina.WETNESS_DROOLING) 
 					{
 						outputText("Thin streams of ");
 						outputText("lubricant occasionally dribble from ");
 					}
 					//Different description based on vag looseness
-					if (player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE) 
+					if (player.vaginas[0].vaginalLooseness< Vagina.LOOSENESS_LOOSE) 
 						outputText("your " + player.vaginaDescript(0) + ". ");
-					if (player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE) 
+					if (player.vaginas[0].vaginalLooseness>= Vagina.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< Vagina.LOOSENESS_GAPING_WIDE) 
 						outputText("your " + player.vaginaDescript(0) + ", its lips slightly parted. ");
-					if (player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE) 
+					if (player.vaginas[0].vaginalLooseness>= Vagina.LOOSENESS_GAPING_WIDE) 
 						outputText("the massive hole that is your " + player.vaginaDescript(0) + ".  ");
 				}
 				if ((player.lib100> 80 || player.lust100 > 80)) //WTF horny!
 				
 				{
 					//Wetness
-					if (player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_WET) 
+					if (player.vaginas[0].vaginalWetness< Vagina.WETNESS_WET) 
 					
 					{
 						outputText("Occasional beads of ");
 						outputText("lubricant drip from ");
 					}
-					if (player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_WET && player.vaginas[0].vaginalWetness< VaginaClass.WETNESS_DROOLING)
+					if (player.vaginas[0].vaginalWetness>= Vagina.WETNESS_WET && player.vaginas[0].vaginalWetness< Vagina.WETNESS_DROOLING)
 					
 					{
 						outputText("Thin streams of ");
 						outputText("lubricant occasionally dribble from ");
 					}
-					if (player.vaginas[0].vaginalWetness>= VaginaClass.WETNESS_DROOLING) 
+					if (player.vaginas[0].vaginalWetness>= Vagina.WETNESS_DROOLING) 
 					
 					{
 						outputText("Thick streams of ");
 						outputText("lubricant drool constantly from ");
 					}
 					//Different description based on vag looseness
-					if (player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_LOOSE) 
+					if (player.vaginas[0].vaginalLooseness< Vagina.LOOSENESS_LOOSE) 
 						outputText("your " + player.vaginaDescript(0) + ". ");
-					if (player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< VaginaClass.LOOSENESS_GAPING_WIDE) 
+					if (player.vaginas[0].vaginalLooseness>= Vagina.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness< Vagina.LOOSENESS_GAPING_WIDE) 
 						outputText("your " + player.vaginaDescript(0) + ", its lips slightly parted. ");
-					if (player.vaginas[0].vaginalLooseness>= VaginaClass.LOOSENESS_GAPING_WIDE) 
+					if (player.vaginas[0].vaginalLooseness>= Vagina.LOOSENESS_GAPING_WIDE) 
 						outputText("the massive hole that is your cunt.  ");
 				}
 				//Line Drop for next descript!
@@ -1575,3 +1595,4 @@ package classes
 		
 	}
 }
+

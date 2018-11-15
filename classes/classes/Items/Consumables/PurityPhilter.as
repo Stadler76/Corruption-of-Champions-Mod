@@ -35,6 +35,7 @@ package classes.Items.Consumables
 			}
 			
 			var corLoss:Number = 5 + Math.floor(player.cor / 10);
+			corLoss += player.countCockSocks("alabaster");
 			dynStats("cor", -corLoss);
 			
 			return false;

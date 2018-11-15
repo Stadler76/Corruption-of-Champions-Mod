@@ -48,12 +48,12 @@ package classes.Scenes.Dungeons.LethicesKeep
 
 			menu();
 
-			if (player.hasCock()) addButton(0, "Fuck Her", maleFuckHer);
+			if (player.hasCock()) addButton(0, "Fuck Her", maleFuckHer).hint("Put that dick of yours to a good use. That sopping wet cunt looks appealing...");
 			else addDisabledButton(0, "Fuck Her", "This scene requires you to have cock.");
-			if (player.hasVagina()) addButton(1, "Get Fucked", femFuckHer);
+			if (player.hasVagina()) addButton(1, "Get Fucked", femFuckHer).hint("Put that pussy of yours to a good use. Her horsecock looks rather appealing...");
 			else addDisabledButton(1, "Get Fucked", "This scene requires you to have vagina.");
-			addButton(5, "Release", letHerGo);
-			addButton(6, "Kill", killHer);
+			addButton(3, "Release", letHerGo).hint("Show her some " + (silly() ? "MERCY" : "mercy") + " and let her go.");
+			addButton(4, "Kill", killHer).hint("This will be one less demonic threat once she's gone.");
 		}
 
 		private function killHer():void

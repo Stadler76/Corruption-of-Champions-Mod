@@ -16,9 +16,31 @@ package classes.BodyParts
 		public static const WOLF:int                 =   6;
 		public static const SPIDER:int               =   7;
 		public static const COCKATRICE:int           =   8;
+		public static const CAT:int                  =   9;
 
 		public var type:Number  = HUMAN;
 		public var count:Number = 2;
+
+		public function setType(eyeType:Number, eyeCount:Number = NaN):void
+		{
+			type = eyeType;
+
+			if (!isNaN(eyeCount)) {
+				count = eyeCount;
+				return;
+			}
+
+			switch (eyeType) {
+				case FOUR_SPIDER_EYES:
+				case SPIDER:
+					type = SPIDER; // Failsafe just in case ...
+					count = 4;
+					break;
+
+				default:
+					count = 2;
+			}
+		}
 
 		public function restore():void
 		{

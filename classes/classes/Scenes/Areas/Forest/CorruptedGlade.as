@@ -175,33 +175,33 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 				if (tentacle == 0) { //Small
 					outputText("a little small for your ");
 					switch (player.vaginas[0].vaginalLooseness) {
-						case VaginaClass.LOOSENESS_TIGHT:		tentacleSize =   0; break;
-						case VaginaClass.LOOSENESS_NORMAL:		tentacleSize =   4; break;
-						case VaginaClass.LOOSENESS_LOOSE:		tentacleSize =  16; break;
-						case VaginaClass.LOOSENESS_GAPING:		tentacleSize =  40; break;
-						case VaginaClass.LOOSENESS_GAPING_WIDE:	tentacleSize =  65; break;
+						case Vagina.LOOSENESS_TIGHT:		tentacleSize =   0; break;
+						case Vagina.LOOSENESS_NORMAL:		tentacleSize =   4; break;
+						case Vagina.LOOSENESS_LOOSE:		tentacleSize =  16; break;
+						case Vagina.LOOSENESS_GAPING:		tentacleSize =  40; break;
+						case Vagina.LOOSENESS_GAPING_WIDE:	tentacleSize =  65; break;
 						default:							tentacleSize = 100;
 					}
 				}
 				if (tentacle == 1) { //Normal
 					outputText("well suited to your ");
 					switch (player.vaginas[0].vaginalLooseness) {
-						case VaginaClass.LOOSENESS_TIGHT:		tentacleSize =   3; break;
-						case VaginaClass.LOOSENESS_NORMAL:		tentacleSize =   7; break;
-						case VaginaClass.LOOSENESS_LOOSE:		tentacleSize =  26; break;
-						case VaginaClass.LOOSENESS_GAPING:		tentacleSize =  60; break;
-						case VaginaClass.LOOSENESS_GAPING_WIDE:	tentacleSize = 115; break;
+						case Vagina.LOOSENESS_TIGHT:		tentacleSize =   3; break;
+						case Vagina.LOOSENESS_NORMAL:		tentacleSize =   7; break;
+						case Vagina.LOOSENESS_LOOSE:		tentacleSize =  26; break;
+						case Vagina.LOOSENESS_GAPING:		tentacleSize =  60; break;
+						case Vagina.LOOSENESS_GAPING_WIDE:	tentacleSize = 115; break;
 						default:							tentacleSize = 175;
 					}
 				}
 				if (tentacle == 2) { //Large
 					outputText("almost too big to cram in your ");
 					switch (player.vaginas[0].vaginalLooseness) {
-						case VaginaClass.LOOSENESS_TIGHT:		tentacleSize =   6; break;
-						case VaginaClass.LOOSENESS_NORMAL:		tentacleSize =   9; break;
-						case VaginaClass.LOOSENESS_LOOSE:		tentacleSize =  34; break;
-						case VaginaClass.LOOSENESS_GAPING:		tentacleSize =  78; break;
-						case VaginaClass.LOOSENESS_GAPING_WIDE:	tentacleSize = 135; break;
+						case Vagina.LOOSENESS_TIGHT:		tentacleSize =   6; break;
+						case Vagina.LOOSENESS_NORMAL:		tentacleSize =   9; break;
+						case Vagina.LOOSENESS_LOOSE:		tentacleSize =  34; break;
+						case Vagina.LOOSENESS_GAPING:		tentacleSize =  78; break;
+						case Vagina.LOOSENESS_GAPING_WIDE:	tentacleSize = 135; break;
 						default:							tentacleSize = 210;
 					}
 				}
@@ -419,10 +419,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface,En
 		outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n");
 
 		outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.\n\n");
-		if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_SATYRS] = 1;
-			outputText("<b>New codex entry unlocked: Satyrs!</b>\n\n")
-		}
+		unlockCodexEntry("Satyrs", kFLAGS.CODEX_ENTRY_SATYRS, false, true);
 		//(Player lacks a penis:
 		if (!player.hasCock()) {
 			outputText("You can't really see any way to take advantage of this scenario, so you simply turn back and leave the way you came.");

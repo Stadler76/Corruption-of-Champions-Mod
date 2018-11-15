@@ -378,10 +378,10 @@ package classes.Scenes.Areas.Plains
 			this.long = "This lanky figure is dappled with black spots across rough, tawny fur. Wiry muscle ripples along long legs and arms, all of it seeming in perpetual frenetic motion: every moment half flinching and half lunging.  The head bears a dark muzzle curled in a perpetual leer and bright orange eyes watching with a savage animal cunning.  Between the legs hang what appears at first to be a long, thin dong; however, on closer inspection it is a fused tube of skin composed of elongated pussy lips and clitoris.  The hyena girl is sporting a pseudo-penis, and judging by the way it bobs higher as she jinks back and forth, she's happy to see you!\n\nShe wears torn rags scavenged from some other, somewhat smaller, creature, and in one hand clutches a twisted club.";
 			this.race = "Gnoll";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_DROOLING, Vagina.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,25,0,0,0);
 			this.tallness = 6*12;
 			this.hips.rating = Hips.RATING_AMPLE;

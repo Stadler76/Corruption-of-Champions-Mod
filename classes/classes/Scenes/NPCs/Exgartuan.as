@@ -454,7 +454,7 @@ public function exgartuanBored():void {
 				outputText("Exgartuan wakes, making your " + player.allBreastsDescript() + " wobble pleasantly.  The need to have them groped and fondled slowly grows with the demoness's wakefulness.  She barks out, \"<i>Oi, bitch!  Touch your titties!</i>\"\n\nYou sigh.");
 				break;
 			case 3:
-				outputText("Suddenly your " + player.chestDesc() + " feel as if they trying to force their way off your chest.  The strange motions are accompanied by some loud moaning, as if they are stretching awake.  Looks like the delightful peace and quiet has ended.");
+				outputText("Suddenly your " + player.chestDesc() + " feel as if they're trying to force their way off your chest.  The strange motions are accompanied by some loud moaning, as if they are stretching awake.  Looks like the delightful peace and quiet has ended.");
 				break;
 			case 4:
 				outputText("Your arms suddenly hug against your " + player.chestDesc() + " of their own accord, the squeeze filling you with a hint of warmth.  The demoness is awake and filling you with longing to be touched and teased.");
@@ -914,8 +914,8 @@ private function exgartuanSleepSurprise():void {
 			//(no balls)
 			if (player.balls == 0) {
 				outputText("The ");
-				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) outputText("puffy");
-				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("glistening");
+				if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_WET) outputText("puffy");
+				else if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but there's no pleasure to be had for your greedy gash.  Cool night air washes over the exposed ");
 				if (player.hasScales()) outputText("scales");
@@ -928,8 +928,8 @@ private function exgartuanSleepSurprise():void {
 			//(Herms + Balls)
 			else {
 				outputText("The ");
-				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_WET) outputText("puffy");
-				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("glistening");
+				if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_WET) outputText("puffy");
+				else if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but with your hands so focused on your " + player.cockDescript(0) + ", there's little for your " + player.vaginaDescript(0) + " to feel.  The closest it gets to pleasure is the sensation of your " + player.sackDescript() + " slapping against it with the steady rhythm of your masturbation.  If only you had taken care of yourself earlier!  You might have had enough control over your rebellious tool to let a hand attend to your OTHER needs.\n\n");
 			}

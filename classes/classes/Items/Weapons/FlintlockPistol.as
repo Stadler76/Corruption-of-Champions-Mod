@@ -7,7 +7,7 @@ package classes.Items.Weapons
 		public function FlintlockPistol(tier:int) 
 		{
 			var ids:Array = ["Flintlk", "Flntlk1", "Flntlk2"];
-			var eqptNames:Array = ["flintlock pistol", "fine flintlock pistol", "masterwork flintloc pistol"];
+			var eqptNames:Array = ["flintlock pistol", "fine flintlock pistol", "masterwork flintlock pistol"];
 			var longNames:Array = ["a flintlock pistol", "a fine flintlock pistol", "a masterwork flintlock pistol"];
 			this.weightCategory = Weapon.WEIGHT_LIGHT;
 			this.tier = tier;

@@ -143,10 +143,10 @@ package classes.Scenes.NPCs
 			this.long = "You are fighting Marble’s little sister Clara!  The cow-girl looks spitting mad, determined to steal you from her sister and make you into her milk slave, with her breasts hanging out for all to see.  Fortunately, she doesn’t look as big or strong as her sister, and you don’t think she’s been trained to fight like Marble has either.  Still, there is no telling what tricks she has up her sleeves, and she is holding a very angry looking heavy mace.";
 			this.race = "Cow-Girl";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_NORMAL, Vagina.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = 6*12+4;
 			this.hips.rating = Hips.RATING_CURVY;
 			this.butt.rating = Butt.RATING_LARGE;

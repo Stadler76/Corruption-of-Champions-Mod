@@ -2,30 +2,28 @@ package classes.Scenes.Dungeons {
 	import classes.*;
 	import classes.GlobalFlags.*;
 	import classes.Scenes.Dungeons.*;
+	import flash.errors.IllegalOperationError;
 
 	public class DungeonMap extends BaseContent {
-
-		public function DungeonMap() {}
-
 		//Declare those map variables. They're set in such a way that the map can be updated as flags change
-		public var MAP_FACTORY_F1:Array;
-		public var MAP_FACTORY_F2:Array;
-		public var MAP_DEEPCAVE:Array;
-		public var MAP_STRONGHOLD_P1:Array;
-		public var MAP_STRONGHOLD_P2:Array;
-		public var MAP_DESERTCAVE:Array;
-		public var MAP_PHOENIXTOWER_B1:Array;
-		public var MAP_PHOENIXTOWER_F1:Array;
-		public var MAP_PHOENIXTOWER_F2:Array;
-		public var MAP_PHOENIXTOWER_F3:Array;
-		public var MAP_ANZUPALACE_B1:Array;
-		public var MAP_ANZUPALACE_F1:Array;
-		public var MAP_ANZUPALACE_F2:Array;
-		public var MAP_ANZUPALACE_F3:Array;
-		public var MAP_ANZUPALACE_F4:Array;
-		public var MAP_HELLCOMPLEX:Array;
-		public var MAP_DRAGONCITY_F1:Array;
-		public var MAP_DRAGONCITY_B1:Array;
+		public var mapFactoryF1:Array;
+		public var mapFactoryF2:Array;
+		public var mapDeepcave:Array;
+		public var mapStrongholdP1:Array;
+		public var mapStrongholdP2:Array;
+		public var mapDesertcave:Array;
+		public var mapPhoenixtowerB1:Array;
+		public var mapPhoenixtowerF1:Array;
+		public var mapPhoenixtowerF2:Array;
+		public var mapPhoenixtowerF3:Array;
+		public var mapAnzupalaceB1:Array;
+		public var mapAnzupalaceF1:Array;
+		public var mapAnzupalaceF2:Array;
+		public var mapAnzupalaceF3:Array;
+		public var mapAnzupalaceF4:Array;
+		public var mapHellcomplex:Array;
+		public var mapDragoncityF1:Array;
+		public var mapDragoncityB1:Array;
 
 		//How to work with the refactored map:
 		//-1 is wide empty space 1x3
@@ -37,21 +35,21 @@ package classes.Scenes.Dungeons {
 
 		public function updateMap():void {
 			//Factory
-			MAP_FACTORY_F1 = [ //Room 00-05 + 06
+			mapFactoryF1 = [ //Room 00-05 + 06
 				"Factory, Floor 1",
-				[-1, -2, 04, -2, -1],
+				[-1, -2,  4, -2, -1],
 				[-1, -2, -3, -2, -1],
-				[05, -4, 02, -4, 03],
+				[ 5, -4,  2, -4,  3],
 				[-1, -2, d1, -2, -1],
-				[09, -4, 00, -4, 01],
+				[ 9, -4,  0, -4,  1],
 				[-1, -2, -3, -2, -1]];
-			MAP_FACTORY_F2 = [ //Room 06-08
+			mapFactoryF2 = [ //Room 06-08
 				"Factory, Floor 2",
-				[06, -4, 07],
+				[ 6, -4,  7],
 				[d2, -2, -1],
-				[08, -2, -1]];
+				[ 8, -2, -1]];
 			//Deep Cave
-			MAP_DEEPCAVE = [ //Room 10-16
+			mapDeepcave = [ //Room 10-16
 				"Zetaz's Lair",
 				[-1, -2, 16, -4, 15],
 				[-1, -2, d3, -2, -3],
@@ -62,7 +60,7 @@ package classes.Scenes.Dungeons {
 				[-1, -2, 10, -2, -1],
 				[-1, -2, -3, -2, -1]];
 			//Lethice's Stronghold
-			MAP_STRONGHOLD_P1 = [
+			mapStrongholdP1 = [
 				"Basilisk Cave",
 				[-1, -2, "tunnel2", -4, -1],
 				[-1, -2, -3, -2, -1],
@@ -72,7 +70,7 @@ package classes.Scenes.Dungeons {
 				[-1, -2, -3, -2, -1],
 				["entrance", -4, "tunnel", -2, -1],
 				[-3, -2, -1, -2, -1]];
-			MAP_STRONGHOLD_P2 = [
+			mapStrongholdP2 = [
 				"Lethice's Keep",
 				[-1, -2, -1, -2, "throneroom", -2, -1, -2, -1],
 				[-1, -2, -1, -2, d5, -2, -1, -2, -1],
@@ -90,7 +88,7 @@ package classes.Scenes.Dungeons {
 				[-1, -2, -1, -2, -3, -2, -1, -2, -1],
 				[-1, -2, -1, -4, "edgeofkeep", -2, -1, -2, -1]];
 			//Desert Cave
-			MAP_DESERTCAVE = [
+			mapDesertcave = [
 				"Cave of the Sand Witches",
 				[-1, -2, -1, -2, 38, -2, -1, -2, -1],
 				[-1, -2, -1, -2, -3, -2, -1, -2, -1],
@@ -101,34 +99,34 @@ package classes.Scenes.Dungeons {
 				[30, -2, 27, -2, 23, -2, 36, -4, 35],
 				[-1, -2, -1, -2, -3, -2, -1, -2, -1]];
 			//Phoenix Tower
-			MAP_PHOENIXTOWER_B1 = [
+			mapPhoenixtowerB1 = [
 				"Tower of the Phoenix, Basement",
 				[-1, -2, 20],
 				[-1, -2, -1],
 				[-1, -2, 18]];
-			MAP_PHOENIXTOWER_F1 = [
+			mapPhoenixtowerF1 = [
 				"Tower of the Phoenix, Floor 1",
 				[-1, -2, 19],
 				[-1, -2, -3],
 				[-1, -2, 17],
 				[-1, -2, -3]];
-			MAP_PHOENIXTOWER_F2 = [
+			mapPhoenixtowerF2 = [
 				"Tower of the Phoenix, Floor 2",
 				[-1, -2, 21],
 				[-1, -2, -1],
 				[-1, -2, -1]];
-			MAP_PHOENIXTOWER_F3 = [
+			mapPhoenixtowerF3 = [
 				"Tower of the Phoenix, Floor 3",
 				[-1, -2, 22],
 				[-1, -2, -1],
 				[-1, -2, -1]];
 			//Anzu's Palace
-			MAP_ANZUPALACE_B1 = [
+			mapAnzupalaceB1 = [
 				"Anzu's Palace, Basement",
 				[-1, -2, -1, -2, -1],
 				[-1, -2, -1, -2, -1],
 				[54, -4, 53, -2, -1]];
-			MAP_ANZUPALACE_F1 = [
+			mapAnzupalaceF1 = [
 				"Anzu's Palace, Floor 1",
 				[42, -2, -1, -2, 44],
 				[-3, -2, -1, -2, -3],
@@ -136,26 +134,26 @@ package classes.Scenes.Dungeons {
 				[-1, -2, -3, -2, -1],
 				[-1, -2, 39, -2, -1],
 				[-1, -2, -3, -2, -1]];
-			MAP_ANZUPALACE_F2 = [
+			mapAnzupalaceF2 = [
 				"Anzu's Palace, Floor 2",
 				[-1, -2, 48, -2, -1],
 				[-1, -2, -3, -2, -1],
 				[46, -4, 45, -4, 47]];
-			MAP_ANZUPALACE_F3 = [
+			mapAnzupalaceF3 = [
 				"Anzu's Palace, Floor 3",
 				[-1, -2, -1, -2, -1],
 				[-1, -2, -1, -2, -1],
 				[50, -4, 49, -4, 51]];
-			MAP_ANZUPALACE_F4 = [
+			mapAnzupalaceF4 = [
 				"Anzu's Palace, Roof",
 				[-1, -2, -1, -2, -1],
 				[-1, -2, -1, -2, -1],
 				[-1, -2, 52, -2, -1]];
 			//Hellhound Master Dungeon
-			MAP_HELLCOMPLEX = [
+			mapHellcomplex = [
 				"Hellhound Complex",
-				[-1, -2, 74, -2, 73],
-				[-1, -2, -3, -2, -3],
+				[74, -2, 75, -2, 73],
+				[-3, -2, -3, -2, -3],
 				[70, -4, 67, -4, 71],
 				[-3, -2, -3, -2, -1],
 				[69, -4, 66, -4, 72],
@@ -163,7 +161,7 @@ package classes.Scenes.Dungeons {
 				[-1, -2, 65, -2, -1],
 				[-1, -2, -3, -2, -1]];
 			//Dragon City (Ember Quest)
-			MAP_DRAGONCITY_F1 = [
+			mapDragoncityF1 = [
 				"Dragon City",
 				[-1, -2, 59, -2, -1],
 				[-1, -2, -3, -2, -3],
@@ -171,7 +169,7 @@ package classes.Scenes.Dungeons {
 				[-3, -2, -3, -2, -3],
 				[56, -4, 55, -4, 60],
 				[-1, -2, -3, -2, -1]];
-			MAP_DRAGONCITY_B1 = [
+			mapDragoncityB1 = [
 				"Dragon City, Sewers",
 				[-1, -2, 64, -2, -1],
 				[-1, -2, -3, -2, -1],
@@ -197,51 +195,52 @@ package classes.Scenes.Dungeons {
 		public function chooseRoomToDisplay():void {
 			updateMap();
 			if (getGame().inRoomedDungeon) {
-			//	if (getGame().inRoomedDungeonName == "GrimdarkMareth") buildMapDisplay(MAP_MARETH);
-				if (getGame().inRoomedDungeonName == "BasiliskCave") buildMapDisplay(MAP_STRONGHOLD_P1);
-				if (getGame().inRoomedDungeonName == "LethicesKeep") buildMapDisplay(MAP_STRONGHOLD_P2);
+				if (getGame().inRoomedDungeonName == "BasiliskCave") buildMapDisplay(mapStrongholdP1);
+				if (getGame().inRoomedDungeonName == "LethicesKeep") buildMapDisplay(mapStrongholdP2);
 			}
 			else if (kGAMECLASS.dungeonLoc >= 0 && kGAMECLASS.dungeonLoc < 10) { //Factory
 				if (kGAMECLASS.dungeonLoc < 6 || kGAMECLASS.dungeonLoc == 9)
-					 buildMapDisplay(MAP_FACTORY_F1);
-				else buildMapDisplay(MAP_FACTORY_F2);
+					 buildMapDisplay(mapFactoryF1);
+				else buildMapDisplay(mapFactoryF2);
 			}
 			else if (kGAMECLASS.dungeonLoc >= 10 && kGAMECLASS.dungeonLoc < 17) //Zetaz's Lair
-				buildMapDisplay(MAP_DEEPCAVE);
+				buildMapDisplay(mapDeepcave);
 			else if (kGAMECLASS.dungeonLoc >= 17 && kGAMECLASS.dungeonLoc < 23) { //Tower of the Phoenix
 				switch(kGAMECLASS.dungeonLoc) {
 					case 18:
-					case 20: buildMapDisplay(MAP_PHOENIXTOWER_B1); break;
+					case 20: buildMapDisplay(mapPhoenixtowerB1); break;
 					case 17:
-					case 19: buildMapDisplay(MAP_PHOENIXTOWER_F1); break;
-					case 21: buildMapDisplay(MAP_PHOENIXTOWER_F2); break;
-					case 22: buildMapDisplay(MAP_PHOENIXTOWER_F3); break;
-					default: buildMapDisplay(MAP_PHOENIXTOWER_F1);
+					case 19: buildMapDisplay(mapPhoenixtowerF1); break;
+					case 21: buildMapDisplay(mapPhoenixtowerF2); break;
+					case 22: buildMapDisplay(mapPhoenixtowerF3); break;
+					default: buildMapDisplay(mapPhoenixtowerF1);
 				}
 			}
 			else if (kGAMECLASS.dungeonLoc >= 23 && kGAMECLASS.dungeonLoc < 39) //Desert Cave
-				buildMapDisplay(MAP_DESERTCAVE);
+				buildMapDisplay(mapDesertcave);
 			else if (kGAMECLASS.dungeonLoc >= 39 && kGAMECLASS.dungeonLoc < 55) { //Anzu's Palace
-				if (kGAMECLASS.dungeonLoc >= 39 && kGAMECLASS.dungeonLoc <= 44) buildMapDisplay(MAP_ANZUPALACE_F1);
-				if (kGAMECLASS.dungeonLoc >= 45 && kGAMECLASS.dungeonLoc <= 48) buildMapDisplay(MAP_ANZUPALACE_F2);
-				if (kGAMECLASS.dungeonLoc >= 49 && kGAMECLASS.dungeonLoc <= 51) buildMapDisplay(MAP_ANZUPALACE_F3);
-				if (kGAMECLASS.dungeonLoc == 52) buildMapDisplay(MAP_ANZUPALACE_F4);
-				if (kGAMECLASS.dungeonLoc == 53 || kGAMECLASS.dungeonLoc == 54) buildMapDisplay(MAP_ANZUPALACE_B1);
+				if (kGAMECLASS.dungeonLoc >= 39 && kGAMECLASS.dungeonLoc <= 44) buildMapDisplay(mapAnzupalaceF1);
+				if (kGAMECLASS.dungeonLoc >= 45 && kGAMECLASS.dungeonLoc <= 48) buildMapDisplay(mapAnzupalaceF2);
+				if (kGAMECLASS.dungeonLoc >= 49 && kGAMECLASS.dungeonLoc <= 51) buildMapDisplay(mapAnzupalaceF3);
+				if (kGAMECLASS.dungeonLoc == 52) buildMapDisplay(mapAnzupalaceF4);
+				if (kGAMECLASS.dungeonLoc == 53 || kGAMECLASS.dungeonLoc == 54) buildMapDisplay(mapAnzupalaceB1);
 			}
 			else if (kGAMECLASS.dungeonLoc >= 55 && kGAMECLASS.dungeonLoc < 65) { //Dragon City
 				if (kGAMECLASS.dungeonLoc < 62)
-					 buildMapDisplay(MAP_DRAGONCITY_F1);
-				else buildMapDisplay(MAP_DRAGONCITY_B1);
+					 buildMapDisplay(mapDragoncityF1);
+				else buildMapDisplay(mapDragoncityB1);
 			}
 			else if (kGAMECLASS.dungeonLoc >= 65 && kGAMECLASS.dungeonLoc < 75)
-				buildMapDisplay(MAP_HELLCOMPLEX);
+				buildMapDisplay(mapHellcomplex);
 		}
 
 		public function buildMapDisplay(map:Array):void {
 			displayHeader(map[0] + "\n");
 			outputText("<font face=\"Consolas, _typewriter\">");
-			for (var i:int = 1; i < map.length; i++) {
-				for (var j:int = 0; j < map[i].length; j++) {
+			var outerMapLength:int = map.length;
+			for (var i:int = 1; i < outerMapLength; i++) {
+				var innerMapLength:int = map[i].length;
+				for (var j:int = 0; j < innerMapLength; j++) {
 					//Negative numbers are special
 					if (map[i][j] is int && map[i][j] < 0) {
 						switch(map[i][j]) {
@@ -251,16 +250,19 @@ package classes.Scenes.Dungeons {
 							case -4: rawOutputText("—"); break;
 							case -5: rawOutputText(" L "); break;
 							case -6: rawOutputText("L"); break;
+						default:
+							throw new IllegalOperationError("Unhandled negative value " + map[i][j]);
+							break;
 						}
 					}
 					else if (getGame().inDungeon && map[i][j] is int && map[i][j] >= 0) {
 						switch(map[i][j]) {
 							case getGame().dungeonLoc: rawOutputText("[<u>@</u>]"); break;
-							case 05:
+							case  5:
 							case 18:
 							case 20:
 							case 53: rawOutputText("[<u>^</u>]"); break;
-							case 06:
+							case  6:
 							case 17:
 							case 22:
 							case 52: rawOutputText("[<u>v</u>]"); break;

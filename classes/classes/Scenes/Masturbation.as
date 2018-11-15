@@ -385,15 +385,15 @@ package classes.Scenes {
 						outputText("You slap your pussy softly, ")
 					else outputText("You touch your enflamed and aroused " + player.vaginaDescript() + ", ");
 					switch (player.vaginas[0].vaginalWetness) {
-						case VaginaClass.WETNESS_DRY:
+						case Vagina.WETNESS_DRY:
 							outputText("expertly arousing your female parts. "); break;
-						case VaginaClass.WETNESS_NORMAL:
+						case Vagina.WETNESS_NORMAL:
 							outputText("sighing as it quickly becomes moist. "); break;
-						case VaginaClass.WETNESS_WET:
+						case Vagina.WETNESS_WET:
 							outputText("giggling as your fingers get a little wet. "); break;
-						case VaginaClass.WETNESS_SLICK:
+						case Vagina.WETNESS_SLICK:
 							outputText("smiling as your fingers become coated in your slick fluids. "); break;
-						case VaginaClass.WETNESS_DROOLING:
+						case Vagina.WETNESS_DROOLING:
 							outputText("slicking your fingers in the juices that constantly dribble from " + player.vaginaDescript() + " "); break;
 						default:
 							outputText("licking your lips as a small spurt of fluid squirts from your nethers.");
@@ -406,15 +406,15 @@ package classes.Scenes {
 						outputText("You slap your pussies softly, ")
 					else outputText("Touch your enflamed and aroused " + player.vaginaDescript() + "s, ");
 					switch (player.vaginas[0].vaginalWetness) {
-						case VaginaClass.WETNESS_DRY:
+						case Vagina.WETNESS_DRY:
 							outputText("expertly arousing your female parts. "); break;
-						case VaginaClass.WETNESS_NORMAL:
+						case Vagina.WETNESS_NORMAL:
 							outputText("sighing as they quickly becomes moist. "); break;
-						case VaginaClass.WETNESS_WET:
+						case Vagina.WETNESS_WET:
 							outputText("giggling as your fingers get a little wet. "); break;
-						case VaginaClass.WETNESS_SLICK:
+						case Vagina.WETNESS_SLICK:
 							outputText("smiling as your fingers become coated in your slick fluids. "); break;
-						case VaginaClass.WETNESS_DROOLING:
+						case Vagina.WETNESS_DROOLING:
 							outputText("slicking your fingers in the juices that constantly dribble from " + player.vaginaDescript() + "s "); break;
 						default:
 							outputText("licking your lips as small spurts of fluid squirt from your nethers.");
@@ -792,7 +792,7 @@ package classes.Scenes {
 					//Big clits
 					else if (player.getClitLength() < 4.5) {
 						outputText("Your large clit is already poking out from your ");
-						if (player.vaginas[0].vaginalWetness > VaginaClass.WETNESS_DRY) outputText("glistening ");
+						if (player.vaginas[0].vaginalWetness > Vagina.WETNESS_DRY) outputText("glistening ");
 						outputText("lips. You gently stroke and touch it until it grows as large as a tiny cock. ");
 					}
 					//Cock-sized clits 
@@ -800,15 +800,15 @@ package classes.Scenes {
 						outputText("Your cock-sized clit is already fully engorged and deliciously sensitive. You touch it softly, eliciting a quiet moan from your throat. ");
 					}
 					switch (player.vaginas[0].vaginalWetness) {
-						case VaginaClass.WETNESS_DRY:
+						case Vagina.WETNESS_DRY:
 							outputText("You have some difficulty with your relatively dry pussy, but you manage to gently and pleasurably masturbate by taking it slowly. "); break;
-						case VaginaClass.WETNESS_NORMAL:
+						case Vagina.WETNESS_NORMAL:
 							outputText("Your horny puss is aching for attention and you oblige it, dipping your fingers into the moist honeypot, and jilling yourself vigorously. "); break;
-						case VaginaClass.WETNESS_WET:
+						case Vagina.WETNESS_WET:
 							outputText("The moistened cleft on your groin demands your full attention, drawing your fingers deep inside to explore the wet passage. "); break;
-						case VaginaClass.WETNESS_SLICK:
+						case Vagina.WETNESS_SLICK:
 							outputText("The sweltering heat of your slick cunt aches for something to fill it, and you oblige, dipping your fingers into your slippery cunt. "); break;
-						case VaginaClass.WETNESS_DROOLING:
+						case Vagina.WETNESS_DROOLING:
 							outputText("Warm wetness runs down your legs in thick streams, pouring from your " + player.vaginaDescript() + ". You smile sheepishly and stroke up your now slickened legs to your pussy-lips, parting them and letting your fingers dive inside the wet channel. "); break;
 						default:
 							outputText("The heavy scent of female arousal fills the air as your steamy sexpot drizzles girl-lube everywhere. You gasp in surprise as your fingers find their way inside, vigorously fingerfucking your passage, spurts of girlcum squirting out with each penetration. ");
@@ -1853,7 +1853,7 @@ package classes.Scenes {
 					else if (player.getClitLength() > 1.5)
 						outputText("Every muscle-twitch seems to stretch your big oversensitive clitty larger, causing you to squeal with delight at every bump and touch against it. ");
 					//Wet orgasms
-					if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + player.vaginaDescript() + ". ");
+					if (player.vaginas[0].vaginalWetness == Vagina.WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + player.vaginaDescript() + ". ");
 				}
 				//MultiCunt UNFINISHED
 				else {
@@ -2002,10 +2002,10 @@ package classes.Scenes {
 				outputText(" You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your wetness, becoming more and more turned on by the second.\n\n");
 			
 				//(Kinda dry)
-				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK)
+				if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLICK)
 					outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your bodily fluids. You grab it two-handed and start slamming it into your " + player.vaginaDescript() + ", vigorously fucking yourself with the swelling dong. The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you. Even your " + player.clitDescript() + " and cunt-lips tingle with need. You answer that need by picking up the pace, pistoning faster and faster.\n\n"); 
 				//(Pretty wet)
-				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) {
+				else if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLAVERING) {
 					outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your natural wetness and grows larger. You grab it in a two-handed grip and begin working it in and out of your " + player.vaginaDescript() + ", gasping and twitching as every ridge and feature of the dildo rubs you just right. Every inch of your nethers tingles with a desire to be touched, rubbed, and squeezed. ");
 					if (player.cocks.length > 0) {
 						outputText("Even your " + player.multiCockDescript() + " ache");
@@ -2075,10 +2075,10 @@ package classes.Scenes {
 			outputText(" You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your arousal, becoming more and more turned on by the second.\n\n");
 		
 			//(Kinda dry)
-			if (player.ass.analWetness < AssClass.WETNESS_SLIMY)
+			if (player.ass.analWetness < Ass.WETNESS_SLIMY)
 				outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your heat. You grab it two-handed and start slamming it into your [asshole], vigorously fucking yourself with the swelling dong. The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.\n\n"); 
 			//(Pretty wet)
-			else if (player.ass.analWetness < AssClass.WETNESS_SLIME_DROOLING) {
+			else if (player.ass.analWetness < Ass.WETNESS_SLIME_DROOLING) {
 				outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your unnatural wetness and grows larger. You grab it in a two-handed grip and begin working it in and out of your [asshole], gasping and twitching as every ridge and feature of the dildo rubs you just right. Every inch of your [ass] tingles with a desire to be touched, rubbed, and squeezed. ");
 				if (player.cocks.length > 0) {
 					outputText("Even your " + player.multiCockDescript() + " ache");

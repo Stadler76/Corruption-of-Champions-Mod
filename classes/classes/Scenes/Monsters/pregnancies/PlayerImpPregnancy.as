@@ -5,7 +5,7 @@ package classes.Scenes.Monsters.pregnancies
 	import classes.PregnancyStore;
 	import classes.Scenes.PregnancyProgression;
 	import classes.Scenes.VaginalPregnancy;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	import classes.StatusEffects;
 	import classes.internals.GuiOutput;
 	import classes.internals.PregnancyUtils;
@@ -125,12 +125,12 @@ package classes.Scenes.Monsters.pregnancies
 			
 			output.text("The pain begins to subside as your delivery continues... replaced with a building sensation of pleasure.  Arousal spikes through you as the contractions intensify, and as you feel something pass you have a tiny orgasm.\n\nYet you feel more within you, and the contractions spike again, pushing you to orgasm as you pass something else.  It repeats, over and over, nearly a dozen times you birth and orgasm.  After an eternity of procreation and pleasure, you sense your ordeal is over and collapse, unconscious.");
 
-			if (player.vaginas[0].vaginalLooseness === VaginaClass.LOOSENESS_TIGHT) {
+			if (player.vaginas[0].vaginalLooseness === Vagina.LOOSENESS_TIGHT) {
 				player.vaginas[0].vaginalLooseness++;
 			}
 			
 			//50% chance
-			if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING_WIDE && Utils.rand(2) === 0) {
+			if (player.vaginas[0].vaginalLooseness < Vagina.LOOSENESS_GAPING_WIDE && Utils.rand(2) === 0) {
 				player.vaginas[0].vaginalLooseness++;
 				output.text("\n\n<b>Your cunt is painfully stretched from the ordeal, permanently enlarged.</b>");
 			}
@@ -162,7 +162,7 @@ package classes.Scenes.Monsters.pregnancies
 				player.growTits(1, 1, false, 3);
 			}
 			
-			if (player.vaginas[0].vaginalWetness === VaginaClass.WETNESS_DRY) {
+			if (player.vaginas[0].vaginalWetness === Vagina.WETNESS_DRY) {
 				player.vaginas[0].vaginalWetness++;
 			}
 			

@@ -40,3 +40,6 @@ test/SingleRunner.mxml
 
 # osx thumbnails
 **/._*
+
+# sonar-scanner working directory
+/.scannerwork/

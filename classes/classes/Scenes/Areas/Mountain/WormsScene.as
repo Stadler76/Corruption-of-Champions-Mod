@@ -69,9 +69,9 @@ package classes.Scenes.Areas.Mountain
 			clearOutput();
 			outputText("While wandering, you come across a crudely illustrated sign.  It depicts an imp in obvious discomfort, covered in white little worms.  It looks as if one of them is even crawling into the imp's penis!\n\nHow do you feel about that?");
 			menu();
-			addButton(0, "Aroused", wormsOn);
-			addButton(1, "Grossed Out", wormsOff);
-			addButton(2, "Who Cares?", wormsPartiallyOn);
+			addButton(0, "Aroused", wormsOn).hint("The display is strangely arousing to say the least. You will start seeing the worms.");
+			addButton(1, "Grossed Out", wormsOff).hint("No fucking way! The display grosses you out and you don't want to see the worms at all.");
+			addButton(2, "Who Cares?", wormsPartiallyOn).hint("Meh. Who really cares? You will still see the worms but at reduced rate.");
 		}
 
 		private function wormsOn():void {

@@ -155,11 +155,11 @@ package classes.Scenes.Areas.Lake
 			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + player.chestDesc() + ".") : "");
 			this.race = "Goo-Girl";
 			// this.long = false;
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 9001, 0, 0, 0);
 			this.createBreastRow(playerHasBigBoobs ? player.biggestTitSize() : 3);
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_SLIME_DROOLING;
 			this.createStatusEffect(StatusEffects.BonusACapacity,9001,0,0,0);
 			this.tallness = rand(8) + 70;
 			this.hips.rating = Hips.RATING_AMPLE;

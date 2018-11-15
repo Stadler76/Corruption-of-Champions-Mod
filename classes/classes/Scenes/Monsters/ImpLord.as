@@ -94,8 +94,8 @@
 			this.pronoun1 = "he";
 			this.pronoun2 = "him";
 			this.pronoun3 = "his";
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = rand(14) + 40;
 			this.hips.rating = Hips.RATING_BOYISH;
 			this.butt.rating = Butt.RATING_TIGHT;

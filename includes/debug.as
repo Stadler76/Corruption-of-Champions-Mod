@@ -174,7 +174,7 @@ public function doThatTestingThang():void
 * 17 \[if (hasCock) HERP|DERP\]
 * 17 [if (hasCock) HERP|DERP]
 * 18 \[if (hasVagina) HERP|DERP\]
-* 18 [if (hasVagina) HERP|DERP]
+* 18 [if (hasVagina) HERP | DERP]
 
 ** Member Accessors**
 
@@ -206,6 +206,8 @@ public function doThatTestingThang():void
 * 31 you feel your [if (tallness >= 120)frame|[if (tallness >= 80)smaller frame|much smaller frame]] surrounded 
 * 32 \[if (bakeryTalkedRoot)talked about root|didn't talk about root\]
 * 32 [if (bakeryTalkedRoot)talked about root|didn't talk about root]
+* 33 \[if (hasCatEyes == false) HERP|DERP\]
+* 33 [if (hasCatEyes == false) HERP|DERP]
 
 
 

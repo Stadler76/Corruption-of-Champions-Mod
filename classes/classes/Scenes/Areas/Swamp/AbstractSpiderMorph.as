@@ -6,6 +6,8 @@ package classes.Scenes.Areas.Swamp
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.WeaponLib;
+import classes.Items.Weapons.HookedGauntlet;
+import classes.Items.Weapons.SpikedGauntlet;
 import classes.StatusEffects.Combat.WebDebuff;
 import classes.StatusEffects.Combat.WebDebuff;
 
@@ -158,9 +160,9 @@ public class AbstractSpiderMorph extends Monster
 			else if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
 				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
-			else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
+			else if (player.weapon is SpikedGauntlet || player.weapon is HookedGauntlet) {
 				outputText("The webbing hits your ");
-				if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but it's so effectively fastened to your hands that the attack fails to disarm you.\n");
+				if (player.weapon is SpikedGauntlet) outputText("gauntlet, but it's so effectively fastened to your hands that the attack fails to disarm you.\n");
 				else outputText("gauntlets, but they're so effectively fastened to your hands that the attack fails to disarm you.\n");
 			}
 			else {

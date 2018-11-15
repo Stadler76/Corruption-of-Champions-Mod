@@ -3,13 +3,13 @@
  */
 package classes.Perks
 {
-	import classes.PerkClass;
+	import classes.Perk;
 	import classes.PerkType;
 
 	public class ElvenBountyPerk extends PerkType
 	{
 
-		override public function desc(params:PerkClass = null):String
+		override public function desc(params:Perk = null):String
 		{
 			return "Increases fertility by " + params.value2 + "% and cum production by " + params.value1 + "mLs.";
 		}

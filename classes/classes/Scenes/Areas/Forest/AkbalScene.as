@@ -7,6 +7,7 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.API.Encounter;
 	import classes.display.SpriteDb;
@@ -1067,7 +1068,7 @@ public class AkbalScene extends BaseContent implements Encounter
 			}
 			//[After 8th submission, if whispered and corruption is greater than 80%]
 			//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
-			else if (flags[kFLAGS.PLAYER_RESISTED_AKBAL] == 0 && flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.isCorruptEnough(80))
+			else if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.isCorruptEnough(80))
 			{
 				if (!player.hasPerk(PerkLib.FireLord)) {
 					outputText("You open your eyes and almost yell in surprise when you see Akbal's emerald eyes looking into yours.  You are still in the forest and his lithe jaguar body is still over you; you quickly realize he hasn't moved you, as you're still resting in a puddle of mixed sex juices.\n\n");
@@ -1096,6 +1097,9 @@ public class AkbalScene extends BaseContent implements Encounter
 			}
 			else
 				outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.");
+			if (player.hasPerk(PerkLib.Whispered) && player.hasPerk(PerkLib.FireLord)) {
+				awardAchievement("Allahu Akbal", kACHIEVEMENTS.GENERAL_ALLAHU_AKBAL, true, true, false);
+			}
 			doNext(playerMenu);
 		}
 

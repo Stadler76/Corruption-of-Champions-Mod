@@ -349,7 +349,7 @@ import classes.StatusEffects.CombatStatusEffect;
 		 */
 		private static function mk(id:String, clazz:Class = null, arity: int = 1):StatusEffectType
 		{
-			return new StatusEffectType(id,clazz ? clazz : StatusEffectClass,arity);
+			return new StatusEffectType(id,clazz ? clazz : StatusEffect,arity);
 		}
 	}
 }

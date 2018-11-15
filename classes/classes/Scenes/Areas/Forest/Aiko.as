@@ -28,11 +28,11 @@ package classes.Scenes.Areas.Forest
 			else
 				this.long = "Aiko stands before you, a little over 5’4 tall. She has a head of short, unkempt silver-blond hair that ends above her shoulders, parted by two large, furry fox ears. "+(flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0 ? "Eight":"Seven")+" fox tails sway behind her, their fur shaggy and matted down. She wears a set of ragged, bloodied robes that show a lot of skin, her D-cup breasts haphazardly bound by a set of bandages in dire need of changing, and you can smell sex and violence on her even from here. She sports a number of red “tattoos” adorning her face and body; the most prominent of which are the spiral-shaped patterns on her palms and buttocks, and a stylized lotus flower on her lower back. She is wielding an over-sized bill-hook hatchet that she can summon and dismiss with a snap of her fingers, and stares you down with a maniacal fire in her crazed blue eyes."
 			this.race = "Kitsune";
-			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_TIGHT);
+			this.createVagina(false, Vagina.WETNESS_NORMAL, Vagina.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 200, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 64;
 			this.hips.rating = Hips.RATING_AMPLE;

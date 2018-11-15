@@ -76,10 +76,10 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 3;
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_LOOSE);
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
 			this.hips.rating = Hips.RATING_AMPLE+2;
 			this.butt.rating = Butt.RATING_LARGE;

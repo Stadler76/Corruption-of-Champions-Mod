@@ -132,8 +132,8 @@
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = rand(8) + 150;
 			this.hips.rating = Hips.RATING_AMPLE+2;
 			this.butt.rating = Butt.RATING_LARGE;

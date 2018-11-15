@@ -1,6 +1,6 @@
 package classes.Perks 
 {
-	import classes.PerkClass;
+	import classes.Perk;
 	import classes.PerkType;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.CharCreation;
@@ -8,7 +8,7 @@ package classes.Perks
 	public class AscensionTolerancePerk extends PerkType
 	{
 		
-		override public function desc(params:PerkClass = null):String
+		override public function desc(params:Perk = null):String
 		{
 			return "(Rank: " + params.value1 + "/" + CharCreation.MAX_TOLERANCE_LEVEL + ") Increases corruption tolerance by " + params.value1 * 5 + " and reduces corruption requirement by " + params.value1 * 5 + ".";
 		}

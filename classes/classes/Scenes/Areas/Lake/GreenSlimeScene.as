@@ -803,8 +803,8 @@ public function slimeVictory():void {
 		if (player.lust >= 33 && player.gender > 0) {
 			outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
 			menu();
-			addButton(0, "Breastfeed", rapeOozeWithMilk);
-			addButton(1, "Rape", slimeVictoryRape);
+			addButton(0, "Breastfeed", rapeOozeWithMilk).hint("Forcibly feed the green ooze with your milk.");
+			addButton(1, "Rape", slimeVictoryRape).hint("Opt to fuck the green slime and get off to it.");
 			addButton(4, "Leave", combat.cleanupAfterCombat);
 		}
 		//Rapes not on the table.

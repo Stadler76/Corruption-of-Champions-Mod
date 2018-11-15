@@ -444,7 +444,8 @@ package classes
 			var catPlayer:Player = new Player();
 			createBreastRows(3, catPlayer);
 			createCock(CockTypesEnum.CAT, catPlayer);
-			catPlayer.face.type = Face.CAT;
+			catPlayer.face.setType(Face.CAT);
+			catPlayer.tongue.type = Tongue.CAT;
 			catPlayer.ears.type = Ears.CAT;
 			catPlayer.tail.type = Tail.CAT;
 			catPlayer.lowerBody.type = LowerBody.CAT;
@@ -810,7 +811,7 @@ package classes
 			var bimboPlayer:Player = new Player();
 			createPerk(PerkLib.BimboBrains, bimboPlayer);
 			createPerk(PerkLib.BimboBody, bimboPlayer);
-			bimboPlayer.createVagina(true, VaginaClass.WETNESS_SLICK);
+			bimboPlayer.createVagina(true, Vagina.WETNESS_SLICK);
 			bimboPlayer.createBreastRow(10);
 			bimboPlayer.setArmor(kGAMECLASS.armors.BIMBOSK);
 			kGAMECLASS.flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST] = 30;

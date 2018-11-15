@@ -13,10 +13,7 @@ package classes.Scenes
 	public class Codex extends BaseContent
 	{
 		/*Use this line of code in an event to unlock codex entry.
-			if (flags[kFLAGS.CODEX_ENTRY_ENTRYHERE] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ENTRYHERE] = 1;
-				outputText("<b>New codex entry unlocked: Insert entry here!</b>\n\n");
-			}
+			unlockCodexEntry("Entry name", kFLAGS.CODEX_ENTRY_ENTRYHERE);
 		 */
 		/*Please use the following template whenever appropriate.
 			clearOutput();
@@ -41,9 +38,7 @@ package classes.Scenes
 			outputText("Lorem ipsum dolor sit amet");
 		 */
 		
-		public function Codex() 
-		{
-		}
+		public function Codex() {}
 		
 		private const PAGE_RACES_1:int    =  0;
 		private const PAGE_RACES_2:int    =  1;
@@ -82,6 +77,15 @@ package classes.Scenes
 				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
+				num++;
+			}
+			if (flags[kFLAGS.CODEX_ENTRY_COCKATRICES] > 0) {
 				num++;
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] > 0) {
@@ -135,13 +139,7 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
 				num++;
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
-				num++;
-			}
 			if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] > 0) {
 				num++;
 			}
 			//Factions
@@ -155,7 +153,7 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_MAGIC] > 0) {
 				num++;
 			}
-			if (num >= 25) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 26) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
 			return num;
 		}
 		
@@ -166,7 +164,7 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0;
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/25");
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/26");
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
@@ -215,7 +213,7 @@ package classes.Scenes
 			addCodexButton("Imps", "Imps", codexEntryImps, kFLAGS.CODEX_ENTRY_IMPS);
 			
 			addButton(4, "Next", menuRacesII);
-			//addButton(9, "Previous", menuRaces);
+			addButtonDisabled(9, "Previous");
 			addButton(14, "Back", accessCodexMenu);
 		}
 		private function menuRacesII():void {
@@ -238,7 +236,7 @@ package classes.Scenes
 			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
 			
-			//addButton(4, "Next", menuRacesIII);
+			addButtonDisabled(4, "Next");
 			addButton(9, "Previous", menuRaces);
 			addButton(14, "Back", accessCodexMenu);
 		}

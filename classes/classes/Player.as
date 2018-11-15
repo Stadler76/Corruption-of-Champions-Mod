@@ -29,16 +29,16 @@
 		
 		public function Player() {
 			//Item things
-			itemSlot1 = new ItemSlotClass();
-			itemSlot2 = new ItemSlotClass();
-			itemSlot3 = new ItemSlotClass();
-			itemSlot4 = new ItemSlotClass();
-			itemSlot5 = new ItemSlotClass();
-			itemSlot6 = new ItemSlotClass();
-			itemSlot7 = new ItemSlotClass();
-			itemSlot8 = new ItemSlotClass();
-			itemSlot9 = new ItemSlotClass();
-			itemSlot10 = new ItemSlotClass();
+			itemSlot1 = new ItemSlot();
+			itemSlot2 = new ItemSlot();
+			itemSlot3 = new ItemSlot();
+			itemSlot4 = new ItemSlot();
+			itemSlot5 = new ItemSlot();
+			itemSlot6 = new ItemSlot();
+			itemSlot7 = new ItemSlot();
+			itemSlot8 = new ItemSlot();
+			itemSlot9 = new ItemSlot();
+			itemSlot10 = new ItemSlot();
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10];
 		}
 		
@@ -85,17 +85,17 @@
 		}
 
 		// Inventory
-		public var itemSlot1:ItemSlotClass;
-		public var itemSlot2:ItemSlotClass;
-		public var itemSlot3:ItemSlotClass;
-		public var itemSlot4:ItemSlotClass;
-		public var itemSlot5:ItemSlotClass;
-		public var itemSlot6:ItemSlotClass;
-		public var itemSlot7:ItemSlotClass;
-		public var itemSlot8:ItemSlotClass;
-		public var itemSlot9:ItemSlotClass;
-		public var itemSlot10:ItemSlotClass;
-		public var itemSlots:/*ItemSlotClass*/Array;
+		public var itemSlot1:ItemSlot;
+		public var itemSlot2:ItemSlot;
+		public var itemSlot3:ItemSlot;
+		public var itemSlot4:ItemSlot;
+		public var itemSlot5:ItemSlot;
+		public var itemSlot6:ItemSlot;
+		public var itemSlot7:ItemSlot;
+		public var itemSlot8:ItemSlot;
+		public var itemSlot9:ItemSlot;
+		public var itemSlot10:ItemSlot;
+		public var itemSlots:/*ItemSlot*/Array;
 		
 		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:/*String*/Array = []; //For tracking achievement.
@@ -612,6 +612,10 @@
 					//This call did nothing. There is no event 5010: if (game.inCombat) kGAMECLASS.output.doNext(5010);
 				}
 			}
+			if (damage > 0 && display) {
+				flags[kFLAGS.ACHIEVEMENT_PROGRESS_DAMAGE_SPONGE] += damage;
+				if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_DAMAGE_SPONGE] >= 10000) kGAMECLASS.awardAchievement("Damage Sponge", kACHIEVEMENTS.COMBAT_DAMAGE_SPONGE, true, true, true);
+			}
 			return returnDamage;
 		}
 
@@ -791,12 +795,12 @@
 			{
 				if (isTaur() && lowerBody.type == LowerBody.CAT) {
 					race = "cat-taur";
-					if (face.type == 0)
+					if (face.type === Face.HUMAN || (hasCatFace() && !isFurryOrScaley()))
 						race = "sphinx-morph"; // no way to be fully feral anyway
 				}
 				else {
 					race = "cat-morph";
-					if (face.type == 0)
+					if (face.type === Face.HUMAN || (hasCatFace() && !isFurryOrScaley()))
 						race = "cat-" + mf("boy", "girl");
 				}
 			}
@@ -1462,7 +1466,9 @@
 		public function catScore():Number
 		{
 			var catCounter:Number = 0;
-			if (face.type == Face.CAT)
+			if (hasCatFace())
+				catCounter++;
+			if (tongue.type == Tongue.CAT)
 				catCounter++;
 			if (ears.type == Ears.CAT)
 				catCounter++;
@@ -2019,7 +2025,7 @@
 		public function manticoreScore():Number
 		{
 			var catCounter:Number = 0;
-			if (face.type == Face.CAT)
+			if (hasCatFace())
 				catCounter++;
 			if (ears.type == Ears.CAT)
 				catCounter++;
@@ -2046,7 +2052,7 @@
 			var bimboCounter:Number = 0;
 			if (hasVagina()) {
 				bimboCounter += 2; 
-				if (vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) 
+				if (vaginas[0].vaginalWetness >= Vagina.WETNESS_SLICK) 
 					bimboCounter++;
 			}
 			if (hasCock()) 
@@ -2136,16 +2142,29 @@
 			return false;
 		}
 
+		/**
+		 * Attempt to stretch the players cunt. The chance for stretching is based on how close the cock size is to the players vagina capacity.
+		 * In case of a stretching an appropriate message will be displayed. If the player was a virgin, the appropriate message will be displayed.
+		 * If display is disabled, no messages will be displayed.
+		 * 
+		 * @param	cArea the area of the cock, will be checked againt vagina capacity
+		 * @param	display if true, output messages else do not display anything
+		 * @param	spacingsF add spaces at the front of the text?
+		 * @param	spacingsB add spaces at the back of the text?
+		 * @return true if a vagina stretch was performed
+		 */
 		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
 			if (vaginas.length==0) return false;
 			var wasVirgin:Boolean = vaginas[0].virgin;
 			var stretched:Boolean = cuntChangeNoDisplay(cArea);
 			var devirgined:Boolean = wasVirgin && !vaginas[0].virgin;
-			if (devirgined){
+			
+			if (display && devirgined){
 				if (spacingsF) outputText("  ");
 				outputText("<b>Your hymen is torn, robbing you of your virginity.</b>");
 				if (spacingsB) outputText("  ");
 			}
+			
 			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
 			if (display && stretched) {
 				//Virgins get different formatting
@@ -2155,12 +2174,12 @@
 				}
 				//Non virgins as usual
 				else if (spacingsF) outputText("  ");
-				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,0)+ " is stretched painfully wide, large enough to accommodate most beasts and demons.</b>");
-				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched so wide that it gapes continually.</b>");
-				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
-				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now very loose.</b>");
-				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now a little loose.</b>");
-				if (vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched out to a more normal size.</b>");
+				if (vaginas[0].vaginalLooseness == Vagina.LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,0)+ " is stretched painfully wide, large enough to accommodate most beasts and demons.</b>");
+				if (vaginas[0].vaginalLooseness == Vagina.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched so wide that it gapes continually.</b>");
+				if (vaginas[0].vaginalLooseness == Vagina.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
+				if (vaginas[0].vaginalLooseness == Vagina.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now very loose.</b>");
+				if (vaginas[0].vaginalLooseness == Vagina.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now a little loose.</b>");
+				if (vaginas[0].vaginalLooseness == Vagina.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched out to a more normal size.</b>");
 				if (spacingsB) outputText("  ");
 			}
 			return stretched;
@@ -3109,7 +3128,7 @@
 					flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
 				}
 			}
-			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
+			for (var a:/*StatusEffect*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
 				// Using a copy of array in case effects are removed/added in handler
 				if (statusEffects.indexOf(a[i])>=0) a[i].onCombatEnd();
 			}
@@ -3121,7 +3140,7 @@
 				return false;
 			}
 			//From here we can be sure the player has enough of the item in inventory
-			var slot:ItemSlotClass;
+			var slot:ItemSlot;
 			while (amount > 0) {
 				slot = getLowestSlot(itype); //Always draw from the least filled slots first
 				if (slot.quantity > amount) {
@@ -3136,7 +3155,7 @@
 			return true;
 /*			
 			var consumed:Boolean = false;
-			var slot:ItemSlotClass;
+			var slot:ItemSlot;
 			while (amount > 0)
 			{
 				if (!hasItem(itype,1))
@@ -3162,10 +3181,10 @@
 */
 		}
 
-		public function getLowestSlot(itype:ItemType):ItemSlotClass
+		public function getLowestSlot(itype:ItemType):ItemSlot
 		{
-			var minslot:ItemSlotClass = null;
-			for each (var slot:ItemSlotClass in itemSlots) {
+			var minslot:ItemSlot = null;
+			for each (var slot:ItemSlot in itemSlots) {
 				if (slot.itype == itype) {
 					if (minslot == null || slot.quantity < minslot.quantity) {
 						minslot = slot;
@@ -3181,7 +3200,7 @@
 		
 		public function itemCount(itype:ItemType):int {
 			var count:int = 0;
-			for each (var itemSlot:ItemSlotClass in itemSlots){
+			for each (var itemSlot:ItemSlot in itemSlots){
 				if (itemSlot.itype == itype) count += itemSlot.quantity;
 			}
 			return count;
@@ -3196,7 +3215,7 @@
 			return -1;
 		}
 
-		public function itemSlot(idx:int):ItemSlotClass
+		public function itemSlot(idx:int):ItemSlot
 		{
 			return itemSlots[idx];
 		}
@@ -3451,7 +3470,7 @@
 				if (output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.");
 				}
-				const effect:StatusEffectClass = statusEffectByType(StatusEffects.Heat);
+				const effect:StatusEffect = statusEffectByType(StatusEffects.Heat);
 				effect.value1 += 5 * intensity;
 				effect.value2 += 5 * intensity;
 				effect.value3 += 48 * intensity;

@@ -151,8 +151,8 @@ package classes.Scenes.Areas.GlacialRift
 			// this.plural = false;
 			this.createVagina(false, 1, 1);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = 7*12;
 			this.hips.rating = Hips.RATING_SLENDER;
 			this.butt.rating = Butt.RATING_TIGHT;

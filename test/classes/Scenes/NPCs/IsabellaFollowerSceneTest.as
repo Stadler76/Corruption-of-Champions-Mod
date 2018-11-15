@@ -179,7 +179,7 @@ package classes.Scenes.NPCs
 			createTentaCocks(3, 24);
 		
 			cut.campSexMenu();
-			fireButon.fireButtonClick(4);
+			fireButon.fireButtonClick(6);
 
 			assertThat(cut.collectedOutput, hasItem(containsString("numerous tentacles")));
 			assertThat(cut.collectedOutput, hasItem(containsString("exposing your monstrous tentacle-cocks")));

@@ -510,9 +510,9 @@ import classes.Scenes.API.Encounter;
 			outputText("Fera smiles as you announce your choice.  \"<i>I thought you might say that, little champion.  Now, you simply relax and enjoy the pleasure that only my normal weak-willed prey are allowed to experience.  You will be the first to taste it and be allowed free.  How wonderful!</i>\"  She pets your forehead.");
 			outputText("\n\nMeanwhile, you hear a squelching, slithering sound down below as Fera pulls away, kneeling down beside you so that her lips are at your ear, washing her hot breath across it and occasionally letting her soft, pillow-like mouth press against your aural opening.  \"<i>Relllaaaax,</i>\" she commands, and you do.  Your body sags bonelessly into its organic cradle as a writhing mass of tentacle-like stamen contort just shy of your mons, their squirming shapes dripping almost as eagerly as you.");
 			outputText("\n\nThe mass of tendrils does not delay. It lurches forward as one unified column of hole-fucking power, plowing straight into your [vagina]");
-			if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText(", spreading its well-widened lips as wide as they've ever been");
-			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText(", spreading your lips well beyond the widest they've ever been and still farther.");
-			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE) outputText(", meeting a bit of token resistance at your unprepared entryway and slithering stamen after stamen inside, the forerunners widening you until the entirety of the column can pass inside, gaping you almost inhumanly wide.");
+			if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_LEVEL_CLOWN_CAR) outputText(", spreading its well-widened lips as wide as they've ever been");
+			else if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_GAPING) outputText(", spreading your lips well beyond the widest they've ever been and still farther.");
+			else if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_LOOSE) outputText(", meeting a bit of token resistance at your unprepared entryway and slithering stamen after stamen inside, the forerunners widening you until the entirety of the column can pass inside, gaping you almost inhumanly wide.");
 			else outputText(", meeting more than a little resistant at your unstretched entry and finding a way in anyhow. First one tentacle slithers in, then a second, then a fourth, and so on. One after another, they spread you wider and wider, opening you until the entire wiggling column is buried deep, pulling your lips ridiculously wide.");
 			outputText("\n\nYou do not feel an ounce of pain from the extreme insertion. You don't even feel a whiff of discomfort. All you can feel is a sense of delicious, twat-stuffing fullness, filling and expanding you all while flooding you with more of that heavenly, brain-deadening slime. Your crotch quickly overflows. There simply isn't room for all the nectar they're leaking inside. The excess is painting you with a glossy coat of nectar and girl-honey, spraying over your [legs] around the impaling members.");
 			//STEAL VIRGINITY!
@@ -540,8 +540,8 @@ import classes.Scenes.API.Encounter;
 			player.fertility += 20;
 			if (player.fertility > 50) player.fertility = 50;
 			//Raise wetness to at least 3.
-			if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
-			if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
+			if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLICK) player.vaginas[0].vaginalWetness = Vagina.WETNESS_SLICK;
+			if (player.vaginas[0].vaginalLooseness < Vagina.LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = Vagina.LOOSENESS_GAPING_WIDE;
 			//Add five corruption.
 			player.orgasm('Vaginal');
 			dynStats("cor", 3);
@@ -581,9 +581,9 @@ import classes.Scenes.API.Encounter;
 			outputText("\n\nTouching against the pliant, slippery vulva that girds your entrance, the tendril rubs its rounded head against you in a surprisingly gentle way, teasing your exterior until you're aching to buck back against it, but you can't, Fera told you to relax.  Disobedience is a concept your poor, addled psyche won't remember for some time.  You hang there, mewling like a cat in heat, pussy splayed and being touched but not penetrated.  Breathily, you repeatedly make pathetic little begging noises, and turn your slow-to-respond eyes towards Fera's face questioningly, begging the goddess with your moans.");
 			
 			outputText("\n\nShe smiles, and the tentacle finally pushes forward");
-			if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText(", slipping past your capacitive entrance with ease");
-			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText(", sliding into your welcoming entrance fairly easily");
-			else if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE) outputText(", slowly working its way into your decently unstretched entrance");
+			if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_LEVEL_CLOWN_CAR) outputText(", slipping past your capacitive entrance with ease");
+			else if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_GAPING) outputText(", sliding into your welcoming entrance fairly easily");
+			else if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_LOOSE) outputText(", slowly working its way into your decently unstretched entrance");
 			else outputText(", slowly burrowing past your tight, restrictive entrance");
 			outputText(" and leaving a trail of slick, black corruption in its wake.  The tendril pushes the whole way up to your cervix, gently butting up against your womb's portal before dragging back out, sputtering more inky cum all the way.  When it pops out, the head catches the tip of your [clit], causing your [vagina] to spasm and contract, squeezing down on the foreign fluid with such strength that a geyser of sable spunk erupts from your quivering quim.");
 			player.cuntChange(1,true,true,false);
@@ -595,12 +595,12 @@ import classes.Scenes.API.Encounter;
 			dynStats("lib", 5, "sen", 20, "cor", 3);
 			//Maximum size to 2
 			player.createPerk(PerkLib.FerasBoonMilkingTwat,0,0,0,0);
-			if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_LOOSE;
+			if (player.vaginas[0].vaginalLooseness > Vagina.LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = Vagina.LOOSENESS_LOOSE;
 			//Boost fertility a little
 			player.fertility += 10;
 			if (player.fertility >= 50) player.fertility = 50;
 			//Raise wetness to at least 3.
-			if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) player.vaginas[0].vaginalWetness =VaginaClass.WETNESS_SLICK;
+			if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLICK) player.vaginas[0].vaginalWetness =Vagina.WETNESS_SLICK;
 			
 			//[Next]
 			menu();

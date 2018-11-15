@@ -529,9 +529,9 @@ public class MainView extends Block {
 
 		button = event.target as CoCButton;
 
-		if (button && button.visible && button.toolTipText) {
-			this.toolTipView.header = button.toolTipHeader;
-			this.toolTipView.text   = button.toolTipText;
+		if (button && button.visible && button.toolTipTextInstance) {
+			this.toolTipView.header = button.toolTipHeaderInstance;
+			this.toolTipView.text   = button.toolTipTextInstance;
 			this.toolTipView.showForButton(button);
 		}
 		else {
@@ -664,7 +664,7 @@ public class MainView extends Block {
 
 		if (label) {
 			button.labelText     = label;
-			button.toolTipHeader = label;
+			button.toolTipHeaderInstance = label;
 		}
 
 		if (callback != null) {

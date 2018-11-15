@@ -17,14 +17,9 @@ package classes.Scenes.Areas.Bog
 			var lizan:LizanRogue = new LizanRogue();
 			if (!player.isPureEnough(30)) {
 				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skin.tone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise the lizan tentatively sniffs the air between the two of you. Without warning he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack and you realize he's waiting for you to back down. What will you do?");
-				if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-				}
 				menu();
 				addButton(0, "Fight", fightLizan, false, null, null, "Fight the lizan!");
 				addButton(1, "Leave", leaveLizan, false);
-				return;
 			}
 			else {
 				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skin.tone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise the lizan tentatively sniffs the air between the two of you. ");
@@ -38,10 +33,6 @@ package classes.Scenes.Areas.Bog
 				outputText("After a moment of silent consideration he speaks. \n\n\"<i>Hey there,</i>\" he says, his lizard lips pulling into a big grin, \"<i>... and who might you be?</i>\" You answer with the truth, your name. ");
 				outputText("\n\n\"<i>Well the alliance is very welcoming to anyone who isn't corrupt,</i>\" he says before rubbing his now bulging loincloth, \"<i>But if you would like to play I'm game.</i>\" he widens his stance like he's preparing to fight but his face is still light and playful.");
 				outputText("\n\nYou're not sure if the lizan wants to have sex with you or have a quick sparring match. You could just attack him and do whatever you want with him. What will you do?");
-				if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-				}
 				menu();
 				addButton(0, "Spar", fightLizan, true, null, null, "Do a spar session with the lizan!");
 				if (player.lust >= 33) {
@@ -50,9 +41,8 @@ package classes.Scenes.Areas.Bog
 					addDisabledButton(1, "Sex", "You are not aroused enough.");
 				}
 				addButton(2, "Decline", leaveLizan, true, null, null, "Excuse yourself and leave.");
-				return;
 			}
-
+			unlockCodexEntry("Lizan", kFLAGS.CODEX_ENTRY_LIZANS);
 		}
 		
 		public function fightLizan(pure:Boolean = false):void {

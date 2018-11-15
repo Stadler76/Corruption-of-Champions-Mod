@@ -120,8 +120,8 @@ package classes.Scenes.Dungeons.LethicesKeep
 
 			outputText("\n\nThe last of the petrifying curse slips from your limbs and a thought leaps lightning fast through your mind, cutting through the warm haze for a moment. It tells you that you have to act now - with your body free of the grey and your mind still resisting the gold. What do you do in this one, free, desperate moment?");
 			menu();
-			addButton(0, "Taunt", capturedbyBasilisksTaunt);
-			addButton(1, "Run", capturedByBasilisksRun);
+			addButton(0, "Taunt", capturedbyBasilisksTaunt).hint("Throw some insults and prepare for a fight!");
+			addButton(1, "Run", capturedByBasilisksRun).hint("Nope out of this situation! Try to escape.");
 		}
 		
 		private function capturedByBasilisksRun():void

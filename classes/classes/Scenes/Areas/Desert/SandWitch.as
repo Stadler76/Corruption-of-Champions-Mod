@@ -65,11 +65,11 @@
 			}
 			this.long = "A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.";
 			this.race = "Human?";
-			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_WET, Vagina.LOOSENESS_LOOSE);
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = rand(12) + 55;
 			this.hips.rating = Hips.RATING_CURVY;
 			this.butt.rating = Butt.RATING_LARGE;

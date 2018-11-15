@@ -77,14 +77,14 @@ package classes{
 		public function isAWoman_checkClitLength():void {
 			cut.isAWoman();
 			
-			assertThat(player.getClitLength(), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+			assertThat(player.getClitLength(), equalTo(Vagina.DEFAULT_CLIT_LENGTH));
 		}
 		
 		[Test]
 		public function isAHerm_checkClitLength():void {
 			cut.isAHerm();
 			
-			assertThat(player.getClitLength(), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+			assertThat(player.getClitLength(), equalTo(Vagina.DEFAULT_CLIT_LENGTH));
 		}
 		
 		[Test]

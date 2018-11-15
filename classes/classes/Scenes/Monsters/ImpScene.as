@@ -43,28 +43,25 @@ package classes.Scenes.Monsters
 					if (player.cockThatFits(monster.analCapacity()) == -1) {
 						addDisabledButton(0, "Male Rape", "Male Rape", "You're too big to rape an imp.");
 					}
-					else 
-						addButton(0, (pc.isTaur() ? "Centaur Rape" : "Male Rape"), (pc.isTaur() ? centaurOnImpStart : rapeImpWithDick));
+					else  {
+						addButton(0, (pc.isTaur() ? "Centaur Rape" : "Male Rape"), (pc.isTaur() ? centaurOnImpStart : rapeImpWithDick)).hint("Teach the imp a lesson and ram his butt with your dick!");
+						if (pc.hasItem(useables.CONDOM) && !pc.isTaur()) addButton(4, "Use Condom", rapeImpWithDick, 1).hint("Teach the imp a lesson and ram his butt with your dick! But safety first, of course. A condom a day keeps the corruption away, so to speak.");
+					}
 				}
 				if (pc.hasVagina()) {
-					if (pc.isTaur()) {
-						addButton(1, "Group Vaginal", centaurGirlOnImps);
-					}
-					else addButton(1, "Female Rape", rapeImpWithPussy);
+					if (pc.isTaur())
+						addButton(1, "Group Vaginal", centaurGirlOnImps).hint("Being a taur, you look like you could do with multiple imps to get you off. Call the imps.");
+					else 
+						addButton(1, "Female Rape", rapeImpWithPussy).hint("Ride the imp's large dick vaginally. Pregnancy is definitely a possibility.");
 				}
-				if (pc.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape);
-			
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(6, "B.Titfuck", (pc.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-				if (pc.cockThatFits(enemy.analCapacity()) != -1 && !pc.isTaur() && pc.hasItem(useables.CONDOM)) addButton(4, "Use Condom", rapeImpWithDick, 1);
+				if (pc.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape).hint("Have the imp fuck your perfectly fuckable nipples.", "Nipple Fuck");
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(6, "B.Titfuck", (pc.armor as LustyMaidensArmor).lustyMaidenPaizuri).hint("Take advantage of the properties of your special armour and get the imp to give you a good titfuck.", "Bikini Titfuck");
 			} else {
 				outputText("\n\n<b>You aren't horny enough to rape him.</b>");
 			}
-			if (pc.lactationQ() >= 500 || player.hasStatusEffect(StatusEffects.Feeder)) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
-			
-			if (pc.canOvipositBee()) addButton(5, "Oviposit", putBeeEggsInAnImpYouMonster);
-			
+			if (pc.lactationQ() >= 500 || player.hasStatusEffect(StatusEffects.Feeder)) addButton(3, "Breastfeed", areImpsLactoseIntolerant).hint("Give him a good fill of your milk. See if the imp is lactose tolerant.");
+			if (pc.canOvipositBee()) addButton(5, "Oviposite", putBeeEggsInAnImpYouMonster).hint("Use your ovipositor and lay some eggs in his butt.");
 			addKillPetrifyButtons(10, 11);
-			
 			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
@@ -426,7 +423,7 @@ package classes.Scenes.Monsters
 			outputText(images.showImage("player-centaur-herm"));
 			outputText("As the imp lays beaten its hands stroke its " + monster.cockDescriptShort(0) + " as its eyes look over you in the hope that you might abuse it in some manner.  You lick your lips as you stare at the large member and you turn around to display your " + player.vaginaDescript(0) + ".  ");
 			//Not gaping?
-			if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING) {
+			if (player.vaginas[0].vaginalLooseness <= Vagina.LOOSENESS_GAPING) {
 				//Penetration for non-gape cases
 				outputText("With a lascivious grin the imp hops forward, gripping your flanks as it drives its member forward into your " + player.vaginaDescript(0) + ".  ");
 				//<<If Pussy Virgin>> 
@@ -1405,7 +1402,19 @@ package classes.Scenes.Monsters
 			}
 			//HP or insta-loss
 			else {
-				outputText("\n<b>You fall, defeated by the imp!</b>\nThe last thing you see before losing consciousness is the creature undoing its crude loincloth to reveal a rather disproportionately-sized member.");
+				outputText("\n<b>You fall, defeated by the imp!</b>\nThe last thing you see before losing consciousness is the creature undoing its crude loincloth to reveal a "+ monster.cockDescript() + ". ");
+				outputText("Before completly slipping into the darkness, you feel a " + monster.cockHead() + " pressing against your ")
+				
+				if (player.isFemaleOrHerm()) {
+					outputText(player.vaginaDescript());
+					player.cuntChange(monster.cockArea(0), false);
+					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+				} else {
+					outputText(player.assholeDescript());
+					player.buttChange(monster.cockArea(0), false);
+				}
+				
+				outputText(".");
 			}
 			combat.cleanupAfterCombat();
 		}
@@ -1510,10 +1519,7 @@ package classes.Scenes.Monsters
 			outputText(images.showImage("monster-implord"));
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
-				if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-				}
+				unlockCodexEntry("Imps", kFLAGS.CODEX_ENTRY_IMPS);
 				startCombat(new ImpLord());
 				return;
 			}
@@ -1522,10 +1528,7 @@ package classes.Scenes.Monsters
 				dynStats("lus", 20);
 				flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] = 10;
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			unlockCodexEntry("Imps", kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1537,10 +1540,7 @@ package classes.Scenes.Monsters
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
 			startCombat(new ImpWarlord());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			unlockCodexEntry("Imps", kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 		
@@ -1552,10 +1552,7 @@ package classes.Scenes.Monsters
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
 			startCombat(new ImpOverlord());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			unlockCodexEntry("Imps", kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 			
@@ -1587,12 +1584,13 @@ package classes.Scenes.Monsters
 					// Button 4 is used for Lusty Maidens Armor special scene and is hidden without it
 						
 					if (player.lust >= 33) {
-						if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0)
-							addButton(0, "FuckHisAss", impLordBumPlug);
-						if (player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
-						if (player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
-						if ((player.findPerk(PerkLib.Feeder) >= 0 || pc.lactationQ() >= 500) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
-						if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+						if (player.hasCock()) {
+							if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "FuckHisAss", impLordBumPlug).hint("Teach the imp a lesson and ram his butt with your dick!", "Fuck His Ass");
+							addButton(1, "Get Blown", getBlownByAnImpLord).hint("Have the imp put his tongue to a good use pleasuring your manhood.");
+						}
+						if (player.hasVagina()) addButton(2, "Ride Cock", femaleVagRape).hint("Ride the imp's big dick vaginally. Pregnancy is definitely a possibility.");
+						if ((player.findPerk(PerkLib.Feeder) >= 0 || pc.lactationQ() >= 500) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3, "Breastfeed", feederBreastfeedRape).hint("Give him a good fill of your milk. See if the imp is lactose tolerant.");
+						if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri).hint("Take advantage of the properties of your special armour and get the imp to give you a good titfuck.", "Bikini Titfuck");
 					} else {
 						outputText("\n\n<b>You aren't horny enough to rape him.</b>");
 					}
@@ -2058,13 +2056,13 @@ package classes.Scenes.Monsters
 
 			if (isNaN(killButtonPos)) killButtonPos = 0;
 			if (killButtonPos >= 0 && monster.HP < 1) {
-				addButton(killButtonPos, "Kill Him", killImp);
+				addButton(killButtonPos, "Kill Him", killImp).hint("Kill the imp and get over with it. That will be one less threat.");
 				buttonCount++;
 			}
 
 			if (isNaN(petriButtonPos)) petriButtonPos = killButtonPos + 1;
 			if (impPetrifyable()) {
-				addButton(petriButtonPos, "Petrify Him", petrifyImp);
+				addButton(petriButtonPos, "Petrify Him", petrifyImp).hint("You could put your basilisk eyes to a good use and turn the imp into a statue. This would make a good camp decoration.");
 				buttonCount++;
 			}
 
@@ -2118,9 +2116,7 @@ package classes.Scenes.Monsters
 			flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 10;
 			//if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
-			var toolTipText:String = "Carry the statue back to your camp to place it on or in front of your wall";
-			var toolTipHeader:String = "Carry the statue to the camp";
-			addButton(0, "Take Statue", curry(combat.cleanupAfterCombat, takeStatue), null, null, null, toolTipText, toolTipHeader);
+			addButton(0, "Take Statue", curry(combat.cleanupAfterCombat, takeStatue)).hint("Carry the statue back to your camp to place it on or in front of your wall.", "Carry the statue to the camp");
 			addButton(1, "Leave", combat.cleanupAfterCombat);
 		}
 
@@ -2172,7 +2168,7 @@ package classes.Scenes.Monsters
 			outputText("You make a quick work of the imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
-			addButton(0, "Take Skull", takeSkull);
+			addButton(0, "Take Skull", takeSkull).hint("You could take the horned skull as a trophy. Maybe it'll make a nice camp decoration...");
 			addButton(1, "Leave", combat.cleanupAfterCombat);
 		}
 		private function takeSkull():void {

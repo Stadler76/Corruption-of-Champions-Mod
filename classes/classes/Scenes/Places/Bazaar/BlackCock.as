@@ -239,6 +239,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			if (!player.hasStatusEffect(StatusEffects.Fullness)) player.createStatusEffect(StatusEffects.Fullness, 4, 0, 0, 0);
 			else player.changeStatusValue(StatusEffects.Fullness, 1, 4);
+			awardAchievement("Dining In", kACHIEVEMENTS.GENERAL_DINING_IN, true, true, false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -302,10 +303,7 @@ package classes.Scenes.Places.Bazaar
 			else {
 				outputText("You catch Anita's eye and wave her over. With a big smile she struts, her soft tits rising and falling with every step, toward your table. She leans in, proudly displaying her bust and crushing them against your table as she smiles big and says, \"<i>Well if it ain't my favorite customer, [name]. What can I do ya for, hun?</i>\"");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Harpies!</b>\n\n");
-			}
+			unlockCodexEntry("Harpies", kFLAGS.CODEX_ENTRY_HARPIES);
 			menu();
 			addButton(0, "Song", listenToAnitaSong).hint("Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
@@ -556,10 +554,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("You call Andy over and when he sees you his face pulls into a warm inviting smile.");
 				outputText("\n\n\"<i>Hey [name], so what'll it be today?</i>\" he asks, pen poised.");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_SATYRS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Satyrs!</b>\n\n");
-			}
+			unlockCodexEntry("Satyrs", kFLAGS.CODEX_ENTRY_SATYRS);
 			menu();
 			addButton(0, "Stash", checkAndyStash).hint("Go out the back of the tent and check out Andy's stash?");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpWithAndyTheSatyr).hint("Proposition to have sex with the satyr.");
@@ -1115,10 +1110,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nHearing your entrance Harry Roswell turns his head towards you and smiles big.");
 				outputText("\n\n\"<i>Hey [name], what can I do ya for?</i>\"");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_RHINOS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_RHINOS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Rhino-Morphs!</b>\n\n");
-			}
+			unlockCodexEntry("Rhino-Morphs", kFLAGS.CODEX_ENTRY_RHINOS);
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", rompUpWithHarry);
 			else addButtonDisabled(0, "Sex", "You aren't horny enough to consider this.");
@@ -1236,10 +1228,7 @@ package classes.Scenes.Places.Bazaar
 				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?</i>\"");
 				else outputText("\n\n\"<i>You ready for a piece of cake now, hun?</i>\"");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Echidna-Morphs!</b>\n\n");
-			}
+			unlockCodexEntry("Echidna-Morphs", kFLAGS.CODEX_ENTRY_ECHIDNAS);
 			doYesNo(orderFridasCake, noThanksToCake);
 		}
 		

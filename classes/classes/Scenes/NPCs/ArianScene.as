@@ -196,9 +196,9 @@ public function meetArian():void {
 	//[Help] [Don't Help]
 	
 	menu();
-	addButton(0,"Help",helpArianWhenYouMeetHim);
-	addButton(1,"Don't Help",dontHelpArianWhenYouMeetHim);
-	addButton(2,"Never Help",dontHelpArianWhenYouMeetHim,true);
+	addButton(0, "Help", helpArianWhenYouMeetHim).hint("Get closer to the coughing figure and offer to help them.");
+	addButton(1, "Don't Help", dontHelpArianWhenYouMeetHim).hint("You don't want to get involved with them for now. Just leave them alone.");
+	addButton(2, "Never Help", dontHelpArianWhenYouMeetHim, true).hint("You don't want to get involved with them anymore. You won't see them again after choosing this option though.");
 }
 
 //[=Don't Help=]
@@ -231,10 +231,7 @@ private function helpArianWhenYouMeetHim():void {
 	outputText("\n\n\"<i>Just... help me up,</i>\" a masculine voice asks, between coughs.");
 	
 	outputText("\n\nYou lean down and offer the stranger your shoulder, letting them place their arm across your neck before you stand upright, helping pull them to their feet.  Once the hooded figure is standing, the hood slides off [Arian eir] head, to reveal a reptilian muzzle that could only belong to some sort of lizard.  His scales are white, almost absurdly so, and he takes deep breaths, trying to calm down his coughing fit.");
-	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-	}		
+	unlockCodexEntry("Lizans", kFLAGS.CODEX_ENTRY_LIZANS);
 	outputText("\n\nOnce it seems like he's calmed down, he looks at you and you gaze at his auburn slitted eyes.  \"<i>Thank you very much.</i>\"  He politely nods at you.  \"<i>Would you mind helping me one more time though?  I'm trying to avoid some people and I'd really appreciate it if you could help me go to a park nearby.</i>\"");
 	
 	outputText("\n\nYou ask him if he's in some kind of trouble first.  \"<i>No, of course not.  My aides are just a tad overprotective, that's all,</i>\" he insists, coughing a bit.");
@@ -533,10 +530,10 @@ public function visitAriansHouse():void {
 					outputText("\n\nIs he... no, he couldn't be.  Arian's still too sickly to get horny... isn't he?  You wonder if you should try and spy on him - or maybe listen at the keyhole?  Then again, you could just barge on in - after all, it's not like he's really playing with himself, right?");
 					//[Eavesdrop] [Peep] [Barge In] [Leave]
 					menu();
-					addButton(0,"Eavesdrop",eavesDropOnArian);
-					addButton(1,"Peep",peepOnArian);
-					addButton(2,"Barge In",bargeInOnArian);
-					addButton(3,"Leave",leaveFappingArian);
+					addButton(0, "Eavesdrop", eavesDropOnArian).hint("Listen to the moaning lizan. He seems to be saying something.");
+					addButton(1, "Peep", peepOnArian).hint("Get a good peek at what's going on at the moment.");
+					addButton(2, "Barge In", bargeInOnArian).hint("Open the door and enter! How rude.");
+					addButton(3, "Leave", leaveFappingArian);
 					return;
 				}
 				//(else)
@@ -587,14 +584,14 @@ private function arianHomeMenu():void {
 	else if (flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) addButton(0,"Next",arianPlot5);
 	//If no story dialogue
 	else {
-		addButton(0,"Talk",talkToArianChoices);
-		if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 2) addButton(1,"Sex",arianSexMenu);
-		if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 1) addButton(3,"Give Item",giveArianAnItem);
+		addButton(0,"Talk",talkToArianChoices).hint("See if the lizan mage is up for some chatting.");
+		if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 2) addButton(1, "Sex", arianSexMenu).hint("Initiate in some loving sexy times with the lizan mage.");
+		if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 1) addButton(3, "Give Item", giveArianAnItem).hint("Give Arian something to " + (flags[kFLAGS.ARIAN_HEALTH] < 30 ? "improve [Arian eir] overall wellbeing." : "alter [Arian em]."));
 		if (player.hasKeyItem("Arian's Talisman") >= 0 || player.hasKeyItem("Arian's Charged Talisman") >= 0)
-			addButton(2,"Talisman",imbueTalisman);
-		if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 5) addButton(4,"Treat Corr.",treatCorruption);
-		if (getGame().time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
-		if (flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
+			addButton(2, "Talisman", imbueTalisman).hint("Imbue the talisman with a single-use enchantment.");
+		if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 5) addButton(4, "Treat Corr.", treatCorruption).hint("Have Arian ease the corruption's hold over your body.", "Treat Corruption");
+		if (getGame().time.hours >= 17 && arianFollower()) addButton(8, "Sleep With", sleepWithArian, true).hint("Opt to sleep with the lizan mage every night.");
+		if (flags[kFLAGS.SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian).hint("Stop sleeping with the lizan for now.");
 		if (!arianFollower()) addButton(14,"Back",telAdre.telAdreMenu);
 		else addButton(14,"Back",camp.campLoversMenu);
 	}
@@ -667,8 +664,8 @@ private function bargeInOnArian():void {
 		outputText("\n\nYou raise your eyebrow; it seems that Arian is not opposed to some male on male.... What do you tell him?");
 		//[Don't mind] [Like Girls]
 		menu();
-		addButton(0,"Don't Mind",youDontMindBeingGayForArian);
-		addButton(1,"Like Girls",youLikeGirlsNotSickLizardDudes);
+		addButton(0,"Don't Mind",youDontMindBeingGayForArian).hint("Don't mind Arian being a male. It's nice to have some gay times after all! You'll be able to alter him and change his gender later on.");
+		addButton(1,"Like Girls",youLikeGirlsNotSickLizardDudes).hint("Prefer that Arian turn into a girl. You'll be able to alter him and change his gender later on.");
 	}
 	//(else if PC is genderless)
 	else if (player.isGenderless()) {
@@ -700,8 +697,8 @@ private function bargeInOnArian():void {
 		outputText("\n\nYou rub your chin in thought....");
 		//[Like Male] [Prefer Female]
 		menu();
-		addButton(0,"Like Male",hermsLikeMaleArian);
-		addButton(1,"Like Female",hermsLikeFemaleArian);
+		addButton(0,"Like Male",hermsLikeMaleArian).hint("Arian should definitely keep that manhood. There are so many options. You'll be able to alter him and change his gender later on.");
+		addButton(1,"Like Female",hermsLikeFemaleArian).hint("Arian should go female. You'll be able to alter him and change his gender later on.");
 	}
 
 }
@@ -716,11 +713,11 @@ private function hermsLikeMaleArian():void {
 	//Get Penetrated - (Proceed to appropriate scene)
 	menu();
 	if (player.hasCock() && player.cockThatFits(50) >= 0) {
-		addButton(0, "Penetrate", giveArianAnal);
+		addButton(0, "Penetrate", giveArianAnal).hint("Give Arian a good butt-stuffing. What could go wrong with this one?");
 	} else {
 		addDisabledButton(0, "Penetrate", "This scene requires you to have fitting cock.");
 	}
-	addButton(1,"Get Penetrated",getPenetratedByArianAndHisHitlerMustache);
+	addButton(1,"Get Penetrated",getPenetratedByArianAndHisHitlerMustache).hint("Arian could penetrate you vaginally.");
 }
 //[=Prefer Female=]
 private function hermsLikeFemaleArian():void {
@@ -755,11 +752,11 @@ private function youDontMindBeingGayForArian():void {
 	//(Proceed Give Anal)
 	menu();
 	if (player.cockThatFits(50) >= 0) {
-		addButton(0, "Penetrate", giveArianAnal);
+		addButton(0, "Penetrate", giveArianAnal).hint("Give Arian a good butt-stuffing. What could go wrong with this one?");
 	} else {
 		addDisabledButton(0, "Penetrate", "This scene requires you to have fitting cock.");
 	}
-	addButton(1, "Get Penetrated", getButtWreckedByArian);
+	addButton(1, "Get Penetrated", getButtWreckedByArian).hint("Have Arian be the one doing the pitching as he stuffs your ass.");
 	
 }
 //[=Like Girls=]
@@ -1074,9 +1071,9 @@ private function talkToArianChoices():void {
 	outputText("You tell Arian you'd like to talk to [Arian em].  Arian smiles at the prospect of chatting with you.  \"<i>I love talking with you; so what do you want to talk about?</i>\"");
 
 	menu();
-	if (flags[kFLAGS.ARIAN_VIRGIN] > 0) addButton(0,"Sexy Talk",arianSexingTalk);
-	if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 3) addButton(1,"Teach Magic",arianMagicLessons);
-	if (!arianFollower() && flags[kFLAGS.ARIAN_S_DIALOGUE] >= 6) addButton(4,"Invite2Camp",inviteArianToCamp);
+	if (flags[kFLAGS.ARIAN_VIRGIN] > 0) addButton(0, "Sexy Talk", arianSexingTalk).hint("Have some dirty talk with the lizan!");
+	if (flags[kFLAGS.ARIAN_S_DIALOGUE] >= 3) addButton(1, "Teach Magic", arianMagicLessons).hint("See if magical theories can be discussed and potentially learn some spells.");
+	if (!arianFollower() && flags[kFLAGS.ARIAN_S_DIALOGUE] >= 6) addButton(4, "Invite2Camp", inviteArianToCamp).hint("Invite Arian to live with you in the camp.", "Invite To Camp");
 	if (flags[kFLAGS.ARIAN_VIRGIN] == 0 && flags[kFLAGS.ARIAN_S_DIALOGUE] < 3) outputText("\n\n<b>Arian doesn't have much to talk about right now.  Maybe you ought to just visit him from time to time or find him an item that would help combat [Arian eir] sickness.</b>");
 	addButton(14,"Back",arianHomeMenu);
 }
@@ -1445,50 +1442,59 @@ private function arianSexMenu(output:Boolean = true):void {
 	}
 	//(Display Options)
 	menu();
+	//Top row is for being the top, bottom row is being the bottom/switch.
 	addDisabledButton(0, "Anal - Pitch", "This scene requires you to have fitting cock.");
-	addDisabledButton(1, "Anal - Catch", "This scene requires Arian to have cock.");
-	addDisabledButton(2, "Get Blown", "This scene requires you to have cock.");
-	addDisabledButton(3, "Blow " + arianMF("Him", "Her"), "This scene requires Arian to have cock.");
-	addDisabledButton(4, "Fuck Vagina", "This scene requires you to have fitting cock. Arian should have vagina.");
-	addDisabledButton(5, "Get Fucked", "This scene requires Arian to have cock.");
-	addDisabledButton(6, "Dildo Fun", "This scene requires both you and Arian to have vagina. You should have a dildo.");
-	addDisabledButton(7, "Docking", "This scene requires you to have fitting cock. Arian should have not overly large cock.");
-	addDisabledButton(8, "Double Pen", "This scene requires you to have two fitting cocks. Arian should have vagina.");
+	addDisabledButton(5, "Anal - Catch", "This scene requires Arian to have cock.");
+	
+	addDisabledButton(1, "Get Blown", "This scene requires you to have cock.");
+	addDisabledButton(6, "Blow " + arianMF("Him", "Her"), "This scene requires Arian to have cock.");
+	
+	addDisabledButton(2, "Vag. - Pitch", "This scene requires you to have fitting cock. Arian should have vagina.", "Vaginal Pitch");
+	addDisabledButton(7, "Vag. - Catch", "This scene requires Arian to have cock.", "Vaginal Catch");
+	
+	addDisabledButton(3, "Docking", "This scene requires you to have fitting cock. Arian should have not overly large cock.");
+	addDisabledButton(4, "Double Pen", "This scene requires you to have two fitting cocks. Arian should have vagina.", "Double Penetration");
+	addDisabledButton(8, "Dildo Fun", "This scene requires both you and Arian to have vagina. You should have a dildo.");
 	
 	if (player.hasCock()) {
-		//PC must have a cock that fits (cock area 50 or less)
-		if (player.cockThatFits(50) >= 0) addButton(0,"Anal - Pitch",giveArianAnal);
+		//Anal Pitch:
+			//PC must have a cock that fits (cock area 50 or less)
+		if (player.cockThatFits(50) >= 0) 
+			addButton(0, "Anal - Pitch", giveArianAnal).hint("Be the one doing the dicking. " + (flags[kFLAGS.ARIAN_ANAL_XP] <= 0 ? "He's probably a virgin so be gentle though!" : ""));
 		//Get Blown:
-		//PC must have a cock.
-		addButton(2,"Get Blown",getBlownByArian);
-		//Penetrate:
-		//Arian must be herm/female.
-		//PC must have a cock that fits (cock area 50 or less)
+			//PC must have a cock.
+			addButton(1, "Get Blown", getBlownByArian).hint("Have Arian suck your dick off and give him the tasty snack he desires.");
+		//Vaginal Pitch:
+			//Arian must be herm/female.
+			//PC must have a cock that fits (cock area 50 or less)
 		if (player.cockThatFits(flags[kFLAGS.ARIAN_CAPACITY]) >= 0 && flags[kFLAGS.ARIAN_VAGINA] > 0) 
-			addButton(4,"Fuck Vagina",penetrateArian);
+			addButton(2, "Vag. - Pitch", penetrateArian).hint("Arian has a nice vagina, why not make use of that?");
+		//Docking:
+			//ArianCockSize needs to be below 3. (ArianDblCock does not affect this decision.) 
+			//PC cock area must be <= 30.
+		if (player.smallestCockArea() <= 30 && flags[kFLAGS.ARIAN_COCK_SIZE] < 3 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) 
+			addButton(3, "Docking", arianDocking).hint("You could penetrate the lizan's inviting genital slit that houses his small dick.");
 		//Double Pen Arian:
-		//PC must have at least 2 cocks that fit. That means two cocks with a cock area of <= 50.
-		//This isn't meant to give AnalXP, but given the fact that Arian's ass will get pen'd it would also be justified. Up to you Fen!
-		if (player.cockThatFits(50) >= 0 && player.cockThatFits2(50) >= 0 && flags[kFLAGS.ARIAN_VAGINA] > 0) addButton(8,"Double Pen",doublePenetrateArian);
-		//Docking
-		//ArianCockSize needs to be below 3. (ArianDblCock does not affect this decision.) 
-		//PC cock area must be <= 30.
-		if (player.smallestCockArea() <= 30 && flags[kFLAGS.ARIAN_COCK_SIZE] < 3 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(7,"Docking",arianDocking);
+			//PC must have at least 2 cocks that fit. That means two cocks with a cock area of <= 50.
+			//This isn't meant to give AnalXP, but given the fact that Arian's ass will get pen'd it would also be justified. Up to you Fen!
+		if (player.cockThatFits(50) >= 0 && player.cockThatFits2(50) >= 0 && flags[kFLAGS.ARIAN_VAGINA] > 0) 
+			addButton(4, "Double Pen", doublePenetrateArian).hint("You could fuck both of Arian's holes given that you have multiple dicks.");
 	}
 	//Get Anal:
-	//Arian must have a cock.
-	if (flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(1,"Anal - Catch",getButtWreckedByArian);
 	//Blow:
-	//Arian must have a cock.
-	if (flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(3,"Blow " + arianMF("Him","Her"),suckAriansDick);
-	
+		//Arian must have a cock.
+	if (flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
+		addButton(5, "Anal - Catch", getButtWreckedByArian).hint("Have Arian be the one doing the pitching as he stuffs your ass.");
+		addButton(6, "Blow " + arianMF("Him", "Her"), suckAriansDick).hint("Get down and suck the lizan off for some good taste of reptilian spunk!");
+	}
 	//PC must have a vagina.
 	if (player.hasVagina()) {
 		//Get Penetrated:
-		//Arian must have a cock.
-		if (flags[kFLAGS.ARIAN_COCK_SIZE] > 0) addButton(5,"Get Fucked",getPenetratedByArianAndHisHitlerMustache);
+			//Arian must have a cock.
+		if (flags[kFLAGS.ARIAN_COCK_SIZE] > 0) 
+			addButton(7, "Vag. - Catch", getPenetratedByArianAndHisHitlerMustache).hint("Arian could penetrate you vaginally.");
 		if (flags[kFLAGS.ARIAN_VAGINA] > 0 && (player.hasKeyItem("Dildo") >= 0 || player.hasKeyItem("Deluxe Dildo") >= 0)) {
-			addButton(6,"Dildo Fun",arianDildoFun);
+			addButton(8, "Dildo Fun", arianDildoFun).hint("Make good use of the dildo for some good mutual pleasurable experience!");
 		}
 	}
 	addButton(14,"Back",arianHomeMenu);

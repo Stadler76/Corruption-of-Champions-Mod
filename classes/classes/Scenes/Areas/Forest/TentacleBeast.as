@@ -55,6 +55,7 @@ package classes.Scenes.Areas.Forest
 			if (hpVictory) {
 				outputText("The creature lets out an ear-piercing screech as it collapses upon itself. Its green coloring quickly fades to brown as the life drains from it, leaving you victorious.");
 				game.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
+				flags[kFLAGS.TENTACLE_BEASTS_KILLED]++;
 			} else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
@@ -122,8 +123,8 @@ package classes.Scenes.Areas.Forest
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
 			this.createBreastRow(0,0);
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_SLIME_DROOLING;
 			this.tallness = rand(9) + 70;
 			this.hips.rating = Hips.RATING_BOYISH;
 			this.butt.rating = Butt.RATING_BUTTLESS;

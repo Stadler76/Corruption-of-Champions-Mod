@@ -2,6 +2,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.StatusEffects;
 	import classes.PerkLib;
 	import classes.Items.WeaponLib;
@@ -63,17 +64,17 @@ package classes.Scenes.Dungeons.LethicesKeep
 			addDisabledButton(4, "SloppySeconds", "This scene requires you to have cock.");
 			addDisabledButton(5, "Ride Him", "This scene requires you to have vagina.");
 			
-			addButton(0,"Kill Them",this.murderhobo);
+			addButton(0,"Kill Them",this.murderhobo).hint("End the both of royal minotaurs and move on.");
 			if (player.hasCock())
 			{
-				if (player.smallestCockArea() <= 50) addButton(1, "Docking", this.dockucocku, player.smallestCockIndex());
-				if (player.cockThatFits(200) >= 0) addButton(2,"Buttfuck",this.buttufucku);
-				addButton(3,"Titfuck",this.titfuckCowslut);
-				addButton(4,"SloppySeconds",this.sloppySeconds);
+				if (player.smallestCockArea() <= 50) addButton(1, "Docking", this.dockucocku, player.smallestCockIndex()).hint("The minotaur king's cock is big enough to put your " + player.cockDescriptShort(player.smallestCockIndex()) + " inside.");
+				if (player.cockThatFits(200) >= 0) addButton(2,"Buttfuck",this.buttufucku).hint("Stuff your dick into the minotaur's ass and show your dominance over him!");
+				addButton(3,"Titfuck",this.titfuckCowslut).hint("Put your dick between the minotaur queen's tits and work your way!");
+				addButton(4,"SloppySeconds",this.sloppySeconds).hint("Excellia can always take so much! Fuck the minotaur queen's well-used pussy, even if she's still stuffed with virile minotaur's cum.");
 			}
 			if (player.hasVagina())
 			{
-				addButton(5,"Ride Him",this.mechanicalbullhue);
+				addButton(5,"Ride Him",this.mechanicalbullhue).hint("Ride the minotaur's huge dick with your " + player.vaginaDescript() + ".");
 			}
 		}
 		
@@ -158,6 +159,7 @@ package classes.Scenes.Dungeons.LethicesKeep
 			}
 			outputText("\n\nYou should be alarmed or worried, but mostly you’re amazed by how good it feels. How great it feels to go limp in his powerful arms. How wonderfully warm and content his narcotic spooge makes your body feel. You drool on his chest, then lick it back up, savoring the salty, sweaty tang of it. Your mouth feels empty without his cock, but then you realize you can suck his nipple until his cock is free.");
 			outputText("\n\nMinotaurs are so great. A fuzzy memory of some other desire tries to make itself known, but another buck of your bull’s hips has your head swimming and your body cumming. The pressure of your own ejaculation is nothing next to his of course. You doubt you could squirt anything out ever again. Your insides must be all stretched out with your lord’s love, but that’s fine so long as he uses you again. You can be his dribbly little spunksleeve.");
+			awardAchievement("Kaizo Trap", kACHIEVEMENTS.GENERAL_KAIZO_TRAP, true, true, false);
 			getGame().gameOver();
 		}
 		

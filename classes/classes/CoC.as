@@ -8,7 +8,7 @@
 package classes
 {
 	// BREAKING ALL THE RULES.
-	import classes.AssClass;
+	import classes.Ass;
 	import classes.CoC_Settings;
 	import classes.Cock;
 	import classes.Creature;
@@ -17,10 +17,10 @@ package classes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.ImageManager;
 	import classes.InputManager;
-	import classes.ItemSlotClass;
+	import classes.ItemSlot;
 	import classes.Items.*;
 	import classes.Parser.Parser;
-	import classes.PerkClass;
+	import classes.Perk;
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.Scenes.*;
@@ -54,9 +54,8 @@ package classes
 	import classes.Scenes.Seasonal.Thanksgiving;
 	import classes.Scenes.Seasonal.Valentines;
 	import classes.Scenes.Seasonal.XmasBase;
-	import classes.StatusEffectClass;
-	import classes.VaginaClass;
-	import classes.content.*;
+	import classes.StatusEffect;
+	import classes.Vagina;
 	import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.internals.Utils;
@@ -81,7 +80,7 @@ package classes
 	/*
 	   One very important thing to know about descriptions in this game is that many words are based on hidden integer values.
 	   These integers are compared to tables or queried directly to get the words used for particular parts of descriptions. For instance,
-	   AssClass below has variables for wetness, looseness, fullness, and virginity. You'll often find little tables like this
+	   Ass below has variables for wetness, looseness, fullness, and virginity. You'll often find little tables like this
 	   scattered through the code:
 	   butt looseness
 	   0 - virgin
@@ -229,13 +228,27 @@ package classes
 		public var giacomoShop:Giacomo = new Giacomo();
 		// Scenes/Monsters/
 		public var goblinScene:GoblinScene = new GoblinScene();
-		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
-		public var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
-		public var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
+		public var goblinSpecialScene:GoblinSpecialScene = new GoblinSpecialScene();
 		public var goblinElderScene:PriscillaScene = new PriscillaScene();
 		public var impScene:ImpScene;
 		public var mimicScene:MimicScene = new MimicScene();
 		public var succubusScene:SuccubusScene = new SuccubusScene();
+		
+		/**
+		 * DO NOT REMOVE OR COMMENT OUT!
+		 * 
+		 * This definition causes the class to be compiled,
+		 * so breaking changes will cause the build to fail.
+		 */
+		private var plantGirlScene:PlantGirlScene;
+		/**
+		 * DO NOT REMOVE OR COMMENT OUT!
+		 * 
+		 * This definition causes the class to be compiled,
+		 * so breaking changes will cause the build to fail.
+		 */
+		private var goblinQueen:GoblinQueen;
+
 		// Scenes/NPC/
 		public var amilyScene:AmilyScene;
 		public var anemoneScene:AnemoneScene;
@@ -556,9 +569,9 @@ package classes
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4.14"; //Version NUMBER
+			ver = "1.0.2_mod_1.4.15"; //Version NUMBER
 			ver += "_dragonmod_1.0.1";
-			version = ver + " (<b>Weapon Upgrading!</b>)"; //Version TEXT
+			version = ver + " (<b>Tooltips & Achievements Bonanza!</b>)"; //Version TEXT
 			
 			//Indicates if building for mobile?
 			mobile = false;
@@ -657,23 +670,23 @@ package classes
 			
 			// ******************************************************************************************
 			
-			mainView.aCb.items = [{label: "TEMP", perk: new PerkClass(PerkLib.Acclimation)}];
+			mainView.aCb.items = [{label: "TEMP", perk: new Perk(PerkLib.Acclimation)}];
 			mainView.aCb.addEventListener(Event.SELECT, playerInfo.changeHandler);
 			
 			//Register the classes we need to be able to serialize and reconstitute so
 			// they'll get reconstituted into the correct class when deserialized
-			registerClassAlias("AssClass", AssClass);
+			registerClassAlias("Ass", Ass);
 			registerClassAlias("Character", Character);
 			registerClassAlias("Cock", Cock);
 			registerClassAlias("CockTypesEnum", CockTypesEnum);
 			registerClassAlias("Enum", Enum);
 			registerClassAlias("Creature", Creature);
-			registerClassAlias("ItemSlotClass", ItemSlotClass);
-			registerClassAlias("KeyItemClass", KeyItemClass);
+			registerClassAlias("ItemSlot", ItemSlot);
+			registerClassAlias("KeyItem", KeyItem);
 			registerClassAlias("Monster", Monster);
 			registerClassAlias("Player", Player);
-			registerClassAlias("StatusEffectClass", StatusEffectClass);
-			registerClassAlias("VaginaClass", VaginaClass);
+			registerClassAlias("StatusEffect", StatusEffect);
+			registerClassAlias("Vagina", Vagina);
 			
 			//Hide sprites
 			mainView.hideSprite();

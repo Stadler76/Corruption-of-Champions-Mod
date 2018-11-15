@@ -539,7 +539,7 @@
 		 */
 		public function updateBonusDuration(hours:int):void
 		{
-			const effect:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
+			const effect:StatusEffect = player.statusEffectByType(StatusEffects.UmasMassage);
 			if (effect!=null) {
 				effect.value3 -= hours;
 				if (effect.value3 <= 0) {

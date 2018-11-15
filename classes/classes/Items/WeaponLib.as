@@ -40,8 +40,15 @@ package classes.Items
 		public const FLNTLK1:Weapon = new FlintlockPistol(1); //Tier 1
 		public const FLNTLK2:Weapon = new FlintlockPistol(2); //Tier 2
 		
-		public const S_GAUNT:Weapon = new Weapon("S.Gaunt", "S.Gauntlet", "spiked gauntlet", "a spiked gauntlet", "spiked punch", 5, 400, "This single metal gauntlet has the knuckles tipped with metal spikes. Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent."); //Tier 1
-		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 8, 300, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm."); //Tier 2
+		public const S_GAUN0:Weapon = new SpikedGauntlet(0); //Tier 0
+		public const S_GAUN1:Weapon = new SpikedGauntlet(1); //Tier 1
+		public const S_GAUN2:Weapon = new SpikedGauntlet(2); //Tier 2
+		public const S_GAUNO:Weapon = new SpikedGauntlet(3, true).setDegradation(200, S_GAUN2); //Tier 3, obsidian
+		
+		public const H_GAUN0:Weapon = new HookedGauntlet(0); //Tier 0
+		public const H_GAUN1:Weapon = new HookedGauntlet(1); //Tier 1
+		public const H_GAUN2:Weapon = new HookedGauntlet(2); //Tier 2
+		public const H_GAUNO:Weapon = new HookedGauntlet(3, true).setDegradation(200, H_GAUN2); //Tier 3, obsidian
 		
 		public const HALBRD0:Weapon = new Halberd(0); //Tier 0, halberds currently restricted to Urta.
 		public const HALBRD1:Weapon = new Halberd(1); //Tier 1

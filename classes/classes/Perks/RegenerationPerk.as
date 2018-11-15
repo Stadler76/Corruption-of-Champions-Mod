@@ -1,13 +1,13 @@
 package classes.Perks 
 {
-	import classes.PerkClass;
+	import classes.Perk;
 	import classes.PerkType;
 	import classes.GlobalFlags.*;
 
 	public class RegenerationPerk extends PerkType
 	{
 		
-		override public function desc(params:PerkClass = null):String
+		override public function desc(params:Perk = null):String
 		{
 			if (kGAMECLASS.flags[kFLAGS.HUNGER_ENABLED] > 0 && kGAMECLASS.player.hunger < 25) return "<b>DISABLED</b> - You are too hungry!";
 			else return super.desc(params);

@@ -7,7 +7,7 @@ package classes.Scenes.NPCs.pregnancies
 	import classes.Scenes.PregnancyProgression;
 	import classes.Scenes.VaginalPregnancy;
 	import classes.StatusEffects;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	import classes.internals.GuiOutput;
 	import classes.internals.PregnancyUtils;
 	import classes.internals.Utils;
@@ -229,10 +229,10 @@ package classes.Scenes.NPCs.pregnancies
 				
 				output.text(".  Your " + player.vaginaDescript(0) + " quivers and pulses as well, adding ");
 				
-				if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) {
+				if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLICK) {
 					output.text("a trickle");
 				}
-				else if (player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) {
+				else if (player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLAVERING) {
 					output.text("a squirt");
 				}
 				else {

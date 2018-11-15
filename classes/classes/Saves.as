@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 	import classes.BodyParts.*;
 	import classes.GlobalFlags.kACHIEVEMENTS;
@@ -39,6 +39,7 @@ public class Saves extends BaseContent {
 	private var gameStateSet:Function;
 	private var itemStorageGet:Function;
 	private var gearStorageGet:Function;
+	private var permObjectFileName:String = "CoC_Main";
 	
 	public function Saves(gameStateDirectGet:Function, gameStateDirectSet:Function) {
 		gameStateGet = gameStateDirectGet; //This is so that the save game functions (and nothing else) get direct access to the gameState variable
@@ -588,6 +589,18 @@ public function loadGame(slot:String):void
 	}
 }
 
+/**
+ * Set the filename that is used to save and load the perm object,
+ * which permanently stores data accross games, e.g. achievments.
+ * This file will show up in the same directory as the save games.
+ * @param	filename to use for the perm object file
+ */
+public function setPermObjectFilename(filename:String):void
+{
+	this.permObjectFileName = filename;
+	LOGGER.debug("Filename for perm object was set to {0}", filename);
+}
+
 //Used for tracking achievements.
 public function savePermObject(isFile:Boolean):void {
 	//Initialize the save file
@@ -601,7 +614,7 @@ public function savePermObject(isFile:Boolean):void {
 	}
 	else
 	{
-		saveFile = SharedObject.getLocal("CoC_Main", "/");
+		saveFile = SharedObject.getLocal(permObjectFileName, "/");
 	}
 	
 	saveFile.data.exists = true;
@@ -666,7 +679,6 @@ public function savePermObject(isFile:Boolean):void {
 }
 
 public function loadPermObject():void {
-	var permObjectFileName:String = "CoC_Main";
 	var saveFile:* = SharedObject.getLocal(permObjectFileName, "/");
 	LOGGER.info("Loading achievements from {0}!", permObjectFileName);
 	//Initialize the save file
@@ -1924,8 +1936,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.cocks = new Vector.<Cock>();
 		SerializationUtils.deserializeVector(player.cocks as Vector.<*>, saveFile.data.cocks, Cock);
 
-		player.vaginas = new Vector.<VaginaClass>();
-		SerializationUtils.deserializeVector(player.vaginas as Vector.<*>, saveFile.data.vaginas, VaginaClass);
+		player.vaginas = new Vector.<Vagina>();
+		SerializationUtils.deserializeVector(player.vaginas as Vector.<*>, saveFile.data.vaginas, Vagina);
 		
 		loadNPCs(saveFile);
 		
@@ -2103,7 +2115,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				CoC_Settings.error("Cannot find status affect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
 				continue;
 			}
-			var sec:StatusEffectClass = player.createStatusEffect(
+			var sec:StatusEffect = player.createStatusEffect(
 				stype,
 				saveFile.data.statusAffects[i].value1,
 				saveFile.data.statusAffects[i].value2,
@@ -2147,7 +2159,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				inventory.createStorage();
-				var storage:ItemSlotClass = itemStorageGet()[i];
+				var storage:ItemSlot = itemStorageGet()[i];
 				var savedIS:* = saveFile.data.itemStorage[i];
 				if (savedIS.shortName)
 				{
@@ -2175,7 +2187,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			for (i = 0; i < saveFile.data.gearStorage.length && gearStorageGet().length < 45; i++)
 			{
-				gearStorageGet().push(new ItemSlotClass());
+				gearStorageGet().push(new ItemSlot());
 					//trace("Initialize a slot for one of the item storage locations to load.");
 			}
 			//Populate storage slot array
@@ -2588,7 +2600,7 @@ public function unFuckSave():void
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] == 0) flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] = 1; 
 	if (gearStorageGet().length < 45) {
 		while (gearStorageGet().length < 45) {
-			gearStorageGet().push(new ItemSlotClass());
+			gearStorageGet().push(new ItemSlot());
 		}
 	}
 	if (player.hasKeyItem("Laybans") >= 0) {

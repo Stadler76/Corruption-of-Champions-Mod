@@ -51,6 +51,7 @@ public class Shield extends Useable //Equipable
 
 		override public function get description():String {
 			var desc:String = _description;
+			var diff:int = 0;
 			switch(_tier) {
 				case 1:
 					desc += " This shield has been upgraded to be of fine quality.";
@@ -65,6 +66,11 @@ public class Shield extends Useable //Equipable
 			desc += "\n\nType: Shield";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
+			diff = block - (game.player.shield.block);
+			if (diff > 0)
+				desc += " (<font color=\"#00d000\">+" + String(Math.abs(diff)) + "</font>)";
+			else if (diff < 0)
+				desc += " (<font color=\"#d00000\">-" + String(Math.abs(diff)) + "</font>)";
 			//Value
 			desc += "\nBase value: " + String(value);
 			return desc;

@@ -101,10 +101,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			outputText("You ask the behemoth about himself. What is he, exactly?");
 			outputText("\n\n\"<i>Nobody calls me by my old name; just call me the Behemoth and that's good enough, eh?  We're a proud race known for our strength, and we love to prove it, too, but there ain't too much of us around anymore. Here, let me show you something,</i>\" the behemoth says, and he pulls out some books.");
-			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Behemoths!</b>");
-			}
+			unlockCodexEntry("Behemoths", kFLAGS.CODEX_ENTRY_BEHEMOTH);
 			outputText("\n\n\"<i>Check through those; they ought to answer everything you're looking for,</i>\" he says, and you thank him.");
 			outputText("\n\n\"<i>Thank <b>you,</b></i>\" he corrects, and he laughs as he pushes his hair and mane back.  You try asking him what's wrong, but he shakes his head.  \"<i>I don't want to talk about it right now,</i>\" he admits. \"<i>My past ain't the greatest; let's just worry about the now for now, okay?</i>\"");
 			outputText("You nod, and you wrap your arms around him to give him a hug, before making your farewells and your way back to camp.");

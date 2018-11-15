@@ -1,7 +1,7 @@
 package classes.Scenes.Dungeons.LethicesKeep 
 {
 	import classes.Appearance;
-	import classes.AssClass;
+	import classes.Ass;
 	import classes.Monster;
 	import classes.StatusEffects;
 	import classes.PerkLib;
@@ -28,8 +28,8 @@ package classes.Scenes.Dungeons.LethicesKeep
 			this.createVagina(false, 3, 3);
 			this.createBreastRow(Appearance.breastCupInverse("FF"));
 			
-			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_LOOSE;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			
 			this.tallness = 8 * 12;
 			this.hips.rating = Hips.RATING_AVERAGE;

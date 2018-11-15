@@ -1,3 +1,4 @@
+
 package classes.Items.Consumables 
 {
 	import classes.BodyParts.*;
@@ -160,7 +161,6 @@ package classes.Items.Consumables
 					while (cockIdx < player.cockTotal()) {
 						if (player.cocks[cockIdx].cockType !== CockTypesEnum.KANGAROO) {
 							player.cocks[cockIdx].cockType = CockTypesEnum.KANGAROO;
-							player.cocks[cockIdx].knotMultiplier = 1;
 							break;
 						}
 						cockIdx++;

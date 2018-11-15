@@ -65,13 +65,13 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.long = "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.";
 			this.race = "Harpy";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_LOOSE);
 			if (LowerBody.HARPY > 0) {
 				this.createStatusEffect(StatusEffects.BonusVCapacity, LowerBody.HARPY, 0, 0, 0);
 			}
 			createBreastRow(Appearance.breastCupInverse("D"));
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = rand(8) + 70;
 			this.hips.rating = Hips.RATING_AMPLE+2;
 			this.butt.rating = Butt.RATING_LARGE;

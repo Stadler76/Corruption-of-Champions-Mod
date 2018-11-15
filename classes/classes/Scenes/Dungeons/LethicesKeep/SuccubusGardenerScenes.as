@@ -3,6 +3,7 @@
 	import classes.BaseContent;
 	import classes.StatusEffects;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.CockTypesEnum;
 	
 	/**
@@ -51,9 +52,9 @@
 			outputText("The succubus drops to her knees, grabbing a tentacle and thrusting it into wanton sex forcefully enough to make you wince. She doesn't seem to mind, in fact, her lips spread into a wordless 'o' of pleasure as she begins rocking back and forth atop, lost to her own lusts. She's in no state to stop you from moving on. Hell, she's probably going to be busy with the tentacles for a long, long time. You suppose you could try and put her mouth to use, but there are a LOT of tentacles awfully close. It might be best to move on or end her quickly.");
 
 			menu();
-			addButton(0, "End Her", endHer);
-			addButton(1, "Leave", leaveHer);
-			addButton(2, "Fuck Her", tentaFail);
+			addButton(0, "End Her", endHer).hint("Kill her and get over with it.");
+			addButton(1, "Leave", leaveHer).hint("Leave the succubus gardener to her fate.");
+			addButton(2, "Fuck Her", tentaFail).hint("Take advantage of her helpless state but this probably won't be a good idea.");
 		}
 
 		private function tentaFail():void
@@ -105,7 +106,7 @@
 			{
 				//Cooches only
 				outputText("\n\nThe new arrival descends towards your already well-lubricated pussy, dripping neon orange goo as it goes. Where the stuff lands on you, you alight with raw, deviously pleasurable sensation, particularly on your pussy lips. They burn with raw, unfiltered sensation, both pleasure and pain all in one. Then, that column of pulsating, phallic meat presses down against you, too fat for any normal pussy to take, and yet somehow, it's ramming itself into you. You spread to accept it... and then spread some more, blossoming.");
-
+				player.cuntChange(player.vaginalCapacity() * 1.25, true, true, false);
 			}
 
 			//Merge Genderless & Coochies
@@ -114,7 +115,7 @@
 				outputText("\n\nYou can feel your");
 				if (createdVag) outputText(" new");
 				outputText(" entrance giving around the girthy monstrosity with each passing second. Wider and wider, your flesh opens up. It feels so big that you wonder if you're going to rip in half, but there is no discomfort, only the pleasure of accepting it's tumescent, inhuman length. You groan as your own fluids make themselves known, soaking your gaped lips in girlish cum. There's no way that you should be able to take this, let alone enjoy it, but you are. Oh gods, how you are!");
-
+				player.cuntChange(player.vaginalCapacity() * 1.25, true, true, false);
 				outputText("\n\nYou can feel your belly moving, stretching around the thick intruder. You wish you could look down, to see it outlined in your body, but your head is held fast. It pushes deeper, and finally, you feel as if you're reaching your limit. Somehow, that huge tentacle must know, because it stops right there and reverses direction. It yanks out far faster than it thrusted in, and you're left ultimately and completely empty. The feeling of cool air inside you is alien... uncomfortable, even. You don't like it. In dawning horror, you realize just how empty you feel, and how badly you need that tentacle inside you.");
 
 				outputText("\n\nYou cum when it thrusts back in, loosening you further, moulding your twat into the perfectly shaped receptacle for its unending, monstrous needs. Gushing, your pussy gratefully clings to its massive, orange-colored master, getting more and more elastic with every second. Your eyes roll back around your third cunt-clenching climax. You miss the sky vanishing behind clouds of green, writhing stalks, but at least you'll never miss that feeling of <i>fullness</i> ever again.");
@@ -166,7 +167,7 @@
 					outputText("\n\nA few seconds later, you find out that you can't handle it when the tentacle strokes you. The wave of skittering, electric pleasure overloads your mind, and breakers for your consciousness shut it down while your dick" + ((player.cocks.length > 1) ? "s throb" : "throbs") +", loving every moment of it.");
 
 					outputText("\n\nSometime later, you come to in between orgasms, surrounded in green, but there is so much sensory data coming from your crotch that your eyes might as well be blind by comparison. You marvel at this new life and wonder if you'll ever tire of admiring the texture of these walls. The next orgasm blasts those thoughts away, answering the question for you. Raw, unfiltered pleasure. That's what matters to you now.");
-
+					awardAchievement("Kaizo Trap", kACHIEVEMENTS.GENERAL_KAIZO_TRAP, true, true , false);
 					getGame().gameOver();
 				}
 			}
@@ -176,7 +177,7 @@
 		{
 			clearOutput();
 			outputText("\n\nYou're held captive, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
-			
+			awardAchievement("Kaizo Trap", kACHIEVEMENTS.GENERAL_KAIZO_TRAP, true, true , false);
 			getGame().gameOver();
 		}
 
@@ -362,8 +363,8 @@
 			
 			// [Pet][Feeder]
 			menu();
-			addButton(0, "Pet", maleLossPet);
-			addButton(1, "Feeder", maleLossFeeder);
+			addButton(0, "Pet", maleLossPet).hint("You'll be the gardener's new pet.");
+			addButton(1, "Feeder", maleLossFeeder).hint("You'll be feeding the tentacles for the rest of your life.");
 		}
 		
 		private function maleLossPet():void

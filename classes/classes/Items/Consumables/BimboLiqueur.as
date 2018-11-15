@@ -8,7 +8,7 @@ package classes.Items.Consumables
 	import classes.Player;
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
-	import classes.VaginaClass;
+	import classes.Vagina;
 
 	public class BimboLiqueur extends Consumable {
 		
@@ -84,21 +84,21 @@ package classes.Items.Consumables
 				if (!game.player.hasVagina()) {
 					game.player.createVagina();
 					game.player.setClitLength(0.25);
-					game.player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
+					game.player.vaginas[0].vaginalWetness = Vagina.WETNESS_SLICK;
 					if (game.player.isTaur()) outputText("Wait!? Wet? You wish you could touch yourself between the " + game.player.legs() + ", but you can tell from the fluid running down your hind-legs just how soaked your new vagina is.");
 					else outputText("Wait!?  Wet?  You touch yourself between the " + game.player.legs() + " and groan when your fingers sink into a sloppy, wet cunt.");
 				}
 				else {
 					if (game.player.isTaur()) {
 						outputText("You wish you could sink your fingers into your sloppy, wet cunt, but as a centaur, you can't quite reach.");
-						if (game.player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK)
-							game.player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
+						if (game.player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLICK)
+							game.player.vaginas[0].vaginalWetness = Vagina.WETNESS_SLICK;
 					}
 					else {
 						outputText("You sink your fingers into your ");
-						if (game.player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) {
+						if (game.player.vaginas[0].vaginalWetness < Vagina.WETNESS_SLICK) {
 							outputText("now ");
-							game.player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
+							game.player.vaginas[0].vaginalWetness = Vagina.WETNESS_SLICK;
 						}
 						outputText("sloppy, wet cunt with a groan of satisfaction.");
 					}

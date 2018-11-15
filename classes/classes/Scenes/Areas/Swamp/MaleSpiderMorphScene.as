@@ -36,14 +36,11 @@ package classes.Scenes.Areas.Swamp
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"");
 				//[Fight] [Talk] [Leave]
 				menu();
-				addButton(0, "Fight", fightSpiderBoy);
-				addButton(1, "Talk", talkToSpiderBoy);
-				addButton(14, "Leave", camp.returnToCampUseOneHour);
+				addButton(0, "Fight", fightSpiderBoy).hint("Initiate the fight against the spider-boy!");
+				addButton(1, "Talk", talkToSpiderBoy).hint("Why not just sit down and have a talk with the spider-morph instead?");
+				addButton(4, "Leave", camp.returnToCampUseOneHour).hint("The spider-boy isn't of your interest? You're sure the spider-morph won't even attempt to chase you given his friendly demeanor so you could leave without any troubles.");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
-			}
+			unlockCodexEntry("Arachnes, Spider-Morphs and Driders", kFLAGS.CODEX_ENTRY_ARACHNES);
 		}
 		
 		private function fightSpiderBoy():void {
@@ -97,17 +94,17 @@ package classes.Scenes.Areas.Swamp
 			if (!player.isGenderless() && player.lust >= 33) {
 				outputText("\n\nWhat do you do?");
 				if (player.hasVagina()) {
-					addButton(0, "Mount", victoryCowgirlRidingOnSpiderBoi);
+					addButton(0, "Mount", victoryCowgirlRidingOnSpiderBoi).hint("Ride the spider-morph, cowgirl style!");
 					if (player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
-						addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster);
+						addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster).hint("Take advantage of the properties of your special armour and get the spider-morph to give you a good titfuck.", "Bikini Titfuck/Paizuri");
 					}
 				}
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.analCapacity()) != -1) {
-						addButton(1, "FuckHisButt", victoryButtFuck);
+						addButton(1, "FuckHisButt", victoryButtFuck).hint("Give the spider-boy a good ramming with your " + player.cockDescript(player.cockThatFits(monster.analCapacity())) + ".", "Fuck His Butt");
 					}
 					if (player.biggestCockArea() > monster.analCapacity()) {
-						addButton(2, "Frot", victoryFrotTheSpoidah);
+						addButton(2, "Frot", victoryFrotTheSpoidah).hint("You could instead give the spider-morph's dick a good rubbing with that big penis of yours.");
 					}
 				}
 			}

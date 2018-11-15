@@ -1003,7 +1003,7 @@ private function jizzFromEatingPregdrynOut():void {
 	outputText("Startled from your sexual fog, you jerk back and gasp.  The smell – it's like sex distilled into orgasm and fired straight into your brain.  Your " + player.hipDescript() + " shake uncontrollably, spasming wildly as your scent-addled mind sets off a full-body orgasm.  ");
 	if (player.hasVagina()) {
 		outputText("Your " + player.vaginaDescript(0) + " contracts and spasms with the rest of you, ");
-		if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("squirting");
+		if (player.vaginas[0].vaginalWetness == Vagina.WETNESS_SLAVERING) outputText("squirting");
 		else outputText("leaking");
 		outputText(" in a pale imitation of Edryn's box.  ");
 	}

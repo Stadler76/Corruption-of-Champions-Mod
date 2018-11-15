@@ -83,10 +83,10 @@ package classes.Scenes.Areas.Mountain
 			
 			if (player.lust >= 33 && !player.isGenderless()) {
 				if (player.hasVagina() && !player.isNaga()) {
-					kGAMECLASS.output.addButton(0, "Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, undefined, undefined, undefined, "Ride his twin cocks.");
+					kGAMECLASS.output.addButton(0, "Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape).hint("Those twin knotted cocks look so rather tantalizing. Ride his twin cocks.");
 				}
 				if (!hpVictory) {
-					kGAMECLASS.output.addButton(1, "Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, undefined, undefined, undefined, "Make him use his tongues.");
+					kGAMECLASS.output.addButton(1, "Lick", game.mountain.hellHoundScene.hellHoundGetsRaped).hint("Make him use his tongues. Two heads are better than one, so to speak.");
 				}
 			}
 			
@@ -122,8 +122,8 @@ package classes.Scenes.Areas.Mountain
 			this.createBreastRow();
 			this.createBreastRow();
 			this.createBreastRow();
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = 47;
 			this.hips.rating = Hips.RATING_AVERAGE;
 			this.butt.rating = Butt.RATING_AVERAGE+1;

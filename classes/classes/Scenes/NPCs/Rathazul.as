@@ -1180,6 +1180,12 @@ private function rathazulAlchemyMenu():void {
 		else addButtonDisabled(7, "Ton o' Trice", "You don't have everything needed for this item.\n\nCost: 100 Gems\nNeeds 1 Reptilum and 1 Golden Seed.");
 	}
 	else addButtonDisabled(7, "Ton o' Trice", "Rathazul doesn't know how to make this yet. Try buying more from him.");
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) {
+		if (player.gems >= 100 && player.hasItem(consumables.S_GOSSR, 2) && player.hasItem(consumables.HUMMUS_, 1))
+			 addButton(8, "Oculum A.", rathazulMakesEyePotion).hint("Ask him to brew a special potion that could grant you a second set of eyes. \n\nCost: 100 Gems\nNeeds 2 Sweet Gossamers and 1 Hummanus.", "Oculum Arachnae");
+		else addButtonDisabled(8, "Oculum A.", "You don't have everything needed for this item.\n\nCost: 100 Gems\nNeeds 2 Sweet Gossamers and 1 Hummanus.", "Oculum Arachnae");
+	}
+	else addButtonDisabled(8, "Oculum A.", "Rathazul doesn't know how to make this yet. Try buying more from him.", "Oculum Arachnae");
 	addButton(14, "Back", returnToRathazulMenu);
 }
 
@@ -1311,6 +1317,40 @@ private function takethatTaurico():void {
 	addMixologyXP(8);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(consumables.TAURICO, returnToRathazulMenu);
+}
+
+private function rathazulMakesEyePotion():void
+{
+	spriteSelect(SpriteDb.s_rathazul);
+	clearOutput();
+	outputText(images.showImage("rathazul-lab"));
+	if (player.gems < 100) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
+		doNext(returnToRathazulMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.S_GOSSR, 2) && player.hasItem(consumables.HUMMUS_, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need two strands of Sweet Gossamer and one vial of Hummanus,</i>\" Rathazul says.");
+		doNext(returnToRathazulMenu);
+		return;
+	}
+	player.destroyItems(consumables.S_GOSSR, 2);
+	player.destroyItems(consumables.HUMMUS_, 1);
+	player.gems -= 100;
+	statScreenRefresh();
+	outputText("You hand over two strands of Sweet Gossamer, one vial of Hummanus and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
+	menu();
+	addButton(0, "Next", takethatOculum);
+}
+
+private function takethatOculum():void
+{
+	clearOutput();
+	outputText(images.showImage("item-taurico"));
+	outputText("After a while, the rat hands you a vial labeled \"Oculum Arachnae\" and nods.");
+	addMixologyXP(8);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+	inventory.takeItem(consumables.OCULUMA, returnToRathazulMenu);
 }
 
 private function rathazulMakesCockatricePotion():void {

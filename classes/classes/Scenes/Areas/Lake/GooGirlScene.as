@@ -120,10 +120,7 @@ public class GooGirlScene extends AbstractLakeContent implements Encounter {
 			outputText("waters. You pause, trying to figure out what the shape might be. Just under the surface of the water, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			startCombat(new GooGirl());
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
-			}
+			unlockCodexEntry("Goo Girls", kFLAGS.CODEX_ENTRY_GOOGIRLS);
 			doNext(playerMenu);
 		}
 
@@ -401,33 +398,33 @@ public class GooGirlScene extends AbstractLakeContent implements Encounter {
 			if (player.lust >= 33) {
 				if (player.hasCock()) {
 					if (player.smallestCockLength() < 24) {
-						addButton(0, "DickSex", createCallBackFunction(gooMaleRape, 2));
+						addButton(0, "DickSex", createCallBackFunction(gooMaleRape, 2)).hint("Make use of your dick and slip it inside the gooey girl.");
 					}
 					if (player.longestCockLength() >= 24) {
-						addButton(1, "BigDickSex", createCallBackFunction(gooMaleRape, 1));
+						addButton(1, "BigDickSex", createCallBackFunction(gooMaleRape, 1)).hint("Put that big dick of yours to a good use, she definitely could handle your size.");
 					}
 				}
 				if (player.isHerm()) {
-					addButton(2, "Herm Sex", victoryHermSex);
+					addButton(2, "Herm Sex", victoryHermSex).hint("Given the flexible nature of the goo, you could engage in performing mutual pleasure with your hermaphroditic sexes.");
 				}
 				if (player.isFemale()) {
-					addButton(3, "FemFuck", normalFemaleRapesAGooGirl);
+					addButton(3, "FemFuck", normalFemaleRapesAGooGirl).hint("You could make use of the goo in stimulating your womanhood.", "Female Fuck");
 					if (flags[kFLAGS.PC_FETISH] >= 1 || player.isCorruptEnough(66) || player.findPerk(PerkLib.Pervert) >= 0) {
-						addButton(4, "Exhib.Fuck", exhibitionismGooGirlVictoryRape);
+						addButton(4, "Exhib.Fuck", exhibitionismGooGirlVictoryRape).hint("Put on a good show!", "Exhibitionism Fuck");
 					}
 				}
 				if (player.armorName == "goo armor" && !player.isButtPregnant() && !player.isPregnant()) {
 					outputText("\n\nValeria's armored form seems to ebb towards the puddled goo-woman before you, almost eager to close the distance with her despite her pledge to protect you. ");
 					if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 					else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
-					addButton(7, "Valeria", kGAMECLASS.valeria.valeriaAndGooThreeStuff, undefined, undefined, undefined, "Have a treesome with Valeria.");
+					addButton(7, "Valeria", kGAMECLASS.valeria.valeriaAndGooThreeStuff).hint("Have a threesome with Valeria. This will definitely leave you goo-stuffed for some time.");
 				}
 			}
 			if (player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() >= 500) {
-				addButton(5, "Breastfeed", victoryRapeAGooGalAsFeeder);
+				addButton(5, "Breastfeed", victoryRapeAGooGalAsFeeder).hint("Forcibly feed the goo-girl with your milk.");
 			}
 			if (player.canOvipositBee()) {
-				addButton(6, "Lay Eggs", layBeeEggsInGoo);
+				addButton(6, "Lay Eggs", layBeeEggsInGoo).hint("Lay some bee eggs inside the goo. The warmth would be perfect for incubating your eggs.");
 			}
 			//corrupt chances
 			if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
@@ -448,7 +445,7 @@ public class GooGirlScene extends AbstractLakeContent implements Encounter {
 					}
 					if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
 						outputText("  Good thing you have those handy!");
-						addButton(8, "Make Slave", kGAMECLASS.latexGirl.meanGooGirlRecruitment);
+						addButton(8, "Make Slave", kGAMECLASS.latexGirl.meanGooGirlRecruitment).hint("You could turn the goo-girl into something latexy and bring her to your camp.");
 					}
 				}
 			}

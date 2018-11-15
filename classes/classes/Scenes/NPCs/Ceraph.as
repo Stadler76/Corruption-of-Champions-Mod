@@ -303,11 +303,11 @@ package classes.Scenes.NPCs
 			this.race = "Demon";
 			// this.plural = false;
 			this.createCock(10,2,CockTypesEnum.DEMON);
-			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
+			this.createVagina(false, Vagina.WETNESS_SLAVERING, Vagina.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,15,0,0,0);
 			this.tallness = 5*12+6;
 			this.hips.rating = Hips.RATING_CURVY;

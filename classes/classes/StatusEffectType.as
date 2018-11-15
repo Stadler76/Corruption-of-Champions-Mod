@@ -48,8 +48,8 @@ package classes
 				if (!(arity >=0 && arity <= 1)) throw new Error("Unsupported status effect '"+id+"' constructor arity "+arity);
 			}
 
-		public function create(value1:Number, value2:Number, value3:Number, value4:Number):StatusEffectClass {
-			var sec:StatusEffectClass;
+		public function create(value1:Number, value2:Number, value3:Number, value4:Number):StatusEffect {
+			var sec:StatusEffect;
 			if (arity == 0) sec = new _secClazz();
 			else if (arity == 1) sec = new _secClazz(this);
 			sec.value1 = value1;

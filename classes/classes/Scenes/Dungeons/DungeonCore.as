@@ -95,7 +95,8 @@ package classes.Scenes.Dungeons  {
 		public static const DUNGEON_HELLHOUND_LAB:int           = 71;
 		public static const DUNGEON_HELLHOUND_KITCHEN:int       = 72;
 		public static const DUNGEON_HELLHOUND_STORAGE:int       = 73;
-		public static const DUNGEON_HELLHOUND_INNER_SANCTUM:int = 74;
+		public static const DUNGEON_HELLHOUND_QUARTERS:int      = 74;
+		public static const DUNGEON_HELLHOUND_INNER_SANCTUM:int = 75;
 
 		public function DungeonCore(pregnancyProgression:PregnancyProgression) {
 			this.desertcave = new DesertCave(pregnancyProgression);

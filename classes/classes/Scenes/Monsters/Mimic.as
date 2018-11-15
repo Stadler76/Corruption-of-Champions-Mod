@@ -1,6 +1,6 @@
 package classes.Scenes.Monsters 
 {
-	import classes.AssClass;
+	import classes.Ass;
 	import classes.BodyParts.Butt;
 	import classes.BodyParts.Hips;
 	import classes.CockTypesEnum;
@@ -90,8 +90,8 @@ package classes.Scenes.Monsters
 				createBreastRow(BreastCup.JACQUES00);
 			else
 				createBreastRow(0);
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = rand(24) + 25;
 			this.hips.rating = Hips.RATING_BOYISH;
 			this.butt.rating = Butt.RATING_TIGHT;

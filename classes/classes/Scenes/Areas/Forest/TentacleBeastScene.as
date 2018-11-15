@@ -282,7 +282,7 @@ internal function tentacleLossRape():void {
 	}
 	//Bad end + counter here
 	if (player.lust >= player.maxLust()) {
-		var tbec:StatusEffectClass = player.statusEffectByType(StatusEffects.TentacleBadEndCounter);
+		var tbec:StatusEffect = player.statusEffectByType(StatusEffects.TentacleBadEndCounter);
 		if (tbec == null) {
 			player.createStatusEffect(StatusEffects.TentacleBadEndCounter,0,0,0,0);
 		} else {
@@ -670,7 +670,7 @@ private function tentacleRapeContinuationForFemales():void {
 	}
 	//Mention that clit doesn't grow if your big enough.
 	else outputText("In time it returns to its normal size, losing all the extra volume.");
-	if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
+	if (player.vaginas[0].vaginalLooseness == Vagina.LOOSENESS_TIGHT) player.vaginas[0].vaginalLooseness = Vagina.LOOSENESS_NORMAL;
 	player.slimeFeed();
 	if (getGame().inCombat)
 		combat.cleanupAfterCombat();

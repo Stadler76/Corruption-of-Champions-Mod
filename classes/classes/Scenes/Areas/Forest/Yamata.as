@@ -19,11 +19,11 @@ package classes.Scenes.Areas.Forest
 			this.imageName = "yamata";
 			this.long = "Yamata stands before you, grinning psychotically as her nine fox tails flare out behind her. Her jet black hair twists and writhes in the air, forming eight serpentine heads that snap at anything within reach. A pair of demonic horns curves up in front of her ears, and she is wielding a cursed black sword that resembles an oversized billhook bathed in demonic power. Just looking at her for too long causes strange thoughts to enter your mind, urging you to submit to her and become her loyal masochistic pet. You’ll have to keep your wits about you, or you might start enjoying the pain!";
 			this.race = "Kitsune";
-			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_WET, Vagina.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_MOIST;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_MOIST;
 			this.createStatusEffect(StatusEffects.BonusACapacity,200,0,0,0);
 			this.tallness = 69;
 			this.hips.rating = Hips.RATING_AMPLE;

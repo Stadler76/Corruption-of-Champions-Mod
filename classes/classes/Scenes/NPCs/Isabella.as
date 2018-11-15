@@ -183,11 +183,11 @@ package classes.Scenes.NPCs
 			this.long = "Isabella is a seven foot tall, red-headed tower of angry cow-girl.  She's snarling at you from behind her massive shield, stamping her hooves in irritation as she prepares to lay into you.  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.  She wears a tight silk shirt and a corset that barely supports her bountiful breasts, but it's hard to get a good look at them behind her giant shield.";
 			this.race = "Cow-Girl";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_GAPING);
+			this.createVagina(false, Vagina.WETNESS_DROOLING, Vagina.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("EE+"));
-			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,38,0,0,0);
 			this.tallness = 7*12+6;
 			this.hips.rating = Hips.RATING_CURVY+2;

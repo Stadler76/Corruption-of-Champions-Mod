@@ -740,7 +740,7 @@ package classes
 			displayHeader("All Perks ("+(1+page*count)+"-"+(page*count+perks.length)+
 					"/"+allPerks.length+")");
 			for each (var ptype:PerkType in perks) {
-				var pclass:PerkClass = player.perk(player.findPerk(ptype));
+				var pclass:Perk = player.perk(player.findPerk(ptype));
 
 				var color:String;
 				if (pclass) color='#000000'; // has perk
@@ -956,7 +956,7 @@ package classes
 			boxPerks.addEventListener(Event.SELECT, changeHandler);
 			addButton(1, "Skip", perkSkip);
 		}
-		private function perkSelect(selected:PerkClass):void {
+		private function perkSelect(selected:Perk):void {
 			mainView.stage.focus = null;
 			if (boxPerks.parent != null) {
 				mainView.removeChild(boxPerks);
@@ -974,7 +974,7 @@ package classes
 		public function changeHandler(event:Event):void {
 			//Store perk name for later addition
 			clearOutput();
-			var selected:PerkClass = ComboBox(event.target).selectedItem.perk;
+			var selected:Perk = ComboBox(event.target).selectedItem.perk;
 			boxPerks.move(210, 85);
 			outputText("You have selected the following perk:\n\n\n");
 			outputText("<b>" + selected.perkName + ":</b> " + selected.perkLongDesc);
@@ -995,13 +995,13 @@ package classes
 			var perks:Array = PerkTree.availablePerks(player);
 			var perkList:Array = [];
 			for each(var perk:PerkType in perks) {
-				var p:PerkClass = new PerkClass(perk,
+				var p:Perk = new Perk(perk,
 						perk.defaultValue1, perk.defaultValue2, perk.defaultValue3, perk.defaultValue4);
 				perkList.push({label: p.perkName, perk: p});
 			}
 			return perkList;
 		}
-		public function applyPerk(perk:PerkClass):void {
+		public function applyPerk(perk:Perk):void {
 			clearOutput();
 			player.perkPoints--;
 			//Apply perk here.

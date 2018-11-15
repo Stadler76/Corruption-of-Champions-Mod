@@ -45,11 +45,11 @@ package classes.Scenes.Monsters
 			this.imageName = "ivorysuccubus";
 			this.long = "The succubus before you is a typical example of a lusty demon. Two horns protrude from her forehead, a pair of wings sprout from her back, and a spaded tail swishes about. She's completely nude, leaving her G-cup breasts and moist pussy open for you to see. From time to time, you can see her jiggling ass clearly inviting you. She doesn't appear to be wielding anything.";
 			this.race = "Demon";
-			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_WET, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("G"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 35 + rand(4);
 			this.hips.rating = Hips.RATING_AMPLE+2;

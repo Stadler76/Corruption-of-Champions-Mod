@@ -16,6 +16,9 @@ package coc.view {
 	import flash.events.MouseEvent;
 	import flash.text.Font;
 	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	import flash.system.Capabilities;
 
 	public class CoCButton extends Block {
 
@@ -23,8 +26,8 @@ package coc.view {
 				advancedAntiAliasing='true',
 				fontName='ShrewsburyTitlingBold',
 				embedAsCFF='false')]
-		private static const ButtonLabelFont:Class;
-		public static const ButtonLabelFontName:String = (new ButtonLabelFont() as Font).fontName;
+		private static const BUTTON_LABEL_FONT:Class;
+		public static const BUTTON_LABEL_FONT_NAME:String = (new BUTTON_LABEL_FONT() as Font).fontName;
 
 
 		private var _labelField:TextField,
@@ -33,26 +36,38 @@ package coc.view {
 				_callback:Function = null,
 				_preCallback:Function = null;
 
-		public var toolTipHeader:String,
-				   toolTipText:String;
+		public var toolTipHeaderInstance:String;
+		public var toolTipTextInstance:String;
 
 		/**
 		 * @param options  enabled, labelText, bitmapClass, callback
 		 */
 		public function CoCButton(options:Object = null) {
 			super();
+			initButton(options);
+		}
+
+		/**
+		 * Extracted constructor to make use of the JIT compiler.
+		 * 
+		 * @param	options See constructor.
+		 */
+		private function initButton(options:Object):void
+		{
 			_backgroundGraphic = addBitmapDataSprite({
 				stretch: true,
 				width  : MainView.BTN_W,
 				height : MainView.BTN_H
 			});
 			_labelField        = addTextField({
-				width            : MainView.BTN_W,
 				embedFonts       : true,
-				y                : 8,
+				//autoSize         : TextFieldAutoSize.CENTER,
+				width            : MainView.BTN_W,
 				height           : MainView.BTN_H - 8,
+				x                : 0,
+				y                : 8,
 				defaultTextFormat: {
-					font : ButtonLabelFontName,
+					font : BUTTON_LABEL_FONT_NAME,
 					size : 18,
 					align: 'center'
 				}
@@ -62,12 +77,16 @@ package coc.view {
 			this.buttonMode    = true;
 			this.visible       = true;
 			UIUtils.setProperties(this, options);
-
+			if (this.width < 130) { //A workaround for squashed text on narrower buttons.
+				this._labelField.x = 0;
+				this._labelField.width = this.width;
+				this._labelField.scaleX = (MainView.BTN_W / this._labelField.width); 
+			}
+			
 			this.addEventListener(MouseEvent.ROLL_OVER, this.hover);
 			this.addEventListener(MouseEvent.ROLL_OUT, this.dim);
 			this.addEventListener(MouseEvent.CLICK, this.click);
 		}
-
 
 
 		//////// Mouse Events... ////////
@@ -176,8 +195,8 @@ package coc.view {
 		 * @return this
 		 */
 		public function hint(toolTipText:String = "",toolTipHeader:String=""):CoCButton {
-			this.toolTipText   = toolTipText   || getToolTipText(this.labelText);
-			this.toolTipHeader = toolTipHeader || getToolTipHeader(this.labelText);
+			this.toolTipTextInstance   = toolTipText   || getToolTipText(this.labelText);
+			this.toolTipHeaderInstance = toolTipHeader || getToolTipHeader(this.labelText);
 			return this;
 		}
 		/**
@@ -186,7 +205,7 @@ package coc.view {
 		 */
 		public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
 			enabled = !condition;
-			if (toolTipText !== null) this.toolTipText = condition?toolTipText:this.toolTipText;
+			if (toolTipText !== null) this.toolTipTextInstance = condition?toolTipText:this.toolTipTextInstance;
 			return this;
 		}
 		/**
@@ -195,7 +214,7 @@ package coc.view {
 		 */
 		public function disable(toolTipText:String=null):CoCButton {
 			enabled = false;
-			if (toolTipText!==null) this.toolTipText = toolTipText;
+			if (toolTipText!==null) this.toolTipTextInstance = toolTipText;
 			return this;
 		}
 		/**
@@ -203,7 +222,7 @@ package coc.view {
 		 * @return this
 		 */
 		public function call(fn:Function,...args:Array):CoCButton {
-			this.callback = Utils.curry.apply(null,args);
+			this.callback = Utils.curry.apply(fn,args);
 			return this;
 		}
 		/**

@@ -180,7 +180,6 @@ package classes.Items.Consumables
 				}
 				else outputText("Then, it disappears back into your sheath.");
 				player.cocks[i].cockType = CockTypesEnum.CAT;
-				player.cocks[i].knotMultiplier = 1;
 				changes++;
 			}
 			//Cat penorz shrink
@@ -239,6 +238,23 @@ package classes.Items.Consumables
 				mutations.updateOvipositionPerk(tfSource);
 			}
 			//Body type changes.  Teh rarest of the rare.
+			// Catgirl-face -> cat-morph-face
+			if (player.face.type === Face.CATGIRL &&
+				player.tongue.type === Tongue.CAT &&
+				player.ears.type === Ears.CAT &&
+				player.tail.type === Tail.CAT &&
+				player.lowerBody.type === LowerBody.CAT &&
+				player.arms.type === Arms.CAT &&
+				(player.hasFur() || (player.hasReptileScales() && player.dragonneScore() >= 4)) &&
+				rand(5) === 0 && changes < changeLimit
+			) {
+				outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging."
+				          +" You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial"
+				          +" characteristics with those of a feline along with a muzzle, a cute cat-nose and whiskers.");
+				outputText("\n<b>You now have a cat-face.</b>");
+				player.face.type = Face.CAT;
+				changes++;
+			}
 			//DA EARZ
 			if (player.ears.type !== Ears.CAT && rand(5) === 0 && changes < changeLimit) {
 				//human to cat:
@@ -292,14 +308,32 @@ package classes.Items.Consumables
 				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of " + player.skin.furColor + " fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
 				changes++;
 			}
+			// Fix old cat faces without cat-eyes.
+			if (player.hasCatFace() && !player.hasCatEyes() && rand(3) === 0 && changes < changeLimit) {
+				outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you."
+				          +" You walk around disoriented until the luminosity fades back to normal."
+				          +" You run to a puddle of water to check your reflection and quickly notice your pupils have become cat-like.");
+				outputText("\n<b>You now have cat-eyes!</b>");
+				player.eyes.setType(Eyes.CAT);
+				changes++;
+			}
 			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
-			if (player.tail.type === Tail.CAT && player.ears.type === Ears.CAT && rand(5) === 0 && changes < changeLimit && player.lowerBody.type === LowerBody.CAT && (player.hasFur() || (player.hasReptileScales() && player.dragonneScore() >= 4)) && player.face.type !== Face.CAT) {
+			if (player.tail.type === Tail.CAT && player.ears.type === Ears.CAT && player.lowerBody.type === LowerBody.CAT && !player.hasCatFace() && rand(5) === 0 && changes < changeLimit) {
 				//Gain cat face, replace old face
-				temp = rand(3);
-				if (temp === 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>");
-				else if (temp === 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>");
-				else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>");
-				player.face.type = Face.CAT;
+				outputText("\n\nYou feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries."
+				          +" Funnily, your face remained relatively human even after the change. You purr at the change, giving you a cute look."
+				          +"[if (hasCatEyes == false)\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright,"
+				          +" almost blinding you. You walk around disoriented until the luminosity fades back to normal."
+				          +" You run to a puddle of water to check your reflection and quickly notice your pupils have become cat-like.]");
+				outputText("\n<b>You now have the face of a cat-" + player.mf("boy", "girl") + "!</b>");
+				player.face.setType(Face.CATGIRL);
+				changes++;
+			}
+			// Cat-tongue
+			if (player.hasCatFace() && player.tongue.type !== Tongue.CAT && rand(5) === 0 && changes < changeLimit) {
+				outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see whats going on and discover it changed to look"
+				          +" similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue</b>.");
+				player.tongue.type = Tongue.CAT;
 				changes++;
 			}
 			//Arms

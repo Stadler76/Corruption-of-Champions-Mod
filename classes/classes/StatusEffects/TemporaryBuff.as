@@ -1,5 +1,5 @@
 package classes.StatusEffects {
-import classes.StatusEffectClass;
+import classes.StatusEffect;
 import classes.StatusEffectType;
 import classes.internals.LoggerFactory;
 
@@ -16,7 +16,7 @@ import mx.logging.ILogger;
  *
  * Using host.dynStats instead of buffHost makes the effect permanent
  */
-public class TemporaryBuff extends StatusEffectClass{
+public class TemporaryBuff extends StatusEffect{
 	private static var LOGGER:ILogger = LoggerFactory.getLogger(TemporaryBuff);
 	private var stat1:String;
 	private var stat2:String;

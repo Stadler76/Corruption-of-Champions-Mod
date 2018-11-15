@@ -89,10 +89,10 @@ package classes.Scenes.NPCs
 			this.long = "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger than she may appear to be.";
 			this.race = "Cow-Girl";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_NORMAL, Vagina.LOOSENESS_NORMAL);
 			createBreastRow(Appearance.breastCupInverse("F"));
-			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_VIRGIN;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = 6*12+4;
 			this.hips.rating = Hips.RATING_CURVY;
 			this.butt.rating = Butt.RATING_LARGE;

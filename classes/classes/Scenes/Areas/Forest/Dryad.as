@@ -64,11 +64,11 @@ package classes.Scenes.Areas.Forest
 			this.imageName = "dryad";
 			this.long = "The dryad before you is brimming with corruption, her hair is composed of dark brown leaves. Her skin looks to be made of corrupted wood, especially her fingers which are shaped like sharp claws. Her clothing is nothing more than leaves and straw put into a gown. Her eyes are a deep and hungry dark red. Her bark-like skin seeps a thick pink substance.  ";
 			this.race = "Dryad";
-			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_DRY, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("C"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 60;
 			this.hips.rating = Hips.RATING_AMPLE+2;

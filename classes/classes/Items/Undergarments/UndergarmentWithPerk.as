@@ -54,22 +54,9 @@ package classes.Items.Undergarments {
 		override public function removeText():void {} //Produces any text seen when removing the undergarment normally
 		
 		override public function get description():String {
-			var desc:String = _description;
-			//Type
-			desc += "\n\nType: Undergarment ";
-			if (type == 0) desc += "(Upper)";
-			else if (type == 1) desc += "(Lower)";
-			else if (type == 2) desc += "(Full)";
-			//Defense
-			if (armorDef > 0) desc += "\nDefense: " + String(armorDef);
-			//Sexiness
-			if (sexiness > 0) desc += "\nSexiness: " + String(sexiness);
-			//Value
-			desc += "\nBase value: " + String(value);
-			//Naga wearable?
-			if (type == 1 && perk == "NagaWearable" && game.player.isNaga()) desc += "\nNagas aren't restricted from wearing this type of lower undergarment.";
+			var desc:String = super.description;
 			//Perk
-			desc += "\nSpecials:" + playerPerk.name;
+			desc += "\nSpecials: " + playerPerk.name;
 			if (playerPerk == PerkLib.WizardsEndurance) desc += " (-" + playerPerkV1 + "% Spell Cost)";
 			else if (playerPerk == PerkLib.WellspringOfLust) {
 				if (game.player.lust < 50) {

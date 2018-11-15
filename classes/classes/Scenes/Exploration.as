@@ -155,10 +155,7 @@ package classes.Scenes
 						spriteSelect(SpriteDb.s_imp);
 					}
 					//Unlock if haven't already.
-					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Imps!</b> ");
-					}
+					unlockCodexEntry("Imps", kFLAGS.CODEX_ENTRY_IMPS);
 				}
 				return;
 			}
@@ -166,26 +163,14 @@ package classes.Scenes
 			else {
 				var goblinChooser:int = rand(100);
 				//Level modifier
-				if (player.level < 20) goblinChooser += player.level;
-				else goblinChooser += 20;
+				goblinChooser += Math.min(player.level, 20);
 				//Limit chooser range
 				if (goblinChooser > 100) goblinChooser = 100;
-				if (player.level < 10 && goblinChooser >= 20) goblinChooser = 29;
-				else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 49;
-				else if (player.level < 16 && goblinChooser >= 80) goblinChooser = 79;
+				if (player.level < 8 && goblinChooser >= 30) goblinChooser = 29;
+				else if (player.level < 14 && goblinChooser >= 80) goblinChooser = 79;
 				//Goblin assassin!
-				if (goblinChooser >= 30 && goblinChooser < 50) {
-					kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
-					return;
-				}
-				//Goblin warrior! (Equal chance with Goblin Shaman)
-				else if (goblinChooser >= 50 && goblinChooser < 65) {
-					kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
-					return;
-				}
-				//Goblin shaman!
-				else if (goblinChooser >= 65 && goblinChooser < 80) {
-					kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+				if (goblinChooser >= 30 && goblinChooser < 80) {
+					kGAMECLASS.goblinSpecialScene.goblinSpecialEncounter();
 					return;
 				}
 				//Goblin elder!
@@ -197,10 +182,7 @@ package classes.Scenes
 					clearOutput();
 					outputText(images.showImage("monster-goblin"));
 					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
-					if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
-					}
+					unlockCodexEntry("Goblins", kFLAGS.CODEX_ENTRY_GOBLINS);
 					startCombat(new Goblin());
 					spriteSelect(SpriteDb.s_goblin);
 					return;
@@ -208,10 +190,7 @@ package classes.Scenes
 				else {
 					clearOutput();
 					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
-					if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Goblins!</b>");
-					}
+					unlockCodexEntry("Goblins", kFLAGS.CODEX_ENTRY_GOBLINS);
 					startCombat(new Goblin());
 					spriteSelect(SpriteDb.s_goblin);
 					return;

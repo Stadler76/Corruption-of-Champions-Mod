@@ -133,7 +133,7 @@ package classes.Scenes.Places.TelAdre
 				outputText("\n\nYou can feel yourself beaming with pride. You’re so glad that you were able to help him out. You tell him that you’ll see him later.");
 				outputText("\n\n\"<i>I look forward to it!</i>\" the imp replies happily, giving you a quick wave.");
 			}
-			doNext(telAdre.gymDesc);
+			doNext(telAdre.gym.gymDesc);
 		}
 		
 		//Pablo has let the cat out of the bag.

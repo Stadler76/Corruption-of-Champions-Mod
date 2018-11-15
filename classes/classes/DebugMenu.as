@@ -120,7 +120,7 @@ package classes
 		}
 		private function  dumpEffectsMenu():void {
 			clearOutput();
-			for each (var effect:StatusEffectClass in player.statusEffects) {
+			for each (var effect:StatusEffect in player.statusEffects) {
 				outputText("'"+effect.stype.id+"': "+effect.value1+" "+effect.value2+" "+effect.value3+" "+effect.value4+"\n");
 			}
 			doNext(accessDebugMenu);
@@ -221,13 +221,14 @@ package classes
 			transformativeArray.push(consumables.MOUSECO);
 			transformativeArray.push(consumables.MINOBLO);
 			transformativeArray.push(consumables.MYSTJWL);
+			transformativeArray.push(consumables.OCULUMA);
 			transformativeArray.push(consumables.P_LBOVA);
 			transformativeArray.push(consumables.PIGTRUF);
 			transformativeArray.push(consumables.PRFRUIT);
 			transformativeArray.push(consumables.PROBOVA);
 			transformativeArray.push(consumables.P_DRAFT);
-			transformativeArray.push(consumables.P_S_MLK);
 			//Page 4
+			transformativeArray.push(consumables.P_S_MLK);
 			transformativeArray.push(consumables.PSDELIT);
 			transformativeArray.push(consumables.PURHONY);
 			transformativeArray.push(consumables.SATYR_W);
@@ -239,8 +240,8 @@ package classes
 			transformativeArray.push(consumables.RINGFIG);
 			transformativeArray.push(consumables.RIZZART);
 			transformativeArray.push(consumables.S_GOSSR);
-			transformativeArray.push(consumables.SALAMFW);
 			//Page 5
+			transformativeArray.push(consumables.SALAMFW);
 			transformativeArray.push(consumables.SHARK_T);
 			transformativeArray.push(consumables.SNAKOIL);
 			transformativeArray.push(consumables.SPHONEY);
@@ -252,6 +253,7 @@ package classes
 			transformativeArray.push(consumables.VIXVIGR);
 			transformativeArray.push(consumables.W_FRUIT);
 			transformativeArray.push(consumables.WETCLTH);
+			//Page 6
 			transformativeArray.push(consumables.WOLF_PP);
 			transformativeArray.push(consumables.UBMBOTT);
 			
@@ -400,7 +402,7 @@ package classes
 			weaponArray.push(weapons.FLAIL_0);
 			weaponArray.push(weapons.FLNTLK0);
 			weaponArray.push(weapons.HALBRD0);
-			weaponArray.push(weapons.H_GAUNT);
+			weaponArray.push(weapons.H_GAUN0);
 			weaponArray.push(weapons.HNTCANE);
 			//Page 2
 			weaponArray.push(weapons.JRAPIER);
@@ -419,8 +421,7 @@ package classes
 			weaponArray.push(weapons.RRAPIER);
 			weaponArray.push(weapons.RSBLADE);
 			weaponArray.push(weapons.S_BLADE);
-			//Page 3
-			weaponArray.push(weapons.S_GAUNT);
+			weaponArray.push(weapons.S_GAUN0);
 			weaponArray.push(weapons.SCARBLD);
 			weaponArray.push(weapons.SCIMTR0);
 			weaponArray.push(weapons.SPEAR_0);
@@ -917,7 +918,7 @@ package classes
 			[Face.COW_MINOTAUR,"(3) COW_MINOTAUR"],
 			[Face.SHARK_TEETH,"(4) SHARK_TEETH"],
 			[Face.SNAKE_FANGS,"(5) SNAKE_FANGS"],
-			[Face.CAT,"(6) CAT"],
+			[Face.CATGIRL,"(6) CATGIRL"],
 			[Face.LIZARD,"(7) LIZARD"],
 			[Face.BUNNY,"(8) BUNNY"],
 			[Face.KANGAROO,"(9) KANGAROO"],
@@ -939,6 +940,7 @@ package classes
 			[Face.COCKATRICE,"(25) COCKATRICE"],
 			//[Face.BEAK,"(26) BEAK"], // Unused placeholder
 			[Face.RED_PANDA,"(27) RED_PANDA"],
+			[Face.CAT,"(28) CAT"],
 			/* [INTERMOD: xianxia]
 			[Face.MANTICORE,"(25) MANTICORE"],
 			[Face.SALAMANDER_FANGS,"(26) SALAMANDER_FANGS"],
@@ -965,6 +967,7 @@ package classes
 			[Tongue.DRACONIC, "(3) DRACONIC"],
 			[Tongue.ECHIDNA, "(4) ECHIDNA"],
 			[Tongue.LIZARD, "(5) LIZARD"],
+			[Tongue.CAT, "(6) CAT"],
 			/* [INTERMOD: xianxia]
 			[Tongue.CAT, "(5) CAT"],
 			*/
@@ -988,6 +991,7 @@ package classes
 			[Eyes.WOLF, "(6) WOLF"],
 			[Eyes.SPIDER, "(7) SPIDER"],
 			[Eyes.COCKATRICE, "(8) COCKATRICE"],
+			[Eyes.CAT, "(9) CAT"],
 		];
 		private static const EAR_TYPE_CONSTANTS:Array    = [
 			[Ears.HUMAN, "(0) HUMAN"],

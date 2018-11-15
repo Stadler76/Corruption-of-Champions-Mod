@@ -46,7 +46,7 @@ package classes.Scenes.Areas {
 					Encounters.group(game.commonEncounters, {
 						name: "d3",
 						when: function ():Boolean {
-							return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
+							return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && rand(5) == 0;
 						},
 						call: game.lethicesKeep.discoverD3
 					}, {
@@ -131,10 +131,7 @@ package classes.Scenes.Areas {
 			clearOutput();
 			outputText(images.showImage("encounter-harpy"));
 			outputText("A harpy wings out of the sky and attacks!");
-			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
-			}
+			unlockCodexEntry("Harpies", kFLAGS.CODEX_ENTRY_HARPIES);
 			startCombat(new Harpy());
 			spriteSelect(SpriteDb.s_harpy);
 		}

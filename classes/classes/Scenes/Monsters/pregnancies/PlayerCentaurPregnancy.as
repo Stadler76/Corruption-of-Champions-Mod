@@ -5,7 +5,7 @@ package classes.Scenes.Monsters.pregnancies
 	import classes.Player;
 	import classes.Scenes.PregnancyProgression;
 	import classes.Scenes.VaginalPregnancy;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	import classes.StatusEffects;
 	import classes.internals.GuiOutput;
 	import classes.internals.PregnancyUtils;
@@ -146,7 +146,7 @@ package classes.Scenes.Monsters.pregnancies
 				output.text("  ");
 				player.cuntChange(100, true);
 				
-				if (player.vaginas[0].vaginalWetness === VaginaClass.WETNESS_DRY) {
+				if (player.vaginas[0].vaginalWetness === Vagina.WETNESS_DRY) {
 					player.vaginas[0].vaginalWetness++;
 				}
 				

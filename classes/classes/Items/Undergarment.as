@@ -29,14 +29,21 @@ package classes.Items
 		
 		override public function get description():String {
 			var desc:String = _description;
+			var diff:int = 0;
 			desc += "\n\nType: Undergarment ";
 			if (type == 0) desc += "(Upper)";
 			else if (type == 1) desc += "(Lower)";
 			else if (type == 2) desc += "(Full)";
 			//Defense
-			if (armorDef > 0) desc += "\nDefense: " + String(armorDef);
+			if (type == UndergarmentLib.TYPE_LOWERWEAR) diff = armorDef - (game.player.lowerGarment.armorDef);
+			else diff = armorDef - (game.player.upperGarment.armorDef);
+			if (armorDef > 0 || diff != 0) desc += "\nDefense: " + String(armorDef);
+			desc += appendStatsDifference(diff);
 			//Sexiness
-			if (sexiness > 0) desc += "\nSexiness: " + String(sexiness);
+			if (type == UndergarmentLib.TYPE_LOWERWEAR) diff = sexiness - (game.player.lowerGarment.sexiness);
+			else diff = sexiness - (game.player.upperGarment.sexiness);
+			if (sexiness > 0 || diff != 0) desc += "\nSexiness: " + String(sexiness);
+			desc += appendStatsDifference(diff);
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Naga wearable?

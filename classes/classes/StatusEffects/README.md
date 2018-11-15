@@ -4,7 +4,7 @@
 
 ### Creating new effects
 
-1. Subclass `StatusEffectClass` or its subclass
+1. Subclass `StatusEffect` or its subclass
     1) Add a `public static TYPE:StatusEffectType` field initialized with `register("unique id", ThisClassName)`.
     2) Link to the `TYPE` through superclass constructor.
     3) In the `StatusEffects` library, add a static constant that refers `TYPE` (even if you don't use the constant, this is required for `TYPE` to be properly initialized on application start).
@@ -26,13 +26,13 @@ if (playerHost) game.outputText(...)
 
 ## Helper classes &amp; methods
 
-#### StatusEffectClass.remove()
+#### StatusEffect.remove()
 
 Removes this instance from host. Fires a `onRemove` event.
 
-#### StatusEffectClass.attach(host:Creature) and Creature.addStatusEffect(StatusEffectClass)
+#### StatusEffect.attach(host:Creature) and Creature.addStatusEffect(StatusEffect)
 
-Attaches the existing instance of StatusEffectClass to host.
+Attaches the existing instance of StatusEffect to host.
 
 #### Creature.createOrFindStatusEffect(StatusEffectType)
 

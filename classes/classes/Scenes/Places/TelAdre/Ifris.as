@@ -62,7 +62,7 @@ public function approachIfris():void {
 		addDisabledButton(0, "Work Out", "There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.");
 		addDisabledButton(1, "Join Me?", "There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.");
 	}
-	addButton(14, "Leave", telAdre.gymDesc);
+	addButton(14, "Leave", telAdre.gym.gymDesc);
 }
 //3a-PC responds they want to work out-
 private function workOutForIfris():void {

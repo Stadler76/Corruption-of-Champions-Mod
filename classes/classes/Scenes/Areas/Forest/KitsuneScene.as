@@ -1055,7 +1055,7 @@ package classes.Scenes.Areas.Forest
 			}
 			//Use same text for anal sex, but using analCapacity instead:
 			if (player.gender >= 2) {
-				outputText(((player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_GAPING) ? "\"<i>Ah!  Nice and tight, just how I like it!</i>\"  she groans, gripping your waist tightly and beginning to strongly pump her hips." : "\"<i>Hmm...  a little loose for my tastes, but I suppose it'll have to do.  You haven't been slutting it up on minotaurs and tentacle beasts, have you cutie?</i>\"  she says teasingly, giving you a patronizing pinch on the cheek."));
+				outputText(((player.vaginas[0].vaginalLooseness < Vagina.LOOSENESS_GAPING) ? "\"<i>Ah!  Nice and tight, just how I like it!</i>\"  she groans, gripping your waist tightly and beginning to strongly pump her hips." : "\"<i>Hmm...  a little loose for my tastes, but I suppose it'll have to do.  You haven't been slutting it up on minotaurs and tentacle beasts, have you cutie?</i>\"  she says teasingly, giving you a patronizing pinch on the cheek."));
 			}
 			else {
 				outputText(((player.ass.analLooseness < 3) ? "\"<i>Ah!  Nice and tight, just how I like it!</i>\"  she groans, gripping your waist tightly and beginning to strongly pump her hips." : "\"<i>Hmm...  a little loose for my tastes, but I suppose it'll have to do.  You haven't been slutting it up on minotaurs and tentacle beasts, have you cutie?</i>\"  she says teasingly, giving you a patronizing pinch on the cheek."));
@@ -1126,18 +1126,18 @@ package classes.Scenes.Areas.Forest
 			//Blonde-exclusive
 			if (monster.hair.color == "blonde") {
 				//[Fuck Draft]
-				if (player.hasItem(consumables.F_DRAFT)) {
-					addButton(button++, "Use F.Draft", fuckDraftBlond, undefined, undefined, undefined, "You could dose her with a fuck draft...");
+				if (player.hasItem(consumables.F_DRAFT) && player.hasCock()) {
+					addButton(button++, "Use F.Draft", fuckDraftBlond).hint("You could dose her with a fuck draft...");
 				} else 
 					addDisabledButton(button++, "Use F.Draft", "This scene requires you to have cock and a bottle of fuck draft.", "Use Fuck Draft");
 				//[Lactaid]
-				if (player.hasItem(consumables.LACTAID)) {
-					addButton(button++, "Use L-Aid", lactaidDoseAKitSune, undefined, undefined, undefined, "You could dose her with lactad...");
+				if (player.hasItem(consumables.LACTAID) && player.hasCock()) {
+					addButton(button++, "Use L-Aid", lactaidDoseAKitSune).hint("You could dose her with lactad...");
 				} else 
 					addDisabledButton(button++, "Use L-Aid", "This scene requires you to have cock and a bottle of lactaid.", "Use LactAid");
 				//[Ovi Elixir]
-				if (player.hasItem(consumables.OVIELIX) && player.isMaleOrHerm()) {
-					addButton(button++, "Use OviElix", doseAKitsuneWithOviElixirs, undefined, undefined, undefined, "You could use an oviposition elixir on her...");
+				if (player.hasItem(consumables.OVIELIX) && player.hasCock()) {
+					addButton(button++, "Use OviElix", doseAKitsuneWithOviElixirs).hint("You could use an oviposition elixir on her...");
 				} else 
 					addDisabledButton(button++, "Use OviElix", "This scene requires you to have cock and a bottle of ovi elixir.", "Use Ovi Elixir");
 			}
@@ -2000,7 +2000,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Your whole body shakes from top to bottom as you are quickly driven back to the precipice, the magically enhanced ministrations of her tongue giving you no quarter as she assaults your nethers with an almost hungry fervor.  Your muscles clamp tightly around her tongue as a rush of fluid comes spilling out into the kitsune's mouth, drenching her chin with your musky feminine juices.  You pull her inward with every last ounce of strength you possess, moaning obscenely, then repeat the action for a second and third time.  On the third moan, your ecstatic scream echoes through the forest, sending birds flocking to the sky as your orgasm tears through your body in a tidal wave of shivers.\n\n");
 
-			outputText("Her tongue continues to wriggle against your quivering walls throughout the duration of your thrashing climax, hungrily funneling every drop that comes rushing out into her mouth." + ((player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) ? "  Streams of girlcum spray from your slavering cunt, soaking her face in the moments before she opens her mouth wide, eagerly swallowing all that she can." : "" ) + "  After what feels like an eternity, your orgasm begins to wane, the shivering pulses of pleasure ebbing away and your mind slowly clearing.  Panting heavily, you loosen your death grip on her head, letting her pull back to catch her breath as you collapse on your back to do the same.\n\n");
+			outputText("Her tongue continues to wriggle against your quivering walls throughout the duration of your thrashing climax, hungrily funneling every drop that comes rushing out into her mouth." + ((player.vaginas[0].vaginalWetness == Vagina.WETNESS_SLAVERING) ? "  Streams of girlcum spray from your slavering cunt, soaking her face in the moments before she opens her mouth wide, eagerly swallowing all that she can." : "" ) + "  After what feels like an eternity, your orgasm begins to wane, the shivering pulses of pleasure ebbing away and your mind slowly clearing.  Panting heavily, you loosen your death grip on her head, letting her pull back to catch her breath as you collapse on your back to do the same.\n\n");
 
 			outputText("She licks her lips in satisfaction, then wipes her mouth on her sleeve, sighing happily before slumping back to rest against the side of a tree.  You lie splayed out on the ground in ecstasy for several minutes before finally summoning up the strength to stand, and when you do so, a cursory glance around suggests that the wily kitsune has made her getaway.  As you gather your things and prepare to head back to camp, you can almost hear the faint echo of a mischievous giggle filtering through the forest.");
 			player.orgasm('Vaginal');
@@ -2032,7 +2032,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Her warm canal constricts around your invasive digits almost immediately, her back arching high and a loud groan filling the air, drowning out the sweet squelch of her soaking hole squeezing around your fingertips.  You pump your fingers in and out a few times, your other hand caressing her throbbing member slowly, gathering dollops of pre from the tip and spreading them down the shaft.\n\n");
 
-			outputText("You move yourself into position, lowering yourself down over her hips with your hands resting on her knees for support.  As the head of her cock kisses the opening of your " + player.vaginaDescript() + ", a cool tingle begins to spread from your loins, shivering its way up your spine.  Playfully, you rock your hips forward and back, teasing the tip of her member with the sensual caress of your warm cleft.  A thin trickle of lubricant slides down her sensitive shaft, making her shudder with delight.  You slow your movements to a crawl, almost to the point of standing still, " + ((player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_LOOSE) ? "then with a sudden lurch forward, you drop yourself onto her throbbing rod, driving it to the hilt in one pass.  A smoldering tingle ebbs and flows through your loins, strongest at the tip of her throbbing cock." : "slowly allowing it inside.  Easing yourself down, you groan eagerly as the girthy rod stretches your " + player.vaginaDescript() + ".  At long last, your hips connect with hers, and you take a deep breath and pause for a moment as a smoldering tingle radiates through your loins."));
+			outputText("You move yourself into position, lowering yourself down over her hips with your hands resting on her knees for support.  As the head of her cock kisses the opening of your " + player.vaginaDescript() + ", a cool tingle begins to spread from your loins, shivering its way up your spine.  Playfully, you rock your hips forward and back, teasing the tip of her member with the sensual caress of your warm cleft.  A thin trickle of lubricant slides down her sensitive shaft, making her shudder with delight.  You slow your movements to a crawl, almost to the point of standing still, " + ((player.vaginas[0].vaginalLooseness > Vagina.LOOSENESS_LOOSE) ? "then with a sudden lurch forward, you drop yourself onto her throbbing rod, driving it to the hilt in one pass.  A smoldering tingle ebbs and flows through your loins, strongest at the tip of her throbbing cock." : "slowly allowing it inside.  Easing yourself down, you groan eagerly as the girthy rod stretches your " + player.vaginaDescript() + ".  At long last, your hips connect with hers, and you take a deep breath and pause for a moment as a smoldering tingle radiates through your loins."));
 			player.cuntChange(12, true, true, false);
 			outputText("\n\n");
 

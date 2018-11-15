@@ -1,7 +1,7 @@
 Corruption-of-Champions-Mod
 ===========================
 [![Build Status](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod.svg?branch=master)](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod)
-[![Sonarcloud code analysis](https://sonarcloud.io/api/badges/gate?key=org.github.Kitteh6660%3ACorruption-of-Champions-Mod)](https://sonarcloud.io/dashboard?id=org.github.Kitteh6660%3ACorruption-of-Champions-Mod)
+[![Sonarcloud code analysis](https://sonarcloud.io/api/project_badges/measure?project=org.github.Kitteh6660%3ACorruption-of-Champions-Mod&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.github.Kitteh6660%3ACorruption-of-Champions-Mod)
 
 NOTE: CONTAINS MATURE CONTENT. ADULTS ONLY
 

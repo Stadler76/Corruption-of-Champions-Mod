@@ -160,11 +160,11 @@ package classes.Scenes.Areas.Swamp
 			this.race = "Drider";
 			// this.plural = false;
 			this.createCock(9,2,CockTypesEnum.DEMON);
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_GAPING);
+			this.createVagina(false, Vagina.WETNESS_DROOLING, Vagina.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 70, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,70,0,0,0);
 			this.tallness = 10*12;
 			this.hips.rating = Hips.RATING_CURVY+2;

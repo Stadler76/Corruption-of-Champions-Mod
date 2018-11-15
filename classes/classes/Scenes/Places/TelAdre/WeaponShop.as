@@ -23,7 +23,7 @@ public class WeaponShop extends Shop {
 		addItemBuyButton(weapons.SPEAR_0);
 		addItemBuyButton(weapons.WHIP__0);
 		addItemBuyButton(weapons.W_STAFF);
-		addItemBuyButton(weapons.S_GAUNT);
+		addItemBuyButton(weapons.S_GAUN0);
 		addItemBuyButton(weapons.DAGGER0);
 		addItemBuyButton(weapons.SCIMTR0);
 		addItemBuyButton(weapons.MACE__0);

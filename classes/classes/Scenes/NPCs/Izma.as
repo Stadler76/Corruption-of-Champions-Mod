@@ -151,11 +151,11 @@ package classes.Scenes.NPCs
 			this.createCock(15,2.2);
 			this.balls = 4;
 			this.ballSize = 3;
-			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_LOOSE);
+			this.createVagina(false, Vagina.WETNESS_SLICK, Vagina.LOOSENESS_LOOSE);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 5*12+5;
 			this.hips.rating = Hips.RATING_CURVY;

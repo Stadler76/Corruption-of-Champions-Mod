@@ -90,7 +90,7 @@ package classes
 			revampLogo.y = Math.floor(MainView.SCREEN_H / 2) - 25;
 			revampLogo.selectable = false;
 			revampLogo.embedFonts = true;
-			revampLogo.defaultTextFormat = new TextFormat(CoCButton.ButtonLabelFontName, 20, mainViewManager.isDarkText() ? 0xc0c0c0 : 0, null, null, null, null, null, "center");
+			revampLogo.defaultTextFormat = new TextFormat(CoCButton.BUTTON_LABEL_FONT_NAME, 20, mainViewManager.isDarkText() ? 0xc0c0c0 : 0, null, null, null, null, null, "center");
 			revampLogo.htmlText = "With Revamp Mod!";
 			var miniCredit:TextField = new TextField();
 			miniCredit.name = "miniCredit";

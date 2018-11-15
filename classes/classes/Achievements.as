@@ -53,7 +53,7 @@ package classes
 			addAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, "Defeat Zetaz and obtain the map.");
 			addAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, "Defeat Lethice.");
 			
-			titleAchievementSection("Zones"); //16 achievements
+			titleAchievementSection("Zones"); //17/20 achievements
 			addAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER, "Discover every zone.");
 			addAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER, "Discover every place.");
 			addAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I, "Explore for the first time.");
@@ -72,7 +72,7 @@ package classes
 			addAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER, "Visit Whitney's farm 30 times.");
 			addAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SEA_LEGS, "Use the lake boat 15 times.");
 			
-			titleAchievementSection("Levels"); //8 achievements
+			titleAchievementSection("Levels"); //10 achievements
 			addAchievement("Level up!", kACHIEVEMENTS.LEVEL_LEVEL_UP, "Get to level 2.");
 			addAchievement("Novice", kACHIEVEMENTS.LEVEL_NOVICE, "Get to level 5.");
 			addAchievement("Apprentice", kACHIEVEMENTS.LEVEL_APPRENTICE, "Get to level 10.");
@@ -81,7 +81,8 @@ package classes
 			addAchievement("Master", kACHIEVEMENTS.LEVEL_MASTER, "Get to level 30.");
 			addAchievement("Grandmaster", kACHIEVEMENTS.LEVEL_GRANDMASTER, "Get to level 45.");
 			addAchievement("Illustrious", kACHIEVEMENTS.LEVEL_ILLUSTRIOUS, "Get to level 60.");
-			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to level 100.", "Get to level 100. (Your powers would have surpassed Marae's by now.)", true);
+			addAchievement("Overlord", kACHIEVEMENTS.LEVEL_OVERLORD, "Get to level 90.");
+			addAchievement("Are you a god?", kACHIEVEMENTS.LEVEL_ARE_YOU_A_GOD, "Get to the level cap of 120.", "Get to the level cap of 120. (Your powers would have surpassed Marae's by now.)", true);
 			
 			titleAchievementSection("Population"); //10 achievements
 			addAchievement("My First Companion", kACHIEVEMENTS.POPULATION_FIRST, "Have a camp population of 2.");
@@ -95,15 +96,15 @@ package classes
 			addAchievement("Kingdom", kACHIEVEMENTS.POPULATION_KINGDOM, "Have a camp population of 2,500.", "", true);
 			addAchievement("Empire", kACHIEVEMENTS.POPULATION_EMPIRE, "Have a camp population of 5,000.", "", true);
 			
-			titleAchievementSection("Time"); //9 achievements
+			titleAchievementSection("Time"); //9/10 achievements
 			addAchievement("It's been a month", kACHIEVEMENTS.TIME_MONTH, "Get to day 30.");
 			addAchievement("Half-year", kACHIEVEMENTS.TIME_HALF_YEAR, "Get to day 180.");
 			addAchievement("Annual", kACHIEVEMENTS.TIME_ANNUAL, "Get to day 365. (1 year)");
 			addAchievement("Biennial", kACHIEVEMENTS.TIME_BIENNIAL, "Get to day 730. (2 years)");
 			addAchievement("Triennial", kACHIEVEMENTS.TIME_TRIENNIAL, "Get to day 1,095. (3 years)");
 			addAchievement("In for the long haul", kACHIEVEMENTS.TIME_LONG_HAUL, "Get to day 1,825. (5 years)");
-			addAchievement("Decade", kACHIEVEMENTS.TIME_DECADE, "Get to day 3,650. (10 years)", "Get to day 3,650. (10 years | Okay, you can stop now.)", true);
-			addAchievement("Century", kACHIEVEMENTS.TIME_CENTURY, "Get to day 36,500. (100 years)", "Get to day 36,500. (100 years | It's time to stop playing. Go outside.)", true);
+			addAchievement("Decade", kACHIEVEMENTS.TIME_DECADE, "Get to day 3,650. (10 years)", "Get to day 3,650. (10 years! Okay, you can stop now.)", true);
+			addAchievement("Century", kACHIEVEMENTS.TIME_CENTURY, "Get to day 36,500. (100 years)", "Get to day 36,500. (100 years! It's time to stop playing. Go outside. Please.)", true);
 			addAchievement("Time Traveller", kACHIEVEMENTS.TIME_TRAVELLER, "Get to day 36,500+ by tampering with save", "", true);
 			
 			titleAchievementSection("Dungeons"); //10 achievements
@@ -118,21 +119,21 @@ package classes
 			addAchievement("Accomplice", kACHIEVEMENTS.DUNGEON_ACCOMPLICE, "Watch Helia kill the Harpy Queen.", "", true);
 			addAchievement("Extremely Celibate Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER, "Complete Phoenix Tower without ever orgasming from the beginning.", "", true);
 			
-			titleAchievementSection("Fashion"); //3 achievements
+			titleAchievementSection("Fashion"); //5 achievements
 			addAchievement("Wannabe Wizard", kACHIEVEMENTS.FASHION_WANNABE_WIZARD, "Equip wizard robes and magic staff.");
 			addAchievement("Cosplayer", kACHIEVEMENTS.FASHION_COSPLAYER, "Wear 10 different clothings/armors.");
 			addAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, "Wear any form of kinky clothing and wield any form of whip.");
 			addAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, "Wear no undergarments while wearing any clothes or armours.");
 			addAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, "Wear jewelry that is valued over 1,000 gems.");
 			
-			titleAchievementSection("Wealth"); //4 achievements
+			titleAchievementSection("Wealth"); //4/5 achievements
 			addAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH, "Have 1,000 gems.");
 			addAchievement("Hoarder", kACHIEVEMENTS.WEALTH_HOARDER, "Have 10,000 gems.");
 			addAchievement("Gem Vault", kACHIEVEMENTS.WEALTH_GEM_VAULT, "Have 100,000 gems.");
 			addAchievement("Millionaire", kACHIEVEMENTS.WEALTH_MILLIONAIRE, "Have 1,000,000 gems.", "Have 1,000,000 gems. What are you going to spend these gems on?", true);
-			//addAchievement("Item Vault", kACHIEVEMENTS.WEALTH_ITEM_VAULT, "Fill up your inventory, chest, jewelry box, weapon and armor racks.");
+			addAchievement("Item Vault", kACHIEVEMENTS.WEALTH_ITEM_VAULT, "Fill up your inventory (10 slots), chest, jewelry box, dresser, and all racks.");
 			
-			titleAchievementSection("Combat"); //7 achievements
+			titleAchievementSection("Combat"); //8/10 achievements
 			addAchievement("Wizard", kACHIEVEMENTS.COMBAT_WIZARD, "Learn all black and white spells from spell books.");
 			addAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON, "Cum in the middle of battle.");
 			addAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB, "Fire your webbings at your opponent.");
@@ -140,7 +141,7 @@ package classes
 			addAchievement("Fractured Limbs", kACHIEVEMENTS.COMBAT_FRACTURED_LIMBS, "Deal 100 damage in one hit.");
 			addAchievement("Broken Bones", kACHIEVEMENTS.COMBAT_BROKEN_BONES, "Deal 250 damage in one hit.");
 			addAchievement("Overkill", kACHIEVEMENTS.COMBAT_OVERKILL, "Deal 500 damage in one hit."); //Actually POSSIBLE
-			//addAchievement("Damage Sponge", kACHIEVEMENTS.COMBAT_DAMAGE_SPONGE, "Take a total of 10,000 damage.");
+			addAchievement("Damage Sponge", kACHIEVEMENTS.COMBAT_DAMAGE_SPONGE, "Take a total of 10,000 damage.");
 			addAchievement("Bloodletter", kACHIEVEMENTS.COMBAT_BLOOD_LETTER, "Deal a total of 50,000 damage.");
 			
 			titleAchievementSection("Seasonal Events"); //10 achievements
@@ -155,14 +156,21 @@ package classes
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
 			
-			titleAchievementSection("Survival/Realistic Mode"); //5 achievements
+			titleAchievementSection("Survival/Realistic Mode"); //4/5 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");
 			addAchievement("Champion Needs Food Badly", kACHIEVEMENTS.REALISTIC_CHAMPION_NEEDS_FOOD, "Instantly refill your hunger from 0 to 100 in one go.");
 			//addAchievement("Gourmand", kACHIEVEMENTS.REALISTIC_GOURMAND, "Refill hunger from 5 different sources.");
 			addAchievement("Glutton", kACHIEVEMENTS.REALISTIC_GLUTTON, "Eat while hunger is above 90.");
 			addAchievement("Fasting", kACHIEVEMENTS.REALISTIC_FASTING, "Keep hunger below 25 for a week but don't let it reach 0.");
 			
-			titleAchievementSection("General"); //10 achievements
+			titleAchievementSection("Challenges"); //5 achievements
+			addAchievement("The Ultimate Noob", kACHIEVEMENTS.CHALLENGE_ULTIMATE_NOOB, "Defeat Lethice at level 1.");
+			addAchievement("The Mundane Champion", kACHIEVEMENTS.CHALLENGE_ULTIMATE_MUNDANE, "Defeat Lethice without having the knowledge of any spells.");
+			addAchievement("The Celibate Hero", kACHIEVEMENTS.CHALLENGE_ULTIMATE_CELIBATE, "Finish the main story without ever having sex or masturbating.");
+			addAchievement("Pacifist", kACHIEVEMENTS.CHALLENGE_PACIFIST, "Finish the main storyline without beating and killing anybody.", "Finish the main storyline without beating and killing anybody. Frisk would be so proud of you.");
+			addAchievement("Speedrunner", kACHIEVEMENTS.CHALLENGE_SPEEDRUN, "Finish the main story within 30 days or less. Must not be on New Game+.");
+			
+			titleAchievementSection("General"); //Loads of achievements
 			addAchievement("Portal Defender", kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER, "Defeat 25 demons and sleep 10 times.");
 			addAchievement("Bad Ender", kACHIEVEMENTS.GENERAL_BAD_ENDER, "Cause or witness 3 Bad Ends to various NPCs.");
 			addAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, "Get a Bad End.");
@@ -216,6 +224,12 @@ package classes
 			addAchievement("NOOOOOOOOOOOO!", kACHIEVEMENTS.GENERAL_NOOOOOOO, "You've managed to kill yourself before Lethice takes you as her slave.", "", true);
 			addAchievement("Make Mareth Great Again", kACHIEVEMENTS.GENERAL_MAKE_MARETH_GREAT_AGAIN, "Build a wall around your camp to defend from those pesky imps.");
 			addAchievement("Terracotta Impy", kACHIEVEMENTS.GENERAL_TERRACOTTA_IMPY, "You've placed 100 imp statues around your camp wall. No, bassy. Bad bassy! Baaad Mr. Bassy!!!", "", true);
+			addAchievement("Kaizo Trap", kACHIEVEMENTS.GENERAL_KAIZO_TRAP, "Fall victim to a Kaizo Trap. Basically, you got a bad end right after your victory!", "", true);
+			addAchievement("The Hunter Becomes the Hunted", kACHIEVEMENTS.GENERAL_HUNTER_IS_HUNTED, "Turn the tables against Erlking.");
+			addAchievement("Allahu Akbal", kACHIEVEMENTS.GENERAL_ALLAHU_AKBAL, "Submit to Akbal until you receive the associated perks.");
+			addAchievement("Dining In", kACHIEVEMENTS.GENERAL_DINING_IN, "Eat any food at The Black Cock.");
+			addAchievement("Prisoner", kACHIEVEMENTS.GENERAL_PRISONER, "Get captured and sent to the Prison.", "", true);
+			addAchievement("Jojo's Bizarre Adventure", kACHIEVEMENTS.GENERAL_JOJOS_BIZARRE_ADVENTURE, "Have Jojo in your camp, through either methods.");
 			
 			doNext(getGame().mainMenu.mainMenu);
 			addButton(1, "" + achievementsEarned + "/" + achievementsTotal + " earned", kGAMECLASS.doNothing).hint("This is how many achievements you have obtained in the game so far.", "Total Achievements Earned");

@@ -60,10 +60,7 @@ package classes.Scenes.Areas.Lake
 			player.changeStatusValue(StatusEffects.FetishOn, 1, 1);
 			clearOutput();
 			outputText("As you get close to your boat, you are surprised to find someone standing at the end of the dock.  As you get closer, you see that it's a man wearing some kind of bizarre religious outfit.  He turns to face you as you approach and says \"<i>This has been claimed by the Followers of the Fetish for security reasons, leave at once.</i>\"\n\n\"<i>What?  This is my boat!</i>\" you cry out in surprise.  The zealot seems to take this as an aggressive action on your part and moves to attack you.");
-			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
-			}
+			unlockCodexEntry("Followers of the Fetish", kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
 			//next button, go to zealot fight
 			startCombat(new FetishZealot());
 			spriteSelect(SpriteDb.s_fetish_zealot);
@@ -269,10 +266,10 @@ package classes.Scenes.Areas.Lake
 			
 			if (player.lust >= 33 && !player.isGenderless()) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
-				addButton(0, "Sex", zealotWinRape);
+				addButton(0, "Sex", zealotWinRape).hint("Have your way with the defeated zealot. Teach him a good lesson that he won't forget!");
 				
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-					addButton(1, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster);
+					addButton(1, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster).hint("Take advantage of the properties of your special armour and get the spider-morph to give you a good titfuck.", "Bikini Titfuck/Paizuri");
 			}
 			
 			addButton(14, "Leave", combat.cleanupAfterCombat);
@@ -301,7 +298,7 @@ package classes.Scenes.Areas.Lake
 				else outputText("You chuckle at him, he <i>accepts</i> his punishment?  Oh, you are going to enjoy this so much.\n\n");
 				outputText("You remove your " + player.armorName + " and stride over top of him, looking down at the defeated zealot as he continues his prayer.  \"<i>I am a wretched man to have allowed a woman like you to have defeated me.  Woe is me, lying at your feet.</i>\"  You shake your head at this absurdity and lower yourself down to get to the fun part.  You eagerly grab his cock and guide it towards your " + player.vaginaDescript(0) + ", awaiting the pleasure you are sure it will bring you.  \"<i>Look at me, so eager to be violated despite why it is happening to me, and yet she teases me and draws it out, making it so much more painful.</i>\"\n\n");
 				outputText("With a laugh, you impale yourself on his cock and despite how ");
-				if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE) outputText("tight");
+				if (player.vaginas[0].vaginalLooseness < Vagina.LOOSENESS_LOOSE) outputText("tight");
 				else outputText("loose");
 				outputText(" you are, he still seems to fit you like a glove.  With no need to adjust to his presence inside you, you immediately start to roughly fuck him.  To make sure he doesn't enjoy himself too much, you start to twist and pull at his nipples.  Between his gasps of pleasure and pain, he continues his prayer: \"<i>Gah, oh woe is me, ah-gha, my punishment is my pleas- agh!  My eternal torment will be –ugha, never being able to –hah, enjoy this forever.  Ugha!</i>\"  Finally tired of his antics, you punch him in the stomach, as his amazing rod pumping within your " + player.vaginaDescript(0) + " pushes you over the edge of an orgasm.\n\n");
 				outputText("Your lusts sated for now, you rise up off of him and put your " + player.armorName + " back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ");

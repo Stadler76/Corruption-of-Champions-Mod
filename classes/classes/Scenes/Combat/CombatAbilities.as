@@ -373,18 +373,18 @@ package classes.Scenes.Combat
 			}
 			if (monster.vaginas.length > 0) {
 				if (monster.plural) {
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s dampen perceptibly.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s become sloppy and wet.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + "s instantly soak " + monster.pronoun2 + " groin.  ");
 				}
 				else {
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
-					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " dampens perceptibly.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " becomes sloppy and wet.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ");
+					if (monster.lust100 >= 60 && monster.vaginas[0].vaginalWetness == Vagina.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 				}
 			}
 			monster.teased(lustDmg);

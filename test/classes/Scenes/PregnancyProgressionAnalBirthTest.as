@@ -23,7 +23,7 @@ package classes.Scenes
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PregnancyStore;
 	import classes.StatusEffects;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	import classes.StatusEffects;
 	import classes.Scenes.Areas.Bog;
 	

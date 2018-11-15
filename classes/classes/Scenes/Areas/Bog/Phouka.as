@@ -181,6 +181,10 @@ package classes.Scenes.Areas.Bog
 				outputText("As the horse morph charges towards you it quite suddenly shrinks.  You have to adjust your defence as a 5 foot tall bunny morph is now hopping your way.\n\n");
 			}
 			this.long = "The " + this.short + " is hopping around near you, waiting for an opening.  He has the general appearance of a bunny with coal black fur.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
+			this.cocks[0].cockType = CockTypesEnum.HUMAN;
+			this.cocks[0].cockLength = 10;
+			this.cocks[0].cockThickness = 1.5;
+			this.tallness = 60;
 			this.armorValue = 60;
 			this.spe = 90;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_BUNNY;
@@ -199,6 +203,10 @@ package classes.Scenes.Areas.Bog
 				outputText("As the horse morph charges towards you it quite suddenly shrinks.  You have to adjust your defence as it is now a 4 foot tall goat morph.\n\n");
 			}
 			this.long = "The " + this.short + " is charging back and forth just out of reach, waiting for an opening.  He has the general appearance of a goat with coal black fur.  He has large glossy black horns and a large cock between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
+			this.cocks[0].cockType = CockTypesEnum.HUMAN;
+			this.cocks[0].cockLength = 10;
+			this.cocks[0].cockThickness = 1.5;
+			this.tallness = 48;
 			this.armorValue = 60;
 			this.spe = 70;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_GOAT;
@@ -217,6 +225,10 @@ package classes.Scenes.Areas.Bog
 				outputText("The goat morph eyes you then seems to think better of charging again.  It backs away and starts to grow larger and larger, its features and body shape twisting and reforming.  Finally it seems unable to grow further and settles into the form of a massive stallion.\n\n");
 			}
 			this.long = "The " + this.short + " is running in a wide circle around you, waiting for an opening.  He has the general appearance of a stallion with coal black fur.  A massive cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
+			this.cocks[0].cockType = CockTypesEnum.HORSE;
+			this.cocks[0].cockLength = 20;
+			this.cocks[0].cockThickness = 2.5;
+			this.tallness = 86;
 			this.armorValue = 75;
 			this.spe = 55;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_HORSE;
@@ -235,6 +247,10 @@ package classes.Scenes.Areas.Bog
 				outputText("The horse morph charges past you.  You look over your shoulder and wonder where the stallion could have gone.  Then you see the tiny faerie zipping back for another attack.\n\n");
 			}
 			this.long = "The " + this.short + " is flying around near you, waiting for an opening.  He has the general appearance of a faerie, though he is slightly larger and his skin and wings are coal black.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
+			this.cocks[0].cockType = CockTypesEnum.HUMAN;
+			this.cocks[0].cockLength = 1;
+			this.cocks[0].cockThickness = 0.5;
+			this.tallness = 5;
 			this.armorValue = 80;
 			this.spe = 80;
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_FAERIE;
@@ -279,8 +295,8 @@ package classes.Scenes.Areas.Bog
 			this.hoursSinceCum = 20;
 
 			createBreastRow(0);
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 
 			this.tallness = 5;
 			this.hips.rating = Hips.RATING_SLENDER;

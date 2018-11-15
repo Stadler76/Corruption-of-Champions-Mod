@@ -154,8 +154,8 @@ package classes.Scenes.Areas.Lake
 			// this.plural = false;
 			this.createCock(7,1.5);
 			createBreastRow(0);
-			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_LOOSE;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 6*12;
 			this.hips.rating = Hips.RATING_BOYISH+1;

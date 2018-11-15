@@ -25,8 +25,8 @@ package classes.Scenes.Places.Ingnam
 			// this.plural = false;
 			this.createCock();
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = 5*12 + 5 + rand(4);
 			this.hips.rating = Hips.RATING_BOYISH;
 			this.butt.rating = Butt.RATING_TIGHT;

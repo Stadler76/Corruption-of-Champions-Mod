@@ -3,10 +3,10 @@
  */
 package classes.StatusEffects
 {
-import classes.StatusEffectClass;
+import classes.StatusEffect;
 import classes.StatusEffectType;
 
-public class CombatStatusEffect extends StatusEffectClass
+public class CombatStatusEffect extends StatusEffect
 {
 
 	public function CombatStatusEffect(stype:StatusEffectType)

@@ -131,12 +131,12 @@ package classes.Scenes.Places.Boat
 			this.imageName = "marae";
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				this.long = "This being is known as the goddess of Mareth. She is corrupted due to the aftermath of the factory valves being blown up. She's white all over and textured with bark. The \"flower\" below her belly button resembles more of a vagina than a flower. Her G-cup sized breasts jiggle with every motion."
-				this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
+				this.createVagina(false, Vagina.WETNESS_DROOLING, Vagina.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("G"));
 			}
 			else {
 				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized."
-				this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
+				this.createVagina(false, Vagina.WETNESS_WET, Vagina.LOOSENESS_NORMAL);
 				createBreastRow(Appearance.breastCupInverse("DD"));
 			}
 			this.race = "Deity";

@@ -170,6 +170,13 @@ public function awardAchievement(title:String, achievement:int, display:Boolean 
 	else outputText("\n<b>ERROR: Invalid achievement!</b>");
 }
 
+public function unlockCodexEntry(title:String, codexFlag:int, nlBefore:Boolean = true, nlAfter:Boolean = false):void {
+	if (flags[codexFlag] <= 0) {
+		flags[codexFlag] = 1;
+		outputText((nlBefore ? "\n\n" : "") + "<b>New codex entry unlocked: " + title + "!</b>" + (nlAfter ? "\n\n" : ""));
+	}
+}
+
 
 public function testDynStatsEvent():void {
 	clearOutput();
@@ -198,16 +205,24 @@ public function dynStats(... args):Object {
 /**
  * Returns true if you're on SFW mode.
  */
-public function doSFWloss():Boolean {
-	clearOutput();
+public function doSFWloss(forceClearOutput:Boolean = false):Boolean
+{
+	if (forceClearOutput || flags[kFLAGS.SFW_MODE] > 0) {
+		clearOutput();
+	}
+
 	if (flags[kFLAGS.SFW_MODE] > 0) {
-		if (player.HP <= 0) outputText("You collapse from your injuries.");
-		else outputText("You collapse from your overwhelming desires.");
-		if (combat.inCombat) combat.cleanupAfterCombat();
-		else output.doNext(camp.returnToCampUseOneHour)
+		outputText("You collapse from your " + (player.HP <= 0 ? "injuries." : "overwhelming desires."));
+
+		if (combat.inCombat) {
+			combat.cleanupAfterCombat();
+		} else {
+			output.doNext(camp.returnToCampUseOneHour)
+		}
 		return true;
 	}
-	else return false;
+
+	return false;
 }
 
 public function isPeaceful():Boolean {

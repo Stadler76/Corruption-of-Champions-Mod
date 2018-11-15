@@ -3,13 +3,13 @@
  */
 package classes.Perks
 {
-	import classes.PerkClass;
+	import classes.Perk;
 	import classes.PerkType;
 
 	public class SpellcastingAffinityPerk extends PerkType
 	{
 
-		override public function desc(params:PerkClass = null):String
+		override public function desc(params:Perk = null):String
 		{
 			return "Reduces spell costs by " + params.value1 + "%.";
 		}

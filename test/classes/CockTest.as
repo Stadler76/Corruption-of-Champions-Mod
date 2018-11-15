@@ -23,6 +23,7 @@ package classes{
 
 		private static const COCK_LENGTH:Number = 12.3;
 		private static const COCK_THICKNESS:Number= 3.21;
+		private static const KNOT_MULTIPLIER:Number = 2.3;
 		
 		private var cut:Cock;
 		private var serializedClass:*;
@@ -165,6 +166,42 @@ package classes{
 			SerializationUtils.deserialize(serializedClass, cut);
 			
 			assertThat(cut.cockThickness, equalTo(COCK_THICKNESS));
+		}
+
+		[Test]
+		public function doNotResetKnotIfKnotIsSupported():void
+		{
+			cut.knotMultiplier = KNOT_MULTIPLIER;
+
+			cut.cockType = CockTypesEnum.DOG;
+
+			assertThat(cut.knotMultiplier, equalTo(KNOT_MULTIPLIER));
+		}
+
+		[Test]
+		public function resetKnotIfKnotIsNotSupported():void
+		{
+			cut.knotMultiplier = KNOT_MULTIPLIER;
+
+			cut.cockType = CockTypesEnum.HORSE;
+
+			assertThat(cut.knotMultiplier, equalTo(DEFAULT_KNOT_MULTIPLIER));
+		}
+		
+		[Test]
+		public function checkHasKnot():void
+		{
+			cut.knotMultiplier = KNOT_MULTIPLIER;
+
+			assertThat(cut.hasKnot(), equalTo(true));
+		}
+		
+		[Test]
+		public function checkHasNoKnot():void
+		{
+			cut.knotMultiplier = Cock.KNOTMULTIPLIER_NO_KNOT;
+
+			assertThat(cut.hasKnot(), equalTo(false));
 		}
 	}
 }

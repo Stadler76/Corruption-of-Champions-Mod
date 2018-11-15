@@ -212,13 +212,13 @@ package classes.Scenes.Areas.HighMountains
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10 || flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) ballSize += 2;
 			this.cumMultiplier = 3;
 			// this.hoursSinceCum = 0;
-			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_SLICK, Vagina.LOOSENESS_NORMAL);
 			//Set breast size based on pure/corrupt
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) createBreastRow(Appearance.breastCupInverse("G"));
 			else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) createBreastRow(Appearance.breastCupInverse("E"));
 			else createBreastRow(Appearance.breastCupInverse("DD"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.tallness = 8*12+4;
 			this.hips.rating = Hips.RATING_CURVY;
 			this.butt.rating = Butt.RATING_LARGE+1;

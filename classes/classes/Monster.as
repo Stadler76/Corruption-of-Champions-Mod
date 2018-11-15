@@ -277,7 +277,7 @@
 			///*OPTIONAL*/ //this.cumMultiplier = ; // default 1
 			///*OPTIONAL*/ //this.hoursSinceCum = ; // default 0
 			//// 2.2. Female
-			///*REQUIRED*/ this.createVagina(virgin=true|false,VaginaClass.WETNESS_,VaginaClass.LOOSENESS_); // default true,normal,tight
+			///*REQUIRED*/ this.createVagina(virgin=true|false,Vagina.WETNESS_,Vagina.LOOSENESS_); // default true,normal,tight
 			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusVCapacity, bonus, 0, 0, 0);
 			//// 2.3. Hermaphrodite
 			//// Just create cocks and vaginas. Last call determines pronouns.
@@ -304,8 +304,8 @@
 			//// Note useful method: this.createBreastRow(Appearance.breastCupInverse("C")); // "C" -> 3
 
 			//// 4. Ass
-			///*OPTIONAL*/ //this.ass.analLooseness = AssClass.LOOSENESS_; // default TIGHT
-			///*OPTIONAL*/ //this.ass.analWetness = AssClass.WETNESS_; // default DRY
+			///*OPTIONAL*/ //this.ass.analLooseness = Ass.LOOSENESS_; // default TIGHT
+			///*OPTIONAL*/ //this.ass.analWetness = Ass.WETNESS_; // default DRY
 			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusACapacity, bonus, 0, 0, 0);
 			//// 5. Body
 			///*REQUIRED*/ this.tallness = ;
@@ -523,7 +523,7 @@
 		protected function initGenderless():void
 		{
 			this.cocks = new Vector.<Cock>();
-			this.vaginas = new Vector.<VaginaClass>();
+			this.vaginas = new Vector.<Vagina>();
 			initedGenitals = true;
 			if (plural) {
 				this.pronoun1 = "they";
@@ -1041,14 +1041,14 @@
 				result += Pronoun3+(i>0?(" #"+(i+1)):"")+" "+cock.cockType.toString().toLowerCase()+" cock is ";
 				result += Appearance.inchesAndFeetsAndInches(cock.cockLength)+" long and "+cock.cockThickness+"\" thick";
 				if (cock.isPierced) result += ", pierced with " + cock.pLongDesc;
-				if (cock.knotMultiplier !== 1) result += ", with knot of size " + cock.knotMultiplier;
+				if (cock.knotMultiplier !== Cock.KNOTMULTIPLIER_NO_KNOT) result += ", with knot of size " + cock.knotMultiplier;
 				result+=".\n";
 			}
 			if (balls > 0 || ballSize > 0) result += Hehas + numberOfThings(balls, "ball") + " of size " + ballSize+".\n";
 			if (cumMultiplier !== 1 || cocks.length > 0) result += Pronoun1 + " " + have+" cum multiplier " + cumMultiplier + ". ";
 			if (hoursSinceCum > 0 || cocks.length > 0) result += "It were " + hoursSinceCum + " hours since " + pronoun1 + " came.\n\n";
 			for (i = 0; i < vaginas.length; i++) {	
-				var vagina:VaginaClass = (vaginas[i] as VaginaClass);
+				var vagina:Vagina = (vaginas[i] as Vagina);
 				result += Pronoun3+ (i>0?(" #"+(i+1)):"")+" "+(Appearance.DEFAULT_VAGINA_TYPE_NAMES[vagina.type]||("vaginaType#"+vagina.type))+(vagina.virgin?" ":" non-")+"virgin vagina is ";
 				result += Appearance.describeByScale(vagina.vaginalLooseness,Appearance.DEFAULT_VAGINA_LOOSENESS_SCALES,"tighter than","looser than");
 				result += ", "+Appearance.describeByScale(vagina.vaginalWetness,Appearance.DEFAULT_VAGINA_WETNESS_SCALES,"drier than","wetter than");
@@ -1063,7 +1063,7 @@
 				var nipple:String = nippleLength+"\" ";
 				if (nipplesPierced) nipple+="pierced by "+nipplesPLong;
 				for (i = 0; i < breastRows.length; i++) {
-					var row:BreastRowClass = (breastRows[i] as BreastRowClass);
+					var row:BreastRow = (breastRows[i] as BreastRow);
 					result += Pronoun3+(i>0?(" #"+(i+1)):"") + " breast row has " + row.breasts;
 					result += " " + row.breastRating.toFixed(2) + "-size (" + Appearance.breastCup(row.breastRating) + ") breasts with ";
 					result += numberOfThings(row.nipplesPerBreast, nipple+(row.fuckable ? "fuckable nipple" : "unfuckable nipple")) + " on each.\n";
@@ -1110,7 +1110,7 @@
 				game.urtaQuest.milkyUrtaTic();
 			}
 			//Countdown
-			var tcd:StatusEffectClass = statusEffectByType(StatusEffects.TentacleCoolDown);
+			var tcd:StatusEffect = statusEffectByType(StatusEffects.TentacleCoolDown);
 			if (tcd!=null) {
 				tcd.value1-=1;
 				if (tcd.value1 <= 0) {

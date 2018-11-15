@@ -47,19 +47,19 @@ package classes.Scenes.Monsters
 			}
 			if (player.lust100 >= 60 && player.hasVagina()) {
 				switch (player.vaginas[0].vaginalWetness) {
-					case VaginaClass.WETNESS_NORMAL:
+					case Vagina.WETNESS_NORMAL:
 						outputText("Your " + player.allVaginaDescript() + " dampen" + (player.vaginas.length > 1 ? "" : "s") + " perceptibly.");
 						break;
-					case VaginaClass.WETNESS_WET:
+					case Vagina.WETNESS_WET:
 						outputText("Your crotch becomes sticky with girl-lust.");
 						break;
-					case VaginaClass.WETNESS_SLICK:
+					case Vagina.WETNESS_SLICK:
 						outputText("Your " + player.allVaginaDescript() + " become" + (player.vaginas.length > 1 ? "" : "s") + " sloppy and wet.");
 						break;
-					case VaginaClass.WETNESS_DROOLING:
+					case Vagina.WETNESS_DROOLING:
 						outputText("Thick runners of girl-lube stream down the insides of your thighs.");
 						break;
-					case VaginaClass.WETNESS_SLAVERING:
+					case Vagina.WETNESS_SLAVERING:
 						outputText("Your " + player.allVaginaDescript() + " instantly soak" + (player.vaginas.length > 1 ? "" : "s") + " your groin.");
 						break;
 					default: //Dry vaginas are unaffected
@@ -86,8 +86,8 @@ package classes.Scenes.Monsters
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_STRETCHED;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = rand(24) + 25;
 			this.hips.rating = Hips.RATING_BOYISH;
 			this.butt.rating = Butt.RATING_TIGHT;

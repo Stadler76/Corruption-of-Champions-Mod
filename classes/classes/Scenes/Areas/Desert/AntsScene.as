@@ -2115,7 +2115,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nSensing that she is nearing an orgasm, you pull back and wrestle out from betwixt her legs.  Finally free, you see she's sprawled out on the bed, her massive abdomen hanging off to the side.  Settling yourself over the top of her, you slide your " + player.clitDescript() + " along her nose, intent on getting your scent entrenched in her body, wanting to make her crave your pussy, something that occurs as she takes a long whiff of air and moans like a whore in heat.");
 
 				//If PC has loose pussy:
-				if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_GAPING) outputText("\n\nYour loose pussy lips cause your juices to drip onto Phylla's face as you hover over her, allowing her to lather in the wetness of your arousal.");
+				if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_GAPING) outputText("\n\nYour loose pussy lips cause your juices to drip onto Phylla's face as you hover over her, allowing her to lather in the wetness of your arousal.");
 
 				outputText("\n\n\"<i>I think you need to lick my pussy for a bit, my queen,</i>\" you tell her, thinking that you wouldn't want her getting off before she's tended to your needs.  You playfully smile down at her.");
 			}

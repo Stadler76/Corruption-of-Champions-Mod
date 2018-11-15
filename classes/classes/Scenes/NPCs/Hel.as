@@ -175,11 +175,11 @@ package classes.Scenes.NPCs
 			this.imageName = "hel";
 			this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 			this.race = "Salamander";
-			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_NORMAL);
+			createVagina(true,Vagina.WETNESS_NORMAL,Vagina.LOOSENESS_NORMAL);
 			createStatusEffect(StatusEffects.BonusVCapacity,85,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
 			this.hips.rating = Hips.RATING_CURVY+2;

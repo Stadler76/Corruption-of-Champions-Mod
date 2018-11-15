@@ -293,11 +293,11 @@ package classes.Scenes.NPCs
 			}
 			this.race = "Kangaroo-Morph";
 			// this.plural = false;
-			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(game.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon, Vagina.WETNESS_SLICK, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			this.createBreastRow(game.flags[kFLAGS.SHEILA_CORRUPTION]/10);
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6*12;
 			this.hips.rating = Hips.RATING_AVERAGE;

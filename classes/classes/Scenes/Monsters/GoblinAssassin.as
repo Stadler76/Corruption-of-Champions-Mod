@@ -105,7 +105,7 @@ package classes.Scenes.Monsters
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.goblinAssassinScene.gobboAssassinRapeIntro();
+			game.goblinSpecialScene.gobboSpecialRapeIntro(hpVictory);
 			
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -115,7 +115,7 @@ package classes.Scenes.Monsters
 				game.combat.cleanupAfterCombat();
 			} 
 			else {
-				game.goblinAssassinScene.gobboAssassinBeatYaUp();
+				game.goblinSpecialScene.gobboSpecialBeatYaUp();
 			}
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
@@ -127,11 +127,11 @@ package classes.Scenes.Monsters
 			this.long = "Her appearance is that of a regular goblin, curvy and pale green, perhaps slightly taller than the norm. Her wavy, untamed hair is a deep shade of blue, covering her pierced ears and reaching just above her shoulders. Her soft curves are accentuated by her choice of wear, a single belt lined with assorted needles strapped across her full chest and a pair of fishnet stockings reaching up to her thick thighs. She bounces on the spot, preparing to dodge anything you might have in store, though your eyes seem to wander towards her bare slit and jiggling ass. Despite her obvious knowledge in combat, she’s a goblin all the same – a hard cock can go a long way.";
 			this.race = "Goblin";
 			// this.plural = false;
-			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
+			this.createVagina(false, Vagina.WETNESS_DROOLING, Vagina.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 90, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
-			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_NORMAL;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 35 + rand(4);
 			this.hips.rating = Hips.RATING_AMPLE+2;

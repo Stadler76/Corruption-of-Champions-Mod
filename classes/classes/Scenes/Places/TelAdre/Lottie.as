@@ -155,7 +155,7 @@ public function encounterLottie(charge:Boolean = false):void {
 			outputText("\"<i>Hey, " + player.short + "! I...I'm really glad I talked about myself with you, you're a really great friend, y'know. I really think I can achieve something this time, if I work hard!</i>\" You smile and tell her how glad you are that she's doing this. Lottie responds with a delighted expression, and continues to talk. \"<i>Anyway, I've been trying to look for a personal trainer, but it's kinda difficult, heh. I mean... I'm sure there's lots of trainers here and all, but I – I'd prefer someone I know personally, right?</i>\" She looks up at you expectantly, but then looks back towards the floor. </i>\"But I guess we can't always have what we want.</i>\"\n\n");
 			//(Note: No options but 'leave' are available until you meet requirements.)
 			menu();
-			addButton(0, "Leave", telAdre.gymDesc);
+			addButton(0, "Leave", telAdre.gym.gymDesc);
 			return;
 		}
 		//[Normal Encounter, If became met requirements]
@@ -288,7 +288,7 @@ public function encounterLottie(charge:Boolean = false):void {
 		addDisabledButton(4, "Sex");
 	}
 	addButton(5, "Hug", hugTheShitOutOfYourHam);
-	addButton(14, "Leave", telAdre.gymDesc);
+	addButton(14, "Leave", telAdre.gym.gymDesc);
 	flags[kFLAGS.LOTTIE_LAST_ENCOURAGEMENT_STATE] = lottieMorale();
 	if (flags[kFLAGS.LOTTIE_WEIGHT_CONCLUSION] == 0) flags[kFLAGS.LOTTIE_WEIGHT_CONCLUSION] = lottieTone();
 }

@@ -35,7 +35,7 @@ package coc.view {
 				embedFonts:true,
 				defaultTextFormat:{
 					size: 18,
-					font: CoCButton.ButtonLabelFontName
+					font: CoCButton.BUTTON_LABEL_FONT_NAME
 				}
 			});
 			this.tf = addTextField({

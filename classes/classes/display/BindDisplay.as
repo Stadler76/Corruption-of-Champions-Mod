@@ -35,15 +35,16 @@ package classes.display
 			height = maxHeight;
 			_nameLabel = addTextField( {
 				text:"THIS IS SOME KINDA CRAZY LABEL",
-				width: 290,
+				width: 440,
 				defaultTextFormat: {
 					font: 'Times New Roman',
 					size: 20,
-					align: 'left'
+					align: 'right'
 				}
 			});
 			for (var i:int = 0; i < buttons; i++) {
 				var button:CoCButton = new CoCButton({
+					width: (buttons <= 2 ? MainView.BTN_W : MainView.BTN_W * (2 / buttons)),
 					labelText: 'Unbound',
 					bitmapClass: MainView.ButtonBackground0,
 					callback: null

@@ -13,6 +13,7 @@ package classes.BodyParts
 		public static const DRACONIC:int =   3;
 		public static const ECHIDNA:int  =   4;
 		public static const LIZARD:int   =   5;
+		public static const CAT:int      =   6;
 
 		public var type:Number = HUMAN;
 

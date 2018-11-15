@@ -59,8 +59,8 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.ballSize = 3;
 			this.cumMultiplier = 25;
 			createBreastRow(Appearance.breastCupInverse("flat"));
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_NORMAL;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_NORMAL;
 			this.tallness = 9*12;
 			this.hips.rating = Hips.RATING_BOYISH;
 			this.butt.rating = Butt.RATING_TIGHT;

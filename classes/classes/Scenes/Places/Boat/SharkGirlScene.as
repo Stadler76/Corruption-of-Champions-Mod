@@ -63,10 +63,7 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 	}
 	outputText("A grey blur bursts from the water and lands on the ground a few feet away from you.\n\n");
 	outputText("It's a woman – a peculiarly corrupted woman, with shiny grey skin, silver hair, and a fin positioned between her shoulder blades. She's wearing some rather revealing black swimwear. The girl looks up at you and grins widely, showing rows of knife-like teeth. \"<i>Wanna play? Heads up though, I play 'rough'!</i>\"\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-	}
+	unlockCodexEntry("Shark-girls & Tigershark-girls", kFLAGS.CODEX_ENTRY_SHARKGIRLS, false, true);
 	outputText("You're fighting a shark girl!");
 	startCombat(new SharkGirl());
 	spriteSelect(SpriteDb.s_sharkgirl);

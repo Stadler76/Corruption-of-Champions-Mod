@@ -7,7 +7,7 @@ package classes.Items.Consumables
 	import classes.PerkLib;
 	import classes.Player;
 	import classes.StatusEffects;
-	import classes.VaginaClass;
+	import classes.Vagina;
 
 	/**
 	 * @since March 31, 2018
@@ -162,8 +162,8 @@ package classes.Items.Consumables
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
 				if (player.cocks.length == 0 && !player.hasVagina()) {
 					player.createVagina();
-					player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-					player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
+					player.vaginas[0].vaginalLooseness = Vagina.LOOSENESS_TIGHT;
+					player.vaginas[0].vaginalWetness = Vagina.WETNESS_NORMAL;
 					player.vaginas[0].virgin = true;
 					player.setClitLength(.25);
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!");
@@ -300,7 +300,7 @@ package classes.Items.Consumables
 			//If player has addictive quality and drinks pure version, removes addictive quality.
 			//if the player has a vagina and it is tight, it loosens.
 			if (player.hasVagina()) {
-				if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE && changes < changeLimit && rand(2) === 0) {
+				if (player.vaginas[0].vaginalLooseness < Vagina.LOOSENESS_LOOSE && changes < changeLimit && rand(2) === 0) {
 					outputText("\n\nYou feel a relaxing sensation in your groin.  On further inspection you discover your " + player.vaginaDescript(0) + " has somehow relaxed, permanently loosening.");
 					player.vaginas[0].vaginalLooseness++;
 					player.vaginas[0].resetRecoveryProgress();

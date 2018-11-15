@@ -193,13 +193,13 @@ package classes
 				"You choose the 'Indefatigable' perk. Thanks to your sheer willpower, you can no longer lose when your lust reaches maximum. (Choosing Fantasize at maximum lust still allows you to submit.)")
 		public static const IronFists:PerkType = mk("Iron Fists", "Iron Fists",
 				"Hardens your fists to increase attack rating by 5.",
-				"You choose the 'Iron Fists' perk, hardening your fists. This increases attack power by 5.");
+				"You choose the 'Iron Fists' perk, hardening your fists. This increases attack power of unarmed attacks by 5 and gauntlets by 2.");
 		public static const IronFists2:PerkType = mk("Iron Fists 2", "Iron Fists 2",
 				"Further hardens your fists to increase attack rating by another 3.",
-				"You choose the 'Iron Fists 2' perk, further hardening your fists. This increases attack power by another 3.");
+				"You choose the 'Iron Fists 2' perk, further hardening your fists. This increases attack power of unarmed attacks by another 3 and gauntlets by 1.");
 		public static const IronFists3:PerkType = mk("Iron Fists 3", "Iron Fists 3",
 				"Even more hardens your fists to increase attack rating again by 3.",
-				"You choose the 'Iron Fists 3' perk, even further hardening your fists. This increases attack power again by 3.");				
+				"You choose the 'Iron Fists 3' perk, even further hardening your fists. This increases attack power of unarmed attacks again by another 3 and gauntlets by 1.");				
 		public static const IronMan:PerkType = mk("Iron Man", "Iron Man",
 				"Reduces the fatigue cost of physical specials by 50%.",
 				"You choose the 'Iron Man' perk, reducing the fatigue cost of physical special attacks by 50%");
@@ -364,9 +364,9 @@ package classes
 				"Increases the gems awarded from victory in battle.");
 		public static const PentUp:PentUpPerk = new PentUpPerk();
 		public static const PhallicPotential:PerkType = mk("Phallic Potential", "Phallic Potential",
-				"Increases the effects of penis-enlarging transformations.");
+				"Increases the effects of penis-enlarging transformations. This only affects cocks covered by scarlet cock-socks.");
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
-				"Reduces the effects of penis-enlarging transformations.");
+				"Reduces the effects of penis-enlarging transformations. This only affects cocks covered by cobalt cock-socks.");
 
 		// Armor perks
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",

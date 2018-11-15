@@ -235,12 +235,15 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//eyes!
-			if (player.hasPlainSkin() && (player.face.type !== Face.SPIDER_FANGS || player.face.type !== Face.HUMAN) && player.eyes.type == Eyes.HUMAN && rand(4) === 0 && changes < changeLimit) {
-				player.eyes.type = Eyes.SPIDER;
-				player.eyes.count = 4;
-				changes++;
-				outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!");
+			if (player.hasPlainSkin() && !player.hasSpiderEyes() && rand(4) === 0 && changes < changeLimit) {
+				outputText("\n\nYou suddenly get the strangest case of double vision; you stumble and blink around, clutching your face,"
+				          +" but you draw your hands back when you poke yourself in the eye. Wait, those fingers were on your forehead!"
+				          +" You tentatively run your fingertips across your forehead, not quite believing what you felt."
+				          +" <b>There's now a pair of eyes on your forehead, positioned just above your normal ones!</b>"
+				          +" This will take some getting used to!");
 				dynStats("int", 5);
+				player.eyes.setType(Eyes.SPIDER);
+				changes++;
 			}
 			//(Gain spider fangs)
 			if (player.face.type == Face.HUMAN && player.hasPlainSkin() && changes < changeLimit && rand(4) === 0) {

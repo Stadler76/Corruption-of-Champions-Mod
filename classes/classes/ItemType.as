@@ -103,6 +103,14 @@ package classes
 			ITEM_SHORT_LIBRARY[this.shortName] = this;
 		}
 
+		protected function appendStatsDifference(diff:int):String {
+			if (diff > 0)
+				return " (<font color=\"#007f00\">+" + String(Math.abs(diff)) + "</font>)";
+			else if (diff < 0)
+				return " (<font color=\"#7f0000\">-" + String(Math.abs(diff)) + "</font>)";
+			else
+				return "";
+		}
 
 		public function toString():String
 		{

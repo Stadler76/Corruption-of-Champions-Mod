@@ -38,16 +38,16 @@
 //You play as Urta, which copies everyone about you into this new variable. Very clumsy.
 //TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth
 //whenever you "leave" the quest
-public var urtaQItems1:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems2:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems3:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems4:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems5:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems6:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems7:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems8:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems9:ItemSlotClass = new ItemSlotClass();
-public var urtaQItems10:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems1:ItemSlot = new ItemSlot();
+public var urtaQItems2:ItemSlot = new ItemSlot();
+public var urtaQItems3:ItemSlot = new ItemSlot();
+public var urtaQItems4:ItemSlot = new ItemSlot();
+public var urtaQItems5:ItemSlot = new ItemSlot();
+public var urtaQItems6:ItemSlot = new ItemSlot();
+public var urtaQItems7:ItemSlot = new ItemSlot();
+public var urtaQItems8:ItemSlot = new ItemSlot();
+public var urtaQItems9:ItemSlot = new ItemSlot();
+public var urtaQItems10:ItemSlot = new ItemSlot();
 
 public function urtaBusy():Boolean {
 	return (telAdre.edryn.pregnancy.type == PregnancyStore.PREGNANCY_TAOTH || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
@@ -212,16 +212,16 @@ public function startUrtaQuest():void {
 	urtaQItems8 = player.itemSlot8;
 	urtaQItems9 = player.itemSlot9;
 	urtaQItems10 = player.itemSlot10;
-	player.itemSlot1 = new ItemSlotClass();
-	player.itemSlot2 = new ItemSlotClass();
-	player.itemSlot3 = new ItemSlotClass();
-	player.itemSlot4 = new ItemSlotClass();
-	player.itemSlot5 = new ItemSlotClass();
-	player.itemSlot6 = new ItemSlotClass();
-	player.itemSlot7 = new ItemSlotClass();
-	player.itemSlot8 = new ItemSlotClass();
-	player.itemSlot9 = new ItemSlotClass();
-	player.itemSlot10 = new ItemSlotClass();
+	player.itemSlot1 = new ItemSlot();
+	player.itemSlot2 = new ItemSlot();
+	player.itemSlot3 = new ItemSlot();
+	player.itemSlot4 = new ItemSlot();
+	player.itemSlot5 = new ItemSlot();
+	player.itemSlot6 = new ItemSlot();
+	player.itemSlot7 = new ItemSlot();
+	player.itemSlot8 = new ItemSlot();
+	player.itemSlot9 = new ItemSlot();
+	player.itemSlot10 = new ItemSlot();
 	player2 = player;
 
 	player = new Player();
@@ -257,8 +257,8 @@ public function startUrtaQuest():void {
 	player.ass.analLooseness = 2;
 	player.createStatusEffect(StatusEffects.BonusVCapacity,58,0,0,0);
 	player.createVagina();
-	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
-	player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
+	player.vaginas[0].vaginalWetness = Vagina.WETNESS_DROOLING;
+	player.vaginas[0].vaginalLooseness = Vagina.LOOSENESS_NORMAL;
 	player.setClitLength(1);
 	player.str = 75;
 	player.tou = 80;

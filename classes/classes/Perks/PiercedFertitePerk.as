@@ -3,13 +3,13 @@
  */
 package classes.Perks
 {
-	import classes.PerkClass;
+	import classes.Perk;
 	import classes.PerkType;
 
 	public class PiercedFertitePerk extends PerkType
 	{
 
-		override public function desc(params:PerkClass = null):String
+		override public function desc(params:Perk = null):String
 		{
 			return "Increases cum production by " + Math.round(2*params.value1) + "% and fertility by " + Math.round(params.value1) + ".";
 		}

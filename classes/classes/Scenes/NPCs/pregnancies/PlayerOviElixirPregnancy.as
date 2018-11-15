@@ -10,7 +10,7 @@ package classes.Scenes.NPCs.pregnancies
 	import classes.Scenes.PregnancyProgression;
 	import classes.Scenes.VaginalPregnancy;
 	import classes.StatusEffects;
-	import classes.VaginaClass;
+	import classes.Vagina;
 	import classes.internals.GuiOutput;
 	import classes.internals.PregnancyUtils;
 	import classes.internals.Utils;
@@ -128,15 +128,15 @@ package classes.Scenes.NPCs.pregnancies
 			else {
 				output.text("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your " + player.armorName + " before it can be ruined by what's coming.  A contraction pushes violently through your midsection, ");
 				
-				if (player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE) {
+				if (player.vaginas[0].vaginalLooseness < Vagina.LOOSENESS_LOOSE) {
 					output.text("stretching your tight cunt painfully, the lips opening wide ");
 				}
 				
-				if (player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING_WIDE) {
+				if (player.vaginas[0].vaginalLooseness >= Vagina.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= Vagina.LOOSENESS_GAPING_WIDE) {
 					output.text("temporarily stretching your cunt-lips wide-open ");
 				}
 				
-				if (player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_GAPING_WIDE) {
+				if (player.vaginas[0].vaginalLooseness > Vagina.LOOSENESS_GAPING_WIDE) {
 					output.text("parting your already gaping lips wide ");
 				}
 				

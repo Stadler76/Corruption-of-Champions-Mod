@@ -5,122 +5,122 @@ package classes.GlobalFlags
 	public class kACHIEVEMENTS 
 	{
 		//Storyline Achievements (000-009)
-		public static const STORY_NEWCOMER:int					= 000; //Enter the realm of Mareth.
-		public static const STORY_MARAE_SAVIOR:int				= 001; //Complete Marae’s quest.
-		public static const STORY_ZETAZ_REVENGE:int				= 002; //Defeat Zetaz and obtain the map.
-		public static const STORY_FINALBOSS:int					= 003; //Defeat Lethice.
-		public static const UNKNOWN_ACHIEVEMENT_004:int			= 004;
-		public static const UNKNOWN_ACHIEVEMENT_005:int			= 005;
-		public static const UNKNOWN_ACHIEVEMENT_006:int			= 006;
-		public static const UNKNOWN_ACHIEVEMENT_007:int			= 007;
-		public static const UNKNOWN_ACHIEVEMENT_008:int			= 008;
-		public static const UNKNOWN_ACHIEVEMENT_009:int			= 009;
+		public static const STORY_NEWCOMER:int					=   0; //Enter the realm of Mareth.
+		public static const STORY_MARAE_SAVIOR:int				=   1; //Complete Marae’s quest.
+		public static const STORY_ZETAZ_REVENGE:int				=   2; //Defeat Zetaz and obtain the map.
+		public static const STORY_FINALBOSS:int					=   3; //Defeat Lethice.
+		public static const UNKNOWN_ACHIEVEMENT_004:int			=   4;
+		public static const UNKNOWN_ACHIEVEMENT_005:int			=   5;
+		public static const UNKNOWN_ACHIEVEMENT_006:int			=   6;
+		public static const UNKNOWN_ACHIEVEMENT_007:int			=   7;
+		public static const UNKNOWN_ACHIEVEMENT_008:int			=   8;
+		public static const UNKNOWN_ACHIEVEMENT_009:int			=   9;
 		
 		//Zone Achievements (010-029)
-		public static const ZONE_EXPLORER:int					= 010; //Discover every zone.
-		public static const ZONE_SIGHTSEER:int					= 011; //Discover every place.
-		public static const ZONE_WHERE_AM_I:int					= 012; //Explore for the first time.
-		public static const ZONE_FOREST_RANGER:int				= 013; //Explore the forest 100 times.
-		public static const ZONE_VACATIONER:int					= 014; //Explore the lake 100 times.
-		public static const ZONE_DEHYDRATED:int					= 015; //Explore the desert 100 times.
-		public static const ZONE_MOUNTAINEER:int				= 016; //Explore the mountain 100 times.
-		public static const ZONE_WE_NEED_TO_GO_DEEPER:int		= 017; //Explore the deepwoods 100 times.
-		public static const ZONE_ROLLING_HILLS:int				= 018; //Explore the plains 100 times.
-		public static const ZONE_WET_ALL_OVER:int				= 019; //Explore the swamp 100 times.
-		public static const ZONE_LIGHT_HEADED:int				= 020; //Explore the high mountain 100 times.
-		public static const ZONE_ALL_MURKY:int					= 021; //Explore the bog 100 times.
-		public static const ZONE_FROZEN:int						= 022; //Explore the glacial rift 100 times.
-		public static const ZONE_ARCHAEOLOGIST:int				= 023; //Visit the town ruins 15 times.
-		public static const ZONE_FARMER:int						= 024; //Visit the farm 30 times.
-		public static const ZONE_SEA_LEGS:int					= 025; //Use the boat 15 times.
-		public static const ZONE_ROASTED:int					= 026; //Explore the volcanic crag 50 times.
-		public static const UNKNOWN_ACHIEVEMENT_027:int			= 027;
-		public static const UNKNOWN_ACHIEVEMENT_028:int			= 028;
-		public static const UNKNOWN_ACHIEVEMENT_029:int			= 029;
+		public static const ZONE_EXPLORER:int					=  10; //Discover every zone.
+		public static const ZONE_SIGHTSEER:int					=  11; //Discover every place.
+		public static const ZONE_WHERE_AM_I:int					=  12; //Explore for the first time.
+		public static const ZONE_FOREST_RANGER:int				=  13; //Explore the forest 100 times.
+		public static const ZONE_VACATIONER:int					=  14; //Explore the lake 100 times.
+		public static const ZONE_DEHYDRATED:int					=  15; //Explore the desert 100 times.
+		public static const ZONE_MOUNTAINEER:int				=  16; //Explore the mountain 100 times.
+		public static const ZONE_WE_NEED_TO_GO_DEEPER:int		=  17; //Explore the deepwoods 100 times.
+		public static const ZONE_ROLLING_HILLS:int				=  18; //Explore the plains 100 times.
+		public static const ZONE_WET_ALL_OVER:int				=  19; //Explore the swamp 100 times.
+		public static const ZONE_LIGHT_HEADED:int				=  20; //Explore the high mountain 100 times.
+		public static const ZONE_ALL_MURKY:int					=  21; //Explore the bog 100 times.
+		public static const ZONE_FROZEN:int						=  22; //Explore the glacial rift 100 times.
+		public static const ZONE_ARCHAEOLOGIST:int				=  23; //Visit the town ruins 15 times.
+		public static const ZONE_FARMER:int						=  24; //Visit the farm 30 times.
+		public static const ZONE_SEA_LEGS:int					=  25; //Use the boat 15 times.
+		public static const ZONE_ROASTED:int					=  26; //Explore the volcanic crag 50 times.
+		public static const UNKNOWN_ACHIEVEMENT_027:int			=  27;
+		public static const UNKNOWN_ACHIEVEMENT_028:int			=  28;
+		public static const UNKNOWN_ACHIEVEMENT_029:int			=  29;
 		
 		//Level Achievements (030-039)
-		public static const LEVEL_LEVEL_UP:int					= 030; //Level 2
-		public static const LEVEL_NOVICE:int					= 031; //Level 5
-		public static const LEVEL_APPRENTICE:int				= 032; //Level 10
-		public static const LEVEL_JOURNEYMAN:int				= 033; //Level 15
-		public static const LEVEL_EXPERT:int					= 034; //Level 20
-		public static const LEVEL_MASTER:int					= 035; //Level 30
-		public static const LEVEL_GRANDMASTER:int				= 036; //Level 40
-		public static const LEVEL_ILLUSTRIOUS:int				= 037; //Level 50
-		public static const LEVEL_OVERLORD:int					= 038; //Level 60
-		public static const LEVEL_ARE_YOU_A_GOD:int				= 039; //Level 100 (shadow achievement)
+		public static const LEVEL_LEVEL_UP:int					=  30; //Level 2
+		public static const LEVEL_NOVICE:int					=  31; //Level 5
+		public static const LEVEL_APPRENTICE:int				=  32; //Level 10
+		public static const LEVEL_JOURNEYMAN:int				=  33; //Level 15
+		public static const LEVEL_EXPERT:int					=  34; //Level 20
+		public static const LEVEL_MASTER:int					=  35; //Level 30
+		public static const LEVEL_GRANDMASTER:int				=  36; //Level 40
+		public static const LEVEL_ILLUSTRIOUS:int				=  37; //Level 50
+		public static const LEVEL_OVERLORD:int					=  38; //Level 60
+		public static const LEVEL_ARE_YOU_A_GOD:int				=  39; //Level 100 (shadow achievement)
 		
 		//Population Achievements (040-049)
-		public static const POPULATION_FIRST:int				= 040; //Population 2
-		public static const POPULATION_HAMLET:int				= 041; //Population 5
-		public static const POPULATION_VILLAGE:int				= 042; //Population 10
-		public static const POPULATION_TOWN:int					= 043; //Population 25
-		public static const POPULATION_CITY:int					= 044; //Population 100
-		public static const POPULATION_METROPOLIS:int			= 045; //Population 250
-		public static const POPULATION_MEGALOPOLIS:int			= 046; //Population 500
-		public static const POPULATION_CITY_STATE:int			= 047; //Population 1,000 (shadow achievement)
-		public static const POPULATION_KINGDOM:int				= 048; //Population 2,500 (shadow achievement)
-		public static const POPULATION_EMPIRE:int				= 049; //Population 5,000 (shadow achievement)
+		public static const POPULATION_FIRST:int				=  40; //Population 2
+		public static const POPULATION_HAMLET:int				=  41; //Population 5
+		public static const POPULATION_VILLAGE:int				=  42; //Population 10
+		public static const POPULATION_TOWN:int					=  43; //Population 25
+		public static const POPULATION_CITY:int					=  44; //Population 100
+		public static const POPULATION_METROPOLIS:int			=  45; //Population 250
+		public static const POPULATION_MEGALOPOLIS:int			=  46; //Population 500
+		public static const POPULATION_CITY_STATE:int			=  47; //Population 1,000 (shadow achievement)
+		public static const POPULATION_KINGDOM:int				=  48; //Population 2,500 (shadow achievement)
+		public static const POPULATION_EMPIRE:int				=  49; //Population 5,000 (shadow achievement)
 		
 		//Time Achievements (050-059)
-		public static const TIME_MONTH:int						= 050; //30 days
-		public static const TIME_HALF_YEAR:int					= 051; //180 days
-		public static const TIME_ANNUAL:int						= 052; //365 days
-		public static const TIME_BIENNIAL:int					= 053; //730 days
-		public static const TIME_TRIENNIAL:int					= 054; //1095 days
-		public static const TIME_LONG_HAUL:int					= 055; //1825 days
-		public static const TIME_DECADE:int						= 056; //3650 days
-		public static const TIME_CENTURY:int					= 057; //36,500 days (shadow achievement)
-		public static const TIME_MILLENNIUM:int					= 058;
-		public static const TIME_TRAVELLER:int					= 059;
+		public static const TIME_MONTH:int						=  50; //30 days
+		public static const TIME_HALF_YEAR:int					=  51; //180 days
+		public static const TIME_ANNUAL:int						=  52; //365 days
+		public static const TIME_BIENNIAL:int					=  53; //730 days
+		public static const TIME_TRIENNIAL:int					=  54; //1095 days
+		public static const TIME_LONG_HAUL:int					=  55; //1825 days
+		public static const TIME_DECADE:int						=  56; //3650 days
+		public static const TIME_CENTURY:int					=  57; //36,500 days (shadow achievement)
+		public static const TIME_MILLENNIUM:int					=  58;
+		public static const TIME_TRAVELLER:int					=  59;
 		
 		//Dungeon Achievements (060-069)
-		public static const DUNGEON_DELVER:int					= 060;
-		public static const DUNGEON_DELVER_MASTER:int			= 061;
-		public static const DUNGEON_SHUT_DOWN_EVERYTHING:int	= 062;
-		public static const DUNGEON_YOURE_IN_DEEP:int			= 063;
-		public static const DUNGEON_SAND_WITCH_FRIEND:int		= 064;
-		public static const DUNGEON_PHOENIX_FALL:int			= 065;
-		public static const DUNGEON_ACCOMPLICE:int				= 066; //shadow achievement
-		public static const DUNGEON_EXTREMELY_CHASTE_DELVER:int	= 067; //shadow achievement
-		public static const DUNGEON_DELVER_APPRENTICE:int		= 068;
-		public static const DUNGEON_END_OF_REIGN:int			= 069;
+		public static const DUNGEON_DELVER:int					=  60;
+		public static const DUNGEON_DELVER_MASTER:int			=  61;
+		public static const DUNGEON_SHUT_DOWN_EVERYTHING:int	=  62;
+		public static const DUNGEON_YOURE_IN_DEEP:int			=  63;
+		public static const DUNGEON_SAND_WITCH_FRIEND:int		=  64;
+		public static const DUNGEON_PHOENIX_FALL:int			=  65;
+		public static const DUNGEON_ACCOMPLICE:int				=  66; //shadow achievement
+		public static const DUNGEON_EXTREMELY_CHASTE_DELVER:int	=  67; //shadow achievement
+		public static const DUNGEON_DELVER_APPRENTICE:int		=  68;
+		public static const DUNGEON_END_OF_REIGN:int			=  69;
 		
 		//Fashion and Wealth Achievements (070-074)(075-079)
-		public static const FASHION_WANNABE_WIZARD:int			= 070;
-		public static const FASHION_COSPLAYER:int				= 071;
-		public static const FASHION_DOMINATRIX:int				= 072;
-		public static const FASHION_GOING_COMMANDO:int			= 073;
-		public static const FASHION_BLING_BLING:int				= 074;
-		public static const WEALTH_RICH:int						= 075;
-		public static const WEALTH_HOARDER:int					= 076;
-		public static const WEALTH_GEM_VAULT:int				= 077;
-		public static const WEALTH_MILLIONAIRE:int				= 078;
-		public static const WEALTH_ITEM_VAULT:int				= 079;
+		public static const FASHION_WANNABE_WIZARD:int			=  70;
+		public static const FASHION_COSPLAYER:int				=  71;
+		public static const FASHION_DOMINATRIX:int				=  72;
+		public static const FASHION_GOING_COMMANDO:int			=  73;
+		public static const FASHION_BLING_BLING:int				=  74;
+		public static const WEALTH_RICH:int						=  75;
+		public static const WEALTH_HOARDER:int					=  76;
+		public static const WEALTH_GEM_VAULT:int				=  77;
+		public static const WEALTH_MILLIONAIRE:int				=  78;
+		public static const WEALTH_ITEM_VAULT:int				=  79;
 		
 		//Combat Achievements (080-089)
-		public static const COMBAT_WIZARD:int					= 080; //Learn all black and white spells.
-		public static const COMBAT_CUM_CANNON:int				= 081; //Cum in the middle of battle.
-		public static const COMBAT_PAIN:int						= 082; //50 damage
-		public static const COMBAT_FRACTURED_LIMBS:int			= 083; //100 damage
-		public static const COMBAT_BROKEN_BONES:int				= 084; //250 damage
-		public static const COMBAT_OVERKILL:int					= 085; //500 damage (shadow achievement?)
-		public static const COMBAT_SHOT_WEB:int					= 086; //How do I shot web?
-		public static const COMBAT_DAMAGE_SPONGE:int			= 087;
-		public static const COMBAT_BLOOD_LETTER:int				= 088;
-		public static const COMBAT_PACIFIST:int					= 089;		
+		public static const COMBAT_WIZARD:int					=  80; //Learn all black and white spells.
+		public static const COMBAT_CUM_CANNON:int				=  81; //Cum in the middle of battle.
+		public static const COMBAT_PAIN:int						=  82; //50 damage
+		public static const COMBAT_FRACTURED_LIMBS:int			=  83; //100 damage
+		public static const COMBAT_BROKEN_BONES:int				=  84; //250 damage
+		public static const COMBAT_OVERKILL:int					=  85; //500 damage (shadow achievement?)
+		public static const COMBAT_SHOT_WEB:int					=  86; //How do I shot web?
+		public static const COMBAT_DAMAGE_SPONGE:int			=  87;
+		public static const COMBAT_BLOOD_LETTER:int				=  88;
+		public static const UNKNOWN_ACHIEVEMENT_089:int			=  89;		
 		
 		//Holiday Achievements (090-099)
-		public static const HOLIDAY_EGG_HUNTER:int				= 090;
-		public static const HOLIDAY_HELIA_BIRTHDAY:int			= 091;
-		public static const HOLIDAY_THANKSGIVING_I:int			= 092;
-		public static const HOLIDAY_THANKSGIVING_II:int			= 093;
-		public static const HOLIDAY_HALLOWEEN_I:int				= 094;
-		public static const HOLIDAY_HALLOWEEN_II:int			= 095;
-		public static const HOLIDAY_CHRISTMAS_I:int				= 096;
-		public static const HOLIDAY_CHRISTMAS_II:int			= 097;
-		public static const HOLIDAY_CHRISTMAS_III:int			= 098;
-		public static const HOLIDAY_VALENTINE:int				= 099;
+		public static const HOLIDAY_EGG_HUNTER:int				=  90;
+		public static const HOLIDAY_HELIA_BIRTHDAY:int			=  91;
+		public static const HOLIDAY_THANKSGIVING_I:int			=  92;
+		public static const HOLIDAY_THANKSGIVING_II:int			=  93;
+		public static const HOLIDAY_HALLOWEEN_I:int				=  94;
+		public static const HOLIDAY_HALLOWEEN_II:int			=  95;
+		public static const HOLIDAY_CHRISTMAS_I:int				=  96;
+		public static const HOLIDAY_CHRISTMAS_II:int			=  97;
+		public static const HOLIDAY_CHRISTMAS_III:int			=  98;
+		public static const HOLIDAY_VALENTINE:int				=  99;
 		
 		//Hunger Achievements (100-104)
 		public static const REALISTIC_TASTES_LIKE_CHICKEN:int	= 100;
@@ -132,10 +132,9 @@ package classes.GlobalFlags
 		//Challenge Achievements (105-109)
 		public static const CHALLENGE_ULTIMATE_NOOB:int			= 105; //Defeat Lethice at level 1.
 		public static const CHALLENGE_ULTIMATE_MUNDANE:int		= 106; //Defeat Lethice without spells. NOT USED.
-		public static const CHALLENGE_PACIFIST:int				= 107; //Beat the game without killing anyone. NOT USED.
-		public static const UNKNOWN_ACHIEVEMENT_108:int			= 108;
-		public static const UNKNOWN_ACHIEVEMENT_109:int			= 109;
-
+		public static const CHALLENGE_ULTIMATE_CELIBATE:int		= 107; //Finish without ever having orgasm or sex.
+		public static const CHALLENGE_PACIFIST:int				= 108; //Beat the game without killing anyone.
+		public static const CHALLENGE_SPEEDRUN:int				= 109; //Beat the game in 30 days or less.
 		
 		//General Achievements (110+)
 		public static const GENERAL_PORTAL_DEFENDER:int			= 110; //Defeat 25 demons and sleep 10 times.
@@ -202,13 +201,15 @@ package classes.GlobalFlags
 		public static const GENERAL_ANTWORKS:int				= 171;
 		public static const GENERAL_OFF_WITH_HER_HEAD:int		= 172; //Awarded for beheading Lethice.
 		public static const GENERAL_NOOOOOOO:int				= 173; //Insert Darth Vader voice here.
-		public static const GENERAL_KAIZO_TRAP:int				= 174; //Fall victim to Kaizo Trap. NOT USED.
+		public static const GENERAL_KAIZO_TRAP:int				= 174; //Fall victim to Kaizo Trap.
 		public static const GENERAL_SAVE_SCUMMER:int			= 175; //Save scum. NOT USED.
 		public static const GENERAL_MAKE_MARETH_GREAT_AGAIN:int	= 176; //Make Mareth Great Again indeed!
 		public static const GENERAL_TERRACOTTA_IMPY:int			= 177; //Place 100 Imp Statues around your camp (Shadow achievement)
-		public static const GENERAL_DINING_IN:int				= 178; //Eat at the Black Cock
+		public static const GENERAL_DINING_IN:int				= 178; //Eat at the Black Cock.
 		public static const GENERAL_HUNTER_IS_HUNTED:int		= 179; //Turn the tables on Erlking
-		public static const GENERAL_ALLAHU_AKBAL:int			= 180; //Get all the perks
+		public static const GENERAL_ALLAHU_AKBAL:int			= 180; //Get all the perks from Akbal.
+		public static const GENERAL_PRISONER:int				= 181; //Get captured and go to prison.
+		public static const GENERAL_JOJOS_BIZARRE_ADVENTURE:int	= 182; //Have Jojo in your camp.
 	}
 
 }

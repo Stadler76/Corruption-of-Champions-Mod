@@ -16,12 +16,12 @@ package classes.Items
 		public static const PERK_RANGED:String = "Ranged";
 		public static const PERK_APHRODISIAC:String = "Aphrodisiac Weapon";
 		
-		private var _verb:String;
-		private var _attack:Number;
-		private var _perk:String;
-		private var _name:String;
-		private var _weight:String = WEIGHT_MEDIUM; //Defaults to medium
-		private var _tier:int = 0; //Defaults to 0.
+		protected var _verb:String;
+		protected var _attack:Number;
+		protected var _perk:String;
+		protected var _name:String;
+		protected var _weight:String = WEIGHT_MEDIUM; //Defaults to medium
+		protected var _tier:int = 0; //Defaults to 0.
 		
 		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "") {
 			super(id, shortName, longName, value, description);
@@ -78,6 +78,7 @@ package classes.Items
 			else if (verb == "smash") desc += "(Blunt)";
 			//Attack
 			desc += "\nAttack: " + String(attack);
+			desc += appendStatsDifference(attack - (game.player.weapon.attack));
 			//Value
 			desc += "\nBase value: " + String(value);
 			return desc;

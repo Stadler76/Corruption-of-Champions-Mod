@@ -205,8 +205,8 @@ package classes.Scenes.Dungeons.DeepCave
 			this.balls = 2;
 			this.ballSize = 1;
 			createBreastRow(0);
-			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
-			this.ass.analWetness = AssClass.WETNESS_DRY;
+			this.ass.analLooseness = Ass.LOOSENESS_TIGHT;
+			this.ass.analWetness = Ass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 36;
 			this.hips.rating = Hips.RATING_SLENDER;

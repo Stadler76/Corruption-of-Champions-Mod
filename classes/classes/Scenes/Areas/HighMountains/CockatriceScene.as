@@ -75,10 +75,7 @@ package classes.Scenes.Areas.HighMountains {
 				          +"It approaches squawking with excitement, not slowing in the slightest as it reaches the plateau. "
 				          +"You now see it clearly, it's a cockatrice, and you know it won’t or can’t halt in such an excitable state. Looks like you’ll have to fight!");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_COCKATRICES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_COCKATRICES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Cockatrices!</b>")
-			}
+			unlockCodexEntry("Cockatrices", kFLAGS.CODEX_ENTRY_COCKATRICES);
 			startCombat(cockatrice);
 			flags[kFLAGS.TIMES_ENCOUNTERED_COCKATRICES]++;
 		}
@@ -150,7 +147,7 @@ package classes.Scenes.Areas.HighMountains {
 			outputText("You begin to rise up his length, the bumps rubbing firmly against your clit with each inch that leaves you. "
 			          +"As you reach the tip you slam your hips back down, relishing the feeling of his length rapidly stretching you as the tip pokes your womb. "
 			          +"You keep this pace as you break the kiss, the regular ascent and rapid descent making lewd ");
-			if (player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_WET) outputText("squelching");
+			if (player.vaginas[0].vaginalWetness >= Vagina.WETNESS_WET) outputText("squelching");
 			else outputText("slapping");
 			outputText(" noises as you get closer to your peak. As you ride him the cockatrice suddenly lunges his forward, trapping one of you [nipples] in his mouth."
 			          +" He sucks hungrily as he feels your walls tightening around him, eager to bring you to a climax. His hand goes to ");
@@ -206,10 +203,10 @@ package classes.Scenes.Areas.HighMountains {
 			          +"You rock your hips a couple more times, spreading his pre over your entrance before pushing down.\n\n");
 			outputText(images.showImage("cockatrice-ridehim-anal"));
 			outputText("As his thick tip slides into your pucker ");
-			if (player.ass.analLooseness <= AssClass.LOOSENESS_TIGHT) outputText("stretching your tight passage open ");
+			if (player.ass.analLooseness <= Ass.LOOSENESS_TIGHT) outputText("stretching your tight passage open ");
 			outputText("you can’t help but moan. "
 			          +"The nubs along his shaft each rub against your sensitive pucker as you slowly take his whole length, and you can’t help but ");
-			if (player.ass.analLooseness <= AssClass.LOOSENESS_TIGHT) outputText("feel full.");
+			if (player.ass.analLooseness <= Ass.LOOSENESS_TIGHT) outputText("feel full.");
 			else outputText("enjoy his size in your practised asshole.");
 			outputText(" His hands come to rest on your ass, squeezing your cheeks lightly as he leans forward and draws you into an open mouthed kiss."
 			          +" He gently rocks his hips, making sure he’s snuggly inside you before he urges you to move with a gentle lift.\n\n");
